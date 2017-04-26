@@ -1,0 +1,52 @@
+{
+    "name": "base",
+    "description": "",
+    "keywords": [],
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": ">=5.5.9",
+        "laravel/lumen-framework": "5.2.*",
+        "illuminate/redis": "5.2.*",
+        "vlucas/phpdotenv": "~2.2",
+        "symfony/var-dumper": "2.8.*|3.0.*",
+        "barryvdh/laravel-debugbar": "^2.2",
+        "waynestate/apdatetime": "^1.0",
+        "waynestate/waynestate-api": "~1.1",
+        "waynestate/formy-parser": "~1.0",
+        "waynestate/parse-promos": "~1.0",
+        "waynestate/parse-menu": "~1.2",
+        "waynestate/display-menu": "~1.0",
+        "waynestate/error-403": "~1.1",
+        "waynestate/error-404": "~1.1",
+        "waynestate/error-500": "~1.1",
+        "fzaninotto/faker": "^1.6"
+    },
+    "require-dev": {
+        "laravel/envoy": "^1.1",
+        "phpunit/phpunit": "~4.0",
+        "friendsofphp/php-cs-fixer": "^1.12",
+        "mockery/mockery": "~0.9"
+    },
+    "autoload": {
+        "files": [
+            "app/Support/helpers.php"
+        ],
+        "psr-4": {
+            "App\\": "app/",
+            "Factories\\": "factories/",
+            "Styleguide\\": "styleguide/",
+            "Contracts\\": "contracts"
+        }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/"
+        ]
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "php -r \"copy('.env.example', '.env');\""
+        ]
+    }
+}

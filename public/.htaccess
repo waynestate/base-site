@@ -1,0 +1,41 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews
+    </IfModule>
+
+    RewriteEngine On
+
+    # Force www to non-www
+    RewriteCond %{HTTP_HOST} ^www\.(.*)
+    RewriteRule ^.*$ https://%1/$1 [L,R=307]
+
+    # If HTTP and we are not on foo.dev, www-dev.foo, www-dev2.foo or www2.foo
+    # then force HTTPS
+    RewriteCond %{HTTPS} !=on
+    RewriteCond %{HTTP_HOST} !(?:\.dev|www-dev2?\..*|www2\..*)$
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=307]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+    # Redirect favicon.ico
+    Redirect 307 /favicon.ico https://wayne.edu/favicon.ico
+
+    # INSERT SITE SPECIFIC REDIRECTS BELOW ####
+
+    # INSERT SITE SPECIFIC REDIRECTS ABOVE ####
+
+    # Look at the raw request to see if it is in the '_static' dir and block it
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /_static/(.*)\ HTTP/(.*)
+    RewriteRule ^ - [F]
+
+    # All other files rewrite to the _static/* directory
+    RewriteCond %{DOCUMENT_ROOT}/_static/%{REQUEST_URI} -f
+    RewriteRule ^(.+) %{DOCUMENT_ROOT}/_static/$1 [L]
+
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>

@@ -1,0 +1,70 @@
+#!/bin/bash
+
+# Keeping track of errors
+errors=false
+
+wild_wayne_test=${WILD_WAYNE}
+site_folder=${PWD##*/}
+
+export PATH=/usr/local/bin:$PATH
+
+# Run on either wild wayne or local machine
+if [ "$wild_wayne_test" = "true" ]; then
+  printf "Running phplint...\n"
+  phplint="$(make phplintdry)"
+
+  printf "Running stylelint...\n"
+  stylelint="$(gulp stylelint)"
+
+  printf "Running tests...\n"
+  phpunit="$(phpunit)"
+else
+    if hash vagrant 2>/dev/null; then
+        printf "Running phplint...\n"
+        phplint="$(vagrant ssh -c "cd /vagrant/${site_folder}; make phplintdry")"
+
+        printf "Running stylelint...\n"
+        stylelint="$(vagrant ssh -c "cd /vagrant/${site_folder}; gulp stylelint")"
+
+        printf "Running tests...\n"
+        phpunit="$(vagrant ssh -c "cd /vagrant/${site_folder}; phpunit")"
+    else
+        printf "vagrant command could not be found.\n"
+        errors=true
+    fi
+fi
+
+# Report errors
+if [[ $phplint == *"- begin diff -"* ]]; then
+    errors=true;
+    printf "phplint has reported errors. Please fix them before committing.\n"
+    printf ">> run: make phplint\n\n"
+fi
+
+if [[ $stylelint == *"Stylelint has errors:"* ]]; then
+    errors=true;
+    printf "Stylint has reported errors. Please fix them before committing.\n"
+    printf ">> run: gulp stylelint\n\n"
+fi
+
+if [[ $phpunit == *"FAILURES!"* ]]; then
+    errors=true;
+    printf "phpunit tests failed. Please fix them before committing.\n"
+    printf ">> run: make runtests\n"
+fi
+
+# Make sure they aren't on the master branch and committing
+branch=`git rev-parse --abbrev-ref HEAD`
+
+if [[ "$branch" == "master" ]]; then
+    errors=true;
+    printf "You are on branch $branch. Are you sure you want to commit to this branch?\n"
+	printf "If so, commit with -n to bypass this pre-commit hook.\n"
+fi
+
+# Abort if errors are found
+if [ $errors == true ]; then
+    exit 1
+fi
+
+exit 0;

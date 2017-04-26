@@ -1,0 +1,11 @@
+// Change based on top menu width
+$menu-top-breakpoint: map-get($breakpoints, 'offcanvas');
+
+// Menu-top
+$menu-top-background: $black;
+$menu-height: 70px;
+$menu-top-font-size: rem-calc(15);
+
+// Slick
+$slick-font-path: "../fonts/";
+$slick-loader-path: "/_resources/images/";
