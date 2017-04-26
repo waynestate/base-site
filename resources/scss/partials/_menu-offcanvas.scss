@@ -1,0 +1,110 @@
+@include breakpoint($menu-top-breakpoint down) {
+    // Show the main menu toggle
+    .offcanvas-main-menu {
+        display: block;
+    }
+
+    // Offcanvas menu overrides
+    .main-menu {
+        // Makes menu background color go all the way down the column
+        height: 100%;
+        background-color: #262626;
+        padding-left: 0;
+        padding-right: 0;
+
+        // Selected State
+        .selected a {
+            color: #fff;
+            background: #085c55;
+        }
+
+        // Bottom borders on child <li>
+        > ul > li {
+            border-bottom: 1px solid #353535;
+        }
+
+        ul {
+            li a {
+                background-color: #262626;
+                color: rgba(255, 255, 255, 0.7);
+
+                &:hover {
+                    background-color: lighten(#262626, 10%);
+                    color: #fff;
+                }
+            }
+
+            // Indent second level now since first level is shown
+            li > ul > li a {
+                padding-left: 2em;
+            }
+
+            // Indent third level now since first level is shown
+            li > ul > li > ul > li a {
+                padding-left: 3em;
+            }
+        }
+    }
+
+    .expand-icons {
+        float: right;
+        font-size: rem-calc(24);
+        display: flex;
+    }
+
+    // Top level MAIN MENU dropdown on top
+    .offcanvas-main-menu {
+        ul li {
+            a.main-menu {
+                display: block;
+                color: #757575;
+                background-color: #000;
+                padding: 0.8em;
+                text-transform: uppercase;
+                font-size: rem-calc(16);
+
+                &:hover {
+                    color: #ffd75d;
+                }
+
+                &.selected {
+                    color: #ffd75d;
+                }
+            }
+
+            // Menu Header top level (MAIN MENU)
+            ul {
+                display: none; // Initially hides Top level Main Menu
+
+                li a {
+                    background-color: #000;
+                    border-bottom: none;
+
+                    &:hover {
+                        color: #ffd75d;
+                    }
+                }
+
+                li.selected a {
+                    color: #ffd75d;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+
+// Hide the main menu toggle when necessary
+@include breakpoint($menu-top-breakpoint up) {
+    .offcanvas-main-menu {
+        display: none;
+    }
+}
+
+// Disable a CSS transition temporarily
+.notransition {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important;
+}

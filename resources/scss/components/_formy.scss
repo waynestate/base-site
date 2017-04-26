@@ -1,0 +1,196 @@
+.formy {
+    // Fieldsets
+    fieldset {
+        margin: 0;
+        padding: 0;
+        border: none;
+
+        legend {
+            display: none;
+        }
+    }
+
+    // Errors
+    .error {
+        p {
+            margin: 4px auto 10px;
+            font-size: 0.8em;
+            color: #c60f13;
+        }
+
+        input,
+        textarea,
+        select {
+            border-color: #c60f13;
+            background-color: rgba(198, 15, 19, 0.1);
+            margin-bottom: 0;
+        }
+
+        .checkbox,
+        .radio {
+            background-color: rgba(198, 15, 19, 0.1);
+            padding-bottom: 0;
+        }
+    }
+
+    // Labels
+    label {
+        color: #4d4d4d;
+        font-size: 1em;
+
+        a {
+            text-decoration: underline;
+        }
+    }
+
+    // Checkboxes and radio
+    div.checkbox input,
+    div.radio input {
+        margin: 0;
+        padding: 0;
+    }
+
+    div.checkbox,
+    div.radio {
+        margin: 0;
+        padding: 0 0 15px;
+        border: 0;
+        float: none;
+    }
+
+    div.checkbox div,
+    div.radio div {
+        border: 0;
+        margin: 4px 0 0;
+    }
+
+    div.checkbox label,
+    div.radio label {
+        float: none;
+        display: inline;
+        margin-left: 5px;
+    }
+
+    div.checkbox input[type=checkbox],
+    div.radio input[type=radio] {
+        margin-bottom: 0;
+    }
+
+    // The subit button
+    .formybutton {
+        margin: 20px 0 0;
+        font-size: 1.1em;
+    }
+
+    // Textareas
+    textarea {
+        height: 8em;
+    }
+
+    // Selects
+    .select select {
+        width: 50%;
+    }
+
+    .select #country,
+    .select #state {
+        width: 100%;
+    }
+
+    // Description and text blocks size
+    p {
+        font-size: 1em;
+        line-height: 1.6em;
+    }
+
+    // Text Headings
+    .field_group h2,
+    h2 {
+        color: #333;
+        font-size: 1.3em;
+        border-bottom: 1px solid #eaeaea;
+    }
+
+    // Login
+    .login-info li {
+        border-bottom: 1px solid #ccc;
+        font-size: 0.9em;
+        padding: 5px 0;
+    }
+
+    .login-info ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .login-info ul li a,
+    .login-info p a,
+    .formy_logout a {
+        color: #0c5449;
+        text-decoration: underline;
+        border-bottom: 0;
+
+        &:hover {
+            text-decoration: none;
+            border-bottom: none;
+        }
+    }
+
+    .formy_logout {
+        text-align: right;
+    }
+
+    // Examples
+    label em {
+        color: #f00;
+    }
+
+    // Recaptcha V2 style
+    .g-recaptcha {
+        margin-bottom: 16px;
+    }
+}
+
+/* Small */
+@include breakpoint(small only) {
+    #info div.payment {
+        padding: 10px;
+    }
+
+    .paymentbutton {
+        text-align: center;
+    }
+
+    .formybutton,
+    .actions {
+        text-align: center;
+        font-size: 1.4em;
+    }
+
+    .formybutton input,
+    .actions input {
+        width: 100%;
+    }
+
+    .select select {
+        width: 100%;
+    }
+
+    .fieldsingle {
+        margin-bottom: 5px;
+    }
+}
+
+/* Smallish */
+@media (min-width: 767px) and (max-width: 920px) {
+    /* This is for making the form fields slightly bigger for this breakpoint so they aren't squished. */
+    .formy .fieldgroup,
+    .formy .singlefield {
+        width: 75%;
+    }
+
+    .formy .select select {
+        width: 65%;
+    }
+}

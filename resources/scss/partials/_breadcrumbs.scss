@@ -1,0 +1,45 @@
+.breadcrumbs {
+    margin-top: rem-calc(21);
+
+    ul {
+        margin: 0;
+        padding: 0;
+        font-size: rem-calc(14);
+
+        li {
+            display: inline;
+
+            a {
+                color: #0c5449;
+
+                &:hover {
+                    text-decoration: underline;
+                    border-bottom: none;
+                }
+            }
+
+            &.last {
+                color: #0c5449;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .first a {
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    .icon-home {
+        font-size: 1.2em;
+        padding: 0;
+        color: #333;
+    }
+
+    .text {
+        display: none;
+    }
+}

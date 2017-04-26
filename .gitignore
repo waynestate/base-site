@@ -1,0 +1,16 @@
+/sami-cache
+/vendor
+/node_modules
+/coverages
+/api
+.env
+.idea
+.DS_Store
+/public/_static
+/shared
+/.envoydeploy
+/public/_resources
+npm-debug.log
+yarn-error.log
+cs_fixer_tmp*
+.php_cs.cache
