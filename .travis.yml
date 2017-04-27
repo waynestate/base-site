@@ -7,6 +7,8 @@ php:
   - 7.1
 
 before_script:
+  # Turn off xdebug
+  - phpenv config-rm xdebug.ini
   # Install nvm for nodejs
   - nvm install 4.3.0
   - nvm use 4.3.0
