@@ -21,4 +21,10 @@ before_script:
   - make install
   - make build
 
-script: make runtests
+script:
+  - make runtests
+  - phpenv config-add xdebug.ini
+  - phpunit --coverage-clover build/logs/clover.xml
+
+after_script:
+  - php vendor/bin/coveralls -v
