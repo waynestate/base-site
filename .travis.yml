@@ -7,8 +7,6 @@ php:
   - 7.1
 
 before_script:
-  # Turn off xdebug
-  - phpenv config-rm xdebug.ini
   # Install nvm for nodejs
   - nvm install 4.3.0
   - nvm use 4.3.0
@@ -23,7 +21,6 @@ before_script:
 
 script:
   - make runtests
-  - phpenv config-add xdebug.ini
   - phpunit --coverage-clover build/logs/clover.xml
 
 after_script:
