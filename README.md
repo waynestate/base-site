@@ -1,7 +1,10 @@
 Base Template
 ================
 
-[![Master Build Status](https://travis-ci.org/waynestate/base-site.svg?branch=master)](https://travis-ci.org/waynestate/base-site) [![Develop Build Status](https://travis-ci.org/waynestate/base-site.svg?branch=develop)](https://travis-ci.org/waynestate/base-site) [![Coverage Status](https://coveralls.io/repos/github/waynestate/base-site/badge.svg)](https://coveralls.io/github/waynestate/base-site)
+| Branch | Build | Coverage |
+---|---|---
+| Master | [![Master Build Status](https://travis-ci.org/waynestate/base-site.svg?branch=master)](https://travis-ci.org/waynestate/base-site) | [![Coverage Status](https://coveralls.io/repos/github/waynestate/base-site/badge.svg?branch=master)](https://coveralls.io/github/waynestate/base-site?branch=master) |
+| Develop | [![Develop Build Status](https://travis-ci.org/waynestate/base-site.svg?branch=develop)](https://travis-ci.org/waynestate/base-site) | [![Coverage Status](https://coveralls.io/repos/github/waynestate/base-site/badge.svg?branch=develop)](https://coveralls.io/github/waynestate/base-site?branch=develop) | 
 
 Starter repository for creating a new website. Live demo can be found at https://base.wayne.edu/.
 
