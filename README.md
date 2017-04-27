@@ -1,6 +1,8 @@
 Base Template
 ================
 
+[![Coverage Status](https://coveralls.io/repos/github/waynestate/base-site/badge.svg)](https://coveralls.io/github/waynestate/base-site)
+
 Starter repository for creating a new website. Live demo can be found at https://base.wayne.edu/.
 
 ## Features
