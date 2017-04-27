@@ -19,4 +19,4 @@ before_script:
   - make install
   - make build
 
-script: phpunit
+script: make runtests
