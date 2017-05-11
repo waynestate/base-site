@@ -206,6 +206,10 @@ $menus = [
         * If the page is NOT within then menu then you need to specify the path to the page. Set `var $path = '/path/to/your/page'` inside your `styleguide/Pages/` class.
     1. Set controller to the one you created in step #4.
 
+## Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+
 ## Licensing
 
 Base Template is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
