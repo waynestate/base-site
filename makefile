@@ -46,7 +46,7 @@ yarncheck: $(YARNFILE)
 	yarn outdated
 
 runtests: $(COMPOSERFILE)
-	phpunit
+	php vendor/bin/phpunit
 
 phplint: $(COMPOSERFILE)
 	php-cs-fixer fix
