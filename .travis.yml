@@ -1,4 +1,7 @@
 language: php
+cache:
+    directories:
+        - $HOME/.composer/cache/files
 
 branches:
   only:
@@ -21,7 +24,8 @@ before_script:
   - sudo apt-get update -qq
   - sudo apt-get install -y -qq yarn
   # Install dependencies and build the project
-  - make install
+  - make yarn
+  - make composerinstalldev
   - make build
 
 script:
