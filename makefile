@@ -19,7 +19,7 @@ yarn: $(YARNFILE)
 	yarn
 
 composerinstall: $(COMPOSERFILE)
-	composer update --lock
+	composer update --lock --prefer-dist --no-scripts --no-interaction
 
 composerinstalldev: $(COMPOSERFILE)
 	composer install --prefer-dist --no-scripts --no-interaction && composer dump-autoload --optimize;
@@ -46,7 +46,7 @@ yarncheck: $(YARNFILE)
 	yarn outdated
 
 runtests: $(COMPOSERFILE)
-	phpunit
+	php vendor/bin/phpunit
 
 phplint: $(COMPOSERFILE)
 	php-cs-fixer fix
