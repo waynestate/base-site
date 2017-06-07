@@ -9,7 +9,7 @@
                     @foreach($social as $item)
                         <li>
                             <a href="{{ $item['link'] }}" target="_blank" rel="noopener">
-                                <i class="icon-{{ strtolower($item['title']) }}"><span>{{ $item['title'] }}</span></i>
+                                <span class="icon-{{ strtolower($item['title']) }}"></span><p class="visuallyhidden">{{ $item['title'] }}</p>
                             </a>
                         </li>
                     @endforeach

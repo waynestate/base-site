@@ -24,7 +24,7 @@ import 'slick-carousel/slick/slick.js';
                 arrows: false
             };
             var config_arrows = {
-                dots: false,
+                dots: true,
                 arrows: true
             }
 

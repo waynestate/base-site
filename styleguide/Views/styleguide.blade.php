@@ -124,15 +124,15 @@
 
     <h2>Buttons</h2>
 
-    <a href="#" class="button">Button</a>
-    <a href="#" class="button expanded">Button Expanded</a>
+    <a href="http://foundation.zurb.com/sites/docs/button.html#basics" class="button">Standard Button</a>
+    <a href="http://foundation.zurb.com/sites/docs/button.html#sizing" class="button expanded">Expanded Button</a>
 
     <a class="button" onclick="$('pre.button-examples').toggleClass('hide');">See Button Code</a>
 
     <pre class="button-examples hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
     {{ htmlspecialchars('
-<a href="#" class="button">Button</a>
-<a href="#" class="button expanded">Button Expanded</a>
+<a href="http://foundation.zurb.com/sites/docs/button.html#basics" class="button">Standard Button</a>
+<a href="http://foundation.zurb.com/sites/docs/button.html#sizing" class="button expanded">Expanded Button</a>
     ') }}
     </pre>
 
@@ -151,7 +151,7 @@
 
     <h2>Maginific Pop-up</h2>
     <p>Any valid YouTube URL starting with <code>youtu.be</code> or <code>youtube.com/watch</code> will open a lightbox with the video.</p>
-    <p><a href="//www.youtube.com/watch?v=guRgefesPXE"><img src="//i.wayne.edu/youtube/guRgefesPXE"></a></p>
+    <p><a href="//www.youtube.com/watch?v=guRgefesPXE"><img src="//i.wayne.edu/youtube/guRgefesPXE" alt="View YouTube Video"></a></p>
     <a class="button" onclick="$('pre.maginific-popup-example').toggleClass('hide');">See Maginific Pop-up Code</a>
 
     <pre class="maginific-popup-example hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">

@@ -57,13 +57,14 @@
         padding: 1em;
         background-color: #fff9eb;
         border: none;
+        color: #6a6a6a;
 
         p {
             font-family: "Lato", sans-serif;
             font-style: italic;
             font-weight: 400;
             font-size: 1.5em;
-            color: #0c5449;
+            color: #6a6a6a;
             margin-bottom: 0;
         }
     }
@@ -82,7 +83,6 @@
         // Header
         thead tr {
             border-collapse: collapse;
-            background: #00565c;
 
             &,
             a {
@@ -96,6 +96,7 @@
                 text-align: left;
                 font-weight: bold;
                 padding: 15px 10px;
+                background: #00565c;
             }
 
             th.center-align {

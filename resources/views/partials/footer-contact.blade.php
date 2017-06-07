@@ -7,11 +7,11 @@
             <div class="row">
                 <div class="columns small-12 text-center">
                     @foreach($contact as $info)
-                        <h3>
+                        <h2>
                             @if($info['link'] != '')<a href="{{ $info['link'] }}">@endif
                             {{ $info['title'] }}
                             @if($info['link'] != '')</a>@endif
-                        </h3>
+                        </h2>
 
                         {!! $info['description'] !!}
                     @endforeach
