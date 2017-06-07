@@ -40,8 +40,8 @@ import spf from 'spf/dist/spf';
             $('body').addClass('spf-link');
 
             // Disable SPF on any links with a file extention
-            $.each($("a[href*='.']"), function(key, obj){
-                $(obj).addClass('spf-nolink');
+            $("a[href*='.']").each(function(){
+                this.classList.add('spf-nolink');
             });
 
             if (document.addEventListener) {
@@ -90,6 +90,11 @@ import spf from 'spf/dist/spf';
          */
         spfdone() {
             window.nanobar.go(100);
+
+            // Disable SPF on any links with a file extention
+            $("a[href*='.']").each(function(){
+                this.classList.add('spf-nolink');
+            });
         }
     }
 
