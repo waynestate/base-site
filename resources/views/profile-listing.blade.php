@@ -7,10 +7,10 @@
         <form name="programs" method="get" class="filter">
             <div class="row">
                 <div class="large-12 columns">
-                    <label for="program">View by department:</label>
+                    <label for="filter-group">View by department:</label>
                     <div class="row collapse">
                         <div class="small-10 columns">
-                            <select name="group">
+                            <select name="group" id="filter-group">
                                 @foreach($dropdown_groups as $key=>$value)
                                     <option value="{{ $key }}"@if($key == $selected_group) selected="selected"@endif>{{ $value }}</option>
                                 @endforeach
@@ -29,9 +29,10 @@
     <div class="row small-up-2 medium-up-3">
         @forelse((array)$profiles as $profile)
             <div class="columns profile">
-                <a href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}profile/{{ $profile['data']['AccessID'] }}" class="profile-img" style="background-image: url('{{ $profile['data']['Picture']['url'] or '/_resources/images/no-photo.svg' }}');" alt="{{ $profile['data']['First Name'] }} {{ $profile['data']['Last Name'] }}"></a>
-
-                <a href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}profile/{{ $profile['data']['AccessID'] }}">{{ $profile['data']['First Name'] }} {{ $profile['data']['Last Name'] }}</a>
+                <a href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}profile/{{ $profile['data']['AccessID'] }}">
+                    <div class="profile-img" style="background-image: url('{{ $profile['data']['Picture']['url'] or '/_resources/images/no-photo.svg' }}');"></div>
+                    {{ $profile['data']['First Name'] }} {{ $profile['data']['Last Name'] }}
+                </a>
 
                 @if(isset($profile['data']['Title']))
                     <span>{{ $profile['data']['Title'] }}</span>

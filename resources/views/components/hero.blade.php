@@ -4,7 +4,7 @@
 --}}
 
 @if(isset($images) && is_array($images))
-    <div class="rotate_arrows overlay-arrows hero{{ isset($class) ? ' ' . $class : '' }}">
+    <div class="{{ (count($images) > 1)? 'rotate_arrows ' : '' }}overlay-arrows hero{{ isset($class) ? ' ' . $class : '' }}">
         @foreach($images as $image)
             @if($image == reset($images))
                 <div class="hero__slide">

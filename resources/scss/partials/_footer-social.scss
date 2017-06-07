@@ -54,13 +54,14 @@
         }
     }
 
-    i {
+    span {
         display: table-cell;
         vertical-align: middle;
         font-size: rem-calc(22);
         transition-duration: 0.25s, 0.25s;
         transition-property: background;
         transition-timing-function: ease-out, ease-in;
+        background: #023337;
         background: rgba(255, 255, 255, 0.1);
         height: rem-calc(40);
         width: rem-calc(40);
@@ -69,10 +70,6 @@
         &:hover {
             background: #00ab99;
             color: white;
-        }
-
-        span {
-            font-size: 0;
         }
 
         @include breakpoint(large) {

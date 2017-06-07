@@ -1,7 +1,7 @@
 {
   "name": "base",
   "private": true,
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "",
   "main": "public/index.php",
   "scripts": {
@@ -19,8 +19,8 @@
   },
   "homepage": "http://base.wayne.edu/",
   "devDependencies": {
-    "@waynestate/wsuheader": "^1.0.0",
     "@waynestate/wsufooter": "^1.0.0",
+    "@waynestate/wsuheader": "^1.0.0",
     "eslint": "^3.7.1",
     "eslint-loader": "^1.5.0",
     "foundation-sites": "~6.3.0",
