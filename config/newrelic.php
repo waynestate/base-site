@@ -10,5 +10,5 @@ return [
     | metrics based on this application.
     |
     */
-    'app_name' => 'base'
+    'app_name' => 'base',
 ];
