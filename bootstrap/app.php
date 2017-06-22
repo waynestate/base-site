@@ -36,6 +36,7 @@ $app = new Laravel\Lumen\Application(
 $app->configure('app');
 $app->configure('cache');
 $app->configure('database');
+$app->configure('newrelic');
 $app->configure('view');
 
 /*
