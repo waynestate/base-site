@@ -17,6 +17,9 @@ class NewRelicMiddleware
     {
         // Load the newrelic transaction
         if (extension_loaded('newrelic')) {
+            // Set the name of the Application
+            newrelic_set_appname(config('newrelic.app_name'));
+
             // Transaction name without GET params
             newrelic_name_transaction($request->server->get('REDIRECT_URL'));
 
