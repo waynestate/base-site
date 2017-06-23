@@ -140,7 +140,10 @@ echo '----';
 [ -d {{ $shared_dir }}/storage/framework/cache ] || mkdir -p -m 0770 {{ $shared_dir }}/storage/framework/cache;
 [ -d {{ $shared_dir }}/storage/framework/views ] || mkdir -p -m 0770 {{ $shared_dir }}/storage/framework/views;
 
-[ -d {{ $app_base }}/tmp ] || mkdir -p 0775 {{ $app_base }}/tmp;
+chmod -R g+s {{ $shared_dir }}/storage
+chmod -R g+s {{ $release_dir }}
+
+[ -d {{ $app_base }}/tmp ] || mkdir -p 0770 {{ $app_base }}/tmp;
 @endtask
 
 @task('updaterepo_localsrc', ['on' => 'local'])
@@ -257,6 +260,7 @@ echo "RemoteRelease Environment file setup Done.";
 @task('prepare_remoterelease', ['on' => $remote_server])
 echo "RemoteRelease Prepare...";
 rsync --progress -e ssh -avzh --delay-updates --delete {{ $source_dir }}/ {{ $release_dir }}/{{ $release }}/;
+chmod -R g+s {{ $release_dir }}/{{ $release }}
 echo "RemoteRelease Prepare Done.";
 @endtask
 
