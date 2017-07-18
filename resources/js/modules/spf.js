@@ -40,7 +40,7 @@ import spf from 'spf/dist/spf';
             $('body').addClass('spf-link');
 
             // Disable SPF on any links with a file extention
-            $("a[href*='.']").each(function(){
+            $("a[href*='.'],a[target=_blank]").each(function(){
                 this.classList.add('spf-nolink');
             });
 

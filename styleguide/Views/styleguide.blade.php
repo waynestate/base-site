@@ -149,6 +149,15 @@
 
     <hr>
 
+    <h2>Links that should not pick up SPF JS</h2>
+
+    <ul>
+        <li><a href="filename.pdf">Anything with a file extension</a> Ex: <code>.pdf</code></li>
+        <li><a href="/styleguide" target="_blank">Relative URLs that open in new window</a> <code>target="_blank"</code></li>
+    </ul>
+
+    <hr>
+
     <h2>Maginific Pop-up</h2>
     <p>Any valid YouTube URL starting with <code>youtu.be</code> or <code>youtube.com/watch</code> will open a lightbox with the video.</p>
     <p><a href="//www.youtube.com/watch?v=guRgefesPXE"><img src="//i.wayne.edu/youtube/guRgefesPXE" alt="View YouTube Video"></a></p>

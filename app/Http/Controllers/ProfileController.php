@@ -34,7 +34,7 @@ class ProfileController extends Controller
         $site_id = isset($request->data['data']['profile_site_id']) ? $request->data['data']['profile_site_id'] : $request->data['site']['id'];
 
         // Determine if we are forcing the profiles from custom page data
-        $forced_profile_group_id = isset($request->data['page']['data']['profile_group_id']) ? $request->data['page']['data']['profile_group_id'] : null;
+        $forced_profile_group_id = isset($request->data['data']['profile_group_id']) ? $request->data['data']['profile_group_id'] : null;
 
         // Get the groups for the dropdown
         $dropdown_groups = $this->profile->getDropdownOfGroups($site_id);
