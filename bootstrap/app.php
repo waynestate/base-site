@@ -48,7 +48,7 @@ $app->configure('view');
 |
 */
 
-if (config('app.sessions_enable') == true) {
+if (config('app.env') != 'testing' && config('app.sessions_enable') == true) {
     session_start();
 }
 
