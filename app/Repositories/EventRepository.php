@@ -51,7 +51,7 @@ class EventRepository implements EventRepositoryContract
         });
 
         // Make sure the return is an array
-        $events['events'] = (is_array($events_listing) && array_key_exists('events', $events_listing)) ? $events_listing['events'] : [];
+        $events['events'] = array_get($events_listing, 'events', []);
 
         return $events;
     }
