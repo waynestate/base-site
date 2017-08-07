@@ -54,7 +54,7 @@ class NewsRepository implements NewsRepositoryContract
         });
 
         // Make sure the return is an array
-        $news['news'] = (is_array($news_listing) && array_key_exists('news', $news_listing)) ? $news_listing['news'] : [];
+        $news['news'] = array_get($news_listing, 'news', []);
 
         return $news;
     }
