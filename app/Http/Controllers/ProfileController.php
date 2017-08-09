@@ -39,11 +39,14 @@ class ProfileController extends Controller
         // Get the groups for the dropdown
         $dropdown_groups = $this->profile->getDropdownOfGroups($site_id);
 
+        // Set the selected group
+        $selected_group = $request->query('group') !== '' ? $request->query('group') : null;
+
         // Get the options for the dropdown
-        $dropdown_group_options = $this->profile->getDropdownOptions($request->query('group'), $forced_profile_group_id);
+        $dropdown_group_options = $this->profile->getDropdownOptions($selected_group, $forced_profile_group_id);
 
         // Determine which group to filter by
-        $group_id = $forced_profile_group_id === null ? $request->query('group') : $forced_profile_group_id;
+        $group_id = $forced_profile_group_id === null ? $selected_group : $forced_profile_group_id;
 
         // Get the profiles
         $profiles = $this->profile->getProfiles($site_id, $group_id);
