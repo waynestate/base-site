@@ -5,13 +5,17 @@
 <div class="menu-top">
     <div class="menu-top-container menu-top-bg">
         <div class="row">
-            <div class="small-12 columns">
+            <div class="small-12 columns position-relative">
                 <div class="vertical-centering title-area">
                     <h1>
-                        <a href="/">
-                            @if(config('app.sub_title') !== null)<span>{{ config('app.sub_title') }}</span>@endif
-                            {{ $site['title'] }}
-                        </a>
+                        <div>
+                            <a href="/">
+                                @if($site['id'] !== 1669)
+                                    <span class="sub-title">{{ config('app.sub_title') }}</span>
+                                @endif
+                                {{ $site['title'] }}
+                            </a>
+                        </div>
                     </h1>
                 </div>
 
@@ -30,6 +34,11 @@
                         </div>
                     </div>
                 </div>
+
+                @if(isset($banner) && $banner != false)
+                    @include('partials/banner', ['banner' => $banner, 'class' => 'banner'])
+                @endif
+
             </div>
         </div>
     </div>
