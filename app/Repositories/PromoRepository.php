@@ -43,6 +43,7 @@ class PromoRepository implements DataRepositoryContract, PromoRepositoryContract
             2907 => 'social',
             2909 => 'under_menu',
             3001 => 'hero',
+            4246 => 'banner',
         ];
 
         // If there is an accordion custom page field and inject it into the group reference
@@ -67,6 +68,7 @@ class PromoRepository implements DataRepositoryContract, PromoRepositoryContract
             'contact' => 'limit:3',
             'under_menu' => 'page_id:'.$data['page']['id'],
             'hero' => 'page_id:'.$data['page']['id'].'|randomize|limit:1',
+            'banner' => 'page_id:'.$data['page']['id'].'|first',
         ];
 
         // Return the parsed promotions
