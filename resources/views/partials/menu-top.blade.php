@@ -10,9 +10,7 @@
                     <h1>
                         <div>
                             <a href="/">
-                                @if($site['id'] !== 1669)
-                                    <span class="sub-title">{{ config('app.sub_title') }}</span>
-                                @endif
+                                @if(config('app.sub_title') !== null)<span>{{ config('app.sub_title') }}</span>@endif
                                 {{ $site['title'] }}
                             </a>
                         </div>
