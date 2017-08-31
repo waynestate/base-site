@@ -7,9 +7,12 @@
 .idea
 .DS_Store
 /public/_static
-/shared
-/.envoydeploy
+/public/hot
+/public/storage
 /public/_resources
+/shared
+/storage/*.key
+/.envoydeploy
 npm-debug.log
 yarn-error.log
 cs_fixer_tmp*
