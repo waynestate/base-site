@@ -1,7 +1,7 @@
 {
   "name": "base",
   "private": true,
-  "version": "3.0.12",
+  "version": "3.1.0",
   "description": "",
   "main": "public/index.php",
   "scripts": {
