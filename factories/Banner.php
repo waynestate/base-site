@@ -5,10 +5,10 @@ namespace Factories;
 use Contracts\Factories\FactoryContract;
 use Faker\Factory;
 
-class Event implements FactoryContract
+class Banner implements FactoryContract
 {
     /**
-     * Construct the Event.
+     * Construct the Banner.
      *
      * @param Factory $faker
      */
@@ -24,12 +24,15 @@ class Event implements FactoryContract
     {
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
-                'url' => $this->faker->url,
-                'title' => $this->faker->sentence(rand(6, 10)),
-                'date' => $this->faker->dateTimeThisMonth('now')->format('Y-m-d'),
-                'start_time' => $this->faker->dateTimeThisMonth('now')->format('H:i:s'),
-                'is_all_day' => $this->faker->boolean,
+                'class' => 'banner',
+                'title' => 'Make a',
+                'link' => $this->faker->url,
+                'excerpt' => 'Gift',
             ];
+        }
+
+        if ($limit == 1) {
+            return current($data);
         }
 
         return $data;
