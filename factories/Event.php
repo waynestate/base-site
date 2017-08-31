@@ -26,8 +26,8 @@ class Event implements FactoryContract
             $data[$i] = [
                 'url' => $this->faker->url,
                 'title' => $this->faker->sentence(rand(6, 10)),
-                'date' => $this->faker->dateTimeThisMonth('now')->format('Y-m-d H:i:s'),
-                'start_time' => $this->faker->dateTimeThisMonth('now')->format('Y-m-d H:i:s'),
+                'date' => $this->faker->dateTimeThisMonth('now')->format('Y-m-d'),
+                'start_time' => $this->faker->dateTimeThisMonth('now')->format('H:i:s'),
                 'is_all_day' => $this->faker->boolean,
             ];
         }
