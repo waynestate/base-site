@@ -84,7 +84,7 @@ class ProfileController extends Controller
         $request->data['page']['title'] = $this->profile->getPageTitleFromName($profile);
 
         // Set the back URL
-        $request->data['back_url'] = $this->profile->getBackToProfileListUrl($request->server->get('HTTP_REFERER'));
+        $request->data['back_url'] = $this->profile->getBackToProfileListUrl($request->server->get('HTTP_REFERER'), $request->server->get('REQUEST_SCHEME'), $request->server->get('HTTP_HOST'), $request->server->get('REQUEST_URI'));
 
         // Make it a full width view
         $request->data['show_site_menu'] = false;
