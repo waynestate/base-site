@@ -268,6 +268,16 @@ class MenuRepository extends Repository
                                     'relative_url' => '/styleguide/hero/full/menu',
                                     'submenu' => [],
                                 ],
+                                105100107 => [
+                                    'menu_item_id' => '105100107',
+                                    'is_active' => '1',
+                                    'page_id' => null,
+                                    'target' => '',
+                                    'display_name' => 'Full Width (Text/Link)',
+                                    'class_name' => '',
+                                    'relative_url' => '/styleguide/hero/full/text/link',
+                                    'submenu' => [],
+                                ],
                             ],
                         ],
                         106100 => [

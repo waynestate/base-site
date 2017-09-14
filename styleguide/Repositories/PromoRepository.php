@@ -29,6 +29,7 @@ class PromoRepository extends Repository
             105100101 => 3, // Hero Contained (Rotate)
             105100102 => 3, // Hero Contained (Text)
             105100103 => 3, // Hero Contained (Text/Link)
+            105100107 => 1, // Hero Full (Text/Link)
         ];
 
         // Only pull hero promos if they match the pages_ids that are specificed
