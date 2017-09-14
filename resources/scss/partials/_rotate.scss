@@ -1,6 +1,17 @@
-.rotate,
-.rotate_arrows {
-    margin-bottom: 0;
+.rotate_arrows.slick-dotted.slick-slider {
+    margin-bottom: rem-calc(15);
+
+    @include breakpoint(large) {
+        margin-bottom: rem-calc(30);
+    }
+
+    @include breakpoint(xlarge) {
+        margin-bottom: rem-calc(40);
+    }
+
+    @include breakpoint(xxlarge) {
+        margin-bottom: rem-calc(50);
+    }
 }
 
 .overlay-arrows {
@@ -9,9 +20,11 @@
         right: 15px;
         height: 40px;
         width: 40px;
+        color: #fff;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 
         &::before {
-            font-size: 40px;
+            content: '\e800';
         }
     }
 
@@ -20,9 +33,21 @@
         left: 15px;
         height: 40px;
         width: 40px;
+        color: #fff;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 
         &::before {
-            font-size: 40px;
+            content: '\e801';
         }
+    }
+}
+
+.slick-prev::before,
+.slick-next::before {
+    font-family: waynestate;
+    font-size: rem-calc(40);
+
+    @include breakpoint(xlarge) {
+        font-size: rem-calc(60);
     }
 }
