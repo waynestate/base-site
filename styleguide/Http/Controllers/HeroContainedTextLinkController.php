@@ -5,7 +5,7 @@ namespace Styleguide\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class HeroTextController extends Controller
+class HeroContainedTextLinkController extends Controller
 {
     /**
      * Display the full width hero view.
@@ -18,7 +18,7 @@ class HeroTextController extends Controller
         // Set this controller in the allowed controllers list
         config([
             'app.hero_text_enabled' => true,
-            'app.hero_text_controllers' => ['HeroTextController'],
+            'app.hero_text_controllers' => ['HeroContainedTextLinkController'],
         ]);
 
         return view('styleguide-childpage', merge($request->data));
