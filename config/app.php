@@ -125,13 +125,15 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Sub header title
+    | Surtitle
     |--------------------------------------------------------------------------
     |
-    | Title shown above the main title.
+    | Title to be shown above the main title of the site you are on. By default
+    | it will link back to "/" which is the main homepage.
     |
     */
-    'sub_title' => null,
+    'surtitle' => null,
+    'surtitle_main_site_enabled' => false,
 
     /*
     |--------------------------------------------------------------------------
