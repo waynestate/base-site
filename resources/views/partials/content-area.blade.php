@@ -3,7 +3,7 @@
 @section('content-area')
     @yield('top')
 
-    @if(isset($hero) && $hero != false && $site_menu['meta']['has_selected'] == false)
+    @if(isset($hero) && $hero != false && $site_menu['meta']['has_selected'] == false && config('app.hero_contained') === false)
         @include('components.hero', ['images' => $hero])
     @endif
 
@@ -34,7 +34,7 @@
 
         <div class="small-12 @if($site_menu['meta']['has_selected'] == false && ((isset($show_site_menu) && $show_site_menu != true) || !isset($show_site_menu)))xlarge-12 large-12 @else xlarge-9 large-9 @endif columns content" data-off-canvas-content>
 
-            @if(isset($hero) && $hero != false && $site_menu['meta']['has_selected'] == true)
+            @if(isset($hero) && $hero != false && $site_menu['meta']['has_selected'] == true || config('app.hero_contained') === true)
                 @include('components.hero', ['images' => $hero, 'class' => 'hero--childpage'])
             @endif
 
