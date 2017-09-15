@@ -26,7 +26,10 @@ class HeaderTitleDoubleController extends Controller
      */
     public function index(Request $request)
     {
-        config(['app.sub_title' => $this->faker->sentence($this->faker->numberBetween(2, 4))]);
+        config([
+            'app.surtitle' => $this->faker->sentence($this->faker->numberBetween(2, 4)),
+            'app.surtitle_main_site_enabled' => true,
+        ]);
 
         return view('styleguide-childpage', merge($request->data));
     }
