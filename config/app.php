@@ -99,7 +99,7 @@ return [
     */
     'hero_text_enabled' => true,
     'hero_text_controllers' => ['HomepageController'],
-    'hero_text_more' => 'View More',
+    'hero_text_more' => 'View more',
 
     /*
     |--------------------------------------------------------------------------
