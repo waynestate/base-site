@@ -5,7 +5,7 @@ namespace Styleguide\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class HeroFullTextLinkController extends Controller
+class HeroFullMenuController extends Controller
 {
     /**
      * Display the full width hero view.
@@ -15,14 +15,7 @@ class HeroFullTextLinkController extends Controller
      */
     public function index(Request $request)
     {
-        // Set this controller in the allowed controllers list
-        config([
-            'app.hero_text_enabled' => true,
-            'app.hero_text_controllers' => ['HeroFullTextLinkController'],
-            'app.hero_contained' => false,
-        ]);
-
-        $request->data['show_site_menu'] = false;
+        config(['app.hero_contained' => false]);
 
         return view('styleguide-childpage', merge($request->data));
     }
