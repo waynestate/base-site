@@ -15,7 +15,7 @@ class HeaderTitleSingleController extends Controller
      */
     public function index(Request $request)
     {
-        config(['app.sub_title' => null]);
+        config(['app.surtitle' => null]);
 
         return view('styleguide-childpage', merge($request->data));
     }

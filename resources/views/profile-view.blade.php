@@ -10,7 +10,7 @@
     @endif
 
     <div class="row profile__block">
-        <div class="small-12 large-4 columns">
+        <div class="small-12 large-4 xlarge-3 columns">
             @if(isset($profile['data']['Picture']['url']))
                 <img src="{{ $profile['data']['Picture']['url'] }}" alt="{{ $page['title'] }}" class="profile__img">
             @else
@@ -54,7 +54,7 @@
              </div>
         </div>
 
-        <div class="small-12 large-8 columns">
+        <div class="small-12 large-8 xlarge-9 columns">
             <h1 class="page-title show-for-large">{{ $page['title'] }}</h1>
 
             @foreach($profile['data'] as $field=>$data)

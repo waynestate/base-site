@@ -2,7 +2,7 @@
 
 namespace Styleguide\Pages;
 
-class HeaderTitleSingle extends Page
+class HeroContainedTextLink extends Page
 {
     /**
      * {@inheritdoc}
@@ -11,9 +11,9 @@ class HeaderTitleSingle extends Page
     {
         return app('Factories\Page')->create(1, [
             'page' => [
-                'controller' => 'HeaderTitleSingleController',
-                'title' => 'Header Title Single',
-                'id' => 102100100,
+                'controller' => 'HeroContainedTextLinkController',
+                'title' => 'Contained (With Text/Link)',
+                'id' => 105100103,
                 'content' => [
                     'main' => '',
                 ],

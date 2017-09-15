@@ -14,7 +14,7 @@ class HeroFullMenu extends Page
     {
         return app('Factories\Page')->create(1, [
             'page' => [
-                'controller' => 'ChildpageController',
+                'controller' => 'HeroFullMenuController',
                 'title' => 'Hero Full (Menu)',
                 'id' => 3,
                 'content' => [

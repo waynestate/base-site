@@ -88,6 +88,33 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Hero Contained
+    |--------------------------------------------------------------------------
+    |
+    | Force the hero image to be contained within the content area of the page.
+    | If set to false the hero image will expand 100% across the top of the
+    | site if it is not found in the menu.
+    |
+    */
+    'hero_contained' => true,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Hero Text Enabled
+    |--------------------------------------------------------------------------
+    |
+    | This enables the hero image to have excerpt text and a view more link.
+    | You can also specify which controllers you want this to work on by
+    | adding to the array. By default only the homepage controller
+    | is allowed to have this functionality.
+    |
+    */
+    'hero_text_enabled' => false,
+    'hero_text_controllers' => ['HomepageController'],
+    'hero_text_more' => 'View more',
+
+    /*
+    |--------------------------------------------------------------------------
     | Sessions
     |--------------------------------------------------------------------------
     |
@@ -98,13 +125,15 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Sub header title
+    | Surtitle
     |--------------------------------------------------------------------------
     |
-    | Title shown above the main title.
+    | Title to be shown above the main title of the site you are on. By default
+    | it will link back to "/" which is the main homepage.
     |
     */
-    'sub_title' => null,
+    'surtitle' => null,
+    'surtitle_main_site_enabled' => false,
 
     /*
     |--------------------------------------------------------------------------
