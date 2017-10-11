@@ -7,7 +7,7 @@
 
     # Force www to non-www
     RewriteCond %{HTTP_HOST} ^www\.(.*)
-    RewriteRule ^.*$ https://%1/$1 [L,R=307]
+    RewriteRule ^.*$ https://%1%{REQUEST_URI} [L,R=307]
 
     # If HTTP and we are not on foo.dev, www-dev.foo, www-dev2.foo or www2.foo
     # then force HTTPS
