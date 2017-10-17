@@ -2,6 +2,7 @@ sudo: false
 dist: trusty
 language: php
 cache:
+    yarn: true
     directories:
         - $HOME/.composer/cache/files
 
