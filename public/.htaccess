@@ -35,6 +35,10 @@
     RewriteCond %{DOCUMENT_ROOT}/_static/%{REQUEST_URI} -f
     RewriteRule ^(.+) %{DOCUMENT_ROOT}/_static/$1 [L]
 
+    # Handle redirects for old index.php URLs to go to /
+    RewriteCond %{THE_REQUEST} ^.*/index\.php
+    RewriteRule ^(.*)index.php$ /$1 [R=307,L]
+
     # Handle Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
