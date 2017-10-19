@@ -26,6 +26,7 @@ class PageRepositoryTest extends TestCase
 
             $response = $this->call('GET', $path);
 
+            $this->assertTrue(is_string($path), 'ERROR: Path to styleguide page not found. Make sure it exists in the styleguide menu. Optionally you can added public $path = \'/styleguide/path/to/page\' in your styleguide Page class.');
             $this->assertEquals(200, $response->status(), 'Styleguide error at path: '.$path);
         });
     }
