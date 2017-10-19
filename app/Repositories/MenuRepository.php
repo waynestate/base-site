@@ -60,13 +60,12 @@ class MenuRepository implements DataRepositoryContract, MenuRepositoryContract
         $top_menu_id = $this->getTopMenuId($data['menu']['id'], config('app.top_menu_id'), $menus);
 
         // Get the top menu
-        $top_menu = $this->getTopMenu(
+        $top_menu = $top_menu_id === null ? null : $top_menu = $this->getTopMenu(
             $menus[$top_menu_id],
             $data['page']['id']
         );
 
-        // Get the site's menu
-        $site_menu = $this->getSiteMenu(
+        $site_menu = $data['menu']['id'] === null ? null : $this->getSiteMenu(
             $menus[$data['menu']['id']],
             $data['page']['id']
         );
@@ -104,6 +103,11 @@ class MenuRepository implements DataRepositoryContract, MenuRepositoryContract
             $menus['show_site_menu'] = false;
         }
 
+        // If no menu is selected then hide the site menu
+        if ($menus['site_menu_output'] === null) {
+            $menus['show_site_menu'] = false;
+        }
+
         return $menus;
     }
 
@@ -112,7 +116,7 @@ class MenuRepository implements DataRepositoryContract, MenuRepositoryContract
      */
     public function getSiteMenuOutput($menu)
     {
-        return $this->displayMenu->render(['menu' => $menu]);
+        return $menu === null ? null : $this->displayMenu->render(['menu' => $menu]);
     }
 
     /**
@@ -120,7 +124,7 @@ class MenuRepository implements DataRepositoryContract, MenuRepositoryContract
      */
     public function getTopMenuOutput($menu)
     {
-        return $this->displayMenu->render(['menu' => $menu, 'menu_class' => 'menu-top show-for-menu-top-up']);
+        return $menu === null ? null : $this->displayMenu->render(['menu' => $menu, 'menu_class' => 'menu-top show-for-menu-top-up']);
     }
 
     /**
