@@ -159,4 +159,29 @@ class ProfileRepositoryTest extends TestCase
         // Since the API returned an error we shouldn't have any profiles
         $this->assertEmpty($profiles['profiles']);
     }
+
+    /**
+     * @covers App\Repositories\ProfileRepository::getGroupIds
+     * @test
+     */
+    public function getting_profile_group_ids_should_return_correct_string()
+    {
+        // Fake a dropdown array of group_id => group name
+        $limit = $this->faker->numberBetween(1, 10);
+        $dropdown = $this->faker->words($limit, false);
+
+        // If no forced ID and no selection has been made the result should be all group_ids from the dropdown
+        $group_ids = app('App\Repositories\ProfileRepository')->getGroupIds(null, null, $dropdown);
+        $this->assertEquals(implode(array_keys($dropdown), '|'), $group_ids);
+
+        // Forcing a group ID
+        $forced_id = $this->faker->numberBetween(0, $limit - 1);
+        $group_ids = app('App\Repositories\ProfileRepository')->getGroupIds(null, $forced_id, $dropdown);
+        $this->assertEquals($forced_id, $group_ids);
+
+        // Selected from the dropdown
+        $selected = array_rand($dropdown, 1);
+        $group_ids = app('App\Repositories\ProfileRepository')->getGroupIds($selected, null, $dropdown);
+        $this->assertEquals($selected, $group_ids);
+    }
 }
