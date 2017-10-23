@@ -27,7 +27,7 @@
     "gulp": "^3.9.1",
     "gulp-replace": "^0.5.4",
     "gulp-sym": "0.0.14",
-    "laravel-elixir": "^6.0.0-9",
+    "laravel-elixir": "^6.0.0-15",
     "laravel-elixir-browsersync-official": "^1.0.0",
     "laravel-elixir-webpack-official": "^1.0.2",
     "magnific-popup": "^1.1.0",
