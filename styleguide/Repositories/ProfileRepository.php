@@ -11,7 +11,7 @@ class ProfileRepository extends Repository
      */
     public function getProfiles($site_id, $selected_group = null)
     {
-        $limit = $selected_group != null ? rand(2, 5) : 10;
+        $limit = is_int($selected_group) ? rand(2, 5) : 20;
 
         $profiles['profiles'] = app('Factories\Profile')->create($limit);
 
@@ -48,5 +48,14 @@ class ProfileRepository extends Repository
     public function getBackToProfileListUrl($referer = null, $scheme = null, $host = null, $uri = null)
     {
         return '/styleguide/profiles';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function sortGroupsByDisplayOrder($grouped, $groups)
+    {
+        // There is no need to sort the groups in the styleguide since the order doesn't matter
+        return $grouped;
     }
 }

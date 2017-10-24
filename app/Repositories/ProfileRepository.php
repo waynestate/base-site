@@ -58,13 +58,19 @@ class ProfileRepository implements ProfileRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getProfilesByGroup($site_id, $selected_group = null)
+    public function getProfilesByGroup($site_id)
     {
+        // Get the groups for the dropdown
+        $dropdown_groups = $this->getDropdownOfGroups($site_id);
+
+        // Determine which group(s) to filter by
+        $group_ids = $this->getGroupIds(null, null, $dropdown_groups['dropdown_groups']);
+
         // Get all the profiles
-        $profiles = $this->getProfiles($site_id, $selected_group);
+        $allProfiles = $this->getProfiles($site_id, $group_ids);
 
         // Return an array of profiles organized by the group they are in
-        $grouped['profiles'] = collect($profiles['profiles'])->map(function ($profile) {
+        $grouped = collect($allProfiles['profiles'])->map(function ($profile) {
             return collect($profile['groups'])->flatMap(function ($group) use ($profile) {
                 return [
                    'data' => $profile['data'],
@@ -78,7 +84,30 @@ class ProfileRepository implements ProfileRepositoryContract
         ->groupBy('group', true)
         ->toArray();
 
-        return $grouped;
+        $profiles['profiles'] = $this->sortGroupsByDisplayOrder($grouped, $dropdown_groups['dropdown_groups']);
+
+        return $profiles;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function sortGroupsByDisplayOrder($grouped, $groups)
+    {
+        return collect($groups)
+            ->reject(function ($item, $key) {
+                return $key === '';
+            })
+            ->reject(function ($item, $key) use ($grouped) {
+                // Remove groups that no one is in
+                return ! isset($grouped[$item]);
+            })
+            ->flatMap(function ($item, $key) use ($grouped) {
+                return [
+                    $item => $grouped[$item],
+                ];
+            })
+            ->toArray();
     }
 
     /**
@@ -131,9 +160,11 @@ class ProfileRepository implements ProfileRepositoryContract
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
-        $groupsArray = collect($profile_groups['results'])->map(function ($item) {
-            return $item['display_name'];
-        })->toArray();
+        $groupsArray = collect($profile_groups['results'])
+            ->sortBy('display_order')
+            ->map(function ($item) {
+                return $item['display_name'];
+            })->toArray();
 
         $groups['dropdown_groups'] = ['' => 'All Profiles'] + $groupsArray;
 
