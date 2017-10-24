@@ -24,7 +24,7 @@ class ProfileGroup implements FactoryContract
     {
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
-                'display_name' => $this->faker->word,
+                'display_name' => ucfirst($this->faker->words(2, true)),
             ];
         }
 

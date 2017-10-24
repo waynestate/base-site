@@ -58,6 +58,32 @@ class ProfileRepository implements ProfileRepositoryContract
     /**
      * {@inheritdoc}
      */
+    public function getProfilesByGroup($site_id, $selected_group = null)
+    {
+        // Get all the profiles
+        $profiles = $this->getProfiles($site_id, $selected_group);
+
+        // Return an array of profiles organized by the group they are in
+        $grouped['profiles'] = collect($profiles['profiles'])->map(function ($profile) {
+            return collect($profile['groups'])->flatMap(function ($group) use ($profile) {
+                return [
+                   'data' => $profile['data'],
+                   'groups' => $profile['groups'],
+                   'group' => $group,
+                   'AccessID' => $profile['data']['AccessID'],
+               ];
+            });
+        })
+        ->keyBy('AccessID')
+        ->groupBy('group', true)
+        ->toArray();
+
+        return $grouped;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getDropdownOptions($selected_group = null, $forced_profile_group_id = null)
     {
         // Default Options

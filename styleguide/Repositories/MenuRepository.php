@@ -75,6 +75,16 @@ class MenuRepository extends Repository
                             'relative_url' => '/styleguide/profiles',
                             'submenu' => [],
                         ],
+                        101104 => [
+                            'menu_item_id' => '101104',
+                            'is_active' => '1',
+                            'page_id' => '101104',
+                            'target' => '',
+                            'display_name' => 'Directory',
+                            'class_name' => '',
+                            'relative_url' => '/styleguide/directory',
+                            'submenu' => [],
+                        ],
                     ],
                 ],
                 102 => [
