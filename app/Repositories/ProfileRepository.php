@@ -160,6 +160,14 @@ class ProfileRepository implements ProfileRepositoryContract
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
+        // Filter down the groups based on the parent group from the config
+        $profile_groups['results'] = collect($profile_groups['results'])
+            ->filter(function ($item) {
+                return (int) $item['parent_id'] === config('app.profile_parent_group_id');
+            })
+            ->toArray();
+
+        // Only return the display name ordered by the display order
         $groupsArray = collect($profile_groups['results'])
             ->sortBy('display_order')
             ->map(function ($item) {

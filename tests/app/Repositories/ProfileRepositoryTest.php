@@ -93,7 +93,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getDropdownOfGroups
      * @test
      */
-    public function getting_dropdown_of_groups_shoudl_contain_all_the_groups()
+    public function getting_dropdown_of_groups_should_contain_all_the_groups()
     {
         // Fake return
         $return = [
