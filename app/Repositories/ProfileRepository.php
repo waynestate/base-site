@@ -67,10 +67,10 @@ class ProfileRepository implements ProfileRepositoryContract
         $group_ids = $this->getGroupIds(null, null, $dropdown_groups['dropdown_groups']);
 
         // Get all the profiles
-        $allProfiles = $this->getProfiles($site_id, $group_ids);
+        $all_profiles = $this->getProfiles($site_id, $group_ids);
 
-        // Return an array of profiles organized by the group they are in
-        $grouped = collect($allProfiles['profiles'])->map(function ($profile) {
+        // Organize profiles by the group they are in keyed by accessid
+        $grouped = collect($all_profiles['profiles'])->map(function ($profile) {
             return collect($profile['groups'])->flatMap(function ($group) use ($profile) {
                 return [
                    'data' => $profile['data'],
@@ -84,6 +84,7 @@ class ProfileRepository implements ProfileRepositoryContract
         ->groupBy('group', true)
         ->toArray();
 
+        // Follow the ordering of groups from the CMS
         $profiles['profiles'] = $this->sortGroupsByDisplayOrder($grouped, $dropdown_groups['dropdown_groups']);
 
         return $profiles;

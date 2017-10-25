@@ -55,7 +55,7 @@ class ProfileRepository extends Repository
      */
     public function sortGroupsByDisplayOrder($grouped, $groups)
     {
-        // There is no need to sort the groups in the styleguide since the order doesn't matter
+        // There is no need to sort the groups in the styleguide since the order is random
         return $grouped;
     }
 }
