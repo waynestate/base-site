@@ -89,6 +89,12 @@
       "css": "cancel-1",
       "code": 59416,
       "src": "entypo"
+    },
+    {
+      "uid": "dcedf50ab1ede3283d7a6c70e2fe32f3",
+      "css": "chat",
+      "code": 59398,
+      "src": "fontawesome"
     }
   ]
 }
