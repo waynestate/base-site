@@ -58,6 +58,62 @@ class ProfileRepository implements ProfileRepositoryContract
     /**
      * {@inheritdoc}
      */
+    public function getProfilesByGroup($site_id)
+    {
+        // Get the groups for the dropdown
+        $dropdown_groups = $this->getDropdownOfGroups($site_id);
+
+        // Determine which group(s) to filter by
+        $group_ids = $this->getGroupIds(null, null, $dropdown_groups['dropdown_groups']);
+
+        // Get all the profiles
+        $all_profiles = $this->getProfiles($site_id, $group_ids);
+
+        // Organize profiles by the group they are in keyed by accessid
+        $grouped = collect($all_profiles['profiles'])->map(function ($profile) {
+            return collect($profile['groups'])->flatMap(function ($group) use ($profile) {
+                return [
+                   'data' => $profile['data'],
+                   'groups' => $profile['groups'],
+                   'group' => $group,
+                   'AccessID' => $profile['data']['AccessID'],
+               ];
+            });
+        })
+        ->keyBy('AccessID')
+        ->groupBy('group', true)
+        ->toArray();
+
+        // Follow the ordering of groups from the CMS
+        $profiles['profiles'] = $this->sortGroupsByDisplayOrder($grouped, $dropdown_groups['dropdown_groups']);
+
+        return $profiles;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function sortGroupsByDisplayOrder($grouped, $groups)
+    {
+        return collect($groups)
+            ->reject(function ($item, $key) {
+                return $key === '';
+            })
+            ->reject(function ($item, $key) use ($grouped) {
+                // Remove groups that no one is in
+                return ! isset($grouped[$item]);
+            })
+            ->flatMap(function ($item, $key) use ($grouped) {
+                return [
+                    $item => $grouped[$item],
+                ];
+            })
+            ->toArray();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getDropdownOptions($selected_group = null, $forced_profile_group_id = null)
     {
         // Default Options
@@ -105,9 +161,19 @@ class ProfileRepository implements ProfileRepositoryContract
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
-        $groupsArray = collect($profile_groups['results'])->map(function ($item) {
-            return $item['display_name'];
-        })->toArray();
+        // Filter down the groups based on the parent group from the config
+        $profile_groups['results'] = collect($profile_groups['results'])
+            ->filter(function ($item) {
+                return (int) $item['parent_id'] === config('app.profile_parent_group_id');
+            })
+            ->toArray();
+
+        // Only return the display name ordered by the display order
+        $groupsArray = collect($profile_groups['results'])
+            ->sortBy('display_order')
+            ->map(function ($item) {
+                return $item['display_name'];
+            })->toArray();
 
         $groups['dropdown_groups'] = ['' => 'All Profiles'] + $groupsArray;
 

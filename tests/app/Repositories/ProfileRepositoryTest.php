@@ -93,7 +93,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getDropdownOfGroups
      * @test
      */
-    public function getting_dropdown_of_groups_shoudl_contain_all_the_groups()
+    public function getting_dropdown_of_groups_should_contain_all_the_groups()
     {
         // Fake return
         $return = [
@@ -183,5 +183,40 @@ class ProfileRepositoryTest extends TestCase
         $selected = array_rand($dropdown, 1);
         $group_ids = app('App\Repositories\ProfileRepository')->getGroupIds($selected, null, $dropdown);
         $this->assertEquals($selected, $group_ids);
+    }
+
+    /**
+     * @covers App\Repositories\ProfileRepository::getProfilesByGroup
+     * @covers App\Repositories\ProfileRepository::sortGroupsByDisplayOrder
+     * @test
+     */
+    public function profiles_should_be_grouped()
+    {
+        // Mock the user listing
+        $return_user_listing = app('Factories\Profile')->create(10);
+        $wsuApi = Mockery::mock('Waynestate\Api\Connector');
+        $wsuApi->shouldReceive('sendRequest')->with('profile.users.listing', Mockery::type('array'))->once()->andReturn($return_user_listing);
+
+        // The Profile factory creates groups. We need those values rather than factoring more groups that users aren't in.
+        $return_group_listing['results'] = collect($return_user_listing)
+            ->map(function ($item, $key) {
+                return [
+                    'parent_id' => 0,
+                    'display_order' => $key,
+                    'display_name' => collect($item['groups'])->first(),
+                ];
+            })
+            ->toArray();
+
+        // Mock the groups listing
+        $wsuApi->shouldReceive('sendRequest')->with('profile.groups.listing', Mockery::type('array'))->once()->andReturn($return_group_listing);
+        $wsuApi->shouldReceive('nextRequestProduction')->twice();
+
+        $profiles = app('App\Repositories\ProfileRepository', [$wsuApi])->getProfilesByGroup($this->faker->numberBetween(1, 10));
+
+        // Make sure the root keys are all of the groups
+        collect($return_group_listing['results'])->each(function ($item) use ($profiles) {
+            $this->assertTrue(array_key_exists($item['display_name'], $profiles['profiles']));
+        });
     }
 }

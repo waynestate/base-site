@@ -12,9 +12,10 @@ class Profile implements FactoryContract
      *
      * @param Factory $faker
      */
-    public function __construct(Factory $faker)
+    public function __construct(Factory $faker, ProfileGroup $group)
     {
         $this->faker = $faker->create();
+        $this->group = $group;
     }
 
     /**
@@ -22,6 +23,8 @@ class Profile implements FactoryContract
      */
     public function create($limit = 1)
     {
+        $groups = collect($this->group->create(4));
+
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
                 'data' => [
@@ -42,6 +45,9 @@ class Profile implements FactoryContract
                         '<p>'.$this->faker->paragraph(10).'</p>',
                         '<p>'.$this->faker->paragraph(10).'</p>',
                     ],
+                ],
+                'groups' => [
+                    $groups->random()['display_name'],
                 ],
             ];
         }
