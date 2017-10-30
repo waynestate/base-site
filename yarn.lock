@@ -15,9 +15,9 @@
   dependencies:
     extract-text-webpack-plugin "^2.1.0"
 
-"@waynestate/wsuheader@^1.0.0":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@waynestate/wsuheader/-/wsuheader-1.0.6.tgz#59db53dbc3ab18c658c8ec4d21664d95f9925f6f"
+"@waynestate/wsuheader@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@waynestate/wsuheader/-/wsuheader-2.0.0.tgz#edcf719c99ba7656370aca7610688a9bc4ec98b3"
   dependencies:
     extract-text-webpack-plugin "^2.1.0"
 

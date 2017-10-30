@@ -20,7 +20,7 @@
   "homepage": "http://base.wayne.edu/",
   "devDependencies": {
     "@waynestate/wsufooter": "^1.0.0",
-    "@waynestate/wsuheader": "^1.0.0",
+    "@waynestate/wsuheader": "^2.0.0",
     "eslint": "^3.7.1",
     "eslint-loader": "^1.5.0",
     "foundation-sites": "~6.3.0",
