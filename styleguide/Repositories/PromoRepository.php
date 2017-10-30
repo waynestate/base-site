@@ -47,7 +47,7 @@ class PromoRepository extends Repository
             'contact' => app('Factories\FooterContact')->create(1),
 
             // Social footer
-            'social' => app('Factories\FooterSocial')->create(7),
+            'social' => app('Factories\FooterSocial')->create(8),
 
             // Hero
             'hero' => $hero,

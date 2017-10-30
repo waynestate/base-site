@@ -108,6 +108,9 @@ import 'foundation-sites/js/foundation.offcanvas';
             // If ooffcanvas is opening
             $('.off-canvas-wrapper').on('opened.zf.offcanvas', this.open);
 
+            // Apply initial classes
+            $('ul.menu-top').addClass('show-for-menu-top-up');
+
             // Redo offCanvas because of the random hash it creates so in SPF it will work
             var foundationOffCanvas = new window.Foundation.OffCanvas($('[data-off-canvas]'));
             window.WayneState.register('foundationOffCanvas', foundationOffCanvas);

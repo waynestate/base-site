@@ -1,7 +1,7 @@
 {
   "name": "base",
   "private": true,
-  "version": "3.3.0",
+  "version": "3.4.0",
   "description": "",
   "main": "public/index.php",
   "scripts": {
@@ -20,14 +20,14 @@
   "homepage": "http://base.wayne.edu/",
   "devDependencies": {
     "@waynestate/wsufooter": "^1.0.0",
-    "@waynestate/wsuheader": "^1.0.0",
+    "@waynestate/wsuheader": "^2.0.0",
     "eslint": "^3.7.1",
     "eslint-loader": "^1.5.0",
     "foundation-sites": "~6.3.0",
     "gulp": "^3.9.1",
     "gulp-replace": "^0.5.4",
     "gulp-sym": "0.0.14",
-    "laravel-elixir": "^6.0.0-9",
+    "laravel-elixir": "^6.0.0-15",
     "laravel-elixir-browsersync-official": "^1.0.0",
     "laravel-elixir-webpack-official": "^1.0.2",
     "magnific-popup": "^1.1.0",

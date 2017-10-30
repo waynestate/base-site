@@ -45,11 +45,11 @@ class ProfileController extends Controller
         // Get the options for the dropdown
         $dropdown_group_options = $this->profile->getDropdownOptions($selected_group, $forced_profile_group_id);
 
-        // Determine which group to filter by
-        $group_id = $forced_profile_group_id === null ? $selected_group : $forced_profile_group_id;
+        // Determine which group(s) to filter by
+        $group_ids = $this->profile->getGroupIds($selected_group, $forced_profile_group_id, $dropdown_groups['dropdown_groups']);
 
         // Get the profiles
-        $profiles = $this->profile->getProfiles($site_id, $group_id);
+        $profiles = $this->profile->getProfiles($site_id, $group_ids);
 
         // Disable hero images
         $request->data['hero'] = false;

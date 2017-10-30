@@ -145,4 +145,16 @@ return [
     |
     */
     'profile_default_back_url' => '/profiles/',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Profile parent group ID
+    |--------------------------------------------------------------------------
+    |
+    | This will limit the groups displayed to only the children groups under
+    | this ID. Typically the group is called "Departments". If all desired
+    | groups are added to the root then leave this value as 0.
+    |
+    */
+    'profile_parent_group_id' => 0,
 ];

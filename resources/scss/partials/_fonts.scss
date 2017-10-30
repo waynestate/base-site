@@ -1,3 +1,7 @@
+html {
+    font-feature-settings: "liga" off;
+}
+
 @font-face {
     font-family: 'waynestate';
     src: url('../fonts/waynestate.eot?58389751');
@@ -45,6 +49,7 @@
 .icon-down-open-mini::before { content: '\e803'; } /* '' */
 .icon-left-open-mini::before { content: '\e804'; } /* '' */
 .icon-home::before { content: '\e805'; } /* '' */
+.icon-chat::before { content: '\e806'; } /* '' */
 .icon-linkedin::before { content: '\e80c'; } /* '' */
 .icon-flickr::before { content: '\e80d'; } /* '' */
 .icon-instagram::before { content: '\e80e'; } /* '' */
