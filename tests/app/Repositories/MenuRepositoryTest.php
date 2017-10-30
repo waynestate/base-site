@@ -582,4 +582,28 @@ class MenuRepositoryTest extends TestCase
         // Make sure we have a starting menu
         $this->assertRegexp('/<ul/', $output);
     }
+
+    /**
+     * @covers App\Repositories\MenuRepository::getMenus
+     * @test
+     */
+    public function page_with_no_menu_should_hide_the_site_menu()
+    {
+        // Get a page with the HomepageController set
+        $page = app('Factories\Page')->create(1,
+            [
+                'page' => [
+                    'controller' => 'HomepageController',
+                ],
+                'menu' => [
+                    'id' => null,
+                ],
+            ]
+        );
+
+        // Parse the site menu
+        $menu = app('App\Repositories\MenuRepository')->getMenus($page, []);
+
+        $this->assertFalse($menu['show_site_menu']);
+    }
 }
