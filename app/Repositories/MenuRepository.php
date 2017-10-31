@@ -60,7 +60,7 @@ class MenuRepository implements DataRepositoryContract, MenuRepositoryContract
         $top_menu_id = $this->getTopMenuId($data['menu']['id'], config('app.top_menu_id'), $menus);
 
         // Get the top menu
-        $top_menu = $top_menu_id === null ? null : $top_menu = $this->getTopMenu(
+        $top_menu = $top_menu_id === null ? null : $this->getTopMenu(
             $menus[$top_menu_id],
             $data['page']['id']
         );
