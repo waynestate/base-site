@@ -13,9 +13,10 @@
         padding-right: 0;
 
         // Selected State
-        .selected a {
+        .selected > a {
             color: #fff;
-            background: #085c55;
+            text-decoration: underline;
+            font-weight: normal;
         }
 
         // Bottom borders on child <li>
