@@ -8,31 +8,54 @@
     .main-menu {
         // Makes menu background color go all the way down the column
         height: 100%;
-        background-color: #262626;
+        //background-color: #262626;
+        background-color: darken(#093f39, 3%);
         padding-left: 0;
         padding-right: 0;
 
+        h2 {
+            color: rgba(255, 255, 255, 0.7);
+            padding: 0 0 5px 16px;
+            margin-top: 32px;
+            border-bottom: 1px solid darken(#093f39, 4%);
+        }
+
         // Selected State
         .selected > a {
-            color: #fff;
             text-decoration: underline;
-            font-weight: normal;
+            //background-color: lighten(#093f39, 3%);
+            color: #fff;
+        }
+
+        .selected a {
+            background-color: lighten(#093f39, 2%);
+        }
+
+        .selected .selected a {
+            background-color: lighten(#093f39, 5%);
+        }
+
+        .selected .selected .selected a {
+            //background-color: lighten(#093f39, 9%);
         }
 
         // Bottom borders on child <li>
         > ul > li {
-            border-bottom: 1px solid #353535;
+            border-bottom: 1px solid darken(#093f39, 4%);
         }
 
         ul {
-            li a {
-                background-color: #262626;
-                color: rgba(255, 255, 255, 0.7);
+            padding: 0;
 
-                &:hover {
-                    background-color: lighten(#262626, 10%);
-                    color: #fff;
-                }
+            li a {
+                color: rgba(255, 255, 255, 0.7);
+            }
+
+            a:hover,
+            .selected a:hover {
+                //background-color: lighten(#262626, 10%);
+                background-color: lighten(#093f39, 7%);
+                color: #fff;
             }
 
             // Indent second level now since first level is shown
@@ -58,34 +81,37 @@
         ul li {
             a.main-menu {
                 display: block;
-                color: #757575;
-                background-color: #000;
+                //color: rgba(255, 255, 255, 0.7);
+                //background-color: darken(#093f39, 5%);
+                border-bottom: 1px solid darken(#093f39, 4%);
                 padding: 0.8em;
                 text-transform: uppercase;
                 font-size: rem-calc(16);
 
                 &:hover {
-                    color: #ffd75d;
+                    //color: #ffd75d;
                 }
 
                 &.selected {
-                    color: #ffd75d;
+                    //color: #ffd75d;
                 }
             }
 
             // Menu Header top level (MAIN MENU)
             ul {
+                border-bottom: 1px solid darken(#093f39, 4%);
+
                 li a {
-                    background-color: #000;
+                    //background-color: #000;
                     border-bottom: none;
 
                     &:hover {
-                        color: #ffd75d;
+                        //color: #ffd75d;
                     }
                 }
 
                 li.selected a {
-                    color: #ffd75d;
+                    //color: #ffd75d;
                     font-weight: bold;
                 }
             }
