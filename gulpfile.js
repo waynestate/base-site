@@ -311,7 +311,7 @@ elixir(function(mix) {
 
     // Auto refresh web browser when changes take place
     mix.browserSync({
-       proxy: 'https://' + package.name + '.wayne.dev'
+       proxy: 'https://' + package.name + '.wayne.local'
     });
 
     // Only run these tasks when on running for production. Ex: "gulp --env=production"
