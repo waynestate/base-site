@@ -29,6 +29,11 @@
         "mockery/mockery": "~0.9",
         "satooshi/php-coveralls": "dev-master"
     },
+    "config": {
+        "platform": {
+            "php": "5.5.9"
+        }
+    },
     "autoload": {
         "files": [
             "app/Support/helpers.php"
