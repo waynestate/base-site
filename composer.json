@@ -5,7 +5,7 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=5.5.9",
+        "php": ">=7.0.10",
         "laravel/lumen-framework": "5.2.*",
         "illuminate/redis": "5.2.*",
         "vlucas/phpdotenv": "~2.2",
@@ -28,6 +28,11 @@
         "friendsofphp/php-cs-fixer": "^1.12",
         "mockery/mockery": "~0.9",
         "satooshi/php-coveralls": "dev-master"
+    },
+    "config": {
+        "platform": {
+            "php": "7.0.10"
+        }
     },
     "autoload": {
         "files": [
