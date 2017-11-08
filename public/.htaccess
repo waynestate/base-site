@@ -12,7 +12,7 @@
     # If HTTP and we are not on foo.dev, www-dev.foo, www-dev2.foo or www2.foo
     # then force HTTPS
     RewriteCond %{HTTPS} !=on
-    RewriteCond %{HTTP_HOST} !(?:\.dev|www-dev2?\..*|www2\..*)$
+    RewriteCond %{HTTP_HOST} !(?:\.local|www-dev2?\..*|www2\..*)$
     RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=307]
 
     # Redirect Trailing Slashes If Not A Folder...
