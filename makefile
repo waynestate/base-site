@@ -54,6 +54,9 @@ phplint: $(COMPOSERFILE)
 phplintdry: $(COMPOSERFILE)
 	php-cs-fixer fix --diff --dry-run
 
+stylelint:
+	stylelint ./resources/scss/**/*.scss --syntax scss
+
 coverage: $(COMPOSERFILE)
 	php vendor/bin/phpunit --coverage-html coverages
 

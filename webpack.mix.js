@@ -3,7 +3,6 @@ let fs = require('fs');
 let path = require('path');
 let exec = require('child_process').exec;
 let package = JSON.parse(fs.readFileSync('./package.json'));
-let StyleLintPlugin = require('stylelint-webpack-plugin');
 let CopyWebpackPlugin = require('copy-webpack-plugin');
 
 /*
@@ -84,11 +83,6 @@ if (mix.inProduction()) {
 // Override webpack configuration
 mix.webpackConfig({
     plugins: [
-        //new StyleLintPlugin({
-        //	files: './resources/scss/**/*.scss',
-        //  configFile: './.stylelintrc',
-        //  syntax: 'scss'
-        //}),
         new CopyWebpackPlugin([
             {
                 from: 'node_modules/@waynestate/wsuheader/dist/header.html',

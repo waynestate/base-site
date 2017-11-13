@@ -14,7 +14,7 @@ if [ "$wild_wayne_test" = "true" ]; then
   phplint="$(make phplintdry)"
 
   printf "Running stylelint...\n"
-  stylelint="$(stylelint ./resources/scss/**/*.scss --syntax scss)"
+  stylelint="$(make stylelint)"
 
   printf "Running tests...\n"
   phpunit="$(phpunit)"
@@ -24,7 +24,7 @@ else
         phplint="$(vagrant ssh -c "cd /vagrant/${site_folder}; make phplintdry")"
 
         printf "Running stylelint...\n"
-        stylelint="$(vagrant ssh -c "cd /vagrant/${site_folder}; gulp stylelint")"
+        stylelint="$(vagrant ssh -c "cd /vagrant/${site_folder}; make stylelint")"
 
         printf "Running tests...\n"
         phpunit="$(vagrant ssh -c "cd /vagrant/${site_folder}; phpunit")"
@@ -41,10 +41,10 @@ if [[ $phplint == *"- begin diff -"* ]]; then
     printf ">> run: make phplint\n\n"
 fi
 
-if [[ $stylelint == *"Stylelint has errors:"* ]]; then
+if [[ $stylelint == *"[stylelint] Error 2"* ]]; then
     errors=true;
     printf "Stylint has reported errors. Please fix them before committing.\n"
-    printf ">> run: gulp stylelint\n\n"
+    printf ">> run: make stylelint\n\n"
 fi
 
 if [[ $phpunit == *"FAILURES!"* ]]; then
