@@ -6,6 +6,7 @@ let exec = require('child_process').exec;
 let package = JSON.parse(fs.readFileSync('./package.json'));
 let CopyWebpackPlugin = require('copy-webpack-plugin');
 
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -58,9 +59,7 @@ mix.copy([
 fs.symlink(
     path.resolve('./storage/app/public'),
     path.resolve('./public/_static'),
-    function (err) { 
-        err.errno != -17 ? console.log(err || "Done.") : null;
-    }
+    function (err) { err.errno != -17 ? console.log(err) : console.log("Done."); }
 );
 
 // Compile JS and SCSS
