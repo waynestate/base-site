@@ -4,6 +4,10 @@
     </IfModule>
 
     RewriteEngine On
+    
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
     # Force www to non-www
     RewriteCond %{HTTP_HOST} ^www\.(.*)
