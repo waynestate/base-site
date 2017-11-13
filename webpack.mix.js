@@ -34,17 +34,10 @@ mix.copy([
 ], 'public/_resources/images');
 
 // Copy the fonts
-if(mix.inProduction()) {
-    mix.copy([
-        'resources/fonts/**/*',
-        'node_modules/slick-carousel/slick/fonts/**/*'
-    ], 'public/_resources/build/fonts');
-}else{
-    mix.copy([
-        'resources/fonts/**/*',
-        'node_modules/slick-carousel/slick/fonts/**/*'
-    ], 'public/_resources/fonts');
-}
+mix.copy([
+    'resources/fonts/**/*',
+    'node_modules/slick-carousel/slick/fonts/**/*'
+], 'public/_resources/fonts');
 
 // Copy the images
 mix.copy([
