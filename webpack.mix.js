@@ -70,7 +70,7 @@ mix.browserSync({
 });
 
 if (mix.inProduction()) {
-    mix.version(['public/_resources/css/main.css', 'public/_resources/js/main.js']);
+    mix.version();
 }
 
 // Override webpack configuration
