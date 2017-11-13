@@ -1,3 +1,4 @@
+let webpack = require('webpack');
 let mix = require('laravel-mix');
 let fs = require('fs');
 let path = require('path');
@@ -82,7 +83,24 @@ if (mix.inProduction()) {
 
 // Override webpack configuration
 mix.webpackConfig({
+    module: {
+        rules: [{
+            test: /\.js$/,
+            exclude: /node_modules/,
+            enforce: 'pre',
+            use: [{
+                loader: 'eslint-loader'
+            }],
+        }],
+    },
     plugins: [
+        new webpack.LoaderOptionsPlugin({
+            options: {
+                eslint: {
+                    configFile: path.join(__dirname, '.eslintrc'),
+                },
+            },
+        }),
         new CopyWebpackPlugin([
             {
                 from: 'node_modules/@waynestate/wsuheader/dist/header.html',
