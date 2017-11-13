@@ -1,7 +1,7 @@
 # Configuration
 YARNFILE := package.json
 COMPOSERFILE := composer.json
-GULPFILE := gulpfile.js
+MIXFILE := webpack.mix.js
 DEPLOY := Envoy.blade.php
 
 # Tasks
@@ -9,8 +9,8 @@ all: install
 install: yarn composerinstall
 update: yarnupgrade composerupdate
 status: yarncheck
-build: gulp
-buildproduction: gulpproduction
+build: webpackdev
+buildproduction: webpackprod
 deploy: install build runtests envoy
 deployproduction: install buildproduction runtests envoyproduction
 
@@ -27,14 +27,14 @@ composerinstalldev: $(COMPOSERFILE)
 composerinstallproduction: $(COMPOSERFILE)
 	composer install --prefer-dist --no-dev --no-scripts --no-interaction && composer dump-autoload --optimize;
 
-gulp: $(GULPFILE)
-	gulp
+webpackdev: $(MIXFILE)
+	npm run dev
 
-gulpproduction: $(GULPFILE)
-	gulp --env=production
+webpackprod: $(MIXFILE)
+	npm run prod
 
-watch: $(GULPFILE)
-	gulp watch
+watch: $(MIXFILE)
+	npm run watch-poll
 
 yarnupgrade: $(YARNFILE)
 	yarn upgrade
@@ -73,5 +73,5 @@ $(YARNFILE):
 $(COMPOSERFILE):
 	composer init
 
-$(GULPFILE):
-	touch $(GULPFILE)
+$(MIXFILE):
+	touch $(webpack.mix.js)
