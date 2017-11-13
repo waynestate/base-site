@@ -14,7 +14,7 @@ if [ "$wild_wayne_test" = "true" ]; then
   phplint="$(make phplintdry)"
 
   printf "Running stylelint...\n"
-  stylelint="$(gulp stylelint)"
+  stylelint="$(stylelint ./resources/scss/**/*.scss --syntax scss)"
 
   printf "Running tests...\n"
   phpunit="$(phpunit)"
