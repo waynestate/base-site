@@ -3,10 +3,11 @@ YARNFILE := package.json
 COMPOSERFILE := composer.json
 MIXFILE := webpack.mix.js
 DEPLOY := Envoy.blade.php
+DOTENV := .env
 
 # Tasks
 all: install
-install: yarn composerinstall
+install: yarn composerinstall generatekey
 update: yarnupgrade composerupdate
 status: yarncheck
 build: webpackdev
@@ -18,8 +19,11 @@ deployproduction: install buildproduction runtests envoyproduction
 yarn: $(YARNFILE)
 	yarn
 
+generatekey: $(DOTENV)
+	php artisan key:generate
+
 composerinstall: $(COMPOSERFILE)
-	composer update --lock --prefer-dist --no-scripts --no-interaction
+	composer update --lock --prefer-dist --no-interaction
 
 composerinstalldev: $(COMPOSERFILE)
 	composer install --prefer-dist --no-scripts --no-interaction && composer dump-autoload --optimize;
@@ -78,3 +82,6 @@ $(COMPOSERFILE):
 
 $(MIXFILE):
 	touch $(webpack.mix.js)
+
+$(DOTENV):
+	cp .env.example .env
