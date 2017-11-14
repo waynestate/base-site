@@ -11,6 +11,7 @@
         "fzaninotto/faker": "~1.4",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
+        "predis/predis": "^1.1",
         "waynestate/apdatetime": "^1.0",
         "waynestate/display-menu": "~1.0",
         "waynestate/error-403": "~1.1",
