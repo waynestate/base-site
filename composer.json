@@ -12,14 +12,14 @@
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "waynestate/apdatetime": "^1.0",
-        "waynestate/waynestate-api": "~1.1",
-        "waynestate/formy-parser": "~1.0",
-        "waynestate/parse-promos": "~1.0",
-        "waynestate/parse-menu": "~1.2",
         "waynestate/display-menu": "~1.0",
         "waynestate/error-403": "~1.1",
         "waynestate/error-404": "~1.1",
-        "waynestate/error-500": "~1.1"
+        "waynestate/error-500": "~1.1",
+        "waynestate/formy-parser": "~1.0",
+        "waynestate/parse-menu": "~1.2",
+        "waynestate/parse-promos": "~1.0",
+        "waynestate/waynestate-api": "~1.1"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
