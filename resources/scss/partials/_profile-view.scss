@@ -1,0 +1,32 @@
+.profile__return {
+    position: relative;
+
+    a {
+        text-align: right;
+        padding: 0.3em 0;
+        position: absolute;
+        right: rem-calc(15);
+    }
+}
+
+.content .profile__img {
+    display: block;
+    width: auto;
+    height: 270px;
+    margin: rem-calc(40) auto 1em;
+    padding: 0;
+
+    @include breakpoint(large up) {
+        margin-top: rem-calc(20);
+        width: 100%;
+        height: auto;
+    }
+}
+
+.profile--contact-info {
+    margin-bottom: 2em;
+
+    p {
+        margin: 0.5em 0;
+    }
+}

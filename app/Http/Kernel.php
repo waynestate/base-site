@@ -57,5 +57,8 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'data' => \App\Http\Middleware\DataMiddleware::class,
+        'formy' => \App\Http\Middleware\FormyMiddleware::class,
+        'spf' => \App\Http\Middleware\SpfMiddleware::class,
     ];
 }

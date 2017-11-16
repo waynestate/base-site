@@ -4,8 +4,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Keywords" content="{{ $page['keywords'] }}" />
+    <meta name="Description" content="{{ $page['description'] }}" />
+    <meta http-equiv="last-modified" content="{{ $page['updated-at'] }}" />
     <meta name="Author" content="Wayne State University" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>@include('partials.head-title')</title>
 
     <link rel="icon" type="image/x-icon" href="https://wayne.edu/favicon.ico" />
     <link rel="stylesheet" href="{{ mix('_resources/css/main.css') }}" />
@@ -13,16 +17,39 @@
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/js/vendor/modernizr.js"></script>
     <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script><![endif]-->
+    @include('partials.ga')
+
+    <meta class="foundation-mq">
 </head>
 <body>
 
 @include('partials.header')
 
-@yield('content-area')
+<div id="menu-top-section" class="header-menu">
+    @include('partials.menu-top', ['site' => $site])
+</div>
+
+<div class="off-canvas-wrapper">
+    <div id="content">
+        @yield('content-area')
+    </div>
+
+    <div id="footer-social">
+        @if(isset($social) && count($social) > 0)
+            @include('partials.footer-social', ['social' => $social])
+        @endif
+    </div>
+
+    <div id="footer-contact">
+        @if(isset($contact) && count($contact) > 0)
+            @include('partials.footer-contact', ['contact' => $contact])
+        @endif
+    </div>
+</div>
 
 @include('partials.footer')
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="{{ mix('_resources/js/main.js') }}"></script>
 </body>
 </html>

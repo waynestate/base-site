@@ -1,0 +1,58 @@
+.footer-contact {
+    padding: 2em 0;
+    background-color: #0a5449;
+
+    h2 {
+        margin-top: 0;
+        color: #ffd478;
+        font-size: 1.5em;
+
+        a {
+            color: #ffd478;
+            text-decoration: none;
+        }
+    }
+
+    p {
+        color: white;
+    }
+
+    a {
+        color: white;
+        text-decoration: underline;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    .columns {
+        // Using HR's because a bottom border would
+        // span to meet each side of the window on small
+        hr {
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        &:last-child hr {
+            display: none;
+        }
+
+        @include breakpoint(large) {
+            hr {
+                display: none;
+            }
+
+            &:nth-child(n+2) {
+                border-left: 1px solid rgba(255, 255, 255, 0.4);
+            }
+        }
+    }
+
+    .social-icons {
+        font-size: 1.6em;
+
+        span {
+            font-size: 0;
+        }
+    }
+}

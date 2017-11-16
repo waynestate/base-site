@@ -1,0 +1,81 @@
+.content {
+    table.table-stack {
+        border-collapse: collapse;
+        width: 100%;
+
+        th,
+        td {
+            line-height: 1.5;
+            text-align: left;
+        }
+
+        // Header
+        thead tr {
+            border-collapse: collapse;
+            background: #00565c;
+        }
+
+        tbody th {
+            padding: 10px;
+        }
+
+        /* Stack rows vertically on small screens */
+        @include breakpoint(medium down) {
+            /* Hide column labels */
+            thead tr {
+                position: absolute;
+                top: -9999em;
+                left: -9999em;
+            }
+
+            tr {
+                border: 1px solid #eaeaea;
+
+                th::before {
+                    content: attr(data-label) ": ";
+                    display: inline;
+                    font-weight: bold;
+                    line-height: 1.5px;
+                }
+            }
+
+            /* Leave a space between table rows */
+            tr + tr {
+                margin-top: 1.5em;
+            }
+
+            /* Get table cells to act like rows */
+            tr,
+            td {
+                display: block;
+            }
+
+            td {
+                border: none;
+            }
+
+            /* Add data labels */
+            td::before {
+                content: attr(data-label) ":";
+                display: inline;
+                font-weight: bold;
+                line-height: 1.5;
+                padding-right: 20px;
+                color: #00565c;
+            }
+        }
+
+        /* Stack labels vertically on smaller screens */
+        @include breakpoint(small only) {
+            td {
+                padding-left: 0.75em;
+            }
+
+            td::before {
+                display: block;
+                margin-bottom: 0.75em;
+                margin-left: 0;
+            }
+        }
+    }
+}

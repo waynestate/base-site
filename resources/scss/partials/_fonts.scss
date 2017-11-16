@@ -1,0 +1,60 @@
+html {
+    font-feature-settings: "liga" off;
+}
+
+@font-face {
+    font-family: 'waynestate';
+    src: url('../fonts/waynestate.eot?58389751');
+    src:
+        url('../fonts/waynestate.eot?58389751#iefix') format('embedded-opentype'),
+        url('../fonts/waynestate.woff2?58389751') format('woff2'),
+        url('../fonts/waynestate.woff?58389751') format('woff'),
+        url('../fonts/waynestate.ttf?58389751') format('truetype'),
+        url('../fonts/waynestate.svg?58389751#waynestate') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"]::before,
+[class*=" icon-"]::before {
+    font-family: "waynestate";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: 0.2em;
+    text-align: center;
+
+    /* For safety - reset parent styles, that can break glyph codes */
+    font-variant: normal;
+    text-transform: none;
+
+    /* fix buttons height, for twitter bootstrap */
+    line-height: 1em;
+
+    /* Animation center compensation - margins should be symmetric
+    remove if not needed */
+    margin-left: 0.2em;
+
+    /* Font smoothing. That was taken from TWBS */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-right-open-big::before { content: '\e800'; } /* '' */
+.icon-left-open-big::before { content: '\e801'; } /* '' */
+.icon-right-open-mini::before { content: '\e802'; } /* '' */
+.icon-down-open-mini::before { content: '\e803'; } /* '' */
+.icon-left-open-mini::before { content: '\e804'; } /* '' */
+.icon-home::before { content: '\e805'; } /* '' */
+.icon-chat::before { content: '\e806'; } /* '' */
+.icon-linkedin::before { content: '\e80c'; } /* '' */
+.icon-flickr::before { content: '\e80d'; } /* '' */
+.icon-instagram::before { content: '\e80e'; } /* '' */
+.icon-facebook::before { content: '\e810'; } /* '' */
+.icon-youtube::before { content: '\e811'; } /* '' */
+.icon-cancel-1::before { content: '\e818'; } /* '' */
+.icon-twitter::before { content: '\e81a'; } /* '' */
+.icon-pinterest::before { content: '\e81b'; } /* '' */

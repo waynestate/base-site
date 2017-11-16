@@ -4,19 +4,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Application Name
-    |--------------------------------------------------------------------------
-    |
-    | This value is the name of your application. This value is used when the
-    | framework needs to place the application's name in a notification or
-    | any other location as required by the application or its packages.
-    |
-    */
-
-    'name' => env('APP_NAME', 'Base'),
-
-    /*
-    |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------
     |
@@ -30,6 +17,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Name
+    |--------------------------------------------------------------------------
+    |
+    | This value is the name of your application. This value is used when the
+    | framework needs to place the application's name in a notification or
+    | any other location as required by the application or its packages.
+    |
+    */
+
+    'name' => env('APP_NAME', 'Base'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Debug Mode
     |--------------------------------------------------------------------------
     |
@@ -40,18 +40,6 @@ return [
     */
 
     'debug' => env('APP_DEBUG', false),
-
-    /*
-    |--------------------------------------------------------------------------
-    | Application URL
-    |--------------------------------------------------------------------------
-    |
-    | This URL is used by the console to properly generate URLs when using
-    | the Artisan command line tool. You should set this to the root of
-    | your application so that it is used when running Artisan tasks.
-    |
-    */
-    'url' => env('APP_URL', 'http://localhost'),
 
     /*
     |--------------------------------------------------------------------------
@@ -81,18 +69,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Application Timezone
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify the default timezone for your application, which
-    | will be used by the PHP date and date-time functions. We have gone
-    | ahead and set this to a sensible default for you out of the box.
-    |
-    */
-    'timezone' => env('APP_TIMEZONE', 'UTC'),
-
-    /*
-    |--------------------------------------------------------------------------
     | Top Menu Enabled
     |--------------------------------------------------------------------------
     |
@@ -101,18 +77,6 @@ return [
     |
     */
     'top_menu_enabled' => false,
-
-    /*
-    |--------------------------------------------------------------------------
-    | Application Locale Configuration
-    |--------------------------------------------------------------------------
-    |
-    | The application locale determines the default locale that will be used
-    | by the translation service provider. You are free to set this value
-    | to any of the locales which will be supported by the application.
-    |
-    */
-    'locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -128,18 +92,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Application Fallback Locale
-    |--------------------------------------------------------------------------
-    |
-    | The fallback locale determines the locale to use when the current one
-    | is not available. You may change the value to correspond to any of
-    | the language folders that are provided through your application.
-    |
-    */
-    'fallback_locale' => 'en',
-
-    /*
-    |--------------------------------------------------------------------------
     | Homepage Menu Enabled
     |--------------------------------------------------------------------------
     |
@@ -149,6 +101,116 @@ return [
     |
     */
     'homepage_menu_enabled' => true,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Hero Contained
+    |--------------------------------------------------------------------------
+    |
+    | Force the hero image to be contained within the content area of the page.
+    | If set to false the hero image will expand 100% across the top of the
+    | site if it is not found in the menu.
+    |
+    */
+    'hero_contained' => true,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Hero Text Enabled
+    |--------------------------------------------------------------------------
+    |
+    | This enables the hero image to have excerpt text and a view more link.
+    | You can also specify which controllers you want this to work on by
+    | adding to the array. By default only the homepage controller
+    | is allowed to have this functionality.
+    |
+    */
+    'hero_text_enabled' => false,
+    'hero_text_controllers' => ['HomepageController'],
+    'hero_text_more' => 'View more',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Surtitle
+    |--------------------------------------------------------------------------
+    |
+    | Title to be shown above the main title of the site you are on. By default
+    | it will link back to "/" which is the main homepage.
+    |
+    */
+    'surtitle' => null,
+    'surtitle_main_site_enabled' => false,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Profile view back url
+    |--------------------------------------------------------------------------
+    |
+    | Back URL to use when viewing a Individual Profile view in place for the
+    | "Return to Listing" link.
+    |
+    */
+    'profile_default_back_url' => '/profiles/',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Profile parent group ID
+    |--------------------------------------------------------------------------
+    |
+    | This will limit the groups displayed to only the children groups under
+    | this ID. Typically the group is called "Departments". If all desired
+    | groups are added to the root then leave this value as 0.
+    |
+    */
+    'profile_parent_group_id' => 0,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Timezone
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify the default timezone for your application, which
+    | will be used by the PHP date and date-time functions. We have gone
+    | ahead and set this to a sensible default for you out of the box.
+    |
+    */
+    'timezone' => env('APP_TIMEZONE', 'UTC'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application URL
+    |--------------------------------------------------------------------------
+    |
+    | This URL is used by the console to properly generate URLs when using
+    | the Artisan command line tool. You should set this to the root of
+    | your application so that it is used when running Artisan tasks.
+    |
+    */
+    'url' => env('APP_URL', 'http://base.wayne.local'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Locale Configuration
+    |--------------------------------------------------------------------------
+    |
+    | The application locale determines the default locale that will be used
+    | by the translation service provider. You are free to set this value
+    | to any of the locales which will be supported by the application.
+    |
+    */
+    'locale' => 'en',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Fallback Locale
+    |--------------------------------------------------------------------------
+    |
+    | The fallback locale determines the locale to use when the current one
+    | is not available. You may change the value to correspond to any of
+    | the language folders that are provided through your application.
+    |
+    */
+    'fallback_locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -166,16 +228,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Sessions
-    |--------------------------------------------------------------------------
-    |
-    | Enable sessions by calling session_start in the boostrap/app.php file.
-    |
-    */
-    'sessions_enable' => false,
-
-    /*
-    |--------------------------------------------------------------------------
     | Logging Configuration
     |--------------------------------------------------------------------------
     |
@@ -189,27 +241,6 @@ return [
     'log' => env('APP_LOG', 'single'),
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
-
-    /*
-    |--------------------------------------------------------------------------
-    | Sub header title
-    |--------------------------------------------------------------------------
-    |
-    | Title shown above the main title.
-    |
-    */
-    'sub_title' => null,
-
-    /*
-    |--------------------------------------------------------------------------
-    | Profile view back url
-    |--------------------------------------------------------------------------
-    |
-    | Back URL to use when viewing a Individual Profile view in place for the
-    | "Return to Listing" link.
-    |
-    */
-    'profile_default_back_url' => '/profiles/',
 
     /*
     |--------------------------------------------------------------------------

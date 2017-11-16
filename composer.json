@@ -35,8 +35,14 @@
             "database/seeds",
             "database/factories"
         ],
+        "files": [
+            "app/Support/helpers.php"
+        ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Factories\\": "factories/",
+            "Styleguide\\": "styleguide/",
+            "Contracts\\": "contracts"
         }
     },
     "autoload-dev": {

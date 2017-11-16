@@ -19,11 +19,15 @@ class DataMiddleware
      */
     public function handle($request, Closure $next)
     {
+        if (using_styleguide()) {
+            $this->prefix = 'Styleguide';
+        }
+
         /*
          * Set the route parameters to global data. These parameters are everything
          * that was matched and captured from the routes file.
          */
-        $data['parameters'] = $request->route()[2];
+        $data['parameters'] = $request->route()->parameters;
 
         /*
          * If no path was matched then set the path to the current relative
