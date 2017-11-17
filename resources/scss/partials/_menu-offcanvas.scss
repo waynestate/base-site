@@ -11,6 +11,25 @@
         background-color: #262626;
         padding-left: 0;
         padding-right: 0;
+        // Animation for menu fade in
+        animation: fadein 1s;
+
+        // Delay animation for a bit so menu flash doesn't occur on faster 3g and up
+        @keyframes fadein {
+            0% {
+                opacity: 0;
+                height: 0;
+            }
+
+            90% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+                height: 100%;
+            }
+        }
 
         // Selected State
         .selected a {
