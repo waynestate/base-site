@@ -20,6 +20,14 @@
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./app</directory>
+            <exclude>
+                <file>./app/Http/routes.php</file>
+                <file>./app/Http/Middleware/NewRelicMiddleware.php</file>
+                <file>./app/Providers/AppServiceProvider.php</file>
+                <file>./app/Exceptions/Handler.php</file>
+                <file>./app/Console/Kernel.php</file>
+                <file>./app/Console/Commands/RedisClear.php</file>
+            </exclude>
         </whitelist>
     </filter>
     <php>

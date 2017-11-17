@@ -27,7 +27,7 @@ class DataMiddleware
          * Set the route parameters to global data. These parameters are everything
          * that was matched and captured from the routes file.
          */
-        $data['parameters'] = $request->route()->parameters;
+        $data['parameters'] = $request->route() !== null ? $request->route()->parameters : [];
 
         /*
          * If no path was matched then set the path to the current relative

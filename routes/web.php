@@ -12,23 +12,23 @@
 */
 
 // Profile view
-Route::get('{path}profile/{accessid}', 'ProfileController@show')
-    ->where(['path' => '.*/?', 'accessid' => '.+'])
+Route::get('{path}/profile/{accessid}', 'ProfileController@show')
+    ->where(['path' => '.*', 'accessid' => '.+'])
     ->middleware('data', 'formy', 'spf');
 
 // News by category
-Route::get('{path}news/category/{slug}', 'NewsController@index')
-    ->where(['path' => '.*/?', 'slug' => '.+'])
+Route::get('{path}/news/category/{slug}', 'NewsController@index')
+    ->where(['path' => '.*', 'slug' => '.+'])
     ->middleware('data', 'formy', 'spf');
 
 // News view
-Route::get('{path}news/{slug}-{id}', 'NewsController@show')
-    ->where(['path' => '.*/?', 'slug' => '.+', 'id' => '\d+'])
+Route::get('{path}/news/{slug}-{id}', 'NewsController@show')
+    ->where(['path' => '.*', 'slug' => '.+', 'id' => '\d+'])
     ->middleware('data', 'formy', 'spf');
 
 // News listing
-Route::get('{path}news', 'NewsController@index')
-    ->where('path', '.*/?')
+Route::get('{path}/news', 'NewsController@index')
+    ->where('path', '.*')
     ->middleware('data', 'formy', 'spf');
 
 // The wild card route is a catch all route that tries to resolve the requests path to a json file

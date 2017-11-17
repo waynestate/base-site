@@ -48,6 +48,16 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        // Add custom errors when debug is not enabled
+        if (config('app.debug') == false) {
+            //if ($exception instanceof HttpException || $exception instanceof HttpResponseException || $exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
+            if ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
+                return response(view('errors.'.$exception->getStatusCode(), compact('request')), $exception->getStatusCode());
+            } else {
+                return response(view('errors.500', compact('request')), 500);
+            }
+        }
+
         return parent::render($request, $exception);
     }
 }
