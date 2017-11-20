@@ -21,9 +21,14 @@
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./app</directory>
             <exclude>
-                <file>./app/Http/routes.php</file>
+                <directory>./app/Providers</directory>
+                <file>./app/Http/Kernel.php</file>
                 <file>./app/Http/Middleware/NewRelicMiddleware.php</file>
-                <file>./app/Providers/AppServiceProvider.php</file>
+                <file>./app/Http/Middleware/EncryptCookies.php</file>
+                <file>./app/Http/Middleware/TrimStrings.php</file>
+                <file>./app/Http/Middleware/TrustProxies.php</file>
+                <file>./app/Http/Middleware/VerifyCsrfToken.php</file>
+                <file>./app/Http/Middleware/RedirectIfAuthenticated.php</file>
                 <file>./app/Exceptions/Handler.php</file>
                 <file>./app/Console/Kernel.php</file>
                 <file>./app/Console/Commands/RedisClear.php</file>

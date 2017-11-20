@@ -62,11 +62,9 @@
                 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-            @if(isset($request))
-                ga('create', 'UA-35684592-1', 'wayne.edu', {'name': 'allWayneState'});
-                ga('allWayneState.send', 'pageview');
-                ga('allWayneState.send', 'event', 'Error', '404', 'page: //{{ $request->server("HTTP_HOST") }}{{ $request->server("REQUEST_URI") }} ref: {{ $request->server("HTTP_REFERER") }}');
-            @endif
+            ga('create', 'UA-35684592-1', 'wayne.edu', {'name': 'allWayneState'});
+            ga('allWayneState.send', 'pageview');
+            ga('allWayneState.send', 'event', 'Error', '404', 'page: //{{ $request->server("HTTP_HOST") }}{{ $request->server("REQUEST_URI") }} ref: {{ $request->server("HTTP_REFERER") }}');
         </script>
     </body>
 </html>
