@@ -14,7 +14,7 @@
 // Profile view
 Route::get('{path}/{accessid}', 'ProfileController@show')
     ->where(['path' => '(?:.*\/|)profile', 'accessid' => '.+'])
-    ->middleware('data', 'formy', 'spf');
+    ->middleware('data', 'formy', 'spf:show');
 
 // News by category
 Route::get('{path}/category/{slug}', 'NewsController@index')
@@ -24,7 +24,7 @@ Route::get('{path}/category/{slug}', 'NewsController@index')
 // News view
 Route::get('{path}/{slug}-{id}', 'NewsController@show')
     ->where(['path' => '(?:.*\/|)news', 'slug' => '.+', 'id' => '\d+'])
-    ->middleware('data', 'formy', 'spf');
+    ->middleware('data', 'formy', 'spf:show');
 
 // News listing
 Route::get('{path}', 'NewsController@index')
