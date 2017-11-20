@@ -58,19 +58,24 @@ fs.symlink(
 // Compile JS and SCSS
 mix.js('resources/js/main.js', 'public/_resources/js')
    .sass('resources/scss/main.scss', 'public/_resources/css')
-   .browserSync({
-        proxy: 'https://' + package.name + '.wayne.local',
-        open: false,
-        files: [
-            'app/**/*.php',
-            'resources/views/**/*.php',
-            'public/_resources/js/**/*.js',
-            'public/_resources/css/**/*.css'
-        ]
-    })
-    .options({
+   .options({
         processCssUrls: false
-    });
+   });
+
+mix.browserSync({
+    proxy: 'https://' + package.name + '.wayne.local',
+    open: false,
+    files: [
+        'app/**/*.php',
+        'resources/views/**/*.php',
+        'public/_resources/js/**/*.js',
+        'public/_resources/css/**/*.css'
+    ],
+    watchOptions: {
+        usePolling: true,
+        interval: 500
+    }
+});
 
 if (mix.inProduction()) {
     mix.version();
