@@ -53,6 +53,7 @@ mix.copy([
 // Compile assets and setup browersync
 mix.js('resources/js/main.js', 'public/_resources/js')
    .sass('resources/scss/main.scss', 'public/_resources/css')
+   .sourceMaps()
    .options({
         processCssUrls: false
    })
