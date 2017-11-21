@@ -18,35 +18,63 @@ let CopyWebpackPlugin = require('copy-webpack-plugin');
  |
  */
 
-// Copy the WSU HTTP Error templates, css, images
+// Error Files
 mix.copy([
-    'vendor/waynestate/error-404/dist/404.css',
-    'vendor/waynestate/error-404/dist/404.css.map',
-    'vendor/waynestate/error-403/dist/403.css',
-    'vendor/waynestate/error-403/dist/403.css.map',
-    'vendor/waynestate/error-500/dist/500.css',
-    'vendor/waynestate/error-500/dist/500.css.map'
-], 'public/_resources/css');
-mix.copy([
-    'vendor/waynestate/error-404/dist/404.png',
-    'vendor/waynestate/error-403/dist/403.png',
-    'vendor/waynestate/error-500/dist/500.png'
-], 'public/_resources/images');
+        'vendor/waynestate/error-404/dist/404.css',
+        'vendor/waynestate/error-404/dist/404.css.map',
+        'vendor/waynestate/error-403/dist/403.css',
+        'vendor/waynestate/error-403/dist/403.css.map',
+        'vendor/waynestate/error-500/dist/500.css',
+        'vendor/waynestate/error-500/dist/500.css.map'
+    ], 'public/_resources/css')
 
-// Copy the fonts
-mix.copy([
-    'resources/fonts/**/*',
-    'node_modules/slick-carousel/slick/fonts/**/*'
-], 'public/_resources/fonts');
+    // Header files
+    .copy([
+        'vendor/waynestate/error-404/dist/404.png',
+        'vendor/waynestate/error-403/dist/403.png',
+        'vendor/waynestate/error-500/dist/500.png'
+    ], 'public/_resources/images')
 
-// Copy the images
-mix.copy([
-    'resources/images/**/*.jpg',
-    'resources/images/**/*.gif',
-    'resources/images/**/*.png',
-    'resources/images/**/*.svg',
-    'node_modules/slick-carousel/slick/**/*.gif'
-], 'public/_resources/images');
+    // Fonts
+    .copy([
+        'resources/fonts/**/*',
+        'node_modules/slick-carousel/slick/fonts/**/*'
+    ], 'public/_resources/fonts')
+
+    // Images
+    .copy([
+        'resources/images/**/*.jpg',
+        'resources/images/**/*.gif',
+        'resources/images/**/*.png',
+        'resources/images/**/*.svg',
+        'node_modules/slick-carousel/slick/**/*.gif'
+    ], 'public/_resources/images');
+
+// Compile assets and setup browersync
+mix.js('resources/js/main.js', 'public/_resources/js')
+   .sass('resources/scss/main.scss', 'public/_resources/css')
+   .options({
+        processCssUrls: false
+   })
+   .browserSync({
+        proxy: 'https://' + package.name + '.wayne.local',
+        open: false,
+        files: [
+            'app/**/*.php',
+            'resources/views/**/*.php',
+            'public/_resources/js/**/*.js',
+            'public/_resources/css/**/*.css'
+        ],
+        watchOptions: {
+            usePolling: true,
+            interval: 500
+        }
+    });
+
+// Cache busting for production websites
+if (mix.inProduction()) {
+    mix.version();
+}
 
 // Create the _static symlink
 fs.symlink(
@@ -54,32 +82,6 @@ fs.symlink(
     path.resolve('./public/_static'),
     function (err) { err.errno != -17 ? console.log(err) : console.log("Done."); }
 );
-
-// Compile JS and SCSS
-mix.js('resources/js/main.js', 'public/_resources/js')
-   .sass('resources/scss/main.scss', 'public/_resources/css')
-   .options({
-        processCssUrls: false
-   });
-
-mix.browserSync({
-    proxy: 'https://' + package.name + '.wayne.local',
-    open: false,
-    files: [
-        'app/**/*.php',
-        'resources/views/**/*.php',
-        'public/_resources/js/**/*.js',
-        'public/_resources/css/**/*.css'
-    ],
-    watchOptions: {
-        usePolling: true,
-        interval: 500
-    }
-});
-
-if (mix.inProduction()) {
-    mix.version();
-}
 
 // Override webpack configuration
 mix.webpackConfig({
