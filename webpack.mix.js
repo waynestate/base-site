@@ -55,7 +55,8 @@ mix.js('resources/js/main.js', 'public/_resources/js')
    .sass('resources/scss/main.scss', 'public/_resources/css')
    .sourceMaps()
    .options({
-        processCssUrls: false
+        processCssUrls: false,
+        postCss: [require('autoprefixer')]
    })
    .browserSync({
         proxy: 'https://' + package.name + '.wayne.local',
