@@ -18,15 +18,6 @@
         </div>
 
         <div class="wsumenu">
-            <nav>
-                <ul>
-                    <li><a href="/parents-counselors/">Parents</a></li>
-                    <li><a href="/faculty/">Faculty</a></li>
-                    <li><a href="/staff/">Staff</a></li>
-                    <li><a href="https://alumni.wayne.edu">Alumni</a></li>
-                </ul>
-            </nav>
-
             <a class="warriorstrong" href="https://wayne.edu/warriorstrong/">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 30"  preserveAspectRatio="xMaxYMax">
                     <title>Warrior strong</title>
