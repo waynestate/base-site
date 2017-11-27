@@ -31,10 +31,6 @@
         "satooshi/php-coveralls": "dev-master"
     },
     "autoload": {
-        "classmap": [
-            "database/seeds",
-            "database/factories"
-        ],
         "files": [
             "app/Support/helpers.php"
         ],
