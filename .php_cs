@@ -8,7 +8,6 @@ $finder = Symfony\CS\Finder::create()
     ->in(__DIR__ . '/app')
     ->in(__DIR__ . '/contracts')
     ->in(__DIR__ . '/factories')
-    ->in(__DIR__ . '/bootstrap')
     ->in(__DIR__ . '/config')
     ->in(__DIR__ . '/styleguide')
     ->in(__DIR__ . '/tests');
