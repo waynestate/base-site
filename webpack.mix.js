@@ -87,6 +87,9 @@ fs.symlink(
 
 // Override webpack configuration
 mix.webpackConfig({
+    externals: {
+        "jquery": "jQuery"
+    },
     module: {
         rules: [{
             test: /\.js$/,
