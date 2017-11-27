@@ -49,7 +49,7 @@
 
 @include('partials.footer')
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="{{ mix('_resources/js/main.js') }}"></script>
 </body>
 </html>
