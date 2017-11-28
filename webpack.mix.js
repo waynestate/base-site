@@ -138,11 +138,12 @@ mix.webpackConfig({
         ]),
         new PurgecssPlugin({
             paths: glob.sync([
-              path.join(__dirname, "resources/views/**/*.blade.php"),
-              path.join(__dirname, "resources/js/**/*.js"),
-              path.join(__dirname, "node_modules/foundation-sites/js/foundation.offcanvas.js")
+                path.join(__dirname, "resources/views/**/*.blade.php"),
+                path.join(__dirname, "styleguide/views/**/*.blade.php"),
+                path.join(__dirname, "resources/js/**/*.js"),
+                path.join(__dirname, "node_modules/foundation-sites/js/foundation.offcanvas.js")
             ]),
-            whitelistPatterns: [/^icon-/, /^slick-/]
+            whitelistPatterns: [/icon-/, /slick-/]
         })
     ]
 });
