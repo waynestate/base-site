@@ -5,6 +5,8 @@ let path = require('path');
 let exec = require('child_process').exec;
 let package = JSON.parse(fs.readFileSync('./package.json'));
 let CopyWebpackPlugin = require('copy-webpack-plugin');
+let glob = require("glob-all");
+let PurgecssPlugin = require("purgecss-webpack-plugin");
 
 
 /*
@@ -85,6 +87,17 @@ fs.symlink(
     function (err) { err.errno != -17 ? console.log(err) : console.log("Done."); }
 );
 
+/**
+ * Custom PurgeCSS Extractor
+ * https://github.com/FullHuman/purgecss
+ * https://github.com/FullHuman/purgecss-webpack-plugin
+ */
+class TailwindExtractor {
+    static extract(content) {
+      return content.match(/[A-z0-9-:\/]+/g);
+    }
+  }
+
 // Override webpack configuration
 mix.webpackConfig({
     externals: {
@@ -134,5 +147,18 @@ mix.webpackConfig({
                 to: path.resolve('.git/hooks'),
             }
         ]),
+        new PurgecssPlugin({
+            paths: glob.sync([
+              path.join(__dirname, "resources/views/**/*.blade.php"),
+              path.join(__dirname, "resources/js/**/*.js"),
+              path.join(__dirname, "resources/scss/partials/fonts.scss")
+            ]),
+            extractors: [
+                {
+                  extractor: TailwindExtractor,
+                  extensions: ["html", "js", "php", "vue"]
+                }
+              ]
+        })
     ]
 });
