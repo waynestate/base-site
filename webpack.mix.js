@@ -8,7 +8,6 @@ let CopyWebpackPlugin = require('copy-webpack-plugin');
 let glob = require("glob-all");
 let PurgecssPlugin = require("purgecss-webpack-plugin");
 
-
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
