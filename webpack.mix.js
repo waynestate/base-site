@@ -83,7 +83,7 @@ if (mix.inProduction()) {
 fs.symlink(
     path.resolve('./storage/app/public'),
     path.resolve('./public/_static'),
-    function (err) { err.errno != -17 ? console.log(err) : console.log("Done."); }
+    function (err) { err != null && err.errno != -17 ? console.log(err) : console.log("Done."); }
 );
 
 // Override webpack configuration
