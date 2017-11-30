@@ -23,12 +23,6 @@
         font-weight: normal;
     }
 
-    .logout {
-        float: right;
-        margin-top: -2.25em;
-        color: $primary-color;
-    }
-
     a:not(.button) {
         text-decoration: underline;
 
@@ -37,13 +31,11 @@
         }
     }
 
-    // Remove the dotted border below the abbr text and inherit color
     abbr,
-    abbr[title],
-    acronym,
-    acronym[title] {
+    abbr[title] {
         color: inherit;
         border: none;
+        text-decoration: none;
     }
 
     ul:not([class]),
@@ -147,7 +139,7 @@
 
             &.icon {
                 display: inline-block;
-                width: inherit;
+                width: auto;
                 margin: 10px;
             }
         }
