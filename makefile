@@ -10,7 +10,7 @@ all: install
 install: yarn composerinstall generatekey
 update: yarnupgrade composerupdate
 status: yarncheck
-build: webpackdev
+build: webpackprod
 buildproduction: webpackprod
 deploy: install build runtests envoy
 deployproduction: install buildproduction runtests envoyproduction
