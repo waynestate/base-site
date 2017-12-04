@@ -498,7 +498,8 @@ class MenuRepositoryTest extends TestCase
         config(['app.homepage_menu_enabled' => false]);
 
         // Get a page with the HomepageController set
-        $page = app('Factories\Page')->create(1,
+        $page = app('Factories\Page')->create(
+            1,
             [
                 'page' => [
                     'controller' => 'HomepageController',
@@ -525,7 +526,8 @@ class MenuRepositoryTest extends TestCase
     public function getting_all_menus_should_return_array_of_menus()
     {
         // Get a page with the HomepageController set
-        $page = app('Factories\Page')->create(1,
+        $page = app('Factories\Page')->create(
+            1,
             [
                 'page' => [
                     'controller' => 'HomepageController',
@@ -590,7 +592,8 @@ class MenuRepositoryTest extends TestCase
     public function page_with_no_menu_should_hide_the_site_menu()
     {
         // Get a page with the HomepageController set
-        $page = app('Factories\Page')->create(1,
+        $page = app('Factories\Page')->create(
+            1,
             [
                 'page' => [
                     'controller' => 'HomepageController',
