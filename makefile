@@ -12,8 +12,8 @@ update: yarnupgrade composerupdate
 status: yarncheck
 build: webpackprod
 buildproduction: webpackprod
-deploy: install build runtests envoy
-deployproduction: install buildproduction runtests envoyproduction
+deploy: install build generatekey runtests envoy
+deployproduction: install buildproduction generatekey runtests envoyproduction
 
 # Commands
 yarn: $(YARNFILE)
