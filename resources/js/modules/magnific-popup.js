@@ -1,4 +1,3 @@
-import 'app';
 import jQuery from 'jquery';
 import 'magnific-popup/dist/jquery.magnific-popup.js';
 

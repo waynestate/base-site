@@ -8,10 +8,11 @@
     <meta name="Description" content="{{ $page['description'] }}" />
     <meta http-equiv="last-modified" content="{{ $page['updated-at'] }}" />
     <meta name="Author" content="Wayne State University" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@include('partials.head-title')</title>
 
     <link rel="icon" type="image/x-icon" href="https://wayne.edu/favicon.ico" />
-    <link rel="stylesheet" href="{{ elixir('css/main.css') }}" />
+    <link rel="stylesheet" href="{{ mix('_resources/css/main.css') }}" />
     <link href="//fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/js/vendor/modernizr.js"></script>
@@ -48,7 +49,7 @@
 
 @include('partials.footer')
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<script src="{{ elixir('js/main.js') }}"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="{{ mix('_resources/js/main.js') }}"></script>
 </body>
 </html>

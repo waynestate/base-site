@@ -11,8 +11,8 @@ return [
     | such as APC or Memcached. Laravel makes it easy to dig right in.
     |
     */
+
     'redis' => [
-        'cluster' => false,
 
         /*
         |--------------------------------------------------------------------------
@@ -23,11 +23,20 @@ return [
         | PHPREDIS_SESSION's being set.
         |
         */
+        'client' => 'predis',
+
         'default' => [
-            'host' => env('REDIS_HOST'),
-            'password' => env('REDIS_PASSWORD'),
-            'port' => env('REDIS_PORT'),
             'database' => 1,
+            'host' => env('REDIS_HOST', '127.0.0.1'),
+            'password' => env('REDIS_PASSWORD', null),
+            'port' => env('REDIS_PORT', 6379),
+        ],
+
+        'sessions' => [
+            'database' => 0,
+            'host' => env('REDIS_HOST', '127.0.0.1'),
+            'password' => env('REDIS_PASSWORD', null),
+            'port' => env('REDIS_PORT', 6379),
         ],
 
         /*
@@ -41,7 +50,7 @@ return [
         |
         */
         'options' => [
-            'prefix' => 'BASE:',
+            'prefix' => str_slug(env('APP_NAME', 'laravel')).':',
         ],
     ],
 ];

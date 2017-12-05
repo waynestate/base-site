@@ -11,7 +11,7 @@ class Accordion extends Page
     {
         return app('Factories\Page')->create(1, [
             'page' => [
-                'controller' => 'ChildpageController',
+                'controller' => 'AccordionController',
                 'title' => 'Accordion',
                 'id' => 108100,
                 'content' => [

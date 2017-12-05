@@ -11,12 +11,26 @@ class AppServiceProvider extends ServiceProvider
     protected $prefix = 'App';
 
     /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        //
+    }
+
+    /**
      * Register any application services.
      *
      * @return void
      */
     public function register()
     {
+        if (using_styleguide()) {
+            $this->prefix = 'Styleguide';
+        }
+
         // WSU API
         $this->app->bind('Waynestate\Api\Connector', function () {
             $api = new Connector(

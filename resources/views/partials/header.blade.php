@@ -33,7 +33,7 @@
                 <div class="wsusearch"><a href="https://wayne.edu/search/" class="wsusearchicon"><span class="wsuhidesmall">Search</span></a></div>
 
                 <div class="wsusearchbar">
-                    <form method="get" action="https://wayne.edu/search/">
+                    <form method="get" action="https://wayne.edu/search/" role="search">
                         <label for="q">Search:</label>
                         <input name="q" class="wsusearchfield" size="15" id="q" placeholder="Search..." type="text">
                         <button type="submit" class="wsusearchicon"><span>Search</span></button>

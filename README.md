@@ -10,14 +10,13 @@ Starter repository for creating a new website. Live demo can be found at https:/
 
 ## Features
 
-* Backend built on [Laravel/Lumen  v5.2](https://lumen.laravel.com/)
+* Backend built on [Laravel v5.5](https://laravel.com/)
 * Frontend built on [Foundation v6.3](http://foundation.zurb.com/sites/docs/)
-* Task runner using [Gulp](http://gulpjs.com/)
-    * Fluent Gulp API using [Laravel Elixir](https://laravel.com/docs/5.2/elixir)
+* [Webpack](https://webpack.github.io/)
+* Fluent webpack API using [Laravel Mix](https://laravel.com/docs/5.5/mix)
 * Fast navigation using [SPF](https://github.com/youtube/spfjs)
-* Zero downtime deployment using [Envoy](https://laravel.com/docs/5.2/envoy)
+* Zero downtime deployment using [Envoy](https://laravel.com/docs/5.5/envoy)
 * Configure multiple enviorments using [PHPDotenv](https://github.com/vlucas/phpdotenv)
-* ES2015 support using [Webpack](https://webpack.github.io/)
 * SCSS support
 * Automatically inject JS/CSS while developing using [BrowserSync](https://browsersync.io/)
 * [NewRelic](https://newrelic.com/) support via the `NewRelicMiddleware` if the php extension is installed
@@ -47,7 +46,7 @@ Starter repository for creating a new website. Live demo can be found at https:/
 1. run `make install`
 1. run `make build`
 1. run `make watch`
-1. open https://domain.dev:3000/ (for BrowserySync)
+1. open https://domain.local:3000/ (for BrowserySync)
 
 ## Deployment
 

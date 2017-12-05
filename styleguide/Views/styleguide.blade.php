@@ -31,44 +31,9 @@
 
     <hr>
 
-    <h2>Accordion</h2>
+    <h2>Table</h2>
 
-    @if(isset($accordion))
-        @include('components.accordion', ['items' => $accordion])
-    @endif
-
-    <a class="button" onclick="$('pre.accordions').toggleClass('hide');">See Accordion Code</a>
-
-    <pre class="accordions hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
-    {{ htmlspecialchars('
-<ul class="accordion">
-    <li class="is-active">
-        <a href="#panel1a">Accordion 1</a>
-        <div id="panel1a">
-            <p>Panel 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </div>
-    </li>
-    <li>
-        <a href="#panel2a">Accordion 2</a>
-        <div id="panel2a">
-            <p>Panel 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </div>
-    </li>
-    <li>
-        <a href="#panel3a">Accordion 3</a>
-        <div id="panel3a">
-            <p>Panel 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </div>
-    </li>
-</ul>
-    ') }}
-    </pre>
-
-    <hr>
-
-    <h2>Table Stack</h2>
-
-    <table class="table-stack">
+    <table>
     	<thead>
     		<tr>
     			<th>First Name</th>
@@ -79,7 +44,7 @@
 
     	<tbody>
             @for ($i = 0; $i < 10; $i++)
-            <tr valign="top">
+            <tr>
                 <td>{{ $faker->firstName }}</td>
                 <td>{{ $faker->lastName }}</td>
                 <td>{{ $faker->email }}</td>
@@ -92,7 +57,7 @@
 
     <pre class="table-stack hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
     {{ htmlspecialchars('
-<table class="table-stack">
+<table>
     <thead>
         <tr>
             <th></th>
@@ -102,7 +67,7 @@
     </thead>
 
     <tbody>
-        <tr valign="top">
+        <tr>
             <td></td>
             <td></td>
             <td></td>
@@ -114,25 +79,79 @@
 
     <hr>
 
+    <h2>Abbreviations</h2>
+
+    <p><abbr title="Wayne State University">WSU</abbr></p>
+
+    <hr>
+
+    <div class="row">
+        <div class="small-12 large-4 columns">
+            <h2>Unordered lists</h2>
+
+            <ul>
+                <li>First</li>
+                <li>Second</li>
+                <li>Third</li>
+            </ul>
+        </div>
+
+        <div class="small-12 large-4 columns">
+            <h2>Ordered lists</h2>
+
+            <ol>
+                <li>First</li>
+                <li>Second</li>
+                <li>Third</li>
+            </ol>
+        </div>
+
+        <div class="small-12 large-4 columns">
+            <h2>Data lists</h2>
+
+            <dl>
+                <dt>First</dt>
+                <dd>Description of first.</dd>
+                <dt>Second</dt>
+                <dd>Description of second.</dd>
+                <dt>Third</dt>
+                <dd>Description of third.</dd>
+            </dl>
+        </div>
+    </div>
+
+    <hr>
+
     <h2>Blockquote</h2>
 
     <blockquote>
         {{ $faker->paragraph(10) }}
     </blockquote>
 
+    <a class="button" onclick="$('pre.blockquote').toggleClass('hide');">See blockquote code</a>
+
+    <pre class="blockquote hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+    {{ htmlspecialchars('
+<blockquote>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+</blockquote>
+    ') }}
+    </pre>
+
+
     <hr>
 
     <h2>Buttons</h2>
 
-    <a href="http://foundation.zurb.com/sites/docs/button.html#basics" class="button">Standard Button</a>
-    <a href="http://foundation.zurb.com/sites/docs/button.html#sizing" class="button expanded">Expanded Button</a>
+    <a href="#" class="button">Standard Button</a>
+    <a href="#" class="button expanded">Expanded Button</a>
 
     <a class="button" onclick="$('pre.button-examples').toggleClass('hide');">See Button Code</a>
 
     <pre class="button-examples hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
     {{ htmlspecialchars('
-<a href="http://foundation.zurb.com/sites/docs/button.html#basics" class="button">Standard Button</a>
-<a href="http://foundation.zurb.com/sites/docs/button.html#sizing" class="button expanded">Expanded Button</a>
+<a href="#" class="button">Standard Button</a>
+<a href="#" class="button expanded">Expanded Button</a>
     ') }}
     </pre>
 
@@ -158,9 +177,26 @@
 
     <hr>
 
+    <h2>Image Icon</h2>
+
+    <p>Images default to span 100% of the container on small view. When using the <code>.icon</code> class you can override this behavior so it defaults to its real height/width.</p>
+
+    <p><img src="http://placehold.it/50x50&text=Icon" class="icon" alt="icon image"></p>
+
+    <a class="button" onclick="$('pre.image-icon').toggleClass('hide');">See Image Icon Code</a>
+
+    <pre class="image-icon hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+    {{ htmlspecialchars('
+<img src="http://placehold.it/50x50&text=Icon" class="icon" alt="">
+    ') }}
+    </pre>
+
+    <hr>
+
     <h2>Maginific Pop-up</h2>
     <p>Any valid YouTube URL starting with <code>youtu.be</code> or <code>youtube.com/watch</code> will open a lightbox with the video.</p>
     <p><a href="//www.youtube.com/watch?v=guRgefesPXE"><img src="//i.wayne.edu/youtube/guRgefesPXE" alt="View YouTube Video"></a></p>
+
     <a class="button" onclick="$('pre.maginific-popup-example').toggleClass('hide');">See Maginific Pop-up Code</a>
 
     <pre class="maginific-popup-example hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
@@ -191,4 +227,5 @@
 </div>
     ') }}
     </pre>
+
 @endsection

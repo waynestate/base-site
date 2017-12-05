@@ -38,39 +38,12 @@ function merge()
     return $merged->toArray();
 }
 
-if (! function_exists('elixir')) {
-    /**
-     * Get the path to a versioned elixir file.
-     *
-     * @param string $file
-     * @param string $buildDirectory
-     * @return string
-     * @throws \InvalidArgumentException
-     */
-    function elixir($file, $buildDirectory = '_resources/build')
-    {
-        static $manifest = [];
-        static $manifestPath;
-
-        if (empty($manifest) || $manifestPath !== $buildDirectory) {
-            $path = app()->basePath('public/'.$buildDirectory.'/rev-manifest.json');
-
-            if (file_exists($path)) {
-                $manifest = json_decode(file_get_contents($path), true);
-                $manifestPath = $buildDirectory;
-            }
-        }
-
-        if (isset($manifest[$file])) {
-            return '/'.trim($buildDirectory.'/'.$manifest[$file], '/');
-        }
-
-        $unversioned = app()->basePath('public/_resources/'.$file);
-
-        if (file_exists($unversioned)) {
-            return '/'.trim('_resources/'.$file, '/');
-        }
-
-        throw new InvalidArgumentException("File {$file} not defined in asset manifest.");
-    }
+/**
+ * Check if we are in the styleguide folder.
+ *
+ * @return bool
+ */
+function using_styleguide()
+{
+    return (config('app.env') == 'testing' || (isset($_SERVER['REQUEST_URI']) && substr($_SERVER['REQUEST_URI'], 0, 11) == '/styleguide'));
 }

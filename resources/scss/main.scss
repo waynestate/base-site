@@ -2,7 +2,7 @@
 @import "settings";
 
 // Core foundation
-@import "foundation-sites/scss/foundation";
+@import "~foundation-sites/scss/foundation";
 
 // Call foundationp mixins to output css
 @include foundation-global-styles;
@@ -23,16 +23,16 @@
 @import "vars";
 
 // Include slick carousel
-@import "slick-carousel/slick/slick";
-@import "slick-carousel/slick/slick-theme";
+@import "~slick-carousel/slick/slick";
+@import "~slick-carousel/slick/slick-theme";
 
 // Include magnific pop-up
-@import "magnific-popup/src/css/_settings";
-@import "magnific-popup/src/css/main";
+@import "~magnific-popup/src/css/_settings";
+@import "~magnific-popup/src/css/main";
 
 // Include header and footer
-@import "@waynestate/wsuheader/dist/header";
-@import "@waynestate/wsufooter/dist/footer";
+@import "~@waynestate/wsuheader/dist/header";
+@import "~@waynestate/wsufooter/dist/footer";
 
 // Partials
 @import "partials/utilities";

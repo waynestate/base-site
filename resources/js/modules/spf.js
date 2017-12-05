@@ -1,4 +1,3 @@
-import 'app';
 import jQuery from 'jquery';
 import nanobar from 'nanobar/nanobar';
 import spf from 'spf/dist/spf';
