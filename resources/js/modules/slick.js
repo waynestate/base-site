@@ -1,4 +1,3 @@
-import 'app';
 import jQuery from 'jquery';
 import 'slick-carousel/slick/slick.js';
 

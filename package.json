@@ -1,44 +1,46 @@
 {
   "name": "base",
   "private": true,
-  "version": "3.4.3",
+  "version": "4.0.0",
   "description": "",
-  "main": "public/index.php",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "npm run development",
+    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch-poll": "npm run watch -- --watch-poll",
+    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "prod": "npm run production",
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:waynestate/base.git"
+    "url": "git@github.com:waynestate/base-site.git"
   },
   "keywords": [],
   "license": "MIT",
   "author": "Web Communications <web@wayne.edu>",
   "bugs": {
-    "url": "https://bitbucket.org/waynestate/base/issues"
+    "url": "https://github.com/waynestate/base-site/issues"
   },
   "homepage": "http://base.wayne.edu/",
   "devDependencies": {
     "@waynestate/wsufooter": "^1.0.0",
-    "@waynestate/wsuheader": "^2.0.4",
+    "@waynestate/wsuheader": "^2.0.0",
+    "browser-sync": "^2.18.13",
+    "browser-sync-webpack-plugin": "^1.2.0",
+    "copy-webpack-plugin": "^4.2.0",
+    "cross-env": "^5.0.1",
     "eslint": "^3.7.1",
     "eslint-loader": "^1.5.0",
     "foundation-sites": "~6.3.0",
-    "gulp": "^3.9.1",
-    "gulp-replace": "^0.5.4",
-    "gulp-sym": "0.0.14",
-    "laravel-elixir": "^6.0.0-15",
-    "laravel-elixir-browsersync-official": "^1.0.0",
-    "laravel-elixir-webpack-official": "^1.0.2",
+    "glob-all": "^3.1.0",
+    "laravel-mix": "^1.0",
     "magnific-popup": "^1.1.0",
     "nanobar": "^0.4.2",
+    "purgecss-webpack-plugin": "^0.13.0",
     "slick-carousel": "^1.6.0",
     "spf": "^2.4.0",
-    "stylelint": "~7.6.0",
-    "stylelint-config-standard": "~13.0.0"
-  },
-  "engines": {
-    "node": ">=4.3.0",
-    "npm": ">=2.14.12"
+    "stylelint": "^8.0.0",
+    "stylelint-config-standard": "^17.0.0"
   }
 }

@@ -12,8 +12,6 @@ branches:
   - develop
 
 php:
-  - 5.5
-  - 5.6
   - 7.0
   - 7.1
 
@@ -24,7 +22,6 @@ before_install:
   # Install yarn
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.2.1
   - export PATH=$HOME/.yarn/bin:$PATH
-  - yarn global add gulp
 
 before_script:
   # Install dependencies and build the project
@@ -33,6 +30,7 @@ before_script:
   - make build
 
 script:
+  - php artisan key:generate
   - make runtests
   - php vendor/bin/phpunit --coverage-clover build/logs/clover.xml
 

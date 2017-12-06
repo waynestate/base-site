@@ -1,4 +1,3 @@
-import 'app';
 import jQuery from 'jquery';
 
 (function($) {

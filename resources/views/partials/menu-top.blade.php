@@ -37,9 +37,8 @@
                 </div>
 
                 @if(isset($banner) && $banner != false)
-                    @include('partials/banner', ['banner' => $banner, 'class' => 'banner'])
+                    @include('partials/banner', ['banner' => $banner])
                 @endif
-
             </div>
         </div>
     </div>

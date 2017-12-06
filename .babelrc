@@ -1,4 +1,9 @@
 {
-    "presets": ["es2015"],
-    "sourceMaps": true
+    "presets": [
+        ["env", {
+            "targets": {
+                "browsers": ["last 2 versions"]
+            }
+        }]
+    ]
 }

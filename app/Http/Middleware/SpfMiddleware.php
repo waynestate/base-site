@@ -96,6 +96,6 @@ class SpfMiddleware
      */
     public function getRouteQuery($request)
     {
-        return is_array($request->route()[2]) ? $request->route()[2] : [];
+        return $request->route() !== null ? $request->route()->parameters : [];
     }
 }

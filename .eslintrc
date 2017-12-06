@@ -1,6 +1,7 @@
 {
     "env": {
-        "browser": true
+        "browser": true,
+        "amd": true
     },
     "parserOptions": {
         "ecmaVersion": 6,

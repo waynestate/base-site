@@ -49,9 +49,9 @@ class NewsRepository extends Repository
         $route = app('request')->route();
 
         // Change the first random category to be the one they selected
-        if (isset($route[2]['slug'])) {
-            $categories['news_categories'][1]['slug'] = $route[2]['slug'];
-            $categories['news_categories'][1]['category'] = str_replace('-', ' ', $route[2]['slug']);
+        if (isset($route->parameters['slug'])) {
+            $categories['news_categories'][1]['slug'] = $route->parameters['slug'];
+            $categories['news_categories'][1]['category'] = str_replace('-', ' ', $route->parameters['slug']);
         }
 
         return $categories;

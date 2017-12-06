@@ -15,14 +15,6 @@ $iterator = Finder::create()
     ->in($dir = './')
 ;
 
-/*
-$versions = GitVersionCollection::create($dir)
-    ->addFromTags('v2.*')
-    ->add('2.5.0', '2.5.0 branch')
-    ->add('master', 'master branch')
-;
-*/
-
 $sami = new Sami($iterator, array(
     'title'                => 'Base API',
     // 'versions'             => $versions,

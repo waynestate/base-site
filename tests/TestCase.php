@@ -2,19 +2,12 @@
 
 namespace Tests;
 
+use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Faker\Factory;
 
-class TestCase extends \Laravel\Lumen\Testing\TestCase
+abstract class TestCase extends BaseTestCase
 {
-    /**
-     * Creates the application.
-     *
-     * @return \Laravel\Lumen\Application
-     */
-    public function createApplication()
-    {
-        return require __DIR__.'/../bootstrap/app.php';
-    }
+    use CreatesApplication;
 
     /**
      * Ran before every test.

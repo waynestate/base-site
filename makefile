@@ -1,25 +1,29 @@
 # Configuration
 YARNFILE := package.json
 COMPOSERFILE := composer.json
-GULPFILE := gulpfile.js
+MIXFILE := webpack.mix.js
 DEPLOY := Envoy.blade.php
+DOTENV := .env
 
 # Tasks
 all: install
-install: yarn composerinstall
+install: yarn composerinstall generatekey
 update: yarnupgrade composerupdate
 status: yarncheck
-build: gulp
-buildproduction: gulpproduction
-deploy: install build runtests envoy
-deployproduction: install buildproduction runtests envoyproduction
+build: webpackprod
+buildproduction: webpackprod
+deploy: install build generatekey runtests envoy
+deployproduction: install buildproduction generatekey runtests envoyproduction
 
 # Commands
 yarn: $(YARNFILE)
 	yarn
 
+generatekey: $(DOTENV)
+	php artisan key:generate
+
 composerinstall: $(COMPOSERFILE)
-	composer update --lock --prefer-dist --no-scripts --no-interaction
+	composer update --lock --prefer-dist --no-interaction
 
 composerinstalldev: $(COMPOSERFILE)
 	composer install --prefer-dist --no-scripts --no-interaction && composer dump-autoload --optimize;
@@ -27,14 +31,14 @@ composerinstalldev: $(COMPOSERFILE)
 composerinstallproduction: $(COMPOSERFILE)
 	composer install --prefer-dist --no-dev --no-scripts --no-interaction && composer dump-autoload --optimize;
 
-gulp: $(GULPFILE)
-	gulp
+webpackdev: $(MIXFILE)
+	npm run dev
 
-gulpproduction: $(GULPFILE)
-	gulp --env=production
+webpackprod: $(MIXFILE)
+	npm run prod
 
-watch: $(GULPFILE)
-	gulp watch
+watch: $(MIXFILE)
+	npm run watch-poll
 
 yarnupgrade: $(YARNFILE)
 	yarn upgrade
@@ -53,6 +57,9 @@ phplint: $(COMPOSERFILE)
 
 phplintdry: $(COMPOSERFILE)
 	php-cs-fixer fix --diff --dry-run
+
+stylelint:
+	stylelint ./resources/scss/**/*.scss --syntax scss
 
 coverage: $(COMPOSERFILE)
 	php vendor/bin/phpunit --coverage-html coverages
@@ -73,5 +80,8 @@ $(YARNFILE):
 $(COMPOSERFILE):
 	composer init
 
-$(GULPFILE):
-	touch $(GULPFILE)
+$(MIXFILE):
+	touch $(webpack.mix.js)
+
+$(DOTENV):
+	cp .env.example .env
