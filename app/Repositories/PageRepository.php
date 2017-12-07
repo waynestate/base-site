@@ -29,6 +29,9 @@ class PageRepository implements DataRepositoryContract, PageRepositoryContract
             $pageData = json_decode($json, true);
 
             return $pageData;
+        } elseif (isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI'] == '/') {
+            // Forward them to the styleguide if no homepage is found
+            return redirect('/styleguide');
         }
 
         return abort('404');

@@ -49,6 +49,11 @@ class DataMiddleware
         // Get the page data
         $pageData = app($this->getPrefix().'\Repositories\PageRepository')->getRequestData($data);
 
+        // If the page is a redirect then return that response
+        if ($pageData instanceof \Illuminate\Http\RedirectResponse) {
+            return $pageData;
+        }
+
         // Merge all data and page data
         $data = merge($pageData, $data);
 
