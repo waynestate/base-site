@@ -56,7 +56,7 @@
         font-weight: normal;
         line-height: 1em;
         margin: 0;
-        padding-bottom: rem-calc(4);
+        padding-bottom: 0;
 
         a {
             color: $white;
@@ -66,6 +66,7 @@
         span {
             display: block;
             font-size: 0.65em;
+            line-height: 16px;
         }
     }
 
@@ -75,25 +76,24 @@
 
         li {
             display: inline-block;
+            margin: 0 10px;
 
             a {
                 color: white;
-                display: block;
-                padding: 0 rem-calc(20);
                 font-size: $menu-top-font-size;
 
                 &:hover {
-                    color: #ffd478;
-                }
-                // Remove padding on first link
-                // So it lines up on the left
-                &:first-child {
-                    padding-left: 0;
+                    color: #ffd969;
                 }
             }
 
             &.selected a {
-                color: #fc3;
+                color: #ffd969;
+                border-bottom: 1px solid #ffd969;
+            }
+
+            &:last-child {
+                margin-right: 0;
             }
         }
 

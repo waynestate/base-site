@@ -28,7 +28,9 @@
 
     // Bottom borders on child <li>
     > ul > li {
-        border-bottom: 1px solid #edeef2;
+        @include breakpoint($menu-top-breakpoint up) {
+            border-bottom: 1px solid #edeef2;
+        }
     }
 
     // Indent each level

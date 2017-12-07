@@ -2,10 +2,14 @@
 $menu-top-breakpoint: map-get($breakpoints, 'offcanvas');
 
 // Menu-top
-$menu-top-background: $black;
-$menu-height: 70px;
-$menu-top-font-size: rem-calc(15);
+$menu-top-background: #093f39;
+$menu-height: 65px;
+$menu-top-font-size: 16px;
 
 // Slick
 $slick-font-path: "../fonts/";
 $slick-loader-path: "/_resources/images/";
+
+// Colors
+$darker-green: #10312c;
+$lighter-yellow: #ffd969;
