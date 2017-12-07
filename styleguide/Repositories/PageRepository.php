@@ -3,6 +3,7 @@
 namespace Styleguide\Repositories;
 
 use App\Repositories\PageRepository as Repository;
+use Illuminate\Support\Facades\Storage;
 
 class PageRepository extends Repository
 {
@@ -36,7 +37,7 @@ class PageRepository extends Repository
         }
 
         // Compare the path's class_name to the filesystem so we can eliminate case sensitivity issues
-        $class_name = collect(glob(__DIR__.'/../Pages/*.php'))->filter(function ($item) use ($filename) {
+        $class_name = collect(Storage::disk('base')->allFiles('styleguide/Pages'))->filter(function ($item) use ($filename) {
             return strtolower(basename($item)) == strtolower($filename).'.php';
         })->map(function ($item) {
             return basename($item, '.php');

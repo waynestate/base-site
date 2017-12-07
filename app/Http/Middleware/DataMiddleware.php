@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Storage;
 
 class DataMiddleware
 {
@@ -49,6 +50,11 @@ class DataMiddleware
         // Get the page data
         $pageData = app($this->getPrefix().'\Repositories\PageRepository')->getRequestData($data);
 
+        // If the page is a redirect then return that response
+        if ($pageData instanceof \Illuminate\Http\RedirectResponse) {
+            return $pageData;
+        }
+
         // Merge all data and page data
         $data = merge($pageData, $data);
 
@@ -56,7 +62,7 @@ class DataMiddleware
         $request->controller = $this->getControllerNamespace($data['page']['controller']);
 
         // Create a global data variable that houses repository data that is passed down to every controller
-        $data = collect(glob(__DIR__.'/../../../'.strtolower($this->getPrefix()).'/Repositories/*.php'))
+        $data = collect(Storage::disk('base')->allFiles('app/Repositories'))
             ->reject(function ($filename) {
                 return in_array(basename($filename), ['PageRepository.php']);
             })

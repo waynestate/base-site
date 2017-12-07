@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Waynestate\Api\Connector;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Storage;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -44,7 +45,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         // Bind all repositories following the filename convention
-        collect(glob(__DIR__.'/../../contracts/Repositories/*.php'))
+        collect(Storage::disk('base')->allFiles('contracts'))
             ->reject(function ($filename) {
                 return in_array(basename($filename), ['DataRepositoryContract.php']);
             })

@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use Illuminate\Support\Facades\Storage;
 use Contracts\Repositories\DataRepositoryContract;
 use Contracts\Repositories\PageRepositoryContract;
 
@@ -21,14 +22,10 @@ class PageRepository implements DataRepositoryContract, PageRepositoryContract
         // Get the filename
         $filename = $this->getFilename($path);
 
-        // Get the raw JSON
-        if (file_exists(storage_path().'/app/public/'.$filename)) {
-            $json = file_get_contents(storage_path().'/app/public/'.$filename);
-
-            // Decode the JSON
-            $pageData = json_decode($json, true);
-
-            return $pageData;
+        if (Storage::disk('public')->exists($filename)) {
+            return json_decode(Storage::disk('public')->get($filename), true);
+        } elseif ($data['server']['path'] === '/') {
+            return redirect('/styleguide');
         }
 
         return abort('404');

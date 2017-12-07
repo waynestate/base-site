@@ -10,15 +10,21 @@ class PageRepositoryTest extends TestCase
      * Passing wrong path should 404.
      *
      * @covers App\Repositories\PageRepository::getRequestData
-     * @expectedException Exception
+     * @expectedException Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @test
      */
     public function non_exisitent_page_should_404()
     {
+        // Change the ENV so it runs through the real DataMiddleware
+        config(['app.env' => 'dev']);
+
         // Fake request
         $request = [
             'parameters' => [
                 'path' => $this->faker->word.'/'.$this->faker->word.'/'.$this->faker->word.'/',
+            ],
+            'server' => [
+                'path' => '',
             ],
         ];
 
