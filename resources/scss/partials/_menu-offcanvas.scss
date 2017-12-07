@@ -1,61 +1,59 @@
 @include breakpoint($menu-top-breakpoint down) {
-    // Show the main menu toggle
+    // Top level MAIN MENU drop down
     .offcanvas-main-menu {
         display: block;
+
+        ul ul li {
+            background-color: $darker-green;
+        }
+
+        ul li .main-menu {
+            background-color: $darker-green;
+            text-transform: uppercase;
+            font-size: rem-calc(16);
+
+            &:hover {
+                background-color: $darker-green;
+            }
+        }
+
+        // Menu Header top level (MAIN MENU)
+        ul ul {
+            border-bottom: 5px solid $darker-green;
+        }
     }
 
     // Offcanvas menu overrides
     .main-menu {
-        // Makes menu background color go all the way down the column
         height: 100%;
-        //background-color: #262626;
-        background-color: darken(#093f39, 3%);
+        background-color: $menu-top-background;
         padding-left: 0;
         padding-right: 0;
 
         h2 {
-            color: rgba(255, 255, 255, 0.7);
-            padding: 0 0 5px 16px;
+            color: rgba(255, 255, 255, 0.9);
+            padding: 0 0 5px 15px;
             margin-top: 32px;
-            border-bottom: 1px solid darken(#093f39, 4%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         // Selected State
         .selected > a {
-            text-decoration: underline;
-            //background-color: lighten(#093f39, 3%);
-            color: #fff;
-        }
-
-        .selected a {
-            background-color: lighten(#093f39, 2%);
-        }
-
-        .selected .selected a {
-            background-color: lighten(#093f39, 5%);
-        }
-
-        .selected .selected .selected a {
-            //background-color: lighten(#093f39, 9%);
-        }
-
-        // Bottom borders on child <li>
-        > ul > li {
-            border-bottom: 1px solid darken(#093f39, 4%);
+            color: #ffd969;
         }
 
         ul {
+            background-color: #113f39;
             padding: 0;
 
             li a {
-                color: rgba(255, 255, 255, 0.7);
+                color: rgba(255, 255, 255, 0.9);
             }
 
             a:hover,
             .selected a:hover {
-                //background-color: lighten(#262626, 10%);
-                background-color: lighten(#093f39, 7%);
-                color: #fff;
+                background: transparent;
+                color: #ffd969;
             }
 
             // Indent second level now since first level is shown
@@ -74,48 +72,6 @@
         float: right;
         font-size: rem-calc(24);
         display: flex;
-    }
-
-    // Top level MAIN MENU dropdown on top
-    .offcanvas-main-menu {
-        ul li {
-            a.main-menu {
-                display: block;
-                //color: rgba(255, 255, 255, 0.7);
-                //background-color: darken(#093f39, 5%);
-                border-bottom: 1px solid darken(#093f39, 4%);
-                padding: 0.8em;
-                text-transform: uppercase;
-                font-size: rem-calc(16);
-
-                &:hover {
-                    //color: #ffd75d;
-                }
-
-                &.selected {
-                    //color: #ffd75d;
-                }
-            }
-
-            // Menu Header top level (MAIN MENU)
-            ul {
-                border-bottom: 1px solid darken(#093f39, 4%);
-
-                li a {
-                    //background-color: #000;
-                    border-bottom: none;
-
-                    &:hover {
-                        //color: #ffd75d;
-                    }
-                }
-
-                li.selected a {
-                    //color: #ffd75d;
-                    font-weight: bold;
-                }
-            }
-        }
     }
 }
 
