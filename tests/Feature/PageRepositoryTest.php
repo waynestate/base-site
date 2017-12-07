@@ -3,6 +3,7 @@
 namespace Tests\Styleguide\Repositories;
 
 use Tests\TestCase;
+use Illuminate\Support\Facades\Storage;
 
 class PageRepositoryTest extends TestCase
 {
@@ -18,7 +19,7 @@ class PageRepositoryTest extends TestCase
     public function all_styleguide_routes_should_load_successfully()
     {
         // Check all repository routes to ensure they load
-        collect(glob(base_path().'/styleguide/Pages/*.php'))
+        collect(Storage::disk('base')->allFiles('styleguide/Pages'))
         ->reject(function ($filename) {
             return in_array(basename($filename), ['Page.php']);
         })
