@@ -4,6 +4,7 @@ namespace Tests\App\Http\Middleware;
 
 use Tests\TestCase;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DataMiddlewareTest extends TestCase
 {
@@ -23,6 +24,27 @@ class DataMiddlewareTest extends TestCase
             // Data check
             $this->assertTrue(is_array($response->data));
         });
+    }
+
+    /**
+     * @covers App\Http\Middleware\DataMiddleware::handle
+     * @covers App\Repositories\PageRepository::getRequestData
+     * @test
+     */
+    public function no_homepage_found_should_redirect_to_styleguide()
+    {
+        // Change the ENV so it runs through the real DataMiddleware
+        config(['app.env' => 'dev']);
+
+        $request = new Request();
+        $request = $request->create('/');
+
+        Storage::shouldReceive('disk->exists')->andReturn(false);
+
+        $redirect = app('App\Http\Middleware\DataMiddleware')->handle($request, function () {
+        });
+
+        $this->assertEquals('styleguide', basename($redirect->headers->get('location')));
     }
 
     /**
