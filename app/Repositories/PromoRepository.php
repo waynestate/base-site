@@ -71,6 +71,10 @@ class PromoRepository implements DataRepositoryContract, PromoRepositoryContract
             'banner' => 'page_id:'.$data['page']['id'].'|first',
         ];
 
+        if (in_array($data['page']['controller'], config('app.hero_rotating_controllers'))) {
+            $group_config = str_replace('|limit:1', '|limit:'.config('app.hero_rotating_limit'), $group_config);
+        }
+
         // Return the parsed promotions
         return $this->parsePromos->parse($promos, $group_reference, $group_config);
     }
