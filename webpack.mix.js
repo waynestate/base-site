@@ -86,6 +86,13 @@ fs.symlink(
     function (err) { err != null && err.errno != -17 ? console.log(err) : console.log("Done."); }
 );
 
+// Allow special characters in class names
+class SpecialCharactersExtractor {
+    static extract(content) {
+        return content.match(/[A-z0-9-:\/]+/g);
+    }
+}
+
 // Override webpack configuration
 mix.webpackConfig({
     externals: {
@@ -139,9 +146,16 @@ mix.webpackConfig({
             paths: glob.sync([
                 path.join(__dirname, "resources/views/**/*.blade.php"),
                 path.join(__dirname, "styleguide/views/**/*.blade.php"),
+                path.join(__dirname, "factories/**/*.php"),
                 path.join(__dirname, "resources/js/**/*.js"),
                 path.join(__dirname, "node_modules/foundation-sites/js/foundation.offcanvas.js")
             ]),
+            extractors: [
+                {
+                    extractor: SpecialCharactersExtractor,
+                    extensions: ["html", "js", "php", "vue"]
+                }
+            ],
             whitelistPatterns: [/icon-/, /slick-/]
         })
     ]
