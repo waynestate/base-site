@@ -74,11 +74,6 @@ mix.js('resources/js/main.js', 'public/_resources/js')
         }
     });
 
-// Cache busting for production websites
-if (mix.inProduction()) {
-    mix.version();
-}
-
 // Create the _static symlink
 fs.symlink(
     path.resolve('./storage/app/public'),
@@ -93,8 +88,7 @@ class SpecialCharactersExtractor {
     }
 }
 
-// Override webpack configuration
-mix.webpackConfig({
+config = {
     externals: {
         "jquery": "jQuery"
     },
@@ -141,7 +135,16 @@ mix.webpackConfig({
                 from: 'hooks',
                 to: path.resolve('.git/hooks'),
             }
-        ]),
+        ])
+    ]
+}
+
+if (mix.inProduction()) {
+    // Version the CSS for cache busting
+    mix.version();
+
+    // Purge the CSS
+    config.plugins.push(
         new PurgecssPlugin({
             paths: glob.sync([
                 path.join(__dirname, "resources/views/**/*.blade.php"),
@@ -158,5 +161,8 @@ mix.webpackConfig({
             ],
             whitelistPatterns: [/icon-/, /slick-/]
         })
-    ]
-});
+    );
+}
+
+// Override webpack configuration
+mix.webpackConfig(config);
