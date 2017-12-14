@@ -179,13 +179,9 @@ echo "Yarn install...";
 make yarn;
 echo "Yarn installed.";
 
-echo "gulp build...";
-if [ "{{ $remote_server }}" = "production" ]; then
+echo "Compile assets...";
 make buildproduction;
-else
-make build;
-fi
-echo "gulp built.";
+echo "Assets compiled.";
 
 echo "LocalSource Dependencies installed.";
 @endtask
