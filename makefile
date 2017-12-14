@@ -10,7 +10,7 @@ all: install
 install: yarn composerinstall generatekey
 update: yarnupgrade composerupdate
 status: yarncheck
-build: webpackprod
+build: webpackdev
 buildproduction: webpackprod
 deploy: install build generatekey runtests envoy
 deployproduction: install buildproduction generatekey runtests envoyproduction
@@ -32,10 +32,10 @@ composerinstallproduction: $(COMPOSERFILE)
 	composer install --prefer-dist --no-dev --no-scripts --no-interaction && composer dump-autoload --optimize;
 
 webpackdev: $(MIXFILE)
-	npm run dev
+	npm run development
 
 webpackprod: $(MIXFILE)
-	npm run prod
+	npm run production
 
 watch: $(MIXFILE)
 	npm run watch-poll
