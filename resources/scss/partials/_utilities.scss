@@ -1,16 +1,23 @@
-.visuallyhidden,
-.rotate_arrows .slick-dots {
+/*
+ * Hide only visually, but have it available for screen readers:
+ * https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+ *
+ * 1. For long content, line feeds are not interpreted as spaces and small width
+ *    causes content to wrap 1 word per line:
+ *    https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
+ */
+ .visuallyhidden, .rotate_arrows .slick-dots {
     border: 0;
     clip: rect(0 0 0 0);
+    -webkit-clip-path: inset(50%);
+    clip-path: inset(50%);
     height: 1px;
     margin: -1px;
     overflow: hidden;
     padding: 0;
     position: absolute;
     width: 1px;
-    background-color: #fff;
-    color: #000;
-    font-size: 16px !important;
+    white-space: nowrap; /* 1 */
 }
 
 .position-relative {
