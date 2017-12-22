@@ -31,6 +31,8 @@ before_script:
 
 script:
   - php artisan key:generate
+  - make phplintdry
+  - make stylelint
   - make runtests
   - php vendor/bin/phpunit --coverage-clover build/logs/clover.xml
 
