@@ -35,13 +35,13 @@ else
 fi
 
 # Report errors
-if [[ $phplint == *"- begin diff -"* ]]; then
+if [[ $phplint == *"'phplintdry' failed"* ]]; then
     errors=true;
     printf "phplint has reported errors. Please fix them before committing.\n"
     printf ">> run: make phplint\n\n"
 fi
 
-if [[ $stylelint == *"[stylelint] Error 2"* ]]; then
+if [[ $stylelint == *"'stylelint' failed"* ]]; then
     errors=true;
     printf "Stylint has reported errors. Please fix them before committing.\n"
     printf ">> run: make stylelint\n\n"
