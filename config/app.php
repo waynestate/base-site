@@ -149,11 +149,12 @@ return [
     |--------------------------------------------------------------------------
     |
     | Title to be shown above the main title of the site you are on. By default
-    | it will link back to "/" which is the main homepage.
+    | it will link back to '/' which homepage of the current domain.
     |
     */
     'surtitle' => null,
     'surtitle_main_site_enabled' => false,
+    'surtitle_url' => '/',
 
     /*
     |--------------------------------------------------------------------------
