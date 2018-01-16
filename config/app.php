@@ -181,6 +181,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Facebook Open Graph
+    |--------------------------------------------------------------------------
+    |
+    | Here you can setup open graph tied to a specific application. This will
+    | output the appropriate meta tags in the head of the document.
+    |
+    */
+    'facebook_profile_id' => null,
+    'facebook_app_id' => null,
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Timezone
     |--------------------------------------------------------------------------
     |

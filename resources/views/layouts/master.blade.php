@@ -4,11 +4,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="Keywords" content="{{ $page['keywords'] }}" />
-    <meta name="Description" content="{{ $page['description'] }}" />
-    <meta http-equiv="last-modified" content="{{ $page['updated-at'] }}" />
     <meta name="Author" content="Wayne State University" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @yield('meta')
+
     <title>@include('partials.head-title')</title>
 
     <link rel="icon" type="image/x-icon" href="https://wayne.edu/favicon.ico" />
