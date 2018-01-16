@@ -6,6 +6,7 @@ import './modules/spf';
 import './modules/formfilter';
 import './modules/slick';
 import './modules/magnific-popup';
+import './modules/share';
 
 // Foundation Modules
 import './modules/accordion';
