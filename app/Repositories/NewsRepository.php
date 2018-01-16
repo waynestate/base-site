@@ -45,7 +45,7 @@ class NewsRepository implements NewsRepositoryContract
             'order_by' => 'display_order',
             'sort' => 'ASC',
             'server_location' => 'both',
-            'fields' => 'news_id|title|link|posted|app_id|slug',
+            'fields' => 'news_id|title|link|posted|app_id|slug|filename',
             'before' => 'now',
         ];
 
@@ -70,7 +70,7 @@ class NewsRepository implements NewsRepositoryContract
             'is_active' => '1',
             'order_by' => 'posted',
             'sort' => 'DESC',
-            'fields' => 'news_id|title|link|posted|app_id|slug|excerpt',
+            'fields' => 'news_id|title|link|posted|app_id|slug|excerpt|filename',
             'server_location' => 'both',
             'limit' => $limit,
             'archive' => '1',
@@ -95,7 +95,7 @@ class NewsRepository implements NewsRepositoryContract
             'is_active' => '1',
             'order_by' => 'posted',
             'sort' => 'DESC',
-            'fields' => 'news_id|title|link|posted|app_id|slug|excerpt|is_archive|ending|body',
+            'fields' => 'news_id|title|link|posted|app_id|slug|excerpt|is_archive|ending|body|filename',
             'server_location' => 'both',
             'limit' => 1,
         ];
@@ -151,5 +151,27 @@ class NewsRepository implements NewsRepositoryContract
         }
 
         return $categories;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getImageUrl($news)
+    {
+        // If the news item has an image attached
+        if (isset($news['news']['filename']) && $news['news']['filename'] !== '') {
+            return $news['news']['filename'];
+        }
+
+        // Scan the news body for the first image
+        $doc = new \DOMDocument();
+        @$doc->loadHTML($news['news']['body']);
+        $images = $doc->getElementsByTagName('img');
+
+        if ($images->item(0) !== null) {
+            return $images->item(0)->getAttribute('src');
+        }
+
+        return null;
     }
 }
