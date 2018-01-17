@@ -33,6 +33,7 @@ class NewsItem implements FactoryContract
                 'archive' => 1,
                 'link' => '',
                 'body' => $this->faker->paragraph,
+                'filename' => '',
             ];
         }
 

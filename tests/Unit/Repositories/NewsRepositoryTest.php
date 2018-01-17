@@ -137,4 +137,45 @@ class NewsRepositoryTest extends TestCase
 
         $this->assertEquals($return, $news);
     }
+
+    /**
+     * @covers App\Repositories\NewsRepository::getImageUrl
+     * @test
+     */
+    public function news_item_with_no_images_should_return_null()
+    {
+        $news['news']['filename'] = '';
+
+        $imageUrl = app('App\Repositories\NewsRepository')->getImageUrl($news);
+
+        $this->assertNull($imageUrl);
+    }
+
+    /**
+     * @covers App\Repositories\NewsRepository::getImageUrl
+     * @test
+     */
+    public function news_item_with_image_should_return_image()
+    {
+        $news['news']['filename'] = $this->faker->imageUrl();
+
+        $imageUrl = app('App\Repositories\NewsRepository')->getImageUrl($news);
+
+        $this->assertEquals($news['news']['filename'], $imageUrl);
+    }
+
+    /**
+     * @covers App\Repositories\NewsRepository::getImageUrl
+     * @test
+     */
+    public function news_item_with_body_image_should_return_image()
+    {
+        $image = $this->faker->imageUrl();
+
+        $news['news']['body'] = '<img src="'.$image.'">';
+
+        $imageUrl = app('App\Repositories\NewsRepository')->getImageUrl($news);
+
+        $this->assertEquals($image, $imageUrl);
+    }
 }

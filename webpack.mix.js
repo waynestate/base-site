@@ -159,7 +159,7 @@ if (mix.inProduction()) {
                     extensions: ["html", "js", "php", "vue"]
                 }
             ],
-            whitelistPatterns: [/icon-/, /slick-/]
+            whitelistPatterns: [/icon-/, /slick-/, /mfp-/, /at-/]
         })
     );
 }
