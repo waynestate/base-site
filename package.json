@@ -22,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/waynestate/base-site/issues"
   },
-  "homepage": "http://base.wayne.edu/",
+  "homepage": "https://base.wayne.edu/",
   "devDependencies": {
     "@waynestate/wsufooter": "^1.0.0",
     "@waynestate/wsuheader": "^2.0.0",

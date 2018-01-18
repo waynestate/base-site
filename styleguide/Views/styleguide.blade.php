@@ -181,13 +181,13 @@
 
     <p>Images default to span 100% of the container on small view. When using the <code>.icon</code> class you can override this behavior so it defaults to its real height/width.</p>
 
-    <p><img src="http://placehold.it/50x50&text=Icon" class="icon" alt="icon image"></p>
+    <p><img src="//placehold.it/50x50&text=Icon" class="icon" alt="icon image"></p>
 
     <a class="button" onclick="$('pre.image-icon').toggleClass('hide');">See Image Icon Code</a>
 
     <pre class="image-icon hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
     {{ htmlspecialchars('
-<img src="http://placehold.it/50x50&text=Icon" class="icon" alt="">
+<img src="//placehold.it/50x50&text=Icon" class="icon" alt="">
     ') }}
     </pre>
 
