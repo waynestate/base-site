@@ -52,4 +52,8 @@
             height: auto;
         }
     }
+
+    &.rotate_arrows.slick-dotted.slick-slider {
+        margin-bottom: 0;
+    }
 }
