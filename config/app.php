@@ -116,6 +116,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Hero Rotating Enabled
+    |--------------------------------------------------------------------------
+    |
+    | This enables the hero image to have arrows to rotate through them, if
+    | the page has more than one hero image assigned. You can specify
+    | which controllers you want this to work on by adding to the
+    | array.
+    |
+    */
+    'hero_rotating_controllers' => [],
+    'hero_rotating_limit' => 3,
+
+    /*
+    |--------------------------------------------------------------------------
     | Hero Text Enabled
     |--------------------------------------------------------------------------
     |
@@ -135,11 +149,12 @@ return [
     |--------------------------------------------------------------------------
     |
     | Title to be shown above the main title of the site you are on. By default
-    | it will link back to "/" which is the main homepage.
+    | it will link back to '/' which homepage of the current domain.
     |
     */
     'surtitle' => null,
     'surtitle_main_site_enabled' => false,
+    'surtitle_url' => '/',
 
     /*
     |--------------------------------------------------------------------------
@@ -163,6 +178,18 @@ return [
     |
     */
     'profile_parent_group_id' => 0,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Facebook Open Graph
+    |--------------------------------------------------------------------------
+    |
+    | Here you can setup open graph tied to a specific application. This will
+    | output the appropriate meta tags in the head of the document.
+    |
+    */
+    'facebook_profile_id' => null,
+    'facebook_app_id' => null,
 
     /*
     |--------------------------------------------------------------------------

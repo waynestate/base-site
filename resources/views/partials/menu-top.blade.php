@@ -11,7 +11,7 @@
                         <div>
                             @if(config('app.surtitle') !== null)
                                 @if($site['parent']['id'] === null && config('app.surtitle_main_site_enabled') === true || $site['parent']['id'] !== null)
-                                    <a href="/"><span class="surtitle">{{ config('app.surtitle') }}</span></a>
+                                    <a href="{{ config('app.surtitle_url') }}"><span class="surtitle">{{ config('app.surtitle') }}</span></a>
                                 @endif
                             @endif
 

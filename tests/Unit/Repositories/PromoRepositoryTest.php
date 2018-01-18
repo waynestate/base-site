@@ -19,8 +19,14 @@ class PromoRepositoryTest extends TestCase
             'promotions' => [],
         ];
 
+        // Always force homepage
+        config(['app.hero_rotating_controllers' => ['HomepageController']]);
+
         // Create a fake data request
         $data = app('Factories\Page')->create(1, [
+            'page' => [
+                'controller' => 'HomepageController',
+            ],
             'data' => [
                 'accordion_promo_group_id' => $this->faker->numberbetween(1, 3),
             ],

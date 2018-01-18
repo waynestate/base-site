@@ -14,9 +14,9 @@
     }
 
     &__excerpt {
-        background-color: rgba(0, 105, 104, 0.8);
+        background-color: rgba(0, 0, 0, 0.7);
         color: white;
-        padding: rem-calc(15 0);
+        padding: rem-calc(15);
 
         @include breakpoint(large up) {
             position: absolute;
@@ -51,5 +51,9 @@
             padding-top: 36.3%;
             height: auto;
         }
+    }
+
+    &.rotate_arrows.slick-dotted.slick-slider {
+        margin-bottom: 0;
     }
 }

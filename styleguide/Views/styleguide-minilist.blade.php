@@ -6,7 +6,7 @@
     <div class="row">
         <div class="medium-6 columns">
             @if(isset($minilist))
-                @include('components.mini-list', ['items' => $minilist, 'url' => 'http://wayne.edu/', 'heading' => 'Heading'])
+                @include('components.mini-list', ['items' => $minilist, 'url' => 'https://wayne.edu/', 'heading' => 'Heading'])
             @endif
         </div>
     </div>

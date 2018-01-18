@@ -1,5 +1,9 @@
 @extends('layouts.' . (isset($layout) ? $layout : 'master'))
 
+@section('meta')
+    @include('partials.meta')
+@endsection
+
 @section('content-area')
     @yield('top')
 

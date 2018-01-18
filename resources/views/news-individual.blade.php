@@ -4,6 +4,9 @@
     <h1 class="page-title">{{ $news['title'] }}</h1>
 
     <div class="news-item">
+        <div class="addthis_share">Share</div>
+        <div class="addthis_sharing_toolbox"></div>
+
         <time datetime="{{ $news['posted'] }}">{{ apdatetime(date('F j, Y', strtotime($news['posted']))) }}</time>
 
         {!! $news['body'] !!}

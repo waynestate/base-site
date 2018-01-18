@@ -57,4 +57,12 @@ interface NewsRepositoryContract
      * @return array
      */
     public function setSelectedCategory($categories, $slug);
+
+    /**
+     * Get the image url for the meta data.
+     *
+     * @param array $news
+     * @return array
+     */
+    public function getImageUrl($news);
 }
