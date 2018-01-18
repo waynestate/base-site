@@ -3768,12 +3768,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-coveralls/php-coveralls.git",
-                "reference": "c9d3fe2327c8539f1105dc19954673ba993e4ad9"
+                "reference": "4f82a64e0c11575e4becdbca7889dff2b21f82f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-coveralls/php-coveralls/zipball/c9d3fe2327c8539f1105dc19954673ba993e4ad9",
-                "reference": "c9d3fe2327c8539f1105dc19954673ba993e4ad9",
+                "url": "https://api.github.com/repos/php-coveralls/php-coveralls/zipball/4f82a64e0c11575e4becdbca7889dff2b21f82f1",
+                "reference": "4f82a64e0c11575e4becdbca7889dff2b21f82f1",
                 "shasum": ""
             },
             "require": {
@@ -3794,7 +3794,7 @@
                 "symfony/http-kernel": "Allows Symfony integration"
             },
             "bin": [
-                "bin/coveralls"
+                "bin/php-coveralls"
             ],
             "type": "library",
             "extra": {
@@ -3843,7 +3843,7 @@
                 "github",
                 "test"
             ],
-            "time": "2017-10-14T23:16:28+00:00"
+            "time": "2017-12-11T11:06:38+00:00"
         },
         {
             "name": "php-cs-fixer/diff",
