@@ -228,4 +228,87 @@
     ') }}
     </pre>
 
+    <hr>
+
+    <div class="row">
+        <div class="large-3 columns">
+            <h2>Figure (left)</h2>
+
+            <figure class="float-left" style="margin-top: 15px;">
+                <img src="//placehold.it/150x150" alt="Placeholder">
+                <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
+            </figure>
+
+            <a class="button" onclick="$('pre.fig-left').toggleClass('hide');">See Code</a>
+
+            <pre class="fig-left hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+            {{ htmlspecialchars('
+<figure class="float-left">
+    <img src="//placehold.it/150x150" alt="Placeholder">
+    <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
+</figure>
+            ') }}
+            </pre>
+        </div>
+
+        <div class="large-3 columns">
+            <h2>Figure (center)</h2>
+
+            <figure class="text-center">
+                <img src="//placehold.it/150x150" alt="Placeholder">
+                <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
+            </figure>
+
+            <a class="button" onclick="$('pre.fig-center').toggleClass('hide');">See Code</a>
+
+            <pre class="fig-center hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+            {{ htmlspecialchars('
+<figure class="text-center">
+    <img src="//placehold.it/150x150" alt="Placeholder">
+    <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
+</figure>
+            ') }}
+            </pre>
+        </div>
+
+        <div class="large-3 columns">
+            <h2>Figure</h2>
+
+            <figure>
+                <img src="//placehold.it/150x150" alt="Placeholder">
+                <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
+            </figure>
+
+            <a class="button" onclick="$('pre.fig-none').toggleClass('hide');">See Code</a>
+
+            <pre class="fig-none hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+            {{ htmlspecialchars('
+<figure>
+    <img src="//placehold.it/150x150" alt="Placeholder">
+    <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
+</figure>
+            ') }}
+            </pre>
+        </div>
+
+        <div class="large-3 columns">
+            <h2>Figure (right)</h2>
+
+            <figure class="float-right" style="margin-top: 15px;">
+                <img src="//placehold.it/150x150" alt="Placeholder">
+                <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
+            </figure>
+
+            <a class="button clearfix" onclick="$('pre.fig-right').toggleClass('hide');">See Code</a>
+
+            <pre class="fig-right hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+            {{ htmlspecialchars('
+<figure class="float-right">
+    <img src="//placehold.it/150x150" alt="Placeholder">
+    <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
+</figure>
+            ') }}
+            </pre>
+        </div>
+    </div>
 @endsection
