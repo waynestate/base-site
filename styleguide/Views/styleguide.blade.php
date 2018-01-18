@@ -231,7 +231,7 @@
     <hr>
 
     <div class="row">
-        <div class="large-4 columns">
+        <div class="large-3 columns">
             <h2>Figure (left)</h2>
 
             <figure class="float-left">
@@ -240,8 +240,8 @@
             </figure>
         </div>
 
-        <div class="large-4 columns">
-            <h2>Figure (no alignment)</h2>
+        <div class="large-3 columns">
+            <h2>Figure (center)</h2>
 
             <figure class="text-center">
                 <img src="//placehold.it/150x150" alt="Placeholder">
@@ -249,7 +249,16 @@
             </figure>
         </div>
 
-        <div class="large-4 columns">
+        <div class="large-3 columns">
+            <h2>Figure</h2>
+
+            <figure>
+                <img src="//placehold.it/150x150" alt="Placeholder">
+                <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
+            </figure>
+        </div>
+
+        <div class="large-3 columns">
             <h2>Figure (right)</h2>
 
             <figure class="float-right">
