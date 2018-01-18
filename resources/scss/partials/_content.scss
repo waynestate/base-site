@@ -144,4 +144,39 @@
             }
         }
     }
+
+    figure {
+        width: 100%;
+        display: table;
+        margin: 15px auto;
+
+        @include breakpoint(large) {
+            margin: 25px;
+            width: auto;
+        }
+
+        &[style*="float:right"],
+        &.float-right {
+            margin-right: 0;
+        }
+
+        &[style*="float:left"],
+        &.float-left {
+            margin-left: 0;
+        }
+
+        img {
+            padding: 0;
+        }
+
+        figcaption {
+            padding-top: 0.5em;
+            font-size: rem-calc(14);
+            font-style: italic;
+            font-weight: bold;
+            color: #999;
+            display: table-caption;
+            caption-side: bottom;
+        }
+    }
 }

@@ -228,4 +228,34 @@
     ') }}
     </pre>
 
+    <hr>
+
+    <div class="row">
+        <div class="large-4 columns">
+            <h2>Figure (left)</h2>
+
+            <figure class="float-left">
+                <img src="//placehold.it/150x150" alt="Placeholder">
+                <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
+            </figure>
+        </div>
+
+        <div class="large-4 columns">
+            <h2>Figure (no alignment)</h2>
+
+            <figure class="text-center">
+                <img src="//placehold.it/150x150" alt="Placeholder">
+                <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
+            </figure>
+        </div>
+
+        <div class="large-4 columns">
+            <h2>Figure (right)</h2>
+
+            <figure class="float-right">
+                <img src="//placehold.it/150x150" alt="Placeholder">
+                <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
+            </figure>
+        </div>
+    </div>
 @endsection
