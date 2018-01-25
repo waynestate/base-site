@@ -148,7 +148,7 @@ if (mix.inProduction()) {
         new PurgecssPlugin({
             paths: glob.sync([
                 path.join(__dirname, "resources/views/**/*.blade.php"),
-                path.join(__dirname, "styleguide/views/**/*.blade.php"),
+                path.join(__dirname, "styleguide/Views/**/*.blade.php"),
                 path.join(__dirname, "factories/**/*.php"),
                 path.join(__dirname, "resources/js/**/*.js"),
                 path.join(__dirname, "node_modules/foundation-sites/js/foundation.offcanvas.js")
