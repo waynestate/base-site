@@ -26,20 +26,18 @@ class NewsController extends Controller
      * Display the news listing view.
      *
      * @param Request $request
-     * @param string $path
-     * @param string $slug
      * @return \Illuminate\View\View
      */
-    public function index(Request $request, $path, $slug = null)
+    public function index(Request $request)
     {
         // Get the news categories
         $categories = $this->news->getCategories($request->data['site']['id']);
 
         // Set the selected category
-        $categories = $this->news->setSelectedCategory($categories, $slug);
+        $categories = $this->news->setSelectedCategory($categories, $request->slug);
 
         // 404 the page since the category doens't exist or is inactive
-        if ($slug !== null && $categories['selected_news_category']['category_id'] === null) {
+        if ($request->slug !== null && $categories['selected_news_category']['category_id'] === null) {
             return abort('404');
         }
 
@@ -64,13 +62,12 @@ class NewsController extends Controller
      * Display the individual news item view.
      *
      * @param Request $request
-     * @param $id
      * @return \Illuminate\View\View
      */
-    public function show(Request $request, $id)
+    public function show(Request $request)
     {
         // Get the news item
-        $news = $this->news->getNewsItem($id, $request->data['site']['id']);
+        $news = $this->news->getNewsItem($request->id, $request->data['site']['id']);
 
         // If the news item does not belong in the archive and the time has expired, don't show it
         if (isset($news['error']) || $news['news']['archive'] == 0 && strtotime($news['news']['ending']) < time()) {

@@ -34,7 +34,7 @@ class NewsControllerTest extends TestCase
         $newsController = app('App\Http\Controllers\NewsController', ['news' => $newsRepository]);
 
         // Call the news listing
-        $view = $newsController->show(new Request(), $this->faker->numberBetween(1, 100));
+        $view = $newsController->show(new Request());
     }
 
     /**
@@ -63,7 +63,7 @@ class NewsControllerTest extends TestCase
         $newsController = app('App\Http\Controllers\NewsController', ['news' => $newsRepository]);
 
         // Call the news listing
-        $view = $newsController->show(new Request(), $this->faker->numberBetween(1, 100));
+        $view = $newsController->show(new Request());
     }
 
     /**
@@ -91,7 +91,7 @@ class NewsControllerTest extends TestCase
         $newsController = app('App\Http\Controllers\NewsController', ['news' => $newsRepository]);
 
         // Call the news listing
-        $redirect = $newsController->show(new Request(), $this->faker->numberBetween(1, 100));
+        $redirect = $newsController->show(new Request());
 
         // Make sure it redirected properly
         $this->assertEquals(302, $redirect->status());
@@ -136,7 +136,7 @@ class NewsControllerTest extends TestCase
         $newsController = app('App\Http\Controllers\NewsController', ['news' => $newsRepository]);
 
         // Call the news listing
-        $view = $newsController->show($request, $this->faker->numberBetween(1, 100));
+        $view = $newsController->show($request);
 
         // Make sure the news title is the page title
         $this->assertEquals($view->getData()['news']['title'], $view->getData()['page']['title']);
@@ -159,7 +159,11 @@ class NewsControllerTest extends TestCase
         // Construct the news controller
         $newsController = app('App\Http\Controllers\NewsController', ['news' => $newsRepository]);
 
+        $request = new Request();
+        $request->path = '/news';
+        $request->slug = 'invalid-category';
+
         // Call the news listing
-        $view = $newsController->index(new Request(), '/news', 'invalid-category');
+        $view = $newsController->index($request);
     }
 }
