@@ -64,13 +64,13 @@ class ProfileController extends Controller
      * @param int $accessid
      * @return \Illuminate\View\View
      */
-    public function show(Request $request, $accessid = null)
+    public function show(Request $request)
     {
         // Determine what site to pull profiles from
         $site_id = isset($request->data['data']['profile_site_id']) ? $request->data['data']['profile_site_id'] : $request->data['site']['id'];
 
         // Get the profile information
-        $profile = $this->profile->getProfile($site_id, $accessid);
+        $profile = $this->profile->getProfile($site_id, $request->accessid);
 
         // Get the fields to display
         $fields = $this->profile->getFields();

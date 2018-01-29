@@ -62,18 +62,33 @@ class SpfMiddleware
         $reflection = $this->getReflectionMethod($request->controller, $method);
 
         // Get the routes dependencies
-        $dependencies = $reflection->getParameters();
+        $dependencies = $this->getReflectionParameters($reflection);
 
-        // Build an array of parameters which can be passed to the reflection method
-        foreach ($dependencies as $key => $value) {
-            if ($value->getName() == 'request') {
-                $parameters[$value->getName()] = $request;
-            } elseif (isset($query[$value->getName()])) {
-                $parameters[$value->getName()] = $query[$value->getName()];
+        // Build an array of parameters
+        foreach ($dependencies as $value) {
+            if ($value == 'request') {
+                $parameters[$value] = $request;
+            } elseif (isset($query[$value])) {
+                $parameters[$value] = $query[$value];
             }
         }
 
         return $parameters;
+    }
+
+    /**
+     * Convert the reflection parameters to an array
+     *
+     * @param \ReflectionMethod $reflection
+     * @return array
+     */
+    public function getReflectionParameters($reflection)
+    {
+        return collect($reflection->getParameters())
+            ->map(function ($value) {
+                return $value->getName();
+            })
+            ->toArray();
     }
 
     /**

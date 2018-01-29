@@ -3,6 +3,7 @@
 namespace Tests\App\Http\Middleware;
 
 use Tests\TestCase;
+use Mockery as Mockery;
 use Illuminate\Http\Request;
 
 class SpfMiddlewareTest extends TestCase
@@ -54,22 +55,42 @@ class SpfMiddlewareTest extends TestCase
      */
     public function getting_route_parameters_should_return_parameters()
     {
-        // Get a random news id
-        $news_id = $this->faker->numberBetween(1, 100);
+        // Fake the parameters for a controllers method
+        $reflection = ['request', 'id'];
 
-        // Create a new request with a controller
+        // Fake the parameter values
         $request = new Request();
-        $request->controller = 'App\Http\Controllers\NewsController';
+        $id = $this->faker->randomDigit;
 
-        // Get the routes parameters
-        $parameters = app('App\Http\Middleware\SpfMiddleware')->getRouteParameters($request, 'show', ['id' => $news_id]);
+        // Mock the middleware
+        $spf = Mockery::mock('App\Http\Middleware\SpfMiddleware')->makePartial();
 
-        // Make sure we only have 2 parameters to invoke
-        $this->assertCount(2, $parameters);
+        // Return a fake controller
+        $spf->shouldReceive('getReflectionMethod')->once()->andReturn('FakeController');
+
+        // Return the fake parameters
+        $spf->shouldReceive('getReflectionParameters')->once()->andReturn($reflection);
+
+        // Get the route parameter values
+        $parameters =  $spf->getRouteParameters($request, 'show', ['id' => $id]);
 
         // Make sure the parameters are correct values
+        $this->assertCount(2, $parameters);
         $this->assertInstanceOf('Illuminate\Http\Request', $parameters['request']);
-        $this->assertEquals($news_id, $parameters['id']);
+        $this->assertEquals($id, $parameters['id']);
+    }
+
+    /**
+     * @covers App\Http\Middleware\SpfMiddleware::getReflectionParameters
+     * @test
+     */
+    public function getting_reflection_parameters_should_return_array()
+    {
+        $reflection = new \ReflectionMethod('App\Http\Controllers\ChildpageController', 'index');
+        $spf = app('App\Http\Middleware\SpfMiddleware');
+        $parameters = $spf->getReflectionParameters($reflection);
+
+        $this->assertTrue(in_array('request', $parameters));
     }
 
     /**
