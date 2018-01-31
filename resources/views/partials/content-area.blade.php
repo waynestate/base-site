@@ -13,7 +13,7 @@
 
     <div class="row">
         <div class="xlarge-3 large-3 small-12 columns main-menu @if($site_menu['meta']['has_selected'] == false && ((isset($show_site_menu) && $show_site_menu != true) || !isset($show_site_menu))) hide-for-menu-top-up @endif" id="mainMenu" data-off-canvas role="navigation">
-            @if(isset($site_menu_output) && isset($top_menu_output) && $site_menu !== $top_menu)
+            @if(isset($top_menu_output) && $site_menu !== $top_menu)
                 <div class="offcanvas-main-menu">
                     <ul>
                         <li>
