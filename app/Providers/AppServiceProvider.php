@@ -47,7 +47,7 @@ class AppServiceProvider extends ServiceProvider
         // Bind all repositories following the filename convention
         collect(Storage::disk('base')->allFiles('contracts'))
             ->reject(function ($filename) {
-                return in_array(basename($filename), ['DataRepositoryContract.php']);
+                return in_array(basename($filename), ['DataRepositoryContract.php', 'FakeImageRepositoryContract']);
             })
             ->each(function ($filename) {
                 $this->app->bind('Contracts\Repositories\\'.basename($filename, '.php'), $this->getPrefix().'\Repositories\\'.basename(str_replace('Contract', '', $filename), '.php'));

@@ -25,7 +25,7 @@ class UnderMenu implements FactoryContract
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
                 'link' => $this->faker->url,
-                'relative_url' => '//placehold.it/400x123',
+                'relative_url' => '/styleguide/image/400x123',
                 'title' => $this->faker->sentence,
             ];
         }

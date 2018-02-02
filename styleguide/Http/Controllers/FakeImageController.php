@@ -1,0 +1,35 @@
+<?php
+
+namespace Styleguide\Http\Controllers;
+
+use Contracts\Repositories\FakeImageRepositoryContract;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+class FakeImageController extends Controller
+{
+    /**
+     * Construct the HomepageController.
+     *
+     * @param FakeImageRepositoryContract $image
+     */
+    public function __construct(FakeImageRepositoryContract $image)
+    {
+        $this->image = $image;
+    }
+    /**
+     * Display an example accordion.
+     *
+     * @param Request $request
+     * @return image/png
+     */
+    public function index(Request $request)
+    {
+        $image = $this->image->create($request->size, $request->text);
+
+        imagepng($image);
+        imagedestroy($image);
+
+        return response(200)->header('Content-Type', 'image/png');
+    }
+}
