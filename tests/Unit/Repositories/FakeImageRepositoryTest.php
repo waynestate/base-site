@@ -56,4 +56,23 @@ class FakeImageRepositoryTest extends TestCase
         $this->assertEquals($width, imagesx($image));
         $this->assertEquals($height, imagesy($image));
     }
+
+    /**
+    * @covers Styleguide\Repositories\FakeImageRepository::onSameHost
+    * @test
+    */
+    public function allow_images_servered_on_same_host()
+    {
+        // Same domains
+        $allow = app('Styleguide\Repositories\FakeImageRepository')->onSameHost('https://base.wayne.edu/', 'https://base.wayne.edu/page/');
+        $this->assertTrue($allow);
+
+        // Different domain
+        $allow = app('Styleguide\Repositories\FakeImageRepository')->onSameHost('https://base.wayne.edu/', 'https://other.wayne.edu/');
+        $this->assertFalse($allow);
+
+        // Unknown referer (when viewing the image directly)
+        $allow = app('Styleguide\Repositories\FakeImageRepository')->onSameHost('https://base.wayne.edu/', '');
+        $this->assertTrue($allow);
+    }
 }

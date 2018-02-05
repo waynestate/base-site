@@ -49,4 +49,15 @@ class FakeImageRepository implements FakeImageRepositoryContract
     {
         return $dimensions['width'] * $dimensions['height'] < 9000000;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function onSameHost($host, $referer)
+    {
+        $parsed_host = parse_url($host);
+        $parsed_referer = parse_url($referer);
+
+        return $parsed_referer['path'] === '' || isset($parsed_referer['host']) && $parsed_host['host'] === $parsed_referer['host'];
+    }
 }

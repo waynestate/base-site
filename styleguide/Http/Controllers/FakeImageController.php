@@ -27,6 +27,10 @@ class FakeImageController extends Controller
     {
         $dimensions = $this->image->dimensions($request->size);
 
+        if (! $this->image->onSameHost('https://'.$request->server('HTTP_HOST'), $request->server('HTTP_REFERER'))) {
+            return abort('404');
+        }
+
         if (! $this->image->reasonableSize($dimensions)) {
             return abort('404');
         }
