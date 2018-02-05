@@ -9,11 +9,8 @@ class FakeImageRepository implements FakeImageRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function create($size, $text = null)
+    public function create($width = 150, $height = 150, $text = null)
     {
-        // Image size
-        list($width, $height) = explode('x', $size);
-
         // Create the image
         $image = imagecreatetruecolor($width, $height);
         imagesavealpha($image, true);
@@ -29,5 +26,27 @@ class FakeImageRepository implements FakeImageRepositoryContract
         imagestring($image, 5, $xpos, $ypos, $overlay, imagecolorallocatealpha($image, 255, 255, 255, 50));
 
         return $image;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function dimensions($size)
+    {
+        // Image size
+        list($width, $height) = explode('x', $size);
+
+        return [
+            'width' => (int) $width,
+            'height' => (int) $height,
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function reasonableSize($dimensions)
+    {
+        return $dimensions['width'] * $dimensions['height'] < 16000000;
     }
 }

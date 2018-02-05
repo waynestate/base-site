@@ -25,7 +25,13 @@ class FakeImageController extends Controller
      */
     public function index(Request $request)
     {
-        $image = $this->image->create($request->size, $request->text);
+        $dimensions = $this->image->dimensions($request->size);
+
+        if (! $this->image->reasonableSize($dimensions)) {
+            return abort('404');
+        }
+
+        $image = $this->image->create($dimensions['width'], $dimensions['height'], $request->text);
 
         imagepng($image);
         imagedestroy($image);

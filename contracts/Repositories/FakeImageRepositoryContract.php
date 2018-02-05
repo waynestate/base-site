@@ -12,4 +12,20 @@ interface FakeImageRepositoryContract
      * @return string
      */
     public function create($size, $text);
+
+    /**
+     * Parse the size for the height and width.
+     *
+     * @param string $size
+     * @return array
+     */
+    public function dimensions($size);
+
+    /**
+     * Block images that are to large.
+     *
+     * @param array $dimensions
+     * @return boolean
+     */
+    public function reasonableSize($dimensions);
 }
