@@ -47,6 +47,6 @@ class FakeImageRepository implements FakeImageRepositoryContract
      */
     public function reasonableSize($dimensions)
     {
-        return $dimensions['width'] * $dimensions['height'] < 16000000;
+        return $dimensions['width'] * $dimensions['height'] < 9000000;
     }
 }
