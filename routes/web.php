@@ -32,11 +32,6 @@ Route::get('{path}', 'NewsController@index')
     ->where('path', '(?:.*\/|)news')
     ->middleware('data', 'formy', 'spf');
 
-// Images
-Route::get('styleguide/image/{size}', '\Styleguide\Http\Controllers\FakeImageController@index')
-    ->where('size', '[0-9]+x[0-9]+')
-    ->name('image');
-
 // The wild card route is a catch all route that tries to resolve the requests path to a json file
 Route::match(['get', 'post'], '{any}', function (Illuminate\Http\Request $request) {
         return app($request->controller)->index($request);
