@@ -110,7 +110,7 @@ import 'foundation-sites/js/foundation.offcanvas';
             // Apply initial classes
             $('ul.menu-top').addClass('show-for-menu-top-up');
 
-            // Redo offCanvas because of the random hash it creates so in SPF it will work
+            // Redo offCanvas because of the random hash it creates
             var foundationOffCanvas = new window.Foundation.OffCanvas($('[data-off-canvas]'));
             window.WayneState.register('foundationOffCanvas', foundationOffCanvas);
         }

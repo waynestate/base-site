@@ -13,7 +13,7 @@ class Banner extends Page
             'page' => [
                 'controller' => 'BannerController',
                 'title' => 'Banner',
-                'id' => 114100,
+                'id' => 113100,
                 'content' => [],
             ],
             'menu' => [

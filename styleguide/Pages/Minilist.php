@@ -13,7 +13,7 @@ class Minilist extends Page
             'page' => [
                 'controller' => 'MiniListController',
                 'title' => 'Mini List',
-                'id' => 112100,
+                'id' => 111100,
                 'content' => [],
             ],
             'menu' => [

@@ -14,7 +14,6 @@ Starter repository for creating a new website. Live demo can be found at https:/
 * Frontend built on [Foundation v6.3](http://foundation.zurb.com/sites/docs/)
 * [Webpack](https://webpack.github.io/)
 * Fluent webpack API using [Laravel Mix](https://laravel.com/docs/5.5/mix)
-* Fast navigation using [SPF](https://github.com/youtube/spfjs)
 * Zero downtime deployment using [Envoy](https://laravel.com/docs/5.5/envoy)
 * Configure multiple enviorments using [PHPDotenv](https://github.com/vlucas/phpdotenv)
 * SCSS support

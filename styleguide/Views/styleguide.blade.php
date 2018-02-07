@@ -168,15 +168,6 @@
 
     <hr>
 
-    <h2>Links that should not pick up SPF JS</h2>
-
-    <ul>
-        <li><a href="filename.pdf">Anything with a file extension</a> Ex: <code>.pdf</code></li>
-        <li><a href="/styleguide" target="_blank">Relative URLs that open in new window</a> <code>target="_blank"</code></li>
-    </ul>
-
-    <hr>
-
     <h2>Image Icon</h2>
 
     <p>Images default to span 100% of the container on small view. When using the <code>.icon</code> class you can override this behavior so it defaults to its real height/width.</p>

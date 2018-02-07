@@ -13,7 +13,7 @@ class Tablestack extends Page
             'page' => [
                 'controller' => 'TableStackController',
                 'title' => 'Table Stack',
-                'id' => 115100,
+                'id' => 114100,
                 'content' => [
                     'main' => '',
                 ],
