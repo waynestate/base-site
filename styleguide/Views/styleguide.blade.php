@@ -181,13 +181,13 @@
 
     <p>Images default to span 100% of the container on small view. When using the <code>.icon</code> class you can override this behavior so it defaults to its real height/width.</p>
 
-    <p><img src="//placehold.it/50x50&text=Icon" class="icon" alt="icon image"></p>
+    <p><img src="/styleguide/image/50x50?text=Icon" class="icon" alt="icon image"></p>
 
     <a class="button" onclick="$('pre.image-icon').toggleClass('hide');">See Image Icon Code</a>
 
     <pre class="image-icon hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
     {{ htmlspecialchars('
-<img src="//placehold.it/50x50&text=Icon" class="icon" alt="">
+<img src="/styleguide/50x50?text=Icon" class="icon" alt="">
     ') }}
     </pre>
 
@@ -235,7 +235,7 @@
             <h2>Figure (left)</h2>
 
             <figure class="float-left" style="margin-top: 15px;">
-                <img src="//placehold.it/150x150" alt="Placeholder">
+                <img src="/styleguide/image/150x150" alt="Placeholder">
                 <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
             </figure>
 
@@ -244,7 +244,7 @@
             <pre class="fig-left hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
             {{ htmlspecialchars('
 <figure class="float-left">
-    <img src="//placehold.it/150x150" alt="Placeholder">
+    <img src="/styleguide/image/150x150" alt="Placeholder">
     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
 </figure>
             ') }}
@@ -255,7 +255,7 @@
             <h2>Figure (center)</h2>
 
             <figure class="text-center">
-                <img src="//placehold.it/150x150" alt="Placeholder">
+                <img src="/styleguide/image/150x150" alt="Placeholder">
                 <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
             </figure>
 
@@ -264,7 +264,7 @@
             <pre class="fig-center hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
             {{ htmlspecialchars('
 <figure class="text-center">
-    <img src="//placehold.it/150x150" alt="Placeholder">
+    <img src="/styleguide/image/150x150" alt="Placeholder">
     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
 </figure>
             ') }}
@@ -275,7 +275,7 @@
             <h2>Figure</h2>
 
             <figure>
-                <img src="//placehold.it/150x150" alt="Placeholder">
+                <img src="/styleguide/image/150x150" alt="Placeholder">
                 <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
             </figure>
 
@@ -284,7 +284,7 @@
             <pre class="fig-none hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
             {{ htmlspecialchars('
 <figure>
-    <img src="//placehold.it/150x150" alt="Placeholder">
+    <img src="/styleguide/image/150x150" alt="Placeholder">
     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
 </figure>
             ') }}
@@ -295,7 +295,7 @@
             <h2>Figure (right)</h2>
 
             <figure class="float-right" style="margin-top: 15px;">
-                <img src="//placehold.it/150x150" alt="Placeholder">
+                <img src="/styleguide/image/150x150" alt="Placeholder">
                 <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
             </figure>
 
@@ -304,7 +304,7 @@
             <pre class="fig-right hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
             {{ htmlspecialchars('
 <figure class="float-right">
-    <img src="//placehold.it/150x150" alt="Placeholder">
+    <img src="/styleguide/image/150x150" alt="Placeholder">
     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
 </figure>
             ') }}
