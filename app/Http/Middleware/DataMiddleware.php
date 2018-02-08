@@ -109,7 +109,7 @@ class DataMiddleware
     /**
      * Get the path from the request.
      *
-     * @param Request $request
+     * @param \Illuminate\Http\Request $request
      * @return string
      */
     public function getPathFromRequest(Request $request)
