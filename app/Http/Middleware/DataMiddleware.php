@@ -32,13 +32,29 @@ class DataMiddleware
 
         /*
          * If no path was matched then set the path to the current relative
-         * url from the request. This is necessary when a request object is created
-         * manually that hasn't matched a route yet (ex: tests). The path is
-         * used later to determine the page data and will 404 if the path
-         * isn't translated to a valid json file in the public folder.
+         * url from the request or the route uri. The path is used later
+         * to determine the page data and will 404 if the path isn't
+         * translated to a valid json file in the public folder.
          */
         if (! isset($data['parameters']['path']) || $data['parameters']['path'] == '') {
-            $data['parameters']['path'] = $request->path();
+            // When a request object is created manually that hasn't matched a route (ex: tests).
+            if ($request->route() === null) {
+                $data['parameters']['path'] = $request->path();
+            } else {
+                // Replace the any route parameter so we can get access to starting route to find the json file
+                $uri = str_replace('{any?}', '', $request->route()->uri);
+
+                // Check the route uri and trim off all parts that are route parameters.
+                $path = collect(explode('/', $uri))
+                    ->filter(function ($item) {
+                        if (! strstr($item, '{')) {
+                            return $item;
+                        }
+                    })
+                    ->implode('/');
+
+                $data['parameters']['path'] = isset($request->any) ? $request->any.$path : $path;
+            }
         }
 
         // Set the current url
