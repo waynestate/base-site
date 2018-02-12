@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class DataMiddleware
@@ -24,21 +25,12 @@ class DataMiddleware
             $this->prefix = 'Styleguide';
         }
 
-        /*
-         * Set the route parameters to global data. These parameters are everything
-         * that was matched and captured from the routes file.
-         */
+        //Set the matched route parameters to global data
         $data['parameters'] = $request->route() !== null ? $request->route()->parameters : [];
 
-        /*
-         * If no path was matched then set the path to the current relative
-         * url from the request. This is necessary when a request object is created
-         * manually that hasn't matched a route yet (ex: tests). The path is
-         * used later to determine the page data and will 404 if the path
-         * isn't translated to a valid json file in the public folder.
-         */
+        // If no path was matched from the route parameters, get the path from the request
         if (! isset($data['parameters']['path']) || $data['parameters']['path'] == '') {
-            $data['parameters']['path'] = $request->path();
+            $data['parameters']['path'] = $this->getPathFromRequest($request);
         }
 
         // Set the current url
@@ -112,5 +104,33 @@ class DataMiddleware
     public function getPrefix()
     {
         return $this->prefix;
+    }
+
+    /**
+     * Get the path from the request.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return string
+     */
+    public function getPathFromRequest(Request $request)
+    {
+        // When a request object is created manually that hasn't matched a route (ex: tests).
+        if ($request->route() === null) {
+            return $request->path();
+        }
+
+        // Replace the any route parameter so we can get access to starting route to find the json file
+        $uri = str_replace('{any?}', '', $request->route()->uri);
+
+        // Check the route uri and trim off all parts that are route parameters.
+        $path = collect(explode('/', $uri))
+            ->filter(function ($item) {
+                if (! strstr($item, '{')) {
+                    return $item;
+                }
+            })
+            ->implode('/');
+
+        return isset($request->any) ? $request->any.$path : $path;
     }
 }
