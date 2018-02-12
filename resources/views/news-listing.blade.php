@@ -25,7 +25,7 @@
         </dl>
 
         <div class="row">
-            <div class="xlarge-6 large-6 medium-6 small-6 columns">
+            <div class="small-6 columns">
                 @if(count($news) == $paging['perPage'])
                     <p>
                         <a href="{{ app('request')->url() }}?page={{ $paging['page_number_previous'] }}">&larr; Previous</a>
@@ -33,7 +33,7 @@
                 @endif
             </div>
 
-            <div class="xlarge-6 large-6 medium-6 small-6 columns text-right">
+            <div class="small-6 columns text-right">
                 @if($paging['page_number_next'] >= 0)
                     <p>
                         <a href="{{ app('request')->url() }}?page={{ $paging['page_number_next'] }}">Next &rarr;</a>

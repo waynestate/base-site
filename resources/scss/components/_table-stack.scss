@@ -20,7 +20,7 @@
         }
 
         /* Stack rows vertically on small screens */
-        @include breakpoint(medium down) {
+        @include breakpoint(small only) {
             /* Hide column labels */
             thead tr {
                 position: absolute;

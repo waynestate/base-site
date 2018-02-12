@@ -1,16 +1,12 @@
 .rotate_arrows.slick-dotted.slick-slider {
     margin-bottom: rem-calc(15);
 
-    @include breakpoint(large) {
+    @include breakpoint(medium) {
         margin-bottom: rem-calc(30);
     }
 
-    @include breakpoint(xlarge) {
+    @include breakpoint(large) {
         margin-bottom: rem-calc(40);
-    }
-
-    @include breakpoint(xxlarge) {
-        margin-bottom: rem-calc(50);
     }
 }
 
@@ -47,7 +43,7 @@
     font-family: waynestate;
     font-size: rem-calc(40);
 
-    @include breakpoint(xlarge) {
+    @include breakpoint(large) {
         font-size: rem-calc(60);
     }
 }
