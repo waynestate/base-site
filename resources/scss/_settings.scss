@@ -81,13 +81,12 @@ $print-transparent-backgrounds: true;
 
 $breakpoints: (
     small: 0,
-    medium: 300px,
-    large: 600px,
-    xlarge: 900px,
-    xxlarge: 1200px,
-    offcanvas: 700px, // Change this value based on the length of the top menu
+    medium: 780px,
+    large: 990px,
+    xlarge: 1200px,
+    offcanvas: 780px, // Change this value based on the length of the top menu
 );
-$breakpoint-classes: (small medium large xlarge xxlarge offcanvas);
+$breakpoint-classes: (small medium large xlarge offcanvas);
 
 // 3. The Grid
 // -----------

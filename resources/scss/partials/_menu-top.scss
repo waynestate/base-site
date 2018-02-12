@@ -35,7 +35,7 @@
         }
 
         &.title-area {
-            @include breakpoint(medium down) {
+            @include breakpoint(small) {
                 width: 75%;
             }
         }

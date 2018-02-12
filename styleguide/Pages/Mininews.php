@@ -13,7 +13,7 @@ class Mininews extends Page
             'page' => [
                 'controller' => 'MiniNewsController',
                 'title' => 'Mini News',
-                'id' => 110100,
+                'id' => 109100,
                 'content' => [],
             ],
             'menu' => [

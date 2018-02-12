@@ -6,7 +6,7 @@
     @if($hide_filtering == false)
         <form name="programs" method="get" class="filter">
             <div class="row">
-                <div class="large-12 columns">
+                <div class="small-12 columns">
                     <label for="filter-group">View by department:</label>
                     <div class="row collapse">
                         <div class="small-10 columns">
@@ -28,7 +28,7 @@
 
     <div class="row small-up-2 medium-up-3">
         @forelse((array)$profiles as $profile)
-            <div class="columns profile">
+            <div class="column profile">
                 <a href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}profile/{{ $profile['data']['AccessID'] }}">
                     <div class="profile-img" style="background-image: url('{{ $profile['data']['Picture']['url'] or '/_resources/images/no-photo.svg' }}');"></div>
                     {{ $profile['data']['First Name'] }} {{ $profile['data']['Last Name'] }}

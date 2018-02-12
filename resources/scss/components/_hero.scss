@@ -5,7 +5,7 @@
         padding-top: 36.3%;
         position: relative;
 
-        @include breakpoint(xlarge up) {
+        @include breakpoint(large up) {
             height: 36.3vw;
             max-height: 550px;
             margin: 0;
@@ -18,7 +18,7 @@
         color: white;
         padding: rem-calc(15);
 
-        @include breakpoint(large up) {
+        @include breakpoint(medium up) {
             position: absolute;
             bottom: 0;
             left: 0;

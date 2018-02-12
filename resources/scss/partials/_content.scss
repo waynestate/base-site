@@ -150,7 +150,7 @@
         display: table;
         margin: 15px auto;
 
-        @include breakpoint(large) {
+        @include breakpoint(medium) {
             margin: 25px;
             width: auto;
         }

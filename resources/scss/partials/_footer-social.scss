@@ -3,7 +3,7 @@
     padding: 1em 0 0.5em;
     margin-top: 4em;
 
-    @include breakpoint(medium) {
+    @include breakpoint(small) {
         padding: 1.5em 0 1.3em;
     }
 
@@ -31,7 +31,7 @@
     li {
         display: inline;
 
-        @include breakpoint(medium) {
+        @include breakpoint(small) {
             margin-right: 2em;
         }
 
@@ -72,7 +72,7 @@
             color: white;
         }
 
-        @include breakpoint(large) {
+        @include breakpoint(medium) {
             font-size: rem-calc(30);
             height: rem-calc(55);
             width: rem-calc(55);

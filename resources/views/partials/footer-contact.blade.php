@@ -20,7 +20,7 @@
         @else
             <div class="row" data-equalizer>
                 @foreach($contact as $info)
-                    <div class="columns small-12 large-4{{ ($info == end($contact)) ? ' end' : '' }}" data-equalizer-watch>
+                    <div class="columns small-12 medium-4{{ ($info == end($contact)) ? ' end' : '' }}" data-equalizer-watch>
                         {!! $info['description'] !!}
 
                         <hr />

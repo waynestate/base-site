@@ -60,6 +60,5 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'data' => \App\Http\Middleware\DataMiddleware::class,
         'formy' => \App\Http\Middleware\FormyMiddleware::class,
-        'spf' => \App\Http\Middleware\SpfMiddleware::class,
     ];
 }

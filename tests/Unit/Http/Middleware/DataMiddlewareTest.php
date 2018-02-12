@@ -4,6 +4,7 @@ namespace Tests\App\Http\Middleware;
 
 use Tests\TestCase;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Storage;
 
 class DataMiddlewareTest extends TestCase
@@ -72,5 +73,40 @@ class DataMiddlewareTest extends TestCase
         $controller = ucfirst($this->faker->word).ucfirst($this->faker->word).ucfirst($this->faker->word);
         $namespace = app('App\Http\Middleware\DataMiddleware')->getControllerNamespace($controller);
         $this->assertContains('App\Http\Controllers', $namespace);
+    }
+
+    /**
+     * @covers App\Http\Middleware\DataMiddleware::getPathFromRequest
+     * @test
+     */
+    public function when_the_request_has_no_matched_route_the_path_should_be_path()
+    {
+        $actual_path = $this->faker->word;
+
+        $request = new Request();
+        $request = $request->create($actual_path);
+
+        $path = app('App\Http\Middleware\DataMiddleware')->getPathFromRequest($request);
+
+        $this->assertEquals($path, $actual_path);
+    }
+
+    /**
+     * @covers App\Http\Middleware\DataMiddleware::getPathFromRequest
+     * @test
+     */
+    public function when_the_request_has_a_matched_route_the_path_should_have_no_route_parameters()
+    {
+        $actual_path = 'news/slug-123';
+
+        $request = new Request([], [], [], [], [], ['REQUEST_URI' => $actual_path]);
+
+        $request->setRouteResolver(function () use ($request) {
+            return (new Route('GET', 'news/{slug}-{id}', []))->bind($request);
+        });
+
+        $path = app('App\Http\Middleware\DataMiddleware')->getPathFromRequest($request);
+
+        $this->assertEquals($path, 'news');
     }
 }

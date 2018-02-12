@@ -13,7 +13,7 @@ class Accordion extends Page
             'page' => [
                 'controller' => 'AccordionController',
                 'title' => 'Accordion',
-                'id' => 108100,
+                'id' => 107100,
                 'content' => [
                     'main' => '<p>'.$this->faker->paragraph(8).'</p>
                     <p>'.$this->faker->paragraph(8).'</p>
