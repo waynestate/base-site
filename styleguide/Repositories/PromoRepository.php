@@ -36,7 +36,7 @@ class PromoRepository extends Repository
         $hero = isset($hero_page_ids[$data['page']['id']]) ? app('Factories\HeroImage')->create($hero_page_ids[$data['page']['id']]) : null;
 
         $accordion_page_ids = [
-            108100 => 5,
+            107100 => 5,
         ];
 
         // Only pull accordion for childpage template
