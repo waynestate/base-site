@@ -20,7 +20,7 @@
         }
 
         /* Stack rows vertically on small screens */
-        @include breakpoint(small only) {
+        @include breakpoint(medium down) {
             /* Hide column labels */
             thead tr {
                 position: absolute;
@@ -66,7 +66,7 @@
         }
 
         /* Stack labels vertically on smaller screens */
-        @include breakpoint(small only) {
+        @include breakpoint(medium down) {
             td {
                 padding-left: 0.75em;
             }

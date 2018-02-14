@@ -36,7 +36,7 @@
             @endif
         </div>
 
-        <div class="small-12 @if($site_menu['meta']['has_selected'] == false && ((isset($show_site_menu) && $show_site_menu != true) || !isset($show_site_menu)))large-12 medium-12 @else medium-9 @endif columns content" data-off-canvas-content>
+        <div class="small-12 @if($site_menu['meta']['has_selected'] == false && ((isset($show_site_menu) && $show_site_menu != true) || !isset($show_site_menu)))medium-12 @else medium-9 @endif columns content" data-off-canvas-content>
 
             @if(isset($hero) && $hero != false && $site_menu['meta']['has_selected'] == true || config('app.hero_contained') === true)
                 @include('components.hero', ['images' => $hero, 'class' => 'hero--childpage'])

@@ -222,7 +222,7 @@
     <hr>
 
     <div class="row">
-        <div class="large-3 columns">
+        <div class="medium-3 columns">
             <h2>Figure (left)</h2>
 
             <figure class="float-left" style="margin-top: 15px;">
@@ -242,7 +242,7 @@
             </pre>
         </div>
 
-        <div class="large-3 columns">
+        <div class="medium-3 columns">
             <h2>Figure (center)</h2>
 
             <figure class="text-center">
@@ -262,7 +262,7 @@
             </pre>
         </div>
 
-        <div class="large-3 columns">
+        <div class="medium-3 columns">
             <h2>Figure</h2>
 
             <figure>
@@ -282,7 +282,7 @@
             </pre>
         </div>
 
-        <div class="large-3 columns">
+        <div class="medium-3 columns">
             <h2>Figure (right)</h2>
 
             <figure class="float-right" style="margin-top: 15px;">

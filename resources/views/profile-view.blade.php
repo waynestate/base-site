@@ -10,14 +10,14 @@
     @endif
 
     <div class="row profile__block">
-        <div class="small-12 medium-4 columns">
+        <div class="small-12 large-4 columns">
             @if(isset($profile['data']['Picture']['url']))
                 <img src="{{ $profile['data']['Picture']['url'] }}" alt="{{ $page['title'] }}" class="profile__img">
             @else
                 <img src="/_resources/images/no-photo.svg" alt="{{ $page['title'] }}" class="profile__img">
             @endif
 
-            <h1 class="hide-for-medium page-title">{{ $page['title'] }}</h1>
+            <h1 class="hide-for-large page-title">{{ $page['title'] }}</h1>
 
             <div class="profile--contact-info">
                 @if(isset($profile['data']['Title']))
@@ -54,8 +54,8 @@
              </div>
         </div>
 
-        <div class="small-12 medium-8 columns">
-            <h1 class="page-title show-for-medium">{{ $page['title'] }}</h1>
+        <div class="small-12 large-8 columns">
+            <h1 class="page-title show-for-large">{{ $page['title'] }}</h1>
 
             @foreach($profile['data'] as $field=>$data)
                 @if(!in_array($field, $contact_fields) && !in_array($field, $hidden_fields))
