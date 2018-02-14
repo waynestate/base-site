@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6ef9c7e3f5ea2b18e61188d5198c8b56",
+    "content-hash": "8085d63d911f9c0e746b561e8ab67baf",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -3823,16 +3823,16 @@
         },
         {
             "name": "php-coveralls/php-coveralls",
-            "version": "dev-master",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-coveralls/php-coveralls.git",
-                "reference": "4f82a64e0c11575e4becdbca7889dff2b21f82f1"
+                "reference": "3eaf7eb689cdf6b86801a3843940d974dc657068"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-coveralls/php-coveralls/zipball/4f82a64e0c11575e4becdbca7889dff2b21f82f1",
-                "reference": "4f82a64e0c11575e4becdbca7889dff2b21f82f1",
+                "url": "https://api.github.com/repos/php-coveralls/php-coveralls/zipball/3eaf7eb689cdf6b86801a3843940d974dc657068",
+                "reference": "3eaf7eb689cdf6b86801a3843940d974dc657068",
                 "shasum": ""
             },
             "require": {
@@ -3902,7 +3902,7 @@
                 "github",
                 "test"
             ],
-            "time": "2017-12-11T11:06:38+00:00"
+            "time": "2017-12-08T14:28:16+00:00"
         },
         {
             "name": "php-cs-fixer/diff",
@@ -5591,9 +5591,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "php-coveralls/php-coveralls": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
