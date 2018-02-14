@@ -16,7 +16,7 @@
     margin: rem-calc(40) auto 1em;
     padding: 0;
 
-    @include breakpoint(medium up) {
+    @include breakpoint(large up) {
         margin-top: rem-calc(20);
         width: 100%;
         height: auto;
