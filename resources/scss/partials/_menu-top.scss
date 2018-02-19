@@ -35,7 +35,7 @@
         }
 
         &.title-area {
-            @include breakpoint(small) {
+            @include breakpoint($menu-top-breakpoint down) {
                 width: 75%;
             }
         }
