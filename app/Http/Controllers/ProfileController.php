@@ -72,13 +72,13 @@ class ProfileController extends Controller
         // Get the profile information
         $profile = $this->profile->getProfile($site_id, $request->accessid);
 
-        // Get the fields to display
-        $fields = $this->profile->getFields();
-
         // Make sure the profile exists
-        if ($profile['profile'] === null) {
+        if (empty($profile['profile'])) {
             return abort('404');
         }
+
+        // Get the fields to display
+        $fields = $this->profile->getFields();
 
         // Change page title to profile name
         $request->data['page']['title'] = $this->profile->getPageTitleFromName($profile);

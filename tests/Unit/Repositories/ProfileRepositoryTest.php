@@ -117,7 +117,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getProfile
      * @test
      */
-    public function getting_profile_that_doesnt_exist_should_return_null()
+    public function getting_profile_that_doesnt_exist_should_return_blank_array()
     {
         $site_id = $this->faker->numberBetween(1, 10);
         $invalid_site_id = $this->faker->numberBetween(20, 30);
@@ -137,7 +137,7 @@ class ProfileRepositoryTest extends TestCase
 
         $profile = app('App\Repositories\ProfileRepository', ['wsuApi' => $wsuApi])->getProfile($site_id, $accessid);
 
-        $this->assertNull($profile['profile']);
+        $this->assertTrue(is_array($profile['profile']) && count($profile['profile']) == 0) ;
     }
 
     /**
