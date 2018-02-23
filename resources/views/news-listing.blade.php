@@ -5,7 +5,7 @@
 
     <div class="news-listing">
         <dl>
-            @foreach($news as $news_item)
+            @forelse($news as $news_item)
                 <dt>
 
                     <a href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}news/{{ $news_item['slug'] }}-{{ $news_item['news_id'] }}">
@@ -17,11 +17,9 @@
                     <time datetime="{{ $news_item['posted'] }}">{{ apdatetime(date('F j, Y', strtotime($news_item['posted']))) }}</time>
                     {{ $news_item['excerpt'] }}
                 </dd>
-            @endforeach
-
-            @if(count($news) == 0)
+            @empty
                 <p>Currently there are no news items {{ isset($selected_news_category['category']) ? ' for the category ' . strtolower($selected_news_category['category']) : '' }}.</p>
-            @endif
+            @endforelse
         </dl>
 
         <div class="row">

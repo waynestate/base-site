@@ -25,7 +25,9 @@
 @include('partials.header')
 
 <div id="menu-top-section" class="header-menu">
-    @include('partials.menu-top', ['site' => $site])
+    @if(!empty($site))
+        @include('partials.menu-top', ['site' => $site])
+    @endif
 </div>
 
 <div class="off-canvas-wrapper">
@@ -34,13 +36,13 @@
     </div>
 
     <div id="footer-social">
-        @if(isset($social) && count($social) > 0)
+        @if(!empty($social))
             @include('partials.footer-social', ['social' => $social])
         @endif
     </div>
 
     <div id="footer-contact">
-        @if(isset($contact) && count($contact) > 0)
+        @if(!empty($contact))
             @include('partials.footer-contact', ['contact' => $contact])
         @endif
     </div>

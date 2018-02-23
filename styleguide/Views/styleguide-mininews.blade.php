@@ -5,7 +5,7 @@
 
     <div class="row">
         <div class="small-12 large-6 columns">
-            @if(isset($news))
+            @if(!empty($news))
                 @include('components.mini-news', ['news' => $news, 'url' => $site['subsite-folder'].'news'])
             @endif
         </div>

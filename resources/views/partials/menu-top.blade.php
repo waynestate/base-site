@@ -22,7 +22,7 @@
 
                 <div class="float-right vertical-centering">
                     <div>
-                        @if(config('app.top_menu_enabled') == true)
+                        @if(config('app.top_menu_enabled') === true)
                             <section id="top-menu">
                                 {!! $top_menu_output !!}
                             </section>
@@ -36,7 +36,7 @@
                     </div>
                 </div>
 
-                @if(isset($banner) && $banner != false)
+                @if(!empty($banner))
                     @include('partials/banner', ['banner' => $banner])
                 @endif
             </div>

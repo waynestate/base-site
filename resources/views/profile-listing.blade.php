@@ -27,7 +27,7 @@
     @endif
 
     <div class="row small-up-2 medium-up-3">
-        @forelse((array)$profiles as $profile)
+        @forelse($profiles as $profile)
             <div class="column profile">
                 <a href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}profile/{{ $profile['data']['AccessID'] }}">
                     <div class="profile-img" style="background-image: url('{{ $profile['data']['Picture']['url'] or '/_resources/images/no-photo.svg' }}');"></div>
