@@ -197,7 +197,7 @@ class ProfileRepository implements ProfileRepositoryContract
             return $this->wsuApi->sendRequest($params['method'], $params)['profiles'];
         });
 
-        $profile['profile'] = isset($profiles[$site_id]) ? $profiles[$site_id] : [];
+        $profile['profile'] = array_get($profiles, $site_id, []);
 
         return $profile;
     }
