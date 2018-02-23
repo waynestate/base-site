@@ -5,7 +5,7 @@
 
     <div class="row">
         <div class="small-12 large-6 columns">
-            @if(isset($events))
+            @if(!empty($events))
                 @include('components.mini-events', ['events' => $events])
             @endif
         </div>

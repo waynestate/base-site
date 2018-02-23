@@ -16,11 +16,11 @@
 
     	<tbody>
             @for ($i = 0; $i < 10; $i++)
-            <tr valign="top">
-                <td>{{ $faker->firstName }}</td>
-                <td>{{ $faker->lastName }}</td>
-                <td>{{ $faker->email }}</td>
-            </tr>
+                <tr valign="top">
+                    <td>{{ $faker->firstName }}</td>
+                    <td>{{ $faker->lastName }}</td>
+                    <td>{{ $faker->email }}</td>
+                </tr>
             @endfor
         </tbody>
     </table>

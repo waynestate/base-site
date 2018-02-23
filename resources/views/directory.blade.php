@@ -9,7 +9,7 @@
         <h1>{{ $key }}</h1>
 
         <div class="row small-up-2 medium-up-3">
-            @foreach((array)$profiles as $profile)
+            @foreach($profiles as $profile)
                 <div class="column profile">
                     <a href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}profile/{{ $profile['data']['AccessID'] }}" class="profile-img" style="background-image: url('{{ $profile['data']['Picture']['url'] or '/_resources/images/no-photo.svg' }}');" alt="{{ $profile['data']['First Name'] }} {{ $profile['data']['Last Name'] }}"></a>
                     <a href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}profile/{{ $profile['data']['AccessID'] }}">{{ $profile['data']['First Name'] }} {{ $profile['data']['Last Name'] }}</a>
