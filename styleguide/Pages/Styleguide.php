@@ -14,15 +14,6 @@ class Styleguide extends Page
                 'controller' => 'StyleGuideController',
                 'title' => 'Content Area',
                 'id' => 100,
-                'content' => [
-                    'main' => '',
-                ],
-            ],
-            'menu' => [
-                'id' => 1,
-            ],
-            'site' => [
-                'subsite-folder' => 'styleguide/',
             ],
         ]);
     }

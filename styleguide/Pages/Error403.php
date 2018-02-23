@@ -14,12 +14,6 @@ class Error403 extends Page
                 'controller' => 'Error403Controller',
                 'title' => '403 Page',
                 'id' => 106100100,
-                'content' => [
-                    'main' => '',
-                ],
-            ],
-            'menu' => [
-                'id' => 1,
             ],
         ]);
     }

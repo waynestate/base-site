@@ -14,10 +14,6 @@ class ImageList extends Page
                 'controller' => 'ImageListController',
                 'title' => 'Image List',
                 'id' => 108100,
-                'content' => [],
-            ],
-            'menu' => [
-                'id' => 1,
             ],
         ]);
     }

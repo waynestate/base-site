@@ -31,12 +31,6 @@ class Page implements StyleguidePageContract
                 'controller' => 'ChildpageController',
                 'title' => 'Childpage',
                 'id' => 1,
-                'content' => [
-                    'main' => '',
-                ],
-            ],
-            'menu' => [
-                'id' => 1,
             ],
         ]);
     }

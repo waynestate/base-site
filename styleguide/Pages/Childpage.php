@@ -20,9 +20,6 @@ class Childpage extends Page
                     <p>'.$this->faker->paragraph(8).'</p>',
                 ],
             ],
-            'menu' => [
-                'id' => 1,
-            ],
         ]);
     }
 }

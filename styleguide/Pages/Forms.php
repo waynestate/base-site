@@ -14,12 +14,6 @@ class Forms extends Page
                 'controller' => 'FormsController',
                 'title' => 'Forms',
                 'id' => 112100,
-                'content' => [
-                    'main' => '',
-                ],
-            ],
-            'menu' => [
-                'id' => 1,
             ],
         ]);
     }

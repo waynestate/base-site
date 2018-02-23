@@ -14,13 +14,6 @@ class Minievents extends Page
                 'controller' => 'MiniEventsController',
                 'title' => 'Mini Events',
                 'id' => 110100,
-                'content' => [],
-            ],
-            'menu' => [
-                'id' => 1,
-            ],
-            'site' => [
-                'subsite-folder' => 'styleguide/',
             ],
         ]);
     }

@@ -14,12 +14,6 @@ class HeroContained extends Page
                 'controller' => 'ChildpageController',
                 'title' => 'Hero Contained',
                 'id' => 105100100,
-                'content' => [
-                    'main' => '',
-                ],
-            ],
-            'menu' => [
-                'id' => 1,
             ],
         ]);
     }

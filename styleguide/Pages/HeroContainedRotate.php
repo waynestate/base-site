@@ -14,12 +14,6 @@ class HeroContainedRotate extends Page
                 'controller' => 'ChildpageController',
                 'title' => 'Hero Contained With Rotate',
                 'id' => 105100101,
-                'content' => [
-                    'main' => '',
-                ],
-            ],
-            'menu' => [
-                'id' => 1,
             ],
         ]);
     }

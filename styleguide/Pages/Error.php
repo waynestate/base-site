@@ -14,12 +14,6 @@ class Error extends Page
                 'controller' => 'ChildpageController',
                 'title' => 'Error Pages',
                 'id' => 106100,
-                'content' => [
-                    'main' => '',
-                ],
-            ],
-            'menu' => [
-                'id' => 1,
             ],
         ]);
     }

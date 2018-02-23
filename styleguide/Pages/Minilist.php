@@ -14,13 +14,6 @@ class Minilist extends Page
                 'controller' => 'MiniListController',
                 'title' => 'Mini List',
                 'id' => 111100,
-                'content' => [],
-            ],
-            'menu' => [
-                'id' => 1,
-            ],
-            'site' => [
-                'subsite-folder' => 'styleguide/',
             ],
         ]);
     }

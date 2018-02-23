@@ -14,12 +14,6 @@ class Components extends Page
                 'controller' => 'ChildpageController',
                 'title' => 'Components',
                 'id' => 102,
-                'content' => [
-                    'main' => '',
-                ],
-            ],
-            'menu' => [
-                'id' => 1,
             ],
         ]);
     }

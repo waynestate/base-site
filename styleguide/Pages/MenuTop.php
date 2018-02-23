@@ -14,12 +14,6 @@ class MenuTop extends Page
                 'controller' => 'MenuTopController',
                 'title' => 'Menu Top',
                 'id' => 103100101,
-                'content' => [
-                    'main' => '',
-                ],
-            ],
-            'menu' => [
-                'id' => 1,
             ],
         ]);
     }
