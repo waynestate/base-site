@@ -5,19 +5,17 @@
 
     <div class="row">
         <div class="medium-6 columns">
-            @if(isset($imagelist))
+            @if(!empty($imagelist))
                 <h2>Image List</h2>
 
-                @if(!empty($imagelist))
-                    @include('components.image-list', ['images' => $imagelist, 'class' => 'image-list'])
-                @endif
+                @include('components.image-list', ['images' => $imagelist, 'class' => 'image-list'])
             @endif
         </div>
 
         <div class="small-12 medium-6 columns">
-            <h2>Image List Lazy</h2>
-
             @if(!empty($imagelist))
+                <h2>Image List Lazy</h2>
+
                 @include('components.image-list-lazy', ['images' => $imagelist, 'class' => 'rotate'])
             @endif
         </div>
