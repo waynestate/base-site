@@ -182,9 +182,10 @@ $menus = [
 
 1. Create repository contract: `contracts/Repositories`
 1. Create repository: `app/Repositories`
-    * implement the repository contract
+    * Implement the repository contract
+    * It's important to return a blank array for instances when no data is found. This way the view can consistantly check for `@if(!empty($item))` to hide areas on the page.
 1. Create fake repository: `styleguide/Repositories`
-    * implement the repository contract
+    * Implement the repository contract
     * Extend the real repository from `app/Repositories`.
     * Overload any methods necessary and use or create `factories/` to get fake data.
 1. Create controller
