@@ -17,12 +17,6 @@ class Profile extends Page
                 'controller' => 'ProfileController',
                 'title' => 'Profile View',
                 'id' => null,
-                'content' => [
-                    'main' => '',
-                ],
-            ],
-            'menu' => [
-                'id' => 1,
             ],
         ]);
     }

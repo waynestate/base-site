@@ -14,12 +14,6 @@ class HeaderTitleDouble extends Page
                 'controller' => 'HeaderTitleDoubleController',
                 'title' => 'Header Title Double',
                 'id' => 102100101,
-                'content' => [
-                    'main' => '',
-                ],
-            ],
-            'menu' => [
-                'id' => 1,
             ],
         ]);
     }

@@ -14,15 +14,6 @@ class Profiles extends Page
                 'controller' => 'ProfileController',
                 'title' => 'Profile Listing',
                 'id' => 101103,
-                'content' => [
-                    'main' => '',
-                ],
-            ],
-            'menu' => [
-                'id' => 1,
-            ],
-            'site' => [
-                'subsite-folder' => 'styleguide/',
             ],
         ]);
     }

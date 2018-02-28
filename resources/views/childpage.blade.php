@@ -5,7 +5,7 @@
 
     {!! $page['content']['main'] !!}
 
-    @if(isset($accordion_page) && count($accordion_page) > 0)
+    @if(!empty($accordion_page))
         @include('components.accordion', ['items' => $accordion_page])
     @endif
 @endsection

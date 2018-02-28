@@ -14,12 +14,6 @@ class Error500 extends Page
                 'controller' => 'Error500Controller',
                 'title' => '500 Page',
                 'id' => 106100102,
-                'content' => [
-                    'main' => '',
-                ],
-            ],
-            'menu' => [
-                'id' => 1,
             ],
         ]);
     }

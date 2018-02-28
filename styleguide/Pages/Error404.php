@@ -14,12 +14,6 @@ class Error404 extends Page
                 'controller' => 'Error404Controller',
                 'title' => '404 Page',
                 'id' => 106100101,
-                'content' => [
-                    'main' => '',
-                ],
-            ],
-            'menu' => [
-                'id' => 1,
             ],
         ]);
     }

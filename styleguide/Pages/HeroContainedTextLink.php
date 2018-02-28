@@ -14,12 +14,6 @@ class HeroContainedTextLink extends Page
                 'controller' => 'HeroContainedTextLinkController',
                 'title' => 'Contained (With Text/Link)',
                 'id' => 105100103,
-                'content' => [
-                    'main' => '',
-                ],
-            ],
-            'menu' => [
-                'id' => 1,
             ],
         ]);
     }

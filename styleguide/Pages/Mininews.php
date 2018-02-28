@@ -14,13 +14,6 @@ class Mininews extends Page
                 'controller' => 'MiniNewsController',
                 'title' => 'Mini News',
                 'id' => 109100,
-                'content' => [],
-            ],
-            'menu' => [
-                'id' => 1,
-            ],
-            'site' => [
-                'subsite-folder' => 'styleguide/',
             ],
         ]);
     }

@@ -14,15 +14,6 @@ class Directory extends Page
                 'controller' => 'DirectoryController',
                 'title' => 'Directory',
                 'id' => 101104,
-                'content' => [
-                    'main' => '',
-                ],
-            ],
-            'menu' => [
-                'id' => 1,
-            ],
-            'site' => [
-                'subsite-folder' => 'styleguide/',
             ],
         ]);
     }

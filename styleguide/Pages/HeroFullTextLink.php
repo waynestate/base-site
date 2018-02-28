@@ -17,12 +17,6 @@ class HeroFullTextLink extends Page
                 'controller' => 'HeroFullTextLinkController',
                 'title' => 'Hero Full (Text/Link)',
                 'id' => 105100107,
-                'content' => [
-                    'main' => '',
-                ],
-            ],
-            'menu' => [
-                'id' => 1,
             ],
         ]);
     }

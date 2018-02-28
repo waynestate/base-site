@@ -23,9 +23,6 @@ class NoMenu extends Page
                     <p>'.$this->faker->paragraph(8).'</p>',
                 ],
             ],
-            'menu' => [
-                'id' => null,
-            ],
         ]);
     }
 }

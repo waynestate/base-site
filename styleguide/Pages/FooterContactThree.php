@@ -14,12 +14,6 @@ class FooterContactThree extends Page
                 'controller' => 'FooterContactThreeController',
                 'title' => 'Footer Contact Three Column',
                 'id' => 104100102,
-                'content' => [
-                    'main' => '',
-                ],
-            ],
-            'menu' => [
-                'id' => 1,
             ],
         ]);
     }

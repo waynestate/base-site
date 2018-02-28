@@ -22,20 +22,15 @@ class Page implements FactoryContract
      */
     public function create($limit = 1, $options = [])
     {
-        // Set default values that need to be the same for every page on this site
-        $site_id = $this->faker->randomDigit();
-        $title = $this->faker->sentence($this->faker->numberBetween(2, 4));
-        $menu_id = $this->faker->randomDigit();
-
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
                 'site' => [
-                    'id' => $site_id,
-                    'title' => $title,
+                    'id' => 2,
+                    'title' => 'Styleguide',
                     'keywords' => '',
-                    'subsite-folder' => null,
+                    'subsite-folder' => 'styleguide/',
                     'parent' => [
-                        'id' => null,
+                        'id' => 1,
                     ],
                 ],
                 'page' => [
@@ -50,7 +45,7 @@ class Page implements FactoryContract
                     'updated-at' => '',
                 ],
                 'menu' => [
-                    'id' => $menu_id,
+                    'id' => 1,
                 ],
                 'data' => [],
             ];

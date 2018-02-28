@@ -17,12 +17,6 @@ class HeroFullRotate extends Page
                 'controller' => 'HeroFullController',
                 'title' => 'Hero Full (Rotate)',
                 'id' => 2,
-                'content' => [
-                    'main' => '',
-                ],
-            ],
-            'menu' => [
-                'id' => 1,
             ],
         ]);
     }

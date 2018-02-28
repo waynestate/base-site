@@ -14,12 +14,6 @@ class HeaderTitleSingle extends Page
                 'controller' => 'HeaderTitleSingleController',
                 'title' => 'Header Title Single',
                 'id' => 102100100,
-                'content' => [
-                    'main' => '',
-                ],
-            ],
-            'menu' => [
-                'id' => 1,
             ],
         ]);
     }

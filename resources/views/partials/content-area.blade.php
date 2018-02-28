@@ -7,13 +7,13 @@
 @section('content-area')
     @yield('top')
 
-    @if(isset($hero) && $hero != false && $site_menu['meta']['has_selected'] == false && config('app.hero_contained') === false)
+    @if(!empty($hero) && $site_menu['meta']['has_selected'] == false && config('app.hero_contained') === false)
         @include('components.hero', ['images' => $hero])
     @endif
 
     <div class="row">
         <div class="small-12 medium-3 columns main-menu @if($site_menu['meta']['has_selected'] == false && ((isset($show_site_menu) && $show_site_menu != true) || !isset($show_site_menu))) hide-for-menu-top-up @endif" id="mainMenu" data-off-canvas role="navigation">
-            @if(isset($top_menu_output) && $site_menu !== $top_menu)
+            @if(!empty($top_menu_output) && $site_menu !== $top_menu)
                 <div class="offcanvas-main-menu">
                     <ul>
                         <li>
@@ -25,24 +25,24 @@
                 </div>
             @endif
 
-            @if(isset($site_menu_output))
+            @if(!empty($site_menu_output))
                 {!! $site_menu_output !!}
             @endif
 
             @yield('below_menu')
 
-            @if(isset($under_menu))
+            @if(!empty($under_menu))
                 @include('components.image-list', ['images' => $under_menu, 'class' => 'under-menu'])
             @endif
         </div>
 
         <div class="small-12 @if($site_menu['meta']['has_selected'] == false && ((isset($show_site_menu) && $show_site_menu != true) || !isset($show_site_menu)))medium-12 @else medium-9 @endif columns content" data-off-canvas-content>
 
-            @if(isset($hero) && $hero != false && $site_menu['meta']['has_selected'] == true || config('app.hero_contained') === true)
+            @if(!empty($hero) && ($site_menu['meta']['has_selected'] == true || config('app.hero_contained') === true))
                 @include('components.hero', ['images' => $hero, 'class' => 'hero--childpage'])
             @endif
 
-            @if(isset($breadcrumbs) && count($breadcrumbs) > 0)
+            @if(!empty($breadcrumbs))
                 @include('partials.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
             @endif
 

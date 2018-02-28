@@ -14,12 +14,6 @@ class FooterContactOne extends Page
                 'controller' => 'FooterContactOneController',
                 'title' => 'Footer Contact One Column',
                 'id' => 104100100,
-                'content' => [
-                    'main' => '',
-                ],
-            ],
-            'menu' => [
-                'id' => 1,
             ],
         ]);
     }

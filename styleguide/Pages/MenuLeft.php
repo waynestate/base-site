@@ -14,12 +14,6 @@ class Menuleft extends Page
                 'controller' => 'MenuLeftController',
                 'title' => 'Menu Left',
                 'id' => 103100100,
-                'content' => [
-                    'main' => '',
-                ],
-            ],
-            'menu' => [
-                'id' => 1,
             ],
         ]);
     }

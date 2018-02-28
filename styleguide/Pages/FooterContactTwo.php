@@ -14,12 +14,6 @@ class FooterContactTwo extends Page
                 'controller' => 'FooterContactTwoController',
                 'title' => 'Footer Contact Two Column',
                 'id' => 104100101,
-                'content' => [
-                    'main' => '',
-                ],
-            ],
-            'menu' => [
-                'id' => 1,
             ],
         ]);
     }

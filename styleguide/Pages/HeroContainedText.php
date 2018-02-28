@@ -14,12 +14,6 @@ class HeroContainedText extends Page
                 'controller' => 'HeroContainedTextController',
                 'title' => 'Contained (Rotate With Text)',
                 'id' => 105100102,
-                'content' => [
-                    'main' => '',
-                ],
-            ],
-            'menu' => [
-                'id' => 1,
             ],
         ]);
     }
