@@ -4,7 +4,7 @@ import jQuery from 'jquery';
     "use strict";
 
     /**
-     * Sticky module.
+     * Share module.
      */
     class Share {
         constructor() {
