@@ -10,7 +10,7 @@ import 'foundation-sites/js/foundation.offcanvas';
     "use strict";
 
     /**
-     * Accordion module.
+     * OffCanvas module.
      */
     class OffCanvas {
 
