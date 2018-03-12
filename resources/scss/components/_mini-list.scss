@@ -1,12 +1,19 @@
+ul.listing,
 dl.listing {
+    list-style: none;
+    padding: 0;
     margin: 0;
+}
 
-    dt {
+.listing {
+    dt,
+    li {
         margin: 0 0 rem-calc(15) 0;
         line-height: 1.5em;
     }
 
-    dt a {
+    dt a,
+    li a {
         font-weight: normal;
         text-decoration: underline;
 
