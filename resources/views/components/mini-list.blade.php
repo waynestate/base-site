@@ -6,12 +6,12 @@
 --}}
 <h2>{{ $heading or 'Resources' }}</h2>
 
-<dl class="listing">
+<ul class="listing">
     @foreach($items as $item)
-        <dt>
+        <li>
             <a href="{{ $item['link'] }}">{{ $item['title'] }}</a>
-        </dt>
+        </li>
     @endforeach
-</dl>
+</ul>
 
 @if(isset($url))<a href="{{ $url }}" class="more-link">{{ $link_text or 'View more' }}</a>@endif

@@ -23,9 +23,9 @@
                 <div class="float-right vertical-centering">
                     <div>
                         @if(config('app.top_menu_enabled') === true)
-                            <section id="top-menu">
+                            <nav id="top-menu" aria-label="Site menu" tabindex="-1">
                                 {!! $top_menu_output !!}
-                            </section>
+                            </nav>
                         @endif
 
                         <div>

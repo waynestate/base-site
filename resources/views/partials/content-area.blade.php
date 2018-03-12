@@ -12,7 +12,7 @@
     @endif
 
     <div class="row">
-        <div class="small-12 medium-3 columns main-menu @if($site_menu['meta']['has_selected'] == false && ((isset($show_site_menu) && $show_site_menu != true) || !isset($show_site_menu))) hide-for-menu-top-up @endif" id="mainMenu" data-off-canvas role="navigation">
+        <div class="small-12 medium-3 columns main-menu @if($site_menu['meta']['has_selected'] == false && ((isset($show_site_menu) && $show_site_menu != true) || !isset($show_site_menu))) hide-for-menu-top-up @endif" data-off-canvas id="page-menu" role="navigation"  aria-label="Page menu" tabindex="-1">
             @if(!empty($top_menu_output) && $site_menu !== $top_menu)
                 <div class="offcanvas-main-menu">
                     <ul>
@@ -46,7 +46,9 @@
                 @include('partials.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
             @endif
 
-            @yield('content')
+            <main id="main" tabindex="-1">
+                @yield('content')
+            </main>
         </div>
     </div>
 
