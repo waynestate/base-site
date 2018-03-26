@@ -1,7 +1,7 @@
 {
   "name": "base",
   "private": true,
-  "version": "4.5.4",
+  "version": "4.5.5",
   "description": "",
   "scripts": {
     "dev": "npm run development",
@@ -34,7 +34,7 @@
     "eslint-loader": "^1.5.0",
     "foundation-sites": "~6.3.0",
     "glob-all": "^3.1.0",
-    "laravel-mix": "^1.0",
+    "laravel-mix": "^2.0",
     "magnific-popup": "^1.1.0",
     "purgecss-webpack-plugin": "^0.13.0",
     "slick-carousel": "^1.6.0",
