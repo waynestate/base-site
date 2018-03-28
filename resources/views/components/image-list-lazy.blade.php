@@ -10,7 +10,7 @@
         @if($image == current($images))
             <img src="{{ $image['relative_url'] }}" alt="{{ $image['title'] }}" />
         @else
-            <img class="b-lazy" src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
+            <img class="b-lazy" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                 data-src="{{ $image['relative_url'] }}" alt="{{ $image['title'] }}" />
         @endif
         @if($image['link'] != '')</a>@endif
