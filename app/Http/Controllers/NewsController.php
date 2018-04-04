@@ -37,7 +37,7 @@ class NewsController extends Controller
         $categories = $this->news->setSelectedCategory($categories, $request->slug);
 
         // 404 the page since the category doens't exist or is inactive
-        if ($request->slug !== null && $categories['selected_news_category']['category_id'] === null) {
+        if ($request->slug !== null && empty($categories['selected_news_category']['category_id'])) {
             return abort('404');
         }
 
