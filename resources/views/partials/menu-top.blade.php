@@ -30,7 +30,7 @@
 
                         <div>
                             <ul class="menu-top menu-button hide-for-menu-top-up">
-                                <li><a href="#mainMenu" class="menu-toggle menu-icon" data-toggle="mainMenu"><span class="visuallyhidden">Menu</span></a></li>
+                                <li><a href="#page-menu" class="menu-toggle menu-icon" data-toggle="page-menu"><span class="visuallyhidden">Menu</span></a></li>
                             </ul>
                         </div>
                     </div>

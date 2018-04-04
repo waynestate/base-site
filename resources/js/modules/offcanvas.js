@@ -29,21 +29,21 @@ import 'foundation-sites/js/foundation.offcanvas';
             // Toggle the appropriate classes for offCanvas
             if ($('.menu-button .menu-toggle').is(":visible") === false) {
                 // Remove classes so the menu is accessible on large screens
-                $('#mainMenu').removeClass('position-right');
-                $('#mainMenu').removeClass('off-canvas-absolute');
+                $('#page-menu').removeClass('position-right');
+                $('#page-menu').removeClass('off-canvas-absolute');
             }else{
                 // Disable CSS transitions
-                $('#mainMenu').addClass('notransition');
+                $('#page-menu').addClass('notransition');
 
                 // Position the menu properly so offcanvas works
-                $('#mainMenu').addClass('position-right');
-                $('#mainMenu').addClass('off-canvas-absolute');
+                $('#page-menu').addClass('position-right');
+                $('#page-menu').addClass('off-canvas-absolute');
 
                 // Trigger a reflow, flushing the CSS changes
-                $('#mainMenu')[0].offsetHeight;
+                $('#page-menu')[0].offsetHeight;
 
                 // Remove the class so transitions are enabled
-                $('#mainMenu').removeClass('notransition');
+                $('#page-menu').removeClass('notransition');
             }
         }
 
@@ -92,7 +92,7 @@ import 'foundation-sites/js/foundation.offcanvas';
          * Initialize
          */
         _init() {
-            // Make the click link for offcanvas button do nothing, this way #mainMenu doesn't append to the URL
+            // Make the click link for offcanvas button do nothing, this way #page-menu doesn't append to the URL
             $('.menu-top-container .menu-toggle').attr('href', 'javascript:void(0);');
 
             // Initialize offcanvas classes
