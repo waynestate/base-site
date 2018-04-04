@@ -4,7 +4,6 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <meta name="Keywords" content="{{ isset($page['keywords']) ? $page['keywords'] : '' }}">
 <meta name="Description" content="{{ isset($page['description']) ? $page['description'] : '' }}">
-<meta http-equiv="last-modified" content="{{ isset($page['updated-at']) ? $page['updated-at'] : '' }}">
 
 <meta property="og:title" content="{{ isset($page['title']) ? $page['title'] : '' }}">
 <meta property="og:image" content="{{ isset($meta['image']) ? $meta['image'] : '' }}">
