@@ -7,7 +7,6 @@
         <dl>
             @forelse($news as $news_item)
                 <dt>
-
                     <a href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}news/{{ $news_item['slug'] }}-{{ $news_item['news_id'] }}">
                         {{ $news_item['title'] }}
                     </a>
@@ -22,26 +21,30 @@
             @endforelse
         </dl>
 
-        <div class="row">
-            <div class="small-6 columns">
-                @if(count($news) == $paging['perPage'])
-                    <p>
-                        <a href="{{ app('request')->url() }}?page={{ $paging['page_number_previous'] }}">&larr; Previous</a>
-                    </p>
-                @endif
-            </div>
+        @if(!empty($paging))
+            <div class="row">
+                <div class="small-6 columns">
+                    @if(count($news) == $paging['perPage'])
+                        <p>
+                            <a href="{{ app('request')->url() }}?page={{ $paging['page_number_previous'] }}">&larr; Previous</a>
+                        </p>
+                    @endif
+                </div>
 
-            <div class="small-6 columns text-right">
-                @if($paging['page_number_next'] >= 0)
-                    <p>
-                        <a href="{{ app('request')->url() }}?page={{ $paging['page_number_next'] }}">Next &rarr;</a>
-                    </p>
-                @endif
+                <div class="small-6 columns text-right">
+                    @if($paging['page_number_next'] >= 0)
+                        <p>
+                            <a href="{{ app('request')->url() }}?page={{ $paging['page_number_next'] }}">Next &rarr;</a>
+                        </p>
+                    @endif
+                </div>
             </div>
-        </div>
+        @endif
     </div>
 @endsection
 
 @section('below_menu')
-    @include('components.news-categories', ['categories' => $news_categories, 'selected_category' => $selected_news_category])
+    @if(!empty($news_categories))
+        @include('components.news-categories', ['categories' => $news_categories, 'selected_category' => $selected_news_category])
+    @endif
 @endsection
