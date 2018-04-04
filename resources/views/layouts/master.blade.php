@@ -18,8 +18,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/js/vendor/modernizr.js"></script>
     <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script><![endif]-->
     @include('partials.ga')
-
-    <meta class="foundation-mq">
 </head>
 <body>
 
