@@ -61,12 +61,17 @@
         a {
             color: $white;
         }
+    }
 
-        // Sub title
-        span {
-            display: block;
-            font-size: 0.65em;
-            line-height: 16px;
+    h2.surtitle {
+        font-size: 1em;
+        line-height: 1em;
+        margin-top: 10px;
+        margin-bottom: 0;
+        font-weight: normal;
+
+        a {
+            color: $white;
         }
     }
 
