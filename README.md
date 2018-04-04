@@ -130,7 +130,8 @@ Pages are written from the content management system automatically. To replicate
             "main" : "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed turpis lorem, malesuada eu tellus vel, pharetra consequat lacus. Vestibulum eu metus nec massa viverra iaculis. Pellentesque libero eros, varius non sem et, dapibus aliquam magna.</p>"
         },
         "keywords" : "",
-        "updated-at" : ""
+        "updated-at" : "",
+        "canonical" : ""
     },
     "menu" : {
         "id" : 1
