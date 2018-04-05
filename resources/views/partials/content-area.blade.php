@@ -1,9 +1,5 @@
 @extends('layouts.' . (isset($layout) ? $layout : 'master'))
 
-@section('meta')
-    @include('partials.meta')
-@endsection
-
 @section('content-area')
     @yield('top')
 
@@ -32,7 +28,7 @@
             @yield('below_menu')
 
             @if(!empty($under_menu))
-                @include('components.image-list', ['images' => $under_menu, 'class' => 'under-menu'])
+                @include('components.image-button-list', ['images' => $under_menu, 'class' => 'under-menu'])
             @endif
         </div>
 

@@ -30,7 +30,7 @@
         @forelse($profiles as $profile)
             <div class="column profile">
                 <a href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}profile/{{ $profile['data']['AccessID'] }}">
-                    <div class="profile-img" style="background-image: url('{{ $profile['data']['Picture']['url'] or '/_resources/images/no-photo.svg' }}');"></div>
+                    <div class="profile-img" style="background-image: url('{{ $profile['data']['Picture']['url'] ?? '/_resources/images/no-photo.svg' }}');"></div>
                     {{ $profile['data']['First Name'] }} {{ $profile['data']['Last Name'] }}
                 </a>
 

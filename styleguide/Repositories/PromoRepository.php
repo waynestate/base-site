@@ -17,7 +17,7 @@ class PromoRepository extends Repository
         ];
 
         // Only pull under_menu promos if they match the page_ids that are specified
-        $under_menu = isset($under_menu_page_ids[$data['page']['id']]) ? app('Factories\UnderMenu')->create($under_menu_page_ids[$data['page']['id']]) : null;
+        $under_menu = isset($under_menu_page_ids[$data['page']['id']]) ? app('Factories\ImageButton')->create($under_menu_page_ids[$data['page']['id']]) : null;
 
         // Define the pages that have hero images: page_id => quanity
         $hero_page_ids = [

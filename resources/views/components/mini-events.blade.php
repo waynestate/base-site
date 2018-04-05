@@ -4,7 +4,7 @@
     $cal_name => string // 'main'
     $link_text => string // 'More events'
 --}}
-<h2>{{ $heading or 'Events' }}</h2>
+<h2>{{ $heading ?? 'Events' }}</h2>
 
 <dl class="listing events">
     @foreach($events as $event)
@@ -20,4 +20,4 @@
     @endforeach
 </dl>
 
-<a href="//events.wayne.edu/{{ $cal_name or 'main' }}/month/" class="more-link">{{ $link_text or 'More events' }}</a>
+<a href="//events.wayne.edu/{{ $cal_name ?? 'main' }}/month/" class="more-link">{{ $link_text ?? 'More events' }}</a>

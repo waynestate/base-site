@@ -9,8 +9,8 @@
     extract-text-webpack-plugin "^2.1.0"
 
 "@waynestate/wsuheader@^2.0.0":
-  version "2.0.8"
-  resolved "https://registry.yarnpkg.com/@waynestate/wsuheader/-/wsuheader-2.0.8.tgz#c292b7ef4fd08a17a276c19cc111f2643ab0657c"
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/@waynestate/wsuheader/-/wsuheader-2.0.9.tgz#54d57c2ad1f86ee5888bfdf24d65ddea02752e97"
 
 abbrev@1:
   version "1.1.1"

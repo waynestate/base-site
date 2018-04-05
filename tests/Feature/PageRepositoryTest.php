@@ -50,7 +50,7 @@ class PageRepositoryTest extends TestCase
 
         $this->getPageResponses()
             ->each(function ($page) {
-                $this->assertTrue(($page['response']->status() !== 500), '500 error in styleguide at path: '.$page['path'] . '. This is likely due to not accounting for a blank array coming back from the factory in your view.');
+                $this->assertTrue(($page['response']->status() !== 500), $page['response']->content()."\n".'500 error in styleguide at path: '.$page['path'] . '. View the error output above to solve the issue.');
             });
     }
 
