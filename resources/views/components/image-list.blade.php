@@ -6,9 +6,13 @@
 
 @foreach($images as $image)
     <div>
-        @if($image['link'] != '')<a href="{{ $image['link'] }}">@endif
-            <img src="{{ $image['relative_url'] }}" alt="{{ $image['title'] }}" />
-        @if($image['link'] != '')</a>@endif
+        @if(!empty($image['link']))<a href="{{ $image['link'] }}"@if(empty($image['relative_url'])) class="button expanded" @endif>@endif
+            @if(!empty($image['relative_url']))
+                <img src="{{ $image['relative_url'] }}" alt="{{ $image['title'] }}" />
+            @else
+                {{ $image['title'] }}
+            @endif
+        @if(!empty($image['link']))</a>@endif
     </div>
 @endforeach
 
