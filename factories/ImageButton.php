@@ -5,10 +5,10 @@ namespace Factories;
 use Contracts\Factories\FactoryContract;
 use Faker\Factory;
 
-class UnderMenu implements FactoryContract
+class ImageButton implements FactoryContract
 {
     /**
-     * Construct the UnderMenu.
+     * Construct the ImageButton.
      *
      * @param Factory $faker
      */
