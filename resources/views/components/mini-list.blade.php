@@ -4,7 +4,7 @@
     $url => string // '/listing.php'
     $link_text => string // 'More items'
 --}}
-<h2>{{ $heading or 'Resources' }}</h2>
+<h2>{{ $heading ?? 'Resources' }}</h2>
 
 <ul class="listing">
     @foreach($items as $item)
@@ -14,4 +14,4 @@
     @endforeach
 </ul>
 
-@if(isset($url))<a href="{{ $url }}" class="more-link">{{ $link_text or 'View more' }}</a>@endif
+@if(isset($url))<a href="{{ $url }}" class="more-link">{{ $link_text ?? 'View more' }}</a>@endif

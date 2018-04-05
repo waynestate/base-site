@@ -5,7 +5,7 @@
     $url => string '/news.php'
     $link_text => string // 'More news'
 --}}
-<h2>{{ $heading or 'News' }}</h2>
+<h2>{{ $heading ?? 'News' }}</h2>
 
 <ul class="listing">
     @foreach($news as $item)
@@ -17,4 +17,4 @@
     @endforeach
 </ul>
 
-<a href="/{{ $url or 'news/' }}" class="more-link">{{ $link_text or 'More news' }}</a>
+<a href="/{{ $url ?? 'news/' }}" class="more-link">{{ $link_text ?? 'More news' }}</a>
