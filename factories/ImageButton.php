@@ -5,10 +5,10 @@ namespace Factories;
 use Contracts\Factories\FactoryContract;
 use Faker\Factory;
 
-class UnderMenu implements FactoryContract
+class ImageButton implements FactoryContract
 {
     /**
-     * Construct the UnderMenu.
+     * Construct the ImageButton.
      *
      * @param Factory $faker
      */
@@ -25,7 +25,7 @@ class UnderMenu implements FactoryContract
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
                 'link' => $this->faker->url,
-                'relative_url' => '/styleguide/image/360x131',
+                'relative_url' => $this->faker->boolean === true ? '/styleguide/image/360x131' : '',
                 'title' => $this->faker->sentence,
             ];
         }
