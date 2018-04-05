@@ -8,16 +8,16 @@
             <div class="small-12 columns position-relative">
                 <div class="title-area{{ config('app.surtitle') === null ? ' vertical-centering' : '' }}">
                     @if(config('app.surtitle') !== null)
-                        <h2 class="surtitle">
+                        <h1 class="surtitle">
                             @if($site['parent']['id'] === null && config('app.surtitle_main_site_enabled') === true || $site['parent']['id'] !== null)
                                 <a href="{{ config('app.surtitle_url') }}">{{ config('app.surtitle') }}</a>
                             @endif
-                        </h2>
+                        </h1>
                     @endif
 
-                    <h1>
+                    {!! config('app.surtitle') !== null ? '<h2>' : '<h1>' !!}
                         <a href="/{{ $site['subsite-folder'] !== null ? rtrim($site['subsite-folder'], '/') : '' }}">{{ $site['title'] }}</a>
-                    </h1>
+                    {!! config('app.surtitle') !== null ? '</h2>' : '</h1>' !!}
                 </div>
 
                 <div class="float-right vertical-centering">

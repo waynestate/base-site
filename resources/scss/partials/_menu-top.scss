@@ -49,9 +49,10 @@
         z-index: 5;
     }
 
-    h1 {
+    h1,
+    h2 {
         color: $white;
-        display: inline-block;
+        display: table;
         font-size: rem-calc(26);
         font-weight: normal;
         line-height: 1em;
@@ -63,7 +64,7 @@
         }
     }
 
-    h2.surtitle {
+    h1.surtitle {
         font-size: 1em;
         line-height: 1em;
         margin-top: 10px;
