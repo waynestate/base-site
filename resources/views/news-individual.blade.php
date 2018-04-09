@@ -1,7 +1,7 @@
 @extends('partials.content-area')
 
 @section('content')
-    <h1 class="page-title">{{ $news['title'] }}</h1>
+    @include('components.page-title', ['title' => $news['title']])
 
     <div class="news-item">
         <div class="addthis_share">Share</div>
@@ -9,7 +9,9 @@
 
         <time datetime="{{ $news['posted'] }}">{{ apdatetime(date('F j, Y', strtotime($news['posted']))) }}</time>
 
-        {!! $news['body'] !!}
+        <div class="content">
+            {!! $news['body'] !!}
+        </div>
 
         <p rel="back">
             <a rel="back" href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}news">Back to listing</a>

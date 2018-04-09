@@ -1,7 +1,9 @@
 @extends('partials.content-area')
 
 @section('content')
-    <h1 class="page-title">{{ $page['title'] }}</h1>
+    @include('components.page-title', ['title' => $page['title']])
 
-    {!! $page['content']['main'] !!}
+    <div class="content">
+        {!! $page['content']['main'] !!}
+    </div>
 @endsection

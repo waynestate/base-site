@@ -1,0 +1,8 @@
+// Buffer for anchor tags
+*[id]:not([class*="accordion"])::before {
+    display: block;
+    content: " ";
+    margin-top: -$menu-height;
+    height: $menu-height;
+    visibility: hidden;
+}

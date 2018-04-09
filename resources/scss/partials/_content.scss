@@ -1,16 +1,5 @@
-/* Content Style */
 .content {
-    // Forces the content area to be full width when the menu is hidden
-    @include breakpoint($menu-top-breakpoint down) {
-        width: 100%;
-        left: 0;
-    }
-
-    h1.page-title {
-        margin: rem-calc(20) 0 $header-margin-bottom;
-    }
-
-    h1:not(.page-title),
+    h1,
     h2,
     h3,
     h4,

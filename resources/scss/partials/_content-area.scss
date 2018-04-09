@@ -1,0 +1,7 @@
+.content-area {
+    // Forces the content area to be full width when the menu is hidden
+    @include breakpoint($menu-top-breakpoint down) {
+        width: 100%;
+        left: 0;
+    }
+}

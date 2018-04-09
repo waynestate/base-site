@@ -40,6 +40,7 @@
 @import "partials/menu-main";
 @import "partials/menu-top";
 @import "partials/menu-offcanvas";
+@import "partials/content-area";
 @import "partials/content";
 @import "partials/footer-social";
 @import "partials/footer-contact";
@@ -51,10 +52,12 @@
 @import "partials/profile-view";
 @import "partials/rotate";
 @import "partials/share";
+@import "partials/_anchors";
 
 // Reusable components
 @import "components/accordion";
 @import "components/formy";
 @import "components/hero";
 @import "components/mini-list";
+@import "components/page-title";
 @import "components/table-stack";
