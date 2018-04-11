@@ -207,7 +207,7 @@
 
         <p>To make sure embedded content maintains its aspect ratio as the width of the screen changes, wrap the <code>iframe</code>, <code>object</code>, <code>embed</code>, or <code>video</code> in a container with the <code>.responsive-embed</code> class.</p>
         <div class="responsive-embed">
-            <iframe width="420" height="315" src="//www.youtube.com/embed/guRgefesPXE" frameborder="0" allowfullscreen></iframe>
+            <iframe width="420" height="315" src="//www.youtube.com/embed/guRgefesPXE" title="Responsive embed example" frameborder="0" allowfullscreen></iframe>
         </div>
 
         <a class="button" onclick="$('pre.responsive-embed-example').toggleClass('hide');">See Responsive Embed Code</a>
@@ -215,7 +215,7 @@
         <pre class="responsive-embed-example hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {{ htmlspecialchars('
 <div class="responsive-embed">
-    <iframe width="420" height="315" src="//www.youtube.com/embed/guRgefesPXE" frameborder="0" allowfullscreen></iframe>
+    <iframe width="420" height="315" src="//www.youtube.com/embed/guRgefesPXE" title="Responsive embed example" frameborder="0" allowfullscreen></iframe>
 </div>
         ') }}
         </pre>
