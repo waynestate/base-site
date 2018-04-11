@@ -1,5 +1,5 @@
 // Buffer for anchor tags
-*[id]:not([class*="accordion"])::before {
+.content-area *[id]:not([class*="accordion"])::before {
     display: block;
     content: " ";
     margin-top: -$menu-height;
