@@ -28,7 +28,7 @@
             @yield('below_menu')
 
             @if(!empty($under_menu))
-                @include('components.image-button-list', ['images' => $under_menu, 'class' => 'under-menu'])
+                @include('components.image-button-list', ['images' => $under_menu])
             @endif
         </div>
 

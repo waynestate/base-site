@@ -8,7 +8,7 @@
             @if(!empty($imagebutton))
                 <h2>Image/Button List</h2>
 
-                @include('components.image-button-list', ['images' => $imagebutton, 'class' => 'image-list'])
+                @include('components.image-button-list', ['images' => $imagebutton])
             @endif
         </div>
 

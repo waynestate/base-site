@@ -1,8 +1,8 @@
 {{--
     $images => array // [['link', 'title', 'relative_url']]
-    $class => string // 'under-menu'
+    $class => string // 'image-button-list'
 --}}
-@if(isset($class))<div class="{{ $class }}">@endif
+<div class="{{ $class ?? 'image-button-list' }}">
 
 @foreach($images as $image)
     <div>
@@ -16,4 +16,4 @@
     </div>
 @endforeach
 
-@if(isset($class))</div>@endif
+</div>
