@@ -12,16 +12,36 @@ class ControllerTest extends TestCase
      */
     public function controllers_should_have_only_one_default()
     {
-        $data = collect(Storage::disk('base')->allFiles('app/Http/Controllers/'))
-            ->reject(function ($item) {
-                return basename($item) === 'Controller.php' || ! ends_with($item, '.php');
-            })
-            ->map(function ($item) {
-                return $this->getCommentData($item);
-            })
-            ->where('Default', 'true');
+        $data = $this->getControllerComments()->where('Default', 'true');
 
         $this->assertCount(1, $data, 'Only one controller can have a default=true value: '.$data->implode('File', ' & '));
+    }
+
+    /**
+     * @test
+     */
+    public function controllers_should_have_unique_descriptions()
+    {
+        $all = $this->getControllerComments()->pluck('Description');
+        $unique = $all->unique();
+
+        $this->assertTrue($all->count() == $unique->count(), 'Controller descriptions must be unique: '.$all->implode(' & '));
+    }
+
+    /**
+     * Get all controller comments.
+     *
+     * @return array
+     */
+    private function getControllerComments()
+    {
+        return collect(Storage::disk('base')->allFiles('app/Http/Controllers/'))
+        ->reject(function ($item) {
+            return basename($item) === 'Controller.php' || ! ends_with($item, '.php');
+        })
+        ->map(function ($item) {
+            return $this->getCommentData($item);
+        });
     }
 
     /**
