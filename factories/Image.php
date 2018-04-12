@@ -23,9 +23,11 @@ class Image implements FactoryContract
     public function create($limit = 1)
     {
         for ($i = 1; $i <= $limit; $i++) {
+            $size = 131 + $i;
+
             $data[$i] = [
                 'link' => $this->faker->url,
-                'relative_url' => '/styleguide/image/360x131',
+                'relative_url' => '/styleguide/image/360x'.$size,
                 'title' => $this->faker->sentence,
             ];
         }

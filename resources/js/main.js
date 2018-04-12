@@ -6,6 +6,7 @@ import './modules/formfilter';
 import './modules/slick';
 import './modules/magnific-popup';
 import './modules/share';
+import './modules/lazyloading';
 
 // Foundation Modules
 import './modules/accordion';

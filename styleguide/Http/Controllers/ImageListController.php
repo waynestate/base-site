@@ -17,7 +17,7 @@ class ImageListController extends Controller
     {
         $promos['imagebutton'] = app('Factories\ImageButton')->create(4);
 
-        $promos['images'] = app('Factories\Image')->create(4);
+        $promos['images'] = app('Factories\Image')->create(50);
 
         return view('styleguide-imagelist', merge($request->data, $promos));
     }
