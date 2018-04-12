@@ -6,7 +6,8 @@
 
             if ("IntersectionObserver" in window) {
                 var options = {
-                 
+                    rootMargin: '50px 0px',
+                    threshold: 0.01  
                 }
 
                 let lazyImageObserver = new IntersectionObserver(function(entries) {
@@ -14,7 +15,6 @@
                         if (entry.isIntersecting) {
                             let lazyImage = entry.target;
                             lazyImage.src = lazyImage.dataset.src;
-                            lazyImage.srcset = lazyImage.dataset.srcset;
                             lazyImage.classList.remove("lazy");
                             lazyImageObserver.unobserve(lazyImage);
                         }

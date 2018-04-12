@@ -8,7 +8,7 @@
     <div>
         @if(!empty($image['link']))<a href="{{ $image['link'] }}"@if(empty($image['relative_url'])) class="button expanded" @endif>@endif
             @if(!empty($image['relative_url']))
-                <img class="lazy" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ $image['relative_url'] }}" data-srcset="{{ $image['relative_url'] }} 1x" alt="{{ $image['title'] }}" />
+                <img class="lazy" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ $image['relative_url'] }}" alt="{{ $image['title'] }}" />
             @else
                 {{ $image['title'] }}
             @endif
