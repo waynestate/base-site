@@ -5,11 +5,6 @@
             var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
 
             if ("IntersectionObserver" in window) {
-                var options = {
-                    rootMargin: '50px 0px',
-                    threshold: 0.01  
-                }
-
                 let lazyImageObserver = new IntersectionObserver(function(entries) {
                     entries.forEach(function(entry) {
                         if (entry.isIntersecting) {
@@ -19,7 +14,7 @@
                             lazyImageObserver.unobserve(lazyImage);
                         }
                     });
-                }, options);
+                });
 
                 lazyImages.forEach(function(lazyImage) {
                     lazyImageObserver.observe(lazyImage);
