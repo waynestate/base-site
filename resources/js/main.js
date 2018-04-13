@@ -1,4 +1,5 @@
 // Import Modules
+import 'intersection-observer';
 import './modules/app';
 import './modules/table';
 import './modules/sticky';
