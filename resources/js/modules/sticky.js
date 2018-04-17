@@ -20,7 +20,7 @@ import jQuery from 'jquery';
             // Scroll the user to the right spot, offseted by the sticky menu top
             if(hash !== '' && document.getElementById(hash)) {
                 window.setTimeout(function() {
-                    $('body').animate({
+                    $('html,body').animate({
                         scrollTop: $('#' + hash).offset().top - $('.menu-top-container').outerHeight()
                     }, 1);
                 }, 1000);
