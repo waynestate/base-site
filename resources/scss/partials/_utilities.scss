@@ -25,35 +25,6 @@
     position: relative;
 }
 
-.skip ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.skip a {
-    position: absolute;
-    left: -1000px;
-    height: 1px;
-    width: 1px;
-    text-align: left;
-    overflow: hidden;
-    color: #000;
-    background: #fff;
-    padding: 4px;
-}
-
-.skip a:active,
-.skip a:focus,
-.skip a:hover {
-    left: 0;
-    top: 0;
-    width: auto;
-    height: auto;
-    overflow: visible;
-    z-index: 10000;
-}
-
 .min-width-100 {
     min-width: 100%;
 }
