@@ -25,7 +25,7 @@ class ImageButton implements FactoryContract
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
                 'link' => $this->faker->url,
-                'relative_url' => $this->faker->boolean === true ? '/styleguide/image/360x131?text='.$i : '',
+                'relative_url' => $this->faker->boolean === true ? '/styleguide/image/360x131?text=360x131%20('.$i.')' : '',
                 'title' => $this->faker->sentence,
             ];
         }
