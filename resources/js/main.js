@@ -9,7 +9,7 @@ import './modules/formfilter';
 import './modules/slick';
 import './modules/magnific-popup';
 import './modules/share';
-import './modules/lazyloading';
+import './modules/lazy-image-loading';
 
 // Foundation Modules
 import './modules/accordion';
