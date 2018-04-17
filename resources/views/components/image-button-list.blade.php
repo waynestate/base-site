@@ -8,7 +8,7 @@
     <div>
         @if(!empty($image['link']))<a href="{{ $image['link'] }}"@if(empty($image['relative_url'])) class="button expanded" @endif>@endif
             @if(!empty($image['relative_url']))
-                @include('components.image-lazy', ['src' => $image['relative_url'], 'alt' => $image['title']])
+                @include('partials.image-fake', ['src' => $image['relative_url'], 'alt' => $image['title']])
             @else
                 {{ $image['title'] }}
             @endif
