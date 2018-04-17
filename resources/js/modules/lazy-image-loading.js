@@ -9,8 +9,8 @@
                     entries.forEach(function(entry) {
                         if (entry.isIntersecting) {
                             let lazyImage = entry.target;
-                            
-                            if(lazyImage.tagName == 'DIV') {
+
+                            if(lazyImage.tagName != 'IMG') {
                                 lazyImage.style = "background-image: url('"+lazyImage.dataset.src+"')";
                             }else{
                                 lazyImage.src = lazyImage.dataset.src;
