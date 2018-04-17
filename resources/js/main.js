@@ -1,5 +1,7 @@
-// Import Modules
+// Polyfills
 import 'intersection-observer';
+
+// Modules
 import './modules/app';
 import './modules/table';
 import './modules/sticky';

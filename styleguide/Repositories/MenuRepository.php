@@ -346,9 +346,9 @@ class MenuRepository extends Repository
                             'is_active' => '1',
                             'page_id' => '108100',
                             'target' => '',
-                            'display_name' => 'Image List',
+                            'display_name' => 'Image/Button List',
                             'class_name' => '',
-                            'relative_url' => '/styleguide/imagelist',
+                            'relative_url' => '/styleguide/image/button/list',
                             'submenu' => [],
                         ],
                         109100 => [
