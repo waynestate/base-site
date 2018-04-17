@@ -48,7 +48,7 @@ class MenuRepository extends Repository
                         101101 => [
                             'menu_item_id' => '101101',
                             'is_active' => '1',
-                            'page_id' => null,
+                            'page_id' => null, // Null value to mimic the homepage not being in the menu
                             'target' => '',
                             'display_name' => 'Homepage',
                             'class_name' => '',
