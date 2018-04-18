@@ -194,7 +194,7 @@ class MenuRepository implements DataRepositoryContract, MenuRepositoryContract
     {
         // Trim first level based on path[0] - only if we are on the main website
         // or we aren't enabling top menu across all subsites
-        if (count($menu['meta']['path']) > 0 && ($parentId === null || $topMenuId === null) && config('app.top_menu_enabled') == true) {
+        if (!empty($menu['meta']['path']) && ($parentId === null || $topMenuId === null) && config('app.top_menu_enabled') == true) {
             foreach ($menu['menu'] as $key => $item) {
                 // If we are on the first path then grab that submenu
                 if ($item['menu_item_id'] == $menu['meta']['path'][0]) {
@@ -207,7 +207,7 @@ class MenuRepository implements DataRepositoryContract, MenuRepositoryContract
 
             // Reset the selected state if there isn't a submenu found, that way
             // it will render a full width view
-            if (count($trim_menu) == 0) {
+            if (empty($trim_menu)) {
                 $menu['meta']['has_selected'] = false;
             }
         }
@@ -224,7 +224,7 @@ class MenuRepository implements DataRepositoryContract, MenuRepositoryContract
         $breadcrumbs = [];
 
         // Get the breadcrumbs from the selected path if it exists
-        if (count($menu['meta']['path']) > 0) {
+        if (!empty($menu['meta']['path'])) {
             $breadcrumbs = $this->parseMenu->getBreadCrumbs($menu);
 
             // If the subsite root isn't already within the breadcrumbs then add the subsite root crumb
