@@ -11,7 +11,7 @@
                             let lazyImage = entry.target;
 
                             if(lazyImage.tagName != 'IMG') {
-                                lazyImage.style = "background-image: url('"+lazyImage.dataset.src+"')";
+                                lazyImage.style.backgroundImage = "url('"+lazyImage.dataset.src+"')";
                             }else{
                                 lazyImage.src = lazyImage.dataset.src;
                             }
