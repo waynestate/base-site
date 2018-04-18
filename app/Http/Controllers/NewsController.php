@@ -51,7 +51,7 @@ class NewsController extends Controller
         $request->data['hero'] = false;
 
         // Force the menu to be shown if categories are found
-        if (isset($categories['news_categories']) && count($categories['news_categories']) > 0) {
+        if (!empty($categories['news_categories'])) {
             $request->data['show_site_menu'] = true;
         }
 
