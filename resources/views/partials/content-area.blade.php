@@ -33,7 +33,6 @@
         </div>
 
         <div class="small-12 @if($site_menu['meta']['has_selected'] == false && ((isset($show_site_menu) && $show_site_menu != true) || !isset($show_site_menu)))medium-12 @else medium-9 @endif columns content-area" data-off-canvas-content>
-
             @if(!empty($hero) && ($site_menu['meta']['has_selected'] == true || config('app.hero_contained') === true))
                 @include('components.hero', ['images' => $hero, 'class' => 'hero--childpage'])
             @endif

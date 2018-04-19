@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Waynestate\Api\Connector;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,7 +19,19 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Blade::directive('image', function ($expression) {
+            // Since all paramters are concated into a string we need to parse them out into an array
+            $params = explode(',', $expression);
+
+            // We have three parameters that are optional so we need to set them as blank strings if they weren't passed in
+            for ($i=0; $i <= 2; $i++) {
+                if (empty($params[$i])) {
+                    $params[$i] = "''";
+                }
+            }
+
+            return "<?php echo view('components.image-lazy', ['src' => $params[0], 'alt' => $params[1], 'class' => $params[2]])->render(); ?>";
+        });
     }
 
     /**
