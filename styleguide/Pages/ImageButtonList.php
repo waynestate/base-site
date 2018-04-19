@@ -2,7 +2,7 @@
 
 namespace Styleguide\Pages;
 
-class Minilist extends Page
+class ImageButtonList extends Page
 {
     /**
      * {@inheritdoc}
@@ -11,9 +11,9 @@ class Minilist extends Page
     {
         return app('Factories\Page')->create(1, [
             'page' => [
-                'controller' => 'MiniListController',
-                'title' => 'Mini List',
-                'id' => 112100,
+                'controller' => 'ImageButtonListController',
+                'title' => 'Image Button List',
+                'id' => 108100,
             ],
         ]);
     }

@@ -40,21 +40,24 @@
 @import "partials/menu-main";
 @import "partials/menu-top";
 @import "partials/menu-offcanvas";
+@import "partials/content-area";
 @import "partials/content";
 @import "partials/footer-social";
 @import "partials/footer-contact";
 @import "partials/news";
-@import "partials/under-menu";
 @import "partials/banner";
 @import "partials/breadcrumbs";
 @import "partials/profile-listing";
 @import "partials/profile-view";
 @import "partials/rotate";
 @import "partials/share";
+@import "partials/skip";
 
 // Reusable components
 @import "components/accordion";
 @import "components/formy";
 @import "components/hero";
 @import "components/mini-list";
+@import "components/page-title";
 @import "components/table-stack";
+@import "components/image-button-list";

@@ -1,16 +1,5 @@
-/* Content Style */
 .content {
-    // Forces the content area to be full width when the menu is hidden
-    @include breakpoint($menu-top-breakpoint down) {
-        width: 100%;
-        left: 0;
-    }
-
-    h1.page-title {
-        margin: rem-calc(20) 0 $header-margin-bottom;
-    }
-
-    h1:not(.page-title),
+    h1,
     h2,
     h3,
     h4,
@@ -173,8 +162,6 @@
             padding-top: 0.5em;
             font-size: rem-calc(14);
             font-style: italic;
-            font-weight: bold;
-            color: #999;
             display: table-caption;
             caption-side: bottom;
         }

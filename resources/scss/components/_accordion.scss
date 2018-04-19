@@ -1,15 +1,13 @@
-.content {
-    ul.accordion {
-        margin-left: 0;
-    }
+ul.accordion {
+    margin-left: 0;
+}
 
-    a.accordion-title {
-        text-decoration: none;
-        font-size: $global-font-size;
-        font-weight: bold;
-    }
+a.accordion-title {
+    text-decoration: none;
+    font-size: $global-font-size;
+    font-weight: bold;
+}
 
-    .accordion-content p:last-of-type {
-        margin-bottom: 0;
-    }
+.accordion-content p:last-of-type {
+    margin-bottom: 0;
 }

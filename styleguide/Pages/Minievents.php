@@ -13,7 +13,7 @@ class Minievents extends Page
             'page' => [
                 'controller' => 'MiniEventsController',
                 'title' => 'Mini Events',
-                'id' => 110100,
+                'id' => 111100,
             ],
         ]);
     }

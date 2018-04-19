@@ -1,14 +1,14 @@
 {{--
     $images => array // [['link', 'title', 'relative_url']]
-    $class => string // 'under-menu'
+    $class => string // 'image-button-list'
 --}}
-@if(isset($class))<div class="{{ $class }}">@endif
+<div class="{{ $class ?? 'image-button-list' }}">
 
 @foreach($images as $image)
     <div>
         @if(!empty($image['link']))<a href="{{ $image['link'] }}"@if(empty($image['relative_url'])) class="button expanded" @endif>@endif
             @if(!empty($image['relative_url']))
-                <img src="{{ $image['relative_url'] }}" alt="{{ $image['title'] }}" />
+                @image($image['relative_url'], $image['title'], $class ?? '')
             @else
                 {{ $image['title'] }}
             @endif
@@ -16,4 +16,4 @@
     </div>
 @endforeach
 
-@if(isset($class))</div>@endif
+</div>

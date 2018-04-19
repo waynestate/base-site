@@ -4,9 +4,9 @@
     @include('components.page-title', ['title' => $page['title']])
 
     <div class="row">
-        <div class="small-12 large-6 columns">
-            @if(!empty($news))
-                @include('components.mini-news', ['news' => $news, 'url' => $site['subsite-folder'].'news'])
+        <div class="small-12 medium-6 columns">
+            @if(!empty($images))
+                @include('components.image-button-list', ['images' => $images, 'class' => 'rotate'])
             @endif
         </div>
     </div>
