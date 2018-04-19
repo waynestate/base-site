@@ -13,7 +13,7 @@ class Forms extends Page
             'page' => [
                 'controller' => 'FormsController',
                 'title' => 'Forms',
-                'id' => 112100,
+                'id' => 113100,
             ],
         ]);
     }

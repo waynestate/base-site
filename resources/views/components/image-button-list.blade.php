@@ -8,7 +8,7 @@
     <div>
         @if(!empty($image['link']))<a href="{{ $image['link'] }}"@if(empty($image['relative_url'])) class="button expanded" @endif>@endif
             @if(!empty($image['relative_url']))
-                <img src="{{ $image['relative_url'] }}" alt="{{ $image['title'] }}" />
+                @image($image['relative_url'], $image['title'], $class ?? '')
             @else
                 {{ $image['title'] }}
             @endif

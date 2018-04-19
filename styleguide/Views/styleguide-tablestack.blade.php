@@ -5,32 +5,33 @@
 
     <div class="content">
         {!! $page['content']['main'] !!}
-    </div>
+   
 
-    <table class="table-stack">
-    	<thead>
-    		<tr>
-    			<th>First Name</th>
-    			<th>Last Name</th>
-    			<th>Email</th>
-    		</tr>
-    	</thead>
-
-    	<tbody>
-            @for ($i = 0; $i < 10; $i++)
-                <tr valign="top">
-                    <td>{{ $faker->firstName }}</td>
-                    <td>{{ $faker->lastName }}</td>
-                    <td>{{ $faker->email }}</td>
+        <table class="table-stack">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
                 </tr>
-            @endfor
-        </tbody>
-    </table>
+            </thead>
 
-    <a class="button" onclick="$('pre.table-stack').toggleClass('hide');">See Table Code</a>
+            <tbody>
+                @for ($i = 0; $i < 10; $i++)
+                    <tr valign="top">
+                        <td>{{ $faker->firstName }}</td>
+                        <td>{{ $faker->lastName }}</td>
+                        <td>{{ $faker->email }}</td>
+                    </tr>
+                @endfor
+            </tbody>
+        </table>
 
-    <pre class="table-stack hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
-    {{ htmlspecialchars('
+
+        <a class="button" onclick="$('pre.table-stack').toggleClass('hide');">See Table Code</a>
+
+        <pre class="table-stack hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+        {{ htmlspecialchars('
 <table class="table-stack">
     <thead>
         <tr>
@@ -48,7 +49,7 @@
         </tr>
     </tbody>
 </table>
-    ') }}
-    </pre>
-
+        ') }}
+        </pre>
+    </div>
 @endsection
