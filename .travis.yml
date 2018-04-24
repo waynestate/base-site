@@ -17,8 +17,8 @@ php:
 
 before_install:
   # Install nvm for nodejs
-  - nvm install 8.7.0
-  - nvm use 8.7.0
+  - nvm install 8.11
+  - nvm use 8.11
   # Install yarn
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH=vendor/bin:node_modules/.bin:$HOME/.yarn/bin:$PATH
