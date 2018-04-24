@@ -30,7 +30,7 @@ before_script:
   - make build
 
 script:
-  - php artisan key:generate -v
+  - make generatekey
   - make phplintdry
   - make stylelint
   - make runtests
