@@ -6,6 +6,7 @@ let exec = require('child_process').exec;
 let package = JSON.parse(fs.readFileSync('./package.json'));
 let CopyWebpackPlugin = require('copy-webpack-plugin');
 let purge = require('laravel-mix-purgecss');
+let tailwindcss = require('tailwindcss');
 
 /*
  |--------------------------------------------------------------------------
@@ -54,7 +55,6 @@ mix.copy([
 mix.js('resources/js/main.js', 'public/_resources/js')
    .sass('resources/scss/main.scss', 'public/_resources/css')
    .purgeCss({
-        enabled: true,
         globs: [
             path.join(__dirname, "resources/views/**/*.blade.php"),
             path.join(__dirname, "styleguide/Views/**/*.blade.php"),
@@ -69,6 +69,7 @@ mix.js('resources/js/main.js', 'public/_resources/js')
    .options({
         processCssUrls: false,
         postCss: [
+            tailwindcss('./tailwind.js'),
             require('autoprefixer')
         ]
     })
