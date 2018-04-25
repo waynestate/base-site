@@ -1,30 +1,30 @@
 {{--
     $contact => array // [['title', 'link', 'description']]
 --}}
-<div class="footer-contact">
-    @if(count($contact) == 1)
-        <div class="row">
-            <div class="columns small-12 text-center">
+@if(is_array($contact) && count($contact) > 0)
+    <div class="bg-green">
+        @if(count($contact) == 1)
+            <div class="row text-center py-8">
                 @foreach($contact as $info)
-                    <h2>
-                        @if($info['link'] != '')<a href="{{ $info['link'] }}">@endif
+                    <h2 class="text-yellow">
+                        @if($info['link'] != '')<a href="{{ $info['link'] }}" class="text-yellow">@endif
                         {{ $info['title'] }}
                         @if($info['link'] != '')</a>@endif
                     </h2>
 
-                    {!! $info['description'] !!}
+                    <div class="p-6 text-white">
+                        {!! $info['description'] !!}
+                    </div>
                 @endforeach
             </div>
-        </div>
-    @else
-        <div class="row" data-equalizer>
-            @foreach($contact as $info)
-                <div class="columns small-12 medium-4 {{ ($info == end($contact)) ? ' end' : '' }}" data-equalizer-watch>
-                    {!! $info['description'] !!}
-
-                    <hr />
-                </div>
-            @endforeach
-        </div>
-    @endif
-</div>
+        @else
+            <div class="row flex flex-wrap py-8">
+                @foreach($contact as $info)
+                <div class="w-full sm:w-1/3 md:w-1/3 px-4 py-4 text-white {{ $loop->last !== true ? 'border-b sm:border-r sm:border-0 border-grey sm:pl-6' : '' }}">
+                        {!! $info['description'] !!}
+                    </div>
+                @endforeach
+            </div>
+        @endif
+    </div>
+@endif
