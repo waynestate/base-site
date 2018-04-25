@@ -129,6 +129,22 @@ let colors = {
     'pink-lightest': '#ffebef',
 }
 
+/*
+|-------------------------------------------------------------------------------
+| Screens                         https://tailwindcss.com/docs/responsive-design
+|-------------------------------------------------------------------------------
+|
+| This is set
+|
+*/
+
+let screens = {
+    'sm': '420px',
+    'md': '780px',
+    'lg': '990px',
+    'xl': '1200px',
+}
+
 module.exports = {
 
     /*
@@ -166,12 +182,7 @@ module.exports = {
     |
     */
 
-    screens: {
-        'sm': '420px',
-        'md': '780px',
-        'lg': '990px',
-        'xl': '1200px',
-    },
+    screens: screens,
 
 
     /*
@@ -604,6 +615,7 @@ module.exports = {
         '4xl': '90rem',
         '5xl': '100rem',
         'full': '100%',
+        'screen-xl': screens.xl,
     },
 
 
@@ -901,10 +913,7 @@ module.exports = {
     */
 
     plugins: [
-        require('tailwindcss/plugins/container')({
-            // center: true,
-            // padding: '1rem',
-        }),
+
     ],
 
 
