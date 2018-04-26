@@ -8,7 +8,6 @@
 
 // Call foundationp mixins to output css
 @include foundation-grid;
-@include foundation-typography;
 @include foundation-button;
 @include foundation-forms;
 @include foundation-visibility-classes;
@@ -61,7 +60,10 @@
 @import "components/page-title";
 @import "components/table-stack";
 @import "components/image-button-list";
+
+// New partials
 @import "components/components";
+@import "partials/global";
 
 // Tailwind
 @tailwind components;

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<html class="no-js bg-white antialiased" lang="en">
 <head>
     @include('partials.meta')
 
@@ -15,7 +14,7 @@
     <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script><![endif]-->
     @include('partials.ga')
 </head>
-<body class="font-sans font-normal antialiased text-black leading-normal">
+<body class="font-sans font-normal text-black leading-normal text-base">
 
 <nav aria-label="Skip navigation" class="skip">
     <ul>
