@@ -7,7 +7,6 @@
 @import "~foundation-sites/scss/foundation";
 
 // Call foundationp mixins to output css
-@include foundation-global-styles;
 @include foundation-grid;
 @include foundation-typography;
 @include foundation-button;

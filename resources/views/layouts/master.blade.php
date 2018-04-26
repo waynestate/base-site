@@ -15,7 +15,7 @@
     <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script><![endif]-->
     @include('partials.ga')
 </head>
-<body>
+<body class="font-sans font-normal antialiased text-black leading-normal">
 
 <nav aria-label="Skip navigation" class="skip">
     <ul>
