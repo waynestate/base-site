@@ -291,7 +291,7 @@
                     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
                 </figure>
 
-                <a class="button clearfix" onclick="$('pre.fig-right').toggleClass('hidden');">See Code</a>
+                <a class="button" onclick="$('pre.fig-right').toggleClass('hidden');">See Code</a>
 
                 <pre class="fig-right hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
                 {{ htmlspecialchars('
