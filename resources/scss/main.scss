@@ -1,9 +1,8 @@
 @tailwind preflight;
 
-// Site specific variables
-@import "vars";
-
 // Include slick carousel
+$slick-font-path: "../fonts/";
+$slick-loader-path: "/_resources/images/";
 @import "~slick-carousel/slick/slick";
 @import "~slick-carousel/slick/slick-theme";
 

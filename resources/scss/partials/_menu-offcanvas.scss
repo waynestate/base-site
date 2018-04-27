@@ -359,29 +359,29 @@
         display: block;
 
         ul ul li {
-            background-color: $darker-green;
+            background-color: #10312c;
         }
 
         ul li .main-menu {
-            background-color: $darker-green;
+            background-color: #10312c;
             text-transform: uppercase;
             font-size: 1rem;
 
             &:hover {
-                background-color: $darker-green;
+                background-color: #10312c;
             }
         }
 
         // Menu Header top level (MAIN MENU)
         ul ul {
-            border-bottom: 5px solid $darker-green;
+            border-bottom: 5px solid #10312c;
         }
     }
 
     // Offcanvas menu overrides
     .main-menu {
         height: 100%;
-        background-color: $menu-top-background;
+        background-color: #093f39;
         padding-left: 0;
         padding-right: 0;
         // Animation for menu fade in

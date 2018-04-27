@@ -1,5 +1,5 @@
 .menu-top-container {
-    height: $menu-height;
+    height: 65px;
 
     .row,
     .column {
@@ -7,7 +7,7 @@
     }
 
     &.menu-top-bg {
-        background: $menu-top-background;
+        background: #093f39;
     }
 
     // Center vertically
@@ -78,7 +78,7 @@
 
             a {
                 color: white;
-                font-size: $menu-top-font-size;
+                font-size: 16px;
 
                 &:hover {
                     color: #ffd969;
