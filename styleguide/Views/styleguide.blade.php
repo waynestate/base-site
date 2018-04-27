@@ -16,8 +16,8 @@
             </div>
         </div>
 
-        <a class="button" onclick="$('pre.columns-code').toggleClass('hide');">See Row/Columns Code</a>
-        <pre class="columns-code hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+        <a class="button" onclick="$('pre.columns-code').toggleClass('hidden');">See Row/Columns Code</a>
+        <pre class="columns-code hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
             {{ htmlspecialchars('
 <div class="row">
     <div class="small-12 large-6 columns">
@@ -54,9 +54,9 @@
             </tbody>
         </table>
 
-        <a class="button" onclick="$('pre.table-stack').toggleClass('hide');">See Table Code</a>
+        <a class="button" onclick="$('pre.table-stack').toggleClass('hidden');">See Table Code</a>
 
-        <pre class="table-stack hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+        <pre class="table-stack hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {{ htmlspecialchars('
 <table>
     <thead>
@@ -129,9 +129,9 @@
             {{ $faker->paragraph(10) }}
         </blockquote>
 
-        <a class="button" onclick="$('pre.blockquote').toggleClass('hide');">See blockquote code</a>
+        <a class="button" onclick="$('pre.blockquote').toggleClass('hidden');">See blockquote code</a>
 
-        <pre class="blockquote hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+        <pre class="blockquote hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {{ htmlspecialchars('
 <blockquote>
     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -147,9 +147,9 @@
         <a href="#" class="button">Standard Button</a>
         <a href="#" class="button expanded">Expanded Button</a>
 
-        <a class="button" onclick="$('pre.button-examples').toggleClass('hide');">See Button Code</a>
+        <a class="button" onclick="$('pre.button-examples').toggleClass('hidden');">See Button Code</a>
 
-        <pre class="button-examples hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+        <pre class="button-examples hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {{ htmlspecialchars('
 <a href="#" class="button">Standard Button</a>
 <a href="#" class="button expanded">Expanded Button</a>
@@ -175,9 +175,9 @@
 
         <p>@image('/styleguide/image/50x50?text=Icon', 'icon image', 'icon')</p>
 
-        <a class="button" onclick="$('pre.image-icon').toggleClass('hide');">See Image Icon Code</a>
+        <a class="button" onclick="$('pre.image-icon').toggleClass('hidden');">See Image Icon Code</a>
 
-        <pre class="image-icon hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+        <pre class="image-icon hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {{ htmlspecialchars('
 <img src="/styleguide/50x50?text=Icon" class="icon" alt="">
         ') }}
@@ -189,9 +189,9 @@
         <p>Any valid YouTube URL starting with <code>youtu.be</code> or <code>youtube.com/watch</code> will open a lightbox with the video.</p>
         <p><a href="//www.youtube.com/watch?v=guRgefesPXE"><img src="//i.wayne.edu/youtube/guRgefesPXE" alt="View YouTube Video"></a></p>
 
-        <a class="button" onclick="$('pre.maginific-popup-example').toggleClass('hide');">See Maginific Pop-up Code</a>
+        <a class="button" onclick="$('pre.maginific-popup-example').toggleClass('hidden');">See Maginific Pop-up Code</a>
 
-        <pre class="maginific-popup-example hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+        <pre class="maginific-popup-example hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {{ htmlspecialchars('
 <p>
     <a href="//www.youtube.com/watch?v=guRgefesPXE">
@@ -210,9 +210,9 @@
             <iframe width="420" height="315" src="//www.youtube.com/embed/guRgefesPXE" title="Responsive embed example" frameborder="0" allowfullscreen></iframe>
         </div>
 
-        <a class="button" onclick="$('pre.responsive-embed-example').toggleClass('hide');">See Responsive Embed Code</a>
+        <a class="button" onclick="$('pre.responsive-embed-example').toggleClass('hidden');">See Responsive Embed Code</a>
 
-        <pre class="responsive-embed-example hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+        <pre class="responsive-embed-example hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {{ htmlspecialchars('
 <div class="responsive-embed">
     <iframe width="420" height="315" src="//www.youtube.com/embed/guRgefesPXE" title="Responsive embed example" frameborder="0" allowfullscreen></iframe>
@@ -231,9 +231,9 @@
                     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
                 </figure>
 
-                <a class="button" onclick="$('pre.fig-left').toggleClass('hide');">See Code</a>
+                <a class="button" onclick="$('pre.fig-left').toggleClass('hidden');">See Code</a>
 
-                <pre class="fig-left hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+                <pre class="fig-left hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
                 {{ htmlspecialchars('
 <figure class="float-left">
     <img src="/styleguide/image/150x150" alt="Placeholder">
@@ -251,9 +251,9 @@
                     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
                 </figure>
 
-                <a class="button" onclick="$('pre.fig-center').toggleClass('hide');">See Code</a>
+                <a class="button" onclick="$('pre.fig-center').toggleClass('hidden');">See Code</a>
 
-                <pre class="fig-center hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+                <pre class="fig-center hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
                 {{ htmlspecialchars('
 <figure class="text-center">
     <img src="/styleguide/image/150x150" alt="Placeholder">
@@ -271,9 +271,9 @@
                     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
                 </figure>
 
-                <a class="button" onclick="$('pre.fig-none').toggleClass('hide');">See Code</a>
+                <a class="button" onclick="$('pre.fig-none').toggleClass('hidden');">See Code</a>
 
-                <pre class="fig-none hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+                <pre class="fig-none hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
                 {{ htmlspecialchars('
 <figure>
     <img src="/styleguide/image/150x150" alt="Placeholder">
@@ -291,9 +291,9 @@
                     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
                 </figure>
 
-                <a class="button clearfix" onclick="$('pre.fig-right').toggleClass('hide');">See Code</a>
+                <a class="button clearfix" onclick="$('pre.fig-right').toggleClass('hidden');">See Code</a>
 
-                <pre class="fig-right hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+                <pre class="fig-right hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
                 {{ htmlspecialchars('
 <figure class="float-right">
     <img src="/styleguide/image/150x150" alt="Placeholder">

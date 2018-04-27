@@ -11,9 +11,9 @@
         @include('components.accordion', ['items' => $accordion_page])
     @endif
 
-<a class="button" onclick="$('pre.accordions').toggleClass('hide');">See Accordion Code</a>
+<a class="button" onclick="$('pre.accordions').toggleClass('hidden');">See Accordion Code</a>
 
-    <pre class="accordions hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+    <pre class="accordions hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
     {{ htmlspecialchars('
 <ul class="accordion">
     <li class="is-active">
