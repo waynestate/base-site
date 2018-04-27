@@ -12,6 +12,16 @@
         font-weight: normal;
     }
 
+    p {
+        margin-bottom: 1rem;
+    }
+
+    dl,
+    ol,
+    ul {
+        margin-bottom: 1rem;
+    }
+
     a:not(.button) {
         text-decoration: underline;
 
