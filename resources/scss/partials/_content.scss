@@ -6,6 +6,20 @@
     h5,
     h6 {
         margin-bottom: 0.3125rem;
+        font-weight: 700;
+        text-rendering: optimizeLegibility;
+        line-height: 1.4;
+    }
+
+    h2,
+    h3 {
+        font-size: 1.375rem;
+    }
+
+    h4,
+    h5,
+    h6 {
+        font-size: 1.0625rem;
     }
 
     h3 {
@@ -14,6 +28,17 @@
 
     p {
         margin-bottom: 1rem;
+    }
+
+    hr {
+        clear: both;
+        max-width: 75rem;
+        height: 0;
+        margin: 1.25rem auto;
+        border-top: 0;
+        border-right: 0;
+        border-bottom: 1px solid #cacaca;
+        border-left: 0;
     }
 
     dl,
