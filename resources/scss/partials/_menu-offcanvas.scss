@@ -352,8 +352,8 @@
     }
 }
 
-// Our offcanvas overrides
-@include breakpoint($menu-top-breakpoint down) {
+// Our offcanvas overrides - menu-top-breakpoint down
+@media screen and (max-width: 48.75em) {
     // Top level MAIN MENU drop down
     .offcanvas-main-menu {
         display: block;
@@ -365,7 +365,7 @@
         ul li .main-menu {
             background-color: $darker-green;
             text-transform: uppercase;
-            font-size: rem-calc(16);
+            font-size: 1rem;
 
             &:hover {
                 background-color: $darker-green;
@@ -444,13 +444,13 @@
 
     .expand-icons {
         float: right;
-        font-size: rem-calc(24);
+        font-size: 1.5rem;
         display: flex;
     }
 }
 
-// Hide the main menu toggle when necessary
-@include breakpoint($menu-top-breakpoint up) {
+// Hide the main menu toggle when necessary - menu-top-breakpoint up
+@media screen and (min-width: 48.75em) {
     .offcanvas-main-menu {
         display: none;
     }

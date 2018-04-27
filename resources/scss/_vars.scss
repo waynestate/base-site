@@ -1,5 +1,5 @@
-// Change based on top menu width
-$menu-top-breakpoint: map-get($breakpoints, 'offcanvas');
+// Change based on top menu width - if you edit, change in tailwind.js as well
+$menu-top-breakpoint: 780px;
 
 // Menu-top
 $menu-top-background: #093f39;

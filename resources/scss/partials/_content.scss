@@ -5,7 +5,7 @@
     h4,
     h5,
     h6 {
-        margin: 0 0 rem-calc(5) 0;
+        margin-bottom: 0.3125rem;
     }
 
     h3 {
@@ -63,7 +63,7 @@
     table {
         border: none;
         width: 100%;
-        margin: 0 0 $paragraph-margin-bottom;
+        margin: 0 0 1rem;
 
         th,
         td {
@@ -126,7 +126,8 @@
     img {
         padding: 10px;
 
-        @include breakpoint($menu-top-breakpoint down) {
+        // menu-top-breakpoint down
+        @media screen and (max-width: 48.75em) {
             display: block;
             width: 100%;
             margin: 10px auto;
@@ -149,7 +150,8 @@
         display: table;
         margin: 15px auto;
 
-        @include breakpoint(medium) {
+        // medium breakpoint
+        @media print, screen and (min-width: 26.25em) {
             margin: 25px;
             width: auto;
         }
@@ -170,7 +172,7 @@
 
         figcaption {
             padding-top: 0.5em;
-            font-size: rem-calc(14);
+            font-size: 0.875rem;
             font-style: italic;
             display: table-caption;
             caption-side: bottom;

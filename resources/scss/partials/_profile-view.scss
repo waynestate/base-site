@@ -5,7 +5,7 @@
         text-align: right;
         padding: 0.3em 0;
         position: absolute;
-        right: rem-calc(15);
+        right: 0.9375rem;
     }
 }
 
@@ -13,11 +13,12 @@
     display: block;
     width: auto;
     height: 270px;
-    margin: rem-calc(40) auto 1em;
+    margin: 2.5rem auto 1em;
     padding: 0;
 
-    @include breakpoint(large up) {
-        margin-top: rem-calc(20);
+    // Large up
+    @media screen and (min-width: 48.75em) {
+        margin-top: 1.25rem;
         width: 100%;
         height: auto;
     }

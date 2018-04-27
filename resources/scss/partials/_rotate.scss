@@ -1,12 +1,14 @@
 .rotate_arrows.slick-dotted.slick-slider {
-    margin-bottom: rem-calc(15);
+    margin-bottom: 0.9375rem;
 
-    @include breakpoint(medium) {
-        margin-bottom: rem-calc(30);
+    // medium breakpoint
+    @media print, screen and (min-width: 26.25em) {
+        margin-bottom: 1.875rem;
     }
 
-    @include breakpoint(large) {
-        margin-bottom: rem-calc(40);
+    // large breakpoint
+    @media print, screen and (min-width: 48.75em) {
+        margin-bottom: 2.5rem;
     }
 }
 
@@ -41,9 +43,10 @@
 .slick-prev::before,
 .slick-next::before {
     font-family: waynestate;
-    font-size: rem-calc(40);
+    font-size: 2.5rem;
 
-    @include breakpoint(large) {
-        font-size: rem-calc(60);
+    // breakpoint large
+    @media print, screen and (min-width: 48.75em) {
+        font-size: 3.75rem;
     }
 }

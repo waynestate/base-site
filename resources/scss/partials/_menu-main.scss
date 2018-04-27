@@ -11,7 +11,7 @@
     }
 
     li {
-        font-size: rem-calc(14);
+        font-size: 0.875rem;
         margin: 0;
         padding: 0;
     }
@@ -28,7 +28,8 @@
 
     // Bottom borders on child <li>
     > ul > li {
-        @include breakpoint($menu-top-breakpoint up) {
+        // menu-top-breakpoint up
+        @media screen and (min-width: 48.75em) {
             border-bottom: 1px solid #edeef2;
         }
     }

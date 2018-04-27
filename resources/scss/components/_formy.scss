@@ -152,8 +152,8 @@
     }
 }
 
-/* Small */
-@include breakpoint(small only) {
+// Small only
+@media screen and (max-width: 26.1875em) {
     #info div.payment {
         padding: 10px;
     }

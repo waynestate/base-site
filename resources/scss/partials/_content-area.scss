@@ -1,6 +1,6 @@
 .content-area {
-    // Forces the content area to be full width when the menu is hidden
-    @include breakpoint($menu-top-breakpoint down) {
+    // Forces the content area to be full width when the menu is hidden - menu-top-breakpoint down
+    @media screen and (max-width: 48.75em) {
         width: 100%;
         left: 0;
     }

@@ -1,14 +1,5 @@
 @tailwind preflight;
 
-// Foundation settings copied from the package
-@import "settings";
-
-// Core foundation
-@import "~foundation-sites/scss/foundation";
-
-// Call foundationp mixins to output css
-@include foundation-forms;
-
 // Site specific variables
 @import "vars";
 

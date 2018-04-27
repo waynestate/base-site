@@ -18,8 +18,8 @@ table.table-stack {
         padding: 10px;
     }
 
-    /* Stack rows vertically on small screens */
-    @include breakpoint(medium down) {
+    /* Stack rows vertically on small screens - medium down */
+    @media screen and (max-width: 48.6875em) {
         /* Hide column labels */
         thead tr {
             position: absolute;
@@ -64,8 +64,8 @@ table.table-stack {
         }
     }
 
-    /* Stack labels vertically on smaller screens */
-    @include breakpoint(medium down) {
+    /* Stack labels vertically on smaller screens - medium down */
+    @media screen and (max-width: 48.6875em) {
         td {
             padding-left: 0.75em;
         }
