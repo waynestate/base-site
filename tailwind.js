@@ -143,6 +143,7 @@ let screens = {
     'md': '780px',
     'lg': '990px',
     'xl': '1200px',
+    'mt': '780px', // Adjust this based on the top menu width
 }
 
 module.exports = {

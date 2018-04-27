@@ -17,7 +17,7 @@
                 <img src="/_resources/images/no-photo.svg" alt="{{ $page['title'] }}" class="profile__img">
             @endif
 
-            @include('components.page-title', ['title' => $page['title'], 'class' => 'hide-for-large'])
+            @include('components.page-title', ['title' => $page['title'], 'class' => 'block md:hidden'])
 
             <div class="profile--contact-info">
                 @if(isset($profile['data']['Title']))
@@ -55,7 +55,7 @@
         </div>
 
         <div class="small-12 large-8 columns">
-            @include('components.page-title', ['title' => $page['title'], 'class' => 'show-for-large'])
+            @include('components.page-title', ['title' => $page['title'], 'class' => 'hidden md:block'])
 
             @foreach($profile['data'] as $field=>$data)
                 @if(!in_array($field, $contact_fields) && !in_array($field, $hidden_fields))

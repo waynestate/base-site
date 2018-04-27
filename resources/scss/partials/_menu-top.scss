@@ -20,7 +20,7 @@
             height: 100%;
         }
 
-        > * > *:not(.hide-for-menu-top-up, .show-for-menu-top-up) {
+        > * > *:not(.mt\:hidden, .hidden) {
             display: table-cell;
             vertical-align: middle;
         }
@@ -108,31 +108,6 @@
             text-align: right;
         }
     }
-}
-
-// Show the main menu based on a custom breakpoint
-.show-for-menu-top-up {
-    display: none;
-
-    @include breakpoint($menu-top-breakpoint) {
-        // Center vertically
-        display: table-cell;
-    }
-}
-
-// Hide the main menu based on a custom breakpoint
-.hide-for-menu-top-up {
-    // Center vertically
-    display: table-cell;
-
-    @include breakpoint($menu-top-breakpoint) {
-        display: none;
-    }
-}
-
-// special case for off canvas menu item Giving not to use table-cell property, so goes full width on off canvas
-li.hide-for-menu-top-up {
-    display: block;
 }
 
 #top-menu .menu-top {

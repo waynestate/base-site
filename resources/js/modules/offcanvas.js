@@ -104,11 +104,11 @@ import 'foundation-sites/js/foundation.offcanvas';
             // If offcanvas is closing
             $('.off-canvas-wrapper').on('closed.zf.offcanvas', this.close);
 
-            // If ooffcanvas is opening
+            // If offcanvas is opening
             $('.off-canvas-wrapper').on('opened.zf.offcanvas', this.open);
 
             // Apply initial classes
-            $('ul.menu-top').addClass('show-for-menu-top-up');
+            $('#top-menu ul.menu-top').addClass('hidden mt:block');
 
             // Redo offCanvas because of the random hash it creates
             var foundationOffCanvas = new window.Foundation.OffCanvas($('[data-off-canvas]'));
