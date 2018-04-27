@@ -7,7 +7,6 @@
 @import "~foundation-sites/scss/foundation";
 
 // Call foundationp mixins to output css
-@include foundation-grid;
 @include foundation-forms;
 @include foundation-off-canvas;
 @include foundation-float-classes;
