@@ -1,3 +1,358 @@
+// From foundation offcanvas
+.is-off-canvas-open {
+    overflow: hidden;
+}
+
+.js-off-canvas-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: opacity 0.5s ease, visibility 0.5s ease;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    background: rgba(254, 254, 254, 0.25);
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+}
+
+.js-off-canvas-overlay.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.js-off-canvas-overlay.is-closable {
+    cursor: pointer;
+}
+
+.js-off-canvas-overlay.is-overlay-absolute {
+    position: absolute;
+}
+
+.js-off-canvas-overlay.is-overlay-fixed {
+    position: fixed;
+}
+
+.off-canvas-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.off-canvas {
+    position: fixed;
+    z-index: 4;
+    transition: transform 0.5s ease;
+    backface-visibility: hidden;
+    background: #f7f7f7;
+}
+
+[data-whatinput='mouse'] .off-canvas {
+    outline: 0;
+}
+
+.off-canvas.is-transition-overlap {
+    z-index: 10;
+}
+
+.off-canvas.is-transition-overlap.is-open {
+    box-shadow: 0 0 10px rgba(10, 10, 10, 0.7);
+}
+
+.off-canvas.is-open {
+    transform: translate(0, 0);
+}
+
+.off-canvas-absolute {
+    position: absolute;
+    z-index: 4;
+    transition: transform 0.5s ease;
+    backface-visibility: hidden;
+    background: #f7f7f7;
+}
+
+[data-whatinput='mouse'] .off-canvas-absolute {
+    outline: 0;
+}
+
+.off-canvas-absolute.is-transition-overlap {
+    z-index: 10;
+}
+
+.off-canvas-absolute.is-transition-overlap.is-open {
+    box-shadow: 0 0 10px rgba(10, 10, 10, 0.7);
+}
+
+.off-canvas-absolute.is-open {
+    transform: translate(0, 0);
+}
+
+.position-left {
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    transform: translateX(-250px);
+    overflow-y: auto;
+}
+
+.position-left.is-open ~ .off-canvas-content {
+    transform: translateX(250px);
+}
+
+.position-left.is-transition-push::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 1px;
+    box-shadow: 0 0 10px rgba(10, 10, 10, 0.7);
+    content: " ";
+}
+
+.position-left.is-transition-overlap.is-open ~ .off-canvas-content {
+    transform: none;
+}
+
+.position-right {
+    top: 0;
+    right: 0;
+    width: 250px;
+    height: 100%;
+    transform: translateX(250px);
+    overflow-y: auto;
+}
+
+.position-right.is-open ~ .off-canvas-content {
+    transform: translateX(-250px);
+}
+
+.position-right.is-transition-push::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 1px;
+    box-shadow: 0 0 10px rgba(10, 10, 10, 0.7);
+    content: " ";
+}
+
+.position-right.is-transition-overlap.is-open ~ .off-canvas-content {
+    transform: none;
+}
+
+.position-top {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 250px;
+    transform: translateY(-250px);
+    overflow-x: auto;
+}
+
+.position-top.is-open ~ .off-canvas-content {
+    transform: translateY(250px);
+}
+
+.position-top.is-transition-push::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    box-shadow: 0 0 10px rgba(10, 10, 10, 0.7);
+    content: " ";
+}
+
+.position-top.is-transition-overlap.is-open ~ .off-canvas-content {
+    transform: none;
+}
+
+.position-bottom {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 250px;
+    transform: translateY(250px);
+    overflow-x: auto;
+}
+
+.position-bottom.is-open ~ .off-canvas-content {
+    transform: translateY(-250px);
+}
+
+.position-bottom.is-transition-push::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    box-shadow: 0 0 10px rgba(10, 10, 10, 0.7);
+    content: " ";
+}
+
+.position-bottom.is-transition-overlap.is-open ~ .off-canvas-content {
+    transform: none;
+}
+
+.off-canvas-content {
+    transition: transform 0.5s ease;
+    backface-visibility: hidden;
+}
+
+@media print, screen and (min-width: 26.25em) {
+    .position-left.reveal-for-medium {
+        transform: none;
+        z-index: 1;
+    }
+
+    .position-left.reveal-for-medium ~ .off-canvas-content {
+        margin-left: 250px;
+    }
+
+    .position-right.reveal-for-medium {
+        transform: none;
+        z-index: 1;
+    }
+
+    .position-right.reveal-for-medium ~ .off-canvas-content {
+        margin-right: 250px;
+    }
+
+    .position-top.reveal-for-medium {
+        transform: none;
+        z-index: 1;
+    }
+
+    .position-top.reveal-for-medium ~ .off-canvas-content {
+        margin-top: 250px;
+    }
+
+    .position-bottom.reveal-for-medium {
+        transform: none;
+        z-index: 1;
+    }
+
+    .position-bottom.reveal-for-medium ~ .off-canvas-content {
+        margin-bottom: 250px;
+    }
+}
+
+@media print, screen and (min-width: 48.75em) {
+    .position-left.reveal-for-large {
+        transform: none;
+        z-index: 1;
+    }
+
+    .position-left.reveal-for-large ~ .off-canvas-content {
+        margin-left: 250px;
+    }
+
+    .position-right.reveal-for-large {
+        transform: none;
+        z-index: 1;
+    }
+
+    .position-right.reveal-for-large ~ .off-canvas-content {
+        margin-right: 250px;
+    }
+
+    .position-top.reveal-for-large {
+        transform: none;
+        z-index: 1;
+    }
+
+    .position-top.reveal-for-large ~ .off-canvas-content {
+        margin-top: 250px;
+    }
+
+    .position-bottom.reveal-for-large {
+        transform: none;
+        z-index: 1;
+    }
+
+    .position-bottom.reveal-for-large ~ .off-canvas-content {
+        margin-bottom: 250px;
+    }
+}
+
+@media screen and (min-width: 61.875em) {
+    .position-left.reveal-for-xlarge {
+        transform: none;
+        z-index: 1;
+    }
+
+    .position-left.reveal-for-xlarge ~ .off-canvas-content {
+        margin-left: 250px;
+    }
+
+    .position-right.reveal-for-xlarge {
+        transform: none;
+        z-index: 1;
+    }
+
+    .position-right.reveal-for-xlarge ~ .off-canvas-content {
+        margin-right: 250px;
+    }
+
+    .position-top.reveal-for-xlarge {
+        transform: none;
+        z-index: 1;
+    }
+
+    .position-top.reveal-for-xlarge ~ .off-canvas-content {
+        margin-top: 250px;
+    }
+
+    .position-bottom.reveal-for-xlarge {
+        transform: none;
+        z-index: 1;
+    }
+
+    .position-bottom.reveal-for-xlarge ~ .off-canvas-content {
+        margin-bottom: 250px;
+    }
+}
+
+@media screen and (min-width: 48.75em) {
+    .position-left.reveal-for-offcanvas {
+        transform: none;
+        z-index: 1;
+    }
+
+    .position-left.reveal-for-offcanvas ~ .off-canvas-content {
+        margin-left: 250px;
+    }
+
+    .position-right.reveal-for-offcanvas {
+        transform: none;
+        z-index: 1;
+    }
+
+    .position-right.reveal-for-offcanvas ~ .off-canvas-content {
+        margin-right: 250px;
+    }
+
+    .position-top.reveal-for-offcanvas {
+        transform: none;
+        z-index: 1;
+    }
+
+    .position-top.reveal-for-offcanvas ~ .off-canvas-content {
+        margin-top: 250px;
+    }
+
+    .position-bottom.reveal-for-offcanvas {
+        transform: none;
+        z-index: 1;
+    }
+
+    .position-bottom.reveal-for-offcanvas ~ .off-canvas-content {
+        margin-bottom: 250px;
+    }
+}
+
+// Our offcanvas overrides
 @include breakpoint($menu-top-breakpoint down) {
     // Top level MAIN MENU drop down
     .offcanvas-main-menu {
