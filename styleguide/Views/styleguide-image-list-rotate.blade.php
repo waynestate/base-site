@@ -4,7 +4,7 @@
     @include('components.page-title', ['title' => $page['title']])
 
     <div class="row">
-        <div class="small-12 medium-6 columns">
+        <div class="w-full sm:w-1/2">
             @if(!empty($images))
                 @include('components.image-button-list', ['images' => $images, 'class' => 'rotate'])
             @endif

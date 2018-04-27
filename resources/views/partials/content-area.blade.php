@@ -8,7 +8,7 @@
     @endif
 
     <div class="row">
-        <div class="small-12 medium-3 columns main-menu @if($site_menu['meta']['has_selected'] == false && ((isset($show_site_menu) && $show_site_menu != true) || !isset($show_site_menu))) mt:hidden @endif" data-off-canvas id="page-menu" role="navigation"  aria-label="Page menu" tabindex="-1">
+        <div class="md:w-1/4 columns main-menu @if($site_menu['meta']['has_selected'] == false && ((isset($show_site_menu) && $show_site_menu != true) || !isset($show_site_menu))) mt:hidden @endif" data-off-canvas id="page-menu" role="navigation"  aria-label="Page menu" tabindex="-1">
             @if(!empty($top_menu_output) && $site_menu !== $top_menu)
                 <div class="offcanvas-main-menu">
                     <ul>
@@ -32,7 +32,7 @@
             @endif
         </div>
 
-        <div class="small-12 @if($site_menu['meta']['has_selected'] == false && ((isset($show_site_menu) && $show_site_menu != true) || !isset($show_site_menu)))medium-12 @else medium-9 @endif columns content-area" data-off-canvas-content>
+        <div class="w-full @if($site_menu['meta']['has_selected'] == false && ((isset($show_site_menu) && $show_site_menu != true) || !isset($show_site_menu)))md:w-full @else md:w-3/4 @endif columns content-area" data-off-canvas-content>
             @if(!empty($hero) && ($site_menu['meta']['has_selected'] == true || config('app.hero_contained') === true))
                 @include('components.hero', ['images' => $hero, 'class' => 'hero--childpage'])
             @endif

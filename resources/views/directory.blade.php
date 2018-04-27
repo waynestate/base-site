@@ -10,9 +10,9 @@
     @forelse($profiles as $key => $profiles)
         <h1>{{ $key }}</h1>
 
-        <div class="row small-up-2 medium-up-3">
+        <div class="row flex flex-wrap">
             @foreach($profiles as $profile)
-                <div class="column profile">
+                <div class="profile w-full sm:w-1/2 md:w-1/3 px-4 py-4">
                     <a href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}profile/{{ $profile['data']['AccessID'] }}" class="profile-img lazy " data-src="{{ $profile['data']['Picture']['url'] ?? '/_resources/images/no-photo.svg' }}">
                         <span class="visuallyhidden">{{ $profile['data']['First Name'] }} {{ $profile['data']['Last Name'] }}</span>
                     </a>

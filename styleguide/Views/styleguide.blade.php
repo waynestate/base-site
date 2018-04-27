@@ -7,11 +7,11 @@
         <hr>
 
         <h2>2 Column Example</h2>
-        <div class="row">
-            <div class="small-12 large-6 columns">
+        <div class="row px-4 flex">
+            <div class="w-full sm:w-1/2 pr-4">
                 <p>{{ $faker->paragraph }}</p>
             </div>
-            <div class="small-12 large-6 columns">
+            <div class="w-full sm:w-1/2 pr-4">
                 <p>{{ $faker->paragraph }}</p>
             </div>
         </div>
@@ -19,11 +19,11 @@
         <a class="button" onclick="$('pre.columns-code').toggleClass('hidden');">See Row/Columns Code</a>
         <pre class="columns-code hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
             {{ htmlspecialchars('
-<div class="row">
-    <div class="small-12 large-6 columns">
+<div class="row px-4 flex">
+    <div class="w-full sm:w-1/2 pr-4">
         <p>'.$faker->paragraph.'</p>
     </div>
-    <div class="small-12 large-6 columns">
+    <div class="w-full sm:w-1/2 pr-4">
         <p>'.$faker->paragraph.'</p>
     </div>
 </div>
@@ -86,8 +86,8 @@
 
         <hr>
 
-        <div class="row">
-            <div class="small-12 large-4 columns">
+        <div class="row px-4 flex">
+            <div class="w-full md:w-1/3">
                 <h2>Unordered lists</h2>
 
                 <ul>
@@ -97,7 +97,7 @@
                 </ul>
             </div>
 
-            <div class="small-12 large-4 columns">
+            <div class="w-full md:w-1/3">
                 <h2>Ordered lists</h2>
 
                 <ol>
@@ -107,7 +107,7 @@
                 </ol>
             </div>
 
-            <div class="small-12 large-4 columns">
+            <div class="w-full md:w-1/3">
                 <h2>Data lists</h2>
 
                 <dl>
@@ -222,8 +222,8 @@
 
         <hr>
 
-        <div class="row">
-            <div class="medium-3 columns">
+        <div class="row flex flex-wrap px-4">
+            <div class="w-full sm:w-1/4">
                 <h2>Figure (left)</h2>
 
                 <figure class="float-left" style="margin-top: 15px;">
@@ -243,7 +243,7 @@
                 </pre>
             </div>
 
-            <div class="medium-3 columns">
+            <div class="w-full sm:w-1/4">
                 <h2>Figure (center)</h2>
 
                 <figure class="text-center">
@@ -263,7 +263,7 @@
                 </pre>
             </div>
 
-            <div class="medium-3 columns">
+            <div class="w-full sm:w-1/4">
                 <h2>Figure</h2>
 
                 <figure>
@@ -283,7 +283,7 @@
                 </pre>
             </div>
 
-            <div class="medium-3 columns">
+            <div class="w-full sm:w-1/4">
                 <h2>Figure (right)</h2>
 
                 <figure class="float-right" style="margin-top: 15px;">

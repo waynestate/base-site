@@ -3,14 +3,12 @@
 @section('content')
     @if($back_url != '')
         <div class="row profile__return">
-            <div class="columns small-12">
-                <a href="{{ $back_url }}">&lt; Return to listing</a>
-            </div>
+            <a href="{{ $back_url }}">&lt; Return to listing</a>
         </div>
     @endif
 
-    <div class="row profile__block">
-        <div class="small-12 large-4 columns">
+    <div class="row flex flex-wrap profile__block">
+        <div class="w-full lg:w-1/3 px-4">
             @if(isset($profile['data']['Picture']['url']))
                 <img src="{{ $profile['data']['Picture']['url'] }}" alt="{{ $page['title'] }}" class="profile__img">
             @else
@@ -54,7 +52,7 @@
              </div>
         </div>
 
-        <div class="small-12 large-8 columns">
+        <div class="w-full lg:w-2/3 px-4">
             @include('components.page-title', ['title' => $page['title'], 'class' => 'hidden md:block'])
 
             @foreach($profile['data'] as $field=>$data)
