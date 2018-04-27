@@ -9,7 +9,6 @@
 // Call foundationp mixins to output css
 @include foundation-forms;
 @include foundation-accordion;
-@include foundation-tabs;
 
 // Site specific variables
 @import "vars";
