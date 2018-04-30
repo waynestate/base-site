@@ -5,8 +5,7 @@ let path = require('path');
 let exec = require('child_process').exec;
 let package = JSON.parse(fs.readFileSync('./package.json'));
 let CopyWebpackPlugin = require('copy-webpack-plugin');
-let glob = require("glob-all");
-let PurgecssPlugin = require("purgecss-webpack-plugin");
+let purge = require('laravel-mix-purgecss');
 
 /*
  |--------------------------------------------------------------------------
@@ -54,11 +53,25 @@ mix.copy([
 // Compile assets and setup browersync
 mix.js('resources/js/main.js', 'public/_resources/js')
    .sass('resources/scss/main.scss', 'public/_resources/css')
+   .purgeCss({
+        enabled: true,
+        globs: [
+            path.join(__dirname, "resources/views/**/*.blade.php"),
+            path.join(__dirname, "styleguide/Views/**/*.blade.php"),
+            path.join(__dirname, "factories/**/*.php"),
+            path.join(__dirname, "resources/js/**/*.js"),
+            path.join(__dirname, "node_modules/foundation-sites/js/foundation.offcanvas.js")
+        ],
+        extensions: ['html', 'js', 'php', 'vue'],
+        whitelistPatterns: [/icon-/, /slick-/, /mfp-/, /at-/]
+    })
    .sourceMaps()
    .options({
         processCssUrls: false,
-        postCss: [require('autoprefixer')]
-   })
+        postCss: [
+            require('autoprefixer')
+        ]
+    })
    .browserSync({
         proxy: 'https://' + package.name + '.wayne.local',
         open: false,
@@ -80,13 +93,6 @@ fs.symlink(
     path.resolve('./public/_static'),
     function (err) { err != null && err.errno != -17 ? console.log(err) : console.log("Done."); }
 );
-
-// Allow special characters in class names
-class SpecialCharactersExtractor {
-    static extract(content) {
-        return content.match(/[A-z0-9-:\/]+/g);
-    }
-}
 
 config = {
     externals: {
@@ -142,26 +148,6 @@ config = {
 if (mix.inProduction()) {
     // Version the CSS for cache busting
     mix.version();
-
-    // Purge the CSS
-    config.plugins.push(
-        new PurgecssPlugin({
-            paths: glob.sync([
-                path.join(__dirname, "resources/views/**/*.blade.php"),
-                path.join(__dirname, "styleguide/Views/**/*.blade.php"),
-                path.join(__dirname, "factories/**/*.php"),
-                path.join(__dirname, "resources/js/**/*.js"),
-                path.join(__dirname, "node_modules/foundation-sites/js/foundation.offcanvas.js")
-            ]),
-            extractors: [
-                {
-                    extractor: SpecialCharactersExtractor,
-                    extensions: ["html", "js", "php", "vue"]
-                }
-            ],
-            whitelistPatterns: [/icon-/, /slick-/, /mfp-/, /at-/]
-        })
-    );
 }
 
 // Override webpack configuration
