@@ -5,7 +5,7 @@
 <div class="{{ $class ?? 'image-button-list' }}">
 
 @foreach($images as $image)
-    <div>
+    <div class="my-4">
         @if(!empty($image['link']))<a href="{{ $image['link'] }}"@if(empty($image['relative_url'])) class="button expanded" @endif>@endif
             @if(!empty($image['relative_url']))
                 @image($image['relative_url'], $image['title'], $class ?? '')
