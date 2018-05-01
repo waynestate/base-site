@@ -3,7 +3,7 @@
 @section('content')
     @if($back_url != '')
         <div class="profile__return relative">
-            <a href="{{ $back_url }}" class="text-right absolute pin-r md:py-1">&lt; Return to listing</a>
+            <a href="{{ $back_url }}" class="text-right absolute pin-r md:py-1 pr-4">&lt; Return to listing</a>
         </div>
     @endif
 
