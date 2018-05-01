@@ -46,15 +46,15 @@ View the full documentation at https://tailwindcss.com.
 let colors = {
     'transparent': 'transparent',
 
-    'black': '#22292f',
+    'black': '#22292f', // using
     'grey-darkest': '#3d4852',
-    'grey-darker': '#606f7b',
-    'grey-dark': '#8795a1',
-    'grey': '#b8c2cc',
-    'grey-light': '#dae1e7',
+    'grey-darker': '#606f7b', // using
+    'grey-dark': '#8795a1', // using
+    'grey': '#b8c2cc', // using
+    'grey-light': '#dae1e7', // using
     'grey-lighter': '#f1f5f8',
     'grey-lightest': '#f8fafc',
-    'white': '#ffffff',
+    'white': '#ffffff', // using
 
     'red-darkest': '#3b0d0c',
     'red-darker': '#621b18',
@@ -75,18 +75,18 @@ let colors = {
     'yellow-darkest': '#453411',
     'yellow-darker': '#684f1d',
     'yellow-dark': '#f2d024',
-    'yellow': '#ffd478',
+    'yellow': '#ffd478', // changed
     'yellow-light': '#fff382',
     'yellow-lighter': '#fff9c2',
     'yellow-lightest': '#fcfbeb',
 
     'green-darkest': '#0f2f21',
-    'green-darker': '#093f39',
-    'green-dark': '#0c5449',
-    'green': '#0a5449',
+    'green-darker': '#093f39', // changed
+    'green-dark': '#0c5449', // changed
+    'green': '#0a5449', // changed
     'green-light': '#51d88a',
     'green-lighter': '#a2f5bf',
-    'green-lightest': '#e3fcec',
+    'green-lightest': '#00ab99', // changed
 
     'teal-darkest': '#0d3331',
     'teal-darker': '#20504f',
@@ -96,7 +96,7 @@ let colors = {
     'teal-lighter': '#a0f0ed',
     'teal-lightest': '#e8fffe',
 
-    'blue-darkest': '#12283a',
+    'blue-darkest': '#023337', // changed
     'blue-darker': '#1c3d5a',
     'blue-dark': '#2779bd',
     'blue': '#3490dc',
@@ -493,6 +493,7 @@ module.exports = {
         '8': '2rem',
         '10': '2.5rem',
         '12': '3rem',
+        '14': '3.5rem',
         '16': '4rem',
         '24': '6rem',
         '32': '8rem',
@@ -540,6 +541,7 @@ module.exports = {
         '8': '2rem',
         '10': '2.5rem',
         '12': '3rem',
+        '14': '3.5rem',
         '16': '4rem',
         '24': '6rem',
         '32': '8rem',
@@ -916,7 +918,7 @@ module.exports = {
     */
 
     plugins: [
-
+        require('glhd-tailwindcss-transitions')(), // https://github.com/glhd/tailwindcss-plugins/
     ],
 
 
