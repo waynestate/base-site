@@ -5,7 +5,7 @@
 
     <div class="content">
         {!! $page['content']['main'] !!}
-   
+
 
         <table class="table-stack">
             <thead>
@@ -31,7 +31,7 @@
         <a class="button" onclick="$('pre.table-stack').toggleClass('hidden');">See Table Code</a>
 
         <pre class="table-stack hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
-        {{ htmlspecialchars('
+        {!! htmlspecialchars('
 <table class="table-stack">
     <thead>
         <tr>
@@ -49,7 +49,7 @@
         </tr>
     </tbody>
 </table>
-        ') }}
+        ') !!}
         </pre>
     </div>
 @endsection

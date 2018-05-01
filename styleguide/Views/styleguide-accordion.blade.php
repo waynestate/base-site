@@ -14,7 +14,7 @@
 <a class="button" onclick="$('pre.accordions').toggleClass('hidden');">See Accordion Code</a>
 
     <pre class="accordions hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
-    {{ htmlspecialchars('
+    {!! htmlspecialchars('
 <ul class="accordion">
     <li class="is-active">
         <a href="#panel1a">Accordion 1</a>
@@ -35,6 +35,6 @@
         </div>
     </li>
 </ul>
-    ') }}
+    ') !!}
     </pre>
 @endsection
