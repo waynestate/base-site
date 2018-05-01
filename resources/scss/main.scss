@@ -26,11 +26,9 @@ $slick-loader-path: "/_resources/images/";
 @import "~@waynestate/wsuheader/dist/header";
 @import "~@waynestate/wsufooter/dist/footer";
 
-// Partials
-@import "partials/banner";
-
 // Reusable components
 @import "components/accordion";
+@import "components/banner";
 @import "components/button";
 @import "components/content";
 @import "components/font-icons";
