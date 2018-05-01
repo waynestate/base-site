@@ -28,10 +28,7 @@ $slick-loader-path: "/_resources/images/";
 
 // Partials
 @import "partials/fonts";
-@import "partials/menu-main";
-@import "partials/menu-offcanvas";
 @import "partials/content-area";
-@import "partials/content";
 @import "partials/footer-social";
 @import "partials/banner";
 @import "partials/breadcrumbs";
@@ -39,9 +36,13 @@ $slick-loader-path: "/_resources/images/";
 // Reusable components
 @import "components/accordion";
 @import "components/button";
+@import "components/content";
+@import "components/font-icons";
 @import "components/formy";
 @import "components/hero";
 @import "components/menu-icon";
+@import "components/menu-main";
+@import "components/menu-offcanvas";
 @import "components/menu-top";
 @import "components/responsive-embed";
 @import "components/share";
