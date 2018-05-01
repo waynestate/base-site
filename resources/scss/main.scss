@@ -1,5 +1,17 @@
 @tailwind preflight;
 
+// Set default links to not have underlines since most cases this is what we want
+a {
+    color: #0c5449;
+    text-decoration: none;
+}
+
+// Tailwind preflight sets this to .5 which isn't ADA compliant
+input::placeholder,
+textarea::placeholder {
+    opacity: 1;
+}
+
 // Include slick carousel
 $slick-font-path: "../fonts/";
 $slick-loader-path: "/_resources/images/";
@@ -34,13 +46,13 @@ $slick-loader-path: "/_resources/images/";
 
 // Reusable components
 @import "components/accordion";
+@import "components/button";
 @import "components/formy";
 @import "components/hero";
+@import "components/menu-icon";
+@import "components/responsive-embed";
+@import "components/row";
 @import "components/table-stack";
-
-// New partials
-@import "components/components";
-@import "partials/global";
 
 // Tailwind
 @tailwind components;

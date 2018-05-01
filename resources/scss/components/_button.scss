@@ -1,0 +1,11 @@
+.button {
+    @apply .inline-block .align-middle .mb-2 .px-4 .py-2 .rounded .text-center .bg-green .text-white .text-sm .cursor-pointer;
+
+    border: 1px solid transparent;
+    -webkit-transition: background-color 0.25s ease-out, color 0.25s ease-out;
+    transition: background-color 0.25s ease-out, color 0.25s ease-out;
+}
+
+.button.expanded {
+    @apply .block .w-full .mx-0;
+}
