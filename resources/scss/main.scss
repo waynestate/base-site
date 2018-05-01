@@ -27,7 +27,6 @@ $slick-loader-path: "/_resources/images/";
 @import "~@waynestate/wsufooter/dist/footer";
 
 // Partials
-@import "partials/utilities";
 @import "partials/fonts";
 @import "partials/menu-main";
 @import "partials/menu-top";
@@ -53,6 +52,7 @@ $slick-loader-path: "/_resources/images/";
 @import "components/responsive-embed";
 @import "components/row";
 @import "components/table-stack";
+@import "components/visually-hidden";
 
 // Tailwind
 @tailwind components;

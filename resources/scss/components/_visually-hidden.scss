@@ -6,8 +6,7 @@
  *    causes content to wrap 1 word per line:
  *    https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
  */
-.visuallyhidden,
-.rotate_arrows .slick-dots {
+.visually-hidden {
     border: 0;
     clip: rect(0 0 0 0);
     -webkit-clip-path: inset(50%);
@@ -19,8 +18,4 @@
     position: absolute;
     width: 1px;
     white-space: nowrap; /* 1 */
-}
-
-.min-width-100 {
-    min-width: 100%;
 }
