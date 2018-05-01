@@ -1,13 +1,8 @@
 .menu-top-container {
     height: 65px;
 
-    .row,
-    .column {
+    .row {
         height: 100%;
-    }
-
-    &.menu-top-bg {
-        background: #093f39;
     }
 
     // Center vertically
@@ -31,14 +26,6 @@
                 width: 75%;
             }
         }
-    }
-
-    // Remove when Foundation.Sticky is working correctly
-    &.sticky {
-        width: 100%;
-        position: fixed;
-        top: 0;
-        z-index: 5;
     }
 
     h1,
@@ -107,31 +94,6 @@
 
         .icon-cancel-1::before {
             text-align: right;
-        }
-    }
-}
-
-#top-menu .menu-top {
-    // menu-top-breakpoint down
-    @media screen and (max-width: 48.75em) {
-        // Animation for menu fade in
-        animation: fadein 1s;
-
-        // Delay animation for a bit so menu flash doesn't occur on faster 3g and up
-        @keyframes fadein {
-            0% {
-                opacity: 0;
-                height: 0;
-            }
-
-            90% {
-                opacity: 0;
-            }
-
-            100% {
-                opacity: 1;
-                height: 100%;
-            }
         }
     }
 }
