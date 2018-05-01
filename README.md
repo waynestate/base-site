@@ -104,7 +104,6 @@ Email web@wayne.edu with your request.
 1. Open `/resources/views/`
 1. This folder contains all the views for the front-end using the [blade templating engine](https://laravel.com/docs/5.2/blade)
 1. Files must be saved in the format of: `homepage.blade.php`
-1. Partials: Contains views that are only used once in the project
 1. Components: Contains views that are reusable
 
 ## Pages

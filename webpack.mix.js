@@ -120,11 +120,11 @@ config = {
         new CopyWebpackPlugin([
             {
                 from: 'node_modules/@waynestate/wsuheader/dist/header.html',
-                to: path.resolve('resources/views/partials/header.blade.php'),
+                to: path.resolve('resources/views/components/header.blade.php'),
             },
             {
                 from: 'node_modules/@waynestate/wsufooter/dist/footer.html',
-                to: path.resolve('resources/views/partials/footer.blade.php'),
+                to: path.resolve('resources/views/components/footer.blade.php'),
             },
             {
                 from: 'vendor/waynestate/error-404/dist/404.php',
