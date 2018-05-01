@@ -4,7 +4,7 @@
     @include('components.page-title', ['title' => $page['title']])
 
     @if($hide_filtering == false)
-        <form name="programs" method="get" class="filter">
+        <form name="programs" method="get" class="filter formy">
             <label for="filter-group">View by department:</label>
             <div class="row px-4">
                 <div class="w-5/6">
