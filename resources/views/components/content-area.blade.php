@@ -32,7 +32,7 @@
             @endif
         </div>
 
-        <div class="w-full px-4 @if($site_menu['meta']['has_selected'] == false && ((isset($show_site_menu) && $show_site_menu != true) || !isset($show_site_menu)))md:w-full @else md:w-3/4 @endif content-area" data-off-canvas-content>
+        <div class="w-full @if($site_menu['meta']['has_selected'] == false && ((isset($show_site_menu) && $show_site_menu != true) || !isset($show_site_menu)))md:w-full @else md:w-3/4 @endif content-area" data-off-canvas-content>
             @if(!empty($hero) && ($site_menu['meta']['has_selected'] == true || config('app.hero_contained') === true))
                 @include('components.hero', ['images' => $hero, 'class' => 'hero--childpage'])
             @endif
