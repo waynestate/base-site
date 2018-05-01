@@ -6,14 +6,14 @@
     <div class="news-listing">
         <dl>
             @forelse($news as $news_item)
-                <dt>
+                <dt class="mb-1">
                     <a href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}news/{{ $news_item['slug'] }}-{{ $news_item['news_id'] }}">
                         {{ $news_item['title'] }}
                     </a>
                 </dt>
 
-                <dd>
-                    <time datetime="{{ $news_item['posted'] }}">{{ apdatetime(date('F j, Y', strtotime($news_item['posted']))) }}</time>
+                <dd class="mb-2 pb-2 border-b border-grey-light">
+                    <time class="block text-sm text-grey-darker" datetime="{{ $news_item['posted'] }}">{{ apdatetime(date('F j, Y', strtotime($news_item['posted']))) }}</time>
                     {{ $news_item['excerpt'] }}
                 </dd>
             @empty

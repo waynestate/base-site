@@ -7,13 +7,13 @@
         <div class="addthis_share">Share</div>
         <div class="addthis_sharing_toolbox"></div>
 
-        <time datetime="{{ $news['posted'] }}">{{ apdatetime(date('F j, Y', strtotime($news['posted']))) }}</time>
+        <time class="block text-sm text-grey-darker mb-2" datetime="{{ $news['posted'] }}">{{ apdatetime(date('F j, Y', strtotime($news['posted']))) }}</time>
 
         <div class="content">
             {!! $news['body'] !!}
         </div>
 
-        <p rel="back">
+        <p rel="back" class="pt-4">
             <a rel="back" href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}news">Back to listing</a>
         </p>
     </div>
