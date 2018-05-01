@@ -1,9 +1,12 @@
+// Set default links to not have underlines since most cases this is what we want
 a {
     color: inherit;
     text-decoration: none;
 }
 
+// Tailwind preflight sets this to .5 which isn't ADA compliant
 input::placeholder,
 textarea::placeholder {
     opacity: 1;
 }
+
