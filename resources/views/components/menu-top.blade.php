@@ -36,7 +36,7 @@
             </div>
 
             @if(!empty($banner))
-                @include('partials/banner', ['banner' => $banner])
+                @include('components.banner', ['banner' => $banner])
             @endif
         </div>
     </div>

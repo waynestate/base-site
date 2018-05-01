@@ -1,4 +1,4 @@
-@extends('partials.content-area')
+@extends('components.content-area')
 
 @section('content')
     @include('components.page-title', ['title' => $news['title']])

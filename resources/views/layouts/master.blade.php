@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html class="no-js bg-white antialiased" lang="en">
 <head>
-    @include('partials.meta')
+    @include('components.meta')
 
-    <title>@include('partials.head-title')</title>
+    <title>@include('components.head-title')</title>
 
     <link rel="icon" type="image/x-icon" href="https://wayne.edu/favicon.ico">
     <link rel="stylesheet" href="{{ mix('_resources/css/main.css') }}">
@@ -12,17 +12,17 @@
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/js/vendor/modernizr.js"></script>
     <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script><![endif]-->
-    @include('partials.ga')
+    @include('components.ga')
 </head>
 <body class="font-sans font-normal text-black leading-normal text-base">
 
-@include('partials.skip')
+@include('components.skip')
 
-@include('partials.header')
+@include('components.header')
 
 <div id="menu-top-section" class="header-menu">
     @if(!empty($site))
-        @include('partials.menu-top', ['site' => $site])
+        @include('components.menu-top', ['site' => $site])
     @endif
 </div>
 
@@ -33,18 +33,18 @@
 
     <div id="footer-social">
         @if(!empty($social))
-            @include('partials.footer-social', ['social' => $social])
+            @include('components.footer-social', ['social' => $social])
         @endif
     </div>
 
     <div id="footer-contact">
         @if(!empty($contact))
-            @include('partials.footer-contact', ['contact' => $contact])
+            @include('components.footer-contact', ['contact' => $contact])
         @endif
     </div>
 </div>
 
-@include('partials.footer')
+@include('components.footer')
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="{{ mix('_resources/js/main.js') }}"></script>

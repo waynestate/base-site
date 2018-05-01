@@ -38,7 +38,7 @@
             @endif
 
             @if(!empty($breadcrumbs))
-                @include('partials.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
+                @include('components.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
             @endif
 
             <main id="main" tabindex="-1">
