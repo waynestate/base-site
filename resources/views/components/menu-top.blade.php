@@ -3,7 +3,7 @@
     $top_menu_output => string // '<ul></ul>'
 --}}
 <div class="menu-top">
-    <div class="menu-top-container bg-green-dark">
+    <div class="menu-top-container bg-green-darker">
         <div class="row relative px-4">
             <div class="title-area{{ config('app.surtitle') === null ? ' vertical-centering' : '' }}">
                 @if(config('app.surtitle') !== null)
