@@ -33,6 +33,7 @@
     "eslint": "^3.7.1",
     "eslint-loader": "^1.5.0",
     "foundation-sites": "~6.3.0",
+    "glhd-tailwindcss-transitions": "^0.3.0",
     "intersection-observer": "^0.5.0",
     "laravel-mix": "^2.0",
     "laravel-mix-purgecss": "^2.0.0",

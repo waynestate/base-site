@@ -3524,6 +3524,10 @@ gifsicle@^3.0.0:
     bin-wrapper "^3.0.0"
     logalot "^2.0.0"
 
+glhd-tailwindcss-transitions@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/glhd-tailwindcss-transitions/-/glhd-tailwindcss-transitions-0.3.0.tgz#9c32e35ba3a11a2d666caa559a1860e61674bcaf"
+
 glob-all@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/glob-all/-/glob-all-3.1.0.tgz#8913ddfb5ee1ac7812656241b03d5217c64b02ab"
