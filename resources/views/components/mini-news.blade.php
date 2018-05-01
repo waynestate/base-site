@@ -7,14 +7,14 @@
 --}}
 <h2>{{ $heading ?? 'News' }}</h2>
 
-<ul class="listing">
+<ul class="list-reset">
     @foreach($news as $item)
-        <li>
-            <a href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}news/{{ $item['slug'] }}-{{ $item['news_id'] }}">
+        <li class="mb-4">
+            <a href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}news/{{ $item['slug'] }}-{{ $item['news_id'] }}" class="underline hover:no-underline font-normal">
                 {{ $item['title'] }}
             </a>
         </li>
     @endforeach
 </ul>
 
-<a href="/{{ $url ?? 'news/' }}" class="more-link">{{ $link_text ?? 'More news' }}</a>
+<a href="/{{ $url ?? 'news/' }}" class="block my-4 underline hover:no-underline">{{ $link_text ?? 'More news' }}</a>

@@ -6,10 +6,10 @@
 --}}
 <h2 class="mb-4">{{ $heading ?? 'Resources' }}</h2>
 
-<ul class="listing">
+<ul class="list-reset">
     @foreach($items as $item)
-        <li>
-            <a href="{{ $item['link'] }}">{{ $item['title'] }}</a>
+        <li class="mb-4">
+            <a href="{{ $item['link'] }}" class="underline hover:no-underline font-normal">{{ $item['title'] }}</a>
         </li>
     @endforeach
 </ul>
