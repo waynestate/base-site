@@ -6,7 +6,6 @@
     <div class="content">
         {!! $page['content']['main'] !!}
 
-
         <table class="table-stack">
             <thead>
                 <tr>
@@ -26,7 +25,6 @@
                 @endfor
             </tbody>
         </table>
-
 
         <a class="button" onclick="$('pre.table-stack').toggleClass('hidden');">See Table Code</a>
 

@@ -39,8 +39,6 @@ $slick-loader-path: "/_resources/images/";
 @import "partials/breadcrumbs";
 @import "partials/profile-listing";
 @import "partials/profile-view";
-@import "partials/rotate";
-@import "partials/share";
 
 // Reusable components
 @import "components/accordion";
@@ -49,6 +47,8 @@ $slick-loader-path: "/_resources/images/";
 @import "components/hero";
 @import "components/menu-icon";
 @import "components/responsive-embed";
+@import "components/share";
+@import "components/rotate";
 @import "components/row";
 @import "components/skip";
 @import "components/table-stack";
