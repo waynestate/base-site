@@ -29,6 +29,7 @@ class HeaderTitleDoubleController extends Controller
         config([
             'app.surtitle' => $this->faker->sentence($this->faker->numberBetween(2, 4)),
             'app.surtitle_main_site_enabled' => true,
+            'app.top_menu_enabled' => true,
         ]);
 
         return view('styleguide-childpage', merge($request->data));
