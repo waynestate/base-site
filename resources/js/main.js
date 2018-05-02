@@ -14,6 +14,4 @@ import './modules/anchor';
 
 // Foundation Modules
 import './modules/accordion';
-import './modules/equalizer';
 import './modules/offcanvas';
-import './modules/tabs';

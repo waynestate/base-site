@@ -2,7 +2,7 @@
 
 // Set default links to not have underlines since most cases this is what we want
 a {
-    color: #0c5449;
+    @apply .text-green-dark;
     text-decoration: none;
 }
 
