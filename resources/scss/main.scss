@@ -1,16 +1,5 @@
+// Combination of normalize and tailwind resets
 @tailwind preflight;
-
-// Set default links to not have underlines since most cases this is what we want
-a {
-    @apply .text-green-dark;
-    text-decoration: none;
-}
-
-// Tailwind preflight sets this to .5 which isn't ADA compliant
-input::placeholder,
-textarea::placeholder {
-    opacity: 1;
-}
 
 // Include slick carousel
 $slick-font-path: "../fonts/";
@@ -27,6 +16,7 @@ $slick-loader-path: "/_resources/images/";
 @import "~@waynestate/wsufooter/dist/footer";
 
 // Reusable components
+@import "components/global";
 @import "components/accordion";
 @import "components/banner";
 @import "components/button";
