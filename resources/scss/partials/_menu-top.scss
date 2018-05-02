@@ -6,6 +6,10 @@
         height: 100%;
     }
 
+    .title-area {
+        display: inline-block;
+    }
+
     &.menu-top-bg {
         background: $menu-top-background;
     }
