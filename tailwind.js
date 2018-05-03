@@ -144,6 +144,7 @@ let screens = {
     'lg': '990px',
     'xl': '1200px',
     'mt': '780px', // Adjust this based on the top menu width
+    'print': {'raw': 'print'},
 }
 
 module.exports = {

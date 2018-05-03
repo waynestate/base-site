@@ -12,7 +12,7 @@ textarea::placeholder {
 }
 
 // Global print styles
-@media print {
+@screen print {
     a::after {
         content: " (" attr(href) ") ";
         font-size: 0.8em;
