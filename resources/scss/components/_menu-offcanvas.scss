@@ -352,105 +352,102 @@
     }
 }
 
-// Our offcanvas overrides - menu-top-breakpoint down
-@media screen and (max-width: 48.75em) {
-    // Top level MAIN MENU drop down
-    .offcanvas-main-menu {
-        display: block;
+// Top level
+.offcanvas-main-menu {
+    display: block;
 
-        ul ul li {
+    ul ul li {
+        background-color: #10312c;
+    }
+
+    ul li .main-menu {
+        background-color: #10312c;
+        text-transform: uppercase;
+        font-size: 1rem;
+
+        &:hover {
             background-color: #10312c;
-        }
-
-        ul li .main-menu {
-            background-color: #10312c;
-            text-transform: uppercase;
-            font-size: 1rem;
-
-            &:hover {
-                background-color: #10312c;
-            }
-        }
-
-        // Menu Header top level (MAIN MENU)
-        ul ul {
-            border-bottom: 5px solid #10312c;
         }
     }
 
-    // Offcanvas menu overrides
-    .main-menu {
-        height: 100%;
-        background-color: #093f39;
-        padding-left: 0;
-        padding-right: 0;
-        // Animation for menu fade in
-        animation: fadein 1s;
+    // Menu Header top level (MAIN MENU)
+    ul ul {
+        border-bottom: 5px solid #10312c;
+    }
+}
 
-        // Delay animation for a bit so menu flash doesn't occur on faster 3g and up
-        @keyframes fadein {
-            0% {
-                opacity: 0;
-                height: 0;
-            }
+.expand-icons {
+    float: right;
+    font-size: 1.5rem;
+    display: flex;
+}
 
-            90% {
-                opacity: 0;
-            }
+// Offcanvas menu overrides
+.main-menu-offcanvas {
+    height: 100%;
+    background-color: #093f39;
+    padding-left: 0;
+    padding-right: 0;
+    // Animation for menu fade in
+    animation: fadein 1s;
 
-            100% {
-                opacity: 1;
-                height: 100%;
-            }
+    // Delay animation for a bit so menu flash doesn't occur on faster 3g and up
+    @keyframes fadein {
+        0% {
+            opacity: 0;
+            height: 0;
         }
 
-        h2 {
+        90% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+            height: 100%;
+        }
+    }
+
+    h2 {
+        color: rgba(255, 255, 255, 0.9);
+        padding: 0 0 5px 15px;
+        margin-top: 32px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    // Selected State
+    .selected > a {
+        color: #ffd969;
+    }
+
+    ul {
+        background-color: #113f39;
+        padding: 0;
+
+        li a {
             color: rgba(255, 255, 255, 0.9);
-            padding: 0 0 5px 15px;
-            margin-top: 32px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        // Selected State
-        .selected > a {
+        a:hover,
+        .selected a:hover {
+            background: transparent;
             color: #ffd969;
         }
 
-        ul {
-            background-color: #113f39;
-            padding: 0;
-
-            li a {
-                color: rgba(255, 255, 255, 0.9);
-            }
-
-            a:hover,
-            .selected a:hover {
-                background: transparent;
-                color: #ffd969;
-            }
-
-            // Indent second level now since first level is shown
-            li > ul > li a {
-                padding-left: 2em;
-            }
-
-            // Indent third level now since first level is shown
-            li > ul > li > ul > li a {
-                padding-left: 3em;
-            }
+        // Indent second level now since first level is shown
+        li > ul > li a {
+            padding-left: 2em;
         }
-    }
 
-    .expand-icons {
-        float: right;
-        font-size: 1.5rem;
-        display: flex;
+        // Indent third level now since first level is shown
+        li > ul > li > ul > li a {
+            padding-left: 3em;
+        }
     }
 }
 
 // Hide the main menu toggle when necessary
-@screen md {
+@screen mt {
     .offcanvas-main-menu {
         display: none;
     }

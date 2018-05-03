@@ -31,6 +31,7 @@ import 'foundation-sites/js/foundation.offcanvas';
                 // Remove classes so the menu is accessible on large screens
                 $('#page-menu').removeClass('position-right');
                 $('#page-menu').removeClass('off-canvas-absolute');
+                $('div.main-menu').removeClass('main-menu-offcanvas');
             }else{
                 // Disable CSS transitions
                 $('#page-menu').addClass('notransition');
@@ -38,6 +39,8 @@ import 'foundation-sites/js/foundation.offcanvas';
                 // Position the menu properly so offcanvas works
                 $('#page-menu').addClass('position-right');
                 $('#page-menu').addClass('off-canvas-absolute');
+
+                $('div.main-menu').addClass('main-menu-offcanvas');
 
                 // Trigger a reflow, flushing the CSS changes
                 $('#page-menu')[0].offsetHeight;
