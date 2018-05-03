@@ -44,14 +44,20 @@ table.table-stack {
         display: block;
     }
 
+    td {
+        padding-left: 0.75em;
+    }
+
     /* Add data labels */
     td::before {
         content: attr(data-label) ":";
-        display: inline;
+        display: block;
         font-weight: bold;
         line-height: 1.5;
         padding-right: 20px;
         color: #00565c;
+        margin-bottom: 0.75em;
+        margin-left: 0;
     }
 
     @screen md {
@@ -79,24 +85,12 @@ table.table-stack {
 
         td {
             display: table-cell;
+            padding: 10px;
 
             &::before {
                 content: "";
                 padding: 0;
             }
-        }
-    }
-
-    /* Stack labels vertically on smaller screens - medium down */
-    @media screen and (max-width: 48.6875em) {
-        td {
-            padding-left: 0.75em;
-        }
-
-        td::before {
-            display: block;
-            margin-bottom: 0.75em;
-            margin-left: 0;
         }
     }
 }
