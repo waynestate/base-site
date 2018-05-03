@@ -1,13 +1,11 @@
 .rotate_arrows.slick-dotted.slick-slider {
     margin-bottom: 0.9375rem;
 
-    // medium breakpoint
-    @media print, screen and (min-width: 26.25em) {
+    @screen md {
         margin-bottom: 1.875rem;
     }
 
-    // large breakpoint
-    @media print, screen and (min-width: 48.75em) {
+    @screen lg {
         margin-bottom: 2.5rem;
     }
 }
@@ -45,8 +43,7 @@
     font-family: waynestate;
     font-size: 2.5rem;
 
-    // breakpoint large
-    @media print, screen and (min-width: 48.75em) {
+    @screen lg {
         font-size: 3.75rem;
     }
 }

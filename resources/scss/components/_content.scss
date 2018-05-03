@@ -148,25 +148,27 @@
         }
     }
 
-    img {
-        padding: 10px;
+    img {        
+        display: block;
+        width: 100%;
+        margin: 10px auto;
+        padding: 0;
 
-        // menu-top-breakpoint down
-        @media screen and (max-width: 48.75em) {
-            display: block;
-            width: 100%;
-            margin: 10px auto;
-            padding: 0;
+        &[class^="float-"] {
+            float: none !important;
+        }
 
-            &[class^="float-"] {
-                float: none !important;
-            }
+        &.icon {
+            display: inline-block;
+            width: auto;
+            margin: 10px;
+        }
 
-            &.icon {
-                display: inline-block;
-                width: auto;
-                margin: 10px;
-            }
+        @screen mt {
+            padding: 10px;
+            width: auto;
+            margin: 0px;
+            float: inherit;
         }
     }
 
@@ -175,8 +177,7 @@
         display: table;
         margin: 15px auto;
 
-        // medium breakpoint
-        @media print, screen and (min-width: 26.25em) {
+        @screen md {
             margin: 25px;
             width: auto;
         }

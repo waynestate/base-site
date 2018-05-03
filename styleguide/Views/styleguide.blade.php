@@ -222,8 +222,8 @@
 
         <hr>
 
-        <div class="row flex flex-wrap px-4">
-            <div class="w-full sm:w-1/4">
+        <div class="row flex flex-wrap">
+            <div class="w-full sm:w-1/4 px-4">
                 <h2>Figure (left)</h2>
 
                 <figure class="float-left" style="margin-top: 15px;">
@@ -243,7 +243,7 @@
                 </pre>
             </div>
 
-            <div class="w-full sm:w-1/4">
+            <div class="w-full sm:w-1/4 px-4">
                 <h2>Figure (center)</h2>
 
                 <figure class="text-center">
@@ -263,7 +263,7 @@
                 </pre>
             </div>
 
-            <div class="w-full sm:w-1/4">
+            <div class="w-full sm:w-1/4 px-4">
                 <h2>Figure</h2>
 
                 <figure>
@@ -283,7 +283,7 @@
                 </pre>
             </div>
 
-            <div class="w-full sm:w-1/4">
+            <div class="w-full sm:w-1/4 px-4">
                 <h2>Figure (right)</h2>
 
                 <figure class="float-right" style="margin-top: 15px;">

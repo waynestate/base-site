@@ -200,7 +200,7 @@
     backface-visibility: hidden;
 }
 
-@media print, screen and (min-width: 26.25em) {
+@screen md {
     .position-left.reveal-for-medium {
         transform: none;
         z-index: 1;
@@ -238,7 +238,7 @@
     }
 }
 
-@media print, screen and (min-width: 48.75em) {
+@screen mt {
     .position-left.reveal-for-large {
         transform: none;
         z-index: 1;
@@ -276,7 +276,7 @@
     }
 }
 
-@media screen and (min-width: 61.875em) {
+@screen lg {
     .position-left.reveal-for-xlarge {
         transform: none;
         z-index: 1;
@@ -314,7 +314,7 @@
     }
 }
 
-@media screen and (min-width: 48.75em) {
+@screen md {
     .position-left.reveal-for-offcanvas {
         transform: none;
         z-index: 1;
@@ -449,8 +449,8 @@
     }
 }
 
-// Hide the main menu toggle when necessary - menu-top-breakpoint up
-@media screen and (min-width: 48.75em) {
+// Hide the main menu toggle when necessary
+@screen md {
     .offcanvas-main-menu {
         display: none;
     }

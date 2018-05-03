@@ -6,7 +6,7 @@
         position: relative;
 
         // Large up
-        @media screen and (min-width: 48.75em) {
+        @screen lg {
             height: 36.3vw;
             max-height: 550px;
             margin: 0;
@@ -19,8 +19,7 @@
         color: white;
         padding: 0.9375rem;
 
-        // Medium up
-        @media screen and (min-width: 26.25em) {
+        @screen md {
             position: absolute;
             bottom: 0;
             left: 0;
@@ -45,8 +44,7 @@
         margin-left: -15px;
         margin-right: -15px;
 
-        // offcanvas up
-        @media screen and (min-width: 48.75em) {
+        @screen mt {
             margin: 0;
         }
 

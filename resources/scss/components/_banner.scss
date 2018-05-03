@@ -3,8 +3,7 @@
         display: none;
         transition: all 0.2s ease-out;
 
-        // menu-top-breakpoint
-        @media screen and (min-width: 48.75em) {
+        @screen mt {
             display: flex;
             background-color: #ffd95c;
             align-items: center;
