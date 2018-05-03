@@ -6,61 +6,84 @@ table.table-stack {
     td {
         line-height: 1.5;
         text-align: left;
+        border: none;
     }
 
     // Header
     thead tr {
         border-collapse: collapse;
         background: #00565c;
+        position: absolute;
+        top: -9999em;
+        left: -9999em;
     }
 
     tbody th {
         padding: 10px;
     }
 
-    /* Stack rows vertically on small screens - medium down */
-    @media screen and (max-width: 48.6875em) {
-        /* Hide column labels */
+    tr {
+        border: 1px solid #eaeaea;
+
+        th::before {
+            content: attr(data-label) ": ";
+            display: inline;
+            font-weight: bold;
+            line-height: 1.5px;
+        }
+    }
+
+    /* Leave a space between table rows */
+    tr + tr {
+        margin-top: 1.5em;
+    }
+
+    /* Get table cells to act like rows */
+    tr,
+    td {
+        display: block;
+    }
+
+    /* Add data labels */
+    td::before {
+        content: attr(data-label) ":";
+        display: inline;
+        font-weight: bold;
+        line-height: 1.5;
+        padding-right: 20px;
+        color: #00565c;
+    }
+
+    @screen md {
         thead tr {
-            position: absolute;
-            top: -9999em;
-            left: -9999em;
+            position: static;
+            top: 0;
+            left: 0;
         }
 
         tr {
-            border: 1px solid #eaeaea;
+            border: none;
 
             th::before {
-                content: attr(data-label) ": ";
-                display: inline;
-                font-weight: bold;
-                line-height: 1.5px;
+                content: "";
             }
         }
 
-        /* Leave a space between table rows */
         tr + tr {
-            margin-top: 1.5em;
+            margin: 0;
         }
 
-        /* Get table cells to act like rows */
-        tr,
-        td {
-            display: block;
+        tr {
+            display: table-row;
         }
 
         td {
-            border: none;
-        }
+            display: table-cell;
 
-        /* Add data labels */
-        td::before {
-            content: attr(data-label) ":";
-            display: inline;
-            font-weight: bold;
-            line-height: 1.5;
-            padding-right: 20px;
-            color: #00565c;
+            &::before {
+                content: "";
+                padding: 0;
+            }
         }
     }
 

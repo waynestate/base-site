@@ -25,9 +25,10 @@
         }
 
         &.title-area {
-            // menu-top-breakpoint down
-            @media screen and (max-width: 48.75em) {
-                width: 75%;
+            width: 75%;
+
+            @screen mt {
+                width: 100%;
             }
         }
     }
