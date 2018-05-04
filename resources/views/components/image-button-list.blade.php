@@ -2,7 +2,7 @@
     $images => array // [['link', 'title', 'relative_url']]
     $class => string // 'image-button-list'
 --}}
-<div class="{{ $class ?? 'image-button-list' }}">
+@if(!empty($class))<div class="{{ $class }}">@endif
 
 @foreach($images as $image)
     <div class="my-4">
@@ -16,4 +16,4 @@
     </div>
 @endforeach
 
-</div>
+@if(!empty($class))</div>@endif
