@@ -11,7 +11,7 @@ import './modules/magnific-popup';
 import './modules/share';
 import './modules/lazy-image-loading';
 import './modules/anchor';
+import './modules/accordions';
 
 // Foundation Modules
-import './modules/accordion';
 import './modules/offcanvas';

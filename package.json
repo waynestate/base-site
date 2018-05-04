@@ -26,6 +26,7 @@
   "devDependencies": {
     "@waynestate/wsufooter": "^1.0.0",
     "@waynestate/wsuheader": "^2.0.0",
+    "accordion": "^2.1.1",
     "browser-sync": "^2.18.13",
     "browser-sync-webpack-plugin": "^1.2.0",
     "copy-webpack-plugin": "^4.2.0",
