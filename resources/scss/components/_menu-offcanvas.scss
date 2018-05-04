@@ -1,355 +1,37 @@
-// From foundation offcanvas
-.is-off-canvas-open {
-    overflow: hidden;
-}
-
-.js-off-canvas-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    -webkit-transition: opacity 0.5s ease, visibility 0.5s ease;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
-    background: rgba(254, 254, 254, 0.25);
-    opacity: 0;
-    visibility: hidden;
-    overflow: hidden;
-}
-
-.js-off-canvas-overlay.is-visible {
-    opacity: 1;
-    visibility: visible;
-}
-
-.js-off-canvas-overlay.is-closable {
-    cursor: pointer;
-}
-
-.js-off-canvas-overlay.is-overlay-absolute {
-    position: absolute;
-}
-
-.js-off-canvas-overlay.is-overlay-fixed {
+.slideout-menu {
     position: fixed;
+    top: 0; // adjust to bring the menu down 65px
+    bottom: 0;
+    width: 256px;
+    min-height: 100vh;
+    z-index: 0;
+    display: none;
 }
 
-.off-canvas-wrapper {
+.slideout-menu-left {
+    left: 0;
+}
+
+.slideout-menu-right {
+    right: 0;
+}
+
+.slideout-panel {
     position: relative;
+    z-index: 1;
+    will-change: transform;
+    background-color: #fff; /* A background-color is required */
+    min-height: 100vh;
+}
+
+.slideout-open,
+.slideout-open body,
+.slideout-open .slideout-panel {
     overflow: hidden;
 }
 
-.off-canvas {
-    position: fixed;
-    z-index: 4;
-    transition: transform 0.5s ease;
-    backface-visibility: hidden;
-    background: #f7f7f7;
-}
-
-[data-whatinput='mouse'] .off-canvas {
-    outline: 0;
-}
-
-.off-canvas.is-transition-overlap {
-    z-index: 10;
-}
-
-.off-canvas.is-transition-overlap.is-open {
-    box-shadow: 0 0 10px rgba(10, 10, 10, 0.7);
-}
-
-.off-canvas.is-open {
-    transform: translate(0, 0);
-}
-
-.off-canvas-absolute {
-    position: absolute;
-    z-index: 4;
-    transition: transform 0.5s ease;
-    backface-visibility: hidden;
-    background: #f7f7f7;
-}
-
-[data-whatinput='mouse'] .off-canvas-absolute {
-    outline: 0;
-}
-
-.off-canvas-absolute.is-transition-overlap {
-    z-index: 10;
-}
-
-.off-canvas-absolute.is-transition-overlap.is-open {
-    box-shadow: 0 0 10px rgba(10, 10, 10, 0.7);
-}
-
-.off-canvas-absolute.is-open {
-    transform: translate(0, 0);
-}
-
-.position-left {
-    top: 0;
-    left: 0;
-    width: 250px;
-    height: 100%;
-    transform: translateX(-250px);
-    overflow-y: auto;
-}
-
-.position-left.is-open ~ .off-canvas-content {
-    transform: translateX(250px);
-}
-
-.position-left.is-transition-push::after {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 1px;
-    box-shadow: 0 0 10px rgba(10, 10, 10, 0.7);
-    content: " ";
-}
-
-.position-left.is-transition-overlap.is-open ~ .off-canvas-content {
-    transform: none;
-}
-
-.position-right {
-    top: 0;
-    right: 0;
-    width: 250px;
-    height: 100%;
-    transform: translateX(250px);
-    overflow-y: auto;
-}
-
-.position-right.is-open ~ .off-canvas-content {
-    transform: translateX(-250px);
-}
-
-.position-right.is-transition-push::after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 1px;
-    box-shadow: 0 0 10px rgba(10, 10, 10, 0.7);
-    content: " ";
-}
-
-.position-right.is-transition-overlap.is-open ~ .off-canvas-content {
-    transform: none;
-}
-
-.position-top {
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 250px;
-    transform: translateY(-250px);
-    overflow-x: auto;
-}
-
-.position-top.is-open ~ .off-canvas-content {
-    transform: translateY(250px);
-}
-
-.position-top.is-transition-push::after {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 1px;
-    width: 100%;
-    box-shadow: 0 0 10px rgba(10, 10, 10, 0.7);
-    content: " ";
-}
-
-.position-top.is-transition-overlap.is-open ~ .off-canvas-content {
-    transform: none;
-}
-
-.position-bottom {
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 250px;
-    transform: translateY(250px);
-    overflow-x: auto;
-}
-
-.position-bottom.is-open ~ .off-canvas-content {
-    transform: translateY(-250px);
-}
-
-.position-bottom.is-transition-push::after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 1px;
-    width: 100%;
-    box-shadow: 0 0 10px rgba(10, 10, 10, 0.7);
-    content: " ";
-}
-
-.position-bottom.is-transition-overlap.is-open ~ .off-canvas-content {
-    transform: none;
-}
-
-.off-canvas-content {
-    transition: transform 0.5s ease;
-    backface-visibility: hidden;
-}
-
-@screen md {
-    .position-left.reveal-for-medium {
-        transform: none;
-        z-index: 1;
-    }
-
-    .position-left.reveal-for-medium ~ .off-canvas-content {
-        margin-left: 250px;
-    }
-
-    .position-right.reveal-for-medium {
-        transform: none;
-        z-index: 1;
-    }
-
-    .position-right.reveal-for-medium ~ .off-canvas-content {
-        margin-right: 250px;
-    }
-
-    .position-top.reveal-for-medium {
-        transform: none;
-        z-index: 1;
-    }
-
-    .position-top.reveal-for-medium ~ .off-canvas-content {
-        margin-top: 250px;
-    }
-
-    .position-bottom.reveal-for-medium {
-        transform: none;
-        z-index: 1;
-    }
-
-    .position-bottom.reveal-for-medium ~ .off-canvas-content {
-        margin-bottom: 250px;
-    }
-}
-
-@screen mt {
-    .position-left.reveal-for-large {
-        transform: none;
-        z-index: 1;
-    }
-
-    .position-left.reveal-for-large ~ .off-canvas-content {
-        margin-left: 250px;
-    }
-
-    .position-right.reveal-for-large {
-        transform: none;
-        z-index: 1;
-    }
-
-    .position-right.reveal-for-large ~ .off-canvas-content {
-        margin-right: 250px;
-    }
-
-    .position-top.reveal-for-large {
-        transform: none;
-        z-index: 1;
-    }
-
-    .position-top.reveal-for-large ~ .off-canvas-content {
-        margin-top: 250px;
-    }
-
-    .position-bottom.reveal-for-large {
-        transform: none;
-        z-index: 1;
-    }
-
-    .position-bottom.reveal-for-large ~ .off-canvas-content {
-        margin-bottom: 250px;
-    }
-}
-
-@screen lg {
-    .position-left.reveal-for-xlarge {
-        transform: none;
-        z-index: 1;
-    }
-
-    .position-left.reveal-for-xlarge ~ .off-canvas-content {
-        margin-left: 250px;
-    }
-
-    .position-right.reveal-for-xlarge {
-        transform: none;
-        z-index: 1;
-    }
-
-    .position-right.reveal-for-xlarge ~ .off-canvas-content {
-        margin-right: 250px;
-    }
-
-    .position-top.reveal-for-xlarge {
-        transform: none;
-        z-index: 1;
-    }
-
-    .position-top.reveal-for-xlarge ~ .off-canvas-content {
-        margin-top: 250px;
-    }
-
-    .position-bottom.reveal-for-xlarge {
-        transform: none;
-        z-index: 1;
-    }
-
-    .position-bottom.reveal-for-xlarge ~ .off-canvas-content {
-        margin-bottom: 250px;
-    }
-}
-
-@screen md {
-    .position-left.reveal-for-offcanvas {
-        transform: none;
-        z-index: 1;
-    }
-
-    .position-left.reveal-for-offcanvas ~ .off-canvas-content {
-        margin-left: 250px;
-    }
-
-    .position-right.reveal-for-offcanvas {
-        transform: none;
-        z-index: 1;
-    }
-
-    .position-right.reveal-for-offcanvas ~ .off-canvas-content {
-        margin-right: 250px;
-    }
-
-    .position-top.reveal-for-offcanvas {
-        transform: none;
-        z-index: 1;
-    }
-
-    .position-top.reveal-for-offcanvas ~ .off-canvas-content {
-        margin-top: 250px;
-    }
-
-    .position-bottom.reveal-for-offcanvas {
-        transform: none;
-        z-index: 1;
-    }
-
-    .position-bottom.reveal-for-offcanvas ~ .off-canvas-content {
-        margin-bottom: 250px;
-    }
+.slideout-open .slideout-menu {
+    display: block;
 }
 
 // Top level
@@ -376,37 +58,12 @@
     }
 }
 
-.expand-icons {
-    float: right;
-    font-size: 1.5rem;
-    display: flex;
-}
-
 // Offcanvas menu overrides
-.main-menu-offcanvas {
+.slideout-menu {
     height: 100%;
     background-color: #093f39;
     padding-left: 0;
     padding-right: 0;
-    // Animation for menu fade in
-    animation: fadein 1s;
-
-    // Delay animation for a bit so menu flash doesn't occur on faster 3g and up
-    @keyframes fadein {
-        0% {
-            opacity: 0;
-            height: 0;
-        }
-
-        90% {
-            opacity: 0;
-        }
-
-        100% {
-            opacity: 1;
-            height: 100%;
-        }
-    }
 
     h2 {
         color: rgba(255, 255, 255, 0.9);
@@ -451,9 +108,4 @@
     .offcanvas-main-menu {
         display: none;
     }
-}
-
-// Disable a CSS transition temporarily
-.notransition {
-    transition: none !important;
 }

@@ -29,5 +29,3 @@
 <meta name="twitter:site" content="@waynestate">
 <meta name="twitter:image" content="{{ isset($meta['image']) ? $meta['image'] : '' }}">
 <meta property="article:published_time" content="{{ isset($page['updated-at']) ? $page['updated-at'] : '' }}">
-
-<meta name="foundation-mq" content="foundation-mq" class="foundation-mq">

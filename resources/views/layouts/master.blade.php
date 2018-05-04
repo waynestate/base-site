@@ -10,7 +10,7 @@
     <link href="//fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
     @if(!empty($page['canonical']))<link rel="canonical" href="{{ $page['canonical'] }}">@endif
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/js/vendor/modernizr.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
     <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script><![endif]-->
     @include('components.ga')
 </head>
@@ -28,7 +28,9 @@
 
 <div class="off-canvas-wrapper">
     <div id="content">
-        @yield('content-area')
+        <main id="panel">
+            @yield('content-area')
+        </main>
     </div>
 
     <div id="footer-social">

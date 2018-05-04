@@ -10,8 +10,8 @@ Starter repository for creating a new website. Live demo can be found at https:/
 
 ## Features
 
-* Backend built on [Laravel v5.5](https://laravel.com/)
-* Frontend built on [Foundation v6.3](http://foundation.zurb.com/sites/docs/)
+* Backend built on [Laravel v5.6](https://laravel.com/)
+* Frontend built on [Tailwind](https://tailwindcss.com/)
 * [Webpack](https://webpack.github.io/)
 * Fluent webpack API using [Laravel Mix](https://laravel.com/docs/5.5/mix)
 * Zero downtime deployment using [Envoy](https://laravel.com/docs/5.5/envoy)

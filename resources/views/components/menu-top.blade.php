@@ -29,7 +29,7 @@
 
                     <div>
                         <ul class="menu-top menu-button mt:hidden">
-                            <li><a href="#page-menu" class="menu-toggle menu-icon" data-toggle="page-menu"><span class="visually-hidden">Menu</span></a></li>
+                            <li><button class="menu-toggle menu-icon"><span class="visually-hidden">Menu</span></button></li>
                         </ul>
                     </div>
                 </div>

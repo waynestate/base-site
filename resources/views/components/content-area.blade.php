@@ -8,31 +8,33 @@
     @endif
 
     <div class="row flex">
-        <div class="md:w-1/4 mt:pl-4 main-menu @if($site_menu['meta']['has_selected'] == false && ((isset($show_site_menu) && $show_site_menu != true) || !isset($show_site_menu))) mt:hidden @endif" data-off-canvas id="page-menu" role="navigation"  aria-label="Page menu" tabindex="-1">
-            @if(!empty($top_menu_output) && $site_menu !== $top_menu)
-                <div class="offcanvas-main-menu">
-                    <ul>
-                        <li>
-                            <a class="main-menu">Main Menu</a>
+        <div class="md:w-1/4 mt:pl-4 main-menu hidden mt:block @if($site_menu['meta']['has_selected'] == false && ((isset($show_site_menu) && $show_site_menu != true) || !isset($show_site_menu))) mt:hidden @endif" id="page-menu" role="navigation" aria-label="Page menu" tabindex="-1">
+            <nav id="menu" class="main-menu">
+                @if(!empty($top_menu_output) && $site_menu !== $top_menu)
+                    <div class="offcanvas-main-menu">
+                        <ul>
+                            <li>
+                                <a class="main-menu">Main Menu</a>
 
-                            {!! $top_menu_output !!}
-                        </li>
-                    </ul>
-                </div>
-            @endif
+                                {!! $top_menu_output !!}
+                            </li>
+                        </ul>
+                    </div>
+                @endif
 
-            @if(!empty($site_menu_output))
-                {!! $site_menu_output !!}
-            @endif
+                @if(!empty($site_menu_output))
+                    {!! $site_menu_output !!}
+                @endif
 
-            @yield('below_menu')
+                @yield('below_menu')
 
-            @if(!empty($under_menu))
-                @include('components.image-button-list', ['images' => $under_menu])
-            @endif
+                @if(!empty($under_menu))
+                    @include('components.image-button-list', ['images' => $under_menu])
+                @endif
+            </nav>
         </div>
 
-        <div class="w-full px-4 @if($site_menu['meta']['has_selected'] == false && ((isset($show_site_menu) && $show_site_menu != true) || !isset($show_site_menu)))md:w-full @else md:w-3/4 @endif content-area" data-off-canvas-content>
+        <div class="w-full px-4 @if($site_menu['meta']['has_selected'] == false && ((isset($show_site_menu) && $show_site_menu != true) || !isset($show_site_menu)))md:w-full @else md:w-3/4 @endif content-area">
             @if(!empty($hero) && ($site_menu['meta']['has_selected'] == true || config('app.hero_contained') === true))
                 @include('components.hero', ['images' => $hero, 'class' => 'hero--childpage'])
             @endif
