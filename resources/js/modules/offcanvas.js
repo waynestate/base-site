@@ -70,6 +70,7 @@ import Slideout from 'slideout/dist/slideout.js';
                  $('.menu-toggle').removeClass('icon-cancel-1');
                  $('.menu-toggle').addClass('menu-icon');
                  $('#page-menu').addClass('hidden');
+                 $('#page-menu').attr('aria-hidden', 'true');
             });
 
             window.WayneState.modules.slideout.on('beforeopen', function () {
@@ -78,6 +79,7 @@ import Slideout from 'slideout/dist/slideout.js';
                 $('.menu-toggle').addClass('icon-cancel-1');
                 $('.menu-toggle').removeClass('menu-icon');
                 $('#page-menu').removeClass('hidden');
+                $('#page-menu').attr('aria-hidden', 'false');
 
                 // Scroll the user to the top so they can see the full menu
                 window.scrollTo(0,0);
