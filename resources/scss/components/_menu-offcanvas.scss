@@ -2,10 +2,8 @@
     position: fixed;
     top: 0; // adjust to bring the menu down 65px
     bottom: 0;
-    width: 256px;
-    min-height: 100vh;
-    overflow-y: scroll;
-    z-index: 0;
+    width: 250px;
+    z-index: 10;
 }
 
 .slideout-menu-left {
@@ -22,12 +20,6 @@
     will-change: transform;
     background-color: #fff; /* A background-color is required */
     min-height: 100vh;
-}
-
-.slideout-open,
-.slideout-open body,
-.slideout-open .slideout-panel {
-    overflow: hidden;
 }
 
 .slideout-open .slideout-menu {
