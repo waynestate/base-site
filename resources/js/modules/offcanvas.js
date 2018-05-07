@@ -30,11 +30,33 @@ import Slideout from 'slideout/dist/slideout.js';
        }
 
         /**
+         * Opening and closing the offcanvas main main dropdown
+         */
+        mainMenuToggle() {
+            $('a.main-menu-toggle').prepend('<span class="expand-icons icon-right-open-mini float-right text-2xl flex"></span>');
+
+            $('a.main-menu-toggle').click(function() {
+                // Show/hide the main menu
+                $('.offcanvas-main-menu ul ul').toggle();
+
+                if($('.offcanvas-main-menu ul ul').is(':visible')) {
+                    $('a.main-menu-toggle .expand-icons').toggleClass('icon-right-open-mini icon-down-open-mini');
+                }else{
+                    $('a.main-menu-toggle .expand-icons').toggleClass('icon-down-open-mini icon-right-open-mini');
+                }
+
+                // Return false so it does not complete the click through
+                return false;
+            });
+        }
+
+        /**
          * Initialize
          */
         _init() {
             // Initialize classes
             $('#page-menu').addClass('hidden');
+            $('#menu .menu-top').addClass('hidden');
 
             // Toggle button
             document.querySelector('.menu-toggle').addEventListener('click', function() {
@@ -63,6 +85,9 @@ import Slideout from 'slideout/dist/slideout.js';
 
             // Initialize offcanvas classes
             this.resizeWindow();
+
+            // Toggle the Main Menu within offcanvas
+            this.mainMenuToggle();
         }
     }
 
