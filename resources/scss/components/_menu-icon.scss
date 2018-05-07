@@ -24,6 +24,10 @@
     box-shadow: 0 7px 0 #cacaca, 0 14px 0 #cacaca;
 }
 
+button.menu-toggle:focus {
+    outline: none;
+}
+
 .icon-cancel-1 {
     color: #fff;
 }
