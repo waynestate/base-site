@@ -33,6 +33,9 @@ import Slideout from 'slideout/dist/slideout.js';
          * Initialize
          */
         _init() {
+            // Initialize classes
+            $('#page-menu').addClass('hidden');
+
             // Toggle button
             document.querySelector('.menu-toggle').addEventListener('click', function() {
                 window.WayneState.modules.slideout.toggle();

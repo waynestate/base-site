@@ -4,8 +4,8 @@
     bottom: 0;
     width: 256px;
     min-height: 100vh;
+    overflow-y: scroll;
     z-index: 0;
-    display: none;
 }
 
 .slideout-menu-left {
