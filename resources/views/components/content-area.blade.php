@@ -11,7 +11,7 @@
         <div class="md:w-1/4 mt:pl-4 main-menu mt:block @if($site_menu['meta']['has_selected'] == false && ((isset($show_site_menu) && $show_site_menu != true) || !isset($show_site_menu))) mt:hidden @endif" id="page-menu" role="navigation" aria-label="Page menu" tabindex="-1">
             <nav id="menu" class="main-menu">
                 @if(!empty($top_menu_output) && $site_menu !== $top_menu)
-                    <div class="offcanvas-main-menu">
+                    <div class="offcanvas-main-menu mt:hidden">
                         <ul>
                             <li>
                                 <a class="main-menu">Main Menu</a>

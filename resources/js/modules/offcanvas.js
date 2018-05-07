@@ -43,16 +43,18 @@ import Slideout from 'slideout/dist/slideout.js';
 
             // Scroll the user to the top so they can see the full menu
             window.WayneState.modules.slideout.on('close', function () {
-                 // Swap icon
+                 // Swap icon and adjust screen size
+                 $('#panel').removeClass('min-h-screen');
                  $('.menu-toggle').removeClass('icon-cancel-1');
                  $('.menu-toggle').addClass('menu-icon');
                  $('#page-menu').addClass('hidden');
             });
 
             window.WayneState.modules.slideout.on('beforeopen', function () {
-                // Swap icon
-                $('.menu-toggle').removeClass('menu-icon');
+                // Swap icon and adjust screen size
+                $('#panel').addClass('min-h-screen');
                 $('.menu-toggle').addClass('icon-cancel-1');
+                $('.menu-toggle').removeClass('menu-icon');
                 $('#page-menu').removeClass('hidden');
 
                 // Scroll the user to the top so they can see the full menu

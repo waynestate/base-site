@@ -1,61 +1,36 @@
 .slideout-menu {
     position: fixed;
-    top: 0; // adjust to bring the menu down 65px
+    top: 0;
+    right: 0;
     bottom: 0;
     width: 250px;
-    z-index: 10;
-}
-
-.slideout-menu-left {
-    left: 0;
-}
-
-.slideout-menu-right {
-    right: 0;
-}
-
-.slideout-panel {
-    position: relative;
-    z-index: 1;
-    will-change: transform;
-    background-color: #fff; /* A background-color is required */
-    min-height: 100vh;
-}
-
-.slideout-open .slideout-menu {
-    display: block;
-}
-
-// Top level
-.offcanvas-main-menu {
-    display: block;
-
-    ul ul li {
-        background-color: #10312c;
-    }
-
-    ul li .main-menu {
-        background-color: #10312c;
-        text-transform: uppercase;
-        font-size: 1rem;
-
-        &:hover {
-            background-color: #10312c;
-        }
-    }
-
-    // Menu Header top level (MAIN MENU)
-    ul ul {
-        border-bottom: 5px solid #10312c;
-    }
-}
-
-// Offcanvas menu overrides
-.slideout-menu {
     height: 100%;
     background-color: #093f39;
-    padding-left: 0;
-    padding-right: 0;
+    z-index: 10;
+
+    // Main Menu within offcanvas
+    .offcanvas-main-menu {
+        display: block;
+
+        ul ul li {
+            background-color: #10312c;
+        }
+
+        ul li .main-menu {
+            background-color: #10312c;
+            text-transform: uppercase;
+            font-size: 1rem;
+
+            &:hover {
+                background-color: #10312c;
+            }
+        }
+
+        // Menu Header top level (MAIN MENU)
+        ul ul {
+            border-bottom: 5px solid #10312c;
+        }
+    }
 
     h2 {
         color: rgba(255, 255, 255, 0.9);
@@ -92,12 +67,5 @@
         li > ul > li > ul > li a {
             padding-left: 3em;
         }
-    }
-}
-
-// Hide the main menu toggle when necessary
-@screen mt {
-    .offcanvas-main-menu {
-        display: none;
     }
 }
