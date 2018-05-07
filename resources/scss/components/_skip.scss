@@ -1,22 +1,11 @@
 .skip a {
-    position: absolute;
+    @apply .absolute .h-px .w-px .text-left .overflow-hidden .text-black .bg-white .p-2;
+
     left: -1000px;
-    height: 1px;
-    width: 1px;
-    text-align: left;
-    overflow: hidden;
-    color: #000;
-    background: #fff;
-    padding: 4px;
 }
 
 .skip a:active,
 .skip a:focus,
 .skip a:hover {
-    left: 0;
-    top: 0;
-    width: auto;
-    height: auto;
-    overflow: visible;
-    z-index: 10000;
+    @apply .pin-l .pin-t .overflow-visible .z-50 .w-auto .h-auto;
 }
