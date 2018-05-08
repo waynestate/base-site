@@ -7,11 +7,11 @@
 
     <link rel="icon" type="image/x-icon" href="https://wayne.edu/favicon.ico">
     <link rel="stylesheet" href="{{ mix('_resources/css/main.css') }}">
-    <link href="//fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
     @if(!empty($page['canonical']))<link rel="canonical" href="{{ $page['canonical'] }}">@endif
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-    <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script><![endif]-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script><![endif]-->
     @include('components.ga')
 </head>
 <body class="font-sans font-normal text-black leading-normal text-base">
@@ -48,7 +48,7 @@
 
 @include('components.footer')
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="{{ mix('_resources/js/main.js') }}"></script>
 </body>
 </html>
