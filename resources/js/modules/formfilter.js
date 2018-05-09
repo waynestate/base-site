@@ -1,6 +1,4 @@
-import jQuery from 'jquery';
-
-(function($) {
+(function() {
     "use strict";
 
     /**
@@ -15,13 +13,15 @@ import jQuery from 'jquery';
          * Initialize
          */
         _init(){
-            $('#content form.filter').each(function () {
+            document.querySelectorAll('#content form.filter').forEach(function (item) {
                 // Remove the "Filter button
-                $(this).find('input[type="submit"]').hide();
+                document.querySelector('input[type="submit"]').style.display = 'none';
 
                 // All drop downs should submit the form
-                $(this).find('select').change(function () {
-                    $(this).closest('form').trigger('submit');
+                item.querySelectorAll('select').forEach(function (select) {
+                    select.addEventListener('change', function () {
+                        item.closest('form').submit();
+                    });
                 });
             });
         }
@@ -32,4 +32,4 @@ import jQuery from 'jquery';
 
     // Register the module
     window.WayneState.register('formFilter', formFilter);
-})(jQuery);
+})();
