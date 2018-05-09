@@ -15,7 +15,7 @@
         _init() {
             // Wait until the page finishes loading so the animate scrollTop doesn't bounce to the top of the pages
             window.onload = function () {
-                this.WayneState.modules.anchor.scrollToHash();
+                window.WayneState.modules.anchor.scrollToHash();
             }
 
 
