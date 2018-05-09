@@ -2,7 +2,7 @@
     "use strict";
 
     document.addEventListener("DOMContentLoaded", function() {
-        var lazyImages = [].slice.call(document.querySelectorAll(".lazy"));
+        var lazyImages = [].slice.call(document.querySelectorAll('.lazy'));
 
         if ("IntersectionObserver" in window) {
             let lazyImageObserver = new IntersectionObserver(function(entries) {
@@ -16,7 +16,7 @@
                             lazyImage.src = lazyImage.dataset.src;
                         }
 
-                        lazyImage.classList.remove("lazy");
+                        lazyImage.classList.remove('lazy');
                         lazyImageObserver.unobserve(lazyImage);
                     }
                 });

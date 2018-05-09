@@ -1,6 +1,4 @@
-import jQuery from 'jquery';
-
-(function($) {
+(function() {
     "use strict";
 
     /**
@@ -15,10 +13,11 @@ import jQuery from 'jquery';
          * Initialize
          */
         _init() {
-            // Wait until the page finishes loading so the animate scrollTop doesn't bounce to the top of the page
-            $(window).on('load', function (){
+            // Wait until the page finishes loading so the animate scrollTop doesn't bounce to the top of the pages
+            window.onload = function () {
                 this.WayneState.modules.anchor.scrollToHash();
-            });
+            }
+
 
             // Anytime the hash changes after the page is loaded scroll the user to that hash
             if ("onhashchange" in window) {
@@ -30,13 +29,14 @@ import jQuery from 'jquery';
             var hash = window.location.hash.substring(1);
 
             if(hash !== '' && document.getElementById(hash)) {
-                $('html,body').animate({
-                    scrollTop: $('#' + hash).offset().top - $('.menu-top-container').outerHeight()
-                }, 100);
+                let y = document.getElementById(hash).offsetTop - document.querySelector('.menu-top-container').offsetHeight;
+
+                window.scroll(0, y);
             }
         }
     }
 
+
     // Register this module
     window.WayneState.register('anchor', new Anchor());
-})(jQuery);
+})();

@@ -1,7 +1,6 @@
-import jQuery from 'jquery';
 import 'accordion/src/accordion.js';
 
-(function($) {
+(function() {
     "use strict";
 
     /**
@@ -16,8 +15,8 @@ import 'accordion/src/accordion.js';
          * Initialize
          */
         _init() {
-            $('.accordion').each(function() {
-                new Accordion(this, {
+            document.querySelectorAll('.accordion').forEach(function(item) {
+                new Accordion(item, {
                     // Only allow one accordion item open at time
                     onToggle: function(target){
                         target.accordion.folds.forEach(fold => {
@@ -29,12 +28,12 @@ import 'accordion/src/accordion.js';
                 });
             });
 
-            $('ul.accordion > li').each(function(){
+            document.querySelectorAll('ul.accordion > li').forEach(function(item) {
                 // Make the items absolute positioning now that we know javascript is enabled
-                $(this).addClass('absolute');
+                item.classList.add('absolute')
 
                 // Apply the content fold
-                $(this).find('div:first').attr('class', 'fold');
+                item.querySelector('div').classList.add('fold');
             });
         }
     }
@@ -44,4 +43,4 @@ import 'accordion/src/accordion.js';
 
     // Register this module
     window.WayneState.register('accordions', accordions);
-})(jQuery);
+})();
