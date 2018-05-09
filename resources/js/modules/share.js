@@ -1,6 +1,4 @@
-import jQuery from 'jquery';
-
-(function($) {
+(function() {
     "use strict";
 
     /**
@@ -16,7 +14,7 @@ import jQuery from 'jquery';
          */
         _init() {
             // Make sure addthis is desired on this page
-            if($('.addthis_sharing_toolbox').length == 0) {
+            if(document.querySelector('.addthis_sharing_toolbox') == null) {
                 return;
             }
 
@@ -45,4 +43,4 @@ import jQuery from 'jquery';
 
     // Register this module
     window.WayneState.register('share', share);
-})(jQuery);
+})();
