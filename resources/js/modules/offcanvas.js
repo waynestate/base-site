@@ -1,6 +1,5 @@
 import Slideout from 'slideout/dist/slideout.js';
 
-
 (function(Slideout) {
     "use strict";
 
@@ -17,13 +16,13 @@ import Slideout from 'slideout/dist/slideout.js';
         *  For resizing the window and figuring out what the state needs to be
         */
        resizeWindow() {
-            // Toggle the appropriate classes for offCanvas
-            if ($('.menu-button .menu-toggle').is(":visible") === false) {
-                $('#menu').removeClass('slideout-menu');
-                $('#menu').removeClass('slideout-menu-right');
+            // Toggle the appropriate classes for offCanvas based on the menu icon's visibility state
+            if(document.querySelector('.menu-button .menu-toggle').offsetParent === null) {
+                document.querySelector('#menu').classList.remove('slideout-menu');
+                document.querySelector('#menu').classList.remove('slideout-menu-right');
             } else {
-                $('#menu').addClass('slideout-menu');
-                $('#menu').addClass('slideout-menu-right');
+                document.querySelector('#menu').classList.add('slideout-menu');
+                document.querySelector('#menu').classList.add('slideout-menu-right');
             }
 
             window.WayneState.modules.slideout.close();
@@ -33,7 +32,11 @@ import Slideout from 'slideout/dist/slideout.js';
          * Opening and closing the offcanvas main main dropdown
          */
         mainMenuToggle() {
-            $('a.main-menu-toggle').prepend('<span class="expand-icons icon-right-open-mini float-right text-2xl flex"></span>');
+            // Add the arrow icons to toggle the main menu
+            var parentNode = document.querySelector('a.main-menu-toggle');
+            var childNode = document.createElement('span');
+            childNode.classList.add('expand-icons', 'icon-right-open-mini', 'float-right', 'text-2xl', 'flex');
+            parentNode.prepend(childNode);
 
             $('a.main-menu-toggle').click(function() {
                 // Show/hide the main menu
