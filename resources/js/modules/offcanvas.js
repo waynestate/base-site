@@ -35,24 +35,29 @@ import Slideout from 'slideout/dist/slideout.js';
             // Add the arrow icons to toggle the main menu
             var parentNode = document.querySelector('a.main-menu-toggle');
             var childNode = document.createElement('span');
-            childNode.classList.add('expand-icons', 'icon-right-open-mini', 'float-right', 'text-2xl', 'flex');
-            parentNode.prepend(childNode);
+            
+            if(parentNode != null) {
+                childNode.classList.add('expand-icons', 'icon-right-open-mini', 'float-right', 'text-2xl', 'flex');
+                parentNode.prepend(childNode);
+            }
 
             // Toggle the menu and show the appropriate icons
-            document.querySelector('a.main-menu-toggle').addEventListener('click', function (){
-                document.querySelector('.offcanvas-main-menu ul ul').classList.toggle('hidden');
+            if(document.querySelector('a.main-menu-toggle') != null) {
+                document.querySelector('a.main-menu-toggle').addEventListener('click', function (){
+                    document.querySelector('.offcanvas-main-menu ul ul').classList.toggle('hidden');
 
-                if(document.querySelector('.offcanvas-main-menu ul ul').offsetParent === null) {
-                    document.querySelector('a.main-menu-toggle .expand-icons').classList.toggle('icon-right-open-mini');
-                    document.querySelector('a.main-menu-toggle .expand-icons').classList.toggle('icon-down-open-mini');
-                } else {
-                    document.querySelector('a.main-menu-toggle .expand-icons').classList.toggle('icon-down-open-mini');
-                    document.querySelector('a.main-menu-toggle .expand-icons').classList.toggle('icon-right-open-min');
-                }
+                    if(document.querySelector('.offcanvas-main-menu ul ul').offsetParent === null) {
+                        document.querySelector('a.main-menu-toggle .expand-icons').classList.toggle('icon-right-open-mini');
+                        document.querySelector('a.main-menu-toggle .expand-icons').classList.toggle('icon-down-open-mini');
+                    } else {
+                        document.querySelector('a.main-menu-toggle .expand-icons').classList.toggle('icon-down-open-mini');
+                        document.querySelector('a.main-menu-toggle .expand-icons').classList.toggle('icon-right-open-min');
+                    }
 
-                // Return false so it does not complete the click through
-                return false;
-            });
+                    // Return false so it does not complete the click through
+                    return false;
+                });
+            }
         }
 
         /**
@@ -60,8 +65,12 @@ import Slideout from 'slideout/dist/slideout.js';
          */
         _init() {
             // Initialize classes
-            document.querySelector('#menu').classList.add('hidden', 'mt:block');
-            document.querySelector('#menu .menu-top').classList.add('hidden');
+            if(document.querySelector('#menu') != null) {
+                document.querySelector('#menu').classList.add('hidden', 'mt:block');
+            }
+            if(document.querySelector('#menu .menu-top') != null) {
+                document.querySelector('#menu .menu-top').classList.add('hidden');
+            }
 
             // Toggle button
             document.querySelector('.menu-toggle').addEventListener('click', function() {
