@@ -38,14 +38,16 @@ import Slideout from 'slideout/dist/slideout.js';
             childNode.classList.add('expand-icons', 'icon-right-open-mini', 'float-right', 'text-2xl', 'flex');
             parentNode.prepend(childNode);
 
-            $('a.main-menu-toggle').click(function() {
-                // Show/hide the main menu
-                $('.offcanvas-main-menu ul ul').toggle();
+            // Toggle the menu and show the appropriate icons
+            document.querySelector('a.main-menu-toggle').addEventListener('click', function (){
+                document.querySelector('.offcanvas-main-menu ul ul').classList.toggle('hidden');
 
-                if($('.offcanvas-main-menu ul ul').is(':visible')) {
-                    $('a.main-menu-toggle .expand-icons').toggleClass('icon-right-open-mini icon-down-open-mini');
-                }else{
-                    $('a.main-menu-toggle .expand-icons').toggleClass('icon-down-open-mini icon-right-open-mini');
+                if(document.querySelector('.offcanvas-main-menu ul ul').offsetParent === null) {
+                    document.querySelector('a.main-menu-toggle .expand-icons').classList.toggle('icon-right-open-mini');
+                    document.querySelector('a.main-menu-toggle .expand-icons').classList.toggle('icon-down-open-mini');
+                } else {
+                    document.querySelector('a.main-menu-toggle .expand-icons').classList.toggle('icon-down-open-mini');
+                    document.querySelector('a.main-menu-toggle .expand-icons').classList.toggle('icon-right-open-min');
                 }
 
                 // Return false so it does not complete the click through
@@ -58,8 +60,8 @@ import Slideout from 'slideout/dist/slideout.js';
          */
         _init() {
             // Initialize classes
-            $('#menu').addClass('hidden mt:block');
-            $('#menu .menu-top').addClass('hidden');
+            document.querySelector('#menu').classList.add('hidden', 'mt:block');
+            document.querySelector('#menu .menu-top').classList.add('hidden');
 
             // Toggle button
             document.querySelector('.menu-toggle').addEventListener('click', function() {
@@ -69,22 +71,22 @@ import Slideout from 'slideout/dist/slideout.js';
             // Scroll the user to the top so they can see the full menu
             window.WayneState.modules.slideout.on('close', function () {
                  // Swap icon and adjust screen size
-                 $('#panel').removeClass('min-h-screen');
-                 $('.menu-toggle').removeClass('icon-cancel-1');
-                 $('.menu-toggle').addClass('menu-icon');
-                 $('#menu').addClass('hidden');
-                 $('#menu').attr('aria-hidden', 'true');
-                 $('.menu-toggle').attr('aria-expanded', 'false');
+                 document.querySelector('#panel').classList.remove('min-h-screen');
+                 document.querySelector('.menu-toggle').classList.remove('icon-cancel-1');
+                 document.querySelector('.menu-toggle').classList.add('menu-icon');
+                 document.querySelector('#menu').classList.add('hidden');
+                 document.querySelector('#menu').setAttribute('aria-hidden', 'true');
+                 document.querySelector('.menu-toggle').setAttribute('aria-expanded', 'false');
             });
 
             window.WayneState.modules.slideout.on('beforeopen', function () {
                 // Swap icon and adjust screen size
-                $('#panel').addClass('min-h-screen');
-                $('.menu-toggle').addClass('icon-cancel-1');
-                $('.menu-toggle').removeClass('menu-icon');
-                $('#menu').removeClass('hidden');
-                $('#menu').attr('aria-hidden', 'false');
-                $('.menu-toggle').attr('aria-expanded', 'true');
+                document.querySelector('#panel').classList.add('min-h-screen');
+                document.querySelector('.menu-toggle').classList.add('icon-cancel-1');
+                document.querySelector('.menu-toggle').classList.remove('menu-icon');
+                document.querySelector('#menu').classList.remove('hidden');
+                document.querySelector('#menu').setAttribute('aria-hidden', 'false');
+                document.querySelector('.menu-toggle').setAttribute('aria-expanded', 'true');
 
                 // Scroll the user to the top so they can see the full menu
                 window.scrollTo(0,0);
