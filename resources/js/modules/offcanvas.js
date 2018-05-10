@@ -71,6 +71,7 @@ import Slideout from 'slideout/dist/slideout.js';
                  $('.menu-toggle').addClass('menu-icon');
                  $('#page-menu').addClass('hidden');
                  $('#page-menu').attr('aria-hidden', 'true');
+                 $('.menu-toggle').attr('aria-expanded', 'false');
             });
 
             window.WayneState.modules.slideout.on('beforeopen', function () {
@@ -80,6 +81,7 @@ import Slideout from 'slideout/dist/slideout.js';
                 $('.menu-toggle').removeClass('menu-icon');
                 $('#page-menu').removeClass('hidden');
                 $('#page-menu').attr('aria-hidden', 'false');
+                $('.menu-toggle').attr('aria-expanded', 'true');
 
                 // Scroll the user to the top so they can see the full menu
                 window.scrollTo(0,0);
@@ -110,6 +112,32 @@ import Slideout from 'slideout/dist/slideout.js';
     // When resizing the browse reset the state of offcanvas
     window.addEventListener('resize', function () {
         window.WayneState.modules.offcanvas.resizeWindow();
+    });
+
+    // When tabbing open offcanvas
+    document.querySelector('.menu-toggle').addEventListener('keyup', function (e) {
+        if (e.keyCode == 9) {
+            window.WayneState.modules.slideout.open();
+        }
+    });
+
+    // Add escape key to close
+    document.querySelectorAll('.menu-toggle, #page-menu a').forEach(function (item) {
+        item.addEventListener('keyup', function(e) {
+            if(e.keyCode == 27) {
+                window.WayneState.modules.slideout.close();
+            }
+        });
+    });
+
+    // Get a list of all menu links
+    var all_links = document.querySelectorAll('#menu a');
+
+    // When tabbing off the last link in the menu close offcanvas
+    all_links[all_links.length -1].addEventListener('keydown', function (e) {
+        if (e.keyCode == 9) {
+            window.WayneState.modules.slideout.close();
+        }
     });
 
 })(Slideout);
