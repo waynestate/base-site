@@ -4,7 +4,7 @@
             <li><a href="#top-menu">Skip to site menu</a></li>
         @endif
         @if(!empty($site_menu_output))
-            <li><a href="#page-menu">Skip to page menu</a></li>
+            <li><a href="#menu">Skip to page menu</a></li>
         @endif
         <li><a href="#main">Skip to main content</a></li>
     </ul>

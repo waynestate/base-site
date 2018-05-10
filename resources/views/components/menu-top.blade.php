@@ -29,7 +29,7 @@
 
                     <div>
                         <ul class="menu-top menu-button mt:hidden">
-                            <li><button class="menu-toggle menu-icon" data-toggle="page-menu" aria-expanded="false" aria-controls="page-menu" tabindex="0"><span class="visually-hidden">Menu</span></button></li>
+                            <li><button class="menu-toggle menu-icon" data-toggle="menu" aria-expanded="false" aria-controls="menu" tabindex="0"><span class="visually-hidden">Menu</span></button></li>
                         </ul>
                     </div>
                 </div>

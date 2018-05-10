@@ -8,8 +8,8 @@
     @endif
 
     <div class="row flex">
-        <div class="md:w-1/4 mt:pl-4 mt:block @if($site_menu['meta']['has_selected'] == false && ((isset($show_site_menu) && $show_site_menu != true) || !isset($show_site_menu))) mt:hidden @endif" id="page-menu" role="navigation" aria-label="Page menu" aria-hidden="true" tabindex="-1">
-            <nav id="menu" class="main-menu">
+        <div class="md:w-1/4 mt:pl-4 mt:block @if($site_menu['meta']['has_selected'] == false && ((isset($show_site_menu) && $show_site_menu != true) || !isset($show_site_menu))) mt:hidden @endif">
+            <nav id="menu" class="main-menu" role="navigation" aria-label="Page menu" aria-hidden="true" tabindex="-1">
                 @if(!empty($top_menu_output) && $site_menu !== $top_menu)
                     <div class="offcanvas-main-menu mt:hidden">
                         <ul>

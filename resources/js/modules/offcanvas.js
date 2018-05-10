@@ -55,7 +55,7 @@ import Slideout from 'slideout/dist/slideout.js';
          */
         _init() {
             // Initialize classes
-            $('#page-menu').addClass('hidden');
+            $('#menu').addClass('hidden mt:block');
             $('#menu .menu-top').addClass('hidden');
 
             // Toggle button
@@ -69,8 +69,8 @@ import Slideout from 'slideout/dist/slideout.js';
                  $('#panel').removeClass('min-h-screen');
                  $('.menu-toggle').removeClass('icon-cancel-1');
                  $('.menu-toggle').addClass('menu-icon');
-                 $('#page-menu').addClass('hidden');
-                 $('#page-menu').attr('aria-hidden', 'true');
+                 $('#menu').addClass('hidden');
+                 $('#menu').attr('aria-hidden', 'true');
                  $('.menu-toggle').attr('aria-expanded', 'false');
             });
 
@@ -79,8 +79,8 @@ import Slideout from 'slideout/dist/slideout.js';
                 $('#panel').addClass('min-h-screen');
                 $('.menu-toggle').addClass('icon-cancel-1');
                 $('.menu-toggle').removeClass('menu-icon');
-                $('#page-menu').removeClass('hidden');
-                $('#page-menu').attr('aria-hidden', 'false');
+                $('#menu').removeClass('hidden');
+                $('#menu').attr('aria-hidden', 'false');
                 $('.menu-toggle').attr('aria-expanded', 'true');
 
                 // Scroll the user to the top so they can see the full menu
@@ -122,7 +122,7 @@ import Slideout from 'slideout/dist/slideout.js';
     });
 
     // Add escape key to close
-    document.querySelectorAll('.menu-toggle, #page-menu a').forEach(function (item) {
+    document.querySelectorAll('.menu-toggle, #menu a').forEach(function (item) {
         item.addEventListener('keyup', function(e) {
             if(e.keyCode == 27) {
                 window.WayneState.modules.slideout.close();

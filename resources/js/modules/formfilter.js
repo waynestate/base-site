@@ -13,7 +13,7 @@
          * Initialize
          */
         _init(){
-            document.querySelectorAll('#content form.filter').forEach(function (item) {
+            document.querySelectorAll('#main form.filter').forEach(function (item) {
                 // Remove the "Filter button
                 document.querySelector('input[type="submit"]').style.display = 'none';
 

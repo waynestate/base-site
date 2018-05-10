@@ -20,30 +20,22 @@
 
 @include('components.header')
 
-<div id="menu-top-section" class="header-menu">
-    @if(!empty($site))
-        @include('components.menu-top', ['site' => $site])
-    @endif
-</div>
+@if(!empty($site))
+    @include('components.menu-top', ['site' => $site])
+@endif
 
 <div class="off-canvas-wrapper">
-    <div id="content">
-        <main id="panel">
-            @yield('content-area')
-        </main>
-    </div>
+    <main id="panel">
+        @yield('content-area')
+    </main>
 
-    <div id="footer-social">
-        @if(!empty($social))
-            @include('components.footer-social', ['social' => $social])
-        @endif
-    </div>
+    @if(!empty($social))
+        @include('components.footer-social', ['social' => $social])
+    @endif
 
-    <div id="footer-contact">
-        @if(!empty($contact))
-            @include('components.footer-contact', ['contact' => $contact])
-        @endif
-    </div>
+    @if(!empty($contact))
+        @include('components.footer-contact', ['contact' => $contact])
+    @endif
 </div>
 
 @include('components.footer')
