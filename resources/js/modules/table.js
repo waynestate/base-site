@@ -1,6 +1,4 @@
-import jQuery from 'jquery';
-
-(function($) {
+(function() {
     "use strict";
 
     /**
@@ -16,15 +14,23 @@ import jQuery from 'jquery';
          * Initialize
          */
         _init() {
-            $('table.table-stack').each(function () {
-                var thetable = $(this);
+            document.querySelectorAll('table.table-stack').forEach(function (table) {
+                table.querySelectorAll('tbody tr').forEach(function (tr) {
+                    tr.querySelectorAll('tbody td').forEach(function (td, index) {
+                        var heading = table.querySelector('thead th:nth-child(' + (index + 1) + ')');
 
-                $(this).find('tbody td').each(function () {
-                    $(this).attr('data-label', thetable.find('thead th:nth-child(' + ($(this).index() + 1) + ')').text());
+                        if(heading != null) {
+                            td.setAttribute('data-label', heading.textContent);
+                        }
+                    });             
                 });
 
-                $(this).find('tbody th').each(function () {
-                    $(this).attr('data-label', thetable.find('thead th:first-child').text());
+                table.querySelectorAll('tbody th').forEach(function (th) {
+                    var heading = table.querySelector('thead th:first-child');
+
+                    if(heading != null) {
+                        th.setAttribute('data-label', heading.textContent);
+                    }
                 });
             });
         }
@@ -35,4 +41,4 @@ import jQuery from 'jquery';
 
     // Register this module
     window.WayneState.register('table', table);
-})(jQuery);
+})();
