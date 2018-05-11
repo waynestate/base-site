@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        <a class="button" onclick="$('pre.columns-code').toggleClass('hidden');">See Row/Columns Code</a>
+        <a class="button" onclick="document.querySelector('pre.columns-code').classList.toggle('hidden');">See Row/Columns Code</a>
         <pre class="columns-code hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
             {!! htmlspecialchars('
 <div class="row px-4 flex">
@@ -54,7 +54,7 @@
             </tbody>
         </table>
 
-        <a class="button" onclick="$('pre.table-stack').toggleClass('hidden');">See Table Code</a>
+        <a class="button" onclick="document.querySelector('pre.table-stack').classList.toggle('hidden');">See Table Code</a>
 
         <pre class="table-stack hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {!! htmlspecialchars('
@@ -129,7 +129,7 @@
             {{ $faker->paragraph(10) }}
         </blockquote>
 
-        <a class="button" onclick="$('pre.blockquote').toggleClass('hidden');">See blockquote code</a>
+        <a class="button" onclick="document.querySelector('pre.blockquote').classList.toggle('hidden');">See blockquote code</a>
 
         <pre class="blockquote hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {!! htmlspecialchars('
@@ -147,7 +147,7 @@
         <a href="#" class="button">Standard Button</a>
         <a href="#" class="button expanded">Expanded Button</a>
 
-        <a class="button" onclick="$('pre.button-examples').toggleClass('hidden');">See Button Code</a>
+        <a class="button" onclick="document.querySelector('pre.button-examples').classList.toggle('hidden');">See Button Code</a>
 
         <pre class="button-examples hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {!! htmlspecialchars('
@@ -175,7 +175,7 @@
 
         <p>@image('/styleguide/image/50x50?text=Icon', 'icon image', 'icon')</p>
 
-        <a class="button" onclick="$('pre.image-icon').toggleClass('hidden');">See Image Icon Code</a>
+        <a class="button" onclick="document.querySelector('pre.image-icon').classList.toggle('hidden');">See Image Icon Code</a>
 
         <pre class="image-icon hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {!! htmlspecialchars('
@@ -189,7 +189,7 @@
         <p>Any valid YouTube URL starting with <code>youtu.be</code> or <code>youtube.com/watch</code> will open a lightbox with the video.</p>
         <p><a href="//www.youtube.com/watch?v=guRgefesPXE"><img src="//i.wayne.edu/youtube/guRgefesPXE" alt="View YouTube Video"></a></p>
 
-        <a class="button" onclick="$('pre.maginific-popup-example').toggleClass('hidden');">See Maginific Pop-up Code</a>
+        <a class="button" onclick="document.querySelector('pre.maginific-popup-example').classList.toggle('hidden');">See Maginific Pop-up Code</a>
 
         <pre class="maginific-popup-example hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {!! htmlspecialchars('
@@ -210,7 +210,7 @@
             <iframe width="420" height="315" src="//www.youtube.com/embed/guRgefesPXE" title="Responsive embed example" frameborder="0" allowfullscreen></iframe>
         </div>
 
-        <a class="button" onclick="$('pre.responsive-embed-example').toggleClass('hidden');">See Responsive Embed Code</a>
+        <a class="button" onclick="document.querySelector('pre.responsive-embed-example').classList.toggle('hidden');">See Responsive Embed Code</a>
 
         <pre class="responsive-embed-example hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {!! htmlspecialchars('
@@ -231,7 +231,7 @@
                     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
                 </figure>
 
-                <a class="button" onclick="$('pre.fig-left').toggleClass('hidden');">See Code</a>
+                <a class="button" onclick="document.querySelector('pre.fig-left').classList.toggle('hidden');">See Code</a>
 
                 <pre class="fig-left hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
                 {!! htmlspecialchars('
@@ -251,7 +251,7 @@
                     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
                 </figure>
 
-                <a class="button" onclick="$('pre.fig-center').toggleClass('hidden');">See Code</a>
+                <a class="button" onclick="document.querySelector('pre.fig-center').classList.toggle('hidden');">See Code</a>
 
                 <pre class="fig-center hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
                 {!! htmlspecialchars('
@@ -271,7 +271,7 @@
                     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
                 </figure>
 
-                <a class="button" onclick="$('pre.fig-none').toggleClass('hidden');">See Code</a>
+                <a class="button" onclick="document.querySelector('pre.fig-none').classList.toggle('hidden');">See Code</a>
 
                 <pre class="fig-none hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
                 {!! htmlspecialchars('
@@ -291,7 +291,7 @@
                     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
                 </figure>
 
-                <a class="button" onclick="$('pre.fig-right').toggleClass('hidden');">See Code</a>
+                <a class="button" onclick="document.querySelector('pre.fig-right').classList.toggle('hidden');">See Code</a>
 
                 <pre class="fig-right hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
                 {!! htmlspecialchars('
