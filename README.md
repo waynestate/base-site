@@ -13,8 +13,8 @@ Starter repository for creating a new website. Live demo can be found at https:/
 * Backend built on [Laravel v5.6](https://laravel.com/)
 * Frontend built on [Tailwind](https://tailwindcss.com/)
 * [Webpack](https://webpack.github.io/)
-* Fluent webpack API using [Laravel Mix](https://laravel.com/docs/5.5/mix)
-* Zero downtime deployment using [Envoy](https://laravel.com/docs/5.5/envoy)
+* Fluent webpack API using [Laravel Mix](https://laravel.com/docs/5.6/mix)
+* Zero downtime deployment using [Envoy](https://laravel.com/docs/5.6/envoy)
 * Configure multiple enviorments using [PHPDotenv](https://github.com/vlucas/phpdotenv)
 * SCSS support
 * Automatically inject JS/CSS while developing using [BrowserSync](https://browsersync.io/)
@@ -35,7 +35,7 @@ Starter repository for creating a new website. Live demo can be found at https:/
         * Under menu promotions
 * [Full styleguide](https://base.wayne.edu/styleguide) detailing out every available component using [PHP faker data](https://github.com/fzaninotto/Faker)
 * [Single](https://base.wayne.edu/styleguide/hero/full) or [rotating](https://base.wayne.edu/styleguide/hero/full/rotate) hero images using [Slick Carousel](http://kenwheeler.github.io/slick/)
-* Automatically lightbox youtube videos using [Magnific Popup](http://dimsemenov.com/plugins/magnific-popup/)
+* Automatically lightbox youtube videos using [Media Box](https://github.com/pinceladasdaweb/mediabox)
 * Easy integration with a CMS by writing [custom .json files](https://base.wayne.edu/index.json) to the public directory which are matched by to a route and sent to the specified controller
 
 ## Setup

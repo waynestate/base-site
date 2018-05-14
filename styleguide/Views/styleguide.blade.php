@@ -185,13 +185,13 @@
 
         <hr>
 
-        <h2>Maginific Pop-up</h2>
+        <h2>Media</h2>
         <p>Any valid YouTube URL starting with <code>youtu.be</code> or <code>youtube.com/watch</code> will open a lightbox with the video.</p>
         <p><a href="//www.youtube.com/watch?v=guRgefesPXE"><img src="//i.wayne.edu/youtube/guRgefesPXE" alt="View YouTube Video"></a></p>
 
-        <a class="button" onclick="document.querySelector('pre.maginific-popup-example').classList.toggle('hidden');">See Maginific Pop-up Code</a>
+        <a class="button" onclick="document.querySelector('pre.media-example').classList.toggle('hidden');">See Media Code</a>
 
-        <pre class="maginific-popup-example hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+        <pre class="media-example hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {!! htmlspecialchars('
 <p>
     <a href="//www.youtube.com/watch?v=guRgefesPXE">

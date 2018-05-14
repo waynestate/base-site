@@ -37,7 +37,7 @@
     "intersection-observer": "^0.5.0",
     "laravel-mix": "^2.0",
     "laravel-mix-purgecss": "^2.0.0",
-    "magnific-popup": "^1.1.0",
+    "mediabox": "^1.1.2",
     "slick-carousel": "^1.6.0",
     "slideout": "^1.0.1",
     "stylelint": "^8.0.0",

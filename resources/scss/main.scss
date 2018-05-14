@@ -7,9 +7,8 @@ $slick-loader-path: "/_resources/images/";
 @import "~slick-carousel/slick/slick";
 @import "~slick-carousel/slick/slick-theme";
 
-// Include magnific pop-up
-@import "~magnific-popup/src/css/_settings";
-@import "~magnific-popup/src/css/main";
+// Package CSS
+@import "~mediabox/dist/mediabox.css";
 
 // Include header and footer
 @import "~@waynestate/wsuheader/dist/header";

@@ -7,7 +7,7 @@ import './modules/table';
 import './modules/sticky';
 import './modules/formfilter';
 import './modules/slick';
-import './modules/magnific-popup';
+import './modules/media';
 import './modules/share';
 import './modules/lazy-image-loading';
 import './modules/anchor';
