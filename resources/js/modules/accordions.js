@@ -24,14 +24,12 @@ import 'accordion/src/accordion.js';
                                 fold.open = false;
                             }
                         });
-                    }
+                    },
+                    enabledClass: 'enabled'
                 });
             });
 
             document.querySelectorAll('ul.accordion > li').forEach(function(item) {
-                // Make the items absolute positioning now that we know javascript is enabled
-                item.classList.add('absolute')
-
                 // Apply the content fold
                 item.querySelector('div').classList.add('fold');
             });

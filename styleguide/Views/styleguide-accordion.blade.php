@@ -16,7 +16,7 @@
     <pre class="accordions hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
     {!! htmlspecialchars('
 <ul class="accordion">
-    <li class="is-active">
+    <li>
         <a href="#panel1a">Accordion 1</a>
         <div id="panel1a">
             <p>Panel 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
