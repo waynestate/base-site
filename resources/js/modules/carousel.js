@@ -22,6 +22,7 @@ var Flickity = require('flickity');
                 pageDots: true,
                 resize: true,
                 setGallerySize: true,
+                wrapAround: true,
             });
         }
     }
