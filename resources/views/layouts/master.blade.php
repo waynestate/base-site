@@ -40,7 +40,6 @@
 
 @include('components.footer')
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="{{ mix('_resources/js/main.js') }}"></script>
 </body>
 </html>

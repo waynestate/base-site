@@ -24,7 +24,7 @@ class Image implements FactoryContract
     {
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
-                'link' => $this->faker->url,
+                'link' => '#'.$i,
                 'relative_url' => '/styleguide/image/360x131?text=360x131%20('.$i.')',
                 'title' => $this->faker->sentence,
             ];

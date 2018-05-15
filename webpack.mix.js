@@ -63,7 +63,7 @@ mix.js('resources/js/main.js', 'public/_resources/js')
             path.join(__dirname, "node_modules/slideout/dist/slideout.js")
         ],
         extensions: ['html', 'js', 'php', 'vue'],
-        whitelistPatterns: [/icon-/, /slick-/, /mfp-/, /at-/]
+        whitelistPatterns: [/icon-/, /flickity-/, /mediabox-/, /at-/]
     })
    .sourceMaps()
    .options({
@@ -96,9 +96,6 @@ fs.symlink(
 );
 
 config = {
-    externals: {
-        "jquery": "jQuery"
-    },
     module: {
         rules: [{
             test: /\.js$/,

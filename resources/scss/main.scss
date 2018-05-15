@@ -1,14 +1,9 @@
 // Combination of normalize and tailwind resets
 @tailwind preflight;
 
-// Include slick carousel
-$slick-font-path: "../fonts/";
-$slick-loader-path: "/_resources/images/";
-@import "~slick-carousel/slick/slick";
-@import "~slick-carousel/slick/slick-theme";
-
 // Package CSS
 @import "~mediabox/dist/mediabox.css";
+@import "~flickity/dist/flickity.css";
 
 // Include header and footer
 @import "~@waynestate/wsuheader/dist/header";
@@ -22,14 +17,13 @@ $slick-loader-path: "/_resources/images/";
 @import "components/content";
 @import "components/font-icons";
 @import "components/formy";
-@import "components/hero";
+//@import "components/hero";
 @import "components/menu-icon";
 @import "components/menu-main";
 @import "components/menu-offcanvas";
 @import "components/menu-top";
 @import "components/responsive-embed";
 @import "components/share";
-@import "components/rotate";
 @import "components/row";
 @import "components/skip";
 @import "components/table-stack";
