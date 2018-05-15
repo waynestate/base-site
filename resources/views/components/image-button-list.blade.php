@@ -9,7 +9,7 @@
         @if(!empty($image['link']))<a href="{{ $image['link'] }}" @if(empty($image['relative_url']))class="button expanded"@endif>@endif
             @if(!empty($image['relative_url']))
                 @if($loop->first == true)
-                    <img src="{{ $image['relative_url'] }}" alt="{{ $image['title'] }}" />
+                    <img class="min-w-full" src="{{ $image['relative_url'] }}" alt="{{ $image['title'] }}" />
                 @else
                     @image($image['relative_url'], $image['title'])
                 @endif

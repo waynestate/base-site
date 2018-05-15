@@ -17,6 +17,12 @@ var Flickity = require('flickity');
          */
         _init() {
             new Flickity('.rotate', {
+                on: {
+                    ready: function() {
+                        // Get the height of the first image that loaded and dynamically set the height
+                        document.querySelector('.flickity-viewport').style.height = document.querySelector('.flickity-enabled .is-selected img').offsetHeight + 'px';
+                    }
+                },
                 accessibility: true,
                 prevNextButtons: true,
                 pageDots: true,
