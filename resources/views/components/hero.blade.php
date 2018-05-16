@@ -3,7 +3,7 @@
     $class => string // 'hero--childpage' if used on a childpage with left menu, and any additional classes
 --}}
 
-<div class="{{ (count($images) > 1)? 'rotate_arrows ' : '' }}overlay-arrows hero{{ isset($class) ? ' ' . $class : '' }}">
+{{-- <div class="{{ (count($images) > 1)? 'rotate ' : '' }} hero{{ isset($class) ? ' ' . $class : '' }}">
     @foreach($images as $image)
         <div class="hero__slide">
             @if($image == reset($images))<div class="hero__image" style="background-image: url('{{ $image['relative_url'] }}')">@else <div class="hero__image lazy" data-src="{{ $image['relative_url'] }}">@endif
@@ -15,6 +15,26 @@
                     </div>
                 @endif
             </div>
-        </div>    
+        </div>
+    @endforeach
+</div> --}}
+
+{{-- <div class="{{ (count($images) > 1)? 'ro1tate ' : '' }}">
+    @foreach($images as $image)
+        @if($loop->first === true)
+            <div style="background-image: url('{{ $image['relative_url'] }}')"></div>
+        @else
+            <div class="lazy" data-src="{{ $image['relative_url'] }}"></div>
+        @endif
+    @endforeach
+</div> --}}
+
+<div class="rotate-arrows">
+    @foreach($images as $image)
+        @if($loop->first === true)
+            <div class="carousel-cell" style="background-image: url('{{ $image['relative_url'] }}')"></div>
+        @else
+            <div class="carousel-cell lazy" data-src="{{ $image['relative_url'] }}"></div>
+        @endif
     @endforeach
 </div>
