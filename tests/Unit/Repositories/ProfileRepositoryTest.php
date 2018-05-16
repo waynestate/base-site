@@ -95,6 +95,9 @@ class ProfileRepositoryTest extends TestCase
      */
     public function getting_dropdown_of_groups_should_contain_all_the_groups()
     {
+        // Force this config incase it is changed
+        config(['app.profile_parent_group_id' => 0]);
+
         // Fake return
         $return = [
             'results' => app('Factories\ProfileGroup')->create(5),
@@ -192,6 +195,9 @@ class ProfileRepositoryTest extends TestCase
      */
     public function profiles_should_be_grouped()
     {
+        // Force this config incase it is changed
+        config(['app.profile_parent_group_id' => 0]);
+
         // Mock the user listing
         $return_user_listing = app('Factories\Profile')->create(10);
         $wsuApi = Mockery::mock('Waynestate\Api\Connector');
