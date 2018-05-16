@@ -29,7 +29,7 @@
     @endforeach
 </div> --}}
 
-<div class="rotate-arrows">
+<div class="hero{{ !empty($images) && count($images) > 1 ? ' rotate' : '' }}{{ !empty($show_site_menu) && $show_site_menu === false ? ' full' : ' contained' }}">
     @foreach($images as $image)
         @if($loop->first === true)
             <div class="carousel-cell" style="background-image: url('{{ $image['relative_url'] }}')"></div>
