@@ -24,19 +24,17 @@
     @include('components.menu-top', ['site' => $site])
 @endif
 
-<div class="off-canvas-wrapper">
-    <main id="panel">
-        @yield('content-area')
-    </main>
+<main id="panel">
+    @yield('content-area')
+</main>
 
-    @if(!empty($social))
-        @include('components.footer-social', ['social' => $social])
-    @endif
+@if(!empty($social))
+    @include('components.footer-social', ['social' => $social])
+@endif
 
-    @if(!empty($contact))
-        @include('components.footer-contact', ['contact' => $contact])
-    @endif
-</div>
+@if(!empty($contact))
+    @include('components.footer-contact', ['contact' => $contact])
+@endif
 
 @include('components.footer')
 
