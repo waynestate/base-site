@@ -12,22 +12,22 @@
         background-size: cover;
         background-position: center top;
         position: relative;
-        height: 35vw;
+        height: 45vw;
         max-height: 550px;
         width: 100%;
     }
 
     &.contained .carousel-cell {
         @screen sm {
-            height: 35vw;
-        }
-
-        @screen md {
             height: 30vw;
         }
 
-        @screen lg {
+        @screen md {
             height: 25vw;
+        }
+
+        @screen lg {
+            height: 20vw;
         }
     }
 }
