@@ -1,11 +1,12 @@
 .slideout-menu {
+    @apply .bg-green-darker;
+
     position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     width: 250px;
     height: 100%;
-    background-color: #093f39;
     z-index: 10;
 
     // Main Menu within offcanvas
@@ -13,27 +14,25 @@
         display: block;
 
         ul ul li {
-            background-color: #10312c;
+            @apply bg-green-darkest;
         }
 
         ul li .main-menu-toggle {
-            background-color: #10312c;
+            @apply bg-green-darkest;
+
             text-transform: uppercase;
             font-size: 1rem;
-
-            &:hover {
-                background-color: #10312c;
-            }
         }
 
         // Menu Header top level (MAIN MENU)
         ul ul {
-            border-bottom: 5px solid #10312c;
+            @apply .border-solid .border-b-4 .border-green-darkest;
         }
     }
 
     h2 {
-        color: rgba(255, 255, 255, 0.9);
+        @apply .text-white;
+
         padding: 0 0 5px 15px;
         margin-top: 32px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -41,21 +40,23 @@
 
     // Selected State
     .selected > a {
-        color: #ffd969;
+        @apply .text-yellow;
     }
 
     ul {
-        background-color: #113f39;
+        @apply .bg-green-darker;
+
         padding: 0;
 
         li a {
-            color: rgba(255, 255, 255, 0.9);
+            @apply .text-white;
         }
 
         a:hover,
         .selected a:hover {
+            @apply .text-yellow;
+
             background: transparent;
-            color: #ffd969;
         }
 
         // Indent second level now since first level is shown

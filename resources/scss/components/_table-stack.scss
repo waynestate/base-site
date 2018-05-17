@@ -23,7 +23,7 @@ table.table-stack {
     }
 
     tr {
-        border: 1px solid #eaeaea;
+        @apply .border .border-solid .border-grey-light;
 
         th::before {
             content: attr(data-label) ": ";
@@ -50,12 +50,13 @@ table.table-stack {
 
     /* Add data labels */
     td::before {
+        @apply .text-grey-darkest;
+
         content: attr(data-label) ":";
         display: block;
         font-weight: bold;
         line-height: 1.5;
         padding-right: 20px;
-        color: #00565c;
         margin-bottom: 0.75em;
         margin-left: 0;
     }
@@ -90,6 +91,10 @@ table.table-stack {
             &::before {
                 content: "";
                 padding: 0;
+
+                @screen mt {
+                    @apply .hidden;
+                }
             }
         }
     }

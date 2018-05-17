@@ -47,7 +47,7 @@ let colors = {
     'transparent': 'transparent',
 
     'black': '#22292f', // using
-    'grey-darkest': '#3d4852',
+    'grey-darkest': '#3d4852', // using
     'grey-darker': '#606f7b', // using
     'grey-dark': '#8795a1', // using
     'grey': '#b8c2cc', // using
@@ -78,9 +78,9 @@ let colors = {
     'yellow': '#ffd478', // changed
     'yellow-light': '#fff382',
     'yellow-lighter': '#fff9c2',
-    'yellow-lightest': '#fcfbeb',
+    'yellow-lightest': '#fcfbeb', // used
 
-    'green-darkest': '#0f2f21',
+    'green-darkest': '#062b27', // changed
     'green-darker': '#093f39', // changed
     'green-dark': '#0c5449', // changed
     'green': '#0a5449', // changed

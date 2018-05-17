@@ -11,12 +11,13 @@
         position: absolute;
 
         > a {
+            @apply .border .border-solid .border-grey;
+
             cursor: pointer;
             user-select: none;
             position: relative;
             display: block;
             padding: 1.25rem 1rem;
-            border: 1px solid #d5d5d5;
             border-bottom: 0;
             line-height: 1;
             text-decoration: none;
@@ -44,10 +45,9 @@
 
         // Content area
         > .fold {
-            @apply .bg-white;
+            @apply .bg-white .border .border-solid .border-grey;
 
             padding: 1rem;
-            border: 1px solid #d5d5d5;
             border-top: none;
         }
     }

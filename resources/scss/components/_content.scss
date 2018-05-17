@@ -71,16 +71,14 @@
 
     blockquote {
         padding: 1em;
-        background-color: #fff9eb;
         border: none;
-        color: #6a6a6a;
+
+        @apply .bg-yellow-lightest;
 
         p {
-            font-family: "Lato", sans-serif;
             font-style: italic;
             font-weight: 400;
             font-size: 1.5em;
-            color: #6a6a6a;
             margin-bottom: 0;
         }
     }
@@ -123,7 +121,7 @@
 
         // Body
         tbody tr {
-            border-bottom: 1px solid #eaeaea;
+            @apply .border-0 .border-b .border-solid .border-grey-light;
 
             td {
                 text-align: left;

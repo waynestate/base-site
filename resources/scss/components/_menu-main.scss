@@ -58,10 +58,11 @@
     }
 
     h2 {
+        @apply .text-grey-darker;
+
         font-size: 1.25rem;
         font-weight: bold;
         margin: 0;
         padding: 1rem 0 0.1rem;
-        color: #167263;
     }
 }

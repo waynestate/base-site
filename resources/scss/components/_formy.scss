@@ -36,45 +36,21 @@
     [type='url'],
     [type='color'],
     textarea {
+        @apply .border-grey .border-solid .border;
+
         display: block;
         box-sizing: border-box;
         width: 100%;
         height: 2.4375rem;
         margin: 0 0 1rem;
         padding: 0.5rem;
-        border: 1px solid #cacaca;
         border-radius: 0;
-        background-color: #fefefe;
         box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
         font-family: inherit;
         font-size: 1rem;
         font-weight: normal;
-        color: #0a0a0a;
         transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
         appearance: none;
-    }
-
-    [type='text']:focus,
-    [type='password']:focus,
-    [type='date']:focus,
-    [type='datetime']:focus,
-    [type='datetime-local']:focus,
-    [type='month']:focus,
-    [type='week']:focus,
-    [type='email']:focus,
-    [type='number']:focus,
-    [type='search']:focus,
-    [type='tel']:focus,
-    [type='time']:focus,
-    [type='url']:focus,
-    [type='color']:focus,
-    textarea:focus,
-    select:focus {
-        outline: none;
-        border: 1px solid #8a8a8a;
-        background-color: #fefefe;
-        box-shadow: 0 0 5px #cacaca;
-        transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
     }
 
     [type='file'] {
@@ -88,18 +64,17 @@
     }
 
     select {
+        @apply .border-grey .border-solid .border .bg-white;
+
         height: 2.4375rem;
         width: 100%;
         margin: 0 0 1rem;
         padding: 0.5rem;
         appearance: none;
-        border: 1px solid #cacaca;
         border-radius: 0;
-        background-color: #fefefe;
         font-family: inherit;
         font-size: 1rem;
         line-height: normal;
-        color: #0a0a0a;
         background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='32' height='24' viewBox='0 0 32 24'><polygon points='0,0 32,0 16,24' style='fill: rgb%28138, 138, 138%29'></polygon></svg>");
         background-origin: content-box;
         background-position: right -1rem center;
@@ -123,22 +98,24 @@
     // Errors
     .error {
         p {
+            @apply .text-red;
+
             margin: 4px auto 10px;
             font-size: 0.8em;
-            color: #c60f13;
         }
 
         input,
         textarea,
         select {
-            border-color: #c60f13;
-            background-color: rgba(198, 15, 19, 0.1);
+            @apply .border-red-light .border .bg-red-lightest;
+
             margin-bottom: 0;
         }
 
         .checkbox,
         .radio {
-            background-color: rgba(198, 15, 19, 0.1);
+            @apply .bg-red-lightest;
+
             padding-bottom: 0;
         }
     }
@@ -188,8 +165,8 @@
 
     // The subit button
     #formy-button {
-        background-color: #777;
-        color: #fefefe;
+        @apply .bg-grey-darker .text-white;
+
         border-radius: 0;
         font-size: 0.75rem;
     }
@@ -214,9 +191,9 @@
     // Text Headings
     .field_group h2,
     h2 {
-        color: #333;
+        @apply .border-b .border-grey-light;
+
         font-size: 1.3em;
-        border-bottom: 1px solid #eaeaea;
     }
 
     // Login
@@ -247,8 +224,8 @@
         text-align: right;
     }
 
-    // Examples
+    // Required
     label em {
-        color: #f00;
+        @apply .text-red;
     }
 }

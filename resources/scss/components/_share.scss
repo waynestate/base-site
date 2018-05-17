@@ -1,6 +1,6 @@
 .addthis_share {
-    color: #4b4b4b;
-    background-color: #e7e7e7;
+    @apply .text-grey-darkest .bg-grey-light;
+
     padding: 8px 11px;
     text-transform: uppercase;
     letter-spacing: 0.1em;
