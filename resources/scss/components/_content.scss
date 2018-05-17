@@ -102,7 +102,8 @@
 
             &,
             a {
-                color: #fff;
+                @apply .text-white;
+
                 text-decoration: none;
                 font-weight: bold;
                 border-bottom: none;
