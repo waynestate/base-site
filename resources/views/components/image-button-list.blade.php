@@ -5,7 +5,7 @@
 @if(!empty($class))<div class="{{ $class }}">@endif
 
 @foreach($images as $image)
-    <div class="my-4 min-w-full">
+    <div class="min-w-full{{ empty($class) ? ' my-4' : '' }}">
         @if(!empty($image['link']))<a href="{{ $image['link'] }}" @if(empty($image['relative_url']))class="button expanded"@endif>@endif
             @if(!empty($image['relative_url']))
                 @if($loop->first == true)
