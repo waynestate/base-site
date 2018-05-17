@@ -34,7 +34,7 @@ Starter repository for creating a new website. Live demo can be found at https:/
         * Left menu
         * Under menu promotions
 * [Full styleguide](https://base.wayne.edu/styleguide) detailing out every available component using [PHP faker data](https://github.com/fzaninotto/Faker)
-* [Single](https://base.wayne.edu/styleguide/hero/full) or [rotating](https://base.wayne.edu/styleguide/hero/full/rotate) hero images using [Slick Carousel](http://kenwheeler.github.io/slick/)
+* [Single](https://base.wayne.edu/styleguide/hero/full) or [rotating](https://base.wayne.edu/styleguide/hero/full/rotate) hero images using [Flickity](https://flickity.metafizzy.co/)
 * Automatically lightbox youtube videos using [Media Box](https://github.com/pinceladasdaweb/mediabox)
 * Easy integration with a CMS by writing [custom .json files](https://base.wayne.edu/index.json) to the public directory which are matched by to a route and sent to the specified controller
 

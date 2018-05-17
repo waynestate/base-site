@@ -38,8 +38,7 @@ mix.copy([
 
     // Fonts
     .copy([
-        'resources/fonts/**/*',
-        'node_modules/slick-carousel/slick/fonts/**/*'
+        'resources/fonts/**/*'
     ], 'public/_resources/fonts')
 
     // Images
@@ -47,8 +46,7 @@ mix.copy([
         'resources/images/**/*.jpg',
         'resources/images/**/*.gif',
         'resources/images/**/*.png',
-        'resources/images/**/*.svg',
-        'node_modules/slick-carousel/slick/**/*.gif'
+        'resources/images/**/*.svg'
     ], 'public/_resources/images');
 
 // Compile assets and setup browersync
