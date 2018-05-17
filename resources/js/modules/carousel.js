@@ -24,6 +24,11 @@ var Flickity = require('flickity');
                             if(document.querySelector('.flickity-enabled .is-selected img') != null) {
                                 document.querySelector('.flickity-viewport').style.height = document.querySelector('.flickity-enabled .is-selected img').offsetHeight + 'px';
                             }
+
+                            // Visually hide the dots for accessibility
+                            if(document.querySelector('.flickity-page-dots') != null) {
+                                document.querySelector('.flickity-page-dots').classList.add('visually-hidden');
+                            }
                         }
                     },
                     accessibility: true,
