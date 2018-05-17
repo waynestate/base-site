@@ -43,9 +43,7 @@
                 @include('components.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
             @endif
 
-            <main id="main" tabindex="-1">
-                @yield('content')
-            </main>
+            @yield('content')
         </div>
     </div>
 

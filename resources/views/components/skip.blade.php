@@ -6,6 +6,6 @@
         @if(!empty($site_menu_output))
             <li><a href="#menu">Skip to page menu</a></li>
         @endif
-        <li><a href="#main">Skip to main content</a></li>
+        <li><a href="#panel">Skip to main content</a></li>
     </ul>
 </nav>

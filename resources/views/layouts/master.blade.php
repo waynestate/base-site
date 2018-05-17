@@ -24,7 +24,7 @@
     @include('components.menu-top', ['site' => $site])
 @endif
 
-<main id="panel">
+<main id="panel" tabindex="-1">
     @yield('content-area')
 </main>
 
