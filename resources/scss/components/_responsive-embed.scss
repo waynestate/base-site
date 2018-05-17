@@ -1,5 +1,4 @@
-.responsive-embed,
-.flex-video {
+.responsive-embed {
     position: relative;
     height: 0;
     margin-bottom: 1rem;
@@ -10,11 +9,7 @@
 .responsive-embed iframe,
 .responsive-embed object,
 .responsive-embed embed,
-.responsive-embed video,
-.flex-video iframe,
-.flex-video object,
-.flex-video embed,
-.flex-video video {
+.responsive-embed video {
     position: absolute;
     top: 0;
     left: 0;
@@ -22,7 +17,6 @@
     height: 100%;
 }
 
-.responsive-embed.widescreen,
-.flex-video.widescreen {
+.responsive-embed.widescreen {
     padding-bottom: 56.25%;
 }
