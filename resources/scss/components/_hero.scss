@@ -19,15 +19,15 @@
 
     &.contained .carousel-cell {
         @screen sm {
-            height: 30vw;
+            height: 35vw;
         }
 
         @screen md {
-            height: 25vw;
+            height: 30vw;
         }
 
         @screen lg {
-            height: 20vw;
+            height: 25vw;
         }
     }
 }
