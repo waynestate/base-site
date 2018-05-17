@@ -1,5 +1,5 @@
 .banner {
-    &__container {
+    a {
         display: none;
         transition: all 0.2s ease-out;
 
@@ -39,7 +39,7 @@
         }
     }
 
-    &__text {
+    .title {
         padding-top: 0.3125rem;
         text-transform: uppercase;
         font-size: 13px;
@@ -47,7 +47,7 @@
         transition: all 0.5s ease-out;
     }
 
-    &__text--italic {
+    .excerpt {
         padding-top: 0.125rem;
         text-transform: none;
         font-family: Georgia, Times, Times New Roman, serif;
@@ -55,13 +55,5 @@
         font-style: italic;
         padding-left: 0.2em;
         transition: all 0.5s ease-out;
-    }
-
-    &:hover .banner__text {
-        color: black;
-    }
-
-    &:hover .banner__text--italic {
-        color: black;
     }
 }
