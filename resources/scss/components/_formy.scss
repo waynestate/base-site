@@ -198,7 +198,8 @@
 
     // Login
     .login-info li {
-        border-bottom: 1px solid #ccc;
+        @apply .border-b .border-solid .border-grey;
+
         font-size: 0.9em;
         padding: 5px 0;
     }

@@ -7,7 +7,7 @@
 }
 
 .flickity-button-icon {
-    fill: #fff;
+    @apply .text-white .fill-current;
 }
 
 .flickity-prev-next-button.next .flickity-button-icon {

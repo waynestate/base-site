@@ -11,8 +11,9 @@ table.table-stack {
 
     // Header
     thead tr {
+        @apply .bg-grey-darkest;
+
         border-collapse: collapse;
-        background: #00565c;
         position: absolute;
         top: -9999em;
         left: -9999em;

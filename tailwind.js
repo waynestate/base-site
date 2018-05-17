@@ -53,24 +53,16 @@ let colors = {
     'grey': '#b8c2cc', // using
     'grey-light': '#e6e6e6', // changed
     'grey-lighter': '#efefef', // changed
-    'grey-lightest': '#f8fafc',
+    'grey-lightest': '#f8fafc', // using
     'white': '#ffffff', // using
 
     'red-darkest': '#3b0d0c',
     'red-darker': '#621b18',
     'red-dark': '#cc1f1a',
-    'red': '#e3342f',
-    'red-light': '#ef5753',
+    'red': '#e3342f', //using
+    'red-light': '#ef5753', // using
     'red-lighter': '#f9acaa',
-    'red-lightest': '#fcebea',
-
-    'orange-darkest': '#462a16',
-    'orange-darker': '#613b1f',
-    'orange-dark': '#de751f',
-    'orange': '#f6993f',
-    'orange-light': '#faad63',
-    'orange-lighter': '#fcd9b6',
-    'orange-lightest': '#fff5eb',
+    'red-lightest': '#fcebea', // using
 
     'yellow-darkest': '#453411',
     'yellow-darker': '#684f1d',
@@ -88,45 +80,13 @@ let colors = {
     'green-lighter': '#a2f5bf',
     'green-lightest': '#00ab99', // changed
 
-    'teal-darkest': '#0d3331',
+    'teal-darkest': '#023337', // changed
     'teal-darker': '#20504f',
     'teal-dark': '#38a89d',
     'teal': '#4dc0b5',
     'teal-light': '#64d5ca',
     'teal-lighter': '#a0f0ed',
     'teal-lightest': '#e8fffe',
-
-    'blue-darkest': '#023337', // changed
-    'blue-darker': '#1c3d5a',
-    'blue-dark': '#2779bd',
-    'blue': '#3490dc',
-    'blue-light': '#6cb2eb',
-    'blue-lighter': '#bcdefa',
-    'blue-lightest': '#eff8ff',
-
-    'indigo-darkest': '#191e38',
-    'indigo-darker': '#2f365f',
-    'indigo-dark': '#5661b3',
-    'indigo': '#6574cd',
-    'indigo-light': '#7886d7',
-    'indigo-lighter': '#b2b7ff',
-    'indigo-lightest': '#e6e8ff',
-
-    'purple-darkest': '#21183c',
-    'purple-darker': '#382b5f',
-    'purple-dark': '#794acf',
-    'purple': '#9561e2',
-    'purple-light': '#a779e9',
-    'purple-lighter': '#d6bbfc',
-    'purple-lightest': '#f3ebff',
-
-    'pink-darkest': '#451225',
-    'pink-darker': '#6f213f',
-    'pink-dark': '#eb5286',
-    'pink': '#f66d9b',
-    'pink-light': '#fa7ea8',
-    'pink-lighter': '#ffbbca',
-    'pink-lightest': '#ffebef',
 }
 
 /*
@@ -220,26 +180,6 @@ module.exports = {
             'Droid Sans',
             'Helvetica Neue',
             'sans-serif',
-        ],
-        'serif': [
-            'Constantia',
-            'Lucida Bright',
-            'Lucidabright',
-            'Lucida Serif',
-            'Lucida',
-            'DejaVu Serif',
-            'Bitstream Vera Serif',
-            'Liberation Serif',
-            'Georgia',
-            'serif',
-        ],
-        'mono': [
-            'Menlo',
-            'Monaco',
-            'Consolas',
-            'Liberation Mono',
-            'Courier New',
-            'monospace',
         ]
     },
 
@@ -750,6 +690,8 @@ module.exports = {
         'lg': '0 15px 30px 0 rgba(0,0,0,0.11), 0 5px 15px 0 rgba(0,0,0,0.08)',
         'inner': 'inset 0 2px 4px 0 rgba(0,0,0,0.06)',
         'none': 'none',
+        'white': '0 7px 0 '+ colors['white'] +', 0 14px 0 '+ colors['white'],
+        'grey': '0 7px 0 '+ colors['grey'] +', 0 14px 0 '+ colors['grey'],
     },
 
 

@@ -1,7 +1,7 @@
 {{--
     $social => array // [['title','link']]
 --}}
-<div class="bg-blue-darkest pt-6 pb-4">
+<div class="bg-teal-darkest pt-6 pb-4">
     <ul class="row list-reset text-center">
         @foreach($social as $item)
             <li class="inline{{ $loop->last !== true ? ' mr-8' : '' }}">

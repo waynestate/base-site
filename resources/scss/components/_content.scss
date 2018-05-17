@@ -11,19 +11,25 @@
         line-height: 1.4;
     }
 
-    h2,
+    h1 {
+        font-size: 2.125rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
     h3 {
         font-size: 1.375rem;
     }
 
-    h4,
-    h5,
-    h6 {
-        font-size: 1.0625rem;
+    h4 {
+        font-size: 1.125rem;
     }
 
-    h3 {
-        font-weight: normal;
+    h5,
+    h6 {
+        font-size: 0.875rem;
     }
 
     p {
@@ -31,13 +37,14 @@
     }
 
     hr {
+        @apply .border-b .border-solid .border-grey;
+
         clear: both;
         max-width: 75rem;
         height: 0;
         margin: 1.25rem auto;
         border-top: 0;
         border-right: 0;
-        border-bottom: 1px solid #cacaca;
         border-left: 0;
     }
 
@@ -108,10 +115,11 @@
             }
 
             th {
+                @apply .bg-grey-darkest .bg-grey-darkest;
+
                 text-align: left;
                 font-weight: bold;
                 padding: 15px 10px;
-                background: #00565c;
             }
 
             th.center-align {
@@ -130,15 +138,15 @@
             }
 
             &:nth-child(odd) {
-                background: #f4f4f4;
+                @apply .bg-grey-lighter;
             }
 
             &:nth-child(even) {
-                background: #fcfcfc;
+                @apply .bg-grey-lightest;
             }
 
             &:hover {
-                background: #fffbef;
+                @apply .bg-yellow-lightest;
             }
         }
 
