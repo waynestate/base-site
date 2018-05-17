@@ -3,7 +3,8 @@
     margin-bottom: 1rem;
     position: relative;
     list-style: none;
-    background: #efefef;
+
+    @apply .bg-grey-lighter;
 
     & > li {
         width: 100%;
@@ -18,13 +19,12 @@
             border: 1px solid #d5d5d5;
             border-bottom: 0;
             line-height: 1;
-            color: foreground(#efefef, #0c5449);
             text-decoration: none;
             font-weight: bold;
 
             &:first-child:hover,
             &:first-child:focus, {
-                background-color: #e6e6e6;
+                @apply .bg-grey-light;
             }
 
             // Open symbol
@@ -49,7 +49,6 @@
             padding: 1rem;
             border: 1px solid #d5d5d5;
             border-top: none;
-            color: foreground(#efefef, #0c5449);
         }
     }
 
