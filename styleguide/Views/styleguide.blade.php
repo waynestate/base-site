@@ -314,13 +314,13 @@
                     <div class="text-white bg-green px-6 py-4 text-sm font-semibold relative shadow">
                         <div class="uppercase">Green</div>
                     </div>
-                    <div class="text-green-darkest bg-green-lightest px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-black bg-green-lightest px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Lightest</span>
                     </div>
-                    <div class="text-green-darkest bg-green-lighter px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-white bg-green-lighter px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Lighter</span>
                     </div>
-                    <div class="text-green-darkest bg-green-light px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-white bg-green-light px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Light</span>
                     </div>
                     <div class="text-white bg-green px-6 py-3 text-sm font-semibold flex justify-between">
@@ -340,86 +340,28 @@
 
             <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
                 <div class="rounded overflow-hidden">
-                    <div class="text-yellow-darkest bg-yellow px-6 py-4 text-sm font-semibold relative shadow">
+                    <div class="text-black bg-yellow px-6 py-4 text-sm font-semibold relative shadow">
                         <div class="uppercase">Yellow</div>
                     </div>
-                    <div class="text-yellow-darkest bg-yellow-lightest px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-black bg-yellow-lightest px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Lightest</span>
                     </div>
-                    <div class="text-yellow-darkest bg-yellow-lighter px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-black bg-yellow-lighter px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Lighter</span>
                     </div>
-                    <div class="text-yellow-darkest bg-yellow-light px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-black bg-yellow-light px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Light</span>
                     </div>
-                    <div class="text-yellow-darkest bg-yellow px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-black bg-yellow px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Base</span>
                     </div>
-                    <div class="text-yellow-darkest bg-yellow-dark px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-white bg-yellow-dark px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Dark</span>
                     </div>
                     <div class="text-white bg-yellow-darker px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Darker</span>
                     </div>
                     <div class="text-white bg-yellow-darkest px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Darkest</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-                <div class="rounded overflow-hidden">
-                    <div class="text-white bg-teal px-6 py-4 text-sm font-semibold relative shadow">
-                        <div class="uppercase">Teal</div>
-                    </div>
-                    <div class="text-teal-darkest bg-teal-lightest px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Lightest</span>
-                    </div>
-                    <div class="text-teal-darkest bg-teal-lighter px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Lighter</span>
-                    </div>
-                    <div class="text-teal-darkest bg-teal-light px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Light</span>
-                    </div>
-                    <div class="text-white bg-teal px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Base</span>
-                    </div>
-                    <div class="text-white bg-teal-dark px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Dark</span>
-                    </div>
-                    <div class="text-white bg-teal-darker px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Darker</span>
-                    </div>
-                    <div class="text-white bg-teal-darkest px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Darkest</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-                <div class="rounded overflow-hidden">
-                    <div class="text-white bg-red px-6 py-4 text-sm font-semibold relative shadow">
-                        <div class="uppercase">Red</div>
-                    </div>
-                    <div class="text-red-darkest bg-red-lightest px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Lightest</span>
-                    </div>
-                    <div class="text-red-darkest bg-red-lighter px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Lighter</span>
-                    </div>
-                    <div class="text-white bg-red-light px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Light</span>
-                    </div>
-                    <div class="text-white bg-red px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Base</span>
-                    </div>
-                    <div class="text-white bg-red-dark px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Dark</span>
-                    </div>
-                    <div class="text-white bg-red-darker px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Darker</span>
-                    </div>
-                    <div class="text-white bg-red-darkest px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Darkest</span>
                     </div>
                 </div>
@@ -459,8 +401,6 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 @endsection

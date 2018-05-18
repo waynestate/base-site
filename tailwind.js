@@ -46,47 +46,39 @@ View the full documentation at https://tailwindcss.com.
 let colors = {
     'transparent': 'transparent',
 
-    'black': '#181a19', // using
-    'grey-darkest': '#323333', // using
-    'grey-darker': '#575959', // using
-    'grey-dark': '#949999', // using
-    'grey': '#babfbf', // using
-    'grey-light': '#d9d9d9', // changed
-    'grey-lighter': '#e6e6e6', // changed
-    'grey-lightest': '#f2f2f2', // using
-    'white': '#ffffff', // using
+    'black': '#181a19',
+    'grey-darkest': '#323333',
+    'grey-darker': '#575959',
+    'grey-dark': '#949999',
+    'grey': '#babfbf',
+    'grey-light': '#d9d9d9',
+    'grey-lighter': '#e6e6e6',
+    'grey-lightest': '#f2f2f2',
+    'white': '#ffffff',
 
     'red-darkest': '#3b0d0c',
     'red-darker': '#621b18',
     'red-dark': '#cc1f1a',
-    'red': '#e3342f', //using
-    'red-light': '#ef5753', // using
+    'red': '#e3342f',
+    'red-light': '#ef5753',
     'red-lighter': '#f9acaa',
-    'red-lightest': '#fcebea', // using
+    'red-lightest': '#fcebea',
 
     'yellow-darkest': '#866e26',
     'yellow-darker': '#ae8f30',
-    'yellow-dark': '#d8ad2d', // changed
-    'yellow': '#ffcc33', // changed
+    'yellow-dark': '#d8ad2d',
+    'yellow': '#ffcc33',
     'yellow-light': '#ffdb6f',
     'yellow-lighter': '#ffe596',
-    'yellow-lightest': '#fff2c9', // used
+    'yellow-lightest': '#fff2c9',
 
-    'green-darkest': '#05211e', // changed
-    'green-darker': '#072e29', // changed
-    'green-dark': '#093f39', // changed
-    'green': '#0c5449', // changed
+    'green-darkest': '#05211e',
+    'green-darker': '#072e29',
+    'green-dark': '#093f39',
+    'green': '#0c5449',
     'green-light': '#3d7a67',
-    'green-lighter': '#71a188',
-    'green-lightest': '#adcab8', // changed
-
-    'teal-darkest': '#023337', // changed
-    'teal-darker': '#20504f',
-    'teal-dark': '#38a89d',
-    'teal': '#4dc0b5',
-    'teal-light': '#64d5ca',
-    'teal-lighter': '#a0f0ed',
-    'teal-lightest': '#e8fffe',
+    'green-lighter': '#71a192',
+    'green-lightest': '#acc9c0',
 }
 
 /*
