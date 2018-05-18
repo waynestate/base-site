@@ -303,5 +303,164 @@
                 </pre>
             </div>
         </div>
+
+        <hr>
+
+        <h2 class="pb-6">Colors</h2>
+
+        <div class="flex flex-wrap">
+            <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
+                <div class="rounded overflow-hidden">
+                    <div class="text-white bg-green px-6 py-4 text-sm font-semibold relative shadow">
+                        <div class="uppercase">Green</div>
+                    </div>
+                    <div class="text-green-darkest bg-green-lightest px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Lightest</span>
+                    </div>
+                    <div class="text-green-darkest bg-green-lighter px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Lighter</span>
+                    </div>
+                    <div class="text-green-darkest bg-green-light px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Light</span>
+                    </div>
+                    <div class="text-white bg-green px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Base</span>
+                    </div>
+                    <div class="text-white bg-green-dark px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Dark</span>
+                    </div>
+                    <div class="text-white bg-green-darker px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Darker</span>
+                    </div>
+                    <div class="text-white bg-green-darkest px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Darkest</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
+                <div class="rounded overflow-hidden">
+                    <div class="text-yellow-darkest bg-yellow px-6 py-4 text-sm font-semibold relative shadow">
+                        <div class="uppercase">Yellow</div>
+                    </div>
+                    <div class="text-yellow-darkest bg-yellow-lightest px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Lightest</span>
+                    </div>
+                    <div class="text-yellow-darkest bg-yellow-lighter px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Lighter</span>
+                    </div>
+                    <div class="text-yellow-darkest bg-yellow-light px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Light</span>
+                    </div>
+                    <div class="text-yellow-darkest bg-yellow px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Base</span>
+                    </div>
+                    <div class="text-yellow-darkest bg-yellow-dark px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Dark</span>
+                    </div>
+                    <div class="text-white bg-yellow-darker px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Darker</span>
+                    </div>
+                    <div class="text-white bg-yellow-darkest px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Darkest</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
+                <div class="rounded overflow-hidden">
+                    <div class="text-white bg-teal px-6 py-4 text-sm font-semibold relative shadow">
+                        <div class="uppercase">Teal</div>
+                    </div>
+                    <div class="text-teal-darkest bg-teal-lightest px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Lightest</span>
+                    </div>
+                    <div class="text-teal-darkest bg-teal-lighter px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Lighter</span>
+                    </div>
+                    <div class="text-teal-darkest bg-teal-light px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Light</span>
+                    </div>
+                    <div class="text-white bg-teal px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Base</span>
+                    </div>
+                    <div class="text-white bg-teal-dark px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Dark</span>
+                    </div>
+                    <div class="text-white bg-teal-darker px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Darker</span>
+                    </div>
+                    <div class="text-white bg-teal-darkest px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Darkest</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
+                <div class="rounded overflow-hidden">
+                    <div class="text-white bg-red px-6 py-4 text-sm font-semibold relative shadow">
+                        <div class="uppercase">Red</div>
+                    </div>
+                    <div class="text-red-darkest bg-red-lightest px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Lightest</span>
+                    </div>
+                    <div class="text-red-darkest bg-red-lighter px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Lighter</span>
+                    </div>
+                    <div class="text-white bg-red-light px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Light</span>
+                    </div>
+                    <div class="text-white bg-red px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Base</span>
+                    </div>
+                    <div class="text-white bg-red-dark px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Dark</span>
+                    </div>
+                    <div class="text-white bg-red-darker px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Darker</span>
+                    </div>
+                    <div class="text-white bg-red-darkest px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Darkest</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
+                <div class="rounded overflow-hidden">
+                    <div class="text-black bg-grey px-6 py-4 text-sm font-semibold relative shadow">
+                        <div class="uppercase">Grey</div>
+                    </div>
+                    <div class="text-black bg-white px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>White</span>
+                    </div>
+                    <div class="text-black bg-grey-lightest px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Lightest</span>
+                    </div>
+                    <div class="text-black bg-grey-lighter px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Lighter</span>
+                    </div>
+                    <div class="text-black bg-grey-light px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Light</span>
+                    </div>
+                    <div class="text-black bg-grey px-6 py-3 text-sm font-semibold flex justify-between flex justify-between">
+                        <span>Base</span>
+                    </div>
+                    <div class="text-white bg-grey-dark px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Dark</span>
+                    </div>
+                    <div class="text-white bg-grey-darker px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Darker</span>
+                    </div>
+                    <div class="text-white bg-grey-darkest px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Darkest</span>
+                    </div>
+                    <div class="text-white bg-black px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Black</span>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
     </div>
 @endsection
