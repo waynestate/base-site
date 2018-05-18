@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Blade::directive('svg', function ($title) {
-            return "<?php if(view()->exists('svg.'.".$title.")) { echo view('svg.'.".$title."); echo '<p class=\"visually-hidden\">'.".$title.".'</p>'; } ?>";
+            return "<?php if(view()->exists('svg.'.".strtolower($title).")) { echo view('svg.'.".$title."); echo '<p class=\"visually-hidden\">'.".$title.".'</p>'; } ?>";
         });
     }
 
