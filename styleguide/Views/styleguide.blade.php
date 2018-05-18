@@ -317,7 +317,7 @@
                     <div class="text-black bg-green-lightest px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Lightest</span>
                     </div>
-                    <div class="text-black bg-green-lighter px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-white bg-green-lighter px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Lighter</span>
                     </div>
                     <div class="text-white bg-green-light px-6 py-3 text-sm font-semibold flex justify-between">
