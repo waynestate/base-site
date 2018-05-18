@@ -8,7 +8,7 @@
     </div>
 
     @forelse($profiles as $key => $profiles)
-        <h1>{{ $key }}</h1>
+        <h2>{{ $key }}</h2>
 
         <div class="row flex flex-wrap -mx-4">
             @foreach($profiles as $profile)
