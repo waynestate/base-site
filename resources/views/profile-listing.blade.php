@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="w-1/6 px-4">
-                    <input type="submit" value="Filter" class="postfix button" />
+                    <input type="submit" value="Filter" class="postfix button expanded" />
                 </div>
             </div>
         </form>
@@ -24,10 +24,10 @@
 
     <div class="row flex flex-wrap -mx-4">
         @forelse($profiles as $profile)
-            <div class="w-full sm:w-1/2 md:w-1/3 px-4 pb-4">
+            <div class="w-full sm:w-1/2 md:w-1/3 px-4 pb-6">
                 <a href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}profile/{{ $profile['data']['AccessID'] }}">
-                    <div class="block bg-cover bg-center w-full pt-full lazy" data-src="{{ $profile['data']['Picture']['url'] ?? '/_resources/images/no-photo.svg' }}"></div>
-                    {{ $profile['data']['First Name'] }} {{ $profile['data']['Last Name'] }}
+                    <div class="block bg-cover bg-center w-full pt-full lazy mb-1" data-src="{{ $profile['data']['Picture']['url'] ?? '/_resources/images/no-photo.svg' }}"></div>
+                    <span class="font-bold">{{ $profile['data']['First Name'] }} {{ $profile['data']['Last Name'] }}</span>
                 </a>
 
                 @if(isset($profile['data']['Title']))
