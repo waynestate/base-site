@@ -7,11 +7,11 @@
         <hr>
 
         <h2>2 Column Example</h2>
-        <div class="row px-4 flex">
-            <div class="w-full sm:w-1/2 pr-4">
+        <div class="row -mx-4 flex">
+            <div class="w-full sm:w-1/2 px-4">
                 <p>{{ $faker->paragraph }}</p>
             </div>
-            <div class="w-full sm:w-1/2 pr-4">
+            <div class="w-full sm:w-1/2 px-4">
                 <p>{{ $faker->paragraph }}</p>
             </div>
         </div>
@@ -19,11 +19,11 @@
         <a class="button" onclick="document.querySelector('pre.columns-code').classList.toggle('hidden');">See Row/Columns Code</a>
         <pre class="columns-code hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
             {!! htmlspecialchars('
-<div class="row px-4 flex">
-    <div class="w-full sm:w-1/2 pr-4">
+<div class="row -mx-4 flex">
+    <div class="w-full sm:w-1/2 px-4">
         <p>'.$faker->paragraph.'</p>
     </div>
-    <div class="w-full sm:w-1/2 pr-4">
+    <div class="w-full sm:w-1/2 px-4">
         <p>'.$faker->paragraph.'</p>
     </div>
 </div>
@@ -86,8 +86,8 @@
 
         <hr>
 
-        <div class="row px-4 flex">
-            <div class="w-full md:w-1/3">
+        <div class="row -mx-4 flex">
+            <div class="w-full md:w-1/3 px-4">
                 <h2>Unordered lists</h2>
 
                 <ul>
@@ -97,7 +97,7 @@
                 </ul>
             </div>
 
-            <div class="w-full md:w-1/3">
+            <div class="w-full md:w-1/3 px-4">
                 <h2>Ordered lists</h2>
 
                 <ol>
@@ -107,7 +107,7 @@
                 </ol>
             </div>
 
-            <div class="w-full md:w-1/3">
+            <div class="w-full md:w-1/3 px-4">
                 <h2>Data lists</h2>
 
                 <dl>
