@@ -4,7 +4,7 @@
         transition: all 0.2s ease-out;
 
         @screen mt {
-            @apply .bg-yellow-dark;
+            @apply .bg-yellow;
 
             display: flex;
             align-items: center;
@@ -19,7 +19,7 @@
 
         // Pointy bottom
         &::after {
-            @apply .border-yellow-dark;
+            @apply .border-yellow;
 
             border-left-color: transparent;
             border-right-color: transparent;
