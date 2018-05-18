@@ -1,5 +1,5 @@
 .slideout-menu {
-    @apply .bg-green-darker;
+    @apply .bg-green-dark;
 
     position: fixed;
     top: 0;
@@ -14,11 +14,11 @@
         display: block;
 
         ul ul li {
-            @apply bg-green-darkest;
+            @apply bg-green-darker;
         }
 
         ul li .main-menu-toggle {
-            @apply bg-green-darkest;
+            @apply bg-green-darker;
 
             text-transform: uppercase;
             font-size: 1rem;
@@ -28,7 +28,7 @@
 
         // Menu Header top level (MAIN MENU)
         ul ul {
-            @apply .border-solid .border-b-4 .border-green-darkest;
+            @apply .border-solid .border-b-4 .border-green-darker;
         }
     }
 
@@ -46,7 +46,7 @@
     }
 
     ul {
-        @apply .bg-green-darker;
+        @apply .bg-green-dark;
 
         padding: 0;
 

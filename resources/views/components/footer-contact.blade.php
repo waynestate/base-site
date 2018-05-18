@@ -6,7 +6,7 @@
         @if(count($contact) == 1)
             <div class="row text-center py-8">
                 @foreach($contact as $info)
-                    <h2 class="text-yellow">
+                    <h2 class="text-yellow-light">
                         @if($info['link'] != '')<a href="{{ $info['link'] }}" class="text-yellow">@endif
                         {{ $info['title'] }}
                         @if($info['link'] != '')</a>@endif

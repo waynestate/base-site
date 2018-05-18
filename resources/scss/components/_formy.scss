@@ -213,7 +213,7 @@
     .login-info ul li a,
     .login-info p a,
     .formy_logout a {
-        @apply .text-green-dark .underline .border-b-0;
+        @apply .text-green .underline .border-b-0;
 
         &:hover {
             text-decoration: none;
