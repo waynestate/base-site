@@ -51,7 +51,7 @@
     dl,
     ol,
     ul {
-        margin-bottom: 1rem;
+        margin: 0 0 1rem;
     }
 
     a:not(.button) {
@@ -69,18 +69,14 @@
         text-decoration: none;
     }
 
-    ul:not([class]),
-    ol,
-    dl {
-        list-style-position: outside;
-        margin-left: 2em;
-    }
-
     blockquote {
         padding: 1em;
-        border: none;
+        border-width: 0 0 0 3px;
+        border-style: solid;
+        margin-bottom: 1em;
 
-        @apply .bg-yellow-lightest;
+        @apply .border-green;
+        @apply .bg-grey-lightest;
 
         p {
             font-style: italic;
@@ -168,7 +164,6 @@
         &.icon {
             display: inline-block;
             width: auto;
-            margin: 10px;
         }
 
         @screen mt {
