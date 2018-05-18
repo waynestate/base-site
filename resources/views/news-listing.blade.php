@@ -22,8 +22,8 @@
         </dl>
 
         @if(!empty($paging))
-            <div class="row flex p-4">
-                <div class="w-1/2">
+            <div class="row flex -mx-4">
+                <div class="w-1/2 px-4">
                     @if(count($news) == $paging['perPage'])
                         <p>
                             <a href="{{ app('request')->url() }}?page={{ $paging['page_number_previous'] }}">&larr; Previous</a>
@@ -31,7 +31,7 @@
                     @endif
                 </div>
 
-                <div class="w-1/2 text-right">
+                <div class="w-1/2 px-4 text-right">
                     @if($paging['page_number_next'] >= 0)
                         <p>
                             <a href="{{ app('request')->url() }}?page={{ $paging['page_number_next'] }}">Next &rarr;</a>
