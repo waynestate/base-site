@@ -64,21 +64,21 @@ let colors = {
     'red-lighter': '#f9acaa',
     'red-lightest': '#fcebea', // using
 
-    'yellow-darkest': '#453411',
-    'yellow-darker': '#684f1d',
-    'yellow-dark': '#ffd95c', // changed
-    'yellow': '#ffd478', // changed
-    'yellow-light': '#fff382',
-    'yellow-lighter': '#fff9c2',
-    'yellow-lightest': '#fcfbeb', // used
+    'yellow-darkest': '#866e26',
+    'yellow-darker': '#ae8f30',
+    'yellow-dark': '#d8ad2d', // changed
+    'yellow': '#ffcc33', // changed
+    'yellow-light': '#ffdb6f',
+    'yellow-lighter': '#ffe596',
+    'yellow-lightest': '#fff2c9', // used
 
-    'green-darkest': '#062b27', // changed
-    'green-darker': '#093f39', // changed
-    'green-dark': '#0c5449', // changed
-    'green': '#0a5449', // changed
-    'green-light': '#51d88a',
-    'green-lighter': '#a2f5bf',
-    'green-lightest': '#00ab99', // changed
+    'green-darkest': '#05211e', // changed
+    'green-darker': '#072e29', // changed
+    'green-dark': '#093f39', // changed
+    'green': '#0c5449', // changed
+    'green-light': '#3d7a67',
+    'green-lighter': '#71a188',
+    'green-lightest': '#adcab8', // changed
 
     'teal-darkest': '#023337', // changed
     'teal-darker': '#20504f',
