@@ -1,6 +1,5 @@
 {{--
     $social => array // [['title','link']]
-    {{ $loop->last !== true ? ' mr-8' : '' }}
 --}}
 <div class="bg-green-darker py-6">
     <div class="row flex justify-center items-center">
