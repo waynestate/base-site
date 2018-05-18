@@ -222,7 +222,7 @@
 
         <hr>
 
-        <div class="row flex flex-wrap">
+        <div class="row flex flex-wrap -mx-4">
             <div class="w-full sm:w-1/4 px-4">
                 <h2>Figure (left)</h2>
 
@@ -308,7 +308,7 @@
 
         <h2 class="pb-6">Colors</h2>
 
-        <div class="flex flex-wrap">
+        <div class="flex flex-wrap -mx-4">
             <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
                 <div class="rounded overflow-hidden">
                     <div class="text-white bg-green px-6 py-4 text-sm font-semibold relative shadow">
