@@ -59,10 +59,11 @@ mix.js('resources/js/main.js', 'public/_resources/js')
             path.join(__dirname, "factories/**/*.php"),
             path.join(__dirname, "resources/js/**/*.js"),
             path.join(__dirname, "node_modules/slideout/dist/slideout.js"),
-            path.join(__dirname, "node_modules/flickity/dist/flickity.pkgd.js")
+            path.join(__dirname, "node_modules/flickity/dist/flickity.pkgd.js"),
+            path.join(__dirname, "node_modules/mediabox/dist/mediabox.js")
         ],
         extensions: ['html', 'js', 'php', 'vue'],
-        whitelistPatterns: [/icon-/, /flickity-/, /mediabox-/, /at-/]
+        whitelistPatterns: [/at-/]
     })
    .sourceMaps()
    .options({
