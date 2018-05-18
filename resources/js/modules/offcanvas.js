@@ -37,7 +37,7 @@ import Slideout from 'slideout/dist/slideout.js';
             var childNode = document.createElement('span');
             
             if(parentNode != null) {
-                childNode.classList.add('expand-icons', 'icon-right-open', 'float-right', 'text-lg');
+                childNode.classList.add('expand-icons', 'icon-right-open', 'float-right', 'text-lg', '-mt-0.5');
                 parentNode.prepend(childNode);
             }
 
