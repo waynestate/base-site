@@ -79,6 +79,12 @@ import Slideout from 'slideout/dist/slideout.js';
                 document.querySelector('#menu .menu-top').classList.add('hidden');
             }
 
+            // Always flex if javascript is available
+            if(document.querySelector('#panel .mt\\:flex') != null) {
+                document.querySelector('#panel .mt\\:flex').classList.add('flex');
+                document.querySelector('#panel .mt\\:flex').classList.remove('mt:flex');
+            }
+
             // Toggle button
             document.querySelector('.menu-toggle').addEventListener('click', function() {
                 window.WayneState.modules.slideout.toggle();
