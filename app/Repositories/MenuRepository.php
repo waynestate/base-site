@@ -124,7 +124,7 @@ class MenuRepository implements DataRepositoryContract, MenuRepositoryContract
      */
     public function getTopMenuOutput($menu)
     {
-        return $menu === null ? null : $this->displayMenu->render(['menu' => $menu, 'menu_class' => 'menu-top mt:block']);
+        return $menu === null ? null : $this->displayMenu->render(['menu' => $menu, 'menu_class' => 'menu-top']);
     }
 
     /**

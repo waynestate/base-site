@@ -22,10 +22,10 @@
             <div class="float-right vertical-centering">
                 <div>
                     @if(config('app.top_menu_enabled') === true)
-                        <nav id="top-menu" aria-label="Site menu" tabindex="-1">
+                        <nav id="top-menu" class="top-menu" aria-label="Site menu" tabindex="-1">
                             {!! $top_menu_output !!}
                         </nav>
-                    @endif
+                    @endif  
 
                     <div>
                         <ul class="menu-top menu-button mt:hidden">

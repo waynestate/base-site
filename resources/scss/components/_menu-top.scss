@@ -19,9 +19,18 @@
             height: 100%;
         }
 
-        > * > *:not(.mt\:hidden, .hidden) {
+        > * > * {
             display: table-cell;
             vertical-align: middle;
+
+            // Hide & show the top menu
+            &.top-menu {
+                display: none;
+
+                @screen mt {
+                    display: table-cell;
+                }
+            }
         }
 
         &.title-area {
