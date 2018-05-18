@@ -60,6 +60,13 @@ import Slideout from 'slideout/dist/slideout.js';
             }
         }
 
+        checkOpen(eve) {
+            if (slideout.isOpen()) {
+                eve.preventDefault();
+                window.WayneState.modules.slideout.close();
+            }
+        }
+
         /**
          * Initialize
          */
@@ -75,7 +82,7 @@ import Slideout from 'slideout/dist/slideout.js';
             // Toggle button
             document.querySelector('.menu-toggle').addEventListener('click', function() {
                 window.WayneState.modules.slideout.toggle();
-            });
+            });            
 
             // Scroll the user to the top so they can see the full menu
             window.WayneState.modules.slideout.on('close', function () {
@@ -99,6 +106,15 @@ import Slideout from 'slideout/dist/slideout.js';
 
                 // Scroll the user to the top so they can see the full menu
                 window.scrollTo(0,0);
+            });
+
+            // Allow clicking the content area to close offcanvas
+            window.WayneState.modules.slideout.on('open', function () {
+                document.querySelector('.content-area').addEventListener('click', window.WayneState.modules.offcanvas.checkOpen);
+            });
+        
+            window.WayneState.modules.slideout.on('close', function () {
+                document.querySelector('.content-area').removeEventListener('click', window.WayneState.modules.offcanvas.checkOpen);
             });
 
             // Initialize offcanvas classes
