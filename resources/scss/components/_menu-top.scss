@@ -98,7 +98,11 @@
             font-size: 2em;
         }
 
-        .icon-cancel-1::before {
+        .icon-cancel {
+            @apply .text-white;
+        }
+
+        .icon-cancel::before {
             text-align: right;
         }
     }

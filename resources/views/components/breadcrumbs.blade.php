@@ -6,15 +6,15 @@
         @foreach($breadcrumbs as $key=>$crumb)
             @if($key == 0)
                 <li class="inline">
-                    <a href="/"><span class="icon-home text-black text-lg"></span><span class="visually-hidden">{{ strip_tags($crumb['display_name']) }}</span></a>
-                    <span class="icon-right-open-mini"></span>
+                    <a href="/"><span class="text-black align-middle">@svg('home')</span><span class="visually-hidden">{{ strip_tags($crumb['display_name']) }}</span></a>
+                    <span class="icon-right-open px-2"></span>
             @elseif($key == (count($breadcrumbs) - 1))
                 <li class="font-bold text-green-dark inline">
                     {{ $crumb['display_name'] }}
             @else
                 <li class="inline">
                 <a href="{{ $crumb['relative_url'] }}" class="text-green-dark hover:underline">{{ $crumb['display_name'] }}</a>
-                <span class="icon-right-open-mini"></span>
+                <span class="icon-right-open px-2"></span>
             @endif
             </li>
         @endforeach

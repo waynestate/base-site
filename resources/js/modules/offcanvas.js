@@ -37,7 +37,7 @@ import Slideout from 'slideout/dist/slideout.js';
             var childNode = document.createElement('span');
             
             if(parentNode != null) {
-                childNode.classList.add('expand-icons', 'icon-right-open-mini', 'float-right', 'text-2xl', 'flex');
+                childNode.classList.add('expand-icons', 'icon-right-open', 'float-right');
                 parentNode.prepend(childNode);
             }
 
@@ -47,11 +47,11 @@ import Slideout from 'slideout/dist/slideout.js';
                     document.querySelector('.offcanvas-main-menu ul ul').classList.toggle('hidden');
 
                     if(document.querySelector('.offcanvas-main-menu ul ul').offsetParent === null) {
-                        document.querySelector('a.main-menu-toggle .expand-icons').classList.toggle('icon-right-open-mini');
-                        document.querySelector('a.main-menu-toggle .expand-icons').classList.toggle('icon-down-open-mini');
+                        document.querySelector('a.main-menu-toggle .expand-icons').classList.toggle('icon-right-open');
+                        document.querySelector('a.main-menu-toggle .expand-icons').classList.toggle('icon-down-open');
                     } else {
-                        document.querySelector('a.main-menu-toggle .expand-icons').classList.toggle('icon-down-open-mini');
-                        document.querySelector('a.main-menu-toggle .expand-icons').classList.toggle('icon-right-open-min');
+                        document.querySelector('a.main-menu-toggle .expand-icons').classList.toggle('icon-down-open');
+                        document.querySelector('a.main-menu-toggle .expand-icons').classList.toggle('icon-right-open');
                     }
 
                     // Return false so it does not complete the click through
@@ -81,7 +81,7 @@ import Slideout from 'slideout/dist/slideout.js';
             window.WayneState.modules.slideout.on('close', function () {
                  // Swap icon and adjust screen size
                  document.querySelector('#panel').classList.remove('min-h-screen');
-                 document.querySelector('.menu-toggle').classList.remove('icon-cancel-1');
+                 document.querySelector('.menu-toggle').classList.remove('icon-cancel');
                  document.querySelector('.menu-toggle').classList.add('menu-icon');
                  document.querySelector('#menu').classList.add('hidden');
                  document.querySelector('#menu').setAttribute('aria-hidden', 'true');
@@ -91,7 +91,7 @@ import Slideout from 'slideout/dist/slideout.js';
             window.WayneState.modules.slideout.on('beforeopen', function () {
                 // Swap icon and adjust screen size
                 document.querySelector('#panel').classList.add('min-h-screen');
-                document.querySelector('.menu-toggle').classList.add('icon-cancel-1');
+                document.querySelector('.menu-toggle').classList.add('icon-cancel');
                 document.querySelector('.menu-toggle').classList.remove('menu-icon');
                 document.querySelector('#menu').classList.remove('hidden');
                 document.querySelector('#menu').setAttribute('aria-hidden', 'false');

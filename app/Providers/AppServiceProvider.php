@@ -32,6 +32,10 @@ class AppServiceProvider extends ServiceProvider
 
             return "<?php echo view('components.image-lazy', ['src' => $params[0], 'alt' => $params[1], 'class' => $params[2]])->render(); ?>";
         });
+
+        Blade::directive('svg', function ($title) {
+            return "<?php if(view()->exists('svg.'.".$title.")) { echo view('svg.'.".$title."); echo '<p class=\"visually-hidden\">'.".$title.".'</p>'; } ?>";
+        });
     }
 
     /**

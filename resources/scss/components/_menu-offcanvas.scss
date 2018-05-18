@@ -22,6 +22,7 @@
 
             text-transform: uppercase;
             font-size: 1rem;
+            cursor: pointer;
         }
 
         // Menu Header top level (MAIN MENU)
@@ -68,5 +69,14 @@
         li > ul > li > ul > li a {
             padding-left: 3em;
         }
+    }
+
+    .icon-right-open {
+        font-size: 1.1em;
+    }
+
+    .icon-down-open {
+        font-size: 1em;
+        font-weight: bold;
     }
 }

@@ -1,0 +1,17 @@
+.icon-cancel {
+    &::after {
+        content: "×";
+    }
+}
+
+.icon-right-open {
+    &::after {
+        content: ">";
+    }
+}
+
+.icon-down-open {
+    &::after {
+        content: "∨";
+    }
+}

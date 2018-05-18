@@ -205,6 +205,15 @@ $menus = [
         * If the page is NOT within then menu then you need to specify the path to the page. Set `var $path = '/path/to/your/page'` inside your `styleguide/Pages/` class.
     1. Set controller to the one you created in step #4.
 
+## Adding SVG icons
+
+1. Load the fontello-config.json file into http://fontello.com/
+1. Select the new icons and download the set.
+1. Load the waynestate.svg file into https://icomoon.io/app/#/select
+1. Select all the icons and download the set.
+1. Open the new SVG icon(s) in the editor of your choice.
+1. Save each file under resources/views/svg as a blade partial.
+
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.

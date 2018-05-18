@@ -49,51 +49,9 @@
       "src": "entypo"
     },
     {
-      "uid": "004882ab2d5c418c5b2060e80596279b",
-      "css": "right-open-big",
-      "code": 59392,
-      "src": "entypo"
-    },
-    {
-      "uid": "884cfc3e6e2d456dd2a2ca0dbb9e6337",
-      "css": "left-open-big",
-      "code": 59393,
-      "src": "entypo"
-    },
-    {
-      "uid": "37f6cfbb4062ed0d01b351ec35c334ff",
-      "css": "right-open-mini",
-      "code": 59394,
-      "src": "entypo"
-    },
-    {
-      "uid": "f11c9e95ae5eaa84d193e8fa1d38c6f9",
-      "css": "down-open-mini",
-      "code": 59395,
-      "src": "entypo"
-    },
-    {
-      "uid": "592717bd601645d61517d2a584d04127",
-      "css": "left-open-mini",
-      "code": 59396,
-      "src": "entypo"
-    },
-    {
       "uid": "d7271d490b71df4311e32cdacae8b331",
       "css": "home",
       "code": 59397,
-      "src": "fontawesome"
-    },
-    {
-      "uid": "c709da589c923ba3c2ad48d9fc563e93",
-      "css": "cancel-1",
-      "code": 59416,
-      "src": "entypo"
-    },
-    {
-      "uid": "dcedf50ab1ede3283d7a6c70e2fe32f3",
-      "css": "chat",
-      "code": 59398,
       "src": "fontawesome"
     }
   ]
