@@ -30,7 +30,7 @@
     // Bottom borders on child <li>
     > ul > li {
         @screen mt {
-            @apply .border-b .border-solid .border-grey-light;
+            @apply .border-b .border-solid .border-grey-lighter;
         }
     }
 
