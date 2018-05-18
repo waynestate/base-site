@@ -12,6 +12,8 @@
 
 .icon-down-open {
     &::after {
-        content: "∨";
+        content: ">";
+        display: inline-block;
+        transform: rotate(90deg);
     }
 }
