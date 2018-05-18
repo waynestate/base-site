@@ -6,8 +6,8 @@
     @if($hide_filtering == false)
         <form name="programs" method="get" class="filter formy">
             <label for="filter-group" class="text-black">View by department:</label>
-            <div class="row">
-                <div class="w-5/6">
+            <div class="row -mx-4">
+                <div class="w-5/6 px-4">
                     <select name="group" id="filter-group">
                         @foreach($dropdown_groups as $key=>$value)
                             <option value="{{ $key }}"@if($key == $selected_group) selected="selected"@endif>{{ $value }}</option>
@@ -15,16 +15,16 @@
                     </select>
                 </div>
 
-                <div class="w-1/6">
+                <div class="w-1/6 px-4">
                     <input type="submit" value="Filter" class="postfix button" />
                 </div>
             </div>
         </form>
     @endif
 
-    <div class="row flex flex-wrap">
+    <div class="row flex flex-wrap -mx-4">
         @forelse($profiles as $profile)
-            <div class="w-full sm:w-1/2 md:w-1/3 pr-8 pb-4">
+            <div class="w-full sm:w-1/2 md:w-1/3 px-4 pb-4">
                 <a href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}profile/{{ $profile['data']['AccessID'] }}">
                     <div class="block bg-cover bg-center w-full pt-full lazy" data-src="{{ $profile['data']['Picture']['url'] ?? '/_resources/images/no-photo.svg' }}"></div>
                     {{ $profile['data']['First Name'] }} {{ $profile['data']['Last Name'] }}

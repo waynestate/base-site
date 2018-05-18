@@ -12,7 +12,7 @@
                     </a>
                 </dt>
 
-                <dd class="mb-2 pb-2 border-b border-grey-light">
+                <dd class="mb-2 pb-2 border-b border-grey-lighter">
                     <time class="block text-sm text-grey-darker" datetime="{{ $news_item['posted'] }}">{{ apdatetime(date('F j, Y', strtotime($news_item['posted']))) }}</time>
                     {{ $news_item['excerpt'] }}
                 </dd>
