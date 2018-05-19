@@ -70,19 +70,15 @@
     }
 
     blockquote {
+        @apply .border-solid .border-green .bg-grey-lightest;
+
         padding: 1em;
         border-width: 0 0 0 3px;
         border-style: solid;
         margin-bottom: 1em;
 
-        @apply .border-green;
-        @apply .bg-grey-lightest;
-
         p {
-            font-style: italic;
-            font-weight: 400;
-            font-size: 1.5em;
-            margin-bottom: 0;
+            margin-bottom: 0.3rem;
         }
     }
 
@@ -111,7 +107,7 @@
             }
 
             th {
-                @apply .bg-grey-darkest .bg-grey-darkest;
+                @apply .bg-green-dark;
 
                 text-align: left;
                 font-weight: bold;

@@ -126,7 +126,7 @@
         <h2>Blockquote</h2>
 
         <blockquote>
-            {{ $faker->paragraph(10) }}
+            <p>{{ $faker->paragraph(10) }}</p>
         </blockquote>
 
         <a class="button" onclick="document.querySelector('pre.blockquote').classList.toggle('hidden');">See blockquote code</a>
@@ -134,7 +134,7 @@
         <pre class="blockquote hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {!! htmlspecialchars('
 <blockquote>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 </blockquote>
         ') !!}
         </pre>
