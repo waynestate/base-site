@@ -4,24 +4,28 @@
     position: relative;
     list-style: none;
 
-    @apply .bg-grey-lighter;
-
     & > li {
+        @apply .border .border-solid .border-grey;
+
         width: 100%;
         position: absolute;
+        border-bottom-width: 0;
+
+        &:last-child {
+            border-bottom-width: 1px;
+        }
 
         > a {
-            @apply .border .border-solid .border-grey;
+            @apply .bg-grey-lighter;
 
             cursor: pointer;
             user-select: none;
             position: relative;
             display: block;
-            padding: 1.25rem 1rem;
-            border-bottom: 0;
-            line-height: 1;
+            padding: 1rem;
             text-decoration: none;
             font-weight: bold;
+            border-bottom-width: 0;
 
             &:first-child:hover,
             &:first-child:focus, {
@@ -45,10 +49,10 @@
 
         // Content area
         > .fold {
-            @apply .bg-white .border .border-solid .border-grey;
+            @apply .bg-white;
 
             padding: 1rem;
-            border-top: none;
+            border-top-width: 0;
         }
     }
 
