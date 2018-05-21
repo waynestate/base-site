@@ -17,6 +17,9 @@ class Homepage extends Page
                'controller' => 'HomepageController',
                'title' => 'Homepage',
                'id' => 101101,
+               'content' => [
+                    'main' => '<p>'.$this->faker->paragraph(8).'</p>',
+                ],
            ],
        ]);
     }

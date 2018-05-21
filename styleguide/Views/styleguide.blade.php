@@ -7,6 +7,7 @@
         <hr>
 
         <h2>2 Column Example</h2>
+
         <div class="row -mx-4 flex flex-wrap">
             <div class="w-full sm:w-1/2 px-4">
                 <p>{{ $faker->paragraph }}</p>
