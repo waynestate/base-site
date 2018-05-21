@@ -52,9 +52,10 @@
     }
 
     .excerpt {
+        @apply .font-serif;
+
         padding-top: 0.125rem;
         text-transform: none;
-        font-family: Georgia, Times, Times New Roman, serif;
         font-size: 20px;
         font-style: italic;
         padding-left: 0.2em;

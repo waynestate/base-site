@@ -172,7 +172,13 @@ module.exports = {
             'Droid Sans',
             'Helvetica Neue',
             'sans-serif',
-        ]
+        ],
+        'serif': [
+            'Georgia',
+            'Times',
+            'Times New Roman',
+            'serif',
+        ],
     },
 
 
