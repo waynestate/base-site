@@ -53,11 +53,11 @@ mix.copy([
 mix.js('resources/js/main.js', 'public/_resources/js')
    .sass('resources/scss/main.scss', 'public/_resources/css/compiled.css')
    .styles([
-       'public/_resources/css/compiled.css',
        'node_modules/mediabox/dist/mediabox.css',
        'node_modules/flickity/dist/flickity.css',
        'node_modules/@waynestate/wsuheader/dist/header.css',
-       'node_modules/@waynestate/wsufooter/dist/footer',       
+       'node_modules/@waynestate/wsufooter/dist/footer',
+       'public/_resources/css/compiled.css',
    ], 'public/_resources/css/main.css')
    .purgeCss({
         globs: [
