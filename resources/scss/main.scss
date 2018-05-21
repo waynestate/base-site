@@ -1,15 +1,6 @@
 // Combination of normalize and tailwind resets
 @tailwind preflight;
 
-// Package CSS
-@import "~mediabox/dist/mediabox.css";
-@import "~flickity/dist/flickity.css";
-
-// Include header and footer
-@import "~@waynestate/wsuheader/dist/header";
-@import "~@waynestate/wsufooter/dist/footer";
-
-// Reusable components
 @import "components/global";
 @import "components/accordion";
 @import "components/banner";
