@@ -10,7 +10,6 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
     @if(!empty($page['canonical']))<link rel="canonical" href="{{ $page['canonical'] }}">@endif
 
-    <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script><![endif]-->
     @include('components.ga')
 </head>
 <body class="font-sans font-normal text-black leading-normal text-base">
