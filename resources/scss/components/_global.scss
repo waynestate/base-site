@@ -1,3 +1,7 @@
+html {
+    font-feature-settings: "liga" 0;
+}
+
 // Set default links to not have underlines since most cases this is what we want
 a {
     @apply .text-green;
