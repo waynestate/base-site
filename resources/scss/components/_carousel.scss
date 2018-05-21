@@ -1,0 +1,21 @@
+.rotate {
+    .flickity-button {
+        background: none;
+
+        &:hover {
+            background: none;
+        }
+    }
+
+    .flickity-button-icon {
+        @apply .text-white .fill-current;
+    }
+
+    .flickity-prev-next-button.next .flickity-button-icon {
+        left: 40%;
+    }
+
+    .flickity-prev-next-button.previous .flickity-button-icon {
+        left: 0%;
+    }
+}
