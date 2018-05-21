@@ -40,8 +40,8 @@
     "laravel-mix-purgecss": "^2.0.0",
     "mediabox": "^1.1.2",
     "slideout": "^1.0.1",
-    "stylelint": "^8.0.0",
-    "stylelint-config-standard": "^17.0.0",
+    "stylelint": "^9.0.0",
+    "stylelint-config-standard": "^18.0.0",
     "tailwindcss": "^0.5.2"
   }
 }

@@ -8,8 +8,8 @@
                 "extend",
                 "screen",
                 "variants",
-                "responsive",
+                "responsive"
             ]
-        }],
+        }]
     }
 }

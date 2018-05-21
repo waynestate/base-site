@@ -54,14 +54,6 @@
         margin: 0 0 1rem;
     }
 
-    a:not(.button) {
-        text-decoration: underline;
-
-        &:hover {
-            text-decoration: none;
-        }
-    }
-
     abbr,
     abbr[title] {
         color: inherit;
@@ -129,6 +121,10 @@
                 font-size: 14px;
             }
 
+            th {
+                padding: 10px;
+            }
+
             &:nth-child(odd) {
                 @apply .bg-grey-lighter;
             }
@@ -141,9 +137,13 @@
                 @apply .bg-yellow-lightest;
             }
         }
+    }
 
-        tbody th {
-            padding: 10px;
+    a:not(.button) {
+        text-decoration: underline;
+
+        &:hover {
+            text-decoration: none;
         }
     }
 

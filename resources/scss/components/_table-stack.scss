@@ -9,6 +9,23 @@ table.table-stack {
         border: none;
     }
 
+    tr {
+        @apply .border .border-solid .border-grey-light;
+
+        th::before {
+            content: attr(data-label) ": ";
+            display: inline;
+            font-weight: bold;
+            line-height: 1.5px;
+        }
+    }
+
+    /* Get table cells to act like rows */
+    tr,
+    td {
+        display: block;
+    }
+
     // Header
     thead tr {
         @apply .bg-grey-darkest;
@@ -23,26 +40,9 @@ table.table-stack {
         padding: 10px;
     }
 
-    tr {
-        @apply .border .border-solid .border-grey-light;
-
-        th::before {
-            content: attr(data-label) ": ";
-            display: inline;
-            font-weight: bold;
-            line-height: 1.5px;
-        }
-    }
-
     /* Leave a space between table rows */
     tr + tr {
         margin-top: 1.5em;
-    }
-
-    /* Get table cells to act like rows */
-    tr,
-    td {
-        display: block;
     }
 
     td {
@@ -63,26 +63,23 @@ table.table-stack {
     }
 
     @screen md {
-        thead tr {
-            position: static;
-            top: 0;
-            left: 0;
-        }
-
         tr {
             border: none;
+            display: table-row;
 
             th::before {
                 content: "";
             }
         }
 
-        tr + tr {
-            margin: 0;
+        thead tr {
+            position: static;
+            top: 0;
+            left: 0;
         }
 
-        tr {
-            display: table-row;
+        tr + tr {
+            margin: 0;
         }
 
         td {

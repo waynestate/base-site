@@ -95,6 +95,18 @@
         }
     }
 
+    // Textareas
+    textarea {
+        height: 8em;
+    }
+
+    // Description and text blocks size
+    p {
+        font-size: 1em;
+        line-height: 1.6em;
+        margin-bottom: 1rem;
+    }
+
     // Errors
     .error {
         p {
@@ -171,26 +183,14 @@
         font-size: 0.75rem;
     }
 
-    // Textareas
-    textarea {
-        height: 8em;
-    }
-
     .select #country,
     .select #state {
         width: 100%;
     }
 
-    // Description and text blocks size
-    p {
-        font-size: 1em;
-        line-height: 1.6em;
-        margin-bottom: 1rem;
-    }
-
     // Text Headings
-    .field_group h2,
-    h2 {
+    h2,
+    .field_group h2 {
         @apply .border-b .border-grey-light;
 
         font-size: 1.3em;
@@ -210,9 +210,9 @@
         list-style: none;
     }
 
-    .login-info ul li a,
+    .formy_logout a,
     .login-info p a,
-    .formy_logout a {
+    .login-info ul li a {
         @apply .text-green .underline .border-b-0;
 
         &:hover {
