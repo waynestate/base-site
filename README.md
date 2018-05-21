@@ -212,7 +212,9 @@ $menus = [
 1. Load the waynestate.svg file into https://icomoon.io/app/#/select
 1. Select all the icons and download the set.
 1. Open the new SVG icon(s) in the editor of your choice.
-1. Save each file under resources/views/svg as a blade partial and remove the comment.
+1. Save each file under resources/views/svg as a blade partial.
+1. Remove the comment from the svg file.
+1. Apply the appropriate classes to the svg element (look at an existing one).
 
 ## Contributing
 
