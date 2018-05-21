@@ -51,9 +51,9 @@ mix.copy([
 
 // Compile assets and setup browersync
 mix.js('resources/js/main.js', 'public/_resources/js')
-   .sass('resources/scss/main.scss', 'public/_resources/css')
+   .sass('resources/scss/main.scss', 'public/_resources/css/compiled.css')
    .styles([
-       'public/_resources/css/main.css',
+       'public/_resources/css/compiled.css',
        'node_modules/mediabox/dist/mediabox.css',
        'node_modules/flickity/dist/flickity.css',
        'node_modules/@waynestate/wsuheader/dist/header.css',
@@ -86,8 +86,8 @@ mix.js('resources/js/main.js', 'public/_resources/js')
         files: [
             'app/**/*.php',
             'resources/views/**/*.php',
-            'public/_resources/js/**/*.js',
-            'public/_resources/css/**/*.css'
+            'public/_resources/js/main.js',
+            'public/_resources/css/main.css'
         ],
         watchOptions: {
             usePolling: true,
