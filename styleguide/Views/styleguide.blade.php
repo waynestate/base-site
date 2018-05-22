@@ -1,4 +1,4 @@
-@extends('partials.content-area')
+@extends('components.content-area')
 
 @section('content')
     @include('components.page-title', ['title' => $page['title']])
@@ -7,23 +7,25 @@
         <hr>
 
         <h2>2 Column Example</h2>
-        <div class="row">
-            <div class="small-12 large-6 columns">
+
+        <div class="row -mx-4 flex flex-wrap">
+            <div class="w-full sm:w-1/2 px-4">
                 <p>{{ $faker->paragraph }}</p>
             </div>
-            <div class="small-12 large-6 columns">
+
+            <div class="w-full sm:w-1/2 px-4">
                 <p>{{ $faker->paragraph }}</p>
             </div>
         </div>
 
-        <a class="button" onclick="$('pre.columns-code').toggleClass('hide');">See Row/Columns Code</a>
-        <pre class="columns-code hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+        <a class="button" onclick="document.querySelector('pre.columns-code').classList.toggle('hidden');">See row/columns code</a>
+        <pre class="columns-code hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
             {!! htmlspecialchars('
-<div class="row">
-    <div class="small-12 large-6 columns">
+<div class="row -mx-4 flex">
+    <div class="w-full sm:w-1/2 px-4">
         <p>'.$faker->paragraph.'</p>
     </div>
-    <div class="small-12 large-6 columns">
+    <div class="w-full sm:w-1/2 px-4">
         <p>'.$faker->paragraph.'</p>
     </div>
 </div>
@@ -54,9 +56,9 @@
             </tbody>
         </table>
 
-        <a class="button" onclick="$('pre.table-stack').toggleClass('hide');">See Table Code</a>
+        <a class="button" onclick="document.querySelector('pre.table-stack').classList.toggle('hidden');">See table code</a>
 
-        <pre class="table-stack hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+        <pre class="table-stack hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {!! htmlspecialchars('
 <table>
     <thead>
@@ -86,8 +88,8 @@
 
         <hr>
 
-        <div class="row">
-            <div class="small-12 large-4 columns">
+        <div class="row -mx-4 flex">
+            <div class="w-full md:w-1/3 px-4">
                 <h2>Unordered lists</h2>
 
                 <ul>
@@ -97,7 +99,7 @@
                 </ul>
             </div>
 
-            <div class="small-12 large-4 columns">
+            <div class="w-full md:w-1/3 px-4">
                 <h2>Ordered lists</h2>
 
                 <ol>
@@ -107,7 +109,7 @@
                 </ol>
             </div>
 
-            <div class="small-12 large-4 columns">
+            <div class="w-full md:w-1/3 px-4">
                 <h2>Data lists</h2>
 
                 <dl>
@@ -126,15 +128,15 @@
         <h2>Blockquote</h2>
 
         <blockquote>
-            {{ $faker->paragraph(10) }}
+            <p>{{ $faker->paragraph(10) }}</p>
         </blockquote>
 
-        <a class="button" onclick="$('pre.blockquote').toggleClass('hide');">See blockquote code</a>
+        <a class="button" onclick="document.querySelector('pre.blockquote').classList.toggle('hidden');">See blockquote code</a>
 
-        <pre class="blockquote hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+        <pre class="blockquote hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {!! htmlspecialchars('
 <blockquote>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 </blockquote>
         ') !!}
         </pre>
@@ -147,9 +149,9 @@
         <a href="#" class="button">Standard Button</a>
         <a href="#" class="button expanded">Expanded Button</a>
 
-        <a class="button" onclick="$('pre.button-examples').toggleClass('hide');">See Button Code</a>
+        <a class="button" onclick="document.querySelector('pre.button-examples').classList.toggle('hidden');">See Button Code</a>
 
-        <pre class="button-examples hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+        <pre class="button-examples hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {!! htmlspecialchars('
 <a href="#" class="button">Standard Button</a>
 <a href="#" class="button expanded">Expanded Button</a>
@@ -175,9 +177,9 @@
 
         <p>@image('/styleguide/image/50x50?text=Icon', 'icon image', 'icon')</p>
 
-        <a class="button" onclick="$('pre.image-icon').toggleClass('hide');">See Image Icon Code</a>
+        <a class="button" onclick="document.querySelector('pre.image-icon').classList.toggle('hidden');">See image icon code</a>
 
-        <pre class="image-icon hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+        <pre class="image-icon hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {!! htmlspecialchars('
 <img src="/styleguide/50x50?text=Icon" class="icon" alt="">
         ') !!}
@@ -185,13 +187,13 @@
 
         <hr>
 
-        <h2>Maginific Pop-up</h2>
+        <h2>Media</h2>
         <p>Any valid YouTube URL starting with <code>youtu.be</code> or <code>youtube.com/watch</code> will open a lightbox with the video.</p>
         <p><a href="//www.youtube.com/watch?v=guRgefesPXE"><img src="//i.wayne.edu/youtube/guRgefesPXE" alt="View YouTube Video"></a></p>
 
-        <a class="button" onclick="$('pre.maginific-popup-example').toggleClass('hide');">See Maginific Pop-up Code</a>
+        <a class="button" onclick="document.querySelector('pre.media-example').classList.toggle('hidden');">See media code</a>
 
-        <pre class="maginific-popup-example hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+        <pre class="media-example hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {!! htmlspecialchars('
 <p>
     <a href="//www.youtube.com/watch?v=guRgefesPXE">
@@ -210,9 +212,9 @@
             <iframe width="420" height="315" src="//www.youtube.com/embed/guRgefesPXE" title="Responsive embed example" frameborder="0" allowfullscreen></iframe>
         </div>
 
-        <a class="button" onclick="$('pre.responsive-embed-example').toggleClass('hide');">See Responsive Embed Code</a>
+        <a class="button" onclick="document.querySelector('pre.responsive-embed-example').classList.toggle('hidden');">See responsive embed code</a>
 
-        <pre class="responsive-embed-example hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+        <pre class="responsive-embed-example hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {!! htmlspecialchars('
 <div class="responsive-embed">
     <iframe width="420" height="315" src="//www.youtube.com/embed/guRgefesPXE" title="Responsive embed example" frameborder="0" allowfullscreen></iframe>
@@ -222,8 +224,8 @@
 
         <hr>
 
-        <div class="row">
-            <div class="medium-3 columns">
+        <div class="row flex flex-wrap -mx-4">
+            <div class="w-full sm:w-1/4 px-4">
                 <h2>Figure (left)</h2>
 
                 <figure class="float-left" style="margin-top: 15px;">
@@ -231,9 +233,9 @@
                     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
                 </figure>
 
-                <a class="button" onclick="$('pre.fig-left').toggleClass('hide');">See Code</a>
+                <a class="button" onclick="document.querySelector('pre.fig-left').classList.toggle('hidden');">See code</a>
 
-                <pre class="fig-left hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+                <pre class="fig-left hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
                 {!! htmlspecialchars('
 <figure class="float-left">
     <img src="/styleguide/image/150x150" alt="Placeholder">
@@ -243,7 +245,7 @@
                 </pre>
             </div>
 
-            <div class="medium-3 columns">
+            <div class="w-full sm:w-1/4 px-4">
                 <h2>Figure (center)</h2>
 
                 <figure class="text-center">
@@ -251,9 +253,9 @@
                     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
                 </figure>
 
-                <a class="button" onclick="$('pre.fig-center').toggleClass('hide');">See Code</a>
+                <a class="button" onclick="document.querySelector('pre.fig-center').classList.toggle('hidden');">See code</a>
 
-                <pre class="fig-center hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+                <pre class="fig-center hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
                 {!! htmlspecialchars('
 <figure class="text-center">
     <img src="/styleguide/image/150x150" alt="Placeholder">
@@ -263,7 +265,7 @@
                 </pre>
             </div>
 
-            <div class="medium-3 columns">
+            <div class="w-full sm:w-1/4 px-4">
                 <h2>Figure</h2>
 
                 <figure>
@@ -271,9 +273,9 @@
                     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
                 </figure>
 
-                <a class="button" onclick="$('pre.fig-none').toggleClass('hide');">See Code</a>
+                <a class="button" onclick="document.querySelector('pre.fig-none').classList.toggle('hidden');">See code</a>
 
-                <pre class="fig-none hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+                <pre class="fig-none hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
                 {!! htmlspecialchars('
 <figure>
     <img src="/styleguide/image/150x150" alt="Placeholder">
@@ -283,7 +285,7 @@
                 </pre>
             </div>
 
-            <div class="medium-3 columns">
+            <div class="w-full sm:w-1/4 px-4">
                 <h2>Figure (right)</h2>
 
                 <figure class="float-right" style="margin-top: 15px;">
@@ -291,9 +293,9 @@
                     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
                 </figure>
 
-                <a class="button clearfix" onclick="$('pre.fig-right').toggleClass('hide');">See Code</a>
+                <a class="button" onclick="document.querySelector('pre.fig-right').classList.toggle('hidden');">See code</a>
 
-                <pre class="fig-right hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+                <pre class="fig-right hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
                 {!! htmlspecialchars('
 <figure class="float-right">
     <img src="/styleguide/image/150x150" alt="Placeholder">
@@ -301,6 +303,105 @@
 </figure>
                 ') !!}
                 </pre>
+            </div>
+        </div>
+
+        <hr>
+
+        <h2 class="pb-6">Colors</h2>
+
+        <div class="flex flex-wrap -mx-4">
+            <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
+                <div class="rounded overflow-hidden">
+                    <div class="text-white bg-green px-6 py-4 text-sm font-semibold relative shadow">
+                        <div class="uppercase">Green</div>
+                    </div>
+                    <div class="text-black bg-green-lightest px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Lightest</span>
+                    </div>
+                    <div class="text-white bg-green-lighter px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Lighter</span>
+                    </div>
+                    <div class="text-white bg-green-light px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Light</span>
+                    </div>
+                    <div class="text-white bg-green px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Base</span>
+                    </div>
+                    <div class="text-white bg-green-dark px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Dark</span>
+                    </div>
+                    <div class="text-white bg-green-darker px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Darker</span>
+                    </div>
+                    <div class="text-white bg-green-darkest px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Darkest</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
+                <div class="rounded overflow-hidden">
+                    <div class="text-black bg-yellow px-6 py-4 text-sm font-semibold relative shadow">
+                        <div class="uppercase">Yellow</div>
+                    </div>
+                    <div class="text-black bg-yellow-lightest px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Lightest</span>
+                    </div>
+                    <div class="text-black bg-yellow-lighter px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Lighter</span>
+                    </div>
+                    <div class="text-black bg-yellow-light px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Light</span>
+                    </div>
+                    <div class="text-black bg-yellow px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Base</span>
+                    </div>
+                    <div class="text-white bg-yellow-dark px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Dark</span>
+                    </div>
+                    <div class="text-white bg-yellow-darker px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Darker</span>
+                    </div>
+                    <div class="text-white bg-yellow-darkest px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Darkest</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
+                <div class="rounded overflow-hidden">
+                    <div class="text-black bg-grey px-6 py-4 text-sm font-semibold relative shadow">
+                        <div class="uppercase">Grey</div>
+                    </div>
+                    <div class="text-black bg-white px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>White</span>
+                    </div>
+                    <div class="text-black bg-grey-lightest px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Lightest</span>
+                    </div>
+                    <div class="text-black bg-grey-lighter px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Lighter</span>
+                    </div>
+                    <div class="text-black bg-grey-light px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Light</span>
+                    </div>
+                    <div class="text-black bg-grey px-6 py-3 text-sm font-semibold flex justify-between flex justify-between">
+                        <span>Base</span>
+                    </div>
+                    <div class="text-white bg-grey-dark px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Dark</span>
+                    </div>
+                    <div class="text-white bg-grey-darker px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Darker</span>
+                    </div>
+                    <div class="text-white bg-grey-darkest px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Darkest</span>
+                    </div>
+                    <div class="text-white bg-black px-6 py-3 text-sm font-semibold flex justify-between">
+                        <span>Black</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

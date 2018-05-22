@@ -38,10 +38,10 @@ class HomepageController extends Controller
     {
         //$promos = $this->promo->getHomepagePromos();
 
-        //$news = $this->news->getNewsByDisplayOrder($request->data['site']['id']);
+        $news = $this->news->getNewsByDisplayOrder($request->data['site']['id']);
 
-        //$events = $this->event->getEvents($request->data['site']['id']);
+        $events = $this->event->getEvents($request->data['site']['id']);
 
-        return view('homepage', merge($request->data));
+        return view('homepage', merge($request->data, $news, $events));
     }
 }

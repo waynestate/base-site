@@ -2,13 +2,17 @@
     $images => array // [['link', 'title', 'relative_url']]
     $class => string // 'image-button-list'
 --}}
-<div class="{{ $class ?? 'image-button-list' }}">
+@if(!empty($class))<div class="{{ $class }}">@endif
 
 @foreach($images as $image)
-    <div>
-        @if(!empty($image['link']))<a href="{{ $image['link'] }}"@if(empty($image['relative_url'])) class="button expanded" @endif>@endif
+    <div class="min-w-full{{ empty($class) ? ' my-4' : '' }}">
+        @if(!empty($image['link']))<a href="{{ $image['link'] }}" @if(empty($image['relative_url']))class="button expanded"@endif>@endif
             @if(!empty($image['relative_url']))
-                @image($image['relative_url'], $image['title'], $class ?? '')
+                @if($loop->first == true)
+                    <img class="min-w-full" src="{{ $image['relative_url'] }}" alt="{{ $image['title'] }}" />
+                @else
+                    @image($image['relative_url'], $image['title'])
+                @endif
             @else
                 {{ $image['title'] }}
             @endif
@@ -16,4 +20,4 @@
     </div>
 @endforeach
 
-</div>
+@if(!empty($class))</div>@endif

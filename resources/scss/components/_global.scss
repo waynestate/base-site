@@ -1,0 +1,25 @@
+html {
+    font-feature-settings: "liga" 0;
+}
+
+// Set default links to not have underlines since most cases this is what we want
+a {
+    @apply .text-green;
+
+    text-decoration: none;
+}
+
+// Tailwind preflight sets this to .5 which isn't ADA compliant
+input::placeholder,
+textarea::placeholder {
+    opacity: 1;
+}
+
+// Global print styles
+@screen print {
+    a::after {
+        content: " (" attr(href) ") ";
+        font-size: 0.8em;
+        font-weight: normal;
+    }
+}

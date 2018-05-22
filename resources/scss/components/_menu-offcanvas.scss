@@ -1,0 +1,73 @@
+.slideout-menu {
+    @apply .bg-green-dark;
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 250px;
+    height: 100%;
+    z-index: 10;
+
+    ul {
+        @apply .bg-green-dark;
+
+        padding: 0;
+
+        li a {
+            @apply .text-white;
+        }
+
+        // Indent second level now since first level is shown
+        li > ul > li a {
+            padding-left: 2em;
+        }
+
+        // Indent third level now since first level is shown
+        li > ul > li > ul > li a {
+            padding-left: 3em;
+        }
+
+        // Selected State
+        .selected > a {
+            @apply .text-yellow;
+        }
+
+        a:hover {
+            @apply .text-yellow;
+
+            background: transparent;
+        }
+    }
+
+    // Main Menu within offcanvas
+    .offcanvas-main-menu {
+        display: block;
+
+        ul ul li {
+            @apply bg-green-darker;
+        }
+
+        ul li .main-menu-toggle {
+            @apply bg-green-darker;
+
+            text-transform: uppercase;
+            font-size: 1rem;
+            cursor: pointer;
+            padding-right: 20px;
+        }
+
+        // Menu Header top level (MAIN MENU)
+        ul ul {
+            @apply .border-solid .border-b-4 .border-green-darker;
+        }
+    }
+
+    h2 {
+        @apply .text-white;
+
+        padding: 0 0 5px 15px;
+        margin-top: 32px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+}

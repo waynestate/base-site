@@ -1,13 +1,65 @@
-ul.accordion {
-    margin-left: 0;
-}
+.accordion.enabled {
+    padding: 0;
+    margin-bottom: 1rem;
+    position: relative;
+    list-style: none;
 
-a.accordion-title {
-    text-decoration: none;
-    font-size: $global-font-size;
-    font-weight: bold;
-}
+    & > li {
+        @apply .border .border-solid .border-grey;
 
-.accordion-content p:last-of-type {
-    margin-bottom: 0;
+        width: 100%;
+        position: absolute;
+        border-bottom-width: 0;
+
+        &:last-child {
+            border-bottom-width: 1px;
+        }
+
+        > a {
+            @apply .bg-grey-lighter;
+
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+            display: block;
+            padding: 1rem;
+            text-decoration: none;
+            font-weight: bold;
+            border-bottom-width: 0;
+
+            &:first-child:hover,
+            &:first-child:focus, {
+                @apply .bg-grey-light;
+            }
+
+            // Open symbol
+            &::before {
+                position: absolute;
+                top: 50%;
+                right: 1rem;
+                margin-top: -0.5rem;
+                content: '+';
+            }
+        }
+
+        // Close symbol
+        &.open > a::before {
+            content: '\2013';
+        }
+
+        // Content area
+        > .fold {
+            @apply .bg-white;
+
+            padding: 1rem;
+            border-top-width: 0;
+        }
+    }
+
+    > * {
+        overflow: hidden;
+        padding: 0;
+        margin: 0;
+        transition: 0.3s ease all;
+    }
 }

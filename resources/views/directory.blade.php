@@ -1,4 +1,4 @@
-@extends('partials.content-area')
+@extends('components.content-area')
 
 @section('content')
     @include('components.page-title', ['title' => $page['title']])
@@ -8,18 +8,18 @@
     </div>
 
     @forelse($profiles as $key => $profiles)
-        <h1>{{ $key }}</h1>
+        <h2>{{ $key }}</h2>
 
-        <div class="row small-up-2 medium-up-3">
+        <div class="row flex flex-wrap -mx-4">
             @foreach($profiles as $profile)
-                <div class="column profile">
-                    <a href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}profile/{{ $profile['data']['AccessID'] }}" class="profile-img lazy " data-src="{{ $profile['data']['Picture']['url'] ?? '/_resources/images/no-photo.svg' }}">
-                        <span class="visuallyhidden">{{ $profile['data']['First Name'] }} {{ $profile['data']['Last Name'] }}</span>
+                <div class="w-full sm:w-1/2 md:w-1/3 px-4 pb-6">
+                    <a href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}profile/{{ $profile['data']['AccessID'] }}">
+                        <div class="block bg-cover bg-center w-full pt-full lazy mb-1" data-src="{{ $profile['data']['Picture']['url'] ?? '/_resources/images/no-photo.svg' }}"></div>
+                        <span class="font-bold">{{ $profile['data']['First Name'] }} {{ $profile['data']['Last Name'] }}</span>
                     </a>
-                    <a href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}profile/{{ $profile['data']['AccessID'] }}">{{ $profile['data']['First Name'] }} {{ $profile['data']['Last Name'] }}</a>
 
                     @if(isset($profile['data']['Title']))
-                        <span>{{ $profile['data']['Title'] }}</span>
+                        <span class="block text-sm">{{ $profile['data']['Title'] }}</span>
                     @endif
                 </div>
             @endforeach

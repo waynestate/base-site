@@ -1,0 +1,24 @@
+.menu-icon {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.menu-icon::after {
+    @apply .bg-white .shadow-white;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 2px;
+    content: '';
+}
+
+.menu-icon:hover::after {
+    @apply .bg-grey .shadow-grey;
+}

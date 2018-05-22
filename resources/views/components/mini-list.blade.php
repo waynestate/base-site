@@ -4,14 +4,14 @@
     $url => string // '/listing.php'
     $link_text => string // 'More items'
 --}}
-<h2>{{ $heading ?? 'Resources' }}</h2>
+<h2 class="mb-4">{{ $heading ?? 'Resources' }}</h2>
 
-<ul class="listing">
+<ul class="list-reset">
     @foreach($items as $item)
-        <li>
-            <a href="{{ $item['link'] }}">{{ $item['title'] }}</a>
+        <li class="mb-4">
+            <a href="{{ $item['link'] }}" class="underline hover:no-underline font-normal">{{ $item['title'] }}</a>
         </li>
     @endforeach
 </ul>
 
-@if(isset($url))<a href="{{ $url }}" class="more-link">{{ $link_text ?? 'View more' }}</a>@endif
+@if(isset($url))<a href="{{ $url }}" class="block my-4 underline hover:no-underline">{{ $link_text ?? 'View more' }}</a>@endif

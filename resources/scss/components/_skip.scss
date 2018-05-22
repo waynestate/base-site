@@ -1,0 +1,11 @@
+.skip a {
+    @apply .absolute .h-px .w-px .text-left .overflow-hidden .text-black .bg-white .p-2;
+
+    left: -1000px;
+}
+
+.skip a:active,
+.skip a:focus,
+.skip a:hover {
+    @apply .pin-l .pin-t .overflow-visible .z-50 .w-auto .h-auto;
+}

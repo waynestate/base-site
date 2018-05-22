@@ -1,63 +1,25 @@
-// Foundation variable settings copied as of v6.2
-@import "settings";
+// Combination of normalize and tailwind resets
+@tailwind preflight;
 
-// Core foundation
-@import "~foundation-sites/scss/foundation";
-
-// Call foundationp mixins to output css
-@include foundation-global-styles;
-@include foundation-grid;
-@include foundation-typography;
-@include foundation-button;
-@include foundation-forms;
-@include foundation-visibility-classes;
-@include foundation-off-canvas;
-@include foundation-menu-icon;
-@include foundation-float-classes;
-@include foundation-callout;
-@include foundation-accordion;
-@include foundation-tabs;
-@include foundation-responsive-embed;
-
-// Site specific variables
-@import "vars";
-
-// Include slick carousel
-@import "~slick-carousel/slick/slick";
-@import "~slick-carousel/slick/slick-theme";
-
-// Include magnific pop-up
-@import "~magnific-popup/src/css/_settings";
-@import "~magnific-popup/src/css/main";
-
-// Include header and footer
-@import "~@waynestate/wsuheader/dist/header";
-@import "~@waynestate/wsufooter/dist/footer";
-
-// Partials
-@import "partials/utilities";
-@import "partials/fonts";
-@import "partials/menu-main";
-@import "partials/menu-top";
-@import "partials/menu-offcanvas";
-@import "partials/content-area";
-@import "partials/content";
-@import "partials/footer-social";
-@import "partials/footer-contact";
-@import "partials/news";
-@import "partials/banner";
-@import "partials/breadcrumbs";
-@import "partials/profile-listing";
-@import "partials/profile-view";
-@import "partials/rotate";
-@import "partials/share";
-@import "partials/skip";
-
-// Reusable components
+@import "components/global";
 @import "components/accordion";
+@import "components/banner";
+@import "components/button";
+@import "components/carousel";
+@import "components/content";
 @import "components/formy";
-@import "components/hero";
-@import "components/mini-list";
-@import "components/page-title";
+@import "components/icons";
+@import "components/menu-icon";
+@import "components/menu-main";
+@import "components/menu-offcanvas";
+@import "components/menu-top";
+@import "components/responsive-embed";
+@import "components/share";
+@import "components/row";
+@import "components/skip";
 @import "components/table-stack";
-@import "components/image-button-list";
+@import "components/visually-hidden";
+
+// Tailwind
+@tailwind components;
+@tailwind utilities;

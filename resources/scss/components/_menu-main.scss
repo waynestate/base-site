@@ -1,0 +1,68 @@
+.main-menu {
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    // Padding above and below menu
+    > ul {
+        padding: 1rem 0;
+    }
+
+    li {
+        font-size: 0.875rem;
+        margin: 0;
+        padding: 0;
+    }
+
+    li a {
+        @apply .text-black;
+
+        display: block;
+        padding: 0.6em 0.5em 0.6em 1em;
+    }
+
+    // Indent each level
+    ul > li > ul > li a {
+        padding-left: 2em;
+    }
+
+    ul > li > ul > li > ul > li a {
+        padding-left: 3em;
+    }
+
+    ul > li > ul > li > ul > li > ul > li > a {
+        padding-left: 4em;
+    }
+
+    li a:hover {
+        @apply .bg-grey-lighter;
+    }
+
+    // Bottom borders on child <li>
+    > ul > li {
+        @screen mt {
+            @apply .border-b .border-solid .border-grey-lighter;
+        }
+    }
+
+    // Selected State
+    .selected {
+        font-weight: bold;
+    }
+
+    // Don't cascade the selected state to child lists of the item
+    .selected ul {
+        font-weight: normal;
+    }
+
+    h2 {
+        @apply .text-grey-darker;
+
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin: 0;
+        padding: 1rem 0 0.1rem;
+    }
+}

@@ -50,6 +50,7 @@ yarncheck: $(YARNFILE)
 	yarn outdated
 
 runtests: $(COMPOSERFILE)
+	php artisan view:clear
 	php vendor/bin/phpunit
 
 phplint: $(COMPOSERFILE)

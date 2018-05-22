@@ -6,74 +6,94 @@ table.table-stack {
     td {
         line-height: 1.5;
         text-align: left;
+        border: none;
+    }
+
+    tr {
+        @apply .border .border-solid .border-grey-light;
+
+        th::before {
+            content: attr(data-label) ": ";
+            display: inline;
+            font-weight: bold;
+            line-height: 1.5px;
+        }
+    }
+
+    /* Get table cells to act like rows */
+    tr,
+    td {
+        display: block;
     }
 
     // Header
     thead tr {
+        @apply .bg-grey-darkest;
+
         border-collapse: collapse;
-        background: #00565c;
+        position: absolute;
+        top: -9999em;
+        left: -9999em;
     }
 
     tbody th {
         padding: 10px;
     }
 
-    /* Stack rows vertically on small screens */
-    @include breakpoint(medium down) {
-        /* Hide column labels */
-        thead tr {
-            position: absolute;
-            top: -9999em;
-            left: -9999em;
-        }
+    /* Leave a space between table rows */
+    tr + tr {
+        margin-top: 1.5em;
+    }
 
+    td {
+        padding-left: 0.75em;
+    }
+
+    /* Add data labels */
+    td::before {
+        @apply .text-grey-darkest;
+
+        content: attr(data-label) ":";
+        display: block;
+        font-weight: bold;
+        line-height: 1.5;
+        padding-right: 20px;
+        margin-bottom: 0.75em;
+        margin-left: 0;
+    }
+
+    @screen md {
         tr {
-            border: 1px solid #eaeaea;
+            border: none;
+            display: table-row;
 
             th::before {
-                content: attr(data-label) ": ";
-                display: inline;
-                font-weight: bold;
-                line-height: 1.5px;
+                content: "";
             }
         }
 
-        /* Leave a space between table rows */
+        thead tr {
+            position: static;
+            top: 0;
+            left: 0;
+        }
+
         tr + tr {
-            margin-top: 1.5em;
-        }
-
-        /* Get table cells to act like rows */
-        tr,
-        td {
-            display: block;
+            margin: 0;
         }
 
         td {
-            border: none;
-        }
+            display: table-cell;
+            padding: 10px;
 
-        /* Add data labels */
-        td::before {
-            content: attr(data-label) ":";
-            display: inline;
-            font-weight: bold;
-            line-height: 1.5;
-            padding-right: 20px;
-            color: #00565c;
-        }
-    }
+            &::before {
+                content: "";
+                padding: 0;
 
-    /* Stack labels vertically on smaller screens */
-    @include breakpoint(medium down) {
-        td {
-            padding-left: 0.75em;
-        }
-
-        td::before {
-            display: block;
-            margin-bottom: 0.75em;
-            margin-left: 0;
+                @screen mt {
+                    @apply .hidden;
+                }
+            }
         }
     }
 }

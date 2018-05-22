@@ -1,4 +1,4 @@
-@extends('partials.content-area')
+@extends('components.content-area')
 
 @section('content')
     @include('components.page-title', ['title' => $page['title']])
@@ -6,14 +6,14 @@
     <div class="news-listing">
         <dl>
             @forelse($news as $news_item)
-                <dt>
+                <dt class="mb-1">
                     <a href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}news/{{ $news_item['slug'] }}-{{ $news_item['news_id'] }}">
                         {{ $news_item['title'] }}
                     </a>
                 </dt>
 
-                <dd>
-                    <time datetime="{{ $news_item['posted'] }}">{{ apdatetime(date('F j, Y', strtotime($news_item['posted']))) }}</time>
+                <dd class="mb-2 pb-2 border-b border-grey-lighter">
+                    <time class="block text-sm text-grey-darker" datetime="{{ $news_item['posted'] }}">{{ apdatetime(date('F j, Y', strtotime($news_item['posted']))) }}</time>
                     {{ $news_item['excerpt'] }}
                 </dd>
             @empty
@@ -22,8 +22,8 @@
         </dl>
 
         @if(!empty($paging))
-            <div class="row">
-                <div class="small-6 columns">
+            <div class="row flex -mx-4">
+                <div class="w-1/2 px-4">
                     @if(count($news) == $paging['perPage'])
                         <p>
                             <a href="{{ app('request')->url() }}?page={{ $paging['page_number_previous'] }}">&larr; Previous</a>
@@ -31,7 +31,7 @@
                     @endif
                 </div>
 
-                <div class="small-6 columns text-right">
+                <div class="w-1/2 px-4 text-right">
                     @if($paging['page_number_next'] >= 0)
                         <p>
                             <a href="{{ app('request')->url() }}?page={{ $paging['page_number_next'] }}">Next &rarr;</a>
