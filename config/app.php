@@ -193,6 +193,50 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Global promotion group ids
+    |--------------------------------------------------------------------------
+    |
+    | Here you can configure the global promotional groups per subsite. The
+    | main site is referenced with a key of main so we don't have to
+    | hardcode that value. By default a subsite will use the main
+    | groups unless a site_id key is added below. A subsit will
+    | also use the main sites config unless you overide it.
+    |
+    */
+    'global_promos' => [
+        'main' => [
+            'contact' => [
+                'id' => 2908,
+                'config' => 'limit:3',
+            ],
+            'social' => [
+                'id' => 2907,
+                'config' => null,
+            ],
+            'under_menu' => [
+                'id' => 2909,
+                'config' => 'page_id:{$page_id}',
+            ],
+            'hero' => [
+                'id' => 3001,
+                'config' => 'page_id:{$page_id}|randomize|limit:1',
+            ],
+            'banner' => [
+                'id' => 4246,
+                'config' => 'page_id:{$page_id}|first',
+            ],
+        ],
+        'subsites' => [
+            // 0000 => [
+            //     'contact' => [
+            //         'id' => 0000,
+            //     ],
+            // ],
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Timezone
     |--------------------------------------------------------------------------
     |
