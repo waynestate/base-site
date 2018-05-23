@@ -47,12 +47,12 @@ class PromoRepository implements DataRepositoryContract, PromoRepositoryContract
         // Figure out which set of groups to use
         $groups = isset($config['subsites'][$key]) ? $config['subsites'][$key] : $config['main'];
 
-        $group_reference = [];
-
         // Setup the group reference array for this site
-        foreach ($groups as $name => $group) {
+        $group_reference = collect($groups)->mapWithKeys(function ($group, $name) {
             $group_reference[$group['id']] = $name;
-        }
+
+            return [$group['id'] => $name];
+        })->toArray();
 
         // Always get the main site's social and contact incase we need them on the subsite
         $group_reference[$config['main']['social']['id']] = 'main_social';
@@ -76,22 +76,21 @@ class PromoRepository implements DataRepositoryContract, PromoRepositoryContract
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
-        $group_config = [];
-
         // Setup the group reference array for this site
-        foreach ($groups as $name => $group) {
+        $group_config = collect($groups)->mapWithKeys(function ($group, $name) use ($config, $data) {
             // If the subsite has a config value use that otherwise try to use the main config
             if (!empty($group['config'])) {
                 $value = $group['config'];
             } elseif (isset($config['main'][$name]['config'])) {
                 $value = $config['main'][$name]['config'];
+            } else {
+                $value = null;
             }
 
-            // Set the group config if one was found
-            if (!empty($value)) {
-                $group_config[$name] = str_replace('{$page_id}', $data['page']['id'], $value);
-            }
-        }
+            return [$name => str_replace('{$page_id}', $data['page']['id'], $value)];
+        })->reject(function ($value) {
+            return empty($value);
+        })->toArray();
 
         // Set the main social config
         if (!empty($config['main']['social']['config'])) {
