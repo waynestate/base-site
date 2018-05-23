@@ -154,6 +154,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Full Width Content Area
+    |--------------------------------------------------------------------------
+    |
+    | Here you can specify in an array which controllers should have a full
+    | width content area. This way you can have things that span
+    | horizontally across the whole site like a background
+    | color or image.
+    |
+    */
+    'full_width_controllers' => [],
+
+    /*
+    |--------------------------------------------------------------------------
     | Global promotion group ids
     |--------------------------------------------------------------------------
     |
