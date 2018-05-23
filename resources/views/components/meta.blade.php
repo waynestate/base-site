@@ -14,12 +14,12 @@
 <meta property="og:updated_time" content="{{ isset($page['updated-at']) ? $page['updated-at'] : '' }}">
 <meta property="og:site_name" content="{{ isset($site['title']) ? $site['title'] : '' }}">
 
-@if(!empty(config('app.facebook_profile_id')))
-<meta property="fb:profile_id" content="{{ config('app.facebook_profile_id') }}">
+@if(!empty(config('base.facebook_profile_id')))
+<meta property="fb:profile_id" content="{{ config('base.facebook_profile_id') }}">
 @endif
 
-@if(!empty(config('app.facebook_app_id')))
-<meta property="fb:app_id" content="{{ config('app.facebook_app_id') }}">
+@if(!empty(config('base.facebook_app_id')))
+<meta property="fb:app_id" content="{{ config('base.facebook_app_id') }}">
 @endif
 
 <meta name="twitter:card" content="summary_large_image">

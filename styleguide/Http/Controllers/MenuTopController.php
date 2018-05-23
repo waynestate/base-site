@@ -24,7 +24,7 @@ class MenuTopController extends Controller
      */
     public function index(Request $request)
     {
-        config(['app.top_menu_enabled' => true]);
+        config(['base.top_menu_enabled' => true]);
 
         // Only get a few items to show for top menu so it doesn't mess up the display
         $top_menu = array_slice($request->data['top_menu']['menu'], 0, 4, true);

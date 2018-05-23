@@ -69,18 +69,18 @@ class ProfileRepositoryTest extends TestCase
     {
         // The default path if no referer
         $url = app('App\Repositories\ProfileRepository')->getBackToProfileListUrl();
-        $this->assertTrue($url == config('app.profile_default_back_url'));
+        $this->assertTrue($url == config('base.profile_default_back_url'));
 
         // If a referer is passed from a different domain
         $referer = $this->faker->url;
         $url = app('App\Repositories\ProfileRepository')->getBackToProfileListUrl($referer, 'http', 'wayne.edu', '/');
-        $this->assertTrue($url == config('app.profile_default_back_url'));
+        $this->assertTrue($url == config('base.profile_default_back_url'));
 
         // If a referer is passed that is the same page we are on
         $referer = $this->faker->url;
         $parsed = parse_url($referer);
         $url = app('App\Repositories\ProfileRepository')->getBackToProfileListUrl($referer, $parsed['scheme'], $parsed['host'], $parsed['path']);
-        $this->assertTrue($url == config('app.profile_default_back_url'));
+        $this->assertTrue($url == config('base.profile_default_back_url'));
 
         // If referer is passed from the same domain that the site is on
         $referer = $this->faker->url;
@@ -96,7 +96,7 @@ class ProfileRepositoryTest extends TestCase
     public function getting_dropdown_of_groups_should_contain_all_the_groups()
     {
         // Force this config incase it is changed
-        config(['app.profile_parent_group_id' => 0]);
+        config(['base.profile_parent_group_id' => 0]);
 
         // Fake return
         $return = [
@@ -196,7 +196,7 @@ class ProfileRepositoryTest extends TestCase
     public function profiles_should_be_grouped()
     {
         // Force this config incase it is changed
-        config(['app.profile_parent_group_id' => 0]);
+        config(['base.profile_parent_group_id' => 0]);
 
         // Mock the user listing
         $return_user_listing = app('Factories\Profile')->create(10);
