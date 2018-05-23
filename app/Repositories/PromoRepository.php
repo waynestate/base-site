@@ -54,7 +54,7 @@ class PromoRepository implements DataRepositoryContract, PromoRepositoryContract
             $group_reference[$group['id']] = $name;
         }
 
-        // Always get the main site's social and contact
+        // Always get the main site's social and contact incase we need them on the subsite
         $group_reference[$config['main']['social']['id']] = 'main_social';
         $group_reference[$config['main']['contact']['id']] = 'main_contact';
 
@@ -80,11 +80,27 @@ class PromoRepository implements DataRepositoryContract, PromoRepositoryContract
 
         // Setup the group reference array for this site
         foreach ($groups as $name => $group) {
-            // If the subsite has a config value use that otherwise default to the main config
-            $value = !empty($group['config']) ? $group['config'] : $config['main'][$name]['config'];
+            // If the subsite has a config value use that otherwise try to use the main config
+            if (!empty($group['config'])) {
+                $value = $group['config'];
+            } elseif (isset($config['main'][$name]['config'])) {
+                $value = $config['main'][$name]['config'];
+            }
 
-            // Set the group config
-            $group_config[$name] = str_replace('{$page_id}', $data['page']['id'], $value);
+            // Set the group config if one was found
+            if (!empty($value)) {
+                $group_config[$name] = str_replace('{$page_id}', $data['page']['id'], $value);
+            }
+        }
+
+        // Set the main social config
+        if (!empty($config['main']['social']['config'])) {
+            $group_config['main_social'] = $config['main']['social']['config'];
+        }
+
+        // Set the main contact config
+        if (!empty($config['main']['contact']['config'])) {
+            $group_config['main_contact'] = $config['main']['contact']['config'];
         }
 
         // If rotating hero images are allowed on this controller then change the limit
