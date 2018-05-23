@@ -48,7 +48,6 @@ class PromoRepository implements DataRepositoryContract, PromoRepositoryContract
         $groups = isset($config['subsites'][$key]) ? $config['subsites'][$key] : $config['main'];
 
         // Setup the group reference array for this site
-
         $group_reference = collect($groups)->reject(function ($group) {
             return empty($group['id']);
         })->mapWithKeys(function ($group, $name) {
@@ -58,8 +57,10 @@ class PromoRepository implements DataRepositoryContract, PromoRepositoryContract
         })->toArray();
 
         // Always get the main site's social and contact incase we need them on the subsite
-        if (!empty($config['main']['social']['id']) && !empty($config['main']['contact']['id'])) {
+        if (!empty($config['main']['social']['id'])) {
             $group_reference[$config['main']['social']['id']] = 'main_social';
+        }
+        if (!empty($config['main']['contact']['id'])) {
             $group_reference[$config['main']['contact']['id']] = 'main_contact';
         }
 
