@@ -48,15 +48,20 @@ class PromoRepository implements DataRepositoryContract, PromoRepositoryContract
         $groups = isset($config['subsites'][$key]) ? $config['subsites'][$key] : $config['main'];
 
         // Setup the group reference array for this site
-        $group_reference = collect($groups)->mapWithKeys(function ($group, $name) {
+
+        $group_reference = collect($groups)->reject(function ($group) {
+            return empty($group['id']);
+        })->mapWithKeys(function ($group, $name) {
             $group_reference[$group['id']] = $name;
 
             return [$group['id'] => $name];
         })->toArray();
 
         // Always get the main site's social and contact incase we need them on the subsite
-        $group_reference[$config['main']['social']['id']] = 'main_social';
-        $group_reference[$config['main']['contact']['id']] = 'main_contact';
+        if (!empty($config['main']['social']['id']) && !empty($config['main']['contact']['id'])) {
+            $group_reference[$config['main']['social']['id']] = 'main_social';
+            $group_reference[$config['main']['contact']['id']] = 'main_contact';
+        }
 
         // If there is an accordion custom page field and inject it into the group reference
         if (isset($data['data']['accordion_promo_group_id']) && $data['data']['accordion_promo_group_id'] != ''
@@ -111,14 +116,14 @@ class PromoRepository implements DataRepositoryContract, PromoRepositoryContract
         $promos = $this->parsePromos->parse($promos, $group_reference, $group_config);
 
         // Override the site's social icons if it doesn't have any
-        if (empty($promos['social'])) {
+        if (empty($promos['social']) && !empty($promos['main_social'])) {
             $promos['social'] = $promos['main_social'];
         }
 
         // Inject the main contact footer if we are on a subsite
         if (isset($promos['contact'])) {
             $promos['contact'] = array_merge($promos['contact'], $promos['main_contact']);
-        } else {
+        } elseif (!empty($promos['main_contact'])) {
             $promos['contact'] = $promos['main_contact'];
         }
 
