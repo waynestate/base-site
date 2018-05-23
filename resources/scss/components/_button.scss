@@ -1,0 +1,11 @@
+.button {
+    @apply .inline-block .align-middle .mb-2 .px-4 .py-2 .rounded .text-center .bg-green .text-white .text-sm .cursor-pointer;
+
+    &:hover {
+        @apply .bg-green-dark;
+    }
+}
+
+.button.expanded {
+    @apply .block .w-full .mx-0;
+}

@@ -1,27 +1,25 @@
-@extends('partials.content-area')
+@extends('components.content-area')
 
 @section('content')
     @if($back_url != '')
-        <div class="row profile__return">
-            <div class="columns small-12">
-                <a href="{{ $back_url }}">&lt; Return to listing</a>
-            </div>
+        <div class="profile__return relative">
+            <a href="{{ $back_url }}" class="text-right absolute pin-r md:py-1 pr-4">&lt; Return to listing</a>
         </div>
     @endif
 
-    <div class="row profile__block">
-        <div class="small-12 large-4 columns">
+    <div class="row flex flex-wrap profile__block">
+        <div class="w-full lg:w-1/3 px-4 mt-6">
             @if(isset($profile['data']['Picture']['url']))
-                <img src="{{ $profile['data']['Picture']['url'] }}" alt="{{ $page['title'] }}" class="profile__img">
+                <img src="{{ $profile['data']['Picture']['url'] }}" alt="{{ $page['title'] }}" class="sm:h-64 md:h-auto block mx-auto">
             @else
-                <img src="/_resources/images/no-photo.svg" alt="{{ $page['title'] }}" class="profile__img">
+                <img src="/_resources/images/no-photo.svg" alt="{{ $page['title'] }}" class="sm:h-64 md:h-auto block mx-auto">
             @endif
 
-            @include('components.page-title', ['title' => $page['title'], 'class' => 'hide-for-large'])
+            @include('components.page-title', ['title' => $page['title'], 'class' => 'block md:hidden'])
 
-            <div class="profile--contact-info">
+            <div class="content">
                 @if(isset($profile['data']['Title']))
-                    <p class="title">{{ $profile['data']['Title'] }}</p>
+                    <p>{{ $profile['data']['Title'] }}</p>
                 @endif
 
                 @foreach($profile['data'] as $field=>$data)
@@ -54,22 +52,24 @@
              </div>
         </div>
 
-        <div class="small-12 large-8 columns">
-            @include('components.page-title', ['title' => $page['title'], 'class' => 'show-for-large'])
+        <div class="w-full lg:w-2/3 px-4">
+            @include('components.page-title', ['title' => $page['title'], 'class' => 'hidden md:block'])
 
-            @foreach($profile['data'] as $field=>$data)
-                @if(!in_array($field, $contact_fields) && !in_array($field, $hidden_fields))
-                    <h2>{{ $field }}</h2>
+            <div class="content">
+                @foreach($profile['data'] as $field=>$data)
+                    @if(!in_array($field, $contact_fields) && !in_array($field, $hidden_fields))
+                        <h2>{{ $field }}</h2>
 
-                    @if(is_array($data))
-                        @foreach($data as $value)
-                            {!! $value !!}
-                        @endforeach
-                    @else
-                        {!! $data !!}
+                        @if(is_array($data))
+                            @foreach($data as $value)
+                                {!! $value !!}
+                            @endforeach
+                        @else
+                            {!! $data !!}
+                        @endif
                     @endif
-                @endif
-            @endforeach
+                @endforeach
+            </div>
         </div>
     </div>
 @endsection

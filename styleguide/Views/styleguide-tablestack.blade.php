@@ -1,11 +1,10 @@
-@extends('partials.content-area')
+@extends('components.content-area')
 
 @section('content')
     @include('components.page-title', ['title' => $page['title']])
 
     <div class="content">
         {!! $page['content']['main'] !!}
-   
 
         <table class="table-stack">
             <thead>
@@ -27,11 +26,10 @@
             </tbody>
         </table>
 
+        <a class="button" onclick="$('pre.table-stack').toggleClass('hidden');">See Table Code</a>
 
-        <a class="button" onclick="$('pre.table-stack').toggleClass('hide');">See Table Code</a>
-
-        <pre class="table-stack hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
-        {{ htmlspecialchars('
+        <pre class="table-stack hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+        {!! htmlspecialchars('
 <table class="table-stack">
     <thead>
         <tr>
@@ -49,7 +47,7 @@
         </tr>
     </tbody>
 </table>
-        ') }}
+        ') !!}
         </pre>
     </div>
 @endsection

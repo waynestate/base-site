@@ -32,6 +32,10 @@ class AppServiceProvider extends ServiceProvider
 
             return "<?php echo view('components.image-lazy', ['src' => $params[0], 'alt' => $params[1], 'class' => $params[2]])->render(); ?>";
         });
+
+        Blade::directive('svg', function ($title) {
+            return "<?php if(view()->exists('svg.'.".strtolower($title).")) { echo view('svg.'.".$title."); } ?>";
+        });
     }
 
     /**
@@ -48,7 +52,7 @@ class AppServiceProvider extends ServiceProvider
         // WSU API
         $this->app->bind('Waynestate\Api\Connector', function () {
             $api = new Connector(
-                config('app.wsu_api_key')
+                config('base.wsu_api_key')
             );
 
             // Set the Cache Directory for the WSU API

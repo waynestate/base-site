@@ -15,7 +15,7 @@ class MenuLeftController extends Controller
      */
     public function index(Request $request)
     {
-        config(['app.top_menu_enabled' => false]);
+        config(['base.top_menu_enabled' => false]);
 
         return view('styleguide-childpage', merge($request->data));
     }

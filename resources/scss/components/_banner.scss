@@ -1,0 +1,64 @@
+.banner {
+    a {
+        display: none;
+        transition: all 0.2s ease-out;
+
+        @screen mt {
+            @apply .bg-yellow;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 140px;
+            height: 30px;
+            position: absolute;
+            bottom: -30px;
+            right: 30px;
+            z-index: 999;
+        }
+
+        // Pointy bottom
+        &::after {
+            @apply .border-yellow;
+
+            border-left-color: transparent;
+            border-right-color: transparent;
+            border-style: solid;
+            border-width: 12px 70px 0;
+            top: 30px;
+            content: "";
+            position: absolute;
+            left: 0;
+            transition: all 0.2s ease-out;
+        }
+
+        &:hover {
+            bottom: -38px;
+            height: 38px;
+            padding-top: 8px;
+
+            &::after {
+                top: 38px;
+            }
+        }
+    }
+
+    .title {
+        padding-top: 0.3125rem;
+        text-transform: uppercase;
+        font-size: 13px;
+        letter-spacing: 0.1em;
+        transition: all 0.5s ease-out;
+    }
+
+    .excerpt {
+        @apply .font-serif;
+
+        padding-top: 0.125rem;
+        text-transform: none;
+        font-size: 20px;
+        font-style: italic;
+        padding-left: 0.2em;
+        transition: all 0.5s ease-out;
+    }
+}

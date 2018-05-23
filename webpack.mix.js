@@ -6,6 +6,7 @@ let exec = require('child_process').exec;
 let package = JSON.parse(fs.readFileSync('./package.json'));
 let CopyWebpackPlugin = require('copy-webpack-plugin');
 let purge = require('laravel-mix-purgecss');
+let tailwindcss = require('tailwindcss');
 
 /*
  |--------------------------------------------------------------------------
@@ -37,8 +38,7 @@ mix.copy([
 
     // Fonts
     .copy([
-        'resources/fonts/**/*',
-        'node_modules/slick-carousel/slick/fonts/**/*'
+        'resources/fonts/**/*'
     ], 'public/_resources/fonts')
 
     // Images
@@ -46,29 +46,37 @@ mix.copy([
         'resources/images/**/*.jpg',
         'resources/images/**/*.gif',
         'resources/images/**/*.png',
-        'resources/images/**/*.svg',
-        'node_modules/slick-carousel/slick/**/*.gif'
+        'resources/images/**/*.svg'
     ], 'public/_resources/images');
 
 // Compile assets and setup browersync
 mix.js('resources/js/main.js', 'public/_resources/js')
-   .sass('resources/scss/main.scss', 'public/_resources/css')
+   .sass('resources/scss/main.scss', 'public/_resources/css/compiled.css')
+   .styles([
+       'node_modules/mediabox/dist/mediabox.css',
+       'node_modules/flickity/dist/flickity.css',
+       'node_modules/@waynestate/wsuheader/dist/header.css',
+       'node_modules/@waynestate/wsufooter/dist/footer.css',
+       'public/_resources/css/compiled.css',
+   ], 'public/_resources/css/main.css')
    .purgeCss({
-        enabled: true,
         globs: [
             path.join(__dirname, "resources/views/**/*.blade.php"),
             path.join(__dirname, "styleguide/Views/**/*.blade.php"),
             path.join(__dirname, "factories/**/*.php"),
             path.join(__dirname, "resources/js/**/*.js"),
-            path.join(__dirname, "node_modules/foundation-sites/js/foundation.offcanvas.js")
+            path.join(__dirname, "node_modules/slideout/dist/slideout.js"),
+            path.join(__dirname, "node_modules/flickity/dist/flickity.pkgd.js"),
+            path.join(__dirname, "node_modules/mediabox/dist/mediabox.js")
         ],
         extensions: ['html', 'js', 'php', 'vue'],
-        whitelistPatterns: [/icon-/, /slick-/, /mfp-/, /at-/]
+        whitelistPatterns: [/at-/]
     })
    .sourceMaps()
    .options({
         processCssUrls: false,
         postCss: [
+            tailwindcss('./tailwind.js'),
             require('autoprefixer')
         ]
     })
@@ -78,8 +86,8 @@ mix.js('resources/js/main.js', 'public/_resources/js')
         files: [
             'app/**/*.php',
             'resources/views/**/*.php',
-            'public/_resources/js/**/*.js',
-            'public/_resources/css/**/*.css'
+            'public/_resources/js/main.js',
+            'public/_resources/css/main.css'
         ],
         watchOptions: {
             usePolling: true,
@@ -95,9 +103,6 @@ fs.symlink(
 );
 
 config = {
-    externals: {
-        "jquery": "jQuery"
-    },
     module: {
         rules: [{
             test: /\.js$/,
@@ -119,11 +124,11 @@ config = {
         new CopyWebpackPlugin([
             {
                 from: 'node_modules/@waynestate/wsuheader/dist/header.html',
-                to: path.resolve('resources/views/partials/header.blade.php'),
+                to: path.resolve('resources/views/components/header.blade.php'),
             },
             {
                 from: 'node_modules/@waynestate/wsufooter/dist/footer.html',
-                to: path.resolve('resources/views/partials/footer.blade.php'),
+                to: path.resolve('resources/views/components/footer.blade.php'),
             },
             {
                 from: 'vendor/waynestate/error-404/dist/404.php',

@@ -38,13 +38,31 @@ class PromoRepository implements DataRepositoryContract, PromoRepositoryContract
      */
     public function getRequestData(array $data)
     {
-        $group_reference = [
-            2908 => 'contact',
-            2907 => 'social',
-            2909 => 'under_menu',
-            3001 => 'hero',
-            4246 => 'banner',
-        ];
+        // Get the global promos config
+        $config = config('base.global_promos');
+
+        // Set the key for the global promos array
+        $key = $data['site']['parent']['id'] === null ? 'main' : $data['site']['id'];
+
+        // Figure out which set of groups to use
+        $groups = isset($config['subsites'][$key]) ? $config['subsites'][$key] : $config['main'];
+
+        // Setup the group reference array for this site
+        $group_reference = collect($groups)->reject(function ($group) {
+            return empty($group['id']);
+        })->mapWithKeys(function ($group, $name) {
+            $group_reference[$group['id']] = $name;
+
+            return [$group['id'] => $name];
+        })->toArray();
+
+        // Always get the main site's social and contact incase we need them on the subsite
+        if (!empty($config['main']['social']['id'])) {
+            $group_reference[$config['main']['social']['id']] = 'main_social';
+        }
+        if (!empty($config['main']['contact']['id'])) {
+            $group_reference[$config['main']['contact']['id']] = 'main_contact';
+        }
 
         // If there is an accordion custom page field and inject it into the group reference
         if (isset($data['data']['accordion_promo_group_id']) && $data['data']['accordion_promo_group_id'] != ''
@@ -64,19 +82,57 @@ class PromoRepository implements DataRepositoryContract, PromoRepositoryContract
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
-        $group_config = [
-            'contact' => 'limit:3',
-            'under_menu' => 'page_id:'.$data['page']['id'],
-            'hero' => 'page_id:'.$data['page']['id'].'|randomize|limit:1',
-            'banner' => 'page_id:'.$data['page']['id'].'|first',
-        ];
+        // Setup the group reference array for this site
+        $group_config = collect($groups)->mapWithKeys(function ($group, $name) use ($config, $data) {
+            // If the subsite has a config value use that otherwise try to use the main config
+            if (!empty($group['config'])) {
+                $value = $group['config'];
+            } elseif (isset($config['main'][$name]['config'])) {
+                $value = $config['main'][$name]['config'];
+            } else {
+                $value = null;
+            }
 
-        if (in_array($data['page']['controller'], config('app.hero_rotating_controllers'))) {
-            $group_config = str_replace('|limit:1', '|limit:'.config('app.hero_rotating_limit'), $group_config);
+            return [$name => str_replace('{$page_id}', $data['page']['id'], $value)];
+        })->reject(function ($value) {
+            return empty($value);
+        })->toArray();
+
+        // Set the main social config
+        if (!empty($config['main']['social']['config'])) {
+            $group_config['main_social'] = $config['main']['social']['config'];
         }
 
-        // Return the parsed promotions
-        return $this->parsePromos->parse($promos, $group_reference, $group_config);
+        // Set the main contact config
+        if (!empty($config['main']['contact']['config'])) {
+            $group_config['main_contact'] = $config['main']['contact']['config'];
+        }
+
+        // If rotating hero images are allowed on this controller then change the limit
+        if (in_array($data['page']['controller'], config('base.hero_rotating_controllers'))) {
+            $group_config = str_replace('|limit:1', '|limit:'.config('base.hero_rotating_limit'), $group_config);
+        }
+
+        // Parsed promotions
+        $promos = $this->parsePromos->parse($promos, $group_reference, $group_config);
+
+        // Override the site's social icons if it doesn't have any
+        if (empty($promos['social']) && !empty($promos['main_social'])) {
+            $promos['social'] = $promos['main_social'];
+        }
+
+        // Inject the main contact footer if we are on a subsite
+        if (isset($promos['contact'])) {
+            $promos['contact'] = array_merge($promos['contact'], $promos['main_contact']);
+        } elseif (!empty($promos['main_contact'])) {
+            $promos['contact'] = $promos['main_contact'];
+        }
+
+        // Remove the uncessary promo groups
+        unset($promos['main_social']);
+        unset($promos['main_contact']);
+
+        return $promos;
     }
 
     /**

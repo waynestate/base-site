@@ -1,0 +1,205 @@
+.content {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin-bottom: 0.3125rem;
+        font-weight: 700;
+        text-rendering: optimizeLegibility;
+        line-height: 1.4;
+    }
+
+    h1 {
+        font-size: 2.125rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    h3 {
+        font-size: 1.375rem;
+    }
+
+    h4 {
+        font-size: 1.125rem;
+    }
+
+    h5,
+    h6 {
+        font-size: 0.875rem;
+    }
+
+    p {
+        margin-bottom: 1rem;
+    }
+
+    hr {
+        @apply .border-b .border-solid .border-grey-lighter;
+
+        clear: both;
+        max-width: 75rem;
+        height: 0;
+        margin: 1.25rem auto;
+        border-top: 0;
+        border-right: 0;
+        border-left: 0;
+    }
+
+    dl,
+    ol,
+    ul {
+        margin: 0 0 1rem;
+    }
+
+    abbr,
+    abbr[title] {
+        color: inherit;
+        border: none;
+        text-decoration: none;
+    }
+
+    blockquote {
+        @apply .border-solid .border-green .bg-grey-lightest;
+
+        padding: 1em;
+        border-width: 0 0 0 3px;
+        border-style: solid;
+        margin-bottom: 1em;
+
+        p {
+            margin-bottom: 0.3rem;
+        }
+    }
+
+    table {
+        border: none;
+        width: 100%;
+        margin: 0 0 1rem;
+
+        th,
+        td {
+            line-height: 1.5;
+            text-align: left;
+        }
+
+        // Header
+        thead tr {
+            border-collapse: collapse;
+
+            &,
+            a {
+                @apply .text-white;
+
+                text-decoration: none;
+                font-weight: bold;
+                border-bottom: none;
+            }
+
+            th {
+                @apply .bg-green-dark;
+
+                text-align: left;
+                font-weight: bold;
+                padding: 15px 10px;
+            }
+
+            th.center-align {
+                text-align: center;
+            }
+        }
+
+        // Body
+        tbody tr {
+            @apply .border-0 .border-b .border-solid .border-grey-light;
+
+            td {
+                text-align: left;
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            th {
+                padding: 10px;
+            }
+
+            &:nth-child(odd) {
+                @apply .bg-grey-lighter;
+            }
+
+            &:nth-child(even) {
+                @apply .bg-grey-lightest;
+            }
+
+            &:hover {
+                @apply .bg-yellow-lightest;
+            }
+        }
+    }
+
+    a:not(.button) {
+        text-decoration: underline;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    img {
+        display: block;
+        width: 100%;
+        margin: 10px auto;
+        padding: 0;
+
+        &[class^="float-"] {
+            float: none !important;
+        }
+
+        &.icon {
+            display: inline-block;
+            width: auto;
+        }
+
+        @screen mt {
+            padding: 10px;
+            width: auto;
+            margin: 0;
+            float: inherit;
+        }
+    }
+
+    figure {
+        width: 100%;
+        display: table;
+        margin: 15px auto;
+
+        @screen md {
+            margin: 25px;
+            width: auto;
+        }
+
+        &[style*="float:right"],
+        &.float-right {
+            margin-right: 0;
+        }
+
+        &[style*="float:left"],
+        &.float-left {
+            margin-left: 0;
+        }
+
+        img {
+            padding: 0;
+        }
+
+        figcaption {
+            padding-top: 0.5em;
+            font-size: 0.875rem;
+            font-style: italic;
+            display: table-caption;
+            caption-side: bottom;
+        }
+    }
+}

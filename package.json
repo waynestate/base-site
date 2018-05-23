@@ -1,7 +1,7 @@
 {
   "name": "base",
   "private": true,
-  "version": "4.8.1",
+  "version": "5.0.0",
   "description": "",
   "scripts": {
     "dev": "npm run development",
@@ -26,19 +26,22 @@
   "devDependencies": {
     "@waynestate/wsufooter": "^1.0.0",
     "@waynestate/wsuheader": "^2.0.0",
-    "browser-sync": "^2.18.13",
-    "browser-sync-webpack-plugin": "^1.2.0",
+    "accordion": "^2.1.1",
+    "browser-sync": "^2.24.0",
+    "browser-sync-webpack-plugin": "^2.2.0",
     "copy-webpack-plugin": "^4.2.0",
     "cross-env": "^5.0.1",
     "eslint": "^3.7.1",
     "eslint-loader": "^1.5.0",
-    "foundation-sites": "~6.3.0",
+    "flickity": "^2.1.1",
+    "glhd-tailwindcss-transitions": "^0.3.0",
     "intersection-observer": "^0.5.0",
     "laravel-mix": "^2.0",
     "laravel-mix-purgecss": "^2.0.0",
-    "magnific-popup": "^1.1.0",
-    "slick-carousel": "^1.6.0",
-    "stylelint": "^8.0.0",
-    "stylelint-config-standard": "^17.0.0"
+    "mediabox": "^1.1.2",
+    "slideout": "^1.0.1",
+    "stylelint": "^9.0.0",
+    "stylelint-config-standard": "^18.0.0",
+    "tailwindcss": "^0.5.2"
   }
 }

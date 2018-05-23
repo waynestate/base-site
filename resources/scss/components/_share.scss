@@ -1,0 +1,32 @@
+.addthis_share {
+    @apply .text-grey-darkest .bg-grey-lighter;
+
+    padding: 8px 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    float: left;
+    line-height: 1em;
+    font-size: 14px;
+    margin-right: 3px;
+}
+
+.addthis_sharing_toolbox {
+    display: inline-block;
+    margin-bottom: 1em;
+
+    svg {
+        fill: #4b4b4b !important;
+        width: 20px !important;
+        height: 20px !important;
+    }
+}
+
+.at-icon-wrapper {
+    line-height: 20px;
+    height: 30px;
+    width: 30px;
+}
+
+a.at-icon-wrapper.at-share-btn {
+    background: #e7e7e7 !important;
+}

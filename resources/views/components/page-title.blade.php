@@ -1,1 +1,1 @@
-<h1 class="page-title{{ !empty($class) ? ' '.$class : '' }}">{{ $title }}</h1>
+<h1 class="my-4 text-3xl{{ !empty($class) ? ' '.$class : '' }}">{{ $title }}</h1>

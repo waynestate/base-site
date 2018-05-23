@@ -10,11 +10,11 @@ Starter repository for creating a new website. Live demo can be found at https:/
 
 ## Features
 
-* Backend built on [Laravel v5.5](https://laravel.com/)
-* Frontend built on [Foundation v6.3](http://foundation.zurb.com/sites/docs/)
+* Backend built on [Laravel v5.6](https://laravel.com/)
+* Frontend built on [Tailwind](https://tailwindcss.com/)
 * [Webpack](https://webpack.github.io/)
-* Fluent webpack API using [Laravel Mix](https://laravel.com/docs/5.5/mix)
-* Zero downtime deployment using [Envoy](https://laravel.com/docs/5.5/envoy)
+* Fluent webpack API using [Laravel Mix](https://laravel.com/docs/5.6/mix)
+* Zero downtime deployment using [Envoy](https://laravel.com/docs/5.6/envoy)
 * Configure multiple enviorments using [PHPDotenv](https://github.com/vlucas/phpdotenv)
 * SCSS support
 * Automatically inject JS/CSS while developing using [BrowserSync](https://browsersync.io/)
@@ -34,8 +34,8 @@ Starter repository for creating a new website. Live demo can be found at https:/
         * Left menu
         * Under menu promotions
 * [Full styleguide](https://base.wayne.edu/styleguide) detailing out every available component using [PHP faker data](https://github.com/fzaninotto/Faker)
-* [Single](https://base.wayne.edu/styleguide/hero/full) or [rotating](https://base.wayne.edu/styleguide/hero/full/rotate) hero images using [Slick Carousel](http://kenwheeler.github.io/slick/)
-* Automatically lightbox youtube videos using [Magnific Popup](http://dimsemenov.com/plugins/magnific-popup/)
+* [Single](https://base.wayne.edu/styleguide/hero/full) or [rotating](https://base.wayne.edu/styleguide/hero/full/rotate) hero images using [Flickity](https://flickity.metafizzy.co/)
+* Automatically lightbox youtube videos using [Media Box](https://github.com/pinceladasdaweb/mediabox)
 * Easy integration with a CMS by writing [custom .json files](https://base.wayne.edu/index.json) to the public directory which are matched by to a route and sent to the specified controller
 
 ## Setup
@@ -104,7 +104,6 @@ Email web@wayne.edu with your request.
 1. Open `/resources/views/`
 1. This folder contains all the views for the front-end using the [blade templating engine](https://laravel.com/docs/5.2/blade)
 1. Files must be saved in the format of: `homepage.blade.php`
-1. Partials: Contains views that are only used once in the project
 1. Components: Contains views that are reusable
 
 ## Pages
@@ -205,6 +204,17 @@ $menus = [
         * If the page needs to be full width set `page_id = null` within the menu.
         * If the page is NOT within then menu then you need to specify the path to the page. Set `var $path = '/path/to/your/page'` inside your `styleguide/Pages/` class.
     1. Set controller to the one you created in step #4.
+
+## Adding SVG icons
+
+1. Load the fontello-config.json file into http://fontello.com/
+1. Select the new icons and download the set.
+1. Load the waynestate.svg file into https://icomoon.io/app/#/select
+1. Select all the icons and download the set.
+1. Open the new SVG icon(s) in the editor of your choice.
+1. Save each file under resources/views/svg as a blade partial.
+1. Remove the comment from the svg file.
+1. Apply the appropriate classes to the svg element (look at an existing one).
 
 ## Contributing
 

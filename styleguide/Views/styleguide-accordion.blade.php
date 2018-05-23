@@ -1,4 +1,4 @@
-@extends('partials.content-area')
+@extends('components.content-area')
 
 @section('content')
     @include('components.page-title', ['title' => $page['title']])
@@ -11,12 +11,12 @@
         @include('components.accordion', ['items' => $accordion_page])
     @endif
 
-<a class="button" onclick="$('pre.accordions').toggleClass('hide');">See Accordion Code</a>
+    <a class="button" onclick="document.querySelector('pre.accordions').classList.toggle('hidden');">See accordion code</a>
 
-    <pre class="accordions hide" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
-    {{ htmlspecialchars('
+    <pre class="accordions hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+    {!! htmlspecialchars('
 <ul class="accordion">
-    <li class="is-active">
+    <li>
         <a href="#panel1a">Accordion 1</a>
         <div id="panel1a">
             <p>Panel 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -35,6 +35,6 @@
         </div>
     </li>
 </ul>
-    ') }}
+    ') !!}
     </pre>
 @endsection

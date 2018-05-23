@@ -1,22 +1,17 @@
 {{--
     $images => array // ['relative_url']
-    $class => string // 'hero--childpage' if used on a childpage with left menu, and any additional classes
 --}}
 
-<div class="{{ (count($images) > 1)? 'rotate_arrows ' : '' }}overlay-arrows hero{{ isset($class) ? ' ' . $class : '' }}">
+<div class="mt:mx-0{{ !empty($images) && count($images) > 1 ? ' rotate' : '' }}{{ !empty($show_site_menu) && $show_site_menu === true ? ' contained -mx-4' : ' full' }}">
     @foreach($images as $image)
-        <div class="hero__slide">
-            @if($image == reset($images))<div class="hero__image" style="background-image: url('{{ $image['relative_url'] }}')">@else <div class="hero__image lazy" data-src="{{ $image['relative_url'] }}">@endif
-                @if(!empty($image['excerpt']) && config('app.hero_text_enabled') && in_array($page['controller'], config('app.hero_text_controllers')))
-                    <div class="hero__excerpt">
-                        <div class="row">
-                            <div class="small-12 columns">
-                                {{ $image['excerpt'] }} @if(!empty($image['link'])) <a href="{{ $image['link'] }}" class="hero__view-more">{{ config('app.hero_text_more') }}</a>@endif
-                            </div>
-                        </div>
+        <div class="pt-partial w-full bg-cover bg-top relative{{ $loop->first !== true ? ' lazy' : '' }}" @if($loop->first === true) style="background-image: url('{{ $image['relative_url'] }}')" @else data-src="{{ $image['relative_url'] }}"@endif>
+            @if(!empty($image['excerpt']) && config('base.hero_text_enabled') && in_array($page['controller'], config('base.hero_text_controllers')))
+                <div class="bg-green-darker text-white py-4 lg:absolute pin-b pin-l pin-r">
+                    <div class="row px-4">
+                        {{ $image['excerpt'] }} @if(!empty($image['link'])) <a href="{{ $image['link'] }}" class="text-white underline font-bold pl-2 hover:no-underline">{{ config('base.hero_text_more') }}</a>@endif
                     </div>
-                @endif
-            </div>
-        </div>    
+                </div>
+            @endif
+        </div>
     @endforeach
 </div>

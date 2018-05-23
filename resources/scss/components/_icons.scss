@@ -1,0 +1,19 @@
+.icon-cancel {
+    &::after {
+        content: "×";
+    }
+}
+
+.icon-right-open {
+    &::after {
+        content: ">";
+    }
+}
+
+.icon-down-open {
+    &::after {
+        content: ">";
+        display: inline-block;
+        transform: rotate(90deg);
+    }
+}
