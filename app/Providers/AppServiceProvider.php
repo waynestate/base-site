@@ -52,7 +52,7 @@ class AppServiceProvider extends ServiceProvider
         // WSU API
         $this->app->bind('Waynestate\Api\Connector', function () {
             $api = new Connector(
-                config('app.wsu_api_key')
+                config('base.wsu_api_key')
             );
 
             // Set the Cache Directory for the WSU API

@@ -164,7 +164,7 @@ class ProfileRepository implements ProfileRepositoryContract
         // Filter down the groups based on the parent group from the config
         $profile_groups['results'] = collect($profile_groups['results'])
             ->filter(function ($item) {
-                return (int) $item['parent_id'] === config('app.profile_parent_group_id');
+                return (int) $item['parent_id'] === config('base.profile_parent_group_id');
             })
             ->toArray();
 
@@ -270,7 +270,7 @@ class ProfileRepository implements ProfileRepositoryContract
             || $referer == $scheme.'://'.$host.$uri
             || strpos($referer, $host) === false
         ) {
-            return config('app.profile_default_back_url');
+            return config('base.profile_default_back_url');
         }
 
         return $referer;

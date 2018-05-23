@@ -39,7 +39,7 @@ class PromoRepository implements DataRepositoryContract, PromoRepositoryContract
     public function getRequestData(array $data)
     {
         // Get the global promos config
-        $config = config('app.global_promos');
+        $config = config('base.global_promos');
 
         // Set the key for the global promos array
         $key = $data['site']['parent']['id'] === null ? 'main' : $data['site']['id'];
@@ -88,8 +88,8 @@ class PromoRepository implements DataRepositoryContract, PromoRepositoryContract
         }
 
         // If rotating hero images are allowed on this controller then change the limit
-        if (in_array($data['page']['controller'], config('app.hero_rotating_controllers'))) {
-            $group_config = str_replace('|limit:1', '|limit:'.config('app.hero_rotating_limit'), $group_config);
+        if (in_array($data['page']['controller'], config('base.hero_rotating_controllers'))) {
+            $group_config = str_replace('|limit:1', '|limit:'.config('base.hero_rotating_limit'), $group_config);
         }
 
         // Parsed promotions

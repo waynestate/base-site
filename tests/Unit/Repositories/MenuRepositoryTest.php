@@ -15,7 +15,7 @@ class MenuRepositoryTest extends TestCase
     public function top_menu_enabled_should_return_top_menu()
     {
         // Enable top menu
-        config(['app.top_menu_enabled' => true]);
+        config(['base.top_menu_enabled' => true]);
 
         // Get a page
         $page = app('Factories\Page')->create(1);
@@ -31,7 +31,7 @@ class MenuRepositoryTest extends TestCase
         $this->assertTrue(isset($menus['top_menu_output']));
 
         // Set it back
-        config(['app.top_menu_enabled' => false]);
+        config(['base.top_menu_enabled' => false]);
     }
 
     /**
@@ -41,7 +41,7 @@ class MenuRepositoryTest extends TestCase
     public function disable_top_menu_should_show_site_menu()
     {
         // Disable top menu
-        config(['app.top_menu_enabled' => false]);
+        config(['base.top_menu_enabled' => false]);
 
         // Get a page
         $page = app('Factories\Page')->create(1);
@@ -176,10 +176,10 @@ class MenuRepositoryTest extends TestCase
      */
     public function trimming_selected_site_menu_with_no_children_should_return_no_trimmed_menu()
     {
-        $currentConfig = config('app.top_menu_enabled');
+        $currentConfig = config('base.top_menu_enabled');
 
         // Force enable top menu
-        config(['app.top_menu_enabled' => true]);
+        config(['base.top_menu_enabled' => true]);
 
         // Get a menu
         $menu = app('Factories\Menu')->create(5);
@@ -194,7 +194,7 @@ class MenuRepositoryTest extends TestCase
         $this->assertEquals($trimmed['menu'], []);
 
         // Set it back
-        config(['app.top_menu_enabled' => $currentConfig]);
+        config(['base.top_menu_enabled' => $currentConfig]);
     }
 
     /**
@@ -492,10 +492,10 @@ class MenuRepositoryTest extends TestCase
     public function homepage_menu_is_disabled_when_config_is_disabled()
     {
         // Get the current config for if the menu is enabled or not
-        $currentConfig = config('app.homepage_menu_enabled');
+        $currentConfig = config('base.homepage_menu_enabled');
 
         // Disable the menu on the homepage
-        config(['app.homepage_menu_enabled' => false]);
+        config(['base.homepage_menu_enabled' => false]);
 
         // Get a page with the HomepageController set
         $page = app('Factories\Page')->create(
@@ -516,7 +516,7 @@ class MenuRepositoryTest extends TestCase
         $this->assertFalse($menus['show_site_menu']);
 
         // Set it back to what it was
-        config(['app.top_menu_enabled' => $currentConfig]);
+        config(['base.top_menu_enabled' => $currentConfig]);
     }
 
     /**

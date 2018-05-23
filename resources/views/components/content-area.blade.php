@@ -3,7 +3,7 @@
 @section('content-area')
     @yield('top')
 
-    @if(!empty($hero) && $site_menu['meta']['has_selected'] == false && config('app.hero_contained') === false)
+    @if(!empty($hero) && $site_menu['meta']['has_selected'] == false && config('base.hero_contained') === false)
         @include('components.hero', ['images' => $hero])
     @endif
 
@@ -35,7 +35,7 @@
         </div>
 
         <div class="w-full px-4 @if($site_menu['meta']['has_selected'] == false && ((isset($show_site_menu) && $show_site_menu != true) || !isset($show_site_menu)))md:w-full @else md:w-3/4 @endif content-area mb-8">
-            @if(!empty($hero) && ($site_menu['meta']['has_selected'] == true || config('app.hero_contained') === true))
+            @if(!empty($hero) && ($site_menu['meta']['has_selected'] == true || config('base.hero_contained') === true))
                 @include('components.hero', ['images' => $hero, 'class' => 'hero--childpage'])
             @endif
 

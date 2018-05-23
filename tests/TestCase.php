@@ -22,10 +22,10 @@ abstract class TestCase extends BaseTestCase
         $_SERVER['REQUEST_URI'] = '';
 
         // Force the top menu to be enabled for now since the tests are written specifically for this condition
-        config(['app.top_menu_enabled' => true]);
+        config(['base.top_menu_enabled' => true]);
 
         // Reset the WSU API key so we never make real connections to the API
-        config(['app.wsu_api_key' => '']);
+        config(['base.wsu_api_key' => '']);
 
         // Create a new faker that every test can use
         $this->faker = (new Factory)->create();

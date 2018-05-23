@@ -5,13 +5,13 @@
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-        @if(config('app.ga_code') != 'UA-' && config('app.ga_name') != null)
-            ga('create', '{{ config('app.ga_code') }}', 'wayne.edu', {'name': '{{ config('app.ga_name') }}'});
-            ga('{{ config('app.ga_name') }}.send', 'pageview', '{{ $server['path_with_query'] }}');        
+        @if(config('base.ga_code') != 'UA-' && config('base.ga_name') != null)
+            ga('create', '{{ config('base.ga_code') }}', 'wayne.edu', {'name': '{{ config('base.ga_name') }}'});
+            ga('{{ config('base.ga_name') }}.send', 'pageview', '{{ $server['path_with_query'] }}');
         @endif
-        
-        @if(config('app.ga_code_all_wsu') != 'UA-')
-            ga('create', '{{ config('app.ga_code_all_wsu') }}', 'wayne.edu', {'name': 'allWayneState'});
+
+        @if(config('base.ga_code_all_wsu') != 'UA-')
+            ga('create', '{{ config('base.ga_code_all_wsu') }}', 'wayne.edu', {'name': 'allWayneState'});
             ga('allWayneState.send', 'pageview', '{{ $server['path_with_query'] }}');
         @endif
     </script>

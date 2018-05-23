@@ -57,7 +57,7 @@ class MenuRepository implements DataRepositoryContract, MenuRepositoryContract
     public function getMenus(array $data, array $menus)
     {
         // Get the ID that will be used for the top menu
-        $top_menu_id = $this->getTopMenuId($data['menu']['id'], config('app.top_menu_id'), $menus);
+        $top_menu_id = $this->getTopMenuId($data['menu']['id'], config('base.top_menu_id'), $menus);
 
         // Get the top menu
         $top_menu = $top_menu_id === null ? null : $this->getTopMenu(
@@ -81,7 +81,7 @@ class MenuRepository implements DataRepositoryContract, MenuRepositoryContract
         $site_menu = $this->trimSiteMenu(
             $site_menu,
             $data['site']['parent']['id'],
-            config('app.top_menu_id')
+            config('base.top_menu_id')
         );
 
         // Build the return
@@ -94,12 +94,12 @@ class MenuRepository implements DataRepositoryContract, MenuRepositoryContract
         ];
 
         // Force left menu all the time if we aren't using top menu
-        if (config('app.top_menu_enabled') === false) {
+        if (config('base.top_menu_enabled') === false) {
             $menus['show_site_menu'] = true;
         }
 
         // Force hide the menu if they specifically disable it
-        if (config('app.homepage_menu_enabled') === false && $data['page']['controller'] == 'HomepageController') {
+        if (config('base.homepage_menu_enabled') === false && $data['page']['controller'] == 'HomepageController') {
             $menus['show_site_menu'] = false;
         }
 
@@ -194,7 +194,7 @@ class MenuRepository implements DataRepositoryContract, MenuRepositoryContract
     {
         // Trim first level based on path[0] - only if we are on the main website
         // or we aren't enabling top menu across all subsites
-        if (!empty($menu['meta']['path']) && ($parentId === null || $topMenuId === null) && config('app.top_menu_enabled') == true) {
+        if (!empty($menu['meta']['path']) && ($parentId === null || $topMenuId === null) && config('base.top_menu_enabled') == true) {
             foreach ($menu['menu'] as $key => $item) {
                 // If we are on the first path then grab that submenu
                 if ($item['menu_item_id'] == $menu['meta']['path'][0]) {

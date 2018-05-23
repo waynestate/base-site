@@ -20,7 +20,7 @@ class PromoRepositoryTest extends TestCase
         ];
 
         // Always force homepage
-        config(['app.hero_rotating_controllers' => ['HomepageController']]);
+        config(['base.hero_rotating_controllers' => ['HomepageController']]);
 
         // Create a fake data request
         $data = app('Factories\Page')->create(1, [
