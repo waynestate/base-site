@@ -214,7 +214,7 @@ $menus = [
 1. Open the new SVG icon(s) in the editor of your choice.
 1. Save each file under resources/views/svg as a blade partial.
 1. Remove the comment from the svg file.
-1. Apply the appropriate classes to the svg element (look at an existing one).
+1. Apply this code to the svg tag: `class="{{ $class ?? '' }}" aria-labelledby="{{ $name ?? '' }}"`.
 
 ## Contributing
 

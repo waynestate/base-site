@@ -5,7 +5,7 @@
     $url => string '/news.php'
     $link_text => string // 'More news'
 --}}
-<h2 class="mb-4">{{ $heading ?? 'News' }}</h2>
+<h2>{{ $heading ?? 'News' }}</h2>
 
 <ul class="list-reset">
     @foreach($news as $item)
