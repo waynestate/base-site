@@ -139,6 +139,12 @@
         }
     }
 
+    &.footer-contact {
+        a {
+            @apply .text-white;
+        }
+    }
+
     a:not(.button) {
         text-decoration: underline;
 
