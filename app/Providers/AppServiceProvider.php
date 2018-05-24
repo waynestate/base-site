@@ -33,8 +33,18 @@ class AppServiceProvider extends ServiceProvider
             return "<?php echo view('components.image-lazy', ['src' => $params[0], 'alt' => $params[1], 'class' => $params[2]])->render(); ?>";
         });
 
-        Blade::directive('svg', function ($title) {
-            return "<?php if(view()->exists('svg.'.".strtolower($title).")) { echo view('svg.'.".$title."); } ?>";
+        Blade::directive('svg', function ($expression) {
+            // Since all paramters are concated into a string we need to parse them out into an array
+            $params = explode(',', $expression);
+
+            // We have two parameters that are optional so we need to set them as blank strings if they weren't passed in
+            for ($i=0; $i <= 1; $i++) {
+                if (empty($params[$i])) {
+                    $params[$i] = "''";
+                }
+            }
+
+            return "<?php if(view()->exists('svg.'.".strtolower($params[0]).")) { echo view('svg.'.".$params[0].", ['name' => $params[0], 'class' => $params[1]])->render(); } ?>";
         });
     }
 

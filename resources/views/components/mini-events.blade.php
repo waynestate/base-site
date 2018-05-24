@@ -4,7 +4,7 @@
     $cal_name => string // 'main'
     $link_text => string // 'More events'
 --}}
-<h2 class="mb-4">{{ $heading ?? 'Events' }}</h2>
+<h2>{{ $heading ?? 'Events' }}</h2>
 
 <dl>
     @foreach($events as $event)
