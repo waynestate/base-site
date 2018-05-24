@@ -98,11 +98,13 @@ import Slideout from 'slideout/dist/slideout.js';
     var all_links = document.querySelectorAll('#menu a');
 
     // When tabbing off the last link in the menu close offcanvas
-    all_links[all_links.length -1].addEventListener('keydown', function (e) {
-        if (e.keyCode == 9) {
-            slideout.close();
-        }
-    });
+    if(all_links.length > 0) {
+        all_links[all_links.length -1].addEventListener('keydown', function (e) {
+            if (e.keyCode == 9) {
+                slideout.close();
+            }
+        });
+    }
 
     // Hide slideout menu now that javascript is available
     if(document.querySelector('#menu') != null) {
