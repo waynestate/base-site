@@ -1,7 +1,7 @@
 {{--
     $breadcrumbs => array // [['display_name', 'relative_url']]
 --}}
-<nav class="mt-6" aria-label="Breadcrumbs">
+<nav class="mt-6 mb-2" aria-label="Breadcrumbs">
     <ul class="list-reset text-sm">
         @foreach($breadcrumbs as $key=>$crumb)
             @if($key == 0)
