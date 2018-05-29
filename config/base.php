@@ -57,7 +57,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | This enables the first level of the menu to show on the homepage. If the
-    | config option app.top_menu_enabled is true, then the homepage menu
+    | config option base.top_menu_enabled is true, then the homepage menu
     | will automatically be hidden.
     |
     */

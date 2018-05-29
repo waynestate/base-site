@@ -17,8 +17,8 @@ class HeroContainedTextController extends Controller
     {
         // Set this controller in the allowed controllers list
         config([
-            'app.hero_text_enabled' => true,
-            'app.hero_text_controllers' => ['HeroContainedTextController'],
+            'base.hero_text_enabled' => true,
+            'base.hero_text_controllers' => ['HeroContainedTextController'],
         ]);
 
         // Remove the link from hero images

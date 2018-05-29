@@ -77,7 +77,7 @@ Starter repository for creating a new website. Live demo can be found at https:/
 
 ## Configure the site
 
-1. Open `/config/app.php`
+1. Open `/config/base.php`
 1. Edit the options to configure the site, some values are present in the `.env` file.
 1. Server specific configuration options come from the `.env` file which need to be manually created/updated on the servers the app is deployed to.
 
