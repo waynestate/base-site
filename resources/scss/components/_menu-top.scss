@@ -9,8 +9,6 @@ ul.menu-top {
         a {
             @apply .text-white;
 
-            font-size: 16px;
-
             &:hover {
                 @apply .text-yellow;
             }
