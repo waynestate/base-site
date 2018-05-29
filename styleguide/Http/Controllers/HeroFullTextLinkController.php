@@ -17,9 +17,9 @@ class HeroFullTextLinkController extends Controller
     {
         // Set this controller in the allowed controllers list
         config([
-            'app.hero_text_enabled' => true,
-            'app.hero_text_controllers' => ['HeroFullTextLinkController'],
-            'app.hero_contained' => false,
+            'base.hero_text_enabled' => true,
+            'base.hero_text_controllers' => ['HeroFullTextLinkController'],
+            'base.hero_contained' => false,
         ]);
 
         $request->data['show_site_menu'] = false;
