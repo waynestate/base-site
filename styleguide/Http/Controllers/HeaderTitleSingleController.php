@@ -16,8 +16,8 @@ class HeaderTitleSingleController extends Controller
     public function index(Request $request)
     {
         config([
-            'app.surtitle' => null,
-            'app.top_menu_enabled' => true,
+            'base.surtitle' => null,
+            'base.top_menu_enabled' => true,
         ]);
 
         return view('styleguide-childpage', merge($request->data));

@@ -17,8 +17,8 @@ class HeroContainedTextLinkController extends Controller
     {
         // Set this controller in the allowed controllers list
         config([
-            'app.hero_text_enabled' => true,
-            'app.hero_text_controllers' => ['HeroContainedTextLinkController'],
+            'base.hero_text_enabled' => true,
+            'base.hero_text_controllers' => ['HeroContainedTextLinkController'],
         ]);
 
         return view('styleguide-childpage', merge($request->data));
