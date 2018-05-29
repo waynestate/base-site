@@ -5,7 +5,7 @@
 <div class="menu-top">
     <div class="menu-top-container bg-green-dark">
         <div class="row flex">
-            <div class="w-5/6 ml-4 py-2">
+            <div class="flex-grow mx-4 py-2">
                 @if(config('base.surtitle') !== null)
                     <h1 class="text-base mb-0 font-normal">
                         @if($site['parent']['id'] === null && config('base.surtitle_main_site_enabled') === true || $site['parent']['id'] !== null)
@@ -19,7 +19,15 @@
                 {!! config('base.surtitle') !== null ? '</h2>' : '</h1>' !!}
             </div>
 
-            <div class="w-1/6 flex justify-end items-center mr-4">
+            <div class="hidden mx-4 mt:flex mt:flex-no-shrink mt:justify-end mt:items-center">
+                @if(config('base.top_menu_enabled') === true)
+                    <nav id="top-menu" aria-label="Site menu" tabindex="-1">
+                        {!! $top_menu_output !!}
+                    </nav>
+                @endif
+            </div>
+
+            <div class="flex flex-1 justify-end items-center mx-4 mt:hidden">
                 <button class="menu-toggle menu-icon text-white text-3xl mt:hidden" data-toggle="menu" aria-expanded="false" aria-controls="menu" tabindex="0"><span class="visually-hidden">Menu</span></button>
             </div>
         </div>
