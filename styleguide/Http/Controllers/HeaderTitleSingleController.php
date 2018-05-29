@@ -17,6 +17,7 @@ class HeaderTitleSingleController extends Controller
     {
         config([
             'base.surtitle' => null,
+            'base.surtitle_main_site_enabled' => false,
             'base.top_menu_enabled' => true,
         ]);
 

@@ -1,118 +1,27 @@
-.menu-top-container {
-    height: 65px;
+ul.menu-top {
+    margin: 0;
+    padding: 0;
 
-    .row {
-        height: 100%;
-    }
-
-    .title-area {
+    li {
         display: inline-block;
-    }
-
-    // Center vertically
-    .vertical-centering {
-        display: inline-block;
-        height: 100%;
-
-        > * {
-            display: table;
-            height: 100%;
-        }
-
-        > * > * {
-            display: table-cell;
-            vertical-align: middle;
-
-            // Hide & show the top menu
-            &.top-menu {
-                display: none;
-
-                @screen mt {
-                    display: table-cell;
-                }
-            }
-        }
-
-        &.title-area {
-            width: 75%;
-
-            @screen mt {
-                width: auto;
-            }
-        }
-    }
-
-    h1,
-    h2 {
-        @apply .text-white;
-
-        display: table;
-        font-size: 1.625rem;
-        font-weight: normal;
-        line-height: 1em;
-        margin: 0;
-        padding-bottom: 0;
+        margin: 0 10px;
 
         a {
             @apply .text-white;
-        }
-    }
 
-    h1.surtitle {
-        font-size: 1em;
-        line-height: 1em;
-        margin-top: 10px;
-        margin-bottom: 0;
-        font-weight: normal;
+            font-size: 16px;
 
-        a {
-            @apply .text-white;
-        }
-    }
-
-    ul.menu-top {
-        margin: 0;
-        padding: 0;
-
-        li {
-            display: inline-block;
-            margin: 0 10px;
-
-            a {
-                @apply .text-white;
-
-                font-size: 16px;
-
-                &:hover {
-                    @apply .text-yellow;
-                }
-            }
-
-            &.selected a {
-                @apply .text-yellow .border-b .border-solid .border-yellow;
-            }
-
-            &:last-child {
-                margin-right: 0;
+            &:hover {
+                @apply .text-yellow;
             }
         }
 
-        // Vertically center menu button on small
-        &.menu-button {
-            line-height: 0;
+        &.selected a {
+            @apply .text-yellow .border-b .border-solid .border-yellow;
         }
 
-        .menu-toggle {
-            padding: 0;
-            font-size: 2em;
-        }
-
-        .icon-cancel {
-            @apply .text-white;
-        }
-
-        .icon-cancel::before {
-            text-align: right;
+        &:last-child {
+            margin-right: 0;
         }
     }
 }

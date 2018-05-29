@@ -57,7 +57,7 @@ import Slideout from 'slideout/dist/slideout.js';
 
     // Toggle the appropriate classes for slideout based on the menu icon's visibility state
     var toggleSlideout = function () {
-        if(document.querySelector('.menu-button .menu-toggle').offsetParent === null) {
+        if(document.querySelector('.menu-toggle').offsetParent === null) {
             document.querySelector('#menu').classList.remove('slideout-menu');
             document.querySelector('#menu').classList.remove('slideout-menu-right');
         } else {

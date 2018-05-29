@@ -4,40 +4,24 @@
 --}}
 <div class="menu-top">
     <div class="menu-top-container bg-green-dark">
-        <div class="row relative px-4">
-            <div class="title-area{{ config('base.surtitle') === null ? ' vertical-centering' : '' }}">
+        <div class="row flex">
+            <div class="w-5/6 ml-4 py-2">
                 @if(config('base.surtitle') !== null)
-                    <h1 class="surtitle">
+                    <h1 class="text-base mb-0 font-normal">
                         @if($site['parent']['id'] === null && config('base.surtitle_main_site_enabled') === true || $site['parent']['id'] !== null)
-                            <a href="{{ config('base.surtitle_url') }}">{{ config('base.surtitle') }}</a>
+                            <a href="{{ config('base.surtitle_url') }}" class="text-white">{{ config('base.surtitle') }}</a>
                         @endif
                     </h1>
                 @endif
 
-                {!! config('base.surtitle') !== null ? '<h2>' : '<h1>' !!}
-                    <a href="/{{ $site['subsite-folder'] !== null ? rtrim($site['subsite-folder'], '/') : '' }}">{{ $site['title'] }}</a>
+                {!! config('base.surtitle') !== null ? '<h2 class="font-normal text-2xl leading-none">' : '<h1 class="font-normal text-2xl leading-none py-3">' !!}
+                    <a href="/{{ $site['subsite-folder'] !== null ? rtrim($site['subsite-folder'], '/') : '' }}" class="text-white">{{ $site['title'] }}</a>
                 {!! config('base.surtitle') !== null ? '</h2>' : '</h1>' !!}
             </div>
 
-            <div class="float-right vertical-centering">
-                <div>
-                    @if(config('base.top_menu_enabled') === true)
-                        <nav id="top-menu" class="top-menu" aria-label="Site menu" tabindex="-1">
-                            {!! $top_menu_output !!}
-                        </nav>
-                    @endif  
-
-                    <div>
-                        <ul class="menu-top menu-button mt:hidden">
-                            <li><button class="menu-toggle menu-icon" data-toggle="menu" aria-expanded="false" aria-controls="menu" tabindex="0"><span class="visually-hidden">Menu</span></button></li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="w-1/6 flex justify-end items-center mr-4">
+                <button class="menu-toggle menu-icon text-white text-3xl mt:hidden" data-toggle="menu" aria-expanded="false" aria-controls="menu" tabindex="0"><span class="visually-hidden">Menu</span></button>
             </div>
-
-            @if(!empty($banner))
-                @include('components.banner', ['banner' => $banner])
-            @endif
         </div>
     </div>
 
