@@ -27,6 +27,9 @@ abstract class TestCase extends BaseTestCase
         // Reset the WSU API key so we never make real connections to the API
         config(['base.wsu_api_key' => '']);
 
+        // Don't run through the exception handler so we have cleaner errors in CLI
+        $this->withoutExceptionHandling();
+
         // Create a new faker that every test can use
         $this->faker = (new Factory)->create();
     }
