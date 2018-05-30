@@ -175,6 +175,9 @@ make composerinstalldev
 fi
 echo "Composer installed.";
 
+echo "Generate the artisian key...";
+make generatekey
+
 echo "Yarn install...";
 make yarn;
 echo "Yarn installed.";
