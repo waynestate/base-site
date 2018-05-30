@@ -17,13 +17,6 @@ class Fullwidth extends Page
                 'controller' => 'FullWidthController',
                 'title' => 'Full Width',
                 'id' => 101105,
-                'content' => [
-                    'main' => '<div class="bg-grey-lighter"><div class="row p-4">'.
-                        '<p>'.$this->faker->paragraph(5).'</p>'.
-                        '<p>'.$this->faker->paragraph(5).'</p>'.
-                        '<p>'.$this->faker->paragraph(5).'</p>'.
-                    '</div></div>',
-                ],
             ],
         ]);
     }

@@ -4,9 +4,20 @@ namespace Styleguide\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Faker\Factory;
 
 class FullWidthController extends Controller
 {
+    /**
+     * Construct the StyleGuideController.
+     *
+     * @param Factory $faker
+     */
+    public function __construct(Factory $faker)
+    {
+        $this->faker['faker'] = $faker->create();
+    }
+
     /**
      * Display the full width hero view.
      *
@@ -25,6 +36,6 @@ class FullWidthController extends Controller
         // Center the page heading
         $class['pageTitleClass'] = 'row px-4';
 
-        return view('styleguide-childpage', merge($request->data, $class));
+        return view('styleguide-fullwidth', merge($request->data, $this->faker, $class));
     }
 }

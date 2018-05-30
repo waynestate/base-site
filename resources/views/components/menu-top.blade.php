@@ -18,13 +18,13 @@
             {!! config('base.surtitle') !== null ? '</h2>' : '</h1>' !!}
         </div>
 
-        <div class="hidden mx-4 mt:flex mt:flex-no-shrink mt:justify-end mt:items-center">
-            @if(config('base.top_menu_enabled') === true)
+        @if(config('base.top_menu_enabled') === true)
+            <div class="hidden mx-4 mt:flex mt:flex-no-shrink mt:justify-end mt:items-center">
                 <nav id="top-menu" aria-label="Site menu" tabindex="-1">
                     {!! $top_menu_output !!}
                 </nav>
-            @endif
-        </div>
+            </div>
+        @endif
 
         <div class="flex flex-1 justify-end items-center mx-4 mt:hidden">
             <button class="menu-toggle menu-icon text-white text-3xl mt:hidden" data-toggle="menu" aria-expanded="false" aria-controls="menu" tabindex="0"><span class="visually-hidden">Menu</span></button>

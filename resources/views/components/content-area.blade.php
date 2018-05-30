@@ -26,6 +26,10 @@
                     {!! $site_menu_output !!}
                 @endif
 
+                @if(!empty($banner))
+                    <a href="{{ $banner['link'] }}" class="my-4 min-w-full button expanded mt:hidden">{{ $banner['title'] }} {{ $banner['excerpt'] }}</a>
+                @endif
+
                 @yield('below_menu')
 
                 @if(!empty($under_menu))
