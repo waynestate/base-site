@@ -22,6 +22,10 @@
     @include('components.menu-top', ['site' => $site])
 @endif
 
+@if(!empty($banner))
+    @include('components.banner', ['banner' => $banner])
+@endif
+
 <main id="panel" tabindex="-1">
     @yield('content-area')
 </main>
