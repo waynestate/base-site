@@ -8,7 +8,7 @@ use Faker\Factory;
 class FooterSocial implements FactoryContract
 {
     /**
-     * Construct the FooterSocial.
+     * Construct the factory.
      *
      * @param Factory $faker
      */

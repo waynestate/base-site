@@ -9,7 +9,7 @@ use Faker\Factory;
 class FullWidthController extends Controller
 {
     /**
-     * Construct the StyleGuideController.
+     * Construct the controller.
      *
      * @param Factory $faker
      */

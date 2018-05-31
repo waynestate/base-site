@@ -8,7 +8,7 @@ use Faker\Factory;
 class FooterContact implements FactoryContract
 {
     /**
-     * Construct the FooterContact.
+     * Construct the factory.
      *
      * @param Factory $faker
      */

@@ -8,7 +8,7 @@ use Faker\Factory;
 class ImageButton implements FactoryContract
 {
     /**
-     * Construct the ImageButton.
+     * Construct the factory.
      *
      * @param Factory $faker
      */
