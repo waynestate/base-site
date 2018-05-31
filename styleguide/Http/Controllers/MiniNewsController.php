@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class MiniNewsController extends Controller
 {
     /**
-     * Construct the MiniNewsController.
+     * Construct the controller.
      *
      * @param NewsRepositoryContract $news
      */

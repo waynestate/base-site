@@ -20,7 +20,7 @@ class PromoRepository implements DataRepositoryContract, PromoRepositoryContract
     protected $cache;
 
     /**
-     * Construct the PromoRepository.
+     * Construct the repository.
      *
      * @param Connector $wsuApi
      * @param ParsePromos $parsePromos

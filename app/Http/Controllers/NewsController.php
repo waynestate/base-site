@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 class NewsController extends Controller
 {
     /**
-     * Construct the NewsController.
+     * Construct the controller.
      *
      * @param NewsRepositoryContract $news
      */

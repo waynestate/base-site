@@ -19,7 +19,7 @@ class ProfileRepository implements ProfileRepositoryContract
     protected $cache;
 
     /**
-     * Construct the ProfileRepository.
+     * Construct the repository.
      *
      * @param Connector $wsuApi
      * @param ParsePromos $parsePromos

@@ -19,7 +19,7 @@ class NewsRepository implements NewsRepositoryContract
     protected $cache;
 
     /**
-     * Construct the NewsRepository.
+     * Construct the repository.
      *
      * @param Connector $wsuApi
      * @param ParsePromos $parsePromos

@@ -19,7 +19,7 @@ class EventRepository implements EventRepositoryContract
     protected $cache;
 
     /**
-     * Construct the EventRepository.
+     * Construct the repository.
      *
      * @param Connector $wsuApi
      * @param ParsePromos $parsePromos

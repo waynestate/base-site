@@ -8,7 +8,7 @@ use Faker\Factory;
 class NewsItem implements FactoryContract
 {
     /**
-     * Construct the NewsItem.
+     * Construct the factory.
      *
      * @param Factory $faker
      */

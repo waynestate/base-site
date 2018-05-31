@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 class HomepageController extends Controller
 {
     /**
-     * Construct the HomepageController.
+     * Construct the controller.
      *
      * @param PromoRepositoryContract $promo
      * @param NewsRepositoryContract $news

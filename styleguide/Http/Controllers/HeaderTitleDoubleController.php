@@ -9,7 +9,7 @@ use Faker\Factory;
 class HeaderTitleDoubleController extends Controller
 {
     /**
-     * Construct the HeaderTitleDoubleController.
+     * Construct the controller.
      *
      * @param Factory $faker
      */
