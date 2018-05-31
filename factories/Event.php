@@ -8,7 +8,7 @@ use Faker\Factory;
 class Event implements FactoryContract
 {
     /**
-     * Construct the Event.
+     * Construct the factory.
      *
      * @param Factory $faker
      */

@@ -8,7 +8,7 @@ use Faker\Factory;
 class Accordion implements FactoryContract
 {
     /**
-     * Construct the Accordion.
+     * Construct the factory.
      *
      * @param Factory $faker
      */

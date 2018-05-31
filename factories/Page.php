@@ -8,7 +8,7 @@ use Faker\Factory;
 class Page implements FactoryContract
 {
     /**
-     * Construct the Page.
+     * Construct the factory.
      *
      * @param Factory $faker
      */

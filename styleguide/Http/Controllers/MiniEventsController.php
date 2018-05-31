@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class MiniEventsController extends Controller
 {
     /**
-     * Construct the MiniEventsController.
+     * Construct the controller.
      *
      * @param EventsRepositoryContract $events
      */

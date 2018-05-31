@@ -8,7 +8,7 @@ use Faker\Factory;
 class ApiError implements FactoryContract
 {
     /**
-     * Construct the ApiError.
+     * Construct the factory.
      *
      * @param Factory $faker
      */

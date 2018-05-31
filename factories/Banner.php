@@ -8,7 +8,7 @@ use Faker\Factory;
 class Banner implements FactoryContract
 {
     /**
-     * Construct the Banner.
+     * Construct the factory.
      *
      * @param Factory $faker
      */

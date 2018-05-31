@@ -8,7 +8,7 @@ use Faker\Factory;
 class HeroImage implements FactoryContract
 {
     /**
-     * Construct the HeroImage.
+     * Construct the factory.
      *
      * @param Factory $faker
      */

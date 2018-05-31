@@ -9,7 +9,7 @@ use Faker\Factory;
 class TableStackController extends Controller
 {
     /**
-     * Construct the StyleGuideController.
+     * Construct the controller.
      *
      * @param Factory $faker
      */

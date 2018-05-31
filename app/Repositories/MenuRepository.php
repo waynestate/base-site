@@ -24,7 +24,7 @@ class MenuRepository implements DataRepositoryContract, MenuRepositoryContract
     protected $cache;
 
     /**
-     * Construct the MenuRepository.
+     * Construct the repository.
      *
      * @param Connector $wsuApi
      * @param Parsemenu $parseMenu

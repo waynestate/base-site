@@ -9,7 +9,7 @@ use Styleguide\Repositories\MenuRepository;
 class MenuTopController extends Controller
 {
     /**
-     * Construct the MenuTopController.
+     * Construct the controller.
      */
     public function __construct(MenuRepository $menuRepository)
     {

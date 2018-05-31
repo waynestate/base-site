@@ -8,7 +8,7 @@ use Faker\Factory;
 class ProfileGroup implements FactoryContract
 {
     /**
-     * Construct the ProfileGroup.
+     * Construct the factory.
      *
      * @param Factory $faker
      */

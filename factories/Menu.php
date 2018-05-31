@@ -11,7 +11,7 @@ class Menu implements FactoryContract
     protected $child_items = false;
 
     /**
-     * Construct the Menu.
+     * Construct the factory.
      *
      * @param Factory $faker
      */

@@ -8,7 +8,7 @@ use Faker\Factory;
 class MiniList implements FactoryContract
 {
     /**
-     * Construct the MiniList.
+     * Construct the factory.
      *
      * @param Factory $faker
      */
