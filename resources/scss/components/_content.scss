@@ -41,6 +41,62 @@
         }
     }
 
+    img {
+        display: block;
+        width: 100%;
+        margin: 10px auto;
+        padding: 0;
+
+        &[class^="float-"] {
+            float: none !important;
+        }
+
+        &.icon {
+            display: inline-block;
+            width: auto;
+        }
+
+        @screen mt {
+            padding: 10px;
+            width: auto;
+            margin: 0;
+            float: inherit;
+        }
+    }
+
+    figure {
+        width: 100%;
+        display: table;
+        margin: 15px auto;
+
+        @screen md {
+            margin: 25px;
+            width: auto;
+        }
+
+        &[style*="float:right"],
+        &.float-right {
+            margin-right: 0;
+        }
+
+        &[style*="float:left"],
+        &.float-left {
+            margin-left: 0;
+        }
+
+        img {
+            padding: 0;
+        }
+
+        figcaption {
+            padding-top: 0.5em;
+            font-size: 0.875rem;
+            font-style: italic;
+            display: table-caption;
+            caption-side: bottom;
+        }
+    }
+
     table {
         border: none;
         width: 100%;
@@ -104,6 +160,11 @@
                 @apply .bg-yellow-lightest;
             }
         }
+
+        img {
+            max-width: none;
+            width: auto;
+        }
     }
 
     &.footer-contact {
@@ -117,62 +178,6 @@
 
         &:hover {
             text-decoration: none;
-        }
-    }
-
-    img {
-        display: block;
-        width: 100%;
-        margin: 10px auto;
-        padding: 0;
-
-        &[class^="float-"] {
-            float: none !important;
-        }
-
-        &.icon {
-            display: inline-block;
-            width: auto;
-        }
-
-        @screen mt {
-            padding: 10px;
-            width: auto;
-            margin: 0;
-            float: inherit;
-        }
-    }
-
-    figure {
-        width: 100%;
-        display: table;
-        margin: 15px auto;
-
-        @screen md {
-            margin: 25px;
-            width: auto;
-        }
-
-        &[style*="float:right"],
-        &.float-right {
-            margin-right: 0;
-        }
-
-        &[style*="float:left"],
-        &.float-left {
-            margin-left: 0;
-        }
-
-        img {
-            padding: 0;
-        }
-
-        figcaption {
-            padding-top: 0.5em;
-            font-size: 0.875rem;
-            font-style: italic;
-            display: table-caption;
-            caption-side: bottom;
         }
     }
 }
