@@ -11,7 +11,11 @@
     var childNode = document.createElement('span');
 
     if(parentNode != null) {
-        childNode.classList.add('expand-icons', 'icon-right-open', 'float-right', 'text-lg', '-mt-0.5');
+        childNode.classList.add('expand-icons');
+        childNode.classList.add('icon-right-open');
+        childNode.classList.add('float-right');
+        childNode.classList.add('text-lg');
+        childNode.classList.add('-mt-0.5');
         parentNode.prepend(childNode);
     }
 
