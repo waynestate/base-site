@@ -108,7 +108,8 @@ import Slideout from 'slideout/dist/slideout.js';
 
     // Hide slideout menu now that javascript is available
     if(document.querySelector('#menu') != null) {
-        document.querySelector('#menu').classList.add('hidden', 'mt:block');
+        document.querySelector('#menu').classList.add('hidden');
+        document.querySelector('#menu').classList.add('mt:block');
     }
 
     // Add flexbox classes now that javascript is available
