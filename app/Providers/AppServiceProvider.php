@@ -44,7 +44,7 @@ class AppServiceProvider extends ServiceProvider
                 }
             }
 
-            return "<?php if(view()->exists('svg.'.".strtolower($params[0]).")) { echo view('svg.'.".$params[0].", ['name' => $params[0], 'class' => $params[1]])->render(); } ?>";
+            return "<?php if(view()->exists('svg.'.".strtolower($params[0]).")) { echo view('svg.'.".strtolower($params[0]).", ['name' => $params[0], 'class' => $params[1]])->render(); } ?>";
         });
     }
 
