@@ -36,12 +36,12 @@
 
         <h2>Table</h2>
 
-        <table>
+        <table aria-label="Example table with fake contact information">
             <thead>
                 <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Email</th>
                 </tr>
             </thead>
 
@@ -60,12 +60,12 @@
 
         <pre class="table-stack hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {!! htmlspecialchars('
-<table>
+<table aria-label="Example table">
     <thead>
         <tr>
-            <th></th>
-            <th></th>
-            <th></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
     </thead>
 
