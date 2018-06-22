@@ -36,7 +36,7 @@
 
         <h2>Table</h2>
 
-        <table>
+        <table aria-label="Example table with fake contact information">
             <thead>
                 <tr>
                     <th>First Name</th>
@@ -60,7 +60,7 @@
 
         <pre class="table-stack hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {!! htmlspecialchars('
-<table>
+<table aria-label="Example table">
     <thead>
         <tr>
             <th></th>
