@@ -2,9 +2,9 @@
 
 namespace Styleguide\Repositories;
 
-use App\Repositories\PromoRepository as Repository;
+use App\Repositories\PromoGlobalRepository as Repository;
 
-class PromoRepository extends Repository
+class PromoGlobalRepository extends Repository
 {
     /**
      * {@inheritdoc}
@@ -57,17 +57,6 @@ class PromoRepository extends Repository
 
             // Accordion child page
             'accordion_page' => $accordion,
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getHomepagePromos()
-    {
-        return [
-            // Example Group
-            //'key' => app('Factories\YourFactory')->create(5),
         ];
     }
 }

@@ -7,7 +7,7 @@
 
 namespace App\Http\Controllers;
 
-use Contracts\Repositories\PromoRepositoryContract;
+use Contracts\Repositories\PromoHomepageRepositoryContract;
 use Contracts\Repositories\NewsRepositoryContract;
 use Contracts\Repositories\EventRepositoryContract;
 use Illuminate\Http\Request;
@@ -21,7 +21,7 @@ class HomepageController extends Controller
      * @param NewsRepositoryContract $news
      * @param EventRepositoryContract $event
      */
-    public function __construct(PromoRepositoryContract $promo, NewsRepositoryContract $news, EventRepositoryContract $event)
+    public function __construct(PromoHomepageRepositoryContract $promo, NewsRepositoryContract $news, EventRepositoryContract $event)
     {
         $this->promo = $promo;
         $this->news = $news;
@@ -36,7 +36,7 @@ class HomepageController extends Controller
      */
     public function index(Request $request)
     {
-        //$promos = $this->promo->getHomepagePromos();
+        //$promos = $this->promo->get();
 
         $news = $this->news->getNewsByDisplayOrder($request->data['site']['id']);
 
