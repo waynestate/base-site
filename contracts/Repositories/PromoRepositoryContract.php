@@ -2,12 +2,12 @@
 
 namespace Contracts\Repositories;
 
-interface PromoHomepageRepositoryContract
+interface PromoRepositoryContract
 {
     /**
      * Get promotions for the homepage.
      *
      * @return array
      */
-    public function get();
+    public function getHomepagePromos();
 }

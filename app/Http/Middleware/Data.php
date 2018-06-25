@@ -54,7 +54,7 @@ class Data
         $request->data = merge(
             $data,
             app($this->getPrefix().'\Repositories\MenuRepository')->getRequestData($data),
-            app($this->getPrefix().'\Repositories\PromoGlobalRepository')->getRequestData($data)
+            app($this->getPrefix().'\Repositories\PromoRepository')->getRequestData($data)
         );
 
         // Controller namespace path so it can be constructed in the routes file
