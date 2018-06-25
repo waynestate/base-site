@@ -204,6 +204,7 @@ return [
             // 0000 => [
             //     'contact' => [
             //         'id' => 0000,
+            //         'override' => false, // Override footer with only this contact group
             //     ],
             // ],
         ],
