@@ -2,12 +2,12 @@
 
 namespace App\Repositories;
 
-use Contracts\Repositories\DataRepositoryContract;
+use Contracts\Repositories\RequestDataRepositoryContract;
 use Illuminate\Cache\Repository;
 use Waynestate\Api\Connector;
 use Waynestate\Promotions\ParsePromos;
 
-class PromoGlobalRepository implements DataRepositoryContract
+class PromoGlobalRepository implements RequestDataRepositoryContract
 {
     /** @var Connector */
     protected $wsuApi;

@@ -6,14 +6,14 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class DataMiddleware
+class Data
 {
     /** @var $prefix **/
     protected $prefix = 'App';
 
     /**
      * Set a global data array to the request object from repositories that
-     * implement the DataRepositoryContract.
+     * implement the RequestDataRepositoryContract.
      *
      * @param \Illuminate\Http\Request $request
      * @param \Closure  $next
@@ -40,42 +40,25 @@ class DataMiddleware
         $data['server']['path_with_query'] = $request->server->get('REQUEST_URI');
 
         // Get the page data
-        $pageData = app($this->getPrefix().'\Repositories\PageRepository')->getRequestData($data);
+        $page = app($this->getPrefix().'\Repositories\PageRepository')->getRequestData($data);
 
         // If the page is a redirect then return that response
-        if ($pageData instanceof \Illuminate\Http\RedirectResponse) {
-            return $pageData;
+        if ($page instanceof \Illuminate\Http\RedirectResponse) {
+            return $page;
         }
 
-        // Merge all data and page data
-        $data = merge($pageData, $data);
+        // Merge server and page data so global repositories can use them
+        $data = merge($data, $page);
+
+        // Merge global repository data and set it to the request
+        $request->data = merge(
+            $data,
+            app($this->getPrefix().'\Repositories\MenuRepository')->getRequestData($data),
+            app($this->getPrefix().'\Repositories\PromoGlobalRepository')->getRequestData($data)
+        );
 
         // Controller namespace path so it can be constructed in the routes file
         $request->controller = $this->getControllerNamespace($data['page']['controller']);
-
-        // Create a global data variable that houses repository data that is passed down to every controller
-        $data = collect(Storage::disk('base')->allFiles('app/Repositories'))
-            ->reject(function ($filename) {
-                return in_array(basename($filename), ['PageRepository.php']);
-            })
-            ->flatMap(function ($filename) use ($data) {
-                // Construct the object
-                $repository = app($this->getPrefix().'\Repositories\\'.basename($filename, '.php'));
-
-                // Get the data from the repository only if it implements the contract to do so
-                if (in_array('Contracts\Repositories\DataRepositoryContract', class_implements($repository))) {
-                    $repositoryData = $repository->getRequestData($data);
-
-                    // Merge the data so it exists in one array for the view
-                    $data = merge($data, $repositoryData);
-                }
-
-                return $data;
-            })
-            ->toArray();
-
-        // Set the data to the request object so it gets injected into the controller
-        $request->data = $data;
 
         return $next($request);
     }

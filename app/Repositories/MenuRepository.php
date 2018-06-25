@@ -2,14 +2,14 @@
 
 namespace App\Repositories;
 
-use Contracts\Repositories\DataRepositoryContract;
+use Contracts\Repositories\RequestDataRepositoryContract;
 use Contracts\Repositories\MenuRepositoryContract;
 use Waynestate\Api\Connector;
 use Waynestate\Menuitems\ParseMenu;
 use Waynestate\Menu\DisplayMenu;
 use Illuminate\Cache\Repository;
 
-class MenuRepository implements DataRepositoryContract, MenuRepositoryContract
+class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryContract
 {
     /** @var Connector */
     protected $wsuApi;

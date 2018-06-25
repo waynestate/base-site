@@ -18,7 +18,7 @@ Starter repository for creating a new website. Live demo can be found at https:/
 * Configure multiple enviorments using [PHPDotenv](https://github.com/vlucas/phpdotenv)
 * SCSS support
 * Automatically inject JS/CSS while developing using [BrowserSync](https://browsersync.io/)
-* [NewRelic](https://newrelic.com/) support via the `NewRelicMiddleware` if the php extension is installed
+* [NewRelic](https://newrelic.com/) support via the `NewRelic` middleware if the php extension is installed
 * [100% test code coverage](https://base.wayne.edu/coverages)
 * [Public API documentation](https://base.wayne.edu/api)
 * Commit hook that require the following to pass:
@@ -88,8 +88,9 @@ Email web@wayne.edu with your request.
 ## Developing global data that is passed down to all views via the `$request->data` variable
 
 1. Open the folder `/app/Repositories`.
-1. Create new class and implement the interface `DataRepositoryContract`.
+1. Create new class and implement the interface `RequestDataRepositoryContract`.
 1. Fill out the `getRequestData` method and return an array.
+1. Call the `getRequestData` method in the `/app/Http/Middleware/Data.php` file.
 
 ### Developing controllers
 
