@@ -6,11 +6,11 @@ use Tests\TestCase;
 use Mockery as Mockery;
 use Illuminate\Http\Request;
 
-class FormyMiddlewareTest extends TestCase
+class FormyTest extends TestCase
 {
     /**
-     * @covers App\Http\Middleware\FormyMiddleware::__construct
-     * @covers App\Http\Middleware\FormyMiddleware::handle
+     * @covers App\Http\Middleware\Formy::__construct
+     * @covers App\Http\Middleware\Formy::handle
      * @test
      */
     public function formy_embed_should_show_form_in_page_content()
@@ -35,7 +35,7 @@ class FormyMiddlewareTest extends TestCase
         $parser->shouldReceive('parse')->once()->andReturn($return);
 
         // Call the middleware
-        app('App\Http\Middleware\FormyMiddleware', ['parser' => $parser])->handle($request, function ($response) use ($return) {
+        app('App\Http\Middleware\Formy', ['parser' => $parser])->handle($request, function ($response) use ($return) {
             $this->assertEquals($return, $response->data['page']['content']['main']);
         });
     }

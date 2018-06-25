@@ -3,10 +3,10 @@
 namespace App\Repositories;
 
 use Illuminate\Support\Facades\Storage;
-use Contracts\Repositories\DataRepositoryContract;
+use Contracts\Repositories\RequestDataRepositoryContract;
 use Contracts\Repositories\PageRepositoryContract;
 
-class PageRepository implements DataRepositoryContract, PageRepositoryContract
+class PageRepository implements RequestDataRepositoryContract, PageRepositoryContract
 {
     /**
      * {@inheritdoc}
