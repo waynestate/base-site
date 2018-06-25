@@ -15,7 +15,7 @@ class PageRepositoryTest extends TestCase
      */
     public function non_exisitent_page_should_404()
     {
-        // Change the ENV so it runs through the real DataMiddleware
+        // Change the ENV so it runs through the real data middleware
         config(['app.env' => 'dev']);
 
         // Fake request

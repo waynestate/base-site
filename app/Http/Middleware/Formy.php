@@ -5,10 +5,10 @@ namespace App\Http\Middleware;
 use Closure;
 use Waynestate\FormyParser\Parser;
 
-class FormyMiddleware
+class Formy
 {
     /**
-     * Construct the FormyMiddleware.
+     * Construct the middleware.
      *
      * @param Parser $parser
      */

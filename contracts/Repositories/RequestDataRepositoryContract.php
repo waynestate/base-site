@@ -2,7 +2,7 @@
 
 namespace Contracts\Repositories;
 
-interface DataRepositoryContract
+interface RequestDataRepositoryContract
 {
     /**
      * Get data and send it with the request object.
