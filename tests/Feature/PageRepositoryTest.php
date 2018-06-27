@@ -72,15 +72,16 @@ class PageRepositoryTest extends TestCase
             ->map(function ($filename) use ($handle_exceptions) {
                 $path = app('Styleguide\Pages\\'.basename($filename, '.php'))->getPath();
 
-                // Disregard 404s since they are appropriate when no data hits a controller
-                if ($handle_exceptions === true) {
-                    try {
-                        $response = $this->call('GET', $path);
-                    } catch (NotFoundHttpException $e) {
-                        $response = null;
-                    }
-                } else {
+                try {
                     $response = $this->call('GET', $path);
+                } catch (NotFoundHttpException $e) {
+                    if ($handle_exceptions === true) {
+                        // When overloading all factories with blank arrays sometimes we expect a 404 and should not error because of it
+                        $response = null;
+                    } else {
+                        // Custom message explaning why a 404 might be occuring
+                        $this->assertEquals(200, $e->getStatusCode(), 'Styleguide page '.$filename.' is resulting in a 404. 1) Make sure the MenuRepository has a unique key so nothing is overriding the menu item. 2) If the page does not exist in the menu make sure a $path is defined within '.$filename.', refer to Pages/Profile.php for an example.');
+                    }
                 }
 
                 return [

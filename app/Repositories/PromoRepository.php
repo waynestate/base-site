@@ -57,7 +57,6 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
-        // Return the parsed promotions
         return $this->parsePromos->parse($promos, $group_reference, $group_config);
     }
 
