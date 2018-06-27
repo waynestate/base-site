@@ -51,6 +51,10 @@ class FooterSocial implements FactoryContract
                 'link' => $this->faker->url,
                 'title' => 'youtube',
             ],
+            8 => [
+                'link' => $this->faker->url,
+                'title' => 'snapchat',
+            ],
         ];
 
         // Make sure they aren't requesting more icons that we have available
