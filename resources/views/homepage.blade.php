@@ -10,13 +10,13 @@
     @if(!empty($news) || !empty($events))
         <div class="row -mx-4 flex flex-wrap">
             @if(!empty($news))
-                <div class="w-full sm:w-1/2 px-4">
+                <div class="w-full md:w-1/2 px-4">
                     @include('components/mini-news', ['news' => $news, 'url' => ($site['subsite-folder'] !== null ? $site['subsite-folder'] : '').'news/'])
                 </div>
             @endif
 
             @if(!empty($events))
-                <div class="w-full sm:w-1/2 px-4">
+                <div class="w-full md:w-1/2 px-4">
                     @include('components/mini-events', ['events' => $events])
                 </div>
             @endif
