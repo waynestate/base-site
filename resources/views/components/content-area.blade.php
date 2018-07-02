@@ -38,7 +38,7 @@
             </nav>
         </div>
 
-        <div class="w-full{{ !in_array($page['controller'], config('base.full_width_controllers')) ? ' px-4' : '' }}{{ ($site_menu['meta']['has_selected'] == false && ((!empty($show_site_menu) && $show_site_menu != true) || !!empty($show_site_menu))) ? '' : ' md:w-3/4'}} content-area mb-8">
+        <div class="w-full{{ !in_array($page['controller'], config('base.full_width_controllers')) ? ' px-4' : '' }}{{ ($site_menu['meta']['has_selected'] == false && ((!empty($show_site_menu) && $show_site_menu != true) || !!empty($show_site_menu))) ? '' : ' mt:w-3/4'}} content-area mb-8">
             @if(!empty($hero) && ($site_menu['meta']['has_selected'] == true || config('base.hero_contained') === true))
                 @include('components.hero', ['images' => $hero, 'class' => 'hero--childpage'])
             @endif
