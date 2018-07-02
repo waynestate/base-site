@@ -72,7 +72,7 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         $key = $data['site']['parent']['id'] === null ? 'main' : $data['site']['id'];
 
         // Figure out which set of groups to use
-        $groups = isset($config['subsites'][$key]) ? $config['subsites'][$key] : $config['main'];
+        $groups = !empty($config['subsites'][$key]) ? $config['subsites'][$key] : $config['main'];
 
         // Setup the group reference array for this site
         $group_reference = collect($groups)->reject(function ($group) {
@@ -91,10 +91,8 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
             $group_reference[$config['main']['contact']['id']] = 'main_contact';
         }
 
-        // If there is an accordion custom page field and inject it into the group reference
-        if (isset($data['data']['accordion_promo_group_id']) && $data['data']['accordion_promo_group_id'] != ''
-            && ! array_key_exists($data['data']['accordion_promo_group_id'], $group_reference)
-        ) {
+        // If there is an accordion custom page field then inject it into the group reference
+        if (!empty($data['data']['accordion_promo_group_id']) && ! array_key_exists($data['data']['accordion_promo_group_id'], $group_reference)) {
             $group_reference[$data['data']['accordion_promo_group_id']] = 'accordion_page';
         }
 
@@ -114,7 +112,7 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
             // If the subsite has a config value use that otherwise try to use the main config
             if (!empty($group['config'])) {
                 $value = $group['config'];
-            } elseif (isset($config['main'][$name]['config'])) {
+            } elseif (!empty($config['main'][$name]['config'])) {
                 $value = $config['main'][$name]['config'];
             } else {
                 $value = null;
@@ -149,9 +147,9 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         }
 
         // Inject the main contact footer if we are on a subsite
-        if (isset($promos['contact']) && (!isset($groups['contact']['override']) || $groups['contact']['override'] === false)) {
+        if (!empty($promos['contact']) && (empty($groups['contact']['override']) || $groups['contact']['override'] === false)) {
             $promos['contact'] = array_merge($promos['contact'], $promos['main_contact']);
-        } elseif (!isset($promos['contact']) && !empty($promos['main_contact'])) {
+        } elseif (empty($promos['contact']) && !empty($promos['main_contact'])) {
             $promos['contact'] = $promos['main_contact'];
         }
 

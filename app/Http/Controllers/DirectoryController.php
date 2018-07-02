@@ -31,7 +31,7 @@ class DirectoryController extends Controller
     public function index(Request $request)
     {
         // Determine what site to pull profiles from
-        $site_id = isset($request->data['data']['profile_site_id']) ? $request->data['data']['profile_site_id'] : $request->data['site']['id'];
+        $site_id = !empty($request->data['data']['profile_site_id']) ? $request->data['data']['profile_site_id'] : $request->data['site']['id'];
 
         // Get the profiles
         $profiles = $this->profile->getProfilesByGroup($site_id);

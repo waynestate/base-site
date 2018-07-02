@@ -26,7 +26,7 @@
             </tbody>
         </table>
 
-        <a class="button" onclick="$('pre.table-stack').toggleClass('hidden');">See Table Code</a>
+        <a class="button" onclick="document.querySelector('pre.table-stack').classList.toggle('hidden');">See Table Code</a>
 
         <pre class="table-stack hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {!! htmlspecialchars('

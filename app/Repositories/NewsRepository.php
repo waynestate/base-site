@@ -159,7 +159,7 @@ class NewsRepository implements NewsRepositoryContract
     public function getImageUrl($news)
     {
         // If the news item has an image attached
-        if (isset($news['news']['filename']) && $news['news']['filename'] !== '') {
+        if (!empty($news['news']['filename'])) {
             return $news['news']['filename'];
         }
 

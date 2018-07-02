@@ -17,7 +17,7 @@ class PromoRepository extends Repository
         ];
 
         // Only pull under_menu promos if they match the page_ids that are specified
-        $under_menu = isset($under_menu_page_ids[$data['page']['id']]) ? app('Factories\ImageButton')->create($under_menu_page_ids[$data['page']['id']]) : null;
+        $under_menu = !empty($under_menu_page_ids[$data['page']['id']]) ? app('Factories\ImageButton')->create($under_menu_page_ids[$data['page']['id']]) : null;
 
         // Define the pages that have hero images: page_id => quanity
         $hero_page_ids = [
@@ -33,14 +33,14 @@ class PromoRepository extends Repository
         ];
 
         // Only pull hero promos if they match the pages_ids that are specificed
-        $hero = isset($hero_page_ids[$data['page']['id']]) ? app('Factories\HeroImage')->create($hero_page_ids[$data['page']['id']]) : null;
+        $hero = !empty($hero_page_ids[$data['page']['id']]) ? app('Factories\HeroImage')->create($hero_page_ids[$data['page']['id']]) : null;
 
         $accordion_page_ids = [
             107100 => 5,
         ];
 
         // Only pull accordion for childpage template
-        $accordion = isset($accordion_page_ids[$data['page']['id']]) ? app('Factories\Accordion')->create($accordion_page_ids[$data['page']['id']]) : null;
+        $accordion = !empty($accordion_page_ids[$data['page']['id']]) ? app('Factories\Accordion')->create($accordion_page_ids[$data['page']['id']]) : null;
 
         return [
             // Contact footer

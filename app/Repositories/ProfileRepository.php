@@ -50,7 +50,7 @@ class ProfileRepository implements ProfileRepositoryContract
         });
 
         // Make sure the return is an array
-        $profiles['profiles'] = ! isset($profile_listing['error']) ? $profile_listing : [];
+        $profiles['profiles'] = ! !empty($profile_listing['error']) ? $profile_listing : [];
 
         return $profiles;
     }
@@ -101,7 +101,7 @@ class ProfileRepository implements ProfileRepositoryContract
             })
             ->reject(function ($item, $key) use ($grouped) {
                 // Remove groups that no one is in
-                return ! isset($grouped[$item]);
+                return empty($grouped[$item]);
             })
             ->flatMap(function ($item, $key) use ($grouped) {
                 return [
