@@ -562,7 +562,7 @@ module.exports = {
         '4xl': '90rem',
         '5xl': '100rem',
         'full': '100%',
-        'screen-xl': screens.xl,
+        'screen-xxxl': screens.xxxl,
     },
 
 
