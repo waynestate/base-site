@@ -17,7 +17,7 @@ class PageRepository implements RequestDataRepositoryContract, PageRepositoryCon
         $pageData = [];
 
         // Set the path
-        $path = isset($data['parameters']['path']) && $data['parameters']['path'] !== '' ? $data['parameters']['path'] : '/';
+        $path = !empty($data['parameters']['path']) ? $data['parameters']['path'] : '/';
 
         // Get the filename
         $filename = $this->getFilename($path);

@@ -14,4 +14,4 @@
     @endforeach
 </ul>
 
-@if(isset($url))<a href="{{ $url }}" class="block my-4 underline hover:no-underline">{{ $link_text ?? 'View more' }}</a>@endif
+@if(!empty($url))<a href="{{ $url }}" class="block my-4 underline hover:no-underline">{{ $link_text ?? 'View more' }}</a>@endif

@@ -29,7 +29,7 @@ class Data
         $data['parameters'] = $request->route() !== null ? $request->route()->parameters : [];
 
         // If no path was matched from the route parameters, get the path from the request
-        if (! isset($data['parameters']['path']) || $data['parameters']['path'] == '') {
+        if (empty($data['parameters']['path'])) {
             $data['parameters']['path'] = $this->getPathFromRequest($request);
         }
 
@@ -114,6 +114,6 @@ class Data
             })
             ->implode('/');
 
-        return isset($request->any) ? $request->any.$path : $path;
+        return !empty($request->any) ? $request->any.$path : $path;
     }
 }

@@ -31,10 +31,10 @@ class ProfileController extends Controller
     public function index(Request $request)
     {
         // Determine what site to pull profiles from
-        $site_id = isset($request->data['data']['profile_site_id']) ? $request->data['data']['profile_site_id'] : $request->data['site']['id'];
+        $site_id = !empty($request->data['data']['profile_site_id']) ? $request->data['data']['profile_site_id'] : $request->data['site']['id'];
 
         // Determine if we are forcing the profiles from custom page data
-        $forced_profile_group_id = isset($request->data['data']['profile_group_id']) ? $request->data['data']['profile_group_id'] : null;
+        $forced_profile_group_id = !empty($request->data['data']['profile_group_id']) ? $request->data['data']['profile_group_id'] : null;
 
         // Get the groups for the dropdown
         $dropdown_groups = $this->profile->getDropdownOfGroups($site_id);
@@ -67,7 +67,7 @@ class ProfileController extends Controller
     public function show(Request $request)
     {
         // Determine what site to pull profiles from
-        $site_id = isset($request->data['data']['profile_site_id']) ? $request->data['data']['profile_site_id'] : $request->data['site']['id'];
+        $site_id = !empty($request->data['data']['profile_site_id']) ? $request->data['data']['profile_site_id'] : $request->data['site']['id'];
 
         // Get the profile information
         $profile = $this->profile->getProfile($site_id, $request->accessid);

@@ -30,7 +30,7 @@
                     <span class="font-bold">{{ $profile['data']['First Name'] }} {{ $profile['data']['Last Name'] }}</span>
                 </a>
 
-                @if(isset($profile['data']['Title']))
+                @if(!empty($profile['data']['Title']))
                     <span class="block text-sm">{{ $profile['data']['Title'] }}</span>
                 @endif
             </div>

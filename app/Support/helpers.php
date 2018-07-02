@@ -45,5 +45,5 @@ function merge()
  */
 function using_styleguide()
 {
-    return (config('app.env') == 'testing' || (isset($_SERVER['REQUEST_URI']) && substr($_SERVER['REQUEST_URI'], 0, 11) == '/styleguide'));
+    return (config('app.env') == 'testing' || (!empty($_SERVER['REQUEST_URI']) && substr($_SERVER['REQUEST_URI'], 0, 11) == '/styleguide'));
 }
