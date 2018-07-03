@@ -20,7 +20,7 @@
         @else
             <div class="row flex flex-wrap py-8">
                 @foreach($contact as $info)
-                    <div class="w-full sm:w-1/3 px-4 py-4 text-white content footer-contact {{ $loop->last !== true ? 'border-b sm:border-r sm:border-0 border-grey' : '' }}">
+                    <div class="w-full md:w-1/3 px-4 py-4 text-white content footer-contact {{ $loop->last !== true ? 'border-b md:border-r md:border-0 border-grey' : '' }}">
                         {!! $info['description'] !!}
                     </div>
                 @endforeach

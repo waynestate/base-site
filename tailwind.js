@@ -92,9 +92,11 @@ let colors = {
 
 let screens = {
     'sm': '420px',
-    'md': '780px',
-    'lg': '990px',
-    'xl': '1200px',
+    'md': '576px',
+    'lg': '732px',
+    'xl': '888px',
+    'xxl': '1044px',
+    'xxxl': '1200px',
     'mt': '780px', // Adjust this based on the top menu width
     'print': {'raw': 'print'},
 }
@@ -560,7 +562,7 @@ module.exports = {
         '4xl': '90rem',
         '5xl': '100rem',
         'full': '100%',
-        'screen-xl': screens.xl,
+        'screen-xxxl': screens.xxxl,
     },
 
 
