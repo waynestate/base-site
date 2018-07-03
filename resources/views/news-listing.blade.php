@@ -17,7 +17,7 @@
                     {{ $news_item['excerpt'] }}
                 </dd>
             @empty
-                <p>Currently there are no news items {{ isset($selected_news_category['category']) ? ' for the category ' . strtolower($selected_news_category['category']) : '' }}.</p>
+                <p>Currently there are no news items {{ !empty($selected_news_category['category']) ? ' for the category ' . strtolower($selected_news_category['category']) : '' }}.</p>
             @endforelse
         </dl>
 

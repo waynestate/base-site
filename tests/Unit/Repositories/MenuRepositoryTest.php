@@ -28,7 +28,7 @@ class MenuRepositoryTest extends TestCase
 
         // Make sure we have a top menu
         $this->assertTrue(is_array($menus['top_menu']['menu']));
-        $this->assertTrue(isset($menus['top_menu_output']));
+        $this->assertTrue(!empty($menus['top_menu_output']));
 
         // Set it back
         config(['base.top_menu_enabled' => false]);
@@ -108,7 +108,7 @@ class MenuRepositoryTest extends TestCase
 
         foreach ($site_menu['menu'] as $key => $value) {
             // Make sure each key that was returned exists as a root level item
-            $this->assertTrue(isset($menu[$key]));
+            $this->assertTrue(!empty($menu[$key]));
 
             // Make sure there aren't any subitems
             $this->assertCount(0, $value['submenu']);
@@ -371,13 +371,13 @@ class MenuRepositoryTest extends TestCase
         $this->assertEquals($random_menu_id, $menuRepository->getTopMenuId($random_menu_id, null, [$random_menu_id => []]));
 
         // Set a top menu id override
-        $this->assertEquals($random_top_menu_id, $menuRepository->getTopMenuId($random_menu_id, $random_top_menu_id, [$random_top_menu_id => []]));
+        $this->assertEquals($random_top_menu_id, $menuRepository->getTopMenuId($random_menu_id, $random_top_menu_id, [$random_top_menu_id => ['menu']]));
 
         // Passing a top_menu_id that does not exist in the menus array should return the regular menu_id
         $this->assertEquals($random_menu_id, $menuRepository->getTopMenuId($random_menu_id, $random_top_menu_id, []));
 
         // Not passing a menu_id should return top menu id
-        $this->assertEquals($random_top_menu_id, $menuRepository->getTopMenuId(null, $random_top_menu_id, [$random_top_menu_id => []]));
+        $this->assertEquals($random_top_menu_id, $menuRepository->getTopMenuId(null, $random_top_menu_id, [$random_top_menu_id => ['menu']]));
 
         // No params should return null
         $this->assertEquals(null, $menuRepository->getTopMenuId());

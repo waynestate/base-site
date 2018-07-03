@@ -9,7 +9,7 @@
 
     <div class="row flex flex-wrap profile__block">
         <div class="w-full lg:w-1/3 px-4 mt-6">
-            @if(isset($profile['data']['Picture']['url']))
+            @if(!empty($profile['data']['Picture']['url']))
                 <img src="{{ $profile['data']['Picture']['url'] }}" alt="{{ $page['title'] }}" class="sm:h-64 md:h-auto block mx-auto">
             @else
                 <img src="/_resources/images/no-photo.svg" alt="{{ $page['title'] }}" class="sm:h-64 md:h-auto block mx-auto">
@@ -18,7 +18,7 @@
             @include('components.page-title', ['title' => $page['title'], 'class' => 'block md:hidden'])
 
             <div class="content">
-                @if(isset($profile['data']['Title']))
+                @if(!empty($profile['data']['Title']))
                     <p>{{ $profile['data']['Title'] }}</p>
                 @endif
 

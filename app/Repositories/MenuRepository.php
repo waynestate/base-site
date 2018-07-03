@@ -143,11 +143,11 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
         });
 
         // If the menu assigned to the page has no menu items set it as a blank array
-        if ($page_menu_id !== null && ! isset($menus[$page_menu_id])) {
+        if ($page_menu_id !== null && ! !empty($menus[$page_menu_id])) {
             $menus[$page_menu_id] = [];
         }
 
-        if (isset($menus['error'])) {
+        if (!empty($menus['error'])) {
             throw new \Exception($menus['error']['message']);
         }
 
@@ -159,7 +159,7 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
      */
     public function getTopMenuId($menu_id = null, $top_menu_id = null, $menus = [])
     {
-        return $top_menu_id !== null && isset($menus[$top_menu_id]) ? $top_menu_id : $menu_id;
+        return $top_menu_id !== null && !empty($menus[$top_menu_id]) ? $top_menu_id : $menu_id;
     }
 
     /**

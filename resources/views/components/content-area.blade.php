@@ -1,4 +1,4 @@
-@extends('layouts.' . (isset($layout) ? $layout : 'master'))
+@extends('layouts.' . (!empty($layout) ? $layout : 'master'))
 
 @section('content-area')
     @yield('top')
@@ -8,7 +8,7 @@
     @endif
 
     @if(!in_array($page['controller'], config('base.full_width_controllers')))<div class="row mt:flex">@endif
-        <div class="md:w-1/4 mt:px-4 mt:block @if($site_menu['meta']['has_selected'] == false && ((isset($show_site_menu) && $show_site_menu != true) || !isset($show_site_menu))) mt:hidden @endif">
+        <div class="mt:w-1/4 mt:px-4 mt:block @if($site_menu['meta']['has_selected'] == false && ((!empty($show_site_menu) && $show_site_menu != true) || !!empty($show_site_menu))) mt:hidden @endif">
             <nav id="menu" class="main-menu" role="navigation" aria-label="Page menu" aria-hidden="true" tabindex="-1">
                 @if(!empty($top_menu_output) && $site_menu !== $top_menu)
                     <div class="offcanvas-main-menu mt:hidden">
@@ -38,7 +38,7 @@
             </nav>
         </div>
 
-        <div class="w-full{{ !in_array($page['controller'], config('base.full_width_controllers')) ? ' px-4' : '' }}{{ ($site_menu['meta']['has_selected'] == false && ((isset($show_site_menu) && $show_site_menu != true) || !isset($show_site_menu))) ? '' : ' md:w-3/4'}} content-area mb-8">
+        <div class="w-full{{ !in_array($page['controller'], config('base.full_width_controllers')) ? ' px-4' : '' }}{{ ($site_menu['meta']['has_selected'] == false && ((!empty($show_site_menu) && $show_site_menu != true) || !!empty($show_site_menu))) ? '' : ' mt:w-3/4'}} content-area mb-8">
             @if(!empty($hero) && ($site_menu['meta']['has_selected'] == true || config('base.hero_contained') === true))
                 @include('components.hero', ['images' => $hero, 'class' => 'hero--childpage'])
             @endif
