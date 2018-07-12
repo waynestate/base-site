@@ -5,17 +5,15 @@
 <div class="menu-top-container bg-green-dark">
     <div class="row flex">
         <div class="flex-grow mx-4 py-2">
-            @if(config('base.surtitle') !== null)
+            @if(config('base.surtitle') !== null && ($site['parent']['id'] === null && config('base.surtitle_main_site_enabled') === true) || $site['parent']['id'] !== null)
                 <h1 class="text-base mb-0 font-normal">
-                    @if($site['parent']['id'] === null && config('base.surtitle_main_site_enabled') === true || $site['parent']['id'] !== null)
-                        <a href="{{ config('base.surtitle_url') }}" class="text-white">{{ config('base.surtitle') }}</a>
-                    @endif
+                    <a href="{{ config('base.surtitle_url') }}" class="text-white">{{ config('base.surtitle') }}</a>
                 </h1>
-            @endif
 
-            {!! config('base.surtitle') !== null ? '<h2 class="font-normal text-2xl leading-none">' : '<h1 class="font-normal text-2xl leading-none py-3">' !!}
-                <a href="/{{ $site['subsite-folder'] !== null ? rtrim($site['subsite-folder'], '/') : '' }}" class="text-white">{{ $site['title'] }}</a>
-            {!! config('base.surtitle') !== null ? '</h2>' : '</h1>' !!}
+                <h2 class="font-normal text-2xl leading-none"><a href="/{{ $site['subsite-folder'] !== null ? rtrim($site['subsite-folder'], '/') : '' }}" class="text-white">{{ $site['title'] }}</a></h2>
+            @else
+                <h1 class="font-normal text-2xl leading-none py-3"><a href="/{{ $site['subsite-folder'] !== null ? rtrim($site['subsite-folder'], '/') : '' }}" class="text-white">{{ $site['title'] }}</a></h1>
+            @endif
         </div>
 
         @if(config('base.top_menu_enabled') === true)
