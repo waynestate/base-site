@@ -12,7 +12,7 @@ class ImageButtonList extends Page
         return app('Factories\Page')->create(1, [
             'page' => [
                 'controller' => 'ImageButtonListController',
-                'title' => 'Image Button List',
+                'title' => 'Image button list',
                 'id' => 108100,
             ],
         ]);

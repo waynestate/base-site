@@ -12,7 +12,7 @@ class Profiles extends Page
         return app('Factories\Page')->create(1, [
             'page' => [
                 'controller' => 'ProfileController',
-                'title' => 'Profile Listing',
+                'title' => 'Profile listing',
                 'id' => 101103,
             ],
         ]);

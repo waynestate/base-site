@@ -12,7 +12,7 @@ class News extends Page
         return app('Factories\Page')->create(1, [
             'page' => [
                 'controller' => 'NewsController',
-                'title' => 'News Listing',
+                'title' => 'News listing',
                 'id' => 101102,
             ],
         ]);

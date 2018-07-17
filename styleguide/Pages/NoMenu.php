@@ -15,7 +15,7 @@ class NoMenu extends Page
         return app('Factories\Page')->create(1, [
             'page' => [
                 'controller' => 'ChildpageController',
-                'title' => 'No Menu',
+                'title' => 'No menu',
                 'id' => null,
                 'content' => [
                     'main' => '<p>'.$this->faker->paragraph(8).'</p>

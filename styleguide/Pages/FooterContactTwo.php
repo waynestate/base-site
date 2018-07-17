@@ -12,7 +12,7 @@ class FooterContactTwo extends Page
         return app('Factories\Page')->create(1, [
             'page' => [
                 'controller' => 'FooterContactTwoController',
-                'title' => 'Footer Contact Two Column',
+                'title' => 'Two column',
                 'id' => 104100101,
             ],
         ]);

@@ -15,7 +15,7 @@ class NotInMenu extends Page
         return app('Factories\Page')->create(1, [
             'page' => [
                 'controller' => 'ChildpageController',
-                'title' => 'Not In Menu',
+                'title' => 'Not in menu',
                 'id' => null,
                 'content' => [
                     'main' => '<p>'.$this->faker->paragraph(8).'</p>

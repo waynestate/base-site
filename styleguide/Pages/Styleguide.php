@@ -12,7 +12,7 @@ class Styleguide extends Page
         return app('Factories\Page')->create(1, [
             'page' => [
                 'controller' => 'StyleGuideController',
-                'title' => 'Content Area',
+                'title' => 'Content area',
                 'id' => 100,
             ],
         ]);

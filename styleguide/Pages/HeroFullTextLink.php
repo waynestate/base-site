@@ -15,7 +15,7 @@ class HeroFullTextLink extends Page
         return app('Factories\Page')->create(1, [
             'page' => [
                 'controller' => 'HeroFullTextLinkController',
-                'title' => 'Hero Full (Text/Link)',
+                'title' => 'Full width (text/link)',
                 'id' => 105100107,
             ],
         ]);

@@ -12,7 +12,7 @@ class Menuleft extends Page
         return app('Factories\Page')->create(1, [
             'page' => [
                 'controller' => 'MenuLeftController',
-                'title' => 'Menu Left',
+                'title' => 'Menu left',
                 'id' => 103100100,
             ],
         ]);

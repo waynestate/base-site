@@ -12,7 +12,7 @@ class Minilist extends Page
         return app('Factories\Page')->create(1, [
             'page' => [
                 'controller' => 'MiniListController',
-                'title' => 'Mini List',
+                'title' => 'Mini list',
                 'id' => 112100,
             ],
         ]);
