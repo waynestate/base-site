@@ -12,7 +12,7 @@ class Mininews extends Page
         return app('Factories\Page')->create(1, [
             'page' => [
                 'controller' => 'MiniNewsController',
-                'title' => 'Mini News',
+                'title' => 'Mini news',
                 'id' => 110100,
             ],
         ]);

@@ -9,8 +9,8 @@
         <table class="table-stack" aria-label="Example table with fake contact information">
             <thead>
                 <tr>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
+                    <th scope="col">First name</th>
+                    <th scope="col">Last name</th>
                     <th scope="col">Email</th>
                 </tr>
             </thead>
@@ -26,7 +26,7 @@
             </tbody>
         </table>
 
-        <a class="button" onclick="document.querySelector('pre.table-stack').classList.toggle('hidden');">See Table Code</a>
+        <a class="button" onclick="document.querySelector('pre.table-stack').classList.toggle('hidden');">See table code</a>
 
         <pre class="table-stack hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {!! htmlspecialchars('

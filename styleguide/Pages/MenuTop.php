@@ -12,7 +12,7 @@ class MenuTop extends Page
         return app('Factories\Page')->create(1, [
             'page' => [
                 'controller' => 'MenuTopController',
-                'title' => 'Menu Top',
+                'title' => 'Menu top',
                 'id' => 103100101,
             ],
         ]);

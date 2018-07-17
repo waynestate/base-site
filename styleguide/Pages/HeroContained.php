@@ -12,7 +12,7 @@ class HeroContained extends Page
         return app('Factories\Page')->create(1, [
             'page' => [
                 'controller' => 'ChildpageController',
-                'title' => 'Hero Contained',
+                'title' => 'Contained',
                 'id' => 105100100,
             ],
         ]);

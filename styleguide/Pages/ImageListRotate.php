@@ -12,7 +12,7 @@ class ImageListRotate extends Page
         return app('Factories\Page')->create(1, [
             'page' => [
                 'controller' => 'ImageListRotateController',
-                'title' => 'Image List Rotate',
+                'title' => 'Image list rotate',
                 'id' => 109100,
             ],
         ]);

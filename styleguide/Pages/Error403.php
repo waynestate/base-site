@@ -12,7 +12,7 @@ class Error403 extends Page
         return app('Factories\Page')->create(1, [
             'page' => [
                 'controller' => 'Error403Controller',
-                'title' => '403 Page',
+                'title' => '403 page',
                 'id' => 106100100,
             ],
         ]);

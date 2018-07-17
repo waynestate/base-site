@@ -12,7 +12,7 @@ class HeroContainedTextLink extends Page
         return app('Factories\Page')->create(1, [
             'page' => [
                 'controller' => 'HeroContainedTextLinkController',
-                'title' => 'Contained (With Text/Link)',
+                'title' => 'Contained (with text/link)',
                 'id' => 105100103,
             ],
         ]);

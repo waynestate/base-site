@@ -15,7 +15,7 @@ class NewsCategory extends Page
         return app('Factories\Page')->create(1, [
             'page' => [
                 'controller' => 'NewsController',
-                'title' => 'News by Category',
+                'title' => 'News by category',
                 'id' => null,
             ],
         ]);

@@ -12,7 +12,7 @@ class HeaderTitleSingle extends Page
         return app('Factories\Page')->create(1, [
             'page' => [
                 'controller' => 'HeaderTitleSingleController',
-                'title' => 'Header Title Single',
+                'title' => 'Header title single',
                 'id' => 102100100,
             ],
         ]);

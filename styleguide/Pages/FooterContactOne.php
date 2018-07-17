@@ -12,7 +12,7 @@ class FooterContactOne extends Page
         return app('Factories\Page')->create(1, [
             'page' => [
                 'controller' => 'FooterContactOneController',
-                'title' => 'Footer Contact One Column',
+                'title' => 'One column',
                 'id' => 104100100,
             ],
         ]);

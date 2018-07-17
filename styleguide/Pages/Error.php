@@ -12,7 +12,7 @@ class Error extends Page
         return app('Factories\Page')->create(1, [
             'page' => [
                 'controller' => 'ChildpageController',
-                'title' => 'Error Pages',
+                'title' => 'Error pages',
                 'id' => 106100,
             ],
         ]);

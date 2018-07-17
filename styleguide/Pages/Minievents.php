@@ -12,7 +12,7 @@ class Minievents extends Page
         return app('Factories\Page')->create(1, [
             'page' => [
                 'controller' => 'MiniEventsController',
-                'title' => 'Mini Events',
+                'title' => 'Mini events',
                 'id' => 111100,
             ],
         ]);

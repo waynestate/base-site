@@ -15,7 +15,7 @@ class Fullwidth extends Page
         return app('Factories\Page')->create(1, [
             'page' => [
                 'controller' => 'FullWidthController',
-                'title' => 'Full Width',
+                'title' => 'Full width',
                 'id' => 101105,
             ],
         ]);

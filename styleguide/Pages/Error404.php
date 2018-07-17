@@ -12,7 +12,7 @@ class Error404 extends Page
         return app('Factories\Page')->create(1, [
             'page' => [
                 'controller' => 'Error404Controller',
-                'title' => '404 Page',
+                'title' => '404 page',
                 'id' => 106100101,
             ],
         ]);

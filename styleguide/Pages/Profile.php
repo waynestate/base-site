@@ -15,7 +15,7 @@ class Profile extends Page
         return app('Factories\Page')->create(1, [
             'page' => [
                 'controller' => 'ProfileController',
-                'title' => 'Profile View',
+                'title' => 'Profile view',
                 'id' => null,
             ],
         ]);

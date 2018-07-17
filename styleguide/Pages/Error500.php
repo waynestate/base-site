@@ -12,7 +12,7 @@ class Error500 extends Page
         return app('Factories\Page')->create(1, [
             'page' => [
                 'controller' => 'Error500Controller',
-                'title' => '500 Page',
+                'title' => '500 page',
                 'id' => 106100102,
             ],
         ]);

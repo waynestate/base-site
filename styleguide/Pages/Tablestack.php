@@ -12,7 +12,7 @@ class Tablestack extends Page
         return app('Factories\Page')->create(1, [
             'page' => [
                 'controller' => 'TableStackController',
-                'title' => 'Table Stack',
+                'title' => 'Table stack',
                 'id' => 115100,
             ],
         ]);

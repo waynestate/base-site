@@ -15,7 +15,7 @@ class HeroFullRotate extends Page
         return app('Factories\Page')->create(1, [
             'page' => [
                 'controller' => 'HeroFullController',
-                'title' => 'Hero Full (Rotate)',
+                'title' => 'Full width (rotate)',
                 'id' => 2,
             ],
         ]);

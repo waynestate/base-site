@@ -6,7 +6,7 @@
     <div class="content">
         <hr>
 
-        <h2>2 Column Example</h2>
+        <h2>Two column example</h2>
 
         <div class="row -mx-4 flex flex-wrap">
             <div class="w-full sm:w-1/2 px-4">
@@ -39,8 +39,8 @@
         <table aria-label="Example table with fake contact information">
             <thead>
                 <tr>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
+                    <th scope="col">First name</th>
+                    <th scope="col">Last name</th>
                     <th scope="col">Email</th>
                 </tr>
             </thead>
@@ -146,15 +146,15 @@
 
         <h2>Buttons</h2>
 
-        <a href="#" class="button">Standard Button</a>
-        <a href="#" class="button expanded">Expanded Button</a>
+        <a href="#" class="button">Standard button</a>
+        <a href="#" class="button expanded">Expanded button</a>
 
-        <a class="button" onclick="document.querySelector('pre.button-examples').classList.toggle('hidden');">See Button Code</a>
+        <a class="button" onclick="document.querySelector('pre.button-examples').classList.toggle('hidden');">See button code</a>
 
         <pre class="button-examples hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {!! htmlspecialchars('
-<a href="#" class="button">Standard Button</a>
-<a href="#" class="button expanded">Expanded Button</a>
+<a href="#" class="button">Standard button</a>
+<a href="#" class="button expanded">Expanded button</a>
         ') !!}
         </pre>
 
@@ -171,7 +171,7 @@
 
         <hr>
 
-        <h2>Image Icon</h2>
+        <h2>Image icon</h2>
 
         <p>Images default to span 100% of the container on small view. When using the <code>.icon</code> class you can override this behavior so it defaults to its real height/width.</p>
 

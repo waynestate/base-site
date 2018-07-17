@@ -1,7 +1,7 @@
 @extends('components.content-area')
 
 @section('content')
-    <img class="w-full block" src="/styleguide/image/1600x580?text=Full%20Width%20Image" />
+    <img class="w-full block" src="/styleguide/image/1600x580?text=Full%20width%20image" />
 
     <div class="bg-grey-lightest mb-4">
         <div class="row py-4">
@@ -10,7 +10,7 @@
     </div>
 
     <div class="row content mx-4">
-        <h2>{{ $faker->words(2, true) }}</h2>
+        <h2>{{ ucfirst($faker->words(2, true)) }}</h2>
 
         <p>{{ $faker->paragraph(10) }}</p>
         <p>{{ $faker->paragraph(10) }}</p>
