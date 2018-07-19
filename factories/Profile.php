@@ -21,7 +21,7 @@ class Profile implements FactoryContract
     /**
      * {@inheritdoc}
      */
-    public function create($limit = 1)
+    public function create($limit = 1, $flatten = false)
     {
         $groups = collect($this->group->create(4));
 
@@ -52,7 +52,7 @@ class Profile implements FactoryContract
             ];
         }
 
-        if ($limit == 1) {
+        if ($limit === 1 && $flatten === true) {
             return current($data);
         }
 

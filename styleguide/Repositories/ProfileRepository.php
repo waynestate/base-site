@@ -37,7 +37,7 @@ class ProfileRepository extends Repository
      */
     public function getProfile($site_id, $accessid)
     {
-        $profile['profile'] = app('Factories\Profile')->create(1);
+        $profile['profile'] = app('Factories\Profile')->create(1, true);
 
         return $profile;
     }

@@ -20,7 +20,7 @@ class Page implements FactoryContract
     /**
      * {@inheritdoc}
      */
-    public function create($limit = 1, $options = [])
+    public function create($limit = 1, $flatten = false, $options = [])
     {
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [

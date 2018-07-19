@@ -20,7 +20,7 @@ class ProfileGroup implements FactoryContract
     /**
      * {@inheritdoc}
      */
-    public function create($limit = 1)
+    public function create($limit = 1, $flatten = false)
     {
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
@@ -28,6 +28,10 @@ class ProfileGroup implements FactoryContract
                 'display_order' => $i,
                 'display_name' => ucfirst($this->faker->words(2, true)),
             ];
+        }
+
+        if ($limit === 1 && $flatten === true) {
+            return current($data);
         }
 
         return $data;

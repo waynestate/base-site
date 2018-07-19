@@ -20,7 +20,7 @@ class FooterContact implements FactoryContract
     /**
      * {@inheritdoc}
      */
-    public function create($limit = 1)
+    public function create($limit = 1, $flatten = false)
     {
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
@@ -34,6 +34,10 @@ class FooterContact implements FactoryContract
                     </p>
                 ',
             ];
+        }
+
+        if ($limit === 1 && $flatten === true) {
+            return current($data);
         }
 
         return $data;

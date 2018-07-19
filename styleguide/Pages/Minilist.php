@@ -9,7 +9,7 @@ class Minilist extends Page
      */
     public function getPageData()
     {
-        return app('Factories\Page')->create(1, [
+        return app('Factories\Page')->create(1, true, [
             'page' => [
                 'controller' => 'MiniListController',
                 'title' => 'Mini list',
