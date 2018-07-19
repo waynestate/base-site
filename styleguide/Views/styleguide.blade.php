@@ -18,14 +18,49 @@
             </div>
         </div>
 
-        <a class="button" onclick="document.querySelector('pre.columns-code').classList.toggle('hidden');">See row/columns code</a>
-        <pre class="columns-code hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+        <a class="button" onclick="document.querySelector('pre.two-columns-code').classList.toggle('hidden');">See row/columns code</a>
+        <pre class="two-columns-code hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
             {!! htmlspecialchars('
 <div class="row -mx-4 flex">
     <div class="w-full sm:w-1/2 px-4">
         <p>'.$faker->paragraph.'</p>
     </div>
     <div class="w-full sm:w-1/2 px-4">
+        <p>'.$faker->paragraph.'</p>
+    </div>
+</div>
+            ') !!}
+        </pre>
+
+        <hr>
+
+        <h2>Three column example</h2>
+
+        <div class="row -mx-4 flex flex-wrap">
+            <div class="w-full md:w-1/3 px-4">
+                <p>{{ $faker->paragraph }}</p>
+            </div>
+
+            <div class="w-full md:w-1/3 px-4">
+                <p>{{ $faker->paragraph }}</p>
+            </div>
+
+            <div class="w-full md:w-1/3 px-4">
+                <p>{{ $faker->paragraph }}</p>
+            </div>
+        </div>
+
+        <a class="button" onclick="document.querySelector('pre.three-columns-code').classList.toggle('hidden');">See row/columns code</a>
+        <pre class="three-columns-code hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+            {!! htmlspecialchars('
+<div class="row -mx-4 flex">
+    <div class="w-full md:w-1/3 px-4">
+        <p>'.$faker->paragraph.'</p>
+    </div>
+    <div class="w-full md:w-1/3 px-4">
+        <p>'.$faker->paragraph.'</p>
+    </div>
+    <div class="w-full md:w-1/3 px-4">
         <p>'.$faker->paragraph.'</p>
     </div>
 </div>
