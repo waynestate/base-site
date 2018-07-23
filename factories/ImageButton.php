@@ -20,7 +20,7 @@ class ImageButton implements FactoryContract
     /**
      * {@inheritdoc}
      */
-    public function create($limit = 1)
+    public function create($limit = 1, $flatten = false)
     {
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
@@ -28,6 +28,10 @@ class ImageButton implements FactoryContract
                 'relative_url' => $this->faker->boolean === true ? '/styleguide/image/360x131?text=360x131%20('.$i.')' : '',
                 'title' => $this->faker->sentence,
             ];
+        }
+
+        if ($limit === 1 && $flatten === true) {
+            return current($data);
         }
 
         return $data;

@@ -15,7 +15,7 @@ class EventRepositoryTest extends TestCase
     public function getting_events_with_api_error_should_return_empty_array()
     {
         // Fake return
-        $return = app('Factories\ApiError')->create(1);
+        $return = app('Factories\ApiError')->create(1, true);
 
         // Mock the connector and set the return
         $wsuApi = Mockery::mock('Waynestate\Api\Connector');

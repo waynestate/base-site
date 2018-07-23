@@ -23,7 +23,7 @@ class PromoRepositoryTest extends TestCase
         config(['base.hero_rotating_controllers' => ['HomepageController']]);
 
         // Create a fake data request
-        $data = app('Factories\Page')->create(1, [
+        $data = app('Factories\Page')->create(1, true, [
             'page' => [
                 'controller' => 'HomepageController',
             ],
@@ -68,7 +68,7 @@ class PromoRepositoryTest extends TestCase
         ];
 
         // Create a fake data request
-        $data = app('Factories\Page')->create(1, [
+        $data = app('Factories\Page')->create(1, true, [
             'site' => [
                 'id' => 2,
                 'parent' => [
@@ -128,7 +128,7 @@ class PromoRepositoryTest extends TestCase
         ];
 
         // Create a fake data request
-        $data = app('Factories\Page')->create(1, [
+        $data = app('Factories\Page')->create(1, true, [
             'site' => [
                 'id' => 2,
                 'parent' => [

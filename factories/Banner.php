@@ -20,7 +20,7 @@ class Banner implements FactoryContract
     /**
      * {@inheritdoc}
      */
-    public function create($limit = 1)
+    public function create($limit = 1, $flatten = false)
     {
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
@@ -31,7 +31,7 @@ class Banner implements FactoryContract
             ];
         }
 
-        if ($limit == 1) {
+        if ($limit === 1 && $flatten === true) {
             return current($data);
         }
 

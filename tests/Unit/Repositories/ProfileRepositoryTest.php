@@ -129,7 +129,7 @@ class ProfileRepositoryTest extends TestCase
         // Fake return
         $return = [
             'profiles' => [
-                $invalid_site_id => app('Factories\Profile')->create(1),
+                $invalid_site_id => app('Factories\Profile')->create(1, true),
             ],
         ];
 
@@ -150,7 +150,7 @@ class ProfileRepositoryTest extends TestCase
     public function getting_profiles_with_api_error_should_return_blank_array()
     {
         // Fake return
-        $return = app('Factories\ApiError')->create(1);
+        $return = app('Factories\ApiError')->create(1, true);
 
         // Mock the Connector and set the return
         $wsuApi = Mockery::mock('Waynestate\Api\Connector');

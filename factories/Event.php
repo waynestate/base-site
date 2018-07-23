@@ -20,7 +20,7 @@ class Event implements FactoryContract
     /**
      * {@inheritdoc}
      */
-    public function create($limit = 1)
+    public function create($limit = 1, $flatten = false)
     {
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
@@ -30,6 +30,10 @@ class Event implements FactoryContract
                 'start_time' => $this->faker->dateTimeThisMonth('now')->format('H:i:s'),
                 'is_all_day' => $this->faker->boolean,
             ];
+        }
+
+        if ($limit === 1 && $flatten === true) {
+            return current($data);
         }
 
         return $data;

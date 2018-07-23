@@ -83,7 +83,7 @@ class NewsRepositoryTest extends TestCase
     {
         // Fake return
         $return = [
-            'news' => app('Factories\NewsItem')->create(1),
+            'news' => app('Factories\NewsItem')->create(1, true),
         ];
 
         // Mock the connector and set the return
@@ -104,7 +104,7 @@ class NewsRepositoryTest extends TestCase
     public function getting_news_by_display_order_with_api_error_should_return_array()
     {
         // Fake return
-        $return = app('Factories\ApiError')->create(1);
+        $return = app('Factories\ApiError')->create(1, true);
 
         // Mock the connector and set the return
         $wsuApi = Mockery::mock('Waynestate\Api\Connector');

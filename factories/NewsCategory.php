@@ -20,7 +20,7 @@ class NewsCategory implements FactoryContract
     /**
      * {@inheritdoc}
      */
-    public function create($limit = 1)
+    public function create($limit = 1, $flatten = false)
     {
         $site_id = $this->faker->randomDigit;
 
@@ -34,6 +34,10 @@ class NewsCategory implements FactoryContract
                 'category' => $category,
                 'slug' => str_slug($category),
             ];
+        }
+
+        if ($limit === 1 && $flatten === true) {
+            return current($data);
         }
 
         return $data;

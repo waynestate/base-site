@@ -20,13 +20,17 @@ class Accordion implements FactoryContract
     /**
      * {@inheritdoc}
      */
-    public function create($limit = 1)
+    public function create($limit = 1, $flatten = false)
     {
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
                 'title' => $this->faker->sentence,
                 'description' => '<p>'.$this->faker->paragraph.'</p>',
             ];
+        }
+
+        if ($limit === 1 && $flatten === true) {
+            return current($data);
         }
 
         return $data;
