@@ -12,10 +12,10 @@ class NoMenu extends Page
      */
     public function getPageData()
     {
-        return app('Factories\Page')->create(1, [
+        return app('Factories\Page')->create(1, true, [
             'page' => [
                 'controller' => 'ChildpageController',
-                'title' => 'No Menu',
+                'title' => 'No menu',
                 'id' => null,
                 'content' => [
                     'main' => '<p>'.$this->faker->paragraph(8).'</p>

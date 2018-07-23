@@ -9,10 +9,10 @@ class News extends Page
      */
     public function getPageData()
     {
-        return app('Factories\Page')->create(1, [
+        return app('Factories\Page')->create(1, true, [
             'page' => [
                 'controller' => 'NewsController',
-                'title' => 'News Listing',
+                'title' => 'News listing',
                 'id' => 101102,
             ],
         ]);

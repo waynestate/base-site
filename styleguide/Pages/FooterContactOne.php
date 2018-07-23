@@ -9,10 +9,10 @@ class FooterContactOne extends Page
      */
     public function getPageData()
     {
-        return app('Factories\Page')->create(1, [
+        return app('Factories\Page')->create(1, true, [
             'page' => [
                 'controller' => 'FooterContactOneController',
-                'title' => 'Footer Contact One Column',
+                'title' => 'One column',
                 'id' => 104100100,
             ],
         ]);

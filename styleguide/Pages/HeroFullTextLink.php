@@ -12,10 +12,10 @@ class HeroFullTextLink extends Page
      */
     public function getPageData()
     {
-        return app('Factories\Page')->create(1, [
+        return app('Factories\Page')->create(1, true, [
             'page' => [
                 'controller' => 'HeroFullTextLinkController',
-                'title' => 'Hero Full (Text/Link)',
+                'title' => 'Full width (text/link)',
                 'id' => 105100107,
             ],
         ]);

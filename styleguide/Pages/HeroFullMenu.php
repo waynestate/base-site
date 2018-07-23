@@ -12,10 +12,10 @@ class HeroFullMenu extends Page
      */
     public function getPageData()
     {
-        return app('Factories\Page')->create(1, [
+        return app('Factories\Page')->create(1, true, [
             'page' => [
                 'controller' => 'HeroFullMenuController',
-                'title' => 'Hero Full (Menu)',
+                'title' => 'Full width (menu)',
                 'id' => 3,
             ],
         ]);

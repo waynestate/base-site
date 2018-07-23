@@ -34,7 +34,7 @@ class NewsRepository extends Repository
      */
     public function getNewsItem($id, $site_id)
     {
-        $news['news'] = app('Factories\NewsItem')->create(1);
+        $news['news'] = app('Factories\NewsItem')->create(1, true);
 
         return $news;
     }

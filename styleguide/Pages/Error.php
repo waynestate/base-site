@@ -9,10 +9,10 @@ class Error extends Page
      */
     public function getPageData()
     {
-        return app('Factories\Page')->create(1, [
+        return app('Factories\Page')->create(1, true, [
             'page' => [
                 'controller' => 'ChildpageController',
-                'title' => 'Error Pages',
+                'title' => 'Error pages',
                 'id' => 106100,
             ],
         ]);

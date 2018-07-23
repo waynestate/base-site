@@ -9,10 +9,10 @@ class HeaderTitleDouble extends Page
      */
     public function getPageData()
     {
-        return app('Factories\Page')->create(1, [
+        return app('Factories\Page')->create(1, true, [
             'page' => [
                 'controller' => 'HeaderTitleDoubleController',
-                'title' => 'Header Title Double',
+                'title' => 'Header title double',
                 'id' => 102100101,
             ],
         ]);

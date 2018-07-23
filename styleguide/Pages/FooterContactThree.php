@@ -9,10 +9,10 @@ class FooterContactThree extends Page
      */
     public function getPageData()
     {
-        return app('Factories\Page')->create(1, [
+        return app('Factories\Page')->create(1, true, [
             'page' => [
                 'controller' => 'FooterContactThreeController',
-                'title' => 'Footer Contact Three Column',
+                'title' => 'Three column',
                 'id' => 104100102,
             ],
         ]);

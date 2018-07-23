@@ -104,7 +104,7 @@ class MenuRepository extends Repository
                     'target' => '',
                     'display_name' => 'Components',
                     'class_name' => '',
-                    'relative_url' => '/styleguide/components',
+                    'relative_url' => '/styleguide/header/title/single',
                     'submenu' => [
                         102100 => [
                             'menu_item_id' => '102100',
@@ -356,7 +356,7 @@ class MenuRepository extends Repository
                             'is_active' => '1',
                             'page_id' => '108100',
                             'target' => '',
-                            'display_name' => 'Image/button list',
+                            'display_name' => 'Image button list',
                             'class_name' => '',
                             'relative_url' => '/styleguide/image/button/list',
                             'submenu' => [],

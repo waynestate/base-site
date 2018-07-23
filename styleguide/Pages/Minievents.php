@@ -9,10 +9,10 @@ class Minievents extends Page
      */
     public function getPageData()
     {
-        return app('Factories\Page')->create(1, [
+        return app('Factories\Page')->create(1, true, [
             'page' => [
                 'controller' => 'MiniEventsController',
-                'title' => 'Mini Events',
+                'title' => 'Mini events',
                 'id' => 111100,
             ],
         ]);

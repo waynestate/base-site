@@ -9,10 +9,10 @@ class Error500 extends Page
      */
     public function getPageData()
     {
-        return app('Factories\Page')->create(1, [
+        return app('Factories\Page')->create(1, true, [
             'page' => [
                 'controller' => 'Error500Controller',
-                'title' => '500 Page',
+                'title' => '500 page',
                 'id' => 106100102,
             ],
         ]);

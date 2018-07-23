@@ -18,7 +18,7 @@ class MenuRepositoryTest extends TestCase
         config(['base.top_menu_enabled' => true]);
 
         // Get a page
-        $page = app('Factories\Page')->create(1);
+        $page = app('Factories\Page')->create(1, true);
 
         // Get a menu and mimic as if there were multiple
         $menu[$page['menu']['id']] = app('Factories\Menu')->create(5);
@@ -44,7 +44,7 @@ class MenuRepositoryTest extends TestCase
         config(['base.top_menu_enabled' => false]);
 
         // Get a page
-        $page = app('Factories\Page')->create(1);
+        $page = app('Factories\Page')->create(1, true);
 
         // Get a menu and mimic as if there were multiple
         $menu[$page['menu']['id']] = app('Factories\Menu')->create(5);
@@ -64,7 +64,7 @@ class MenuRepositoryTest extends TestCase
     public function menu_api_error_should_throw_exception()
     {
         // Get an error
-        $return = app('Factories\ApiError')->create(1);
+        $return = app('Factories\ApiError')->create(1, true);
 
         // Mock the Connector and set the return
         $wsuApi = Mockery::mock('Waynestate\Api\Connector');
@@ -81,7 +81,7 @@ class MenuRepositoryTest extends TestCase
     public function getting_a_menu_without_menu_items_should_not_error()
     {
         // Get the page data
-        $data = app('Factories\Page')->create(1);
+        $data = app('Factories\Page')->create(1, true);
 
         // Mock the connector and set the return
         $wsuApi = Mockery::mock('Waynestate\Api\Connector');
@@ -500,6 +500,7 @@ class MenuRepositoryTest extends TestCase
         // Get a page with the HomepageController set
         $page = app('Factories\Page')->create(
             1,
+            true,
             [
                 'page' => [
                     'controller' => 'HomepageController',
@@ -528,6 +529,7 @@ class MenuRepositoryTest extends TestCase
         // Get a page with the HomepageController set
         $page = app('Factories\Page')->create(
             1,
+            true,
             [
                 'page' => [
                     'controller' => 'HomepageController',
@@ -594,6 +596,7 @@ class MenuRepositoryTest extends TestCase
         // Get a page with the HomepageController set
         $page = app('Factories\Page')->create(
             1,
+            true,
             [
                 'page' => [
                     'controller' => 'HomepageController',

@@ -6,7 +6,7 @@
     <div class="content">
         <hr>
 
-        <h2>2 Column Example</h2>
+        <h2>Two column example</h2>
 
         <div class="row -mx-4 flex flex-wrap">
             <div class="w-full sm:w-1/2 px-4">
@@ -18,8 +18,8 @@
             </div>
         </div>
 
-        <a class="button" onclick="document.querySelector('pre.columns-code').classList.toggle('hidden');">See row/columns code</a>
-        <pre class="columns-code hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+        <a class="button" onclick="document.querySelector('pre.two-columns-code').classList.toggle('hidden');">See row/columns code</a>
+        <pre class="two-columns-code hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
             {!! htmlspecialchars('
 <div class="row -mx-4 flex">
     <div class="w-full sm:w-1/2 px-4">
@@ -34,13 +34,48 @@
 
         <hr>
 
+        <h2>Three column example</h2>
+
+        <div class="row -mx-4 flex flex-wrap">
+            <div class="w-full md:w-1/3 px-4">
+                <p>{{ $faker->paragraph }}</p>
+            </div>
+
+            <div class="w-full md:w-1/3 px-4">
+                <p>{{ $faker->paragraph }}</p>
+            </div>
+
+            <div class="w-full md:w-1/3 px-4">
+                <p>{{ $faker->paragraph }}</p>
+            </div>
+        </div>
+
+        <a class="button" onclick="document.querySelector('pre.three-columns-code').classList.toggle('hidden');">See row/columns code</a>
+        <pre class="three-columns-code hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+            {!! htmlspecialchars('
+<div class="row -mx-4 flex">
+    <div class="w-full md:w-1/3 px-4">
+        <p>'.$faker->paragraph.'</p>
+    </div>
+    <div class="w-full md:w-1/3 px-4">
+        <p>'.$faker->paragraph.'</p>
+    </div>
+    <div class="w-full md:w-1/3 px-4">
+        <p>'.$faker->paragraph.'</p>
+    </div>
+</div>
+            ') !!}
+        </pre>
+
+        <hr>
+
         <h2>Table</h2>
 
         <table aria-label="Example table with fake contact information">
             <thead>
                 <tr>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
+                    <th scope="col">First name</th>
+                    <th scope="col">Last name</th>
                     <th scope="col">Email</th>
                 </tr>
             </thead>
@@ -146,15 +181,15 @@
 
         <h2>Buttons</h2>
 
-        <a href="#" class="button">Standard Button</a>
-        <a href="#" class="button expanded">Expanded Button</a>
+        <a href="#" class="button">Standard button</a>
+        <a href="#" class="button expanded">Expanded button</a>
 
-        <a class="button" onclick="document.querySelector('pre.button-examples').classList.toggle('hidden');">See Button Code</a>
+        <a class="button" onclick="document.querySelector('pre.button-examples').classList.toggle('hidden');">See button code</a>
 
         <pre class="button-examples hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {!! htmlspecialchars('
-<a href="#" class="button">Standard Button</a>
-<a href="#" class="button expanded">Expanded Button</a>
+<a href="#" class="button">Standard button</a>
+<a href="#" class="button expanded">Expanded button</a>
         ') !!}
         </pre>
 
@@ -171,7 +206,7 @@
 
         <hr>
 
-        <h2>Image Icon</h2>
+        <h2>Image icon</h2>
 
         <p>Images default to span 100% of the container on small view. When using the <code>.icon</code> class you can override this behavior so it defaults to its real height/width.</p>
 

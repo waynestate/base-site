@@ -51,13 +51,13 @@ mix.copy([
 
 // Compile assets and setup browersync
 mix.js('resources/js/main.js', 'public/_resources/js')
-   .sass('resources/scss/main.scss', 'public/_resources/css/compiled.css')
+   .sass('resources/scss/main.scss', 'public/_resources/css/main.css')
    .styles([
        'node_modules/mediabox/dist/mediabox.css',
        'node_modules/flickity/dist/flickity.css',
        'node_modules/@waynestate/wsuheader/dist/header.css',
        'node_modules/@waynestate/wsufooter/dist/footer.css',
-       'public/_resources/css/compiled.css',
+       'public/_resources/css/main.css',
    ], 'public/_resources/css/main.css')
    .purgeCss({
         globs: [
@@ -147,7 +147,8 @@ config = {
                 to: path.resolve('.git/hooks'),
             }
         ])
-    ]
+    ],
+    devtool: 'source-map'
 }
 
 if (mix.inProduction()) {

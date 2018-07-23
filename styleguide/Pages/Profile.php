@@ -12,10 +12,10 @@ class Profile extends Page
      */
     public function getPageData()
     {
-        return app('Factories\Page')->create(1, [
+        return app('Factories\Page')->create(1, true, [
             'page' => [
                 'controller' => 'ProfileController',
-                'title' => 'Profile View',
+                'title' => 'Profile view',
                 'id' => null,
             ],
         ]);

@@ -9,10 +9,10 @@ class HeroContainedText extends Page
      */
     public function getPageData()
     {
-        return app('Factories\Page')->create(1, [
+        return app('Factories\Page')->create(1, true, [
             'page' => [
                 'controller' => 'HeroContainedTextController',
-                'title' => 'Contained (Rotate With Text)',
+                'title' => 'Contained (rotate with text)',
                 'id' => 105100102,
             ],
         ]);
