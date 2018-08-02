@@ -93,10 +93,8 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
             'top_menu_output' => $this->getTopMenuOutput($top_menu['menu']),
         ];
 
-        // Force left menu all the time if we aren't using top menu
-        if (config('base.top_menu_enabled') === false) {
-            $menus['show_site_menu'] = true;
-        }
+        // Show the menu by default
+        $menus['show_site_menu'] = true;
 
         // Force hide the menu if they specifically disable it
         if (config('base.homepage_menu_enabled') === false && $data['page']['controller'] == 'HomepageController') {
