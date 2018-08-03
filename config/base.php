@@ -73,7 +73,7 @@ return [
     | site if it is not found in the menu.
     |
     */
-    'hero_contained' => true,
+    'hero_contained' => false,
 
     /*
     |--------------------------------------------------------------------------
