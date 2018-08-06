@@ -50,7 +50,7 @@ class ProfileRepository implements ProfileRepositoryContract
         });
 
         // Make sure the return is an array
-        $profiles['profiles'] = ! !empty($profile_listing['error']) ? $profile_listing : [];
+        $profiles['profiles'] = empty($profile_listing['error']) ? $profile_listing : [];
 
         return $profiles;
     }
