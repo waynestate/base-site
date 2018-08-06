@@ -127,11 +127,7 @@ class ProfileRepositoryTest extends TestCase
         $accessid = $this->faker->word;
 
         // Fake return
-        $return = [
-            'profiles' => [
-                $invalid_site_id => app('Factories\Profile')->create(1, true),
-            ],
-        ];
+        $return = app('Factories\ApiError')->create(1, true);
 
         // Mock the Connector and set the return
         $wsuApi = Mockery::mock('Waynestate\Api\Connector');
