@@ -123,7 +123,6 @@ class ProfileRepositoryTest extends TestCase
     public function getting_profile_that_doesnt_exist_should_return_blank_array()
     {
         $site_id = $this->faker->numberBetween(1, 10);
-        $invalid_site_id = $this->faker->numberBetween(20, 30);
         $accessid = $this->faker->word;
 
         // Fake return
