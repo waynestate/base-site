@@ -50,7 +50,7 @@ class ProfileRepository implements ProfileRepositoryContract
         });
 
         // Make sure the return is an array
-        $profiles['profiles'] = ! !empty($profile_listing['error']) ? $profile_listing : [];
+        $profiles['profiles'] = empty($profile_listing['error']) ? $profile_listing : [];
 
         return $profiles;
     }
@@ -194,10 +194,10 @@ class ProfileRepository implements ProfileRepositoryContract
         $profiles = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             $this->wsuApi->nextRequestProduction();
 
-            return $this->wsuApi->sendRequest($params['method'], $params)['profiles'];
+            return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
-        $profile['profile'] = array_get($profiles, $site_id, []);
+        $profile['profile'] = empty($profiles['error']) ? array_get($profiles['profiles'], $site_id, []) : [];
 
         return $profile;
     }
