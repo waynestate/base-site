@@ -23,14 +23,13 @@ class BaseFeature extends Command
     public function handle()
     {
         $this->controller();
+        $this->contract();
     }
 
     public function controller()
     {
         $this->initializeStub('controller');
-
         $this->setFeature($this->argument('feature'));
-
         $this->replaceDescription();
         $this->replaceContract();
         $this->replaceControllerName();
@@ -38,6 +37,17 @@ class BaseFeature extends Command
         $this->replaceView();
 
         Storage::disk('base')->put('App\Http\Controllers\/'.$this->feature.'Controller.php', $this->stub);
+    }
+
+    public function contract()
+    {
+        $this->initializeStub('contract');
+        $this->setFeature($this->argument('feature'));
+        $this->replaceContractName();
+        $this->stub = str_replace('getDummys', 'get'.ucfirst(strtolower($this->feature)).'s', $this->stub);
+        $this->stub = str_replace('dummys', strtolower($this->feature).'s', $this->stub);
+
+        Storage::disk('base')->put('Contracts\Repositories\/'.$this->feature.'RepositoryContract.php', $this->stub);
     }
 
     public function setFeature($feature)
@@ -67,11 +77,20 @@ class BaseFeature extends Command
 
     public function replaceVariables()
     {
-        $this->stub = str_replace(['$dummy', '$this->dummy'], ['$'.strtolower($this->feature), '$this->'.strtolower($this->feature)], $this->stub);
+        $this->stub = str_replace(
+            ['$dummy', '$this->dummy', '$dummys', '$this->getDummys'],
+            ['$'.strtolower($this->feature), '$this->'.strtolower($this->feature), '$'.strtolower($this->feature).'s', '$this->get'.ucfirst(strtolower($this->feature)).'s'],
+            $this->stub
+        );
     }
 
     public function replaceView()
     {
         $this->stub = str_replace('DummyView', strtolower($this->feature), $this->stub);
+    }
+
+    public function replaceContractName()
+    {
+        $this->stub = str_replace('DummyRepositoryContract', $this->feature.'RepositoryContract', $this->stub);
     }
 }
