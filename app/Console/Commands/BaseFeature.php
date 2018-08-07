@@ -67,7 +67,7 @@ class BaseFeature extends Command
 
     public function replaceVariables()
     {
-       $this->stub = str_replace(['$dummy', '$this->dummy'], ['$'.strtolower($this->feature), '$this->'.strtolower($this->feature)], $this->stub);
+        $this->stub = str_replace(['$dummy', '$this->dummy'], ['$'.strtolower($this->feature), '$this->'.strtolower($this->feature)], $this->stub);
     }
 
     public function replaceView()
