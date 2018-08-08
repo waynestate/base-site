@@ -28,6 +28,7 @@ class BaseFeature extends Command
         $this->contract();
         $this->repository();
         $this->repositoryStyleguide();
+        $this->menu();
         $this->page();
         $this->view();
         $this->factory();
@@ -77,13 +78,31 @@ class BaseFeature extends Command
         Storage::disk('base')->put('styleguide\Repositories\/'.ucfirst($this->feature).'Repository.php', $this->stub);
     }
 
+    public function menu()
+    {
+        $menu = $this->getMenu();
+
+        $item = end($menu[101]['submenu']);
+
+        $item['menu_item_id']++;
+        $item['page_id'] = $item['menu_item_id'];
+        $item['display_name'] = ucfirst($this->feature).'s';
+        $item['relative_url'] = '/styleguide/'.strtolower($this->feature).'s';
+
+        $menu[101]['submenu'][$item['menu_item_id']] = $item;
+
+        Storage::disk('base')->put('styleguide/menu.json', json_encode($menu, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES));
+    }
+
     public function page()
     {
+        $menu = $this->getMenu();
+
         $this->initializeStub('page');
         $this->replaceController();
         $this->stub = str_replace('DummyPage', ucfirst($this->feature).'s', $this->stub);
         $this->stub = str_replace('DummyTitle', ucfirst($this->feature).'s', $this->stub);
-        $this->stub = str_replace('DummyId', 1, $this->stub);
+        $this->stub = str_replace('DummyId', end($menu[101]['submenu'])['menu_item_id'], $this->stub);
 
         Storage::disk('base')->put('styleguide\Pages\/'.ucfirst($this->feature).'s.php', $this->stub);
     }
@@ -136,5 +155,10 @@ class BaseFeature extends Command
     public function getView()
     {
         return strtolower(preg_replace('/(?<!^)[A-Z]/', '-$0', $this->feature)).'s';
+    }
+
+    public function getMenu()
+    {
+        return json_decode(Storage::disk('base')->get('styleguide/menu.json'), true);
     }
 }
