@@ -141,7 +141,7 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
         });
 
         // If the menu assigned to the page has no menu items set it as a blank array
-        if ($page_menu_id !== null && ! !empty($menus[$page_menu_id])) {
+        if ($page_menu_id !== null && empty($menus[$page_menu_id])) {
             $menus[$page_menu_id] = [];
         }
 
