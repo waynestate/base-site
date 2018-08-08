@@ -29,6 +29,7 @@ class BaseFeature extends Command
         $this->repository();
         $this->repositoryStyleguide();
         $this->page();
+        $this->view();
     }
 
     public function controller()
@@ -36,13 +37,9 @@ class BaseFeature extends Command
         $this->initializeStub('controller');
         $this->replaceContract();
         $this->replaceController();
+        $this->replaceVariables();
         $this->stub = str_replace('Dummy Template', $this->feature.' Template', $this->stub);
-        $this->stub = str_replace(
-            ['$dummy', '$this->dummy', '$dummys', '->getDummys'],
-            ['$'.strtolower($this->feature), '$this->'.strtolower($this->feature), '$'.strtolower($this->feature).'s', '->get'.ucfirst(strtolower($this->feature)).'s'],
-            $this->stub
-        );
-        $this->stub = str_replace('DummyView', strtolower($this->feature), $this->stub);
+        $this->stub = str_replace('DummyView', $this->getView(), $this->stub);
 
         Storage::disk('base')->put('app\Http\Controllers\/'.$this->feature.'Controller.php', $this->stub);
     }
@@ -89,6 +86,14 @@ class BaseFeature extends Command
         Storage::disk('base')->put('styleguide\Pages\/'.ucfirst($this->feature).'s.php', $this->stub);
     }
 
+    public function view()
+    {
+        $this->initializeStub('view');
+        $this->replaceVariables();
+
+        Storage::disk('base')->put('resources\views\/'.$this->getView().'.blade.php', $this->stub);
+    }
+
     public function setFeature($feature)
     {
         $this->feature = $feature;
@@ -107,5 +112,19 @@ class BaseFeature extends Command
     public function replaceController()
     {
         $this->stub = str_replace('DummyController', $this->feature.'Controller', $this->stub);
+    }
+
+    public function replaceVariables()
+    {
+        $this->stub = str_replace(
+            ['$dummy', '$this->dummy', '$dummys', '->getDummys'],
+            ['$'.strtolower($this->feature), '$this->'.strtolower($this->feature), '$'.strtolower($this->feature).'s', '->get'.ucfirst(strtolower($this->feature)).'s'],
+            $this->stub
+        );
+    }
+
+    public function getView()
+    {
+        return strtolower(preg_replace('/(?<!^)[A-Z]/', '-$0', $this->feature)).'s';
     }
 }
