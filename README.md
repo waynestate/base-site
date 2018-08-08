@@ -181,7 +181,7 @@ $menus = [
 
 ## Style guide development for a new feature
 
-To create a new feature called "Spotlight": `php artisan base:feature Spotlight`
+Feature names should be singular and CamelCased. To create a new feature called "Spotlight": `php artisan base:feature Spotlight`
 
 ## Adding SVG icons
 
