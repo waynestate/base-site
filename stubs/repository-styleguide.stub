@@ -1,0 +1,18 @@
+<?php
+
+namespace Styleguide\Repositories;
+
+use App\Repositories\DummyRepository as Repository;
+
+class DummyRepository extends Repository
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function getDummy()
+    {
+        return [
+            'dummy' => app('Factories\DummyFactory')->create(5)
+        ];
+    }
+}
