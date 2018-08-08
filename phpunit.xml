@@ -22,6 +22,7 @@
             <directory suffix=".php">./app</directory>
             <exclude>
                 <directory>./app/Providers</directory>
+                <directory>./app/Console/Commands</directory>
                 <file>./app/Http/Kernel.php</file>
                 <file>./app/Http/Middleware/NewRelic.php</file>
                 <file>./app/Http/Middleware/EncryptCookies.php</file>
@@ -30,7 +31,6 @@
                 <file>./app/Http/Middleware/VerifyCsrfToken.php</file>
                 <file>./app/Exceptions/Handler.php</file>
                 <file>./app/Console/Kernel.php</file>
-                <file>./app/Console/Commands/RedisClear.php</file>
             </exclude>
         </whitelist>
     </filter>
