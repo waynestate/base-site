@@ -22,14 +22,16 @@ class BaseFeature extends Command
      */
     public function handle()
     {
+        $this->setFeature($this->argument('feature'));
+
         $this->controller();
         $this->contract();
+        $this->repository();
     }
 
     public function controller()
     {
         $this->initializeStub('controller');
-        $this->setFeature($this->argument('feature'));
         $this->replaceDescription();
         $this->replaceContract();
         $this->replaceControllerName();
@@ -42,12 +44,22 @@ class BaseFeature extends Command
     public function contract()
     {
         $this->initializeStub('contract');
-        $this->setFeature($this->argument('feature'));
         $this->replaceContractName();
         $this->stub = str_replace('getDummys', 'get'.ucfirst(strtolower($this->feature)).'s', $this->stub);
         $this->stub = str_replace('dummys', strtolower($this->feature).'s', $this->stub);
 
         Storage::disk('base')->put('Contracts\Repositories\/'.$this->feature.'RepositoryContract.php', $this->stub);
+    }
+
+    public function repository()
+    {
+        $this->initializeStub('repository');
+        $this->replaceContract();
+        $this->stub = str_replace('DummyRepository', ucfirst($this->feature).'Repository', $this->stub);
+        $this->stub = str_replace('getDummy()', 'get'.ucfirst(strtolower($this->feature)).'s()', $this->stub);
+        $this->stub = str_replace('dummy', strtolower($this->feature).'s', $this->stub);
+
+        Storage::disk('base')->put('App\Repositories\/'.ucfirst($this->feature).'Repository.php', $this->stub);
     }
 
     public function setFeature($feature)
