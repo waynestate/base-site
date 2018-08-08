@@ -11,6 +11,8 @@ class DummyRepository extends Repository
      */
     public function getDummy()
     {
-        return ['dummy' => []];
+        return [
+            'dummy' => app('Factories\DummyFactory')->create(5)
+        ];
     }
 }

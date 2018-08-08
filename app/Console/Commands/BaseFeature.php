@@ -30,6 +30,7 @@ class BaseFeature extends Command
         $this->repositoryStyleguide();
         $this->page();
         $this->view();
+        $this->factory();
     }
 
     public function controller()
@@ -71,6 +72,7 @@ class BaseFeature extends Command
         $this->stub = str_replace('DummyRepository', ucfirst($this->feature).'Repository', $this->stub);
         $this->stub = str_replace('getDummy()', 'get'.ucfirst(strtolower($this->feature)).'s()', $this->stub);
         $this->stub = str_replace('dummy', strtolower($this->feature).'s', $this->stub);
+        $this->stub = str_replace('DummyFactory', ucfirst($this->feature), $this->stub);
 
         Storage::disk('base')->put('styleguide\Repositories\/'.ucfirst($this->feature).'Repository.php', $this->stub);
     }
@@ -92,6 +94,14 @@ class BaseFeature extends Command
         $this->replaceVariables();
 
         Storage::disk('base')->put('resources\views\/'.$this->getView().'.blade.php', $this->stub);
+    }
+
+    public function factory()
+    {
+        $this->initializeStub('factory');
+        $this->stub = str_replace('DummyFactory', ucfirst($this->feature), $this->stub);
+
+        Storage::disk('base')->put('factories\/'.ucfirst($this->feature).'.php', $this->stub);
     }
 
     public function setFeature($feature)

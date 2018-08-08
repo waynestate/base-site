@@ -37,6 +37,8 @@ class DummyRepository implements DummyRepositoryContract
      */
     public function getDummy()
     {
-        return ['dummy' => []];
+        return [
+            'dummy' => []
+        ];
     }
 }
