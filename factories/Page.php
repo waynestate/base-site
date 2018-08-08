@@ -30,7 +30,7 @@ class Page implements FactoryContract
                     'keywords' => '',
                     'subsite-folder' => 'styleguide/',
                     'parent' => [
-                        'id' => 1,
+                        'id' => null,
                     ],
                 ],
                 'page' => [

@@ -15,6 +15,11 @@ class Profiles extends Page
                 'title' => 'Profile listing',
                 'id' => 101103,
             ],
+            'site' => [
+                'parent' => [
+                    'id' => 1,
+                ],
+            ],
         ]);
     }
 }
