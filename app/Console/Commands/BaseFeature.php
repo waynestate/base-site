@@ -50,7 +50,7 @@ class BaseFeature extends Command
     {
         $this->initializeStub('contract');
         $this->replaceContract();
-        $this->stub = str_replace('getDummys', 'get'.ucfirst(strtolower($this->feature)).'s', $this->stub);
+        $this->stub = str_replace('getDummys', 'get'.strtolower($this->feature).'s', $this->stub);
         $this->stub = str_replace('dummys', strtolower($this->feature).'s', $this->stub);
 
         Storage::disk('base')->put('contracts\Repositories\/'.$this->feature.'RepositoryContract.php', $this->stub);
@@ -60,22 +60,22 @@ class BaseFeature extends Command
     {
         $this->initializeStub('repository');
         $this->replaceContract();
-        $this->stub = str_replace('DummyRepository', ucfirst($this->feature).'Repository', $this->stub);
-        $this->stub = str_replace('getDummy()', 'get'.ucfirst(strtolower($this->feature)).'s()', $this->stub);
+        $this->stub = str_replace('DummyRepository', $this->feature.'Repository', $this->stub);
+        $this->stub = str_replace('getDummy()', 'get'.strtolower($this->feature).'s()', $this->stub);
         $this->stub = str_replace('dummy', strtolower($this->feature).'s', $this->stub);
 
-        Storage::disk('base')->put('app\Repositories\/'.ucfirst($this->feature).'Repository.php', $this->stub);
+        Storage::disk('base')->put('app\Repositories\/'.$this->feature.'Repository.php', $this->stub);
     }
 
     public function repositoryStyleguide()
     {
         $this->initializeStub('repository-styleguide');
-        $this->stub = str_replace('DummyRepository', ucfirst($this->feature).'Repository', $this->stub);
-        $this->stub = str_replace('getDummy()', 'get'.ucfirst(strtolower($this->feature)).'s()', $this->stub);
+        $this->stub = str_replace('DummyRepository', $this->feature.'Repository', $this->stub);
+        $this->stub = str_replace('getDummy()', 'get'.strtolower($this->feature).'s()', $this->stub);
         $this->stub = str_replace('dummy', strtolower($this->feature).'s', $this->stub);
-        $this->stub = str_replace('DummyFactory', ucfirst($this->feature), $this->stub);
+        $this->stub = str_replace('DummyFactory', $this->feature, $this->stub);
 
-        Storage::disk('base')->put('styleguide\Repositories\/'.ucfirst($this->feature).'Repository.php', $this->stub);
+        Storage::disk('base')->put('styleguide\Repositories\/'.$this->feature.'Repository.php', $this->stub);
     }
 
     public function menu()
@@ -86,7 +86,7 @@ class BaseFeature extends Command
 
         $item['menu_item_id']++;
         $item['page_id'] = $item['menu_item_id'];
-        $item['display_name'] = ucfirst($this->feature).'s';
+        $item['display_name'] = $this->feature.'s';
         $item['relative_url'] = '/styleguide/'.strtolower($this->feature).'s';
 
         $menu[101]['submenu'][$item['menu_item_id']] = $item;
@@ -100,11 +100,11 @@ class BaseFeature extends Command
 
         $this->initializeStub('page');
         $this->replaceController();
-        $this->stub = str_replace('DummyPage', ucfirst($this->feature).'s', $this->stub);
-        $this->stub = str_replace('DummyTitle', ucfirst($this->feature).'s', $this->stub);
+        $this->stub = str_replace('DummyPage', $this->feature.'s', $this->stub);
+        $this->stub = str_replace('DummyTitle', $this->feature.'s', $this->stub);
         $this->stub = str_replace('DummyId', end($menu[101]['submenu'])['menu_item_id'], $this->stub);
 
-        Storage::disk('base')->put('styleguide\Pages\/'.ucfirst($this->feature).'s.php', $this->stub);
+        Storage::disk('base')->put('styleguide\Pages\/'.$this->feature.'s.php', $this->stub);
     }
 
     public function view()
@@ -118,14 +118,14 @@ class BaseFeature extends Command
     public function factory()
     {
         $this->initializeStub('factory');
-        $this->stub = str_replace('DummyFactory', ucfirst($this->feature), $this->stub);
+        $this->stub = str_replace('DummyFactory', $this->feature, $this->stub);
 
-        Storage::disk('base')->put('factories\/'.ucfirst($this->feature).'.php', $this->stub);
+        Storage::disk('base')->put('factories\/'.$this->feature.'.php', $this->stub);
     }
 
     public function setFeature($feature)
     {
-        $this->feature = $feature;
+        $this->feature = ucfirst($feature);
     }
 
     public function initializeStub($type)
@@ -147,7 +147,7 @@ class BaseFeature extends Command
     {
         $this->stub = str_replace(
             ['$dummy', '$this->dummy', '$dummys', '->getDummys'],
-            ['$'.strtolower($this->feature), '$this->'.strtolower($this->feature), '$'.strtolower($this->feature).'s', '->get'.ucfirst(strtolower($this->feature)).'s'],
+            ['$'.strtolower($this->feature), '$this->'.strtolower($this->feature), '$'.strtolower($this->feature).'s', '->get'.strtolower($this->feature).'s'],
             $this->stub
         );
     }
