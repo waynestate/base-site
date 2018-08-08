@@ -21,6 +21,9 @@ class Homepage extends Page
                     'main' => '<p>'.$this->faker->paragraph(8).'</p>',
                 ],
            ],
+           'site' => [
+               'subsite-folder' => 'styleguide/',
+           ]
        ]);
     }
 }

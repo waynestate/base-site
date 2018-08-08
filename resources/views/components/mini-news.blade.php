@@ -10,7 +10,7 @@
 <ul class="list-reset">
     @foreach($news as $item)
         <li class="mb-4">
-            <a href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}news/{{ $item['slug'] }}-{{ $item['news_id'] }}" class="underline hover:no-underline font-normal">
+            <a href="{{ $item['full_link'] }}" class="underline hover:no-underline font-normal">
                 {{ $item['title'] }}
             </a>
         </li>

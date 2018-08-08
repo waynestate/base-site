@@ -15,11 +15,6 @@ class Directory extends Page
                 'title' => 'Directory',
                 'id' => 101104,
             ],
-            'site' => [
-                'parent' => [
-                    'id' => 1,
-                ],
-            ],
         ]);
     }
 }

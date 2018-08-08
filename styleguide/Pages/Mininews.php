@@ -15,11 +15,6 @@ class Mininews extends Page
                 'title' => 'Mini news',
                 'id' => 110100,
             ],
-            'site' => [
-                'parent' => [
-                    'id' => 1,
-                ],
-            ],
         ]);
     }
 }
