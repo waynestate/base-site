@@ -27,6 +27,7 @@ class BaseFeature extends Command
         $this->controller();
         $this->contract();
         $this->repository();
+        $this->repositoryStyleguide();
     }
 
     public function controller()
@@ -42,7 +43,7 @@ class BaseFeature extends Command
         );
         $this->stub = str_replace('DummyView', strtolower($this->feature), $this->stub);
 
-        Storage::disk('base')->put('App\Http\Controllers\/'.$this->feature.'Controller.php', $this->stub);
+        Storage::disk('base')->put('app\Http\Controllers\/'.$this->feature.'Controller.php', $this->stub);
     }
 
     public function contract()
@@ -52,7 +53,7 @@ class BaseFeature extends Command
         $this->stub = str_replace('getDummys', 'get'.ucfirst(strtolower($this->feature)).'s', $this->stub);
         $this->stub = str_replace('dummys', strtolower($this->feature).'s', $this->stub);
 
-        Storage::disk('base')->put('Contracts\Repositories\/'.$this->feature.'RepositoryContract.php', $this->stub);
+        Storage::disk('base')->put('contracts\Repositories\/'.$this->feature.'RepositoryContract.php', $this->stub);
     }
 
     public function repository()
@@ -63,7 +64,17 @@ class BaseFeature extends Command
         $this->stub = str_replace('getDummy()', 'get'.ucfirst(strtolower($this->feature)).'s()', $this->stub);
         $this->stub = str_replace('dummy', strtolower($this->feature).'s', $this->stub);
 
-        Storage::disk('base')->put('App\Repositories\/'.ucfirst($this->feature).'Repository.php', $this->stub);
+        Storage::disk('base')->put('app\Repositories\/'.ucfirst($this->feature).'Repository.php', $this->stub);
+    }
+
+    public function repositoryStyleguide()
+    {
+        $this->initializeStub('repository-styleguide');
+        $this->stub = str_replace('DummyRepository', ucfirst($this->feature).'Repository', $this->stub);
+        $this->stub = str_replace('getDummy()', 'get'.ucfirst(strtolower($this->feature)).'s()', $this->stub);
+        $this->stub = str_replace('dummy', strtolower($this->feature).'s', $this->stub);
+
+        Storage::disk('base')->put('styleguide\Repositories\/'.ucfirst($this->feature).'Repository.php', $this->stub);
     }
 
     public function setFeature($feature)
