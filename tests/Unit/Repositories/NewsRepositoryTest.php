@@ -61,7 +61,7 @@ class NewsRepositoryTest extends TestCase
     {
         // Fake return
         $return = [
-            'results' => app('Factories\NewsCategory')->create(5),
+            'news_categories' => app('Factories\NewsCategory')->create(5),
         ];
 
         // Mock the connector and set the return
@@ -69,7 +69,7 @@ class NewsRepositoryTest extends TestCase
         $wsuApi->shouldReceive('sendRequest')->with('cms.news.categories', Mockery::type('array'))->once()->andReturn($return);
 
         // Get the news categories
-        $categories = app('App\Repositories\NewsRepository', ['wsuApi' => $wsuApi])->getCategories($this->faker->randomDigit);
+        $categories = app('App\Repositories\NewsRepository', ['wsuApi' => $wsuApi])->getCategories($this->faker->randomDigit, 'styleguide/');
 
         // Make sure they are the same as the ones we created
         $this->assertEquals($return, $categories);

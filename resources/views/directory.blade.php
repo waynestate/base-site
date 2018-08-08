@@ -13,7 +13,7 @@
         <div class="row flex flex-wrap -mx-4">
             @foreach($profiles as $profile)
                 <div class="w-full sm:w-1/2 md:w-1/3 px-4 pb-6">
-                    <a href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}profile/{{ $profile['data']['AccessID'] }}">
+                    <a href="{{ $profile['link'] }}">
                         <div class="block bg-cover bg-center w-full pt-full lazy mb-1" data-src="{{ $profile['data']['Picture']['url'] ?? '/_resources/images/no-photo.svg' }}"></div>
                         <span class="font-bold">{{ $profile['data']['First Name'] }} {{ $profile['data']['Last Name'] }}</span>
                     </a>

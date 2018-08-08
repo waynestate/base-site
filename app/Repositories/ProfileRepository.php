@@ -49,6 +49,15 @@ class ProfileRepository implements ProfileRepositoryContract
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
+        // Build the link
+        if (!empty($profile_listing['data'])) {
+            $profile_listing = collect($profile_listing)->map(function ($item) {
+                $item['link'] = '/profile/'.$item['data']['AccessID'];
+
+                return $item;
+            })->toArray();
+        }
+
         // Make sure the return is an array
         $profiles['profiles'] = empty($profile_listing['error']) ? $profile_listing : [];
 
@@ -77,6 +86,7 @@ class ProfileRepository implements ProfileRepositoryContract
                    'groups' => $profile['groups'],
                    'group' => $group,
                    'AccessID' => $profile['data']['AccessID'],
+                   'link' => $profile['link'],
                ];
             });
         })

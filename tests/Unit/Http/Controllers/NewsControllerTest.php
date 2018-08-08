@@ -118,6 +118,7 @@ class NewsControllerTest extends TestCase
         $request->data = [
             'site' => [
                 'id' => 1,
+                'subsite-folder' => null,
             ],
             'page' => [
                 'title' => $this->faker->sentence,

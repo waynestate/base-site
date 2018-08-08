@@ -42,7 +42,7 @@ class NewsRepository extends Repository
     /**
      * {@inheritdoc}
      */
-    public function getCategories($site_id)
+    public function getCategories($site_id, $subsite=null)
     {
         $categories['news_categories'] = app('Factories\NewsCategory')->create(5);
 

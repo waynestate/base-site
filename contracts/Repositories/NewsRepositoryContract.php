@@ -45,9 +45,10 @@ interface NewsRepositoryContract
      * Get news categories for a site.
      *
      * @param int $site_id
+     * @param string $subsite
      * @return array
      */
-    public function getCategories($site_id);
+    public function getCategories($site_id, $subsite);
 
     /**
      * Set the selected category based on the slug.
