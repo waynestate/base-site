@@ -50,7 +50,7 @@ class ProfileRepository implements ProfileRepositoryContract
         });
 
         // Build the link
-        if (!empty($profile_listing['data'])) {
+        if (empty($profile_listing['error'])) {
             $profile_listing = collect($profile_listing)->map(function ($item) {
                 $item['link'] = '/profile/'.$item['data']['AccessID'];
 
