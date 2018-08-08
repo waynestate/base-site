@@ -28,17 +28,18 @@ class BaseFeature extends Command
         $this->contract();
         $this->repository();
         $this->repositoryStyleguide();
+        $this->page();
     }
 
     public function controller()
     {
         $this->initializeStub('controller');
         $this->replaceContract();
+        $this->replaceController();
         $this->stub = str_replace('Dummy Template', $this->feature.' Template', $this->stub);
-        $this->stub = str_replace('DummyController', $this->feature.'Controller', $this->stub);
         $this->stub = str_replace(
-            ['$dummy', '$this->dummy', '$dummys', '$this->getDummys'],
-            ['$'.strtolower($this->feature), '$this->'.strtolower($this->feature), '$'.strtolower($this->feature).'s', '$this->get'.ucfirst(strtolower($this->feature)).'s'],
+            ['$dummy', '$this->dummy', '$dummys', '->getDummys'],
+            ['$'.strtolower($this->feature), '$this->'.strtolower($this->feature), '$'.strtolower($this->feature).'s', '->get'.ucfirst(strtolower($this->feature)).'s'],
             $this->stub
         );
         $this->stub = str_replace('DummyView', strtolower($this->feature), $this->stub);
@@ -77,6 +78,17 @@ class BaseFeature extends Command
         Storage::disk('base')->put('styleguide\Repositories\/'.ucfirst($this->feature).'Repository.php', $this->stub);
     }
 
+    public function page()
+    {
+        $this->initializeStub('page');
+        $this->replaceController();
+        $this->stub = str_replace('DummyPage', ucfirst($this->feature).'s', $this->stub);
+        $this->stub = str_replace('DummyTitle', ucfirst($this->feature).'s', $this->stub);
+        $this->stub = str_replace('DummyId', 1, $this->stub);
+
+        Storage::disk('base')->put('styleguide\Pages\/'.ucfirst($this->feature).'s.php', $this->stub);
+    }
+
     public function setFeature($feature)
     {
         $this->feature = $feature;
@@ -90,5 +102,10 @@ class BaseFeature extends Command
     public function replaceContract()
     {
         $this->stub = str_replace('DummyRepositoryContract', $this->feature.'RepositoryContract', $this->stub);
+    }
+
+    public function replaceController()
+    {
+        $this->stub = str_replace('DummyController', $this->feature.'Controller', $this->stub);
     }
 }
