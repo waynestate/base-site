@@ -125,7 +125,11 @@ class BaseFeature extends Command
 
     public function setFeature($feature)
     {
-        $this->feature = ucfirst($feature);
+        $this->feature = ucfirst(rtrim($feature, 's'));
+
+        if (Storage::disk('base')->exists('app\Http\Controllers\/'.$this->feature.'Controller.php')) {
+            die($this->error('Feature already exists, please use another name.'));
+        }
     }
 
     public function initializeStub($type)
