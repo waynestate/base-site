@@ -6,6 +6,6 @@
 
 <ul>
     @foreach($categories as $category)
-        <li{!! $selected_category['category_id'] == $category['category_id'] ? ' class="selected"': '' !!}><a href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}news/category/{{ $category['slug'] }}">{{ $category['category'] }}</a></li>
+        <li{!! $selected_category['category_id'] == $category['category_id'] ? ' class="selected"': '' !!}><a href="{{ $category['link'] }}">{{ $category['category'] }}</a></li>
     @endforeach
 </ul>

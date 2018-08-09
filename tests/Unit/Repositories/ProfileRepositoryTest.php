@@ -159,6 +159,27 @@ class ProfileRepositoryTest extends TestCase
     }
 
     /**
+     * @covers App\Repositories\ProfileRepository::getProfiles
+     * @test
+     */
+    public function getting_profiles_should_append_link()
+    {
+        // Fake return
+        $return = app('Factories\Profile')->create(5);
+
+        // Mock the Connector and set the return
+        $wsuApi = Mockery::mock('Waynestate\Api\Connector');
+        $wsuApi->shouldReceive('sendRequest')->with('profile.users.listing', Mockery::type('array'))->once()->andReturn($return);
+        $wsuApi->shouldReceive('nextRequestProduction')->once();
+
+        $profiles = app('App\Repositories\ProfileRepository', ['wsuApi' => $wsuApi])->getProfiles($this->faker->numberBetween(1, 10));
+
+        collect($profiles['profiles'])->each(function ($item) {
+            $this->assertTrue(!empty($item['link']));
+        });
+    }
+
+    /**
      * @covers App\Repositories\ProfileRepository::getGroupIds
      * @test
      */

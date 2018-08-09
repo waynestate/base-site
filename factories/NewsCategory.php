@@ -33,6 +33,7 @@ class NewsCategory implements FactoryContract
                 'is_active' => 1,
                 'category' => $category,
                 'slug' => str_slug($category),
+                'link' => '/styleguide/news/category/'.str_slug($category),
             ];
         }
 

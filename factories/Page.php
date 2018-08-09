@@ -28,9 +28,9 @@ class Page implements FactoryContract
                     'id' => 2,
                     'title' => 'Styleguide',
                     'keywords' => '',
-                    'subsite-folder' => 'styleguide/',
+                    'subsite-folder' => null,
                     'parent' => [
-                        'id' => 1,
+                        'id' => null,
                     ],
                 ],
                 'page' => [
