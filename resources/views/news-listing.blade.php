@@ -7,7 +7,7 @@
         <dl>
             @forelse($news as $news_item)
                 <dt class="mb-1">
-                    <a href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}news/{{ $news_item['slug'] }}-{{ $news_item['news_id'] }}">
+                    <a href="{{ $news_item['full_link'] }}">
                         {{ $news_item['title'] }}
                     </a>
                 </dt>

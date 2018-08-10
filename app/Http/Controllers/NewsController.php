@@ -31,7 +31,7 @@ class NewsController extends Controller
     public function index(Request $request)
     {
         // Get the news categories
-        $categories = $this->news->getCategories($request->data['site']['id']);
+        $categories = $this->news->getCategories($request->data['site']['id'], $request->data['site']['subsite-folder']);
 
         // Set the selected category
         $categories = $this->news->setSelectedCategory($categories, $request->slug);
@@ -86,7 +86,7 @@ class NewsController extends Controller
         $request->data['hero'] = false;
 
         // Get the news categories
-        $categories = $this->news->getCategories($request->data['site']['id']);
+        $categories = $this->news->getCategories($request->data['site']['id'], $request->data['site']['subsite-folder']);
 
         // Set the selected category
         $categories = $this->news->setSelectedCategory($categories, null);

@@ -103,7 +103,7 @@ Email web@wayne.edu with your request.
 ## Developing views
 
 1. Open `/resources/views/`
-1. This folder contains all the views for the front-end using the [blade templating engine](https://laravel.com/docs/5.2/blade)
+1. This folder contains all the views for the front-end using the [blade templating engine](https://laravel.com/docs/5.6/blade)
 1. Files must be saved in the format of: `homepage.blade.php`
 1. Components: Contains views that are reusable
 
@@ -181,30 +181,7 @@ $menus = [
 
 ## Style guide development for a new feature
 
-1. Create repository contract: `contracts/Repositories`
-1. Create repository: `app/Repositories`
-    * Implement the repository contract
-    * It's important to return a blank array for instances when no data is found. This way the view can consistantly check for `@if(!empty($item))` to hide areas on the page.
-1. Create fake repository: `styleguide/Repositories`
-    * Implement the repository contract
-    * Extend the real repository from `app/Repositories`.
-    * Overload any methods necessary and use or create `factories/` to get fake data.
-1. Create controller
-    1. Create the controller in `app/Http/Controllers`. If the styleguide needs to show variations of the feature, you may need to build controllers within `styleguide/Http/Controllers` to achieve this.
-    1. Point to your view file in `resources/views`.
-    1. Dependency inject the repository contract(s) into the constructor.
-    1. Call whatever method(s) necessary to get data from the repository and assign it to the view.
-1. Create menu item: `styleguide/Repositories/MenuRepository.php`
-    1. Set `menu_item_id` and `page_id` to be the same.
-    1. Follow the pattern for setting `menu_item_id`
-        * Root items, increment from previous.
-        * Sub items, copy parent `menu_item_id` and append 100 and auto increment from there.
-    1. Set `menu_id` to 1
-1. Create page: `styleguide/Pages/`
-    1. Set page_id from the menu.
-        * If the page needs to be full width set `page_id = null` within the menu.
-        * If the page is NOT within then menu then you need to specify the path to the page. Set `var $path = '/path/to/your/page'` inside your `styleguide/Pages/` class.
-    1. Set controller to the one you created in step #4.
+Feature names should be singular and CamelCased. To create a new feature called "Spotlight": `php artisan base:feature Spotlight`
 
 ## Adding SVG icons
 

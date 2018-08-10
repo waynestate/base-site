@@ -49,8 +49,17 @@ class ProfileRepository implements ProfileRepositoryContract
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
+        // Build the link
+        if (empty($profile_listing['error'])) {
+            $profile_listing = collect($profile_listing)->map(function ($item) {
+                $item['link'] = '/profile/'.$item['data']['AccessID'];
+
+                return $item;
+            })->toArray();
+        }
+
         // Make sure the return is an array
-        $profiles['profiles'] = ! !empty($profile_listing['error']) ? $profile_listing : [];
+        $profiles['profiles'] = empty($profile_listing['error']) ? $profile_listing : [];
 
         return $profiles;
     }
@@ -77,6 +86,7 @@ class ProfileRepository implements ProfileRepositoryContract
                    'groups' => $profile['groups'],
                    'group' => $group,
                    'AccessID' => $profile['data']['AccessID'],
+                   'link' => $profile['link'],
                ];
             });
         })
@@ -194,10 +204,10 @@ class ProfileRepository implements ProfileRepositoryContract
         $profiles = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             $this->wsuApi->nextRequestProduction();
 
-            return $this->wsuApi->sendRequest($params['method'], $params)['profiles'];
+            return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
-        $profile['profile'] = array_get($profiles, $site_id, []);
+        $profile['profile'] = empty($profiles['error']) ? array_get($profiles['profiles'], $site_id, []) : [];
 
         return $profile;
     }

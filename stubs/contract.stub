@@ -1,0 +1,13 @@
+<?php
+
+namespace Contracts\Repositories;
+
+interface DummyRepositoryContract
+{
+    /**
+     * Get the dummys listing.
+     *
+     * @return array
+     */
+    public function getDummys();
+}

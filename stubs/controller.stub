@@ -1,0 +1,37 @@
+<?php
+/*
+* Status: Public
+* Description: Dummy Template
+* Default: false
+*/
+
+namespace App\Http\Controllers;
+
+use Contracts\Repositories\DummyRepositoryContract;
+use Illuminate\Http\Request;
+
+class DummyController extends Controller
+{
+    /**
+     * Construct the controller.
+     *
+     * @param DummyRepositoryContract $dummy
+     */
+    public function __construct(DummyRepositoryContract $dummy)
+    {
+        $this->dummy = $dummy;
+    }
+
+    /**
+     * Display the view.
+     *
+     * @param Request $request
+     * @return \Illuminate\View\View
+     */
+    public function index(Request $request)
+    {
+        $dummys = $this->dummy->getDummys();
+
+        return view('DummyView', merge($request->data, $dummys));
+    }
+}

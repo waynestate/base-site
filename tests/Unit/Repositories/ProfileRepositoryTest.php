@@ -123,15 +123,10 @@ class ProfileRepositoryTest extends TestCase
     public function getting_profile_that_doesnt_exist_should_return_blank_array()
     {
         $site_id = $this->faker->numberBetween(1, 10);
-        $invalid_site_id = $this->faker->numberBetween(20, 30);
         $accessid = $this->faker->word;
 
         // Fake return
-        $return = [
-            'profiles' => [
-                $invalid_site_id => app('Factories\Profile')->create(1, true),
-            ],
-        ];
+        $return = app('Factories\ApiError')->create(1, true);
 
         // Mock the Connector and set the return
         $wsuApi = Mockery::mock('Waynestate\Api\Connector');
@@ -161,6 +156,27 @@ class ProfileRepositoryTest extends TestCase
 
         // Since the API returned an error we shouldn't have any profiles
         $this->assertEmpty($profiles['profiles']);
+    }
+
+    /**
+     * @covers App\Repositories\ProfileRepository::getProfiles
+     * @test
+     */
+    public function getting_profiles_should_append_link()
+    {
+        // Fake return
+        $return = app('Factories\Profile')->create(5);
+
+        // Mock the Connector and set the return
+        $wsuApi = Mockery::mock('Waynestate\Api\Connector');
+        $wsuApi->shouldReceive('sendRequest')->with('profile.users.listing', Mockery::type('array'))->once()->andReturn($return);
+        $wsuApi->shouldReceive('nextRequestProduction')->once();
+
+        $profiles = app('App\Repositories\ProfileRepository', ['wsuApi' => $wsuApi])->getProfiles($this->faker->numberBetween(1, 10));
+
+        collect($profiles['profiles'])->each(function ($item) {
+            $this->assertTrue(!empty($item['link']));
+        });
     }
 
     /**

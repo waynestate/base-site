@@ -122,7 +122,7 @@ class NewsRepository implements NewsRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getCategories($site_id)
+    public function getCategories($site_id, $subsite=null)
     {
         $params = [
             'method' => 'cms.news.categories',
@@ -133,6 +133,12 @@ class NewsRepository implements NewsRepositoryContract
         $categories = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
+
+        $categories['news_categories'] = collect($categories['news_categories'])->map(function ($item) use ($subsite) {
+            $item['link'] = '/'.(!empty($subsite) ? $subsite : '').'news/category/'.$item['slug'];
+
+            return $item;
+        })->toArray();
 
         return $categories;
     }

@@ -1,0 +1,17 @@
+@extends('components.content-area')
+
+@section('content')
+    @include('components.page-title', ['title' => $page['title']])
+
+    <div class="content">
+        {!! $page['content']['main'] !!}
+    </div>
+
+    @if(!empty($dummys))
+        <ul>
+            @foreach($dummys as $item)
+                <li>{{ $item['title'] }}</li>
+            @endforeach
+        </ul>
+    @endif
+@endsection
