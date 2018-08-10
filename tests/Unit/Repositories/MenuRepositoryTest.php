@@ -612,4 +612,35 @@ class MenuRepositoryTest extends TestCase
 
         $this->assertFalse($menu['show_site_menu']);
     }
+
+    /**
+     * @covers App\Repositories\MenuRepository::getMenus
+     * @test
+     */
+    public function page_with_menu_and_no_submenu_items_with_top_menu_enabled_showsitemenu_should_be_false()
+    {
+        // Force enable top menu
+        config(['base.top_menu_enabled' => true]);
+
+        // Get a page with the HomepageController set
+        $page = app('Factories\Page')->create(
+            1,
+            true,
+            [
+                'page' => [
+                    'controller' => 'ChildpageController',
+                ],
+                'menu' => [
+                    'id' => 1,
+                ],
+            ]
+        );
+        // Get a menu and mimic as if there were multiple
+        $menu[$page['menu']['id']] = app('Factories\Menu')->create(5);
+
+        // Parse the site menu
+        $menus = app('App\Repositories\MenuRepository')->getMenus($page, $menu);
+
+        $this->assertFalse($menus['show_site_menu']);
+    }
 }

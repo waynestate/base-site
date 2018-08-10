@@ -102,7 +102,7 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
         }
 
         // If no menu is selected then hide the site menu
-        if ($menus['site_menu_output'] === null) {
+        if (empty($menus['site_menu_output'])) {
             $menus['show_site_menu'] = false;
         }
 
