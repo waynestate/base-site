@@ -1,7 +1,7 @@
 // Polyfills
 import 'intersection-observer';
-import './polyfills/foreach';
-import './polyfills/prepend';
+//import './polyfills/foreach';
+//import './polyfills/prepend';
 
 // Modules
 import './modules/table';
