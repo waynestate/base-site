@@ -50,7 +50,7 @@ class BaseFeature extends Command
     {
         $this->initializeStub('contract');
         $this->replaceContract();
-        $this->stub = str_replace('getDummys', 'get'.strtolower($this->feature).'s', $this->stub);
+        $this->stub = str_replace('getDummys', 'get'.$this->feature.'s', $this->stub);
         $this->stub = str_replace('dummys', strtolower($this->feature).'s', $this->stub);
 
         Storage::disk('base')->put('contracts\Repositories\/'.$this->feature.'RepositoryContract.php', $this->stub);
@@ -61,7 +61,7 @@ class BaseFeature extends Command
         $this->initializeStub('repository');
         $this->replaceContract();
         $this->stub = str_replace('DummyRepository', $this->feature.'Repository', $this->stub);
-        $this->stub = str_replace('getDummy()', 'get'.strtolower($this->feature).'s()', $this->stub);
+        $this->stub = str_replace('getDummy()', 'get'.$this->feature.'s()', $this->stub);
         $this->stub = str_replace('dummy', strtolower($this->feature).'s', $this->stub);
 
         Storage::disk('base')->put('app\Repositories\/'.$this->feature.'Repository.php', $this->stub);
@@ -71,7 +71,7 @@ class BaseFeature extends Command
     {
         $this->initializeStub('repository-styleguide');
         $this->stub = str_replace('DummyRepository', $this->feature.'Repository', $this->stub);
-        $this->stub = str_replace('getDummy()', 'get'.strtolower($this->feature).'s()', $this->stub);
+        $this->stub = str_replace('getDummy()', 'get'.$this->feature.'s()', $this->stub);
         $this->stub = str_replace('dummy', strtolower($this->feature).'s', $this->stub);
         $this->stub = str_replace('DummyFactory', $this->feature, $this->stub);
 
@@ -151,7 +151,7 @@ class BaseFeature extends Command
     {
         $this->stub = str_replace(
             ['$dummy', '$this->dummy', '$dummys', '->getDummys'],
-            ['$'.strtolower($this->feature), '$this->'.strtolower($this->feature), '$'.strtolower($this->feature).'s', '->get'.strtolower($this->feature).'s'],
+            ['$'.strtolower($this->feature), '$this->'.strtolower($this->feature), '$'.strtolower($this->feature).'s', '->get'.$this->feature.'s'],
             $this->stub
         );
     }
