@@ -2709,16 +2709,16 @@
         },
         {
             "name": "waynestate/formy-parser",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/waynestate/formy-parser.git",
-                "reference": "4f8f08e15e9f2722f52df3968fb3892063b82ac2"
+                "reference": "159bb55723382e114f1abc88006694c84e0b13c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/waynestate/formy-parser/zipball/4f8f08e15e9f2722f52df3968fb3892063b82ac2",
-                "reference": "4f8f08e15e9f2722f52df3968fb3892063b82ac2",
+                "url": "https://api.github.com/repos/waynestate/formy-parser/zipball/159bb55723382e114f1abc88006694c84e0b13c6",
+                "reference": "159bb55723382e114f1abc88006694c84e0b13c6",
                 "shasum": ""
             },
             "require": {
@@ -2745,7 +2745,7 @@
                 }
             ],
             "description": "Parses a string for formy elements and converts the string to an HTML form",
-            "time": "2017-07-28T17:49:06+00:00"
+            "time": "2018-08-21T15:30:15+00:00"
         },
         {
             "name": "waynestate/image-faker",
