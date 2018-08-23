@@ -84,6 +84,18 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
             config('base.top_menu_id')
         );
 
+        // If top menu is enabled and this page is not in the menu then override it
+        if (config('base.top_menu_enabled') === true && $site_menu['meta']['has_selected'] === false) {
+            $site_menu['menu'] = [];
+        }
+
+        // If the page isn't found in the site menu then force it to be part of the full controllers list
+        if ($site_menu['meta']['has_selected'] === false) {
+            $controllers = config('base.hero_full_controllers');
+            array_push($controllers, $data['page']['controller']);
+            config(['base.hero_full_controllers' => $controllers]);
+        }
+
         // Build the return
         $menus = [
             'site_menu' => $site_menu,
@@ -192,7 +204,7 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
     {
         // Trim first level based on path[0] - only if we are on the main website
         // or we aren't enabling top menu across all subsites
-        if (!empty($menu['meta']['path']) && ($parentId === null || $topMenuId === null) && config('base.top_menu_enabled') == true) {
+        if (!empty($menu['meta']['path']) && ($parentId === null || $topMenuId === null) && config('base.top_menu_enabled') === true) {
             foreach ($menu['menu'] as $key => $item) {
                 // If we are on the first path then grab that submenu
                 if ($item['menu_item_id'] == $menu['meta']['path'][0]) {
