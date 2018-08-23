@@ -65,15 +65,16 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Hero Contained
+    | Hero Full Width
     |--------------------------------------------------------------------------
     |
-    | Force the hero image to be contained within the content area of the page.
-    | If set to false the hero image will expand 100% across the top of the
-    | site if it is not found in the menu.
+    | This enables hero images to span 100% across the top of the site. You
+    | can specify which controllers you want this to work on by adding to
+    | the array. If a controller is not listed it will be contained
+    | within the content-area.
     |
     */
-    'hero_contained' => true,
+    'hero_full_controllers' => [],
 
     /*
     |--------------------------------------------------------------------------
