@@ -3,9 +3,6 @@ ul.menu-top {
     padding: 0;
 
     li {
-        display: inline-block;
-        margin: 0 10px;
-
         a {
             @apply .text-white;
 
@@ -14,12 +11,17 @@ ul.menu-top {
             }
         }
 
-        &.selected a {
-            @apply .text-yellow .border-b .border-solid .border-yellow;
-        }
-
         &:last-child {
             margin-right: 0;
+        }
+
+        @screen mt {
+            display: inline-block;
+            margin: 0 10px;
+
+            &.selected a {
+                @apply .text-yellow .border-b .border-solid .border-yellow;
+            }
         }
     }
 }
