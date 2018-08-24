@@ -48,17 +48,22 @@ class Data
         }
 
         // Merge server and page data so global repositories can use them
-        $data = merge($data, $page);
+        $request->data = merge($data, $page);
 
-        // Merge global repository data and set it to the request
+        // Merge in global menus
         $request->data = merge(
-            $data,
-            app($this->getPrefix().'\Repositories\MenuRepository')->getRequestData($data),
-            app($this->getPrefix().'\Repositories\PromoRepository')->getRequestData($data)
+            $request->data,
+            app($this->getPrefix().'\Repositories\MenuRepository')->getRequestData($request->data)
+        );
+
+        // Merge in global promotions
+        $request->data = merge(
+            $request->data,
+            app($this->getPrefix().'\Repositories\PromoRepository')->getRequestData($request->data)
         );
 
         // Controller namespace path so it can be constructed in the routes file
-        $request->controller = $this->getControllerNamespace($data['page']['controller']);
+        $request->controller = $this->getControllerNamespace($request->data['page']['controller']);
 
         return $next($request);
     }

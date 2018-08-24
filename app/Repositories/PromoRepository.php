@@ -138,6 +138,13 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
             $group_config = str_replace('|limit:1', '|limit:'.config('base.hero_rotating_limit'), $group_config);
         }
 
+        // Add to full hero controllers list if the page has no site menu
+        if (!empty($data['site_menu']) && empty($data['site_menu']['menu'])) {
+            $controllers = config('base.hero_full_controllers');
+            array_push($controllers, $data['page']['controller']);
+            config(['base.hero_full_controllers' => $controllers]);
+        }
+
         // Parsed promotions
         $promos = $this->parsePromos->parse($promos, $group_reference, $group_config);
 
