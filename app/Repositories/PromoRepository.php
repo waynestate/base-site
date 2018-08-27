@@ -139,7 +139,7 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         }
 
         // Add to full hero controllers list if the page has no site menu or its not being shown
-        if (!empty($data['site_menu']) && empty($data['site_menu']['menu']) || (!empty($data['site_menu']['menu']) && config('base.homepage_menu_enabled') === false && $data['show_site_menu'] === false)) {
+        if ((!empty($data['site_menu']) && empty($data['site_menu']['menu'])) || (!empty($data['site_menu']['menu']) && $data['show_site_menu'] === false)) {
             $controllers = config('base.hero_full_controllers');
             array_push($controllers, $data['page']['controller']);
             config(['base.hero_full_controllers' => $controllers]);
