@@ -84,6 +84,11 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
             config('base.top_menu_id')
         );
 
+        // Override the menu so it doesn't show the same menu twice
+        if (config('base.top_menu_enabled') === true && $site_menu['meta']['has_selected'] === false) {
+            $site_menu['menu'] = [];
+        }
+
         // Build the return
         $menus = [
             'site_menu' => $site_menu,
@@ -93,15 +98,15 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
             'top_menu_output' => $this->getTopMenuOutput($top_menu['menu']),
         ];
 
-        // Show the menu by default
+        // Show the site menu by default
         $menus['show_site_menu'] = true;
 
-        // Force hide the menu if they specifically disable it
+        // Force hide the site menu if they specifically disable it
         if (config('base.homepage_menu_enabled') === false && $data['page']['controller'] == 'HomepageController') {
             $menus['show_site_menu'] = false;
         }
 
-        // If no menu is selected then hide the site menu
+        // If no site menu is selected then hide the site menu
         if (empty($menus['site_menu_output'])) {
             $menus['show_site_menu'] = false;
         }
@@ -192,7 +197,7 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
     {
         // Trim first level based on path[0] - only if we are on the main website
         // or we aren't enabling top menu across all subsites
-        if (!empty($menu['meta']['path']) && ($parentId === null || $topMenuId === null) && config('base.top_menu_enabled') == true) {
+        if (!empty($menu['meta']['path']) && ($parentId === null || $topMenuId === null) && config('base.top_menu_enabled') === true) {
             foreach ($menu['menu'] as $key => $item) {
                 // If we are on the first path then grab that submenu
                 if ($item['menu_item_id'] == $menu['meta']['path'][0]) {

@@ -1,6 +1,10 @@
 // Combination of normalize and tailwind resets
 @tailwind preflight;
 
+@import "~mediabox/dist/mediabox";
+@import "~flickity/dist/flickity";
+@import "~@waynestate/wsuheader/dist/header";
+@import "~@waynestate/wsufooter/dist/footer";
 @import "components/global";
 @import "components/accordion";
 @import "components/banner";
