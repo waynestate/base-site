@@ -165,6 +165,62 @@ class PromoRepositoryTest extends TestCase
     }
 
     /**
+     * @covers App\Repositories\PromoRepository::getRequestData
+     * @test
+     */
+    public function page_should_show_full_width_hero_with_no_site_menu()
+    {
+        // Create a fake data request
+        $data = app('Factories\Page')->create(1, true, [
+            'page' => [
+                'controller' => 'ExampleController',
+            ],
+        ]);
+
+        // Fake a site menu with no menu
+        $data['site_menu']['menu'] = [];
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock('Waynestate\Api\Connector');
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn([]);
+
+        // Get the promos
+        $promos = app('App\Repositories\PromoRepository', ['wsuApi' => $wsuApi])->getRequestData($data);
+
+        $this->assertTrue(in_array('ExampleController', config('base.hero_full_controllers')));
+    }
+
+    /**
+     * @covers App\Repositories\PromoRepository::getRequestData
+     * @test
+     */
+    public function page_should_show_full_width_hero_with_site_menu_but_menu_is_hidden()
+    {
+        // Create a fake data request
+        $data = app('Factories\Page')->create(1, true, [
+            'page' => [
+                'controller' => 'ExampleController',
+            ],
+        ]);
+
+        // Force this to false
+        //config(['base.homepage_menu_enabled' => false]);
+
+        // Fake a site menu
+        $data['site_menu']['menu'] = app('Factories\Menu')->create();
+        $data['show_site_menu'] = false;
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock('Waynestate\Api\Connector');
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn([]);
+
+        // Get the promos
+        $promos = app('App\Repositories\PromoRepository', ['wsuApi' => $wsuApi])->getRequestData($data);
+
+        $this->assertTrue(in_array('ExampleController', config('base.hero_full_controllers')));
+    }
+
+    /**
      * @covers App\Repositories\PromoRepository::getHomepagePromos
      * @test
      */
