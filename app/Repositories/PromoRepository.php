@@ -164,6 +164,8 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         unset($promos['main_social']);
         unset($promos['main_contact']);
 
+
+        dump($promos);
         return $promos;
     }
 }

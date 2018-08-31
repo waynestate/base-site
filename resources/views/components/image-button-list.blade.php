@@ -13,6 +13,9 @@
                 @else
                     @image($image['relative_url'], $image['title'])
                 @endif
+            @elseif(!empty($image['relative_url']) && !empty($image['secondary_image']))
+                <img src="/promos/{{ $image['promo_group_id'] }}/{{ $image['secondary_image']}}">
+                true
             @else
                 {{ $image['title'] }}
             @endif

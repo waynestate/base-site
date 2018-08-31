@@ -33,7 +33,7 @@
                 @yield('below_menu')
 
                 @if(!empty($under_menu))
-                    @include('components.image-button-list', ['images' => $under_menu])
+                    @include('components.under-menu', ['images' => $under_menu])
                 @endif
             </nav>
         </div>
