@@ -26,7 +26,8 @@ class Page implements FactoryContract
             $data[$i] = [
                 'site' => [
                     'id' => 2,
-                    'title' => 'Styleguide',
+                    'title' => 'Site style guide',
+                    'short-title' => 'Styleguide',
                     'keywords' => '',
                     'subsite-folder' => null,
                     'parent' => [
