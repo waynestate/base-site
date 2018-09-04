@@ -4,6 +4,7 @@ import './polyfills/foreach';
 import './polyfills/prepend';
 
 // Modules
+import './modules/search';
 import './modules/table';
 import './modules/sticky';
 import './modules/formfilter';

@@ -4,7 +4,7 @@
 --}}
 <div class="menu-top-container bg-green-dark">
     <div class="row flex">
-        <div class="flex-grow mx-4 py-2">
+        <div class="hidden mt:inline-flex mt:flex-grow mx-4 py-2">
             @if(config('base.surtitle') !== null && ($site['parent']['id'] === null && config('base.surtitle_main_site_enabled') === true) || ($site['parent']['id'] !== null && config('base.surtitle') !== null))
                 <h1 class="text-base mb-0 font-normal">
                     <a href="{{ config('base.surtitle_url') }}" class="text-white">{{ config('base.surtitle') }}</a>
@@ -14,6 +14,14 @@
             @else
                 <h1 class="font-normal text-2xl leading-none py-3"><a href="/{{ $site['subsite-folder'] !== null ? rtrim($site['subsite-folder'], '/') : '' }}" class="text-white">{{ $site['title'] }}</a></h1>
             @endif
+        </div>
+
+        <div class="flex-grow mx-4 py-2 mt:hidden">
+            <h1 class="short-title font-normal text-2xl leading-none py-3">
+                <a href="/{{ $site['subsite-folder'] !== null ? rtrim($site['subsite-folder'], '/') : '' }}" class="text-white">
+                    {{ $site['short-title'] !== '' ? $site['short-title'] : $site['title'] }}
+                </a>
+            </h1>
         </div>
 
         @if(config('base.top_menu_enabled') === true)
