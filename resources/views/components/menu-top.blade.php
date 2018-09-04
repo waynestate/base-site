@@ -4,7 +4,7 @@
 --}}
 <div class="menu-top-container bg-green-dark">
     <div class="row flex">
-        <div class="hidden mt:inline-flex mt:flex-grow mx-4 py-2">
+        <div class="hidden mt:block mt:flex-grow mx-4 py-2">
             @if(config('base.surtitle') !== null && ($site['parent']['id'] === null && config('base.surtitle_main_site_enabled') === true) || ($site['parent']['id'] !== null && config('base.surtitle') !== null))
                 <h1 class="text-base mb-0 font-normal">
                     <a href="{{ config('base.surtitle_url') }}" class="text-white">{{ config('base.surtitle') }}</a>
