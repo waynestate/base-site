@@ -13,7 +13,7 @@ class PromoRepository extends Repository
     {
         // Define the pages that have under menu promos: page_id => quanity
         $under_menu_page_ids = [
-            100 => 8, // Styleguide
+            100 => 12, // Styleguide
         ];
 
         // Only pull under_menu promos if they match the page_ids that are specified

@@ -15,7 +15,7 @@ class ImageButtonListController extends Controller
      */
     public function index(Request $request)
     {
-        $promos['imagebutton'] = app('Factories\ImageButton')->create(50);
+        $promos['imagebutton'] = app('Factories\ImageButton')->create(15);
 
         return view('styleguide-image-button-list', merge($request->data, $promos));
     }
