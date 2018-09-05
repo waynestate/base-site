@@ -6,45 +6,20 @@
 
 @foreach($images as $image)
     <div class="min-w-full{{ empty($class) ? ' my-4' : '' }}">
-        @if(empty($image['option']))
-            @include('components.button-default', ['button' => $image])
-        @endif
-
-        @if(!empty($image['option']) && $image['option'] === 'Bg gradient green')
-            @include('components.button-bg-gradient-green', ['button' => $image])
-        @endif
-
-        @if(!empty($image['option']) && $image['option'] === 'Bg image dark')
-            @include('components.button-bg-image-dark', ['button' => $image])
-        @endif
-
-        @if(!empty($image['option']) && $image['option'] === 'Bg image light')
-            @include('components.button-bg-image-light', ['button' => $image])
-        @endif
-
-        @if(!empty($image['option']) && $image['option'] === 'Icon dark')
-            @include('components.button-icon-dark', ['button' => $image])
-        @endif
-
-        @if(!empty($image['option']) && $image['option'] === 'Icon light')
-            @include('components.button-icon-light', ['button' => $image])
-        @endif
-
-        @if(!empty($image['option']) && $image['option'] === 'Icon dark w/ img bg')
-            @include('components.button-icon-dark-w-img-bg', ['button' => $image])
-        @endif
-
-        @if(!empty($image['option']) && $image['option'] === 'Icon light w/ img bg')
-            @include('components.button-icon-light-w-img-bg', ['button' => $image])
-        @endif
-
-        @if(!empty($image['option']) && $image['option'] === 'SVG overlay dark')
-            @include('components.button-svg-overlay-dark', ['button' => $image])
-        @endif
-
-        @if(!empty($image['option']) && $image['option'] === 'SVG overlay light')
-            @include('components.button-svg-overlay-light', ['button' => $image])
-        @endif
+        @if(!empty($image['link']))<a href="{{ $image['link'] }}" @if(empty($image['relative_url']))class="button expanded"@endif>@endif
+            @if(!empty($image['relative_url']))
+                @if($loop->first == true)
+                    <img class="min-w-full" src="{{ $image['relative_url'] }}" alt="{{ $image['title'] }}" />
+                @else
+                    @image($image['relative_url'], $image['title'])
+                @endif
+            @elseif(!empty($image['relative_url']) && !empty($image['secondary_image']))
+                <img src="/promos/{{ $image['promo_group_id'] }}/{{ $image['secondary_image']}}">
+                true
+            @else
+                {{ $image['title'] }}
+            @endif
+        @if(!empty($image['link']))</a>@endif
     </div>
 @endforeach
 
