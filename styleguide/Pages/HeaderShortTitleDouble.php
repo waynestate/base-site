@@ -13,7 +13,7 @@ class HeaderShortTitleDouble extends Page
             'page' => [
                 'controller' => 'HeaderShortTitleDoubleController',
                 'title' => 'Header title double w/short title',
-                'id' => 102100104,
+                'id' => 102100103,
             ],
         ]);
     }
