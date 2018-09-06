@@ -24,6 +24,7 @@
 
                 @if(!empty($site_menu_output))
                     {!! $site_menu_output !!}
+                    <hr class="mb-2">
                 @endif
 
                 @if(!empty($banner))

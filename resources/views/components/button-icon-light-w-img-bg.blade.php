@@ -1,17 +1,17 @@
 {{--
-    $button => array // [['title', 'link', 'excerpt', 'relative_url', 'secondary_image']]
+    $button => array // [['title', 'link', 'excerpt', 'relative_url', 'secondary_relative_url']]
 --}}
 
-<a href="{{ $button['link'] }}" class="block min-w-full relative rounded bg-grey-lighter bg-cover" style="padding-top: 36.39%; background-image: url('{{ $button['relative_url'] }}'); ">
-    <div class="absolute pin p-4 rounded bg-grey-lighter opacity-65"></div>
-    <div class="absolute min-w-full flex pin content-start items-center p-4">
-        <div class="w-1/4">
-        <!-- TODO: DELETE // Dealing with styleguide secondary image -->@if(!empty($promo_group_id)) <img src="/promos/{{ $button['promo_group_id'] }}/{{ $button['secondary_image']}}"> @else <img src="{{ $button['secondary_image']}}"> @endif
+<a href="{{ $button['link'] }}" class="block min-w-full relative rounded bg-grey-lighter bg-cover" style="background-image: url('{{ $button['relative_url'] }}'); ">
+    <div class="absolute pin rounded bg-white opacity-65"></div>
+    <div class="min-w-full flex p-3 xl:p-4 relative @if(!empty($button['excerpt'])) items-top @else items-center @endif">
+        <div class="w-1/6">
+            <img src="{{ $button['secondary_relative_url']}}" class="block" aria-hidden="true" alt="" role="presentation">
         </div>
-        <div class="w-3/4 pl-4">
-            <div class="block text-xl font-bold text-black leading-tight">{{ $button['title'] }}</div>
+        <div class="w-5/6 pl-2 xl:pl-4">
+            <div class="block text-md xl:text-xl font-bold text-black leading-tight">{{ $button['title'] }}</div>
             @if(!empty($button['excerpt']))
-                <div class="block text-black leading-tight">{{ $button['excerpt'] }}</div>
+                <div class="leading-tight text-sm text-black pb-1">{{ $button['excerpt'] }}</div>
             @endif
         </div>
     </div>

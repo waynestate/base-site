@@ -27,13 +27,3 @@
 // Tailwind
 @tailwind components;
 @tailwind utilities;
-
-.bg-gradient-green {
-    background-color: #093f39;
-    background-image: linear-gradient(180deg, #0c5449 0, #093f39);
-
-    &:hover {
-        background-color: #093f39;
-        background-image: none;
-    }
-}

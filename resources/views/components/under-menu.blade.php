@@ -5,7 +5,7 @@
 @if(!empty($class))<div class="{{ $class }}">@endif
 
 @foreach($buttons as $button)
-    <div class="min-w-full{{ empty($class) ? ' my-4' : '' }}">
+    <div class="min-w-full px-4 mt:px-0{{ empty($class) ? ' mb-4' : '' }}">
         @if(empty($button['option']))
             @include('components.button-default', ['button' => $button])
         @endif
