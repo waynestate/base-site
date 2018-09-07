@@ -643,4 +643,66 @@ class MenuRepositoryTest extends TestCase
 
         $this->assertFalse($menus['show_site_menu']);
     }
+
+    /**
+     * @covers App\Repositories\MenuRepository::getMenus
+     * @test
+     */
+    public function page_should_show_full_width_hero_with_no_site_menu()
+    {
+        // Create a fake data request
+        $page = app('Factories\Page')->create(
+            1,
+            true,
+            [
+                'page' => [
+                    'controller' => 'ExampleController',
+                ],
+                'menu' => [
+                    'id' => 1,
+                ],
+            ]
+        );
+
+        // Fake a site menu with no menu
+        $menu[$page['menu']['id']] = [];
+
+        // Parse the site menu
+        app('App\Repositories\MenuRepository')->getMenus($page, $menu);
+
+        $this->assertTrue(in_array('ExampleController', config('base.hero_full_controllers')));
+    }
+
+    /**
+     * @covers App\Repositories\MenuRepository::getMenus
+     * @test
+     */
+    public function page_should_show_full_width_hero_with_site_menu_but_menu_is_hidden()
+    {
+        // Create a fake data request
+        $page = app('Factories\Page')->create(
+            1,
+            true,
+            [
+                'page' => [
+                    'controller' => 'HomepageController',
+                ],
+                'menu' => [
+                    'id' => 1,
+                ],
+            ]
+        );
+
+        // Set default config values
+        config(['base.hero_full_controllers' => []]);
+        config(['base.homepage_menu_enabled' => false]);
+
+        // Fake a site menu
+        $menu[$page['menu']['id']] = app('Factories\Menu')->create(5);
+
+        // Parse the site menu
+        app('App\Repositories\MenuRepository')->getMenus($page, $menu);
+
+        $this->assertTrue(in_array('HomepageController', config('base.hero_full_controllers')));
+    }
 }
