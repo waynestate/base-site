@@ -13,7 +13,7 @@
                         @else
                             <h2>Default</h2>
                         @endif
-                        
+
                         @include('components.under-menu', ['buttons' => $button])
                     </div>
                 @endforeach

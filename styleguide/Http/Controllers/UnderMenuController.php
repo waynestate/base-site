@@ -37,8 +37,8 @@ class UnderMenuController extends Controller
         $promos['buttons']['default'] = app('Factories\UnderMenu')->create(4);
 
         // Default button with green gradient bg
-        $promos['buttons']['default_gradient'] = app('Factories\UnderMenu')->create(4, false, [
-            'option' => 'Bg gradient green',
+        $promos['buttons']['default_dark'] = app('Factories\UnderMenu')->create(4, false, [
+            'option' => 'Default dark',
         ]);
 
         // Grey button with two lines
@@ -47,8 +47,8 @@ class UnderMenuController extends Controller
         ]);
 
         // Green gradient button with two lines
-        $promos['buttons']['two_line_gradient'] = app('Factories\UnderMenu')->create(4, false, [
-            'option' => 'Bg gradient green',
+        $promos['buttons']['two_line_dark'] = app('Factories\UnderMenu')->create(4, false, [
+            'option' => 'Default dark',
             'excerpt' => ucfirst(implode(' ', $this->faker->words(3))),
         ]);
 
@@ -66,43 +66,27 @@ class UnderMenuController extends Controller
             'excerpt' => ucfirst(implode(' ', $this->faker->words(3))),
         ]);
 
-        // Icon light with background image
-        $promos['buttons']['icon_light_bg_img'] = app('Factories\UnderMenu')->create(4, false, [
-            'option' => 'Icon light w/ img bg',
-            'relative_url' => $bg_light,
-            'secondary_relative_url' => $icon_light,
-        ]);
-
-        // Icon dark with background image
-        $promos['buttons']['icon_dark_bg_img'] = app('Factories\UnderMenu')->create(4, false, [
-            'option' => 'Icon dark w/ img bg',
-            'relative_url' => $bg_dark,
-            'secondary_relative_url' => $icon_dark,
-        ]);
-
         // Bg image light
         $promos['buttons']['bg_image_light'] = app('Factories\UnderMenu')->create(4, false, [
             'option' => 'Bg image light',
             'relative_url' => $bg_light,
-            'secondary_relative_url' => $icon_light,
         ]);
 
         // Bg image dark
         $promos['buttons']['bg_image_dark'] = app('Factories\UnderMenu')->create(4, false, [
             'option' => 'Bg image dark',
             'relative_url' => $bg_dark,
-            'secondary_relative_url' => $icon_dark,
         ]);
 
         // SVG overlay light
-        $promos['buttons']['bg_image_light'] = app('Factories\UnderMenu')->create(4, false, [
+        $promos['buttons']['svg_overlay_light'] = app('Factories\UnderMenu')->create(4, false, [
             'option' => 'SVG overlay light',
             'relative_url' => $bg_light,
             'secondary_relative_url' => $svg_light,
         ]);
 
         // SVG overlay dark
-        $promos['buttons']['bg_image_dark'] = app('Factories\UnderMenu')->create(4, false, [
+        $promos['buttons']['svg_overlay_dark'] = app('Factories\UnderMenu')->create(4, false, [
             'option' => 'SVG overlay dark',
             'relative_url' => $bg_dark,
             'secondary_relative_url' => $svg_dark,
