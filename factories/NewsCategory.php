@@ -20,7 +20,7 @@ class NewsCategory implements FactoryContract
     /**
      * {@inheritdoc}
      */
-    public function create($limit = 1, $flatten = false)
+    public function create($limit = 1, $flatten = false, $options = [])
     {
         $site_id = $this->faker->randomDigit;
 
@@ -35,6 +35,8 @@ class NewsCategory implements FactoryContract
                 'slug' => str_slug($category),
                 'link' => '/styleguide/news/category/'.str_slug($category),
             ];
+
+            $data[$i] = array_replace_recursive($data[$i], $options);
         }
 
         if ($limit === 1 && $flatten === true) {

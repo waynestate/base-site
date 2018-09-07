@@ -50,7 +50,6 @@ class Page implements FactoryContract
                 'data' => [],
             ];
 
-            // Merge in overrides
             $data[$i] = array_replace_recursive($data[$i], $options);
         }
 

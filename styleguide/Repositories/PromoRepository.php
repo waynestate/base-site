@@ -42,12 +42,33 @@ class PromoRepository extends Repository
         // Only pull accordion for childpage template
         $accordion = !empty($accordion_page_ids[$data['page']['id']]) ? app('Factories\Accordion')->create($accordion_page_ids[$data['page']['id']]) : null;
 
+        // Every available social icon
+        $icons = [
+            'twitter',
+            'facebook',
+            'instagram',
+            'linkedin',
+            'flickr',
+            'pinterest',
+            'youtube',
+            'snapchat',
+        ];
+
+        // Get all the social icons
+        $social = collect($icons)->map(function ($name) {
+            return app('Factories\FooterSocial')->create(1, true, ['title' => $name]);
+        })
+        ->reject(function ($item) {
+            return empty($item);
+        })
+        ->toArray();
+
         return [
             // Contact footer
             'contact' => app('Factories\FooterContact')->create(1),
 
             // Social footer
-            'social' => app('Factories\FooterSocial')->create(8),
+            'social' => $social,
 
             // Hero
             'hero' => $hero,

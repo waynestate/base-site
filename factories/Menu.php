@@ -23,7 +23,7 @@ class Menu implements FactoryContract
     /**
      * {@inheritdoc}
      */
-    public function create($limit = 1, $flatten = false)
+    public function create($limit = 1, $flatten = false, $options = [])
     {
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
@@ -49,8 +49,12 @@ class Menu implements FactoryContract
                         'relative_url' => '/'.$this->faker->word().$this->faker->word(),
                         'submenu' => [],
                     ];
+
+                    $data[$i]['submenu'][$j] = array_replace_recursive($data[$i]['submenu'][$j], $options);
                 }
             }
+
+            $data[$i] = array_replace_recursive($data[$i], $options);
         }
 
         if ($limit === 1 && $flatten === true) {
