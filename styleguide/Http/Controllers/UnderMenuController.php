@@ -23,108 +23,83 @@ class UnderMenuController extends Controller
         $svg_dark = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNjAgMTMxIj48cGF0aCBkPSJNMTI3LjcgOTFoMTcuMnY1LjFoLTExLjZ2NC43aDExdjUuMWgtMTF2NS4xaDEyLjJ2NS4xaC0xNy44Vjkxem0yNi4zIDE2bC01LjgtOC4xaDYuM2wzLjEgNC43IDMtNC43aDZMMTYxIDEwN2w2LjcgOS4zaC02LjNsLTMuOC01LjgtNC4xIDUuOGgtNi4ybDYuNy05LjN6bTI2IDcuMWMtLjcuOS0xLjUgMS42LTIuNCAyLTEgLjQtMiAuNi0zLjEuNi0uOCAwLTEuNi0uMS0yLjMtLjMtLjctLjItMS40LS42LTItMS0uNi0uNS0xLTEtMS40LTEuNy0uMy0uNy0uNS0xLjQtLjUtMi4zIDAtMSAuMi0xLjguNi0yLjUuNC0uNy45LTEuMyAxLjUtMS43LjYtLjUgMS4zLS44IDIuMi0xLjEuOC0uMiAxLjYtLjQgMi41LS42LjktLjEgMS43LS4yIDIuNi0uMmgyLjRjMC0xLS4zLTEuNy0xLTIuMy0uNy0uNi0xLjUtLjgtMi40LS44cy0xLjcuMi0yLjQuNi0xLjQuOS0xLjkgMS41bC0yLjktMi45YzEtLjkgMi4yLTEuNiAzLjUtMi4xczIuNy0uNyA0LjEtLjdjMS42IDAgMi45LjIgMy45LjZzMS44IDEgMi40IDEuN2MuNi44IDEgMS43IDEuMyAyLjguMiAxLjEuNCAyLjQuNCAzLjh2OC44SDE4MHYtMi4yem0tMS4zLTUuNGMtLjQgMC0uOSAwLTEuNS4xLS42IDAtMS4yLjEtMS43LjMtLjYuMi0xIC40LTEuNC43LS40LjMtLjYuOC0uNiAxLjRzLjMgMS4xLjggMS40IDEuMS41IDEuNy41Yy41IDAgMS0uMSAxLjUtLjJzLjktLjMgMS4zLS42LjctLjYuOS0xIC4zLS45LjMtMS40di0xLjFoLTEuM3YtLjF6bTkuNi05LjhoNS4xdjIuNGguMWMuMi0uMy40LS43LjctMXMuNy0uNiAxLjEtLjljLjQtLjMuOS0uNSAxLjUtLjYuNS0uMiAxLjEtLjIgMS44LS4yIDEuMiAwIDIuMy4yIDMuMi43czEuNiAxLjMgMi4xIDIuNGMuNi0xLjEgMS40LTEuOSAyLjItMi40LjktLjUgMi0uNyAzLjItLjdzMi4xLjIgMi45LjYgMS40LjkgMS45IDEuNi44IDEuNSAxIDIuNC4zIDEuOS4zIDIuOXYxMC4ySDIxMHYtMTAuMWMwLS44LS4yLTEuNS0uNS0yLjFzLTEtLjktMS44LS45Yy0uNiAwLTEuMS4xLTEuNi4zLS40LjItLjcuNS0xIC44LS4yLjQtLjQuOC0uNSAxLjItLjEuNS0uMiAxLS4yIDEuNXY5LjJIMTk5VjEwNS45YzAtLjUtLjEtLjktLjItMS4zcy0uNC0uNy0uNy0xLS44LS40LTEuNC0uNGMtLjcgMC0xLjIuMS0xLjcuNC0uNC4yLS44LjYtMSAxcy0uNC45LS40IDEuNGMtLjEuNS0uMSAxLjEtLjEgMS42djguNmgtNS40Vjk4LjloLjJ6bTMxLjYgMGg0Ljl2Mi4zaC4xYy4yLS4zLjUtLjYuOC0uOXMuOC0uNiAxLjItLjljLjUtLjMgMS0uNSAxLjUtLjYuNS0uMiAxLjEtLjIgMS43LS4yIDEuMyAwIDIuNC4yIDMuNS43IDEgLjQgMS45IDEuMSAyLjcgMS45czEuMyAxLjcgMS43IDIuOGMuNCAxLjEuNiAyLjMuNiAzLjYgMCAxLjItLjIgMi40LS42IDMuNS0uNCAxLjEtLjkgMi4xLTEuNiAyLjktLjcuOS0xLjUgMS41LTIuNSAyLjEtMSAuNS0yLjEuOC0zLjMuOC0xLjEgMC0yLjItLjItMy4xLS41LTEtLjMtMS44LS45LTIuNC0xLjhoLS4xdjEwaC01LjRWOTguOWguM3ptNC45IDguN2MwIDEuMy40IDIuNCAxLjEgMy4yLjcuOCAxLjggMS4yIDMuMiAxLjJzMi40LS40IDMuMi0xLjJjLjctLjggMS4xLTEuOSAxLjEtMy4yIDAtMS4zLS40LTIuNC0xLjEtMy4yLS44LS44LTEuOC0xLjItMy4yLTEuMnMtMi40LjQtMy4yIDEuMmMtLjguOC0xLjEgMS45LTEuMSAzLjJ6bTE3LjEtMTguM2g1LjR2MjdoLTUuNHYtMjd6bTI1LjYgMjRjLS45IDEuMS0xLjkgMS45LTMuMiAyLjUtMS4zLjYtMi43LjktNC4xLjktMS4zIDAtMi42LS4yLTMuOC0uNi0xLjItLjQtMi4yLTEtMy4xLTEuOC0uOS0uOC0xLjYtMS44LTIuMS0yLjlzLS43LTIuNC0uNy0zLjdjMC0xLjQuMi0yLjYuNy0zLjdzMS4yLTIuMSAyLjEtMi45Yy45LS44IDEuOS0xLjQgMy4xLTEuOHMyLjQtLjYgMy44LS42YzEuMiAwIDIuNC4yIDMuNC42czEuOSAxIDIuNiAxLjggMS4yIDEuOCAxLjYgMi45LjYgMi40LjYgMy43djEuN0gyNTZjLjIgMSAuNyAxLjggMS40IDIuNC43LjYgMS42LjkgMi42LjkuOSAwIDEuNi0uMiAyLjItLjZzMS4xLS45IDEuNi0xLjVsMy43IDIuN3ptLTQuNS03LjdjMC0uOS0uMy0xLjctLjktMi4zLS42LS42LTEuNC0xLTIuNC0xLS42IDAtMS4xLjEtMS42LjMtLjUuMi0uOC40LTEuMi43LS4zLjMtLjYuNi0uNyAxLS4yLjQtLjMuOC0uMyAxLjJoNy4xdi4xem0zMC45LTIuNGgtNC43djUuOGMwIC41IDAgLjkuMSAxLjMgMCAuNC4yLjcuMyAxIC4yLjMuNC41LjguNy4zLjIuOC4yIDEuNC4yLjMgMCAuNyAwIDEuMS0uMS41LS4xLjgtLjIgMS4xLS40djQuNWMtLjYuMi0xLjIuNC0xLjkuNC0uNi4xLTEuMy4xLTEuOS4xLS45IDAtMS43LS4xLTIuNS0uMy0uOC0uMi0xLjQtLjUtMi0uOXMtMS0xLTEuMy0xLjZjLS4zLS43LS41LTEuNS0uNS0yLjR2LTguMmgtMy40Vjk5aDMuNHYtNS4xaDUuNFY5OWg0Ljd2NC4yaC0uMXptMTkuMiAxMC4xYy0uOSAxLjEtMS45IDEuOS0zLjIgMi41LTEuMy42LTIuNy45LTQuMS45LTEuMyAwLTIuNi0uMi0zLjgtLjYtMS4yLS40LTIuMi0xLTMuMS0xLjhzLTEuNi0xLjgtMi4xLTIuOS0uNy0yLjQtLjctMy43YzAtMS40LjItMi42LjctMy43czEuMi0yLjEgMi4xLTIuOSAxLjktMS40IDMuMS0xLjggMi40LS42IDMuOC0uNmMxLjIgMCAyLjQuMiAzLjQuNnMxLjkgMSAyLjYgMS44IDEuMiAxLjggMS42IDIuOS42IDIuNC42IDMuN3YxLjdoLTEyLjRjLjIgMSAuNyAxLjggMS40IDIuNC43LjYgMS42LjkgMi42LjkuOSAwIDEuNi0uMiAyLjItLjZzMS4xLS45IDEuNi0xLjVsMy43IDIuN3ptLTQuNi03LjdjMC0uOS0uMy0xLjctLjktMi4zLS42LS42LTEuNC0xLTIuNC0xLS42IDAtMS4xLjEtMS42LjMtLjUuMi0uOC40LTEuMi43LS4zLjMtLjYuNi0uNyAxLS4yLjQtLjMuOC0uMyAxLjJoNy4xdi4xem0xMy4zIDEuNGwtNS44LTguMWg2LjNsMy4xIDQuNyAzLTQuN2g2bC01LjYgOC4xIDYuNyA5LjNIMzI5bC0zLjgtNS44LTQuMSA1LjhIMzE1bDYuOC05LjN6bTI3LTMuOGgtNC43djUuOGMwIC41IDAgLjkuMSAxLjMgMCAuNC4yLjcuMyAxIC4yLjMuNC41LjguNy4zLjIuOC4yIDEuNC4yLjMgMCAuNyAwIDEuMS0uMS41LS4xLjgtLjIgMS4xLS40djQuNWMtLjYuMi0xLjIuNC0xLjkuNC0uNi4xLTEuMy4xLTEuOS4xLS45IDAtMS43LS4xLTIuNS0uMy0uOC0uMi0xLjQtLjUtMi0uOXMtMS0xLTEuMy0xLjZjLS4zLS43LS41LTEuNS0uNS0yLjR2LTguMmgtMy40Vjk5aDMuNHYtNS4xaDUuNFY5OWg0Ljd2NC4yaC0uMXoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=";
 
         // Default button
-        $promos['buttons']['default'] = app('Factories\UnderMenu')->create(4);
-        foreach ($promos['buttons']['default'] as $key => $item) {
-            $promos['buttons']['default'][$key]['excerpt'] = '';
-        };
+        $promos['buttons']['default'] = app('Factories\UnderMenu')->create(4, false, [
+            'excerpt' => '',
+        ]);
 
         // Default button with green gradient bg
-        $promos['buttons']['default_gradient'] = app('Factories\UnderMenu')->create(4);
-        foreach ($promos['buttons']['default_gradient'] as $key => $item) {
-            $promos['buttons']['default_gradient'][$key]['option'] = 'Bg gradient green';
-            $promos['buttons']['default_gradient'][$key]['excerpt'] = '';
-        };
+        $promos['buttons']['default_gradient'] = app('Factories\UnderMenu')->create(4, false, [
+            'option' => 'Bg gradient green',
+            'excerpt' => '',
+        ]);
 
         // Grey button with two lines
         $promos['buttons']['two_line_grey'] = app('Factories\UnderMenu')->create(4);
 
         // Green gradient button with two lines
-        $promos['buttons']['two_line_gradient'] = app('Factories\UnderMenu')->create(4);
-        foreach ($promos['buttons']['two_line_gradient'] as $key => $item) {
-            $promos['buttons']['two_line_gradient'][$key]['option'] = 'Bg gradient green';
-        };
-
-        // Icon light one line
-        $promos['buttons']['icon_light'] = app('Factories\UnderMenu')->create(4);
-        foreach ($promos['buttons']['icon_light'] as $key => $item) {
-            $promos['buttons']['icon_light'][$key]['option'] = 'Icon dark';
-            $promos['buttons']['icon_light'][$key]['secondary_relative_url'] = $icon_light;
-        };
-
-        // Icon dark one line
-        $promos['buttons']['icon_dark'] = app('Factories\UnderMenu')->create(4);
-        foreach ($promos['buttons']['icon_dark'] as $key => $item) {
-            $promos['buttons']['icon_dark'][$key]['option'] = 'Icon dark';
-            $promos['buttons']['icon_dark'][$key]['secondary_relative_url'] = $icon_dark;
-        };
+        $promos['buttons']['two_line_gradient'] = app('Factories\UnderMenu')->create(4, false, [
+            'option' => 'Bg gradient green',
+        ]);
 
         // Icon light two lines
-        $promos['buttons']['icon_light'] = app('Factories\UnderMenu')->create(4);
-        foreach ($promos['buttons']['icon_light'] as $key => $item) {
-            $promos['buttons']['icon_light'][$key]['option'] = 'Icon light';
-            $promos['buttons']['icon_light'][$key]['secondary_relative_url'] = $icon_light;
-        };
+        $promos['buttons']['icon_light'] = app('Factories\UnderMenu')->create(4, false, [
+            'option' => 'Icon light',
+            'secondary_relative_url' => $icon_light,
+        ]);
 
         // Icon dark two lines
-        $promos['buttons']['icon_dark'] = app('Factories\UnderMenu')->create(4);
-        foreach ($promos['buttons']['icon_dark'] as $key => $item) {
-            $promos['buttons']['icon_dark'][$key]['option'] = 'Icon dark';
-            $promos['buttons']['icon_dark'][$key]['secondary_relative_url'] = $icon_dark;
-        };
+        $promos['buttons']['icon_dark'] = app('Factories\UnderMenu')->create(4, false, [
+            'option' => 'Icon dark',
+            'secondary_relative_url' => $icon_dark,
+        ]);
 
         // Icon light with background image
-        $promos['buttons']['icon_light_bg_img'] = app('Factories\UnderMenu')->create(4);
-        foreach ($promos['buttons']['icon_light_bg_img'] as $key => $item) {
-            $promos['buttons']['icon_light_bg_img'][$key]['option'] = 'Icon light w/ img bg';
-            $promos['buttons']['icon_light_bg_img'][$key]['relative_url'] = $bg_light;
-            $promos['buttons']['icon_light_bg_img'][$key]['secondary_relative_url'] = $icon_light;
-            $promos['buttons']['icon_light_bg_img'][$key]['excerpt'] = '';
-        };
+        $promos['buttons']['icon_light_bg_img'] = app('Factories\UnderMenu')->create(4, false, [
+            'option' => 'Icon light w/ img bg',
+            'relative_url' => $bg_light,
+            'secondary_relative_url' => $icon_light,
+            'excerpt' => '',
+        ]);
 
         // Icon dark with background image
-        $promos['buttons']['icon_dark_bg_img'] = app('Factories\UnderMenu')->create(4);
-        foreach ($promos['buttons']['icon_dark_bg_img'] as $key => $item) {
-            $promos['buttons']['icon_dark_bg_img'][$key]['option'] = 'Icon dark w/ img bg';
-            $promos['buttons']['icon_dark_bg_img'][$key]['relative_url'] = $bg_dark;
-            $promos['buttons']['icon_dark_bg_img'][$key]['secondary_relative_url'] = $icon_dark;
-            $promos['buttons']['icon_dark_bg_img'][$key]['excerpt'] = '';
-        };
+        $promos['buttons']['icon_dark_bg_img'] = app('Factories\UnderMenu')->create(4, false, [
+            'option' => 'Icon dark w/ img bg',
+            'relative_url' => $bg_dark,
+            'secondary_relative_url' => $icon_dark,
+            'excerpt' => '',
+        ]);
 
         // Bg image light
-        $promos['buttons']['bg_image_light'] = app('Factories\UnderMenu')->create(4);
-        foreach ($promos['buttons']['bg_image_light'] as $key => $item) {
-            $promos['buttons']['bg_image_light'][$key]['option'] = 'Bg image light';
-            $promos['buttons']['bg_image_light'][$key]['relative_url'] = $bg_light;
-            $promos['buttons']['bg_image_light'][$key]['secondary_relative_url'] = $icon_light;
-            $promos['buttons']['bg_image_light'][$key]['excerpt'] = '';
-        };
+        $promos['buttons']['bg_image_light'] = app('Factories\UnderMenu')->create(4, false, [
+            'option' => 'Bg image light',
+            'relative_url' => $bg_light,
+            'secondary_relative_url' => $icon_light,
+            'excerpt' => '',
+        ]);
 
         // Bg image dark
-        $promos['buttons']['bg_image_dark'] = app('Factories\UnderMenu')->create(4);
-        foreach ($promos['buttons']['bg_image_dark'] as $key => $item) {
-            $promos['buttons']['bg_image_dark'][$key]['option'] = 'Bg image dark';
-            $promos['buttons']['bg_image_dark'][$key]['relative_url'] = $bg_dark;
-            $promos['buttons']['bg_image_dark'][$key]['secondary_relative_url'] = $icon_dark;
-            $promos['buttons']['bg_image_dark'][$key]['excerpt'] = '';
-        };
+        $promos['buttons']['bg_image_dark'] = app('Factories\UnderMenu')->create(4, false, [
+            'option' => 'Bg image dark',
+            'relative_url' => $bg_dark,
+            'secondary_relative_url' => $icon_dark,
+            'excerpt' => '',
+        ]);
 
         // SVG overlay light
-        $promos['buttons']['bg_image_light'] = app('Factories\UnderMenu')->create(4);
-        foreach ($promos['buttons']['bg_image_light'] as $key => $item) {
-            $promos['buttons']['bg_image_light'][$key]['option'] = 'SVG overlay light';
-            $promos['buttons']['bg_image_light'][$key]['relative_url'] = $bg_light;
-            $promos['buttons']['bg_image_light'][$key]['secondary_relative_url'] = $svg_light;
-            $promos['buttons']['bg_image_light'][$key]['excerpt'] = '';
-        };
+        $promos['buttons']['bg_image_light'] = app('Factories\UnderMenu')->create(4, false, [
+            'option' => 'SVG overlay light',
+            'relative_url' => $bg_light,
+            'secondary_relative_url' => $svg_light,
+            'excerpt' => '',
+        ]);
 
         // SVG overlay dark
-        $promos['buttons']['bg_image_dark'] = app('Factories\UnderMenu')->create(4);
-        foreach ($promos['buttons']['bg_image_dark'] as $key => $item) {
-            $promos['buttons']['bg_image_dark'][$key]['option'] = 'SVG overlay dark';
-            $promos['buttons']['bg_image_dark'][$key]['relative_url'] = $bg_dark;
-            $promos['buttons']['bg_image_dark'][$key]['secondary_relative_url'] = $svg_dark;
-            $promos['buttons']['bg_image_dark'][$key]['excerpt'] = '';
-        };
+        $promos['buttons']['bg_image_dark'] = app('Factories\UnderMenu')->create(4, false, [
+            'option' => 'SVG overlay dark',
+            'relative_url' => $bg_dark,
+            'secondary_relative_url' => $svg_dark,
+            'excerpt' => '',
+        ]);
 
         return view('styleguide-under-menu', merge($request->data, $promos));
     }
