@@ -26,8 +26,6 @@ class UnderMenu implements FactoryContract
             $data[$i] = [
                 'link' => $this->faker->url,
                 'title' => ucfirst(implode(' ', $this->faker->words(2))),
-                'excerpt' => ucfirst(implode(' ', $this->faker->words(3))),
-                'option' => '',
             ];
 
             $data[$i] = array_replace_recursive($data[$i], $options);
