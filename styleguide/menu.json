@@ -334,26 +334,6 @@
                 "relative_url": "/styleguide/accordion",
                 "submenu": []
             },
-            "108100": {
-                "menu_item_id": "108100",
-                "is_active": "1",
-                "page_id": "108100",
-                "target": "",
-                "display_name": "Image button list",
-                "class_name": "",
-                "relative_url": "/styleguide/image/button/list",
-                "submenu": []
-            },
-            "109100": {
-                "menu_item_id": "109100",
-                "is_active": "1",
-                "page_id": "109100",
-                "target": "",
-                "display_name": "Image list rotate",
-                "class_name": "",
-                "relative_url": "/styleguide/image/list/rotate",
-                "submenu": []
-            },
             "110100": {
                 "menu_item_id": "110100",
                 "is_active": "1",
