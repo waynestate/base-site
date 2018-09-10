@@ -20,7 +20,7 @@ class Event implements FactoryContract
     /**
      * {@inheritdoc}
      */
-    public function create($limit = 1, $flatten = false)
+    public function create($limit = 1, $flatten = false, $options = [])
     {
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
@@ -30,6 +30,8 @@ class Event implements FactoryContract
                 'start_time' => $this->faker->dateTimeThisMonth('now')->format('H:i:s'),
                 'is_all_day' => $this->faker->boolean,
             ];
+
+            $data[$i] = array_replace_recursive($data[$i], $options);
         }
 
         if ($limit === 1 && $flatten === true) {

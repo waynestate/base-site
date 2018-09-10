@@ -111,6 +111,13 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
             $menus['show_site_menu'] = false;
         }
 
+        // Add to full hero controllers list if the page has no site menu or its not being shown
+        if ((!empty($menus['site_menu']) && empty($menus['site_menu']['menu'])) || (!empty($menus['site_menu']['menu']) && $menus['show_site_menu'] === false)) {
+            $controllers = config('base.hero_full_controllers');
+            array_push($controllers, $data['page']['controller']);
+            config(['base.hero_full_controllers' => $controllers]);
+        }
+
         return $menus;
     }
 

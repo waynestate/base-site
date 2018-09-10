@@ -20,7 +20,7 @@ class Banner implements FactoryContract
     /**
      * {@inheritdoc}
      */
-    public function create($limit = 1, $flatten = false)
+    public function create($limit = 1, $flatten = false, $options = [])
     {
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
@@ -29,6 +29,8 @@ class Banner implements FactoryContract
                 'link' => $this->faker->url,
                 'excerpt' => 'Gift',
             ];
+
+            $data[$i] = array_replace_recursive($data[$i], $options);
         }
 
         if ($limit === 1 && $flatten === true) {

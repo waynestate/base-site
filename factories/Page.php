@@ -26,7 +26,8 @@ class Page implements FactoryContract
             $data[$i] = [
                 'site' => [
                     'id' => 2,
-                    'title' => 'Styleguide',
+                    'title' => 'Site style guide',
+                    'short-title' => '',
                     'keywords' => '',
                     'subsite-folder' => null,
                     'parent' => [
@@ -50,7 +51,6 @@ class Page implements FactoryContract
                 'data' => [],
             ];
 
-            // Merge in overrides
             $data[$i] = array_replace_recursive($data[$i], $options);
         }
 
