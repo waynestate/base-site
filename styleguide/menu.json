@@ -117,6 +117,26 @@
                         "class_name": "",
                         "relative_url": "/styleguide/header/title/double/",
                         "submenu": []
+                    },
+                    "102100102": {
+                        "menu_item_id": "102100102",
+                        "is_active": "1",
+                        "page_id": "102100102",
+                        "target": "",
+                        "display_name": "Header title single w/short title",
+                        "class_name": "",
+                        "relative_url": "/styleguide/header/shorttitle/single",
+                        "submenu": []
+                    },
+                    "102100103": {
+                        "menu_item_id": "102100103",
+                        "is_active": "1",
+                        "page_id": "102100103",
+                        "target": "",
+                        "display_name": "Header title double w/short title",
+                        "class_name": "",
+                        "relative_url": "/styleguide/header/shorttitle/double/",
+                        "submenu": []
                     }
                 }
             },
