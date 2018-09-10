@@ -2,7 +2,7 @@
 
 namespace Styleguide\Pages;
 
-class ImageButtonList extends Page
+class UnderMenu extends Page
 {
     /**
      * {@inheritdoc}
@@ -11,9 +11,9 @@ class ImageButtonList extends Page
     {
         return app('Factories\Page')->create(1, true, [
             'page' => [
-                'controller' => 'ImageButtonListController',
-                'title' => 'Image button list',
-                'id' => 108100,
+                'controller' => 'UnderMenuController',
+                'title' => 'Under menu',
+                'id' => 114100,
             ],
         ]);
     }

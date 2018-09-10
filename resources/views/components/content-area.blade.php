@@ -24,6 +24,7 @@
 
                 @if(!empty($site_menu_output))
                     {!! $site_menu_output !!}
+                    <hr class="mb-2">
                 @endif
 
                 @if(!empty($banner))
@@ -33,7 +34,7 @@
                 @yield('below_menu')
 
                 @if(!empty($under_menu))
-                    @include('components.image-button-list', ['images' => $under_menu])
+                    @include('components.under-menu', ['buttons' => $under_menu])
                 @endif
             </nav>
         </div>
