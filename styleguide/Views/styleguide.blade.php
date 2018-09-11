@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <a class="button" onclick="document.querySelector('pre.two-columns-code').classList.toggle('hidden');">See row/columns code</a>
+        <a href="#two-columns-code" class="button" onclick="document.querySelector('pre.two-columns-code').classList.toggle('hidden');">See row/columns code</a>
         <pre class="two-columns-code hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
             {!! htmlspecialchars('
 <div class="row -mx-4 flex">
@@ -50,7 +50,7 @@
             </div>
         </div>
 
-        <a class="button" onclick="document.querySelector('pre.three-columns-code').classList.toggle('hidden');">See row/columns code</a>
+        <a href="#three-columns-code" class="button" onclick="document.querySelector('pre.three-columns-code').classList.toggle('hidden');">See row/columns code</a>
         <pre class="three-columns-code hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
             {!! htmlspecialchars('
 <div class="row -mx-4 flex">
@@ -91,7 +91,7 @@
             </tbody>
         </table>
 
-        <a class="button" onclick="document.querySelector('pre.table-stack').classList.toggle('hidden');">See table code</a>
+        <a href="#table-stack" class="button" onclick="document.querySelector('pre.table-stack').classList.toggle('hidden');">See table code</a>
 
         <pre class="table-stack hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {!! htmlspecialchars('
@@ -166,7 +166,7 @@
             <p>{{ $faker->paragraph(10) }}</p>
         </blockquote>
 
-        <a class="button" onclick="document.querySelector('pre.blockquote').classList.toggle('hidden');">See blockquote code</a>
+        <a href="#blockquote" class="button" onclick="document.querySelector('pre.blockquote').classList.toggle('hidden');">See blockquote code</a>
 
         <pre class="blockquote hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {!! htmlspecialchars('
@@ -181,10 +181,10 @@
 
         <h2>Buttons</h2>
 
-        <a href="#" class="button">Standard button</a>
-        <a href="#" class="button expanded">Expanded button</a>
+        <a href="#standard-button" class="button">Standard button</a>
+        <a href="#expanded-button" class="button expanded">Expanded button</a>
 
-        <a class="button" onclick="document.querySelector('pre.button-examples').classList.toggle('hidden');">See button code</a>
+        <a href="#button-examples" class="button" onclick="document.querySelector('pre.button-examples').classList.toggle('hidden');">See button code</a>
 
         <pre class="button-examples hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {!! htmlspecialchars('
@@ -212,7 +212,7 @@
 
         <p>@image('/styleguide/image/50x50?text=Icon', 'icon image', 'icon')</p>
 
-        <a class="button" onclick="document.querySelector('pre.image-icon').classList.toggle('hidden');">See image icon code</a>
+        <a href="#image-icon" class="button" onclick="document.querySelector('pre.image-icon').classList.toggle('hidden');">See image icon code</a>
 
         <pre class="image-icon hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {!! htmlspecialchars('
@@ -226,7 +226,7 @@
         <p>Any valid YouTube URL starting with <code>youtu.be</code> or <code>youtube.com/watch</code> will open a lightbox with the video.</p>
         <p><a href="//www.youtube.com/watch?v=guRgefesPXE"><img src="//i.wayne.edu/youtube/guRgefesPXE" alt="View YouTube Video"></a></p>
 
-        <a class="button" onclick="document.querySelector('pre.media-example').classList.toggle('hidden');">See media code</a>
+        <a href="#media-example" class="button" onclick="document.querySelector('pre.media-example').classList.toggle('hidden');">See media code</a>
 
         <pre class="media-example hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {!! htmlspecialchars('
@@ -247,7 +247,7 @@
             <iframe width="420" height="315" src="//www.youtube.com/embed/guRgefesPXE" title="Responsive embed example" frameborder="0" allowfullscreen></iframe>
         </div>
 
-        <a class="button" onclick="document.querySelector('pre.responsive-embed-example').classList.toggle('hidden');">See responsive embed code</a>
+        <a href="#responsive-embed-example" class="button" onclick="document.querySelector('pre.responsive-embed-example').classList.toggle('hidden');">See responsive embed code</a>
 
         <pre class="responsive-embed-example hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {!! htmlspecialchars('
@@ -268,7 +268,7 @@
                     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
                 </figure>
 
-                <a class="button" onclick="document.querySelector('pre.fig-left').classList.toggle('hidden');">See code</a>
+                <a href="#fig-left" class="button" onclick="document.querySelector('pre.fig-left').classList.toggle('hidden');">See code</a>
 
                 <pre class="fig-left hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
                 {!! htmlspecialchars('
@@ -288,7 +288,7 @@
                     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
                 </figure>
 
-                <a class="button" onclick="document.querySelector('pre.fig-center').classList.toggle('hidden');">See code</a>
+                <a href="#fig-center" class="button" onclick="document.querySelector('pre.fig-center').classList.toggle('hidden');">See code</a>
 
                 <pre class="fig-center hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
                 {!! htmlspecialchars('
@@ -308,7 +308,7 @@
                     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
                 </figure>
 
-                <a class="button" onclick="document.querySelector('pre.fig-none').classList.toggle('hidden');">See code</a>
+                <a href="#fig-none" class="button" onclick="document.querySelector('pre.fig-none').classList.toggle('hidden');">See code</a>
 
                 <pre class="fig-none hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
                 {!! htmlspecialchars('
@@ -328,7 +328,7 @@
                     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
                 </figure>
 
-                <a class="button" onclick="document.querySelector('pre.fig-right').classList.toggle('hidden');">See code</a>
+                <a href="#fig-right" class="button" onclick="document.querySelector('pre.fig-right').classList.toggle('hidden');">See code</a>
 
                 <pre class="fig-right hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
                 {!! htmlspecialchars('
@@ -354,7 +354,7 @@
                     <div class="text-black bg-green-lightest px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Lightest</span>
                     </div>
-                    <div class="text-white bg-green-lighter px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-black bg-green-lighter px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Lighter</span>
                     </div>
                     <div class="text-white bg-green-light px-6 py-3 text-sm font-semibold flex justify-between">
@@ -392,10 +392,10 @@
                     <div class="text-black bg-yellow px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Base</span>
                     </div>
-                    <div class="text-white bg-yellow-dark px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-black bg-yellow-dark px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Dark</span>
                     </div>
-                    <div class="text-white bg-yellow-darker px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-black bg-yellow-darker px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Darker</span>
                     </div>
                     <div class="text-white bg-yellow-darkest px-6 py-3 text-sm font-semibold flex justify-between">
@@ -424,7 +424,7 @@
                     <div class="text-black bg-grey px-6 py-3 text-sm font-semibold flex justify-between flex justify-between">
                         <span>Base</span>
                     </div>
-                    <div class="text-white bg-grey-dark px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-black bg-grey-dark px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Dark</span>
                     </div>
                     <div class="text-white bg-grey-darker px-6 py-3 text-sm font-semibold flex justify-between">

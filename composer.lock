@@ -2754,16 +2754,16 @@
         },
         {
             "name": "waynestate/image-faker",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/waynestate/image-faker.git",
-                "reference": "122867bf9b6a9a624eaf658ff141fc0c88b164b4"
+                "reference": "82a9615b46afed7c1e541dd333b673d84e4f96b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/waynestate/image-faker/zipball/122867bf9b6a9a624eaf658ff141fc0c88b164b4",
-                "reference": "122867bf9b6a9a624eaf658ff141fc0c88b164b4",
+                "url": "https://api.github.com/repos/waynestate/image-faker/zipball/82a9615b46afed7c1e541dd333b673d84e4f96b7",
+                "reference": "82a9615b46afed7c1e541dd333b673d84e4f96b7",
                 "shasum": ""
             },
             "require": {
@@ -2800,7 +2800,7 @@
                 }
             ],
             "description": "Fake image generator using the PHP GD library. Accessible through a Laravel route.",
-            "time": "2018-02-07T18:57:46+00:00"
+            "time": "2018-09-11T18:44:58+00:00"
         },
         {
             "name": "waynestate/parse-menu",

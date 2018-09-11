@@ -43,7 +43,7 @@
         @endif
 
         <div class="flex flex-1 justify-end items-center mx-4 mt:hidden">
-            <button class="menu-toggle menu-icon text-white text-3xl mt:hidden" data-toggle="menu" aria-expanded="false" aria-controls="menu" tabindex="0"><span class="visually-hidden">Menu</span></button>
+            <button class="menu-toggle menu-icon text-white text-3xl mt:hidden" data-toggle="menu" aria-controls="menu" area-label="Menu" tabindex="0"><span class="visually-hidden">Menu</span></button>
         </div>
     </div>
 </div>
