@@ -11,7 +11,7 @@
         @include('components.accordion', ['items' => $accordion_page])
     @endif
 
-    <a class="button" onclick="document.querySelector('pre.accordions').classList.toggle('hidden');">See accordion code</a>
+    <a href="#accordions" class="button" onclick="document.querySelector('pre.accordions').classList.toggle('hidden');">See accordion code</a>
 
     <pre class="accordions hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
     {!! htmlspecialchars('
