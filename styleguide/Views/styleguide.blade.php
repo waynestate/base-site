@@ -354,7 +354,7 @@
                     <div class="text-black bg-green-lightest px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Lightest</span>
                     </div>
-                    <div class="text-white bg-green-lighter px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-black bg-green-lighter px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Lighter</span>
                     </div>
                     <div class="text-white bg-green-light px-6 py-3 text-sm font-semibold flex justify-between">
@@ -392,10 +392,10 @@
                     <div class="text-black bg-yellow px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Base</span>
                     </div>
-                    <div class="text-white bg-yellow-dark px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-black bg-yellow-dark px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Dark</span>
                     </div>
-                    <div class="text-white bg-yellow-darker px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-black bg-yellow-darker px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Darker</span>
                     </div>
                     <div class="text-white bg-yellow-darkest px-6 py-3 text-sm font-semibold flex justify-between">
@@ -424,7 +424,7 @@
                     <div class="text-black bg-grey px-6 py-3 text-sm font-semibold flex justify-between flex justify-between">
                         <span>Base</span>
                     </div>
-                    <div class="text-white bg-grey-dark px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-black bg-grey-dark px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Dark</span>
                     </div>
                     <div class="text-white bg-grey-darker px-6 py-3 text-sm font-semibold flex justify-between">
