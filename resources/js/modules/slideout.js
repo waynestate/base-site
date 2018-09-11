@@ -78,13 +78,6 @@ import Slideout from 'slideout/dist/slideout.js';
         slideout.toggle();
     });
 
-     // When tabbing open offcanvas
-     document.querySelector('.menu-toggle').addEventListener('keyup', function (e) {
-        if (e.keyCode == 9) {
-            slideout.open();
-        }
-    });
-
     // Add escape key to close
     document.querySelectorAll('.menu-toggle, #menu a').forEach(function (item) {
         item.addEventListener('keyup', function(e) {
@@ -93,18 +86,6 @@ import Slideout from 'slideout/dist/slideout.js';
             }
         });
     });
-
-    // Get a list of all menu links
-    var all_links = document.querySelectorAll('#menu a');
-
-    // When tabbing off the last link in the menu close offcanvas
-    if(all_links.length > 0) {
-        all_links[all_links.length -1].addEventListener('keydown', function (e) {
-            if (e.keyCode == 9) {
-                slideout.close();
-            }
-        });
-    }
 
     // Hide slideout menu now that javascript is available
     if(document.querySelector('#menu') != null) {
