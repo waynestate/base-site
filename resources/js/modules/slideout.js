@@ -20,7 +20,6 @@ import Slideout from 'slideout/dist/slideout.js';
         document.querySelector('.menu-toggle').classList.add('menu-icon');
         document.querySelector('#menu').classList.add('hidden');
         document.querySelector('#menu').setAttribute('aria-hidden', 'true');
-        document.querySelector('.menu-toggle').setAttribute('aria-expanded', 'false');
         window.scrollTo(0,0);
     });
 
@@ -31,7 +30,6 @@ import Slideout from 'slideout/dist/slideout.js';
         document.querySelector('.menu-toggle').classList.remove('menu-icon');
         document.querySelector('#menu').classList.remove('hidden');
         document.querySelector('#menu').setAttribute('aria-hidden', 'false');
-        document.querySelector('.menu-toggle').setAttribute('aria-expanded', 'true');
         window.scrollTo(0,0);
     });
 
