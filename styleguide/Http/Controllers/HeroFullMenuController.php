@@ -15,7 +15,10 @@ class HeroFullMenuController extends Controller
      */
     public function index(Request $request)
     {
-        config(['base.hero_contained' => false]);
+        config([
+            'base.hero_contained' => false,
+            'base.hero_full_controllers' => ['HeroFullMenuController'],
+        ]);
 
         return view('styleguide-childpage', merge($request->data));
     }
