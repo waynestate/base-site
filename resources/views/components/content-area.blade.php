@@ -28,7 +28,9 @@
                 @endif
 
                 @if(!empty($banner))
-                    <a href="{{ $banner['link'] }}" class="my-4 min-w-full button expanded mt:hidden">{{ $banner['title'] }} {{ $banner['excerpt'] }}</a>
+                    <div class="min-w-full px-4 mt:px-0 mb-4 mt:hidden">
+                        <a href="{{ $banner['link'] }}" class="button expanded uppercase">{{ $banner['title'] }} <span class="excerpt normal-case text-xl italic font-serif">{{ $banner['excerpt'] }}</span></a>
+                    </div>
                 @endif
 
                 @yield('below_menu')
