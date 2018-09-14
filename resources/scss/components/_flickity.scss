@@ -1,0 +1,43 @@
+button.flickity-button.flickity-prev-next-button.previous::before,
+button.flickity-button.flickity-prev-next-button.previous::after,
+button.flickity-button.flickity-prev-next-button.next::before,
+button.flickity-button.flickity-prev-next-button.next::after {
+    content: '';
+    position: absolute;
+    background: transparent;
+    transform-origin: 0, 0;
+    z-index: -1;
+    background-color: rgba(5, 33, 30, 0.4);
+}
+
+button.flickity-button.flickity-prev-next-button.next::after {
+    transform: rotate(45deg);
+    width: 4px;
+    height: 18px;
+    top: 20px;
+    right: 9px;
+}
+
+button.flickity-button.flickity-prev-next-button.next::before {
+    transform: rotate(-45deg);
+    width: 4px;
+    height: 17px;
+    top: 9px;
+    right: 9px;
+}
+
+button.flickity-button.flickity-prev-next-button.previous::after {
+    transform: rotate(-45deg);
+    width: 4px;
+    height: 18px;
+    top: 20px;
+    left: 9px;
+}
+
+button.flickity-button.flickity-prev-next-button.previous::before {
+    transform: rotate(45deg);
+    width: 4px;
+    height: 17px;
+    top: 9px;
+    left: 9px;
+}

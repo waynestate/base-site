@@ -1,0 +1,12 @@
+@responsive {
+    .bg-gradient-dark::before {
+        content: '';
+        background-image: radial-gradient(ellipse at center bottom, rgba(#05211e, 0.9) 10%, rgba(#05211e, 0) 50%);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 500%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
