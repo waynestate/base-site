@@ -27,7 +27,7 @@ class PromoRepository extends Repository
             101101 => 1, // Homepage
             105100100 => 1, // Hero Contained
             105100101 => 3, // Hero Contained (Rotate)
-            105100102 => 1, // Hero Contained (Text)
+            105100102 => 3, // Hero Contained (Text)
             105100103 => 3, // Hero Contained (Text/Link)
             105100107 => 1, // Hero Full (Text/Link)
         ];
