@@ -1,0 +1,47 @@
+button.flickity-button.flickity-prev-next-button.previous::before,
+button.flickity-button.flickity-prev-next-button.previous::after,
+button.flickity-button.flickity-prev-next-button.next::before,
+button.flickity-button.flickity-prev-next-button.next::after {
+    content: '';
+    position: absolute;
+    background: transparent;
+    transform-origin: 0, 0;
+    z-index: -1;
+    background-color: rgba(5, 33, 30, 0.4);
+}
+
+button.flickity-button.flickity-prev-next-button.next::after {
+    transform: rotate(45deg);
+    width: 0.26em;
+    height: 1.14em;
+    top: 1.19em;
+    right: 0.51em;
+    box-shadow: 0 1px 1px rgba(5, 33, 30, 0.4);
+}
+
+button.flickity-button.flickity-prev-next-button.next::before {
+    transform: rotate(-45deg);
+    width: 0.26em;
+    height: 1em;
+    top: 0.6em;
+    right: 0.54em;
+    box-shadow: 0 1px 1px rgba(5, 33, 30, 0.4);
+}
+
+button.flickity-button.flickity-prev-next-button.previous::after {
+    transform: rotate(-45deg);
+    width: 0.26em;
+    height: 1.14em;
+    top: 1.19em;
+    left: 0.51em;
+    box-shadow: 0 1px 1px rgba(5, 33, 30, 0.4);
+}
+
+button.flickity-button.flickity-prev-next-button.previous::before {
+    transform: rotate(45deg);
+    width: 0.26em;
+    height: 1em;
+    top: 0.6em;
+    left: 0.54em;
+    box-shadow: 0 1px 1px rgba(5, 33, 30, 0.4);
+}

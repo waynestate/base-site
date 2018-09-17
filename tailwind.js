@@ -617,7 +617,7 @@ module.exports = {
         '20': '5rem',
         '24': '6rem',
         '32': '8rem',
-        'partial' : '36.3%',
+        'hero' : '36.3%',
         'full' : '100%',
     },
 
