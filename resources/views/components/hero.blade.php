@@ -10,7 +10,7 @@
                 <div class="md:absolute md:pin-b md:pin-x md:text-white md:text-shadow-dark @if(count($images) > 1) p-6 @else py-4 @if(in_array($page['controller'], config('base.hero_full_controllers')))lg:pb-10 @endif @endif">
                     <div class="row">
                         <div class="mx-4">
-                            <h1 class="leading-tight text-2xl @if(in_array($page['controller'], config('base.hero_full_controllers')))xl:text-5xl @else xl:text-4xl @endif">{{ $image['title'] }}</h1>
+                            <h1 class="leading-tight text-2xl @if(in_array($page['controller'], config('base.hero_full_controllers')))xl:text-5xl @else xl:text-3xl @endif">{{ $image['title'] }}</h1>
                             @if(!empty($image['excerpt']))<p class="inline pr-2 md:text-lg">{{ $image['excerpt'] }}</p>@endif
                             @if(!empty($image['link']))<a href="{{ $image['link'] }}" class="underline font-bold hover:no-underline md:text-white md:text-lg">{{ config('base.hero_text_more') }}</a>@endif
                         </div>
