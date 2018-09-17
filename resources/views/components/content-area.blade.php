@@ -5,6 +5,8 @@
 
     @if(!empty($hero) && in_array($page['controller'], config('base.hero_full_controllers')))
         @include('components.hero', ['images' => $hero])
+
+        @yield('under-hero')
     @endif
 
     @if(!in_array($page['controller'], config('base.full_width_controllers')))<div class="row mt:flex">@endif
@@ -43,7 +45,9 @@
 
     <div class="w-full{{ !in_array($page['controller'], config('base.full_width_controllers')) ? ' px-4' : '' }} {{$show_site_menu === true ? 'mt:w-3/4' : '' }} content-area mb-8">
             @if(!empty($hero) && !in_array($page['controller'], config('base.hero_full_controllers')))
-                @include('components.hero', ['images' => $hero, 'class' => 'hero--childpage'])
+                @include('components.hero', ['images' => $hero])
+
+                @yield('under-hero')
             @endif
 
             @if(!empty($breadcrumbs))

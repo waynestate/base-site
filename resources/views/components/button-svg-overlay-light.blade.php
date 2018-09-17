@@ -6,7 +6,7 @@
     <a href="{{ $button['link'] }}" class="block min-w-full relative rounded bg-cover bg-grey-lighter" style="padding-top: 36.39%; background-image: url('{{ $button['relative_url'] }}'); ">
         <div class="absolute pin p-4 rounded bg-white opacity-65"></div>
         <div class="absolute min-w-full pin rounded">
-            <img src="{{ $button['secondary_relative_url']}}">
+            <img src="{{ $button['secondary_relative_url']}}" alt="{{ $button['title'] }}">
         </div>
     </a>
 @endif
