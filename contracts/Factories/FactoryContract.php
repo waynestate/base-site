@@ -9,7 +9,8 @@ interface FactoryContract
      *
      * @param int $limit
      * @param bool $flatten
+     * @param array $options
      * @return array
      */
-    public function create($limit, $flatten);
+    public function create($limit, $flatten, $options);
 }

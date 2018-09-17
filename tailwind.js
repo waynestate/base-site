@@ -617,7 +617,7 @@ module.exports = {
         '20': '5rem',
         '24': '6rem',
         '32': '8rem',
-        'partial' : '36.3%',
+        'hero' : '36.3%',
         'full' : '100%',
     },
 
@@ -736,6 +736,7 @@ module.exports = {
     zIndex: {
         'auto': 'auto',
         '0': 0,
+        '5': 5,
         '10': 10,
         '20': 20,
         '30': 30,
@@ -761,6 +762,7 @@ module.exports = {
         '0': '0',
         '25': '.25',
         '50': '.5',
+        '65': '.65',
         '75': '.75',
         '100': '1',
     },
@@ -850,7 +852,7 @@ module.exports = {
         minHeight: ['responsive'],
         minWidth: ['responsive'],
         negativeMargin: ['responsive'],
-        opacity: ['responsive'],
+        opacity: ['responsive', 'hover'],
         overflow: ['responsive'],
         padding: ['responsive'],
         pointerEvents: ['responsive'],

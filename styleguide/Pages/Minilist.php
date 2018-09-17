@@ -13,7 +13,7 @@ class Minilist extends Page
             'page' => [
                 'controller' => 'MiniListController',
                 'title' => 'Mini list',
-                'id' => 112100,
+                'id' => 110100,
             ],
         ]);
     }

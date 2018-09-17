@@ -4,9 +4,6 @@ namespace Styleguide\Pages;
 
 class HeroFullMenu extends Page
 {
-    /** {@inheritdoc} **/
-    public $path = '/styleguide/hero/full/menu';
-
     /**
      * {@inheritdoc}
      */

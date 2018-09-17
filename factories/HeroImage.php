@@ -20,15 +20,17 @@ class HeroImage implements FactoryContract
     /**
      * {@inheritdoc}
      */
-    public function create($limit = 1, $flatten = false)
+    public function create($limit = 1, $flatten = false, $options = [])
     {
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
                 'link' => $this->faker->url,
-                'excerpt' => $this->faker->sentence,
+                'excerpt' => $this->faker->boolean === true ? $this->faker->sentence : '',
                 'relative_url' => '/styleguide/image/1600x580?text=1600x580%20('.$i.')',
                 'title' => $this->faker->sentence,
             ];
+
+            $data[$i] = array_replace_recursive($data[$i], $options);
         }
 
         if ($limit === 1 && $flatten === true) {

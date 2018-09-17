@@ -17,7 +17,10 @@ class HeroFullController extends Controller
     {
         $request->data['show_site_menu'] = false;
 
-        config(['base.hero_contained' => false]);
+        config([
+            'base.hero_contained' => false,
+            'base.hero_full_controllers' => ['HeroFullController'],
+        ]);
 
         return view('styleguide-childpage', merge($request->data));
     }

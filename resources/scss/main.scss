@@ -8,9 +8,11 @@
 @import "components/global";
 @import "components/accordion";
 @import "components/banner";
+@import "components/bg-gradient";
 @import "components/button";
 @import "components/carousel";
 @import "components/content";
+@import "components/flickity";
 @import "components/formy";
 @import "components/icons";
 @import "components/menu-icon";
@@ -22,8 +24,10 @@
 @import "components/row";
 @import "components/skip";
 @import "components/table-stack";
+@import "components/text-shadow";
 @import "components/visually-hidden";
 
 // Tailwind
 @tailwind components;
 @tailwind utilities;
+

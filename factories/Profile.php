@@ -21,7 +21,7 @@ class Profile implements FactoryContract
     /**
      * {@inheritdoc}
      */
-    public function create($limit = 1, $flatten = false)
+    public function create($limit = 1, $flatten = false, $options = [])
     {
         $groups = collect($this->group->create(4));
 
@@ -53,6 +53,8 @@ class Profile implements FactoryContract
                 ],
                 'link' => '/styleguide/profile/'.$accessid,
             ];
+
+            $data[$i] = array_replace_recursive($data[$i], $options);
         }
 
         if ($limit === 1 && $flatten === true) {

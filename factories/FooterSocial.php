@@ -20,49 +20,16 @@ class FooterSocial implements FactoryContract
     /**
      * {@inheritdoc}
      */
-    public function create($limit = 1, $flatten = false)
+    public function create($limit = 1, $flatten = false, $options = [])
     {
-        $data = [
-            1 => [
+        for ($i = 1; $i <= $limit; $i++) {
+            $data[$i] = [
                 'link' => $this->faker->url,
-                'title' => 'twitter',
-            ],
-            2 => [
-                'link' => $this->faker->url,
-                'title' => 'facebook',
-            ],
-            3 => [
-                'link' => $this->faker->url,
-                'title' => 'instagram',
-            ],
-            4 => [
-                'link' => $this->faker->url,
-                'title' => 'linkedin',
-            ],
-            5 => [
-                'link' => $this->faker->url,
-                'title' => 'flickr',
-            ],
-            6 => [
-                'link' => $this->faker->url,
-                'title' => 'pinterest',
-            ],
-            7 => [
-                'link' => $this->faker->url,
-                'title' => 'youtube',
-            ],
-            8 => [
-                'link' => $this->faker->url,
-                'title' => 'snapchat',
-            ],
-        ];
+                'title' => $this->faker->word,
+            ];
 
-        // Make sure they aren't requesting more icons that we have available
-        if ($limit > count($data)) {
-            $limit = count($data);
+            $data[$i] = array_replace_recursive($data[$i], $options);
         }
-
-        $data = array_slice($data, 0, $limit);
 
         if ($limit === 1 && $flatten === true) {
             return current($data);

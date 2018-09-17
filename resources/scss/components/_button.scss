@@ -1,11 +1,22 @@
 .button {
-    @apply .inline-block .align-middle .mb-2 .px-4 .py-2 .rounded .text-center .bg-green .text-white .text-sm .cursor-pointer;
+    @apply .inline-block .align-middle .mb-2 .px-4 .py-2 .rounded .text-center .bg-grey-lighter .text-green .text-sm .cursor-pointer .font-bold;
 
     &:hover {
-        @apply .bg-green-dark;
+        @apply .bg-grey-lightest;
     }
 }
 
 .expanded {
     @apply .block .w-full .mx-0;
+}
+
+// Background color used on .button, under-menu items, or anywhere
+.bg-gradient-green {
+    background-color: #093f39;
+    background-image: linear-gradient(180deg, #0c5449 0, #093f39);
+
+    &:hover {
+        background-color: #093f39;
+        background-image: none;
+    }
 }

@@ -117,6 +117,26 @@
                         "class_name": "",
                         "relative_url": "/styleguide/header/title/double/",
                         "submenu": []
+                    },
+                    "102100102": {
+                        "menu_item_id": "102100102",
+                        "is_active": "1",
+                        "page_id": "102100102",
+                        "target": "",
+                        "display_name": "Header title single w/short title",
+                        "class_name": "",
+                        "relative_url": "/styleguide/header/shorttitle/single",
+                        "submenu": []
+                    },
+                    "102100103": {
+                        "menu_item_id": "102100103",
+                        "is_active": "1",
+                        "page_id": "102100103",
+                        "target": "",
+                        "display_name": "Header title double w/short title",
+                        "class_name": "",
+                        "relative_url": "/styleguide/header/shorttitle/double/",
+                        "submenu": []
                     }
                 }
             },
@@ -264,7 +284,7 @@
                     "105100106": {
                         "menu_item_id": "105100106",
                         "is_active": "1",
-                        "page_id": null,
+                        "page_id": 3,
                         "target": "",
                         "display_name": "Full width (menu)",
                         "class_name": "",
@@ -339,9 +359,9 @@
                 "is_active": "1",
                 "page_id": "108100",
                 "target": "",
-                "display_name": "Image button list",
+                "display_name": "Mini news",
                 "class_name": "",
-                "relative_url": "/styleguide/image/button/list",
+                "relative_url": "/styleguide/mininews",
                 "submenu": []
             },
             "109100": {
@@ -349,9 +369,9 @@
                 "is_active": "1",
                 "page_id": "109100",
                 "target": "",
-                "display_name": "Image list rotate",
+                "display_name": "Mini events",
                 "class_name": "",
-                "relative_url": "/styleguide/image/list/rotate",
+                "relative_url": "/styleguide/minievents",
                 "submenu": []
             },
             "110100": {
@@ -359,9 +379,9 @@
                 "is_active": "1",
                 "page_id": "110100",
                 "target": "",
-                "display_name": "Mini news",
+                "display_name": "Mini list",
                 "class_name": "",
-                "relative_url": "/styleguide/mininews",
+                "relative_url": "/styleguide/minilist",
                 "submenu": []
             },
             "111100": {
@@ -369,9 +389,9 @@
                 "is_active": "1",
                 "page_id": "111100",
                 "target": "",
-                "display_name": "Mini events",
+                "display_name": "Forms",
                 "class_name": "",
-                "relative_url": "/styleguide/minievents",
+                "relative_url": "/styleguide/forms",
                 "submenu": []
             },
             "112100": {
@@ -379,9 +399,9 @@
                 "is_active": "1",
                 "page_id": "112100",
                 "target": "",
-                "display_name": "Mini list",
+                "display_name": "Banner",
                 "class_name": "",
-                "relative_url": "/styleguide/minilist",
+                "relative_url": "/styleguide/banner",
                 "submenu": []
             },
             "113100": {
@@ -389,9 +409,9 @@
                 "is_active": "1",
                 "page_id": "113100",
                 "target": "",
-                "display_name": "Forms",
+                "display_name": "Table stack",
                 "class_name": "",
-                "relative_url": "/styleguide/forms",
+                "relative_url": "/styleguide/tablestack",
                 "submenu": []
             },
             "114100": {
@@ -399,19 +419,9 @@
                 "is_active": "1",
                 "page_id": "114100",
                 "target": "",
-                "display_name": "Banner",
+                "display_name": "Under menu",
                 "class_name": "",
-                "relative_url": "/styleguide/banner",
-                "submenu": []
-            },
-            "115100": {
-                "menu_item_id": "115100",
-                "is_active": "1",
-                "page_id": "115100",
-                "target": "",
-                "display_name": "Table stack",
-                "class_name": "",
-                "relative_url": "/styleguide/tablestack",
+                "relative_url": "/styleguide/undermenu",
                 "submenu": []
             }
         }

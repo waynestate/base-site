@@ -13,11 +13,11 @@ class PromoRepository extends Repository
     {
         // Define the pages that have under menu promos: page_id => quanity
         $under_menu_page_ids = [
-            100 => 2, // Styleguide
+            100 => 4, // Styleguide
         ];
 
         // Only pull under_menu promos if they match the page_ids that are specified
-        $under_menu = !empty($under_menu_page_ids[$data['page']['id']]) ? app('Factories\ImageButton')->create($under_menu_page_ids[$data['page']['id']]) : null;
+        $under_menu = !empty($under_menu_page_ids[$data['page']['id']]) ? app('Factories\UnderMenu')->create($under_menu_page_ids[$data['page']['id']]) : null;
 
         // Define the pages that have hero images: page_id => quanity
         $hero_page_ids = [
@@ -42,12 +42,33 @@ class PromoRepository extends Repository
         // Only pull accordion for childpage template
         $accordion = !empty($accordion_page_ids[$data['page']['id']]) ? app('Factories\Accordion')->create($accordion_page_ids[$data['page']['id']]) : null;
 
+        // Every available social icon
+        $icons = [
+            'twitter',
+            'facebook',
+            'instagram',
+            'linkedin',
+            'flickr',
+            'pinterest',
+            'youtube',
+            'snapchat',
+        ];
+
+        // Get all the social icons
+        $social = collect($icons)->map(function ($name) {
+            return app('Factories\FooterSocial')->create(1, true, ['title' => $name]);
+        })
+        ->reject(function ($item) {
+            return empty($item);
+        })
+        ->toArray();
+
         return [
             // Contact footer
             'contact' => app('Factories\FooterContact')->create(1),
 
             // Social footer
-            'social' => app('Factories\FooterSocial')->create(8),
+            'social' => $social,
 
             // Hero
             'hero' => $hero,
