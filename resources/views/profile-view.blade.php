@@ -2,12 +2,12 @@
 
 @section('content')
     @if($back_url != '')
-        <div class="profile__return relative">
+        <div class="relative">
             <a href="{{ $back_url }}" class="text-right absolute pin-r md:py-1 pr-4">&lt; Return to listing</a>
         </div>
     @endif
 
-    <div class="row flex flex-wrap profile__block">
+    <div class="row flex flex-wrap">
         <div class="w-full lg:w-1/3 px-4 mt-6">
             @if(!empty($profile['data']['Picture']['url']))
                 <img src="{{ $profile['data']['Picture']['url'] }}" alt="{{ $page['title'] }}" class="sm:h-64 md:h-auto block mx-auto">
