@@ -103,7 +103,6 @@ return [
     | is allowed to have this functionality.
     |
     */
-    'hero_text_enabled' => false,
     'hero_text_controllers' => ['HomepageController'],
     'hero_text_more' => 'View more',
 

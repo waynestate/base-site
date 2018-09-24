@@ -19,7 +19,6 @@ class HeroFullTextLinkController extends Controller
 
         // Set this controller in the allowed controllers list
         config([
-            'base.hero_text_enabled' => true,
             'base.hero_text_controllers' => ['HeroFullTextLinkController'],
             'base.hero_contained' => false,
             'base.hero_full_controllers' => ['HeroFullTextLinkController'],
