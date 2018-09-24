@@ -17,7 +17,6 @@ class HeroContainedTextController extends Controller
     {
         // Set this controller in the allowed controllers list
         config([
-            'base.hero_text_enabled' => true,
             'base.hero_text_controllers' => ['HeroContainedTextController'],
         ]);
 
