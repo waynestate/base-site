@@ -13,9 +13,9 @@ class ProfileRepository extends Repository
     {
         $limit = is_int($selected_group) ? rand(2, 5) : 20;
 
-        $profiles['profiles'] = app('Factories\Profile')->create($limit);
-
-        return $profiles;
+        return [
+            'profiles' => app('Factories\Profile')->create($limit),
+        ];
     }
 
     /**
@@ -23,13 +23,15 @@ class ProfileRepository extends Repository
      */
     public function getDropdownOfGroups($site_id)
     {
-        $groupsArray = collect(app('Factories\ProfileGroup')->create(10))->map(function ($item) {
+        $groups = collect(app('Factories\ProfileGroup')->create(10))->map(function ($item) {
             return $item['display_name'];
-        })->toArray();
+        })
+        ->prepend('All Profiles', '')
+        ->toArray();
 
-        $groups['dropdown_groups'] = ['' => 'All Profiles'] + $groupsArray;
-
-        return $groups;
+        return [
+            'dropdown_groups' => $groups,
+        ];
     }
 
     /**
@@ -37,9 +39,9 @@ class ProfileRepository extends Repository
      */
     public function getProfile($site_id, $accessid)
     {
-        $profile['profile'] = app('Factories\Profile')->create(1, true);
-
-        return $profile;
+        return [
+            'profile' => app('Factories\Profile')->create(1, true),
+        ];
     }
 
     /**

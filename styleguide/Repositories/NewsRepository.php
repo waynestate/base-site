@@ -11,9 +11,9 @@ class NewsRepository extends Repository
      */
     public function getNewsByDisplayOrder($site_id)
     {
-        $news['news'] = app('Factories\NewsItem')->create(4);
-
-        return $news;
+        return [
+            'news' => app('Factories\NewsItem')->create(4),
+        ];
     }
 
     /**
@@ -24,9 +24,9 @@ class NewsRepository extends Repository
         // Stop the paging after page 2 so it doesn't go on forever
         $limit = $page == 2 ? 5 : 25;
 
-        $news['news'] = app('Factories\NewsItem')->create($limit);
-
-        return $news;
+        return [
+            'news' => app('Factories\NewsItem')->create($limit),
+        ];
     }
 
     /**
@@ -34,9 +34,9 @@ class NewsRepository extends Repository
      */
     public function getNewsItem($id, $site_id)
     {
-        $news['news'] = app('Factories\NewsItem')->create(1, true);
-
-        return $news;
+        return [
+            'news' => app('Factories\NewsItem')->create(1, true),
+        ];
     }
 
     /**

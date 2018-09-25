@@ -11,8 +11,8 @@ class EventRepository extends Repository
      */
     public function getEvents($site_id)
     {
-        $events['events'] = app('Factories\Event')->create(4);
-
-        return $events;
+        return [
+            'events' => app('Factories\Event')->create(4),
+        ];
     }
 }
