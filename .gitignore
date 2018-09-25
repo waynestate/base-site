@@ -18,3 +18,4 @@ yarn-error.log
 cs_fixer_tmp*
 .php_cs.cache
 /public/mix-manifest.json
+/*.diff

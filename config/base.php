@@ -4,7 +4,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | WSU API key - Waynestate\Api\Connector
+    | WSU API Key - Waynestate\Api\Connector
     |--------------------------------------------------------------------------
     |
     | Create an API key by going to http://api.wayne.edu/tools/test/raw.php
@@ -16,7 +16,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Google Analytics Code
+    | Google Analytics
     |--------------------------------------------------------------------------
     |
     | The UA- code can be obtained at https://www.google.com/analytics/. The
@@ -80,7 +80,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Hero Rotating Enabled
+    | Hero Rotating
     |--------------------------------------------------------------------------
     |
     | This enables the hero image to have arrows to rotate through them, if
@@ -94,16 +94,15 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Hero Text Enabled
+    | Hero Text
     |--------------------------------------------------------------------------
     |
     | This enables the hero image to have excerpt text and a view more link.
     | You can also specify which controllers you want this to work on by
-    | adding to the array. By default only the homepage controller
-    | is allowed to have this functionality.
+    | adding to the array.
     |
     */
-    'hero_text_controllers' => ['HomepageController'],
+    'hero_text_controllers' => [],
     'hero_text_more' => 'View more',
 
     /*
@@ -121,7 +120,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Profile view back url
+    | Profile View Back Url
     |--------------------------------------------------------------------------
     |
     | Back URL to use when viewing a Individual Profile view in place for the
@@ -132,7 +131,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Profile parent group ID
+    | Profile Parent Group
     |--------------------------------------------------------------------------
     |
     | This will limit the groups displayed to only the children groups under
@@ -169,7 +168,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Global promotion group ids
+    | Global Promotion Groups
     |--------------------------------------------------------------------------
     |
     | Here you can configure the global promotional groups. Subsites are keyed

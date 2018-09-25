@@ -9,5 +9,5 @@ interface PromoRepositoryContract
      *
      * @return array
      */
-    public function getHomepagePromos();
+    public function getHomepagePromos(int $page_id);
 }
