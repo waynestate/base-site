@@ -194,6 +194,11 @@ Feature names should be singular and CamelCased. To create a new feature called 
 1. Remove the comment from the svg file.
 1. Apply this code to the svg tag: `class="{{ $class ?? '' }}" aria-labelledby="{{ $name ?? '' }}"`.
 
+## Lazy loading
+
+1. For <img> replace with: `@image('/path/to/image.jpg', 'alt text', 'optional classes')`
+1. For background images: `<div data-src="/path/to/image.jpg"></div>`
+
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
