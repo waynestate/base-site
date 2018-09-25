@@ -4,7 +4,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | WSU API key - Waynestate\Api\Connector
+    | WSU API Key - Waynestate\Api\Connector
     |--------------------------------------------------------------------------
     |
     | Create an API key by going to http://api.wayne.edu/tools/test/raw.php
@@ -16,7 +16,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Google Analytics Code
+    | Google Analytics
     |--------------------------------------------------------------------------
     |
     | The UA- code can be obtained at https://www.google.com/analytics/. The
@@ -120,7 +120,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Profile view back url
+    | Profile View Back Url
     |--------------------------------------------------------------------------
     |
     | Back URL to use when viewing a Individual Profile view in place for the
@@ -131,7 +131,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Profile parent group ID
+    | Profile Parent Group
     |--------------------------------------------------------------------------
     |
     | This will limit the groups displayed to only the children groups under
@@ -168,7 +168,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Global promotion group ids
+    | Global Promotion Groups
     |--------------------------------------------------------------------------
     |
     | Here you can configure the global promotional groups. Subsites are keyed
