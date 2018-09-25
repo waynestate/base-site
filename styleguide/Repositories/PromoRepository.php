@@ -9,6 +9,17 @@ class PromoRepository extends Repository
     /**
      * {@inheritdoc}
      */
+    public function getHomepagePromos(int $page_id = null)
+    {
+        return [
+            // Example Group
+            //'key' => app('Factories\YourFactory')->create(5),
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getRequestData(array $data)
     {
         // Define the pages that have under menu promos: page_id => quanity
@@ -78,17 +89,6 @@ class PromoRepository extends Repository
 
             // Accordion child page
             'accordion_page' => $accordion,
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getHomepagePromos()
-    {
-        return [
-            // Example Group
-            //'key' => app('Factories\YourFactory')->create(5),
         ];
     }
 }

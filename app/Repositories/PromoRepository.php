@@ -36,14 +36,14 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
     /**
      * {@inheritdoc}
      */
-    public function getHomepagePromos()
+    public function getHomepagePromos(int $page_id = 0)
     {
         $group_reference = [
             123 => 'example',
         ];
 
         $group_config = [
-            'example' => 'first',
+            'example' => 'page_id:'.$page_id.'|randomize|first',
         ];
 
         $params = [
