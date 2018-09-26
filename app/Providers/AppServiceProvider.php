@@ -65,9 +65,6 @@ class AppServiceProvider extends ServiceProvider
                 config('base.wsu_api_key')
             );
 
-            // Set the Cache Directory for the WSU API
-            $api->cache_dir = storage_path().'/app/api/';
-
             return $api;
         });
 
