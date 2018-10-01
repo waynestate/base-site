@@ -206,22 +206,6 @@
 
         <hr>
 
-        <h2>Image icon</h2>
-
-        <p>Images default to span 100% of the container on small view. When using the <code>.icon</code> class you can override this behavior so it defaults to its real height/width.</p>
-
-        <p>@image('/styleguide/image/50x50?text=Icon', 'icon image', 'icon')</p>
-
-        <a href="#image-icon" class="button" onclick="document.querySelector('pre.image-icon').classList.toggle('hidden');">See image icon code</a>
-
-        <pre class="image-icon hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
-        {!! htmlspecialchars('
-<img src="/styleguide/50x50?text=Icon" class="icon" alt="">
-        ') !!}
-        </pre>
-
-        <hr>
-
         <h2>Media</h2>
         <p>Any valid YouTube URL starting with <code>youtu.be</code> or <code>youtube.com/watch</code> will open a lightbox with the video.</p>
         <p><a href="//www.youtube.com/watch?v=guRgefesPXE"><img src="//i.wayne.edu/youtube/guRgefesPXE" alt="View YouTube Video"></a></p>

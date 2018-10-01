@@ -41,26 +41,17 @@
         }
     }
 
-    img {
-        display: block;
-        width: 100%;
-        margin: 10px auto;
-        padding: 0;
+    // Images remain at their specified width
+    // Text appears above and below for small
+    @media (max-width: config('screens.mt')) {
+        img {
+            display: block;
+            margin: 0 auto;
 
-        &[class^="float-"] {
-            float: none !important;
-        }
-
-        &.icon {
-            display: inline-block;
-            width: auto;
-        }
-
-        @screen mt {
-            padding: 10px;
-            width: auto;
-            margin: 0;
-            float: inherit;
+            &[style*="float:right"],
+            &[style*="float:left"] {
+                float: none !important;
+            }
         }
     }
 
