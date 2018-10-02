@@ -134,7 +134,6 @@ echo '----';
 [ -d {{ $shared_dir }}/storage/debugbar ] || mkdir -p -m 0770 {{ $shared_dir }}/storage/debugbar;
 [ -d {{ $shared_dir }}/storage/logs ] || mkdir -p -m 0770 {{ $shared_dir }}/storage/logs;
 [ -d {{ $shared_dir }}/storage/app ] || mkdir -p -m 0770 {{ $shared_dir }}/storage/app;
-[ -d {{ $shared_dir }}/storage/app/api ] || mkdir -p -m 0770 {{ $shared_dir }}/storage/app/api;
 [ -d {{ $shared_dir }}/storage/app/public ] || mkdir -p -m 0770 {{ $shared_dir }}/storage/app/public;
 [ -d {{ $shared_dir }}/storage/framework ] || mkdir -p -m 0770 {{ $shared_dir }}/storage/framework;
 [ -d {{ $shared_dir }}/storage/framework/cache ] || mkdir -p -m 0770 {{ $shared_dir }}/storage/framework/cache;
