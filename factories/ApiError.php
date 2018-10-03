@@ -25,6 +25,7 @@ class ApiError implements FactoryContract
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
                 'error' => [
+                    'status' => $this->faker->numberBetween(100, 199),
                     'message' => $this->faker->sentence,
                 ],
             ];

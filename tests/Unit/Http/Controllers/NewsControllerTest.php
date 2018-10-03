@@ -17,11 +17,7 @@ class NewsControllerTest extends TestCase
     public function news_view_with_no_item_should_404()
     {
         // Fake return
-        $return = [
-            'error' => [
-                'status' => 101,
-            ],
-        ];
+        $return = app('Factories\ApiError')->create(1, true);
 
         // Mock the connector
         $wsuApi = Mockery::mock('Waynestate\Api\Connector');
@@ -46,10 +42,10 @@ class NewsControllerTest extends TestCase
     {
         // Fake return
         $return = [
-            'news' => [
+            'news' => app('Factories\NewsItem')->create(1, true, [
                 'archive' => 0,
                 'ending' => '0000-00-00 00:00:00',
-            ],
+            ]),
         ];
 
         // Mock the connector
@@ -74,10 +70,10 @@ class NewsControllerTest extends TestCase
     {
         // Fake return
         $return = [
-            'news' => [
+            'news' => app('Factories\NewsItem')->create(1, true, [
                 'archive' => 1,
                 'link' => $this->faker->url,
-            ],
+            ]),
         ];
 
         // Mock the connector
@@ -106,24 +102,12 @@ class NewsControllerTest extends TestCase
     {
         // Fake return
         $return = [
-            'news' => [
-                'archive' => 1,
-                'link' => '',
-                'title' => $this->faker->sentence,
-            ],
+            'news' => app('Factories\NewsItem')->create(1, true),
         ];
 
         // Fake request
         $request = new Request();
-        $request->data = [
-            'site' => [
-                'id' => 1,
-                'subsite-folder' => null,
-            ],
-            'page' => [
-                'title' => $this->faker->sentence,
-            ],
-        ];
+        $request->data = app('Factories\Page')->create(1, true);
 
         // Mock the connector
         $wsuApi = Mockery::mock('Waynestate\Api\Connector');
