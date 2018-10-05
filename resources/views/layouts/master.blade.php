@@ -26,7 +26,7 @@
     @include('components.banner', ['banner' => $banner])
 @endif
 
-<main id="panel" tabindex="-1">
+<main id="panel">
     @yield('content-area')
 </main>
 
