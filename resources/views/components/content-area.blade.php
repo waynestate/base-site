@@ -43,7 +43,7 @@
             </nav>
         </div>
 
-    <div class="w-full{{ !in_array($page['controller'], config('base.full_width_controllers')) ? ' px-4' : '' }} {{$show_site_menu === true ? 'mt:w-3/4' : '' }} content-area mb-8" id="content">
+    <div class="w-full{{ !in_array($page['controller'], config('base.full_width_controllers')) ? ' px-4' : '' }} {{$show_site_menu === true ? 'mt:w-3/4' : '' }} content-area mb-8" id="content" tabindex="-1">
             @if(!empty($hero) && !in_array($page['controller'], config('base.hero_full_controllers')))
                 @include('components.hero', ['images' => $hero])
 
