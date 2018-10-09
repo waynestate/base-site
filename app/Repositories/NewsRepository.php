@@ -45,6 +45,7 @@ class NewsRepository implements NewsRepositoryContract
             'order_by' => 'display_order',
             'sort' => 'ASC',
             'server_location' => 'both',
+            'server' => config('app.env'),
             'fields' => 'news_id|title|link|posted|app_id|slug|filename',
             'before' => 'now',
         ];
@@ -72,6 +73,7 @@ class NewsRepository implements NewsRepositoryContract
             'sort' => 'DESC',
             'fields' => 'news_id|title|link|posted|app_id|slug|excerpt|filename',
             'server_location' => 'both',
+            'server' => config('app.env'),
             'limit' => $limit,
             'archive' => '1',
             'offset' => ($page != '' ? $page * $limit : 0),
@@ -97,6 +99,7 @@ class NewsRepository implements NewsRepositoryContract
             'sort' => 'DESC',
             'fields' => 'news_id|title|link|posted|app_id|slug|excerpt|is_archive|ending|body|filename',
             'server_location' => 'both',
+            'server' => config('app.env'),
             'limit' => 1,
         ];
 
