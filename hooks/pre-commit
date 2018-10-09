@@ -47,7 +47,7 @@ if [[ $stylelint == *"'stylelint' failed"* ]]; then
     printf ">> run: make stylelint\n\n"
 fi
 
-if [[ $phpunit == *"FAILURES!"* || $phpunit == *"ERRORS!"* ]]; then
+if [[ $phpunit == *"FAILURES!"* || $phpunit == *"ERRORS!"* || $phpunit == *"Fatal error"* ]]; then
     errors=true;
     printf "phpunit tests failed. Please fix them before committing.\n"
     printf ">> run: make runtests\n"
