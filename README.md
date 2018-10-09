@@ -10,9 +10,9 @@ Starter repository for creating a new website. Live demo can be found at https:/
 
 ## Features
 
-* Backend built on [Laravel v5.6](https://laravel.com/)
+* Backend built on [Laravel](https://laravel.com/)
 * Frontend built on [Tailwind](https://tailwindcss.com/)
-* [Webpack](https://webpack.github.io/)
+* Module bundling using [Webpack](https://webpack.github.io/)
 * Fluent webpack API using [Laravel Mix](https://laravel.com/docs/5.6/mix)
 * Zero downtime deployment using [Envoy](https://laravel.com/docs/5.6/envoy)
 * Configure multiple enviorments using [PHPDotenv](https://github.com/vlucas/phpdotenv)
@@ -29,10 +29,11 @@ Starter repository for creating a new website. Live demo can be found at https:/
 * Menus
     * Top level menu carried across all pages that follows you down the page as you scroll
     * Left menu if a page has subitems, otherwise its a full width page
-    * Offcanvas menu that is triggered on a variable breakpoint that includes
+    * Slideout menu that is triggered on a variable breakpoint that includes
         * The top level menu grouped together
         * Left menu
         * Under menu promotions
+        * Banner promotion
 * [Full styleguide](https://base.wayne.edu/styleguide) detailing out every available component using [PHP faker data](https://github.com/fzaninotto/Faker)
 * [Single](https://base.wayne.edu/styleguide/hero/full) or [rotating](https://base.wayne.edu/styleguide/hero/full/rotate) hero images using [Flickity](https://flickity.metafizzy.co/)
 * Automatically lightbox youtube videos using [Media Box](https://github.com/pinceladasdaweb/mediabox)
@@ -81,9 +82,18 @@ Starter repository for creating a new website. Live demo can be found at https:/
 1. Edit the options to configure the site, some values are present in the `.env` file.
 1. Server specific configuration options come from the `.env` file which need to be manually created/updated on the servers the app is deployed to.
 
-## Request API key
+## Request a WSU API key
 
 Email web@wayne.edu with your request.
+
+## Adding `.env` variables
+1. Add a config option to `config/base.php` called your_key using the `env()` function.
+1. Using it in blade: `<script>var KEY = { API_KEY: {{ config('base.your_key' }} };</script> .`
+1. Using it in PHP: `<?php $key = config('base.your_key'); ?>`
+1. Add a blank entry to your local `.env.example` file for `your_key`
+1. Add an entry with the actual value to your local `.env` file. 
+1. Commit the .env.example file. You may want to put the actual value in the example file when necessary.
+2. Once the site is deployed you will want to add the actual value to the `.env` on each server.
 
 ## Developing global data that is passed down to all views via the `$request->data` variable
 
@@ -194,10 +204,13 @@ Feature names should be singular and CamelCased. To create a new feature called 
 1. Remove the comment from the svg file.
 1. Apply this code to the svg tag: `class="{{ $class ?? '' }}" aria-labelledby="{{ $name ?? '' }}"`.
 
+## Using SVG icons
+1. `<svg>` replace with: `@svg('filename', 'optional classes')`
+
 ## Lazy loading
 
-1. For <img> replace with: `@image('/path/to/image.jpg', 'alt text', 'optional classes')`
-1. For background images: `<div data-src="/path/to/image.jpg"></div>`
+1. `<img>` replace with: `@image('/path/to/image.jpg', 'alt text', 'optional classes')`
+1.  Background images: `<div data-src="/path/to/image.jpg"></div>`
 
 ## Contributing
 

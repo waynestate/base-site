@@ -26,11 +26,9 @@ class Profile implements FactoryContract
         $groups = collect($this->group->create(4));
 
         for ($i = 1; $i <= $limit; $i++) {
-            $accessid = $this->faker->randomLetter.$this->faker->randomLetter.$this->faker->randomNumber(4, true);
-
             $data[$i] = [
                 'data' => [
-                    'AccessID' => $accessid,
+                    'AccessID' => $this->faker->randomLetter.$this->faker->randomLetter.$this->faker->randomNumber(4, true),
                     'First Name' => $this->faker->firstName,
                     'Last Name' => $this->faker->lastName,
                     'Title' => $this->faker->sentence(3),
@@ -51,7 +49,7 @@ class Profile implements FactoryContract
                 'groups' => [
                     $groups->random()['display_name'],
                 ],
-                'link' => '/styleguide/profile/'.$accessid,
+                'link' => '/styleguide/profile/aa0000',
             ];
 
             $data[$i] = array_replace_recursive($data[$i], $options);
