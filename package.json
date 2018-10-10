@@ -1,7 +1,7 @@
 {
   "name": "base",
   "private": true,
-  "version": "5.9.2",
+  "version": "5.9.3",
   "description": "",
   "scripts": {
     "dev": "npm run development",
