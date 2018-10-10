@@ -66,38 +66,6 @@ class NewsControllerTest extends TestCase
      * @covers App\Http\Controllers\NewsController::show
      * @test
      */
-    public function news_item_with_link_should_redirect()
-    {
-        // Fake return
-        $return = [
-            'news' => app('Factories\NewsItem')->create(1, true, [
-                'archive' => 1,
-                'link' => $this->faker->url,
-            ]),
-        ];
-
-        // Mock the connector
-        $wsuApi = Mockery::mock('Waynestate\Api\Connector');
-        $wsuApi->shouldReceive('sendRequest')->with('cms.news.info', Mockery::type('array'))->once()->andReturn($return);
-
-        // Construct the news repository
-        $newsRepository = app('App\Repositories\NewsRepository', ['wsuApi' => $wsuApi]);
-
-        // Construct the news controller
-        $newsController = app('App\Http\Controllers\NewsController', ['news' => $newsRepository]);
-
-        // Call the news listing
-        $redirect = $newsController->show(new Request());
-
-        // Make sure it redirected properly
-        $this->assertEquals(302, $redirect->status());
-        $this->assertEquals($return['news']['link'], $redirect->getTargetUrl());
-    }
-
-    /**
-     * @covers App\Http\Controllers\NewsController::show
-     * @test
-     */
     public function page_title_should_be_news_item_title()
     {
         // Fake return

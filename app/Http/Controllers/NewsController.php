@@ -74,11 +74,6 @@ class NewsController extends Controller
             return abort('404');
         }
 
-        // If it is linked somewhere then redirect to the URL
-        if ($news['news']['link'] != '' && strtolower(substr($news['news']['link'], 0, 4)) == 'http') {
-            return redirect($news['news']['link']);
-        }
-
         // Set the page title to the news item title
         $request->data['page']['title'] = $news['news']['title'];
 
