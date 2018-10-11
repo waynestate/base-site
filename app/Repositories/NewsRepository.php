@@ -125,7 +125,7 @@ class NewsRepository implements NewsRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getCategories($site_id, $subsite=null)
+    public function getCategories($site_id, $subsite=null, $prepend=false)
     {
         $params = [
             'method' => 'cms.news.categories',
@@ -143,6 +143,15 @@ class NewsRepository implements NewsRepositoryContract
             return $item;
         })->toArray();
 
+        if ($prepend === true) {
+            $categories['news_categories'] = collect($categories['news_categories'])->prepend([
+                    'category_id' => null,
+                    'slug' => null,
+                    'category' => 'All categories',
+                    'link' => '/news/',
+            ])->toArray();
+        }
+
         return $categories;
     }
 
@@ -154,7 +163,7 @@ class NewsRepository implements NewsRepositoryContract
         $categories['selected_news_category']['category_id'] = null;
 
         foreach ($categories['news_categories'] as $key => $category) {
-            if ($category['slug'] == $slug) {
+            if (!empty($slug) && $category['slug'] == $slug) {
                 $categories['selected_news_category'] = $category;
             }
         }
