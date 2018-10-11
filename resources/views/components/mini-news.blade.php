@@ -2,7 +2,7 @@
     $news => array // [['news_id', 'slug', 'title']]
     $site => array // ['subsite-folder']
     $heading => string // 'News'
-    $url => string '/news.php'
+    $url => string '/news/'
     $link_text => string // 'More news'
 --}}
 <h2>{{ $heading ?? 'News' }}</h2>
@@ -17,4 +17,4 @@
     @endforeach
 </ul>
 
-<a href="/{{ $url ?? 'news/' }}" class="block my-4 underline hover:no-underline">{{ $link_text ?? 'More news' }}</a>
+<a href="/{{ $url ?? config('base.news_listing_route').'/' }}" class="block my-4 underline hover:no-underline">{{ $link_text ?? 'More news' }}</a>

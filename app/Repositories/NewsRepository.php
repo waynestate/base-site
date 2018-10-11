@@ -147,8 +147,8 @@ class NewsRepository implements NewsRepositoryContract
             $categories['news_categories'] = collect($categories['news_categories'])->prepend([
                     'category_id' => null,
                     'slug' => null,
-                    'category' => 'All categories',
-                    'link' => '/news/',
+                    'category' => config('base.news_all_text'),
+                    'link' => '/'.config('base.news_listing_route').'/',
             ])->toArray();
         }
 

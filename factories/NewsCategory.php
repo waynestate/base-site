@@ -33,7 +33,7 @@ class NewsCategory implements FactoryContract
                 'is_active' => 1,
                 'category' => $category,
                 'slug' => 'example',
-                'link' => '/styleguide/news/category/example',
+                'link' => '/styleguide/'.config('base.news_listing_route').'/'.config('base.news_category_route').'/example',
             ];
 
             $data[$i] = array_replace_recursive($data[$i], $options);

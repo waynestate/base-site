@@ -79,7 +79,7 @@ class NewsRepositoryTest extends TestCase
         $categories = app('App\Repositories\NewsRepository', ['wsuApi' => $wsuApi])->getCategories($this->faker->randomDigit, 'styleguide/', true);
 
         // Make sure it was prepended
-        $this->assertEquals($categories['news_categories'][0]['category'], 'All categories');
+        $this->assertEquals($categories['news_categories'][0]['category'], config('base.news_all_text'));
     }
 
     /**

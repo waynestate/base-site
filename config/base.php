@@ -168,6 +168,22 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | News
+    |--------------------------------------------------------------------------
+    |
+    | Here you can configure the news area. No ending slash for route paths.
+    | If you change a route path from the default value you will need to
+    | also change the CMS pages and styleguide menu path to coincide
+    | with your new path.
+    |
+    */
+    'news_listing_route' => 'news',
+    'news_view_route' => 'news',
+    'news_category_route' => 'category',
+    'news_all_text' => 'All categories',
+
+    /*
+    |--------------------------------------------------------------------------
     | Global Promotion Groups
     |--------------------------------------------------------------------------
     |

@@ -58,8 +58,8 @@ class NewsRepository extends Repository
             $categories['news_categories'] = collect($categories['news_categories'])->prepend([
                     'category_id' => null,
                     'slug' => null,
-                    'category' => 'All categories',
-                    'link' => '/styleguide/news/',
+                    'category' => config('base.news_all_text'),
+                    'link' => '/styleguide/'.config('base.news_listing_route').'/',
             ])->toArray();
         }
 
