@@ -31,7 +31,7 @@ class NewsController extends Controller
     public function index(Request $request)
     {
         // Get the news categories
-        $categories = $this->news->getCategories($request->data['site']['id'], $request->data['site']['subsite-folder']);
+        $categories = $this->news->getCategories($request->data['site']['id'], $request->data['site']['subsite-folder'], true);
 
         // Set the selected category
         $categories = $this->news->setSelectedCategory($categories, $request->slug);
