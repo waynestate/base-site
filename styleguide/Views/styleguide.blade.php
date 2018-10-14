@@ -208,7 +208,7 @@
 
         <h2>Media</h2>
         <p>Any valid YouTube URL starting with <code>youtu.be</code> or <code>youtube.com/watch</code> will open a lightbox with the video.</p>
-        <p><a href="//www.youtube.com/watch?v=guRgefesPXE"><img src="//i.wayne.edu/youtube/guRgefesPXE" alt="View YouTube Video"></a></p>
+        <p><a href="//www.youtube.com/watch?v=guRgefesPXE"><img src="//i.wayne.edu/youtube/guRgefesPXE" alt="School of Medicine Commencement YouTube video"></a></p>
 
         <a href="#media-example" class="button" onclick="document.querySelector('pre.media-example').classList.toggle('hidden');">See media code</a>
 
@@ -216,7 +216,7 @@
         {!! htmlspecialchars('
 <p>
     <a href="//www.youtube.com/watch?v=guRgefesPXE">
-        <img src="//i.wayne.edu/youtube/guRgefesPXE">
+        <img src="//i.wayne.edu/youtube/guRgefesPXE" alt="Description of YouTube video">
     </a>
 </p>
         ') !!}
