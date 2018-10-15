@@ -97,12 +97,12 @@ class DataTest extends TestCase
      */
     public function when_the_request_has_a_matched_route_the_path_should_have_no_route_parameters()
     {
-        $actual_path = 'news/slug-123';
+        $actual_path = config('base.news_view_route').'/slug-123';
 
         $request = new Request([], [], [], [], [], ['REQUEST_URI' => $actual_path]);
 
         $request->setRouteResolver(function () use ($request) {
-            return (new Route('GET', 'news/{slug}-{id}', []))->bind($request);
+            return (new Route('GET', config('base.news_view_route').'/{slug}-{id}', []))->bind($request);
         });
 
         $path = app('App\Http\Middleware\Data')->getPathFromRequest($request);
