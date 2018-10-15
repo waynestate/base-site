@@ -125,6 +125,27 @@ class NewsRepositoryTest extends TestCase
     }
 
     /**
+     * @covers App\Repositories\NewsRepository::getNewsByDisplayOrder
+     * @test
+     */
+    public function getting_news_by_display_order_should_return_array_of_news()
+    {
+        // Fake return
+        $return = [
+            'news' => app('Factories\NewsItem')->create(5),
+        ];
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock('Waynestate\Api\Connector');
+        $wsuApi->shouldReceive('sendRequest')->with('cms.news.listing', Mockery::type('array'))->once()->andReturn($return);
+
+        // Get the news
+        $news = app('App\Repositories\NewsRepository', ['wsuApi' => $wsuApi])->getNewsByDisplayOrder($this->faker->randomDigit);
+
+        $this->assertEquals($return, $news);
+    }
+
+    /**
      * @covers App\Repositories\NewsRepository::getNewsByPage
      * @test
      */
@@ -184,5 +205,27 @@ class NewsRepositoryTest extends TestCase
         $imageUrl = app('App\Repositories\NewsRepository')->getImageUrl($news);
 
         $this->assertEquals($image, $imageUrl);
+    }
+
+    /**
+     * @covers App\Repositories\NewsRepository::setNewsLink
+     * @test
+     */
+    public function setting_news_link_should_change_route_path()
+    {
+        $current_config = config('base.news_view_route');
+        $item = app('Factories\NewsItem')->create(1, true);
+
+        // Default news route path
+        $changed = app('App\Repositories\NewsRepository')->setNewsLink($item);
+        $this->assertEquals($item, $changed);
+
+        // Randomly changing the news view route path
+        $news_view_route = $this->faker->word;
+        config(['base.news_view_route' => $news_view_route]);
+        $changed = app('App\Repositories\NewsRepository')->setNewsLink($item);
+        $this->assertContains($news_view_route, $changed['full_link']);
+
+        config(['base.news_view_route' => $current_config]);
     }
 }

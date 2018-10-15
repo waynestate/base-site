@@ -14,7 +14,7 @@
         </div>
 
         <p rel="back" class="pt-4">
-            <a rel="back" href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}news">Back to listing</a>
+            <a rel="back" href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}{{ config('base.news_listing_route') }}">Back to listing</a>
         </p>
     </div>
 @endsection

@@ -11,7 +11,7 @@
         <div class="row -mx-4 flex flex-wrap">
             @if(!empty($news))
                 <div class="w-full md:w-1/2 px-4">
-                    @include('components/mini-news', ['news' => $news, 'url' => ($site['subsite-folder'] !== null ? $site['subsite-folder'] : '').'news/'])
+                    @include('components/mini-news', ['news' => $news, 'url' => ($site['subsite-folder'] !== null ? $site['subsite-folder'] : '').config('base.news_listing_route').'/'])
                 </div>
             @endif
 
