@@ -51,7 +51,15 @@ class NewsRepository implements NewsRepositoryContract
         ];
 
         $news_listing = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
-            return $this->wsuApi->sendRequest($params['method'], $params);
+            $items = $this->wsuApi->sendRequest($params['method'], $params);
+
+            if (!empty($items['news'])) {
+                $items['news'] = collect($items['news'])->map(function ($item) {
+                    return $this->setNewsLink($item);
+                })->toArray();
+            }
+
+            return $items;
         });
 
         // Make sure the return is an array
@@ -81,7 +89,15 @@ class NewsRepository implements NewsRepositoryContract
         ];
 
         return $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
-            return $this->wsuApi->sendRequest($params['method'], $params);
+            $items = $this->wsuApi->sendRequest($params['method'], $params);
+
+            if (!empty($items['news'])) {
+                $items['news'] = collect($items['news'])->map(function ($item) {
+                    return $this->setNewsLink($item);
+                })->toArray();
+            }
+
+            return $items;
         });
     }
 
@@ -138,7 +154,7 @@ class NewsRepository implements NewsRepositoryContract
         });
 
         $categories['news_categories'] = collect($categories['news_categories'])->map(function ($item) use ($subsite) {
-            $item['link'] = '/'.(!empty($subsite) ? $subsite : '').'news/category/'.$item['slug'];
+            $item['link'] = '/'.(!empty($subsite) ? $subsite : '').config('base.news_listing_route').'/'.config('base.news_category_route').'/'.$item['slug'];
 
             return $item;
         })->toArray();
@@ -191,5 +207,18 @@ class NewsRepository implements NewsRepositoryContract
         }
 
         return null;
+    }
+
+    /**
+     * Set the news link according to the news view route.
+     *
+     * @param array $item
+     * @return array
+     */
+    public function setNewsLink($item)
+    {
+        $item['full_link'] = str_replace('/news/', '/'.config('base.news_view_route').'/', $item['full_link']);
+
+        return $item;
     }
 }
