@@ -1,7 +1,7 @@
 @extends('components.content-area')
 
 @section('content')
-    <img class="w-full block" src="/styleguide/image/1600x580?text=Full%20width%20image" />
+    <img class="w-full block" src="/styleguide/image/1600x580?text=Full%20width%20image" alt="">
 
     <div class="bg-grey-lightest mb-4">
         <div class="row py-4">

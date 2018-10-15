@@ -68,11 +68,18 @@ class NewsRepositoryTest extends TestCase
         $wsuApi = Mockery::mock('Waynestate\Api\Connector');
         $wsuApi->shouldReceive('sendRequest')->with('cms.news.categories', Mockery::type('array'))->once()->andReturn($return);
 
-        // Get the news categories
-        $categories = app('App\Repositories\NewsRepository', ['wsuApi' => $wsuApi])->getCategories($this->faker->randomDigit, 'styleguide/');
+        // Get the news categories without prepending all categories
+        $categories = app('App\Repositories\NewsRepository', ['wsuApi' => $wsuApi])->getCategories($this->faker->randomDigit, 'styleguide/', false);
 
         // Make sure they are the same as the ones we created
         $this->assertEquals($return, $categories);
+
+        // Get the news categories with prepending all categories
+        $wsuApi->shouldReceive('sendRequest')->with('cms.news.categories', Mockery::type('array'))->once()->andReturn($return);
+        $categories = app('App\Repositories\NewsRepository', ['wsuApi' => $wsuApi])->getCategories($this->faker->randomDigit, 'styleguide/', true);
+
+        // Make sure it was prepended
+        $this->assertEquals($categories['news_categories'][0]['category'], config('base.news_all_text'));
     }
 
     /**

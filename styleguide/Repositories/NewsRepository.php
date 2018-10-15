@@ -42,16 +42,25 @@ class NewsRepository extends Repository
     /**
      * {@inheritdoc}
      */
-    public function getCategories($site_id, $subsite=null)
+    public function getCategories($site_id, $subsite=null, $prepend=false)
     {
         $categories['news_categories'] = app('Factories\NewsCategory')->create(5);
 
         $route = app('request')->route();
 
-        // Change the first random category to be the one they selected
+        // Change the last random category to be the one they selected
         if (!empty($route->parameters['slug'])) {
-            $categories['news_categories'][1]['slug'] = $route->parameters['slug'];
-            $categories['news_categories'][1]['category'] = str_replace('-', ' ', $route->parameters['slug']);
+            $categories['news_categories'][5]['slug'] = $route->parameters['slug'];
+            $categories['news_categories'][5]['category'] = str_replace('-', ' ', $route->parameters['slug']);
+        }
+
+        if ($prepend === true) {
+            $categories['news_categories'] = collect($categories['news_categories'])->prepend([
+                    'category_id' => null,
+                    'slug' => null,
+                    'category' => config('base.news_all_text'),
+                    'link' => '/styleguide/'.config('base.news_listing_route').'/',
+            ])->toArray();
         }
 
         return $categories;

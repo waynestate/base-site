@@ -11,7 +11,7 @@
 
     @if(!in_array($page['controller'], config('base.full_width_controllers')))<div class="row mt:flex">@endif
         <div class="mt:w-1/4 mt:px-4 mt:block {{ $show_site_menu === false ? ' mt:hidden' : '' }}">
-            <nav id="menu" class="main-menu" role="navigation" aria-label="Page menu" tabindex="-1">
+            <nav id="menu" class="main-menu" aria-label="Page menu" tabindex="-1">
                 @if(!empty($top_menu_output) && $site_menu !== $top_menu)
                     <div class="offcanvas-main-menu mt:hidden">
                         <ul>
@@ -43,7 +43,7 @@
             </nav>
         </div>
 
-    <div class="w-full{{ !in_array($page['controller'], config('base.full_width_controllers')) ? ' px-4' : '' }} {{$show_site_menu === true ? 'mt:w-3/4' : '' }} content-area mb-8" id="content" tabindex="-1">
+        <main class="w-full{{ !in_array($page['controller'], config('base.full_width_controllers')) ? ' px-4' : '' }} {{$show_site_menu === true ? 'mt:w-3/4' : '' }} content-area mb-8" id="content" tabindex="-1">
             @if(!empty($hero) && !in_array($page['controller'], config('base.hero_full_controllers')))
                 @include('components.hero', ['images' => $hero])
 
@@ -55,7 +55,7 @@
             @endif
 
             @yield('content')
-        </div>
+        </main>
     @if(!in_array($page['controller'], config('base.full_width_controllers')))</div>@endif
 
     @yield('bottom')

@@ -16,29 +16,33 @@
 
 @include('components.skip')
 
-@include('components.header')
+<header>
+    @include('components.header')
 
-@if(!empty($site))
-    @include('components.menu-top', ['site' => $site])
-@endif
+    @if(!empty($site))
+        @include('components.menu-top', ['site' => $site])
+    @endif
 
-@if(!empty($banner))
-    @include('components.banner', ['banner' => $banner])
-@endif
+    @if(!empty($banner))
+        @include('components.banner', ['banner' => $banner])
+    @endif
+</header>
 
-<main id="panel">
+<div id="panel">
     @yield('content-area')
-</main>
+</div>
 
-@if(!empty($social))
-    @include('components.footer-social', ['social' => $social])
-@endif
+<footer>
+    @if(!empty($social))
+        @include('components.footer-social', ['social' => $social])
+    @endif
 
-@if(!empty($contact))
-    @include('components.footer-contact', ['contact' => $contact])
-@endif
+    @if(!empty($contact))
+        @include('components.footer-contact', ['contact' => $contact])
+    @endif
 
-@include('components.footer')
+    @include('components.footer')
+</footer>
 
 <script src="{{ mix('_resources/js/main.js') }}"></script>
 </body>

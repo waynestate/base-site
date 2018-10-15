@@ -32,7 +32,7 @@ class NewsItem implements FactoryContract
                 'excerpt' => '',
                 'archive' => 1,
                 'link' => '',
-                'full_link' => '/styleguide/news/item-1',
+                'full_link' => '/styleguide/'.config('base.news_listing_route').'/item-1',
                 'body' => $this->faker->paragraph,
                 'filename' => '',
                 'categories' => null,
