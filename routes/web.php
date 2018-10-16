@@ -25,6 +25,6 @@ Route::get('{any?}'.config('base.news_view_route').'/{slug}-{id}', 'NewsControll
 
 // The wild card route is a catch all route that tries to resolve the requests path to a json file
 Route::match(['get', 'post'], '{path}', function (Illuminate\Http\Request $request) {
-        return app($request->controller)->index($request);
-    })
+    return app($request->controller)->index($request);
+})
     ->where('path', '.*');
