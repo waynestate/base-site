@@ -1,44 +1,28 @@
+// Contact footer content
+footer .content a {
+    @apply .text-white;
+}
+
+// Content returning from CMS
 .content {
-    p {
-        margin-bottom: 1rem;
-    }
-
     hr {
-        @apply .border-b .border-solid .border-grey-lighter;
-
-        clear: both;
-        max-width: 75rem;
-        height: 0;
-        margin: 1.25rem auto;
-        border-top: 0;
-        border-right: 0;
-        border-left: 0;
+        @apply .border-b .border-solid .border-grey-lighter .my-5;
     }
 
+    p,
     dl,
     ol,
     ul {
-        margin: 0 0 1rem;
+        @apply .mb-5;
     }
 
     abbr,
     abbr[title] {
-        color: inherit;
-        border: none;
-        text-decoration: none;
+        @apply .no-underline;
     }
 
     blockquote {
-        @apply .border-solid .border-green .bg-grey-lightest;
-
-        padding: 1em;
-        border-width: 0 0 0 3px;
-        border-style: solid;
-        margin-bottom: 1em;
-
-        p {
-            margin-bottom: 0.3rem;
-        }
+        @apply .border-l-4 .border-solid .border-grey .bg-grey-lightest .p-4 .pb-1 .mb-4;
     }
 
     // Images remain at their specified width
@@ -56,7 +40,8 @@
     }
 
     figure {
-        width: 100%;
+        @apply .w-full;
+
         display: table;
         margin: 15px auto;
 
@@ -89,54 +74,25 @@
     }
 
     table {
-        border: none;
-        width: 100%;
-        margin: 0 0 1rem;
+        @apply .border-collapse .w-full .mb-4 .text-left;
 
-        th,
-        td {
-            line-height: 1.5;
-            text-align: left;
-        }
-
-        // Header
         thead tr {
-            border-collapse: collapse;
+            @apply .border .border-solid .border-green-dark;
 
-            &,
+            th {
+                @apply .bg-green-dark .font-bold .px-4 .py-3 .text-white .leading-none;
+            }
+
             a {
                 @apply .text-white;
-
-                text-decoration: none;
-                font-weight: bold;
-                border-bottom: none;
-            }
-
-            th {
-                @apply .bg-green-dark;
-
-                text-align: left;
-                font-weight: bold;
-                padding: 15px 10px;
-            }
-
-            th.center-align {
-                text-align: center;
             }
         }
 
-        // Body
         tbody tr {
-            @apply .border-0 .border-b .border-solid .border-grey-light;
+            @apply .border .border-t-0 .border-solid .align-top;
 
             td {
-                text-align: left;
-                padding: 10px;
-                font-size: 14px;
-            }
-
-            th {
-                padding: 10px;
+                @apply .text-sm .px-4 .py-2;
             }
 
             &:nth-child(odd) {
@@ -151,24 +107,14 @@
                 @apply .bg-yellow-lightest;
             }
         }
-
-        img {
-            max-width: none;
-            width: auto;
-        }
     }
 
-    &.footer-contact {
-        a {
-            @apply .text-white;
-        }
-    }
-
+    // All content links
     a:not(.button) {
-        text-decoration: underline;
+        @apply .underline;
 
         &:hover {
-            text-decoration: none;
+            @apply .no-underline;
         }
     }
 }

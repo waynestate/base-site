@@ -9,11 +9,11 @@
         <h2>Two column example</h2>
 
         <div class="row -mx-4 flex flex-wrap">
-            <div class="w-full sm:w-1/2 px-4">
+            <div class="w-full sm:w-1/2 px-4 content">
                 <p>{{ $faker->paragraph }}</p>
             </div>
 
-            <div class="w-full sm:w-1/2 px-4">
+            <div class="w-full sm:w-1/2 px-4 content">
                 <p>{{ $faker->paragraph }}</p>
             </div>
         </div>
@@ -36,7 +36,7 @@
 
         <h2>Three column example</h2>
 
-        <div class="row -mx-4 flex flex-wrap">
+        <div class="row -mx-4 lg:flex flex-wrap">
             <div class="w-full md:w-1/3 px-4">
                 <p>{{ $faker->paragraph }}</p>
             </div>
@@ -71,9 +71,10 @@
 
         <h2>Table</h2>
 
-        <table aria-label="Example table with fake contact information">
+        <table class="table-stack" aria-label="Example table with fake contact information">
             <thead>
                 <tr>
+                    <th scope="col">Picture</th>
                     <th scope="col">First name</th>
                     <th scope="col">Last name</th>
                     <th scope="col">Email</th>
@@ -81,11 +82,12 @@
             </thead>
 
             <tbody>
-                @for ($i = 0; $i < 10; $i++)
+                @for ($i = 0; $i < 4; $i++)
                 <tr>
+                    <td><img src="/styleguide/image/150x50?text=150x50" alt="" style="margin: 10px;">
                     <td>{{ $faker->firstName }}</td>
                     <td>{{ $faker->lastName }}</td>
-                    <td>{{ $faker->email }}</td>
+                    <td><a href="mailto:{{ $faker->email }}">{{ $faker->email }}</a></td>
                 </tr>
                 @endfor
             </tbody>
@@ -95,7 +97,7 @@
 
         <pre class="table-stack hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {!! htmlspecialchars('
-<table aria-label="Example table">
+<table class="table-stack" aria-label="Example table">
     <thead>
         <tr>
             <th scope="col"></th>
@@ -119,11 +121,13 @@
 
         <h2>Abbreviations</h2>
 
-        <p><abbr title="Wayne State University">WSU</abbr></p>
+        <div class="content">
+            <p><abbr title="Wayne State University">WSU</abbr></p>
+        </div>
 
         <hr>
 
-        <div class="row -mx-4 flex">
+        <div class="row -mx-4 md:flex">
             <div class="w-full md:w-1/3 px-4">
                 <h2>Unordered lists</h2>
 

@@ -1,99 +1,28 @@
-table.table-stack {
-    border-collapse: collapse;
-    width: 100%;
+.content table.table-stack {
+    @media (max-width: config('screens.md')) {
+        @apply .border-t;
 
-    th,
-    td {
-        line-height: 1.5;
-        text-align: left;
-        border: none;
-    }
-
-    tr {
-        @apply .border .border-solid .border-grey-light;
-
-        th::before {
-            content: attr(data-label) ": ";
-            display: inline;
-            font-weight: bold;
-            line-height: 1.5px;
-        }
-    }
-
-    /* Get table cells to act like rows */
-    tr,
-    td {
-        display: block;
-    }
-
-    // Header
-    thead tr {
-        @apply .bg-grey-darkest;
-
-        border-collapse: collapse;
-        position: absolute;
-        top: -9999em;
-        left: -9999em;
-    }
-
-    tbody th {
-        padding: 10px;
-    }
-
-    /* Leave a space between table rows */
-    tr + tr {
-        margin-top: 1.5em;
-    }
-
-    td {
-        padding-left: 0.75em;
-    }
-
-    /* Add data labels */
-    td::before {
-        @apply .text-grey-darkest;
-
-        content: attr(data-label) ":";
-        display: block;
-        font-weight: bold;
-        line-height: 1.5;
-        padding-right: 20px;
-        margin-bottom: 0.75em;
-        margin-left: 0;
-    }
-
-    @screen md {
-        tr {
-            border: none;
-            display: table-row;
-
-            th::before {
-                content: "";
-            }
-        }
-
+        // Hide table head
         thead tr {
-            position: static;
-            top: 0;
-            left: 0;
+            @apply .absolute;
+
+            top: -9999em;
+            left: -9999em;
         }
 
-        tr + tr {
-            margin: 0;
+        tbody tr {
+            @apply .block .py-2;
         }
 
-        td {
-            display: table-cell;
-            padding: 10px;
+        tbody td {
+            @apply .block .px-4 .pt-0 .pb-1 .my-2;
+        }
 
-            &::before {
-                content: "";
-                padding: 0;
+        // Add data labels
+        td::before {
+            @apply .block .font-bold;
 
-                @screen mt {
-                    @apply .hidden;
-                }
-            }
+            content: attr(data-label) ":";
         }
     }
 }
