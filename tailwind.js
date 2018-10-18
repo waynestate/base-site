@@ -181,14 +181,6 @@ module.exports = {
             'Times New Roman',
             'serif',
         ],
-        'mono': [
-            'Menlo',
-            'Monaco',
-            'Consolas',
-            'Liberation Mono',
-            'Courier New',
-            'monospace',
-        ],
     },
 
 
