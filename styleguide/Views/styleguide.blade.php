@@ -262,7 +262,7 @@
                 <pre class="fig-none hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
                 {!! htmlspecialchars('
 <figure>
-    <img src="/styleguide/image/150x150" alt="Placeholder">
+    <img src="/styleguide/image/400x300" alt="Placeholder">
     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
 </figure>
                 ') !!}

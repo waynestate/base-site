@@ -20,7 +20,7 @@
         <pre class="fig-none hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {!! htmlspecialchars('
 <figure>
-    <img src="https://placehold.it/400x300" alt="Placeholder">
+    <img src="/styleguide/image/400x300" alt="Placeholder">
     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
 </figure>
         ') !!}
@@ -45,7 +45,7 @@
                 <pre class="fig-left hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
                 {!! htmlspecialchars('
 <figure class="float-left">
-    <img src="https://placehold.it/400x300" alt="Placeholder">
+    <img src="/styleguide/image/400x300" alt="Placeholder">
     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
 </figure>
                 ') !!}
@@ -72,7 +72,7 @@
                 <pre class="fig-right hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
                 {!! htmlspecialchars('
 <figure class="float-right">
-    <img src="https://placehold.it/400x300" alt="Placeholder">
+    <img src="/styleguide/image/400x300" alt="Placeholder">
     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
 </figure>
                 ') !!}
@@ -100,7 +100,7 @@
                 <pre class="fig-center hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
                 {!! htmlspecialchars('
 <figure class="text-center">
-    <img src="https://placehold.it/800x450" alt="Placeholder">
+    <img src="/styleguide/image/800x450" alt="Placeholder">
     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
 </figure>
                 ') !!}
