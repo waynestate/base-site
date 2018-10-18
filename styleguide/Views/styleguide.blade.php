@@ -184,6 +184,8 @@
         <h2>Buttons</h2>
 
         <a href="#standard-button" class="button">Standard button</a>
+        <br />
+        <a href="#standard-button" class="button bg-gradient-green text-white">Dark button</a>
         <a href="#expanded-button" class="button expanded">Expanded button</a>
         <br />
         <a href="#button-examples" class="button" onclick="document.querySelector('pre.button-examples').classList.toggle('hidden');">See button code</a>
@@ -191,6 +193,7 @@
         <pre class="button-examples hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
         {!! htmlspecialchars('
 <a href="#" class="button">Standard button</a>
+<a href="#" class="button bg-gradient-green text-white">Dark button</a>
 <a href="#" class="button expanded">Expanded button</a>
         ') !!}
         </pre>
