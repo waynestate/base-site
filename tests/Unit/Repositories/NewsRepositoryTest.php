@@ -214,15 +214,16 @@ class NewsRepositoryTest extends TestCase
     public function setting_news_link_should_change_route_path()
     {
         $current_config = config('base.news_view_route');
-        $item = app('Factories\NewsItem')->create(1, true);
 
         // Default news route path
+        $item = app('Factories\NewsItem')->create(1, true);
         $changed = app('App\Repositories\NewsRepository')->setNewsLink($item);
         $this->assertEquals($item, $changed);
 
         // Randomly changing the news view route path
         $news_view_route = $this->faker->word;
         config(['base.news_view_route' => $news_view_route]);
+        $item = app('Factories\NewsItem')->create(1, true);
         $changed = app('App\Repositories\NewsRepository')->setNewsLink($item);
         $this->assertContains($news_view_route, $changed['full_link']);
 

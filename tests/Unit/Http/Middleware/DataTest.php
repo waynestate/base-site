@@ -107,6 +107,6 @@ class DataTest extends TestCase
 
         $path = app('App\Http\Middleware\Data')->getPathFromRequest($request);
 
-        $this->assertEquals($path, 'news');
+        $this->assertEquals($path, config('base.news_view_route'));
     }
 }

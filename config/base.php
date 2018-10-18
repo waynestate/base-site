@@ -174,7 +174,12 @@ return [
     | Here you can configure the news area. No ending slash for route paths.
     | If you change any of the route paths from the default value you will
     | need to also change the CMS page, styleguide page, and styleguide
-    | menu path to coincide with your new path.
+    | menu path to coincide with your new path. Below are the files
+    | you would need to change in the styleguide.
+    |
+    | /styleguide/Pages/News.php -> value of `news_listing_route`
+    | /styleguide/Pages/NewsCategory.php -> value of `news_listing_route + news_category_route`
+    | /styleguide/Pages/NewsView.php ->value of  `news_view_route`
     |
     */
     'news_listing_route' => 'news',
