@@ -70,7 +70,7 @@ class NewsController extends Controller
         $news = $this->news->getNewsItem($request->id, $request->data['site']['id']);
 
         // If the news item does not belong in the archive and the time has expired, don't show it
-        if (!empty($news['error']) || $news['news']['archive'] == 0 && strtotime($news['news']['ending']) < time()) {
+        if (empty($news['news']) || !empty($news['error']) || $news['news']['archive'] == 0 && strtotime($news['news']['ending']) < time()) {
             return abort('404');
         }
 
