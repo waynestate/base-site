@@ -6,14 +6,14 @@
     <div class="content">
         <hr>
 
-        <h2>Two column example</h2>
+        <h2>Two column layout</h2>
 
-        <div class="row -mx-4 flex flex-wrap">
-            <div class="w-full sm:w-1/2 px-4 content">
+        <div class="row -mx-4 md:flex">
+            <div class="md:w-1/2 px-4">
                 <p>{{ $faker->paragraph }}</p>
             </div>
 
-            <div class="w-full sm:w-1/2 px-4 content">
+            <div class="md:w-1/2 px-4">
                 <p>{{ $faker->paragraph }}</p>
             </div>
         </div>
@@ -21,11 +21,11 @@
         <a href="#two-columns-code" class="button" onclick="document.querySelector('pre.two-columns-code').classList.toggle('hidden');">See row/columns code</a>
         <pre class="two-columns-code hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
             {!! htmlspecialchars('
-<div class="row -mx-4 flex">
-    <div class="w-full sm:w-1/2 px-4">
+<div class="row -mx-4 md:flex">
+    <div class="md:w-1/2 px-4">
         <p>'.$faker->paragraph.'</p>
     </div>
-    <div class="w-full sm:w-1/2 px-4">
+    <div class="md:w-1/2 px-4">
         <p>'.$faker->paragraph.'</p>
     </div>
 </div>
@@ -34,18 +34,18 @@
 
         <hr>
 
-        <h2>Three column example</h2>
+        <h2>Three column layout</h2>
 
-        <div class="row -mx-4 lg:flex flex-wrap">
-            <div class="w-full md:w-1/3 px-4">
+        <div class="row -mx-4 lg:flex">
+            <div class="lg:w-1/3 px-4">
                 <p>{{ $faker->paragraph }}</p>
             </div>
 
-            <div class="w-full md:w-1/3 px-4">
+            <div class="lg:w-1/3 px-4">
                 <p>{{ $faker->paragraph }}</p>
             </div>
 
-            <div class="w-full md:w-1/3 px-4">
+            <div class="lg:w-1/3 px-4">
                 <p>{{ $faker->paragraph }}</p>
             </div>
         </div>
@@ -53,14 +53,14 @@
         <a href="#three-columns-code" class="button" onclick="document.querySelector('pre.three-columns-code').classList.toggle('hidden');">See row/columns code</a>
         <pre class="three-columns-code hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
             {!! htmlspecialchars('
-<div class="row -mx-4 flex">
-    <div class="w-full md:w-1/3 px-4">
+<div class="row -mx-4 lg:flex">
+    <div class="lg:w-1/3 px-4">
         <p>'.$faker->paragraph.'</p>
     </div>
-    <div class="w-full md:w-1/3 px-4">
+    <div class="lg:w-1/3 px-4">
         <p>'.$faker->paragraph.'</p>
     </div>
-    <div class="w-full md:w-1/3 px-4">
+    <div class="lg:w-1/3 px-4">
         <p>'.$faker->paragraph.'</p>
     </div>
 </div>
@@ -74,7 +74,7 @@
         <table class="table-stack" aria-label="Example table with fake contact information">
             <thead>
                 <tr>
-                    <th scope="col">Picture</th>
+                    <th scope="col">Image</th>
                     <th scope="col">First name</th>
                     <th scope="col">Last name</th>
                     <th scope="col">Email</th>
@@ -121,9 +121,7 @@
 
         <h2>Abbreviations</h2>
 
-        <div class="content">
-            <p><abbr title="Wayne State University">WSU</abbr></p>
-        </div>
+        <p><abbr title="Wayne State University">WSU</abbr></p>
 
         <hr>
 
@@ -187,7 +185,7 @@
 
         <a href="#standard-button" class="button">Standard button</a>
         <a href="#expanded-button" class="button expanded">Expanded button</a>
-
+        <br />
         <a href="#button-examples" class="button" onclick="document.querySelector('pre.button-examples').classList.toggle('hidden');">See button code</a>
 
         <pre class="button-examples hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
@@ -248,79 +246,22 @@
         <hr>
 
         <div class="row flex flex-wrap -mx-4">
-            <div class="w-full sm:w-1/4 px-4">
-                <h2>Figure (left)</h2>
-
-                <figure class="float-left" style="margin-top: 15px;">
-                    @image('/styleguide/image/150x150', 'Placeholder')
-                    <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
-                </figure>
-
-                <a href="#fig-left" class="button" onclick="document.querySelector('pre.fig-left').classList.toggle('hidden');">See code</a>
-
-                <pre class="fig-left hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
-                {!! htmlspecialchars('
-<figure class="float-left">
-    <img src="/styleguide/image/150x150" alt="Placeholder">
-    <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
-</figure>
-                ') !!}
-                </pre>
-            </div>
-
-            <div class="w-full sm:w-1/4 px-4">
-                <h2>Figure (center)</h2>
-
-                <figure class="text-center">
-                    @image('/styleguide/image/150x150', 'Placeholder')
-                    <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
-                </figure>
-
-                <a href="#fig-center" class="button" onclick="document.querySelector('pre.fig-center').classList.toggle('hidden');">See code</a>
-
-                <pre class="fig-center hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
-                {!! htmlspecialchars('
-<figure class="text-center">
-    <img src="/styleguide/image/150x150" alt="Placeholder">
-    <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
-</figure>
-                ') !!}
-                </pre>
-            </div>
-
-            <div class="w-full sm:w-1/4 px-4">
+            <div class="w-full px-4">
                 <h2>Figure</h2>
 
-                <figure>
-                    @image('/styleguide/image/150x150', 'Placeholder')
-                    <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
-                </figure>
+                <div class="table">
+                    <figure>
+                        @image('/styleguide/image/400x300', 'Placeholder', 'p-10px')
+                        <figcaption>{{ $faker->paragraph }}</figcaption>
+                    </figure>
+                </div>
 
-                <a href="#fig-none" class="button" onclick="document.querySelector('pre.fig-none').classList.toggle('hidden');">See code</a>
+                <a href="#fig-none" class="button mr-4" onclick="document.querySelector('pre.fig-none').classList.toggle('hidden');">See code</a>
+                <a href="/styleguide/figure" class="button">More options</a>
 
                 <pre class="fig-none hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
                 {!! htmlspecialchars('
 <figure>
-    <img src="/styleguide/image/150x150" alt="Placeholder">
-    <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
-</figure>
-                ') !!}
-                </pre>
-            </div>
-
-            <div class="w-full sm:w-1/4 px-4">
-                <h2>Figure (right)</h2>
-
-                <figure class="float-right" style="margin-top: 15px;">
-                    @image('/styleguide/image/150x150', 'Placeholder')
-                    <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
-                </figure>
-
-                <a href="#fig-right" class="button" onclick="document.querySelector('pre.fig-right').classList.toggle('hidden');">See code</a>
-
-                <pre class="fig-right hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
-                {!! htmlspecialchars('
-<figure class="float-right">
     <img src="/styleguide/image/150x150" alt="Placeholder">
     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
 </figure>

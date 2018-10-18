@@ -22,7 +22,7 @@ footer .content a {
     }
 
     blockquote {
-        @apply .border-l-4 .border-solid .border-grey .bg-grey-lightest .p-4 .pb-1 .mb-4;
+        @apply .border-l-8 .border-solid .border-grey-lighter .bg-grey-lightest .p-4 .pb-1 .mb-4;
     }
 
     // Images remain at their specified width
@@ -40,36 +40,42 @@ footer .content a {
     }
 
     figure {
-        @apply .w-full;
+        @apply .table .mt-2 .mb-4;
 
-        display: table;
-        margin: 15px auto;
-
-        @screen md {
-            margin: 25px;
-            width: auto;
-        }
-
-        &[style*="float:right"],
-        &.float-right {
-            margin-right: 0;
-        }
-
-        &[style*="float:left"],
-        &.float-left {
-            margin-left: 0;
+        @media (max-width: config('screens.mt')) {
+            @apply .float-none;
         }
 
         img {
-            padding: 0;
+            @apply .block;
+
+            padding: 0 !important;
         }
 
         figcaption {
-            padding-top: 0.5em;
-            font-size: 0.875rem;
-            font-style: italic;
+            @apply .text-sm .text-grey-darker .mt-2 .text-left;
+
             display: table-caption;
             caption-side: bottom;
+        }
+
+        @screen mt {
+            @apply .w-auto .mb-4;
+
+            &[style*="float:right"],
+            &.float-right {
+                @apply .ml-6 .max-w-50%;
+            }
+
+            &[style*="float:left"],
+            &.float-left {
+                @apply .mr-6 .max-w-50%;
+            }
+
+            &[style*="text:center"],
+            &.text-center {
+                @apply .ml-auto .mr-auto;
+            }
         }
     }
 

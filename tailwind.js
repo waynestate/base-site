@@ -181,6 +181,14 @@ module.exports = {
             'Times New Roman',
             'serif',
         ],
+        'mono': [
+            'Menlo',
+            'Monaco',
+            'Consolas',
+            'Liberation Mono',
+            'Courier New',
+            'monospace',
+        ],
     },
 
 
@@ -561,6 +569,7 @@ module.exports = {
         '3xl': '80rem',
         '4xl': '90rem',
         '5xl': '100rem',
+        '50%': '50%',
         'full': '100%',
         'screen-xxxl': screens.xxxl,
     },
@@ -603,6 +612,7 @@ module.exports = {
 
     padding: {
         'px': '1px',
+        '10px': '10px',
         '0': '0',
         '1': '0.25rem',
         '2': '0.5rem',
