@@ -212,7 +212,7 @@
         <hr>
 
         <h2>Media</h2>
-        <p>Any valid YouTube URL starting with <code>youtu.be</code> or <code>youtube.com/watch</code> will open a lightbox with the video.</p>
+        <p>Any valid YouTube URL starting with <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">youtu.be</code> or <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">youtube.com/watch</code> will open a lightbox with the video.</p>
         <p><a href="//www.youtube.com/watch?v=guRgefesPXE"><img src="//i.wayne.edu/youtube/guRgefesPXE" alt="School of Medicine Commencement YouTube video"></a></p>
 
         <a href="#media-example" class="button" onclick="document.querySelector('pre.media-example').classList.toggle('hidden');">See media code</a>
@@ -231,7 +231,7 @@
 
         <h2>Responsive Embed</h2>
 
-        <p>To make sure embedded content maintains its aspect ratio as the width of the screen changes, wrap the <code>iframe</code>, <code>object</code>, <code>embed</code>, or <code>video</code> in a container with the <code>.responsive-embed</code> class.</p>
+        <p>To make sure embedded content maintains its aspect ratio as the width of the screen changes, wrap the <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">iframe</code>, <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">object</code>, <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">embed</code>, or <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">video</code> in a container with the <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">.responsive-embed</code> class.</p>
         <div class="responsive-embed">
             <iframe width="420" height="315" src="//www.youtube.com/embed/guRgefesPXE" title="Responsive embed example" frameborder="0" allowfullscreen></iframe>
         </div>
@@ -255,7 +255,7 @@
                 <div class="table">
                     <figure>
                         @image('/styleguide/image/400x300', 'Placeholder', 'p-10px')
-                        <figcaption>{{ $faker->paragraph }}</figcaption>
+                        <figcaption>{{ $faker->sentence }}</figcaption>
                     </figure>
                 </div>
 

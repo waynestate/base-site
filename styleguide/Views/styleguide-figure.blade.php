@@ -6,7 +6,7 @@
     <div class="content">
         {!! $page['content']['main'] !!}
 
-        <p>Available classes for <span class="bg-grey-lightest py-px pb-1 px-2 font-mono text-sm">&lt;figure&gt;</span> are <span class="bg-grey-lightest py-px pb-1 px-2 font-mono text-sm">.float-left</span>, <span class="bg-grey-lightest py-px pb-1 px-2 font-mono text-sm">.float-right</span>, and <span class="bg-grey-lightest py-px pb-1 px-2 font-mono text-sm">.text-center</span>.</p>
+        <p>Available classes for <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">&lt;figure&gt;</code> are <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">.float-left</code>, <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">.float-right</code>, and <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">.text-center</code>.</p>
 
         <div class="table">
             <figure>
