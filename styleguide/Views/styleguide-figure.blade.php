@@ -9,7 +9,7 @@
         <p>Available classes for <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">&lt;figure&gt;</code> are <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">.float-left</code>, <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">.float-right</code>, and <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">.text-center</code>.</p>
 
         <figure>
-            @image('/styleguide/image/400x300')
+            @image('/styleguide/image/400x300', '', 'p-2')
             <figcaption>{{ $faker->sentence }}</figcaption>
         </figure>
 
@@ -31,7 +31,7 @@
                 <h2>Float left</h2>
 
                 <figure class="float-left">
-                    @image('/styleguide/image/400x300')
+                    @image('/styleguide/image/400x300', '', 'p-2')
                     <figcaption>{{ $faker->sentence }}</figcaption>
                 </figure>
                 <p>{{ $faker->paragraph(38) }}</p>
@@ -56,7 +56,7 @@
                 <h2>Float right</h2>
 
                 <figure class="float-right">
-                    @image('/styleguide/image/400x300')
+                    @image('/styleguide/image/400x300', '', 'p-2')
                     <figcaption>{{ $faker->sentence }}</figcaption>
                 </figure>
                 <p>{{ $faker->paragraph(28) }}</p>
@@ -82,7 +82,7 @@
 
                 <p>{{ $faker->paragraph(12) }}</p>
                 <figure class="text-center">
-                    @image('/styleguide/image/800x450')
+                    @image('/styleguide/image/800x450', '', 'p-2')
                     <figcaption>{{ $faker->sentence }}</figcaption>
                 </figure>
                 <p>{{ $faker->paragraph(12) }}</p>
@@ -99,6 +99,4 @@
                 </pre>
             </div>
         </div>
-
-
 @endsection
