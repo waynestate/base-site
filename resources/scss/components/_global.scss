@@ -1,58 +1,60 @@
+// Restricts the embedded font from combining two characters like "fi"
 html {
     font-feature-settings: "liga" 0;
 }
 
 // Set default links to not have underlines since most cases this is what we want
 a {
-    @apply .text-green;
-
-    text-decoration: none;
+    @apply .text-green .no-underline;
 }
 
 // Tailwind preflight sets this to .5 which isn't ADA compliant
 input::placeholder,
 textarea::placeholder {
-    opacity: 1;
+    @apply .opacity-100;
 }
 
+// Global headings
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-    margin-bottom: 0.3125rem;
-    font-weight: 700;
+    @apply .font-bold .mb-4 .leading-none;
+
     text-rendering: optimizeLegibility;
-    line-height: 1.4;
 }
 
 h1 {
-    font-size: 2.125rem;
+    @apply .text-4xl;
 }
 
 h2 {
-    font-size: 1.75rem;
+    @apply .text-3xl;
 }
 
 h3 {
-    font-size: 1.375rem;
+    @apply .text-2xl;
 }
 
 h4 {
-    font-size: 1.125rem;
+    @apply .text-xl;
 }
 
-h5,
+h5 {
+    @apply .text-lg;
+}
+
 h6 {
-    font-size: 0.875rem;
+    @apply .text-sm;
 }
 
 // Global print styles
 @screen print {
     a::after {
+        @apply .text-sm .font-normal;
+
         content: " (" attr(href) ") ";
-        font-size: 0.8em;
-        font-weight: normal;
     }
 }

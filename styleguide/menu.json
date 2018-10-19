@@ -423,6 +423,16 @@
                 "class_name": "",
                 "relative_url": "/styleguide/undermenu",
                 "submenu": []
+            },
+            "115100": {
+                "menu_item_id": "115100",
+                "is_active": "1",
+                "page_id": "115100",
+                "target": "",
+                "display_name": "Figure",
+                "class_name": "",
+                "relative_url": "/styleguide/figure",
+                "submenu": []
             }
         }
     }
