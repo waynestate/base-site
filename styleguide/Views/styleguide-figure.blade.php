@@ -15,7 +15,7 @@
 
         <a href="#fig-none" class="button" onclick="document.querySelector('pre.fig-none').classList.toggle('hidden');">See code</a>
 
-        <pre class="fig-none hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+        <pre class="fig-none hidden bg-grey-lightest overflow-scroll">
         {!! htmlspecialchars('
 <figure>
     <img src="/styleguide/image/400x300" alt="">
@@ -38,7 +38,7 @@
 
                 <a href="#fig-left" class="button" onclick="document.querySelector('pre.fig-left').classList.toggle('hidden');">See code</a>
 
-                <pre class="fig-left hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+                <pre class="fig-left hidden bg-grey-lightest overflow-scroll">
                 {!! htmlspecialchars('
 <figure class="float-left">
     <img src="/styleguide/image/400x300" alt="">
@@ -63,7 +63,7 @@
 
                 <a href="#fig-right" class="button" onclick="document.querySelector('pre.fig-right').classList.toggle('hidden');">See code</a>
 
-                <pre class="fig-right hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+                <pre class="fig-right hidden bg-grey-lightest overflow-scroll">
                 {!! htmlspecialchars('
 <figure class="float-right">
     <img src="/styleguide/image/400x300" alt="">
@@ -89,7 +89,7 @@
 
                 <a href="#fig-center" class="button" onclick="document.querySelector('pre.fig-center').classList.toggle('hidden');">See code</a>
 
-                <pre class="fig-center hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+                <pre class="fig-center hidden bg-grey-lightest overflow-scroll">
                 {!! htmlspecialchars('
 <figure class="text-center">
     <img src="/styleguide/image/800x450" alt="">
