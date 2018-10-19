@@ -604,7 +604,6 @@ module.exports = {
 
     padding: {
         'px': '1px',
-        '10px': '10px',
         '0': '0',
         '1': '0.25rem',
         '2': '0.5rem',

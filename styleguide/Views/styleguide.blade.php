@@ -254,7 +254,7 @@
 
                 <div class="table">
                     <figure>
-                        @image('/styleguide/image/400x300', 'Placeholder', 'p-10px')
+                        @image('/styleguide/image/400x300')
                         <figcaption>{{ $faker->sentence }}</figcaption>
                     </figure>
                 </div>
@@ -265,7 +265,7 @@
                 <pre class="fig-none hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
                 {!! htmlspecialchars('
 <figure>
-    <img src="/styleguide/image/400x300" alt="Placeholder">
+    <img src="/styleguide/image/400x300" alt="">
     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
 </figure>
                 ') !!}
