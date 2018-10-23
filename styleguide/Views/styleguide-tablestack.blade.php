@@ -17,7 +17,7 @@
 
             <tbody>
                 @for ($i = 0; $i < 10; $i++)
-                    <tr valign="top">
+                    <tr>
                         <td>{{ $faker->firstName }}</td>
                         <td>{{ $faker->lastName }}</td>
                         <td>{{ $faker->email }}</td>
