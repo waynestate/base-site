@@ -113,7 +113,6 @@ class NewsRepository implements NewsRepositoryContract
             'is_active' => '1',
             'order_by' => 'posted',
             'sort' => 'DESC',
-            'fields' => 'news_id|title|link|posted|app_id|slug|excerpt|is_archive|ending|body|filename',
             'server_location' => 'both',
             'server' => config('app.env'),
             'limit' => 1,

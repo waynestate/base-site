@@ -6,7 +6,7 @@
     <div class="content">
         {!! $page['content']['main'] !!}
 
-        <table class="table-stack" aria-label="Example table with fake contact information">
+        <table class="table-stack" summary="Example table with fake contact information">
             <thead>
                 <tr>
                     <th scope="col">First name</th>
@@ -17,7 +17,7 @@
 
             <tbody>
                 @for ($i = 0; $i < 10; $i++)
-                    <tr valign="top">
+                    <tr>
                         <td>{{ $faker->firstName }}</td>
                         <td>{{ $faker->lastName }}</td>
                         <td>{{ $faker->email }}</td>
@@ -28,9 +28,9 @@
 
         <a href="#table-stack" class="button" onclick="document.querySelector('pre.table-stack').classList.toggle('hidden');">See table code</a>
 
-        <pre class="table-stack hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+        <pre id="table-stack" class="table-stack hidden bg-grey-lightest overflow-scroll">
         {!! htmlspecialchars('
-<table class="table-stack" aria-label="Example table">
+<table class="table-stack" summary="Example table">
     <thead>
         <tr>
             <th scope="col"></th>

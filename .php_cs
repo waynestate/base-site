@@ -8,6 +8,7 @@ $finder = Finder::create()
     ->in(__DIR__ . '/contracts')
     ->in(__DIR__ . '/factories')
     ->in(__DIR__ . '/config')
+    ->in(__DIR__ . '/routes')
     ->in(__DIR__ . '/styleguide')
     ->in(__DIR__ . '/tests');
 
@@ -31,6 +32,10 @@ $fixers = [
     'switch_case_semicolon_to_colon' => true,
     'switch_case_space' => true,
     'visibility_required' => true,
+    'no_trailing_comma_in_singleline_array' => true,
+    'whitespace_after_comma_in_array' => true,
+    'no_whitespace_before_comma_in_array' => true,
+    'trailing_comma_in_multiline_array' => true,
 ];
 
 return Config::create()

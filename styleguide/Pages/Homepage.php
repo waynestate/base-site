@@ -23,7 +23,7 @@ class Homepage extends Page
            ],
            'site' => [
                'subsite-folder' => 'styleguide/',
-           ]
+           ],
        ]);
     }
 }

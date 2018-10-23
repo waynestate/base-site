@@ -13,7 +13,7 @@
 
     <a href="#accordions" class="button" onclick="document.querySelector('pre.accordions').classList.toggle('hidden');">See accordion code</a>
 
-    <pre class="accordions hidden" style="background: #EAEAEA; margin-bottom: 10px; overflow: scroll;">
+    <pre id="accordions" class="accordions hidden bg-grey-lightest overflow-scroll">
     {!! htmlspecialchars('
 <ul class="accordion">
     <li>
