@@ -71,7 +71,7 @@
 
         <h2>Table</h2>
 
-        <table class="table-stack" aria-label="Example table with fake contact information">
+        <table class="table-stack" summary="Example table with fake contact information">
             <thead>
                 <tr>
                     <th scope="col">Image</th>
@@ -97,7 +97,7 @@
 
         <pre id="table-stack" class="table-stack hidden bg-grey-lightest overflow-scroll">
         {!! htmlspecialchars('
-<table class="table-stack" aria-label="Example table">
+<table class="table-stack" summary="Example table">
     <thead>
         <tr>
             <th scope="col"></th>
