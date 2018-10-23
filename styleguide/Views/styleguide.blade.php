@@ -18,8 +18,8 @@
             </div>
         </div>
 
-        <a href="#two-columns-code" class="button" onclick="document.querySelector('pre.two-columns-code').classList.toggle('hidden');">See row/columns code</a>
-        <pre class="two-columns-code hidden bg-grey-lightest overflow-scroll">
+        <a href="#two-columns-code" class="button" onclick="document.querySelector('pre.two-columns-code').classList.toggle('hidden');">See two column code</a>
+        <pre id="two-columns-code" class="two-columns-code hidden bg-grey-lightest overflow-scroll">
             {!! htmlspecialchars('
 <div class="row -mx-4 md:flex">
     <div class="md:w-1/2 px-4">
@@ -50,8 +50,8 @@
             </div>
         </div>
 
-        <a href="#three-columns-code" class="button" onclick="document.querySelector('pre.three-columns-code').classList.toggle('hidden');">See row/columns code</a>
-        <pre class="three-columns-code hidden bg-grey-lightest overflow-scroll">
+        <a href="#three-columns-code" class="button" onclick="document.querySelector('pre.three-columns-code').classList.toggle('hidden');">See three column code</a>
+        <pre id="three-columns-code" class="three-columns-code hidden bg-grey-lightest overflow-scroll">
             {!! htmlspecialchars('
 <div class="row -mx-4 lg:flex">
     <div class="lg:w-1/3 px-4">
@@ -71,7 +71,7 @@
 
         <h2>Table</h2>
 
-        <table class="table-stack" aria-label="Example table with fake contact information">
+        <table class="table-stack" summary="Example table with fake contact information">
             <thead>
                 <tr>
                     <th scope="col">Image</th>
@@ -95,9 +95,9 @@
 
         <a href="#table-stack" class="button" onclick="document.querySelector('pre.table-stack').classList.toggle('hidden');">See table code</a>
 
-        <pre class="table-stack hidden bg-grey-lightest overflow-scroll">
+        <pre id="table-stack" class="table-stack hidden bg-grey-lightest overflow-scroll">
         {!! htmlspecialchars('
-<table class="table-stack" aria-label="Example table">
+<table class="table-stack" summary="Example table">
     <thead>
         <tr>
             <th scope="col"></th>
@@ -170,7 +170,7 @@
 
         <a href="#blockquote" class="button" onclick="document.querySelector('pre.blockquote').classList.toggle('hidden');">See blockquote code</a>
 
-        <pre class="blockquote hidden bg-grey-lightest overflow-scroll">
+        <pre id="blockquote" class="blockquote hidden bg-grey-lightest overflow-scroll">
         {!! htmlspecialchars('
 <blockquote>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -183,14 +183,14 @@
 
         <h2>Buttons</h2>
 
-        <a href="#standard-button" class="button">Standard button</a>
+        <a href="#button-examples" class="button">Standard button</a>
         <br />
-        <a href="#standard-button" class="button bg-gradient-green text-white">Dark button</a>
-        <a href="#expanded-button" class="button expanded">Expanded button</a>
+        <a href="#button-examples" class="button bg-gradient-green text-white">Dark button</a>
+        <a href="#button-examples" class="button expanded">Expanded button</a>
         <br />
         <a href="#button-examples" class="button" onclick="document.querySelector('pre.button-examples').classList.toggle('hidden');">See button code</a>
 
-        <pre class="button-examples hidden bg-grey-lightest overflow-scroll">
+        <pre id="button-examples" class="button-examples hidden bg-grey-lightest overflow-scroll">
         {!! htmlspecialchars('
 <a href="#" class="button">Standard button</a>
 <a href="#" class="button bg-gradient-green text-white">Dark button</a>
@@ -217,7 +217,7 @@
 
         <a href="#media-example" class="button" onclick="document.querySelector('pre.media-example').classList.toggle('hidden');">See media code</a>
 
-        <pre class="media-example hidden">
+        <pre id="media-example" class="media-example hidden">
         {!! htmlspecialchars('
 <p>
     <a href="//www.youtube.com/watch?v=guRgefesPXE">
@@ -238,7 +238,7 @@
 
         <a href="#responsive-embed-example" class="button" onclick="document.querySelector('pre.responsive-embed-example').classList.toggle('hidden');">See responsive embed code</a>
 
-        <pre class="responsive-embed-example hidden bg-grey-lightest overflow-scroll">
+        <pre id="responsive-embed-example" class="responsive-embed-example hidden bg-grey-lightest overflow-scroll">
         {!! htmlspecialchars('
 <div class="responsive-embed">
     <iframe width="420" height="315" src="//www.youtube.com/embed/guRgefesPXE" title="Responsive embed example" frameborder="0" allowfullscreen></iframe>
@@ -262,7 +262,7 @@
                 <a href="#fig-none" class="button mr-4" onclick="document.querySelector('pre.fig-none').classList.toggle('hidden');">See code</a>
                 <a href="/styleguide/figure" class="button">More options</a>
 
-                <pre class="fig-none hidden bg-grey-lightest overflow-scroll">
+                <pre id="fig-none" class="fig-none hidden bg-grey-lightest overflow-scroll">
                 {!! htmlspecialchars('
 <figure>
     <img src="/styleguide/image/400x300" alt="">

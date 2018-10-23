@@ -45,3 +45,8 @@ button.flickity-button.flickity-prev-next-button.previous::before {
     left: 0.54em;
     box-shadow: 0 1px 1px rgba(5, 33, 30, 0.4);
 }
+
+.flickity-enabled:focus .flickity-viewport {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+}
