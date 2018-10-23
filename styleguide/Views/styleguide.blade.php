@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <a href="#two-columns-code" class="button" onclick="document.querySelector('pre.two-columns-code').classList.toggle('hidden');">See row/columns code</a>
+        <a href="#two-columns-code" class="button" onclick="document.querySelector('pre.two-columns-code').classList.toggle('hidden');">See two column code</a>
         <pre id="two-columns-code" class="two-columns-code hidden bg-grey-lightest overflow-scroll">
             {!! htmlspecialchars('
 <div class="row -mx-4 md:flex">
@@ -50,7 +50,7 @@
             </div>
         </div>
 
-        <a href="#three-columns-code" class="button" onclick="document.querySelector('pre.three-columns-code').classList.toggle('hidden');">See row/columns code</a>
+        <a href="#three-columns-code" class="button" onclick="document.querySelector('pre.three-columns-code').classList.toggle('hidden');">See three column code</a>
         <pre id="three-columns-code" class="three-columns-code hidden bg-grey-lightest overflow-scroll">
             {!! htmlspecialchars('
 <div class="row -mx-4 lg:flex">
