@@ -28,7 +28,7 @@
 
         <a href="#table-stack" class="button" onclick="document.querySelector('pre.table-stack').classList.toggle('hidden');">See table code</a>
 
-        <pre class="table-stack hidden bg-grey-lightest overflow-scroll">
+        <pre id="table-stack" class="table-stack hidden bg-grey-lightest overflow-scroll">
         {!! htmlspecialchars('
 <table class="table-stack" aria-label="Example table">
     <thead>
