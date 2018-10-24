@@ -13,9 +13,9 @@
             <figcaption>{{ $faker->sentence }}</figcaption>
         </figure>
 
-        <a href="#fig-none" class="button" onclick="document.querySelector('pre.fig-none').classList.toggle('hidden');">See code</a>
+        <a href="#fig-none" class="button" onclick="document.querySelector('pre.fig-none').classList.toggle('hidden');">See figure code</a>
 
-        <pre class="fig-none hidden bg-grey-lightest overflow-scroll">
+        <pre id="fig-none" class="fig-none hidden bg-grey-lightest overflow-scroll">
         {!! htmlspecialchars('
 <figure>
     <img src="/styleguide/image/400x300" alt="">
@@ -36,9 +36,9 @@
                 </figure>
                 <p>{{ $faker->paragraph(38) }}</p>
 
-                <a href="#fig-left" class="button" onclick="document.querySelector('pre.fig-left').classList.toggle('hidden');">See code</a>
+                <a href="#fig-left" class="button" onclick="document.querySelector('pre.fig-left').classList.toggle('hidden');">See float left code</a>
 
-                <pre class="fig-left hidden bg-grey-lightest overflow-scroll">
+                <pre id="fig-left" class="fig-left hidden bg-grey-lightest overflow-scroll">
                 {!! htmlspecialchars('
 <figure class="float-left">
     <img src="/styleguide/image/400x300" alt="">
@@ -61,9 +61,9 @@
                 </figure>
                 <p>{{ $faker->paragraph(28) }}</p>
 
-                <a href="#fig-right" class="button" onclick="document.querySelector('pre.fig-right').classList.toggle('hidden');">See code</a>
+                <a href="#fig-right" class="button" onclick="document.querySelector('pre.fig-right').classList.toggle('hidden');">See float right code</a>
 
-                <pre class="fig-right hidden bg-grey-lightest overflow-scroll">
+                <pre id="fig-right" class="fig-right hidden bg-grey-lightest overflow-scroll">
                 {!! htmlspecialchars('
 <figure class="float-right">
     <img src="/styleguide/image/400x300" alt="">
@@ -87,9 +87,9 @@
                 </figure>
                 <p>{{ $faker->paragraph(12) }}</p>
 
-                <a href="#fig-center" class="button" onclick="document.querySelector('pre.fig-center').classList.toggle('hidden');">See code</a>
+                <a href="#fig-center" class="button" onclick="document.querySelector('pre.fig-center').classList.toggle('hidden');">See center image code</a>
 
-                <pre class="fig-center hidden bg-grey-lightest overflow-scroll">
+                <pre id="fig-center" class="fig-center hidden bg-grey-lightest overflow-scroll">
                 {!! htmlspecialchars('
 <figure class="text-center">
     <img src="/styleguide/image/800x450" alt="">
