@@ -620,6 +620,7 @@ module.exports = {
         '32': '8rem',
         'hero' : '36.3%',
         'full' : '100%',
+        'portrait' : '133%',
     },
 
 
