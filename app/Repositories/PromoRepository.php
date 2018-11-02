@@ -108,7 +108,7 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         });
 
         // Set the main social config
-        if (!empty($config['main']['social']['config'])) {
+        if (!empty($config['main']['social']['id']) && !empty($config['main']['social']['config'])) {
             $groups['main_social'] = [
                 'id' => $config['main']['social']['id'],
                 'config' => $config['main']['social']['config'],
@@ -116,7 +116,7 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         }
 
         // Set the main contact config
-        if (!empty($config['main']['contact']['config'])) {
+        if (!empty($config['main']['contact']['id']) && !empty($config['main']['contact']['config'])) {
             $groups['main_contact'] = [
                 'id' => $config['main']['contact']['id'],
                 'config' => $config['main']['contact']['config'],
