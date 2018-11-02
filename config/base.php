@@ -178,14 +178,15 @@ return [
     | you would need to change in the styleguide.
     |
     | /styleguide/Pages/News.php -> value of `news_listing_route`
-    | /styleguide/Pages/NewsCategory.php -> value of `news_listing_route + news_category_route`
+    | /styleguide/Pages/NewsCategory.php -> value of `news_listing_route + news_filter_route`
     | /styleguide/Pages/NewsView.php ->value of  `news_view_route`
     |
     */
     'news_listing_route' => 'news',
     'news_view_route' => 'news',
-    'news_category_route' => 'category',
+    'news_filter_route' => 'category',
     'news_all_text' => 'All categories',
+    'news_controller' => 'NewsController',
 
     /*
     |--------------------------------------------------------------------------
