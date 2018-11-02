@@ -5,13 +5,15 @@ namespace Styleguide\Pages;
 class NewsView extends Page
 {
     /** {@inheritdoc} **/
-    public $path = '/styleguide/news/item-1';
+    public $path;
 
     /**
      * {@inheritdoc}
      */
     public function getPageData()
     {
+        $this->path = '/styleguide/'.config('base.news_listing_route').'/item-1';
+
         return app('Factories\Page')->create(1, true, [
             'page' => [
                 'controller' => 'NewsController',
