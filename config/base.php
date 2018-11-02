@@ -196,7 +196,7 @@ return [
     | Here you can configure the global promotional groups. Subsites are keyed
     | by site_id and allow for an optional config value. If no config value
     | exists for a subsite promo group it will default to the main config.
-    | Subsite will also use the main promo roups unless a site_id key
+    | Subsite will also use the main promo groups unless a site_id key
     | exists.
     |
     */
