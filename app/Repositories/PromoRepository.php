@@ -107,6 +107,22 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
+        // Set the main social config
+        if (!empty($config['main']['social']['id']) && !empty($config['main']['social']['config'])) {
+            $groups['main_social'] = [
+                'id' => $config['main']['social']['id'],
+                'config' => $config['main']['social']['config'],
+            ];
+        }
+
+        // Set the main contact config
+        if (!empty($config['main']['contact']['id']) && !empty($config['main']['contact']['config'])) {
+            $groups['main_contact'] = [
+                'id' => $config['main']['contact']['id'],
+                'config' => $config['main']['contact']['config'],
+            ];
+        }
+
         // Setup the group reference array for this site
         $group_config = collect($groups)->mapWithKeys(function ($group, $name) use ($config, $data) {
             // If the subsite has a config value use that otherwise try to use the main config
@@ -122,16 +138,6 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         })->reject(function ($value) {
             return empty($value);
         })->toArray();
-
-        // Set the main social config
-        if (!empty($config['main']['social']['config'])) {
-            $group_config['main_social'] = $config['main']['social']['config'];
-        }
-
-        // Set the main contact config
-        if (!empty($config['main']['contact']['config'])) {
-            $group_config['main_contact'] = $config['main']['contact']['config'];
-        }
 
         // If rotating hero images are allowed on this controller then change the limit
         if (in_array($data['page']['controller'], config('base.hero_rotating_controllers'))) {
