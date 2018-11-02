@@ -178,14 +178,15 @@ return [
     | you would need to change in the styleguide.
     |
     | /styleguide/Pages/News.php -> value of `news_listing_route`
-    | /styleguide/Pages/NewsCategory.php -> value of `news_listing_route + news_category_route`
-    | /styleguide/Pages/NewsView.php ->value of  `news_view_route`
+    | /styleguide/Pages/NewsCategory.php -> value of `news_listing_route + news_filter_route`
+    | /styleguide/Pages/NewsView.php -> value of `news_view_route` + View
     |
     */
     'news_listing_route' => 'news',
     'news_view_route' => 'news',
-    'news_category_route' => 'category',
+    'news_filter_route' => 'category',
     'news_all_text' => 'All categories',
+    'news_controller' => 'NewsController',
 
     /*
     |--------------------------------------------------------------------------
@@ -195,7 +196,7 @@ return [
     | Here you can configure the global promotional groups. Subsites are keyed
     | by site_id and allow for an optional config value. If no config value
     | exists for a subsite promo group it will default to the main config.
-    | Subsite will also use the main promo roups unless a site_id key
+    | Subsite will also use the main promo groups unless a site_id key
     | exists.
     |
     */

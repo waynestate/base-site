@@ -12,7 +12,7 @@ class NewsCategory extends Page
      */
     public function getPageData()
     {
-        $this->path = '/styleguide/'.config('base.news_listing_route').'/'.config('base.news_category_route').'/est-quisquam';
+        $this->path = '/styleguide/'.config('base.news_listing_route').'/'.config('base.news_filter_route').'/est-quisquam';
 
         return app('Factories\Page')->create(1, true, [
             'page' => [
