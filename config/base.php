@@ -179,7 +179,7 @@ return [
     |
     | /styleguide/Pages/News.php -> value of `news_listing_route`
     | /styleguide/Pages/NewsCategory.php -> value of `news_listing_route + news_filter_route`
-    | /styleguide/Pages/NewsView.php ->value of  `news_view_route`
+    | /styleguide/Pages/NewsView.php -> value of `news_view_route` + View
     |
     */
     'news_listing_route' => 'news',
