@@ -153,7 +153,7 @@ class NewsRepository implements NewsRepositoryContract
         });
 
         $categories['news_categories'] = collect($categories['news_categories'])->map(function ($item) use ($subsite) {
-            $item['link'] = '/'.(!empty($subsite) ? $subsite : '').config('base.news_listing_route').'/'.config('base.news_category_route').'/'.$item['slug'];
+            $item['link'] = '/'.(!empty($subsite) ? $subsite : '').config('base.news_listing_route').'/'.config('base.news_filter_route').'/'.$item['slug'];
 
             return $item;
         })->toArray();

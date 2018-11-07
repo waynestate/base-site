@@ -16,11 +16,11 @@ Route::get('{any?}profile/{accessid}', 'ProfileController@show')
     ->where(['any' => '.*', 'accessid' => '.+']);
 
 // News by category
-Route::get('{any?}'.config('base.news_listing_route').'/'.config('base.news_category_route').'/{slug}', 'NewsController@index')
+Route::get('{any?}'.config('base.news_listing_route').'/'.config('base.news_filter_route').'/{slug}', config('base.news_controller').'@index')
     ->where(['any' => '.*', 'slug' => '.+']);
 
 // News view
-Route::get('{any?}'.config('base.news_view_route').'/{slug}-{id}', 'NewsController@show')
+Route::get('{any?}'.config('base.news_view_route').'/{slug}-{id}', config('base.news_controller').'@show')
     ->where(['any' => '.*', 'slug' => '.+', 'id' => '\d+']);
 
 // The wild card route is a catch all route that tries to resolve the requests path to a json file
