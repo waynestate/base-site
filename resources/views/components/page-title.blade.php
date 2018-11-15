@@ -1,1 +1,1 @@
-<h1 class="mt-4{{ !empty($class) ? ' '.$class : '' }}">{{ $title }}</h1>
+<h1 class="mt-6{{ !empty($class) ? ' '.$class : '' }}">{{ $title }}</h1>
