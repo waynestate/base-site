@@ -22,13 +22,25 @@ footer .content a {
     }
 
     blockquote {
-        @apply .border-l-8 .border-solid .border-grey-lighter .bg-grey-lightest .p-4 .pb-1 .mb-4;
+        @apply .border-t .border-b .border-solid .border-grey-lighter .pt-6 .pb-2 .pl-16 .pr-6 .my-8 .text-xl .text-black .relative .bg-transparent .flex;
+
+        @screen mt {
+            @apply .text-2xl;
+        }
+
+        &::before {
+            @apply .absolute .pin .mt-4 .leading-none .text-grey-lighter .pr-1 .font-serif;
+
+            content: '\201C'; // Double quote
+            font-size: 85pt; // We won't use this value any other time
+        }
     }
 
     // Images remain at their specified width
     // Text appears above and below for small
     @media (max-width: config('screens.mt')) {
-        img {
+        img,
+        figure {
             display: block;
             margin: 0 auto;
 
@@ -40,20 +52,16 @@ footer .content a {
     }
 
     figure {
-        @apply .table .mt-2 .mb-4;
+        @apply .mt-2 .mb-4 .mx-auto;
 
-        @media (max-width: config('screens.mt')) {
-            @apply .float-none;
-        }
+        display: table !important; // Overriding display: inline-block; from CKEditor
 
         img {
-            @apply .block;
-
             padding: 0 !important;
         }
 
         figcaption {
-            @apply .text-sm .text-grey-darker .mt-2 .text-left;
+            @apply .text-sm .text-grey-darker .text-left;
 
             display: table-caption;
             caption-side: bottom;
