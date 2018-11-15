@@ -86,6 +86,11 @@ class NewsController extends Controller
         // Set the selected category
         $categories = $this->news->setSelectedCategory($categories, null);
 
+        // Set hero
+        if(!empty($news['news']['filename_url_relative'])){
+            $request->data['hero'][]['relative_url'] = $news['news']['filename_url_relative'];
+        }
+
         // Set the meta image information
         $request->data['meta']['image'] = $this->news->getImageUrl($news);
 
