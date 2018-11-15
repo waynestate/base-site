@@ -87,7 +87,7 @@ class NewsController extends Controller
         $categories = $this->news->setSelectedCategory($categories, null);
 
         // Set hero
-        if(!empty($news['news']['filename_url_relative'])){
+        if (!empty($news['news']['filename_url_relative'])) {
             $request->data['hero'][]['relative_url'] = $news['news']['filename_url_relative'];
         }
 
