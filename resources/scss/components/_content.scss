@@ -32,7 +32,7 @@ footer .content a {
             @apply .absolute .pin .mt-4 .leading-none .text-grey-lighter .pr-1 .font-serif;
 
             content: '\201C'; // Double quote
-            font-size: 85pt; // We won't use this value any other time
+            font-size: 85pt;
         }
     }
 
@@ -51,10 +51,30 @@ footer .content a {
         }
     }
 
+    // Floated images can only be 50% of column width for readability
+    @screen mt {
+        img {
+            &[style*="float:right"],
+            &[style*="float:left"] {
+                padding: 0 !important;
+            }
+
+            &[style*="float:right"] {
+                @apply .ml-6 .my-2 .max-w-50%;
+            }
+
+            &[style*="float:left"] {
+                @apply .mr-6 .my-2 .max-w-50%;
+            }
+        }
+    }
+
     figure {
         @apply .mt-2 .mb-4 .mx-auto;
 
-        display: table !important; // Overriding display: inline-block; from CKEditor
+        // Overriding display: inline-block; from CKEditor
+        // so that the caption wraps appropriately
+        display: table !important;
 
         img {
             padding: 0 !important;
