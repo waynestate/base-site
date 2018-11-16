@@ -28,6 +28,6 @@ class EventsListingController extends Controller
     {
         $events = $this->events->getEvents($request->data['site']['id']);
 
-        return view('styleguide-minievents', merge($request->data, $events));
+        return view('styleguide-events-listing', merge($request->data, $events));
     }
 }
