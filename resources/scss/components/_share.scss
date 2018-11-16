@@ -1,5 +1,6 @@
 .addthis_sharing_toolbox {
-    display: block;
+    @apply .block;
+
     min-height: 32px;
 
     svg {
@@ -9,11 +10,10 @@
     }
 
     &::before {
-        @apply .text-grey-darker .bg-grey-lighter .uppercase .float-left .leading-tight;
+        @apply .text-grey-darker .bg-grey-lighter .uppercase .float-left .leading-tight .text-sm;
 
         padding: 6px 11px 7px;
         letter-spacing: 0.1em;
-        font-size: 14px;
         margin-right: 2px;
         content: 'Share';
     }
@@ -26,6 +26,7 @@
 }
 
 a.at-icon-wrapper.at-share-btn {
+    @apply .mb-0;
+
     background: config('colors.grey-lighter') !important;
-    margin-bottom: 0;
 }
