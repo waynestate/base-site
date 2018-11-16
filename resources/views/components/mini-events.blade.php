@@ -6,18 +6,30 @@
 --}}
 <h2>{{ $heading ?? 'Events' }}</h2>
 
-<dl>
-    @foreach($events as $event)
-        <dt><a href="{{ $event['url'] }}" class="underline hover:no-underline">{{ $event['title'] }}</a></dt>
-        <dd class="mb-4">
-            <time class="text-grey-darker text-sm" datetime="{{ apdatetime($event['date']) }} {{ apdatetime($event['start_time']) }}">
-                {{ apdatetime(date("F j, Y", strtotime($event['date']))) }}
-                @if(!(bool)$event['is_all_day'])
-                    at {{ apdatetime(date('g:i a' , strtotime($event['start_time']))) }}
+<ul class="list-reset">
+    @foreach($events as $key => $dates)
+        <li class="flex -mx-2">
+            <div class="mx-2">
+                <div class="relative border-2 border-green rounded-sm text-center mb-4">
+                    <div class="w-12 bg-green text-white leading-none border-b-2 border-green text-sm">{{ apdatetime(date('M' , strtotime($key))) }}</div>
+                    <div class="text-green text-2xl leading-tight">{{ apdatetime(date('d' , strtotime($key))) }}</div>
+                </div>
+            </div>
+            <ul class="list-reset mx-2">
+                @foreach($dates as $event)
+                    <li class="mb-2 pb-2 border-b border-solid">
+                        <a class="block" href="{{ $event['url'] }}">{{ $event['title'] }}</a>
+                        <time class="text-sm text-grey-darker" datetime="{{ $event['date'] }}T{{ $event['start_time'] }}{{ date('P') }}">
+                            @if(!(bool)$event['is_all_day']){{ apdatetime(date('g:i a' , strtotime($event['start_time']))) }}@else All day @endif
+                        </time>
+                    </li>
+                @endforeach
+                @if($dates == end($events))
+                    <li>
+                        <a href="//events.wayne.edu/{{ $cal_name ?? 'main' }}/month/">{{ $link_text ?? 'More events' }}</a>
+                    </li>
                 @endif
-            </time>
-        </dd>
+            </ul>
+        </li>
     @endforeach
-</dl>
-
-<a href="//events.wayne.edu/{{ $cal_name ?? 'main' }}/month/" class="block my-4 underline hover:no-underline">{{ $link_text ?? 'More events' }}</a>
+</ul>

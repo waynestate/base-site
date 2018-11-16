@@ -50,8 +50,11 @@ class EventRepository implements EventRepositoryContract
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
-        // Make sure the return is an array
-        $events['events'] = array_get($events_listing, 'events', []);
+        if (!empty($events_listing['events'])) {
+            $events['events'] = collect($events_listing['events'])->groupBy('date')->toArray();
+        } else {
+            $events['events'] = [];
+        }
 
         return $events;
     }
