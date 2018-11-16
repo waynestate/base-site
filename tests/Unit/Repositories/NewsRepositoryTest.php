@@ -172,7 +172,7 @@ class NewsRepositoryTest extends TestCase
      */
     public function news_item_with_no_images_should_return_null()
     {
-        $news['news']['filename'] = '';
+        $news['news']['filename_url_absolute'] = '';
 
         $imageUrl = app('App\Repositories\NewsRepository')->getImageUrl($news);
 
@@ -185,11 +185,11 @@ class NewsRepositoryTest extends TestCase
      */
     public function news_item_with_image_should_return_image()
     {
-        $news['news']['filename'] = $this->faker->imageUrl();
+        $news['news']['filename_url_absolute'] = $this->faker->imageUrl();
 
         $imageUrl = app('App\Repositories\NewsRepository')->getImageUrl($news);
 
-        $this->assertEquals($news['news']['filename'], $imageUrl);
+        $this->assertEquals($news['news']['filename_url_absolute'], $imageUrl);
     }
 
     /**

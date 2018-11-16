@@ -21,7 +21,7 @@ h3,
 h4,
 h5,
 h6 {
-    @apply .font-bold .mb-4 .leading-none;
+    @apply .font-bold .mb-4 .leading-tight;
 
     text-rendering: optimizeLegibility;
 }
