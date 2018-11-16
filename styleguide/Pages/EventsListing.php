@@ -2,7 +2,7 @@
 
 namespace Styleguide\Pages;
 
-class Minievents extends Page
+class EventsListing extends Page
 {
     /**
      * {@inheritdoc}
@@ -11,8 +11,8 @@ class Minievents extends Page
     {
         return app('Factories\Page')->create(1, true, [
             'page' => [
-                'controller' => 'MiniEventsController',
-                'title' => 'Mini events',
+                'controller' => 'EventsListingController',
+                'title' => 'Events listing',
                 'id' => 109100,
             ],
         ]);

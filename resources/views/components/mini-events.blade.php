@@ -15,7 +15,7 @@
                     <div class="text-green text-2xl leading-tight">{{ apdatetime(date('d' , strtotime($key))) }}</div>
                 </div>
             </div>
-            <ul class="list-reset mx-2">
+            <ul class="list-reset mx-2 flex-grow">
                 @foreach($dates as $event)
                     <li class="mb-2 pb-2 border-b border-solid">
                         <a class="block" href="{{ $event['url'] }}">{{ $event['title'] }}</a>
