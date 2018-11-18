@@ -13,8 +13,8 @@
             {!! $news['body'] !!}
         </div>
 
-        <p rel="back" class="pt-4">
-            <a rel="back" href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}{{ config('base.news_listing_route') }}">Back to listing</a>
+        <p class="pt-4">
+            <a href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}{{ config('base.news_listing_route') }}">Back to listing</a>
         </p>
     </div>
 @endsection
