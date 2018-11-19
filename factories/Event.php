@@ -23,7 +23,9 @@ class Event implements FactoryContract
     public function create($limit = 1, $flatten = false, $options = [])
     {
         for ($i = 1; $i <= $limit; $i++) {
-            $data[$this->faker->dateTimeThisMonth('now')->format('Y-m-d')][$i] = [
+            $date = $this->faker->dateTimeThisMonth('now')->format('Y-m-d');
+
+            $data[$date][$i] = [
                 'url' => $this->faker->url,
                 'title' => $this->faker->sentence(rand(6, 10)),
                 'date' => $this->faker->dateTimeThisMonth('now')->format('Y-m-d'),
@@ -31,11 +33,13 @@ class Event implements FactoryContract
                 'is_all_day' => $this->faker->boolean,
             ];
 
-            //$data[$i] = array_replace_recursive($data[$i], $options);
+            $data[$date][$i] = array_replace_recursive($data[$date][$i], $options);
         }
 
         if ($limit === 1 && $flatten === true) {
-            return current($data);
+            foreach ($data as $date => $event) {
+                $data[$date] = current($event);
+            }
         }
 
         return $data;
