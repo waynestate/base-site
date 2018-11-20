@@ -25,15 +25,16 @@ class Event implements FactoryContract
         for ($i = 1; $i <= $limit; $i++) {
             $date = $this->faker->dateTimeThisMonth('now')->format('Y-m-d');
 
-            $data[$date][$i] = [
+            $event = [
                 'url' => $this->faker->url,
                 'title' => $this->faker->sentence(rand(6, 10)),
-                'date' => $this->faker->dateTimeThisMonth('now')->format('Y-m-d'),
+                'date' => $date,
                 'start_time' => $this->faker->dateTimeThisMonth('now')->format('H:i:s'),
                 'is_all_day' => $this->faker->boolean,
             ];
+            $event = array_replace_recursive($event, $options);
 
-            $data[$date][$i] = array_replace_recursive($data[$date][$i], $options);
+            $data[$date][] = $event;
         }
 
         if ($limit === 1 && $flatten === true) {
