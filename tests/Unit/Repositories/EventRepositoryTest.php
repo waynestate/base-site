@@ -25,7 +25,7 @@ class EventRepositoryTest extends TestCase
         // Get the events
         $events = app('App\Repositories\EventRepository', ['wsuApi' => $wsuApi])->getEvents($this->faker->randomDigit);
 
-        // Make sure we have a blank news array
+        // Make sure we have a blank events array
         $this->assertEquals($events, ['events' => []]);
     }
 
@@ -55,7 +55,7 @@ class EventRepositoryTest extends TestCase
         // Get the events
         $events = app('App\Repositories\EventRepository', ['wsuApi' => $wsuApi])->getEvents($this->faker->randomDigit);
 
-        // Make sure we have a blank news array
+        // Make sure we have a events array grouped by the event date
         $this->assertEquals($events, ['events' => $testEvents]);
     }
 }
