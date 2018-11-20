@@ -22,7 +22,7 @@ class EventRepositoryTest extends TestCase
         $wsuApi->shouldReceive('sendRequest')->with('calendar.events.listing', Mockery::type('array'))->once()->andReturn($return);
         $wsuApi->shouldReceive('nextRequestProduction')->once();
 
-        // Get the news
+        // Get the events
         $events = app('App\Repositories\EventRepository', ['wsuApi' => $wsuApi])->getEvents($this->faker->randomDigit);
 
         // Make sure we have a blank news array
