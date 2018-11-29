@@ -17,7 +17,7 @@
 
             @if(!empty($events))
                 <div class="w-full md:w-1/2 px-4">
-                    @include('components/mini-events', ['events' => $events])
+                    @include('components/events-listing', ['events' => $events])
                 </div>
             @endif
         </div>

@@ -369,9 +369,9 @@
                 "is_active": "1",
                 "page_id": "109100",
                 "target": "",
-                "display_name": "Mini events",
+                "display_name": "Events listing",
                 "class_name": "",
-                "relative_url": "/styleguide/minievents",
+                "relative_url": "/styleguide/eventslisting",
                 "submenu": []
             },
             "110100": {
