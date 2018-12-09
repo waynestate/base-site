@@ -6,7 +6,8 @@
     <div class="content">
         {!! $page['content']['main'] !!}
 
-        <table class="table-stack" summary="Example table with fake contact information">
+        <table class="table-stack">
+            <caption>Example table with fake contact information</caption>
             <thead>
                 <tr>
                     <th scope="col">First name</th>
@@ -30,7 +31,8 @@
 
         <pre id="table-stack" class="table-stack hidden bg-grey-lightest overflow-scroll">
         {!! htmlspecialchars('
-<table class="table-stack" summary="Example table">
+<table class="table-stack">
+    <caption>Example table with caption</caption>
     <thead>
         <tr>
             <th scope="col"></th>
