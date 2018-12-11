@@ -1,6 +1,8 @@
 const validator = require("html-validator");
 const request = require("request-promise");
 const fs = require("fs");
+const pa11y = require("pa11y");
+
 const file = __dirname + "/../../styleguide/menu.json";
 const base_domain = "https://base.wayne.local";
 let urls = [];
@@ -12,6 +14,10 @@ const validator_options = {
 
 const request_options = {
     rejectUnauthorized: false
+};
+
+const a11y_options = {
+    standard: "WCAG2AA"
 };
 
 /**
@@ -44,6 +50,15 @@ fs.readFile(file, "utf8", (err, data) => {
                     .catch(errorOut);
             })
             .catch(errorOut);
+
+        pa11y(request_options.uri, a11y_options).then(results => {
+            if (results.issues.length === 0) {
+                process.stdout.write(colorize(92, "."));
+            } else {
+                process.stdout.write("\n\n" + colorize(91, "F "));
+                console.log(url, "\n", results.issues);
+            }
+        });
     });
 });
 

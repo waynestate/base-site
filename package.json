@@ -41,6 +41,7 @@
     "laravel-mix": "^2.0",
     "laravel-mix-purgecss": "^2.0.0",
     "mediabox": "^1.1.2",
+    "pa11y": "^5.1.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
     "slideout": "^1.0.1",
