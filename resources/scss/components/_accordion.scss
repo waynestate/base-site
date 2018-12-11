@@ -1,5 +1,5 @@
 .accordion.enabled {
-    @apply .p-0 .mb-1 .relative .list-reset;
+    @apply .p-0 .mb-4 .relative .list-reset;
 
     & > li {
         @apply .border .border-solid .border-grey .w-full .absolute .border-b-0;
