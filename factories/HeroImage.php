@@ -26,7 +26,7 @@ class HeroImage implements FactoryContract
             $data[$i] = [
                 'relative_url' => '/styleguide/image/1600x580?text=1600x580%20('.$i.')',
                 'title' => $this->faker->sentence,
-                'description' => '<p>' . $this->faker->text(100) . ' <a href="">'. $this->faker->sentence(3)  .'</a>',
+                'description' => '<p>' . $this->faker->text(100) . ' <a href="#">'. $this->faker->sentence(3)  .'</a>',
             ];
 
             $data[$i] = array_replace_recursive($data[$i], $options);
