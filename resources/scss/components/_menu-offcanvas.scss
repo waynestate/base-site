@@ -1,18 +1,12 @@
 .slideout-menu {
-    @apply .bg-green-dark;
+    @apply .bg-green-dark .fixed .pin-t .pin-r .pin-b;
 
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
     width: 250px;
     height: 100%;
     z-index: 10;
 
     ul {
-        @apply .bg-green-dark;
-
-        padding: 0;
+        @apply .bg-green-dark .p-0;
 
         li a {
             @apply .text-white;
@@ -20,12 +14,12 @@
 
         // Indent second level now since first level is shown
         li > ul > li a {
-            padding-left: 2em;
+            @apply .pl-8;
         }
 
         // Indent third level now since first level is shown
         li > ul > li > ul > li a {
-            padding-left: 3em;
+            @apply .pl-12;
         }
 
         // Selected State
@@ -42,19 +36,16 @@
 
     // Main Menu within offcanvas
     .offcanvas-main-menu {
-        display: block;
+        @apply .block;
 
         ul ul li {
-            @apply bg-green-darker;
+            @apply .bg-green-darker;
         }
 
         ul li .main-menu-toggle {
-            @apply bg-green-darker;
+            @apply .bg-green-darker .uppercase .text-base .pr-6;
 
-            text-transform: uppercase;
-            font-size: 1rem;
             cursor: pointer;
-            padding-right: 20px;
         }
 
         // Menu Header top level (MAIN MENU)
@@ -64,10 +55,6 @@
     }
 
     h2 {
-        @apply .text-white;
-
-        padding: 0 0 5px 15px;
-        margin-top: 32px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        @apply .text-white .p-0 .pb-3 .pl-3 .mt-8;
     }
 }
