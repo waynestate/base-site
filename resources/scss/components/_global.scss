@@ -8,11 +8,13 @@ a {
     @apply .text-green .no-underline;
 }
 
-.white-links a {
-    @apply .text-white .underline;
+@responsive {
+    .white-links a {
+        @apply .text-white .underline;
 
-    &:hover {
-        @apply .no-underline;
+        &:hover {
+            @apply .no-underline;
+        }
     }
 }
 
