@@ -1,6 +1,5 @@
 ul.menu-top {
-    margin: 0;
-    padding: 0;
+    @apply .m-0 .p-0;
 
     li {
         a {
@@ -12,12 +11,11 @@ ul.menu-top {
         }
 
         &:last-child {
-            margin-right: 0;
+            @apply .mr-0;
         }
 
         @screen mt {
-            display: inline-block;
-            margin: 0 10px;
+            @apply .inline-block .mx-2 .my-0;
 
             &.selected a {
                 @apply .text-yellow .border-b .border-solid .border-yellow;
