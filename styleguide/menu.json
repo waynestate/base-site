@@ -369,9 +369,9 @@
                 "is_active": "1",
                 "page_id": "109100",
                 "target": "",
-                "display_name": "Mini events",
+                "display_name": "Events listing",
                 "class_name": "",
-                "relative_url": "/styleguide/minievents",
+                "relative_url": "/styleguide/eventslisting",
                 "submenu": []
             },
             "110100": {
@@ -392,7 +392,28 @@
                 "display_name": "Forms",
                 "class_name": "",
                 "relative_url": "/styleguide/forms",
-                "submenu": []
+                "submenu": {
+                    "111100": {
+                        "menu_item_id": "111100",
+                        "is_active": "1",
+                        "page_id": "111100",
+                        "target": "",
+                        "display_name": "Forms",
+                        "class_name": "",
+                        "relative_url": "/styleguide/forms",
+                        "submenu": []
+                    },
+                    "111100100": {
+                        "menu_item_id": "111100100",
+                        "is_active": "1",
+                        "page_id": "111100100",
+                        "target": "",
+                        "display_name": "Form Errors",
+                        "class_name": "",
+                        "relative_url": "/styleguide/forms/error",
+                        "submenu": []
+                    }
+                }
             },
             "112100": {
                 "menu_item_id": "112100",
@@ -432,6 +453,16 @@
                 "display_name": "Figure",
                 "class_name": "",
                 "relative_url": "/styleguide/figure",
+                "submenu": []
+            },
+            "116100": {
+                "menu_item_id": "116100",
+                "is_active": "1",
+                "page_id": "116100",
+                "target": "",
+                "display_name": "Featured Promo",
+                "class_name": "",
+                "relative_url": "/styleguide/featuredpromo",
                 "submenu": []
             }
         }

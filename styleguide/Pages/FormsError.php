@@ -2,7 +2,7 @@
 
 namespace Styleguide\Pages;
 
-class Minievents extends Page
+class FormsError extends Page
 {
     /**
      * {@inheritdoc}
@@ -11,9 +11,9 @@ class Minievents extends Page
     {
         return app('Factories\Page')->create(1, true, [
             'page' => [
-                'controller' => 'MiniEventsController',
-                'title' => 'Mini events',
-                'id' => 109100,
+                'controller' => 'FormsErrorController',
+                'title' => 'Form Errors',
+                'id' => 111100100,
             ],
         ]);
     }

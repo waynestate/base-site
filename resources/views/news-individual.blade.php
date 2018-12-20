@@ -4,12 +4,12 @@
     @include('components.page-title', ['title' => $news['title']])
 
     <div class="news-item">
-        <div class="addthis_share">Share</div>
-        <div class="addthis_sharing_toolbox"></div>
 
-        <time class="block text-sm text-grey-darker mb-2" datetime="{{ $news['posted'] }}">{{ apdatetime(date('F j, Y', strtotime($news['posted']))) }}</time>
+        <time class="block text-sm text-grey-darker mb-6" datetime="{{ $news['posted'] }}">{{ apdatetime(date('F j, Y', strtotime($news['posted']))) }}</time>
 
-        <div class="content">
+        <div class="addthis_sharing_toolbox mb-4"></div>
+
+        <div class="content mt:text-xl">
             {!! $news['body'] !!}
         </div>
 

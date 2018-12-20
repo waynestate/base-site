@@ -5,7 +5,7 @@ namespace Factories;
 use Contracts\Factories\FactoryContract;
 use Faker\Factory;
 
-class HeroImage implements FactoryContract
+class FeaturedPromo implements FactoryContract
 {
     /**
      * Construct the factory.
@@ -24,9 +24,10 @@ class HeroImage implements FactoryContract
     {
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
-                'relative_url' => '/styleguide/image/1600x580?text=1600x580%20('.$i.')',
+                'link' => $this->faker->url,
+                'relative_url' => '/styleguide/image/600x450?text=Featured',
                 'title' => $this->faker->sentence,
-                'description' => '<p>' . $this->faker->text(100) . ' <a href="#">'. $this->faker->sentence(3)  .'</a>',
+                'excerpt' => $this->faker->sentence,
             ];
 
             $data[$i] = array_replace_recursive($data[$i], $options);

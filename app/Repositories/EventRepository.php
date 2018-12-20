@@ -44,14 +44,19 @@ class EventRepository implements EventRepositoryContract
             'end_date' => date('Y-m-d', strtotime('+6 month')),
         ];
 
-        $events_listing = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+        $events['events'] = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             $this->wsuApi->nextRequestProduction();
 
-            return $this->wsuApi->sendRequest($params['method'], $params);
-        });
+            $events_listing = $this->wsuApi->sendRequest($params['method'], $params);
 
-        // Make sure the return is an array
-        $events['events'] = array_get($events_listing, 'events', []);
+            if (!empty($events_listing['events'])) {
+                $events_listing = collect($events_listing['events'])->groupBy('date')->toArray();
+            } else {
+                $events_listing = [];
+            }
+
+            return $events_listing;
+        });
 
         return $events;
     }

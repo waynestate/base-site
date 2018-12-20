@@ -1,23 +1,21 @@
-.addthis_share {
-    @apply .text-grey-darkest .bg-grey-lighter;
-
-    padding: 8px 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    float: left;
-    line-height: 1em;
-    font-size: 14px;
-    margin-right: 3px;
-}
-
 .addthis_sharing_toolbox {
-    display: inline-block;
-    margin-bottom: 1em;
+    @apply .block;
+
+    min-height: 32px;
 
     svg {
-        fill: #4b4b4b !important;
+        fill: config('colors.grey-darker') !important;
         width: 20px !important;
         height: 20px !important;
+    }
+
+    &::before {
+        @apply .text-grey-darker .bg-grey-lighter .uppercase .float-left .leading-tight .text-sm;
+
+        padding: 6px 11px 7px;
+        letter-spacing: 0.1em;
+        margin-right: 2px;
+        content: 'Share';
     }
 }
 
@@ -28,5 +26,7 @@
 }
 
 a.at-icon-wrapper.at-share-btn {
-    background: #e7e7e7 !important;
+    @apply .mb-0;
+
+    background: config('colors.grey-lighter') !important;
 }

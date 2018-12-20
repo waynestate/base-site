@@ -5,8 +5,8 @@
 
     <div class="row">
         <div class="w-full md:w-1/2">
-            @if(!empty($events))
-                @include('components.mini-events', ['events' => $events])
+            @if(!empty($featured_promo))
+                @include('components.featured-promo', ['featured_promo' => $featured_promo])
             @endif
         </div>
     </div>

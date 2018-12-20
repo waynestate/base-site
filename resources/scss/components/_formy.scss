@@ -36,25 +36,16 @@
     [type='url'],
     [type='color'],
     textarea {
-        @apply .border-grey .border-solid .border;
+        @apply .border-grey .border-solid .border .block .w-full .p-2 .text-base .m-0 .mb-4 .font-normal .h-10 .rounded-none;
 
-        display: block;
         box-sizing: border-box;
-        width: 100%;
-        height: 2.4375rem;
-        margin: 0 0 1rem;
-        padding: 0.5rem;
-        border-radius: 0;
         box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
-        font-size: 1rem;
-        font-weight: normal;
         transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
         appearance: none;
     }
 
     [type='file'] {
-        width: 100%;
-        margin: 0 0 1rem;
+        @apply .w-full .m-0 .mb-4;
     }
 
     [type='checkbox'] + label[for],
@@ -63,149 +54,119 @@
     }
 
     select {
-        @apply .border-grey .border-solid .border .bg-white;
+        @apply .border-grey .border-solid .border .bg-white .h-10 .w-full .m-0 .mb-4 .p-2 .pr-6 .text-base .leading-normal .rounded-none;
 
-        height: 2.4375rem;
-        width: 100%;
-        margin: 0 0 1rem;
-        padding: 0.5rem;
         appearance: none;
-        border-radius: 0;
-        font-size: 1rem;
-        line-height: normal;
         background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='32' height='24' viewBox='0 0 32 24'><polygon points='0,0 32,0 16,24' style='fill: rgb%28138, 138, 138%29'></polygon></svg>");
         background-origin: content-box;
         background-position: right -1rem center;
         background-repeat: no-repeat;
         background-size: 9px 6px;
-        padding-right: 1.5rem;
         transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
     }
 
     // Fieldsets
     fieldset {
-        margin: 0;
-        padding: 0;
-        border: none;
+        @apply .m-0 .p-0 .border-0;
 
         legend {
-            display: none;
+            @apply .hidden;
         }
     }
 
     // Textareas
     textarea {
-        height: 8em;
+        @apply .h-32;
     }
 
     // Description and text blocks size
     p {
-        font-size: 1em;
-        line-height: 1.6em;
-        margin-bottom: 1rem;
+        @apply .text-base .mb-4 .leading-normal;
     }
 
     // Errors
     .error {
         p {
-            @apply .text-red;
-
-            margin: 4px auto 10px;
-            font-size: 0.8em;
+            @apply .text-red .mx-auto .mt-1 .mb-4 .text-sm;
         }
 
         input,
         textarea,
         select {
-            @apply .border-red-light .border .bg-red-lightest;
-
-            margin-bottom: 0;
+            @apply .border-red-light .border .bg-red-lightest .mb-0;
         }
 
         .checkbox,
         .radio {
-            @apply .bg-red-lightest;
-
-            padding-bottom: 0;
+            @apply .bg-red-lightest .pb-0;
         }
     }
 
     // Labels
     label {
+        @apply .font-normal;
+
         color: inherit;
-        font-size: 1em;
 
         a {
-            text-decoration: underline;
+            @apply .underline;
         }
     }
 
     // Checkboxes and radio
     div.checkbox input,
     div.radio input {
-        margin: 0;
-        padding: 0;
+        @apply .m-0 .p-0;
     }
 
     div.checkbox,
     div.radio {
-        margin: 0;
-        padding: 0 0 15px;
-        border: 0;
-        float: none;
+        @apply .m-0 .p-0 .pb-4 .border-0 .float-none;
     }
 
     div.checkbox div,
     div.radio div {
-        border: 0;
-        margin: 4px 0 0;
+        @apply .border-0 .m-0 .mt-2;
     }
 
     div.checkbox label,
     div.radio label {
-        float: none;
-        display: inline;
-        margin-left: 5px;
+        @apply .float-none .inline .ml-2;
     }
 
     div.checkbox input[type=checkbox],
     div.radio input[type=radio] {
-        margin-bottom: 0;
+        @apply .mb-0;
     }
 
     // The subit button
     #formy-button {
-        @apply .bg-grey-darker .text-white;
+        @apply .text-white;
 
-        border-radius: 0;
-        font-size: 0.75rem;
+        @extend .button;
+        @extend .bg-gradient-green;
     }
 
     .select #country,
     .select #state {
-        width: 100%;
+        @apply .w-full;
+
+        border-radius: 0 !important;
     }
 
     // Text Headings
     h2,
     .field_group h2 {
-        @apply .border-b .border-grey-light;
-
-        font-size: 1.3em;
+        @apply .border-b .border-grey-light .text-xl;
     }
 
     // Login
     .login-info li {
-        @apply .border-b .border-solid .border-grey;
-
-        font-size: 0.9em;
-        padding: 5px 0;
+        @apply .border-b .border-solid .border-grey .text-sm .px-0 .py-2;
     }
 
     .login-info ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
+        @apply .m-0 .p-0 .list-reset;
     }
 
     .formy_logout a,
@@ -214,13 +175,12 @@
         @apply .text-green .underline .border-b-0;
 
         &:hover {
-            text-decoration: none;
-            border-bottom: none;
+            @apply .no-underline .border-0;
         }
     }
 
     .formy_logout {
-        text-align: right;
+        @apply .text-right;
     }
 
     // Required
