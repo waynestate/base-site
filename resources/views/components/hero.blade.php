@@ -11,7 +11,7 @@
                     <div class="row">
                         <div class="mx-4">
                             <h1 id="hero-image-{{ $loop->iteration }}" class="leading-tight text-2xl mb-1 @if(in_array($page['controller'], config('base.hero_full_controllers')))xl:text-5xl @else xl:text-3xl @endif">{{ $image['title'] }}</h1>
-                            @if(!empty($image['description']))<p class="pr-2 md:text-lg content md:white-links">{!! strip_tags($image['description'], '<a>') !!}</p>@endif
+                            @if(!empty($image['description']))<p class="pr-2 md:text-lg md:white-links content">{!! strip_tags($image['description'], '<a>') !!}</p>@endif
                         </div>
                     </div>
                 </div>
