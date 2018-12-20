@@ -1,22 +1,16 @@
 .responsive-embed {
-    position: relative;
+    @apply .relative .mb-4 .overflow-hidden .pb-3/4;
+
     height: 0;
-    margin-bottom: 1rem;
-    padding-bottom: 75%;
-    overflow: hidden;
 }
 
 .responsive-embed iframe,
 .responsive-embed object,
 .responsive-embed embed,
 .responsive-embed video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    @apply .absolute .pin-t .pin-l .w-full .h-full;
 }
 
 .responsive-embed.widescreen {
-    padding-bottom: 56.25%;
+    @apply .pb-16/9;
 }
