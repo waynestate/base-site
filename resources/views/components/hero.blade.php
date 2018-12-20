@@ -2,7 +2,7 @@
     $images => array // ['relative_url']
 --}}
 
-<aside class="mb-4 mt:mx-0{{ !empty($images) && count($images) > 1 ? ' rotate' : '' }}{{ !empty($show_site_menu) && $show_site_menu === true ? ' contained -mx-4' : ' full' }} bg-grey-lighter md:bg-transparent">
+<aside class="mb-4 mt:mx-0{{ !empty($images) && count($images) > 1 ? ' rotate' : '' }}{{!in_array($page['controller'], config('base.hero_full_controllers'))  ? '  -mx-4' : ' ' }} bg-grey-lighter md:bg-transparent">
     @if(in_array($page['controller'], config('base.hero_text_controllers')))
         @foreach($images as $image)
             <div class="w-full relative" aria-labelledby="hero-image-{{ $loop->iteration }}">
