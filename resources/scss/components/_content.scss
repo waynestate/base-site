@@ -22,7 +22,7 @@ footer .content a {
     }
 
     blockquote {
-        @apply .border-t .border-b .border-solid .border-grey-lighter .pt-6 .pb-2 .pl-16 .pr-6 .my-8 .text-xl .text-black .relative .bg-transparent .flex;
+        @apply .pt-6 .pb-2 .pl-16 .pr-6 .my-8 .text-xl .text-black .relative .bg-transparent .flex;
 
         @screen mt {
             @apply .text-2xl;
@@ -41,8 +41,7 @@ footer .content a {
     @media (max-width: config('screens.mt')) {
         img,
         figure {
-            display: block;
-            margin: 0 auto;
+            @apply .block .my-0 .mx-auto;
 
             &[style*="float:right"],
             &[style*="float:left"] {

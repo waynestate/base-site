@@ -1,39 +1,32 @@
 .main-menu {
     ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
+        @apply .list-reset .m-0 .p-0;
     }
 
     // Padding above and below menu
     > ul {
-        padding: 1rem 0;
+        @apply .py-4 .px-0;
     }
 
     li {
-        font-size: 0.875rem;
-        margin: 0;
-        padding: 0;
+        @apply .text-sm .m-0 .p-0;
     }
 
     li a {
-        @apply .text-black;
-
-        display: block;
-        padding: 0.6em 0.5em 0.6em 1em;
+        @apply .text-black .block .p-2 .px-3;
     }
 
     // Indent each level
     ul > li > ul > li a {
-        padding-left: 2em;
+        @apply .pl-8;
     }
 
     ul > li > ul > li > ul > li a {
-        padding-left: 3em;
+        @apply .pl-12;
     }
 
     ul > li > ul > li > ul > li > ul > li > a {
-        padding-left: 4em;
+        @apply .pl-16;
     }
 
     li a:hover {
@@ -49,20 +42,15 @@
 
     // Selected State
     .selected {
-        font-weight: bold;
+        @apply .font-bold;
     }
 
     // Don't cascade the selected state to child lists of the item
     .selected ul {
-        font-weight: normal;
+        @apply .font-normal;
     }
 
     h2 {
-        @apply .text-grey-darker;
-
-        font-size: 1.25rem;
-        font-weight: bold;
-        margin: 0;
-        padding: 1rem 0 0.1rem;
+        @apply .text-grey-darker .text-lg .font-bold .m-0 .px-0 .pt-4;
     }
 }

@@ -1,31 +1,18 @@
 .accordion.enabled {
-    padding: 0;
-    margin-bottom: 1rem;
-    position: relative;
-    list-style: none;
+    @apply .p-0 .mb-4 .relative .list-reset;
 
     & > li {
-        @apply .border .border-solid .border-grey;
-
-        width: 100%;
-        position: absolute;
-        border-bottom-width: 0;
+        @apply .border .border-solid .border-grey .w-full .absolute .border-b-0;
 
         &:last-child {
-            border-bottom-width: 1px;
+            @apply .border-b;
         }
 
         > a {
-            @apply .bg-grey-lighter;
+            @apply .bg-grey-lighter .relative .block .p-4 .pr-8 .font-bold .border-b-0 .no-underline;
 
             cursor: pointer;
             user-select: none;
-            position: relative;
-            display: block;
-            padding: 1rem;
-            text-decoration: none;
-            font-weight: bold;
-            border-bottom-width: 0;
 
             &:first-child:hover,
             &:first-child:focus, {
@@ -34,10 +21,8 @@
 
             // Open symbol
             &::before {
-                position: absolute;
-                top: 50%;
-                right: 1rem;
-                margin-top: -0.5rem;
+                @apply .absolute .pin-r .pr-4 .pin-t .pt-4;
+
                 content: '+';
             }
         }
@@ -49,17 +34,13 @@
 
         // Content area
         > .fold {
-            @apply .bg-white;
-
-            padding: 1rem;
-            border-top-width: 0;
+            @apply .bg-white .p-4 .border-t-0;
         }
     }
 
     > * {
-        overflow: hidden;
-        padding: 0;
-        margin: 0;
+        @apply .overflow-hidden .p-0 .m-0;
+
         transition: 0.3s ease all;
     }
 }

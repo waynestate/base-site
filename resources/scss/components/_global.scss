@@ -8,6 +8,16 @@ a {
     @apply .text-green .no-underline;
 }
 
+@responsive {
+    .white-links a {
+        @apply .text-white .underline;
+
+        &:hover {
+            @apply .no-underline;
+        }
+    }
+}
+
 // Tailwind preflight sets this to .5 which isn't ADA compliant
 input::placeholder,
 textarea::placeholder {
