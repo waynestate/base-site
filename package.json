@@ -39,9 +39,12 @@
     "laravel-mix": "^4.0",
     "laravel-mix-purgecss": "^4.0.0",
     "mediabox": "^1.1.2",
+    "sass": "^1.15.2",
+    "sass-loader": "7.*",
     "slideout": "^1.0.1",
     "stylelint": "^9.0.0",
     "stylelint-config-standard": "^18.0.0",
-    "tailwindcss": "^0.7.0"
+    "tailwindcss": "^0.7.0",
+    "vue-template-compiler": "^2.5.21"
   }
 }
