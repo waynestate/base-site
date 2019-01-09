@@ -4,7 +4,7 @@
     @include('components.page-title', ['title' => $page['title']])
 
     <div class="content">
-        {!! $page['content']['main'] !!}
+        11{!! $page['content']['main'] !!}
     </div>
 
     @if(!empty($news) || !empty($events))
