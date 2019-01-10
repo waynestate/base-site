@@ -1,25 +1,25 @@
 <?php
 /*
 * Status: Private
-* Description: News Template
+* Description: Article Template
 * Default: false
 */
 
 namespace App\Http\Controllers;
 
-use Contracts\Repositories\NewsRepositoryContract;
+use Contracts\Repositories\ArticleRepositoryContract;
 use Illuminate\Http\Request;
 
-class NewsController extends Controller
+class ArticleController extends Controller
 {
     /**
      * Construct the controller.
      *
-     * @param NewsRepositoryContract $news
+     * @param ArticleRepositoryContract $articles
      */
-    public function __construct(NewsRepositoryContract $news)
+    public function __construct(ArticleRepositoryContract $articles)
     {
-        $this->news = $news;
+        $this->articles = $articles;
     }
 
     /**

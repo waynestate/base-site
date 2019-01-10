@@ -2,18 +2,15 @@
 
 namespace App\Repositories;
 
-use Contracts\Repositories\NewsRepositoryContract;
-use Illuminate\Cache\Repository;
+use Waynestate\Api\News;
 use Waynestate\Api\Connector;
-use Waynestate\Promotions\ParsePromos;
+use Illuminate\Cache\Repository;
+use Contracts\Repositories\ArticleRepositoryContract;
 
-class NewsRepository implements NewsRepositoryContract
+class ArticleRepository implements ArticleRepositoryContract
 {
-    /** @var Connector */
-    protected $wsuApi;
-
-    /** @var ParsePromos */
-    protected $parsePromos;
+    /** @var News */
+    protected $articleApi;
 
     /** @var Repository */
     protected $cache;
@@ -21,15 +18,41 @@ class NewsRepository implements NewsRepositoryContract
     /**
      * Construct the repository.
      *
-     * @param Connector $wsuApi
-     * @param ParsePromos $parsePromos
+     * @param news $articleApi
      * @param Repository $cache
      */
-    public function __construct(Connector $wsuApi, ParsePromos $parsePromos, Repository $cache)
+    public function __construct(News $articleApi, Repository $cache)
     {
-        $this->wsuApi = $wsuApi;
-        $this->parsePromos = $parsePromos;
+        $this->articleApi = $articleApi;
         $this->cache = $cache;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function listing($application_ids, $limit=5, $page=1)
+    {
+        $params = [
+            'perPage' =>  $limit,
+            'page' => $page,
+            'application_ids' => $application_ids,
+            //'exclude_topics' => [],
+            'method' => 'articles',
+        ];
+
+        $articles['articles'] = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+            $items = $this->articleApi->request($params['method'], $params);
+
+            if (!empty($items['data'])) {
+                $items['data'] = collect($items['data'])->map(function ($item) {
+                    return $this->setNewsLink($item);
+                })->toArray();
+            }
+
+            return $items;
+        });
+
+        return $articles;
     }
 
     /**
@@ -209,14 +232,13 @@ class NewsRepository implements NewsRepositoryContract
     }
 
     /**
-     * Set the news link according to the news view route.
-     *
-     * @param array $item
-     * @return array
+     * {@inheritdoc}
      */
     public function setNewsLink($item)
     {
-        $item['full_link'] = str_replace('/news/', '/'.config('base.news_view_route').'/', $item['full_link']);
+        if (empty($item['link'])) {
+            $item['link'] = '/'.config('base.news_view_route').'/'.$item['permalink'].'-'.$item['id'];
+        }
 
         return $item;
     }

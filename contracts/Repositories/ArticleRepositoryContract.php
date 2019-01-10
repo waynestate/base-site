@@ -2,7 +2,7 @@
 
 namespace Contracts\Repositories;
 
-interface NewsRepositoryContract
+interface ArticleRepositoryContract
 {
     /**
       * Get news ordered by display_order.
@@ -66,4 +66,12 @@ interface NewsRepositoryContract
      * @return array
      */
     public function getImageUrl($news);
+
+    /**
+     * Set the article link based on the route
+     *
+     * @param array $item
+     * @return array
+     */
+    public function setNewsLink($item);
 }

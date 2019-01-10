@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c23024c2c71700c9a8cc37dbf50552e7",
+    "content-hash": "2df0e786c9aa75c5f64c5063c2d24163",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -3607,6 +3607,46 @@
             ],
             "description": "Fake image generator using the PHP GD library. Accessible through a Laravel route.",
             "time": "2018-09-11T18:44:58+00:00"
+        },
+        {
+            "name": "waynestate/news-api-php",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/waynestate/news-api-php.git",
+                "reference": "4020a9f8f5810f36b5a9b55522a6765365d7d23c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/waynestate/news-api-php/zipball/4020a9f8f5810f36b5a9b55522a6765365d7d23c",
+                "reference": "4020a9f8f5810f36b5a9b55522a6765365d7d23c",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.0",
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Waynestate\\Api\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Web Communications",
+                    "email": "web@wayne.edu"
+                }
+            ],
+            "description": "Connector for News API",
+            "time": "2018-12-18T20:29:20+00:00"
         },
         {
             "name": "waynestate/parse-menu",

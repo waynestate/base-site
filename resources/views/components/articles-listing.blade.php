@@ -8,9 +8,9 @@
 <h2>{{ $heading ?? 'News' }}</h2>
 
 <ul class="list-reset">
-    @foreach($news as $item)
+    @foreach($articles as $item)
         <li class="mb-4">
-            <a href="{{ $item['full_link'] }}" class="underline hover:no-underline font-normal">
+            <a href="{{ $item['link'] }}" class="underline hover:no-underline font-normal">
                 {{ $item['title'] }}
             </a>
         </li>
