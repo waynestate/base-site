@@ -1,6 +1,10 @@
 @extends('components.content-area')
 
 @section('content')
+    <div class="float-right mt-4 mr-4">
+        <a href="/{{ config('base.news_listing_route') }}/{{ config('base.news_topics_route') }}/" class="button">{{ config('base.news_topics_text') }}</a>
+    </div>
+
     @include('components.page-title', ['title' => $page['title']])
 
     <ul class="list-reset">

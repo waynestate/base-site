@@ -113,7 +113,7 @@ class NewsControllerTest extends TestCase
         $newsController = app('App\Http\Controllers\NewsController', ['news' => $newsRepository]);
 
         $request = new Request();
-        $request->path = '/'.config('base.news_listing_route').'/'.config('base.news_filter_route');
+        $request->path = '/'.config('base.news_listing_route').'/'.config('base.news_topic_route');
         $request->slug = 'invalid-category';
 
         // Call the news listing
