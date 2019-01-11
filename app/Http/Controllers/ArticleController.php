@@ -8,6 +8,7 @@
 namespace App\Http\Controllers;
 
 use Contracts\Repositories\ArticleRepositoryContract;
+use Contracts\Repositories\TopicRepositoryContract;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -16,10 +17,12 @@ class ArticleController extends Controller
      * Construct the controller.
      *
      * @param ArticleRepositoryContract $article
+     * @param TopicRepositoryContract $topic
      */
-    public function __construct(ArticleRepositoryContract $article)
+    public function __construct(ArticleRepositoryContract $article, TopicRepositoryContract $topic)
     {
         $this->article = $article;
+        $this->topic = $topic;
     }
 
     /**
@@ -32,7 +35,7 @@ class ArticleController extends Controller
     {
         // Get the topic
         if(!empty($request->slug)) {
-            $topic = $this->article->findTopicBySlug($request->slug);
+            $topic = $this->topic->find(null, $request->slug);
 
             // 404 the page since the category doens't exist
             if(isset($topic['topic']['errors'])) {

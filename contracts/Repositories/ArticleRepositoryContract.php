@@ -25,14 +25,6 @@ interface ArticleRepositoryContract
     public function find($id, $application_ids);
 
     /**
-     * Find individual topic.
-     *
-     * @param string $slug
-     * @return array
-     */
-    public function findTopicBySlug($slug);
-
-    /**
      * Get the image url for the meta data.
      *
      * @param array $news

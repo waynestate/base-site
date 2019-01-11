@@ -91,22 +91,6 @@ class ArticleRepository implements ArticleRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function findTopicBySlug($slug)
-    {
-        $params = [
-            'method' => 'topic/'.$slug,
-        ];
-
-        $topic['topic'] = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
-            return $this->articleApi->request($params['method'], $params);
-        });
-
-        return $topic;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getImageUrl($article)
     {
         // If the news item has an image attached
