@@ -186,7 +186,7 @@ return [
     'news_view_route' => 'news',
     'news_filter_route' => 'category',
     'news_all_text' => 'All categories',
-    'news_controller' => 'ArticlesController',
+    'news_controller' => 'ArticleController',
 
     /*
     |--------------------------------------------------------------------------

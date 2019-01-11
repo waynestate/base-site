@@ -23,7 +23,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * Display the news listing view.
+     * Display the articles.
      *
      * @param Request $request
      * @return \Illuminate\View\View
@@ -61,7 +61,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * Display the individual news item view.
+     * Display the individual article.
      *
      * @param Request $request
      * @return \Illuminate\View\View
@@ -69,33 +69,30 @@ class ArticleController extends Controller
     public function show(Request $request)
     {
         // Get the news item
-        $news = $this->news->getNewsItem($request->id, $request->data['site']['id']);
+        $article = $this->article->find($request->id, [7]);
 
-        // If the news item does not belong in the archive and the time has expired, don't show it
-        if (empty($news['news']) || !empty($news['error']) || $news['news']['archive'] == 0 && strtotime($news['news']['ending']) < time()) {
+        // If the news item does not exist or isn't published
+        if (empty($article['article']['data']) || $article['article']['data']['status'] !== 'Published') {
             return abort('404');
         }
 
         // Set the page title to the news item title
-        $request->data['page']['title'] = $news['news']['title'];
-
-        // Disable hero images
-        $request->data['hero'] = false;
+        $request->data['page']['title'] = $article['article']['data']['title'];
 
         // Get the news categories
-        $categories = $this->news->getCategories($request->data['site']['id'], $request->data['site']['subsite-folder']);
+        // $categories = $this->news->getCategories($request->data['site']['id'], $request->data['site']['subsite-folder']);
 
         // Set the selected category
-        $categories = $this->news->setSelectedCategory($categories, null);
+        // $categories = $this->news->setSelectedCategory($categories, null);
 
         // Set hero
-        if (!empty($news['news']['filename_url_relative'])) {
-            $request->data['hero'][]['relative_url'] = $news['news']['filename_url_relative'];
+        if (!empty($article['article']['data']['hero_image']['url'])) {
+            $request->data['hero'][]['relative_url'] = $article['article']['data']['hero_image']['url'];
         }
 
         // Set the meta image information
-        $request->data['meta']['image'] = $this->news->getImageUrl($news);
+        $request->data['meta']['image'] = $this->article->getImageUrl($article['article']['data']);
 
-        return view('news-individual', merge($request->data, $news, $categories));
+        return view('article', merge($request->data, $article));
     }
 }

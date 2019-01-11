@@ -60,6 +60,32 @@ class ArticleRepository implements ArticleRepositoryContract
         return $articles;
     }
 
+    public function find($id, $application_ids)
+    {
+        $params = [
+            'method' => 'articles/'.$id,
+            'application_ids' => $application_ids,
+        ];
+
+        $article['article'] = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($id, $params) {
+            return $this->articleApi->request($params['method'], $params);
+        });
+
+        if (!empty($article['article']['data'])) {
+            $article['article']['data'] = current($article['article']['data']);
+        }
+
+        if (!empty($article['article']['data']['hero_image'])) {
+            $article['article']['data']['hero_image'] = current($article['article']['data']['hero_image']);
+        }
+
+        if (!empty($article['article']['data']['main_image'])) {
+            $article['article']['data']['main_image'] = current($article['article']['data']['main_image']);
+        }
+
+        return $article;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -217,16 +243,20 @@ class ArticleRepository implements ArticleRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getImageUrl($news)
+    public function getImageUrl($article)
     {
         // If the news item has an image attached
-        if (!empty($news['news']['filename_url_absolute'])) {
-            return $news['news']['filename_url_absolute'];
+        if (!empty($article['hero_image']['url'])) {
+            return $article['hero_image']['url'];
+        }
+
+        if (!empty($article['main_image']['url'])) {
+            return $article['main_image']['url'];
         }
 
         // Scan the news body for the first image
         $doc = new \DOMDocument();
-        @$doc->loadHTML($news['news']['body']);
+        @$doc->loadHTML($article['body']);
         $images = $doc->getElementsByTagName('img');
 
         if ($images->item(0) !== null) {
