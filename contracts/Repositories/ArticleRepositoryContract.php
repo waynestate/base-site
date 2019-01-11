@@ -5,59 +5,24 @@ namespace Contracts\Repositories;
 interface ArticleRepositoryContract
 {
     /**
-      * Get news ordered by display_order.
-      *
-      * @param int $site_id
-      * @return array
-      */
-    public function getNewsByDisplayOrder($site_id);
-
-    /**
-     * Get news using pagination.
+     * Get articles by application and topics.
      *
-     * @param int $site_id
-     * @param int $page
+     * @param array $application_ids
      * @param int $limit
-     * @param int $category_id
-     * @return array
+     * @param int $page
+     * @param array $topics
+     * @return void
      */
-    public function getNewsByPage($site_id, $page, $limit, $category_id);
+    public function listing($application_ids, $limit=5, $page=1, $topics=[]);
 
     /**
-     * Get individual news item.
+     * Get an individual article by id.
      *
      * @param int $id
-     * @param int $site_id
-     * @return array
+     * @param array $application_ids
+     * @return void
      */
-    public function getNewsItem($id, $site_id);
-
-    /**
-     * Get paging information.
-     *
-     * @param int $page
-     * @param int $limit
-     * @return array
-     */
-    public function getPaging($page, $limit);
-
-    /**
-     * Get news categories for a site.
-     *
-     * @param int $site_id
-     * @param string $subsite
-     * @return array
-     */
-    public function getCategories($site_id, $subsite);
-
-    /**
-     * Set the selected category based on the slug.
-     *
-     * @param array $categories
-     * @param string $slug
-     * @return array
-     */
-    public function setSelectedCategory($categories, $slug);
+    public function find($id, $application_ids);
 
     /**
      * Get the image url for the meta data.
@@ -65,7 +30,7 @@ interface ArticleRepositoryContract
      * @param array $news
      * @return array
      */
-    public function getImageUrl($news);
+    public function getImageUrl($article);
 
     /**
      * Set the article link based on the route
@@ -73,5 +38,5 @@ interface ArticleRepositoryContract
      * @param array $item
      * @return array
      */
-    public function setNewsLink($item);
+    public function setArticleLink($item);
 }
