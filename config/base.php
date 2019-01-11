@@ -184,8 +184,8 @@ return [
     */
     'news_listing_route' => 'news',
     'news_view_route' => 'news',
-    'news_filter_route' => 'category',
-    'news_all_text' => 'All categories',
+    'news_filter_route' => 'topic',
+    'news_all_text' => 'All topics',
     'news_controller' => 'ArticleController',
 
     /*

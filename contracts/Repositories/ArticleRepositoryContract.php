@@ -11,7 +11,7 @@ interface ArticleRepositoryContract
      * @param int $limit
      * @param int $page
      * @param array $topics
-     * @return void
+     * @return array
      */
     public function listing($application_ids, $limit=5, $page=1, $topics=[]);
 
@@ -20,9 +20,17 @@ interface ArticleRepositoryContract
      *
      * @param int $id
      * @param array $application_ids
-     * @return void
+     * @return array
      */
     public function find($id, $application_ids);
+
+    /**
+     * Find individual topic.
+     *
+     * @param string $slug
+     * @return array
+     */
+    public function findTopicBySlug($slug);
 
     /**
      * Get the image url for the meta data.

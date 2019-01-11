@@ -69,7 +69,7 @@ class ArticleRepository implements ArticleRepositoryContract
             'application_ids' => $application_ids,
         ];
 
-        $article['article'] = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($id, $params) {
+        $article['article'] = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             return $this->articleApi->request($params['method'], $params);
         });
 
@@ -86,6 +86,22 @@ class ArticleRepository implements ArticleRepositoryContract
         }
 
         return $article;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findTopicBySlug($slug)
+    {
+        $params = [
+            'method' => 'topic/'.$slug,
+        ];
+
+        $topic['topic'] = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+            return $this->articleApi->request($params['method'], $params);
+        });
+
+        return $topic;
     }
 
     /**

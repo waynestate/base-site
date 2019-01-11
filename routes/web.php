@@ -15,7 +15,7 @@
 Route::get('{any?}profile/{accessid}', 'ProfileController@show')
     ->where(['any' => '.*', 'accessid' => '.+']);
 
-// News by category
+// News filtering
 Route::get('{any?}'.config('base.news_listing_route').'/'.config('base.news_filter_route').'/{slug}', config('base.news_controller').'@index')
     ->where(['any' => '.*', 'slug' => '.+']);
 

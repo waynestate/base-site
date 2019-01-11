@@ -30,8 +30,18 @@ class ArticleController extends Controller
      */
     public function index(Request $request)
     {
+        // Get the topic
+        if(!empty($request->slug)) {
+            $topic = $this->article->findTopicBySlug($request->slug);
+
+            // 404 the page since the category doens't exist
+            if(isset($topic['topic']['errors'])) {
+                return abort('404');
+            }
+        }
+
         // Get the articles
-        $articles = $this->article->listing([7], 25, $request->query('page'));
+        $articles = $this->article->listing([7], 25, $request->query('page'), !empty($topic['topic']['data']['id']) ? [$topic['topic']['data']['id']] : null);
 
         // Disable hero images
         $request->data['hero'] = false;
