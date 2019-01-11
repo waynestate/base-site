@@ -4,13 +4,12 @@
     @include('components.page-title', ['title' => $page['title']])
 
     <ul class="list-reset">
-        @forelse($news as $news_item)
+        @forelse($articles['data'] as $article)
             <li class="mb-3 pb-4 border-b border-grey-lighter">
-                <a href="{{ $news_item['full_link'] }}" class="font-bold text-lg block">
-                    {{ $news_item['title'] }}
+                <a href="{{ $article['link'] }}" class="font-bold text-lg block">
+                    {{ $article['title'] }}
                 </a>
-                @if(!empty($news_item['excerpt']))<div class="text-sm mt-1 mb-2 leading-tight">{{ $news_item['excerpt'] }}</div>@endif
-                <time class="block text-sm text-grey-darker mt-1 leading-tight" datetime="{{ $news_item['posted'] }}">{{ apdatetime(date('F j, Y', strtotime($news_item['posted']))) }}</time>
+                <time class="block text-sm text-grey-darker mt-1 leading-tight" datetime="{{ $article['article_date'] }}">{{ apdatetime(date('F j, Y', strtotime($article['article_date']))) }}</time>
             </li>
 
         @empty

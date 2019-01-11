@@ -30,7 +30,7 @@ class ArticleRepository implements ArticleRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function listing($application_ids, $limit=5, $page=1)
+    public function listing($application_ids, $limit=5, $page=1, $topics=[])
     {
         $params = [
             'perPage' =>  $limit,
@@ -39,6 +39,11 @@ class ArticleRepository implements ArticleRepositoryContract
             //'exclude_topics' => [],
             'method' => 'articles',
         ];
+
+        if (!empty($topics)) {
+            $params['method'] = 'articles/topics';
+            $params['topics'] = $topics;
+        }
 
         $articles['articles'] = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             $items = $this->articleApi->request($params['method'], $params);

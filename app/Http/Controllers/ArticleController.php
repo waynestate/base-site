@@ -15,11 +15,11 @@ class ArticleController extends Controller
     /**
      * Construct the controller.
      *
-     * @param ArticleRepositoryContract $articles
+     * @param ArticleRepositoryContract $article
      */
-    public function __construct(ArticleRepositoryContract $articles)
+    public function __construct(ArticleRepositoryContract $article)
     {
-        $this->articles = $articles;
+        $this->article = $article;
     }
 
     /**
@@ -30,32 +30,34 @@ class ArticleController extends Controller
      */
     public function index(Request $request)
     {
-        // Get the news categories
-        $categories = $this->news->getCategories($request->data['site']['id'], $request->data['site']['subsite-folder'], true);
 
-        // Set the selected category
-        $categories = $this->news->setSelectedCategory($categories, $request->slug);
+        // // Get the news categories
+        // $categories = $this->news->getCategories($request->data['site']['id'], $request->data['site']['subsite-folder'], true);
 
-        // 404 the page since the category doens't exist or is inactive
-        if ($request->slug !== null && empty($categories['selected_news_category']['category_id'])) {
-            return abort('404');
-        }
+        // // Set the selected category
+        // $categories = $this->news->setSelectedCategory($categories, $request->slug);
 
-        // Get the news listing
-        $news = $this->news->getNewsByPage($request->data['site']['id'], $request->query('page'), 25, $categories['selected_news_category']['category_id']);
+        // // 404 the page since the category doens't exist or is inactive
+        // if ($request->slug !== null && empty($categories['selected_news_category']['category_id'])) {
+        //     return abort('404');
+        // }
 
-        // Get the previous and next paging information
-        $paging = $this->news->getPaging($request->query('page'), 25);
+        // // Get the articles
+        $articles = $this->article->listing([7], 25, $request->query('page'));
+        //dd($articles['articles']['data']);
 
-        // Disable hero images
+        // // Get the previous and next paging information
+        // $paging = $this->news->getPaging($request->query('page'), 25);
+
+        // // Disable hero images
         $request->data['hero'] = false;
 
-        // Force the menu to be shown if categories are found
-        if (!empty($categories['news_categories'])) {
-            $request->data['show_site_menu'] = true;
-        }
+        // // Force the menu to be shown if categories are found
+        // if (!empty($categories['news_categories'])) {
+        //     $request->data['show_site_menu'] = true;
+        // }
 
-        return view('news-listing', merge($request->data, $news, $paging, $categories));
+        return view('articles', merge($request->data, $articles));
     }
 
     /**
