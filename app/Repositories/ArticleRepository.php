@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use Waynestate\Api\News;
-use Waynestate\Api\Connector;
 use Illuminate\Cache\Repository;
 use Contracts\Repositories\ArticleRepositoryContract;
 
