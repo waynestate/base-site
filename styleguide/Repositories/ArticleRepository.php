@@ -2,17 +2,17 @@
 
 namespace Styleguide\Repositories;
 
-use App\Repositories\NewsRepository as Repository;
+use App\Repositories\ArticleRepository as Repository;
 
-class NewsRepository extends Repository
+class ArticleRepository extends Repository
 {
     /**
      * {@inheritdoc}
      */
-    public function getNewsByDisplayOrder($site_id)
+    public function listing($application_ids, $limit=5, $page=1, $topics=[])
     {
         return [
-            'news' => app('Factories\NewsItem')->create(4),
+            'articles' => app('Factories\Article')->create(4),
         ];
     }
 
