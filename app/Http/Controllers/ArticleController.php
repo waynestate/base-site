@@ -33,6 +33,8 @@ class ArticleController extends Controller
      */
     public function index(Request $request)
     {
+        $topic['topic'] = null;
+
         // Get the topic
         if(!empty($request->slug)) {
             $topic = $this->topic->find(null, $request->slug);
@@ -49,7 +51,7 @@ class ArticleController extends Controller
         // Disable hero images
         $request->data['hero'] = false;
 
-        return view('articles', merge($request->data, $articles));
+        return view('articles', merge($request->data, $articles, $topic));
     }
 
     /**

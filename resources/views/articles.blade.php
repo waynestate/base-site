@@ -17,7 +17,7 @@
             </li>
 
         @empty
-            <p>Currently there are no news items {{ !empty($selected_news_category['category']) ? ' for the category ' . strtolower($selected_news_category['category']) : '' }}.</p>
+            <p>Currently there are no news items {{ !empty($topic['data']['name']) ? ' for the category ' . strtolower($topic['data']['name']) : '' }} {{ config('base.news_topic_route') }}.</p>
         @endforelse
     </ul>
 
