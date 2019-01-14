@@ -21,20 +21,20 @@
         @endforelse
     </ul>
 
-    @if(!empty($paging))
+    @if(!empty($articles['meta']['prev_page_url']) || !empty($articles['meta']['next_page_url']))
         <div class="row flex -mx-4">
             <div class="w-1/2 px-4">
-                @if(count($news) == $paging['perPage'])
+                @if(!empty($articles['meta']['prev_page_url']) && $articles['meta']['current_page'] !== 1)
                     <p>
-                        <a href="{{ app('request')->url() }}?page={{ $paging['page_number_previous'] }}">&larr; Previous</a>
+                        <a href="{{ app('request')->url() }}?page={{ ($articles['meta']['current_page'] - 1) }}">&larr; Previous</a>
                     </p>
                 @endif
             </div>
 
             <div class="w-1/2 px-4 text-right">
-                @if($paging['page_number_next'] >= 0)
+                @if(!empty($articles['meta']['next_page_url']))
                     <p>
-                        <a href="{{ app('request')->url() }}?page={{ $paging['page_number_next'] }}">Next &rarr;</a>
+                        <a href="{{ app('request')->url() }}?page={{ ($articles['meta']['current_page'] + 1) }}">Next &rarr;</a>
                     </p>
                 @endif
             </div>
