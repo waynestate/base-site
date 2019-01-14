@@ -9,7 +9,7 @@ use Contracts\Repositories\TopicRepositoryContract;
 class TopicRepository implements TopicRepositoryContract
 {
     /** @var News */
-    protected $articleApi;
+    protected $newsApi;
 
     /** @var Repository */
     protected $cache;
@@ -17,12 +17,12 @@ class TopicRepository implements TopicRepositoryContract
     /**
      * Construct the repository.
      *
-     * @param news $articleApi
+     * @param news $newsApi
      * @param Repository $cache
      */
-    public function __construct(News $articleApi, Repository $cache)
+    public function __construct(News $newsApi, Repository $cache)
     {
-        $this->articleApi = $articleApi;
+        $this->newsApi = $newsApi;
         $this->cache = $cache;
     }
 
@@ -37,7 +37,7 @@ class TopicRepository implements TopicRepositoryContract
         ];
 
         $topics['topics'] = $this->cache->remember('newsroom-topics', config('cache.ttl'), function () use ($params) {
-            return $this->articleApi->request($params['method'], $params);
+            return $this->newsApi->request($params['method'], $params);
         });
 
         return $topics;
@@ -53,7 +53,7 @@ class TopicRepository implements TopicRepositoryContract
         ];
 
         $topic['topic'] = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
-            return $this->articleApi->request($params['method'], $params);
+            return $this->newsApi->request($params['method'], $params);
         });
 
         return $topic;

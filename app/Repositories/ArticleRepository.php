@@ -9,7 +9,7 @@ use Contracts\Repositories\ArticleRepositoryContract;
 class ArticleRepository implements ArticleRepositoryContract
 {
     /** @var News */
-    protected $articleApi;
+    protected $newsApi;
 
     /** @var Repository */
     protected $cache;
@@ -17,12 +17,12 @@ class ArticleRepository implements ArticleRepositoryContract
     /**
      * Construct the repository.
      *
-     * @param news $articleApi
+     * @param news $newsApi
      * @param Repository $cache
      */
-    public function __construct(News $articleApi, Repository $cache)
+    public function __construct(News $newsApi, Repository $cache)
     {
-        $this->articleApi = $articleApi;
+        $this->newsApi = $newsApi;
         $this->cache = $cache;
     }
 
@@ -44,7 +44,7 @@ class ArticleRepository implements ArticleRepositoryContract
         }
 
         $articles['articles'] = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
-            $items = $this->articleApi->request($params['method'], $params);
+            $items = $this->newsApi->request($params['method'], $params);
 
             if (!empty($items['data'])) {
                 $items['data'] = collect($items['data'])->map(function ($item) {
@@ -69,7 +69,7 @@ class ArticleRepository implements ArticleRepositoryContract
         ];
 
         $article['article'] = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
-            return $this->articleApi->request($params['method'], $params);
+            return $this->newsApi->request($params['method'], $params);
         });
 
         if (!empty($article['article']['data'])) {
