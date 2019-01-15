@@ -37,7 +37,15 @@ class TopicRepository implements TopicRepositoryContract
         ];
 
         $topics['topics'] = $this->cache->remember('newsroom-topics', config('cache.ttl'), function () use ($params) {
-            return $this->newsApi->request($params['method'], $params);
+            $topics = $this->newsApi->request($params['method'], $params);
+
+            $topics['data'] = collect($topics['data'])->map(function ($topic) {
+                $topic['url'] = '/'.config('base.news_listing_route').'/'.config('base.news_topic_route').'/'.$topic['slug'];
+
+                return $topic;
+            })->toArray();
+
+            return $topics;
         });
 
         return $topics;
@@ -74,6 +82,8 @@ class TopicRepository implements TopicRepositoryContract
             foreach ($topics as $item) {
                 $sorted[substr($item['name'], 0, 1)][] = $item;
             }
+
+            ksort($sorted);
         }
 
         return $sorted;

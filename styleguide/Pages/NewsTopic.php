@@ -2,7 +2,7 @@
 
 namespace Styleguide\Pages;
 
-class NewsCategory extends Page
+class NewsTopic extends Page
 {
     /** {@inheritdoc} **/
     public $path;
@@ -16,9 +16,9 @@ class NewsCategory extends Page
 
         return app('Factories\Page')->create(1, true, [
             'page' => [
-                'controller' => 'AeticleController',
+                'controller' => 'ArticleController',
                 'title' => 'Articles by topic',
-                'id' => null,
+                'id' => 101102,
             ],
         ]);
     }

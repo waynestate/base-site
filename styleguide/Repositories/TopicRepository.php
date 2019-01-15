@@ -11,7 +11,9 @@ class TopicRepository extends Repository
      */
     public function listing($application_ids)
     {
-
+        return [
+            'topics' => app('Factories\Topic')->create(20),
+        ];
     }
 
     /**
@@ -19,6 +21,8 @@ class TopicRepository extends Repository
      */
     public function find($id, $slug)
     {
-
+        return [
+            'topics' => app('Factories\Topic')->create(1, true),
+        ];
     }
 }

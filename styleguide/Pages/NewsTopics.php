@@ -2,11 +2,8 @@
 
 namespace Styleguide\Pages;
 
-class Fullwidth extends Page
+class NewsTopics extends Page
 {
-    /** {@inheritdoc} **/
-    public $path = '/styleguide/fullwidth';
-
     /**
      * {@inheritdoc}
      */
@@ -14,9 +11,9 @@ class Fullwidth extends Page
     {
         return app('Factories\Page')->create(1, true, [
             'page' => [
-                'controller' => 'FullWidthController',
-                'title' => 'Full width',
-                'id' => 101106,
+                'controller' => 'TopicController',
+                'title' => 'Topic listing',
+                'id' => 101103,
             ],
         ]);
     }

@@ -53,9 +53,9 @@
                 "is_active": "1",
                 "page_id": "101103",
                 "target": "",
-                "display_name": "Profiles",
+                "display_name": "Topics",
                 "class_name": "",
-                "relative_url": "/styleguide/profiles",
+                "relative_url": "/styleguide/news/topics",
                 "submenu": []
             },
             "101104": {
@@ -63,13 +63,23 @@
                 "is_active": "1",
                 "page_id": "101104",
                 "target": "",
+                "display_name": "Profiles",
+                "class_name": "",
+                "relative_url": "/styleguide/profiles",
+                "submenu": []
+            },
+            "101105": {
+                "menu_item_id": "101105",
+                "is_active": "1",
+                "page_id": "101105",
+                "target": "",
                 "display_name": "Directory",
                 "class_name": "",
                 "relative_url": "/styleguide/directory",
                 "submenu": []
             },
-            "101105": {
-                "menu_item_id": "101105",
+            "101106": {
+                "menu_item_id": "101106",
                 "is_active": "1",
                 "page_id": null,
                 "target": "",
