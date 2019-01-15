@@ -180,7 +180,7 @@ $menus = [
 
 ## News listing & view
 
-1. Create a CMS page called `news` in the root of the site and select the `NewsController` as the template.
+1. Create a CMS page called `news` in the root of the site and select the `ArticleController` as the template.
 1. This will handle both the listing & view for this particular site. If you need news for a subsite, follow #1 while being within that subsite.
 
 ## Profile listing & view

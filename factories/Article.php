@@ -98,7 +98,7 @@ class Article implements FactoryContract
         }
 
         if ($limit === 1 && $flatten === true) {
-            $data['data'] = current($data);
+            $data['data'] = current($data['data']);
         }
 
         $data['meta']['total'] = count($data['data']);

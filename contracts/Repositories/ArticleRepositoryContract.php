@@ -39,4 +39,11 @@ interface ArticleRepositoryContract
      * @return array
      */
     public function setArticleLink($item);
+
+    /**
+     * Get the topic listing url.
+     *
+     * @return string
+     */
+    public function topicsUrl();
 }

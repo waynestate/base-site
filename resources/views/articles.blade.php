@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="float-right mt-4 mr-4">
-        <a href="/{{ config('base.news_listing_route') }}/{{ config('base.news_topics_route') }}/" class="button">{{ config('base.news_topics_text') }}</a>
+        <a href="{{ $topics_url }}" class="button">{{ config('base.news_topics_text') }}</a>
     </div>
 
     @include('components.page-title', ['title' => $page['title']])
@@ -17,7 +17,7 @@
             </li>
 
         @empty
-            <p>Currently there are no news items {{ !empty($topic['data']['name']) ? ' for the category ' . strtolower($topic['data']['name']) : '' }} {{ config('base.news_topic_route') }}.</p>
+            <p>Currently there are no articles {{ !empty($topic['data']['name']) ? ' for the category ' . strtolower($topic['data']['name']) : '' }} {{ config('base.news_topic_route') }}.</p>
         @endforelse
     </ul>
 

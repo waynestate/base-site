@@ -124,4 +124,12 @@ class ArticleRepository implements ArticleRepositoryContract
 
         return $item;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function topicsUrl()
+    {
+        return '/'.config('base.news_listing_route').'/'.config('base.news_topics_route').'/';
+    }
 }

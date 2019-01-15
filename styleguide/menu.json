@@ -359,9 +359,9 @@
                 "is_active": "1",
                 "page_id": "108100",
                 "target": "",
-                "display_name": "Mini news",
+                "display_name": "Article listing",
                 "class_name": "",
-                "relative_url": "/styleguide/mininews",
+                "relative_url": "/styleguide/articlelisting",
                 "submenu": []
             },
             "109100": {
