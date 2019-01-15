@@ -43,7 +43,7 @@ class ArticleController extends Controller
             }
         }
 
-        $articles = $this->article->listing([7], 2, $request->query('page'), !empty($topic['topic']['data']['id']) ? [$topic['topic']['data']['id']] : null);
+        $articles = $this->article->listing([7], 25, $request->query('page'), !empty($topic['topic']['data']['id']) ? [$topic['topic']['data']['id']] : null);
 
         $articles['topics_url'] = $this->article->topicsUrl();
 

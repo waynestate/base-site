@@ -1,6 +1,5 @@
 {{--
-    $news => array // [['news_id', 'slug', 'title']]
-    $site => array // ['subsite-folder']
+    $articles => array // ['link', 'title']
     $heading => string // 'News'
     $url => string '/news/'
     $link_text => string // 'More news'
