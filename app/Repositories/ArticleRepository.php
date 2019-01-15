@@ -54,13 +54,13 @@ class ArticleRepository implements ArticleRepositoryContract
 
             if(empty($page)) {
                 $items['meta']['next_page_url'] = null;
-                $items['meta']['prev_page_url'] = '/news?page=2';
+                $items['meta']['prev_page_url'] = ($items['meta']['total'] < $items['meta']['per_page']) ? null : '/'.config('base.news_view_route').'?page=2';
             }elseif($page == $items['meta']['last_page']) {
-                $items['meta']['next_page_url'] = '/news?page='.($page-1);
+                $items['meta']['next_page_url'] = '/'.config('base.news_view_route').'?page='.($page-1);
                 $items['meta']['prev_page_url'] = null;
             }else{
-                $items['meta']['next_page_url'] = '/news'.(($page-1 == 1) ? '' : '?page='.($page-1));
-                $items['meta']['prev_page_url'] = '/news/?page='.($page+1);
+                $items['meta']['next_page_url'] = '/'.config('base.news_view_route').(($page-1 == 1) ? '' : '?page='.($page-1));
+                $items['meta']['prev_page_url'] = '/'.config('base.news_view_route').'/?page='.($page+1);
             }
 
             return $items;
@@ -103,7 +103,6 @@ class ArticleRepository implements ArticleRepositoryContract
      */
     public function getImageUrl($article)
     {
-        // If the news item has an image attached
         if (!empty($article['hero_image']['url'])) {
             return $article['hero_image']['url'];
         }
@@ -112,7 +111,6 @@ class ArticleRepository implements ArticleRepositoryContract
             return $article['main_image']['url'];
         }
 
-        // Scan the news body for the first image
         $doc = new \DOMDocument();
         @$doc->loadHTML($article['body']);
         $images = $doc->getElementsByTagName('img');
