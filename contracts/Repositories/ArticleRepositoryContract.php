@@ -27,7 +27,7 @@ interface ArticleRepositoryContract
     /**
      * Get the image url for the meta data.
      *
-     * @param array $news
+     * @param array $article
      * @return array
      */
     public function getImageUrl($article);

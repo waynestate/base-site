@@ -18,7 +18,7 @@ class HomepageController extends Controller
      * Construct the controller.
      *
      * @param PromoRepositoryContract $promo
-     * @param ArticleRepositoryContract $news
+     * @param ArticleRepositoryContract $article
      * @param EventRepositoryContract $event
      */
     public function __construct(PromoRepositoryContract $promo, ArticleRepositoryContract $article, EventRepositoryContract $event)

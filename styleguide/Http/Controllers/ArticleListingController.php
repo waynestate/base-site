@@ -11,7 +11,7 @@ class ArticleListingController extends Controller
     /**
      * Construct the controller.
      *
-     * @param ArticleRepositoryContract $news
+     * @param ArticleRepositoryContract $article
      */
     public function __construct(ArticleRepositoryContract $article)
     {
@@ -19,7 +19,7 @@ class ArticleListingController extends Controller
     }
 
     /**
-     * Display the mini news.
+     * Display the articles.
      *
      * @param Request $request
      * @return \Illuminate\View\View

@@ -41,9 +41,3 @@
         </div>
     @endif
 @endsection
-
-@section('below_menu')
-    @if(!empty($news_categories))
-        @include('components.news-categories', ['categories' => $news_categories, 'selected_category' => $selected_news_category])
-    @endif
-@endsection
