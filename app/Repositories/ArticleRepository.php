@@ -52,13 +52,13 @@ class ArticleRepository implements ArticleRepositoryContract
                 })->toArray();
             }
 
-            if(empty($page)) {
+            if (empty($page)) {
                 $items['meta']['next_page_url'] = null;
                 $items['meta']['prev_page_url'] = ($items['meta']['total'] < $items['meta']['per_page']) ? null : '/'.config('base.news_view_route').'?page=2';
-            }elseif($page == $items['meta']['last_page']) {
+            } elseif ($page == $items['meta']['last_page']) {
                 $items['meta']['next_page_url'] = '/'.config('base.news_view_route').'?page='.($page-1);
                 $items['meta']['prev_page_url'] = null;
-            }else{
+            } else {
                 $items['meta']['next_page_url'] = '/'.config('base.news_view_route').(($page-1 == 1) ? '' : '?page='.($page-1));
                 $items['meta']['prev_page_url'] = '/'.config('base.news_view_route').'/?page='.($page+1);
             }

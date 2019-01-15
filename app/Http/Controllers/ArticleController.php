@@ -35,10 +35,10 @@ class ArticleController extends Controller
     {
         $topic['topic'] = null;
 
-        if(!empty($request->slug)) {
+        if (!empty($request->slug)) {
             $topic = $this->topic->find(null, $request->slug);
 
-            if(isset($topic['topic']['errors'])) {
+            if (isset($topic['topic']['errors'])) {
                 return abort('404');
             }
         }

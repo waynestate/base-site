@@ -16,13 +16,13 @@ class ArticleRepository extends Repository
 
         $articles['articles'] = app('Factories\Article')->create($limit);
 
-        if(empty($page)) {
+        if (empty($page)) {
             $next_page_url = null;
             $prev_page_url = '/styleguide/'.config('base.news_view_route').'?page=2';
-        }elseif($page >=3) {
+        } elseif ($page >=3) {
             $next_page_url = '/styleguide/'.config('base.news_view_route').'?page='.($page-1);
             $prev_page_url = null;
-        }else{
+        } else {
             $next_page_url = '/styleguide/'.config('base.news_view_route').(($page-1 == 1) ? '' : '?page='.($page-1));
             $prev_page_url = '/styleguide/'.config('base.news_view_route').'/?page='.($page+1);
         }
