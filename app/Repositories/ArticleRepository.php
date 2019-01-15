@@ -43,13 +43,24 @@ class ArticleRepository implements ArticleRepositoryContract
             $params['topics'] = $topics;
         }
 
-        $articles['articles'] = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+        $articles['articles'] = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params, $page) {
             $items = $this->newsApi->request($params['method'], $params);
 
             if (!empty($items['data'])) {
                 $items['data'] = collect($items['data'])->map(function ($item) {
                     return $this->setArticleLink($item);
                 })->toArray();
+            }
+
+            if(empty($page)) {
+                $items['meta']['next_page_url'] = null;
+                $items['meta']['prev_page_url'] = '/news?page=2';
+            }elseif($page == $items['meta']['last_page']) {
+                $items['meta']['next_page_url'] = '/news?page='.($page-1);
+                $items['meta']['prev_page_url'] = null;
+            }else{
+                $items['meta']['next_page_url'] = '/news'.(($page-1 == 1) ? '' : '?page='.($page-1));
+                $items['meta']['prev_page_url'] = '/news/?page='.($page+1);
             }
 
             return $items;

@@ -11,9 +11,30 @@ class ArticleRepository extends Repository
      */
     public function listing($application_ids, $limit=5, $page=1, $topics=[])
     {
-        return [
-            'articles' => app('Factories\Article')->create(4),
+        // Stop the paging after page 3 so it doesn't go on forever
+        $limit = $page >= 3 ? 5 : 25;
+
+        $articles['articles'] = app('Factories\Article')->create($limit);
+
+        if(empty($page)) {
+            $next_page_url = null;
+            $prev_page_url = '/styleguide/news?page=2';
+        }elseif($page >=3) {
+            $next_page_url = '/styleguide/news?page='.($page-1);
+            $prev_page_url = null;
+        }else{
+            $next_page_url = '/styleguide/news'.(($page-1 == 1) ? '' : '?page='.($page-1));
+            $prev_page_url = '/styleguide/news/?page='.($page+1);
+        }
+
+        $articles['articles']['meta'] = [
+            'total' => 55,
+            'current_page' => $page,
+            'prev_page_url' => $prev_page_url,
+            'next_page_url' => $next_page_url,
         ];
+
+        return $articles;
     }
 
     /**

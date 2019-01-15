@@ -101,8 +101,6 @@ class Article implements FactoryContract
             $data['data'] = current($data['data']);
         }
 
-        $data['meta']['total'] = count($data['data']);
-
         return $data;
     }
 }
