@@ -22,6 +22,20 @@ class Article implements FactoryContract
      */
     public function create($limit = 1, $flatten = false, $options = [])
     {
+        $hero[] = [
+            'url' => '/styleguide/image/1600x580',
+            'caption' => $this->faker->sentence(rand(5, 10)),
+            'alt_text' => $this->faker->sentence(rand(5, 10)),
+            'type' => 'Hero Image',
+        ];
+
+        $main[] = [
+            'url' => '/styleguide/image/1600x580',
+            'caption' => $this->faker->sentence(rand(5, 10)),
+            'alt_text' => $this->faker->sentence(rand(5, 10)),
+            'type' => 'Main Image',
+        ];
+
         for ($i = 1; $i <= $limit; $i++) {
             $data['data'][$i] = [
                 'id' => $i,
@@ -82,12 +96,16 @@ class Article implements FactoryContract
                 'article_date' => $this->faker->date,
                 'status' => 'Published',
                 'link' => '/styleguide/'.config('base.news_view_route').'/item-1',
+                'main_image' => [
+                    'url' => '/styleguide/image/1600x580',
+                    'caption' => $this->faker->sentence(rand(5, 10)),
+                    'alt_text' => $this->faker->sentence(rand(5, 10)),
+                ],
+                'hero_image' => $hero,
+                'main_image' => $main,
                 'files' => [
-                    0 => [
-                        'url' => '/styleguide/image/1600x580',
-                        'caption' => $this->faker->sentence(rand(5, 10)),
-                        'alt_text' => $this->faker->sentence(rand(5, 10)),
-                    ],
+                    0 => $hero,
+                    1 => $main,
                 ],
                 'favicon' => null,
                 'user' => null,
@@ -100,6 +118,14 @@ class Article implements FactoryContract
         if ($limit === 1 && $flatten === true) {
             $data['data'] = current($data['data']);
         }
+
+        $data['meta'] = [
+            'total' => '',
+            'per_page' => '',
+            'last_page' => '',
+            'next_page_url' => '',
+            'prev_page_url' => '',
+        ];
 
         return $data;
     }
