@@ -7,19 +7,20 @@
 
     @include('components.page-title', ['title' => $page['title']])
 
-    <ul class="list-reset">
-        @forelse($articles['data'] as $article)
-            <li class="mb-3 pb-4 border-b border-grey-lighter">
-                <a href="{{ $article['link'] }}" class="font-bold text-lg block">
-                    {{ $article['title'] }}
-                </a>
-                <time class="block text-sm text-grey-darker mt-1 leading-tight" datetime="{{ $article['article_date'] }}">{{ apdatetime(date('F j, Y', strtotime($article['article_date']))) }}</time>
-            </li>
-
-        @empty
-            <p>Currently there are no articles {{ !empty($topic['data']['name']) ? ' for the category ' . strtolower($topic['data']['name']) : '' }} {{ config('base.news_topic_route') }}.</p>
-        @endforelse
-    </ul>
+    @if(!empty($articles['data']))
+        <ul class="list-reset">
+            @foreach($articles['data'] as $article)
+                <li class="mb-3 pb-4 border-b border-grey-lighter">
+                    <a href="{{ $article['link'] }}" class="font-bold text-lg block">
+                        {{ $article['title'] }}
+                    </a>
+                    <time class="block text-sm text-grey-darker mt-1 leading-tight" datetime="{{ $article['article_date'] }}">{{ apdatetime(date('F j, Y', strtotime($article['article_date']))) }}</time>
+                </li>
+            @endforeach
+        </ul>
+    @else
+        <p>Currently there are no articles {{ !empty($topic['data']['name']) ? ' for the category ' . strtolower($topic['data']['name']) : '' }} {{ config('base.news_topic_route') }}.</p>
+    @endif
 
     @if(!empty($articles['meta']['prev_page_url']) || !empty($articles['meta']['next_page_url']))
         <div class="row flex -mx-4">
