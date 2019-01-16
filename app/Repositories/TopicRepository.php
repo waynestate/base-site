@@ -45,6 +45,10 @@ class TopicRepository implements TopicRepositoryContract
                 return $topic;
             })->toArray();
 
+            if (!empty($topics['data'])) {
+                $topics['data'] = $this->sortByLetter($topics['data']);
+            }
+
             return $topics;
         });
 

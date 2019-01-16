@@ -11,9 +11,13 @@ class TopicRepository extends Repository
      */
     public function listing($application_ids)
     {
-        return [
-            'topics' => app('Factories\Topic')->create(20),
-        ];
+        $topics['topics'] = app('Factories\Topic')->create(20);
+
+        if (!empty($topics['topics']['data'])) {
+            $topics['topics']['data'] = $this->sortByLetter($topics['topics']['data']);
+        }
+
+        return $topics;
     }
 
     /**
