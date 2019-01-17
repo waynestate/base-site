@@ -63,8 +63,8 @@ class TopicRepositoryTest extends TestCase
         // Get the news categories
         $sorted = app('App\Repositories\TopicRepository', ['newsApi' => $newsApi])->sortByLetter($topics['data']);
 
-        foreach($sorted as $letter=>$topics) {
-            foreach($topics as $topic) {
+        foreach ($sorted as $letter=>$topics) {
+            foreach ($topics as $topic) {
                 $this->assertEquals($topic['name'][0], $letter);
             }
         }

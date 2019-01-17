@@ -41,9 +41,79 @@ class ArticleRepositoryTest extends TestCase
         $newsApi->shouldReceive('request')->andReturn($return);
 
         // Get the articles
-        $articles = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->listing($this->faker->randomDigit);
+        $articles = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->listing($this->faker->randomDigit, $this->faker->randomDigit, $this->faker->randomDigit, [$this->faker->word]);
 
         $this->assertEquals($return['data'], $articles['articles']['data']);
+    }
+
+    /**
+    * @covers App\Repositories\ArticleRepository::listing
+    * @test
+    */
+    public function articles_paging_while_on_first_page()
+    {
+        // Fake return
+        $return = app('Factories\Article')->create(5);
+
+        // Mock the connector and set the return
+        $newsApi = Mockery::mock('Waynestate\Api\News');
+        $newsApi->shouldReceive('request')->andReturn($return);
+
+        $articles = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->listing($this->faker->randomDigit, $this->faker->randomDigit, 1);
+
+        $next = parse_url($articles['articles']['meta']['next_page_url']);
+        parse_str($next['query'], $next);
+        $this->assertEquals(0, $next['page']);
+
+        $prev = parse_url($articles['articles']['meta']['prev_page_url']);
+        parse_str($prev['query'], $prev);
+        $this->assertEquals(2, $prev['page']);
+    }
+
+    /**
+    * @covers App\Repositories\ArticleRepository::listing
+    * @test
+    */
+    public function articles_paging_while_on_last_page()
+    {
+        // Fake return
+        $return = app('Factories\Article')->create(5);
+
+        // Mock the connector and set the return
+        $newsApi = Mockery::mock('Waynestate\Api\News');
+        $newsApi->shouldReceive('request')->andReturn($return);
+
+        $articles = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->listing($this->faker->randomDigit, $this->faker->randomDigit, 3);
+
+        $next = parse_url($articles['articles']['meta']['next_page_url']);
+        parse_str($next['query'], $next);
+        $this->assertEquals(2, $next['page']);
+
+        $prev = parse_url($articles['articles']['meta']['prev_page_url']);
+        $this->assertTrue(empty($prev['page']));
+    }
+
+    /**
+     * @covers App\Repositories\ArticleRepository::listing
+     * @test
+     */
+    public function articles_paging_no_page()
+    {
+        // Fake return
+        $return = app('Factories\Article')->create(5);
+
+        // Mock the connector and set the return
+        $newsApi = Mockery::mock('Waynestate\Api\News');
+        $newsApi->shouldReceive('request')->andReturn($return);
+
+        $articles = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->listing($this->faker->randomDigit, $this->faker->randomDigit, null);
+
+        $next = parse_url($articles['articles']['meta']['next_page_url']);
+        $this->assertTrue(empty($next['page']));
+
+        $prev = parse_url($articles['articles']['meta']['prev_page_url']);
+        parse_str($prev['query'], $prev);
+        $this->assertEquals(2, $prev['page']);
     }
 
     /**
