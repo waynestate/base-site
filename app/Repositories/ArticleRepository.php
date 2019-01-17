@@ -83,18 +83,6 @@ class ArticleRepository implements ArticleRepositoryContract
             return $this->newsApi->request($params['method'], $params);
         });
 
-        if (!empty($article['article']['data'])) {
-            $article['article']['data'] = current($article['article']['data']);
-        }
-
-        if (!empty($article['article']['data']['hero_image'])) {
-            $article['article']['data']['hero_image'] = current($article['article']['data']['hero_image']);
-        }
-
-        if (!empty($article['article']['data']['main_image'])) {
-            $article['article']['data']['main_image'] = current($article['article']['data']['main_image']);
-        }
-
         return $article;
     }
 
@@ -105,10 +93,6 @@ class ArticleRepository implements ArticleRepositoryContract
     {
         if (!empty($article['hero_image']['url'])) {
             return $article['hero_image']['url'];
-        }
-
-        if (!empty($article['main_image']['url'])) {
-            return $article['main_image']['url'];
         }
 
         $doc = new \DOMDocument();

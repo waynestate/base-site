@@ -22,18 +22,20 @@ class Article implements FactoryContract
      */
     public function create($limit = 1, $flatten = false, $options = [])
     {
-        $hero[] = [
+        $hero = [
+            'featured' => 0,
             'url' => '/styleguide/image/1600x580',
             'caption' => $this->faker->sentence(rand(5, 10)),
             'alt_text' => $this->faker->sentence(rand(5, 10)),
             'type' => 'Hero Image',
         ];
 
-        $main[] = [
+        $featured = [
+            'featured' => 1,
             'url' => '/styleguide/image/1600x580',
             'caption' => $this->faker->sentence(rand(5, 10)),
             'alt_text' => $this->faker->sentence(rand(5, 10)),
-            'type' => 'Main Image',
+            'type' => 'Embeddable',
         ];
 
         for ($i = 1; $i <= $limit; $i++) {
@@ -96,16 +98,11 @@ class Article implements FactoryContract
                 'article_date' => $this->faker->date,
                 'status' => 'Published',
                 'link' => '/styleguide/'.config('base.news_view_route').'/item-1',
-                'main_image' => [
-                    'url' => '/styleguide/image/1600x580',
-                    'caption' => $this->faker->sentence(rand(5, 10)),
-                    'alt_text' => $this->faker->sentence(rand(5, 10)),
-                ],
                 'hero_image' => $hero,
-                'main_image' => $main,
+                'featured' => $featured,
                 'files' => [
                     0 => $hero,
-                    1 => $main,
+                    1 => $featured,
                 ],
                 'favicon' => null,
                 'user' => null,

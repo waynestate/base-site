@@ -14,7 +14,7 @@ class ArticleRepositoryTest extends TestCase
     public function finding_article_should_return_article()
     {
         // Fake return
-        $return = app('Factories\Article')->create(1);
+        $return = app('Factories\Article')->create(1, true);
 
         // Mock the connector and set the return
         $newsApi = Mockery::mock('Waynestate\Api\News');
@@ -24,7 +24,7 @@ class ArticleRepositoryTest extends TestCase
         $article = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->find($this->faker->randomDigit, $this->faker->randomDigit);
 
         // Make sure they are the same as the ones we created
-        $this->assertEquals($return['data'][1]['id'], $article['article']['data']['id']);
+        $this->assertEquals($return['data']['id'], $article['article']['data']['id']);
     }
 
     /**
@@ -139,7 +139,6 @@ class ArticleRepositoryTest extends TestCase
     public function article_with_hero_should_return_hero_url()
     {
         $article = app('Factories\Article')->create(1, true);
-        $article['data']['hero_image'] = current($article['data']['hero_image']);
 
         $imageUrl = app('App\Repositories\ArticleRepository')->getImageUrl($article['data']);
 
@@ -156,7 +155,6 @@ class ArticleRepositoryTest extends TestCase
 
         $article = app('Factories\Article')->create(1, true, [
             'hero_image' => null,
-            'main_image' => null,
             'body' => '<img src="'.$image.'">',
         ]);
 

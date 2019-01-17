@@ -68,7 +68,7 @@ class ArticleControllerTest extends TestCase
     public function page_title_should_be_news_item_title()
     {
         // Fake return
-        $return = app('Factories\Article')->create(1);
+        $return = app('Factories\Article')->create(1, true);
 
         // Fake request
         $request = new Request();
