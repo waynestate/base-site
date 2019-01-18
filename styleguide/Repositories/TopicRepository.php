@@ -23,7 +23,7 @@ class TopicRepository extends Repository
     /**
      * {@inheritdoc}
      */
-    public function find($id, $slug)
+    public function find($slug)
     {
         return [
             'topics' => app('Factories\Topic')->create(1, true),

@@ -58,7 +58,7 @@ class TopicRepository implements TopicRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function find($id, $slug)
+    public function find($slug)
     {
         $params = [
             'method' => 'topic/'.$slug,
