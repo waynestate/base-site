@@ -20,6 +20,11 @@ class NewsTopic extends Page
                 'title' => 'Articles by topic',
                 'id' => 101102,
             ],
+            'site' => [
+                'news' => [
+                    'application_id' => 1,
+                ],
+            ],
         ]);
     }
 }

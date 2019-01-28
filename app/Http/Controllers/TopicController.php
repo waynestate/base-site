@@ -30,7 +30,7 @@ class TopicController extends Controller
      */
     public function index(Request $request)
     {
-        $topics = $this->topic->listing([7]);
+        $topics = $this->topic->listing($request->data['site']['news']['application_id']);
 
         return view('topics', merge($request->data, $topics));
     }

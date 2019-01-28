@@ -72,7 +72,7 @@ class ArticleControllerTest extends TestCase
 
         // Fake request
         $request = new Request();
-        $request->data = app('Factories\Page')->create(1, true);
+        $request->data = app('Styleguide\Pages\NewsView')->getPageData();
 
         // Mock the connector
         $newsApi = Mockery::mock('Waynestate\Api\News');

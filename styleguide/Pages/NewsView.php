@@ -20,6 +20,11 @@ class NewsView extends Page
                 'title' => 'News View',
                 'id' => null,
             ],
+            'site' => [
+                'news' => [
+                    'application_id' => 1,
+                ],
+            ],
         ]);
     }
 }

@@ -38,7 +38,7 @@ class HomepageController extends Controller
     {
         //$promos = $this->promo->getHomepagePromos();
 
-        $articles = $this->article->listing([7]);
+        $articles = $this->article->listing($request->data['site']['news']['application_id']);
 
         $events = $this->event->getEvents($request->data['site']['id']);
 

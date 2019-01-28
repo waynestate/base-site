@@ -43,7 +43,7 @@ class ArticleController extends Controller
             }
         }
 
-        $articles = $this->article->listing([7], 25, $request->query('page'), !empty($topic['topic']['data']['id']) ? [$topic['topic']['data']['id']] : null);
+        $articles = $this->article->listing($request->data['site']['news']['application_id'], 25, $request->query('page'), !empty($topic['topic']['data']['id']) ? [$topic['topic']['data']['id']] : null);
 
         $articles['topics_url'] = $this->article->topicsUrl();
 
@@ -60,7 +60,7 @@ class ArticleController extends Controller
      */
     public function show(Request $request)
     {
-        $article = $this->article->find($request->id, [7]);
+        $article = $this->article->find($request->id, $request->data['site']['news']['application_id']);
 
         if (empty($article['article']['data']) || $article['article']['data']['status'] !== 'Published') {
             return abort('404');
