@@ -45,8 +45,6 @@ class ArticleController extends Controller
 
         $articles = $this->article->listing($request->data['site']['news']['application_id'], 25, $request->query('page'), !empty($topic['topic']['data']['id']) ? [$topic['topic']['data']['id']] : null);
 
-        $articles['topics_url'] = $this->article->topicsUrl();
-
         $request->data['hero'] = false;
 
         return view('articles', merge($request->data, $articles, $topic));

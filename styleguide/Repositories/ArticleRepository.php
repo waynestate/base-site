@@ -46,12 +46,4 @@ class ArticleRepository extends Repository
             'article' => app('Factories\Article')->create(1, true),
         ];
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function topicsUrl()
-    {
-        return '/styleguide/'.config('base.news_listing_route').'/'.config('base.news_topics_route').'/';
-    }
 }

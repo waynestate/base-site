@@ -190,15 +190,4 @@ class ArticleRepositoryTest extends TestCase
         // Change the config back
         config(['base.news_view_route' => $current_config]);
     }
-
-    /**
-     * @covers App\Repositories\ArticleRepository::topicsUrl
-     * @test
-     */
-    public function setting_topics_url_should_return_url()
-    {
-        $url = app('App\Repositories\ArticleRepository')->topicsUrl();
-
-        $this->assertTrue(is_string($url));
-    }
 }
