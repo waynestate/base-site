@@ -32,6 +32,10 @@ class TopicController extends Controller
     {
         $topics = $this->topic->listing($request->data['site']['news']['application_id']);
 
+        if (!empty($topics['topics']['data'])) {
+            $topics['topics']['data'] = $this->topic->sortByLetter($topics['topics']['data']);
+        }
+
         return view('topics', merge($request->data, $topics));
     }
 }

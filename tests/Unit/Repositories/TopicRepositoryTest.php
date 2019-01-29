@@ -25,7 +25,7 @@ class TopicRepositoryTest extends TestCase
         // Get the articles
         $topics = $topicRepository->listing($this->faker->randomDigit);
 
-        $this->assertEquals(count($topicRepository->sortByLetter($return['data'])), count($topics['topics']['data']));
+        $this->assertCount(count($topics['topics']['data']), $return['data']);
     }
 
     /**

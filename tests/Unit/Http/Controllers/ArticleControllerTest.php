@@ -98,12 +98,11 @@ class ArticleControllerTest extends TestCase
      */
     public function news_listing_with_invalid_topic_should_404()
     {
-        // Mock the connector
         $newsApi = Mockery::mock('Waynestate\Api\News');
-        $newsApi->shouldReceive('request')->once()->andReturn(['errors' => []]);
-
-        // Construct the repositories
         $articleRepository = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi]);
+
+        $newsApi = Mockery::mock('Waynestate\Api\News');
+        $newsApi->shouldReceive('request')->once()->andReturn(app('Factories\Topic')->create(5));
         $topicRepository = app('App\Repositories\topicRepository', ['newsApi' => $newsApi]);
 
         // Construct the news controller

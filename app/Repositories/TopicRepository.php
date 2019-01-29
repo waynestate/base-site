@@ -39,14 +39,12 @@ class TopicRepository implements TopicRepositoryContract
         $topics['topics'] = $this->cache->remember('newsroom-topics', config('cache.ttl'), function () use ($params) {
             $topics = $this->newsApi->request($params['method'], $params);
 
-            $topics['data'] = collect($topics['data'])->map(function ($topic) {
-                $topic['url'] = '/'.config('base.news_listing_route').'/'.config('base.news_topic_route').'/'.$topic['slug'];
-
-                return $topic;
-            })->toArray();
-
             if (!empty($topics['data'])) {
-                $topics['data'] = $this->sortByLetter($topics['data']);
+                $topics['data'] = collect($topics['data'])->map(function ($topic) {
+                    $topic['url'] = '/'.config('base.news_listing_route').'/'.config('base.news_topic_route').'/'.$topic['slug'];
+
+                    return $topic;
+                })->toArray();
             }
 
             return $topics;
@@ -72,10 +70,7 @@ class TopicRepository implements TopicRepositoryContract
     }
 
     /**
-     * Sort articles by letter
-     *
-     * @param array $topics
-     * @return array
+     * {@inheritdoc}
      */
     public function sortByLetter($topics)
     {
@@ -91,5 +86,17 @@ class TopicRepository implements TopicRepositoryContract
         }
 
         return $sorted;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setSelected($topics, $topic)
+    {
+        return collect($topics)->map(function ($item) use ($topic) {
+            $item['selected'] = $item['slug'] === $topic ? true : false;
+
+            return $item;
+        })->toArray();
     }
 }

@@ -187,7 +187,7 @@ return [
     'news_view_route' => 'news',
     'news_topic_route' => 'topic',
     'news_topics_route' => 'topics',
-    'news_topics_text' => 'Browse by topics',
+    'news_topics_text' => 'Filter by topic',
     'news_topics_controller' => 'TopicController',
     'news_controller' => 'ArticleController',
 

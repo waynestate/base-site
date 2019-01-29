@@ -33,21 +33,28 @@ class ArticleController extends Controller
      */
     public function index(Request $request)
     {
-        $topic['topic'] = null;
+        $topics = $this->topic->listing($request->data['site']['news']['application_id']);
 
-        if (!empty($request->slug)) {
-            $topic = $this->topic->find($request->slug);
+        if (!empty($topics['topics']['data'])) {
+            $topics['topics']['data'] = $this->topic->setSelected($topics['topics']['data'], $request->slug);
 
-            if (isset($topic['topic']['errors'])) {
-                return abort('404');
-            }
+            $selected_topic = collect($topics['topics']['data'])->firstWhere('selected', true);
         }
 
-        $articles = $this->article->listing($request->data['site']['news']['application_id'], 25, $request->query('page'), !empty($topic['topic']['data']['id']) ? [$topic['topic']['data']['id']] : null);
+        if (!empty($request->slug) && empty($selected_topic['selected'])) {
+            return abort('404');
+        }
+
+        $articles = $this->article->listing($request->data['site']['news']['application_id'], 25, $request->query('page'), !empty($selected_topic['topic_id']) ? $selected_topic['topic_id'] : null);
 
         $request->data['hero'] = false;
 
-        return view('articles', merge($request->data, $articles, $topic));
+        // Force the menu to be shown if categories are found
+        if (!empty($topics['topics']['data'])) {
+            $request->data['show_site_menu'] = true;
+        }
+
+        return view('articles', merge($request->data, $articles, $topics));
     }
 
     /**
