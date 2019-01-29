@@ -25,4 +25,16 @@ class TopicRepository extends Repository
             'topics' => app('Factories\Topic')->create(1, true),
         ];
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setSelected($topics, $topic)
+    {
+        return collect($topics)->map(function ($item, $key) {
+            $item['selected'] = $key === 1 ? true : false;
+
+            return $item;
+        })->toArray();
+    }
 }
