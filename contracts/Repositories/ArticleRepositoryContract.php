@@ -39,4 +39,13 @@ interface ArticleRepositoryContract
      * @return array
      */
     public function setArticleLink($item);
+
+    /**
+     * Set the paging.
+     *
+     * @param array $meta
+     * @param int $page
+     * @return array
+     */
+    public function setPaging($meta, $page);
 }

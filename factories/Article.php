@@ -119,6 +119,7 @@ class Article implements FactoryContract
         $data['meta'] = [
             'total' => '',
             'per_page' => '',
+            'current_page' => '',
             'last_page' => 3,
             'next_page_url' => '',
             'prev_page_url' => '',

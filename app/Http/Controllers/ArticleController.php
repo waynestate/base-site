@@ -47,6 +47,10 @@ class ArticleController extends Controller
 
         $articles = $this->article->listing($request->data['site']['news']['application_id'], 25, $request->query('page'), !empty($selected_topic['topic_id']) ? $selected_topic['topic_id'] : null);
 
+        if (!empty($articles['articles']['meta'])) {
+            $articles['articles']['meta'] = $this->article->setPaging($articles['articles']['meta'], $request->query('page'));
+        }
+
         $request->data['hero'] = false;
 
         // Force the menu to be shown if categories are found

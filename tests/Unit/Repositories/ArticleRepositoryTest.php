@@ -59,7 +59,11 @@ class ArticleRepositoryTest extends TestCase
         $newsApi = Mockery::mock('Waynestate\Api\News');
         $newsApi->shouldReceive('request')->andReturn($return);
 
-        $articles = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->listing($this->faker->randomDigit, $this->faker->randomDigit, 1);
+        $page = 1;
+
+        $articles = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->listing($this->faker->randomDigit, $this->faker->randomDigit, $page);
+
+        $articles['articles']['meta'] = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->SetPaging($articles['articles']['meta'], $page);
 
         $next = parse_url($articles['articles']['meta']['next_page_url']);
         parse_str($next['query'], $next);
@@ -83,7 +87,11 @@ class ArticleRepositoryTest extends TestCase
         $newsApi = Mockery::mock('Waynestate\Api\News');
         $newsApi->shouldReceive('request')->andReturn($return);
 
-        $articles = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->listing($this->faker->randomDigit, $this->faker->randomDigit, 3);
+        $page = 3;
+
+        $articles = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->listing($this->faker->randomDigit, $this->faker->randomDigit, $page);
+
+        $articles['articles']['meta'] = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->SetPaging($articles['articles']['meta'], $page);
 
         $next = parse_url($articles['articles']['meta']['next_page_url']);
         parse_str($next['query'], $next);
@@ -106,7 +114,11 @@ class ArticleRepositoryTest extends TestCase
         $newsApi = Mockery::mock('Waynestate\Api\News');
         $newsApi->shouldReceive('request')->andReturn($return);
 
-        $articles = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->listing($this->faker->randomDigit, $this->faker->randomDigit, null);
+        $page = null;
+
+        $articles = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->listing($this->faker->randomDigit, $this->faker->randomDigit, $page);
+
+        $articles['articles']['meta'] = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->SetPaging($articles['articles']['meta'], $page);
 
         $next = parse_url($articles['articles']['meta']['next_page_url']);
         $this->assertTrue(empty($next['page']));

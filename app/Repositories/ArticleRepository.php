@@ -43,25 +43,13 @@ class ArticleRepository implements ArticleRepositoryContract
             $params['topics'] = $topics;
         }
 
-        $articles['articles'] = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params, $page) {
+        $articles['articles'] = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             $items = $this->newsApi->request($params['method'], $params);
 
             if (!empty($items['data'])) {
                 $items['data'] = collect($items['data'])->map(function ($item) {
                     return $this->setArticleLink($item);
                 })->toArray();
-            }
-
-
-            if (empty($page)) {
-                $items['meta']['next_page_url'] = null;
-                $items['meta']['prev_page_url'] = ($items['meta']['total'] < $items['meta']['per_page']) ? null : url()->current().'?page=2';
-            } elseif ($page == $items['meta']['last_page']) {
-                $items['meta']['next_page_url'] = url()->current().'?page='.($page-1);
-                $items['meta']['prev_page_url'] = null;
-            } else {
-                $items['meta']['next_page_url'] = url()->current().(($page-1 == 1) ? '' : '?page='.($page-1));
-                $items['meta']['prev_page_url'] = url()->current().'?page='.($page+1);
             }
 
             return $items;
@@ -117,5 +105,24 @@ class ArticleRepository implements ArticleRepositoryContract
         }
 
         return $item;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPaging($meta, $page)
+    {
+        if (empty($page)) {
+            $meta['next_page_url'] = null;
+            $meta['prev_page_url'] = ($meta['total'] < $meta['per_page']) ? null : url()->current().'?page=2';
+        } elseif ($page == $meta['last_page']) {
+            $meta['next_page_url'] = url()->current().'?page='.($page-1);
+            $meta['prev_page_url'] = null;
+        } else {
+            $meta['next_page_url'] = url()->current().(($page-1 == 1) ? '' : '?page='.($page-1));
+            $meta['prev_page_url'] = url()->current().'?page='.($page+1);
+        }
+
+        return $meta;
     }
 }
