@@ -17,3 +17,9 @@
         </p>
     </div>
 @endsection
+
+@section('below_menu')
+    @if(!empty($topics['data']))
+        @include('components.article-topics', ['topics' => $topics['data'], 'heading' => config('base.news_topics_text')])
+    @endif
+@endsection

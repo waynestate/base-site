@@ -51,8 +51,6 @@ class ArticleController extends Controller
             $articles['articles']['meta'] = $this->article->setPaging($articles['articles']['meta'], $request->query('page'));
         }
 
-        $request->data['hero'] = false;
-
         // Force the menu to be shown if categories are found
         if (!empty($topics['topics']['data'])) {
             $request->data['show_site_menu'] = true;
@@ -83,6 +81,19 @@ class ArticleController extends Controller
 
         $request->data['meta']['image'] = $this->article->getImageUrl($article['article']['data']);
 
-        return view('article', merge($request->data, $article));
+        $topics = $this->topic->listing($request->data['site']['news']['application_id']);
+
+        if (!empty($topics['topics']['data'])) {
+            $topics['topics']['data'] = $this->topic->setSelected($topics['topics']['data'], $request->slug);
+
+            $selected_topic = collect($topics['topics']['data'])->firstWhere('selected', true);
+        }
+
+        // Force the menu to be shown if categories are found
+        if (!empty($topics['topics']['data'])) {
+            $request->data['show_site_menu'] = true;
+        }
+
+        return view('article', merge($request->data, $article, $topics));
     }
 }
