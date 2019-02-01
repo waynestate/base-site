@@ -48,6 +48,7 @@ class ArticleRepositoryTest extends TestCase
 
     /**
     * @covers App\Repositories\ArticleRepository::listing
+    * @covers App\Repositories\ArticleRepository::setPaging
     * @test
     */
     public function articles_paging_while_on_first_page()
@@ -63,7 +64,7 @@ class ArticleRepositoryTest extends TestCase
 
         $articles = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->listing($this->faker->randomDigit, $this->faker->randomDigit, $page);
 
-        $articles['articles']['meta'] = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->SetPaging($articles['articles']['meta'], $page);
+        $articles['articles']['meta'] = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->setPaging($articles['articles']['meta'], $page);
 
         $next = parse_url($articles['articles']['meta']['next_page_url']);
         parse_str($next['query'], $next);
@@ -76,6 +77,7 @@ class ArticleRepositoryTest extends TestCase
 
     /**
     * @covers App\Repositories\ArticleRepository::listing
+    * @covers App\Repositories\ArticleRepository::setPaging
     * @test
     */
     public function articles_paging_while_on_last_page()
@@ -91,7 +93,7 @@ class ArticleRepositoryTest extends TestCase
 
         $articles = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->listing($this->faker->randomDigit, $this->faker->randomDigit, $page);
 
-        $articles['articles']['meta'] = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->SetPaging($articles['articles']['meta'], $page);
+        $articles['articles']['meta'] = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->setPaging($articles['articles']['meta'], $page);
 
         $next = parse_url($articles['articles']['meta']['next_page_url']);
         parse_str($next['query'], $next);
@@ -103,6 +105,7 @@ class ArticleRepositoryTest extends TestCase
 
     /**
      * @covers App\Repositories\ArticleRepository::listing
+     * @covers App\Repositories\ArticleRepository::setPaging
      * @test
      */
     public function articles_paging_no_page()
@@ -118,7 +121,7 @@ class ArticleRepositoryTest extends TestCase
 
         $articles = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->listing($this->faker->randomDigit, $this->faker->randomDigit, $page);
 
-        $articles['articles']['meta'] = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->SetPaging($articles['articles']['meta'], $page);
+        $articles['articles']['meta'] = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->setPaging($articles['articles']['meta'], $page);
 
         $next = parse_url($articles['articles']['meta']['next_page_url']);
         $this->assertTrue(empty($next['page']));
