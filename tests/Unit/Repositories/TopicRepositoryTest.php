@@ -69,4 +69,21 @@ class TopicRepositoryTest extends TestCase
             }
         }
     }
+
+    /**
+     * @covers App\Repositories\TopicRepository::setSelected
+     * @test
+     */
+    public function setting_selected_topic()
+    {
+        $topics = app('Factories\Topic')->create(5);
+
+        $newsApi = Mockery::mock('Waynestate\Api\News');
+
+        $first = collect($topics['data'])->first();
+
+        $selected = app('App\Repositories\TopicRepository', ['newsApi' => $newsApi])->setSelected($topics['data'], $first['slug']);
+
+        $this->assertTrue(collect($selected)->first()['selected']);
+    }
 }
