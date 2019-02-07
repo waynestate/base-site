@@ -26,7 +26,7 @@ class VideoFull implements FactoryContract
             $data[$i] = [
                 'link' => 'https://www.youtube.com/watch?v=QYVv994xz6s',
                 'youtube_id' => 'QYVv994xz6s',
-                'relative_url' => '/styleguide/image/1600x580?text=Full Video',
+                'relative_url' => '/styleguide/image/1600x580?text=Video Full',
                 'title' => $this->faker->sentence,
                 'excerpt' => $this->faker->sentence,
                 'description' => $this->faker->sentence,

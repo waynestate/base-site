@@ -17,3 +17,11 @@
         transform: rotate(90deg);
     }
 }
+
+.right-triangle {
+    &::after {
+        content: "▶";
+        padding: 0;
+        display: inline-block;
+    }
+}
