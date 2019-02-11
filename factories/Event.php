@@ -24,10 +24,11 @@ class Event implements FactoryContract
     {
         for ($i = 1; $i <= $limit; $i++) {
             $date = $this->faker->dateTimeThisMonth('now')->format('Y-m-d');
+            $title = ($i !== 2)?$this->faker->sentence(rand(6, 10)):$title;
 
             $event = [
                 'url' => $this->faker->url,
-                'title' => $this->faker->sentence(rand(6, 10)),
+                'title' => $title,
                 'date' => $date,
                 'start_time' => $this->faker->dateTimeThisMonth('now')->format('H:i:s'),
                 'is_all_day' => $this->faker->boolean,
