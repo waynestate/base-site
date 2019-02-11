@@ -5,7 +5,7 @@ namespace Factories;
 use Contracts\Factories\FactoryContract;
 use Faker\Factory;
 
-class NewsItem implements FactoryContract
+class Article implements FactoryContract
 {
     /**
      * Construct the factory.
@@ -22,21 +22,32 @@ class NewsItem implements FactoryContract
      */
     public function create($limit = 1, $flatten = false, $options = [])
     {
+        $hero = [
+            'featured' => 0,
+            'url' => '/styleguide/image/1600x580',
+            'caption' => $this->faker->sentence(rand(5, 10)),
+            'alt_text' => $this->faker->sentence(rand(5, 10)),
+            'type' => 'Hero Image',
+        ];
+
+        $featured = [
+            'featured' => 1,
+            'url' => '/styleguide/image/1600x580',
+            'caption' => $this->faker->sentence(rand(5, 10)),
+            'alt_text' => $this->faker->sentence(rand(5, 10)),
+            'type' => 'Embeddable',
+        ];
+
         for ($i = 1; $i <= $limit; $i++) {
-            $data[$i] = [
-                'news_id' => $i,
-                'app_id' => $this->faker->randomDigit,
-                'slug' => $this->faker->slug,
+            $data['data'][$i] = [
+                'id' => $i,
+                'user_id' => $this->faker->randomDigit,
+                'application_id' => $this->faker->randomDigit,
+                'favicon_id' => null,
                 'title' => $this->faker->sentence(rand(6, 10)),
-                'posted' => $this->faker->date,
-                'excerpt' => '',
-                'archive' => 1,
-                'link' => '',
-                'full_link' => '/styleguide/'.config('base.news_view_route').'/item-1',
-                'filename' => '/styleguide/image/1600x580',
-                'filename_url_relative' => '/styleguide/image/1600x580',
-                'filename_url_absolute' => '/styleguide/image/1600x580',
-                'categories' => null,
+                'short_title' => $this->faker->sentence(rand(3, 6)),
+                'sub_title' => null,
+                'permalink' => $this->faker->slug,
                 'body' => '<p>'.$this->faker->paragraph(8).'</p>
                 <p>'.$this->faker->paragraph(8).'</p>
                 <figure class="figure" style="padding-bottom:10px; float:right">
@@ -84,15 +95,35 @@ class NewsItem implements FactoryContract
                 </p>
                 <p>'.$this->faker->paragraph(8).'</p>
                 ',
-
+                'article_date' => $this->faker->date,
+                'status' => 'Published',
+                'link' => '/styleguide/'.config('base.news_view_route').'/item-1',
+                'hero_image' => $hero,
+                'featured' => $featured,
+                'files' => [
+                    0 => $hero,
+                    1 => $featured,
+                ],
+                'favicon' => null,
+                'user' => null,
+                'applications' => null,
             ];
 
-            $data[$i] = array_replace_recursive($data[$i], $options);
+            $data['data'][$i] = array_replace_recursive($data['data'][$i], $options);
         }
 
         if ($limit === 1 && $flatten === true) {
-            return current($data);
+            $data['data'] = current($data['data']);
         }
+
+        $data['meta'] = [
+            'total' => '',
+            'per_page' => '',
+            'current_page' => '',
+            'last_page' => 3,
+            'next_page_url' => '',
+            'prev_page_url' => '',
+        ];
 
         return $data;
     }

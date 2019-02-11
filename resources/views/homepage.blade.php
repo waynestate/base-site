@@ -7,11 +7,11 @@
         {!! $page['content']['main'] !!}
     </div>
 
-    @if(!empty($news) || !empty($events))
+    @if(!empty($articles['data']) || !empty($events))
         <div class="row -mx-4 flex flex-wrap">
-            @if(!empty($news))
+            @if(!empty($articles['data']))
                 <div class="w-full md:w-1/2 px-4">
-                    @include('components/mini-news', ['news' => $news, 'url' => ($site['subsite-folder'] !== null ? $site['subsite-folder'] : '').config('base.news_listing_route').'/'])
+                    @include('components/article-listing', ['articles' => $articles['data'], 'url' => ($site['subsite-folder'] !== null ? $site['subsite-folder'] : '').config('base.news_listing_route').'/'])
                 </div>
             @endif
 

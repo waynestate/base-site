@@ -1,6 +1,5 @@
 {{--
-    $news => array // [['news_id', 'slug', 'title']]
-    $site => array // ['subsite-folder']
+    $articles => array // ['link', 'title']
     $heading => string // 'News'
     $url => string '/news/'
     $link_text => string // 'More news'
@@ -8,9 +7,9 @@
 <h2>{{ $heading ?? 'News' }}</h2>
 
 <ul class="list-reset">
-    @foreach($news as $item)
+    @foreach($articles as $item)
         <li class="mb-4">
-            <a href="{{ $item['full_link'] }}" class="underline hover:no-underline font-normal">
+            <a href="{{ $item['link'] }}" class="underline hover:no-underline font-normal">
                 {{ $item['title'] }}
             </a>
         </li>
