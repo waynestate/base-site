@@ -31,6 +31,10 @@ class ArticleRepository implements ArticleRepositoryContract
      */
     public function listing($application_ids, $limit=5, $page=1, $topics=[])
     {
+        if (empty($application_ids)) {
+            return ['articles' => []];
+        }
+
         $params = [
             'perPage' =>  $limit,
             'page' => $page,
