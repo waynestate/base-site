@@ -23,6 +23,9 @@ class Homepage extends Page
            ],
            'site' => [
                'subsite-folder' => 'styleguide/',
+               'news' => [
+                   'application_id' => 1,
+               ],
            ],
        ]);
     }

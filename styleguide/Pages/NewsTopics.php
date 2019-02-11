@@ -2,7 +2,7 @@
 
 namespace Styleguide\Pages;
 
-class Mininews extends Page
+class NewsTopics extends Page
 {
     /**
      * {@inheritdoc}
@@ -11,12 +11,14 @@ class Mininews extends Page
     {
         return app('Factories\Page')->create(1, true, [
             'page' => [
-                'controller' => 'MiniNewsController',
-                'title' => 'Mini news',
-                'id' => 108100,
+                'controller' => 'TopicController',
+                'title' => 'Topic listing',
+                'id' => 101103,
             ],
             'site' => [
-                'subsite-folder' => 'styleguide/',
+                'news' => [
+                    'application_id' => 1,
+                ],
             ],
         ]);
     }

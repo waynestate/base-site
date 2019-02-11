@@ -13,7 +13,7 @@ class Directory extends Page
             'page' => [
                 'controller' => 'DirectoryController',
                 'title' => 'Directory',
-                'id' => 101104,
+                'id' => 101105,
             ],
         ]);
     }

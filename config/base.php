@@ -168,7 +168,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | News Routes
+    | News
     |--------------------------------------------------------------------------
     |
     | Here you can configure the news area. No ending slash for route paths.
@@ -178,15 +178,18 @@ return [
     | you would need to change in the styleguide.
     |
     | /styleguide/Pages/News.php -> value of `news_listing_route`
-    | /styleguide/Pages/NewsCategory.php -> value of `news_listing_route + news_filter_route`
-    | /styleguide/Pages/NewsView.php -> value of `news_view_route` + View
+    | /styleguide/Pages/NewsView.php -> value of `news_view_route`
+    | /styleguide/Pages/NewsTopic.php -> value of `news_listing_route + `news_topic_route`
+    | /styleguide/Pages/NewsTopics.php -> value of `news_view_route` + `news_topics_route`
     |
     */
     'news_listing_route' => 'news',
     'news_view_route' => 'news',
-    'news_filter_route' => 'category',
-    'news_all_text' => 'All categories',
-    'news_controller' => 'NewsController',
+    'news_topic_route' => 'topic',
+    'news_topics_route' => 'topics',
+    'news_topics_text' => 'Filter by topic',
+    'news_topics_controller' => 'TopicController',
+    'news_controller' => 'ArticleController',
 
     /*
     |--------------------------------------------------------------------------
