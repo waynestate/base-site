@@ -96,6 +96,11 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
             $group_reference[$data['data']['accordion_promo_group_id']] = 'accordion_page';
         }
 
+        // If there is an grid custom page field then inject it into the group reference
+        if (!empty($data['data']['grid_promo_group_id']) && ! array_key_exists($data['data']['grid_promo_group_id'], $group_reference)) {
+            $group_reference[$data['data']['grid_promo_group_id']] = 'grid_page';
+        }
+
         $params = [
             'method' => 'cms.promotions.listing',
             'promo_group_id' => array_keys($group_reference),
