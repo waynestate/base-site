@@ -1,0 +1,25 @@
+.heading-lined {
+    overflow: hidden;
+    position: relative;
+    font-weight: 900;
+
+    &::before {
+        content: '';
+        background-color: #acc9c0;
+        height: 2px;
+        width: 50%;
+        position: absolute;
+        top: 55%;
+        left: -30px;
+    }
+
+    &::after {
+        content: '';
+        background-color: #acc9c0;
+        height: 2px;
+        width: 50%;
+        position: absolute;
+        top: 55%;
+        right: -30px;
+    }
+}
