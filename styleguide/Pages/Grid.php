@@ -12,7 +12,7 @@ class Grid extends Page
         return app('Factories\Page')->create(1, true, [
             'page' => [
                 'controller' => 'GridController',
-                'title' => 'Figure',
+                'title' => 'Grid',
                 'id' => 101106,
             ],
         ]);

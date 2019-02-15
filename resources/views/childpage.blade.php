@@ -10,4 +10,8 @@
     @if(!empty($accordion_page))
         @include('components.accordion', ['items' => $accordion_page])
     @endif
+
+    @if(!empty($grid))
+        @include('components.promo-grid', ['items' => $promo_grid])
+    @endif
 @endsection

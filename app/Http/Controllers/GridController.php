@@ -2,7 +2,7 @@
 /*
 * Status: Public
 * Description: Grid Template
-* Default: true
+* Default: false
 */
 
 namespace App\Http\Controllers;

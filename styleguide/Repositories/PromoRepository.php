@@ -57,6 +57,7 @@ class PromoRepository extends Repository
             101106 => 15,
         ];
 
+
         // Only pull grid for childpage template
         $grid = !empty($grid_page_ids[$data['page']['id']]) ? app('Factories\Grid')->create($grid_page_ids[$data['page']['id']]) : null;
 
@@ -96,6 +97,9 @@ class PromoRepository extends Repository
 
             // Accordion child page
             'accordion_page' => $accordion,
+
+            // Grid child page
+            'grid' => $grid,
         ];
     }
 }
