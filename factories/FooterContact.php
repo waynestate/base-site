@@ -23,19 +23,10 @@ class FooterContact implements FactoryContract
     public function create($limit = 1, $flatten = false, $options = [])
     {
         for ($i = 1; $i <= $limit; $i++) {
-            $title = '';
-
-            if ($i == 2) {
-                $title = '<h2><a href="'.$this->faker->url.'">'.$this->faker->words(3, true).'</a></h2>';
-            } elseif ($i == 3) {
-                $title = '<h2>'.$this->faker->words(3, true).'</h2>';
-            }
-
             $data[$i] = [
                 'link' => '/',
-                'title' => $this->faker->sentence,
+                'title' => $this->faker->text(15),
                 'description' =>
-                    $title.
                     '<p>
                         ' .$this->faker->name.'<br />
                         ' .$this->faker->streetAddress.'<br />
