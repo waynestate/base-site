@@ -16,7 +16,9 @@
                     </div>
                     <div class="w-2/3 pl-4 md:pl-0">
                         <div class="font-bold hover:underline">{{ $item['title'] }}</div>
-                        <p class="text-sm">{!! strip_tags($item['description']) !!}</p>
+                        @if(!empty($item['description']))
+                            <p class="text-sm">{!! strip_tags($item['description']) !!}</p>
+                        @endif
                     </div>
                 </a>
             </div>
