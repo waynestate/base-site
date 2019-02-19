@@ -7,7 +7,7 @@
 
 namespace App\Http\Controllers;
 
-use Contracts\Repositories\PromoRepositoryContract;
+use Contracts\Repositories\GridRepositoryContract;
 use Illuminate\Http\Request;
 
 class GridController extends Controller
@@ -15,11 +15,9 @@ class GridController extends Controller
     /**
      * Construct the controller.
      *
-     * @param PromoRepositoryContract $promo
-     * @param NewsRepositoryContract $news
-     * @param EventRepositoryContract $event
+     * @param GridRepositoryContract $promo
      */
-    public function __construct(PromoRepositoryContract $promo)
+    public function __construct(GridRepositoryContract $promo)
     {
         $this->promo = $promo;
     }

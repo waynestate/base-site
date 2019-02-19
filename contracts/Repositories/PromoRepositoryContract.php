@@ -10,11 +10,4 @@ interface PromoRepositoryContract
      * @return array
      */
     public function getHomepagePromos(int $page_id);
-
-    /**
-     * Get promotions for the grid.
-     *
-     * @return array
-     */
-    public function getGridPromos(int $page_id);
 }
