@@ -24,7 +24,7 @@ class Grid implements FactoryContract
     {
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
-                'relative_url' => '/styleguide/image/550x400?text=550x400%20',
+                'relative_url' => '/styleguide/image/550x400?text=550x400',
                 'title' => $this->faker->text(20),
                 'link' => $this->faker->url,
                 'excerpt' => $this->faker->text(20),
