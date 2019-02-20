@@ -9,5 +9,5 @@ interface GridRepositoryContract
      *
      * @return array
      */
-    public function getGridPromos();
+    public function getGridPromos(array $data, $limit = 75);
 }

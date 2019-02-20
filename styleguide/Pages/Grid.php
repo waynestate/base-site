@@ -14,6 +14,10 @@ class Grid extends Page
                 'controller' => 'GridController',
                 'title' => 'Grid',
                 'id' => 101106,
+                'content' => [
+                    'main' => '<p>'.$this->faker->paragraph(8).'</p>
+                    <p>'.$this->faker->paragraph(8).'</p>',
+                ],
             ],
         ]);
     }

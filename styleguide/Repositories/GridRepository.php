@@ -9,7 +9,7 @@ class GridRepository extends Repository
     /**
      * {@inheritdoc}
      */
-    public function getGridPromos()
+    public function getGridPromos(array $data, $limit = 75)
     {
         return [
             // Contact footer

@@ -27,7 +27,7 @@ class Grid implements FactoryContract
                 'relative_url' => '/styleguide/image/550x400?text=550x400%20',
                 'title' => $this->faker->text(20),
                 'link' => $this->faker->url,
-                'description' => '<p>' . $this->faker->text(5) . ' <a href="#">'. $this->faker->sentence(3)  .'</a>',
+                'excerpt' => $this->faker->text(20),
             ];
 
             $data[$i] = array_replace_recursive($data[$i], $options);

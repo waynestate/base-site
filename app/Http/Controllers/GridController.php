@@ -31,7 +31,7 @@ class GridController extends Controller
     public function index(Request $request)
     {
         // Get grid promotions
-        $promos = $this->promo->getGridPromos();
+        $promos = $this->promo->getGridPromos($request->data);
 
         return view('grid', merge($request->data, $promos));
     }
