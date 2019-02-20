@@ -15,8 +15,7 @@ class Grid extends Page
                 'title' => 'Grid',
                 'id' => 101106,
                 'content' => [
-                    'main' => '<p>'.$this->faker->paragraph(8).'</p>
-                    <p>'.$this->faker->paragraph(8).'</p>',
+                    'main' => '<p>'.$this->faker->paragraph(8).'</p>',
                 ],
             ],
         ]);
