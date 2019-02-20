@@ -207,7 +207,7 @@ return [
         'main' => [
             'contact' => [
                 'id' => 2908,
-                'config' => 'limit:3',
+                'config' => 'limit:4',
             ],
             'social' => [
                 'id' => 2907,
