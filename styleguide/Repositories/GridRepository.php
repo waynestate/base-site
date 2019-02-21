@@ -12,7 +12,6 @@ class GridRepository extends Repository
     public function getGridPromos(array $data, $limit = 75)
     {
         return [
-            // Contact footer
             'grid_promos' => app('Factories\Grid')->create(15),
         ];
     }

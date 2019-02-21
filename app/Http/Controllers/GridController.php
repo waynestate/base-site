@@ -1,7 +1,7 @@
 <?php
 /*
 * Status: Public
-* Description: Grid Template
+* Description: Grid Promotion Template
 * Default: false
 */
 
@@ -30,7 +30,6 @@ class GridController extends Controller
      */
     public function index(Request $request)
     {
-        // Get grid promotions
         $promos = $this->promo->getGridPromos($request->data);
 
         return view('grid', merge($request->data, $promos));
