@@ -42,6 +42,8 @@ class GridRepository implements GridRepositoryContract
         // If there is an grid custom page field then inject it into the group reference
         if (!empty($data['data']['grid_promo_group_id'])) {
             $group_reference[$data['data']['grid_promo_group_id']] = 'grid_promos';
+        } else {
+            return ['grid_promos' => []];
         }
 
         $group_config = [
