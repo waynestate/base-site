@@ -5,7 +5,7 @@ namespace Factories;
 use Contracts\Factories\FactoryContract;
 use Faker\Factory;
 
-class FooterContact implements FactoryContract
+class Grid implements FactoryContract
 {
     /**
      * Construct the factory.
@@ -22,17 +22,16 @@ class FooterContact implements FactoryContract
      */
     public function create($limit = 1, $flatten = false, $options = [])
     {
+        $promo_group_id = $this->faker->randomDigitNotNull;
+
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
-                'link' => '/',
-                'title' => $this->faker->text(15),
-                'description' =>
-                    '<p>
-                        ' .$this->faker->name.'<br />
-                        ' .$this->faker->streetAddress.'<br />
-                        ' .$this->faker->city.', '.$this->faker->state.' '.$this->faker->postcode.'<br />
-                        <a href="'.$this->faker->url.'">'.$this->faker->word.'</a>
-                    </p>',
+                'relative_url' => '/styleguide/image/550x400?text=550x400',
+                'title' => $this->faker->text(20),
+                'link' => $this->faker->url,
+                'excerpt' => $this->faker->text(20),
+                'promo_group_id' => $promo_group_id,
+                'promo_item_id' => $i,
             ];
 
             $data[$i] = array_replace_recursive($data[$i], $options);
