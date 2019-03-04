@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Str;
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -50,7 +52,7 @@ return [
         |
         */
         'options' => [
-            'prefix' => str_slug(env('APP_NAME', 'laravel')).':',
+            'prefix' => Str::slug(env('APP_NAME', 'laravel')).':',
         ],
     ],
 ];
