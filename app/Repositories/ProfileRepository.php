@@ -2,10 +2,11 @@
 
 namespace App\Repositories;
 
-use Contracts\Repositories\ProfileRepositoryContract;
-use Illuminate\Cache\Repository;
+use Illuminate\Support\Arr;
 use Waynestate\Api\Connector;
+use Illuminate\Cache\Repository;
 use Waynestate\Promotions\ParsePromos;
+use Contracts\Repositories\ProfileRepositoryContract;
 
 class ProfileRepository implements ProfileRepositoryContract
 {
@@ -207,7 +208,7 @@ class ProfileRepository implements ProfileRepositoryContract
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
-        $profile['profile'] = empty($profiles['error']) ? array_get($profiles['profiles'], $site_id, []) : [];
+        $profile['profile'] = empty($profiles['error']) ? Arr::get($profiles['profiles'], $site_id, []) : [];
 
         return $profile;
     }

@@ -84,11 +84,6 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
             config('base.top_menu_id')
         );
 
-        // Override the menu so it doesn't show the same menu twice
-        if (config('base.top_menu_enabled') === true && $site_menu['meta']['has_selected'] === false) {
-            $site_menu['menu'] = [];
-        }
-
         // Build the return
         $menus = [
             'site_menu' => $site_menu,
