@@ -7,6 +7,7 @@ let package = JSON.parse(fs.readFileSync('./package.json'));
 let CopyWebpackPlugin = require('copy-webpack-plugin');
 let purge = require('laravel-mix-purgecss');
 let tailwindcss = require('tailwindcss');
+let ReplaceInFileWebpackPlugin = require('replace-in-file-webpack-plugin');
 
 /*
  |--------------------------------------------------------------------------
@@ -139,7 +140,15 @@ config = {
                 from: 'hooks',
                 to: path.resolve('.git/hooks'),
             }
-        ])
+        ]),
+        new ReplaceInFileWebpackPlugin([{
+            dir: 'resources/views/components',
+            files: ['footer.blade.php'],
+            rules: [{
+                search: /2\d{3}/,
+                replace: "{{ date('Y') }}"
+            }]
+        }])
     ],
     devtool: 'source-map'
 };
