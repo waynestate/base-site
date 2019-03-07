@@ -757,16 +757,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.8.2",
+            "version": "v5.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "c3b7cbe700efb0f4c9a5359feaedb0a1f0a741ca"
+                "reference": "d36d74acd3added5abbe7e7a84342b54bb0b0521"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/c3b7cbe700efb0f4c9a5359feaedb0a1f0a741ca",
-                "reference": "c3b7cbe700efb0f4c9a5359feaedb0a1f0a741ca",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/d36d74acd3added5abbe7e7a84342b54bb0b0521",
+                "reference": "d36d74acd3added5abbe7e7a84342b54bb0b0521",
                 "shasum": ""
             },
             "require": {
@@ -900,7 +900,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2019-02-27T14:02:36+00:00"
+            "time": "2019-03-05T13:51:19+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -2502,7 +2502,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "BackEndTea@gmail.com"
+                    "email": "backendtea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
@@ -2953,16 +2953,16 @@
         },
         {
             "name": "vlucas/phpdotenv",
-            "version": "v3.3.2",
+            "version": "v3.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "1ee9369cfbf26cfcf1f2515d98f15fab54e9647a"
+                "reference": "dbcc609971dd9b55f48b8008b553d79fd372ddde"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/1ee9369cfbf26cfcf1f2515d98f15fab54e9647a",
-                "reference": "1ee9369cfbf26cfcf1f2515d98f15fab54e9647a",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/dbcc609971dd9b55f48b8008b553d79fd372ddde",
+                "reference": "dbcc609971dd9b55f48b8008b553d79fd372ddde",
                 "shasum": ""
             },
             "require": {
@@ -3001,7 +3001,7 @@
                 "env",
                 "environment"
             ],
-            "time": "2019-01-30T10:43:17+00:00"
+            "time": "2019-03-06T09:39:45+00:00"
         },
         {
             "name": "waynestate/apdatetime",
@@ -3281,16 +3281,16 @@
         },
         {
             "name": "waynestate/news-api-php",
-            "version": "1.0.5",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/waynestate/news-api-php.git",
-                "reference": "d7d2f2eca7b81b8c82b52cc437148a772b76d428"
+                "reference": "c94335728df26e8d82076e1a13b8db144ab8d620"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/waynestate/news-api-php/zipball/d7d2f2eca7b81b8c82b52cc437148a772b76d428",
-                "reference": "d7d2f2eca7b81b8c82b52cc437148a772b76d428",
+                "url": "https://api.github.com/repos/waynestate/news-api-php/zipball/c94335728df26e8d82076e1a13b8db144ab8d620",
+                "reference": "c94335728df26e8d82076e1a13b8db144ab8d620",
                 "shasum": ""
             },
             "require": {
@@ -3317,7 +3317,7 @@
                 }
             ],
             "description": "Connector for News API",
-            "time": "2019-02-01T17:01:27+00:00"
+            "time": "2019-03-07T16:57:56+00:00"
         },
         {
             "name": "waynestate/parse-menu",
@@ -3509,16 +3509,16 @@
         },
         {
             "name": "waynestate/waynestate-api",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/waynestate/waynestate-api-php.git",
-                "reference": "2020523f91f4c063bae71570b854c5efb473354c"
+                "reference": "7f81f2286a352cbd6089751fa5ad7817cc95463f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/waynestate/waynestate-api-php/zipball/2020523f91f4c063bae71570b854c5efb473354c",
-                "reference": "2020523f91f4c063bae71570b854c5efb473354c",
+                "url": "https://api.github.com/repos/waynestate/waynestate-api-php/zipball/7f81f2286a352cbd6089751fa5ad7817cc95463f",
+                "reference": "7f81f2286a352cbd6089751fa5ad7817cc95463f",
                 "shasum": ""
             },
             "require": {
@@ -3542,7 +3542,7 @@
             ],
             "description": "An API wrapper for the Wayne State University v1 API",
             "homepage": "https://github.com/waynestate/waynestate-api-php",
-            "time": "2017-12-05T14:24:54+00:00"
+            "time": "2019-03-07T17:24:17+00:00"
         }
     ],
     "packages-dev": [
