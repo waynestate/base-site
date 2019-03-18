@@ -88,10 +88,10 @@
                 "relative_url": "/styleguide/fullwidth",
                 "submenu": []
             },
-            "101106": {
-                "menu_item_id": "101106",
+            "101107": {
+                "menu_item_id": "101107",
                 "is_active": "1",
-                "page_id": 101106,
+                "page_id": "101107",
                 "target": "",
                 "display_name": "Grid",
                 "class_name": "",
