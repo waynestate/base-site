@@ -33,14 +33,6 @@ interface ArticleRepositoryContract
     public function getImageUrl($article);
 
     /**
-     * Set the article link based on the route
-     *
-     * @param array $item
-     * @return array
-     */
-    public function setArticleLink($item);
-
-    /**
      * Set the paging.
      *
      * @param array $meta

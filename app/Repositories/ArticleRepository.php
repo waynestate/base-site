@@ -48,15 +48,7 @@ class ArticleRepository implements ArticleRepositoryContract
         }
 
         $articles['articles'] = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
-            $items = $this->newsApi->request($params['method'], $params);
-
-            if (!empty($items['data'])) {
-                $items['data'] = collect($items['data'])->map(function ($item) {
-                    return $this->setArticleLink($item);
-                })->toArray();
-            }
-
-            return $items;
+            return $this->newsApi->request($params['method'], $params);
         });
 
         return $articles;
@@ -97,18 +89,6 @@ class ArticleRepository implements ArticleRepositoryContract
         }
 
         return null;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setArticleLink($item)
-    {
-        if (empty($item['link'])) {
-            $item['link'] = '/'.config('base.news_view_route').'/'.$item['permalink'].'-'.$item['id'];
-        }
-
-        return $item;
     }
 
     /**
