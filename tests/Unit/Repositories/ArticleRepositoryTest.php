@@ -188,32 +188,4 @@ class ArticleRepositoryTest extends TestCase
 
         $this->assertEquals($image, $imageUrl);
     }
-
-    /**
-     * @covers App\Repositories\ArticleRepository::setArticleLink
-     * @test
-     */
-    public function setting_article_link_should_set_link()
-    {
-        $current_config = config('base.news_view_route');
-
-        // Default news route path
-        $article = app('Factories\Article')->create(1, true, [
-            'link' => null,
-        ]);
-        $updated = app('App\Repositories\ArticleRepository')->setArticleLink($article['data']);
-        $this->assertContains('/'.$current_config, $updated['link']);
-
-        // Randomly changing the news view route path
-        $news_view_route = $this->faker->word;
-        config(['base.news_view_route' => $news_view_route]);
-        $article = app('Factories\Article')->create(1, true, [
-            'link' => null,
-        ]);
-        $updated = app('App\Repositories\ArticleRepository')->setArticleLink($article['data']);
-        $this->assertContains('/'.$news_view_route, $updated['link']);
-
-        // Change the config back
-        config(['base.news_view_route' => $current_config]);
-    }
 }
