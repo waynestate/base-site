@@ -40,6 +40,7 @@ class ArticleRepository implements ArticleRepositoryContract
             'page' => $page,
             'application_ids' => $application_ids,
             'method' => 'articles',
+            'env' => config('app.env'),
         ];
 
         if (!empty($topics)) {
