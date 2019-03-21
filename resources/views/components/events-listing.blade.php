@@ -30,7 +30,7 @@
                 @endforeach
                 @if($dates == end($events))
                     <li>
-                        <a href="//events.wayne.edu/{{ $cal_name ?? 'main' }}/month/">{{ $link_text ?? 'More events' }}</a>
+                        <a href="//events.wayne.edu/{{ $cal_name ?? 'main/' }}month/">{{ $link_text ?? 'More events' }}</a>
                     </li>
                 @endif
             </ul>
