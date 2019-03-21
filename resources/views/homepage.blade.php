@@ -17,7 +17,7 @@
 
             @if(!empty($events))
                 <div class="w-full md:w-1/2 px-4">
-                    @include('components/events-listing', ['events' => $events])
+                    @include('components/events-listing', ['events' => $events, 'cal_name' => !empty($site['events']['path']) ? $site['events']['path'] : null])
                 </div>
             @endif
         </div>
