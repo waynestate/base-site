@@ -101,6 +101,11 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
             $menus['show_site_menu'] = false;
         }
 
+        // Hide the site menu if its equal to the top menu so the menu doesn't show twice
+        if (config('base.top_menu_enabled') === true && $site_menu['menu'] == $top_menu['menu']) {
+            $menus['show_site_menu'] = false;
+        }
+
         // If no site menu is selected then hide the site menu
         if (empty($menus['site_menu_output'])) {
             $menus['show_site_menu'] = false;
