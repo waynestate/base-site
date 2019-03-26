@@ -61,8 +61,8 @@ class DataTest extends TestCase
         config([
             'globaldata.sites' => [
                 2 => [
-                    'methods' => [
-                        '\Mocked\Method' => 'mockMethod',
+                    'callbacks' => [
+                        '\Mocked\Method@mockMethod',
                     ],
                 ],
             ],

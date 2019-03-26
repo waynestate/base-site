@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class Data
 {
@@ -53,17 +54,19 @@ class Data
         // Get the global data config
         $config = config('globaldata');
 
-        // Get the global methods
-        $methods = $config['all']['methods'];
+        // Get the global callbacks
+        $callbacks = $config['all']['callbacks'];
 
-        // Merge the methods for the site we are on
+        // Merge the callbacks for the site we are on
         if (!empty($config['sites'][$page['site']['id']])) {
-            $methods = array_merge($methods, $config['sites'][$page['site']['id']]['methods']);
+            $callbacks = array_merge($callbacks, $config['sites'][$page['site']['id']]['callbacks']);
         }
 
         // Get global data
-        $global = collect($methods)->flatMap(function ($method, $class) use ($request) {
-            return app($this->getPrefix().$class)->$method($request->data);
+        $global = collect($callbacks)->flatMap(function ($callback) use ($request) {
+            list($controller, $method) = Str::parseCallback($callback);
+
+            return app($this->getPrefix().$controller)->$method($request->data);
         })->toArray();
 
         // Merge global data

@@ -15,7 +15,7 @@ return [
     | the same key. If no promo config value exists for a subsite promo group it
     | will default to the value in the all config.
     |
-    | The "methods" array allows you to specify a relative namespace and method
+    | The "callbacks" array allows you to specify a relative namespace and method
     | to call. This method will automatically be called for you and assigned
     | to the view. This should only be used if you want to that data on
     | every page (or every page for a specific subsite).
@@ -44,9 +44,9 @@ return [
                 'config' => 'page_id:{$page_id}|first',
             ],
         ],
-        'methods' => [
-            '\Repositories\MenuRepository' => 'getRequestData',
-            '\Repositories\PromoRepository' => 'getRequestData',
+        'callbacks' => [
+            '\Repositories\MenuRepository@getRequestData',
+            '\Repositories\PromoRepository@getRequestData',
         ],
     ],
     'sites' => [
@@ -62,7 +62,7 @@ return [
                     'config' => null,
                 ],
             ],
-            'methods' => [],
+            'callbacks' => [],
         ],
     ],
 ];
