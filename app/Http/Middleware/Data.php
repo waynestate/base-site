@@ -50,17 +50,24 @@ class Data
         // Merge server and page data so global repositories can use them
         $request->data = merge($data, $page);
 
-        // Merge in global menus
-        $request->data = merge(
-            $request->data,
-            app($this->getPrefix().'\Repositories\MenuRepository')->getRequestData($request->data)
-        );
+        // Get the global data config
+        $config = config('globaldata');
 
-        // Merge in global promotions
-        $request->data = merge(
-            $request->data,
-            app($this->getPrefix().'\Repositories\PromoRepository')->getRequestData($request->data)
-        );
+        // Get the global methods
+        $methods = $config['all']['methods'];
+
+        // Merge the methods for the site we are on
+        if (!empty($config['sites'][$page['site']['id']])) {
+            $methods = array_merge($methods, $config['sites'][$page['site']['id']]['methods']);
+        }
+
+        // Get global data
+        $global = collect($methods)->flatMap(function ($method, $class) use ($request) {
+            return app($this->getPrefix().$class)->$method($request->data);
+        })->toArray();
+
+        // Merge global data
+        $request->data = merge($request->data, $global);
 
         // Controller namespace path so it can be constructed in the routes file
         $request->controller = $this->getControllerNamespace($request->data['page']['controller']);

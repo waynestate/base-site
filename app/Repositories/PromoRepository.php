@@ -66,15 +66,17 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
     public function getRequestData(array $data)
     {
         // Get the global promos config
-        $config = config('base.global_promos');
+        $config = config('globaldata');
 
-        // Set the key for the global promos array
-        $key = $data['site']['parent']['id'] === null ? 'main' : $data['site']['id'];
+        // Set all the groups
+        $groups = $config['all']['promos'];
 
-        // Figure out which set of groups to use
-        $groups = !empty($config['subsites'][$key]) ? $config['subsites'][$key] : $config['main'];
+        // Merge the groups for the site we are on
+        if (!empty($config['sites'][$data['site']['id']])) {
+            $groups = array_merge($groups, $config['sites'][$data['site']['id']]['promos']);
+        }
 
-        // Setup the group reference array for this site
+        // Setup the group reference
         $group_reference = collect($groups)->reject(function ($group) {
             return empty($group['id']);
         })->mapWithKeys(function ($group, $name) {
@@ -82,14 +84,6 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
 
             return [$group['id'] => $name];
         })->toArray();
-
-        // Always get the main site's social and contact incase we need them on the subsite
-        if (!empty($config['main']['social']['id'])) {
-            $group_reference[$config['main']['social']['id']] = 'main_social';
-        }
-        if (!empty($config['main']['contact']['id'])) {
-            $group_reference[$config['main']['contact']['id']] = 'main_contact';
-        }
 
         // If there is an accordion custom page field then inject it into the group reference
         if (!empty($data['data']['accordion_promo_group_id']) && ! array_key_exists($data['data']['accordion_promo_group_id'], $group_reference)) {
@@ -107,32 +101,9 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
-        // Set the main social config
-        if (!empty($config['main']['social']['id']) && !empty($config['main']['social']['config'])) {
-            $groups['main_social'] = [
-                'id' => $config['main']['social']['id'],
-                'config' => $config['main']['social']['config'],
-            ];
-        }
-
-        // Set the main contact config
-        if (!empty($config['main']['contact']['id']) && !empty($config['main']['contact']['config'])) {
-            $groups['main_contact'] = [
-                'id' => $config['main']['contact']['id'],
-                'config' => $config['main']['contact']['config'],
-            ];
-        }
-
         // Setup the group reference array for this site
         $group_config = collect($groups)->mapWithKeys(function ($group, $name) use ($config, $data) {
-            // If the subsite has a config value use that otherwise try to use the main config
-            if (!empty($group['config'])) {
-                $value = $group['config'];
-            } elseif (!empty($config['main'][$name]['config'])) {
-                $value = $config['main'][$name]['config'];
-            } else {
-                $value = null;
-            }
+            $value = !empty($group['config']) ? $group['config'] : null;
 
             return [$name => str_replace('{$page_id}', $data['page']['id'], $value)];
         })->reject(function ($value) {
@@ -153,7 +124,7 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         }
 
         // Inject the main contact footer if we are on a subsite
-        if (!empty($promos['contact']) && (empty($groups['contact']['override']) || $groups['contact']['override'] === false)) {
+        if (!empty($promos['contact']) && (!isset($groups['contact']['merge_with_main_contact']) || $groups['contact']['merge_with_main_contact'] === true)) {
             $promos['contact'] = array_merge($promos['contact'], $promos['main_contact']);
         } elseif (empty($promos['contact']) && !empty($promos['main_contact'])) {
             $promos['contact'] = $promos['main_contact'];

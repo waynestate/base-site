@@ -190,49 +190,4 @@ return [
     'news_topics_text' => 'Filter by topic',
     'news_topics_controller' => 'TopicController',
     'news_controller' => 'ArticleController',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Global Promotion Groups
-    |--------------------------------------------------------------------------
-    |
-    | Here you can configure the global promotional groups. Subsites are keyed
-    | by site_id and allow for an optional config value. If no config value
-    | exists for a subsite promo group it will default to the main config.
-    | Subsite will also use the main promo groups unless a site_id key
-    | exists.
-    |
-    */
-    'global_promos' => [
-        'main' => [
-            'contact' => [
-                'id' => 2908,
-                'config' => 'limit:4',
-            ],
-            'social' => [
-                'id' => 2907,
-                'config' => null,
-            ],
-            'under_menu' => [
-                'id' => 2909,
-                'config' => 'page_id:{$page_id}',
-            ],
-            'hero' => [
-                'id' => 3001,
-                'config' => 'page_id:{$page_id}|randomize|limit:1',
-            ],
-            'banner' => [
-                'id' => 4246,
-                'config' => 'page_id:{$page_id}|first',
-            ],
-        ],
-        'subsites' => [
-            // 0000 => [
-            //     'contact' => [
-            //         'id' => 0000,
-            //         'override' => false, // Override footer with only this contact group
-            //     ],
-            // ],
-        ],
-    ],
 ];
