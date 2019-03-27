@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class Data
 {
@@ -50,17 +51,26 @@ class Data
         // Merge server and page data so global repositories can use them
         $request->data = merge($data, $page);
 
-        // Merge in global menus
-        $request->data = merge(
-            $request->data,
-            app($this->getPrefix().'\Repositories\MenuRepository')->getRequestData($request->data)
-        );
+        // Get the global data config
+        $config = config('base.global');
 
-        // Merge in global promotions
-        $request->data = merge(
-            $request->data,
-            app($this->getPrefix().'\Repositories\PromoRepository')->getRequestData($request->data)
-        );
+        // Get the global callbacks
+        $callbacks = $config['all']['callbacks'];
+
+        // Merge the callbacks for the site we are on
+        if (!empty($config['sites'][$page['site']['id']]['callbacks'])) {
+            $callbacks = array_merge($callbacks, $config['sites'][$page['site']['id']]['callbacks']);
+        }
+
+        // Get global data
+        $global = collect($callbacks)->flatMap(function ($callback) use ($request) {
+            list($controller, $method) = Str::parseCallback($callback);
+
+            return app($this->getPrefix().$controller)->$method($request->data);
+        })->toArray();
+
+        // Merge global data
+        $request->data = merge($request->data, $global);
 
         // Controller namespace path so it can be constructed in the routes file
         $request->controller = $this->getControllerNamespace($request->data['page']['controller']);

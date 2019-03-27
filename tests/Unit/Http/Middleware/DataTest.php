@@ -2,6 +2,7 @@
 
 namespace Tests\App\Http\Middleware;
 
+use Mockery;
 use Tests\TestCase;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
@@ -46,6 +47,37 @@ class DataTest extends TestCase
         });
 
         $this->assertEquals('styleguide', basename($redirect->headers->get('location')));
+    }
+
+    /**
+     * @covers App\Http\Middleware\Data::handle
+     * @test
+     */
+    public function site_methods_should_merge_with_all_methods()
+    {
+        $request = new Request();
+        $request = $request->create('styleguide');
+
+        config([
+            'base.global.sites' => [
+                2 => [
+                    'callbacks' => [
+                        '\Mocked\Method@mockMethod',
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->app->bind('Styleguide\Mocked\Method', function ($app) {
+            $mock = Mockery::mock('Mocked\Method');
+            $mock->shouldReceive('mockMethod')->andReturn(['mockMethod' => true]);
+
+            return $mock;
+        });
+
+        app('App\Http\Middleware\Data')->handle($request, function ($request) {
+            $this->assertTrue($request->data['mockMethod']);
+        });
     }
 
     /**
