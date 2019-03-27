@@ -59,7 +59,7 @@ class DataTest extends TestCase
         $request = $request->create('styleguide');
 
         config([
-            'globaldata.sites' => [
+            'base.global.sites' => [
                 2 => [
                     'callbacks' => [
                         '\Mocked\Method@mockMethod',

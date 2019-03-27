@@ -52,13 +52,13 @@ class Data
         $request->data = merge($data, $page);
 
         // Get the global data config
-        $config = config('globaldata');
+        $config = config('base.global');
 
         // Get the global callbacks
         $callbacks = $config['all']['callbacks'];
 
         // Merge the callbacks for the site we are on
-        if (!empty($config['sites'][$page['site']['id']])) {
+        if (!empty($config['sites'][$page['site']['id']]['callbacks'])) {
             $callbacks = array_merge($callbacks, $config['sites'][$page['site']['id']]['callbacks']);
         }
 

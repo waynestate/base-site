@@ -66,7 +66,7 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
     public function getRequestData(array $data)
     {
         // Get the global promos config
-        $config = config('globaldata');
+        $config = config('base.global');
 
         // Set all the groups
         $groups = $config['all']['promos'];

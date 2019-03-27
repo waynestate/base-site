@@ -82,7 +82,7 @@ class PromoRepositoryTest extends TestCase
         ]);
 
         // Build the config
-        config(['globaldata' => [
+        config(['base.global' => [
             'all' => [
                 'promos' => [
                     'main_contact' => [
@@ -156,7 +156,7 @@ class PromoRepositoryTest extends TestCase
         ]);
 
         // Build the config
-        config(['globaldata' => [
+        config(['base.global' => [
             'all' => [
                 'promos' => [
                     'main_contact' => [
@@ -217,7 +217,7 @@ class PromoRepositoryTest extends TestCase
         ]);
 
         // Build the config
-        config(['globaldata' => [
+        config(['base.global' => [
             'all' => [
                 'promos' => [
                     'main_contact' => [
