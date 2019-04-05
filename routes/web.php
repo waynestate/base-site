@@ -13,7 +13,7 @@
 
 // Profile view
 Route::get('{any?}profile/{accessid}', 'ProfileController@show')
-    ->where(['any' => '.*', 'accessid' => '.+']);
+    ->where(['any' => '.*', 'accessid' => '[a-zA-Z]{2}\d{4}']);
 
 // News listing by topic
 Route::get('{any?}'.config('base.news_listing_route').'/'.config('base.news_topic_route').'/{slug}', config('base.news_controller').'@index')
