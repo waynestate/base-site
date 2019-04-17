@@ -20,9 +20,10 @@ interface ArticleRepositoryContract
      *
      * @param int $id
      * @param array $application_ids
+     * @param boolean $preview
      * @return array
      */
-    public function find($id, $application_ids);
+    public function find($id, $application_ids, $preview);
 
     /**
      * Get the image url for the meta data.

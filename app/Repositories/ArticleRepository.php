@@ -58,11 +58,12 @@ class ArticleRepository implements ArticleRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function find($id, $application_ids)
+    public function find($id, $application_ids, $preview = null)
     {
         $params = [
             'method' => 'articles/'.$id,
             'application_ids' => $application_ids,
+            'preview' => $preview,
         ];
 
         $article['article'] = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
