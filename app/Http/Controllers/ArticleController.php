@@ -67,7 +67,7 @@ class ArticleController extends Controller
      */
     public function show(Request $request)
     {
-        $article = $this->article->find($request->id, $request->data['site']['news']['application_id']);
+        $article = $this->article->find($request->id, $request->data['site']['news']['application_id'], $request->preview);
 
         if (empty($article['article']['data']) || $article['article']['data']['status'] !== 'Published') {
             return abort('404');
