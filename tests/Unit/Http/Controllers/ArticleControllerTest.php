@@ -65,6 +65,66 @@ class ArticleControllerTest extends TestCase
      * @covers App\Http\Controllers\ArticleController::show
      * @test
      */
+    public function news_item_that_is_draft_should_allow_preview()
+    {
+        // Fake return
+        $return =  app('Factories\Article')->create(1, true, [
+            'status' => 'draft',
+        ]);
+
+        // Mock the connector
+        $newsApi = Mockery::mock('Waynestate\Api\News');
+        $newsApi->shouldReceive('request')->andReturn($return);
+
+        // Construct the news repository
+        $articleRepository = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi]);
+
+        // Construct the news controller
+        $articleController = app('App\Http\Controllers\ArticleController', ['article' => $articleRepository]);
+
+        $request = new Request();
+        $request->data = app('Styleguide\Pages\NewsView')->getPageData();
+        $request->preview = true;
+
+        // Call the news listing
+        $view = $articleController->show($request);
+
+        $this->assertEquals($return, $view->getData()['article']);
+    }
+
+    /**
+     * @covers App\Http\Controllers\ArticleController::show
+     * @test
+     */
+    public function news_item_that_is_published_and_preview_should_redirect()
+    {
+        // Fake return
+        $return =  null;
+
+        // Mock the connector
+        $newsApi = Mockery::mock('Waynestate\Api\News');
+        $newsApi->shouldReceive('request')->andReturn($return);
+
+        // Construct the news repository
+        $articleRepository = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi]);
+
+        // Construct the news controller
+        $articleController = app('App\Http\Controllers\ArticleController', ['article' => $articleRepository]);
+
+        $request = new Request();
+        $request->data = app('Styleguide\Pages\NewsView')->getPageData();
+        $request->preview = true;
+
+        // Call the news listing
+        $view = $articleController->show($request);
+
+        $this->assertInstanceOf('Illuminate\Routing\Redirector', $view);
+    }
+
+    /**
+     * @covers App\Http\Controllers\ArticleController::show
+     * @test
+     */
     public function page_title_should_be_news_item_title()
     {
         // Fake return

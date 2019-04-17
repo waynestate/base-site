@@ -22,7 +22,7 @@ class ArticleRepository extends Repository
     /**
      * {@inheritdoc}
      */
-    public function find($id, $application_ids)
+    public function find($id, $application_ids, $preview = null)
     {
         return [
             'article' => app('Factories\Article')->create(1, true),
