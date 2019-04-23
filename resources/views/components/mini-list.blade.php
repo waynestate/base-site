@@ -4,7 +4,7 @@
     $url => string // '/listing.php'
     $link_text => string // 'More items'
 --}}
-<h2>{{ $heading ?? 'Resources' }}</h2>
+<h2{!! !empty($class) ? ' class="'.$class.'"' : '' !!}>{{ $heading ?? 'Resources' }}</h2>
 
 <ul class="list-reset">
     @foreach($items as $item)

@@ -4,7 +4,7 @@
     $cal_name => string // 'main'
     $link_text => string // 'More events'
 --}}
-<h2>{{ $heading ?? 'Events' }}</h2>
+<h2{!! !empty($class) ? ' class="'.$class.'"' : '' !!}>{{ $heading ?? 'Events' }}</h2>
 
 <ul class="list-reset">
     @foreach($events as $key => $dates)

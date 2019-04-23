@@ -1,4 +1,4 @@
-<h2>{{ $heading }}</h2>
+<h2{!! !empty($class) ? ' class="'.$class.'"' : '' !!}>{{ $heading }}</h2>
 
 <ul>
     @foreach($topics as $topic)
