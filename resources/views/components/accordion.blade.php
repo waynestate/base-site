@@ -1,5 +1,5 @@
 {{--
-    $items => array // [['title', 'description']]
+    $items => array // ['title', 'description']
 --}}
 <ul class="accordion">
     @foreach($items as $key=>$item)

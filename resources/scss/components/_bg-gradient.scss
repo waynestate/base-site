@@ -1,5 +1,5 @@
 @responsive {
-    .bg-gradient-dark::before {
+    .bg-gradient-darkest::before {
         content: '';
         background-image: radial-gradient(ellipse at center bottom, rgba(#05211e, 0.9) 10%, rgba(#05211e, 0) 55%);
         position: absolute;

@@ -1,30 +1,30 @@
 {{--
-    $contact => array // [['title', 'link', 'description']]
+    $contact => array // ['title', 'link', 'description']
 --}}
 @if(is_array($contact) && count($contact) > 0)
     <div class="bg-green">
-        @if(count($contact) == 1)
-            <div class="row text-center py-8">
-                @foreach($contact as $info)
-                    <h2 class="text-yellow-light">
-                        @if($info['link'] != '')<a href="{{ $info['link'] }}" class="text-yellow-light">@endif
-                        {{ $info['title'] }}
-                        @if($info['link'] != '')</a>@endif
-                    </h2>
+        <div class="row flex flex-wrap lg:flex-no-wrap py-8 @if(count($contact) == 1)text-center @endif">
+            @foreach($contact as $info)
+                @if($loop->iteration == 1)
+                    <div class="w-full px-4 py-4 lg:flex-1">
+                        <h2 class="text-yellow-light mb-1">
+                            @if($info['link'] != '')
+                                <a href="{{ $info['link'] }}" class="text-yellow-light">{{ $info['title'] }}</a>
+                            @else
+                                {{ $info['title'] }}
+                            @endif
+                        </h2>
 
-                    <div class="p-6 text-white content">
+                        <div class="content text-white">
+                            {!! $info['description'] !!}
+                        </div>
+                    </div>
+                @else
+                    <div class="w-full lg:flex-1 px-4 py-4 text-white content border-t lg:border-l lg:border-0 border-grey">
                         {!! $info['description'] !!}
                     </div>
-                @endforeach
-            </div>
-        @else
-            <div class="row flex flex-wrap py-8">
-                @foreach($contact as $info)
-                    <div class="w-full md:w-1/3 px-4 py-4 text-white content {{ $loop->last !== true ? 'border-b md:border-r md:border-0 border-grey' : '' }}">
-                        {!! $info['description'] !!}
-                    </div>
-                @endforeach
-            </div>
-        @endif
+                @endif
+            @endforeach
+        </div>
     </div>
 @endif

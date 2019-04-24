@@ -41,7 +41,7 @@ class ArticleRepositoryTest extends TestCase
         $newsApi->shouldReceive('request')->andReturn($return);
 
         // Get the articles
-        $articles = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->listing($this->faker->randomDigit, $this->faker->randomDigit, $this->faker->randomDigit, [$this->faker->word]);
+        $articles = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->listing(1, 5, $this->faker->randomDigit, [$this->faker->word]);
 
         $this->assertEquals($return['data'], $articles['articles']['data']);
     }
@@ -62,7 +62,7 @@ class ArticleRepositoryTest extends TestCase
 
         $page = 1;
 
-        $articles = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->listing($this->faker->randomDigit, $this->faker->randomDigit, $page);
+        $articles = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->listing(1, 5, $page);
 
         $articles['articles']['meta'] = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->setPaging($articles['articles']['meta'], $page);
 
@@ -91,7 +91,7 @@ class ArticleRepositoryTest extends TestCase
 
         $page = 3;
 
-        $articles = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->listing($this->faker->randomDigit, $this->faker->randomDigit, $page);
+        $articles = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->listing(1, 5, $page);
 
         $articles['articles']['meta'] = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->setPaging($articles['articles']['meta'], $page);
 
@@ -119,7 +119,7 @@ class ArticleRepositoryTest extends TestCase
 
         $page = null;
 
-        $articles = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->listing($this->faker->randomDigit, $this->faker->randomDigit, $page);
+        $articles = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->listing(1, 5, $page);
 
         $articles['articles']['meta'] = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->setPaging($articles['articles']['meta'], $page);
 
@@ -129,6 +129,17 @@ class ArticleRepositoryTest extends TestCase
         $prev = parse_url($articles['articles']['meta']['prev_page_url']);
         parse_str($prev['query'], $prev);
         $this->assertEquals(2, $prev['page']);
+    }
+
+    /**
+     * @covers App\Repositories\ArticleRepository::listing
+     * @test
+     */
+    public function getting_articles_with_no_applications()
+    {
+        $articles = app('App\Repositories\ArticleRepository')->listing([]);
+
+        $this->assertCount(0, $articles['articles']);
     }
 
     /**
@@ -176,33 +187,5 @@ class ArticleRepositoryTest extends TestCase
         $imageUrl = app('App\Repositories\ArticleRepository')->getImageUrl($article['data']);
 
         $this->assertEquals($image, $imageUrl);
-    }
-
-    /**
-     * @covers App\Repositories\ArticleRepository::setArticleLink
-     * @test
-     */
-    public function setting_article_link_should_set_link()
-    {
-        $current_config = config('base.news_view_route');
-
-        // Default news route path
-        $article = app('Factories\Article')->create(1, true, [
-            'link' => null,
-        ]);
-        $updated = app('App\Repositories\ArticleRepository')->setArticleLink($article['data']);
-        $this->assertContains('/'.$current_config, $updated['link']);
-
-        // Randomly changing the news view route path
-        $news_view_route = $this->faker->word;
-        config(['base.news_view_route' => $news_view_route]);
-        $article = app('Factories\Article')->create(1, true, [
-            'link' => null,
-        ]);
-        $updated = app('App\Repositories\ArticleRepository')->setArticleLink($article['data']);
-        $this->assertContains('/'.$news_view_route, $updated['link']);
-
-        // Change the config back
-        config(['base.news_view_route' => $current_config]);
     }
 }

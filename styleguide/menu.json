@@ -87,6 +87,16 @@
                 "class_name": "",
                 "relative_url": "/styleguide/fullwidth",
                 "submenu": []
+            },
+            "101107": {
+                "menu_item_id": "101107",
+                "is_active": "1",
+                "page_id": "101107",
+                "target": "",
+                "display_name": "Grid",
+                "class_name": "",
+                "relative_url": "/styleguide/grid",
+                "submenu": []
             }
         }
     },
@@ -218,6 +228,16 @@
                         "display_name": "Three column",
                         "class_name": "",
                         "relative_url": "/styleguide/footer/contact/three",
+                        "submenu": []
+                    },
+                    "104100103": {
+                        "menu_item_id": "104100103",
+                        "is_active": "1",
+                        "page_id": "104100103",
+                        "target": "",
+                        "display_name": "Four column",
+                        "class_name": "",
+                        "relative_url": "/styleguide/footer/contact/four",
                         "submenu": []
                     }
                 }

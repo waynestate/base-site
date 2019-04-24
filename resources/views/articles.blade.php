@@ -23,7 +23,7 @@
             <div class="w-1/2 px-4">
                 @if(!empty($articles['meta']['prev_page_url']))
                     <p>
-                        <a href="{{ $articles['meta']['prev_page_url'] }}">&larr; Previous</a>
+                        <a href="{{ $articles['meta']['prev_page_url'] }}" class="button">&larr; Previous</a>
                     </p>
                 @endif
             </div>
@@ -31,7 +31,7 @@
             <div class="w-1/2 px-4 text-right">
                 @if(!empty($articles['meta']['next_page_url']) && $articles['meta']['current_page'] !== 1)
                     <p>
-                        <a href="{{ $articles['meta']['next_page_url'] }}">Next &rarr;</a>
+                        <a href="{{ $articles['meta']['next_page_url'] }}" class="button">Next &rarr;</a>
                     </p>
                 @endif
             </div>

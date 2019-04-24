@@ -1,12 +1,12 @@
 {{--
-    $images => array // ['relative_url']
+    $images => array // ['relative_url', 'title', 'description']
 --}}
 
-<aside class="mb-4 mt:mx-0{{ !empty($images) && count($images) > 1 ? ' rotate' : '' }}{{!in_array($page['controller'], config('base.hero_full_controllers'))  ? '  -mx-4' : ' ' }} bg-grey-lighter md:bg-transparent">
+<div {!! (in_array($page['controller'], config('base.hero_full_controllers'))) ? 'role="complementary"' : '' !!} class="mb-4 mt:mx-0{{ !empty($images) && count($images) > 1 ? ' rotate' : '' }}{{!in_array($page['controller'], config('base.hero_full_controllers'))  ? '  -mx-4' : ' ' }} bg-grey-lighter md:bg-transparent">
     @if(in_array($page['controller'], config('base.hero_text_controllers')))
         @foreach($images as $image)
             <div class="w-full relative" aria-labelledby="hero-image-{{ $loop->iteration }}">
-                <div class="pt-hero w-full bg-cover bg-green-darkest md:bg-gradient-dark md:overflow-hidden bg-top relative{{ $loop->first !== true ? ' lazy' : '' }}" @if($loop->first === true) style="background-image: url('{{ $image['relative_url'] }}')" @else data-src="{{ $image['relative_url'] }}"@endif></div>
+                <div class="pt-hero w-full bg-cover md:bg-gradient-darkest md:overflow-hidden bg-top relative{{ $loop->first !== true ? ' lazy' : '' }}" @if($loop->first === true) style="background-image: url('{{ $image['relative_url'] }}')" @else data-src="{{ $image['relative_url'] }}"@endif></div>
                 <div class="md:absolute md:pin-b md:pin-x md:text-white md:text-shadow-dark @if(count($images) > 1) p-6 @else py-4 @if(in_array($page['controller'], config('base.hero_full_controllers')))lg:pb-10 @endif @endif">
                     <div class="row">
                         <div class="mx-4">
@@ -24,4 +24,4 @@
             </div>
         @endforeach
     @endif
-</aside>
+</div>

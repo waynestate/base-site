@@ -1,12 +1,6 @@
 @extends('components.content-area')
 
 @section('content')
-    @if($back_url != '')
-        <div class="relative">
-            <a href="{{ $back_url }}" class="text-right absolute pin-r md:py-1 pr-4">&lt; Return to listing</a>
-        </div>
-    @endif
-
     <div class="row flex flex-wrap">
         <div class="w-full lg:w-1/3 px-4 mt-6">
             @if(!empty($profile['data']['Picture']['url']))
@@ -69,6 +63,12 @@
                         @endif
                     @endif
                 @endforeach
+
+                @if($back_url != '')
+                    <p class="pt-4">
+                        <a href="{{ $back_url }}" class="button">&larr; Return to listing</a>
+                    </p>
+                @endif
             </div>
         </div>
     </div>

@@ -33,7 +33,7 @@ class ArticleController extends Controller
      */
     public function index(Request $request)
     {
-        $topics = $this->topic->listing($request->data['site']['news']['application_id']);
+        $topics = $this->topic->listing($request->data['site']['news']['application_id'], 25);
 
         if (!empty($topics['topics']['data'])) {
             $topics['topics']['data'] = $this->topic->setSelected($topics['topics']['data'], $request->slug);
@@ -67,9 +67,13 @@ class ArticleController extends Controller
      */
     public function show(Request $request)
     {
-        $article = $this->article->find($request->id, $request->data['site']['news']['application_id']);
+        $article = $this->article->find($request->id, $request->data['site']['news']['application_id'], $request->preview);
 
-        if (empty($article['article']['data']) || $article['article']['data']['status'] !== 'Published') {
+        if (empty($article['article']['data'])) {
+            if ($request->preview) {
+                return redirect($request->server->get('REDIRECT_URL'));
+            }
+
             return abort('404');
         }
 

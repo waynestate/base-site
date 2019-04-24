@@ -20,9 +20,10 @@ interface ArticleRepositoryContract
      *
      * @param int $id
      * @param array $application_ids
+     * @param boolean $preview
      * @return array
      */
-    public function find($id, $application_ids);
+    public function find($id, $application_ids, $preview);
 
     /**
      * Get the image url for the meta data.
@@ -31,14 +32,6 @@ interface ArticleRepositoryContract
      * @return array
      */
     public function getImageUrl($article);
-
-    /**
-     * Set the article link based on the route
-     *
-     * @param array $item
-     * @return array
-     */
-    public function setArticleLink($item);
 
     /**
      * Set the paging.

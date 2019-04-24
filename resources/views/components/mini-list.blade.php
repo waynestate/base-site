@@ -1,10 +1,10 @@
 {{--
-    $items => array // [['title', 'link']]
+    $items => array // ['title', 'link']
     $heading => string // 'Resources'
-    $url => string // '/listing.php'
-    $link_text => string // 'More items'
+    $url => string // '/listing'
+    $link_text => string // 'View more'
 --}}
-<h2>{{ $heading ?? 'Resources' }}</h2>
+<h2{!! !empty($class) ? ' class="'.$class.'"' : '' !!}>{{ $heading ?? 'Resources' }}</h2>
 
 <ul class="list-reset">
     @foreach($items as $item)

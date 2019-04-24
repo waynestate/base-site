@@ -1,10 +1,10 @@
 {{--
-    $events => array // [['title', 'url', 'date', 'start_time', 'is_all_day']]
+    $events => array // ['title', 'url', 'date', 'start_time', 'is_all_day']
     $heading => string // 'Events'
-    $cal_name => string // 'main'
+    $cal_name => string // 'main/'
     $link_text => string // 'More events'
 --}}
-<h2>{{ $heading ?? 'Events' }}</h2>
+<h2{!! !empty($class) ? ' class="'.$class.'"' : '' !!}>{{ $heading ?? 'Events' }}</h2>
 
 <ul class="list-reset">
     @foreach($events as $key => $dates)
@@ -30,7 +30,7 @@
                 @endforeach
                 @if($dates == end($events))
                     <li>
-                        <a href="//events.wayne.edu/{{ $cal_name ?? 'main' }}/month/">{{ $link_text ?? 'More events' }}</a>
+                        <a href="//events.wayne.edu/{{ $cal_name ?? 'main/' }}month/">{{ $link_text ?? 'More events' }}</a>
                     </li>
                 @endif
             </ul>

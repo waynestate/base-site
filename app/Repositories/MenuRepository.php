@@ -84,11 +84,6 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
             config('base.top_menu_id')
         );
 
-        // Override the menu so it doesn't show the same menu twice
-        if (config('base.top_menu_enabled') === true && $site_menu['meta']['has_selected'] === false) {
-            $site_menu['menu'] = [];
-        }
-
         // Build the return
         $menus = [
             'site_menu' => $site_menu,
@@ -103,6 +98,11 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
 
         // Force hide the site menu if they specifically disable it
         if (config('base.homepage_menu_enabled') === false && $data['page']['controller'] == 'HomepageController') {
+            $menus['show_site_menu'] = false;
+        }
+
+        // Hide the site menu if its equal to the top menu so the menu doesn't show twice
+        if (config('base.top_menu_enabled') === true && $site_menu['menu'] == $top_menu['menu']) {
             $menus['show_site_menu'] = false;
         }
 

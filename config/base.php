@@ -193,45 +193,67 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Global Promotion Groups
+    | Global Data
     |--------------------------------------------------------------------------
     |
-    | Here you can configure the global promotional groups. Subsites are keyed
-    | by site_id and allow for an optional config value. If no config value
-    | exists for a subsite promo group it will default to the main config.
-    | Subsite will also use the main promo groups unless a site_id key
-    | exists.
+    | Here you can configure the global data that is automatically assigned to each
+    | view. The key "all" is a place to define data that should be across the main
+    | site and subsites.
+    |
+    | The sites array should be keyed by the site_id for the specific site you want
+    | to set global data on. You can override promo groups from "all" by specifying
+    | the same key. If no promo config value exists for a subsite promo group it
+    | will default to the value in the all config.
+    |
+    | The "callbacks" array allows you to specify a relative namespace and method
+    | to call. This method will automatically be called for you and assigned
+    | to the view. This should only be used if you want to that data on
+    | every page (or every page for a specific subsite).
     |
     */
-    'global_promos' => [
-        'main' => [
-            'contact' => [
-                'id' => 2908,
-                'config' => 'limit:3',
+    'global' => [
+        'all' => [
+            'promos' => [
+                'main_contact' => [
+                    'id' => 2908,
+                    'config' => 'limit:4',
+                ],
+                'main_social' => [
+                    'id' => 2907,
+                    'config' => null,
+                ],
+                'under_menu' => [
+                    'id' => 2909,
+                    'config' => 'page_id:{$page_id}',
+                ],
+                'hero' => [
+                    'id' => 3001,
+                    'config' => 'page_id:{$page_id}|randomize|limit:1',
+                ],
+                'banner' => [
+                    'id' => 4246,
+                    'config' => 'page_id:{$page_id}|first',
+                ],
             ],
-            'social' => [
-                'id' => 2907,
-                'config' => null,
-            ],
-            'under_menu' => [
-                'id' => 2909,
-                'config' => 'page_id:{$page_id}',
-            ],
-            'hero' => [
-                'id' => 3001,
-                'config' => 'page_id:{$page_id}|randomize|limit:1',
-            ],
-            'banner' => [
-                'id' => 4246,
-                'config' => 'page_id:{$page_id}|first',
+            'callbacks' => [
+                '\Repositories\MenuRepository@getRequestData',
+                '\Repositories\PromoRepository@getRequestData',
             ],
         ],
-        'subsites' => [
-            // 0000 => [
-            //     'contact' => [
-            //         'id' => 0000,
-            //         'override' => false, // Override footer with only this contact group
+        'sites' => [
+            // 0 => [
+            //     'promos' => [
+            //         'contact' => [
+            //             'id' => 0,
+            //             'config' => 'limit:1',
+            //             'merge_with_main_contact' => true,
+            //         ],
+            //         'social' => [
+            //             'id' => 0,
+            //             'config' => null,
+            //         ],
             //     ],
+            //     'callbacks' => [],
             // ],
         ],
     ],

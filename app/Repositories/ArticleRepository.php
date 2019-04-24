@@ -31,11 +31,16 @@ class ArticleRepository implements ArticleRepositoryContract
      */
     public function listing($application_ids, $limit=5, $page=1, $topics=[])
     {
+        if (empty($application_ids)) {
+            return ['articles' => []];
+        }
+
         $params = [
             'perPage' =>  $limit,
             'page' => $page,
             'application_ids' => $application_ids,
             'method' => 'articles',
+            'env' => config('app.env'),
         ];
 
         if (!empty($topics)) {
@@ -44,15 +49,7 @@ class ArticleRepository implements ArticleRepositoryContract
         }
 
         $articles['articles'] = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
-            $items = $this->newsApi->request($params['method'], $params);
-
-            if (!empty($items['data'])) {
-                $items['data'] = collect($items['data'])->map(function ($item) {
-                    return $this->setArticleLink($item);
-                })->toArray();
-            }
-
-            return $items;
+            return $this->newsApi->request($params['method'], $params);
         });
 
         return $articles;
@@ -61,11 +58,12 @@ class ArticleRepository implements ArticleRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function find($id, $application_ids)
+    public function find($id, $application_ids, $preview = null)
     {
         $params = [
             'method' => 'articles/'.$id,
             'application_ids' => $application_ids,
+            'preview' => $preview,
         ];
 
         $article['article'] = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
@@ -93,18 +91,6 @@ class ArticleRepository implements ArticleRepositoryContract
         }
 
         return null;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setArticleLink($item)
-    {
-        if (empty($item['link'])) {
-            $item['link'] = '/'.config('base.news_view_route').'/'.$item['permalink'].'-'.$item['id'];
-        }
-
-        return $item;
     }
 
     /**

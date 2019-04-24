@@ -1,7 +1,7 @@
 {
   "name": "base",
   "private": true,
-  "version": "6.0.0",
+  "version": "6.3.1",
   "description": "",
   "scripts": {
     "dev": "npm run development",
@@ -39,6 +39,7 @@
     "laravel-mix": "^4.0",
     "laravel-mix-purgecss": "^4.0.0",
     "mediabox": "^1.1.2",
+    "replace-in-file-webpack-plugin": "^1.0.6",
     "sass": "^1.15.2",
     "sass-loader": "7.*",
     "slideout": "^1.0.1",
