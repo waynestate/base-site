@@ -1,5 +1,5 @@
 {{--
-    $button => array // [['title', 'link', 'excerpt', 'secondary_relative_url']]
+    $button => array // ['title', 'link', 'excerpt', 'secondary_relative_url']
 --}}
 
 @if(!empty($button['link']) && !empty($button['secondary_relative_url']))

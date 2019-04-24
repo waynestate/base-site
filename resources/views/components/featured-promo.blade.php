@@ -1,5 +1,5 @@
 {{--
-    $featured_promo => array // [['link', 'title', 'relative_url', 'excerpt']]
+    $featured_promo => array // ['link', 'title', 'relative_url', 'excerpt']
 --}}
 
 @if(!empty($featured_promo['link']))<a href="{{ $featured_promo['link'] }}">@endif

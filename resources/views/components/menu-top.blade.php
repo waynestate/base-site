@@ -1,5 +1,5 @@
 {{--
-    $site => array // ['title']
+    $site => array // ['short-title', 'title', 'subsite-folder']
     $top_menu_output => string // '<ul></ul>'
 --}}
 <div class="menu-top-container bg-green-dark">

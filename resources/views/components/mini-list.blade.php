@@ -1,8 +1,8 @@
 {{--
-    $items => array // [['title', 'link']]
+    $items => array // ['title', 'link']
     $heading => string // 'Resources'
-    $url => string // '/listing.php'
-    $link_text => string // 'More items'
+    $url => string // '/listing'
+    $link_text => string // 'View more'
 --}}
 <h2{!! !empty($class) ? ' class="'.$class.'"' : '' !!}>{{ $heading ?? 'Resources' }}</h2>
 

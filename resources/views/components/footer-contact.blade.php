@@ -1,5 +1,5 @@
 {{--
-    $contact => array // [['title', 'link', 'description']]
+    $contact => array // ['title', 'link', 'description']
 --}}
 @if(is_array($contact) && count($contact) > 0)
     <div class="bg-green">

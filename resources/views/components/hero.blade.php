@@ -1,5 +1,5 @@
 {{--
-    $images => array // ['relative_url']
+    $images => array // ['relative_url', 'title', 'description']
 --}}
 
 <div {!! (in_array($page['controller'], config('base.hero_full_controllers'))) ? 'role="complementary"' : '' !!} class="mb-4 mt:mx-0{{ !empty($images) && count($images) > 1 ? ' rotate' : '' }}{{!in_array($page['controller'], config('base.hero_full_controllers'))  ? '  -mx-4' : ' ' }} bg-grey-lighter md:bg-transparent">

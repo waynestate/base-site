@@ -1,7 +1,7 @@
 {{--
-    $events => array // [['title', 'url', 'date', 'start_time', 'is_all_day']]
+    $events => array // ['title', 'url', 'date', 'start_time', 'is_all_day']
     $heading => string // 'Events'
-    $cal_name => string // 'main'
+    $cal_name => string // 'main/'
     $link_text => string // 'More events'
 --}}
 <h2{!! !empty($class) ? ' class="'.$class.'"' : '' !!}>{{ $heading ?? 'Events' }}</h2>

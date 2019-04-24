@@ -1,3 +1,8 @@
+{{--
+    $topics => array // ['url', 'name', 'selected']
+    $heading => string // 'Filter by topic'
+    $class => string // ''
+--}}
 <h2{!! !empty($class) ? ' class="'.$class.'"' : '' !!}>{{ $heading }}</h2>
 
 <ul>
