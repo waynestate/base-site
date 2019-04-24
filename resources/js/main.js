@@ -9,6 +9,7 @@ import './modules/table';
 import './modules/sticky';
 import './modules/formfilter';
 import './modules/media';
+import './modules/pdf';
 import './modules/share';
 import './modules/lazy-image-loading';
 import './modules/anchor';
