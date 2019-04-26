@@ -180,6 +180,11 @@
         ') !!}
         </pre>
 
+        <hr>
+
+        <h2>PDF links</h2>
+
+        Links to PDFs will automatically append the file type to the end of the link. Example: <a href="example.pdf">download brochure</a>.
 
         <hr>
 

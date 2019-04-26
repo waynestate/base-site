@@ -1,5 +1,3 @@
-import 'accordion/src/accordion.js';
-
 (function() {
     "use strict";
 
