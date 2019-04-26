@@ -498,11 +498,11 @@
             "117100": {
                 "menu_item_id": "117100",
                 "is_active": "1",
-                "page_id": null,
+                "page_id": "117100",
                 "target": "",
-                "display_name": "Video Full",
+                "display_name": "Video",
                 "class_name": "",
-                "relative_url": "/styleguide/videofull",
+                "relative_url": "/styleguide/video",
                 "submenu": []
             }
         }
