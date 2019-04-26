@@ -8,7 +8,7 @@
         @if(!empty($video['relative_url']))
             @image($video['relative_url'], $video['excerpt'])
         @else
-            @image('//i.wayne.edu/youtube/'.$video['youtube_id'].'/max')
+            @image('//i.wayne.edu/youtube/'.$video['youtube_id'].'/max', $video['excerpt'])
         @endif
 
         <div class="absolute pin flex items-center justify-center">
