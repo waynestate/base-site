@@ -25,5 +25,7 @@ var Flickity = require('flickity');
             setGallerySize: true,
             wrapAround: true,
         });
+
+        document.querySelector('.rotate').removeAttribute('tabindex');
     }
 })(Flickity);
