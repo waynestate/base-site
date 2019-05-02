@@ -16,7 +16,7 @@
                     <div class="offcanvas-main-menu mt:hidden">
                         <ul>
                             <li>
-                                <a class="main-menu-toggle">Main Menu</a>
+                                <a class="main-menu-toggle" tabindex="0">Main Menu</a>
 
                                 {!! $top_menu_output !!}
                             </li>
