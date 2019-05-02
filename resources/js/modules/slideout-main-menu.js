@@ -16,6 +16,7 @@
         childNode.classList.add('float-right');
         childNode.classList.add('text-lg');
         childNode.classList.add('-mt-0.5');
+        childNode.setAttribute('aria-hidden', 'true');
         parentNode.prepend(childNode);
     }
 
