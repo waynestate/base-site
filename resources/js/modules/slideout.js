@@ -72,6 +72,9 @@ import Slideout from 'slideout/dist/slideout.js';
             // When tabbing backwards off the menu toggle goto the last focusable element in the slideout
             document.querySelector('.menu-toggle').addEventListener('keydown', tabToLastElement);
         }
+
+        // Set that it was expanded
+        document.querySelector('.menu-toggle').setAttribute('aria-expanded', 'true');
     });
 
     slideout.on('close', function () {
@@ -89,6 +92,9 @@ import Slideout from 'slideout/dist/slideout.js';
         }
 
         document.querySelector('.menu-toggle').removeEventListener('keydown', tabToLastElement);
+
+        // Set that it was closed
+        document.querySelector('.menu-toggle').setAttribute('aria-expanded', 'false');
     });
 
     // Toggle the appropriate classes for slideout based on the menu icon's visibility state
