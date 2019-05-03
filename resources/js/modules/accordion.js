@@ -23,6 +23,9 @@ import 'accordion/src/accordion.js';
         item.querySelectorAll('.content').forEach(function(item) {
             item.classList.add('hidden');
         });
+
+        // Remove the role="tablist" since it is not needed
+        item.removeAttribute('role');
     });
 
     document.querySelectorAll('ul.accordion > li').forEach(function(item) {
