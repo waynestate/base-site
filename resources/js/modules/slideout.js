@@ -141,6 +141,50 @@ import Slideout from 'slideout/dist/slideout.js';
         document.querySelector('#panel .mt\\:flex').classList.remove('mt:flex');
     }
 
+    // On small screens when the menu toggle is visible allow the skip to site menu to open slideout and main menu toggle
+    let toggleSkipEvents = function () {
+        let skipPageMenu = function (e) {
+            slideout.open();
+            window.scrollTo(0,0);
+            e.preventDefault();
+            document.querySelector('.menu-toggle').focus();
+        }
+
+        let skipSiteMenu = function (e) {
+            slideout.open();
+            window.scrollTo(0,0);
+            e.preventDefault();
+            document.querySelector('.main-menu-toggle').focus();
+        }
+
+        if(getComputedStyle(document.querySelector('.menu-toggle')).display != 'none') {
+            if(document.querySelector('.skip-page-menu')) {
+                document.querySelector('.skip-page-menu').addEventListener('click', skipPageMenu);
+            }
+
+            if(document.querySelector('.skip-site-menu')) {
+                document.querySelector('.skip-site-menu').addEventListener('click', skipSiteMenu);
+            }
+        } else {
+            // Remove skip listeners if the regular menu is showing
+            if(document.querySelector('.skip-page-menu')) {
+                document.querySelector('.skip-page-menu').removeEventListener('click', skipPageMenu);
+                console.log('remove page');
+            }
+
+            if(document.querySelector('.skip-site-menu')) {
+                document.querySelector('.skip-site-menu').removeEventListener('click', skipSiteMenu);
+                console.log('remove site');
+            }
+        }
+    }
+
+    // When resizing check if we need to toggle skip events
+    window.addEventListener('resize', toggleSkipEvents);
+
     // Check if we need to toggle the slideout on intial load
     toggleSlideout();
+
+    // Check if we need to toggle the skip links
+    toggleSkipEvents();
 })(Slideout);
