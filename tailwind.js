@@ -213,8 +213,6 @@ module.exports = {
         '3xl': '1.875rem', // 30px
         '4xl': '2.25rem', // 36px
         '5xl': '3rem', // 48px
-        '7xl': '4rem', // 64px
-        '9xl': '5rem', // 80px
     },
 
 
@@ -401,8 +399,6 @@ module.exports = {
         'sm': '.125rem',
         default: '.25rem',
         'lg': '.5rem',
-        'xxl': '1.25rem',
-        'xxxl': '1.75rem',
         'full': '9999px',
     },
 
@@ -535,9 +531,6 @@ module.exports = {
 
     minHeight: {
         '0': '0',
-        'sm': '250px',
-        'md': '400px',
-        'lg': '600px',
         'full': '100%',
         'screen': '100vh'
     },
@@ -618,10 +611,8 @@ module.exports = {
         '4': '1rem',
         '5': '1.25rem',
         '6': '1.5rem',
-        '7': '1.75rem',
         '8': '2rem',
         '10': '2.5rem',
-        '11': '2.75rem',
         '12': '3rem',
         '16': '4rem',
         '20': '5rem',
