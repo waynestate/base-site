@@ -31,8 +31,5 @@ import 'accordion/src/accordion.js';
     document.querySelectorAll('ul.accordion > li').forEach(function(item) {
         // Apply the required content fold afterwards to simplify the html
         item.querySelector('div').classList.add('fold');
-
-        // Use this span container for the + and - close text and hide it from screen readers
-        // item.querySelector('a').insertAdjacentHTML('afterbegin', '<span class="hidden"></span>');
     });
 })();
