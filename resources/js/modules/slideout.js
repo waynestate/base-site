@@ -39,7 +39,7 @@ import Slideout from 'slideout/dist/slideout.js';
     // Trap focus within the slideout by tabbing back to the close button
     let tabToCloseButton = function (e) {
         if (!e.shiftKey && e.keyCode == 9) {
-            // Wrapping this in a setTimeout prevents it from focusing on the element after this one (unknown bug) 
+            // Wrapping this in a setTimeout prevents it from focusing on the element after this one (unknown bug)
             setTimeout(function () {
                 document.querySelector('button.menu-toggle').focus();
             }, 0);
@@ -49,7 +49,7 @@ import Slideout from 'slideout/dist/slideout.js';
     // Trap focus within the slideout by tabbing to the last element
     let tabToLastElement = function (e) {
         if (e.shiftKey && e.keyCode == 9) {
-            // Wrapping this in a setTimeout prevents it from focusing on the element after this one (unknown bug) 
+            // Wrapping this in a setTimeout prevents it from focusing on the element after this one (unknown bug)
             setTimeout(function () {
                 all_links[all_links.length-1].focus();
             }, 0);
@@ -68,7 +68,7 @@ import Slideout from 'slideout/dist/slideout.js';
         if(all_links.length > 0) {
             // When tabbing off the last link in the menu make it go back to the close button
             all_links[all_links.length-1].addEventListener('keydown', tabToCloseButton);
-            
+
             // When tabbing backwards off the menu toggle goto the last focusable element in the slideout
             document.querySelector('.menu-toggle').addEventListener('keydown', tabToLastElement);
         }
@@ -140,6 +140,53 @@ import Slideout from 'slideout/dist/slideout.js';
         document.querySelector('#panel .mt\\:flex').classList.add('flex');
         document.querySelector('#panel .mt\\:flex').classList.remove('mt:flex');
     }
+
+    // On small screens when the menu toggle is visible allow the skip to site menu to open slideout and main menu toggle
+    let toggleSkipEvents = function () {
+        let skipMenu = function (e) {
+            slideout.open();
+            window.scrollTo(0,0);
+            e.preventDefault();
+            document.querySelector('.menu-toggle').focus();
+        }
+
+        if(getComputedStyle(document.querySelector('.menu-toggle')).display != 'none') {
+            // Hide the site menu
+            if(document.querySelector('.skip-site-menu')) {
+                document.querySelector('.skip-site-menu').classList.add('hidden');
+            }
+
+            // Hide the page menu
+            if(document.querySelector('.skip-page-menu')) {
+                document.querySelector('.skip-page-menu').classList.add('hidden');
+            }
+
+            // Make the skip menu visible
+            document.querySelector('.skip-menu').classList.remove('hidden');
+
+            // Add a listener to skip to the menu and open it
+            document.querySelector('.skip-menu a').addEventListener('click', skipMenu);
+        } else {
+            // Hide the skip menu
+            document.querySelector('.skip-menu').classList.add('hidden');
+
+            // Bring back the site menu
+            if(document.querySelector('.skip-site-menu')) {
+                document.querySelector('.skip-site-menu').classList.remove('hidden');
+            }
+
+            // Bring back the page menu
+            if(document.querySelector('.skip-page-menu')) {
+                document.querySelector('.skip-page-menu').classList.remove('hidden');
+            }
+        }
+    }
+
+    // When resizing check if we need to toggle skip events
+    window.addEventListener('resize', toggleSkipEvents);
+
+    // Check if we need to toggle the skip links
+    toggleSkipEvents();
 
     // Check if we need to toggle the slideout on intial load
     toggleSlideout();
