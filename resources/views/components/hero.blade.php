@@ -2,10 +2,6 @@
     $images => array // ['relative_url', 'title', 'description']
 --}}
 
-{{-- 
-<ul
-@endif --}}
-
 <{{ (!empty($images) && count($images) > 1) ? 'ul' : 'div' }}{!! (in_array($page['controller'], config('base.hero_full_controllers'))) ? ' role="complementary"' : '' !!} class="mb-4 mt:mx-0{{ !empty($images) && count($images) > 1 ? ' rotate' : '' }}{{!in_array($page['controller'], config('base.hero_full_controllers'))  ? '  -mx-4' : ' ' }} bg-grey-lighter md:bg-transparent{{ (!empty($images) && count($images) > 1) ? ' list-reset' : '' }}">
     @if(in_array($page['controller'], config('base.hero_text_controllers')))
         @foreach($images as $image)
