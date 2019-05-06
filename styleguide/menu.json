@@ -494,6 +494,16 @@
                 "class_name": "",
                 "relative_url": "/styleguide/featuredpromo",
                 "submenu": []
+            },
+            "117100": {
+                "menu_item_id": "117100",
+                "is_active": "1",
+                "page_id": "117100",
+                "target": "",
+                "display_name": "Video",
+                "class_name": "",
+                "relative_url": "/styleguide/video",
+                "submenu": []
             }
         }
     }
