@@ -180,6 +180,11 @@ import Slideout from 'slideout/dist/slideout.js';
                 document.querySelector('.skip-page-menu').classList.remove('hidden');
             }
         }
+
+        // If there are no page menu items on larger breakpoints then hide the skip to page link
+        if(getComputedStyle(document.querySelector('#menu').parentElement).display == 'none' && getComputedStyle(document.querySelector('.menu-toggle')).display == 'none') {
+            document.querySelector('.skip-page-menu').classList.add('hidden');
+        }
     }
 
     // When resizing check if we need to toggle skip events
