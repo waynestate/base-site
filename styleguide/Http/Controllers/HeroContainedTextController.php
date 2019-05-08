@@ -23,7 +23,7 @@ class HeroContainedTextController extends Controller
         // Remove the link from hero images
         $request->data['hero'] = collect($request->data['hero'])
             ->transform(function ($item) {
-                $item['link'] = '';
+                $item['description'] = strip_tags($item['description'], 'a');
 
                 return $item;
             })
