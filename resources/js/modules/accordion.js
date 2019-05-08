@@ -26,6 +26,10 @@ import 'accordion/src/accordion.js';
 
         // Remove the role="tablist" since it is not needed
         item.removeAttribute('role');
+
+        item.querySelectorAll('li a:first-child').forEach(function(item) {
+            item.setAttribute('role', 'button');
+        });
     });
 
     document.querySelectorAll('ul.accordion > li').forEach(function(item) {
