@@ -16,7 +16,7 @@
                     <div class="offcanvas-main-menu mt:hidden">
                         <ul>
                             <li>
-                                <a class="main-menu-toggle">Main Menu</a>
+                                <a class="main-menu-toggle" tabindex="0" aria-expanded="false">Main Menu</a>
 
                                 {!! $top_menu_output !!}
                             </li>
@@ -26,7 +26,6 @@
 
                 @if(!empty($site_menu_output))
                     {!! $site_menu_output !!}
-                    <hr class="mb-2">
                 @endif
 
                 @if(!empty($banner))
@@ -43,7 +42,7 @@
             </nav>
         </div>
 
-        <main class="w-full{{ !in_array($page['controller'], config('base.full_width_controllers')) ? ' px-4' : '' }} {{$show_site_menu === true ? 'mt:w-3/4' : '' }} content-area mb-8" id="content" tabindex="-1">
+        <main class="w-full{{ !in_array($page['controller'], config('base.full_width_controllers')) ? ' px-4' : '' }} {{$show_site_menu === true ? 'mt:w-3/4' : '' }} content-area mb-8" tabindex="-1">
             @if(!empty($hero) && !in_array($page['controller'], config('base.hero_full_controllers')))
                 @include('components.hero', ['images' => $hero])
 
@@ -54,7 +53,9 @@
                 @include('components.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
             @endif
 
-            @yield('content')
+            <div id="content" tabindex="-1">
+                @yield('content')
+            </div>
         </main>
     @if(!in_array($page['controller'], config('base.full_width_controllers')))</div>@endif
 

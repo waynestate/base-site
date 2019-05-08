@@ -1,6 +1,5 @@
 {{--
-    $banner => array // [['title','link', 'excerpt']]
-    $class => string // 'banner'
+    $banner => array // [['title', 'link', 'excerpt']]
 --}}
 <div class="row relative">
     <a class="banner bg-yellow items-center justify-center absolute pin-r mr-4 transition transition-timing-ease-out hover:text-black hidden mt:flex z-5" href="{{ $banner['link'] }}">

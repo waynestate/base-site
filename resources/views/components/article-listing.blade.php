@@ -3,8 +3,9 @@
     $heading => string // 'News'
     $url => string '/news/'
     $link_text => string // 'More news'
+    $class => string // ''
 --}}
-<h2>{{ $heading ?? 'News' }}</h2>
+<h2{!! !empty($class) ? ' class="'.$class.'"' : '' !!}>{{ $heading ?? 'News' }}</h2>
 
 <ul class="list-reset">
     @foreach($articles as $item)

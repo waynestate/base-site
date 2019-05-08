@@ -5,7 +5,7 @@ namespace Factories;
 use Contracts\Factories\FactoryContract;
 use Faker\Factory;
 
-class Accordion implements FactoryContract
+class Video implements FactoryContract
 {
     /**
      * Construct the factory.
@@ -24,8 +24,11 @@ class Accordion implements FactoryContract
     {
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
+                'link' => 'https://www.youtube.com/watch?v=QYVv994xz6s',
+                'youtube_id' => 'QYVv994xz6s',
+                'relative_url' => $this->faker->randomElement(array('/styleguide/image/800x450?text=Video', '')),
                 'title' => $this->faker->sentence,
-                'description' => '<p>'.$this->faker->paragraph.' <a href="/styleguide">Example link.</a></p>',
+                'excerpt' => $this->faker->sentence,
             ];
 
             $data[$i] = array_replace_recursive($data[$i], $options);

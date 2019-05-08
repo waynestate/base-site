@@ -1,5 +1,5 @@
 {{--
-    $social => array // [['title','link']]
+    $social => array // ['title','link']
 --}}
 <div class="bg-green-darker py-6">
     <div class="row flex justify-center items-center">

@@ -1,5 +1,5 @@
 {{--
-    $buttons => array // [['link', 'title', 'relative_url']]
+    $buttons => array // ['option', 'link', 'title', 'relative_url']
     $class => string // 'image-button-list'
 --}}
 @if(!empty($class))<div class="{{ $class }}">@endif
