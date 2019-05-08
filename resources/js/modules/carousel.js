@@ -27,5 +27,23 @@ var Flickity = require('flickity');
         });
 
         document.querySelector('.rotate').removeAttribute('tabindex');
+
+        let EnableTabbableItems = function () {
+            // Don't allow tabbing to items that aren't selected
+            document.querySelectorAll('.rotate .content a').forEach(function (item) {
+                item.classList.add('hidden');
+            });
+
+            // Allow tabbing to the selected item
+            document.querySelectorAll('.rotate .is-selected .content a').forEach(function (item) {
+                item.classList.remove('hidden');
+            });
+        }
+
+        EnableTabbableItems();
+
+        document.querySelectorAll('.flickity-button').forEach(function (item) {
+           item.addEventListener('click', EnableTabbableItems);
+        });
     }
 })(Flickity);
