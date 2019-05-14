@@ -92,6 +92,9 @@ module.exports = {
                 'white': '0 7px 0 '+ colors['white'] +', 0 14px 0 '+ colors['white'],
                 'grey': '0 7px 0 '+ colors['grey'] +', 0 14px 0 '+ colors['grey'],
             },
+            opacity: {
+                '65' : '.65',
+            },
         }
     },
     variants: {},
