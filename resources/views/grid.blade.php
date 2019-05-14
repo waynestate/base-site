@@ -8,7 +8,7 @@
     </div>
 
     @if(!empty($grid_promos))
-        <ul class="flex flex-wrap -mx-4 list-reset">
+        <ul class="flex flex-wrap -mx-4">
             @foreach($grid_promos as $item)
                 <li class="w-full md:w-1/2 xl:w-1/3 px-4 pb-6">
                     <a href="{{ $item['link'] }}" class="flex md:block">

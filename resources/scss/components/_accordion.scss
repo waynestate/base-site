@@ -1,5 +1,5 @@
 .accordion.enabled {
-    @apply .p-0 .mb-4 .relative .list-reset;
+    @apply .p-0 .mb-4 .relative;
 
     & > li {
         @apply .border .border-solid .border-grey .w-full .absolute .border-b-0;
@@ -21,7 +21,7 @@
 
             // Open symbol
             & span::before {
-                @apply .absolute .pin-r .pr-4 .pin-t .pt-4;
+                @apply .absolute .right-0 .pr-4 .top-0 .pt-4;
 
                 content: '+';
             }

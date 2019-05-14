@@ -14,7 +14,7 @@
 .bg-gradient-green {
     @apply .bg-green-dark;
 
-    background-image: linear-gradient(180deg, config('colors.green') 0, config('colors.green-dark'));
+    background-image: linear-gradient(180deg, theme('colors.green') 0, theme('colors.green-dark'));
 
     &:hover {
         @apply .bg-green-dark;

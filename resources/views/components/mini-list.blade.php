@@ -6,7 +6,7 @@
 --}}
 <h2{!! !empty($class) ? ' class="'.$class.'"' : '' !!}>{{ $heading ?? 'Resources' }}</h2>
 
-<ul class="list-reset">
+<ul>
     @foreach($items as $item)
         <li class="mb-4">
             <a href="{{ $item['link'] }}" class="underline hover:no-underline font-normal">{{ $item['title'] }}</a>

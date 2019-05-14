@@ -11,7 +11,7 @@
             @image('//i.wayne.edu/youtube/'.$video['youtube_id'].'/max', $video['excerpt'])
         @endif
 
-        <div class="absolute pin flex items-center justify-center">
+        <div class="absolute inset-0 flex items-center justify-center">
             <div class="w-1/4 opacity-50 transition transition-delay-none transition-timing-ease-in-out hover:opacity-75">
                 @svg('video-play')
             </div>
