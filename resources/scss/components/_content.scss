@@ -5,6 +5,16 @@ footer .content a {
 
 // Content returning from CMS
 .content {
+    ul {
+        list-style-type: disc;
+        @apply .ml-8;
+    }
+
+    ol {
+        list-style-type: decimal;
+        @apply .ml-8;
+    }
+
     hr {
         @apply .border-b .border-solid .border-grey-lighter .my-5;
     }
