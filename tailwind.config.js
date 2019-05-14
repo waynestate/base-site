@@ -81,6 +81,7 @@ module.exports = {
                 'screen-xxxl': screens['xxxl'],
             },
             spacing: {
+                '14' : '3.5rem',
                 '3/4' : '75%',
                 '16/9': '56.35%',
                 'hero' : '36.3%',
