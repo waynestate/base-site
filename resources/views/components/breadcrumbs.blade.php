@@ -6,7 +6,7 @@
         @foreach($breadcrumbs as $key=>$crumb)
             @if($key == 0)
                 <li class="inline">
-                    <a href="/"><span class="text-black align-middle">@svg('home', 'w-4 h-4')</span></a>
+                    <a href="/"><span class="text-black align-middle">@svg('home', 'w-4 h-4 inline align-baseline')</span></a>
                     <span class="icon-right-open px-2"></span>
             @elseif($key == (count($breadcrumbs) - 1))
                 <li class="font-bold text-green inline">
