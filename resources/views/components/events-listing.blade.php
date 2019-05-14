@@ -17,7 +17,7 @@
             </div>
             <ul class="mx-2 flex-grow">
                 @foreach($dates as $event)
-                    <li class="mb-2 pb-2 border-b border-solid">
+                    <li class="mb-2 pb-2 border-b border-solid border-grey-light">
                         <a class="block" href="{{ $event['url'] }}">{{ $event['title'] }}
                             <span class="visually-hidden"> on {{ apdatetime(date('M d, Y' , strtotime($key))) }}
                                 @if(!(bool)$event['is_all_day']) at {{ apdatetime(date('g:i a' , strtotime($event['start_time']))) }}@endif
