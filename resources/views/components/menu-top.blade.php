@@ -35,7 +35,7 @@
         </div>
 
         @if(config('base.top_menu_enabled') === true)
-            <div class="hidden mx-4 mt:flex mt:flex-no-shrink mt:justify-end mt:items-center">
+            <div class="hidden mx-4 mt:flex mt:shrink-0 mt:justify-end mt:items-center">
                 <nav id="top-menu" aria-label="Site menu" tabindex="-1">
                     {!! $top_menu_output !!}
                 </nav>

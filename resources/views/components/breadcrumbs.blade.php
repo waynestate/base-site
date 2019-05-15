@@ -2,11 +2,11 @@
     $breadcrumbs => array // ['display_name', 'relative_url']
 --}}
 <nav class="mt-6 mb-2" aria-label="Breadcrumbs">
-    <ul class="list-reset text-sm">
+    <ul class="text-sm">
         @foreach($breadcrumbs as $key=>$crumb)
             @if($key == 0)
                 <li class="inline">
-                    <a href="/"><span class="text-black align-middle">@svg('home', 'w-4 h-4')</span></a>
+                    <a href="/"><span class="text-black align-middle">@svg('home', 'w-4 h-4 inline align-baseline')</span></a>
                     <span class="icon-right-open px-2"></span>
             @elseif($key == (count($breadcrumbs) - 1))
                 <li class="font-bold text-green inline">

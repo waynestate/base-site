@@ -5,6 +5,18 @@ footer .content a {
 
 // Content returning from CMS
 .content {
+    ul {
+        list-style-type: disc;
+
+        @apply .ml-8;
+    }
+
+    ol {
+        list-style-type: decimal;
+
+        @apply .ml-8;
+    }
+
     hr {
         @apply .border-b .border-solid .border-grey-lighter .my-5;
     }
@@ -29,7 +41,7 @@ footer .content a {
         }
 
         &::before {
-            @apply .absolute .pin .mt-4 .leading-none .text-grey-lighter .pr-1 .font-serif;
+            @apply .absolute .inset-0 .mt-4 .leading-none .text-grey-lighter .pr-1 .font-serif;
 
             content: '\201C'; // Double quote
             font-size: 85pt;
@@ -38,7 +50,7 @@ footer .content a {
 
     // Images remain at their specified width
     // Text appears above and below for small
-    @media (max-width: config('screens.mt')) {
+    @media (max-width: theme('screens.mt')) {
         img,
         figure {
             @apply .block .my-0 .mx-auto;
@@ -59,11 +71,11 @@ footer .content a {
             }
 
             &[style*="float:right"] {
-                @apply .ml-6 .my-2 .max-w-50%;
+                @apply .ml-6 .my-2 .max-w-half;
             }
 
             &[style*="float:left"] {
-                @apply .mr-6 .my-2 .max-w-50%;
+                @apply .mr-6 .my-2 .max-w-half;
             }
         }
     }
@@ -91,12 +103,12 @@ footer .content a {
 
             &[style*="float:right"],
             &.float-right {
-                @apply .ml-6 .max-w-50%;
+                @apply .ml-6 .max-w-half;
             }
 
             &[style*="float:left"],
             &.float-left {
-                @apply .mr-6 .max-w-50%;
+                @apply .mr-6 .max-w-half;
             }
 
             &[style*="text:center"],
@@ -122,7 +134,7 @@ footer .content a {
         }
 
         tbody tr {
-            @apply .border .border-t-0 .border-solid .align-top;
+            @apply .border .border-grey-light .border-t-0 .border-solid .align-top;
 
             td {
                 @apply .text-sm .px-4 .py-2;

@@ -1,5 +1,5 @@
 .content table.table-stack {
-    @media (max-width: config('screens.md')) {
+    @media (max-width: theme('screens.md')) {
         @apply .border-t;
 
         // Hide table head

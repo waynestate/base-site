@@ -6,7 +6,6 @@ let exec = require('child_process').exec;
 let package = JSON.parse(fs.readFileSync('./package.json'));
 let CopyWebpackPlugin = require('copy-webpack-plugin');
 let purge = require('laravel-mix-purgecss');
-let tailwindcss = require('tailwindcss');
 let ReplaceInFileWebpackPlugin = require('replace-in-file-webpack-plugin');
 
 /*
@@ -70,7 +69,7 @@ mix.js('resources/js/main.js', 'public/_resources/js')
    .options({
         processCssUrls: false,
         postCss: [
-            tailwindcss('./tailwind.js'),
+            require('tailwindcss'),
             require('autoprefixer')
         ]
     })
