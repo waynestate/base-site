@@ -78,7 +78,7 @@ module.exports = {
         extend: {
             maxWidth: {
                 half: '50%',
-                'screen-xxxl': screens['xxxl'],
+                'screen-xxxl': screens.xxxl,
             },
             spacing: {
                 '14' : '3.5rem',
@@ -89,8 +89,8 @@ module.exports = {
                 'portrait' : '133%',
             },
             boxShadow: {
-                'white': '0 7px 0 '+ colors['white'] +', 0 14px 0 '+ colors['white'],
-                'grey': '0 7px 0 '+ colors['grey'] +', 0 14px 0 '+ colors['grey'],
+                'white': '0 7px 0 '+ colors.white +', 0 14px 0 '+ colors.white,
+                'grey': '0 7px 0 '+ colors.grey +', 0 14px 0 '+ colors.grey,
             },
             opacity: {
                 '65' : '.65',
