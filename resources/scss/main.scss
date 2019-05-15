@@ -1,5 +1,5 @@
 // Combination of normalize and tailwind resets
-@tailwind preflight;
+@tailwind base;
 
 @import "~mediabox/dist/mediabox";
 @import "~flickity/dist/flickity";

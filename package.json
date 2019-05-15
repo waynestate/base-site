@@ -45,7 +45,7 @@
     "slideout": "^1.0.1",
     "stylelint": "^9.0.0",
     "stylelint-config-standard": "^18.0.0",
-    "tailwindcss": "^0.7.0",
+    "tailwindcss": "^1.0.0",
     "vue-template-compiler": "^2.5.21"
   }
 }

@@ -22,7 +22,7 @@
         </form>
     @endif
 
-    <ul class="row flex flex-wrap -mx-4 list-reset">
+    <ul class="row flex flex-wrap -mx-4">
         @forelse($profiles as $profile)
             <li class="w-full sm:w-1/2 md:w-1/3 px-4 pb-6">
                 <a href="{{ $profile['link'] }}" class="underline">

@@ -4,7 +4,7 @@
     min-height: 32px;
 
     svg {
-        fill: config('colors.grey-darker') !important;
+        fill: theme('colors.grey.darker') !important;
         width: 20px !important;
         height: 20px !important;
     }
@@ -28,5 +28,5 @@
 a.at-icon-wrapper.at-share-btn {
     @apply .mb-0;
 
-    background: config('colors.grey-lighter') !important;
+    background: theme('colors.grey.lighter') !important;
 }

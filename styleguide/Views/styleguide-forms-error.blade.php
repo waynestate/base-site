@@ -9,7 +9,7 @@
             <p>This sample form with error states</p>
         </div>
 
-        <form action="/{{ $server['path'] }}#form-1" method="post" id="form-1" name="form-1" enctype="multipart/form-data" tabindex="-1">
+        <form action="/{{ $server['path'] }}#form-1" method="post" id="form-1" class="content" name="form-1" enctype="multipart/form-data" tabindex="-1">
             <p id="required-message">Fields with asterisks (*) are required.</p>
             <div class="form-errors">
                 <h2 id="form-errors" tabindex="-1">Error: There are 12 error(s) on the form</h2>

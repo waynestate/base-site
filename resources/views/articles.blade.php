@@ -4,7 +4,7 @@
     @include('components.page-title', ['title' => $page['title']])
 
     @if(!empty($articles['data']))
-        <ul class="list-reset">
+        <ul>
             @foreach($articles['data'] as $article)
                 <li class="mb-3 pb-4 border-b border-grey-lighter">
                     <a href="{{ $article['link'] }}" class="font-bold text-lg block">

@@ -7,7 +7,7 @@
 --}}
 <h2{!! !empty($class) ? ' class="'.$class.'"' : '' !!}>{{ $heading ?? 'News' }}</h2>
 
-<ul class="list-reset">
+<ul>
     @foreach($articles as $item)
         <li class="mb-4">
             <a href="{{ $item['link'] }}" class="underline hover:no-underline font-normal">
