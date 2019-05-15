@@ -1,8 +1,8 @@
 let colors = {
-    transparent: 'transparent',
+    'transparent': 'transparent',
 
-    black: '#181a19',
-    white: '#fff',
+    'black': '#181a19',
+    'white': '#fff',
 
     'grey-darkest': '#323333',
     'grey-darker': '#575959',
