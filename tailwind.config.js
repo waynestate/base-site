@@ -1,51 +1,54 @@
 let colors = {
-    'transparent': 'transparent',
-
-    'black': '#181a19',
-    'white': '#fff',
-
-    'grey-darkest': '#323333',
-    'grey-darker': '#575959',
-    'grey-dark': '#949999',
-    'grey': '#babfbf',
-    'grey-light': '#d9d9d9',
-    'grey-lighter': '#e6e6e6',
-    'grey-lightest': '#f2f2f2',
-
-    'red-darkest': '#3b0d0c',
-    'red-darker': '#621b18',
-    'red-dark': '#cc1f1a',
-    'red': '#e60000',
-    'red-light': '#ef5753',
-    'red-lighter': '#f9acaa',
-    'red-lightest': '#fcebea',
-
-    'yellow-darkest': '#866e26',
-    'yellow-darker': '#ae8f30',
-    'yellow-dark': '#d8ad2d',
-    'yellow': '#ffcc33',
-    'yellow-light': '#ffdb6f',
-    'yellow-lighter': '#ffe596',
-    'yellow-lightest': '#fff2c9',
-
-    'green-darkest': '#05211e',
-    'green-darker': '#072e29',
-    'green-dark': '#093f39',
-    'green': '#0c5449',
-    'green-light': '#3d7a67',
-    'green-lighter': '#71a192',
-    'green-lightest': '#acc9c0',
+    transparent: 'transparent',
+    black: '#181a19',
+    white: '#fff',
+    grey: {
+        darkest: '#323333',
+        darker: '#575959',
+        dark: '#949999',
+        default: '#babfbf',
+        light: '#d9d9d9',
+        lighter: '#e6e6e6',
+        lightest: '#f2f2f2',
+    },
+    red: {
+        darkest: '#3b0d0c',
+        darker: '#621b18',
+        dark: '#cc1f1a',
+        default: '#e60000',
+        light: '#ef5753',
+        lighter: '#f9acaa',
+        lightest: '#fcebea',
+    },
+    yellow: {
+        darkest: '#866e26',
+        darker: '#ae8f30',
+        dark: '#d8ad2d',
+        default: '#ffcc33',
+        light: '#ffdb6f',
+        lighter: '#ffe596',
+        lightest: '#fff2c9',
+    },
+    green: {
+        darkest: '#05211e',
+        darker: '#072e29',
+        dark: '#093f39',
+        default: '#0c5449',
+        light: '#3d7a67',
+        lighter: '#71a192',
+        lightest: '#acc9c0',
+    },
 }
 
 screens = {
-    'sm': '420px',
-    'md': '576px',
-    'lg': '732px',
-    'xl': '888px',
-    'xxl': '1044px',
-    'xxxl': '1200px',
-    'mt': '780px', // Adjust this based on the top menu width
-    'print': {'raw': 'print'},
+    sm: '420px',
+    md: '576px',
+    lg: '732px',
+    xl: '888px',
+    xxl: '1044px',
+    xxxl: '1200px',
+    mt: '780px', // Adjust this based on the top menu width
+    print: {'raw': 'print'},
 }
 
 module.exports = {
@@ -77,7 +80,7 @@ module.exports = {
         },
         extend: {
             maxWidth: {
-                half: '50%',
+                'half': '50%',
                 'screen-xxxl': screens.xxxl,
             },
             spacing: {
