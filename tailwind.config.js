@@ -83,13 +83,14 @@ module.exports = {
                 'half': '50%',
                 'screen-xxxl': screens.xxxl,
             },
-            spacing: {
-                '14' : '3.5rem',
+            padding: {
                 '3/4' : '75%',
                 '16/9': '56.35%',
                 'hero' : '36.3%',
                 'full' : '100%',
-                'portrait' : '133%',
+            },
+            spacing: {
+                '14' : '3.5rem',
             },
             boxShadow: {
                 'white': '0 7px 0 '+ colors.white +', 0 14px 0 '+ colors.white,
