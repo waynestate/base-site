@@ -84,7 +84,7 @@ module.exports = {
                 'screen-xxxl': screens.xxxl,
             },
             padding: {
-                '3/4' : '75%',
+                '4/3' : '75%',
                 '16/9': '56.35%',
                 'hero' : '36.3%',
                 'full' : '100%',
