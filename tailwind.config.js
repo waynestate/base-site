@@ -101,7 +101,9 @@ module.exports = {
             },
         }
     },
-    variants: {},
+    variants: {
+        opacity: ['responsive', 'hover', 'focus'],
+    },
     plugins: [
         require('glhd-tailwindcss-transitions')(), // https://github.com/glhd/tailwindcss-plugins/
     ],
