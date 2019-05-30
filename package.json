@@ -1,7 +1,7 @@
 {
   "name": "base",
   "private": true,
-  "version": "6.5.1",
+  "version": "6.6.0",
   "description": "",
   "scripts": {
     "dev": "npm run development",
@@ -41,7 +41,7 @@
     "mediabox": "^1.1.2",
     "replace-in-file-webpack-plugin": "^1.0.6",
     "sass": "^1.15.2",
-    "sass-loader": "7.*",
+    "sass-loader": "^7.0",
     "slideout": "^1.0.1",
     "stylelint": "^9.0.0",
     "stylelint-config-standard": "^18.0.0",
