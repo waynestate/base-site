@@ -15,7 +15,7 @@
             @endforeach
         </ul>
     @else
-        <p>Currently there are no articles {{ !empty($topic['data']['name']) ? ' for the category ' . strtolower($topic['data']['name']) : '' }} {{ config('base.news_topic_route') }}.</p>
+        <p>Currently there are no articles{{ !empty($topic['data']['name']) ? ' for the category ' . strtolower($topic['data']['name']) : '' }}.</p>
     @endif
 
     @if(!empty($articles['meta']['prev_page_url']) || !empty($articles['meta']['next_page_url']))
