@@ -80,7 +80,8 @@ mix.js('resources/js/main.js', 'public/_resources/js')
             'app/**/*.php',
             'resources/views/**/*.php',
             'public/_resources/js/main.js',
-            'public/_resources/css/main.css'
+            'public/_resources/css/main.css',
+            'tailwind.config.js'
         ],
         watchOptions: {
             usePolling: true,

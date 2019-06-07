@@ -18,7 +18,7 @@
             <ul class="mx-2 flex-grow">
                 @foreach($dates as $event)
                     <li class="mb-2 pb-2 border-b border-solid border-grey-light">
-                        <a class="block" href="{{ $event['url'] }}">{{ $event['title'] }}
+                        <a class="block hover:underline" href="{{ $event['url'] }}">{{ $event['title'] }}
                             <span class="visually-hidden"> on {{ apdatetime(date('M d, Y' , strtotime($key))) }}
                                 @if(!(bool)$event['is_all_day']) at {{ apdatetime(date('g:i a' , strtotime($event['start_time']))) }}@endif
                             </span>
@@ -30,7 +30,7 @@
                 @endforeach
                 @if($dates == end($events))
                     <li>
-                        <a href="//events.wayne.edu/{{ $cal_name ?? 'main/' }}month/">{{ $link_text ?? 'More events' }}</a>
+                        <a href="//events.wayne.edu/{{ $cal_name ?? 'main/' }}month/" class="hover:underline">{{ $link_text ?? 'More events' }}</a>
                     </li>
                 @endif
             </ul>
