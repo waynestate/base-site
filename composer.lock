@@ -3877,16 +3877,16 @@
         },
         {
             "name": "waynestate/waynestate-api",
-            "version": "1.2.1",
+            "version": "1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/waynestate/waynestate-api-php.git",
-                "reference": "7f81f2286a352cbd6089751fa5ad7817cc95463f"
+                "reference": "b11c2339678f4ace2204fed5ffdc5de7ae6cd1e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/waynestate/waynestate-api-php/zipball/7f81f2286a352cbd6089751fa5ad7817cc95463f",
-                "reference": "7f81f2286a352cbd6089751fa5ad7817cc95463f",
+                "url": "https://api.github.com/repos/waynestate/waynestate-api-php/zipball/b11c2339678f4ace2204fed5ffdc5de7ae6cd1e3",
+                "reference": "b11c2339678f4ace2204fed5ffdc5de7ae6cd1e3",
                 "shasum": ""
             },
             "require": {
@@ -3910,7 +3910,7 @@
             ],
             "description": "An API wrapper for the Wayne State University v1 API",
             "homepage": "https://github.com/waynestate/waynestate-api-php",
-            "time": "2019-03-07T17:24:17+00:00"
+            "time": "2019-06-07T18:35:12+00:00"
         }
     ],
     "packages-dev": [
