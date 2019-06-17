@@ -49,7 +49,11 @@ class ArticleRepository implements ArticleRepositoryContract
         }
 
         $articles['articles'] = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
-            return $this->newsApi->request($params['method'], $params);
+            try {
+                return $this->newsApi->request($params['method'], $params);
+            } catch (\Exception $e) {
+                return [];
+            }
         });
 
         return $articles;

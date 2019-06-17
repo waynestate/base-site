@@ -37,7 +37,11 @@ class TopicRepository implements TopicRepositoryContract
         ];
 
         $topics['topics'] = $this->cache->remember('newsroom-topics', config('cache.ttl'), function () use ($params) {
-            $topics = $this->newsApi->request($params['method'], $params);
+            try {
+                $topics = $this->newsApi->request($params['method'], $params);
+            } catch (\Exception $e) {
+                $topics = [];
+            }
 
             if (!empty($topics['data'])) {
                 $topics['data'] = collect($topics['data'])->map(function ($topic) {
