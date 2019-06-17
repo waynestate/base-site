@@ -29,6 +29,24 @@ class TopicRepositoryTest extends TestCase
     }
 
     /**
+     * @covers App\Repositories\TopicRepository::listing
+     * @test
+     */
+    public function getting_topics_with_exception_should_return_empty_array()
+    {
+        // Fake return
+        $return = app('Factories\Topic')->create(5);
+
+        // Mock the connector and set the return
+        $newsApi = Mockery::mock('Waynestate\Api\News');
+        $newsApi->shouldReceive('request')->andThrow(new \Exception);
+
+        $topics = app('App\Repositories\TopicRepository', ['newsApi' => $newsApi])->listing(1);
+
+        $this->assertCount(0, $topics['topics']);
+    }
+
+    /**
      * @covers App\Repositories\TopicRepository::find
      * @test
      */
