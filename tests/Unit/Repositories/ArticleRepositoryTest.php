@@ -143,6 +143,24 @@ class ArticleRepositoryTest extends TestCase
     }
 
     /**
+     * @covers App\Repositories\ArticleRepository::listing
+     * @test
+     */
+    public function getting_articles_with_exception_should_return_empty_array()
+    {
+        // Fake return
+        $return = app('Factories\Article')->create(5);
+
+        // Mock the connector and set the return
+        $newsApi = Mockery::mock('Waynestate\Api\News');
+        $newsApi->shouldReceive('request')->andThrow(new \Exception);
+
+        $articles = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi])->listing(1);
+
+        $this->assertCount(0, $articles['articles']);
+    }
+
+    /**
      * @covers App\Repositories\ArticleRepository::getImageUrl
      * @test
      */
