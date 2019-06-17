@@ -3649,16 +3649,16 @@
         },
         {
             "name": "waynestate/news-api-php",
-            "version": "1.0.6",
+            "version": "1.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/waynestate/news-api-php.git",
-                "reference": "c94335728df26e8d82076e1a13b8db144ab8d620"
+                "reference": "ddcc8eee7ad27a05de1644aba4faf002b3d1f7eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/waynestate/news-api-php/zipball/c94335728df26e8d82076e1a13b8db144ab8d620",
-                "reference": "c94335728df26e8d82076e1a13b8db144ab8d620",
+                "url": "https://api.github.com/repos/waynestate/news-api-php/zipball/ddcc8eee7ad27a05de1644aba4faf002b3d1f7eb",
+                "reference": "ddcc8eee7ad27a05de1644aba4faf002b3d1f7eb",
                 "shasum": ""
             },
             "require": {
@@ -3685,7 +3685,7 @@
                 }
             ],
             "description": "Connector for News API",
-            "time": "2019-03-07T16:57:56+00:00"
+            "time": "2019-06-10T13:16:25+00:00"
         },
         {
             "name": "waynestate/parse-menu",
