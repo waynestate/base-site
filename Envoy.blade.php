@@ -129,15 +129,15 @@ echo '----';
 @endtask
 
 @task('init_basedir_remote', ['on' => $remote_server])
-[ -d {{ $release_dir }} ] || mkdir -p -m 0770 {{ $release_dir }};
-[ -d {{ $shared_dir }}/storage ] || mkdir -p -m 0770 {{ $shared_dir }}/storage;
-[ -d {{ $shared_dir }}/storage/debugbar ] || mkdir -p -m 0770 {{ $shared_dir }}/storage/debugbar;
-[ -d {{ $shared_dir }}/storage/logs ] || mkdir -p -m 0770 {{ $shared_dir }}/storage/logs;
-[ -d {{ $shared_dir }}/storage/app ] || mkdir -p -m 0770 {{ $shared_dir }}/storage/app;
-[ -d {{ $shared_dir }}/storage/app/public ] || mkdir -p -m 0770 {{ $shared_dir }}/storage/app/public;
-[ -d {{ $shared_dir }}/storage/framework ] || mkdir -p -m 0770 {{ $shared_dir }}/storage/framework;
-[ -d {{ $shared_dir }}/storage/framework/cache ] || mkdir -p -m 0770 {{ $shared_dir }}/storage/framework/cache;
-[ -d {{ $shared_dir }}/storage/framework/views ] || mkdir -p -m 0770 {{ $shared_dir }}/storage/framework/views;
+[ -d {{ $release_dir }} ] || mkdir -p -m 02770 {{ $release_dir }};
+[ -d {{ $shared_dir }}/storage ] || mkdir -p -m 02770 {{ $shared_dir }}/storage;
+[ -d {{ $shared_dir }}/storage/debugbar ] || mkdir -p -m 02770 {{ $shared_dir }}/storage/debugbar;
+[ -d {{ $shared_dir }}/storage/logs ] || mkdir -p -m 02770 {{ $shared_dir }}/storage/logs;
+[ -d {{ $shared_dir }}/storage/app ] || mkdir -p -m 02770 {{ $shared_dir }}/storage/app;
+[ -d {{ $shared_dir }}/storage/app/public ] || mkdir -p -m 02770 {{ $shared_dir }}/storage/app/public;
+[ -d {{ $shared_dir }}/storage/framework ] || mkdir -p -m 02770 {{ $shared_dir }}/storage/framework;
+[ -d {{ $shared_dir }}/storage/framework/cache ] || mkdir -p -m 02770 {{ $shared_dir }}/storage/framework/cache;
+[ -d {{ $shared_dir }}/storage/framework/views ] || mkdir -p -m 02770 {{ $shared_dir }}/storage/framework/views;
 
 chmod -R g+s {{ $shared_dir }}/storage
 chmod -R g+s {{ $release_dir }}
