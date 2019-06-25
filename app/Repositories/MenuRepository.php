@@ -126,7 +126,7 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
      */
     public function getSiteMenuOutput($menu)
     {
-        return $menu === null ? null : $this->displayMenu->render(['menu' => $menu]);
+        return $menu === null ? null : $this->displayMenu->render(['menu' => $menu, 'menu_class' => 'main-menu']);
     }
 
     /**
