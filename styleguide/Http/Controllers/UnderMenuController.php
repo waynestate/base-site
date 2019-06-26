@@ -80,6 +80,7 @@ class UnderMenuController extends Controller
 
         // SVG overlay light
         $promos['buttons']['svg_overlay_light'] = app('Factories\UnderMenu')->create(1, false, [
+            'title' => 'Example light SVG overlay',
             'option' => 'SVG overlay light',
             'relative_url' => $bg_light,
             'secondary_relative_url' => $svg_light,
@@ -87,6 +88,7 @@ class UnderMenuController extends Controller
 
         // SVG overlay dark
         $promos['buttons']['svg_overlay_dark'] = app('Factories\UnderMenu')->create(1, false, [
+            'title' => 'Example dark SVG overlay',
             'option' => 'SVG overlay dark',
             'relative_url' => $bg_dark,
             'secondary_relative_url' => $svg_dark,
