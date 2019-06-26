@@ -85,7 +85,7 @@
             <tbody>
                 @for ($i = 0; $i < 4; $i++)
                 <tr>
-                    <td>@image('/styleguide/image/150x50?text=150x50', '', 'p-2')
+                    <td>@image('/styleguide/image/150x50?text=150x50', 'Example table image showing the image size of 150x50', 'p-2')
                     <td>{{ $faker->firstName }}</td>
                     <td>{{ $faker->lastName }}</td>
                     <td><a href="mailto:{{ $faker->email }}">{{ $faker->email }}</a></td>
@@ -261,7 +261,7 @@
 
                 <div class="table">
                     <figure>
-                        @image('/styleguide/image/400x300', '', 'p-2')
+                        @image('/styleguide/image/400x300', 'Example figure image showing the image size of 400x300', 'p-2')
                         <figcaption>{{ $faker->sentence }}</figcaption>
                     </figure>
                 </div>
