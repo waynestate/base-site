@@ -16,7 +16,7 @@
 
             &:first-child:hover,
             &:first-child:focus, {
-                @apply .bg-grey-light;
+                @apply .bg-grey-darker .text-white;
             }
 
             // Open symbol
