@@ -10,13 +10,17 @@ import 'accordion/src/accordion.js';
                 target.accordion.folds.forEach(fold => {
                     if(fold !== target) {
                         fold.open = false;
+                        fold.el.firstElementChild.setAttribute('aria-expanded', 'false');
                     }
                 });
 
                 // Allow the content to be shown if its open or hide it when closed
                 target.content.classList.toggle('hidden')
+
+                target.el.firstElementChild.setAttribute('aria-expanded', 'true');
             },
-            enabledClass: 'enabled'
+            enabledClass: 'enabled',
+            noAria: true,
         });
 
         // Hide all accordion content from the start so content inside it isn't part of the tabindex
@@ -24,11 +28,9 @@ import 'accordion/src/accordion.js';
             item.classList.add('hidden');
         });
 
-        // Remove the role="tablist" since it is not needed
-        item.removeAttribute('role');
-
         item.querySelectorAll('li a:first-child').forEach(function(item) {
             item.setAttribute('role', 'button');
+            item.setAttribute('aria-expanded', 'false');
         });
     });
 
