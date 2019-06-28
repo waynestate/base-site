@@ -70,7 +70,7 @@ class ArticleRepository implements ArticleRepositoryContract
             'preview' => $preview,
         ];
 
-        $article['article'] = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+        $article['article'] = $this->cache->remember($params['method'].md5(serialize($params)), $preview ? 0 : config('cache.ttl'), function () use ($params) {
             return $this->newsApi->request($params['method'], $params);
         });
 
