@@ -18,8 +18,7 @@
             </div>
         </div>
 
-        <a href="#two-columns-code" class="button" onclick="document.querySelector('pre.two-columns-code').classList.toggle('hidden');">See two column code</a>
-        <pre id="two-columns-code" class="two-columns-code hidden bg-grey-lightest overflow-scroll">
+        <pre class="bg-grey-lightest overflow-scroll p-4">
             {!! htmlspecialchars('
 <div class="row -mx-4 md:flex">
     <div class="md:w-1/2 px-4">
@@ -28,8 +27,7 @@
     <div class="md:w-1/2 px-4">
         <p>'.$faker->paragraph.'</p>
     </div>
-</div>
-            ') !!}
+</div>') !!}
         </pre>
 
         <hr>
@@ -50,8 +48,7 @@
             </div>
         </div>
 
-        <a href="#three-columns-code" class="button" onclick="document.querySelector('pre.three-columns-code').classList.toggle('hidden');">See three column code</a>
-        <pre id="three-columns-code" class="three-columns-code hidden bg-grey-lightest overflow-scroll">
+        <pre class="bg-grey-lightest overflow-scroll p-4">
             {!! htmlspecialchars('
 <div class="row -mx-4 lg:flex">
     <div class="lg:w-1/3 px-4">
@@ -63,8 +60,7 @@
     <div class="lg:w-1/3 px-4">
         <p>'.$faker->paragraph.'</p>
     </div>
-</div>
-            ') !!}
+</div>') !!}
         </pre>
 
         <hr>
@@ -94,9 +90,7 @@
             </tbody>
         </table>
 
-        <a href="#table-stack" class="button" onclick="document.querySelector('pre.table-stack').classList.toggle('hidden');">See table code</a>
-
-        <pre id="table-stack" class="table-stack hidden bg-grey-lightest overflow-scroll">
+        <pre class="bg-grey-lightest overflow-scroll p-4">
         {!! htmlspecialchars('
 <table class="table-stack">
         <caption>Example table with caption</caption>
@@ -115,8 +109,7 @@
             <td></td>
         </tr>
     </tbody>
-</table>
-        ') !!}
+</table>') !!}
         </pre>
 
         <hr>
@@ -170,14 +163,12 @@
             <p>{{ $faker->paragraph(10) }}</p>
         </blockquote>
 
-        <a href="#blockquote" class="button" onclick="document.querySelector('pre.blockquote').classList.toggle('hidden');">See blockquote code</a>
 
-        <pre id="blockquote" class="blockquote hidden bg-grey-lightest overflow-scroll">
+        <pre class="bg-grey-lightest overflow-scroll p-4">
         {!! htmlspecialchars('
 <blockquote>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-</blockquote>
-        ') !!}
+</blockquote>') !!}
         </pre>
 
         <hr>
@@ -195,14 +186,12 @@
         <a href="#button-examples" class="button bg-gradient-green text-white">Dark button</a>
         <a href="#button-examples" class="button expanded">Expanded button</a>
         <br />
-        <a href="#button-examples" class="button" onclick="document.querySelector('pre.button-examples').classList.toggle('hidden');">See button code</a>
 
-        <pre id="button-examples" class="button-examples hidden bg-grey-lightest overflow-scroll">
+        <pre class="bg-grey-lightest overflow-scroll p-4">
         {!! htmlspecialchars('
 <a href="#" class="button">Standard button</a>
 <a href="#" class="button bg-gradient-green text-white">Dark button</a>
-<a href="#" class="button expanded">Expanded button</a>
-        ') !!}
+<a href="#" class="button expanded">Expanded button</a>') !!}
         </pre>
 
         <hr>
@@ -222,16 +211,13 @@
         <p>Any valid YouTube URL starting with <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">youtu.be</code> or <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">youtube.com/watch</code> will open a lightbox with the video.</p>
         <p><a href="//www.youtube.com/watch?v=guRgefesPXE"><img src="//i.wayne.edu/youtube/guRgefesPXE" alt="School of Medicine Commencement YouTube video"></a></p>
 
-        <a href="#media-example" class="button" onclick="document.querySelector('pre.media-example').classList.toggle('hidden');">See media code</a>
-
-        <pre id="media-example" class="media-example hidden">
+        <pre class="bg-grey-lightest overflow-scroll p-4">
         {!! htmlspecialchars('
 <p>
     <a href="//www.youtube.com/watch?v=guRgefesPXE">
         <img src="//i.wayne.edu/youtube/guRgefesPXE" alt="Description of YouTube video">
     </a>
-</p>
-        ') !!}
+</p>') !!}
         </pre>
 
         <hr>
@@ -243,14 +229,11 @@
             <iframe width="420" height="315" src="//www.youtube.com/embed/guRgefesPXE" title="Responsive embed example" allowfullscreen></iframe>
         </div>
 
-        <a href="#responsive-embed-example" class="button" onclick="document.querySelector('pre.responsive-embed-example').classList.toggle('hidden');">See responsive embed code</a>
-
-        <pre id="responsive-embed-example" class="responsive-embed-example hidden bg-grey-lightest overflow-scroll">
+        <pre class="bg-grey-lightest overflow-scroll p-4">
         {!! htmlspecialchars('
 <div class="responsive-embed">
     <iframe width="420" height="315" src="//www.youtube.com/embed/guRgefesPXE" title="Responsive embed example" allowfullscreen></iframe>
-</div>
-        ') !!}
+</div>') !!}
         </pre>
 
         <hr>
@@ -266,17 +249,15 @@
                     </figure>
                 </div>
 
-                <a href="#fig-none" class="button mr-4" onclick="document.querySelector('pre.fig-none').classList.toggle('hidden');">See code</a>
-                <a href="/styleguide/figure" class="button">More options</a>
-
-                <pre id="fig-none" class="fig-none hidden bg-grey-lightest overflow-scroll">
+                <pre class="bg-grey-lightest overflow-scroll p-4">
                 {!! htmlspecialchars('
 <figure>
     <img src="/styleguide/image/400x300" alt="">
     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
-</figure>
-                ') !!}
+</figure>') !!}
                 </pre>
+
+                <a href="/styleguide/figure" class="button mt-4">More options</a>
             </div>
         </div>
 
@@ -286,7 +267,7 @@
 
         <div class="flex flex-wrap -mx-4">
             <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-                <div class="rounded overflow-hidden border">
+                <div class="rounded overflow-hidden border border-grey">
                     <div class="text-black bg-green-lightest px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Lightest green</span>
                     </div>
@@ -312,7 +293,7 @@
             </div>
 
             <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-                <div class="rounded overflow-hidden border">
+                <div class="rounded overflow-hidden border border-grey">
                     <div class="text-black bg-yellow-lightest px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Lightest yellow</span>
                     </div>
@@ -338,7 +319,7 @@
             </div>
 
             <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-                <div class="rounded overflow-hidden border">
+                <div class="rounded overflow-hidden border border-grey">
                     <div class="text-black bg-white px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>White</span>
                     </div>

@@ -13,15 +13,12 @@
             <figcaption>{{ $faker->sentence }}</figcaption>
         </figure>
 
-        <a href="#fig-none" class="button" onclick="document.querySelector('pre.fig-none').classList.toggle('hidden');">See figure code</a>
-
-        <pre id="fig-none" class="fig-none hidden bg-grey-lightest overflow-scroll">
+        <pre class="bg-grey-lightest overflow-scroll p-4">
         {!! htmlspecialchars('
 <figure>
     <img src="/styleguide/image/400x300" alt="">
     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
-</figure>
-        ') !!}
+</figure>') !!}
         </pre>
 
         <hr>
@@ -36,15 +33,12 @@
                 </figure>
                 <p>{{ $faker->paragraph(38) }}</p>
 
-                <a href="#fig-left" class="button" onclick="document.querySelector('pre.fig-left').classList.toggle('hidden');">See float left code</a>
-
-                <pre id="fig-left" class="fig-left hidden bg-grey-lightest overflow-scroll">
+                <pre class="bg-grey-lightest overflow-scroll p-4">
                 {!! htmlspecialchars('
 <figure class="float-left">
     <img src="/styleguide/image/400x300" alt="">
     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
-</figure>
-                ') !!}
+</figure>')!!}
                 </pre>
             </div>
         </div>
@@ -61,15 +55,12 @@
                 </figure>
                 <p>{{ $faker->paragraph(28) }}</p>
 
-                <a href="#fig-right" class="button" onclick="document.querySelector('pre.fig-right').classList.toggle('hidden');">See float right code</a>
-
-                <pre id="fig-right" class="fig-right hidden bg-grey-lightest overflow-scroll">
+                <pre class="bg-grey-lightest overflow-scroll p-4">
                 {!! htmlspecialchars('
 <figure class="float-right">
     <img src="/styleguide/image/400x300" alt="">
     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
-</figure>
-                ') !!}
+</figure>') !!}
                 </pre>
             </div>
         </div>
@@ -87,15 +78,12 @@
                 </figure>
                 <p>{{ $faker->paragraph(12) }}</p>
 
-                <a href="#fig-center" class="button" onclick="document.querySelector('pre.fig-center').classList.toggle('hidden');">See center image code</a>
-
-                <pre id="fig-center" class="fig-center hidden bg-grey-lightest overflow-scroll">
+                <pre class="bg-grey-lightest overflow-scroll p-4">
                 {!! htmlspecialchars('
 <figure class="text-center">
     <img src="/styleguide/image/800x450" alt="">
     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
-</figure>
-                ') !!}
+</figure>') !!}
                 </pre>
             </div>
         </div>
