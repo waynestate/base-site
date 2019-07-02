@@ -286,91 +286,82 @@
 
         <div class="flex flex-wrap -mx-4">
             <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-                <div class="rounded overflow-hidden">
-                    <div class="text-white bg-green px-6 py-4 text-sm font-semibold relative shadow">
-                        <div class="uppercase">Green</div>
-                    </div>
+                <div class="rounded overflow-hidden border">
                     <div class="text-black bg-green-lightest px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Lightest</span>
+                        <span>Lightest green</span>
                     </div>
                     <div class="text-black bg-green-lighter px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Lighter</span>
+                        <span>Lighter green</span>
                     </div>
                     <div class="text-white bg-green-light px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Light</span>
+                        <span>Light green</span>
                     </div>
                     <div class="text-white bg-green px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Base</span>
+                        <span>Base green</span>
                     </div>
                     <div class="text-white bg-green-dark px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Dark</span>
+                        <span>Dark green</span>
                     </div>
                     <div class="text-white bg-green-darker px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Darker</span>
+                        <span>Darker green</span>
                     </div>
                     <div class="text-white bg-green-darkest px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Darkest</span>
+                        <span>Darkest green</span>
                     </div>
                 </div>
             </div>
 
             <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-                <div class="rounded overflow-hidden">
-                    <div class="text-black bg-yellow px-6 py-4 text-sm font-semibold relative shadow">
-                        <div class="uppercase">Yellow</div>
-                    </div>
+                <div class="rounded overflow-hidden border">
                     <div class="text-black bg-yellow-lightest px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Lightest</span>
+                        <span>Lightest yellow</span>
                     </div>
                     <div class="text-black bg-yellow-lighter px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Lighter</span>
+                        <span>Lighter yellow</span>
                     </div>
                     <div class="text-black bg-yellow-light px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Light</span>
+                        <span>Light yellow</span>
                     </div>
                     <div class="text-black bg-yellow px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Base</span>
+                        <span>Base yellow</span>
                     </div>
                     <div class="text-black bg-yellow-dark px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Dark</span>
+                        <span>Dark yellow</span>
                     </div>
                     <div class="text-black bg-yellow-darker px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Darker</span>
+                        <span>Darker yellow</span>
                     </div>
                     <div class="text-white bg-yellow-darkest px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Darkest</span>
+                        <span>Darkest yellow</span>
                     </div>
                 </div>
             </div>
 
             <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-                <div class="rounded overflow-hidden">
-                    <div class="text-black bg-grey px-6 py-4 text-sm font-semibold relative shadow">
-                        <div class="uppercase">Grey</div>
-                    </div>
+                <div class="rounded overflow-hidden border">
                     <div class="text-black bg-white px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>White</span>
                     </div>
                     <div class="text-black bg-grey-lightest px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Lightest</span>
+                        <span>Lightest grey</span>
                     </div>
                     <div class="text-black bg-grey-lighter px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Lighter</span>
+                        <span>Lighter grey</span>
                     </div>
                     <div class="text-black bg-grey-light px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Light</span>
+                        <span>Light grey</span>
                     </div>
                     <div class="text-black bg-grey px-6 py-3 text-sm font-semibold flex justify-between flex justify-between">
-                        <span>Base</span>
+                        <span>Base grey</span>
                     </div>
                     <div class="text-black bg-grey-dark px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Dark</span>
+                        <span>Dark grey</span>
                     </div>
                     <div class="text-white bg-grey-darker px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Darker</span>
+                        <span>Darker grey</span>
                     </div>
                     <div class="text-white bg-grey-darkest px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Darkest</span>
+                        <span>Darkest grey</span>
                     </div>
                     <div class="text-white bg-black px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Black</span>
