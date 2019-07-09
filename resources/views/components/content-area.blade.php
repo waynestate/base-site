@@ -16,7 +16,7 @@
                     <div class="offcanvas-main-menu mt:hidden">
                         <ul class="mb-2">
                             <li>
-                                <a class="main-menu-toggle pt-2 pb-2 pl-3 pr-3 block" tabindex="0" aria-expanded="false">Main Menu</a>
+                                <a role="button" class="main-menu-toggle pt-2 pb-2 pl-3 pr-3 block" tabindex="0" aria-expanded="false">Main Menu</a>
 
                                 {!! $top_menu_output !!}
                             </li>
