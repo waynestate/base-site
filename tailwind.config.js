@@ -92,6 +92,10 @@ module.exports = {
             spacing: {
                 '14' : '3.5rem',
             },
+            margin: {
+                '17' : '4.25rem',
+                '19' : '4.75rem',
+            },
             boxShadow: {
                 'white': '0 7px 0 '+ colors.white +', 0 14px 0 '+ colors.white,
                 'grey': '0 7px 0 '+ colors.grey +', 0 14px 0 '+ colors.grey,
