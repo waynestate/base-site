@@ -57,6 +57,7 @@ class UnderMenuController extends Controller
             'option' => 'Icon light',
             'secondary_relative_url' => $icon_light,
             'excerpt' => ucfirst(implode(' ', $this->faker->words(3))),
+            'secondary_alt_text' => 'Example light icon',
         ]);
 
         // Icon dark two lines
@@ -64,6 +65,7 @@ class UnderMenuController extends Controller
             'option' => 'Icon dark',
             'secondary_relative_url' => $icon_dark,
             'excerpt' => ucfirst(implode(' ', $this->faker->words(3))),
+            'secondary_alt_text' => 'Example dark icon',
         ]);
 
         // Bg image light
@@ -84,6 +86,7 @@ class UnderMenuController extends Controller
             'option' => 'SVG overlay light',
             'relative_url' => $bg_light,
             'secondary_relative_url' => $svg_light,
+            'secondary_alt_text' => 'Example light overlay image',
         ]);
 
         // SVG overlay dark
@@ -92,6 +95,7 @@ class UnderMenuController extends Controller
             'option' => 'SVG overlay dark',
             'relative_url' => $bg_dark,
             'secondary_relative_url' => $svg_dark,
+            'secondary_alt_text' => 'Example dark overlay image',
         ]);
 
         return view('styleguide-under-menu', merge($request->data, $promos));

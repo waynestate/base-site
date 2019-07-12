@@ -32,6 +32,7 @@ class Grid implements FactoryContract
                 'excerpt' => $this->faker->text(20),
                 'promo_group_id' => $promo_group_id,
                 'promo_item_id' => $i,
+                'filename_alt_text' => 'Example grid image',
             ];
 
             $data[$i] = array_replace_recursive($data[$i], $options);

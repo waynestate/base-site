@@ -28,6 +28,7 @@ class FeaturedPromo implements FactoryContract
                 'relative_url' => '/styleguide/image/600x450?text=Featured',
                 'title' => $this->faker->sentence,
                 'excerpt' => $this->faker->sentence,
+                'filename_alt_text' => 'Example featured image',
             ];
 
             $data[$i] = array_replace_recursive($data[$i], $options);
