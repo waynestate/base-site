@@ -6,9 +6,9 @@
 
     <div class="relative">
         @if(!empty($video['relative_url']))
-            @image($video['relative_url'], $video['excerpt'])
+            @image($video['relative_url'], $video['filename_alt_text'])
         @else
-            @image('//i.wayne.edu/youtube/'.$video['youtube_id'].'/max', $video['excerpt'])
+            @image('//i.wayne.edu/youtube/'.$video['youtube_id'].'/max', $video['filename_alt_text'])
         @endif
 
         <div class="absolute inset-0 flex items-center justify-center">

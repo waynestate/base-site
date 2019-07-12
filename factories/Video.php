@@ -29,6 +29,7 @@ class Video implements FactoryContract
                 'relative_url' => $this->faker->randomElement(array('/styleguide/image/800x450?text=Video', '')),
                 'title' => $this->faker->sentence,
                 'excerpt' => $this->faker->sentence,
+                'filename_alt_text' => 'Example video image',
             ];
 
             $data[$i] = array_replace_recursive($data[$i], $options);
