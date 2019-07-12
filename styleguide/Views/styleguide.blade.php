@@ -18,8 +18,7 @@
             </div>
         </div>
 
-        <a href="#two-columns-code" class="button" onclick="document.querySelector('pre.two-columns-code').classList.toggle('hidden');">See two column code</a>
-        <pre id="two-columns-code" class="two-columns-code hidden bg-grey-lightest overflow-scroll">
+        <pre class="bg-grey-lightest overflow-scroll p-4">
             {!! htmlspecialchars('
 <div class="row -mx-4 md:flex">
     <div class="md:w-1/2 px-4">
@@ -28,8 +27,7 @@
     <div class="md:w-1/2 px-4">
         <p>'.$faker->paragraph.'</p>
     </div>
-</div>
-            ') !!}
+</div>') !!}
         </pre>
 
         <hr>
@@ -50,8 +48,7 @@
             </div>
         </div>
 
-        <a href="#three-columns-code" class="button" onclick="document.querySelector('pre.three-columns-code').classList.toggle('hidden');">See three column code</a>
-        <pre id="three-columns-code" class="three-columns-code hidden bg-grey-lightest overflow-scroll">
+        <pre class="bg-grey-lightest overflow-scroll p-4">
             {!! htmlspecialchars('
 <div class="row -mx-4 lg:flex">
     <div class="lg:w-1/3 px-4">
@@ -63,8 +60,7 @@
     <div class="lg:w-1/3 px-4">
         <p>'.$faker->paragraph.'</p>
     </div>
-</div>
-            ') !!}
+</div>') !!}
         </pre>
 
         <hr>
@@ -85,7 +81,7 @@
             <tbody>
                 @for ($i = 0; $i < 4; $i++)
                 <tr>
-                    <td>@image('/styleguide/image/150x50?text=150x50', '', 'p-2')
+                    <td>@image('/styleguide/image/150x50?text=150x50', 'Example table image showing the image size of 150x50', 'p-2')
                     <td>{{ $faker->firstName }}</td>
                     <td>{{ $faker->lastName }}</td>
                     <td><a href="mailto:{{ $faker->email }}">{{ $faker->email }}</a></td>
@@ -94,9 +90,7 @@
             </tbody>
         </table>
 
-        <a href="#table-stack" class="button" onclick="document.querySelector('pre.table-stack').classList.toggle('hidden');">See table code</a>
-
-        <pre id="table-stack" class="table-stack hidden bg-grey-lightest overflow-scroll">
+        <pre class="bg-grey-lightest overflow-scroll p-4">
         {!! htmlspecialchars('
 <table class="table-stack">
         <caption>Example table with caption</caption>
@@ -115,8 +109,7 @@
             <td></td>
         </tr>
     </tbody>
-</table>
-        ') !!}
+</table>') !!}
         </pre>
 
         <hr>
@@ -170,14 +163,12 @@
             <p>{{ $faker->paragraph(10) }}</p>
         </blockquote>
 
-        <a href="#blockquote" class="button" onclick="document.querySelector('pre.blockquote').classList.toggle('hidden');">See blockquote code</a>
 
-        <pre id="blockquote" class="blockquote hidden bg-grey-lightest overflow-scroll">
+        <pre class="bg-grey-lightest overflow-scroll p-4">
         {!! htmlspecialchars('
 <blockquote>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-</blockquote>
-        ') !!}
+</blockquote>') !!}
         </pre>
 
         <hr>
@@ -195,14 +186,12 @@
         <a href="#button-examples" class="button bg-gradient-green text-white">Dark button</a>
         <a href="#button-examples" class="button expanded">Expanded button</a>
         <br />
-        <a href="#button-examples" class="button" onclick="document.querySelector('pre.button-examples').classList.toggle('hidden');">See button code</a>
 
-        <pre id="button-examples" class="button-examples hidden bg-grey-lightest overflow-scroll">
+        <pre class="bg-grey-lightest overflow-scroll p-4">
         {!! htmlspecialchars('
 <a href="#" class="button">Standard button</a>
 <a href="#" class="button bg-gradient-green text-white">Dark button</a>
-<a href="#" class="button expanded">Expanded button</a>
-        ') !!}
+<a href="#" class="button expanded">Expanded button</a>') !!}
         </pre>
 
         <hr>
@@ -222,16 +211,13 @@
         <p>Any valid YouTube URL starting with <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">youtu.be</code> or <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">youtube.com/watch</code> will open a lightbox with the video.</p>
         <p><a href="//www.youtube.com/watch?v=guRgefesPXE"><img src="//i.wayne.edu/youtube/guRgefesPXE" alt="School of Medicine Commencement YouTube video"></a></p>
 
-        <a href="#media-example" class="button" onclick="document.querySelector('pre.media-example').classList.toggle('hidden');">See media code</a>
-
-        <pre id="media-example" class="media-example hidden">
+        <pre class="bg-grey-lightest overflow-scroll p-4">
         {!! htmlspecialchars('
 <p>
     <a href="//www.youtube.com/watch?v=guRgefesPXE">
         <img src="//i.wayne.edu/youtube/guRgefesPXE" alt="Description of YouTube video">
     </a>
-</p>
-        ') !!}
+</p>') !!}
         </pre>
 
         <hr>
@@ -243,14 +229,11 @@
             <iframe width="420" height="315" src="//www.youtube.com/embed/guRgefesPXE" title="Responsive embed example" allowfullscreen></iframe>
         </div>
 
-        <a href="#responsive-embed-example" class="button" onclick="document.querySelector('pre.responsive-embed-example').classList.toggle('hidden');">See responsive embed code</a>
-
-        <pre id="responsive-embed-example" class="responsive-embed-example hidden bg-grey-lightest overflow-scroll">
+        <pre class="bg-grey-lightest overflow-scroll p-4">
         {!! htmlspecialchars('
 <div class="responsive-embed">
     <iframe width="420" height="315" src="//www.youtube.com/embed/guRgefesPXE" title="Responsive embed example" allowfullscreen></iframe>
-</div>
-        ') !!}
+</div>') !!}
         </pre>
 
         <hr>
@@ -261,22 +244,20 @@
 
                 <div class="table">
                     <figure>
-                        @image('/styleguide/image/400x300', '', 'p-2')
+                        @image('/styleguide/image/400x300', 'Example figure image showing the image size of 400x300', 'p-2')
                         <figcaption>{{ $faker->sentence }}</figcaption>
                     </figure>
                 </div>
 
-                <a href="#fig-none" class="button mr-4" onclick="document.querySelector('pre.fig-none').classList.toggle('hidden');">See code</a>
-                <a href="/styleguide/figure" class="button">More options</a>
-
-                <pre id="fig-none" class="fig-none hidden bg-grey-lightest overflow-scroll">
+                <pre class="bg-grey-lightest overflow-scroll p-4">
                 {!! htmlspecialchars('
 <figure>
     <img src="/styleguide/image/400x300" alt="">
     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
-</figure>
-                ') !!}
+</figure>') !!}
                 </pre>
+
+                <a href="/styleguide/figure" class="button mt-4">More options</a>
             </div>
         </div>
 
@@ -286,91 +267,82 @@
 
         <div class="flex flex-wrap -mx-4">
             <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-                <div class="rounded overflow-hidden">
-                    <div class="text-white bg-green px-6 py-4 text-sm font-semibold relative shadow">
-                        <div class="uppercase">Green</div>
-                    </div>
+                <div class="rounded overflow-hidden border border-grey">
                     <div class="text-black bg-green-lightest px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Lightest</span>
+                        <span>Lightest green</span>
                     </div>
                     <div class="text-black bg-green-lighter px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Lighter</span>
+                        <span>Lighter green</span>
                     </div>
                     <div class="text-white bg-green-light px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Light</span>
+                        <span>Light green</span>
                     </div>
                     <div class="text-white bg-green px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Base</span>
+                        <span>Base green</span>
                     </div>
                     <div class="text-white bg-green-dark px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Dark</span>
+                        <span>Dark green</span>
                     </div>
                     <div class="text-white bg-green-darker px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Darker</span>
+                        <span>Darker green</span>
                     </div>
                     <div class="text-white bg-green-darkest px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Darkest</span>
+                        <span>Darkest green</span>
                     </div>
                 </div>
             </div>
 
             <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-                <div class="rounded overflow-hidden">
-                    <div class="text-black bg-yellow px-6 py-4 text-sm font-semibold relative shadow">
-                        <div class="uppercase">Yellow</div>
-                    </div>
+                <div class="rounded overflow-hidden border border-grey">
                     <div class="text-black bg-yellow-lightest px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Lightest</span>
+                        <span>Lightest yellow</span>
                     </div>
                     <div class="text-black bg-yellow-lighter px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Lighter</span>
+                        <span>Lighter yellow</span>
                     </div>
                     <div class="text-black bg-yellow-light px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Light</span>
+                        <span>Light yellow</span>
                     </div>
                     <div class="text-black bg-yellow px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Base</span>
+                        <span>Base yellow</span>
                     </div>
                     <div class="text-black bg-yellow-dark px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Dark</span>
+                        <span>Dark yellow</span>
                     </div>
                     <div class="text-black bg-yellow-darker px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Darker</span>
+                        <span>Darker yellow</span>
                     </div>
                     <div class="text-white bg-yellow-darkest px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Darkest</span>
+                        <span>Darkest yellow</span>
                     </div>
                 </div>
             </div>
 
             <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-                <div class="rounded overflow-hidden">
-                    <div class="text-black bg-grey px-6 py-4 text-sm font-semibold relative shadow">
-                        <div class="uppercase">Grey</div>
-                    </div>
+                <div class="rounded overflow-hidden border border-grey">
                     <div class="text-black bg-white px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>White</span>
                     </div>
                     <div class="text-black bg-grey-lightest px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Lightest</span>
+                        <span>Lightest grey</span>
                     </div>
                     <div class="text-black bg-grey-lighter px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Lighter</span>
+                        <span>Lighter grey</span>
                     </div>
                     <div class="text-black bg-grey-light px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Light</span>
+                        <span>Light grey</span>
                     </div>
                     <div class="text-black bg-grey px-6 py-3 text-sm font-semibold flex justify-between flex justify-between">
-                        <span>Base</span>
+                        <span>Base grey</span>
                     </div>
                     <div class="text-black bg-grey-dark px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Dark</span>
+                        <span>Dark grey</span>
                     </div>
                     <div class="text-white bg-grey-darker px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Darker</span>
+                        <span>Darker grey</span>
                     </div>
                     <div class="text-white bg-grey-darkest px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Darkest</span>
+                        <span>Darkest grey</span>
                     </div>
                     <div class="text-white bg-black px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Black</span>

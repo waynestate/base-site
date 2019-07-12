@@ -3,7 +3,14 @@
 @section('content')
     @include('components.page-title', ['title' => $page['title']])
 
-    <style>.formy fieldset legend { display:block; }</style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll('.formy fieldset legend').forEach(function (legend) {
+                legend.style.display = 'block';
+            });
+        });
+    </script>
+
     <div class="formy">
         <div class="form-description">
             <div class="form-description">

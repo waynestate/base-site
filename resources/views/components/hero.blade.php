@@ -2,10 +2,10 @@
     $images => array // ['relative_url', 'title', 'description']
 --}}
 
-<{{ (!empty($images) && count($images) > 1) ? 'ul' : 'div' }}{!! (in_array($page['controller'], config('base.hero_full_controllers'))) ? ' role="complementary"' : '' !!} class="mb-4 mt:mx-0{{ !empty($images) && count($images) > 1 ? ' rotate' : '' }}{{!in_array($page['controller'], config('base.hero_full_controllers'))  ? '  -mx-4' : ' ' }} bg-grey-lighter md:bg-transparent">
+<div{!! (in_array($page['controller'], config('base.hero_full_controllers'))) ? ' role="complementary"' : '' !!} class="mb-4 mt:mx-0{{ !empty($images) && count($images) > 1 ? ' rotate' : '' }}{{!in_array($page['controller'], config('base.hero_full_controllers'))  ? '  -mx-4' : ' ' }} bg-grey-lighter md:bg-transparent">
     @if(in_array($page['controller'], config('base.hero_text_controllers')))
         @foreach($images as $image)
-            <{{ (!empty($images) && count($images) > 1) ? 'li' : 'div' }} class="w-full relative" aria-labelledby="hero-image-{{ $loop->iteration }}">
+            <div class="w-full relative" aria-labelledby="hero-image-{{ $loop->iteration }}">
                 <div class="pt-hero w-full bg-cover md:bg-gradient-darkest md:overflow-hidden bg-top relative{{ $loop->first !== true ? ' lazy' : '' }}" @if($loop->first === true) style="background-image: url('{{ $image['relative_url'] }}')" @else data-src="{{ $image['relative_url'] }}"@endif></div>
                 <div class="md:absolute md:bottom-0 md:inset-x-0 md:text-white md:text-shadow-dark @if(count($images) > 1) p-6 @else py-4 @if(in_array($page['controller'], config('base.hero_full_controllers')))lg:pb-10 @endif @endif">
                     <div class="row">
@@ -15,13 +15,13 @@
                         </div>
                     </div>
                 </div>
-            </{{ (!empty($images) && count($images) > 1) ? 'li' : 'div' }}>
+            </div>
         @endforeach
     @else
         @foreach($images as $image)
-            <{{ (!empty($images) && count($images) > 1) ? 'ul' : 'div' }} class="w-full">
+            <div class="w-full">
                 <div class="pt-hero w-full bg-cover bg-top relative{{ $loop->first !== true ? ' lazy' : '' }}" @if($loop->first === true) style="background-image: url('{{ $image['relative_url'] }}')" @else data-src="{{ $image['relative_url'] }}"@endif></div>
-            </{{ (!empty($images) && count($images) > 1) ? 'ul' : 'div' }}>
+            </div>
         @endforeach
     @endif
-</{{ (!empty($images) && count($images) > 1) ? 'ul' : 'div' }}>
+</div>

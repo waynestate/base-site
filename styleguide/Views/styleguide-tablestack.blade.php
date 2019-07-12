@@ -27,9 +27,7 @@
             </tbody>
         </table>
 
-        <a href="#table-stack" class="button" onclick="document.querySelector('pre.table-stack').classList.toggle('hidden');">See table code</a>
-
-        <pre id="table-stack" class="table-stack hidden bg-grey-lightest overflow-scroll">
+        <pre class="bg-grey-lightest overflow-scroll p-4">
         {!! htmlspecialchars('
 <table class="table-stack">
     <caption>Example table with caption</caption>
@@ -48,8 +46,7 @@
             <td></td>
         </tr>
     </tbody>
-</table>
-        ') !!}
+</table>') !!}
         </pre>
     </div>
 @endsection

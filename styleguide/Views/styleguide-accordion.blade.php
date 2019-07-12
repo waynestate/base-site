@@ -11,9 +11,7 @@
         @include('components.accordion', ['items' => $accordion_page])
     @endif
 
-    <a href="#accordions" class="button" onclick="document.querySelector('pre.accordions').classList.toggle('hidden');">See accordion code</a>
-
-    <pre id="accordions" class="accordions hidden bg-grey-lightest overflow-scroll">
+    <pre class="bg-grey-lightest overflow-scroll p-4">
     {!! htmlspecialchars('
 <ul class="accordion">
     <li>
@@ -34,7 +32,6 @@
             <p>Panel 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </div>
     </li>
-</ul>
-    ') !!}
+</ul>') !!}
     </pre>
 @endsection

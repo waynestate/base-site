@@ -1,11 +1,8 @@
 .main-menu {
+    @apply .py-4 .px-0 .mb-2;
+
     ul {
         @apply .m-0 .mb-2 .p-0;
-    }
-
-    // Padding above and below menu
-    > ul {
-        @apply .py-4 .px-0;
     }
 
     li {
@@ -17,15 +14,15 @@
     }
 
     // Indent each level
-    ul > li > ul > li a {
+    li > ul > li a {
         @apply .pl-8;
     }
 
-    ul > li > ul > li > ul > li a {
+    li > ul > li > ul > li a {
         @apply .pl-12;
     }
 
-    ul > li > ul > li > ul > li > ul > li > a {
+    li > ul > li > ul > li > ul > li > a {
         @apply .pl-16;
     }
 
@@ -34,7 +31,7 @@
     }
 
     // Bottom borders on child <li>
-    > ul > li {
+    > li {
         @screen mt {
             @apply .border-b .border-solid .border-grey-lighter;
         }
@@ -48,9 +45,5 @@
     // Don't cascade the selected state to child lists of the item
     .selected ul {
         @apply .font-normal;
-    }
-
-    h2 {
-        @apply .text-grey-darker .text-lg .font-bold .m-0 .px-0 .pt-4;
     }
 }
