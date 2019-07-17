@@ -142,7 +142,7 @@ echo '----';
 chmod -R g+s {{ $shared_dir }}/storage
 chmod -R g+s {{ $release_dir }}
 
-[ -d {{ $app_base }}/tmp ] || mkdir -p 0770 {{ $app_base }}/tmp;
+[ -d {{ $app_base }}/tmp ] || mkdir -p 02770 {{ $app_base }}/tmp;
 @endtask
 
 @task('updaterepo_localsrc', ['on' => 'local'])
