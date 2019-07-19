@@ -14,6 +14,9 @@ import 'accordion/src/accordion.js';
                     }
                 });
 
+                // Force the focus on the element they opened
+                target.el.firstElementChild.focus();
+
                 // Allow the content to be shown if its open or hide it when closed
                 target.content.classList.toggle('hidden')
 
