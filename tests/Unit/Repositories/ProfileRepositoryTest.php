@@ -47,18 +47,31 @@ class ProfileRepositoryTest extends TestCase
      */
     public function getting_page_title_should_come_from_name()
     {
-        $name_fields = app('App\Repositories\ProfileRepository')->getFields()['name_fields'];
+        $returnNameFields = [
+            'name_fields' => [
+                'Honorific',
+                'First Name',
+                'Last Name',
+                'Suffix',
+            ],
+        ];
 
-        // Build the return set
-        foreach ((array) $name_fields as $name) {
-            $return['profile']['data'][$name] = $this->faker->word;
-        }
+        $return['profile']['data'] = [
+            'Honorific' => 'Dr.',
+            'First Name' => 'Anthony',
+            'Last Name' => 'Wayne',
+            'Suffix' => 'Jr.',
+        ];
+
+        // Mock the Connector and set the return
+        $profile = Mockery::mock('App\Repositories\ProfileRepository')->makePartial();
+        $profile->shouldReceive('getFields')->once()->andReturn($returnNameFields);
 
         // Get the page title
-        $pageTitle = app('App\Repositories\ProfileRepository')->getPageTitleFromName($return);
+        $pageTitle = $profile->getPageTitleFromName($return);
 
         // Make sure the page title equals all the name fields
-        $this->assertEquals(implode($return['profile']['data'], ' '), $pageTitle);
+        $this->assertEquals('Dr. Anthony Wayne, Jr.', $pageTitle);
     }
 
     /**
