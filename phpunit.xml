@@ -24,7 +24,6 @@
                 <directory>./app/Providers</directory>
                 <directory>./app/Console/Commands</directory>
                 <file>./app/Http/Kernel.php</file>
-                <file>./app/Http/Middleware/NewRelic.php</file>
                 <file>./app/Http/Middleware/EncryptCookies.php</file>
                 <file>./app/Http/Middleware/TrimStrings.php</file>
                 <file>./app/Http/Middleware/TrustProxies.php</file>

@@ -18,7 +18,6 @@ Starter repository for creating a new website. Live demo can be found at https:/
 * Configure multiple enviorments using [PHPDotenv](https://github.com/vlucas/phpdotenv)
 * SCSS support
 * Automatically inject JS/CSS while developing using [BrowserSync](https://browsersync.io/)
-* [NewRelic](https://newrelic.com/) support via the `NewRelic` middleware if the php extension is installed
 * [100% test code coverage](https://base.wayne.edu/coverages)
 * [Public API documentation](https://base.wayne.edu/api)
 * Commit hook that require the following to pass:
