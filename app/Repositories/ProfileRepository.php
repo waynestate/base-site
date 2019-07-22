@@ -266,9 +266,15 @@ class ProfileRepository implements ProfileRepositoryContract
     {
         $name_fields = $this->getFields()['name_fields'];
 
-        return collect($profile['profile']['data'])->filter(function ($value, $key) use ($name_fields) {
+        $name = collect($profile['profile']['data'])->filter(function ($value, $key) use ($name_fields) {
             return in_array($key, $name_fields) && $value != '';
-        })->implode(' ');
+        })
+            ->map(function ($value, $key) {
+                return $key == 'Suffix' ? ', '.$value : $value;
+            })
+            ->implode(' ');
+
+        return str_replace(' ,', ',', $name);
     }
 
     /**
