@@ -29,14 +29,14 @@ class TopicRepository implements TopicRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function listing($application_ids)
+    public function listing($application_ids, $subsite_folder = null)
     {
         $params = [
             'application_ids' => $application_ids,
             'method' => 'topics',
         ];
 
-        $topics['topics'] = $this->cache->remember('newsroom-topics', config('cache.ttl'), function () use ($params) {
+        $topics['topics'] = $this->cache->remember('newsroom-topics', config('cache.ttl'), function () use ($params, $subsite_folder) {
             try {
                 $topics = $this->newsApi->request($params['method'], $params);
             } catch (\Exception $e) {
@@ -44,8 +44,8 @@ class TopicRepository implements TopicRepositoryContract
             }
 
             if (!empty($topics['data'])) {
-                $topics['data'] = collect($topics['data'])->map(function ($topic) {
-                    $topic['url'] = '/'.config('base.news_listing_route').'/'.config('base.news_topic_route').'/'.$topic['slug'];
+                $topics['data'] = collect($topics['data'])->map(function ($topic) use ($subsite_folder) {
+                    $topic['url'] = '/'.(!empty($subsite_folder) ? $subsite_folder : '').config('base.news_listing_route').'/'.config('base.news_topic_route').'/'.$topic['slug'];
 
                     return $topic;
                 })->toArray();
