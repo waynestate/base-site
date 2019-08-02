@@ -10,7 +10,7 @@ interface TopicRepositoryContract
      * @param array $application_ids
      * @return array
      */
-    public function listing($application_ids);
+    public function listing($application_ids, $subsite_folder);
 
     /**
      * Find topic by id or slug.

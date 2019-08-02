@@ -9,7 +9,7 @@ class TopicRepository extends Repository
     /**
      * {@inheritdoc}
      */
-    public function listing($application_ids)
+    public function listing($application_ids, $subsite_folder = null)
     {
         $topics['topics'] = app('Factories\Topic')->create(20);
 
