@@ -37,14 +37,14 @@ class AppServiceProvider extends ServiceProvider
             // Since all paramters are concated into a string we need to parse them out into an array
             $params = explode(',', $expression);
 
-            // We have two parameters that are optional so we need to set them as blank strings if they weren't passed in
-            for ($i=0; $i <= 1; $i++) {
+            // We have three parameters that are optional so we need to set them as blank strings if they weren't passed in
+            for ($i=0; $i <= 2; $i++) {
                 if (empty($params[$i])) {
                     $params[$i] = "''";
                 }
             }
 
-            return "<?php if(view()->exists('svg.'.strtolower(trim(".$params[0].")))) { echo view('svg.'.strtolower(trim(".$params[0].")), ['name' => strtolower(trim($params[0])), 'class' => $params[1]])->render(); } ?>";
+            return "<?php if(view()->exists('svg.'.strtolower(trim(".$params[0].")))) { echo view('svg.'.strtolower(trim(".$params[0].")), ['name' => strtolower(trim($params[0])), 'class' => $params[1], 'label' => $params[2]])->render(); } ?>";
         });
     }
 
