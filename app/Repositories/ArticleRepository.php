@@ -80,10 +80,13 @@ class ArticleRepository implements ArticleRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getImageUrl($article)
+    public function getImage($article)
     {
-        if (!empty($article['hero_image']['url'])) {
-            return $article['hero_image']['url'];
+        if (!empty($article['hero_image'])) {
+            return [
+                'url' => $article['hero_image']['url'],
+                'alt_text' => $article['hero_image']['alt_text'],
+            ];
         }
 
         $doc = new \DOMDocument();
@@ -91,10 +94,16 @@ class ArticleRepository implements ArticleRepositoryContract
         $images = $doc->getElementsByTagName('img');
 
         if ($images->item(0) !== null) {
-            return $images->item(0)->getAttribute('src');
+            return [
+                'url' => $images->item(0)->getAttribute('src'),
+                'alt_text' => $images->item(0)->getAttribute('alt'),
+            ];
         }
 
-        return null;
+        return [
+            'url' => null,
+            'alt_text' => null,
+        ];
     }
 
     /**

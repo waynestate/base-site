@@ -161,7 +161,7 @@ class ArticleRepositoryTest extends TestCase
     }
 
     /**
-     * @covers App\Repositories\ArticleRepository::getImageUrl
+     * @covers App\Repositories\ArticleRepository::getImage
      * @test
      */
     public function article_with_no_images_should_return_null()
@@ -171,39 +171,43 @@ class ArticleRepositoryTest extends TestCase
             'body' => null,
         ]);
 
-        $imageUrl = app('App\Repositories\ArticleRepository')->getImageUrl($article);
+        $imageUrl = app('App\Repositories\ArticleRepository')->getImage($article);
 
-        $this->assertNull($imageUrl);
+        $this->assertNull($imageUrl['url']);
+        $this->assertNull($imageUrl['alt_text']);
     }
 
     /**
-     * @covers App\Repositories\ArticleRepository::getImageUrl
+     * @covers App\Repositories\ArticleRepository::getImage
      * @test
      */
     public function article_with_hero_should_return_hero_url()
     {
         $article = app('Factories\Article')->create(1, true);
 
-        $imageUrl = app('App\Repositories\ArticleRepository')->getImageUrl($article['data']);
+        $imageUrl = app('App\Repositories\ArticleRepository')->getImage($article['data']);
 
-        $this->assertEquals($article['data']['hero_image']['url'], $imageUrl);
+        $this->assertEquals($article['data']['hero_image']['url'], $imageUrl['url']);
+        $this->assertEquals($article['data']['hero_image']['alt_text'], $imageUrl['alt_text']);
     }
 
     /**
-     * @covers App\Repositories\ArticleRepository::getImageUrl
+     * @covers App\Repositories\ArticleRepository::getImage
      * @test
      */
     public function article_with_body_image_should_return_url()
     {
-        $image = $this->faker->imageUrl();
+        $url = $this->faker->imageUrl();
+        $alt = $this->faker->word;
 
         $article = app('Factories\Article')->create(1, true, [
             'hero_image' => null,
-            'body' => '<img src="'.$image.'">',
+            'body' => '<img src="'.$url.'" alt="'.$alt.'">',
         ]);
 
-        $imageUrl = app('App\Repositories\ArticleRepository')->getImageUrl($article['data']);
+        $image = app('App\Repositories\ArticleRepository')->getImage($article['data']);
 
-        $this->assertEquals($image, $imageUrl);
+        $this->assertEquals($url, $image['url']);
+        $this->assertEquals($alt, $image['alt_text']);
     }
 }

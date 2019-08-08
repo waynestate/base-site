@@ -48,6 +48,12 @@ class Data
             return $page;
         }
 
+        // Overrides for meta information
+        $data['meta']['image'] = !empty($page['data']['meta_image']) ? $page['data']['meta_image'] : '';
+        $data['meta']['image_alt'] = !empty($page['data']['meta_image_alt']) ? $page['data']['meta_image_alt'] : '';
+        $page['page']['description'] = !empty($page['data']['page_description']) ? $page['data']['page_description'] : $page['page']['description'];
+        $page['page']['title'] = !empty($page['data']['page_title']) ? $page['data']['page_title'] : $page['page']['title'];
+
         // Merge server and page data so global repositories can use them
         $request->data = merge($data, $page);
 

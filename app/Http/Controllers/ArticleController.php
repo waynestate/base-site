@@ -83,7 +83,10 @@ class ArticleController extends Controller
             $request->data['hero'][]['relative_url'] = $article['article']['data']['hero_image']['url'];
         }
 
-        $request->data['meta']['image'] = $this->article->getImageUrl($article['article']['data']);
+        $image = $this->article->getImage($article['article']['data']);
+
+        $request->data['meta']['image'] = $image['url'];
+        $request->data['meta']['image_alt'] = $image['alt_text'];
 
         $topics = $this->topic->listing($request->data['site']['news']['application_id']);
 

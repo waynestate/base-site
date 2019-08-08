@@ -26,12 +26,12 @@ interface ArticleRepositoryContract
     public function find($id, $application_ids, $preview);
 
     /**
-     * Get the image url for the meta data.
+     * Get the image for the meta data.
      *
      * @param array $article
      * @return array
      */
-    public function getImageUrl($article);
+    public function getImage($article);
 
     /**
      * Set the paging.
