@@ -4,7 +4,7 @@ import 'accordion/src/accordion.js';
     "use strict";
 
     document.querySelectorAll('.accordion').forEach(function(item) {
-        new Accordion(item, {
+        let accordion = new Accordion(item, {
             onToggle: function(target){
                 // Only allow one accordion item open at time
                 target.accordion.folds.forEach(fold => {
@@ -31,10 +31,20 @@ import 'accordion/src/accordion.js';
             item.classList.add('hidden');
         });
 
+        // Apply accessibility attributes
         item.querySelectorAll('li a:first-child').forEach(function(item) {
             item.setAttribute('role', 'button');
             item.setAttribute('aria-expanded', 'false');
         });
+
+        // See if the hash is within this accordion so we can open it
+        if(window.location.hash != '') {
+            accordion.folds.forEach(function (fold) {
+                if(fold.heading.getAttribute('id') == window.location.hash.substr(1)) {
+                    fold.open = true;
+                }
+            });
+        }
     });
 
     document.querySelectorAll('ul.accordion > li').forEach(function(item) {
