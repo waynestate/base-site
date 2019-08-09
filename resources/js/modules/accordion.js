@@ -20,7 +20,11 @@ import 'accordion/src/accordion.js';
                 // Allow the content to be shown if its open or hide it when closed
                 target.content.classList.toggle('hidden')
 
+                // Set accessible state of expanded
                 target.el.firstElementChild.setAttribute('aria-expanded', 'true');
+
+                // Update the browsers hash so if the url is copied it will deep link properly
+                window.location.hash = target.heading.hash.substr(1);
             },
             enabledClass: 'enabled',
             noAria: true,
@@ -41,14 +45,21 @@ import 'accordion/src/accordion.js';
         if(window.location.hash != '') {
             accordion.folds.forEach(function (fold) {
                 if(fold.heading.getAttribute('id') == window.location.hash.substr(1)) {
-                    fold.open = true;
+                    window.setTimeout(function () {
+                        fold.open = true;
+                    }, 500);
                 }
             });
         }
     });
 
+    // Apply the required content fold afterwards to simplify the html
     document.querySelectorAll('ul.accordion > li').forEach(function(item) {
-        // Apply the required content fold afterwards to simplify the html
         item.querySelector('div').classList.add('fold');
+    });
+
+    // Remove IDs from content folds so the browser doesn't jump around when opening an accordion item
+    document.querySelectorAll('.accordion li a').forEach(function (item) {
+        item.removeAttribute('id');
     });
 })();
