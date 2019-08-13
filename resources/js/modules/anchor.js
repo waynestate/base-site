@@ -1,11 +1,19 @@
 (function() {
     "use strict";
 
+    var offset = function offset(el) {
+        var rect = el.getBoundingClientRect(),
+        scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+        scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
+    }
+
     var scrollToHash = function () {
         var hash = window.location.hash.substring(1);
 
         if(hash !== '' && document.getElementById(hash)) {
-            let y = document.getElementById(hash).offsetTop - document.querySelector('.menu-top-container').offsetHeight;
+            let y = offset((document.getElementById(hash))).top - document.querySelector('.menu-top-container').offsetHeight;
 
             window.scroll(0, y);
         }
