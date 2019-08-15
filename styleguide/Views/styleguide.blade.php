@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <pre class="bg-grey-lightest overflow-scroll p-4">
+        <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
             {!! htmlspecialchars('
 <div class="row -mx-4 md:flex">
     <div class="md:w-1/2 px-4">
@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        <pre class="bg-grey-lightest overflow-scroll p-4">
+        <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
             {!! htmlspecialchars('
 <div class="row -mx-4 lg:flex">
     <div class="lg:w-1/3 px-4">
@@ -90,7 +90,7 @@
             </tbody>
         </table>
 
-        <pre class="bg-grey-lightest overflow-scroll p-4">
+        <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
         {!! htmlspecialchars('
 <table class="table-stack">
         <caption>Example table with caption</caption>
@@ -164,7 +164,7 @@
         </blockquote>
 
 
-        <pre class="bg-grey-lightest overflow-scroll p-4">
+        <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
         {!! htmlspecialchars('
 <blockquote>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -187,7 +187,7 @@
         <a href="#button-examples" class="button expanded">Expanded button</a>
         <br />
 
-        <pre class="bg-grey-lightest overflow-scroll p-4">
+        <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
         {!! htmlspecialchars('
 <a href="#" class="button">Standard button</a>
 <a href="#" class="button bg-gradient-green text-white">Dark button</a>
@@ -211,7 +211,7 @@
         <p>Any valid YouTube URL starting with <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">youtu.be</code> or <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">youtube.com/watch</code> will open a lightbox with the video.</p>
         <p><a href="//www.youtube.com/watch?v=guRgefesPXE"><img src="//i.wayne.edu/youtube/guRgefesPXE" alt="School of Medicine Commencement YouTube video"></a></p>
 
-        <pre class="bg-grey-lightest overflow-scroll p-4">
+        <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
         {!! htmlspecialchars('
 <p>
     <a href="//www.youtube.com/watch?v=guRgefesPXE">
@@ -229,7 +229,7 @@
             <iframe width="420" height="315" src="//www.youtube.com/embed/guRgefesPXE" title="Responsive embed example" allowfullscreen></iframe>
         </div>
 
-        <pre class="bg-grey-lightest overflow-scroll p-4">
+        <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
         {!! htmlspecialchars('
 <div class="responsive-embed">
     <iframe width="420" height="315" src="//www.youtube.com/embed/guRgefesPXE" title="Responsive embed example" allowfullscreen></iframe>
@@ -249,7 +249,7 @@
                     </figure>
                 </div>
 
-                <pre class="bg-grey-lightest overflow-scroll p-4">
+                <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
                 {!! htmlspecialchars('
 <figure>
     <img src="/styleguide/image/400x300" alt="">

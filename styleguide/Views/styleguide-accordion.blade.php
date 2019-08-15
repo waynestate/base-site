@@ -11,7 +11,7 @@
         @include('components.accordion', ['items' => $accordion_page])
     @endif
 
-    <pre class="bg-grey-lightest overflow-scroll p-4">
+    <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
     {!! htmlspecialchars('
 <ul class="accordion">
     <li>
