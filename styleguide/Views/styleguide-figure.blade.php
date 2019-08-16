@@ -13,7 +13,7 @@
             <figcaption>{{ $faker->sentence }}</figcaption>
         </figure>
 
-        <pre class="bg-grey-lightest overflow-scroll p-4">
+        <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
         {!! htmlspecialchars('
 <figure>
     <img src="/styleguide/image/400x300" alt="">
@@ -33,7 +33,7 @@
                 </figure>
                 <p>{{ $faker->paragraph(38) }}</p>
 
-                <pre class="bg-grey-lightest overflow-scroll p-4">
+                <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
                 {!! htmlspecialchars('
 <figure class="float-left">
     <img src="/styleguide/image/400x300" alt="">
@@ -55,7 +55,7 @@
                 </figure>
                 <p>{{ $faker->paragraph(28) }}</p>
 
-                <pre class="bg-grey-lightest overflow-scroll p-4">
+                <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
                 {!! htmlspecialchars('
 <figure class="float-right">
     <img src="/styleguide/image/400x300" alt="">
@@ -78,7 +78,7 @@
                 </figure>
                 <p>{{ $faker->paragraph(12) }}</p>
 
-                <pre class="bg-grey-lightest overflow-scroll p-4">
+                <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
                 {!! htmlspecialchars('
 <figure class="text-center">
     <img src="/styleguide/image/800x450" alt="">
