@@ -1,0 +1,12 @@
+{
+	"base": [
+        "a[href$=\"login\\.wayne\\.edu\"] > .wsuhidesmall",
+        "a[href$=\"policies\\/\"]",
+        ".copyright > p",
+        "p > a[href$=\"wayne\\.edu\\/\"]",
+        "blockquote > p",
+        "#filter-group",
+        "#q"
+    ],
+    "local": []
+}
