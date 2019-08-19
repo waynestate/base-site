@@ -11,6 +11,8 @@
         ".banner > .excerpt.normal-case.text-xl",
         ".bg-grey-lighter.overflow-hidden.bg-cover > .p-4.absolute.inset-0 > .text-center.text-lg.font-bold",
         ".overflow-hidden.bg-cover.bg-green-darkest > .p-4.absolute.inset-0:nth-child(2) > .text-center.text-lg.font-bold",
+        ".button-bg-image-light > .p-4.absolute.inset-0 > .text-center.text-lg.font-bold",
+        ".button-bg-image-dark > .p-4.absolute.inset-0 > .text-center.text-lg.font-bold",
         "#video"
     ],
     "local": []
