@@ -28,7 +28,7 @@ class Grid implements FactoryContract
             $data[$i] = [
                 'relative_url' => '/styleguide/image/550x400?text=550x400',
                 'title' => $this->faker->text(20),
-                'link' => $this->faker->url,
+                'link' => 'https://wayne.edu/',
                 'excerpt' => $this->faker->text(20),
                 'promo_group_id' => $promo_group_id,
                 'promo_item_id' => $i,

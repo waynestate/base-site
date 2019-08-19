@@ -3,6 +3,7 @@
         "a[href$=\"login\\.wayne\\.edu\"] > .wsuhidesmall",
         "a[href$=\"policies\\/\"]",
         ".copyright > p",
+        ".copyright > p > a[href$=\"wayne\\.edu\\/\"]",
         "p > a[href$=\"wayne\\.edu\\/\"]",
         "blockquote > p",
         "#filter-group",

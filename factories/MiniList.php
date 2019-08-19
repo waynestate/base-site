@@ -24,7 +24,7 @@ class MiniList implements FactoryContract
     {
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
-                'link' => $this->faker->url,
+                'link' => 'https://wayne.edu/',
                 'title' => $this->faker->sentence,
             ];
 
