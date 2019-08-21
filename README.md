@@ -25,6 +25,7 @@ Starter repository for creating a new website. Live demo can be found at https:/
     * PHP linting using [PHPCSFixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer)
     * JS linting using [ESLint](http://eslint.org/)
     * CSS/SCSS linting using [Stylelint](https://stylelint.io/)
+    * Accessibility tests using [Axe](https://github.com/dequelabs/axe-webdriverjs)
 * Menus
     * Top level menu carried across all pages that follows you down the page as you scroll
     * Left menu if a page has subitems, otherwise its a full width page
@@ -36,7 +37,7 @@ Starter repository for creating a new website. Live demo can be found at https:/
 * [Full styleguide](https://base.wayne.edu/styleguide) detailing out every available component using [PHP faker data](https://github.com/fzaninotto/Faker)
 * [Single](https://base.wayne.edu/styleguide/hero/full) or [rotating](https://base.wayne.edu/styleguide/hero/full/rotate) hero images using [Flickity](https://flickity.metafizzy.co/)
 * Automatically lightbox youtube videos using [Media Box](https://github.com/pinceladasdaweb/mediabox)
-* Easy integration with a CMS by writing [custom .json files](https://base.wayne.edu/index.json) to the public directory which are matched by to a route and sent to the specified controller
+* Easy integration with a CMS by writing custom .json files to the public directory which are matched by to a route and sent to the specified controller
 
 ## Setup
 
@@ -99,7 +100,7 @@ Email web@wayne.edu with your request.
 1. Open the folder `/app/Repositories`.
 1. Create new class and implement the interface `RequestDataRepositoryContract`.
 1. Fill out the `getRequestData` method and return an array.
-1. Call the `getRequestData` method in the `/app/Http/Middleware/Data.php` file.
+1. Add the callback under the site in `config/base.php`
 
 ### Developing controllers
 
@@ -112,7 +113,7 @@ Email web@wayne.edu with your request.
 ## Developing views
 
 1. Open `/resources/views/`
-1. This folder contains all the views for the front-end using the [blade templating engine](https://laravel.com/docs/5.6/blade)
+1. This folder contains all the views for the front-end using the [blade templating engine](https://laravel.com/docs/)
 1. Files must be saved in the format of: `homepage.blade.php`
 1. Components: Contains views that are reusable
 
@@ -188,7 +189,7 @@ $menus = [
 
 1. Create a CMS page for the profile listing page (ex: `profiles`) and select the `ProfileController` as the template.
 1. Create a CMS page for the profile view, it must be: `profile` and select the `ProfileController` as the template.
-1. You can now visit `https://domain.dev/profiles` and `http://domain.dev/profile/{accessid}`.
+1. You can now visit `https://domain.local/profiles` and `http://domain.local/profile/{accessid}`.
 
 ## Style guide development for a new feature
 
@@ -206,7 +207,7 @@ Feature names should be singular and CamelCased. To create a new feature called 
 1. Apply this code to the svg tag: `class="{{ $class ?? '' }}" aria-labelledby="{{ $name ?? '' }}"`.
 
 ## Using SVG icons
-1. `<svg>` replace with: `@svg('filename', 'optional classes')`
+1. `<svg>` replace with: `@svg('filename', 'optional classes', 'optional label')`
 
 ## Lazy loading
 
