@@ -264,11 +264,13 @@ echo "RemoteRelease Prepare Done.";
 @endtask
 
 @task('cache_remote_release', ['on' => $remote_server])
+shopt -s expand_aliases
+source ~/.bashrc
 echo "Caching configs...";
-php73 artisan config:cache
+php73 {{ $source_dir }}/ {{ $release_dir }}/{{ $release }}/artisan config:cache
 echo "Caching routes...";
-php73 artisan route:cache
-echo "Done caching";
+php73 {{ $source_dir }}/ {{ $release_dir }}/{{ $release }}/artisan route:cache
+echo "Done caching ";
 @endtask
 
 @task('link_newrelease_on_remote', ['on' => $remote_server])
