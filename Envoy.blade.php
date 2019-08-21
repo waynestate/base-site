@@ -258,7 +258,7 @@ echo "RemoteRelease Environment file setup Done.";
 
 @task('prepare_remoterelease', ['on' => $remote_server])
 echo "RemoteRelease Prepare...";
-rsync --progress -e ssh -avzh --delay-updates --delete {{ $source_dir }}/ {{ $release_dir }}/{{ $release }}/;
+rsync --progress -e ssh -avzh --delay-updates --delete {{ $source_dir }}/{{ $release_dir }}/{{ $release }}/;
 chmod -R g+s {{ $release_dir }}/{{ $release }}
 echo "RemoteRelease Prepare Done.";
 @endtask
@@ -267,9 +267,9 @@ echo "RemoteRelease Prepare Done.";
 shopt -s expand_aliases
 source ~/.bashrc
 echo "Caching configs...";
-php73 {{ $source_dir }}/ {{ $release_dir }}/{{ $release }}/artisan config:cache
+php73 {{ $source_dir }}/{{ $release_dir }}/{{ $release }}/artisan config:cache
 echo "Caching routes...";
-php73 {{ $source_dir }}/ {{ $release_dir }}/{{ $release }}/artisan route:cache
+php73 {{ $source_dir }}/{{ $release_dir }}/{{ $release }}/artisan route:cache
 echo "Done caching ";
 @endtask
 
