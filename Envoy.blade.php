@@ -93,6 +93,7 @@ extractreleasepack_on_remote
 syncshareddata_remotesrc
 baseenvlink_remoterelease
 prepare_remoterelease
+cache_remote_release
 link_newrelease_on_remote
 cleanup_oldreleases_on_remote
 clean_localsrc
@@ -174,7 +175,7 @@ make composerinstalldev
 fi
 echo "Composer installed.";
 
-echo "Generate the artisian key...";
+echo "Generate the artisan key...";
 make generatekey
 
 echo "Yarn install...";
@@ -260,6 +261,14 @@ echo "RemoteRelease Prepare...";
 rsync --progress -e ssh -avzh --delay-updates --delete {{ $source_dir }}/ {{ $release_dir }}/{{ $release }}/;
 chmod -R g+s {{ $release_dir }}/{{ $release }}
 echo "RemoteRelease Prepare Done.";
+@endtask
+
+@task('cache_remote_release', ['on' => $remote_server])
+echo "Caching configs...";
+php73 artisan config:cache
+echo "Caching routes...";
+php73 artisan route:cache
+echo "Done caching";
 @endtask
 
 @task('link_newrelease_on_remote', ['on' => $remote_server])
