@@ -267,9 +267,9 @@ echo "RemoteRelease Prepare Done.";
 shopt -s expand_aliases
 source ~/.bashrc
 echo "Caching configs...";
-php73 {{ $source_dir }}/{{ $release_dir }}/{{ $release }}/artisan config:cache
+php73 {{ $release_dir }}/{{ $release }}/artisan config:cache
 echo "Caching routes...";
-php73 {{ $source_dir }}/{{ $release_dir }}/{{ $release }}/artisan route:cache
+php73 {{ $release_dir }}/{{ $release }}/artisan route:cache
 echo "Done caching ";
 @endtask
 
