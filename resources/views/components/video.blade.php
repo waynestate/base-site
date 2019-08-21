@@ -2,7 +2,7 @@
     $video => array // [['title', 'link', 'relative_url', 'youtube_id', 'excerpt']]
 --}}
 
-@if(!empty($video['link']))<a class="no-underline hover:underline font-bold" href="{{ $video['link'] }}">@endif
+@if(!empty($video['link']))<a class="video no-underline hover:underline font-bold" href="{{ $video['link'] }}">@endif
 
     <div class="relative">
         @if(!empty($video['relative_url']))

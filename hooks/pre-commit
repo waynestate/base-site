@@ -10,14 +10,17 @@ export PATH=/usr/local/bin:$PATH
 
 # Run on either wild wayne or local machine
 if [ "$wild_wayne_test" = "true" ]; then
-  printf "Running phplint...\n"
-  phplint="$(make phplintdry)"
+    printf "Running phplint...\n"
+    phplint="$(make phplintdry)"
 
-  printf "Running stylelint...\n"
-  stylelint="$(make stylelint)"
+    printf "Running stylelint...\n"
+    stylelint="$(make stylelint)"
 
-  printf "Running tests...\n"
-  phpunit="$(phpunit)"
+    printf "Running tests...\n"
+    phpunit="$(phpunit)"
+
+    printf "Accessibility audit...\n"
+    accessibility="$(yarn --cwd /vagrant/accessibility-audit run audit ${site_folder})"
 else
     if hash vagrant 2>/dev/null; then
         printf "Running phplint...\n"
@@ -28,6 +31,9 @@ else
 
         printf "Running tests...\n"
         phpunit="$(vagrant ssh -c "cd /vagrant/${site_folder}; phpunit")"
+
+        printf "Accessibility audit...\n"
+        accessibility="$(vagrant ssh -c "cd /vagrant/accessibility-audit; yarn run audit ${site_folder}")"
     else
         printf "vagrant command could not be found.\n"
         errors=true
@@ -51,6 +57,12 @@ if [[ $phpunit == *"FAILURES!"* || $phpunit == *"ERRORS!"* || $phpunit == *"Fata
     errors=true;
     printf "phpunit tests failed. Please fix them before committing.\n"
     printf ">> run: make runtests\n"
+fi
+
+if [[ $accessibility == *"violations found"* ]]; then
+    errors=true;
+    printf "Accessibility errors found. Please fix them before committing.\n"
+    echo $accessibility;
 fi
 
 # Make sure they aren't on the master branch and committing
