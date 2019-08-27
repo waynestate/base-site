@@ -24,7 +24,7 @@ class FooterSocial implements FactoryContract
     {
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
-                'link' => 'https://wayne.edu/',
+                'link' => 'https://wayne.edu',
                 'title' => $this->faker->word,
             ];
 

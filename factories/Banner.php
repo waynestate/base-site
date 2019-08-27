@@ -26,7 +26,7 @@ class Banner implements FactoryContract
             $data[$i] = [
                 'class' => 'banner',
                 'title' => 'Make a',
-                'link' => 'https://wayne.edu/',
+                'link' => 'https://wayne.edu',
                 'excerpt' => 'Gift',
             ];
 

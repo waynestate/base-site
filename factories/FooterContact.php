@@ -31,7 +31,7 @@ class FooterContact implements FactoryContract
                         ' .$this->faker->name.'<br />
                         ' .$this->faker->streetAddress.'<br />
                         ' .$this->faker->city.', '.$this->faker->state.' '.$this->faker->postcode.'<br />
-                        <a href="https://wayne.edu/">'.$this->faker->word.'</a>
+                        <a href="https://wayne.edu">'.$this->faker->word.'</a>
                     </p>',
             ];
 

@@ -68,7 +68,7 @@ class UnderMenuController extends Controller
             'secondary_alt_text' => 'Example dark icon',
         ]);
 
-        // // Bg image light
+        // Bg image light
         $promos['buttons']['bg_image_light'] = app('Factories\UnderMenu')->create(1, false, [
             'title' => 'Example Text',
             'option' => 'Bg image light',
