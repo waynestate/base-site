@@ -24,7 +24,7 @@ class UnderMenu implements FactoryContract
     {
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
-                'link' => 'https://wayne.edu/',
+                'link' => 'https://wayne.edu',
                 'title' => ucfirst(implode(' ', $this->faker->words(2))),
             ];
 

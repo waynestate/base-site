@@ -27,7 +27,7 @@ class Event implements FactoryContract
             $title = ($i !== 2)?$this->faker->sentence(rand(6, 10)):$title;
 
             $event = [
-                'url' => 'https://wayne.edu/',
+                'url' => 'https://wayne.edu',
                 'title' => $title,
                 'date' => $date,
                 'start_time' => $this->faker->dateTimeThisMonth('now')->format('H:i:s'),
