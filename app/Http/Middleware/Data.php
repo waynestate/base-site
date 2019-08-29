@@ -13,8 +13,7 @@ class Data
     protected $prefix = 'App';
 
     /**
-     * Set a global data array to the request object from repositories that
-     * implement the RequestDataRepositoryContract.
+     * Set a global data array to the request object containing page information
      *
      * @param \Illuminate\Http\Request $request
      * @param \Closure  $next
