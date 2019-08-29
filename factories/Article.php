@@ -48,7 +48,7 @@ class Article implements FactoryContract
                 'short_title' => $this->faker->sentence(rand(3, 6)),
                 'sub_title' => null,
                 'permalink' => $this->faker->slug,
-                'body' => '<div id="article"><p>'.$this->faker->paragraph(8).'</p>
+                'body' => '<p>'.$this->faker->paragraph(8).'</p>
                 <p>'.$this->faker->paragraph(8).'</p>
                 <figure class="figure" style="padding-bottom:10px; float:right">
                     <img alt="Placeholder" height="400" src="/styleguide/image/300x400?text=Figure%20float%20right" style="padding:10px" width="300">
@@ -93,7 +93,7 @@ class Article implements FactoryContract
                 <p style="text-align:center">
                     <img alt="Placeholder" height="350" src="/styleguide/image/800x350?text=Image%20centered" style="padding:10px" width="800">
                 </p>
-                <p>'.$this->faker->paragraph(8).'</p></div>
+                <p>'.$this->faker->paragraph(8).'</p>
                 ',
                 'article_date' => $this->faker->date,
                 'status' => 'Published',
