@@ -13,7 +13,7 @@ class Profiles extends Page
             'page' => [
                 'controller' => 'ProfileController',
                 'title' => 'Profile listing',
-                'id' => 101104,
+                'id' => 101105,
             ],
         ]);
     }

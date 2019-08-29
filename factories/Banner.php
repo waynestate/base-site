@@ -26,7 +26,7 @@ class Banner implements FactoryContract
             $data[$i] = [
                 'class' => 'banner',
                 'title' => 'Make a',
-                'link' => $this->faker->url,
+                'link' => 'https://wayne.edu',
                 'excerpt' => 'Gift',
             ];
 

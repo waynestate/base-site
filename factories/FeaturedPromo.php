@@ -24,7 +24,7 @@ class FeaturedPromo implements FactoryContract
     {
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
-                'link' => $this->faker->url,
+                'link' => 'https://wayne.edu',
                 'relative_url' => '/styleguide/image/600x450?text=Featured',
                 'title' => $this->faker->sentence,
                 'excerpt' => $this->faker->sentence,

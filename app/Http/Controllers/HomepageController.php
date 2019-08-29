@@ -36,7 +36,7 @@ class HomepageController extends Controller
      */
     public function index(Request $request)
     {
-        //$promos = $this->promo->getHomepagePromos();
+        // $promos = $this->promo->getHomepagePromos();
 
         $articles = $this->article->listing($request->data['site']['news']['application_id']);
 

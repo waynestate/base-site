@@ -70,12 +70,14 @@ class UnderMenuController extends Controller
 
         // Bg image light
         $promos['buttons']['bg_image_light'] = app('Factories\UnderMenu')->create(1, false, [
+            'title' => 'Example Text',
             'option' => 'Bg image light',
             'relative_url' => $bg_light,
         ]);
 
         // Bg image dark
         $promos['buttons']['bg_image_dark'] = app('Factories\UnderMenu')->create(1, false, [
+            'title' => 'Example Text',
             'option' => 'Bg image dark',
             'relative_url' => $bg_dark,
         ]);

@@ -12,7 +12,6 @@ class PromoRepository extends Repository
     public function getHomepagePromos(int $page_id = null)
     {
         return [
-            // Example Group
             //'key' => app('Factories\YourFactory')->create(5),
         ];
     }
@@ -46,6 +45,7 @@ class PromoRepository extends Repository
         // Only pull hero promos if they match the pages_ids that are specificed
         $hero = !empty($hero_page_ids[$data['page']['id']]) ? app('Factories\HeroImage')->create($hero_page_ids[$data['page']['id']]) : null;
 
+        // Define the pages that the childpage accordion should show on page_id => quanity
         $accordion_page_ids = [
             107100 => 5,
         ];
@@ -53,8 +53,8 @@ class PromoRepository extends Repository
         // Only pull accordion for childpage template
         $accordion = !empty($accordion_page_ids[$data['page']['id']]) ? app('Factories\Accordion')->create($accordion_page_ids[$data['page']['id']]) : null;
 
-        // Every available social icon
-        $icons = [
+        // Get all the social icons
+        $social = collect([
             'twitter',
             'facebook',
             'instagram',
@@ -63,10 +63,7 @@ class PromoRepository extends Repository
             'pinterest',
             'youtube',
             'snapchat',
-        ];
-
-        // Get all the social icons
-        $social = collect($icons)->map(function ($name) {
+        ])->map(function ($name) {
             return app('Factories\FooterSocial')->create(1, true, ['title' => $name]);
         })
         ->reject(function ($item) {
@@ -75,19 +72,10 @@ class PromoRepository extends Repository
         ->toArray();
 
         return [
-            // Contact footer
             'contact' => app('Factories\FooterContact')->create(1),
-
-            // Social footer
             'social' => $social,
-
-            // Hero
             'hero' => $hero,
-
-            // Under menu
             'under_menu' => $under_menu,
-
-            // Accordion child page
             'accordion_page' => $accordion,
         ];
     }
