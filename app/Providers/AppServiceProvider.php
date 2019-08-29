@@ -39,7 +39,7 @@ class AppServiceProvider extends ServiceProvider
 
             // Default the label to the title
             if (empty($params[2])) {
-                $params[2] = strtolower(trim($params[0]));
+                $params[2] = $params[0];
             }
 
             // We have three parameters that are optional so we need to set them as blank strings if they weren't passed in
@@ -49,7 +49,7 @@ class AppServiceProvider extends ServiceProvider
                 }
             }
 
-            return "<?php if(view()->exists('svg.'.strtolower(trim(".$params[0].")))) { echo view('svg.'.strtolower(trim(".$params[0].")), ['name' => strtolower(trim($params[0])), 'class' => $params[1], 'label' => $params[2]])->render(); } ?>";
+            return "<?php if(view()->exists('svg.'.strtolower(trim(".$params[0].")))) { echo view('svg.'.strtolower(trim(".$params[0].")), ['name' => strtolower(trim($params[0])), 'class' => $params[1], 'label' => strtolower(trim($params[2]))])->render(); } ?>";
         });
     }
 
