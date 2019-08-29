@@ -13,7 +13,7 @@ class NewsTopics extends Page
             'page' => [
                 'controller' => 'TopicController',
                 'title' => 'Topic listing',
-                'id' => 101103,
+                'id' => 101104,
             ],
             'site' => [
                 'news' => [
