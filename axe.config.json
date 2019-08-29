@@ -17,7 +17,10 @@
             "div[aria-labelledby=\"hero-image-2\"] > .md\\:absolute.md\\:bottom-0.md\\:inset-x-0 > .row > .mx-4 > .pr-2.md\\:text-lg.md\\:white-links",
             "#hero-image-3",
             "div[aria-labelledby=\"hero-image-3\"] > .md\\:absolute.md\\:bottom-0.md\\:inset-x-0 > .row > .mx-4 > .pr-2.md\\:text-lg.md\\:white-links",
-            ".pt-hero"
+            ".pt-hero",
+            ".blockquote1 > p",
+            ".blockquote2 > p",
+            ".blockquote3 > p"
         ]
     }
 }

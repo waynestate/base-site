@@ -48,19 +48,19 @@ class Article implements FactoryContract
                 'short_title' => $this->faker->sentence(rand(3, 6)),
                 'sub_title' => null,
                 'permalink' => $this->faker->slug,
-                'body' => '<p>'.$this->faker->paragraph(8).'</p>
+                'body' => '<div id="article"><p>'.$this->faker->paragraph(8).'</p>
                 <p>'.$this->faker->paragraph(8).'</p>
                 <figure class="figure" style="padding-bottom:10px; float:right">
                     <img alt="Placeholder" height="400" src="/styleguide/image/300x400?text=Figure%20float%20right" style="padding:10px" width="300">
                     <figcaption>'.$this->faker->paragraph.'</figcaption>
                 </figure>
                 <p>'.$this->faker->paragraph.'</p>
-                <blockquote>
+                <blockquote class="blockquote1">
                     <p>'.$this->faker->paragraph(1).'</p>
                 </blockquote>
                 <p>'.$this->faker->paragraph(8).'</p>
                 <p>'.$this->faker->paragraph(8).'</p>
-                <blockquote>
+                <blockquote class="blockquote2">
                     <p>'.$this->faker->paragraph(1).'</p>
                 </blockquote>
                 <p>'.$this->faker->paragraph(8).'</p>
@@ -73,7 +73,7 @@ class Article implements FactoryContract
                 </figure>
                 <p>'.$this->faker->paragraph(8).'</p>
                 <p>'.$this->faker->paragraph(15).'</p>
-                <blockquote>
+                <blockquote class="blockquote3">
                     <p>'.$this->faker->paragraph(5).'</p>
                 </blockquote>
                 <p>'.$this->faker->paragraph(15).'</p>
@@ -93,7 +93,7 @@ class Article implements FactoryContract
                 <p style="text-align:center">
                     <img alt="Placeholder" height="350" src="/styleguide/image/800x350?text=Image%20centered" style="padding:10px" width="800">
                 </p>
-                <p>'.$this->faker->paragraph(8).'</p>
+                <p>'.$this->faker->paragraph(8).'</p></div>
                 ',
                 'article_date' => $this->faker->date,
                 'status' => 'Published',
