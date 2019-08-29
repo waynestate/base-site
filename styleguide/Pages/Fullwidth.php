@@ -16,7 +16,7 @@ class Fullwidth extends Page
             'page' => [
                 'controller' => 'FullWidthController',
                 'title' => 'Full width',
-                'id' => 101106,
+                'id' => 101108,
             ],
         ]);
     }

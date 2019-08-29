@@ -55,12 +55,12 @@ class Article implements FactoryContract
                     <figcaption>'.$this->faker->paragraph.'</figcaption>
                 </figure>
                 <p>'.$this->faker->paragraph.'</p>
-                <blockquote>
+                <blockquote class="blockquote1">
                     <p>'.$this->faker->paragraph(1).'</p>
                 </blockquote>
                 <p>'.$this->faker->paragraph(8).'</p>
                 <p>'.$this->faker->paragraph(8).'</p>
-                <blockquote>
+                <blockquote class="blockquote2">
                     <p>'.$this->faker->paragraph(1).'</p>
                 </blockquote>
                 <p>'.$this->faker->paragraph(8).'</p>
@@ -73,7 +73,7 @@ class Article implements FactoryContract
                 </figure>
                 <p>'.$this->faker->paragraph(8).'</p>
                 <p>'.$this->faker->paragraph(15).'</p>
-                <blockquote>
+                <blockquote class="blockquote3">
                     <p>'.$this->faker->paragraph(5).'</p>
                 </blockquote>
                 <p>'.$this->faker->paragraph(15).'</p>

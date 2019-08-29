@@ -4,9 +4,6 @@ namespace Styleguide\Pages;
 
 class Profile extends Page
 {
-    /** {@inheritdoc} **/
-    public $path = '/styleguide/profile/aa0000';
-
     /**
      * {@inheritdoc}
      */
@@ -16,7 +13,7 @@ class Profile extends Page
             'page' => [
                 'controller' => 'ProfileController',
                 'title' => 'Profile view',
-                'id' => null,
+                'id' => 101106,
             ],
         ]);
     }

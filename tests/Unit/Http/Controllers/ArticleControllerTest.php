@@ -83,7 +83,7 @@ class ArticleControllerTest extends TestCase
         $articleController = app('App\Http\Controllers\ArticleController', ['article' => $articleRepository]);
 
         $request = new Request();
-        $request->data = app('Styleguide\Pages\NewsView')->getPageData();
+        $request->data = app('Styleguide\Pages\News')->getPageData();
         $request->preview = true;
 
         // Call the news listing
@@ -112,7 +112,7 @@ class ArticleControllerTest extends TestCase
         $articleController = app('App\Http\Controllers\ArticleController', ['article' => $articleRepository]);
 
         $request = new Request();
-        $request->data = app('Styleguide\Pages\NewsView')->getPageData();
+        $request->data = app('Styleguide\Pages\News')->getPageData();
         $request->preview = true;
 
         // Call the news listing
@@ -132,7 +132,7 @@ class ArticleControllerTest extends TestCase
 
         // Fake request
         $request = new Request();
-        $request->data = app('Styleguide\Pages\NewsView')->getPageData();
+        $request->data = app('Styleguide\Pages\News')->getPageData();
 
         // Mock the connector
         $newsApi = Mockery::mock('Waynestate\Api\News');
