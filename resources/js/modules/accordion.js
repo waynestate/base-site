@@ -6,6 +6,11 @@ import 'accordion/src/accordion.js';
     document.querySelectorAll('.accordion').forEach(function(item) {
         let accordion = new Accordion(item, {
             onToggle: function(target){
+                // Remove IDs from content folds so the browser doesn't jump around when opening an accordion item
+                document.querySelectorAll('.accordion li a').forEach(function (item) {
+                    item.removeAttribute('id');
+                });
+
                 // Only allow one accordion item open at time
                 target.accordion.folds.forEach(fold => {
                     if(fold !== target) {
@@ -56,10 +61,5 @@ import 'accordion/src/accordion.js';
     // Apply the required content fold afterwards to simplify the html
     document.querySelectorAll('ul.accordion > li').forEach(function(item) {
         item.querySelector('div').classList.add('fold');
-    });
-
-    // Remove IDs from content folds so the browser doesn't jump around when opening an accordion item
-    document.querySelectorAll('.accordion li a').forEach(function (item) {
-        item.removeAttribute('id');
     });
 })();
