@@ -8,31 +8,34 @@ class HelpersTest extends TestCase
 {
     /**
      * @covers ::merge
-     * @expectedException Exception
      * @test
      */
     public function merge_string_value_should_throw_exception()
     {
+        $this->expectException(\Exception::class);
+
         $merge = merge($this->faker->word);
     }
 
     /**
      * @covers ::merge
-     * @expectedException Exception
      * @test
      */
     public function merge_array_with_zero_key_should_throw_exception()
     {
+        $this->expectException(\Exception::class);
+
         $merge = merge([$this->faker->word]);
     }
 
     /**
      * @covers ::merge
-     * @expectedException Exception
      * @test
      */
     public function merge_array_with_same_key_should_throw_exception()
     {
+        $this->expectException(\Exception::class);
+
         // Same key to be used
         $key = $this->faker->word;
 

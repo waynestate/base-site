@@ -5,17 +5,19 @@ namespace Tests\App\Http\Controllers;
 use Tests\TestCase;
 use Mockery as Mockery;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ArticleControllerTest extends TestCase
 {
     /**
      * @covers App\Http\Controllers\ArticleController::__construct
      * @covers App\Http\Controllers\ArticleController::show
-     * @expectedException Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @test
      */
     public function news_view_with_no_item_should_404()
     {
+        $this->expectException(NotFoundHttpException::class);
+
         // Fake return
         $return = app('Factories\ApiError')->create(1, true);
 
@@ -35,11 +37,12 @@ class ArticleControllerTest extends TestCase
 
     /**
      * @covers App\Http\Controllers\ArticleController::show
-     * @expectedException Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @test
      */
     public function news_item_that_is_not_published_should_404()
     {
+        $this->expectException(NotFoundHttpException::class);
+
         // Fake return
         $return = [
             'news' => app('Factories\Article')->create(1, true, [
@@ -153,11 +156,12 @@ class ArticleControllerTest extends TestCase
 
     /**
      * @covers App\Http\Controllers\ArticleController::index
-     * @expectedException Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @test
      */
     public function news_listing_with_invalid_topic_should_404()
     {
+        $this->expectException(NotFoundHttpException::class);
+
         $newsApi = Mockery::mock('Waynestate\Api\News');
         $articleRepository = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi]);
 

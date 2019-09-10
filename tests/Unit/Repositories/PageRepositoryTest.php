@@ -3,6 +3,7 @@
 namespace Tests\App\Repositories;
 
 use Tests\TestCase;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PageRepositoryTest extends TestCase
 {
@@ -10,11 +11,12 @@ class PageRepositoryTest extends TestCase
      * Passing wrong path should 404.
      *
      * @covers App\Repositories\PageRepository::getRequestData
-     * @expectedException Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @test
      */
     public function non_exisitent_page_should_404()
     {
+        $this->expectException(NotFoundHttpException::class);
+
         // Change the ENV so it runs through the real data middleware
         config(['app.env' => 'dev']);
 

@@ -5,17 +5,19 @@ namespace Tests\App\Http\Controllers;
 use Tests\TestCase;
 use Mockery as Mockery;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProfileControllerTest extends TestCase
 {
     /**
-     * @expectedException Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @covers App\Http\Controllers\ProfileController::__construct
      * @covers App\Http\Controllers\ProfileController::show
      * @test
      */
     public function invalid_profile_should_404()
     {
+        $this->expectException(NotFoundHttpException::class);
+
         // Fake return
         $return = [
             'profiles' => [],
