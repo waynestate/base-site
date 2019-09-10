@@ -58,11 +58,12 @@ class MenuRepositoryTest extends TestCase
 
     /**
      * @covers App\Repositories\MenuRepository::getAllMenus
-     * @expectedException Exception
      * @test
      */
     public function menu_api_error_should_throw_exception()
     {
+        $this->expectException(\Exception::class);
+
         // Get an error
         $return = app('Factories\ApiError')->create(1, true);
 

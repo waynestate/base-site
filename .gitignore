@@ -19,3 +19,5 @@ cs_fixer_tmp*
 .php_cs.cache
 /public/mix-manifest.json
 /*.diff
+.phpunit.result.cache
+.env.backup

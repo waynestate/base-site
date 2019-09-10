@@ -3,6 +3,7 @@
 namespace Tests\App\Http\Controllers;
 
 use Tests\TestCase;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
 class ControllerTest extends TestCase
@@ -37,7 +38,7 @@ class ControllerTest extends TestCase
     {
         return collect(Storage::disk('base')->allFiles('app/Http/Controllers/'))
         ->reject(function ($item) {
-            return basename($item) === 'Controller.php' || ! ends_with($item, '.php');
+            return basename($item) === 'Controller.php' || ! Str::endsWith($item, '.php');
         })
         ->map(function ($item) {
             return $this->getCommentData($item);
