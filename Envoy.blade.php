@@ -266,6 +266,8 @@ echo "RemoteRelease Prepare Done.";
 @task('cache_remote_release', ['on' => $remote_server])
 shopt -s expand_aliases
 source ~/.bashrc
+echo "Clearing view cache"
+php73 {{ $release_dir }}/{{ $release }}/artisan view:clear
 echo "Caching configs...";
 php73 {{ $release_dir }}/{{ $release }}/artisan config:cache
 echo "Caching routes...";
