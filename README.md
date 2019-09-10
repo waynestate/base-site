@@ -25,7 +25,6 @@ Starter repository for creating a new website. Live demo can be found at https:/
     * PHP linting using [PHPCSFixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer)
     * JS linting using [ESLint](http://eslint.org/)
     * CSS/SCSS linting using [Stylelint](https://stylelint.io/)
-    * Accessibility tests using [Axe](https://github.com/dequelabs/axe-webdriverjs)
 * Menus
     * Top level menu carried across all pages that follows you down the page as you scroll
     * Left menu if a page has subitems, otherwise its a full width page
