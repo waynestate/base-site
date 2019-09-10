@@ -104,7 +104,7 @@ class DataTest extends TestCase
         // When trying to reference a styleguide controller that doesn't exist, test that it defaults to app namespace
         $controller = ucfirst($this->faker->word).ucfirst($this->faker->word).ucfirst($this->faker->word);
         $namespace = app('App\Http\Middleware\Data')->getControllerNamespace($controller);
-        $this->assertContains('App\Http\Controllers', $namespace);
+        $this->assertStringContainsString('App\Http\Controllers', $namespace);
     }
 
     /**

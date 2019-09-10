@@ -1,81 +1,74 @@
 #!/bin/bash
 
-# Keeping track of errors
-errors=false
-
+# Run on either wild wayne or local machine
 wild_wayne_test=${WILD_WAYNE}
+
+# Current working directory of the site
 site_folder=${PWD##*/}
 
 export PATH=/usr/local/bin:$PATH
 
-# Run on either wild wayne or local machine
-if [ "$wild_wayne_test" = "true" ]; then
-    printf "Running phplint...\n"
-    phplint="$(make phplintdry)"
-
-    printf "Running stylelint...\n"
-    stylelint="$(make stylelint)"
-
-    printf "Running tests...\n"
-    phpunit="$(phpunit)"
-
-    printf "Accessibility audit...\n"
-    accessibility="$(yarn --cwd /vagrant/accessibility-audit run audit ${site_folder})"
-else
+# Make sure vagrant command is found
+if [ "$wild_wayne_test" != "true" ]; then
     if hash vagrant 2>/dev/null; then
-        printf "Running phplint...\n"
-        phplint="$(vagrant ssh -c "cd /vagrant/${site_folder}; make phplintdry")"
-
-        printf "Running stylelint...\n"
-        stylelint="$(vagrant ssh -c "cd /vagrant/${site_folder}; make stylelint")"
-
-        printf "Running tests...\n"
-        phpunit="$(vagrant ssh -c "cd /vagrant/${site_folder}; phpunit")"
-
-        printf "Accessibility audit...\n"
-        accessibility="$(vagrant ssh -c "cd /vagrant/accessibility-audit; yarn run audit ${site_folder}")"
+        printf "vagrant command found...\n"
     else
-        printf "vagrant command could not be found.\n"
-        errors=true
+        printf "Vagrant command could not be found. If you plan to develop without using vagrant then delete this check.\n"
+        exit 1
     fi
 fi
 
-# Report errors
-if [[ $phplint == *"'phplintdry' failed"* ]]; then
-    errors=true;
-    printf "phplint has reported errors. Please fix them before committing.\n"
-    printf ">> run: make phplint\n\n"
-fi
-
-if [[ $stylelint == *"'stylelint' failed"* ]]; then
-    errors=true;
-    printf "Stylint has reported errors. Please fix them before committing.\n"
-    printf ">> run: make stylelint\n\n"
-fi
-
-if [[ $phpunit == *"FAILURES!"* || $phpunit == *"ERRORS!"* || $phpunit == *"Fatal error"* ]]; then
-    errors=true;
-    printf "phpunit tests failed. Please fix them before committing.\n"
-    printf ">> run: make runtests\n"
-fi
-
-if [[ $accessibility == *"violations found"* ]]; then
-    errors=true;
-    printf "Accessibility errors found. Please fix them before committing.\n"
-    echo $accessibility;
-fi
-
-# Make sure they aren't on the master branch and committing
+# Make sure commits aren't directly going to the master branch
 branch=`git rev-parse --abbrev-ref HEAD`
 
 if [[ "$branch" == "master" ]]; then
-    errors=true;
     printf "You are on branch $branch. Are you sure you want to commit to this branch?\n"
 	printf "If so, commit with -n to bypass this pre-commit hook.\n"
+    exit 1
 fi
 
-# Abort if errors are found
-if [ $errors == true ]; then
+# PHP linting
+if [ "$wild_wayne_test" = "true" ]; then
+    printf "Running phplint...\n"
+    phplint="$(make phplintdry)"
+else
+    printf "Running phplint...\n"
+    phplint="$(vagrant ssh -c "cd /vagrant/${site_folder}; make phplintdry")"
+fi
+
+if [[ $phplint == *"'phplintdry' failed"* ]]; then
+    printf "phplint has reported errors. Please fix them before committing.\n"
+    printf ">> run: make phplint\n\n"
+    exit 1
+fi
+
+# Style linting
+if [ "$wild_wayne_test" = "true" ]; then
+    printf "Running stylelint...\n"
+    stylelint="$(make stylelint)"
+else
+    printf "Running stylelint...\n"
+    stylelint="$(vagrant ssh -c "cd /vagrant/${site_folder}; make stylelint")"
+fi
+
+if [[ $stylelint == *"'stylelint' failed"* ]]; then
+    printf "Stylint has reported errors. Please fix them before committing.\n"
+    printf ">> run: make stylelint\n\n"
+    exit 1
+fi
+
+# PHP tests
+if [ "$wild_wayne_test" = "true" ]; then
+    printf "Running tests...\n"
+    phpunit="$(phpunit)"
+else
+    printf "Running tests...\n"
+    phpunit="$(vagrant ssh -c "cd /vagrant/${site_folder}; phpunit")"
+fi
+
+if [[ $phpunit == *"FAILURES!"* || $phpunit == *"ERRORS!"* || $phpunit == *"Fatal error"* ]]; then
+    printf "phpunit tests failed. Please fix them before committing.\n"
+    printf ">> run: make runtests\n"
     exit 1
 fi
 

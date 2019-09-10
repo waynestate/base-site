@@ -10,6 +10,18 @@
 
         <div class="content mt:text-xl">
             {!! $article['data']['body'] !!}
+
+            @if(!empty($article['data']['assets']))
+                <h2 class="border-b mt-4">Assets</h2>
+
+                <ul>
+                    @foreach($article['data']['assets'] as $asset)
+                        <li>
+                            <a href="{{ $asset['url'] }}">{{ !empty($asset['caption']) ? $asset['caption'] . ' ('.pathinfo($asset['filename'])['extension'].')' : basename($asset['filename']) }}</a>
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
         </div>
 
         <p class="pt-4">
