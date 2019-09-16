@@ -36,7 +36,7 @@ class GridRepositoryTest extends TestCase
         // Get the promos
         $promos = app('App\Repositories\GridRepository', ['wsuApi' => $wsuApi])->getGridPromos($data);
 
-        $this->assertEquals($return['promotions'], $promos['grid_promos']);
+        $this->assertCount(count($return['promotions']), $promos['grid_promos']);
     }
 
     /**

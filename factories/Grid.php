@@ -33,6 +33,7 @@ class Grid implements FactoryContract
                 'promo_group_id' => $promo_group_id,
                 'promo_item_id' => $i,
                 'filename_alt_text' => 'Example grid image',
+                'start_date' => $this->faker->dateTimeThisMonth()->format('Y-m-d H:i:s'),
             ];
 
             $data[$i] = array_replace_recursive($data[$i], $options);
