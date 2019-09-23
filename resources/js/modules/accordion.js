@@ -33,6 +33,7 @@ import 'accordion/src/accordion.js';
             },
             enabledClass: 'enabled',
             noAria: true,
+            noTransforms: true
         });
 
         // Hide all accordion content from the start so content inside it isn't part of the tabindex
