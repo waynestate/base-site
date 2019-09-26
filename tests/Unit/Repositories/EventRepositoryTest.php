@@ -34,18 +34,13 @@ class EventRepositoryTest extends TestCase
      * @covers App\Repositories\EventRepository::getEvents
      * @test
      */
-    public function getting_events_with_events_should_return_grouped_by_date()
+    public function getting_events_grouped_by_date()
     {
-        // Fake events
-        $testEvents = app('Factories\Event')->create(2, false);
+        // Expected events to be returned
+        $expected = app('Factories\Event')->create(2);
 
-        // Build fake API return
-        $return['events'] = [];
-        foreach ($testEvents as $date => $events) {
-            foreach ($events as $event) {
-                $return['events'][] = $event;
-            }
-        }
+        // Maniuplate events to mimic the API return since they aren't grouped yet
+        $return['events'] = collect($expected)->flatten(1)->toArray();
 
         // Mock the connector and set the return
         $wsuApi = Mockery::mock('Waynestate\Api\Connector');
@@ -55,7 +50,6 @@ class EventRepositoryTest extends TestCase
         // Get the events
         $events = app('App\Repositories\EventRepository', ['wsuApi' => $wsuApi])->getEvents($this->faker->randomDigit);
 
-        // Make sure we have a events array grouped by the event date
-        $this->assertEquals($events, ['events' => $testEvents]);
+        $this->assertEquals($expected, $events['events']);
     }
 }
