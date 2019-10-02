@@ -103,10 +103,14 @@ module.exports = {
             opacity: {
                 '65' : '.65',
             },
-        }
+        },
     },
     variants: {
-        opacity: ['responsive', 'hover', 'focus'],
+        opacity: ['responsive', 'hover', 'focus', 'active', 'group-hover'],
+        textDecoration: ['responsive', 'hover', 'focus', 'active', 'group-hover'],
+        backgroundColor: ['responsive', 'hover', 'focus', 'active', 'group-hover'],
+        textColor: ['responsive', 'hover', 'focus', 'active', 'group-hover'],
+        borderColor: ['responsive', 'hover', 'focus', 'active', 'group-hover'],
     },
     plugins: [
         require('glhd-tailwindcss-transitions')(), // https://github.com/glhd/tailwindcss-plugins/
