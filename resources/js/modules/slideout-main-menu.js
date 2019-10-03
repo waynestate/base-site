@@ -21,7 +21,7 @@
     }
 
     let toggleMainMenu = function () {
-        document.querySelector('.offcanvas-main-menu ul ul').classList.toggle('hidden');
+        document.querySelector('.slideout-main-menu ul ul').classList.toggle('hidden');
 
         if(document.querySelector('a.main-menu-toggle').getAttribute('aria-expanded') == 'false') {
             document.querySelector('a.main-menu-toggle').setAttribute('aria-expanded', 'true');
@@ -29,7 +29,7 @@
             document.querySelector('a.main-menu-toggle').setAttribute('aria-expanded', 'false');
         }
 
-        if(document.querySelector('.offcanvas-main-menu ul ul').offsetParent === null) {
+        if(document.querySelector('.slideout-main-menu ul ul').offsetParent === null) {
             document.querySelector('a.main-menu-toggle .expand-icons').classList.toggle('icon-right-open');
             document.querySelector('a.main-menu-toggle .expand-icons').classList.toggle('icon-down-open');
         } else {
@@ -46,7 +46,7 @@
         document.querySelector('a.main-menu-toggle').addEventListener('click', toggleMainMenu);
         document.querySelector('a.main-menu-toggle').addEventListener('keypress', function (e) {
             if(e.keyCode == 13) {
-               toggleMainMenu(); 
+               toggleMainMenu();
             }
         });
     }

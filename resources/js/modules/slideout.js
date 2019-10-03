@@ -57,7 +57,7 @@ import Slideout from 'slideout/dist/slideout.js';
     }
 
     slideout.on('open', function () {
-        // Allow clicking the content area to close offcanvas
+        // Allow clicking the content area to close slideout
         document.querySelector('.content-area').addEventListener('click', function (e) {
             if (slideout.isOpen()) {
                 e.preventDefault();
@@ -107,10 +107,12 @@ import Slideout from 'slideout/dist/slideout.js';
             document.querySelector('#menu').classList.add('slideout-menu-right');
         }
 
-        slideout.close();
+        if(window.getComputedStyle(document.querySelector('button.menu-toggle')).getPropertyValue('display') === 'none') {
+            slideout.close();
+        }
     }
 
-    // When resizing the browse reset the state of offcanvas
+    // When resizing the browse reset the state of the slideout
     window.addEventListener('resize', function () {
         toggleSlideout();
     });
