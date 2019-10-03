@@ -13,7 +13,7 @@
         <div class="mt:w-1/4 mt:px-4 mt:block {{ $show_site_menu === false ? ' mt:hidden' : '' }}">
             <nav id="menu" aria-label="Page menu" tabindex="-1">
                 @if(!empty($top_menu_output) && $site_menu !== $top_menu)
-                    <div class="offcanvas-main-menu mt:hidden">
+                    <div class="slideout-main-menu mt:hidden">
                         <ul class="main-menu mb-2">
                             <li>
                                 <a role="button" class="main-menu-toggle pt-2 pb-2 pl-3 pr-3 block" tabindex="0" aria-expanded="false">Main Menu</a>
