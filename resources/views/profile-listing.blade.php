@@ -35,7 +35,7 @@
                 @endif
             </li>
         @empty
-            <p>No profiles found.</p>
+            <li>No profiles found.</li>
         @endforelse
     </ul>
 @endsection
