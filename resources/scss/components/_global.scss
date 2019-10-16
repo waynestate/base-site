@@ -15,6 +15,10 @@ a {
         &:hover {
             @apply .no-underline;
         }
+
+        @screen print {
+            @apply .text-black;
+        }
     }
 }
 
