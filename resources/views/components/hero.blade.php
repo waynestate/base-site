@@ -45,7 +45,7 @@
     @else
         @foreach($images as $image)
             <div class="w-full">
-                <div class=" @if(!empty($image['option']) && $image['option'] === "Stripe") pt-stripe @else pt-hero @endif  w-full bg-cover bg-top relative{{ $loop->first !== true ? ' lazy' : '' }}" @if($loop->first === true) style="background-image: url('{{ $image['relative_url'] }}')" @else data-src="{{ $image['relative_url'] }}"@endif></div>
+                <div class="pt-hero w-full bg-cover bg-top relative{{ $loop->first !== true ? ' lazy' : '' }}" @if($loop->first === true) style="background-image: url('{{ $image['relative_url'] }}')" @else data-src="{{ $image['relative_url'] }}"@endif></div>
             </div>
         @endforeach
     @endif
