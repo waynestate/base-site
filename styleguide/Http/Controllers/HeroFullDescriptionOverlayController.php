@@ -38,7 +38,7 @@ class HeroFullDescriptionOverlayController extends Controller
         $request->data['hero'] = collect($request->data['hero'])->map(function ($item) {
             $item['option'] = "Description Overlay";
             $item['description'] = '<p>' . $this->faker->text(100) . '</p><p><a href="https://wayne.edu" class="button">Button</a></p>';
-            $item['secondary_relative_url'] = '/styleguide/image/1600x250?text=600x250';
+            $item['secondary_relative_url'] = '/styleguide/image/600x250?text=600x250';
 
             return $item;
         })->toArray();
