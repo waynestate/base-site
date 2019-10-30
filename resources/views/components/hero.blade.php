@@ -26,7 +26,6 @@
                             </div>
                         </div>
                     </div>
-
                 @endif
             @else
                 <div class="w-full relative">
