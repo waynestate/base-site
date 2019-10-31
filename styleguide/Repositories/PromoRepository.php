@@ -40,6 +40,8 @@ class PromoRepository extends Repository
             105100102 => 3, // Hero Contained (Text)
             105100103 => 3, // Hero Contained (Text/Link)
             105100107 => 1, // Hero Full (Text/Link)
+            105100108 => 1, // Hero Full (SVG Overlay)
+            105100109 => 1, // Hero Full (Description Overlay)
         ];
 
         // Only pull hero promos if they match the pages_ids that are specificed

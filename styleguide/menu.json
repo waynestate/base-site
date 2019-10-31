@@ -350,6 +350,26 @@
                         "class_name": "",
                         "relative_url": "/styleguide/hero/full/text/link",
                         "submenu": []
+                    },
+                    "105100108": {
+                        "menu_item_id": "105100108",
+                        "is_active": "1",
+                        "page_id": 105100108,
+                        "target": "",
+                        "display_name": "Full width (SVG overlay)",
+                        "class_name": "",
+                        "relative_url": "/styleguide/hero/full/svgoverlay",
+                        "submenu": []
+                    },
+                    "105100109": {
+                        "menu_item_id": "105100109",
+                        "is_active": "1",
+                        "page_id": 105100109,
+                        "target": "",
+                        "display_name": "Full width (Description overlay)",
+                        "class_name": "",
+                        "relative_url": "/styleguide/hero/full/descriptionoverlay",
+                        "submenu": []
                     }
                 }
             },
