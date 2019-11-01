@@ -71,7 +71,7 @@ a.text-white:-moz-focusring {
 
 // Global print styles
 @screen print {
-    a::after {
+    .content a[href]::after {
         @apply .text-sm .font-normal;
 
         content: " (" attr(href) ") ";
