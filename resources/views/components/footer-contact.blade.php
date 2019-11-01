@@ -7,13 +7,7 @@
             @foreach($contact as $info)
                 @if($loop->iteration == 1)
                     <div class="w-full px-4 py-4 lg:flex-1">
-                        <h2 class="text-yellow-light mb-1 print:text-black">
-                            @if($info['link'] != '')
-                                <a href="{{ $info['link'] }}" class="text-yellow-light print:text-black">{{ $info['title'] }}</a>
-                            @else
-                                {{ $info['title'] }}
-                            @endif
-                        </h2>
+                        <h2 class="text-yellow-light mb-1 print:text-black">{{ $info['title'] }}</h2>
 
                         <div class="content text-white white-links print:text-black">
                             {!! $info['description'] !!}
