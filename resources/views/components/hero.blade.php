@@ -19,7 +19,7 @@
                 <div class="w-full relative text-white flex flex-col justify-center">
                     <div class="row w-full px-4 pt-10 pb-6 text-center md:white-links content">
                         @if(!empty($image['secondary_relative_url']))<img class="mx-auto mb-4" src="{{ $image['secondary_relative_url'] }}" alt="{{ $image['secondary_alt_text'] }}">@endif
-                        <h1 class="leading-tight text-2xl mb-1 @if(in_array($page['controller'], config('base.hero_full_controllers')))xl:text-5xl @else xl:text-3xl @endif">{{ $image['title'] }}</h1>
+                        <h1 class="md:text-shadow-darkest leading-tight text-2xl mb-1 @if(in_array($page['controller'], config('base.hero_full_controllers')))xl:text-5xl @else xl:text-3xl @endif">{{ $image['title'] }}</h1>
                         @if(!empty($image['description']))<div class="md:text-lg">{!! $image['description'] !!}</div>@endif
                     </div>
                 </div>
