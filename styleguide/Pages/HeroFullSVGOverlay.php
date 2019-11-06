@@ -15,8 +15,8 @@ class HeroFullSVGOverlay extends Page
         return app('Factories\Page')->create(1, true, [
             'page' => [
                 'controller' => 'HeroFullSVGOverlayController',
-                'title' => 'Full width (SVG overlay)',
-                'id' => 105100108,
+                'title' => 'Full width - SVG overlay',
+                'id' => 105100106,
             ],
         ]);
     }

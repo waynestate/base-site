@@ -2,10 +2,10 @@
 
 namespace Styleguide\Pages;
 
-class HeroFullTextLink extends Page
+class HeroFullTextOverlay extends Page
 {
     /** {@inheritdoc} **/
-    public $path = '/styleguide/hero/full/text/link';
+    public $path = '/styleguide/hero/full/textoverlay';
 
     /**
      * {@inheritdoc}
@@ -14,9 +14,9 @@ class HeroFullTextLink extends Page
     {
         return app('Factories\Page')->create(1, true, [
             'page' => [
-                'controller' => 'HeroFullTextLinkController',
-                'title' => 'Full width (text/link)',
-                'id' => 105100107,
+                'controller' => 'HeroFullTextOverlayController',
+                'title' => 'Full width - Text overlay',
+                'id' => 105100105,
             ],
         ]);
     }

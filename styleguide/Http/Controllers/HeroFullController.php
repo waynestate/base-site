@@ -15,8 +15,6 @@ class HeroFullController extends Controller
      */
     public function index(Request $request)
     {
-        $request->data['show_site_menu'] = false;
-
         config([
             'base.hero_contained' => false,
             'base.hero_full_controllers' => ['HeroFullController'],

@@ -15,8 +15,6 @@ class HeroFullSVGOverlayController extends Controller
      */
     public function index(Request $request)
     {
-        $request->data['show_site_menu'] = false;
-
         // Set this controller in the allowed controllers list
         config([
             'base.hero_text_controllers' => ['HeroFullSVGOverlayController'],

@@ -24,7 +24,7 @@ class HeroImage implements FactoryContract
     {
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
-                'title' => $this->faker->sentence,
+                'title' => $this->faker->sentence(3),
                 'description' => '<p>' . $this->faker->text(100) . ' <a href="https://wayne.edu">'. $this->faker->sentence(3)  .'</a></p>',
                 'link' => 'https://wayne.edu',
                 'relative_url' => '/styleguide/image/1600x580?text=1600x580%20('.$i.')',

@@ -2,7 +2,7 @@
 
 namespace Styleguide\Pages;
 
-class HeroFullDescriptionOverlay extends Page
+class HeroContainedTextOverlay extends Page
 {
     /**
      * {@inheritdoc}
@@ -11,9 +11,9 @@ class HeroFullDescriptionOverlay extends Page
     {
         return app('Factories\Page')->create(1, true, [
             'page' => [
-                'controller' => 'HeroFullDescriptionOverlayController',
-                'title' => 'Full width (Description overlay)',
-                'id' => 105100109,
+                'controller' => 'HeroContainedTextOverlayController',
+                'title' => 'Contained - Text overlay',
+                'id' => 105100102,
             ],
         ]);
     }
