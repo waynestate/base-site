@@ -30,7 +30,7 @@
                 <div class="relative md:absolute md:bottom-0 md:inset-x-0 md:text-white md:white-links content md:bg-gradient-darkest">
                     <div class="row">
                         <div class="mx-4 relative pb-0 pt-4 @if(in_array($page['controller'], config('base.hero_full_controllers'))) md:pb-2 md:pt-8 xl:pt-10 @else md:pt-6 @endif">
-                            <h1 class="md:text-shadow-dark leading-tight text-2xl mb-1 @if(in_array($page['controller'], config('base.hero_full_controllers')))xl:text-5xl @else xl:text-3xl @endif">{{ $image['title'] }}</h1>
+                            <h1 class="md:text-shadow-darkest leading-tight text-2xl mb-1 @if(in_array($page['controller'], config('base.hero_full_controllers')))xl:text-5xl @else xl:text-3xl @endif">{{ $image['title'] }}</h1>
                             @if(!empty($image['description']))<div class="md:text-lg">{!! $image['description'] !!}</div>@endif
                         </div>
                     </div>
