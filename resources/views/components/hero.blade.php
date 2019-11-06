@@ -14,8 +14,8 @@
                 @if(!empty($image['link']))</a>@endif
             </div>
         @elseif(!empty($image['option']) && $image['option'] === "Logo Overlay" && in_array($page['controller'], config('base.hero_full_controllers')))
-            <div class="mb-4 full min-h-hero relative overflow-hidden flex bg-green-darker">
-                <div class="inset-0 absolute bg-cover bg-top opacity-25 {{ $loop->first !== true ? ' lazy' : '' }}" @if($loop->first === true) style="background-image: url('{{ $image['relative_url'] }}')" @else data-src="{{ $image['relative_url'] }}"@endif></div>
+            <div class="mb-4 full min-h-hero relative overflow-hidden flex bg-green-darkest">
+                <div class="inset-0 absolute bg-cover bg-top opacity-20 {{ $loop->first !== true ? ' lazy' : '' }}" @if($loop->first === true) style="background-image: url('{{ $image['relative_url'] }}')" @else data-src="{{ $image['relative_url'] }}"@endif></div>
                 <div class="w-full relative text-white flex flex-col justify-center">
                     <div class="row w-full px-4 pt-10 pb-6 text-center md:white-links content">
                         @if(!empty($image['secondary_relative_url']))<img class="mx-auto mb-4" src="{{ $image['secondary_relative_url'] }}" alt="{{ $image['secondary_alt_text'] }}">@endif

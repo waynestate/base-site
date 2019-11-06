@@ -17,10 +17,13 @@ class HeroFullLogoOverlay extends Page
                 'content' => [
                     'main' => '
                         <h2>Promo group setup</h2>
+                        <p>Only available for full-width templates</p>
                         <ul>
                             <li><strong>Primary image:</strong> Background image</li>
-                            <li><strong>Secondary image:</strong> Your logo as PNG or SVG. Can be any size. It appears above title and description</li>
+                            <li><strong>Secondary image:</strong> Your logo as PNG or SVG</li>
+                            <li><strong>Title:</strong> Brief title </li>
                             <li><strong>Description:</strong> Text will be centered, buttons allowed</li>
+                            <li><strong>Option:</strong> Logo Overlay</li>
                         </ul>
                         ',
                 ],
