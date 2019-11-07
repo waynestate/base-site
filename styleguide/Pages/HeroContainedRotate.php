@@ -12,7 +12,7 @@ class HeroContainedRotate extends Page
         return app('Factories\Page')->create(1, true, [
             'page' => [
                 'controller' => 'ChildpageController',
-                'title' => 'Contained (rotate)',
+                'title' => 'Contained - Rotate',
                 'id' => 105100101,
             ],
         ]);

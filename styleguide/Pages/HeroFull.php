@@ -16,7 +16,7 @@ class HeroFull extends Page
             'page' => [
                 'controller' => 'HeroFullController',
                 'title' => 'Full width',
-                'id' => 1,
+                'id' => 105100103,
             ],
         ]);
     }

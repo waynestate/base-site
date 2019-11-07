@@ -31,17 +31,15 @@ class PromoRepository extends Repository
 
         // Define the pages that have hero images: page_id => quanity
         $hero_page_ids = [
-            1 => 1, // HeroFull
-            2 => 3, // HeroFullRotate
-            3 => 1, // HeroFullMenu
             101101 => 1, // Homepage
             105100100 => 1, // Hero Contained
-            105100101 => 3, // Hero Contained (Rotate)
-            105100102 => 3, // Hero Contained (Text)
-            105100103 => 3, // Hero Contained (Text/Link)
-            105100107 => 1, // Hero Full (Text/Link)
-            105100108 => 1, // Hero Full (SVG Overlay)
-            105100109 => 1, // Hero Full (Description Overlay)
+            105100101 => 3, // Hero Contained - Rotate
+            105100102 => 1, // Hero Contained - Text overlay
+            105100103 => 1, // Hero Full
+            105100104 => 3, // Hero Full - Rotate
+            105100105 => 1, // Hero Full - Text overlay
+            105100106 => 1, // Hero Full - SVG Overlay
+            105100107 => 1, // Hero Full - Logo overlay
         ];
 
         // Only pull hero promos if they match the pages_ids that are specificed
