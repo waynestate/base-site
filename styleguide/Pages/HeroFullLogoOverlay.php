@@ -2,11 +2,8 @@
 
 namespace Styleguide\Pages;
 
-class HeroFullSVGOverlay extends Page
+class HeroFullLogoOverlay extends Page
 {
-    /** {@inheritdoc} **/
-    public $path = '/styleguide/hero/full/svgoverlay';
-
     /**
      * {@inheritdoc}
      */
@@ -14,18 +11,19 @@ class HeroFullSVGOverlay extends Page
     {
         return app('Factories\Page')->create(1, true, [
             'page' => [
-                'controller' => 'HeroFullSVGOverlayController',
-                'title' => 'Full width - SVG overlay',
-                'id' => 105100106,
+                'controller' => 'HeroFullLogoOverlayController',
+                'title' => 'Full width - Logo overlay',
+                'id' => 105100107,
                 'content' => [
                     'main' => '
                         <h2>Promo group setup</h2>
                         <p>Only available for full-width templates</p>
                         <ul>
                             <li><strong>Primary image:</strong> Background image</li>
-                            <li><strong>Secondary image:</strong> Covers the entire background image</li>
-                            <li><strong>Link:</strong> Entire hero area links to your destination</li>
-                            <li><strong>Option:</strong> SVG Overlay</li>
+                            <li><strong>Secondary image:</strong> Your logo as PNG or SVG</li>
+                            <li><strong>Title:</strong> Brief title </li>
+                            <li><strong>Description:</strong> Text will be centered, buttons allowed</li>
+                            <li><strong>Option:</strong> Logo Overlay</li>
                         </ul>
                         ',
                 ],

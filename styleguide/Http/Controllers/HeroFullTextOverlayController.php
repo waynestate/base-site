@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Faker\Factory;
 
-class HeroFullDescriptionOverlayController extends Controller
+class HeroFullTextOverlayController extends Controller
 {
     /**
      * Construct the factory.
@@ -26,19 +26,16 @@ class HeroFullDescriptionOverlayController extends Controller
      */
     public function index(Request $request)
     {
-
         // Set this controller in the allowed controllers list
         config([
-            'base.hero_text_controllers' => ['HeroFullDescriptionOverlayController'],
             'base.hero_contained' => false,
-            'base.hero_full_controllers' => ['HeroFullDescriptionOverlayController'],
+            'base.hero_full_controllers' => ['HeroFullTextOverlayController'],
         ]);
 
         // Set option
         $request->data['hero'] = collect($request->data['hero'])->map(function ($item) {
-            $item['option'] = "Description Overlay";
-            $item['description'] = '<p>' . $this->faker->text(100) . '</p><p><a href="https://wayne.edu" class="button">Button</a></p>';
-            $item['secondary_relative_url'] = '/styleguide/image/600x250?text=600x250';
+            $item['option'] = "Text Overlay";
+            $item['description'] = '<p>' . ucfirst(implode($this->faker->words(10), ' ')) . ' <a href="https://wayne.edu">' . $this->faker->word . '</a>.</p>';
 
             return $item;
         })->toArray();

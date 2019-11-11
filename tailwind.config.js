@@ -104,6 +104,7 @@ module.exports = {
                 'grey': '0 7px 0 '+ colors.grey +', 0 14px 0 '+ colors.grey,
             },
             opacity: {
+                '20' : '.20',
                 '65' : '.65',
             },
         },

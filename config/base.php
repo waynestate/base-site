@@ -94,19 +94,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Hero Text
-    |--------------------------------------------------------------------------
-    |
-    | This enables the hero image to have excerpt text and a view more link.
-    | You can also specify which controllers you want this to work on by
-    | adding to the array.
-    |
-    */
-    'hero_text_controllers' => [],
-    'hero_text_more' => 'View more',
-
-    /*
-    |--------------------------------------------------------------------------
     | Surtitle
     |--------------------------------------------------------------------------
     |
