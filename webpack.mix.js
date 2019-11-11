@@ -63,7 +63,7 @@ mix.js('resources/js/main.js', 'public/_resources/js')
             path.join(__dirname, "node_modules/mediabox/dist/mediabox.js")
         ],
         extensions: ['html', 'js', 'php', 'vue'],
-        whitelistPatterns: [/at-/]
+        whitelistPatterns: [/at-/, /w-[1-5]\/[1-5]/, /(sm|md|lg|xl|xxl|xxxl|mt)\:w-[1-5]\/[1-5]/]
     })
    .sourceMaps()
    .options({
