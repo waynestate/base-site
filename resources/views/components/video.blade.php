@@ -2,7 +2,7 @@
     $video => array // [['title', 'link', 'relative_url', 'youtube_id', 'excerpt']]
 --}}
 
-@if(!empty($video['link']))<a class="no-underline hover:underline font-bold" href="{{ $video['link'] }}">@endif
+@if(!empty($video['link']))<a class="group" href="{{ $video['link'] }}">@endif
 
     <div class="relative">
         @if(!empty($video['relative_url']))
@@ -12,14 +12,16 @@
         @endif
 
         <div class="absolute inset-0 flex items-center justify-center">
-            <div class="w-1/4 opacity-50 transition transition-delay-none transition-timing-ease-in-out hover:opacity-75">
+            <div class="w-1/4 opacity-50 group-hover:opacity-75 transition-slow">
                 @svg('video-play')
             </div>
         </div>
     </div>
 
     @if(!empty($video['title']))
-        {!! $video['title'] !!}
+        <div class="no-underline group-hover:underline font-bold">
+            {!! $video['title'] !!}
+        </div>
     @endif
 
 @if(!empty($video['link']))</a>@endif
