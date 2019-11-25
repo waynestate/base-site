@@ -26,7 +26,7 @@
         @forelse($profiles as $profile)
             <li class="w-full sm:w-1/2 md:w-1/3 px-4 pb-6">
                 <a href="{{ $profile['link'] }}" class="underline">
-                    <div class="block bg-cover bg-center w-full pt-full lazy mb-1" data-src="{{ $profile['data']['Picture']['url'] ?? '/_resources/images/no-photo.svg' }}"></div>
+                    <div class="block bg-cover bg-center w-full pt-portrait lazy mb-1" data-src="{{ $profile['data']['Picture']['url'] ?? '/_resources/images/no-photo.svg' }}"></div>
                     <span class="font-bold">{{ $profile['data']['First Name'] }} {{ $profile['data']['Last Name'] }}</span>
                 </a>
 

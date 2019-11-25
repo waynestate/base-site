@@ -88,6 +88,7 @@ module.exports = {
                 '16/9': '56.35%',
                 'hero' : '36.3%',
                 'full' : '100%',
+                'portrait' : '133%',
             },
             spacing: {
                 '14' : '3.5rem',
