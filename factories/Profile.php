@@ -33,7 +33,7 @@ class Profile implements FactoryContract
                     'Last Name' => $this->faker->lastName,
                     'Title' => $this->faker->sentence(3),
                     'Picture' => [
-                        'url' => '/styleguide/image/550x400?text='.$i,
+                        'url' => '/styleguide/image/400x533?text=400x533%20('.$i.')',
                     ],
                     'Phone' => $this->faker->phoneNumber,
                     'Email' => $this->faker->email,
