@@ -12,7 +12,7 @@
 */
 
 // Profile view
-Route::get('{any?}profile/{accessid}', 'ProfileController@show')
+Route::get('{any?}profile/{accessid?}', 'ProfileController@show')
     ->where(['any' => '.*', 'accessid' => '[a-zA-Z]{2}\d{4}']);
 
 // News listing by topic
