@@ -14,6 +14,22 @@ class ProfileControllerTest extends TestCase
      * @covers App\Http\Controllers\ProfileController::show
      * @test
      */
+    public function no_profile_accessid_should_404()
+    {
+        $this->expectException(NotFoundHttpException::class);
+
+        // Construct the news controller
+        $this->profileController = app('App\Http\Controllers\ProfileController', []);
+
+        // Call the profile listing
+        $view = $this->profileController->show(new Request());
+    }
+
+    /**
+     * @covers App\Http\Controllers\ProfileController::__construct
+     * @covers App\Http\Controllers\ProfileController::show
+     * @test
+     */
     public function invalid_profile_should_404()
     {
         $this->expectException(NotFoundHttpException::class);
@@ -34,7 +50,10 @@ class ProfileControllerTest extends TestCase
         // Construct the news controller
         $this->profileController = app('App\Http\Controllers\ProfileController', ['profile' => $profileRepository]);
 
+        $request = new Request();
+        $request->accessid = 'aa1234';
+
         // Call the profile listing
-        $view = $this->profileController->show(new Request());
+        $view = $this->profileController->show($request);
     }
 }
