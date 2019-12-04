@@ -66,6 +66,10 @@ class ProfileController extends Controller
      */
     public function show(Request $request)
     {
+        if (empty($request->accessid)) {
+            abort(404);
+        }
+
         // Determine what site to pull profiles from
         $site_id = !empty($request->data['data']['profile_site_id']) ? $request->data['data']['profile_site_id'] : $request->data['site']['id'];
 

@@ -1,15 +1,15 @@
 @extends('components.content-area')
 
 @section('content')
-    <div class="row flex flex-wrap">
+    <div class="row flex flex-wrap -mx-4">
         <div class="w-full lg:w-1/3 px-4 mt-6">
             @if(!empty($profile['data']['Picture']['url']))
-                <img src="{{ $profile['data']['Picture']['url'] }}" alt="{{ $page['title'] }}" class="sm:h-64 md:h-auto block mx-auto">
+                <img src="{{ $profile['data']['Picture']['url'] }}" alt="{{ $page['title'] }}" class="sm:h-64 lg:h-auto mx-auto lg:mx-0 block mb-4">
             @else
-                <img src="/_resources/images/no-photo.svg" alt="{{ $page['title'] }}" class="sm:h-64 md:h-auto block mx-auto">
+                <img src="/_resources/images/no-photo.svg" alt="{{ $page['title'] }}" class="sm:h-64 lg:h-auto block mx-auto lg:mx-0 mb-4">
             @endif
 
-            @include('components.page-title', ['title' => $page['title'], 'class' => 'block md:hidden'])
+            @include('components.page-title', ['title' => $page['title'], 'class' => 'block lg:hidden'])
 
             <div class="content">
                 @if(!empty($profile['data']['Title']))
@@ -47,7 +47,7 @@
         </div>
 
         <div class="w-full lg:w-2/3 px-4">
-            @include('components.page-title', ['title' => $page['title'], 'class' => 'hidden md:block'])
+            @include('components.page-title', ['title' => $page['title'], 'class' => 'hidden lg:block'])
 
             <div class="content">
                 @foreach($profile['data'] as $field=>$data)
