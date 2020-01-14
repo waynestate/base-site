@@ -6,16 +6,16 @@
     <div class="content">
         {!! $page['content']['main'] !!}
 
-        <p>Available classes for <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">&lt;figure&gt;</code> are <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">.float-left</code>, <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">.float-right</code>, and <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">.text-center</code>.</p>
+        <p>Available classes for <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">&lt;figure&gt;</code> are <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">.figure</code> <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">.float-left</code>, <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">.float-right</code>, and <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">.text-center</code>.</p>
 
-        <figure>
+        <figure class="figure">
             @image('/styleguide/image/400x300', '', 'p-2')
             <figcaption>{{ $faker->sentence }}</figcaption>
         </figure>
 
         <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
         {!! htmlspecialchars('
-<figure>
+<figure class="figure">
     <img src="/styleguide/image/400x300" alt="">
     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
 </figure>') !!}
@@ -27,7 +27,7 @@
             <div class="w-full px-4">
                 <h2>Float left</h2>
 
-                <figure class="float-left">
+                <figure class="figure float-left">
                     @image('/styleguide/image/400x300', '', 'p-2')
                     <figcaption>{{ $faker->sentence }}</figcaption>
                 </figure>
@@ -35,7 +35,7 @@
 
                 <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
                 {!! htmlspecialchars('
-<figure class="float-left">
+<figure class="figure float-left">
     <img src="/styleguide/image/400x300" alt="">
     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
 </figure>')!!}
@@ -49,7 +49,7 @@
             <div class="w-full px-4">
                 <h2>Float right</h2>
 
-                <figure class="float-right">
+                <figure class="figure float-right">
                     @image('/styleguide/image/400x300', '', 'p-2')
                     <figcaption>{{ $faker->sentence }}</figcaption>
                 </figure>
@@ -57,7 +57,7 @@
 
                 <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
                 {!! htmlspecialchars('
-<figure class="float-right">
+<figure class="figure float-right">
     <img src="/styleguide/image/400x300" alt="">
     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
 </figure>') !!}
@@ -72,7 +72,7 @@
                 <h2>Text center</h2>
 
                 <p>{{ $faker->paragraph(12) }}</p>
-                <figure class="text-center">
+                <figure class="figure text-center">
                     @image('/styleguide/image/800x450', '', 'p-2')
                     <figcaption>{{ $faker->sentence }}</figcaption>
                 </figure>
@@ -80,7 +80,7 @@
 
                 <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
                 {!! htmlspecialchars('
-<figure class="text-center">
+<figure class="figure text-center">
     <img src="/styleguide/image/800x450" alt="">
     <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
 </figure>') !!}
