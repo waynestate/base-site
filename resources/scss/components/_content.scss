@@ -43,6 +43,11 @@
         }
     }
 
+    // Tailwind preflight sets images to block
+    img {
+        @apply .inline;
+    }
+
     // Images remain at their specified width
     // Text appears above and below for small
     @media (max-width: theme('screens.mt')) {
@@ -81,6 +86,8 @@
         // Overriding display: inline-block; from CKEditor
         // so that the caption wraps appropriately
         display: table !important;
+        padding: 0 !important;
+        clear: both;
 
         img {
             padding: 0 !important;
