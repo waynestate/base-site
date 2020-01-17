@@ -83,12 +83,12 @@ class ProfileRepository implements ProfileRepositoryContract
         $grouped = collect($all_profiles['profiles'])->map(function ($profile) {
             return collect($profile['groups'])->flatMap(function ($group) use ($profile) {
                 return [
-                   'data' => $profile['data'],
-                   'groups' => $profile['groups'],
-                   'group' => $group,
-                   'AccessID' => $profile['data']['AccessID'],
-                   'link' => $profile['link'],
-               ];
+                    'data' => $profile['data'],
+                    'groups' => $profile['groups'],
+                    'group' => $group,
+                    'AccessID' => $profile['data']['AccessID'],
+                    'link' => $profile['link'],
+                ];
             });
         })
         ->keyBy('AccessID')

@@ -18,6 +18,7 @@ $fixers = [
     'blank_line_after_namespace' => true,
     'class_definition' => true,
     'indentation_type' => true,
+    'array_indentation' => true,
     'line_ending' => true,
     'method_argument_space' => ['ensure_fully_multiline' => true],
     'no_break_comment' => true,
