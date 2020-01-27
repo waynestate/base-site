@@ -219,7 +219,7 @@ return [
                     'id' => 2907,
                     'config' => null,
                 ],
-                'under_menu' => [
+                'main_under_menu' => [
                     'id' => 2909,
                     'config' => 'page_id:{$page_id}',
                 ],
@@ -248,6 +248,11 @@ return [
             //         'social' => [
             //             'id' => 0,
             //             'config' => null,
+            //         ],
+            //         'under_menu' => [
+            //             'id' => 6022,
+            //             'config' => 'page_id:{$page_id}',
+            //             'merge_with_main_under_menu' => false,
             //         ],
             //     ],
             //     'callbacks' => [],
