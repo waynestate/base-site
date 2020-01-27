@@ -131,6 +131,14 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
             $promos['contact'] = $main_contact;
         }
 
+        // Inject the main under menu if we are on a subsite
+        $main_under_menu = $promos['main_under_menu'] ?? [];
+        if (!empty($promos['under_menu']) && (!isset($groups['under_menu']['merge_with_main_under_menu']) || $groups['under_menu']['merge_with_main_under_menu'] === true)) {
+            $promos['under_menu'] = array_merge($promos['under_menu'], $main_under_menu);
+        } elseif (empty($promos['under_menu']) && !empty($main_under_menu)) {
+            $promos['under_menu'] = $main_under_menu;
+        }
+
         // Remove the uncessary promo groups
         unset($promos['main_social']);
         unset($promos['main_contact']);
