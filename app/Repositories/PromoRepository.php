@@ -124,10 +124,11 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         }
 
         // Inject the main contact footer if we are on a subsite
+        $main_contact = $promos['main_contact'] ?? [];
         if (!empty($promos['contact']) && (!isset($groups['contact']['merge_with_main_contact']) || $groups['contact']['merge_with_main_contact'] === true)) {
-            $promos['contact'] = array_merge($promos['contact'], $promos['main_contact']);
+            $promos['contact'] = array_merge($promos['contact'], $main_contact);
         } elseif (empty($promos['contact']) && !empty($promos['main_contact'])) {
-            $promos['contact'] = $promos['main_contact'];
+            $promos['contact'] = $main_contact;
         }
 
         // Remove the uncessary promo groups
