@@ -19,6 +19,7 @@
         "waynestate/display-menu": "~1.0",
         "waynestate/error-403": "~1.1",
         "waynestate/error-404": "~1.1",
+        "waynestate/error-429": "^1.0",
         "waynestate/error-500": "~1.1",
         "waynestate/formy-parser": "~1.0",
         "waynestate/image-faker": "~1.0",

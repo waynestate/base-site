@@ -25,6 +25,8 @@ mix.copy([
         'vendor/waynestate/error-404/dist/404.css.map',
         'vendor/waynestate/error-403/dist/403.css',
         'vendor/waynestate/error-403/dist/403.css.map',
+        'vendor/waynestate/error-429/dist/429.css',
+        'vendor/waynestate/error-429/dist/429.css.map',
         'vendor/waynestate/error-500/dist/500.css',
         'vendor/waynestate/error-500/dist/500.css.map'
     ], 'public/_resources/css')
@@ -33,6 +35,7 @@ mix.copy([
     .copy([
         'vendor/waynestate/error-404/dist/404.png',
         'vendor/waynestate/error-403/dist/403.png',
+        'vendor/waynestate/error-429/dist/429.png',
         'vendor/waynestate/error-500/dist/500.png'
     ], 'public/_resources/images')
 
@@ -131,6 +134,10 @@ config = {
             {
                 from: 'vendor/waynestate/error-403/dist/403.php',
                 to: path.resolve('resources/views/errors/403.blade.php'),
+            },
+            {
+                from: 'vendor/waynestate/error-429/dist/429.php',
+                to: path.resolve('resources/views/errors/429.blade.php'),
             },
             {
                 from: 'vendor/waynestate/error-500/dist/500.php',
