@@ -80,19 +80,12 @@ class ProfileRepository implements ProfileRepositoryContract
         $all_profiles = $this->getProfiles($site_id, $group_ids);
 
         // Organize profiles by the group they are in keyed by accessid
-        $grouped = collect($all_profiles['profiles'])->map(function ($profile) {
-            return collect($profile['groups'])->flatMap(function ($group) use ($profile) {
-                return [
-                    'data' => $profile['data'],
-                    'groups' => $profile['groups'],
-                    'group' => $group,
-                    'AccessID' => $profile['data']['AccessID'],
-                    'link' => $profile['link'],
-                ];
-            });
-        })
-        ->keyBy('AccessID')
-        ->groupBy('group', true)
+        $grouped = collect($all_profiles['profiles'])->keyBy('data.AccessID')
+        ->groupBy([
+            function ($profile) {
+                return $profile['groups'];
+            },
+        ], $preserveKeys = true)
         ->toArray();
 
         // Follow the ordering of groups from the CMS
