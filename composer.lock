@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "42d49222a679e81f203f038cc564c2ec",
+    "content-hash": "dd40aad5e260cf737c501c1b26bfcd89",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -3582,6 +3582,44 @@
                 "status"
             ],
             "time": "2019-08-16T13:38:12+00:00"
+        },
+        {
+            "name": "waynestate/error-429",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/waynestate/error-429.git",
+                "reference": "35a6823feda9f60699af80d94008b5c884cb5f10"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/waynestate/error-429/zipball/35a6823feda9f60699af80d94008b5c884cb5f10",
+                "reference": "35a6823feda9f60699af80d94008b5c884cb5f10",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Web Communications",
+                    "email": "web@wayne.edu"
+                }
+            ],
+            "description": "Wayne State University Error 429 HTTP Status",
+            "homepage": "https://github.com/waynestate/error-429",
+            "keywords": [
+                "429",
+                "error",
+                "http",
+                "status"
+            ],
+            "time": "2020-02-06T15:21:37+00:00"
         },
         {
             "name": "waynestate/error-500",
