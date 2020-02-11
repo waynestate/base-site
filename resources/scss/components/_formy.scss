@@ -54,7 +54,7 @@
     }
 
     select {
-        @apply .border-grey .border-solid .border .bg-white .h-10 .w-full .m-0 .mb-4 .p-2 .pr-6 .text-base .leading-normal .rounded-none;
+        @apply .block .border-grey .border-solid .border .bg-white .h-10 .w-full .m-0 .mb-4 .p-2 .pr-6 .text-base .leading-normal .rounded-none;
 
         appearance: none;
         transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
