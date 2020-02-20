@@ -84,18 +84,18 @@ module.exports = {
                 'screen-xxxl': screens.xxxl,
             },
             padding: {
-                '3/4' : '75%',
+                '3/4': '75%',
                 '16/9': '56.35%',
-                'hero' : '36.3%',
-                'full' : '100%',
+                'hero': '36.3%',
+                'full': '100%',
                 'portrait' : '133%',
             },
             spacing: {
-                '14' : '3.5rem',
+                '14': '3.5rem',
             },
             margin: {
-                '17' : '4.25rem',
-                '19' : '4.75rem',
+                '17': '4.25rem',
+                '19': '4.75rem',
             },
             minHeight: {
                 'hero': '36.3vw',
@@ -105,8 +105,11 @@ module.exports = {
                 'grey': '0 7px 0 '+ colors.grey +', 0 14px 0 '+ colors.grey,
             },
             opacity: {
-                '20' : '.20',
-                '65' : '.65',
+                '20': '.20',
+                '65': '.65',
+            },
+            inset: {
+                '4': '1rem',
             },
         },
     },
