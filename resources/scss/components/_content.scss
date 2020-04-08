@@ -29,18 +29,44 @@
     }
 
     blockquote {
-        @apply .pt-6 .pb-2 .pl-16 .pr-6 .my-8 .text-xl .text-black .relative .bg-transparent .flex;
+        padding: 3.5rem 1.5rem 3rem;
+        margin: 2.5rem 0;
+        font-weight: bold;
+        font-size: 1.25rem;
+        position: relative;
+        text-align: center;
 
         @screen mt {
-            @apply .text-2xl;
+            padding: 3.5rem 6rem 3rem;
         }
+    }
 
-        &::before {
-            @apply .absolute .inset-0 .mt-4 .leading-none .text-grey-lighter .pr-1 .font-serif;
+    blockquote::before,
+    blockquote::after {
+        content: '';
+        display: block;
+        font-family: Arial Black, sans-serif;
+        font-size: 2.5rem;
+        padding: 0 1.5rem;
+        position: absolute;
+    }
 
-            content: '\201C'; // Double quote
-            font-size: 85pt;
-        }
+    blockquote::before {
+        content: "\201C";
+        border-bottom: 1px solid black;
+        line-height: 0.5em;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    blockquote::after {
+        content: "\201D";
+        border-top: 1px solid black;
+        line-height: 1em;
+        bottom: -0.75rem;
+        left: 50%;
+        transform: translateX(-50%);
     }
 
     // Tailwind preflight sets images to block
