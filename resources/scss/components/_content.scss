@@ -29,42 +29,35 @@
     }
 
     blockquote {
-        padding: 3.5rem 1.5rem 3rem;
-        margin: 2.5rem 0;
-        font-weight: bold;
-        font-size: 1.25rem;
-        position: relative;
-        text-align: center;
+        @apply .pt-16 .px-6 .pb-12 .my-10 .relative .text-center .text-xl .font-bold;
 
         @screen mt {
-            padding: 3.5rem 6rem 3rem;
+            @apply .px-20;
         }
     }
 
     blockquote::before,
     blockquote::after {
+        @apply .block .px-6 .absolute .text-4xl;
+
         content: '';
-        display: block;
         font-family: Arial Black, sans-serif;
-        font-size: 2.5rem;
-        padding: 0 1.5rem;
-        position: absolute;
     }
 
     blockquote::before {
+        @apply .top-0 .border-b .border-black;
+
         content: "\201C";
-        border-bottom: 1px solid black;
         line-height: 0.5em;
-        top: 0;
         left: 50%;
         transform: translateX(-50%);
     }
 
     blockquote::after {
+        @apply .bottom-0 .border-t .border-black .leading-none;
+
         content: "\201D";
-        border-top: 1px solid black;
-        line-height: 1em;
-        bottom: -0.75rem;
+        bottom: -1rem;
         left: 50%;
         transform: translateX(-50%);
     }
