@@ -45,7 +45,7 @@
     }
 
     blockquote::before {
-        @apply .top-0 .border-b .border-black;
+        @apply .top-0 .border-b;
 
         content: "\201C";
         line-height: 0.5em;
@@ -54,7 +54,7 @@
     }
 
     blockquote::after {
-        @apply .bottom-0 .border-t .border-black .leading-none;
+        @apply .bottom-0 .border-t .leading-none;
 
         content: "\201D";
         bottom: -1rem;
