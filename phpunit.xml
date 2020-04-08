@@ -24,6 +24,7 @@
                 <directory>./app/Providers</directory>
                 <directory>./app/Console/Commands</directory>
                 <file>./app/Http/Kernel.php</file>
+                <file>./app/Http/Controller/Controller.php</file>
                 <file>./app/Http/Middleware/EncryptCookies.php</file>
                 <file>./app/Http/Middleware/TrimStrings.php</file>
                 <file>./app/Http/Middleware/TrustProxies.php</file>
