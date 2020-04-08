@@ -29,7 +29,7 @@
     }
 
     blockquote {
-        @apply .pt-16 .px-6 .pb-12 .my-10 .relative .text-center .text-xl .font-bold;
+        @apply .pt-12 .px-6 .pb-8 .my-10 .relative .text-center .text-xl .font-bold;
 
         @screen mt {
             @apply .px-20;
