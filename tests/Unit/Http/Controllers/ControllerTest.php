@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\App\Http\Controllers;
+namespace Tests\Unit\Http\Controllers;
 
 use Tests\TestCase;
 use Illuminate\Support\Str;

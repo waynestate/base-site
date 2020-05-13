@@ -2,7 +2,7 @@
 
 namespace Styleguide\Pages;
 
-class Menuleft extends Page
+class MenuLeft extends Page
 {
     /**
      * {@inheritdoc}
