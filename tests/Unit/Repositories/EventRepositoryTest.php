@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\App\Repositories;
+namespace Tests\Unit\Repositories;
 
 use Tests\TestCase;
 use Mockery as Mockery;

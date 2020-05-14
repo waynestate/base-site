@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\App\Http\Middleware;
+namespace Tests\Unit\Http\Middleware;
 
 use Mockery;
 use Tests\TestCase;
