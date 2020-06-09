@@ -19,8 +19,7 @@
                 @apply .bg-grey-darker .text-white;
             }
 
-            // Open symbol
-            &.symbol::before {
+            &::before {
                 @apply .absolute .right-0 .pr-4 .top-0 .pt-4;
 
                 content: '+';
@@ -28,7 +27,7 @@
         }
 
         // Close symbol
-        &.open > .symbol::before {
+        &.open > a::before {
             content: '\2013';
         }
 
