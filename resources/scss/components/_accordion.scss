@@ -20,7 +20,7 @@
             }
 
             // Open symbol
-            & span::before {
+            &.symbol::before {
                 @apply .absolute .right-0 .pr-4 .top-0 .pt-4;
 
                 content: '+';
@@ -28,7 +28,7 @@
         }
 
         // Close symbol
-        &.open > a span::before {
+        &.open > .symbol::before {
             content: '\2013';
         }
 
