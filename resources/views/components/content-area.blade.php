@@ -1,4 +1,4 @@
-@extends('layouts.' . (!empty($layout) ? $layout : 'master'))
+@extends('layouts.' . (!empty($layout) ? $layout : 'main'))
 
 @section('content-area')
     @yield('top')
