@@ -53,6 +53,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Top Menu Label for Off-canvas
+    |--------------------------------------------------------------------------
+    |
+    | When there is a top menu and a local page menu, this is the label the
+    | will be give to the top menu when the off-canvas menu is expanded.
+    | It can be changed here based on context, ex. "CLAS menu".
+    |
+    */
+    'top_menu_label' => 'Main menu',
+
+    /*
+    |--------------------------------------------------------------------------
     | Homepage Menu Enabled
     |--------------------------------------------------------------------------
     |
