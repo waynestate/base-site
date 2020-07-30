@@ -265,6 +265,9 @@ class ProfileRepository implements ProfileRepositoryContract
             ->map(function ($value, $key) {
                 return $key == 'Suffix' ? ', '.$value : $value;
             })
+            ->sortBy(function ($value, $key) use ($name_fields) {
+                return array_search($key, $name_fields);
+            })
             ->implode(' ');
 
         return str_replace(' ,', ',', $name);
