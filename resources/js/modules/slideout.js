@@ -75,6 +75,7 @@ import Slideout from 'slideout/dist/slideout.js';
 
         // Set that it was expanded
         document.querySelector('.menu-toggle').setAttribute('aria-expanded', 'true');
+        document.querySelector('.menu-toggle').setAttribute('aria-label', 'Close menu');
     });
 
     slideout.on('close', function () {
@@ -95,6 +96,10 @@ import Slideout from 'slideout/dist/slideout.js';
 
         // Set that it was closed
         document.querySelector('.menu-toggle').setAttribute('aria-expanded', 'false');
+        document.querySelector('.menu-toggle').setAttribute('aria-label', 'Menu');
+
+        // Return focus to the menu icon
+        document.querySelector('.menu-toggle').focus();
     });
 
     // Toggle the appropriate classes for slideout based on the menu icon's visibility state
