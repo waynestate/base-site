@@ -29,37 +29,15 @@
     }
 
     blockquote {
-        @apply .pt-12 .px-6 .pb-8 .my-10 .relative .text-center .text-xl .font-bold;
+        @apply .ml-8 .my-8 .border-l-4 .border-grey .pl-4 .pt-2 .pb-1;
 
-        @screen mt {
-            @apply .px-20;
+        > *:last-child {
+            @apply .mb-2;
         }
-    }
 
-    blockquote::before,
-    blockquote::after {
-        @apply .block .px-6 .absolute .text-4xl;
-
-        content: '';
-        font-family: Arial Black, sans-serif;
-    }
-
-    blockquote::before {
-        @apply .top-0 .border-b;
-
-        content: "\201C";
-        line-height: 0.5em;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    blockquote::after {
-        @apply .bottom-0 .border-t .leading-none;
-
-        content: "\201D";
-        bottom: -1rem;
-        left: 50%;
-        transform: translateX(-50%);
+        cite {
+            @apply .block .mb-4;
+        }
     }
 
     // Tailwind preflight sets images to block
