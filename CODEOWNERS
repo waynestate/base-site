@@ -1,0 +1,1 @@
+* @waynestate/wayne-state-web-team
