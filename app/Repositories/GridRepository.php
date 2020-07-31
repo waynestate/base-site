@@ -38,13 +38,13 @@ class GridRepository implements GridRepositoryContract
     public function getGridPromos(array $data, $limit = 75)
     {
         $group_reference = [];
-
-        // If there is an grid custom page field then inject it into the group reference
-        if (!empty($data['data']['grid_promo_group_id'])) {
-            $group_reference[$data['data']['grid_promo_group_id']] = 'grid_promos';
-        } else {
+        
+        if (empty($data['data']['grid_promo_group_id'])) {
             return ['grid_promos' => []];
         }
+
+        // If there is an grid custom page field then inject it into the group reference
+        $group_reference[$data['data']['grid_promo_group_id']] = 'grid_promos';
 
         $group_config = [
             'grid_promos' => 'limit:' . $limit,

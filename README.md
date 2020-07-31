@@ -45,7 +45,7 @@ Starter repository for creating a new website. Live demo can be found at https:/
 1. run `make install`
 1. run `make build`
 1. run `make watch`
-1. open https://domain.local:3000/ (for BrowserySync)
+1. open https://domain.local:3000/ (for BrowserSync)
 
 ## Deployment
 
