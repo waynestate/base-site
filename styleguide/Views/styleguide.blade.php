@@ -160,14 +160,16 @@
         <h2>Blockquote</h2>
 
         <blockquote>
-            <p>{{ $faker->paragraph(10) }}</p>
+            <p>&ldquo;{{ $faker->paragraph(10) }}&rdquo;</p>
+            <p>&ldquo;{{ $faker->paragraph(4) }}&rdquo;</p>
+            <cite>&mdash; {{ $faker->Name }}</cite>
         </blockquote>
-
 
         <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
         {!! htmlspecialchars('
 <blockquote>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
+    <cite>Name or citation</cite>
 </blockquote>') !!}
         </pre>
 
