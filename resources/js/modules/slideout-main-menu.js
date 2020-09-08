@@ -3,7 +3,13 @@
 
     // Hide the main menu to start
     if(document.querySelector('#menu .menu-top') != null) {
-        document.querySelector('#menu .menu-top').classList.add('hidden');
+        // Add .hide to .menu-top when it's in .slideout-main-menu
+        if(document.querySelector('#menu .slideout-main-menu') != null) {
+            document.querySelector('#menu .menu-top').classList.add('hidden');
+        } else {
+            // Add .main-menu styling class
+            document.querySelector('#menu .menu-top').classList.add('main-menu');
+        }
     }
 
     // Add the arrow icons to toggle the main menu
