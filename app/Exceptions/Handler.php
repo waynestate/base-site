@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Facades\View;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -51,7 +52,7 @@ class Handler extends ExceptionHandler
     {
         // Add custom errors when debug is not enabled
         if (config('app.debug') == false) {
-            if (View::exists('errors.'.$exception->getStatusCode())) {
+            if ($exception instanceof HttpException && View::exists('errors.'.$exception->getStatusCode())) {
                 return response(view('errors.'.$exception->getStatusCode(), compact('request')), $exception->getStatusCode());
             } else {
                 return response(view('errors.500', compact('request')), 500);
