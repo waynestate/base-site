@@ -268,6 +268,7 @@ return [
             //         ],
             //     ],
             //     'callbacks' => [],
+            //     'surtitle_disabled' => null,
             // ],
         ],
     ],
