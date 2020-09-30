@@ -272,24 +272,31 @@
                 <div class="rounded overflow-hidden border border-grey">
                     <div class="text-black bg-green-lightest px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Lightest green</span>
+                        <span>#acc9c0</span>
                     </div>
                     <div class="text-black bg-green-lighter px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Lighter green</span>
+                        <span>#71a192</span>
                     </div>
                     <div class="text-white bg-green-light px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Light green</span>
+                        <span>#3d7a67</span>
                     </div>
                     <div class="text-white bg-green px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Base green</span>
+                        <span>#0c5449</span>
                     </div>
                     <div class="text-white bg-green-dark px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Dark green</span>
+                        <span>#093f39</span>
                     </div>
                     <div class="text-white bg-green-darker px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Darker green</span>
+                        <span>#072e29</span>
                     </div>
                     <div class="text-white bg-green-darkest px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Darkest green</span>
+                        <span>#05211e</span>
                     </div>
                 </div>
             </div>
@@ -298,24 +305,31 @@
                 <div class="rounded overflow-hidden border border-grey">
                     <div class="text-black bg-yellow-lightest px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Lightest yellow</span>
+                        <span>#fff2c9</span>
                     </div>
                     <div class="text-black bg-yellow-lighter px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Lighter yellow</span>
+                        <span>#ffe596</span>
                     </div>
                     <div class="text-black bg-yellow-light px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Light yellow</span>
+                        <span>#ffdb6f</span>
                     </div>
                     <div class="text-black bg-yellow px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Base yellow</span>
+                        <span>#ffcc33</span>
                     </div>
                     <div class="text-black bg-yellow-dark px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Dark yellow</span>
+                        <span>#d8ad2d</span>
                     </div>
                     <div class="text-black bg-yellow-darker px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Darker yellow</span>
+                        <span>#ae8f30</span>
                     </div>
                     <div class="text-white bg-yellow-darkest px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Darkest yellow</span>
+                        <span>#866e26</span>
                     </div>
                 </div>
             </div>
@@ -324,30 +338,39 @@
                 <div class="rounded overflow-hidden border border-grey">
                     <div class="text-black bg-white px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>White</span>
+                        <span>#ffffff</span>
                     </div>
                     <div class="text-black bg-grey-lightest px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Lightest grey</span>
+                        <span>#f2f2f2</span>
                     </div>
                     <div class="text-black bg-grey-lighter px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Lighter grey</span>
+                        <span>#e6e6e6</span>
                     </div>
                     <div class="text-black bg-grey-light px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Light grey</span>
+                        <span>#d9d9d9</span>
                     </div>
                     <div class="text-black bg-grey px-6 py-3 text-sm font-semibold flex justify-between flex justify-between">
                         <span>Base grey</span>
+                        <span>#babfbf</span>
                     </div>
                     <div class="text-black bg-grey-dark px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Dark grey</span>
+                        <span>#949999</span>
                     </div>
                     <div class="text-white bg-grey-darker px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Darker grey</span>
+                        <span>#575959</span>
                     </div>
                     <div class="text-white bg-grey-darkest px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Darkest grey</span>
+                        <span>#323333</span>
                     </div>
                     <div class="text-white bg-black px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Black</span>
+                        <span>#181a19</span>
                     </div>
                 </div>
             </div>
