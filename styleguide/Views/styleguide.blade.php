@@ -309,7 +309,7 @@
                     </div>
                     <div class="text-black bg-yellow-lighter px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Lighter yellow</span>
-                        <span>ffe596</span>
+                        <span>#ffe596</span>
                     </div>
                     <div class="text-black bg-yellow-light px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Light yellow</span>
@@ -317,7 +317,7 @@
                     </div>
                     <div class="text-black bg-yellow px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Base yellow</span>
-                        <span>ffcc33</span>
+                        <span>#ffcc33</span>
                     </div>
                     <div class="text-black bg-yellow-dark px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Dark yellow</span>
