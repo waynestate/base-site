@@ -13,7 +13,7 @@ branches:
 
 php:
   - 7.3
-
+  
 before_install:
   # Install nvm for nodejs
   - nvm install 12
