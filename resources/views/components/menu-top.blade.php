@@ -5,7 +5,14 @@
 <div class="menu-top-container bg-green-dark print:bg-transparent">
     <div class="row flex">
         <div class="flex-grow mx-4 py-2" data-short-title="{{ $site['short-title'] }}">
-            @if((config('base.surtitle') !== null && ($site['parent']['id'] === null && config('base.surtitle_main_site_enabled') === true) || ($site['parent']['id'] !== null && config('base.surtitle') !== null)) && (!config('base.global.sites.' . $site['id'] . '.surtitle_disabled')))
+            @if(
+                (
+                    config('base.surtitle') !== null &&
+                    ($site['parent']['id'] === null && config('base.surtitle_main_site_enabled') === true) ||
+                    ($site['parent']['id'] !== null && config('base.surtitle') !== null)
+                ) &&
+                !config('base.global.sites.' . $site['id'] . '.surtitle_disabled')
+            )
                 <h1 class="text-base mb-0 font-normal leading-tight">
                     <a href="{{ config('base.surtitle_url') }}" class="text-white print:text-black">{{ config('base.surtitle') }}</a>
                 </h1>
