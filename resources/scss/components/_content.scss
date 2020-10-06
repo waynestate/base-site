@@ -53,7 +53,9 @@
             @apply .block .my-0 .mx-auto;
 
             &[style*="float:right"],
-            &[style*="float:left"] {
+            &[style*="float:left"],
+            &.float-right,
+            &.float-left {
                 float: none !important;
             }
         }
