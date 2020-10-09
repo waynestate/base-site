@@ -28,7 +28,7 @@ class Spotlight implements FactoryContract
                 'relative_url' => '/styleguide/image/300x400?text=300x400',
                 'title' => $this->faker->name,
                 'excerpt' => $this->faker->sentence,
-                'description' => '<p>'.$this->faker->paragraph.'</p>',
+                'description' => '<p>'.$this->faker->paragraph.'</p>'.'<p>'.$this->faker->paragraph.'</p>'.'<p>'.$this->faker->paragraph.'</p>',
                 'filename_alt_text' => 'Example grid image',
             ];
 
