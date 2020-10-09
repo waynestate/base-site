@@ -14,11 +14,6 @@ class Spotlights extends Page
                 'controller' => 'SpotlightController',
                 'title' => 'Spotlights',
                 'id' => 101110,
-                'content' => [
-                    'main' => '<p>'.$this->faker->paragraph(8).'</p>
-                    <p>'.$this->faker->paragraph(8).'</p>
-                    <p>'.$this->faker->paragraph(8).'</p>',
-                ],
             ],
         ]);
     }
