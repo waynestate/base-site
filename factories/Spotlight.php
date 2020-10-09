@@ -24,8 +24,12 @@ class Spotlight implements FactoryContract
     {
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
-                'title' => $this->faker->sentence,
+                'promo_item_id' => $i,
+                'relative_url' => '/styleguide/image/300x400?text=300x400',
+                'title' => $this->faker->name,
+                'excerpt' => $this->faker->sentence,
                 'description' => '<p>'.$this->faker->paragraph.'</p>',
+                'filename_alt_text' => 'Example grid image',
             ];
 
             $data[$i] = array_replace_recursive($data[$i], $options);

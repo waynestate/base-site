@@ -12,7 +12,25 @@ class SpotlightRepository extends Repository
     public function getSpotlights()
     {
         return [
-            'spotlights' => app('Factories\Spotlight')->create(5)
+            'spotlights' => app('Factories\Spotlight')->create(12),
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSpotlight($id)
+    {
+        return [
+            'spotlight' => app('Factories\Spotlight')->create(1, true),
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBackToSpotlightsListing($referer = null, $scheme = null, $host = null, $uri = null)
+    {
+        return '/styleguide/spotlights';
     }
 }

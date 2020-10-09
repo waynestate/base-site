@@ -11,6 +11,10 @@
 |
 */
 
+// Individual spotlight route
+Route::get('{any?}spotlights/{title}-{id}', 'SpotlightController@show')
+    ->where(['any' => '.*', 'title' => '.+', 'id' => '\d+']);
+
 // Profile view
 Route::get('{any?}profile/{accessid?}', 'ProfileController@show')
     ->where(['any' => '.*', 'accessid' => '[a-zA-Z]{2}\d{4}']);

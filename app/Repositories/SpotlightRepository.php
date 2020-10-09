@@ -37,8 +37,60 @@ class SpotlightRepository implements SpotlightRepositoryContract
      */
     public function getSpotlights()
     {
-        return [
-            'spotlights' => []
+        $group_reference = [
+//            0000 => 'spotlights',
         ];
+
+        $group_config = [];
+
+        $params = [
+            'method' => 'cms.promotions.listing',
+            'promo_group_id' => array_keys($group_reference),
+            'filename_url' => true,
+            'is_active' => '1',
+        ];
+
+        $promos = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+            return $this->wsuApi->sendRequest($params['method'], $params);
+        });
+
+        return $this->parsePromos->parse($promos, $group_reference, $group_config);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSpotlight($id)
+    {
+        $params = [
+            'method' => 'cms.promotions.info',
+            'promo_item_id' => $id,
+            'filename_url' => true,
+            'is_active' => '1',
+        ];
+
+        $promo = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+            return $this->wsuApi->sendRequest($params['method'], $params);
+        });
+
+        $promo['spotlight'] = empty($promo['error']) ? $promo['promotion'] : [];
+
+        return $promo;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBackToSpotlightsListing($referer = null, $scheme = null, $host = null, $uri = null)
+    {
+        // Make sure the referer is coming from the site we are currently on and not the current page
+        if ($referer === null
+            || $referer == $scheme.'://'.$host.$uri
+            || strpos($referer, $host) === false
+        ) {
+            return '/spotlights';
+        }
+
+        return $referer;
     }
 }
