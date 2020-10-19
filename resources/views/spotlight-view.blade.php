@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row flex flex-wrap -mx-4">
-        <div class="w-full lg:w-1/3 px-4 mt-6">
+        <div class="w-full lg:w-1/3 px-4 mt-6 mb-4">
             @if(!empty($spotlight['relative_url']))
                 @image($spotlight['relative_url'], $spotlight['filename_alt_text'], 'w-full')
             @else
