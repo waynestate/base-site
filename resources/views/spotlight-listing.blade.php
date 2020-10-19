@@ -16,7 +16,7 @@
                             @if(!empty($spotlight['relative_url']))
                                 @image($spotlight['relative_url'], $spotlight['filename_alt_text'], 'w-full')
                             @else
-                                <div class="w-full pt-4/3 bg-cover bg-center" style="background-image: url('/_resources/images/no-photo.svg');"></div>
+                                <div class="w-full pt-portrait bg-cover bg-center" style="background-image: url('/_resources/images/no-photo.svg');"></div>
                             @endif
                         </a>
                     </div>
