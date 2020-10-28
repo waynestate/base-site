@@ -32,7 +32,11 @@ class DirectoryController extends Controller
     {
         $site_id = !empty($request->data['data']['profile_site_id']) ? $request->data['data']['profile_site_id'] : $request->data['site']['id'];
 
-        $profiles = $this->profile->getProfilesByGroup($site_id);
+        if (!empty($request->data['data']['profile_group_id'])) {
+            $profiles = $this->profile->getProfilesByGroupOrderPiped($site_id, $request->data['data']['profile_group_id']);
+        } else {
+            $profiles = $this->profile->getProfilesByGroup($site_id);
+        }
 
         return view('directory', merge($request->data, $profiles));
     }
