@@ -29,6 +29,29 @@ class SpotlightRepositoryTest extends TestCase
     }
 
     /**
+     * @covers App\Repositories\SpotlightRepository::getSpotlight
+     * @test
+     */
+    public function getting_spotlight_should_return_array()
+    {
+        $spotlight_return = app('Factories\Spotlight')->create(1, true);
+
+        // Fake return
+        $return = [
+            'promotion' => $spotlight_return,
+        ];
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock('Waynestate\Api\Connector');
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.info', Mockery::type('array'))->once()->andReturn($return);
+
+        // Get the spotlight
+        $spotlight = app('App\Repositories\SpotlightRepository', ['wsuApi' => $wsuApi])->getSpotlight($this->faker->randomDigit);
+
+        $this->assertEquals($spotlight, ['spotlight' => $spotlight_return]);
+    }
+
+    /**
      * @covers App\Repositories\SpotlightRepository::getBackToSpotlightsListing
      * @test
      */

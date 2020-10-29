@@ -73,9 +73,9 @@ class SpotlightRepository implements SpotlightRepositoryContract
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
-        $promo['spotlight'] = empty($promo['error']) ? $promo['promotion'] : [];
+        $spotlight['spotlight'] = empty($promo['error']) ? $promo['promotion'] : [];
 
-        return $promo;
+        return $spotlight;
     }
 
     /**
