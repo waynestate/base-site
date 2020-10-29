@@ -38,7 +38,7 @@ class SpotlightRepository implements SpotlightRepositoryContract
     public function getSpotlights()
     {
         $group_reference = [
-//            0000 => 'spotlights',
+            //            0000 => 'spotlights',
         ];
 
         $group_config = [];
