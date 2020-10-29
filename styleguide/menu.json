@@ -117,6 +117,26 @@
                 "class_name": "",
                 "relative_url": "/styleguide/grid",
                 "submenu": []
+            },
+            "101110": {
+                "menu_item_id": 101110,
+                "is_active": "1",
+                "page_id": 101110,
+                "target": "",
+                "display_name": "Spotlights",
+                "class_name": "",
+                "relative_url": "/styleguide/spotlights",
+                "submenu": []
+            },
+            "101111": {
+                "menu_item_id": 101111,
+                "is_active": "1",
+                "page_id": 101111,
+                "target": "",
+                "display_name": "Spotlight view",
+                "class_name": "",
+                "relative_url": "/styleguide/spotlight/title-12345",
+                "submenu": []
             }
         }
     },
