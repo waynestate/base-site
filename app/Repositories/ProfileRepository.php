@@ -124,6 +124,8 @@ class ProfileRepository implements ProfileRepositoryContract
 
         $group_order = explode('|', $groups);
 
+        $profiles = [];
+
         // Retain the order of the groups as they were piped in
         foreach ($group_order as $group) {
             foreach ($profile_listing['profiles'] as $profile) {
