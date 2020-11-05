@@ -266,9 +266,7 @@ class ProfileRepositoryTest extends TestCase
 
         $groups = collect($return_user_listing)->map(function ($item) {
             return array_shift($item['groups']);
-        })->unique()->toArray();
-
-        krsort($groups);
+        })->unique()->reverse()->toArray();
 
         $piped_groups = implode('|', array_keys($groups));
 
