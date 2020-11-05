@@ -13,7 +13,7 @@ class DirectoryOrdered extends Page
             'page' => [
                 'controller' => 'DirectoryController',
                 'title' => 'Directory ordered',
-                'id' => 101110,
+                'id' => 101112,
             ],
             'data' => [
                 'profile_group_id' => '0|1',
