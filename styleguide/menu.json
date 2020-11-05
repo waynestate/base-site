@@ -137,6 +137,16 @@
                 "class_name": "",
                 "relative_url": "/styleguide/spotlight/title-12345",
                 "submenu": []
+            },
+            "101112": {
+                "menu_item_id": "101112",
+                "is_active": "1",
+                "page_id": "101112",
+                "target": "",
+                "display_name": "Directory ordered",
+                "class_name": "",
+                "relative_url": "/styleguide/directoryordered",
+                "submenu": []
             }
         }
     },

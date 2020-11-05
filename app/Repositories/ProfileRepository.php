@@ -118,6 +118,29 @@ class ProfileRepository implements ProfileRepositoryContract
     /**
      * {@inheritdoc}
      */
+    public function getProfilesByGroupOrderPiped($site_id, $groups)
+    {
+        $profile_listing = $this->getProfiles($site_id);
+
+        $group_order = explode('|', $groups);
+
+        $profiles = [];
+
+        // Retain the order of the groups as they were piped in
+        foreach ($group_order as $group) {
+            foreach ($profile_listing['profiles'] as $profile) {
+                if (array_key_exists($group, $profile['groups'])) {
+                    $profiles['profiles'][$profile['groups'][$group]][] = $profile;
+                }
+            }
+        }
+
+        return $profiles;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getDropdownOptions($selected_group = null, $forced_profile_group_id = null)
     {
         // Default Options

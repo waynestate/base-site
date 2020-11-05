@@ -254,4 +254,36 @@ class ProfileRepositoryTest extends TestCase
             $this->assertTrue(array_key_exists($item['display_name'], $profiles['profiles']));
         });
     }
+
+    /**
+     * @covers App\Repositories\ProfileRepository::getProfilesByGroupOrderPiped
+     * @test
+     */
+    public function profile_group_ids_should_return_ordered_array()
+    {
+        // Mock the user listing
+        $return_user_listing = app('Factories\Profile')->create(10);
+
+        $groups = collect($return_user_listing)->map(function ($item) {
+            return array_shift($item['groups']);
+        })->unique()->reverse()->toArray();
+
+        $piped_groups = implode('|', array_keys($groups));
+
+        $return_user_listing = collect($return_user_listing)->mapWithKeys(function ($item, $key) use ($groups) {
+            $group_id = array_search($item['groups'][0], $groups);
+            $item['groups'] = [$group_id => $item['groups'][0]];
+
+            return [$key => $item];
+        });
+
+        $wsuApi = Mockery::mock('Waynestate\Api\Connector');
+        $wsuApi->shouldReceive('sendRequest')->with('profile.users.listing', Mockery::type('array'))->once()->andReturn($return_user_listing);
+
+        $wsuApi->shouldReceive('nextRequestProduction')->once();
+
+        $profiles = app('App\Repositories\ProfileRepository', ['wsuApi' => $wsuApi])->getProfilesByGroupOrderPiped($this->faker->numberBetween(1, 10), $piped_groups);
+
+        $this->assertEquals(array_values($groups), array_values(array_keys($profiles['profiles'])));
+    }
 }
