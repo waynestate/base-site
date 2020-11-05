@@ -14,6 +14,23 @@ interface ProfileRepositoryContract
     public function getProfiles($site_id, $selected_group);
 
     /**
+     * Gets the profiles based on promo_group_id custom field and generates anchors for each group
+     *
+     * @param int $site_id
+     * @param string $groups
+     * @return array
+     */
+    public function getProfilesByGroupOrderPipedWithAnchors($site_id, $groups);
+
+    /**
+     * Creates a table of contents and displays in 2 columns
+     *
+     * @param array $profiles
+     * @return array
+     */
+    public function getGroupsFromReturnedProfiles($profiles);
+
+    /**
      * Get the dropdown config options.
      *
      * @param int $selected_group
