@@ -9,8 +9,8 @@
 
     <a id="directory-contents"></a>
 
-    <h2>Table of contents</h2>
     @if(!empty($groups_left) && !empty($groups_right))
+        <h2>Table of contents</h2>
         <div class="flex -mx-4 mb-8 w-full">
             <ul class="mx-4 w-full">
                 @foreach($groups_left as $group=>$anchor)
