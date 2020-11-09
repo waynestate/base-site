@@ -157,6 +157,16 @@
                 "class_name": "",
                 "relative_url": "/styleguide/contacttables",
                 "submenu": []
+            },
+            "101114": {
+                "menu_item_id": "101114",
+                "is_active": "1",
+                "page_id": "101114",
+                "target": "",
+                "display_name": "Contact tables, no table of contents",
+                "class_name": "",
+                "relative_url": "/styleguide/contacttablesnotoc",
+                "submenu": []
             }
         }
     },
