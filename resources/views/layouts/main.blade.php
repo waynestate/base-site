@@ -10,9 +10,10 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
     @if(!empty($page['canonical']))<link rel="canonical" href="{{ $page['canonical'] }}">@endif
 
-    @include('components.ga')
+    @include('components.gtm-head')
 </head>
 <body class="font-sans font-normal text-black leading-normal text-base">
+    @include('components.gtm-body')
 
 @include('components.skip')
 
