@@ -20,15 +20,7 @@ interface ProfileRepositoryContract
      * @param string $groups
      * @return array
      */
-    public function getProfilesByGroupOrderPipedWithAnchors($site_id, $groups);
-
-    /**
-     * Creates a table of contents and displays in 2 columns
-     *
-     * @param array $profiles
-     * @return array
-     */
-    public function getGroupsFromReturnedProfiles($profiles);
+    public function getProfilesByGroupOrder($site_id, $groups);
 
     /**
      * Get the dropdown config options.

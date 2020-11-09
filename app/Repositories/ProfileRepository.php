@@ -119,7 +119,7 @@ class ProfileRepository implements ProfileRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getProfilesByGroupOrderPiped($site_id, $groups)
+    public function getProfilesByGroupOrder($site_id, $groups)
     {
         $profile_listing = $this->getProfiles($site_id);
 
@@ -128,62 +128,18 @@ class ProfileRepository implements ProfileRepositoryContract
         $profiles = [];
 
         // Retain the order of the groups as they were piped in
-        foreach ($group_order as $group) {
-            foreach ($profile_listing['profiles'] as $profile) {
-                if (array_key_exists($group, $profile['groups'])) {
-                    $profiles['profiles'][$profile['groups'][$group]][] = $profile;
-                }
-            }
-        }
-
-        return $profiles;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getProfilesByGroupOrderPipedWithAnchors($site_id, $groups)
-    {
-        $profile_listing = $this->getProfiles($site_id);
-
-        $group_order = explode('|', $groups);
-
-        $profiles['profiles'] = [];
-
-        // Retain the order of the groups as they were piped in
         if (!empty($profile_listing)) {
             foreach ($group_order as $group) {
                 foreach ($profile_listing['profiles'] as $profile) {
                     if (array_key_exists($group, $profile['groups'])) {
-                        $profiles['profiles'][$profile['groups'][$group]]['people'][] = $profile;
-                        $profiles['profiles'][$profile['groups'][$group]]['anchor'] = Str::slug($profile['groups'][$group]);
+                        $profiles['profiles'][$profile['groups'][$group]][] = $profile;
+                        $profiles['anchors'][$profile['groups'][$group]] = Str::slug($profile['groups'][$group]);
                     }
                 }
             }
         }
 
         return $profiles;
-    }
-
-    /**
-     * {@inheritdoc}
-     * Creates a table of contents and displays in 2 columns
-     */
-    public function getGroupsFromReturnedProfiles($profiles)
-    {
-        $group_listing = [];
-
-        foreach ($profiles['profiles'] as $key => $value) {
-            $group_listing[$key] = Str::slug($key);
-        }
-
-        $groups_count = count($group_listing);
-
-        $groups['groups_left'] = array_slice($group_listing, 0, floor($groups_count / 2));
-
-        $groups['groups_right'] = array_slice($group_listing, floor($groups_count / 2));
-
-        return $groups;
     }
 
     /**

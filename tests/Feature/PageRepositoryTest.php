@@ -17,6 +17,7 @@ class PageRepositoryTest extends TestCase
      * @covers App\Http\Controllers\DirectoryController
      * @covers App\Http\Controllers\TopicController
      * @covers App\Http\Controllers\SpotlightController
+     * @covers App\Http\Controllers\ContactTableController
      * @covers Styleguide\Repositories\PageRepository::getRequestData
      * @test
      */

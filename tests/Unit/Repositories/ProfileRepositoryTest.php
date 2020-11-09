@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Repositories;
 
+use Illuminate\Support\Str;
 use Tests\TestCase;
 use Mockery as Mockery;
 
@@ -256,7 +257,7 @@ class ProfileRepositoryTest extends TestCase
     }
 
     /**
-     * @covers App\Repositories\ProfileRepository::getProfilesByGroupOrderPiped
+     * @covers App\Repositories\ProfileRepository::getProfilesByGroupOrder
      * @test
      */
     public function profile_group_ids_should_return_ordered_array()
@@ -282,80 +283,14 @@ class ProfileRepositoryTest extends TestCase
 
         $wsuApi->shouldReceive('nextRequestProduction')->once();
 
-        $profiles = app('App\Repositories\ProfileRepository', ['wsuApi' => $wsuApi])->getProfilesByGroupOrderPiped($this->faker->numberBetween(1, 10), $piped_groups);
+        $profiles = app('App\Repositories\ProfileRepository', ['wsuApi' => $wsuApi])->getProfilesByGroupOrder($this->faker->numberBetween(1, 10), $piped_groups);
 
         $this->assertEquals(array_values($groups), array_values(array_keys($profiles['profiles'])));
-    }
 
-    /**
-     * @covers App\Repositories\ProfileRepository::getProfilesByGroupOrderPipedWithAnchors
-     * @test
-     */
-    public function profile_group_ids_should_return_ordered_array_with_anchors()
-    {
-        // QUESTION ON THIS
-        // This is function in the repository is just about the exact same as the function with the "WithAnchors" suffix on it. Would this be a candidate to try factoring the two into the same function? Or maybe we need more extraction?
+        $this->assertEquals(array_values($groups), array_values(array_keys($profiles['anchors'])));
 
-        // Mock the user listing
-        $return_user_listing = app('Factories\Profile')->create(10);
-
-        $groups = collect($return_user_listing)->map(function ($item) {
-            return array_shift($item['groups']);
-        })->unique()->reverse()->toArray();
-
-        $piped_groups = implode('|', array_keys($groups));
-
-        $return_user_listing = collect($return_user_listing)->mapWithKeys(function ($item, $key) use ($groups) {
-            $group_id = array_search($item['groups'][0], $groups);
-            $item['groups'] = [$group_id => $item['groups'][0]];
-
-            return [$key => $item];
-        });
-
-
-        $wsuApi = Mockery::mock('Waynestate\Api\Connector');
-        $wsuApi->shouldReceive('sendRequest')->with('profile.users.listing', Mockery::type('array'))->once()->andReturn($return_user_listing);
-
-        $wsuApi->shouldReceive('nextRequestProduction')->once();
-
-        $profiles = app('App\Repositories\ProfileRepository', ['wsuApi' => $wsuApi])->getProfilesByGroupOrderPipedWithAnchors($this->faker->numberBetween(1, 10), $piped_groups);
-
-        $this->assertEquals(array_values($groups), array_values(array_keys($profiles['profiles'])));
-    }
-
-    /**
-     * @covers App\Repositories\ProfileRepository::getGroupsFromReturnedProfiles
-     * @test
-     */
-    public function groups_should_be_split_in_two()
-    {
-        // QUESTION ON THIS
-        //so this expects that users have already been grouped from the previous test here (the group order piped with anchors). how do i handle that? do i duplicate the above code? or is there a way to "snapshot" the end result of that function's mockery/faker and just use that instead of duplicating all the code?
-
-        // Mock the user listing
-        $return_user_listing = app('Factories\Profile')->create(10);
-
-        $groups = collect($return_user_listing)->map(function ($item) {
-            return array_shift($item['groups']);
-        })->unique()->reverse()->toArray();
-
-        $piped_groups = implode('|', array_keys($groups));
-
-        $return_user_listing = collect($return_user_listing)->mapWithKeys(function ($item, $key) use ($groups) {
-            $group_id = array_search($item['groups'][0], $groups);
-            $item['groups'] = [$group_id => $item['groups'][0]];
-
-            return [$key => $item];
-        });
-
-
-        $wsuApi = Mockery::mock('Waynestate\Api\Connector');
-        $wsuApi->shouldReceive('sendRequest')->with('profile.users.listing', Mockery::type('array'))->once()->andReturn($return_user_listing);
-
-        $wsuApi->shouldReceive('nextRequestProduction')->once();
-
-        $profiles = app('App\Repositories\ProfileRepository', ['wsuApi' => $wsuApi])->getProfilesByGroupOrderPipedWithAnchors($this->faker->numberBetween(1, 10), $piped_groups);
-
-        $this->assertEquals(array_values($groups), array_values(array_keys($profiles['profiles'])));
+        foreach ($profiles['anchors'] as $key => $slug) {
+            $this->assertEquals($slug, Str::slug($key));
+        }
     }
 }

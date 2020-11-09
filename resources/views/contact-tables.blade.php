@@ -9,17 +9,12 @@
 
     <a id="directory-contents"></a>
 
-    @if(!empty($groups_left) && !empty($groups_right))
+    @if(!empty($anchors))
         <h2>Table of contents</h2>
         <div class="flex -mx-4 mb-8 w-full">
             <ul class="mx-4 w-full">
-                @foreach($groups_left as $group=>$anchor)
+                @foreach($anchors as $group=>$anchor)
                     <li class="list-none"><a href="#{{$anchor}}" class="underline hover:no-underline" aria-label="{{$group}} contacts">{{$group}}</a></li>
-                @endforeach
-            </ul>
-            <ul class="mx-4 w-full">
-                @foreach($groups_right as $group=>$anchor)
-                    <li class="list-none"><a href="#{{$anchor}}" class="underline hover:no-underline">{{$group}}</a></li>
                 @endforeach
             </ul>
         </div>
@@ -28,7 +23,7 @@
     <div class="content">
         @if(!empty($profiles))
             @foreach($profiles as $group=>$profile_list)
-                <h2 id="{{$profile_list['anchor']}}">{{$group}}</h2>
+                <h2 @if(!empty($anchors)) id="{{$anchors[$group]}}" @endif>{{$group}}</h2>
                 <table class="table-stack">
                     <thead>
                     <tr>
@@ -39,7 +34,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($profile_list['people'] as $profile)
+                    @foreach($profile_list as $profile)
                         <tr>
                             <td>@if(isset($profile['data']['Email']))<a href="mailto:{{$profile['data']['Email']}}">@endif{{$profile['data']['First Name']}} {{$profile['data']['Last Name']}}@if(isset($profile['data']['Email']))</a>@endif</td>
                             <td>@if(isset($profile['data']['Title'])){{$profile['data']['Title']}}@endif</td>

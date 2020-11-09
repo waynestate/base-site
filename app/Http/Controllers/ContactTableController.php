@@ -33,15 +33,13 @@ class ContactTableController extends Controller
         // Determine what site to pull profiles from
         $site_id = !empty($request->data['data']['profile_site_id']) ? $request->data['data']['profile_site_id'] : $request->data['site']['id'];
 
-        $profiles = $this->profile->getProfilesByGroupOrderPipedWithAnchors($site_id, $request->data['data']['profile_group_id']);
+        $profiles = $this->profile->getProfilesByGroupOrder($site_id, $request->data['data']['profile_group_id']);
 
         // show table of contents if custom field 'table_of_contents' is not set to 'hide'
         if (isset($request->data['data']['table_of_contents']) && $request->data['data']['table_of_contents'] === 'hide') {
-            $groups = [];
-        } else {
-            $groups = $this->profile->getGroupsFromReturnedProfiles($profiles);
+            $profiles['anchors'] = [];
         }
 
-        return view('contact-tables', merge($request->data, $groups, $profiles));
+        return view('contact-tables', merge($request->data, $profiles));
     }
 }
