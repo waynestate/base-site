@@ -11,8 +11,8 @@
 
     @if(!empty($anchors))
         <h2>Table of contents</h2>
-        <div class="flex -mx-4 mb-8 w-full">
-            <ul class="mx-4 w-full">
+        <div class="mb-8">
+            <ul class="table-of-contents">
                 @foreach($anchors as $group=>$anchor)
                     <li class="list-none"><a href="#{{$anchor}}" class="underline hover:no-underline" aria-label="{{$group}} contacts">{{$group}}</a></li>
                 @endforeach
