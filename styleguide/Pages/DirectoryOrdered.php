@@ -16,7 +16,7 @@ class DirectoryOrdered extends Page
             'page' => [
                 'controller' => 'DirectoryController',
                 'title' => 'Directory ordered',
-                'id' => 101112,
+                'id' => 101108,
                 'content' => ['main' => '<p>In order to choose which groups show:</p>
     <ol>
         <li>Add a custom field named "profile_group_id"</li>

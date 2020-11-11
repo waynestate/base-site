@@ -13,7 +13,7 @@ class Spotlight extends Page
             'page' => [
                 'controller' => 'SpotlightController',
                 'title' => 'Spotlight view',
-                'id' => 101111,
+                'id' => 101112,
             ],
         ]);
     }
