@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Waynestate\Api\Connector;
 use Illuminate\Cache\Repository;
 use Waynestate\Promotions\ParsePromos;
@@ -118,7 +119,7 @@ class ProfileRepository implements ProfileRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getProfilesByGroupOrderPiped($site_id, $groups)
+    public function getProfilesByGroupOrder($site_id, $groups)
     {
         $profile_listing = $this->getProfiles($site_id);
 
@@ -127,10 +128,13 @@ class ProfileRepository implements ProfileRepositoryContract
         $profiles = [];
 
         // Retain the order of the groups as they were piped in
-        foreach ($group_order as $group) {
-            foreach ($profile_listing['profiles'] as $profile) {
-                if (array_key_exists($group, $profile['groups'])) {
-                    $profiles['profiles'][$profile['groups'][$group]][] = $profile;
+        if (!empty($profile_listing)) {
+            foreach ($group_order as $group) {
+                foreach ($profile_listing['profiles'] as $profile) {
+                    if (array_key_exists($group, $profile['groups'])) {
+                        $profiles['profiles'][$profile['groups'][$group]][] = $profile;
+                        $profiles['anchors'][$profile['groups'][$group]] = Str::slug($profile['groups'][$group]);
+                    }
                 }
             }
         }

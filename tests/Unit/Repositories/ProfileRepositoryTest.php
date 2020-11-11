@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Repositories;
 
+use Illuminate\Support\Str;
 use Tests\TestCase;
 use Mockery as Mockery;
 
@@ -256,7 +257,7 @@ class ProfileRepositoryTest extends TestCase
     }
 
     /**
-     * @covers App\Repositories\ProfileRepository::getProfilesByGroupOrderPiped
+     * @covers App\Repositories\ProfileRepository::getProfilesByGroupOrder
      * @test
      */
     public function profile_group_ids_should_return_ordered_array()
@@ -282,8 +283,14 @@ class ProfileRepositoryTest extends TestCase
 
         $wsuApi->shouldReceive('nextRequestProduction')->once();
 
-        $profiles = app('App\Repositories\ProfileRepository', ['wsuApi' => $wsuApi])->getProfilesByGroupOrderPiped($this->faker->numberBetween(1, 10), $piped_groups);
+        $profiles = app('App\Repositories\ProfileRepository', ['wsuApi' => $wsuApi])->getProfilesByGroupOrder($this->faker->numberBetween(1, 10), $piped_groups);
 
         $this->assertEquals(array_values($groups), array_values(array_keys($profiles['profiles'])));
+
+        $this->assertEquals(array_values($groups), array_values(array_keys($profiles['anchors'])));
+
+        foreach ($profiles['anchors'] as $key => $slug) {
+            $this->assertEquals($slug, Str::slug($key));
+        }
     }
 }
