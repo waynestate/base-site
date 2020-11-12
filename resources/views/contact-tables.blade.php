@@ -14,7 +14,7 @@
         <div class="mb-8">
             <ul class="table-of-contents">
                 @foreach($anchors as $group=>$anchor)
-                    <li class="list-none"><a href="#{{$anchor}}" class="underline hover:no-underline" aria-label="{{$group}} contacts">{{$group}}</a></li>
+                    <li class="list-none"><a href="#{{$anchor}}" class="underline hover:no-underline">{{$group}}</a></li>
                 @endforeach
             </ul>
         </div>
