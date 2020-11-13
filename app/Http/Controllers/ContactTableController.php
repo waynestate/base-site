@@ -1,7 +1,7 @@
 <?php
 /*
 * Status: Public
-* Description: Directory Template
+* Description: ContactTable Template
 * Default: false
 */
 
@@ -10,7 +10,7 @@ namespace App\Http\Controllers;
 use Contracts\Repositories\ProfileRepositoryContract;
 use Illuminate\Http\Request;
 
-class DirectoryController extends Controller
+class ContactTableController extends Controller
 {
     /**
      * Construct the controller.
@@ -23,21 +23,23 @@ class DirectoryController extends Controller
     }
 
     /**
-     * Display directory listing view.
+     * Display the view.
      *
      * @param Request $request
      * @return \Illuminate\View\View
      */
     public function index(Request $request)
     {
+        // Determine what site to pull profiles from
         $site_id = !empty($request->data['data']['profile_site_id']) ? $request->data['data']['profile_site_id'] : $request->data['site']['id'];
 
-        if (!empty($request->data['data']['profile_group_id'])) {
-            $profiles = $this->profile->getProfilesByGroupOrder($site_id, $request->data['data']['profile_group_id']);
-        } else {
-            $profiles = $this->profile->getProfilesByGroup($site_id);
+        $profiles = $this->profile->getProfilesByGroupOrder($site_id, $request->data['data']['profile_group_id']);
+
+        // show table of contents if custom field 'table_of_contents' is not set to 'hide'
+        if (isset($request->data['data']['table_of_contents']) && $request->data['data']['table_of_contents'] === 'hide') {
+            $profiles['anchors'] = [];
         }
 
-        return view('directory', merge($request->data, $profiles));
+        return view('contact-tables', merge($request->data, $profiles));
     }
 }

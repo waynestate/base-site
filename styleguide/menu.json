@@ -101,6 +101,16 @@
             "101108": {
                 "menu_item_id": "101108",
                 "is_active": "1",
+                "page_id": "101108",
+                "target": "",
+                "display_name": "Directory ordered",
+                "class_name": "",
+                "relative_url": "/styleguide/directoryordered",
+                "submenu": []
+            },
+            "101109": {
+                "menu_item_id": "101109",
+                "is_active": "1",
                 "page_id": null,
                 "target": "",
                 "display_name": "Full width content area",
@@ -108,14 +118,54 @@
                 "relative_url": "/styleguide/fullwidth",
                 "submenu": []
             },
-            "101109": {
-                "menu_item_id": "101109",
+            "101110": {
+                "menu_item_id": "101110",
                 "is_active": "1",
-                "page_id": "101109",
+                "page_id": "101110",
                 "target": "",
                 "display_name": "Grid",
                 "class_name": "",
                 "relative_url": "/styleguide/grid",
+                "submenu": []
+            },
+            "101111": {
+                "menu_item_id": 101111,
+                "is_active": "1",
+                "page_id": 101111,
+                "target": "",
+                "display_name": "Spotlights",
+                "class_name": "",
+                "relative_url": "/styleguide/spotlights",
+                "submenu": []
+            },
+            "101112": {
+                "menu_item_id": 101112,
+                "is_active": "1",
+                "page_id": 101112,
+                "target": "",
+                "display_name": "Spotlight view",
+                "class_name": "",
+                "relative_url": "/styleguide/spotlight/title-12345",
+                "submenu": []
+            },
+            "101113": {
+                "menu_item_id": "101113",
+                "is_active": "1",
+                "page_id": "101113",
+                "target": "",
+                "display_name": "Contact tables",
+                "class_name": "",
+                "relative_url": "/styleguide/contacttables",
+                "submenu": []
+            },
+            "101114": {
+                "menu_item_id": "101114",
+                "is_active": "1",
+                "page_id": "101114",
+                "target": "",
+                "display_name": "Contact tables, no table of contents",
+                "class_name": "",
+                "relative_url": "/styleguide/contacttablesnotoc",
                 "submenu": []
             }
         }
