@@ -41,9 +41,12 @@ class RedisClear extends Command
     public function handle()
     {
         // Get the keys for the site
+        $num_deleted_keys = 0;
         $keys = $this->cache->getStore()->getRedis()->keys('*');
         foreach ((array) $keys as $key) {
-            $this->cache->getStore()->getRedis()->del(preg_replace('/^'.config('database.redis.options.prefix').'/', '', $key));
+            $num_deleted_keys += $this->cache->getStore()->getRedis()->del(preg_replace('/^'.config('database.redis.options.prefix').'/', '', $key));
         }
+
+        $this->info(!empty($num_deleted_keys) ? 'The number of keys deleted: '.$num_deleted_keys : 'No keys found to delete');
     }
 }
