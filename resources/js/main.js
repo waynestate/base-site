@@ -6,6 +6,7 @@ import './polyfills/prepend';
 // Modules
 import './modules/search';
 import './modules/table';
+import './modules/table-sort';
 import './modules/sticky';
 import './modules/formfilter';
 import './modules/media';
