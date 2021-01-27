@@ -29,11 +29,13 @@
 
     # INSERT SITE SPECIFIC REDIRECTS BELOW ####
 
+    ## USE CMS REDIRECTS ##
+
     # INSERT SITE SPECIFIC REDIRECTS ABOVE ####
 
     # Look at the raw request to see if it is in the '_static' dir and block it
     RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /_static/(.*)\ HTTP/(.*) [OR]
-    RewriteCond %{REQUEST_URI} \.(json)$
+    RewriteCond %{REQUEST_URI} \.(json|map)$
     RewriteRule ^ - [F]
 
     # All other files rewrite to the _static/* directory

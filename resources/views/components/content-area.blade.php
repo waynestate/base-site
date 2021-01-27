@@ -40,7 +40,7 @@
                 @yield('below_menu')
 
                 @if(!empty($under_menu))
-                    @include('components.under-menu', ['buttons' => $under_menu])
+                    @include('components.under-menu', ['buttons' => $under_menu, 'class' => 'under-menu'])
                 @endif
             </nav>
         </div>
