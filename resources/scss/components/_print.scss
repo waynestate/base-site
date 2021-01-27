@@ -1,0 +1,60 @@
+// Global print styles
+@screen print {
+    *,
+    *::before,
+    *::after {
+        color: #000 !important;
+        background-color: transparent !important;
+        border-color: #000 !important;
+    }
+
+    .wsufooter {
+        background: transparent;
+    }
+
+    .pt-hero {
+        padding-top: 0 !important;
+    }
+
+    a[href]::after {
+        @apply .text-sm .font-normal;
+
+        content: " (" attr(href) ") ";
+    }
+
+    .content {
+
+        abbr[title]::after {
+            content: " (" attr(title) ") ";
+        }
+
+        pre {
+            @apply .border .bg-transparent .overflow-auto .whitespace-pre-wrap;
+
+            word-wrap: break-word;
+        }
+
+        hr {
+            @apply .border-black;
+        }
+
+        a.button {
+            padding: 0;
+            background-color: transparent;
+            color: #000;
+            border-radius: 0;
+            text-align: left;
+            text-decoration: underline;
+            font-size: 1rem;
+        }
+
+        figure figcaption {
+            font-size: 1rem;
+            color: #000;
+        }
+    }
+
+    .news-item .addthis_sharing_toolbox {
+        display: none;
+    }
+}
