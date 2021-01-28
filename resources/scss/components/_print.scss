@@ -8,6 +8,26 @@
         border-color: #000 !important;
     }
 
+    a[href]::after {
+        @apply .font-normal;
+
+        content: " (" attr(href) ") ";
+    }
+
+    .wsuwordmark a[href]::after {
+        content: '';
+    }
+
+    .menu-top-container {
+        &.fixed {
+            @apply .relative;
+        }
+
+        h1 > a[href]::after {
+            content: '';
+        }
+    }
+
     .wsufooter {
         background: transparent;
     }
@@ -16,14 +36,14 @@
         padding-top: 0 !important;
     }
 
-    a[href]::after {
-        @apply .text-sm .font-normal;
-
-        content: " (" attr(href) ") ";
-    }
-
     abbr[title]::after {
         content: " (" attr(title) ") ";
+    }
+
+    @responsive {
+        .bg-gradient-darkest::before {
+            background-image: none;
+        }
     }
 
     .content {
