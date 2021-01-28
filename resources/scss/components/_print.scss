@@ -1,0 +1,68 @@
+// Global print styles
+@screen print {
+    *,
+    *::before,
+    *::after {
+        color: #000 !important;
+        background-color: transparent !important;
+        border-color: #000 !important;
+    }
+
+    a[href]::after {
+        @apply .font-normal;
+
+        content: " (" attr(href) ") ";
+    }
+
+    .wsuwordmark a[href]::after {
+        content: '';
+    }
+
+    .menu-top-container {
+        &.fixed {
+            @apply .relative;
+        }
+
+        h1 > a[href]::after {
+            content: '';
+        }
+    }
+
+    .wsufooter {
+        @apply .bg-transparent;
+    }
+
+    .pt-hero {
+        padding-top: 0 !important;
+    }
+
+    abbr[title]::after {
+        content: " (" attr(title) ") ";
+    }
+
+    @responsive {
+        .bg-gradient-darkest::before {
+            @apply .bg-none;
+        }
+    }
+
+    .content {
+        pre {
+            @apply .border .bg-transparent .overflow-auto .whitespace-pre-wrap;
+
+            word-wrap: break-word;
+        }
+
+        hr {
+            @apply .border-black;
+        }
+
+        a.button {
+            @apply .p-0 .bg-transparent .text-black .rounded-none .text-left .text-base .underline .font-normal;
+        }
+
+        figure figcaption {
+            @apply .text-base .text-black;
+        }
+    }
+}

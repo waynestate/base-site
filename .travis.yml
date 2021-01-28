@@ -13,11 +13,11 @@ branches:
 
 php:
   - 7.3
-  
+
 before_install:
   # Install nvm for nodejs
-  - nvm install 12
-  - nvm use 12
+  - nvm install 14
+  - nvm use 14
   # Install yarn
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH=vendor/bin:node_modules/.bin:$HOME/.yarn/bin:$PATH
