@@ -10,7 +10,7 @@
     @endif
 
     @if(!in_array($page['controller'], config('base.full_width_controllers')))<div class="row mt:flex">@endif
-        <div class="mt:w-1/4 mt:px-4 mt:block {{ $show_site_menu === false ? ' mt:hidden' : '' }}">
+        <div class="mt:w-1/4 mt:px-4 mt:block print:hidden {{ $show_site_menu === false ? ' mt:hidden' : '' }}">
             <nav id="menu" aria-label="Page menu" tabindex="-1">
                 @if(!empty($top_menu_output) && $site_menu !== $top_menu && config('base.top_menu_enabled'))
                     @if(!empty($site_menu_output))
