@@ -535,6 +535,16 @@
                 "relative_url": "/styleguide/tablestack",
                 "submenu": []
             },
+            "113101": {
+                "menu_item_id": "113101",
+                "is_active": "1",
+                "page_id": "113101",
+                "target": "",
+                "display_name": "Table sortable",
+                "class_name": "",
+                "relative_url": "/styleguide/tablesortable",
+                "submenu": []
+            },
             "114100": {
                 "menu_item_id": "114100",
                 "is_active": "1",
