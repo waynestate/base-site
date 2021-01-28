@@ -29,7 +29,7 @@
     }
 
     .wsufooter {
-        background: transparent;
+        @apply .bg-transparent;
     }
 
     .pt-hero {
@@ -42,7 +42,7 @@
 
     @responsive {
         .bg-gradient-darkest::before {
-            background-image: none;
+            @apply .bg-none;
         }
     }
 
@@ -58,22 +58,11 @@
         }
 
         a.button {
-            padding: 0;
-            background-color: transparent;
-            color: #000;
-            border-radius: 0;
-            text-align: left;
-            text-decoration: underline;
-            font-size: 1rem;
+            @apply .p-0 .bg-transparent .text-black .rounded-none .text-left .text-base .underline .font-normal;
         }
 
         figure figcaption {
-            font-size: 1rem;
-            color: #000;
+            @apply .text-base .text-black;
         }
-    }
-
-    .news-item .addthis_sharing_toolbox {
-        display: none;
     }
 }
