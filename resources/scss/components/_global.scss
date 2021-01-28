@@ -68,12 +68,3 @@ h6 {
 a.text-white:-moz-focusring {
     outline-color: #000;
 }
-
-// Global print styles
-@screen print {
-    .content a[href]::after {
-        @apply .text-sm .font-normal;
-
-        content: " (" attr(href) ") ";
-    }
-}
