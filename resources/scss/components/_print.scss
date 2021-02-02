@@ -18,10 +18,6 @@
         content: '';
     }
 
-    #breadcrumbs-menu a[href]::after {
-        content: '';
-    }
-
     .menu-top-container {
         &.fixed {
             @apply .relative;
@@ -30,6 +26,10 @@
         h1 > a[href]::after {
             content: '';
         }
+    }
+
+    #breadcrumbs-menu a[href]::after {
+        content: '';
     }
 
     .wsufooter {
