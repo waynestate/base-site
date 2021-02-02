@@ -18,6 +18,10 @@
         content: '';
     }
 
+    #breadcrumbs-menu a[href]::after {
+        content: '';
+    }
+
     .menu-top-container {
         &.fixed {
             @apply .relative;
