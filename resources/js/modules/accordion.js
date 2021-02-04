@@ -45,6 +45,11 @@ import 'accordion/src/accordion.js';
         item.querySelectorAll('li a:first-child').forEach(function(item) {
             item.setAttribute('role', 'button');
             item.setAttribute('aria-expanded', 'false');
+
+            // Adds +/- span if there isn't one already
+            if (!item.querySelector('span')) {
+                item.insertAdjacentHTML('afterbegin', `<span aria-hidden="true"></span>`);
+            }
         });
 
         // See if the hash is within this accordion so we can open it
