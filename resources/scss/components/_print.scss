@@ -44,12 +44,6 @@
         content: " (" attr(title) ") ";
     }
 
-    @responsive {
-        .bg-gradient-darkest::before {
-            @apply .bg-none;
-        }
-    }
-
     .content {
         pre {
             @apply .border .bg-transparent .overflow-auto .whitespace-pre-wrap;
