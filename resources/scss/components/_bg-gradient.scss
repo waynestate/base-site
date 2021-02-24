@@ -4,5 +4,9 @@
 
         content: '';
         background-image: radial-gradient(200% 100% at 50% 100%, rgba(#05211e, 0.9) 10%, transparent 100%);
+
+        @media print {
+            @apply .bg-none;
+        }
     }
 }
