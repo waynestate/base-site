@@ -18,8 +18,8 @@
 
     p,
     dl,
-    ol,
-    ul {
+    & > ol,
+    & > ul {
         @apply .mb-5;
     }
 
