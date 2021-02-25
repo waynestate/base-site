@@ -65,7 +65,7 @@
                 @endforeach
 
                 @if($back_url != '')
-                    <p class="pt-4">
+                    <p class="pt-4 print:hidden">
                         <a href="{{ $back_url }}" class="button">&larr; Return to listing</a>
                     </p>
                 @endif

@@ -6,7 +6,7 @@
     <div class="news-item">
         <time class="block text-sm text-grey-darker mb-6" datetime="{{ $article['data']['article_date'] }}">{{ apdatetime(date('F j, Y', strtotime($article['data']['article_date']))) }}</time>
 
-        <div class="addthis_sharing_toolbox mb-4"></div>
+        <div class="addthis_sharing_toolbox mb-4 print:hidden"></div>
 
         <div class="content mt:text-xl">
             {!! $article['data']['body'] !!}
@@ -24,7 +24,7 @@
             @endif
         </div>
 
-        <p class="pt-4">
+        <p class="pt-4 print:hidden">
             <a href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}{{ config('base.news_listing_route') }}" class="button">&larr; Back to listing</a>
         </p>
     </div>

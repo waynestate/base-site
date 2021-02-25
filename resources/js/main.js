@@ -6,6 +6,7 @@ import './polyfills/prepend';
 // Modules
 import './modules/search';
 import './modules/table';
+import './modules/table-sort';
 import './modules/sticky';
 import './modules/formfilter';
 import './modules/media';
@@ -17,3 +18,4 @@ import './modules/accordion';
 import './modules/slideout';
 import './modules/slideout-main-menu';
 import './modules/carousel';
+import './modules/under-menu';
