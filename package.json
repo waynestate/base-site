@@ -25,7 +25,7 @@
   "homepage": "https://base.wayne.edu/",
   "devDependencies": {
     "@waynestate/wsufooter": "^1.0.7",
-    "@waynestate/wsuheader": "^2.0.0",
+    "@waynestate/wsuheader": "^2.1.0",
     "accordion": "^3.0.0",
     "browser-sync": "^2.24.0",
     "browser-sync-webpack-plugin": "^2.2.0",
@@ -36,7 +36,7 @@
     "flickity": "^2.1.1",
     "glhd-tailwindcss-transitions": "^0.3.0",
     "intersection-observer": "^0.7.0",
-    "laravel-mix": "^5.0.1",
+    "laravel-mix": "^6.0.16",
     "laravel-mix-purgecss": "^4.1.0",
     "mediabox": "^1.1.2",
     "replace-in-file-webpack-plugin": "^1.0.6",
