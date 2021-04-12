@@ -1,7 +1,7 @@
 {
   "name": "base",
   "private": true,
-  "version": "6.20.7",
+  "version": "6.21.0",
   "description": "",
   "scripts": {
     "dev": "npm run development",
@@ -25,7 +25,7 @@
   "homepage": "https://base.wayne.edu/",
   "devDependencies": {
     "@waynestate/wsufooter": "^1.0.7",
-    "@waynestate/wsuheader": "^2.0.0",
+    "@waynestate/wsuheader": "^2.1.0",
     "accordion": "^3.0.0",
     "browser-sync": "^2.24.0",
     "browser-sync-webpack-plugin": "^2.2.0",
