@@ -57,14 +57,23 @@
         @apply .block .border-grey .border .bg-white .w-full .p-2 .pr-8 .rounded-sm;
 
         appearance: none;
-        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeD0iMTJweCIgeT0iMHB4IiB3aWR0aD0iMjRweCIgaGVpZ2h0PSIzcHgiIHZpZXdCb3g9IjAgMCA2IDMiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDYgMyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHBvbHlnb24gcG9pbnRzPSI1Ljk5MiwwIDIuOTkyLDMgLTAuMDA4LDAgIi8+PC9zdmc+);
-        background-position: 100% center;
+        background-image: linear-gradient(45deg, transparent 49%, #000 49%), linear-gradient(135deg, #000 49%, transparent 49%), linear-gradient(to right, #fff, #fff);
+        background-position: calc(100% - 10px) calc(1em + 5px), calc(100% - 5px) calc(1em + 5px), 100% 0;
+        background-size: 5px 5px, 5px 5px, 22px 100%;
         background-repeat: no-repeat;
         transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
+
+        @media screen and (-ms-high-contrast: active) {
+            appearance: menulist;
+        }
 
         // Remove double arrow for IE
         &::-ms-expand {
             display: none;
+
+            @media screen and (-ms-high-contrast: active) {
+                display: block;
+            }
         }
     }
 
