@@ -6,8 +6,8 @@
 <meta name="Description" content="{{ !empty($page['description']) ? $page['description'] : '' }}">
 
 <meta property="og:title" content="{{ !empty($page['title']) ? $page['title'] : '' }}">
-<meta property="og:image" content="{{ !empty($meta['image']) ? $meta['image'] : '' }}">
-<meta property="og:image:alt" content="{{ !empty($meta['image_alt']) ? $meta['image_alt'] : '' }}">
+<meta property="og:image" content="{{ !empty($meta['image']) ? $meta['image'] : config('base.meta_image') }}">
+<meta property="og:image:alt" content="{{ !empty($meta['image_alt']) ? $meta['image_alt'] : config('base.meta_image_alt') }}">
 <meta property="og:description" content="{{ !empty($page['description']) ? $page['description'] : '' }}">
 <meta property="og:url" content="{{ !empty($server['url']) ? $server['url'] : '' }}">
 <meta property="og:type" content="article" />
