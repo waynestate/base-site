@@ -142,6 +142,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Default Meta Image
+    |--------------------------------------------------------------------------
+    |
+    | Here you can setup a default meta image.
+    |
+    */
+    'meta_image' =>'https://wayne.edu/opengraph/wsu-social-share.png',
+    'meta_image_alt' =>'Wayne State University shield with Warrior Strong text above',
+
+    /*
+    |--------------------------------------------------------------------------
     | Facebook Open Graph
     |--------------------------------------------------------------------------
     |
