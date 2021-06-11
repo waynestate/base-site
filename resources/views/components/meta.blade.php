@@ -6,8 +6,8 @@
 <meta name="Description" content="{{ !empty($page['description']) ? $page['description'] : '' }}">
 
 <meta property="og:title" content="{{ !empty($page['title']) ? $page['title'] : '' }}">
-<meta property="og:image" content="{{ !empty($meta['image']) ? $meta['image'] : '' }}">
-<meta property="og:image:alt" content="{{ !empty($meta['image_alt']) ? $meta['image_alt'] : '' }}">
+<meta property="og:image" content="{{ !empty($meta['image']) ? $meta['image'] : config('base.meta_image') }}">
+<meta property="og:image:alt" content="{{ !empty($meta['image_alt']) ? $meta['image_alt'] : config('base.meta_image_alt') }}">
 <meta property="og:description" content="{{ !empty($page['description']) ? $page['description'] : '' }}">
 <meta property="og:url" content="{{ !empty($server['url']) ? $server['url'] : '' }}">
 <meta property="og:type" content="article" />
@@ -27,6 +27,6 @@
 <meta name="twitter:description" content="{{ !empty($page['description']) ? $page['description'] : '' }}">
 <meta name="twitter:url" content="{{ !empty($server['url']) ? $server['url'] : '' }}">
 <meta name="twitter:site" content="{{ config('base.twitter_handle') }}">
-<meta name="twitter:image" content="{{ !empty($meta['image']) ? $meta['image'] : '' }}">
-<meta name="twitter:image:alt" content="{{ !empty($meta['image_alt']) ? $meta['image_alt'] : '' }}">
+<meta name="twitter:image" content="{{ !empty($meta['image']) ? $meta['image'] : config('base.meta_image') }}">
+<meta name="twitter:image:alt" content="{{ !empty($meta['image_alt']) ? $meta['image_alt'] : config('base.meta_image_alt') }}">
 <meta property="article:published_time" content="{{ !empty($page['updated-at']) ? $page['updated-at'] : '' }}">
