@@ -9,7 +9,7 @@ class SpotlightRepository extends Repository
     /**
      * {@inheritdoc}
      */
-    public function getSpotlights()
+    public function getSpotlights(array $data)
     {
         return [
             'spotlights' => app('Factories\Spotlight')->create(12),

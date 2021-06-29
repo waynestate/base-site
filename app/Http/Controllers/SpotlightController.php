@@ -30,7 +30,7 @@ class SpotlightController extends Controller
      */
     public function index(Request $request)
     {
-        $spotlights = $this->spotlight->getSpotlights();
+        $spotlights = $this->spotlight->getSpotlights($request->data);
 
         return view('spotlight-listing', merge($request->data, $spotlights));
     }
@@ -49,7 +49,9 @@ class SpotlightController extends Controller
             return abort('404');
         }
 
-        $request->data['page']['title'] = $spotlight['spotlight']['title'];
+        if (!empty($spotlight['spotlight']['title'])) {
+            $request->data['page']['title'] = $spotlight['spotlight']['title'];
+        }
 
         // Set the back URL
         $request->data['back_url'] = $this->spotlight->getBackToSpotlightsListing($request->server->get('HTTP_REFERER'), $request->server->get('REQUEST_SCHEME'), $request->server->get('HTTP_HOST'), $request->server->get('REQUEST_URI'));
