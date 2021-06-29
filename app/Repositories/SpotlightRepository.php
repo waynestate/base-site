@@ -35,11 +35,14 @@ class SpotlightRepository implements SpotlightRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getSpotlights()
+    public function getSpotlights(array $data)
     {
-        $group_reference = [
-            //            0000 => 'spotlights',
-        ];
+        $group_reference = [];
+
+        // If there is an spotlight custom page field then inject it into the group reference
+        if (!empty($data['data']['spotlight_promo_group_id']) && ! array_key_exists($data['data']['spotlight_promo_group_id'], $group_reference)) {
+            $group_reference[$data['data']['spotlight_promo_group_id']] = 'spotlights';
+        }
 
         $group_config = [];
 

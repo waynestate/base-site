@@ -18,13 +18,22 @@ class SpotlightRepositoryTest extends TestCase
             'spotlights' => [],
         ];
 
+        // Create a fake data request
+        $data = app('Factories\Page')->create(1, true, [
+            'page' => [
+                'controller' => 'SpotlightController',
+            ],
+            'data' => [
+                'spotlight_promo_group_id' => $this->faker->numberbetween(1, 3),
+            ],
+        ]);
+
         // Mock the connector and set the return
         $wsuApi = Mockery::mock('Waynestate\Api\Connector');
         $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
 
         // Get the spotlights
-        $spotlights = app('App\Repositories\SpotlightRepository', ['wsuApi' => $wsuApi])->getSpotlights();
-
+        $spotlights = app('App\Repositories\SpotlightRepository', ['wsuApi' => $wsuApi])->getSpotlights($data);
         $this->assertTrue(is_array($spotlights));
     }
 
@@ -79,3 +88,4 @@ class SpotlightRepositoryTest extends TestCase
         $this->assertEquals($referer, $url);
     }
 }
+
