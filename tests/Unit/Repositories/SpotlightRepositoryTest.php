@@ -88,4 +88,3 @@ class SpotlightRepositoryTest extends TestCase
         $this->assertEquals($referer, $url);
     }
 }
-
