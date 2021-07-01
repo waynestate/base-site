@@ -2,7 +2,7 @@
 
 namespace Styleguide\Pages;
 
-class Grid extends Page
+class PromoGrid extends Page
 {
     /**
      * {@inheritdoc}
@@ -11,8 +11,8 @@ class Grid extends Page
     {
         return app('Factories\Page')->create(1, true, [
             'page' => [
-                'controller' => 'GridController',
-                'title' => 'Grid',
+                'controller' => 'PromoGridController',
+                'title' => 'Promo grid',
                 'id' => 101110,
                 'content' => [
                     'main' => '<p>'.$this->faker->paragraph(8).'</p>',

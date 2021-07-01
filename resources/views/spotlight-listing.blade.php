@@ -10,25 +10,22 @@
     @if(!empty($spotlights))
         <ul class="mt-8">
             @foreach($spotlights as $spotlight)
-                <li class="flex flex-wrap mb-8 pb-8 @if(!$loop->last) border-b border-grey-lighter @endif -mx-4">
-                    <div class="w-full sm:w-2/5 md:w-1/5 mb-3 sm:mb-0 px-4">
-                        <a href="{{ !empty($spotlight['link']) ? $spotlight['link'] : 'spotlight/'.\Illuminate\Support\Str::slug($spotlight['title']).'-'.$spotlight['promo_item_id'] }}" aria-label="View {{ $spotlight['title'] }} spotlight">
+                <li class="mb-8 pb-8 @if(!$loop->last) border-b border-grey-lighter @endif">
+                    <a class="group -mx-4 flex flex-wrap sm:flex-no-wrap block" href="{{ !empty($spotlight['link']) ? $spotlight['link'] : 'spotlight/'.\Illuminate\Support\Str::slug($spotlight['title']).'-'.$spotlight['promo_item_id'] }}" aria-label="View {{ $spotlight['title'] }} spotlight">
+                        <div class="w-full sm:w-1/3 md:w-1/5 mb-3 sm:mb-0 px-4">
                             @if(!empty($spotlight['relative_url']))
                                 @image($spotlight['relative_url'], $spotlight['filename_alt_text'], 'w-full')
                             @else
                                 <div class="w-full pt-portrait bg-cover bg-center" style="background-image: url('/_resources/images/no-photo.svg');"></div>
                             @endif
-                        </a>
-                    </div>
-                    <div class="px-4 w-full sm:w-3/5 md:w-4/5 content">
-                        <h2 class="text-normal text-lg mb-2">
-                            <a href="{{ !empty($spotlight['link']) ? $spotlight['link'] : 'spotlight/'.\Illuminate\Support\Str::slug($spotlight['title']).'-'.$spotlight['promo_item_id'] }}">{{ $spotlight['title'] }}</a>
-                        </h2>
-
-                        @if(!empty($spotlight['excerpt']))
-                            <div>{{ $spotlight['excerpt'] }}</div>
-                        @endif
-                    </div>
+                        </div>
+                        <div class="px-4 w-full md:w-4/5 content">
+                            <div class="text-normal font-bold text-lg mb-2 underline group-hover:no-underline">{{ $spotlight['title'] }}</div>
+                            @if(!empty($spotlight['excerpt']))
+                                <div class="text-black">{{ $spotlight['excerpt'] }}</div>
+                            @endif
+                        </div>
+                    </a>
                 </li>
             @endforeach
         </ul>

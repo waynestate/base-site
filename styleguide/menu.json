@@ -123,9 +123,19 @@
                 "is_active": "1",
                 "page_id": "101110",
                 "target": "",
-                "display_name": "Grid",
+                "display_name": "Promo grid",
                 "class_name": "",
-                "relative_url": "/styleguide/grid",
+                "relative_url": "/styleguide/promogrid",
+                "submenu": []
+            },
+            "101116": {
+                "menu_item_id": "101116",
+                "is_active": "1",
+                "page_id": "101116",
+                "target": "",
+                "display_name": "Promo listing",
+                "class_name": "",
+                "relative_url": "/styleguide/promolisting",
                 "submenu": []
             },
             "101111": {
@@ -133,9 +143,19 @@
                 "is_active": "1",
                 "page_id": 101111,
                 "target": "",
-                "display_name": "Spotlights",
+                "display_name": "Spotlight listing",
                 "class_name": "",
-                "relative_url": "/styleguide/spotlights",
+                "relative_url": "/styleguide/spotlightlisting",
+                "submenu": []
+            },
+            "101115": {
+                "menu_item_id": 101115,
+                "is_active": "1",
+                "page_id": 101115,
+                "target": "",
+                "display_name": "Spotlight grid",
+                "class_name": "",
+                "relative_url": "/styleguide/spotlightgrid",
                 "submenu": []
             },
             "101112": {

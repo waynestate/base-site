@@ -10,7 +10,7 @@ namespace App\Http\Controllers;
 use Contracts\Repositories\SpotlightRepositoryContract;
 use Illuminate\Http\Request;
 
-class SpotlightController extends Controller
+class SpotlightGridController extends Controller
 {
     /**
      * Construct the controller.

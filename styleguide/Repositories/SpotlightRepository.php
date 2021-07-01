@@ -31,6 +31,6 @@ class SpotlightRepository extends Repository
      */
     public function getBackToSpotlightsListing($referer = null, $scheme = null, $host = null, $uri = null)
     {
-        return '/styleguide/spotlights';
+        return '/styleguide/spotlightlisting';
     }
 }

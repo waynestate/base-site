@@ -91,7 +91,7 @@ class SpotlightRepository implements SpotlightRepositoryContract
             || $referer == $scheme.'://'.$host.$uri
             || strpos($referer, $host) === false
         ) {
-            return '/spotlights';
+            return '/spotlightlisting';
         }
 
         return $referer;

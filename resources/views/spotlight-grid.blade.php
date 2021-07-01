@@ -9,19 +9,21 @@
 
     @if(!empty($spotlights))
         <ul class="flex flex-wrap -mx-4">
-            @foreach($spotlights as $item)
-                <li class="w-full md:w-1/2 xl:w-1/3 px-4 pb-6">
-                    @if(!empty($item['link']))<a href="{{ $item['link'] }}" class="group">@endif
-                        <div class="flex md:block">
-                            <div class="w-1/3 md:w-full">
-                                @image($item['relative_url'], $item['filename_alt_text'], 'block')
-                            </div>
-                            <div class="w-2/3 pl-4 md:p-0 md:w-full">
-                                <div class="font-bold mt-1 lg:mt-2 {{ (!empty($item['link']) ? 'underline group-hover:no-underline' : '') }}">{{ $item['title'] }}</div>
-                                <p class="text-sm text-black">{{ $item['excerpt'] }}</p>
-                            </div>
+            @foreach($spotlights as $spotlight)
+                <li class="w-1/2 md:w-1/3 xxl:w-1/4 px-4 pb-6">
+                    <a href="{{ !empty($spotlight['link']) ? $spotlight['link'] : 'spotlight/'.\Illuminate\Support\Str::slug($spotlight['title']).'-'.$spotlight['promo_item_id'] }}" aria-label="View {{ $spotlight['title'] }} spotlight" class="group block">
+                        <div class="w-full">
+                            @if(!empty($spotlight['relative_url']))
+                                @image($spotlight['relative_url'], $spotlight['filename_alt_text'], 'w-full')
+                            @else
+                                <div class="w-full pt-portrait bg-cover bg-center" style="background-image: url('/_resources/images/no-photo.svg');"></div>
+                            @endif
                         </div>
-                    @if(!empty($item['link']))</a>@endif
+                        <div class="w-full p-0">
+                            <div class="font-bold mt-1 lg:mt-2 underline group-hover:no-underline">{{ $spotlight['title'] }}</div>
+                            <p class="text-sm text-black">{{ $spotlight['excerpt'] }}</p>
+                        </div>
+                    </a>
                 </li>
             @endforeach
         </ul>
