@@ -34,4 +34,28 @@ class PromoListingController extends Controller
 
         return view('promo-listing', merge($request->data, $promos));
     }
+
+    /**
+     * Display the individual item.
+     *
+     * @param Request $request
+     * @return \Illuminate\View\View
+     */
+    public function show(Request $request)
+    {
+        $promo = $this->spotlight->getPromoView($request->id);
+
+        if (empty($promo['promo'])) {
+            return abort('404');
+        }
+
+        if (!empty($promo['promo']['title'])) {
+            $request->data['page']['title'] = $promo['promo']['title'];
+        }
+
+        // Set the back URL
+        $request->data['back_url'] = $this->promo->getBackToPromoListing($request->server->get('HTTP_REFERER'), $request->server->get('REQUEST_SCHEME'), $request->server->get('HTTP_HOST'), $request->server->get('REQUEST_URI'));
+
+        return view('promo-view', merge($request->data, $spotlight));
+    }
 }

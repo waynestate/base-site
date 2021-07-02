@@ -31,81 +31,11 @@
             "101101": {
                 "menu_item_id": "101101",
                 "is_active": "1",
-                "page_id": null,
+                "page_id": 101101,
                 "target": "",
                 "display_name": "Homepage",
                 "class_name": "",
                 "relative_url": "/styleguide/homepage",
-                "submenu": []
-            },
-            "101102": {
-                "menu_item_id": "101102",
-                "is_active": "1",
-                "page_id": "101102",
-                "target": "",
-                "display_name": "News",
-                "class_name": "",
-                "relative_url": "/styleguide/news",
-                "submenu": []
-            },
-            "101103": {
-                "menu_item_id": "101103",
-                "is_active": "1",
-                "page_id": null,
-                "target": "",
-                "display_name": "News view",
-                "class_name": "",
-                "relative_url": "/styleguide/news/item-1",
-                "submenu": []
-            },
-            "101104": {
-                "menu_item_id": "101104",
-                "is_active": "1",
-                "page_id": "101104",
-                "target": "",
-                "display_name": "Topics",
-                "class_name": "",
-                "relative_url": "/styleguide/news/topics",
-                "submenu": []
-            },
-            "101105": {
-                "menu_item_id": "101105",
-                "is_active": "1",
-                "page_id": "101105",
-                "target": "",
-                "display_name": "Profiles",
-                "class_name": "",
-                "relative_url": "/styleguide/profiles",
-                "submenu": []
-            },
-            "101106": {
-                "menu_item_id": "101106",
-                "is_active": "1",
-                "page_id": "101106",
-                "target": "",
-                "display_name": "Profile view",
-                "class_name": "",
-                "relative_url": "/styleguide/profile/aa0000",
-                "submenu": []
-            },
-            "101107": {
-                "menu_item_id": "101107",
-                "is_active": "1",
-                "page_id": "101107",
-                "target": "",
-                "display_name": "Directory",
-                "class_name": "",
-                "relative_url": "/styleguide/directory",
-                "submenu": []
-            },
-            "101108": {
-                "menu_item_id": "101108",
-                "is_active": "1",
-                "page_id": "101108",
-                "target": "",
-                "display_name": "Directory ordered",
-                "class_name": "",
-                "relative_url": "/styleguide/directoryordered",
                 "submenu": []
             },
             "101109": {
@@ -118,75 +48,158 @@
                 "relative_url": "/styleguide/fullwidth",
                 "submenu": []
             },
+            "101102": {
+                "menu_item_id": "101102",
+                "is_active": "1",
+                "page_id": "101102",
+                "target": "",
+                "display_name": "News",
+                "class_name": "",
+                "relative_url": "/styleguide/news",
+                "submenu": {
+                    "101102": {
+                        "menu_item_id": "101102",
+                        "is_active": "1",
+                        "page_id": "101102",
+                        "target": "",
+                        "display_name": "News",
+                        "class_name": "",
+                        "relative_url": "/styleguide/news",
+                        "submenu": []
+                    },
+                    "101103": {
+                        "menu_item_id": "101103",
+                        "is_active": "1",
+                        "page_id": null,
+                        "target": "",
+                        "display_name": "News view",
+                        "class_name": "",
+                        "relative_url": "/styleguide/news/item-1",
+                        "submenu": []
+                    },
+                    "101104": {
+                        "menu_item_id": "101104",
+                        "is_active": "1",
+                        "page_id": "101104",
+                        "target": "",
+                        "display_name": "Topics",
+                        "class_name": "",
+                        "relative_url": "/styleguide/news/topics",
+                        "submenu": []
+                    }
+                }
+            },
+            "101105": {
+                "menu_item_id": "101105",
+                "is_active": "1",
+                "page_id": "101105",
+                "target": "",
+                "display_name": "Profile driven",
+                "class_name": "",
+                "relative_url": "/styleguide/profiles",
+                "submenu": {
+                    "101105": {
+                        "menu_item_id": "101105",
+                        "is_active": "1",
+                        "page_id": "101105",
+                        "target": "",
+                        "display_name": "Profiles",
+                        "class_name": "",
+                        "relative_url": "/styleguide/profiles",
+                        "submenu": []
+                    },
+                    "101106": {
+                        "menu_item_id": "101106",
+                        "is_active": "1",
+                        "page_id": "101106",
+                        "target": "",
+                        "display_name": "Profile view",
+                        "class_name": "",
+                        "relative_url": "/styleguide/profile/aa0000",
+                        "submenu": []
+                    },
+                    "101107": {
+                        "menu_item_id": "101107",
+                        "is_active": "1",
+                        "page_id": "101107",
+                        "target": "",
+                        "display_name": "Directory",
+                        "class_name": "",
+                        "relative_url": "/styleguide/directory",
+                        "submenu": []
+                    },
+                    "101108": {
+                        "menu_item_id": "101108",
+                        "is_active": "1",
+                        "page_id": "101108",
+                        "target": "",
+                        "display_name": "Directory ordered",
+                        "class_name": "",
+                        "relative_url": "/styleguide/directoryordered",
+                        "submenu": []
+                    },
+                    "101113": {
+                        "menu_item_id": "101113",
+                        "is_active": "1",
+                        "page_id": "101113",
+                        "target": "",
+                        "display_name": "Contact tables",
+                        "class_name": "",
+                        "relative_url": "/styleguide/contacttables",
+                        "submenu": []
+                    },
+                    "101114": {
+                        "menu_item_id": "101114",
+                        "is_active": "1",
+                        "page_id": "101114",
+                        "target": "",
+                        "display_name": "Contact tables, no table of contents",
+                        "class_name": "",
+                        "relative_url": "/styleguide/contacttablesnotoc",
+                        "submenu": []
+                    }
+                }
+            },
             "101110": {
                 "menu_item_id": "101110",
                 "is_active": "1",
                 "page_id": "101110",
                 "target": "",
-                "display_name": "Promo grid",
+                "display_name": "Promotion driven",
                 "class_name": "",
                 "relative_url": "/styleguide/promogrid",
-                "submenu": []
-            },
-            "101116": {
-                "menu_item_id": "101116",
-                "is_active": "1",
-                "page_id": "101116",
-                "target": "",
-                "display_name": "Promo listing",
-                "class_name": "",
-                "relative_url": "/styleguide/promolisting",
-                "submenu": []
-            },
-            "101111": {
-                "menu_item_id": 101111,
-                "is_active": "1",
-                "page_id": 101111,
-                "target": "",
-                "display_name": "Spotlight listing",
-                "class_name": "",
-                "relative_url": "/styleguide/spotlightlisting",
-                "submenu": []
-            },
-            "101115": {
-                "menu_item_id": 101115,
-                "is_active": "1",
-                "page_id": 101115,
-                "target": "",
-                "display_name": "Spotlight grid",
-                "class_name": "",
-                "relative_url": "/styleguide/spotlightgrid",
-                "submenu": []
-            },
-            "101112": {
-                "menu_item_id": 101112,
-                "is_active": "1",
-                "page_id": 101112,
-                "target": "",
-                "display_name": "Spotlight view",
-                "class_name": "",
-                "relative_url": "/styleguide/spotlight/title-12345",
-                "submenu": []
-            },
-            "101113": {
-                "menu_item_id": "101113",
-                "is_active": "1",
-                "page_id": "101113",
-                "target": "",
-                "display_name": "Contact tables",
-                "class_name": "",
-                "relative_url": "/styleguide/contacttables",
-                "submenu": []
-            },
-            "101114": {
-                "menu_item_id": "101114",
-                "is_active": "1",
-                "page_id": "101114",
-                "target": "",
-                "display_name": "Contact tables, no table of contents",
-                "class_name": "",
-                "relative_url": "/styleguide/contacttablesnotoc",
-                "submenu": []
+                "submenu": {
+                    "101110100": {
+                        "menu_item_id": "101110100",
+                        "is_active": "1",
+                        "page_id": "101110100",
+                        "target": "",
+                        "display_name": "Promo grid",
+                        "class_name": "",
+                        "relative_url": "/styleguide/promogrid",
+                        "submenu": []
+                    },
+                    "101110200": {
+                        "menu_item_id": "101110200",
+                        "is_active": "1",
+                        "page_id": "101110200",
+                        "target": "",
+                        "display_name": "Promo listing",
+                        "class_name": "",
+                        "relative_url": "/styleguide/promolisting",
+                        "submenu": []
+                    },
+                    "101110300": {
+                        "menu_item_id": "101110300",
+                        "is_active": "1",
+                        "page_id": "101110300",
+                        "target": "",
+                        "display_name": "Promo item view",
+                        "class_name": "",
+                        "relative_url": "/styleguide/view/title-12345",
+                        "submenu": []
+                    }
+                }
             }
         }
     },

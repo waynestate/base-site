@@ -7,17 +7,17 @@
 
 namespace App\Http\Controllers;
 
-use Contracts\Repositories\GridRepositoryContract;
+use Contracts\Repositories\PromoGridRepositoryContract;
 use Illuminate\Http\Request;
 
-class GridController extends Controller
+class PromoGridController extends Controller
 {
     /**
      * Construct the controller.
      *
      * @param GridRepositoryContract $promo
      */
-    public function __construct(GridRepositoryContract $promo)
+    public function __construct(PromoGridRepositoryContract $promo)
     {
         $this->promo = $promo;
     }
@@ -32,6 +32,6 @@ class GridController extends Controller
     {
         $promos = $this->promo->getGridPromos($request->data);
 
-        return view('grid', merge($request->data, $promos));
+        return view('promo-grid', merge($request->data, $promos));
     }
 }

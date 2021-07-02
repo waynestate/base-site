@@ -2,9 +2,9 @@
 
 namespace Styleguide\Repositories;
 
-use App\Repositories\GridRepository as Repository;
+use App\Repositories\PromoGridRepository as Repository;
 
-class GridRepository extends Repository
+class PromoGridRepository extends Repository
 {
     /**
      * {@inheritdoc}

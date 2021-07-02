@@ -2,12 +2,12 @@
 
 namespace App\Repositories;
 
-use Contracts\Repositories\GridRepositoryContract;
+use Contracts\Repositories\PromoGridRepositoryContract;
 use Illuminate\Cache\Repository;
 use Waynestate\Api\Connector;
 use Waynestate\Promotions\ParsePromos;
 
-class GridRepository implements GridRepositoryContract
+class PromoGridRepository implements PromoGridRepositoryContract
 {
     /** @var Connector */
     protected $wsuApi;
