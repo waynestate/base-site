@@ -36,7 +36,7 @@ else
     phplint="$(vagrant ssh -c "cd /vagrant/${site_folder}; make phplintdry")"
 fi
 
-if [[ $phplint == *"'phplintdry' failed"* ]]; then
+if [[ $phplint == *"phplintdry] Error"* ]]; then
     printf "phplint has reported errors. Please fix them before committing.\n"
     printf ">> run: make phplint\n\n"
     exit 1
