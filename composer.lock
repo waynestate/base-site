@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "51a904d64ad5110683df495100a724cd",
+    "content-hash": "2569e87a5ebcc58c119443dbb71effa5",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -5309,16 +5309,16 @@
         },
         {
             "name": "waynestate/news-api-php",
-            "version": "dev-feature/update-guzzle-to-7.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/waynestate/news-api-php.git",
-                "reference": "bcd650fbaa8e934beb3a9d0130db2182175ab695"
+                "reference": "2cd356fbf2ccb3511f3e8809f3a397de2a28a3d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/waynestate/news-api-php/zipball/bcd650fbaa8e934beb3a9d0130db2182175ab695",
-                "reference": "bcd650fbaa8e934beb3a9d0130db2182175ab695",
+                "url": "https://api.github.com/repos/waynestate/news-api-php/zipball/2cd356fbf2ccb3511f3e8809f3a397de2a28a3d7",
+                "reference": "2cd356fbf2ccb3511f3e8809f3a397de2a28a3d7",
                 "shasum": ""
             },
             "require": {
@@ -5354,9 +5354,9 @@
             "description": "Connector for News API",
             "support": {
                 "issues": "https://github.com/waynestate/news-api-php/issues",
-                "source": "https://github.com/waynestate/news-api-php/tree/feature/update-guzzle-to-7.0"
+                "source": "https://github.com/waynestate/news-api-php/tree/2.0.0"
             },
-            "time": "2021-07-22T15:46:59+00:00"
+            "time": "2021-07-22T18:01:17+00:00"
         },
         {
             "name": "waynestate/parse-menu",
@@ -9018,9 +9018,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "waynestate/news-api-php": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
