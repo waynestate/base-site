@@ -1,12 +1,13 @@
-let webpack = require('webpack');
-let mix = require('laravel-mix');
-let fs = require('fs');
-let path = require('path');
-let exec = require('child_process').exec;
-let package = JSON.parse(fs.readFileSync('./package.json'));
-let CopyWebpackPlugin = require('copy-webpack-plugin');
-let purge = require('laravel-mix-purgecss');
-let ReplaceInFileWebpackPlugin = require('replace-in-file-webpack-plugin');
+const webpack = require('webpack');
+const mix = require('laravel-mix');
+const fs = require('fs');
+const path = require('path');
+const exec = require('child_process').exec;
+const package = JSON.parse(fs.readFileSync('./package.json'));
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
+const purge = require('laravel-mix-purgecss');
+const ReplaceInFileWebpackPlugin = require('replace-in-file-webpack-plugin');
 
 /*
  |--------------------------------------------------------------------------
@@ -100,54 +101,44 @@ fs.symlink(
 );
 
 config = {
-    module: {
-        rules: [{
-            test: /\.js$/,
-            exclude: /node_modules/,
-            enforce: 'pre',
-            use: [{
-                loader: 'eslint-loader'
-            }],
-        }],
-    },
     plugins: [
-        new webpack.LoaderOptionsPlugin({
-            options: {
-                eslint: {
-                    configFile: path.join(__dirname, '.eslintrc'),
-                },
-            },
+        new ESLintPlugin({
+            exclude: [
+                'node_modules'
+            ],
         }),
-        new CopyWebpackPlugin([
-            {
-                from: 'node_modules/@waynestate/wsuheader/dist/header.html',
-                to: path.resolve('resources/views/components/header.blade.php'),
-            },
-            {
-                from: 'node_modules/@waynestate/wsufooter/dist/footer.html',
-                to: path.resolve('resources/views/components/footer.blade.php'),
-            },
-            {
-                from: 'vendor/waynestate/error-404/dist/404.php',
-                to: path.resolve('resources/views/errors/404.blade.php'),
-            },
-            {
-                from: 'vendor/waynestate/error-403/dist/403.php',
-                to: path.resolve('resources/views/errors/403.blade.php'),
-            },
-            {
-                from: 'vendor/waynestate/error-429/dist/429.php',
-                to: path.resolve('resources/views/errors/429.blade.php'),
-            },
-            {
-                from: 'vendor/waynestate/error-500/dist/500.php',
-                to: path.resolve('resources/views/errors/500.blade.php'),
-            },
-            {
-                from: 'hooks',
-                to: path.resolve('.git/hooks'),
-            }
-        ]),
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: 'node_modules/@waynestate/wsuheader/dist/header.html',
+                    to: path.resolve('resources/views/components/header.blade.php'),
+                },
+                {
+                    from: 'node_modules/@waynestate/wsufooter/dist/footer.html',
+                    to: path.resolve('resources/views/components/footer.blade.php'),
+                },
+                {
+                    from: 'vendor/waynestate/error-404/dist/404.php',
+                    to: path.resolve('resources/views/errors/404.blade.php'),
+                },
+                {
+                    from: 'vendor/waynestate/error-403/dist/403.php',
+                    to: path.resolve('resources/views/errors/403.blade.php'),
+                },
+                {
+                    from: 'vendor/waynestate/error-429/dist/429.php',
+                    to: path.resolve('resources/views/errors/429.blade.php'),
+                },
+                {
+                    from: 'vendor/waynestate/error-500/dist/500.php',
+                    to: path.resolve('resources/views/errors/500.blade.php'),
+                },
+                {
+                    from: 'hooks',
+                    to: path.resolve('.git/hooks'),
+                }
+            ]
+        }),
         new ReplaceInFileWebpackPlugin([{
             dir: 'resources/views/components',
             files: ['footer.blade.php'],
