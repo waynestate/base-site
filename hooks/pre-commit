@@ -36,7 +36,8 @@ else
     phplint="$(vagrant ssh -c "cd /vagrant/${site_folder}; make phplintdry")"
 fi
 
-if [[ $phplint == *"phplintdry] Error"* ]]; then
+# Check if the last command (PHPLint) didn't exit with a 0 success
+if  (( $? != 0 )); then
     printf "phplint has reported errors. Please fix them before committing.\n"
     printf ">> run: make phplint\n\n"
     exit 1
@@ -51,8 +52,9 @@ else
     stylelint="$(vagrant ssh -c "cd /vagrant/${site_folder}; make stylelint")"
 fi
 
-if [[ $stylelint == *"'stylelint' failed"* ]]; then
-    printf "Stylint has reported errors. Please fix them before committing.\n"
+# Check if the last command (Stylelint) didn't exit with a 0 success
+if  (( $? != 0 )); then
+    printf "Styleint has reported errors. Please fix them before committing.\n"
     printf ">> run: make stylelint\n\n"
     exit 1
 fi
@@ -66,7 +68,8 @@ else
     phpunit="$(vagrant ssh -c "cd /vagrant/${site_folder}; phpunit")"
 fi
 
-if [[ $phpunit == *"FAILURES!"* || $phpunit == *"ERRORS!"* || $phpunit == *"Fatal error"* ]]; then
+# Check if the last command (PHPUnit) didn't exit with a 0 success
+if  (( $? != 0 )); then
     printf "phpunit tests failed. Please fix them before committing.\n"
     printf ">> run: make runtests\n"
     exit 1
