@@ -1,25 +1,25 @@
 .button {
-    @apply .inline-block .align-middle .mb-2 .px-4 .py-2 .rounded .text-center .bg-grey-lighter .text-green .text-sm .cursor-pointer .font-bold .no-underline;
+    @apply inline-block align-middle mb-2 px-4 py-2 rounded text-center bg-grey-lighter text-green text-sm cursor-pointer font-bold no-underline;
 
     text-shadow: none;
 
     &:hover {
-        @apply .bg-grey-lightest;
+        @apply bg-grey-lightest;
     }
 }
 
 .expanded {
-    @apply .block .w-full .mx-0;
+    @apply block w-full mx-0;
 }
 
 // Background color used on .button, under-menu items, or anywhere
 .bg-gradient-green {
-    @apply .bg-green-dark;
+    @apply bg-green-dark;
 
-    background-image: linear-gradient(180deg, theme('colors.green') 0, theme('colors.green.dark'));
+    background-image: linear-gradient(180deg, theme('colors.green.default') 0, theme('colors.green.dark'));
 
     &:hover {
-        @apply .bg-green-dark;
+        @apply bg-green-dark;
 
         background-image: none;
     }

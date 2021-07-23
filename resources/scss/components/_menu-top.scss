@@ -1,24 +1,24 @@
 ul.menu-top {
-    @apply .m-0 .p-0;
+    @apply m-0 p-0;
 
     li {
         a {
-            @apply .text-white;
+            @apply text-white;
 
             &:hover {
-                @apply .text-yellow;
+                @apply text-yellow;
             }
         }
 
         &:last-child {
-            @apply .mr-0;
+            @apply mr-0;
         }
 
         @screen mt {
-            @apply .inline-block .mx-2 .my-0;
+            @apply inline-block mx-2 my-0;
 
             &.selected a {
-                @apply .text-yellow .border-b .border-solid .border-yellow;
+                @apply text-yellow border-b border-solid border-yellow;
             }
         }
     }

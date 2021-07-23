@@ -1,5 +1,5 @@
 .addthis_sharing_toolbox {
-    @apply .block;
+    @apply block;
 
     min-height: 32px;
 
@@ -10,7 +10,7 @@
     }
 
     &::before {
-        @apply .text-grey-darker .bg-grey-lighter .uppercase .float-left .leading-tight .text-sm;
+        @apply text-grey-darker bg-grey-lighter uppercase float-left leading-tight text-sm;
 
         padding: 6px 11px 7px;
         letter-spacing: 0.1em;
@@ -26,7 +26,7 @@
 }
 
 a.at-icon-wrapper.at-share-btn {
-    @apply .mb-0;
+    @apply mb-0;
 
     background: theme('colors.grey.lighter') !important;
 }

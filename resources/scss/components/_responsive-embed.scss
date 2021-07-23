@@ -1,5 +1,5 @@
 .responsive-embed {
-    @apply .relative .mb-4 .overflow-hidden .pb-3/4;
+    @apply relative mb-4 overflow-hidden pb-3/4;
 
     height: 0;
 }
@@ -8,9 +8,9 @@
 .responsive-embed object,
 .responsive-embed embed,
 .responsive-embed video {
-    @apply .absolute .top-0 .left-0 .w-full .h-full;
+    @apply absolute top-0 left-0 w-full h-full;
 }
 
 .responsive-embed.widescreen {
-    @apply .pb-16/9;
+    @apply pb-16/9;
 }

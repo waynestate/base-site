@@ -3,46 +3,46 @@
     ul {
         list-style-type: disc;
 
-        @apply .ml-8;
+        @apply ml-8;
     }
 
     ol {
         list-style-type: decimal;
 
-        @apply .ml-8;
+        @apply ml-8;
     }
 
     hr {
-        @apply .border-b .border-solid .border-grey-lighter .my-5;
+        @apply border-b border-solid border-grey-lighter my-5;
     }
 
     p,
     dl,
     & > ol,
     & > ul {
-        @apply .mb-5;
+        @apply mb-5;
     }
 
     abbr,
     abbr[title] {
-        @apply .no-underline;
+        @apply no-underline;
     }
 
     blockquote {
-        @apply .ml-8 .my-8 .border-l-4 .border-grey .pl-4 .pt-2 .pb-1;
+        @apply ml-8 my-8 border-l-4 border-grey pl-4 pt-2 pb-1;
 
         > *:last-child {
-            @apply .mb-2;
+            @apply mb-2;
         }
 
         cite {
-            @apply .block .mb-4;
+            @apply block mb-4;
         }
     }
 
     // Tailwind preflight sets images to block
     img {
-        @apply .inline;
+        @apply inline;
     }
 
     // Images remain at their specified width
@@ -50,7 +50,7 @@
     @media (max-width: theme('screens.mt')) {
         img,
         figure {
-            @apply .block .my-0 .mx-auto;
+            @apply block my-0 mx-auto;
 
             &[style*="float:right"],
             &[style*="float:left"],
@@ -70,17 +70,17 @@
             }
 
             &[style*="float:right"] {
-                @apply .ml-6 .my-2 .max-w-half;
+                @apply ml-6 my-2 max-w-half;
             }
 
             &[style*="float:left"] {
-                @apply .mr-6 .my-2 .max-w-half;
+                @apply mr-6 my-2 max-w-half;
             }
         }
     }
 
     figure {
-        @apply .mt-2 .mb-4 .mx-auto;
+        @apply mt-2 mb-4 mx-auto;
 
         // Overriding display: inline-block; from CKEditor
         // so that the caption wraps appropriately
@@ -93,74 +93,74 @@
         }
 
         figcaption {
-            @apply .text-sm .text-grey-darker .text-left;
+            @apply text-sm text-grey-darker text-left;
 
             display: table-caption;
             caption-side: bottom;
         }
 
         @screen mt {
-            @apply .w-auto .mb-4;
+            @apply w-auto mb-4;
 
             &[style*="float:right"],
             &.float-right {
-                @apply .ml-6 .max-w-half;
+                @apply ml-6 max-w-half;
             }
 
             &[style*="float:left"],
             &.float-left {
-                @apply .mr-6 .max-w-half;
+                @apply mr-6 max-w-half;
             }
 
             &[style*="text:center"],
             &.text-center {
-                @apply .ml-auto .mr-auto;
+                @apply ml-auto mr-auto;
             }
         }
     }
 
     table {
-        @apply .border-collapse .w-full .mb-4 .text-left;
+        @apply border-collapse w-full mb-4 text-left;
 
         thead tr {
-            @apply .border .border-solid .border-green-dark;
+            @apply border border-solid border-green-dark;
 
             th {
-                @apply .bg-green-dark .font-bold .px-4 .py-3 .text-white .leading-none;
+                @apply bg-green-dark font-bold px-4 py-3 text-white leading-none;
             }
 
             a {
-                @apply .text-white;
+                @apply text-white;
             }
         }
 
         tbody tr {
-            @apply .border .border-grey-light .border-t-0 .border-solid .align-top;
+            @apply border border-grey-light border-t-0 border-solid align-top;
 
             td {
-                @apply .text-sm .px-4 .py-2;
+                @apply text-sm px-4 py-2;
             }
 
             &:nth-child(odd) {
-                @apply .bg-grey-lighter;
+                @apply bg-grey-lighter;
             }
 
             &:nth-child(even) {
-                @apply .bg-grey-lightest;
+                @apply bg-grey-lightest;
             }
 
             &:hover {
-                @apply .bg-yellow-lightest;
+                @apply bg-yellow-lightest;
             }
         }
     }
 
     // All content links
     a:not(.button, .content-button) {
-        @apply .underline;
+        @apply underline;
 
         &:hover {
-            @apply .no-underline;
+            @apply no-underline;
         }
     }
 }
