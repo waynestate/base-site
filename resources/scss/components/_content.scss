@@ -29,7 +29,7 @@
     }
 
     blockquote {
-        @apply ml-8 my-8 border-l-4 border-grey pl-4 pt-2 pb-1;
+        @apply ml-8 my-8 border-l-4 border-grey-default pl-4 pt-2 pb-1;
 
         > *:last-child {
             @apply mb-2;

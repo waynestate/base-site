@@ -36,7 +36,7 @@
     [type='url'],
     [type='color'],
     textarea {
-        @apply border-grey border-solid border block w-full p-2 text-base m-0 mb-4 font-normal h-10 rounded-none;
+        @apply border-grey-default border-solid border block w-full p-2 text-base m-0 mb-4 font-normal h-10 rounded-none;
 
         box-sizing: border-box;
         box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
@@ -54,7 +54,7 @@
     }
 
     select {
-        @apply block border-grey border bg-white w-full p-2 pr-8 rounded-sm;
+        @apply block border-grey-default border bg-white w-full p-2 pr-8 rounded-sm;
 
         appearance: none;
         transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
@@ -91,7 +91,7 @@
     // Errors
     .error {
         p {
-            @apply text-red mx-auto mt-1 mb-4 text-sm;
+            @apply text-red-default mx-auto mt-1 mb-4 text-sm;
         }
 
         input,
@@ -166,7 +166,7 @@
 
     // Login
     .login-info li {
-        @apply border-b border-solid border-grey text-sm px-0 py-2;
+        @apply border-b border-solid border-grey-default text-sm px-0 py-2;
     }
 
     .login-info ul {
@@ -176,7 +176,7 @@
     .formy_logout a,
     .login-info p a,
     .login-info ul li a {
-        @apply text-green underline border-b-0;
+        @apply text-green-default underline border-b-0;
 
         &:hover {
             @apply no-underline border-0;
@@ -189,6 +189,6 @@
 
     // Required
     label em {
-        @apply text-red;
+        @apply text-red-default;
     }
 }

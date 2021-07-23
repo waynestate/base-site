@@ -24,11 +24,11 @@
 
         // Selected State
         .selected > a {
-            @apply text-yellow;
+            @apply text-yellow-default;
         }
 
         a:hover {
-            @apply text-yellow;
+            @apply text-yellow-default;
 
             background: transparent;
         }
