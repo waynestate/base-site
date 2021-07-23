@@ -566,7 +566,7 @@ class MenuRepositoryTest extends TestCase
         $output = app('App\Repositories\MenuRepository')->getSiteMenuOutput($siteMenu['menu']);
 
         // Make sure we have a starting menu
-        $this->assertRegexp('/<ul/', $output);
+        $this->assertMatchesRegularExpression('/<ul/', $output);
     }
 
     /**
@@ -585,7 +585,7 @@ class MenuRepositoryTest extends TestCase
         $output = app('App\Repositories\MenuRepository')->getTopMenuOutput($topMenu['menu']);
 
         // Make sure we have a starting menu
-        $this->assertRegexp('/<ul/', $output);
+        $this->assertMatchesRegularExpression('/<ul/', $output);
     }
 
     /**
