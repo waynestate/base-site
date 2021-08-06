@@ -78,6 +78,8 @@ class PromoListingRepository implements PromoListingRepositoryContract
      */
     public function getPromoView($id)
     {
+        $promo['promotion'] = [];
+
         $params = [
             'method' => 'cms.promotions.info',
             'promo_item_id' => $id,
@@ -89,7 +91,8 @@ class PromoListingRepository implements PromoListingRepositoryContract
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
-        $promo['promo'] = empty($promo['error']) ? $promo['promo'] : [];
+        $promo['promo'] = empty($promo['error']) ? $promo['promotion'] : [];
+
 
         return $promo;
     }

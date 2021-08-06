@@ -47,17 +47,19 @@ class PromoListingRepositoryTest extends TestCase
 
         // Fake return
         $return = [
-            'promo' => $promo_return,
+            'promotion' => $promo_return,
         ];
 
         // Mock the connector and set the return
         $wsuApi = Mockery::mock('Waynestate\Api\Connector');
         $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.info', Mockery::type('array'))->once()->andReturn($return);
 
-        // Get the promo
-        $promo = app('App\Repositories\PromoListingRepository', ['wsuApi' => $wsuApi])->getPromoView($this->faker->randomDigit);
 
-        $this->assertEquals($promo, ['promo' => $promo_return]);
+        // Get the promo
+        $single_promo = app('App\Repositories\PromoListingRepository', ['wsuApi' => $wsuApi])->getPromoView($this->faker->randomDigit);
+        $promo['promotion'] = $single_promo['promo'];
+
+        $this->assertEquals($promo, ['promotion' => $promo_return]);
     }
 
     /**
