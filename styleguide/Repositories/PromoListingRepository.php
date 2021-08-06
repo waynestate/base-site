@@ -29,8 +29,8 @@ class PromoListingRepository extends Repository
     /**
      * {@inheritdoc}
      */
-    public function getBackToSpotlightsListing($referer = null, $scheme = null, $host = null, $uri = null)
+    public function getBackToPromoListing($referer = null, $scheme = null, $host = null, $uri = null)
     {
-        return '/styleguide/spotlightlisting';
+        return '/styleguide/promolisting';
     }
 }

@@ -85,11 +85,12 @@ class PromoListingRepository implements PromoListingRepositoryContract
             'is_active' => '1',
         ];
 
+
         $promo = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
-        $promo['promo'] = empty($promo['error']) ? $promo['promo'] : [];
+        $promo['promo'] = empty($promo['error']) ? $promo['promotion'] : [];
 
         return $promo;
     }
