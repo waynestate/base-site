@@ -2,7 +2,7 @@
 
 namespace Contracts\Repositories;
 
-interface GridRepositoryContract
+interface PromoGridRepositoryContract
 {
     /**
      * Get promotions for the grid.

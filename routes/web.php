@@ -11,8 +11,8 @@
 |
 */
 
-// Individual spotlight route
-Route::get('{any?}spotlight/{title}-{id}', 'SpotlightController@show')
+// Individual promo view route
+Route::get('{any?}view/{title}-{id}', 'PromoListingController@show')
     ->where(['any' => '.*', 'title' => '.+', 'id' => '\d+']);
 
 // Profile view
