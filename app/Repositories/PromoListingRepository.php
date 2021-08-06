@@ -89,7 +89,7 @@ class PromoListingRepository implements PromoListingRepositoryContract
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
-        $promo['promo'] = empty($promo['error']) ? $promo['promotion'] : [];
+        $promo['promo'] = empty($promo['error']) ? $promo['promo'] : [];
 
         return $promo;
     }
