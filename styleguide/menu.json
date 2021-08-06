@@ -167,16 +167,16 @@
                 "target": "",
                 "display_name": "Promotion driven",
                 "class_name": "",
-                "relative_url": "/styleguide/promogrid",
+                "relative_url": "/styleguide/promolisting",
                 "submenu": {
                     "101110100": {
                         "menu_item_id": "101110100",
                         "is_active": "1",
                         "page_id": "101110100",
                         "target": "",
-                        "display_name": "Promo grid",
+                        "display_name": "Promo listing",
                         "class_name": "",
-                        "relative_url": "/styleguide/promogrid",
+                        "relative_url": "/styleguide/promolisting",
                         "submenu": []
                     },
                     "101110200": {
@@ -184,9 +184,9 @@
                         "is_active": "1",
                         "page_id": "101110200",
                         "target": "",
-                        "display_name": "Promo listing",
+                        "display_name": "Promo grid",
                         "class_name": "",
-                        "relative_url": "/styleguide/promolisting",
+                        "relative_url": "/styleguide/promogrid",
                         "submenu": []
                     },
                     "101110300": {

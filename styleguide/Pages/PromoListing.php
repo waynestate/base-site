@@ -13,7 +13,7 @@ class PromoListing extends Page
             'page' => [
                 'controller' => 'PromoListingController',
                 'title' => 'Promo listing',
-                'id' => 101110200,
+                'id' => 101110100,
                 'content' => [
                     'main' => '
                         <h2>Page setup</h2>
@@ -32,6 +32,9 @@ class PromoListing extends Page
                         </ul>
                     ',
                 ],
+            ],
+            'data' => [
+                'listing_promo_group_id' => 12345,
             ],
         ]);
     }

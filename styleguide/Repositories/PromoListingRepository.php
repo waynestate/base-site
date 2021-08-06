@@ -12,7 +12,25 @@ class PromoListingRepository extends Repository
     public function getPromoListingPromos(array $data, $limit = 75)
     {
         return [
-            'listing_promos' => app('Factories\PromoListing')->create(15),
+            'promos' => app('Factories\PromoListing')->create(15),
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPromoView($id)
+    {
+        return [
+            'promo' => app('Factories\PromoListing')->create(1, true),
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBackToSpotlightsListing($referer = null, $scheme = null, $host = null, $uri = null)
+    {
+        return '/styleguide/spotlightlisting';
     }
 }

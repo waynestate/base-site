@@ -11,9 +11,9 @@ class PromoGrid extends Page
     {
         return app('Factories\Page')->create(1, true, [
             'page' => [
-                'controller' => 'PromoGridController',
+                'controller' => 'PromoListingController',
                 'title' => 'Promo grid',
-                'id' => 101110100,
+                'id' => 101110200,
                 'content' => [
                     'main' => '
                         <h2>Page setup</h2>
@@ -32,6 +32,9 @@ class PromoGrid extends Page
                         </ul>
                     ',
                 ],
+            ],
+            'data' => [
+                'grid_promo_group_id' => 12345,
             ],
         ]);
     }

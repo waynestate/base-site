@@ -39,16 +39,15 @@ class PromoListingRepository implements PromoListingRepositoryContract
     {
         $group_reference = [];
         
-        if (empty($data['data']['listing_promo_group_id'])) {
-            return ['listing_promos' => []];
+        if (!empty($data['data']['listing_promo_group_id'])) {
+            $group_reference[$data['data']['listing_promo_group_id']] = 'promos';
+        } elseif (!empty($data['data']['grid_promo_group_id'])) {
+            $group_reference[$data['data']['grid_promo_group_id']] = 'promos';
+        } else {
+            return ['promos' => []];
         }
 
-        // If there is an grid custom page field then inject it into the group reference
-        $group_reference[$data['data']['listing_promo_group_id']] = 'listing_promos';
-
-        $group_config = [
-            'listing_promos' => 'limit:' . $limit,
-        ];
+        $group_config = ['promos' => 'limit:' . $limit];
 
         $params = [
             'method' => 'cms.promotions.listing',
@@ -62,5 +61,42 @@ class PromoListingRepository implements PromoListingRepositoryContract
         });
 
         return $this->parsePromos->parse($promos, $group_reference, $group_config);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPromoView($id)
+    {
+        $params = [
+            'method' => 'cms.promotions.info',
+            'promo_item_id' => $id,
+            'filename_url' => true,
+            'is_active' => '1',
+        ];
+
+        $promo = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+            return $this->wsuApi->sendRequest($params['method'], $params);
+        });
+
+        $promo['promo'] = empty($promo['error']) ? $promo['promotion'] : [];
+
+        return $promo;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBackToSpotlightsListing($referer = null, $scheme = null, $host = null, $uri = null)
+    {
+        // Make sure the referer is coming from the site we are currently on and not the current page
+        if ($referer === null
+            || $referer == $scheme.'://'.$host.$uri
+            || strpos($referer, $host) === false
+        ) {
+            return '/spotlightlisting';
+        }
+
+        return $referer;
     }
 }

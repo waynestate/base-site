@@ -7,9 +7,9 @@
         {!! $page['content']['main'] !!}
     </div>
 
-    @if(!empty($grid_promos))
+    @if(!empty($promos))
         <ul class="flex flex-wrap -mx-4">
-            @foreach($grid_promos as $item)
+            @foreach($promos as $item)
                 <li class="w-full md:w-1/2 xl:w-1/3 px-4 pb-6">
                     @if(!empty($item['link']))<a href="{{ $item['link'] }}" class="group">@endif
                         <div class="flex md:block">

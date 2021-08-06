@@ -11,7 +11,7 @@ class PromoView extends Page
     {
         return app('Factories\Page')->create(1, true, [
             'page' => [
-                'controller' => 'PromoViewController',
+                'controller' => 'PromoListingController',
                 'title' => 'Promo view',
                 'id' => 101110300,
             ],

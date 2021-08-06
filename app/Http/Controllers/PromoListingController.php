@@ -23,7 +23,7 @@ class PromoListingController extends Controller
     }
 
     /**
-     * Display the grid view.
+     * Display the view.
      *
      * @param Request $request
      * @return \Illuminate\View\View
@@ -32,7 +32,13 @@ class PromoListingController extends Controller
     {
         $promos = $this->promo->getPromoListingPromos($request->data);
 
-        return view('promo-listing', merge($request->data, $promos));
+        if (!empty($request->data['data']['listing_promo_group_id'])) {
+            return view('promo-listing', merge($request->data, $promos));
+        } 
+
+        if (!empty($request->data['data']['grid_promo_group_id'])) {
+            return view('promo-grid', merge($request->data, $promos));
+        }
     }
 
     /**
@@ -43,7 +49,11 @@ class PromoListingController extends Controller
      */
     public function show(Request $request)
     {
-        $promo = $this->spotlight->getPromoView($request->id);
+        dump('here');
+        die;
+        dump($request);
+        die;
+        $promo = $this->promo->getPromoView($request->id);
 
         if (empty($promo['promo'])) {
             return abort('404');
