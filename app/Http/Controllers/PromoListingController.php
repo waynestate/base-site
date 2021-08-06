@@ -34,7 +34,7 @@ class PromoListingController extends Controller
 
         if (!empty($request->data['data']['listing_promo_group_id'])) {
             return view('promo-listing', merge($request->data, $promos));
-        } 
+        }
 
         if (!empty($request->data['data']['grid_promo_group_id'])) {
             return view('promo-grid', merge($request->data, $promos));
@@ -49,10 +49,6 @@ class PromoListingController extends Controller
      */
     public function show(Request $request)
     {
-        dump('here');
-        die;
-        dump($request);
-        die;
         $promo = $this->promo->getPromoView($request->id);
 
         if (empty($promo['promo'])) {
@@ -66,6 +62,6 @@ class PromoListingController extends Controller
         // Set the back URL
         $request->data['back_url'] = $this->promo->getBackToPromoListing($request->server->get('HTTP_REFERER'), $request->server->get('REQUEST_SCHEME'), $request->server->get('HTTP_HOST'), $request->server->get('REQUEST_URI'));
 
-        return view('promo-view', merge($request->data, $spotlight));
+        return view('promo-view', merge($request->data, $promo));
     }
 }

@@ -60,7 +60,17 @@ class PromoListingRepository implements PromoListingRepositoryContract
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
-        return $this->parsePromos->parse($promos, $group_reference, $group_config);
+        $promos = $this->parsePromos->parse($promos, $group_reference, $group_config);
+
+        if (!empty($data['data']['promotion_view_boolean']) && $data['data']['promotion_view_boolean'] === 'true') {
+            $promos['promos'] = collect($promos['promos'])->map(function ($item) use ($data) {
+                $item['link'] = 'view/'.\Illuminate\Support\Str::slug($item['title']).'-'.$item['promo_item_id'];
+
+                return $item;
+            })->toArray();
+        }
+
+        return $promos;
     }
 
     /**
@@ -87,14 +97,14 @@ class PromoListingRepository implements PromoListingRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getBackToSpotlightsListing($referer = null, $scheme = null, $host = null, $uri = null)
+    public function getBackToPromoListing($referer = null, $scheme = null, $host = null, $uri = null)
     {
         // Make sure the referer is coming from the site we are currently on and not the current page
         if ($referer === null
             || $referer == $scheme.'://'.$host.$uri
             || strpos($referer, $host) === false
         ) {
-            return '/spotlightlisting';
+            return '';
         }
 
         return $referer;

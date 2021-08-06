@@ -2,7 +2,7 @@
 
 namespace Styleguide\Pages;
 
-class PromoView extends Page
+class View extends Page
 {
     /**
      * {@inheritdoc}
