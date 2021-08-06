@@ -38,7 +38,7 @@ class PromoListingRepositoryTest extends TestCase
     }
 
     /**
-     * @covers App\Repositories\PromoListingRepository::getPromoListingPromos
+     * @covers App\Repositories\PromoListingRepository::getPromoView
      * @test
      */
     public function getting_single_promo_should_return_array()
