@@ -2,7 +2,7 @@
 
 namespace Styleguide\Pages;
 
-class Spotlights extends Page
+class View extends Page
 {
     /**
      * {@inheritdoc}
@@ -11,9 +11,9 @@ class Spotlights extends Page
     {
         return app('Factories\Page')->create(1, true, [
             'page' => [
-                'controller' => 'SpotlightController',
-                'title' => 'Spotlights',
-                'id' => 101111,
+                'controller' => 'PromoListingController',
+                'title' => 'Promo view',
+                'id' => 101110300,
             ],
         ]);
     }

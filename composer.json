@@ -10,8 +10,8 @@
     "type": "project",
     "require": {
         "php": ">=7.3.7",
+        "fakerphp/faker": "^1.13",
         "fideloper/proxy": "^4.0",
-        "fzaninotto/faker": "~1.8",
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
         "predis/predis": "^1.1",

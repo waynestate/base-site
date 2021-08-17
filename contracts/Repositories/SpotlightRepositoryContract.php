@@ -9,7 +9,7 @@ interface SpotlightRepositoryContract
      *
      * @return array
      */
-    public function getSpotlights();
+    public function getSpotlights(array $data);
 
     /**
      * Get promotions for individual spotlights.

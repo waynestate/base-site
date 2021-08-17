@@ -2,12 +2,12 @@
 
 namespace App\Repositories;
 
-use Contracts\Repositories\SpotlightRepositoryContract;
+use Contracts\Repositories\PromoListingRepositoryContract;
 use Illuminate\Cache\Repository;
 use Waynestate\Api\Connector;
 use Waynestate\Promotions\ParsePromos;
 
-class SpotlightRepository implements SpotlightRepositoryContract
+class PromoListingRepository implements PromoListingRepositoryContract
 {
     /** @var Connector */
     protected $wsuApi;
@@ -35,13 +35,19 @@ class SpotlightRepository implements SpotlightRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getSpotlights()
+    public function getPromoListingPromos(array $data, $limit = 75)
     {
-        $group_reference = [
-            //            0000 => 'spotlights',
-        ];
+        $group_reference = [];
+        
+        if (!empty($data['data']['listing_promo_group_id'])) {
+            $group_reference[$data['data']['listing_promo_group_id']] = 'promos';
+        } elseif (!empty($data['data']['grid_promo_group_id'])) {
+            $group_reference[$data['data']['grid_promo_group_id']] = 'promos';
+        } else {
+            return ['promos' => []];
+        }
 
-        $group_config = [];
+        $group_config = ['promos' => 'limit:' . $limit];
 
         $params = [
             'method' => 'cms.promotions.listing',
@@ -54,14 +60,26 @@ class SpotlightRepository implements SpotlightRepositoryContract
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
-        return $this->parsePromos->parse($promos, $group_reference, $group_config);
+        $promos = $this->parsePromos->parse($promos, $group_reference, $group_config);
+
+        if (!empty($data['data']['promotion_view_boolean']) && $data['data']['promotion_view_boolean'] === 'true') {
+            $promos['promos'] = collect($promos['promos'])->map(function ($item) use ($data) {
+                $item['link'] = 'view/'.\Illuminate\Support\Str::slug($item['title']).'-'.$item['promo_item_id'];
+
+                return $item;
+            })->toArray();
+        }
+
+        return $promos;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getSpotlight($id)
+    public function getPromoView($id)
     {
+        $promo['promotion'] = [];
+
         $params = [
             'method' => 'cms.promotions.info',
             'promo_item_id' => $id,
@@ -73,22 +91,23 @@ class SpotlightRepository implements SpotlightRepositoryContract
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
-        $spotlight['spotlight'] = empty($promo['error']) ? $promo['promotion'] : [];
+        $promo['promo'] = empty($promo['error']) ? $promo['promotion'] : [];
 
-        return $spotlight;
+
+        return $promo;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getBackToSpotlightsListing($referer = null, $scheme = null, $host = null, $uri = null)
+    public function getBackToPromoListing($referer = null, $scheme = null, $host = null, $uri = null)
     {
         // Make sure the referer is coming from the site we are currently on and not the current page
         if ($referer === null
             || $referer == $scheme.'://'.$host.$uri
             || strpos($referer, $host) === false
         ) {
-            return '/spotlights';
+            return '';
         }
 
         return $referer;
