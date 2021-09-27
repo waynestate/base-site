@@ -82,14 +82,14 @@ class BaseFeature extends Command
     {
         $menu = $this->getMenu();
 
-        $item = end($menu[101]['submenu']);
+        $item = end($menu[101]['submenu'][999]['submenu']);
 
         $item['menu_item_id']++;
         $item['page_id'] = $item['menu_item_id'];
         $item['display_name'] = $this->feature.'s';
         $item['relative_url'] = '/styleguide/'.strtolower($this->feature).'s';
 
-        $menu[101]['submenu'][$item['menu_item_id']] = $item;
+        $menu[101]['submenu'][999]['submenu'][$item['menu_item_id']] = $item;
 
         Storage::disk('base')->put('styleguide/menu.json', json_encode($menu, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES));
     }

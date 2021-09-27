@@ -1,8 +1,8 @@
 {
     "100": {
-        "menu_item_id": "100",
-        "is_active": "1",
-        "page_id": "100",
+        "menu_item_id": 100,
+        "is_active": 1,
+        "page_id": 100,
         "target": "",
         "display_name": "Content area",
         "class_name": "",
@@ -10,18 +10,18 @@
         "submenu": []
     },
     "101": {
-        "menu_item_id": "101",
-        "is_active": "1",
-        "page_id": "101",
+        "menu_item_id": 101,
+        "is_active": 1,
+        "page_id": 101,
         "target": "",
         "display_name": "Templates",
         "class_name": "",
         "relative_url": "/styleguide/childpage",
         "submenu": {
             "101100": {
-                "menu_item_id": "101100",
-                "is_active": "1",
-                "page_id": "101100",
+                "menu_item_id": 101100,
+                "is_active": 1,
+                "page_id": 101100,
                 "target": "",
                 "display_name": "Childpage",
                 "class_name": "",
@@ -29,8 +29,8 @@
                 "submenu": []
             },
             "101101": {
-                "menu_item_id": "101101",
-                "is_active": "1",
+                "menu_item_id": 101101,
+                "is_active": 1,
                 "page_id": 101101,
                 "target": "",
                 "display_name": "Homepage",
@@ -39,9 +39,9 @@
                 "submenu": []
             },
             "101109": {
-                "menu_item_id": "101109",
-                "is_active": "1",
-                "page_id": null,
+                "menu_item_id": 101109,
+                "is_active": 1,
+                "page_id": 101109,
                 "target": "",
                 "display_name": "Full width content area",
                 "class_name": "",
@@ -49,18 +49,18 @@
                 "submenu": []
             },
             "101102": {
-                "menu_item_id": "101102",
-                "is_active": "1",
-                "page_id": "101102",
+                "menu_item_id": 101102,
+                "is_active": 1,
+                "page_id": 101102,
                 "target": "",
                 "display_name": "News",
                 "class_name": "",
                 "relative_url": "/styleguide/news",
                 "submenu": {
                     "101102": {
-                        "menu_item_id": "101102",
-                        "is_active": "1",
-                        "page_id": "101102",
+                        "menu_item_id": 101102,
+                        "is_active": 1,
+                        "page_id": 101102,
                         "target": "",
                         "display_name": "News",
                         "class_name": "",
@@ -68,9 +68,9 @@
                         "submenu": []
                     },
                     "101103": {
-                        "menu_item_id": "101103",
-                        "is_active": "1",
-                        "page_id": null,
+                        "menu_item_id": 101103,
+                        "is_active": 1,
+                        "page_id": 101103,
                         "target": "",
                         "display_name": "News view",
                         "class_name": "",
@@ -78,9 +78,9 @@
                         "submenu": []
                     },
                     "101104": {
-                        "menu_item_id": "101104",
-                        "is_active": "1",
-                        "page_id": "101104",
+                        "menu_item_id": 101104,
+                        "is_active": 1,
+                        "page_id": 101104,
                         "target": "",
                         "display_name": "Topics",
                         "class_name": "",
@@ -90,18 +90,18 @@
                 }
             },
             "101105": {
-                "menu_item_id": "101105",
-                "is_active": "1",
-                "page_id": "101105",
+                "menu_item_id": 101105,
+                "is_active": 1,
+                "page_id": 101105,
                 "target": "",
                 "display_name": "Profile driven",
                 "class_name": "",
                 "relative_url": "/styleguide/profiles",
                 "submenu": {
                     "101105": {
-                        "menu_item_id": "101105",
-                        "is_active": "1",
-                        "page_id": "101105",
+                        "menu_item_id": 101105,
+                        "is_active": 1,
+                        "page_id": 101105,
                         "target": "",
                         "display_name": "Profiles",
                         "class_name": "",
@@ -109,9 +109,9 @@
                         "submenu": []
                     },
                     "101106": {
-                        "menu_item_id": "101106",
-                        "is_active": "1",
-                        "page_id": "101106",
+                        "menu_item_id": 101106,
+                        "is_active": 1,
+                        "page_id": 101106,
                         "target": "",
                         "display_name": "Profile view",
                         "class_name": "",
@@ -119,9 +119,9 @@
                         "submenu": []
                     },
                     "101107": {
-                        "menu_item_id": "101107",
-                        "is_active": "1",
-                        "page_id": "101107",
+                        "menu_item_id": 101107,
+                        "is_active": 1,
+                        "page_id": 101107,
                         "target": "",
                         "display_name": "Directory",
                         "class_name": "",
@@ -129,9 +129,9 @@
                         "submenu": []
                     },
                     "101108": {
-                        "menu_item_id": "101108",
-                        "is_active": "1",
-                        "page_id": "101108",
+                        "menu_item_id": 101108,
+                        "is_active": 1,
+                        "page_id": 101108,
                         "target": "",
                         "display_name": "Directory ordered",
                         "class_name": "",
@@ -139,9 +139,9 @@
                         "submenu": []
                     },
                     "101113": {
-                        "menu_item_id": "101113",
-                        "is_active": "1",
-                        "page_id": "101113",
+                        "menu_item_id": 101113,
+                        "is_active": 1,
+                        "page_id": 101113,
                         "target": "",
                         "display_name": "Contact tables",
                         "class_name": "",
@@ -149,9 +149,9 @@
                         "submenu": []
                     },
                     "101114": {
-                        "menu_item_id": "101114",
-                        "is_active": "1",
-                        "page_id": "101114",
+                        "menu_item_id": 101114,
+                        "is_active": 1,
+                        "page_id": 101114,
                         "target": "",
                         "display_name": "Contact tables, no table of contents",
                         "class_name": "",
@@ -161,18 +161,18 @@
                 }
             },
             "101110": {
-                "menu_item_id": "101110",
-                "is_active": "1",
-                "page_id": "101110",
+                "menu_item_id": 101110,
+                "is_active": 1,
+                "page_id": 101110,
                 "target": "",
                 "display_name": "Promotion driven",
                 "class_name": "",
                 "relative_url": "/styleguide/promolisting",
                 "submenu": {
                     "101110100": {
-                        "menu_item_id": "101110100",
-                        "is_active": "1",
-                        "page_id": "101110100",
+                        "menu_item_id": 101110100,
+                        "is_active": 1,
+                        "page_id": 101110100,
                         "target": "",
                         "display_name": "Promo listing",
                         "class_name": "",
@@ -180,9 +180,9 @@
                         "submenu": []
                     },
                     "101110200": {
-                        "menu_item_id": "101110200",
-                        "is_active": "1",
-                        "page_id": "101110200",
+                        "menu_item_id": 101110200,
+                        "is_active": 1,
+                        "page_id": 101110200,
                         "target": "",
                         "display_name": "Promo grid",
                         "class_name": "",
@@ -190,9 +190,9 @@
                         "submenu": []
                     },
                     "101110300": {
-                        "menu_item_id": "101110300",
-                        "is_active": "1",
-                        "page_id": "101110300",
+                        "menu_item_id": 101110300,
+                        "is_active": 1,
+                        "page_id": 101110300,
                         "target": "",
                         "display_name": "Promo item view",
                         "class_name": "",
@@ -200,31 +200,52 @@
                         "submenu": []
                     }
                 }
+            },
+            "999": {
+                "menu_item_id": 999,
+                "is_active": 1,
+                "page_id": 999,
+                "target": "",
+                "display_name": "Site specific",
+                "class_name": "",
+                "relative_url": "/styleguide/sitespecific",
+                "submenu": {
+                    "99901": {
+                        "menu_item_id": 99901,
+                        "is_active": 1,
+                        "page_id": 99901,
+                        "target": "",
+                        "display_name": "Create site specific templates",
+                        "class_name": "",
+                        "relative_url": "/styleguide/sitespecific",
+                        "submenu": []
+                    }
+                }
             }
         }
     },
     "102": {
-        "menu_item_id": "102",
-        "is_active": "1",
-        "page_id": "102",
+        "menu_item_id": 102,
+        "is_active": 1,
+        "page_id": 102,
         "target": "",
         "display_name": "Components",
         "class_name": "",
         "relative_url": "/styleguide/header/title/single",
         "submenu": {
             "102100": {
-                "menu_item_id": "102100",
-                "is_active": "1",
-                "page_id": "102100",
+                "menu_item_id": 102100,
+                "is_active": 1,
+                "page_id": 102100,
                 "target": "",
                 "display_name": "Header title",
                 "class_name": "",
                 "relative_url": "/styleguide/header/title/single",
                 "submenu": {
                     "102100100": {
-                        "menu_item_id": "102100100",
-                        "is_active": "1",
-                        "page_id": "102100100",
+                        "menu_item_id": 102100100,
+                        "is_active": 1,
+                        "page_id": 102100100,
                         "target": "",
                         "display_name": "Header title single",
                         "class_name": "",
@@ -232,9 +253,9 @@
                         "submenu": []
                     },
                     "102100101": {
-                        "menu_item_id": "102100101",
-                        "is_active": "1",
-                        "page_id": "102100101",
+                        "menu_item_id": 102100101,
+                        "is_active": 1,
+                        "page_id": 102100101,
                         "target": "",
                         "display_name": "Header title double",
                         "class_name": "",
@@ -242,9 +263,9 @@
                         "submenu": []
                     },
                     "102100102": {
-                        "menu_item_id": "102100102",
-                        "is_active": "1",
-                        "page_id": "102100102",
+                        "menu_item_id": 102100102,
+                        "is_active": 1,
+                        "page_id": 102100102,
                         "target": "",
                         "display_name": "Header title single w/short title",
                         "class_name": "",
@@ -252,9 +273,9 @@
                         "submenu": []
                     },
                     "102100103": {
-                        "menu_item_id": "102100103",
-                        "is_active": "1",
-                        "page_id": "102100103",
+                        "menu_item_id": 102100103,
+                        "is_active": 1,
+                        "page_id": 102100103,
                         "target": "",
                         "display_name": "Header title double w/short title",
                         "class_name": "",
@@ -264,18 +285,18 @@
                 }
             },
             "103100": {
-                "menu_item_id": "103100",
-                "is_active": "1",
-                "page_id": "103100",
+                "menu_item_id": 103100,
+                "is_active": 1,
+                "page_id": 103100,
                 "target": "",
                 "display_name": "Menu",
                 "class_name": "",
                 "relative_url": "/styleguide/menu/left",
                 "submenu": {
                     "103100100": {
-                        "menu_item_id": "103100100",
-                        "is_active": "1",
-                        "page_id": "103100100",
+                        "menu_item_id": 103100100,
+                        "is_active": 1,
+                        "page_id": 103100100,
                         "target": "",
                         "display_name": "Menu left",
                         "class_name": "",
@@ -283,9 +304,9 @@
                         "submenu": []
                     },
                     "103100101": {
-                        "menu_item_id": "103100101",
-                        "is_active": "1",
-                        "page_id": "103100101",
+                        "menu_item_id": 103100101,
+                        "is_active": 1,
+                        "page_id": 103100101,
                         "target": "",
                         "display_name": "Menu top",
                         "class_name": "",
@@ -295,18 +316,18 @@
                 }
             },
             "104100": {
-                "menu_item_id": "104100",
-                "is_active": "1",
-                "page_id": "104100",
+                "menu_item_id": 104100,
+                "is_active": 1,
+                "page_id": 104100,
                 "target": "",
                 "display_name": "Footer contact",
                 "class_name": "",
                 "relative_url": "/styleguide/footer/contact/one",
                 "submenu": {
                     "104100100": {
-                        "menu_item_id": "104100100",
-                        "is_active": "1",
-                        "page_id": "104100100",
+                        "menu_item_id": 104100100,
+                        "is_active": 1,
+                        "page_id": 104100100,
                         "target": "",
                         "display_name": "One column",
                         "class_name": "",
@@ -314,9 +335,9 @@
                         "submenu": []
                     },
                     "104100101": {
-                        "menu_item_id": "104100101",
-                        "is_active": "1",
-                        "page_id": "104100101",
+                        "menu_item_id": 104100101,
+                        "is_active": 1,
+                        "page_id": 104100101,
                         "target": "",
                         "display_name": "Two column",
                         "class_name": "",
@@ -324,9 +345,9 @@
                         "submenu": []
                     },
                     "104100102": {
-                        "menu_item_id": "104100102",
-                        "is_active": "1",
-                        "page_id": "104100102",
+                        "menu_item_id": 104100102,
+                        "is_active": 1,
+                        "page_id": 104100102,
                         "target": "",
                         "display_name": "Three column",
                         "class_name": "",
@@ -334,9 +355,9 @@
                         "submenu": []
                     },
                     "104100103": {
-                        "menu_item_id": "104100103",
-                        "is_active": "1",
-                        "page_id": "104100103",
+                        "menu_item_id": 104100103,
+                        "is_active": 1,
+                        "page_id": 104100103,
                         "target": "",
                         "display_name": "Four column",
                         "class_name": "",
@@ -346,18 +367,18 @@
                 }
             },
             "105100": {
-                "menu_item_id": "105100",
-                "is_active": "1",
-                "page_id": "105100",
+                "menu_item_id": 105100,
+                "is_active": 1,
+                "page_id": 105100,
                 "target": "",
                 "display_name": "Hero image",
                 "class_name": "",
                 "relative_url": "/styleguide/hero/contained",
                 "submenu": {
                     "105100100": {
-                        "menu_item_id": "105100100",
-                        "is_active": "1",
-                        "page_id": "105100100",
+                        "menu_item_id": 105100100,
+                        "is_active": 1,
+                        "page_id": 105100100,
                         "target": "",
                         "display_name": "Contained",
                         "class_name": "",
@@ -365,9 +386,9 @@
                         "submenu": []
                     },
                     "105100101": {
-                        "menu_item_id": "105100101",
-                        "is_active": "1",
-                        "page_id": "105100101",
+                        "menu_item_id": 105100101,
+                        "is_active": 1,
+                        "page_id": 105100101,
                         "target": "",
                         "display_name": "Contained - Rotate",
                         "class_name": "",
@@ -375,9 +396,9 @@
                         "submenu": []
                     },
                     "105100102": {
-                        "menu_item_id": "105100102",
-                        "is_active": "1",
-                        "page_id": "105100102",
+                        "menu_item_id": 105100102,
+                        "is_active": 1,
+                        "page_id": 105100102,
                         "target": "",
                         "display_name": "Contained - Text overlay",
                         "class_name": "",
@@ -385,8 +406,8 @@
                         "submenu": []
                     },
                     "105100103": {
-                        "menu_item_id": "105100103",
-                        "is_active": "1",
+                        "menu_item_id": 105100103,
+                        "is_active": 1,
                         "page_id": 105100103,
                         "target": "",
                         "display_name": "Full width",
@@ -395,9 +416,9 @@
                         "submenu": []
                     },
                     "105100104": {
-                        "menu_item_id": "105100104",
-                        "is_active": "1",
-                        "page_id": "105100104",
+                        "menu_item_id": 105100104,
+                        "is_active": 1,
+                        "page_id": 105100104,
                         "target": "",
                         "display_name": "Full width - Rotate",
                         "class_name": "",
@@ -405,8 +426,8 @@
                         "submenu": []
                     },
                     "105100107": {
-                        "menu_item_id": "105100105",
-                        "is_active": "1",
+                        "menu_item_id": 105100105,
+                        "is_active": 1,
                         "page_id": 105100105,
                         "target": "",
                         "display_name": "Full width - Text overlay",
@@ -415,8 +436,8 @@
                         "submenu": []
                     },
                     "105100108": {
-                        "menu_item_id": "105100106",
-                        "is_active": "1",
+                        "menu_item_id": 105100106,
+                        "is_active": 1,
                         "page_id": 105100106,
                         "target": "",
                         "display_name": "Full width - SVG overlay",
@@ -425,8 +446,8 @@
                         "submenu": []
                     },
                     "105100109": {
-                        "menu_item_id": "105100107",
-                        "is_active": "1",
+                        "menu_item_id": 105100107,
+                        "is_active": 1,
                         "page_id": 105100107,
                         "target": "",
                         "display_name": "Full width - Logo overlay",
@@ -437,18 +458,18 @@
                 }
             },
             "106100": {
-                "menu_item_id": "106100",
-                "is_active": "1",
-                "page_id": "106100",
+                "menu_item_id": 106100,
+                "is_active": 1,
+                "page_id": 106100,
                 "target": "",
                 "display_name": "Error pages",
                 "class_name": "",
                 "relative_url": "/styleguide/error",
                 "submenu": {
                     "106100100": {
-                        "menu_item_id": "106100100",
-                        "is_active": "1",
-                        "page_id": "106100100",
+                        "menu_item_id": 106100100,
+                        "is_active": 1,
+                        "page_id": 106100100,
                         "target": "",
                         "display_name": "Error 403",
                         "class_name": "",
@@ -456,9 +477,9 @@
                         "submenu": []
                     },
                     "106100101": {
-                        "menu_item_id": "106100101",
-                        "is_active": "1",
-                        "page_id": "106100101",
+                        "menu_item_id": 106100101,
+                        "is_active": 1,
+                        "page_id": 106100101,
                         "target": "",
                         "display_name": "Error 404",
                         "class_name": "",
@@ -466,9 +487,9 @@
                         "submenu": []
                     },
                     "106100102": {
-                        "menu_item_id": "106100102",
-                        "is_active": "1",
-                        "page_id": "106100102",
+                        "menu_item_id": 106100102,
+                        "is_active": 1,
+                        "page_id": 106100102,
                         "target": "",
                         "display_name": "Error 500",
                         "class_name": "",
@@ -478,9 +499,9 @@
                 }
             },
             "107100": {
-                "menu_item_id": "107100",
-                "is_active": "1",
-                "page_id": "107100",
+                "menu_item_id": 107100,
+                "is_active": 1,
+                "page_id": 107100,
                 "target": "",
                 "display_name": "Accordion",
                 "class_name": "",
@@ -488,9 +509,9 @@
                 "submenu": []
             },
             "108100": {
-                "menu_item_id": "108100",
-                "is_active": "1",
-                "page_id": "108100",
+                "menu_item_id": 108100,
+                "is_active": 1,
+                "page_id": 108100,
                 "target": "",
                 "display_name": "Article listing",
                 "class_name": "",
@@ -498,9 +519,9 @@
                 "submenu": []
             },
             "109100": {
-                "menu_item_id": "109100",
-                "is_active": "1",
-                "page_id": "109100",
+                "menu_item_id": 109100,
+                "is_active": 1,
+                "page_id": 109100,
                 "target": "",
                 "display_name": "Events listing",
                 "class_name": "",
@@ -508,9 +529,9 @@
                 "submenu": []
             },
             "110100": {
-                "menu_item_id": "110100",
-                "is_active": "1",
-                "page_id": "110100",
+                "menu_item_id": 110100,
+                "is_active": 1,
+                "page_id": 110100,
                 "target": "",
                 "display_name": "Mini list",
                 "class_name": "",
@@ -518,18 +539,18 @@
                 "submenu": []
             },
             "111100": {
-                "menu_item_id": "111100",
-                "is_active": "1",
-                "page_id": "111100",
+                "menu_item_id": 111100,
+                "is_active": 1,
+                "page_id": 111100,
                 "target": "",
                 "display_name": "Forms",
                 "class_name": "",
                 "relative_url": "/styleguide/forms",
                 "submenu": {
                     "111100": {
-                        "menu_item_id": "111100",
-                        "is_active": "1",
-                        "page_id": "111100",
+                        "menu_item_id": 111100,
+                        "is_active": 1,
+                        "page_id": 111100,
                         "target": "",
                         "display_name": "Forms",
                         "class_name": "",
@@ -537,9 +558,9 @@
                         "submenu": []
                     },
                     "111100100": {
-                        "menu_item_id": "111100100",
-                        "is_active": "1",
-                        "page_id": "111100100",
+                        "menu_item_id": 111100100,
+                        "is_active": 1,
+                        "page_id": 111100100,
                         "target": "",
                         "display_name": "Form Errors",
                         "class_name": "",
@@ -549,9 +570,9 @@
                 }
             },
             "112100": {
-                "menu_item_id": "112100",
-                "is_active": "1",
-                "page_id": "112100",
+                "menu_item_id": 112100,
+                "is_active": 1,
+                "page_id": 112100,
                 "target": "",
                 "display_name": "Banner",
                 "class_name": "",
@@ -559,9 +580,9 @@
                 "submenu": []
             },
             "113100": {
-                "menu_item_id": "113100",
-                "is_active": "1",
-                "page_id": "113100",
+                "menu_item_id": 113100,
+                "is_active": 1,
+                "page_id": 113100,
                 "target": "",
                 "display_name": "Table stack",
                 "class_name": "",
@@ -569,9 +590,9 @@
                 "submenu": []
             },
             "113101": {
-                "menu_item_id": "113101",
-                "is_active": "1",
-                "page_id": "113101",
+                "menu_item_id": 113101,
+                "is_active": 1,
+                "page_id": 113101,
                 "target": "",
                 "display_name": "Table sortable",
                 "class_name": "",
@@ -579,9 +600,9 @@
                 "submenu": []
             },
             "114100": {
-                "menu_item_id": "114100",
-                "is_active": "1",
-                "page_id": "114100",
+                "menu_item_id": 114100,
+                "is_active": 1,
+                "page_id": 114100,
                 "target": "",
                 "display_name": "Under menu",
                 "class_name": "",
@@ -589,9 +610,9 @@
                 "submenu": []
             },
             "115100": {
-                "menu_item_id": "115100",
-                "is_active": "1",
-                "page_id": "115100",
+                "menu_item_id": 115100,
+                "is_active": 1,
+                "page_id": 115100,
                 "target": "",
                 "display_name": "Figure",
                 "class_name": "",
@@ -599,9 +620,9 @@
                 "submenu": []
             },
             "116100": {
-                "menu_item_id": "116100",
-                "is_active": "1",
-                "page_id": "116100",
+                "menu_item_id": 116100,
+                "is_active": 1,
+                "page_id": 116100,
                 "target": "",
                 "display_name": "Featured Promo",
                 "class_name": "",
@@ -609,9 +630,9 @@
                 "submenu": []
             },
             "117100": {
-                "menu_item_id": "117100",
-                "is_active": "1",
-                "page_id": "117100",
+                "menu_item_id": 117100,
+                "is_active": 1,
+                "page_id": 117100,
                 "target": "",
                 "display_name": "Video",
                 "class_name": "",
