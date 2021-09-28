@@ -46,22 +46,32 @@ h1 {
 
 h2 {
     @apply .text-3xl;
+
+    margin-bottom: 0.5rem;
 }
 
 h3 {
     @apply .text-2xl;
+
+    margin-bottom: 0.3rem;
 }
 
 h4 {
     @apply .text-xl;
+
+    margin-bottom: 0.3rem;
 }
 
 h5 {
     @apply .text-lg;
+
+    margin-bottom: 0.3rem;
 }
 
 h6 {
     @apply .text-sm;
+
+    margin-bottom: 0.3rem;
 }
 
 // Firefox uses the outline focus color as the text color. Since our overall background is white we need to change it.
