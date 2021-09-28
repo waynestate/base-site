@@ -3,8 +3,8 @@
 @section('content')
     <div class="row flex flex-wrap -mx-4">
         <div class="w-full md:w-1/3 px-4 mt-6">
-            @if(!empty($promotion['relative_url']))
-                @image($promotion['relative_url'], $promotion['filename_alt_text'], 'sm:h-64 md:h-auto mx-auto md:mx-0')
+            @if(!empty($promo['relative_url']))
+                @image($promo['relative_url'], $promo['filename_alt_text'], 'sm:h-64 md:h-auto mx-auto md:mx-0')
             @else
                 <img src="/_resources/images/no-photo.svg" alt="{{ $page['title'] }}" class="sm:h-64 md:h-auto block mx-auto md:mx-0">
             @endif
@@ -14,12 +14,12 @@
             @include('components.page-title', ['title' => $page['title']])
 
             <div class="content">
-                @if(!empty($promotion['excerpt']))
-                    <p>{{ $promotion['excerpt'] }}</p>
+                @if(!empty($promo['excerpt']))
+                    <p>{{ $promo['excerpt'] }}</p>
                 @endif
 
-                @if(!empty($promotion['description']))
-                    {!! $promotion['description'] !!}
+                @if(!empty($promo['description']))
+                    {!! $promo['description'] !!}
                 @endif
 
                 @if($back_url != '')
