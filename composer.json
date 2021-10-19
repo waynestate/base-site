@@ -62,7 +62,7 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "make php-cs-fix"
+            "make php-cs-fixer"
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"

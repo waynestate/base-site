@@ -54,8 +54,8 @@ runtests: $(COMPOSERFILE)
 	php artisan config:clear
 	php vendor/bin/phpunit
 
-php-cs-fix:
-	chmod +x php-cs-fix-script.sh && ./php-cs-fix-script.sh
+php-cs-fixer:
+	chmod +x php-cs-fixer-script.sh && ./php-cs-fixer-script.sh
 
 phplint: $(COMPOSERFILE)
 	tools/php-cs-fixer/vendor/bin/php-cs-fixer fix
