@@ -86,7 +86,8 @@ class ArticleControllerTest extends TestCase
         $articleController = app('App\Http\Controllers\ArticleController', ['article' => $articleRepository]);
 
         $request = new Request();
-        $request->data = app('Styleguide\Pages\News')->getPageData();
+        $base['base'] = app('Styleguide\Pages\News')->getPageData();
+        $request->data = $base;
         $request->preview = true;
 
         // Call the news listing
@@ -115,7 +116,8 @@ class ArticleControllerTest extends TestCase
         $articleController = app('App\Http\Controllers\ArticleController', ['article' => $articleRepository]);
 
         $request = new Request();
-        $request->data = app('Styleguide\Pages\News')->getPageData();
+        $base['base'] = app('Styleguide\Pages\News')->getPageData();
+        $request->data = $base;
         $request->preview = true;
 
         // Call the news listing
@@ -135,7 +137,8 @@ class ArticleControllerTest extends TestCase
 
         // Fake request
         $request = new Request();
-        $request->data = app('Styleguide\Pages\News')->getPageData();
+        $base['base'] = app('Styleguide\Pages\News')->getPageData();
+        $request->data = $base;
 
         // Mock the connector
         $newsApi = Mockery::mock('Waynestate\Api\News');
@@ -151,7 +154,7 @@ class ArticleControllerTest extends TestCase
         $view = $ArticleController->show($request);
 
         // Make sure the news title is the page title
-        $this->assertEquals($view->getData()['article']['data']['title'], $view->getData()['page']['title']);
+        $this->assertEquals($view->getData()['article']['data']['title'], $view->getData()['base']['page']['title']);
     }
 
     /**

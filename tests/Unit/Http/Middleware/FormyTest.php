@@ -18,11 +18,13 @@ class FormyTest extends TestCase
         // Fake request
         $request = new Request();
         $request->data = [
-            'page' => [
-                'content' => [
-                    'main' => 'original-form-main',
+            'base' => [
+                'page' => [
+                    'content' => [
+                        'main' => 'original-form-main',
+                    ],
                 ],
-            ],
+            ]
         ];
 
         // Fake return
@@ -36,7 +38,7 @@ class FormyTest extends TestCase
 
         // Call the middleware
         app('App\Http\Middleware\Formy', ['parser' => $parser])->handle($request, function ($response) use ($return) {
-            $this->assertEquals($return, $response->data['page']['content']['main']);
+            $this->assertEquals($return, $response->data['base']['page']['content']['main']);
         });
     }
 }

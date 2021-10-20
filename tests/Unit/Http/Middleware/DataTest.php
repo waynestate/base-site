@@ -76,7 +76,7 @@ class DataTest extends TestCase
         });
 
         app('App\Http\Middleware\Data')->handle($request, function ($request) {
-            $this->assertTrue($request->data['mockMethod']);
+            $this->assertTrue($request->data['base']['mockMethod']);
         });
     }
 
