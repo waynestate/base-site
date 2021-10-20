@@ -15,7 +15,7 @@ class PromoListingRepositoryTest extends TestCase
      * @covers \App\Repositories\PromoListingRepository::getPromoListingPromos
      * @test
      */
-    public function getting_promos_should_return_array()
+    public function getting_promos_listing_as_listing_should_return_listing_array()
     {
         // Fake return
         $return = [
@@ -35,6 +35,58 @@ class PromoListingRepositoryTest extends TestCase
         // Mock the connector and set the return
         $wsuApi = Mockery::mock(Connector::class);
         $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
+
+        // Get the promos
+        $promos = app(PromoListingRepository::class, ['wsuApi' => $wsuApi])->getPromoListingPromos($data);
+        $this->assertTrue(is_array($promos));
+    }
+
+    /**
+     * @covers \App\Repositories\PromoListingRepository::getPromoListingPromos
+     * @test
+     */
+    public function getting_promos_listing_as_grid_should_return_grid_array()
+    {
+        // Fake return
+        $return = [
+            'promos' => [],
+        ];
+
+        // Create a fake data request
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'PromoListingPromos',
+            ],
+            'data' => [
+                'grid_promo_group_id' => $this->faker->numberbetween(1, 3),
+            ],
+        ]);
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
+
+        // Get the promos
+        $promos = app(PromoListingRepository::class, ['wsuApi' => $wsuApi])->getPromoListingPromos($data);
+        $this->assertTrue(is_array($promos));
+    }
+
+    /**
+     * @covers \App\Repositories\PromoListingRepository::getPromoListingPromos
+     * @test
+     */
+    public function getting_promos_listing_with_no_page_field_should_be_empty_array()
+    {
+        // Create a fake data request
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'PromoListingPromos',
+            ],
+        ]);
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->never();
 
         // Get the promos
         $promos = app(PromoListingRepository::class, ['wsuApi' => $wsuApi])->getPromoListingPromos($data);
