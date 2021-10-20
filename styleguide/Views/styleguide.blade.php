@@ -1,7 +1,7 @@
 @extends('components.content-area')
 
 @section('content')
-    @include('components.page-title', ['title' => $page['title']])
+    @include('components.page-title', ['title' => $base['page']['title']])
 
     <div class="content">
         <hr>

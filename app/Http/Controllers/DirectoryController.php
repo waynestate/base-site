@@ -30,10 +30,10 @@ class DirectoryController extends Controller
      */
     public function index(Request $request)
     {
-        $site_id = !empty($request->data['data']['profile_site_id']) ? $request->data['data']['profile_site_id'] : $request->data['site']['id'];
+        $site_id = !empty($request->data['base']['data']['profile_site_id']) ? $request->data['base']['data']['profile_site_id'] : $request->data['base']['site']['id'];
 
-        if (!empty($request->data['data']['profile_group_id'])) {
-            $profiles = $this->profile->getProfilesByGroupOrder($site_id, $request->data['data']['profile_group_id']);
+        if (!empty($request->data['base']['data']['profile_group_id'])) {
+            $profiles = $this->profile->getProfilesByGroupOrder($site_id, $request->data['base']['data']['profile_group_id']);
         } else {
             $profiles = $this->profile->getProfilesByGroup($site_id);
         }

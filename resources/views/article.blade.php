@@ -25,7 +25,7 @@
         </div>
 
         <p class="pt-4 print:hidden">
-            <a href="/{{ ($site['subsite-folder'] !== null) ? $site['subsite-folder'] : '' }}{{ config('base.news_listing_route') }}" class="button">&larr; Back to listing</a>
+            <a href="/{{ ($base['site']['subsite-folder'] !== null) ? $base['site']['subsite-folder'] : '' }}{{ config('base.news_listing_route') }}" class="button">&larr; Back to listing</a>
         </p>
     </div>
 @endsection

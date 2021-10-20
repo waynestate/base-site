@@ -80,6 +80,18 @@ class Data
         // Controller namespace path so it can be constructed in the routes file
         $request->controller = $this->getControllerNamespace($request->data['page']['controller']);
 
+        // Scope the waynestate/base-site global request data to be within ['base']
+        // This was found to be an issue with InertiaJS which had it's own $page variable in the view
+        if (!empty($request->data)) {
+            $request_keys = array_keys($request->data);
+
+            $request->data['base'] = $request->data;
+
+            foreach($request_keys as $request_key){
+                unset($request->data[$request_key]);
+            }
+        }
+
         return $next($request);
     }
 

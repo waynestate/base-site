@@ -33,7 +33,7 @@ class HeroFullTextOverlayController extends Controller
         ]);
 
         // Set option
-        $request->data['hero'] = collect($request->data['hero'])->map(function ($item) {
+        $request->data['base']['hero'] = collect($request->data['base']['hero'])->map(function ($item) {
             $item['option'] = "Text Overlay";
             $item['description'] = '<p>' . ucfirst(implode($this->faker->words(10), ' ')) . ' <a href="https://wayne.edu">' . $this->faker->word . '</a>.</p>';
 

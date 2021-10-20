@@ -26,7 +26,7 @@ class FullWidthController extends Controller
      */
     public function index(Request $request)
     {
-        $request->data['show_site_menu'] = false;
+        $request->data['base']['show_site_menu'] = false;
 
         config([
             'base.full_width_controllers' => ['FullWidthController'],

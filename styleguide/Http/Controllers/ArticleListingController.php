@@ -26,7 +26,7 @@ class ArticleListingController extends Controller
      */
     public function index(Request $request)
     {
-        $articles = $this->article->listing($request->data['site']['id'], 5);
+        $articles = $this->article->listing($request->data['base']['site']['id'], 5);
 
         return view('styleguide-article-listing', merge($request->data, $articles));
     }

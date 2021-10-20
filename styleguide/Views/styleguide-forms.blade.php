@@ -1,7 +1,7 @@
 @extends('components.content-area')
 
 @section('content')
-    @include('components.page-title', ['title' => $page['title']])
+    @include('components.page-title', ['title' => $base['page']['title']])
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <form action="/{{ $server['path'] }}#form-1" method="post" id="form-1" name="form-1" enctype="multipart/form-data" tabindex="-1">
+        <form action="/{{ $base['server']['path'] }}#form-1" method="post" id="form-1" name="form-1" enctype="multipart/form-data" tabindex="-1">
             <p id="required-message">Fields with asterisks (*) are required.</p>
             <h2>Contact Information (autofilled if authenticated)</h2>
             <div class="row field_group">

@@ -3,64 +3,64 @@
 @section('content-area')
     @yield('top')
 
-    @if(!empty($hero) && in_array($page['controller'], config('base.hero_full_controllers')))
-        @include('components.hero', ['images' => $hero])
+    @if(!empty($base['hero']) && in_array($base['page']['controller'], config('base.hero_full_controllers')))
+        @include('components.hero', ['images' => $base['hero']])
 
         @yield('under-hero')
     @endif
 
-    @if(!in_array($page['controller'], config('base.full_width_controllers')))<div class="row mt:flex">@endif
-        <div class="mt:w-1/4 mt:px-4 mt:block print:hidden {{ $show_site_menu === false ? ' mt:hidden' : '' }}">
+    @if(!in_array($base['page']['controller'], config('base.full_width_controllers')))<div class="row mt:flex">@endif
+        <div class="mt:w-1/4 mt:px-4 mt:block print:hidden {{ $base['show_site_menu'] === false ? ' mt:hidden' : '' }}">
             <nav id="menu" aria-label="Page menu" tabindex="-1">
-                @if(!empty($top_menu_output) && $site_menu !== $top_menu && config('base.top_menu_enabled'))
-                    @if(!empty($site_menu_output))
+                @if(!empty($base['top_menu_output']) && $base['site_menu'] !== $base['top_menu'] && config('base.top_menu_enabled'))
+                    @if(!empty($base['site_menu_output']))
                         <div class="slideout-main-menu mt:hidden">
                             <ul class="main-menu mb-2">
                                 <li>
                                     <a role="button" class="main-menu-toggle pt-2 pb-2 pl-3 pr-3 block" tabindex="0" aria-expanded="false">{{ config('base.top_menu_label') }}</a>
-                                    {!! $top_menu_output !!}
+                                    {!! $base['top_menu_output'] !!}
                                 </li>
                             </ul>
                         </div>
                     @else
-                        {!! $top_menu_output !!}
+                        {!! $base['top_menu_output'] !!}
                     @endif
                 @endif
 
-                @if(!empty($site_menu_output))
-                    {!! $site_menu_output !!}
+                @if(!empty($base['site_menu_output']))
+                    {!! $base['site_menu_output'] !!}
                 @endif
 
-                @if(!empty($banner))
+                @if(!empty($base['banner']))
                     <div class="min-w-full px-4 mt:px-0 mb-4 mt:hidden">
-                        <a href="{{ $banner['link'] }}" class="button expanded uppercase">{{ $banner['title'] }} <span class="excerpt normal-case text-xl italic font-serif">{{ $banner['excerpt'] }}</span></a>
+                        <a href="{{ $base['banner']['link'] }}" class="button expanded uppercase">{{ $base['banner']['title'] }} <span class="excerpt normal-case text-xl italic font-serif">{{ $base['banner']['excerpt'] }}</span></a>
                     </div>
                 @endif
 
                 @yield('below_menu')
 
-                @if(!empty($under_menu))
-                    @include('components.under-menu', ['buttons' => $under_menu, 'class' => 'under-menu'])
+                @if(!empty($base['under_menu']))
+                    @include('components.under-menu', ['buttons' => $base['under_menu'], 'class' => 'under-menu'])
                 @endif
             </nav>
         </div>
 
-        <main class="w-full{{ !in_array($page['controller'], config('base.full_width_controllers')) ? ' px-4' : '' }} {{$show_site_menu === true ? 'mt:w-3/4' : '' }} content-area mb-8 print:w-full" tabindex="-1">
-            @if(!empty($hero) && !in_array($page['controller'], config('base.hero_full_controllers')))
-                @include('components.hero', ['images' => $hero])
+        <main class="w-full{{ !in_array($base['page']['controller'], config('base.full_width_controllers')) ? ' px-4' : '' }} {{$base['show_site_menu'] === true ? 'mt:w-3/4' : '' }} content-area mb-8 print:w-full" tabindex="-1">
+            @if(!empty($base['hero']) && !in_array($base['page']['controller'], config('base.hero_full_controllers')))
+                @include('components.hero', ['images' => $base['hero']])
 
                 @yield('under-hero')
             @endif
 
-            @if(!empty($breadcrumbs))
-                @include('components.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
+            @if(!empty($base['breadcrumbs']))
+                @include('components.breadcrumbs', ['breadcrumbs' => $base['breadcrumbs']])
             @endif
 
             <div id="content" tabindex="-1">
                 @yield('content')
             </div>
         </main>
-    @if(!in_array($page['controller'], config('base.full_width_controllers')))</div>@endif
+    @if(!in_array($base['page']['controller'], config('base.full_width_controllers')))</div>@endif
 
     @yield('bottom')
 @endsection

@@ -26,7 +26,7 @@ class MiniEventsController extends Controller
      */
     public function index(Request $request)
     {
-        $events = $this->events->getEvents($request->data['site']['id']);
+        $events = $this->events->getEvents($request->data['base']['site']['id']);
 
         return view('styleguide-minievents', merge($request->data, $events));
     }

@@ -1,10 +1,10 @@
 @extends('components.content-area')
 
 @section('content')
-    @include('components.page-title', ['title' => $page['title']])
+    @include('components.page-title', ['title' => $base['page']['title']])
 
     <div class="content">
-        {!! $page['content']['main'] !!}
+        {!! $base['page']['content']['main'] !!}
 
         <p>Available classes for <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">&lt;figure&gt;</code> are <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">.figure</code> <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">.float-left</code>, <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">.float-right</code>, and <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">.text-center</code>.</p>
 

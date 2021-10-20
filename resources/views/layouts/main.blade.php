@@ -8,7 +8,7 @@
     <link rel="icon" type="image/x-icon" href="https://wayne.edu/favicon.ico">
     <link rel="stylesheet" href="{{ mix('_resources/css/main.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
-    @if(!empty($page['canonical']))<link rel="canonical" href="{{ $page['canonical'] }}">@endif
+    @if(!empty($base['page']['canonical']))<link rel="canonical" href="{{ $base['page']['canonical'] }}">@endif
 
     @include('components.ga')
 </head>
@@ -19,12 +19,12 @@
 <header>
     @include('components.header')
 
-    @if(!empty($site))
-        @include('components.menu-top', ['site' => $site])
+    @if(!empty($base['site']))
+        @include('components.menu-top', ['site' => $base['site'], 'top_menu_output' => $base['top_menu_output']])
     @endif
 
-    @if(!empty($banner))
-        @include('components.banner', ['banner' => $banner])
+    @if(!empty($base['banner']))
+        @include('components.banner', ['banner' => $base['banner']])
     @endif
 </header>
 
@@ -33,12 +33,12 @@
 </div>
 
 <footer>
-    @if(!empty($social))
-        @include('components.footer-social', ['social' => $social])
+    @if(!empty($base['social']))
+        @include('components.footer-social', ['social' => $base['social']])
     @endif
 
-    @if(!empty($contact))
-        @include('components.footer-contact', ['contact' => $contact])
+    @if(!empty($base['contact']))
+        @include('components.footer-contact', ['contact' => $base['contact']])
     @endif
 
     @include('components.footer')

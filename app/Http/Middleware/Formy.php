@@ -26,7 +26,7 @@ class Formy
      */
     public function handle($request, Closure $next)
     {
-        $request->data['page']['content'] = collect($request->data['page']['content'])
+        $request->data['base']['page']['content'] = collect($request->data['base']['page']['content'])
             ->map(function ($content) {
                 return $this->parser->parse(stripslashes($content));
             })

@@ -32,7 +32,7 @@ class HeaderShortTitleDoubleController extends Controller
             'base.top_menu_enabled' => true,
         ]);
 
-        $request->data['site']['short-title'] = $this->faker->sentence(2);
+        $request->data['base']['site']['short-title'] = $this->faker->sentence(2);
 
         return view('styleguide-childpage', merge($request->data));
     }
