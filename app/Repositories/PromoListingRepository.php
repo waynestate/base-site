@@ -38,14 +38,17 @@ class PromoListingRepository implements PromoListingRepositoryContract
      */
     public function getPromoListingPromos(array $data, $limit = 75)
     {
+        if (empty($data['data']['listing_promo_group_id']) &&
+            empty($data['data']['grid_promo_group_id'])) {
+            return ['promos' => []];
+        }
+
         $group_reference = [];
-        
+
         if (!empty($data['data']['listing_promo_group_id'])) {
             $group_reference[$data['data']['listing_promo_group_id']] = 'promos';
         } elseif (!empty($data['data']['grid_promo_group_id'])) {
             $group_reference[$data['data']['grid_promo_group_id']] = 'promos';
-        } else {
-            return ['promos' => []];
         }
 
         $group_config = ['promos' => 'limit:' . $limit];
