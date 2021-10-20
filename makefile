@@ -67,7 +67,7 @@ stylelint:
 	stylelint ./resources/scss/**/*.scss --syntax scss
 
 coverage: $(COMPOSERFILE)
-	phpbrew ext enable xdebug && php vendor/bin/phpunit --coverage-html coverages && phpbrew ext disable xdebug
+	phpbrew ext enable xdebug && XDEBUG_MODE=coverage php vendor/bin/phpunit --coverage-html coverages && phpbrew ext disable xdebug
 
 envoy: $(DEPLOY)
 	envoy run deploy
