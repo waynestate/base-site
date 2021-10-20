@@ -24,7 +24,7 @@ class FormyTest extends TestCase
                         'main' => 'original-form-main',
                     ],
                 ],
-            ]
+            ],
         ];
 
         // Fake return

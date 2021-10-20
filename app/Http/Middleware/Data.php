@@ -87,7 +87,7 @@ class Data
 
             $request->data['base'] = $request->data;
 
-            foreach($request_keys as $request_key){
+            foreach ($request_keys as $request_key) {
                 unset($request->data[$request_key]);
             }
         }
