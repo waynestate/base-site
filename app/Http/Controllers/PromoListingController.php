@@ -52,7 +52,7 @@ class PromoListingController extends Controller
         $promo = $this->promo->getPromoView($request->id);
 
         if (empty($promo['promo'])) {
-            return abort('404');
+            abort('404');
         }
 
         if (!empty($promo['promo']['title'])) {

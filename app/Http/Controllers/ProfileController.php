@@ -67,7 +67,7 @@ class ProfileController extends Controller
     public function show(Request $request)
     {
         if (empty($request->accessid)) {
-            abort(404);
+            abort('404');
         }
 
         // Determine what site to pull profiles from
@@ -78,7 +78,7 @@ class ProfileController extends Controller
 
         // Make sure the profile exists
         if (empty($profile['profile'])) {
-            return abort('404');
+            abort('404');
         }
 
         // Get the fields to display

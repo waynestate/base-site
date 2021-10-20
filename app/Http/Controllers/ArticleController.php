@@ -42,7 +42,7 @@ class ArticleController extends Controller
         }
 
         if (!empty($request->slug) && empty($selected_topic['selected'])) {
-            return abort('404');
+            abort('404');
         }
 
         $articles = $this->article->listing($request->data['base']['site']['news']['application_id'], 25, $request->query('page'), !empty($selected_topic['topic_id']) ? $selected_topic['topic_id'] : null);
@@ -74,7 +74,7 @@ class ArticleController extends Controller
                 return redirect($request->server->get('REDIRECT_URL'));
             }
 
-            return abort('404');
+            abort('404');
         }
 
         $request->data['base']['page']['title'] = $article['article']['data']['title'];
