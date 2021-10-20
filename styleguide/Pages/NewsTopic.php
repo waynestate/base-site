@@ -2,6 +2,8 @@
 
 namespace Styleguide\Pages;
 
+use Factories\Page as PageFactory;
+
 class NewsTopic extends Page
 {
     /** {@inheritdoc} **/
@@ -14,7 +16,7 @@ class NewsTopic extends Page
     {
         $this->path = '/styleguide/'.config('base.news_listing_route').'/'.config('base.news_topic_route').'/est-quisquam';
 
-        return app('Factories\Page')->create(1, true, [
+        return app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'ArticleController',
                 'title' => 'Articles by topic',

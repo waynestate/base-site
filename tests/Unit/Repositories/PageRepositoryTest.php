@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Repositories;
 
+use App\Repositories\PageRepository;
 use Tests\TestCase;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -10,7 +11,7 @@ class PageRepositoryTest extends TestCase
     /**
      * Passing wrong path should 404.
      *
-     * @covers App\Repositories\PageRepository::getRequestData
+     * @covers \App\Repositories\PageRepository::getRequestData
      * @test
      */
     public function non_exisitent_page_should_404()
@@ -30,11 +31,11 @@ class PageRepositoryTest extends TestCase
             ],
         ];
 
-        app('App\Repositories\PageRepository')->getRequestData($request);
+        app(PageRepository::class)->getRequestData($request);
     }
 
     /**
-     * @covers App\Repositories\PageRepository::getRequestData
+     * @covers \App\Repositories\PageRepository::getRequestData
      * @test
      */
     public function getting_page_data_should_return_parsed_json()
@@ -47,7 +48,7 @@ class PageRepositoryTest extends TestCase
         file_put_contents($filename, '{}');
 
         // Parse the page data
-        $data = app('App\Repositories\PageRepository')->getRequestData(['parameters' => ['path' => $path]]);
+        $data = app(PageRepository::class)->getRequestData(['parameters' => ['path' => $path]]);
 
         // Delete the temp file
         unlink($filename);
@@ -57,12 +58,12 @@ class PageRepositoryTest extends TestCase
     }
 
     /**
-     * @covers App\Repositories\PageRepository::getFilename
+     * @covers \App\Repositories\PageRepository::getFilename
      * @test
      */
     public function getting_filename_should_return_correct_filename()
     {
-        $pageRepository = app('App\Repositories\PageRepository');
+        $pageRepository = app(PageRepository::class);
 
         // Homepage should be index
         $this->assertEquals('index.json', $pageRepository->getFilename('/'));

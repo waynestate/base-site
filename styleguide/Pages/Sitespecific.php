@@ -2,6 +2,8 @@
 
 namespace Styleguide\Pages;
 
+use Factories\Page as PageFactory;
+
 class Sitespecific extends Page
 {
     /**
@@ -9,7 +11,7 @@ class Sitespecific extends Page
      */
     public function getPageData()
     {
-        return app('Factories\Page')->create(1, true, [
+        return app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'ChildpageController',
                 'title' => 'Creating site specific templates',
@@ -24,7 +26,7 @@ class Sitespecific extends Page
                 ],
             ],
 
-            
+
         ]);
     }
 }

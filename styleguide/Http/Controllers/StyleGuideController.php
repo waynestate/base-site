@@ -3,6 +3,7 @@
 namespace Styleguide\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Factories\Accordion;
 use Illuminate\Http\Request;
 use Faker\Factory;
 
@@ -26,7 +27,7 @@ class StyleGuideController extends Controller
      */
     public function index(Request $request)
     {
-        $promos['accordion'] = app('Factories\Accordion')->create(5);
+        $promos['accordion'] = app(Accordion::class)->create(5);
 
         return view('styleguide', merge($request->data, $this->faker, $promos));
     }

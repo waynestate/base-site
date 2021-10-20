@@ -61,8 +61,10 @@ class ProfileController extends Controller
      * Display the individual profile view.
      *
      * @param Request $request
-     * @param int $accessid
      * @return \Illuminate\View\View
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function show(Request $request)
     {

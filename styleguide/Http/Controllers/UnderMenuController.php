@@ -3,6 +3,7 @@
 namespace Styleguide\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Factories\UnderMenu;
 use Illuminate\Http\Request;
 use Faker\Factory;
 
@@ -34,26 +35,26 @@ class UnderMenuController extends Controller
         $svg_light = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNjAgMTMxIj48cGF0aCBkPSJNMzQ5IDg3LjRWMTAuOEgxMXYxMDloMTYxLjh2Mkg5VjguOGgzNDJ2NzguNmgtMnoiLz48cGF0aCBkPSJNMTc5LjIgMTEyLjVsLTUuNi0xOC45aDQuN2wzLjQgMTIuOWguMWwzLjQtMTIuOWg0LjJsLTUuNiAxOC45djkuNGgtNC41di05LjR6bTEwLjktMTIuMmMwLTQuNSAyLjQtNy4xIDYuOC03LjFzNi44IDIuNiA2LjggNy4xVjExNWMwIDQuNS0yLjQgNy4xLTYuOCA3LjFzLTYuOC0yLjYtNi44LTcuMXYtMTQuN3ptNC40IDE1YzAgMiAuOSAyLjggMi4zIDIuOHMyLjMtLjggMi4zLTIuOFYxMDBjMC0yLS45LTIuOC0yLjMtMi44cy0yLjMuOC0yLjMgMi44djE1LjN6bTE2LjItMjEuOHYyMS45YzAgMiAuOSAyLjggMi4zIDIuOHMyLjMtLjcgMi4zLTIuOFY5My41aDQuMnYyMS42YzAgNC41LTIuMyA3LjEtNi42IDcuMXMtNi42LTIuNi02LjYtNy4xVjkzLjVoNC40em0yMS4yIDI4LjRjLS4yLS43LS40LTEuMi0uNC0zLjV2LTQuNWMwLTIuNi0uOS0zLjYtMi45LTMuNkgyMjd2MTEuNWgtNC41VjkzLjVoNi43YzQuNiAwIDYuNiAyLjEgNi42IDYuNXYyLjJjMCAyLjktLjkgNC44LTIuOSA1Ljd2LjFjMi4yLjkgMyAzIDMgNnY0LjRjMCAxLjQgMCAyLjQuNSAzLjRoLTQuNXpNMjI3IDk3LjZ2OC43aDEuN2MxLjcgMCAyLjctLjcgMi43LTN2LTIuOGMwLTItLjctMi45LTIuMy0yLjlIMjI3em0xNy44IDIuN2MwLTQuNSAyLjQtNy4xIDYuOC03LjFzNi44IDIuNiA2LjggNy4xVjExNWMwIDQuNS0yLjQgNy4xLTYuOCA3LjFzLTYuOC0yLjYtNi44LTcuMXYtMTQuN3ptNC40IDE1YzAgMiAuOSAyLjggMi4zIDIuOHMyLjMtLjggMi4zLTIuOFYxMDBjMC0yLS45LTIuOC0yLjMtMi44cy0yLjMuOC0yLjMgMi44djE1LjN6bTE4LjYgMS4zbDMuNC0yMy4xaDQuMWwtNC40IDI4LjNoLTYuNmwtNC40LTI4LjNoNC41bDMuNCAyMy4xem0xNC0xMS4xaDYuMXY0aC02LjF2OC4zaDcuN3Y0aC0xMi4xVjkzLjVoMTIuMXY0aC03Ljd2OHptMTkuOCAxNi40Yy0uMi0uNy0uNC0xLjItLjQtMy41di00LjVjMC0yLjYtLjktMy42LTIuOS0zLjZoLTEuNXYxMS41aC00LjVWOTMuNWg2LjdjNC42IDAgNi42IDIuMSA2LjYgNi41djIuMmMwIDIuOS0uOSA0LjgtMi45IDUuN3YuMWMyLjIuOSAzIDMgMyA2djQuNGMwIDEuNCAwIDIuNC41IDMuNGgtNC42em0tNC45LTI0LjN2OC43aDEuN2MxLjcgMCAyLjctLjcgMi43LTN2LTIuOGMwLTItLjctMi45LTIuMy0yLjloLTIuMXptMTEuOC00LjFoNC41djI0LjNoNy4zdjRoLTExLjhWOTMuNXptMjguMiAyOC40aC00LjVsLS44LTUuMWgtNS41bC0uOCA1LjFIMzIxbDQuNS0yOC4zaDYuNWw0LjcgMjguM3ptLTEwLjItOWg0LjNsLTIuMS0xNC4zaC0uMWwtMi4xIDE0LjN6bTE0LjQtLjRsLTUuNi0xOC45aDQuN2wzLjQgMTIuOWguMWwzLjQtMTIuOWg0LjJsLTUuNiAxOC45djkuNEgzNDF2LTkuNHoiLz48L3N2Zz4=";
 
         // Default button
-        $promos['buttons']['default'] = app('Factories\UnderMenu')->create(1);
+        $promos['buttons']['default'] = app(UnderMenu::class)->create(1);
 
         // Default button with green gradient bg
-        $promos['buttons']['default_dark'] = app('Factories\UnderMenu')->create(1, false, [
+        $promos['buttons']['default_dark'] = app(UnderMenu::class)->create(1, false, [
             'option' => 'Default dark',
         ]);
 
         // Grey button with two lines
-        $promos['buttons']['two_line_grey'] = app('Factories\UnderMenu')->create(1, false, [
+        $promos['buttons']['two_line_grey'] = app(UnderMenu::class)->create(1, false, [
             'excerpt' => ucfirst(implode(' ', $this->faker->words(3))),
         ]);
 
         // Green gradient button with two lines
-        $promos['buttons']['two_line_dark'] = app('Factories\UnderMenu')->create(1, false, [
+        $promos['buttons']['two_line_dark'] = app(UnderMenu::class)->create(1, false, [
             'option' => 'Default dark',
             'excerpt' => ucfirst(implode(' ', $this->faker->words(3))),
         ]);
 
         // Icon light two lines
-        $promos['buttons']['icon_light'] = app('Factories\UnderMenu')->create(1, false, [
+        $promos['buttons']['icon_light'] = app(UnderMenu::class)->create(1, false, [
             'option' => 'Icon light',
             'secondary_relative_url' => $icon_light,
             'excerpt' => ucfirst(implode(' ', $this->faker->words(3))),
@@ -61,7 +62,7 @@ class UnderMenuController extends Controller
         ]);
 
         // Icon dark two lines
-        $promos['buttons']['icon_dark'] = app('Factories\UnderMenu')->create(1, false, [
+        $promos['buttons']['icon_dark'] = app(UnderMenu::class)->create(1, false, [
             'option' => 'Icon dark',
             'secondary_relative_url' => $icon_dark,
             'excerpt' => ucfirst(implode(' ', $this->faker->words(3))),
@@ -69,21 +70,21 @@ class UnderMenuController extends Controller
         ]);
 
         // Bg image light
-        $promos['buttons']['bg_image_light'] = app('Factories\UnderMenu')->create(1, false, [
+        $promos['buttons']['bg_image_light'] = app(UnderMenu::class)->create(1, false, [
             'title' => 'Example Text',
             'option' => 'Bg image light',
             'relative_url' => $bg_light,
         ]);
 
         // Bg image dark
-        $promos['buttons']['bg_image_dark'] = app('Factories\UnderMenu')->create(1, false, [
+        $promos['buttons']['bg_image_dark'] = app(UnderMenu::class)->create(1, false, [
             'title' => 'Example Text',
             'option' => 'Bg image dark',
             'relative_url' => $bg_dark,
         ]);
 
         // SVG overlay light
-        $promos['buttons']['svg_overlay_light'] = app('Factories\UnderMenu')->create(1, false, [
+        $promos['buttons']['svg_overlay_light'] = app(UnderMenu::class)->create(1, false, [
             'title' => 'Example light SVG overlay',
             'option' => 'SVG overlay light',
             'relative_url' => $bg_light,
@@ -92,7 +93,7 @@ class UnderMenuController extends Controller
         ]);
 
         // SVG overlay dark
-        $promos['buttons']['svg_overlay_dark'] = app('Factories\UnderMenu')->create(1, false, [
+        $promos['buttons']['svg_overlay_dark'] = app(UnderMenu::class)->create(1, false, [
             'title' => 'Example dark SVG overlay',
             'option' => 'SVG overlay dark',
             'relative_url' => $bg_dark,

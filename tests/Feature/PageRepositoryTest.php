@@ -10,15 +10,15 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class PageRepositoryTest extends TestCase
 {
     /**
-     * @covers App\Http\Controllers\HomepageController
-     * @covers App\Http\Controllers\ChildpageController
-     * @covers App\Http\Controllers\ProfileController
-     * @covers App\Http\Controllers\ArticleController
-     * @covers App\Http\Controllers\DirectoryController
-     * @covers App\Http\Controllers\TopicController
-     * @covers App\Http\Controllers\PromoListingController
-     * @covers App\Http\Controllers\ContactTableController
-     * @covers Styleguide\Repositories\PageRepository::getRequestData
+     * @covers \App\Http\Controllers\HomepageController
+     * @covers \App\Http\Controllers\ChildpageController
+     * @covers \App\Http\Controllers\ProfileController
+     * @covers \App\Http\Controllers\ArticleController
+     * @covers \App\Http\Controllers\DirectoryController
+     * @covers \App\Http\Controllers\TopicController
+     * @covers \App\Http\Controllers\PromoListingController
+     * @covers \App\Http\Controllers\ContactTableController
+     * @covers \Styleguide\Repositories\PageRepository::getRequestData
      * @test
      */
     public function all_styleguide_routes_should_load_successfully()
@@ -64,7 +64,7 @@ class PageRepositoryTest extends TestCase
      * blank arrays.
      *
      * @param $handle_exceptions bool;
-     * @return Illuminate\Support\Collection
+     * @return \Illuminate\Support\Collection
      */
     public function getPageResponses($handle_exceptions = false)
     {

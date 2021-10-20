@@ -2,6 +2,8 @@
 
 namespace Styleguide\Pages;
 
+use Factories\Page as PageFactory;
+
 class HeaderShortTitleDouble extends Page
 {
     /**
@@ -9,7 +11,7 @@ class HeaderShortTitleDouble extends Page
      */
     public function getPageData()
     {
-        return app('Factories\Page')->create(1, true, [
+        return app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'HeaderShortTitleDoubleController',
                 'title' => 'Header title double w/short title',

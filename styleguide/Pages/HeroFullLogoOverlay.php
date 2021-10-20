@@ -2,6 +2,8 @@
 
 namespace Styleguide\Pages;
 
+use Factories\Page as PageFactory;
+
 class HeroFullLogoOverlay extends Page
 {
     /**
@@ -9,7 +11,7 @@ class HeroFullLogoOverlay extends Page
      */
     public function getPageData()
     {
-        return app('Factories\Page')->create(1, true, [
+        return app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'HeroFullLogoOverlayController',
                 'title' => 'Full width - Logo overlay',

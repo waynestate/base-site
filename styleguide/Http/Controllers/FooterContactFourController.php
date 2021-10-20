@@ -3,6 +3,7 @@
 namespace Styleguide\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Factories\FooterContact;
 use Illuminate\Http\Request;
 
 class FooterContactFourController extends Controller
@@ -15,7 +16,7 @@ class FooterContactFourController extends Controller
      */
     public function index(Request $request)
     {
-        $request->data['contact'] = app('Factories\FooterContact')->create(4);
+        $request->data['contact'] = app(FooterContact::class)->create(4);
 
         return view('styleguide-childpage', merge($request->data));
     }

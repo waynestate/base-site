@@ -2,14 +2,17 @@
 
 namespace Tests\Unit\Repositories;
 
+use App\Repositories\PromoRepository;
+use Factories\Page;
 use Tests\TestCase;
 use Mockery as Mockery;
+use Waynestate\Api\Connector;
 
 class PromoRepositoryTest extends TestCase
 {
     /**
-     * @covers App\Repositories\PromoRepository::__construct
-     * @covers App\Repositories\PromoRepository::getRequestData
+     * @covers \App\Repositories\PromoRepository::__construct
+     * @covers \App\Repositories\PromoRepository::getRequestData
      * @test
      */
     public function getting_promos_with_custom_page_accordion_should_return_accordion_page()
@@ -23,7 +26,7 @@ class PromoRepositoryTest extends TestCase
         config(['base.hero_rotating_controllers' => ['HomepageController']]);
 
         // Create a fake data request
-        $data = app('Factories\Page')->create(1, true, [
+        $data = app(Page::class)->create(1, true, [
             'page' => [
                 'controller' => 'HomepageController',
             ],
@@ -33,18 +36,18 @@ class PromoRepositoryTest extends TestCase
         ]);
 
         // Mock the connector and set the return
-        $wsuApi = Mockery::mock('Waynestate\Api\Connector');
+        $wsuApi = Mockery::mock(Connector::class);
         $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
 
         // Get the promos
-        $promos = app('App\Repositories\PromoRepository', ['wsuApi' => $wsuApi])->getRequestData($data);
+        $promos = app(PromoRepository::class, ['wsuApi' => $wsuApi])->getRequestData($data);
 
         $this->assertArrayHasKey('accordion_page', $promos);
     }
 
     /**
-     * @covers App\Repositories\PromoRepository::__construct
-     * @covers App\Repositories\PromoRepository::getRequestData
+     * @covers \App\Repositories\PromoRepository::__construct
+     * @covers \App\Repositories\PromoRepository::getRequestData
      * @test
      */
     public function subsite_overriding_main_contact_social_and_under_menu()
@@ -80,7 +83,7 @@ class PromoRepositoryTest extends TestCase
         ];
 
         // Create a fake data request
-        $data = app('Factories\Page')->create(1, true, [
+        $data = app(Page::class)->create(1, true, [
             'site' => [
                 'id' => 2,
                 'parent' => [
@@ -127,11 +130,11 @@ class PromoRepositoryTest extends TestCase
         ]]);
 
         // Mock the connector and set the return
-        $wsuApi = Mockery::mock('Waynestate\Api\Connector');
+        $wsuApi = Mockery::mock(Connector::class);
         $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
 
         // Get the promos
-        $promos = app('App\Repositories\PromoRepository', ['wsuApi' => $wsuApi])->getRequestData($data);
+        $promos = app(PromoRepository::class, ['wsuApi' => $wsuApi])->getRequestData($data);
 
         // Make sure that the count is equal to the main config limit
         $this->assertCount(1, $promos['contact']);
@@ -143,8 +146,8 @@ class PromoRepositoryTest extends TestCase
     }
 
     /**
-     * @covers App\Repositories\PromoRepository::__construct
-     * @covers App\Repositories\PromoRepository::getRequestData
+     * @covers \App\Repositories\PromoRepository::__construct
+     * @covers \App\Repositories\PromoRepository::getRequestData
      * @test
      */
     public function subsite_using_main_contact_social_and_under_menu()
@@ -168,7 +171,7 @@ class PromoRepositoryTest extends TestCase
         ];
 
         // Create a fake data request
-        $data = app('Factories\Page')->create(1, true, [
+        $data = app(Page::class)->create(1, true, [
             'site' => [
                 'id' => 2,
                 'parent' => [
@@ -198,11 +201,11 @@ class PromoRepositoryTest extends TestCase
         ]]);
 
         // Mock the connector and set the return
-        $wsuApi = Mockery::mock('Waynestate\Api\Connector');
+        $wsuApi = Mockery::mock(Connector::class);
         $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
 
         // Get the promos
-        $promos = app('App\Repositories\PromoRepository', ['wsuApi' => $wsuApi])->getRequestData($data);
+        $promos = app(PromoRepository::class, ['wsuApi' => $wsuApi])->getRequestData($data);
 
         // Make sure that the count is equal to the main config limit
         $this->assertCount(1, $promos['contact']);
@@ -214,8 +217,8 @@ class PromoRepositoryTest extends TestCase
     }
 
     /**
-     * @covers App\Repositories\PromoRepository::__construct
-     * @covers App\Repositories\PromoRepository::getRequestData
+     * @covers \App\Repositories\PromoRepository::__construct
+     * @covers \App\Repositories\PromoRepository::getRequestData
      * @test
      */
     public function subsite_contact_merging_with_main_contact_and_under_menu()
@@ -243,7 +246,7 @@ class PromoRepositoryTest extends TestCase
         ];
 
         // Create a fake data request
-        $data = app('Factories\Page')->create(1, true, [
+        $data = app(Page::class)->create(1, true, [
             'site' => [
                 'id' => 2,
                 'parent' => [
@@ -283,19 +286,19 @@ class PromoRepositoryTest extends TestCase
         ]]);
 
         // Mock the connector and set the return
-        $wsuApi = Mockery::mock('Waynestate\Api\Connector');
+        $wsuApi = Mockery::mock(Connector::class);
         $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
 
         // Get the promos
-        $promos = app('App\Repositories\PromoRepository', ['wsuApi' => $wsuApi])->getRequestData($data);
+        $promos = app(PromoRepository::class, ['wsuApi' => $wsuApi])->getRequestData($data);
 
         $this->assertCount(2, $promos['contact']);
         $this->assertCount(2, $promos['under_menu']);
     }
 
     /**
-     * @covers App\Repositories\PromoRepository::__construct
-     * @covers App\Repositories\PromoRepository::getRequestData
+     * @covers \App\Repositories\PromoRepository::__construct
+     * @covers \App\Repositories\PromoRepository::getRequestData
      * @test
      */
     public function subsite_contact_merging_with_no_main_contact()
@@ -311,7 +314,7 @@ class PromoRepositoryTest extends TestCase
         ];
 
         // Create a fake data request
-        $data = app('Factories\Page')->create(1, true, [
+        $data = app(Page::class)->create(1, true, [
             'site' => [
                 'id' => 2,
                 'parent' => [
@@ -343,18 +346,18 @@ class PromoRepositoryTest extends TestCase
         ]]);
 
         // Mock the connector and set the return
-        $wsuApi = Mockery::mock('Waynestate\Api\Connector');
+        $wsuApi = Mockery::mock(Connector::class);
         $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
 
         // Get the promos
-        $promos = app('App\Repositories\PromoRepository', ['wsuApi' => $wsuApi])->getRequestData($data);
+        $promos = app(PromoRepository::class, ['wsuApi' => $wsuApi])->getRequestData($data);
 
         $this->assertCount(1, $promos['contact']);
     }
 
     /**
-     * @covers App\Repositories\PromoRepository::__construct
-     * @covers App\Repositories\PromoRepository::getRequestData
+     * @covers \App\Repositories\PromoRepository::__construct
+     * @covers \App\Repositories\PromoRepository::getRequestData
      * @test
      */
     public function subsite_under_menu_merging_with_no_main_under_menu()
@@ -370,7 +373,7 @@ class PromoRepositoryTest extends TestCase
         ];
 
         // Create a fake data request
-        $data = app('Factories\Page')->create(1, true, [
+        $data = app(Page::class)->create(1, true, [
             'site' => [
                 'id' => 2,
                 'parent' => [
@@ -402,17 +405,17 @@ class PromoRepositoryTest extends TestCase
         ]]);
 
         // Mock the connector and set the return
-        $wsuApi = Mockery::mock('Waynestate\Api\Connector');
+        $wsuApi = Mockery::mock(Connector::class);
         $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
 
         // Get the promos
-        $promos = app('App\Repositories\PromoRepository', ['wsuApi' => $wsuApi])->getRequestData($data);
+        $promos = app(PromoRepository::class, ['wsuApi' => $wsuApi])->getRequestData($data);
 
         $this->assertCount(1, $promos['under_menu']);
     }
 
     /**
-     * @covers App\Repositories\PromoRepository::getHomepagePromos
+     * @covers \App\Repositories\PromoRepository::getHomepagePromos
      * @test
      */
     public function getting_homepage_promos_should_return_array()
@@ -423,11 +426,11 @@ class PromoRepositoryTest extends TestCase
         ];
 
         // Mock the connector and set the return
-        $wsuApi = Mockery::mock('Waynestate\Api\Connector');
+        $wsuApi = Mockery::mock(Connector::class);
         $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
 
         // Get the promos
-        $promos = app('App\Repositories\PromoRepository', ['wsuApi' => $wsuApi])->getHomepagePromos($this->faker->randomDigit);
+        $promos = app(PromoRepository::class, ['wsuApi' => $wsuApi])->getHomepagePromos($this->faker->randomDigit);
 
         $this->assertTrue(is_array($promos));
     }

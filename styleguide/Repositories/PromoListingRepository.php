@@ -3,6 +3,7 @@
 namespace Styleguide\Repositories;
 
 use App\Repositories\PromoListingRepository as Repository;
+use Factories\PromoListing;
 
 class PromoListingRepository extends Repository
 {
@@ -12,7 +13,7 @@ class PromoListingRepository extends Repository
     public function getPromoListingPromos(array $data, $limit = 75)
     {
         return [
-            'promos' => app('Factories\PromoListing')->create(15),
+            'promos' => app(PromoListing::class)->create(15),
         ];
     }
 
@@ -22,7 +23,7 @@ class PromoListingRepository extends Repository
     public function getPromoView($id)
     {
         return [
-            'promo' => app('Factories\PromoListing')->create(1, true),
+            'promo' => app(PromoListing::class)->create(1, true),
         ];
     }
 

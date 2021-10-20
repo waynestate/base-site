@@ -46,6 +46,9 @@ class PromoListingController extends Controller
      *
      * @param Request $request
      * @return \Illuminate\View\View
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function show(Request $request)
     {
