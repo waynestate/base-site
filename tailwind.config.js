@@ -1,4 +1,6 @@
-let colors = {
+const colors = require('tailwindcss/colors')
+
+const myColors = {
     transparent: 'transparent',
     black: '#181a19',
     white: '#fff',
@@ -40,7 +42,7 @@ let colors = {
     },
 }
 
-screens = {
+const screens = {
     sm: '420px',
     md: '576px',
     lg: '732px',
@@ -79,6 +81,7 @@ module.exports = {
             ],
         },
         extend: {
+            colors: myColors,
             maxWidth: {
                 'half': '50%',
                 'screen-xxxl': screens.xxxl,
