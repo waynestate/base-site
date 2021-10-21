@@ -7,7 +7,7 @@ DOTENV := .env
 
 # Tasks
 all: install
-install: yarn composerinstall generatekey php-cs-fix
+install: yarn composerinstall generatekey php-cs-fixer
 update: yarnupgrade composerupdate
 status: yarncheck
 build: webpackdev
