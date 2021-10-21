@@ -3,7 +3,56 @@ const colors = require('tailwindcss/colors')
 const myColors = {
     transparent: 'transparent',
     black: '#181a19',
-    white: '#fff',
+    current: '#fff',
+    /*
+     * update these values in the blade.php and .scss files and un-comment them out
+    grey: {
+        grey-lightest-to-gray-100: '#f2f2f2',
+        grey-lighter-to-gray-200: '#e6e6e6',
+        grey-light-to-gray-300: '#d9d9d9',
+        grey-default-to-gray-400: '#babfbf',
+        grey-dark-to-gray-500: '#949999',
+        grey-darker-to-gray-600: '#575959',
+        grey-darkest-to-gray-700: '#323333',
+    },
+    green: {
+        green-lightest-to-green-50: '#acc9c0',
+        50: '#cedddb',
+        100: '#9ebbb6',
+        green-lighter-to-green-200: '#71a192',
+        200: '#6d9892',
+        green-light-to-green-300: '#3d7a67',
+        300: '#3d766d',
+        DEFAULT: '#0c5449',
+        500: '#0b4a40',
+        600: '#094038',
+        green-dark-to-green-600: '#093f39',
+        700: '#08352f',
+        green-darker-to-green-800: '#072e29',
+        800: '#062b27',
+        green-darkest-to-green-900: '#05211e',
+        900: '#05211e',
+    },
+    gold: {
+        yellow-lightest-to-gold-50: '#fff2c9',
+        50: '#fff5d6',
+        100: '#ffebad',
+        yellow-lighter-to-gold-200: '#ffe596',
+        200: '#ffe085',
+        300: '#ffd65c',
+        yellow-light-to-gold-300: '#ffdb6f',
+        DEFAULT: '#ffcc33',
+        500: '#edbd2c',
+        yellow-dark-to-gold-600: '#d8ad2d',
+        600: '#dbae25',
+        700: '#c89f1f',
+        800: '#b69018',
+        yellow-darker-to-gold-800: '#ae8f30',
+        900: '#a48111',
+        yellow-darkest-to-gold-900: '#866e26',
+    },
+    */
+    // Delete these after the above replacements are made
     grey: {
         darkest: '#323333',
         darker: '#575959',
@@ -48,7 +97,9 @@ const screens = {
     lg: '732px',
     xl: '888px',
     xxl: '1044px',
+    // xxl-to-2xl: '1044px',
     xxxl: '1200px',
+    // xxxl-to-3xl: '1200px',
     mt: '780px', // Adjust this based on the top menu width
     print: {'raw': 'print'},
 }
@@ -105,7 +156,7 @@ module.exports = {
             },
             boxShadow: {
                 'white': '0 7px 0 '+ colors.white +', 0 14px 0 '+ colors.white,
-                'grey': '0 7px 0 '+ colors.grey +', 0 14px 0 '+ colors.grey,
+                'grey': '0 7px 0 '+ colors.gray +', 0 14px 0 '+ colors.gray,
             },
             opacity: {
                 '20': '.20',
