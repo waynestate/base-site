@@ -23,3 +23,9 @@ ul.menu-top {
         }
     }
 }
+
+.top_menu_hidden {
+    @media (max-width: theme('screens.mt')) {
+        @apply .hidden;
+    }
+}
