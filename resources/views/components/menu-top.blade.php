@@ -32,7 +32,7 @@
                     <a href="/{{ $site['subsite-folder'] !== null ? rtrim($site['subsite-folder'], '/') : '' }}" class="text-white print:text-black">
                         @if($site['short-title'] !== '')
                             <span class="mt:hidden">{{ $site['short-title'] }}</span>
-                            <span class="hidden mt:inline">{{ $site['title'] }}</span>
+                            <span class="top_menu_hidden mt:inline">{{ $site['title'] }}</span>
                         @else
                             {{ $site['title'] }}
                         @endif
