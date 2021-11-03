@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use Contracts\Repositories\PromoListingRepositoryContract;
 use Illuminate\Cache\Repository;
+use Illuminate\Support\Str;
 use Waynestate\Api\Connector;
 use Waynestate\Promotions\ParsePromos;
 
@@ -64,7 +65,7 @@ class PromoListingRepository implements PromoListingRepositoryContract
 
         if (!empty($data['data']['promotion_view_boolean']) && $data['data']['promotion_view_boolean'] === 'true') {
             $promos['promos'] = collect($promos['promos'])->map(function ($item) use ($data) {
-                $item['link'] = 'view/'.\Illuminate\Support\Str::slug($item['title']).'-'.$item['promo_item_id'];
+                $item['link'] = 'view/'.Str::slug($item['title']).'-'.$item['promo_item_id'];
 
                 return $item;
             })->toArray();
