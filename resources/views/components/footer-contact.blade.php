@@ -14,7 +14,7 @@
                         </div>
                     </div>
                 @else
-                    <div class="w-full lg:flex-1 px-4 py-4 text-white white-links content border-t lg:border-l lg:border-0 border-grey print:text-black">
+                    <div class="w-full lg:flex-1 px-4 py-4 text-white white-links content border-t lg:border-l lg:border-0 border-gray print:text-black">
                         {!! $info['description'] !!}
                     </div>
                 @endif

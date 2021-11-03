@@ -269,7 +269,7 @@
 
         <div class="flex flex-wrap -mx-4">
             <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-                <div class="rounded overflow-hidden border border-grey">
+                <div class="rounded overflow-hidden border border-gray">
                     <div class="text-black bg-green-50 px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Lightest green</span>
                         <span>#acc9c0</span>
@@ -302,7 +302,7 @@
             </div>
 
             <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-                <div class="rounded overflow-hidden border border-grey">
+                <div class="rounded overflow-hidden border border-gray">
                     <div class="text-black bg-gold-50 px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Lightest yellow</span>
                         <span>#fff2c9</span>
@@ -335,7 +335,7 @@
             </div>
 
             <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-                <div class="rounded overflow-hidden border border-grey">
+                <div class="rounded overflow-hidden border border-gray">
                     <div class="text-black bg-white px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>White</span>
                         <span>#ffffff</span>
@@ -352,7 +352,7 @@
                         <span>Light grey</span>
                         <span>#d9d9d9</span>
                     </div>
-                    <div class="text-black bg-grey px-6 py-3 text-sm font-semibold flex justify-between flex justify-between">
+                    <div class="text-black bg-gray px-6 py-3 text-sm font-semibold flex justify-between flex justify-between">
                         <span>Base grey</span>
                         <span>#babfbf</span>
                     </div>
@@ -360,11 +360,11 @@
                         <span>Dark grey</span>
                         <span>#949999</span>
                     </div>
-                    <div class="text-white bg-gray-500 px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-white bg-gray-600 px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Darker grey</span>
                         <span>#575959</span>
                     </div>
-                    <div class="text-white bg-gray-600 px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-white bg-gray-700 px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Darkest grey</span>
                         <span>#323333</span>
                     </div>
