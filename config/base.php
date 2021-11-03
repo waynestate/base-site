@@ -148,7 +148,7 @@ return [
     | Here you can setup a default meta image.
     |
     */
-    'meta_image' =>'https://wayne.edu/opengraph/wsu-social-share.png',
+    'meta_image' =>'https://assets.wayne.edu/images/opengraph/wsu-social-share.png',
     'meta_image_alt' =>'Wayne State University shield with Warrior Strong text above',
 
     /*
