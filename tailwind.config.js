@@ -1,6 +1,6 @@
-const colors = require('tailwindcss/colors')
+const twColors = require('tailwindcss/colors')
 
-const myColors = {
+const baseColors = {
     transparent: 'transparent',
     black: '#181a19',
     current: '#fff',
@@ -80,7 +80,7 @@ module.exports = {
             ],
         },
         extend: {
-            colors: myColors,
+            colors: baseColors,
             maxWidth: {
                 'half': '50%',
                 'screen-xxxl': screens.xxxl,
@@ -103,8 +103,8 @@ module.exports = {
                 'hero': '36.3vw',
             },
             boxShadow: {
-                'white': '0 7px 0 '+ colors.white +', 0 14px 0 '+ colors.white,
-                'grey': '0 7px 0 '+ colors.gray +', 0 14px 0 '+ colors.gray,
+                'white': '0 7px 0 '+ twColors.white +', 0 14px 0 '+ twColors.white,
+                'grey': '0 7px 0 '+ twColors.gray +', 0 14px 0 '+ twColors.gray,
             },
             opacity: {
                 '20': '.20',
