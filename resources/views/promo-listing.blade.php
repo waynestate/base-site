@@ -10,7 +10,7 @@
     @if(!empty($promos))
         <ul class="mt-8">
             @foreach($promos as $item)
-                <li class="flex flex-wrap sm:flex-no-wrap mb-8 pb-8 @if(!$loop->last) border-b border-grey-lighter @endif -mx-4">
+                <li class="flex flex-wrap sm:flex-no-wrap mb-8 pb-8 @if(!$loop->last) border-b border-gray-200 @endif -mx-4">
                     @if(!empty($item['relative_url']))
                         <div class="w-full sm:w-1/3 md:w-1/5 mb-3 sm:mb-0 px-4">
                             @image($item['relative_url'], $item['filename_alt_text'], 'w-full')

@@ -2,21 +2,21 @@
     @apply p-0 mb-4 ml-0 relative;
 
     & > li {
-        @apply border border-solid border-grey-default w-full absolute border-b-0;
+        @apply border border-solid border-gray-400 w-full absolute border-b-0;
 
         &:last-child {
             @apply border-b;
         }
 
         > a {
-            @apply bg-grey-lighter relative block p-4 pr-8 font-bold border-b-0 no-underline;
+            @apply bg-gray-200 relative block p-4 pr-8 font-bold border-b-0 no-underline;
 
             cursor: pointer;
             user-select: none;
 
             &:first-child:hover,
             &:first-child:focus, {
-                @apply bg-grey-darker text-white;
+                @apply bg-gray-500 text-white;
             }
 
             // Open symbol

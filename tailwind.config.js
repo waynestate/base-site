@@ -4,17 +4,17 @@ const myColors = {
     transparent: 'transparent',
     black: '#181a19',
     current: '#fff',
+    gray: {
+        100: '#f2f2f2',
+        200: '#e6e6e6',
+        300: '#d9d9d9',
+        400: '#babfbf',
+        500: '#949999',
+        600: '#575959',
+        700: '#323333',
+    },
     /*
      * update these values in the blade.php and .scss files and un-comment them out
-    grey: {
-        grey-lightest-to-gray-100: '#f2f2f2',
-        grey-lighter-to-gray-200: '#e6e6e6',
-        grey-light-to-gray-300: '#d9d9d9',
-        grey-default-to-gray-400: '#babfbf',
-        grey-dark-to-gray-500: '#949999',
-        grey-darker-to-gray-600: '#575959',
-        grey-darkest-to-gray-700: '#323333',
-    },
     green: {
         green-lightest-to-green-50: '#acc9c0',
         50: '#cedddb',

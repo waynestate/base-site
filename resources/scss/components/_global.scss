@@ -30,7 +30,7 @@ a {
 // Tailwind preflight sets this to .5 which isn't ADA compliant
 input::placeholder,
 textarea::placeholder {
-    @apply opacity-100 text-grey-darker;
+    @apply opacity-100 text-gray-500;
 }
 
 // Global headings

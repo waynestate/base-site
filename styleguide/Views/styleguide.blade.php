@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
+        <pre class="bg-gray-100 overflow-scroll p-4" tabindex="0">
             {!! htmlspecialchars('
 <div class="row -mx-4 md:flex">
     <div class="md:w-1/2 px-4">
@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
+        <pre class="bg-gray-100 overflow-scroll p-4" tabindex="0">
             {!! htmlspecialchars('
 <div class="row -mx-4 lg:flex">
     <div class="lg:w-1/3 px-4">
@@ -90,7 +90,7 @@
             </tbody>
         </table>
 
-        <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
+        <pre class="bg-gray-100 overflow-scroll p-4" tabindex="0">
         {!! htmlspecialchars('
 <table class="table-stack">
         <caption>Example table with caption</caption>
@@ -165,7 +165,7 @@
             <cite>&mdash; {{ $faker->Name }}</cite>
         </blockquote>
 
-        <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
+        <pre class="bg-gray-100 overflow-scroll p-4" tabindex="0">
         {!! htmlspecialchars('
 <blockquote>
     <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
@@ -189,7 +189,7 @@
         <a href="#button-examples" class="button expanded">Expanded button</a>
         <br />
 
-        <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
+        <pre class="bg-gray-100 overflow-scroll p-4" tabindex="0">
         {!! htmlspecialchars('
 <a href="#" class="button">Standard button</a>
 <a href="#" class="button bg-gradient-green text-white">Dark button</a>
@@ -210,10 +210,10 @@
         <hr>
 
         <h2>Media</h2>
-        <p>Any valid YouTube URL starting with <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">youtu.be</code> or <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">youtube.com/watch</code> will open a lightbox with the video.</p>
+        <p>Any valid YouTube URL starting with <code class="bg-gray-100 py-px pb-1 px-1 text-sm">youtu.be</code> or <code class="bg-gray-100 py-px pb-1 px-1 text-sm">youtube.com/watch</code> will open a lightbox with the video.</p>
         <p><a href="//www.youtube.com/watch?v=guRgefesPXE"><img src="//i.wayne.edu/youtube/guRgefesPXE" alt="School of Medicine Commencement YouTube video"></a></p>
 
-        <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
+        <pre class="bg-gray-100 overflow-scroll p-4" tabindex="0">
         {!! htmlspecialchars('
 <p>
     <a href="//www.youtube.com/watch?v=guRgefesPXE">
@@ -226,12 +226,12 @@
 
         <h2>Responsive Embed</h2>
 
-        <p>To make sure embedded content maintains its aspect ratio as the width of the screen changes, wrap the <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">iframe</code>, <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">object</code>, <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">embed</code>, or <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">video</code> in a container with the <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">.responsive-embed</code> class.</p>
+        <p>To make sure embedded content maintains its aspect ratio as the width of the screen changes, wrap the <code class="bg-gray-100 py-px pb-1 px-1 text-sm">iframe</code>, <code class="bg-gray-100 py-px pb-1 px-1 text-sm">object</code>, <code class="bg-gray-100 py-px pb-1 px-1 text-sm">embed</code>, or <code class="bg-gray-100 py-px pb-1 px-1 text-sm">video</code> in a container with the <code class="bg-gray-100 py-px pb-1 px-1 text-sm">.responsive-embed</code> class.</p>
         <div class="responsive-embed">
             <iframe width="420" height="315" src="//www.youtube.com/embed/guRgefesPXE" title="Responsive embed example" allowfullscreen></iframe>
         </div>
 
-        <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
+        <pre class="bg-gray-100 overflow-scroll p-4" tabindex="0">
         {!! htmlspecialchars('
 <div class="responsive-embed">
     <iframe width="420" height="315" src="//www.youtube.com/embed/guRgefesPXE" title="Responsive embed example" allowfullscreen></iframe>
@@ -251,7 +251,7 @@
                     </figure>
                 </div>
 
-                <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
+                <pre class="bg-gray-100 overflow-scroll p-4" tabindex="0">
                 {!! htmlspecialchars('
 <figure>
     <img src="/styleguide/image/400x300" alt="">
@@ -340,15 +340,15 @@
                         <span>White</span>
                         <span>#ffffff</span>
                     </div>
-                    <div class="text-black bg-grey-lightest px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-black bg-gray-100 px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Lightest grey</span>
                         <span>#f2f2f2</span>
                     </div>
-                    <div class="text-black bg-grey-lighter px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-black bg-gray-200 px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Lighter grey</span>
                         <span>#e6e6e6</span>
                     </div>
-                    <div class="text-black bg-grey-light px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-black bg-gray-300 px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Light grey</span>
                         <span>#d9d9d9</span>
                     </div>
@@ -356,15 +356,15 @@
                         <span>Base grey</span>
                         <span>#babfbf</span>
                     </div>
-                    <div class="text-black bg-grey-dark px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-black bg-gray-500 px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Dark grey</span>
                         <span>#949999</span>
                     </div>
-                    <div class="text-white bg-grey-darker px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-white bg-gray-500 px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Darker grey</span>
                         <span>#575959</span>
                     </div>
-                    <div class="text-white bg-grey-darkest px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-white bg-gray-600 px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Darkest grey</span>
                         <span>#323333</span>
                     </div>

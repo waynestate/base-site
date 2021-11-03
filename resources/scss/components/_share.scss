@@ -10,7 +10,7 @@
     }
 
     &::before {
-        @apply text-grey-darker bg-grey-lighter uppercase float-left leading-tight text-sm;
+        @apply text-gray-500 bg-gray-200 uppercase float-left leading-tight text-sm;
 
         padding: 6px 11px 7px;
         letter-spacing: 0.1em;

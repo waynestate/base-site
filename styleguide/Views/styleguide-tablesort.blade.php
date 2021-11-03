@@ -27,7 +27,7 @@
             </tbody>
         </table>
 
-        <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
+        <pre class="bg-gray-100 overflow-scroll p-4" tabindex="0">
         {!! htmlspecialchars('
 <table class="table-sort">
     <caption>Example table with caption</caption>

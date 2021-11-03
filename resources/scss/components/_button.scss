@@ -1,10 +1,10 @@
 .button {
-    @apply inline-block align-middle mb-2 px-4 py-2 rounded text-center bg-grey-lighter text-green-default text-sm cursor-pointer font-bold no-underline;
+    @apply inline-block align-middle mb-2 px-4 py-2 rounded text-center bg-gray-200 text-green-default text-sm cursor-pointer font-bold no-underline;
 
     text-shadow: none;
 
     &:hover {
-        @apply bg-grey-lightest;
+        @apply bg-gray-100;
     }
 }
 

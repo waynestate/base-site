@@ -6,14 +6,14 @@
     <div class="content">
         {!! $base['page']['content']['main'] !!}
 
-        <p>Available classes for <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">&lt;figure&gt;</code> are <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">.figure</code> <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">.float-left</code>, <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">.float-right</code>, and <code class="bg-grey-lightest py-px pb-1 px-1 text-sm">.text-center</code>.</p>
+        <p>Available classes for <code class="bg-gray-100 py-px pb-1 px-1 text-sm">&lt;figure&gt;</code> are <code class="bg-gray-100 py-px pb-1 px-1 text-sm">.figure</code> <code class="bg-gray-100 py-px pb-1 px-1 text-sm">.float-left</code>, <code class="bg-gray-100 py-px pb-1 px-1 text-sm">.float-right</code>, and <code class="bg-gray-100 py-px pb-1 px-1 text-sm">.text-center</code>.</p>
 
         <figure class="figure">
             @image('/styleguide/image/400x300', '', 'p-2')
             <figcaption>{{ $faker->sentence }}</figcaption>
         </figure>
 
-        <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
+        <pre class="bg-gray-100 overflow-scroll p-4" tabindex="0">
         {!! htmlspecialchars('
 <figure class="figure">
     <img src="/styleguide/image/400x300" alt="">
@@ -33,7 +33,7 @@
                 </figure>
                 <p>{{ $faker->paragraph(38) }}</p>
 
-                <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
+                <pre class="bg-gray-100 overflow-scroll p-4" tabindex="0">
                 {!! htmlspecialchars('
 <figure class="figure float-left">
     <img src="/styleguide/image/400x300" alt="">
@@ -55,7 +55,7 @@
                 </figure>
                 <p>{{ $faker->paragraph(28) }}</p>
 
-                <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
+                <pre class="bg-gray-100 overflow-scroll p-4" tabindex="0">
                 {!! htmlspecialchars('
 <figure class="figure float-right">
     <img src="/styleguide/image/400x300" alt="">
@@ -78,7 +78,7 @@
                 </figure>
                 <p>{{ $faker->paragraph(12) }}</p>
 
-                <pre class="bg-grey-lightest overflow-scroll p-4" tabindex="0">
+                <pre class="bg-gray-100 overflow-scroll p-4" tabindex="0">
                 {!! htmlspecialchars('
 <figure class="figure text-center">
     <img src="/styleguide/image/800x450" alt="">

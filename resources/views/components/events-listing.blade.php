@@ -20,13 +20,13 @@
                 @endif
 
                 <div class="mx-2 flex-grow{{ ! $loop->first ? ' ml-19' :'' }}">
-                    <div class="mb-2 pb-2 border-b border-solid border-grey-light">
+                    <div class="mb-2 pb-2 border-b border-solid border-gray-300">
                         <a class="block hover:underline" href="{{ $event['url'] }}">{{ $event['title'] }}
                             <span class="visually-hidden"> on {{ apdatetime(date('M d, Y' , strtotime($key))) }}
                                 @if(!(bool)$event['is_all_day']) at {{ apdatetime(date('g:i a' , strtotime($event['start_time']))) }}@endif
                             </span>
                         </a>
-                        <time class="text-sm text-grey-darker" datetime="{{ $event['date'] }}T{{ $event['start_time'] }}{{ date('P') }}">
+                        <time class="text-sm text-gray-500" datetime="{{ $event['date'] }}T{{ $event['start_time'] }}{{ date('P') }}">
                             @if(!(bool)$event['is_all_day']){{ apdatetime(date('g:i a' , strtotime($event['start_time']))) }}@else All day @endif
                         </time>
                     </div>

@@ -3,7 +3,7 @@
 --}}
 
 @if(!empty($button['link']) && !empty($button['secondary_relative_url']))
-    <a href="{{ $button['link'] }}" class="content-button block min-w-full relative rounded bg-grey-lighter hover:bg-grey-lightest overflow-hidden">
+    <a href="{{ $button['link'] }}" class="content-button block min-w-full relative rounded bg-gray-200 hover:bg-gray-100 overflow-hidden">
         <div class="min-w-full flex p-3 xl:p-4 @if(!empty($button['excerpt'])) items-top @else items-center @endif">
             <div class="w-1/6">
                 @image($button['secondary_relative_url'], $button['secondary_alt_text'], 'block')

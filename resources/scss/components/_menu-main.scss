@@ -27,13 +27,13 @@
     }
 
     li a:hover {
-        @apply bg-grey-lighter;
+        @apply bg-gray-200;
     }
 
     // Bottom borders on child <li>
     > li {
         @screen mt {
-            @apply border-b border-solid border-grey-lighter;
+            @apply border-b border-solid border-gray-200;
         }
     }
 

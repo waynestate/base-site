@@ -13,7 +13,7 @@
     }
 
     hr {
-        @apply border-b border-solid border-grey-lighter my-5;
+        @apply border-b border-solid border-gray-200 my-5;
     }
 
     p,
@@ -29,7 +29,7 @@
     }
 
     blockquote {
-        @apply ml-8 my-8 border-l-4 border-grey-default pl-4 pt-2 pb-1;
+        @apply ml-8 my-8 border-l-4 border-gray-400 pl-4 pt-2 pb-1;
 
         > *:last-child {
             @apply mb-2;
@@ -93,7 +93,7 @@
         }
 
         figcaption {
-            @apply text-sm text-grey-darker text-left;
+            @apply text-sm text-gray-500 text-left;
 
             display: table-caption;
             caption-side: bottom;
@@ -135,18 +135,18 @@
         }
 
         tbody tr {
-            @apply border border-grey-light border-t-0 border-solid align-top;
+            @apply border border-gray-300 border-t-0 border-solid align-top;
 
             td {
                 @apply text-sm px-4 py-2;
             }
 
             &:nth-child(odd) {
-                @apply bg-grey-lighter;
+                @apply bg-gray-200;
             }
 
             &:nth-child(even) {
-                @apply bg-grey-lightest;
+                @apply bg-gray-100;
             }
 
             &:hover {
