@@ -303,31 +303,31 @@
 
             <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
                 <div class="rounded overflow-hidden border border-grey">
-                    <div class="text-black bg-yellow-lightest px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-black bg-gold-50 px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Lightest yellow</span>
                         <span>#fff2c9</span>
                     </div>
-                    <div class="text-black bg-yellow-lighter px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-black bg-gold-200 px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Lighter yellow</span>
                         <span>#ffe596</span>
                     </div>
-                    <div class="text-black bg-yellow-light px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-black bg-gold-300 px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Light yellow</span>
                         <span>#ffdb6f</span>
                     </div>
-                    <div class="text-black bg-yellow px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-black bg-gold px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Base yellow</span>
                         <span>#ffcc33</span>
                     </div>
-                    <div class="text-black bg-yellow-dark px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-black bg-gold-600 px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Dark yellow</span>
                         <span>#d8ad2d</span>
                     </div>
-                    <div class="text-black bg-yellow-darker px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-black bg-gold-800 px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Darker yellow</span>
                         <span>#ae8f30</span>
                     </div>
-                    <div class="text-white bg-yellow-darkest px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-white bg-gold-900 px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Darkest yellow</span>
                         <span>#866e26</span>
                     </div>

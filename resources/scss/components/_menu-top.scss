@@ -6,7 +6,7 @@ ul.menu-top {
             @apply text-white;
 
             &:hover {
-                @apply text-yellow-default;
+                @apply text-gold;
             }
         }
 
@@ -18,7 +18,7 @@ ul.menu-top {
             @apply inline-block mx-2 my-0;
 
             &.selected a {
-                @apply text-yellow-default border-b border-solid border-yellow-default;
+                @apply text-gold border-b border-solid border-gold;
             }
         }
     }

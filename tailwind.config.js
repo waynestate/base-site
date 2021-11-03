@@ -25,64 +25,18 @@ const myColors = {
         800: '#062b27',
         900: '#05211e',
     },
-    /*
-     * update these values in the blade.php and .scss files and un-comment them out
     gold: {
-        yellow-lightest-to-gold-50: '#fff2c9',
         50: '#fff5d6',
         100: '#ffebad',
-        yellow-lighter-to-gold-200: '#ffe596',
         200: '#ffe085',
         300: '#ffd65c',
-        yellow-light-to-gold-300: '#ffdb6f',
         DEFAULT: '#ffcc33',
         500: '#edbd2c',
-        yellow-dark-to-gold-600: '#d8ad2d',
         600: '#dbae25',
         700: '#c89f1f',
         800: '#b69018',
-        yellow-darker-to-gold-800: '#ae8f30',
         900: '#a48111',
-        yellow-darkest-to-gold-900: '#866e26',
-    },
-    */
-    // Delete these after the above replacements are made
-    grey: {
-        darkest: '#323333',
-        darker: '#575959',
-        dark: '#949999',
-        default: '#babfbf',
-        light: '#d9d9d9',
-        lighter: '#e6e6e6',
-        lightest: '#f2f2f2',
-    },
-    red: {
-        darkest: '#3b0d0c',
-        darker: '#621b18',
-        dark: '#cc1f1a',
-        default: '#e60000',
-        light: '#ef5753',
-        lighter: '#f9acaa',
-        lightest: '#fcebea',
-    },
-    yellow: {
-        darkest: '#866e26',
-        darker: '#ae8f30',
-        dark: '#d8ad2d',
-        default: '#ffcc33',
-        light: '#ffdb6f',
-        lighter: '#ffe596',
-        lightest: '#fff2c9',
-    },
-    green: {
-        darkest: '#05211e',
-        darker: '#072e29',
-        dark: '#093f39',
-        default: '#0c5449',
-        light: '#3d7a67',
-        lighter: '#71a192',
-        lightest: '#acc9c0',
-    },
+    }
 }
 
 const screens = {
@@ -100,7 +54,7 @@ const screens = {
 
 module.exports = {
     theme: {
-        colors: colors,
+        colors: twColors,
         screens: screens,
         fontFamily: {
             'sans': [
