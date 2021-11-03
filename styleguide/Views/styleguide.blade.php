@@ -282,7 +282,7 @@
                         <span>Light green</span>
                         <span>#3d7a67</span>
                     </div>
-                    <div class="text-white bg-green-default px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-white bg-green px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Base green</span>
                         <span>#0c5449</span>
                     </div>

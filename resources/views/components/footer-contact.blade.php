@@ -2,7 +2,7 @@
     $contact => array // ['title', 'link', 'description']
 --}}
 @if(is_array($contact) && count($contact) > 0)
-    <div class="bg-green-default print:bg-transparent">
+    <div class="bg-green print:bg-transparent">
         <div class="row flex flex-wrap lg:flex-no-wrap py-8 print:py-0 @if(count($contact) == 1)text-center @endif">
             @foreach($contact as $info)
                 @if($loop->iteration == 1)

@@ -91,18 +91,18 @@
     // Errors
     .error {
         p {
-            @apply text-red-default mx-auto mt-1 mb-4 text-sm;
+            @apply text-red-500 mx-auto mt-1 mb-4 text-sm;
         }
 
         input,
         textarea,
         select {
-            @apply border-red-light border bg-red-lightest mb-0;
+            @apply border-red-300 border bg-red-50 mb-0;
         }
 
         .checkbox,
         .radio {
-            @apply bg-red-lightest pb-0;
+            @apply bg-red-50 pb-0;
         }
     }
 
@@ -176,7 +176,7 @@
     .formy_logout a,
     .login-info p a,
     .login-info ul li a {
-        @apply text-green-default underline border-b-0;
+        @apply text-green underline border-b-0;
 
         &:hover {
             @apply no-underline border-0;
@@ -189,6 +189,6 @@
 
     // Required
     label em {
-        @apply text-red-default;
+        @apply text-red-500;
     }
 }
