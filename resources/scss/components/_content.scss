@@ -123,10 +123,10 @@
         @apply border-collapse w-full mb-4 text-left;
 
         thead tr {
-            @apply border border-solid border-green-dark;
+            @apply border border-solid border-green-600;
 
             th {
-                @apply bg-green-dark font-bold px-4 py-3 text-white leading-none;
+                @apply bg-green-600 font-bold px-4 py-3 text-white leading-none;
             }
 
             a {

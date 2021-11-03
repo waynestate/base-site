@@ -13,26 +13,20 @@ const myColors = {
         600: '#575959',
         700: '#323333',
     },
-    /*
-     * update these values in the blade.php and .scss files and un-comment them out
     green: {
-        green-lightest-to-green-50: '#acc9c0',
         50: '#cedddb',
         100: '#9ebbb6',
-        green-lighter-to-green-200: '#71a192',
         200: '#6d9892',
-        green-light-to-green-300: '#3d7a67',
         300: '#3d766d',
         DEFAULT: '#0c5449',
         500: '#0b4a40',
         600: '#094038',
-        green-dark-to-green-600: '#093f39',
         700: '#08352f',
-        green-darker-to-green-800: '#072e29',
         800: '#062b27',
-        green-darkest-to-green-900: '#05211e',
         900: '#05211e',
     },
+    /*
+     * update these values in the blade.php and .scss files and un-comment them out
     gold: {
         yellow-lightest-to-gold-50: '#fff2c9',
         50: '#fff5d6',

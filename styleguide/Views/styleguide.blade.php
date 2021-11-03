@@ -270,31 +270,31 @@
         <div class="flex flex-wrap -mx-4">
             <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
                 <div class="rounded overflow-hidden border border-grey">
-                    <div class="text-black bg-green-lightest px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-black bg-green-50 px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Lightest green</span>
                         <span>#acc9c0</span>
                     </div>
-                    <div class="text-black bg-green-lighter px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-black bg-green-200 px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Lighter green</span>
                         <span>#71a192</span>
                     </div>
-                    <div class="text-white bg-green-light px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-white bg-green-300 px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Light green</span>
                         <span>#3d7a67</span>
                     </div>
-                    <div class="text-white bg-green px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-white bg-green-default px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Base green</span>
                         <span>#0c5449</span>
                     </div>
-                    <div class="text-white bg-green-dark px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-white bg-green-600 px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Dark green</span>
                         <span>#093f39</span>
                     </div>
-                    <div class="text-white bg-green-darker px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-white bg-green-800 px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Darker green</span>
                         <span>#072e29</span>
                     </div>
-                    <div class="text-white bg-green-darkest px-6 py-3 text-sm font-semibold flex justify-between">
+                    <div class="text-white bg-green-900 px-6 py-3 text-sm font-semibold flex justify-between">
                         <span>Darkest green</span>
                         <span>#05211e</span>
                     </div>
