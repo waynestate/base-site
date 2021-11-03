@@ -16,7 +16,7 @@ class BannerController extends Controller
      */
     public function index(Request $request)
     {
-        $request->data['banner'] = app(Banner::class)->create(1, true);
+        $request->data['base']['banner'] = app(Banner::class)->create(1, true);
 
         return view('styleguide-childpage', merge($request->data));
     }
