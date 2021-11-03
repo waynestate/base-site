@@ -8,7 +8,7 @@ body {
     @apply min-h-screen flex flex-col;
 }
 
-// Links outside of content aren't underlined 
+// Links outside of content aren't underlined
 a {
     @apply text-green no-underline;
 }
@@ -41,7 +41,6 @@ h4,
 h5,
 h6 {
     @apply font-bold mb-4 leading-tight;
-
 }
 
 h1 {
