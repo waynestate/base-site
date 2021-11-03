@@ -1,15 +1,11 @@
 // Content returning from CMS
 .content {
     ul {
-        list-style-type: disc;
-
-        @apply ml-8;
+        @apply ml-8 list-disc;
     }
 
     ol {
-        list-style-type: decimal;
-
-        @apply ml-8;
+        @apply ml-8 list-decimal;
     }
 
     hr {
