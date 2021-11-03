@@ -1,23 +1,28 @@
 // Restricts the embedded font from combining two characters like "fi"
 html {
     font-feature-settings: "liga" 0;
+    text-rendering: optimizeLegibility;
 }
 
-// Set default links to not have underlines since most cases this is what we want
+body {
+    @apply min-h-screen flex flex-col;
+}
+
+// Links outside of content aren't underlined 
 a {
-    @apply .text-green .no-underline;
+    @apply text-green no-underline;
 }
 
 @responsive {
     .white-links a:not(.button) {
-        @apply .text-white .underline;
+        @apply text-white underline;
 
         &:hover {
-            @apply .no-underline;
+            @apply no-underline;
         }
 
         @screen print {
-            @apply .text-black;
+            @apply text-black;
         }
     }
 }
@@ -25,7 +30,7 @@ a {
 // Tailwind preflight sets this to .5 which isn't ADA compliant
 input::placeholder,
 textarea::placeholder {
-    @apply .opacity-100 .text-grey-darker;
+    @apply opacity-100 text-grey-darker;
 }
 
 // Global headings
@@ -35,36 +40,39 @@ h3,
 h4,
 h5,
 h6 {
-    @apply .font-bold .mb-4 .leading-tight;
+    @apply font-bold mb-4 leading-tight;
 
-    text-rendering: optimizeLegibility;
 }
 
 h1 {
-    @apply .text-4xl;
+    @apply text-4xl;
 }
 
 h2 {
-    @apply .text-3xl;
+    @apply text-3xl mb-2;
 }
 
 h3 {
-    @apply .text-2xl;
+    @apply text-2xl mb-1;
 }
 
 h4 {
-    @apply .text-xl;
+    @apply text-xl mb-1;
 }
 
 h5 {
-    @apply .text-lg;
+    @apply text-lg mb-1;
 }
 
 h6 {
-    @apply .text-sm;
+    @apply text-sm mb-1;
 }
 
 // Firefox uses the outline focus color as the text color. Since our overall background is white we need to change it.
 a.text-white:-moz-focusring {
     outline-color: #000;
+}
+
+footer {
+    @apply mt-auto;
 }
