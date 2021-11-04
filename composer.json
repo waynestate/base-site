@@ -61,16 +61,14 @@
         }
     },
     "scripts": {
-        "post-install-cmd": [
-            "make php-cs-fixer"
-        ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi",
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "make php-cs-fixer"
         ]
     },
     "config": {
