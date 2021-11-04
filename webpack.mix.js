@@ -6,7 +6,6 @@ const exec = require('child_process').exec;
 const package = JSON.parse(fs.readFileSync('./package.json'));
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
-const purge = require('laravel-mix-purgecss');
 const ReplaceInFileWebpackPlugin = require('replace-in-file-webpack-plugin');
 
 /*
@@ -56,19 +55,6 @@ mix.copy([
 // Compile assets and setup browersync
 mix.js('resources/js/main.js', 'public/_resources/js')
    .sass('resources/scss/main.scss', 'public/_resources/css/main.css')
-   .purgeCss({
-        globs: [
-            path.join(__dirname, "resources/views/**/*.blade.php"),
-            path.join(__dirname, "styleguide/Views/**/*.blade.php"),
-            path.join(__dirname, "factories/**/*.php"),
-            path.join(__dirname, "resources/js/**/*.js"),
-            path.join(__dirname, "node_modules/slideout/dist/slideout.js"),
-            path.join(__dirname, "node_modules/flickity/dist/flickity.pkgd.js"),
-            path.join(__dirname, "node_modules/mediabox/dist/mediabox.js")
-        ],
-        extensions: ['html', 'js', 'php', 'vue'],
-        whitelistPatterns: [/at-/, /w-[1-5]\/[1-5]/, /(sm|md|lg|xl|xxl|xxxl|mt)\:w-[1-5]\/[1-5]/,/form_responses/]
-    })
    .sourceMaps()
    .options({
         processCssUrls: false,

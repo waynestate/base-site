@@ -1,4 +1,5 @@
 const twColors = require('tailwindcss/colors')
+const path = require("path");
 
 const baseColors = {
     transparent: 'transparent',
@@ -53,6 +54,22 @@ const screens = {
 }
 
 module.exports = {
+    purge: {
+        content: [
+            path.join(__dirname, "resources/views/**/*.blade.php"),
+            path.join(__dirname, "styleguide/Views/**/*.blade.php"),
+            path.join(__dirname, "factories/**/*.php"),
+            path.join(__dirname, "resources/js/**/*.js"),
+            path.join(__dirname, "node_modules/slideout/dist/slideout.js"),
+            path.join(__dirname, "node_modules/flickity/dist/flickity.pkgd.js"),
+            path.join(__dirname, "node_modules/mediabox/dist/mediabox.js")
+        ],
+        safeList: [
+            /at-/,
+            /w-[1-5]\/[1-5]/,
+            /(sm|md|lg|xl|xxl|xxxl|mt)\:w-[1-5]\/[1-5]/
+        ]
+    },
     theme: {
         colors: twColors,
         screens: screens,
@@ -125,5 +142,4 @@ module.exports = {
     plugins: [
         require('glhd-tailwindcss-transitions')(), // https://github.com/glhd/tailwindcss-plugins/
     ],
-    purge: false,
 }
