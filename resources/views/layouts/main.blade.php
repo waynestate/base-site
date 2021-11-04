@@ -7,7 +7,11 @@
 
     <link rel="icon" type="image/x-icon" href="https://wayne.edu/favicon.ico">
     <link rel="stylesheet" href="{{ mix('_resources/css/main.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com/">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
+    
     @if(!empty($base['page']['canonical']))<link rel="canonical" href="{{ $base['page']['canonical'] }}">@endif
 
     @include('components.ga')
