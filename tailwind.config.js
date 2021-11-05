@@ -67,7 +67,8 @@ module.exports = {
         safeList: [
             /at-/,
             /w-[1-5]\/[1-5]/,
-            /(sm|md|lg|xl|xxl|xxxl|mt)\:w-[1-5]\/[1-5]/
+            /(sm|md|lg|xl|xxl|xxxl|mt)\:w-[1-5]\/[1-5]/,
+            /form_responses/
         ]
     },
     theme: {
