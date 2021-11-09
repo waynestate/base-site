@@ -267,110 +267,167 @@
 
         <h2 class="pb-6">Colors</h2>
 
-        <div class="flex flex-wrap -mx-4">
-            <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-                <div class="rounded overflow-hidden border border-gray">
-                    <div class="text-black bg-green-50 px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Lightest green</span>
-                        <span>#acc9c0</span>
-                    </div>
-                    <div class="text-black bg-green-200 px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Lighter green</span>
-                        <span>#71a192</span>
-                    </div>
-                    <div class="text-white bg-green-300 px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Light green</span>
-                        <span>#3d7a67</span>
-                    </div>
-                    <div class="text-white bg-green px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Base green</span>
-                        <span>#0c5449</span>
-                    </div>
-                    <div class="text-white bg-green-600 px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Dark green</span>
-                        <span>#093f39</span>
-                    </div>
-                    <div class="text-white bg-green-800 px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Darker green</span>
-                        <span>#072e29</span>
-                    </div>
-                    <div class="text-white bg-green-900 px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Darkest green</span>
-                        <span>#05211e</span>
+        <div class="flex flex-col space-y-3 sm:flex-row text-xs sm:space-y-0 sm:space-x-4">
+            <div class="w-32 flex-shrink-0">
+                <div class="h-10 flex flex-col justify-center">
+                    <div class="text-sm font-semibold text-gray-900">Green</div>
+                    <div>
+                        <code class="text-xs text-gray-500">baseColors.green</code>
                     </div>
                 </div>
             </div>
-
-            <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-                <div class="rounded overflow-hidden border border-gray">
-                    <div class="text-black bg-gold-50 px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Lightest yellow</span>
-                        <span>#fff2c9</span>
+            <div class="min-w-0 flex-1 grid grid-cols-5 2xl:grid-cols-10 gap-x-4 gap-y-3 2xl:gap-x-2">
+                <div class="space-y-1.5">
+                    <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-green-50"></div>
+                    <div class="px-0.5 md:flex md:justify-between md:space-x-2 2xl:space-x-0 2xl:block">
+                        <div class="w-6 font-medium text-gray-900">50</div>
+                        <div>#CEDDDB</div>
                     </div>
-                    <div class="text-black bg-gold-200 px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Lighter yellow</span>
-                        <span>#ffe596</span>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-green-100"></div>
+                    <div class="px-0.5 md:flex md:justify-between md:space-x-2 2xl:space-x-0 2xl:block">
+                        <div class="w-6 font-medium text-gray-900">100</div>
+                    <div>#9EBBB6</div>
+                </div>
+            </div>
+            <div class="space-y-1.5">
+                <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-green-200"></div>
+                    <div class="px-0.5 md:flex md:justify-between md:space-x-2 2xl:space-x-0 2xl:block">
+                        <div class="w-6 font-medium text-gray-900">200</div>
+                        <div>#6D9892</div>
                     </div>
-                    <div class="text-black bg-gold-300 px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Light yellow</span>
-                        <span>#ffdb6f</span>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-green-300"></div>
+                    <div class="px-0.5 md:flex md:justify-between md:space-x-2 2xl:space-x-0 2xl:block">
+                        <div class="w-6 font-medium text-gray-900">300</div>
+                        <div>#3D766D</div>
                     </div>
-                    <div class="text-black bg-gold px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Base yellow</span>
-                        <span>#ffcc33</span>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-green-400"></div>
+                    <div class="px-0.5 md:flex md:justify-between md:space-x-2 2xl:space-x-0 2xl:block">
+                        <div class="w-6 font-medium text-gray-900">400</div>
+                    <div>#0C5449</div></div>
+                </div>
+                <div class="space-y-1.5">
+                        <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-green-500"></div>
+                    <div class="px-0.5 md:flex md:justify-between md:space-x-2 2xl:space-x-0 2xl:block">
+                        <div class="w-6 font-medium text-gray-900">500</div>
+                        <div>#0B4A40</div>
                     </div>
-                    <div class="text-black bg-gold-600 px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Dark yellow</span>
-                        <span>#d8ad2d</span>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-green-600"></div>
+                    <div class="px-0.5 md:flex md:justify-between md:space-x-2 2xl:space-x-0 2xl:block">
+                        <div class="w-6 font-medium text-gray-900">600</div>
+                        <div>#094038</div>
                     </div>
-                    <div class="text-black bg-gold-800 px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Darker yellow</span>
-                        <span>#ae8f30</span>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-green-700"></div>
+                    <div class="px-0.5 md:flex md:justify-between md:space-x-2 2xl:space-x-0 2xl:block">
+                        <div class="w-6 font-medium text-gray-900">700</div>
+                        <div>#08352F</div>
                     </div>
-                    <div class="text-white bg-gold-900 px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Darkest yellow</span>
-                        <span>#866e26</span>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-green-800"></div>
+                    <div class="px-0.5 md:flex md:justify-between md:space-x-2 2xl:space-x-0 2xl:block">
+                        <div class="w-6 font-medium text-gray-900">800</div>
+                        <div>#062B27</div>
+                    </div>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-green-900"></div>
+                    <div class="px-0.5 md:flex md:justify-between md:space-x-2 2xl:space-x-0 2xl:block">
+                        <div class="w-6 font-medium text-gray-900">900</div>
+                        <div>#05211E</div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-                <div class="rounded overflow-hidden border border-gray">
-                    <div class="text-black bg-white px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>White</span>
-                        <span>#ffffff</span>
+
+
+        <div class="flex flex-col space-y-3 sm:flex-row text-xs sm:space-x-4">
+            <div class="w-32 flex-shrink-0">
+                <div class="h-10 flex flex-col justify-center">
+                    <div class="text-sm font-semibold text-gray-900">Gold</div>
+                    <div>
+                        <code class="text-xs text-gray-500">baseColors.gold</code>
                     </div>
-                    <div class="text-black bg-gray-100 px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Lightest grey</span>
-                        <span>#f2f2f2</span>
+                </div>
+            </div>
+            <div class="min-w-0 flex-1 grid grid-cols-5 2xl:grid-cols-10 gap-x-4 gap-y-3 2xl:gap-x-2">
+                <div class="space-y-1.5">
+                    <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-gold-50"></div>
+                    <div class="px-0.5 md:flex md:justify-between md:space-x-2 2xl:space-x-0 2xl:block">
+                        <div class="w-6 font-medium text-gray-900">50</div>
+                        <div>#FFF5D6</div>
                     </div>
-                    <div class="text-black bg-gray-200 px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Lighter grey</span>
-                        <span>#e6e6e6</span>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-gold-100"></div>
+                    <div class="px-0.5 md:flex md:justify-between md:space-x-2 2xl:space-x-0 2xl:block">
+                        <div class="w-6 font-medium text-gray-900">100</div>
+                    <div>#FFEBAD</div>
+                </div>
+            </div>
+            <div class="space-y-1.5">
+                <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-gold-200"></div>
+                    <div class="px-0.5 md:flex md:justify-between md:space-x-2 2xl:space-x-0 2xl:block">
+                        <div class="w-6 font-medium text-gray-900">200</div>
+                        <div>#FFE085</div>
                     </div>
-                    <div class="text-black bg-gray-300 px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Light grey</span>
-                        <span>#d9d9d9</span>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-gold-300"></div>
+                    <div class="px-0.5 md:flex md:justify-between md:space-x-2 2xl:space-x-0 2xl:block">
+                        <div class="w-6 font-medium text-gray-900">300</div>
+                        <div>#FFD65C</div>
                     </div>
-                    <div class="text-black bg-gray px-6 py-3 text-sm font-semibold flex justify-between flex justify-between">
-                        <span>Base grey</span>
-                        <span>#babfbf</span>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-gold-400"></div>
+                    <div class="px-0.5 md:flex md:justify-between md:space-x-2 2xl:space-x-0 2xl:block">
+                        <div class="w-6 font-medium text-gray-900">400</div>
+                    <div>#FFCC33</div></div>
+                </div>
+                <div class="space-y-1.5">
+                        <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-gold-500"></div>
+                    <div class="px-0.5 md:flex md:justify-between md:space-x-2 2xl:space-x-0 2xl:block">
+                        <div class="w-6 font-medium text-gray-900">500</div>
+                        <div>#EDBD2C</div>
                     </div>
-                    <div class="text-black bg-gray-500 px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Dark grey</span>
-                        <span>#949999</span>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-gold-600"></div>
+                    <div class="px-0.5 md:flex md:justify-between md:space-x-2 2xl:space-x-0 2xl:block">
+                        <div class="w-6 font-medium text-gray-900">600</div>
+                        <div>#DBAE25</div>
                     </div>
-                    <div class="text-white bg-gray-600 px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Darker grey</span>
-                        <span>#575959</span>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-gold-700"></div>
+                    <div class="px-0.5 md:flex md:justify-between md:space-x-2 2xl:space-x-0 2xl:block">
+                        <div class="w-6 font-medium text-gray-900">700</div>
+                        <div>#C89F1F</div>
                     </div>
-                    <div class="text-white bg-gray-700 px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Darkest grey</span>
-                        <span>#323333</span>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-gold-800"></div>
+                    <div class="px-0.5 md:flex md:justify-between md:space-x-2 2xl:space-x-0 2xl:block">
+                        <div class="w-6 font-medium text-gray-900">800</div>
+                        <div>#B69018</div>
                     </div>
-                    <div class="text-white bg-black px-6 py-3 text-sm font-semibold flex justify-between">
-                        <span>Black</span>
-                        <span>#181a19</span>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-gold-900"></div>
+                    <div class="px-0.5 md:flex md:justify-between md:space-x-2 2xl:space-x-0 2xl:block">
+                        <div class="w-6 font-medium text-gray-900">900</div>
+                        <div>#A48111</div>
                     </div>
                 </div>
             </div>
