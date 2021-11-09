@@ -77,7 +77,7 @@ class PromoRepository extends Repository
         ->toArray();
 
         return [
-            'contact' => app(FooterContact::class)->create(1),
+            'contact' => app(FooterContact::class)->create(3),
             'social' => $social,
             'hero' => $hero,
             'under_menu' => $under_menu,

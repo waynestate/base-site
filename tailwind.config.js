@@ -3,8 +3,8 @@ const path = require("path");
 
 const baseColors = {
     transparent: 'transparent',
+    current: 'currentColor',
     black: '#181a19',
-    current: '#fff',
     gray: {
         100: '#f2f2f2',
         200: '#e6e6e6',
