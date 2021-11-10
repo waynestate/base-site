@@ -61,13 +61,14 @@ class PromoRepository extends Repository
         // Get all the social icons
         $social = collect([
             'twitter',
+            'tiktok',
             'facebook',
             'instagram',
+            'youtube',
+            'snapchat',
             'linkedin',
             'flickr',
             'pinterest',
-            'youtube',
-            'snapchat',
         ])->map(function ($name) {
             return app(FooterSocial::class)->create(1, true, ['title' => $name]);
         })
@@ -77,7 +78,7 @@ class PromoRepository extends Repository
         ->toArray();
 
         return [
-            'contact' => app(FooterContact::class)->create(3),
+            'contact' => app(FooterContact::class)->create(1),
             'social' => $social,
             'hero' => $hero,
             'under_menu' => $under_menu,

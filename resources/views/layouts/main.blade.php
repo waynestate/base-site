@@ -37,6 +37,9 @@
 </div>
 
 <footer>
+    @if(!empty($base['social']))
+        @include('components.footer-social', ['social' => $base['social']])
+    @endif
 
     @if(!empty($base['contact']))
         @include('components.footer-contact', ['contact' => $base['contact']])
