@@ -57,6 +57,7 @@ const screens = {
 }
 
 module.exports = {
+    mode: 'jit',
     purge: {
         content: [
             path.join(__dirname, "resources/views/**/*.blade.php"),
