@@ -1,4 +1,5 @@
-.button {
+.button,
+.content .button {
     @apply inline-block align-middle mb-2 px-4 py-2 rounded text-center bg-gray-200 text-green text-sm cursor-pointer font-bold no-underline;
 
     &:hover {

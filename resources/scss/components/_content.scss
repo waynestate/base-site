@@ -8,20 +8,11 @@
         @apply ml-8 list-decimal;
     }
 
-    hr {
-        @apply border-b border-solid border-gray-200 my-5;
-    }
-
     p,
     dl,
     & > ol,
     & > ul {
         @apply mb-5;
-    }
-
-    abbr,
-    abbr[title] {
-        @apply no-underline;
     }
 
     blockquote {
@@ -115,44 +106,8 @@
         }
     }
 
-    table {
-        @apply border-collapse w-full mb-4 text-left;
-
-        thead tr {
-            @apply border border-solid border-green-600;
-
-            th {
-                @apply bg-green-600 font-bold px-4 py-3 text-white leading-none;
-            }
-
-            a {
-                @apply text-white;
-            }
-        }
-
-        tbody tr {
-            @apply border border-gray-300 border-t-0 border-solid align-top;
-
-            td {
-                @apply text-sm px-4 py-2;
-            }
-
-            &:nth-child(odd) {
-                @apply bg-gray-200;
-            }
-
-            &:nth-child(even) {
-                @apply bg-gray-100;
-            }
-
-            &:hover {
-                @apply bg-gold-50;
-            }
-        }
-    }
-
     // All content links
-    a:not(.button, .content-button) {
+    a {
         @apply underline;
 
         &:hover {

@@ -15,7 +15,7 @@
                 @else
                     <div class="w-full lg:flex-1 px-4 py-4 border-t lg:border-l lg:border-0 border-green-500">
                         <h3 class="text-gold-300 mb-1 text-2xl">{{ $info['title'] }}</h2>
-                        <div class="content white-links text-white">
+                        <div class="content white-links text-white print:text-black">
                             {!! $info['description'] !!}
                         </div>
                     </div>

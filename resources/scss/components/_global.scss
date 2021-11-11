@@ -14,15 +14,11 @@ a {
 }
 
 @responsive {
-    .white-links a:not(.button) {
+    .white-links a {
         @apply text-white underline;
 
         &:hover {
             @apply no-underline;
-        }
-
-        @screen print {
-            @apply text-black;
         }
     }
 }
@@ -40,11 +36,11 @@ h3,
 h4,
 h5,
 h6 {
-    @apply font-bold mb-4 leading-tight;
+    @apply font-bold;
 }
 
 h1 {
-    @apply text-4xl;
+    @apply text-4xl mb-4;
 }
 
 h2 {
@@ -52,19 +48,69 @@ h2 {
 }
 
 h3 {
-    @apply text-2xl mb-1;
+    @apply text-2xl;
 }
 
 h4 {
-    @apply text-xl mb-1;
+    @apply text-xl;
 }
 
 h5 {
-    @apply text-lg mb-1;
+    @apply text-lg;
 }
 
 h6 {
-    @apply text-sm mb-1;
+    @apply text-base;
+}
+
+.gold-line {
+    @apply relative overflow-hidden;
+
+    &::after {
+        content: "";
+
+        @apply absolute w-full block h-0.5;
+    }
+}
+
+hr {
+    @apply border-b border-solid border-gray-200 my-5;
+}
+
+table {
+    @apply border-collapse w-full mb-4 text-left;
+
+    thead tr {
+        @apply border border-solid border-green-600;
+
+        th {
+            @apply bg-green-600 font-bold px-4 py-3 text-white leading-none;
+        }
+
+        a {
+            @apply text-white;
+        }
+    }
+
+    tbody tr {
+        @apply border border-gray-300 border-t-0 border-solid align-top;
+
+        td {
+            @apply text-sm px-4 py-2;
+        }
+
+        &:nth-child(odd) {
+            @apply bg-gray-200;
+        }
+
+        &:nth-child(even) {
+            @apply bg-gray-100;
+        }
+
+        &:hover {
+            @apply bg-gold-50;
+        }
+    }
 }
 
 // Firefox uses the outline focus color as the text color. Since our overall background is white we need to change it.

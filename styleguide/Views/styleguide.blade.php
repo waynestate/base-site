@@ -4,22 +4,43 @@
     @include('components.page-title', ['title' => $base['page']['title']])
 
     <div class="content">
-        <hr>
+        <p>Welcome to your Styleguide! The styles listed on this page are available to you in the CMS.</p>
 
-        <h2>Two column layout</h2>
+        <h2>H2: {{ $faker->text(20) }}</h2>
+        <p>{{ $faker->text(40) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a> {{ $faker->text(300) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a></p>
+
+        <h3>H3: {{ $faker->text(20) }}</h3>
+        <p>{{ $faker->text(40) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a> {{ $faker->text(300) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a></p>
+
+        <h4>H4: {{ $faker->text(20) }}</h4>
+        <p>{{ $faker->text(40) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a> {{ $faker->text(300) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a></p>
+
+        <h5>H5: {{ $faker->text(20) }}</h5>
+        <p>{{ $faker->text(40) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a> {{ $faker->text(300) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a></p>
+
+        <h6>H6: {{ $faker->text(20) }}</h6>
+        <p>{{ $faker->text(40) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a> {{ $faker->text(300) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a></p>
+
+        <h2 class="gold-line mb-4">Two column layout</h2>
 
         <div class="row -mx-4 md:flex">
             <div class="md:w-1/2 px-4">
-                <p>{{ $faker->paragraph }}</p>
+                <img src="/styleguide/image/400x200" alt="" class="mb-2">
+                <p>{{ $faker->text(100) }}</p>
             </div>
 
             <div class="md:w-1/2 px-4">
-                <p>{{ $faker->paragraph }}</p>
+                <img src="/styleguide/image/400x200" alt="" class="mb-2">
+                <p>{{ $faker->text(100) }}</p>
             </div>
         </div>
 
-        <pre class="bg-gray-100 overflow-scroll p-4" tabindex="0">
-            {!! htmlspecialchars('
+        <ul class="accordion">
+            <li>
+                <a href="#code-two-col" id="code-two-col"><span aria-hidden="true"></span>Two column layout code</a>
+                <div class="content">
+<pre class="bg-gray-100 overflow-scroll p-4" tabindex="0">
+{!! htmlspecialchars('
 <div class="row -mx-4 md:flex">
     <div class="md:w-1/2 px-4">
         <p>'.$faker->paragraph.'</p>
@@ -28,28 +49,36 @@
         <p>'.$faker->paragraph.'</p>
     </div>
 </div>') !!}
-        </pre>
+</pre>
+                </div>
+            </li>
+        </ul>
 
-        <hr>
-
-        <h2>Three column layout</h2>
+        <h2 class="mb-4">Three column layout</h2>
 
         <div class="row -mx-4 lg:flex">
             <div class="lg:w-1/3 px-4">
-                <p>{{ $faker->paragraph }}</p>
+                <img src="/styleguide/image/270x100" alt="" class="mb-2">
+                <p>{{ $faker->text(60) }}</p>
             </div>
 
             <div class="lg:w-1/3 px-4">
-                <p>{{ $faker->paragraph }}</p>
+                <img src="/styleguide/image/270x100" alt="" class="mb-2">
+                <p>{{ $faker->text(60) }}</p>
             </div>
 
             <div class="lg:w-1/3 px-4">
-                <p>{{ $faker->paragraph }}</p>
+                <img src="/styleguide/image/270x100" alt="">
+                <p>{{ $faker->text(60) }}</p>
             </div>
         </div>
 
-        <pre class="bg-gray-100 overflow-scroll p-4" tabindex="0">
-            {!! htmlspecialchars('
+        <ul class="accordion">
+            <li>
+                <a href="#code-three-col" id="code-three-col"><span aria-hidden="true"></span>Three column layout code</a>
+                <div class="content">
+<pre class="bg-gray-100 overflow-scroll p-4" tabindex="0">
+{!! htmlspecialchars('
 <div class="row -mx-4 lg:flex">
     <div class="lg:w-1/3 px-4">
         <p>'.$faker->paragraph.'</p>
@@ -61,7 +90,10 @@
         <p>'.$faker->paragraph.'</p>
     </div>
 </div>') !!}
-        </pre>
+</pre>
+                </div>
+            </li>
+        </ul>
 
         <hr>
 
