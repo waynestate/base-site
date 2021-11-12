@@ -37,6 +37,36 @@
                 "class_name": "",
                 "relative_url": "/styleguide/programlisting",
                 "submenu": []
+            },
+            "115100": {
+                "menu_item_id": 115100,
+                "is_active": 1,
+                "page_id": 115100,
+                "target": "",
+                "display_name": "Figure",
+                "class_name": "",
+                "relative_url": "/styleguide/figure",
+                "submenu": []
+            },
+            "113100": {
+                "menu_item_id": 113100,
+                "is_active": 1,
+                "page_id": 113100,
+                "target": "",
+                "display_name": "Table stack",
+                "class_name": "",
+                "relative_url": "/styleguide/tablestack",
+                "submenu": []
+            },
+            "113101": {
+                "menu_item_id": 113101,
+                "is_active": 1,
+                "page_id": 113101,
+                "target": "",
+                "display_name": "Table sortable",
+                "class_name": "",
+                "relative_url": "/styleguide/tablesortable",
+                "submenu": []
             }
         }
     },
@@ -620,26 +650,6 @@
                 "relative_url": "/styleguide/banner",
                 "submenu": []
             },
-            "113100": {
-                "menu_item_id": 113100,
-                "is_active": 1,
-                "page_id": 113100,
-                "target": "",
-                "display_name": "Table stack",
-                "class_name": "",
-                "relative_url": "/styleguide/tablestack",
-                "submenu": []
-            },
-            "113101": {
-                "menu_item_id": 113101,
-                "is_active": 1,
-                "page_id": 113101,
-                "target": "",
-                "display_name": "Table sortable",
-                "class_name": "",
-                "relative_url": "/styleguide/tablesortable",
-                "submenu": []
-            },
             "114100": {
                 "menu_item_id": 114100,
                 "is_active": 1,
@@ -648,16 +658,6 @@
                 "display_name": "Under menu",
                 "class_name": "",
                 "relative_url": "/styleguide/undermenu",
-                "submenu": []
-            },
-            "115100": {
-                "menu_item_id": 115100,
-                "is_active": 1,
-                "page_id": 115100,
-                "target": "",
-                "display_name": "Figure",
-                "class_name": "",
-                "relative_url": "/styleguide/figure",
                 "submenu": []
             },
             "116100": {

@@ -56,55 +56,6 @@
         
         <hr>
 
-        <h2>Table</h2>
-
-        <table>
-                <caption>Example table with fake contact information</caption>
-            <thead>
-                <tr>
-                    <th scope="col">Image</th>
-                    <th scope="col">First name</th>
-                    <th scope="col">Last name</th>
-                    <th scope="col">Email</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @for ($i = 0; $i < 4; $i++)
-                <tr>
-                    <td>@image('/styleguide/image/150x50?text=150x50', 'Example table image showing the image size of 150x50', 'p-2')
-                    <td>{{ $faker->firstName }}</td>
-                    <td>{{ $faker->lastName }}</td>
-                    <td><a href="mailto:{{ $faker->email }}">{{ $faker->email }}</a></td>
-                </tr>
-                @endfor
-            </tbody>
-        </table>
-
-        <pre class="bg-gray-100 overflow-scroll p-4" tabindex="0">
-        {!! htmlspecialchars('
-<table class="table-stack">
-        <caption>Example table with caption</caption>
-    <thead>
-        <tr>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-
-    <tbody>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </tbody>
-</table>') !!}
-        </pre>
-
-        <hr>
-
         <h2>Abbreviations</h2>
 
         <p><abbr title="Wayne State University">WSU</abbr></p>
