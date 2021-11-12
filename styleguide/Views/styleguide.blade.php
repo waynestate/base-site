@@ -6,31 +6,45 @@
     <div class="content">
         <p>Welcome to your Styleguide! The styles listed on this page are available to you in the CMS.</p>
 
-        <h2>H2: {{ $faker->text(20) }}</h2>
+        <p>Listed below are the basic heading styles.</p>
+
+        <h2>&lt;h2&gt; {{ $faker->text(20) }}</h2>
         <p>{{ $faker->text(40) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a> {{ $faker->text(300) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a></p>
 
-        <h3>H3: {{ $faker->text(20) }}</h3>
+        <h3>&lt;h3&gt; {{ $faker->text(20) }}</h3>
         <p>{{ $faker->text(40) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a> {{ $faker->text(300) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a></p>
 
-        <h4>H4: {{ $faker->text(20) }}</h4>
+        <h4>&lt;h4&gt; {{ $faker->text(20) }}</h4>
         <p>{{ $faker->text(40) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a> {{ $faker->text(300) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a></p>
 
-        <h5>H5: {{ $faker->text(20) }}</h5>
+        <h5>&lt;h5&gt; {{ $faker->text(20) }}</h5>
         <p>{{ $faker->text(40) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a> {{ $faker->text(300) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a></p>
 
-        <h6>H6: {{ $faker->text(20) }}</h6>
+        <h6>&lt;h6&gt; {{ $faker->text(20) }}</h6>
         <p>{{ $faker->text(40) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a> {{ $faker->text(300) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a></p>
 
-        <h2 class="gold-line mb-4">Two column layout</h2>
+        <hr>
+
+        <h2>Additional heading styles</h2>
+        <p>Heading variants available by classes.</p>
+        <h3 class="divider-gold">Your heading with a gold divider</h3>
+        <p>Add this html to your heading for this style: <code>class="divider-gold"</code></p>
+
+        <h3 class="divider-green">Your heading with a gold divider</h3>
+        <p>Add this html to your heading for this style: <code>class="divider-green"</code></p>
+
+        <hr>
+
+        <h2 class="mb-4">Two column layout</h2>
 
         <div class="row -mx-4 md:flex">
             <div class="md:w-1/2 px-4">
-                <img src="/styleguide/image/400x200" alt="" class="mb-2">
+                <img src="/styleguide/image/450x150" alt="" class="mb-2">
                 <p>{{ $faker->text(100) }}</p>
             </div>
 
             <div class="md:w-1/2 px-4">
-                <img src="/styleguide/image/400x200" alt="" class="mb-2">
+                <img src="/styleguide/image/450x150" alt="" class="mb-2">
                 <p>{{ $faker->text(100) }}</p>
             </div>
         </div>
@@ -43,9 +57,11 @@
 {!! htmlspecialchars('
 <div class="row -mx-4 md:flex">
     <div class="md:w-1/2 px-4">
+        <img src="/styleguide/image/450x150" alt="" class="mb-2">
         <p>'.$faker->paragraph.'</p>
     </div>
     <div class="md:w-1/2 px-4">
+        <img src="/styleguide/image/450x150" alt="" class="mb-2">
         <p>'.$faker->paragraph.'</p>
     </div>
 </div>') !!}
@@ -54,21 +70,23 @@
             </li>
         </ul>
 
+        <hr>
+
         <h2 class="mb-4">Three column layout</h2>
 
         <div class="row -mx-4 lg:flex">
             <div class="lg:w-1/3 px-4">
-                <img src="/styleguide/image/270x100" alt="" class="mb-2">
+                <img src="/styleguide/image/268x100" alt="" class="mb-2">
                 <p>{{ $faker->text(60) }}</p>
             </div>
 
             <div class="lg:w-1/3 px-4">
-                <img src="/styleguide/image/270x100" alt="" class="mb-2">
+                <img src="/styleguide/image/268x100" alt="" class="mb-2">
                 <p>{{ $faker->text(60) }}</p>
             </div>
 
             <div class="lg:w-1/3 px-4">
-                <img src="/styleguide/image/270x100" alt="">
+                <img src="/styleguide/image/268x100" alt="">
                 <p>{{ $faker->text(60) }}</p>
             </div>
         </div>
@@ -81,12 +99,15 @@
 {!! htmlspecialchars('
 <div class="row -mx-4 lg:flex">
     <div class="lg:w-1/3 px-4">
+        <img src="/styleguide/image/268x100" alt="">
         <p>'.$faker->paragraph.'</p>
     </div>
     <div class="lg:w-1/3 px-4">
+        <img src="/styleguide/image/268x100" alt="">
         <p>'.$faker->paragraph.'</p>
     </div>
     <div class="lg:w-1/3 px-4">
+        <img src="/styleguide/image/268x100" alt="">
         <p>'.$faker->paragraph.'</p>
     </div>
 </div>') !!}
@@ -99,7 +120,7 @@
 
         <h2>Table</h2>
 
-        <table class="table-stack">
+        <table>
                 <caption>Example table with fake contact information</caption>
             <thead>
                 <tr>

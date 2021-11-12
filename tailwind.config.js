@@ -106,6 +106,7 @@ module.exports = {
             maxWidth: {
                 'half': '50%',
                 'screen-xxxl': screens.xxxl,
+                'screen-3xl': 'screens.3xl', // does this even work
             },
             padding: {
                 '3/4': '75%',
@@ -129,20 +130,9 @@ module.exports = {
                 'grey': '0 7px 0 '+ twColors.gray +', 0 14px 0 '+ twColors.gray,
             },
             opacity: {
-                '20': '.20',
                 '65': '.65',
             },
-            inset: {
-                '4': '1rem',
-            },
         },
-    },
-    variants: {
-        opacity: ['responsive', 'hover', 'focus', 'active', 'group-hover'],
-        textDecoration: ['responsive', 'hover', 'focus', 'active', 'group-hover'],
-        backgroundColor: ['responsive', 'hover', 'focus', 'active', 'group-hover'],
-        textColor: ['responsive', 'hover', 'focus', 'active', 'group-hover'],
-        borderColor: ['responsive', 'hover', 'focus', 'active', 'group-hover'],
     },
     plugins: [
         require('glhd-tailwindcss-transitions')(), // https://github.com/glhd/tailwindcss-plugins/

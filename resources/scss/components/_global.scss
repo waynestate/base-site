@@ -63,13 +63,23 @@ h6 {
     @apply text-base;
 }
 
-.gold-line {
-    @apply relative overflow-hidden;
+.divider-gold {
+    @apply relative overflow-hidden mb-2;
 
     &::after {
         content: "";
 
-        @apply absolute w-full block h-0.5;
+        @apply absolute inline w-full h-0.5 ml-4 top-1/2 bottom-auto bg-gold;
+    }
+}
+
+.divider-green {
+    @apply relative overflow-hidden mb-2;
+
+    &::after {
+        content: "";
+
+        @apply absolute inline w-full h-0.5 ml-4 top-1/2 bottom-auto bg-green;
     }
 }
 
@@ -116,6 +126,10 @@ table {
 // Firefox uses the outline focus color as the text color. Since our overall background is white we need to change it.
 a.text-white:-moz-focusring {
     outline-color: #000;
+}
+
+code {
+    @apply bg-gray-200 py-1 px-2 rounded text-sm;
 }
 
 footer {
