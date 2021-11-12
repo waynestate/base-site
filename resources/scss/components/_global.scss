@@ -40,11 +40,11 @@ h6 {
 }
 
 h1 {
-    @apply text-4xl mb-4;
+    @apply text-4xl mb-2;
 }
 
 h2 {
-    @apply text-3xl mb-2;
+    @apply text-3xl mb-1;
 }
 
 h3 {
@@ -81,6 +81,13 @@ h6 {
 
         @apply absolute inline w-full h-0.5 ml-4 top-1/2 bottom-auto bg-green;
     }
+}
+
+p,
+dl,
+ol,
+ul {
+    @apply mb-4;
 }
 
 hr {

@@ -8,13 +8,6 @@
         @apply ml-8 list-decimal;
     }
 
-    p,
-    dl,
-    & > ol,
-    & > ul {
-        @apply mb-5;
-    }
-
     blockquote {
         @apply ml-8 my-8 border-l-4 border-gray-400 pl-4 pt-2 pb-1;
 

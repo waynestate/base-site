@@ -4,10 +4,41 @@
         "is_active": 1,
         "page_id": 100,
         "target": "",
-        "display_name": "Content area",
+        "display_name": "CMS Content Examples",
         "class_name": "",
         "relative_url": "/styleguide",
-        "submenu": []
+        "submenu": {
+            "100100": {
+                "menu_item_id": 100100,
+                "is_active": 1,
+                "page_id": 100100,
+                "target": "",
+                "display_name": "Content area",
+                "class_name": "",
+                "relative_url": "/styleguide",
+                "submenu": []
+            },
+            "100200": {
+                "menu_item_id": 100200,
+                "is_active": 1,
+                "page_id": 100200,
+                "target": "",
+                "display_name": "Basic column layouts",
+                "class_name": "",
+                "relative_url": "/styleguide/basiccolumnlayouts",
+                "submenu": []
+            },
+            "100300": {
+                "menu_item_id": 100300,
+                "is_active": 1,
+                "page_id": 100300,
+                "target": "",
+                "display_name": "Program listing",
+                "class_name": "",
+                "relative_url": "/styleguide/programlisting",
+                "submenu": []
+            }
+        }
     },
     "101": {
         "menu_item_id": 101,

@@ -4,7 +4,7 @@ namespace Styleguide\Pages;
 
 use Factories\Page as PageFactory;
 
-class Styleguide extends Page
+class BasicColumnLayouts extends Page
 {
     /**
      * {@inheritdoc}
@@ -13,8 +13,8 @@ class Styleguide extends Page
     {
         return app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'StyleGuideController',
-                'title' => 'Content area',
+                'controller' => 'BasicColumnLayoutsController',
+                'title' => 'Basic Column Layouts',
                 'id' => 100100,
             ],
         ]);

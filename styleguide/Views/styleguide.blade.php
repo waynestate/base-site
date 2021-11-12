@@ -6,9 +6,21 @@
     <div class="content">
         <p>Welcome to your Styleguide! The styles listed on this page are available to you in the CMS.</p>
 
-        <p>Listed below are the basic heading styles.</p>
+        <h2>General code formatting</h2>
+        <p class="mb-2">These HTML classes are available for text formatting.Add <code>class=""</code> to a paragraph or span tag.</p>
+        <ul>
+            <li>font-normal</li>
+            <li><span class="font-bold">font-bold</span></li>
+            <li><span class="font-light">font-light</span></li>
+            <li><span class="italic">italic</span></li>
+            <li><span class="text-sm">text-sm</span></li>
+            <li><span class="text-lg">text-lg</span></li>
+            <li><span class="text-xl">text-xl</span></li>
+        </ul>
 
-        <h2>&lt;h2&gt; {{ $faker->text(20) }}</h2>
+        <hr>
+
+        <h2>&lt;h2&gt; Heading levels</h2>
         <p>{{ $faker->text(40) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a> {{ $faker->text(300) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a></p>
 
         <h3>&lt;h3&gt; {{ $faker->text(20) }}</h3>
@@ -248,17 +260,6 @@
 <a href="#" class="button bg-gradient-green text-white">Dark button</a>
 <a href="#" class="button expanded">Expanded button</a>') !!}
         </pre>
-
-        <hr>
-
-        <h2>Headers</h2>
-
-        <h1>H1: {{ $faker->sentence }}</h1>
-        <h2>H2: {{ $faker->sentence }}</h2>
-        <h3>H3: {{ $faker->sentence }}</h3>
-        <h4>H4: {{ $faker->sentence }}</h4>
-        <h5>H5: {{ $faker->sentence }}</h5>
-        <h6>H6: {{ $faker->sentence }}</h6>
 
         <hr>
 

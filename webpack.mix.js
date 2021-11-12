@@ -93,38 +93,42 @@ config = {
                 'node_modules'
             ],
         }),
+        /*
+         * This is causing make watch to loop continuously
+         * Needs to be worked out before launch
+         *
         new CopyWebpackPlugin({
-            patterns: [
-                {
-                    from: 'node_modules/@waynestate/wsuheader/dist/header.html',
-                    to: path.resolve('resources/views/components/header.blade.php'),
-                },
-                {
-                    from: 'node_modules/@waynestate/wsufooter/dist/footer.html',
-                    to: path.resolve('resources/views/components/footer.blade.php'),
-                },
-                {
-                    from: 'vendor/waynestate/error-404/dist/404.php',
-                    to: path.resolve('resources/views/errors/404.blade.php'),
-                },
-                {
-                    from: 'vendor/waynestate/error-403/dist/403.php',
-                    to: path.resolve('resources/views/errors/403.blade.php'),
-                },
-                {
-                    from: 'vendor/waynestate/error-429/dist/429.php',
-                    to: path.resolve('resources/views/errors/429.blade.php'),
-                },
-                {
-                    from: 'vendor/waynestate/error-500/dist/500.php',
-                    to: path.resolve('resources/views/errors/500.blade.php'),
-                },
-                {
-                    from: 'hooks',
-                    to: path.resolve('.git/hooks'),
-                }
-            ]
-        }),
+                    patterns: [
+                        {
+                            from: 'node_modules/@waynestate/wsuheader/dist/header.html',
+                            to: path.resolve('resources/views/components/header.blade.php'),
+                        },
+                        {
+                            from: 'node_modules/@waynestate/wsufooter/dist/footer.html',
+                            to: path.resolve('resources/views/components/footer.blade.php'),
+                        },
+                        {
+                            from: 'vendor/waynestate/error-404/dist/404.php',
+                            to: path.resolve('resources/views/errors/404.blade.php'),
+                        },
+                        {
+                            from: 'vendor/waynestate/error-403/dist/403.php',
+                            to: path.resolve('resources/views/errors/403.blade.php'),
+                        },
+                        {
+                            from: 'vendor/waynestate/error-429/dist/429.php',
+                            to: path.resolve('resources/views/errors/429.blade.php'),
+                        },
+                        {
+                            from: 'vendor/waynestate/error-500/dist/500.php',
+                            to: path.resolve('resources/views/errors/500.blade.php'),
+                        },
+                        {
+                            from: 'hooks',
+                            to: path.resolve('.git/hooks'),
+                        }
+                    ]
+                }),
         new ReplaceInFileWebpackPlugin([{
             dir: 'resources/views/components',
             files: ['footer.blade.php'],
@@ -133,6 +137,7 @@ config = {
                 replace: "{{ date('Y') }}"
             }]
         }])
+        */
     ],
     devtool: 'source-map'
 };

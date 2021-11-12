@@ -106,7 +106,6 @@ module.exports = {
             maxWidth: {
                 'half': '50%',
                 'screen-xxxl': screens.xxxl,
-                'screen-3xl': 'screens.3xl', // does this even work
             },
             padding: {
                 '3/4': '75%',
