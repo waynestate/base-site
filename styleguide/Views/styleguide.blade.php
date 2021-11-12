@@ -20,114 +20,40 @@
 
         <hr>
 
-        <h2>&lt;h2&gt; Heading levels</h2>
+        <h2>&lt;h2&gt; Heading level 2</h2>
         <p>{{ $faker->text(40) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a> {{ $faker->text(300) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a></p>
 
-        <h3>&lt;h3&gt; {{ $faker->text(20) }}</h3>
+        <h3>&lt;h3&gt; Heading level 3</h3>
         <p>{{ $faker->text(40) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a> {{ $faker->text(300) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a></p>
 
-        <h4>&lt;h4&gt; {{ $faker->text(20) }}</h4>
+        <h4>&lt;h4&gt; Heading level 4</h4>
         <p>{{ $faker->text(40) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a> {{ $faker->text(300) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a></p>
 
-        <h5>&lt;h5&gt; {{ $faker->text(20) }}</h5>
+        <h5>&lt;h5&gt; Heading level 5</h5>
         <p>{{ $faker->text(40) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a> {{ $faker->text(300) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a></p>
 
-        <h6>&lt;h6&gt; {{ $faker->text(20) }}</h6>
+        <h6>&lt;h6&gt; Heading level 6</h6>
         <p>{{ $faker->text(40) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a> {{ $faker->text(300) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a></p>
 
         <hr>
 
         <h2>Additional heading styles</h2>
-        <p>Heading variants available by classes.</p>
+        <p>Heading variants available by adding classes.</p>
+
         <h3 class="divider-gold">Your heading with a gold divider</h3>
-        <p>Add this html to your heading for this style: <code>class="divider-gold"</code></p>
+        <p><code>&lt;h2 class="divider-gold"&gt;</code></p>
 
-        <h3 class="divider-green">Your heading with a gold divider</h3>
-        <p>Add this html to your heading for this style: <code>class="divider-green"</code></p>
+        <h3 class="divider-green">Your heading with a green divider</h3>
+        <p><code>&lt;h2 class="divider-green"&gt;</code></p>
 
-        <hr>
+        <h3 class="bar-gold">Your heading with a gold bar</h3>
+        <p><code>&lt;h2 class="bar-gold"&gt;</code></p>
 
-        <h2 class="mb-4">Two column layout</h2>
+        <h3 class="text-green font-normal mb-2">Your heading with green text and normal weight</h3>
+        <p><code>&lt;h2 class="text-green font-normal"&gt;</code></p>
 
-        <div class="row -mx-4 md:flex">
-            <div class="md:w-1/2 px-4">
-                <img src="/styleguide/image/450x150" alt="" class="mb-2">
-                <p>{{ $faker->text(100) }}</p>
-            </div>
-
-            <div class="md:w-1/2 px-4">
-                <img src="/styleguide/image/450x150" alt="" class="mb-2">
-                <p>{{ $faker->text(100) }}</p>
-            </div>
-        </div>
-
-        <ul class="accordion">
-            <li>
-                <a href="#code-two-col" id="code-two-col"><span aria-hidden="true"></span>Two column layout code</a>
-                <div class="content">
-<pre class="bg-gray-100 overflow-scroll p-4" tabindex="0">
-{!! htmlspecialchars('
-<div class="row -mx-4 md:flex">
-    <div class="md:w-1/2 px-4">
-        <img src="/styleguide/image/450x150" alt="" class="mb-2">
-        <p>'.$faker->paragraph.'</p>
-    </div>
-    <div class="md:w-1/2 px-4">
-        <img src="/styleguide/image/450x150" alt="" class="mb-2">
-        <p>'.$faker->paragraph.'</p>
-    </div>
-</div>') !!}
-</pre>
-                </div>
-            </li>
-        </ul>
-
-        <hr>
-
-        <h2 class="mb-4">Three column layout</h2>
-
-        <div class="row -mx-4 lg:flex">
-            <div class="lg:w-1/3 px-4">
-                <img src="/styleguide/image/268x100" alt="" class="mb-2">
-                <p>{{ $faker->text(60) }}</p>
-            </div>
-
-            <div class="lg:w-1/3 px-4">
-                <img src="/styleguide/image/268x100" alt="" class="mb-2">
-                <p>{{ $faker->text(60) }}</p>
-            </div>
-
-            <div class="lg:w-1/3 px-4">
-                <img src="/styleguide/image/268x100" alt="">
-                <p>{{ $faker->text(60) }}</p>
-            </div>
-        </div>
-
-        <ul class="accordion">
-            <li>
-                <a href="#code-three-col" id="code-three-col"><span aria-hidden="true"></span>Three column layout code</a>
-                <div class="content">
-<pre class="bg-gray-100 overflow-scroll p-4" tabindex="0">
-{!! htmlspecialchars('
-<div class="row -mx-4 lg:flex">
-    <div class="lg:w-1/3 px-4">
-        <img src="/styleguide/image/268x100" alt="">
-        <p>'.$faker->paragraph.'</p>
-    </div>
-    <div class="lg:w-1/3 px-4">
-        <img src="/styleguide/image/268x100" alt="">
-        <p>'.$faker->paragraph.'</p>
-    </div>
-    <div class="lg:w-1/3 px-4">
-        <img src="/styleguide/image/268x100" alt="">
-        <p>'.$faker->paragraph.'</p>
-    </div>
-</div>') !!}
-</pre>
-                </div>
-            </li>
-        </ul>
-
+        <p><strong>Notice: Your heading text and body text cannot be gold.</strong></p>
+        
         <hr>
 
         <h2>Table</h2>

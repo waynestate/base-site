@@ -15,7 +15,7 @@ class BasicColumnLayouts extends Page
             'page' => [
                 'controller' => 'BasicColumnLayoutsController',
                 'title' => 'Basic Column Layouts',
-                'id' => 100100,
+                'id' => 100200,
             ],
         ]);
     }

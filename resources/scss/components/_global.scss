@@ -83,6 +83,26 @@ h6 {
     }
 }
 
+.bar-gold {
+    @apply relative mb-2 pl-3;
+
+    &::before {
+        content: "";
+
+        @apply absolute h-full w-1 left-0 bg-gold ;
+    }
+}
+
+.bar-green {
+    @apply relative mb-2 pl-3;
+
+    &::before {
+        content: "";
+
+        @apply absolute h-full w-1 left-0 bg-green ;
+    }
+}
+
 p,
 dl,
 ol,

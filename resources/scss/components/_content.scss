@@ -28,7 +28,6 @@
     // Images remain at their specified width
     // Text appears above and below for small
     @media (max-width: theme('screens.mt')) {
-        img,
         figure {
             @apply block my-0 mx-auto;
 

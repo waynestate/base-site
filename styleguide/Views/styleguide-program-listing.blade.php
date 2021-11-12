@@ -80,7 +80,7 @@
 
         <hr>
         
-        <h2 class="mb-4">Copy this into the CMS</h2>
+        <h3 class="mb-4">Copy this into the CMS source editor</h3>
 
 <pre class="bg-gray-100 overflow-scroll p-4" tabindex="0">
 {!! htmlspecialchars('
