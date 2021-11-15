@@ -4,7 +4,7 @@ namespace Styleguide\Pages;
 
 use Factories\Page as PageFactory;
 
-class Tablestack extends Page
+class Tables extends Page
 {
     /**
      * {@inheritdoc}
@@ -13,8 +13,8 @@ class Tablestack extends Page
     {
         return app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'TableStackController',
-                'title' => 'Table stack',
+                'controller' => 'TablesController',
+                'title' => 'Tables',
                 'id' => 113100,
             ],
         ]);

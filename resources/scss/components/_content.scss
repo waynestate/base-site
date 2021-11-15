@@ -1,5 +1,22 @@
 // Content returning from CMS
 .content {
+    // Underline all content links
+    a {
+        @apply underline;
+
+        &:hover,
+        &:focus {
+            @apply no-underline;
+        }
+    }
+
+    p,
+    dl,
+    ol,
+    ul {
+        @apply mb-4;
+    }
+
     ul {
         @apply ml-8 list-disc;
     }
@@ -8,102 +25,30 @@
         @apply ml-8 list-decimal;
     }
 
-    blockquote {
-        @apply ml-8 my-8 border-l-4 border-gray-400 pl-4 pt-2 pb-1;
-
-        > *:last-child {
-            @apply mb-2;
-        }
-
-        cite {
-            @apply block mb-4;
-        }
-    }
-
     // Tailwind preflight sets images to block
     img {
         @apply inline;
     }
 
-    // Images remain at their specified width
-    // Text appears above and below for small
-    @media (max-width: theme('screens.mt')) {
-        figure {
-            @apply block my-0 mx-auto;
-
-            &[style*="float:right"],
-            &[style*="float:left"],
-            &.float-right,
-            &.float-left {
-                float: none !important;
-            }
-        }
-    }
-
-    // Floated images can only be 50% of column width for readability
-    @screen mt {
-        img {
-            &[style*="float:right"],
-            &[style*="float:left"] {
-                padding: 0 !important;
-            }
-
-            &[style*="float:right"] {
-                @apply ml-6 my-2 max-w-half;
-            }
-
-            &[style*="float:left"] {
-                @apply mr-6 my-2 max-w-half;
-            }
-        }
-    }
-
-    figure {
-        @apply mt-2 mb-4 mx-auto;
-
-        // Overriding display: inline-block; from CKEditor
-        // so that the caption wraps appropriately
-        display: table !important;
-        padding: 0 !important;
-        clear: both;
-
-        img {
-            padding: 0 !important;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        // Prevent users from having gold text
+        &.text-gold {
+            @apply text-black;
         }
 
-        figcaption {
-            @apply text-sm text-gray-500 text-left;
-
-            display: table-caption;
-            caption-side: bottom;
+        // Header links have a bottom border instead of an underline
+        a {
+            @apply no-underline border-b border-green; 
         }
 
-        @screen mt {
-            @apply w-auto mb-4;
-
-            &[style*="float:right"],
-            &.float-right {
-                @apply ml-6 max-w-half;
-            }
-
-            &[style*="float:left"],
-            &.float-left {
-                @apply mr-6 max-w-half;
-            }
-
-            &[style*="text:center"],
-            &.text-center {
-                @apply ml-auto mr-auto;
-            }
-        }
-    }
-
-    // All content links
-    a {
-        @apply underline;
-
-        &:hover {
-            @apply no-underline;
+        a:hover,
+        a:focus {
+            @apply border-0;
         }
     }
 }

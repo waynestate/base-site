@@ -63,6 +63,7 @@ h6 {
     @apply text-base;
 }
 
+// Heading styles
 .divider-gold {
     @apply relative overflow-hidden mb-2;
 
@@ -103,19 +104,16 @@ h6 {
     }
 }
 
-p,
-dl,
-ol,
-ul {
-    @apply mb-4;
-}
-
 hr {
     @apply border-b border-solid border-gray-200 my-5;
 }
 
 table {
     @apply border-collapse w-full mb-4 text-left;
+
+    caption {
+        @apply text-left pb-2;
+    }
 
     thead tr {
         @apply border border-solid border-green-600;
@@ -146,6 +144,91 @@ table {
 
         &:hover {
             @apply bg-gold-50;
+        }
+    }
+}
+
+blockquote {
+    @apply ml-8 my-8 border-l-4 border-gray-400 pl-4 pt-2 pb-1;
+
+    > *:last-child {
+        @apply mb-2;
+    }
+
+    cite {
+        @apply block mb-4;
+    }
+}
+
+figure {
+    @apply mt-2 mb-4 mx-auto;
+
+    // Overriding display: inline-block; from CKEditor
+    // so that the caption wraps appropriately
+    display: table !important;
+    padding: 0 !important;
+    clear: both;
+
+    img {
+        padding: 0 !important;
+    }
+
+    figcaption {
+        @apply text-sm text-gray-500 text-left;
+
+        display: table-caption;
+        caption-side: bottom;
+    }
+
+    @screen mt {
+        @apply w-auto mb-4;
+
+        &[style*="float:right"],
+        &.float-right {
+            @apply ml-6 max-w-half;
+        }
+
+        &[style*="float:left"],
+        &.float-left {
+            @apply mr-6 max-w-half;
+        }
+
+        &[style*="text:center"],
+        &.text-center {
+            @apply ml-auto mr-auto;
+        }
+    }
+}
+
+// Images remain at their specified width
+// Text appears above and below for small
+@media (max-width: theme('screens.mt')) {
+    figure {
+        @apply block my-0 mx-auto;
+
+        &[style*="float:right"],
+        &[style*="float:left"],
+        &.float-right,
+        &.float-left {
+            float: none !important;
+        }
+    }
+}
+
+// Floated images can only be 50% of column width for readability
+@screen mt {
+    img {
+        &[style*="float:right"],
+        &[style*="float:left"] {
+            padding: 0 !important;
+        }
+
+        &[style*="float:right"] {
+            @apply ml-6 my-2 max-w-half;
+        }
+
+        &[style*="float:left"] {
+            @apply mr-6 my-2 max-w-half;
         }
     }
 }

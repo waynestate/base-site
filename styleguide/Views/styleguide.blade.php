@@ -171,31 +171,6 @@
 
         <hr>
 
-        <div class="row flex flex-wrap -mx-4">
-            <div class="w-full px-4">
-                <h2>Figure</h2>
-
-                <div class="table">
-                    <figure>
-                        @image('/styleguide/image/400x300', 'Example figure image showing the image size of 400x300', 'p-2')
-                        <figcaption>{{ $faker->sentence }}</figcaption>
-                    </figure>
-                </div>
-
-                <pre class="bg-gray-100 overflow-scroll p-4" tabindex="0">
-                {!! htmlspecialchars('
-<figure>
-    <img src="/styleguide/image/400x300" alt="">
-    <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
-</figure>') !!}
-                </pre>
-
-                <a href="/styleguide/figure" class="button mt-4">More options</a>
-            </div>
-        </div>
-
-        <hr>
-
         <h2 class="pb-6">Colors</h2>
 
         <div class="flex flex-col space-y-3 sm:flex-row text-xs sm:space-y-0 sm:space-x-4">
