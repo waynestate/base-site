@@ -1,12 +1,9 @@
-const webpack = require('webpack');
 const mix = require('laravel-mix');
 const fs = require('fs');
 const path = require('path');
-const exec = require('child_process').exec;
 const package = JSON.parse(fs.readFileSync('./package.json'));
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
-const ReplaceInFileWebpackPlugin = require('replace-in-file-webpack-plugin');
+const replace = require('replace-in-file');
 
 /*
  |--------------------------------------------------------------------------
@@ -18,6 +15,23 @@ const ReplaceInFileWebpackPlugin = require('replace-in-file-webpack-plugin');
  | file for your application, as well as bundling up your JS files.
  |
  */
+
+// Copy & Rename Blade Files and Replace date in Footer, necessary to do outside of mix.copy and webpack plugins due to
+// file changes causing infinite loops during make watch.
+fs.copyFileSync('node_modules/@waynestate/wsuheader/dist/header.html', 'resources/views/components/header.blade.php', fs.constants.COPYFILE_FICLONE);
+fs.copyFileSync('node_modules/@waynestate/wsufooter/dist/footer.html', 'resources/views/components/footer.blade.php', fs.constants.COPYFILE_FICLONE);
+fs.copyFileSync('vendor/waynestate/error-404/dist/404.php', 'resources/views/errors/404.blade.php', fs.constants.COPYFILE_FICLONE);
+fs.copyFileSync('vendor/waynestate/error-403/dist/403.php', 'resources/views/errors/403.blade.php', fs.constants.COPYFILE_FICLONE);
+fs.copyFileSync('vendor/waynestate/error-429/dist/429.php', 'resources/views/errors/429.blade.php', fs.constants.COPYFILE_FICLONE);
+fs.copyFileSync('vendor/waynestate/error-500/dist/500.php', 'resources/views/errors/500.blade.php', fs.constants.COPYFILE_FICLONE);
+fs.copyFileSync('vendor/waynestate/error-500/dist/500.php', 'resources/views/errors/500.blade.php', fs.constants.COPYFILE_FICLONE);
+fs.copyFileSync('hooks/pre-commit', '.git/hooks/pre-commit');
+replace.sync({
+    files: 'resources/views/components/footer.blade.php',
+    from: /2\d{3}/g,
+    to: "{{ date('Y') }}",
+});
+
 
 // Error Files
 mix.copy([
@@ -93,51 +107,6 @@ config = {
                 'node_modules'
             ],
         }),
-        /*
-         * This is causing make watch to loop continuously
-         * Needs to be worked out before launch
-         *
-        new CopyWebpackPlugin({
-                    patterns: [
-                        {
-                            from: 'node_modules/@waynestate/wsuheader/dist/header.html',
-                            to: path.resolve('resources/views/components/header.blade.php'),
-                        },
-                        {
-                            from: 'node_modules/@waynestate/wsufooter/dist/footer.html',
-                            to: path.resolve('resources/views/components/footer.blade.php'),
-                        },
-                        {
-                            from: 'vendor/waynestate/error-404/dist/404.php',
-                            to: path.resolve('resources/views/errors/404.blade.php'),
-                        },
-                        {
-                            from: 'vendor/waynestate/error-403/dist/403.php',
-                            to: path.resolve('resources/views/errors/403.blade.php'),
-                        },
-                        {
-                            from: 'vendor/waynestate/error-429/dist/429.php',
-                            to: path.resolve('resources/views/errors/429.blade.php'),
-                        },
-                        {
-                            from: 'vendor/waynestate/error-500/dist/500.php',
-                            to: path.resolve('resources/views/errors/500.blade.php'),
-                        },
-                        {
-                            from: 'hooks',
-                            to: path.resolve('.git/hooks'),
-                        }
-                    ]
-                }),
-        new ReplaceInFileWebpackPlugin([{
-            dir: 'resources/views/components',
-            files: ['footer.blade.php'],
-            rules: [{
-                search: /2\d{3}/,
-                replace: "{{ date('Y') }}"
-            }]
-        }])
-        */
     ],
     devtool: 'source-map'
 };
