@@ -108,6 +108,8 @@ hr {
     @apply border-b border-solid border-gray-200 my-5;
 }
 
+// mobile make table display block and scroll
+
 table {
     @apply border-collapse w-full mb-4 text-left;
 
