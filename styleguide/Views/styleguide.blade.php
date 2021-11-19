@@ -7,13 +7,14 @@
         <p>Welcome to your Styleguide! The styles listed on this page are available to you in the CMS.</p>
 
         <h2>General code formatting</h2>
-        <p class="mb-2">These HTML classes are available for text formatting.Add <code>class=""</code> to a paragraph or span tag.</p>
+        <p class="mb-1">These HTML classes are available for text formatting. Add <code>class="text-lg"</code> to a paragraph or span tag.</p>
         <ul>
             <li>font-normal</li>
             <li><span class="font-bold">font-bold</span></li>
             <li><span class="font-light">font-light</span></li>
             <li><span class="italic">italic</span></li>
             <li><span class="text-sm">text-sm</span></li>
+            <li><span class="text-base">text-base</span></li>
             <li><span class="text-lg">text-lg</span></li>
             <li><span class="text-xl">text-xl</span></li>
         </ul>

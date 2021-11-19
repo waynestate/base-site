@@ -23,6 +23,10 @@ a {
     }
 }
 
+p {
+    @apply mb-4;
+}
+
 // Tailwind preflight sets this to .5 which isn't ADA compliant
 input::placeholder,
 textarea::placeholder {
@@ -242,6 +246,10 @@ a.text-white:-moz-focusring {
 
 code {
     @apply bg-gray-200 py-1 px-2 rounded text-sm;
+}
+
+.code-block {
+    @apply bg-gray-100 overflow-scroll px-4 text-sm mb-8;
 }
 
 footer {

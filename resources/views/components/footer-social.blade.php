@@ -1,7 +1,7 @@
 {{--
     $social => array // ['title','link']
 --}}
-<div class="bg-green-800 py-6 print:hidden">
+<div class="bg-green-700 py-6 print:hidden">
     <div class="row flex justify-center items-center">
         @foreach($social as $item)
             <a href="{{ $item['link'] }}" target="_blank" aria-labelledby="{{ strtolower(trim($item['title'])) }}" rel="noopener" 
