@@ -57,6 +57,16 @@
                 "class_name": "",
                 "relative_url": "/styleguide/tables",
                 "submenu": []
+            },
+            "100400": {
+                "menu_item_id": 100400,
+                "is_active": 1,
+                "page_id": 100400,
+                "target": "",
+                "display_name": "Buttons", 
+                "class_name": "",
+                "relative_url": "/styleguide/buttons",
+                "submenu": []
             }
         }
     },

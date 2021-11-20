@@ -1,0 +1,54 @@
+.content a.button,
+.content a.green-gradient-button,
+.content a.gold-gradient-button,
+.content a.green-button,
+.content a.gold-button {
+    @apply no-underline cursor-pointer inline-block;
+}
+
+.button,
+.green-gradient-button,
+.gold-gradient-button,
+.green-button,
+.gold-button {
+    @apply align-middle mb-2 px-4 py-2 rounded text-center text-sm font-bold;
+}
+
+.button {
+    @apply bg-gray-200 text-green;
+
+    &:hover {
+        @apply bg-gray-100;
+    }
+}
+
+.green-gradient-button,
+.green-button {
+    @apply bg-green text-white;
+
+    &:hover {
+        @apply bg-green-800;
+    }
+}
+
+.content .green-gradient-button {
+    background-image: radial-gradient(200% 100% at 50% 100%, rgba(#05211e, 0.9) 10%, transparent 100%);
+}
+
+.gold-gradient-button {
+    @apply bg-gold-200 text-green-900;
+
+    background-image: radial-gradient(200% 100% at 50% 100%, rgba(#edbd2c, 0.9) 10%, transparent 100%);
+
+    &:hover {
+        @apply bg-gold-300;
+    }
+}
+
+.gold-button {
+    @apply bg-gold text-green-900;
+
+    &:hover {
+        @apply bg-gold-300;
+    }
+}

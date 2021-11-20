@@ -33,125 +33,8 @@ textarea::placeholder {
     @apply opacity-100 text-gray-500;
 }
 
-// Global headings
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    @apply font-bold;
-}
-
-h1 {
-    @apply text-4xl mb-2;
-}
-
-h2 {
-    @apply text-3xl mb-1;
-}
-
-h3 {
-    @apply text-2xl;
-}
-
-h4 {
-    @apply text-xl;
-}
-
-h5 {
-    @apply text-lg;
-}
-
-h6 {
-    @apply text-base;
-}
-
-// Heading styles
-.divider-gold {
-    @apply relative overflow-hidden mb-2;
-
-    &::after {
-        content: "";
-
-        @apply absolute inline w-full h-0.5 ml-4 top-1/2 bottom-auto bg-gold;
-    }
-}
-
-.divider-green {
-    @apply relative overflow-hidden mb-2;
-
-    &::after {
-        content: "";
-
-        @apply absolute inline w-full h-0.5 ml-4 top-1/2 bottom-auto bg-green;
-    }
-}
-
-.bar-gold {
-    @apply relative mb-2 pl-3;
-
-    &::before {
-        content: "";
-
-        @apply absolute h-full w-1 left-0 bg-gold ;
-    }
-}
-
-.bar-green {
-    @apply relative mb-2 pl-3;
-
-    &::before {
-        content: "";
-
-        @apply absolute h-full w-1 left-0 bg-green ;
-    }
-}
-
 hr {
     @apply border-b border-solid border-gray-200 my-5;
-}
-
-// mobile make table display block and scroll
-
-table {
-    @apply border-collapse w-full mb-4 text-left;
-
-    caption {
-        @apply text-left pb-2;
-    }
-
-    thead tr {
-        @apply border border-solid border-green-600;
-
-        th {
-            @apply bg-green-600 font-bold px-4 py-3 text-white leading-none;
-        }
-
-        a {
-            @apply text-white;
-        }
-    }
-
-    tbody tr {
-        @apply border border-gray-300 border-t-0 border-solid align-top;
-
-        td {
-            @apply text-sm px-4 py-2;
-        }
-
-        &:nth-child(odd) {
-            @apply bg-gray-200;
-        }
-
-        &:nth-child(even) {
-            @apply bg-gray-100;
-        }
-
-        &:hover {
-            @apply bg-gold-50;
-        }
-    }
 }
 
 blockquote {
@@ -252,6 +135,7 @@ code {
     @apply bg-gray-100 overflow-scroll px-4 text-sm mb-8;
 }
 
+// Keep footer at the bottom of the browser
 footer {
     @apply mt-auto;
 }

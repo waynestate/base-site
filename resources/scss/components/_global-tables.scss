@@ -1,0 +1,88 @@
+table {
+    @apply text-left mb-4 w-full;
+
+    &:not([class]),
+    &.table-sort {
+        @apply block whitespace-nowrap overflow-x-auto border-collapse;
+    }
+
+    @screen mt {
+        &:not([class]),
+        &.table-sort {
+            @apply table;
+        }
+    }
+
+    caption {
+        @apply text-left pb-2;
+
+        min-width: calc(100vw - 2rem);
+    }
+
+    @screen mt {
+        caption {
+            min-width: auto;
+        }
+    }
+
+    thead tr {
+        @apply border border-solid border-green-600;
+
+        th {
+            @apply bg-green-600 font-bold px-4 py-3 text-white leading-none;
+        }
+
+        a {
+            @apply text-white;
+        }
+    }
+
+    tbody tr {
+        @apply border border-gray-300 border-t-0 border-solid align-top;
+
+        td {
+            @apply text-sm px-4 py-2;
+        }
+
+        &:nth-child(odd) {
+            @apply bg-gray-200;
+        }
+
+        &:nth-child(even) {
+            @apply bg-gray-100;
+        }
+
+        &:hover {
+            @apply bg-gold-50;
+        }
+    }
+}
+
+.table-stack {
+    @media (max-width: theme('screens.md')) {
+        @apply w-full;
+
+        // Hide table head
+        thead tr {
+            @apply absolute;
+
+            top: -9999em;
+            left: -9999em;
+        }
+
+        tbody tr {
+            @apply block mb-2 py-2 align-top border-t border-gray-300 rounded;
+        }
+
+        tbody td {
+            @apply flex px-4 pt-0 pb-1 my-2;
+        }
+
+        // Add data labels
+        td::before {
+            @apply block font-bold pr-1.5;
+
+            content: attr(data-label) ":";
+        }
+    }
+}

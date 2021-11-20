@@ -8,7 +8,7 @@
 
         <h2>Basic table</h2>
         <table>
-            <caption>Describe your table for screen readers in the caption.</caption>
+            <caption>Describe your table for screen readers in the caption. Use <code>class="visually-hidden"</code> to hide it from sighted users.</caption>
             <thead>
                 <tr>
                     <th scope="col">First name</th>
@@ -29,12 +29,11 @@
                 @endfor
             </tbody>
         </table>
-        </div>
 
-        <pre class="bg-gray-100 overflow-scroll p-4" tabindex="0">
+        <pre class="code-block" tabindex="0">
         {!! htmlspecialchars('
 <table>
-    <caption>Describe your table for screen readers in the caption.</caption>
+    <caption>Describe your table for screen readers in the caption. Use class="visually-hidden" to hide from sighted users.</caption>
     <thead>
         <tr>
             <th scope="col">Column 1</th>
@@ -49,6 +48,11 @@
             <td>Data for col 2</td>
             <td>Data for col 3</td>
         </tr>
+        <tr>
+            <td>Data for col 1</td>
+            <td>Data for col 2</td>
+            <td>Data for col 3</td>
+        </tr>
     </tbody>
 </table>') !!}
         </pre>
@@ -57,7 +61,7 @@
         <h2>Sortable table</h2>
 
         <table class="table-sort">
-            <caption>Example table with fake contact information</caption>
+            <caption>Describe your table for screen readers in the caption. Use <code>class="visually-hidden"</code> to hide it from sighted users.</caption>
             <thead>
                 <tr>
                     <th scope="col">First name</th>
@@ -77,23 +81,28 @@
             </tbody>
         </table>
 
-        <pre class="bg-gray-100 overflow-scroll p-4" tabindex="0">
+        <pre class="code-block" tabindex="0">
         {!! htmlspecialchars('
 <table class="table-sort">
-    <caption>Example table with caption</caption>
+    <caption>Describe your table for screen readers in the caption. Use class="visually-hidden" to hide from sighted users.</caption>
     <thead>
         <tr>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
+            <th scope="col">Column 1</th>
+            <th scope="col">Column 2</th>
+            <th scope="col">Column 3</th>
         </tr>
     </thead>
 
     <tbody>
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>Data for col 1</td>
+            <td>Data for col 2</td>
+            <td>Data for col 3</td>
+        </tr>
+        <tr>
+            <td>Data for col 1</td>
+            <td>Data for col 2</td>
+            <td>Data for col 3</td>
         </tr>
     </tbody>
 </table>') !!}
@@ -104,7 +113,7 @@
         <h2>Responsive table</h2>
 
         <table class="table-stack">
-            <caption>Describe your table for screen readers in the caption.</caption>
+            <caption>Describe your table for screen readers in the caption. Use <code>class="visually-hidden"</code> to hide it from sighted users.</caption>
             <thead>
                 <tr>
                     <th scope="col">First name</th>
@@ -124,10 +133,10 @@
             </tbody>
         </table>
 
-        <pre class="bg-gray-100 overflow-scroll p-4" tabindex="0">
+        <pre class="code-block" tabindex="0">
         {!! htmlspecialchars('
 <table class="table-stack">
-    <caption>Describe your table for screen readers in the caption.</caption>
+    <caption>Describe your table for screen readers in the caption. Use class="visually-hidden" to hide from sighted users.</caption>
     <thead>
         <tr>
             <th scope="col">Column 1</th>
