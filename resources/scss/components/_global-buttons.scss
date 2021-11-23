@@ -1,54 +1,61 @@
-.content a.button,
-.content a.green-gradient-button,
-.content a.gold-gradient-button,
-.content a.green-button,
-.content a.gold-button {
-    @apply no-underline cursor-pointer inline-block;
-}
-
-.button,
-.green-gradient-button,
-.gold-gradient-button,
-.green-button,
-.gold-button {
-    @apply align-middle mb-2 px-4 py-2 rounded text-center text-sm font-bold;
-}
-
 .button {
-    @apply bg-gray-200 text-green;
+    @apply bg-gray-200 text-green align-middle mb-2 px-4 py-2 rounded text-center text-sm font-bold inline-block transition-all;
 
     &:hover {
         @apply bg-gray-100;
     }
 }
 
-.green-gradient-button,
+.button--two-line {
+    @apply text-left;
+
+    & > *:nth-of-type(1) {
+        @apply block text-lg xl:text-xl leading-tight not-italic;
+    }
+
+    & > *:nth-of-type(2) {
+        @apply text-sm pb-1 leading-tight font-normal not-italic;
+    }
+}
+
 .green-button {
+    @extend .button;
+
     @apply bg-green text-white;
 
     &:hover {
-        @apply bg-green-800;
+        @apply bg-green-600;
     }
 }
 
-.content .green-gradient-button {
-    background-image: radial-gradient(200% 100% at 50% 100%, rgba(#05211e, 0.9) 10%, transparent 100%);
-}
+.green-gradient-button {
+    @extend .green-button;
 
-.gold-gradient-button {
-    @apply bg-gold-200 text-green-900;
-
-    background-image: radial-gradient(200% 100% at 50% 100%, rgba(#edbd2c, 0.9) 10%, transparent 100%);
-
-    &:hover {
-        @apply bg-gold-300;
-    }
+    background-image: radial-gradient(200% 100% at 50% 100%, theme('colors.green.700') 25%, transparent 100%);
 }
 
 .gold-button {
-    @apply bg-gold text-green-900;
+    @extend .button;
+
+    @apply bg-gold text-green-800;
 
     &:hover {
-        @apply bg-gold-300;
+        @apply bg-gold-200;
     }
+}
+
+.gold-gradient-button {
+    @extend .button;
+
+    @apply bg-gold-200 text-green-800;
+
+    background-image: radial-gradient(200% 100% at 50% 100%, theme('colors.gold.500'), 50%, transparent 100%);
+
+    &:hover {
+        @apply bg-gold-100;
+    }
+}
+
+.content a[class*="button"] {
+    @apply no-underline cursor-pointer;
 }

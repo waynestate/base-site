@@ -78,7 +78,6 @@ module.exports = {
         ]
     },
     theme: {
-        colors: twColors,
         screens: screens,
         fontFamily: {
             'sans': [
