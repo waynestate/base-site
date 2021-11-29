@@ -71,7 +71,6 @@
 <pre class="code-block" tabindex="0">
 {!! htmlspecialchars('<h2 class="divider-gold font-normal text-green my-4">Two columns with list</h2>
 <div class="two-col-layout">
-    <!-- Item one -->
     <div class="md:w-2/3">
         <p>'.$faker->text(400).'</p>
         <p><a href="#" class="button">'.ucfirst(implode(' ',$faker->words(2))).'</a></p>
@@ -82,8 +81,6 @@
             <li><a href="#">'.ucfirst(implode(' ',$faker->words(4))).'</a></li>
         </ul>
     </div>
-
-    <!-- Duplicate this item as many times as necessary -->
 </div>') !!}
 </pre>
         <h2 class="divider-gold text-green font-normal mt-8 mb-4">Two column grid</h2>
