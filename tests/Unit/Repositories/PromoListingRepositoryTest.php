@@ -5,6 +5,7 @@ namespace Tests\Unit\Repositories;
 use App\Repositories\PromoListingRepository;
 use Factories\Page;
 use Factories\PromoListing;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 use Mockery as Mockery;
 use Waynestate\Api\Connector;
@@ -17,10 +18,12 @@ class PromoListingRepositoryTest extends TestCase
      */
     public function getting_promos_listing_as_listing_should_return_listing_array()
     {
+        $promo_group_id = $this->faker->numberbetween(1, 3);
+
         // Fake return
-        $return = [
-            'promos' => [],
-        ];
+        $return['promotions'] = app(PromoListing::class)->create(5, false, [
+            'promo_group_id' => $promo_group_id,
+        ]);
 
         // Create a fake data request
         $data = app(Page::class)->create(1, true, [
@@ -28,7 +31,7 @@ class PromoListingRepositoryTest extends TestCase
                 'controller' => 'PromoListingPromos',
             ],
             'data' => [
-                'listing_promo_group_id' => $this->faker->numberbetween(1, 3),
+                'listing_promo_group_id' => $promo_group_id,
             ],
         ]);
 
@@ -38,7 +41,8 @@ class PromoListingRepositoryTest extends TestCase
 
         // Get the promos
         $promos = app(PromoListingRepository::class, ['wsuApi' => $wsuApi])->getPromoListingPromos($data);
-        $this->assertTrue(is_array($promos));
+
+        $this->assertCount(count($return['promotions']), $promos['promos']);
     }
 
     /**
@@ -49,7 +53,7 @@ class PromoListingRepositoryTest extends TestCase
     {
         // Fake return
         $return = [
-            'promos' => [],
+            'promotions' => [],
         ];
 
         // Create a fake data request
@@ -69,6 +73,44 @@ class PromoListingRepositoryTest extends TestCase
         // Get the promos
         $promos = app(PromoListingRepository::class, ['wsuApi' => $wsuApi])->getPromoListingPromos($data);
         $this->assertTrue(is_array($promos));
+    }
+
+    /**
+     * @covers \App\Repositories\PromoListingRepository::getPromoListingPromos
+     * @test
+     */
+    public function getting_promos_listing_with_promotion_view_boolean_true_should_return_with_view_link()
+    {
+        $promo_group_id = $this->faker->numberbetween(1, 3);
+
+        // Fake return
+        $return['promotions'] = app(PromoListing::class)->create(5, false, [
+            'promo_group_id' => $promo_group_id,
+        ]);
+
+        // Create a fake data request
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'PromoListingPromos',
+            ],
+            'data' => [
+                'listing_promo_group_id' => $promo_group_id,
+                'promotion_view_boolean' => 'true',
+            ],
+        ]);
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
+
+        // Get the promos
+        $promos = app(PromoListingRepository::class, ['wsuApi' => $wsuApi])->getPromoListingPromos($data);
+
+        collect($promos['promos'])->each(function ($promo) {
+            $expected = 'view/'.Str::slug($promo['title']).'-'.$promo['promo_item_id'];
+
+            $this->assertEquals($expected, $promo['link']);
+        });
     }
 
     /**

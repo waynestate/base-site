@@ -34,7 +34,7 @@ class PromoListingController extends Controller
      */
     public function index(Request $request)
     {
-        $promos = $this->promo->getPromoListingPromos($request->data);
+        $promos = $this->promo->getPromoListingPromos($request->data['base']);
 
         if (!empty($request->data['base']['data']['listing_promo_group_id'])) {
             return view('promo-listing', merge($request->data, $promos));
