@@ -4,7 +4,7 @@
     @include('components.page-title', ['title' => $base['page']['title']])
 
     <div class="content">
-        <h2 class="mt-4 divider-gold text-green font-normal">Single row of two columns layout</h2>
+        <h2 class="mt-4 divider-gold text-green font-normal">Two column row</h2>
 
         <div class="single-row-two-col-layout">
             <img src="/styleguide/image/300x200" alt="">
@@ -15,12 +15,12 @@
         </div>
 
         <div class="single-row-two-col-layout">
-            <p>{{ $faker->text(450) }}</p>
-            <img src="/styleguide/image/150x150" alt="">
+            <div>
+                <p>{{ $faker->text(250) }}</p>
+                <p>{{ $faker->text(250) }}</p>
+            </div>
+            <img src="/styleguide/image/300x200" alt="">
         </div>
-
-        <h3>Copy this into the CMS source editor</h3>
-        <p>Show as many items as you want by duplicating the identified section below</p>
 
 <pre class="code-block" tabindex="0">
 {!! htmlspecialchars('
@@ -43,7 +43,7 @@
 <!-- Duplicate as many items as you need -->
 ') !!}
 </pre>
-        <h2 class="mt-4 divider-gold text-green font-normal">Grid of two columns layout</h2>
+        <h2 class="mt-4 divider-gold text-green font-normal">Two column grid</h2>
 
         <div class="grid-two-col-layout">
             <div>
@@ -66,9 +66,6 @@
                 <p>{{ $faker->text(50) }}</p>
             </div>
         </div>
-
-        <h3>Copy this into the CMS source editor</h3>
-        <p>Show as many items as you want by duplicating the identified section below</p>
 
 <pre class="code-block" tabindex="0">
 {!! htmlspecialchars('
@@ -102,7 +99,7 @@
 ') !!}
 </pre>
 
-        <h2 class="mt-8 divider-gold text-green font-normal">Three column layout</h2>
+        <h2 class="mt-8 divider-gold text-green font-normal">Three column grid</h2>
 
         <div class="grid-three-col-layout">
             <div>
@@ -131,9 +128,6 @@
             </div>
 
         </div>
-
-        <h3>Copy this into the CMS</h3>
-        <p>Show as many items as you want by duplicating the identified section below</p>
 
 <pre class="code-block" tabindex="0">
 {!! htmlspecialchars('

@@ -4,12 +4,12 @@
     @include('components.page-title', ['title' => $base['page']['title']])
 
     <div class="content">
-        <p>Example usage: <code>text-green-600</code> or <code>text-gold</code></p>
+        <p>Example usage: <code>text-green-600</code> or <code>text-gold</code>. When you need to use our palette in CSS where it's not an existing Tailwind property like a gradient stop, use <code>theme('colors.gold.DEFAULT')</code> or <code>theme('colors.gold.500')</code>.</p>
         <div class="flex flex-col space-y-3 sm:flex-row text-xs sm:space-y-0 sm:space-x-4">
             <div class="w-32 flex-shrink-0">
                 <div class="h-10 flex flex-col justify-center">
                     <div class="text-sm font-semibold text-gray-900">Green</div>
-                    <code class="text-xs text-gray-900">baseColors.green</code>
+                    <code class="text-xs text-gray-900">colors.green</code>
                 </div>
             </div>
             <div class="min-w-0 flex-1 grid grid-cols-2 md:grid-cols-5 2xl:grid-cols-10 gap-x-4 gap-y-3 2xl:gap-x-2">
@@ -89,7 +89,7 @@
             <div class="w-32 flex-shrink-0">
                 <div class="h-10 flex flex-col justify-center">
                     <div class="text-sm font-semibold text-gray-900">Gold</div>
-                    <code class="text-xs text-gray-900">baseColors.gold</code>
+                    <code class="text-xs text-gray-900">colors.gold</code>
                 </div>
             </div>
             <div class="min-w-0 flex-1 grid grid-cols-2 md:grid-cols-5 2xl:grid-cols-10 gap-x-4 gap-y-3 2xl:gap-x-2">

@@ -18,6 +18,16 @@
                 "relative_url": "/styleguide",
                 "submenu": []
             },
+            "100900": {
+                "menu_item_id": 100900,
+                "is_active": 1,
+                "page_id": 100900,
+                "target": "",
+                "display_name": "Heading styles",
+                "class_name": "",
+                "relative_url": "/styleguide/headingstyles",
+                "submenu": []
+            },
             "100200": {
                 "menu_item_id": 100200,
                 "is_active": 1,
