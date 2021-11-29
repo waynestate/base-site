@@ -4,7 +4,7 @@ namespace Styleguide\Pages;
 
 use Factories\Page as PageFactory;
 
-class ProgramListing extends Page
+class BasicLayouts extends Page
 {
     /**
      * {@inheritdoc}
@@ -13,9 +13,9 @@ class ProgramListing extends Page
     {
         return app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'ProgramListingController',
-                'title' => 'Program listing',
-                'id' => 100300,
+                'controller' => 'BasicLayoutsController',
+                'title' => 'Basic layouts',
+                'id' => 100200,
             ],
         ]);
     }

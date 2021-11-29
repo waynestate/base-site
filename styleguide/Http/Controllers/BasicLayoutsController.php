@@ -7,7 +7,7 @@ use Factories\Accordion;
 use Illuminate\Http\Request;
 use Faker\Factory;
 
-class BasicColumnLayoutsController extends Controller
+class BasicLayoutsController extends Controller
 {
     /**
      * Construct the controller.
@@ -27,6 +27,6 @@ class BasicColumnLayoutsController extends Controller
      */
     public function index(Request $request)
     {
-        return view('styleguide-basic-column-layouts', merge($request->data, $this->faker));
+        return view('styleguide-basic-layouts', merge($request->data, $this->faker));
     }
 }

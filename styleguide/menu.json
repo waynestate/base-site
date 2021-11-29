@@ -28,46 +28,6 @@
                 "relative_url": "/styleguide/headingstyles",
                 "submenu": []
             },
-            "100200": {
-                "menu_item_id": 100200,
-                "is_active": 1,
-                "page_id": 100200,
-                "target": "",
-                "display_name": "Basic column layouts",
-                "class_name": "",
-                "relative_url": "/styleguide/basiccolumnlayouts",
-                "submenu": []
-            },
-            "100300": {
-                "menu_item_id": 100300,
-                "is_active": 1,
-                "page_id": 100300,
-                "target": "",
-                "display_name": "Program listing",
-                "class_name": "",
-                "relative_url": "/styleguide/programlisting",
-                "submenu": []
-            },
-            "115100": {
-                "menu_item_id": 115100,
-                "is_active": 1,
-                "page_id": 115100,
-                "target": "",
-                "display_name": "Figure",
-                "class_name": "",
-                "relative_url": "/styleguide/figure",
-                "submenu": []
-            },
-            "113100": {
-                "menu_item_id": 113100,
-                "is_active": 1,
-                "page_id": 113100,
-                "target": "",
-                "display_name": "Tables",
-                "class_name": "",
-                "relative_url": "/styleguide/tables",
-                "submenu": []
-            },
             "100400": {
                 "menu_item_id": 100400,
                 "is_active": 1,
@@ -86,6 +46,36 @@
                 "display_name": "Video",
                 "class_name": "",
                 "relative_url": "/styleguide/video",
+                "submenu": []
+            },
+            "113100": {
+                "menu_item_id": 113100,
+                "is_active": 1,
+                "page_id": 113100,
+                "target": "",
+                "display_name": "Tables",
+                "class_name": "",
+                "relative_url": "/styleguide/tables",
+                "submenu": []
+            },
+            "115100": {
+                "menu_item_id": 115100,
+                "is_active": 1,
+                "page_id": 115100,
+                "target": "",
+                "display_name": "Figure",
+                "class_name": "",
+                "relative_url": "/styleguide/figure",
+                "submenu": []
+            },
+            "100200": {
+                "menu_item_id": 100200,
+                "is_active": 1,
+                "page_id": 100200,
+                "target": "",
+                "display_name": "Basic layouts",
+                "class_name": "",
+                "relative_url": "/styleguide/basiclayouts",
                 "submenu": []
             },
             "100800": {

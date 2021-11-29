@@ -1,4 +1,4 @@
-.single-row-two-col-layout {
+.two-col-layout {
     @apply md:flex items-start md:space-x-4;
 
     & > * {
@@ -6,8 +6,6 @@
     }
 
     img {
-        @apply flex-shrink-0;
-
         padding: 0 !important;
     }
 }
