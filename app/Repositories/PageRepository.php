@@ -28,7 +28,7 @@ class PageRepository implements RequestDataRepositoryContract, PageRepositoryCon
             return redirect('/styleguide');
         }
 
-        abort('404');
+        return abort('404');
     }
 
     /**
