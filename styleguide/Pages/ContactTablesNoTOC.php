@@ -12,8 +12,13 @@ class ContactTablesNoTOC extends Page
     public function getPageData()
     {
         return app(PageFactory::class)->create(1, true, [
+            'site' => [
+                'people' => [
+                    'site_id' => 1,
+                ],
+            ],
             'data' => [
-                'profile_group_id' => '0|1|2|3',
+                'profile_group_id' => '0,1,2,3',
                 'table_of_contents' => 'hide',
             ],
             'page' => [
@@ -23,7 +28,7 @@ class ContactTablesNoTOC extends Page
                 'content' => ['main' => '<p>In order to choose which groups show:</p>
     <ol>
         <li>Add a custom field named "profile_group_id"</li>
-        <li>Add in the IDs of the groups separated by the "|" character</li>
+        <li>Add in the IDs of the groups separated by the "," character</li>
         <li>Groups will be displayed in the order they are entered in the custom field</li>
     </ol>
     <p>In order to hide the table of contents:</p>

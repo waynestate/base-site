@@ -31,7 +31,7 @@ class ProfileController extends Controller
     public function index(Request $request)
     {
         // Determine what site to pull profiles from
-        $site_id = !empty($request->data['base']['data']['profile_site_id']) ? $request->data['base']['data']['profile_site_id'] : $request->data['base']['site']['id'];
+        $site_id = $this->profile->getSiteID($request->data['base']);
 
         // Determine if we are forcing the profiles from custom page data
         $forced_profile_group_id = !empty($request->data['base']['data']['profile_group_id']) ? $request->data['base']['data']['profile_group_id'] : null;
@@ -73,7 +73,7 @@ class ProfileController extends Controller
         }
 
         // Determine what site to pull profiles from
-        $site_id = !empty($request->data['base']['data']['profile_site_id']) ? $request->data['base']['data']['profile_site_id'] : $request->data['base']['site']['id'];
+        $site_id = $this->profile->getSiteID($request->data['base']);
 
         // Get the profile information
         $profile = $this->profile->getProfile($site_id, $request->accessid);

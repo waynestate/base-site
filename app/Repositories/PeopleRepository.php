@@ -2,20 +2,16 @@
 
 namespace App\Repositories;
 
+use Contracts\Repositories\ProfileRepositoryContract;
+use Illuminate\Cache\Repository;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Waynestate\Api\Connector;
-use Illuminate\Cache\Repository;
-use Waynestate\Promotions\ParsePromos;
-use Contracts\Repositories\ProfileRepositoryContract;
+use Waynestate\Api\People;
 
-class ProfileRepository implements ProfileRepositoryContract
+class PeopleRepository implements ProfileRepositoryContract
 {
-    /** @var Connector */
-    protected $wsuApi;
-
-    /** @var ParsePromos */
-    protected $parsePromos;
+    /** @var People */
+    protected $peopleApi;
 
     /** @var Repository */
     protected $cache;
@@ -23,51 +19,66 @@ class ProfileRepository implements ProfileRepositoryContract
     /**
      * Construct the repository.
      *
-     * @param Connector $wsuApi
-     * @param ParsePromos $parsePromos
+     * @param people $peopleApi
      * @param Repository $cache
      */
-    public function __construct(Connector $wsuApi, ParsePromos $parsePromos, Repository $cache)
+    public function __construct(People $peopleApi, Repository $cache)
     {
-        $this->wsuApi = $wsuApi;
-        $this->parsePromos = $parsePromos;
+        $this->peopleApi = $peopleApi;
         $this->cache = $cache;
     }
 
     /**
-     * {@inheritdoc}
+     * Get the profile listing.
+     *
+     * @param int $site_id
+     * @param int $selected_group
+     * @return array
      */
     public function getProfiles($site_id, $selected_group = null)
     {
         $params = [
-            'method' => 'profile.users.listing',
             'site_id' => $site_id,
+            'method' => 'sites/'.$site_id.'/users',
             'groups' => $selected_group,
+            'env' => config('app.env'),
         ];
 
-        $profile_listing = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
-            $this->wsuApi->nextRequestProduction();
-
-            return $this->wsuApi->sendRequest($params['method'], $params);
+        $profiles = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+            try {
+                return $this->peopleApi->request($params['method'], $params);
+            } catch (\Exception $e) {
+                return [];
+            }
         });
 
-        // Build the link
-        if (empty($profile_listing['error'])) {
-            $profile_listing = collect($profile_listing)->map(function ($item) {
-                $item['link'] = '/profile/'.$item['data']['AccessID'];
+        $profile_return['profiles'] = [];
+        if (!empty($profiles['data'])) {
+            $profile_return['profiles'] = collect($profiles['data'])->mapWithKeys(function ($profile) {
+                $profile['link'] = '/profile/'.$profile['accessid'];
 
-                return $item;
-            })->toArray();
+                foreach ($profile['field_data'] as $data) {
+                    $profile['data'][$data['field']['name']] = $data['value'];
+                }
+                $profile['data']['AccessID'] = $profile['accessid'];
+
+                $profile['groups'] = collect($profile['groups'])->keyBy('id')->toArray();
+
+                return [$profile['data']['AccessID'] => $profile];
+            })
+            ->sortBy('last_name')
+            ->toArray();
         }
 
-        // Make sure the return is an array
-        $profiles['profiles'] = empty($profile_listing['error']) ? $profile_listing : [];
-
-        return $profiles;
+        return $profile_return;
     }
 
     /**
-     * {@inheritdoc}
+     * Gets the profiles based on promo_group_id custom field and generates anchors for each group
+     *
+     * @param int $site_id
+     * @param string $groups
+     * @return array
      */
     public function getProfilesByGroup($site_id)
     {
@@ -82,12 +93,10 @@ class ProfileRepository implements ProfileRepositoryContract
 
         // Organize profiles by the group they are in keyed by accessid
         $grouped = collect($all_profiles['profiles'])->keyBy('data.AccessID')
-        ->groupBy([
-            function ($profile) {
-                return $profile['groups'];
-            },
-        ], $preserveKeys = true)
-        ->toArray();
+            ->groupBy(function ($profile) {
+                return collect($profile['groups'])->pluck('name')->toArray();
+            })
+            ->toArray();
 
         // Follow the ordering of groups from the CMS
         $profiles['profiles'] = $this->sortGroupsByDisplayOrder($grouped, $dropdown_groups['dropdown_groups']);
@@ -123,17 +132,18 @@ class ProfileRepository implements ProfileRepositoryContract
     {
         $profile_listing = $this->getProfiles($site_id);
 
-        $group_order = explode('|', $groups);
+        $group_order = explode(',', $groups);
 
-        $profiles = [];
+        $profiles['profiles'] = [];
 
         // Retain the order of the groups as they were piped in
         if (!empty($profile_listing)) {
             foreach ($group_order as $group) {
                 foreach ($profile_listing['profiles'] as $profile) {
                     if (array_key_exists($group, $profile['groups'])) {
-                        $profiles['profiles'][$profile['groups'][$group]][] = $profile;
-                        $profiles['anchors'][$profile['groups'][$group]] = Str::slug($profile['groups'][$group]);
+                        $group_name = $profile['groups'][$group]['name'];
+                        $profiles['profiles'][$group_name][] = $profile;
+                        $profiles['anchors'][$group_name] = Str::slug($group_name);
                     }
                 }
             }
@@ -141,6 +151,7 @@ class ProfileRepository implements ProfileRepositoryContract
 
         return $profiles;
     }
+
 
     /**
      * {@inheritdoc}
@@ -161,50 +172,43 @@ class ProfileRepository implements ProfileRepositoryContract
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function getGroupIds($selected_group, $forced_profile_group_id, $dropdown_groups)
-    {
-        // Use the selected group or the forced one from custom page fields
-        $group_ids = $forced_profile_group_id === null ? $selected_group : $forced_profile_group_id;
-
-        // Use all the IDs from the dropdown since the initial selection is "All Profiles"
-        if ($group_ids === null) {
-            $group_ids = ltrim(implode(array_keys($dropdown_groups), '|'), '|');
-        }
-
-        return $group_ids;
-    }
-
-    /**
-     * {@inheritdoc}
+     * Get the dropdown of groups.
+     *
+     * @param int $site_id
+     * @return array
      */
     public function getDropdownOfGroups($site_id)
     {
         $params = [
-            'method' => 'profile.groups.listing',
-            'site_id' => $site_id,
+            'method' => 'sites/'.$site_id.'/groups',
+            'env' => config('app.env'),
         ];
 
         $profile_groups = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
-            $this->wsuApi->nextRequestProduction();
-
-            return $this->wsuApi->sendRequest($params['method'], $params);
+            try {
+                return $this->peopleApi->request($params['method'], $params);
+            } catch (\Exception $e) {
+                return [];
+            }
         });
 
-        // Filter down the groups based on the parent group from the config
-        $profile_groups['results'] = collect($profile_groups['results'])
-            ->filter(function ($item) {
-                return (int) $item['parent_id'] === config('base.profile_parent_group_id');
-            })
-            ->toArray();
+        if (!empty($profile_groups['data'])) {
+            // Filter down the groups based on the parent group from the config
+            $profile_groups['data'] = collect($profile_groups['data'])
+                ->filter(function ($item) {
+                    return (int)$item['parent_id'] === config('base.profile_parent_group_id');
+                })
+                ->toArray();
 
-        // Only return the display name ordered by the display order
-        $groupsArray = collect($profile_groups['results'])
-            ->sortBy('display_order')
-            ->map(function ($item) {
-                return $item['display_name'];
-            })->toArray();
+            // Only return the display name ordered by the display order
+            $groupsArray = collect($profile_groups['data'])
+                ->sortBy('display_order')
+                ->mapWithKeys(function ($item) {
+                    return [$item['id'] => $item['name']];
+                })->toArray();
+        } else {
+            $groupsArray = [];
+        }
 
         $groups['dropdown_groups'] = ['' => 'All Profiles'] + $groupsArray;
 
@@ -214,23 +218,54 @@ class ProfileRepository implements ProfileRepositoryContract
     /**
      * {@inheritdoc}
      */
+    public function getGroupIds($selected_group, $forced_profile_group_id, $dropdown_groups)
+    {
+        // Use the selected group or the forced one from custom page fields
+        $group_ids = $forced_profile_group_id === null ? $selected_group : $forced_profile_group_id;
+
+        // Use all the IDs from the dropdown since the initial selection is "All Profiles"
+        if ($group_ids === null) {
+            $group_ids = ltrim(implode(array_keys($dropdown_groups), ','), ',');
+        }
+
+        return $group_ids;
+    }
+
+    /**
+     * Get the persons profile information.
+     *
+     * @param int $site_id
+     * @param string $accessid
+     * @return array
+     */
     public function getProfile($site_id, $accessid)
     {
         $params = [
-            'method' => 'profile.users.view',
             'site_id' => $site_id,
-            'accessid' => $accessid,
+            'method' => 'users/'.$accessid.'/sites/'.$site_id,
+            'env' => config('app.env'),
         ];
 
-        $profiles = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
-            $this->wsuApi->nextRequestProduction();
-
-            return $this->wsuApi->sendRequest($params['method'], $params);
+        $profile = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+            try {
+                return $this->peopleApi->request($params['method'], $params);
+            } catch (\Exception $e) {
+                return [];
+            }
         });
 
-        $profile['profile'] = empty($profiles['error']) ? Arr::get($profiles['profiles'], $site_id, []) : [];
+        $profile_return['profile'] = [];
+        if (!empty($profile['data'])) {
+            $profile['data']['link'] = '/profile/'.$profile['data']['accessid'];
 
-        return $profile;
+            foreach ($profile['data']['field_data'] as $data) {
+                $profile['data']['data'][$data['field']['name']] = $data['value'];
+            }
+
+            $profile_return['profile'] = $profile['data'];
+        }
+
+        return $profile_return;
     }
 
     /**

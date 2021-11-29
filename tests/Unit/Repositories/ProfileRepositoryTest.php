@@ -2,20 +2,15 @@
 
 namespace Tests\Unit\Repositories;
 
-use App\Repositories\ProfileRepository;
-use Factories\ApiError;
-use Factories\Profile;
-use Factories\ProfileGroup;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 use Mockery as Mockery;
-use Waynestate\Api\Connector;
 
 class ProfileRepositoryTest extends TestCase
 {
     /**
-     * @covers \App\Repositories\ProfileRepository::__construct
-     * @covers \App\Repositories\ProfileRepository::getDropdownOptions
+     * @covers App\Repositories\ProfileRepository::__construct
+     * @covers App\Repositories\ProfileRepository::getDropdownOptions
      * @test
      */
     public function getting_dropdown_options_should_return_options()
@@ -24,31 +19,31 @@ class ProfileRepositoryTest extends TestCase
         $random_group_id = $this->faker->numberBetween(1, 9);
 
         // No parameters
-        $options = app(ProfileRepository::class)->getDropdownOptions();
+        $options = app('App\Repositories\ProfileRepository')->getDropdownOptions();
         $this->assertEquals(['selected_group' => null, 'hide_filtering' => false], $options);
 
         // If user selects group
-        $options = app(ProfileRepository::class)->getDropdownOptions($random_group_id);
+        $options = app('App\Repositories\ProfileRepository')->getDropdownOptions($random_group_id);
         $this->assertEquals(['selected_group' => $random_group_id, 'hide_filtering' => false], $options);
 
         // If custom page fields selects the group
-        $options = app(ProfileRepository::class)->getDropdownOptions(null, $random_group_id);
+        $options = app('App\Repositories\ProfileRepository')->getDropdownOptions(null, $random_group_id);
         $this->assertEquals(['selected_group' => $random_group_id, 'hide_filtering' => true], $options);
     }
 
     /**
-     * @covers \App\Repositories\ProfileRepository::getFields
+     * @covers App\Repositories\ProfileRepository::getFields
      * @test
      */
     public function getting_fields_should_return_all_types()
     {
-        $fields = app(ProfileRepository::class)->getFields();
+        $fields = app('App\Repositories\ProfileRepository')->getFields();
 
         $this->assertTrue(is_array($fields));
     }
 
     /**
-     * @covers \App\Repositories\ProfileRepository::getPageTitleFromName
+     * @covers App\Repositories\ProfileRepository::getPageTitleFromName
      * @test
      */
     public function getting_page_title_should_come_from_name()
@@ -70,7 +65,7 @@ class ProfileRepositoryTest extends TestCase
         ];
 
         // Mock the Connector and set the return
-        $profile = Mockery::mock(ProfileRepository::class)->makePartial();
+        $profile = Mockery::mock('App\Repositories\ProfileRepository')->makePartial();
         $profile->shouldReceive('getFields')->once()->andReturn($returnNameFields);
 
         // Get the page title
@@ -81,35 +76,35 @@ class ProfileRepositoryTest extends TestCase
     }
 
     /**
-     * @covers \App\Repositories\ProfileRepository::getBackToProfileListUrl
+     * @covers App\Repositories\ProfileRepository::getBackToProfileListUrl
      * @test
      */
     public function getting_back_to_profile_list_url_should_return_url()
     {
         // The default path if no referer
-        $url = app(ProfileRepository::class)->getBackToProfileListUrl();
+        $url = app('App\Repositories\ProfileRepository')->getBackToProfileListUrl();
         $this->assertTrue($url == config('base.profile_default_back_url'));
 
         // If a referer is passed from a different domain
         $referer = $this->faker->url;
-        $url = app(ProfileRepository::class)->getBackToProfileListUrl($referer, 'http', 'wayne.edu', '/');
+        $url = app('App\Repositories\ProfileRepository')->getBackToProfileListUrl($referer, 'http', 'wayne.edu', '/');
         $this->assertTrue($url == config('base.profile_default_back_url'));
 
         // If a referer is passed that is the same page we are on
         $referer = $this->faker->url;
         $parsed = parse_url($referer);
-        $url = app(ProfileRepository::class)->getBackToProfileListUrl($referer, $parsed['scheme'], $parsed['host'], $parsed['path']);
+        $url = app('App\Repositories\ProfileRepository')->getBackToProfileListUrl($referer, $parsed['scheme'], $parsed['host'], $parsed['path']);
         $this->assertTrue($url == config('base.profile_default_back_url'));
 
         // If referer is passed from the same domain that the site is on
         $referer = $this->faker->url;
         $parsed = parse_url($referer);
-        $url = app(ProfileRepository::class)->getBackToProfileListUrl($referer, $parsed['scheme'], $parsed['host'], $this->faker->word);
+        $url = app('App\Repositories\ProfileRepository')->getBackToProfileListUrl($referer, $parsed['scheme'], $parsed['host'], $this->faker->word);
         $this->assertEquals($referer, $url);
     }
 
     /**
-     * @covers \App\Repositories\ProfileRepository::getDropdownOfGroups
+     * @covers App\Repositories\ProfileRepository::getDropdownOfGroups
      * @test
      */
     public function getting_dropdown_of_groups_should_contain_all_the_groups()
@@ -119,15 +114,15 @@ class ProfileRepositoryTest extends TestCase
 
         // Fake return
         $return = [
-            'results' => app(ProfileGroup::class)->create(5),
+            'results' => app('Factories\ProfileGroup')->create(5),
         ];
 
         // Mock the Connector and set the return
-        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi = Mockery::mock('Waynestate\Api\Connector');
         $wsuApi->shouldReceive('sendRequest')->with('profile.groups.listing', Mockery::type('array'))->once()->andReturn($return);
         $wsuApi->shouldReceive('nextRequestProduction')->once();
 
-        $dropdown = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getDropdownOfGroups($this->faker->numberBetween(1, 10));
+        $dropdown = app('App\Repositories\ProfileRepository', ['wsuApi' => $wsuApi])->getDropdownOfGroups($this->faker->numberBetween(1, 10));
 
         collect($return['results'])->each(function ($item) use ($dropdown) {
             // Make sure the group exists in the dropdown array
@@ -136,7 +131,7 @@ class ProfileRepositoryTest extends TestCase
     }
 
     /**
-     * @covers \App\Repositories\ProfileRepository::getProfile
+     * @covers App\Repositories\ProfileRepository::getProfile
      * @test
      */
     public function getting_profile_that_doesnt_exist_should_return_blank_array()
@@ -145,53 +140,53 @@ class ProfileRepositoryTest extends TestCase
         $accessid = $this->faker->word;
 
         // Fake return
-        $return = app(ApiError::class)->create(1, true);
+        $return = app('Factories\ApiError')->create(1, true);
 
         // Mock the Connector and set the return
-        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi = Mockery::mock('Waynestate\Api\Connector');
         $wsuApi->shouldReceive('sendRequest')->with('profile.users.view', Mockery::type('array'))->once()->andReturn($return);
         $wsuApi->shouldReceive('nextRequestProduction')->once();
 
-        $profile = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getProfile($site_id, $accessid);
+        $profile = app('App\Repositories\ProfileRepository', ['wsuApi' => $wsuApi])->getProfile($site_id, $accessid);
 
         $this->assertTrue(is_array($profile['profile']) && count($profile['profile']) == 0) ;
     }
 
     /**
-     * @covers \App\Repositories\ProfileRepository::getProfiles
+     * @covers App\Repositories\ProfileRepository::getProfiles
      * @test
      */
     public function getting_profiles_with_api_error_should_return_blank_array()
     {
         // Fake return
-        $return = app(ApiError::class)->create(1, true);
+        $return = app('Factories\ApiError')->create(1, true);
 
         // Mock the Connector and set the return
-        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi = Mockery::mock('Waynestate\Api\Connector');
         $wsuApi->shouldReceive('sendRequest')->with('profile.users.listing', Mockery::type('array'))->once()->andReturn($return);
         $wsuApi->shouldReceive('nextRequestProduction')->once();
 
-        $profiles = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getProfiles($this->faker->numberBetween(1, 10));
+        $profiles = app('App\Repositories\ProfileRepository', ['wsuApi' => $wsuApi])->getProfiles($this->faker->numberBetween(1, 10));
 
         // Since the API returned an error we shouldn't have any profiles
         $this->assertEmpty($profiles['profiles']);
     }
 
     /**
-     * @covers \App\Repositories\ProfileRepository::getProfiles
+     * @covers App\Repositories\ProfileRepository::getProfiles
      * @test
      */
     public function getting_profiles_should_append_link()
     {
         // Fake return
-        $return = app(Profile::class)->create(5);
+        $return = app('Factories\Profile')->create(5);
 
         // Mock the Connector and set the return
-        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi = Mockery::mock('Waynestate\Api\Connector');
         $wsuApi->shouldReceive('sendRequest')->with('profile.users.listing', Mockery::type('array'))->once()->andReturn($return);
         $wsuApi->shouldReceive('nextRequestProduction')->once();
 
-        $profiles = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getProfiles($this->faker->numberBetween(1, 10));
+        $profiles = app('App\Repositories\ProfileRepository', ['wsuApi' => $wsuApi])->getProfiles($this->faker->numberBetween(1, 10));
 
         collect($profiles['profiles'])->each(function ($item) {
             $this->assertTrue(!empty($item['link']));
@@ -199,7 +194,7 @@ class ProfileRepositoryTest extends TestCase
     }
 
     /**
-     * @covers \App\Repositories\ProfileRepository::getGroupIds
+     * @covers App\Repositories\ProfileRepository::getGroupIds
      * @test
      */
     public function getting_profile_group_ids_should_return_correct_string()
@@ -209,23 +204,23 @@ class ProfileRepositoryTest extends TestCase
         $dropdown = $this->faker->words($limit, false);
 
         // If no forced ID and no selection has been made the result should be all group_ids from the dropdown
-        $group_ids = app(ProfileRepository::class)->getGroupIds(null, null, $dropdown);
+        $group_ids = app('App\Repositories\ProfileRepository')->getGroupIds(null, null, $dropdown);
         $this->assertEquals(implode(array_keys($dropdown), '|'), $group_ids);
 
         // Forcing a group ID
         $forced_id = $this->faker->numberBetween(0, $limit - 1);
-        $group_ids = app(ProfileRepository::class)->getGroupIds(null, $forced_id, $dropdown);
+        $group_ids = app('App\Repositories\ProfileRepository')->getGroupIds(null, $forced_id, $dropdown);
         $this->assertEquals($forced_id, $group_ids);
 
         // Selected from the dropdown
         $selected = array_rand($dropdown, 1);
-        $group_ids = app(ProfileRepository::class)->getGroupIds($selected, null, $dropdown);
+        $group_ids = app('App\Repositories\ProfileRepository')->getGroupIds($selected, null, $dropdown);
         $this->assertEquals($selected, $group_ids);
     }
 
     /**
-     * @covers \App\Repositories\ProfileRepository::getProfilesByGroup
-     * @covers \App\Repositories\ProfileRepository::sortGroupsByDisplayOrder
+     * @covers App\Repositories\ProfileRepository::getProfilesByGroup
+     * @covers App\Repositories\ProfileRepository::sortGroupsByDisplayOrder
      * @test
      */
     public function profiles_should_be_grouped()
@@ -234,8 +229,8 @@ class ProfileRepositoryTest extends TestCase
         config(['base.profile_parent_group_id' => 0]);
 
         // Mock the user listing
-        $return_user_listing = app(Profile::class)->create(10);
-        $wsuApi = Mockery::mock(Connector::class);
+        $return_user_listing = app('Factories\Profile')->create(10);
+        $wsuApi = Mockery::mock('Waynestate\Api\Connector');
         $wsuApi->shouldReceive('sendRequest')->with('profile.users.listing', Mockery::type('array'))->once()->andReturn($return_user_listing);
 
         // The Profile factory creates groups. We need those values rather than factoring more groups that users aren't in.
@@ -253,7 +248,7 @@ class ProfileRepositoryTest extends TestCase
         $wsuApi->shouldReceive('sendRequest')->with('profile.groups.listing', Mockery::type('array'))->once()->andReturn($return_group_listing);
         $wsuApi->shouldReceive('nextRequestProduction')->twice();
 
-        $profiles = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getProfilesByGroup($this->faker->numberBetween(1, 10));
+        $profiles = app('App\Repositories\ProfileRepository', ['wsuApi' => $wsuApi])->getProfilesByGroup($this->faker->numberBetween(1, 10));
 
         // Make sure the root keys are all of the groups
         collect($return_group_listing['results'])->each(function ($item) use ($profiles) {
@@ -262,13 +257,13 @@ class ProfileRepositoryTest extends TestCase
     }
 
     /**
-     * @covers \App\Repositories\ProfileRepository::getProfilesByGroupOrder
+     * @covers App\Repositories\ProfileRepository::getProfilesByGroupOrder
      * @test
      */
     public function profile_group_ids_should_return_ordered_array()
     {
         // Mock the user listing
-        $return_user_listing = app(Profile::class)->create(10);
+        $return_user_listing = app('Factories\Profile')->create(10);
 
         $groups = collect($return_user_listing)->map(function ($item) {
             return array_shift($item['groups']);
@@ -283,12 +278,12 @@ class ProfileRepositoryTest extends TestCase
             return [$key => $item];
         });
 
-        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi = Mockery::mock('Waynestate\Api\Connector');
         $wsuApi->shouldReceive('sendRequest')->with('profile.users.listing', Mockery::type('array'))->once()->andReturn($return_user_listing);
 
         $wsuApi->shouldReceive('nextRequestProduction')->once();
 
-        $profiles = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getProfilesByGroupOrder($this->faker->numberBetween(1, 10), $piped_groups);
+        $profiles = app('App\Repositories\ProfileRepository', ['wsuApi' => $wsuApi])->getProfilesByGroupOrder($this->faker->numberBetween(1, 10), $piped_groups);
 
         $this->assertEquals(array_values($groups), array_values(array_keys($profiles['profiles'])));
 

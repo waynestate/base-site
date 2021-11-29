@@ -73,4 +73,12 @@ interface ProfileRepositoryContract
      * @return string
      */
     public function getBackToProfileListUrl($referer, $scheme, $host, $uri);
+
+    /**
+     * Get the Site ID based off the request data
+     *
+     * @param array $data
+     * @return int
+     */
+    public function getSiteID($data);
 }

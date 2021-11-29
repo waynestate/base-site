@@ -31,7 +31,7 @@ class ContactTableController extends Controller
     public function index(Request $request)
     {
         // Determine what site to pull profiles from
-        $site_id = !empty($request->data['base']['data']['profile_site_id']) ? $request->data['base']['data']['profile_site_id'] : $request->data['base']['site']['id'];
+        $site_id = $this->profile->getSiteID($request->data['base']);
 
         $profiles = $this->profile->getProfilesByGroupOrder($site_id, $request->data['base']['data']['profile_group_id']);
 
