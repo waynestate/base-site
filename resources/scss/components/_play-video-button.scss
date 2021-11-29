@@ -1,0 +1,19 @@
+.play-video-button {
+    @apply relative block;
+
+    &::after {
+        @apply absolute inset-0 opacity-70 transition-all bg-no-repeat bg-center;
+
+        content: '';
+        background-image: url('/_resources/images/youtube-play.svg');
+        background-size: 25%;
+    }
+
+    &:hover::after {
+        @apply opacity-100;
+    }
+
+    img {
+        @apply w-full;
+    }
+}

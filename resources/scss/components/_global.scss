@@ -128,11 +128,11 @@ a.text-white:-moz-focusring {
 }
 
 code {
-    @apply bg-gray-200 py-1 px-2 rounded text-sm;
+    @apply bg-gray-100 py-1 px-2 rounded text-sm;
 }
 
 .code-block {
-    @apply bg-gray-100 overflow-scroll px-4 text-sm mb-8;
+    @apply block bg-gray-100 overflow-scroll text-sm py-2 px-3 mb-4;
 }
 
 // Keep footer at the bottom of the browser

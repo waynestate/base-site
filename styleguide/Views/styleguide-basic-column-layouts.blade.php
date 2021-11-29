@@ -7,21 +7,16 @@
         <h2 class="mt-4 divider-gold text-green font-normal">Single row of two columns layout</h2>
 
         <div class="single-row-two-col-layout">
-            <div class="flex-shrink-0">
-                <img src="/styleguide/image/350x200" alt="">
-            </div>
+            <img src="/styleguide/image/300x200" alt="">
             <div>
-                <p>{{ $faker->text(350) }}</p>
+                <p>{{ $faker->text(250) }}</p>
+                <p>{{ $faker->text(250) }}</p>
             </div>
         </div>
 
         <div class="single-row-two-col-layout">
-            <div>
-                <p>{{ $faker->text(350) }}</p>
-            </div>
-            <div class="flex-shrink-0">
-                <img src="/styleguide/image/350x200" alt="">
-            </div>
+            <p>{{ $faker->text(450) }}</p>
+            <img src="/styleguide/image/150x150" alt="">
         </div>
 
         <h3>Copy this into the CMS source editor</h3>
@@ -29,26 +24,21 @@
 
 <pre class="code-block" tabindex="0">
 {!! htmlspecialchars('
-<!-- Row one image left -->
+<!-- Row image left -->
 <div class="single-row-two-col-layout">
-    <div class="flex-shrink-0">
-        <img src="/styleguide/image/350x200" alt="Your image description">
-    </div>
-
+    <img src="/styleguide/image/300x200" alt="Your image description">
     <div>
+        <p>'.$faker->paragraph.'</p>
         <p>'.$faker->paragraph.'</p>
     </div>
 </div>
 
-<!-- Row two image right -->
-<div class="two-col-layout">
+<!-- Row image right -->
+<div class="single-row-two-col-layout">
     <div>
         <p>'.$faker->paragraph.'</p>
     </div>
-
-    <div class="flex-shrink-0">
-        <img src="/styleguide/image/350x200" alt="Your image description">
-    </div>
+    <img src="/styleguide/image/150x150" alt="Your image description">
 </div>
 <!-- Duplicate as many items as you need -->
 ') !!}
@@ -176,6 +166,5 @@
 </div>
 ') !!}
 </pre>
-
     </div>
 @endsection

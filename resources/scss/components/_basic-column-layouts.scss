@@ -1,0 +1,32 @@
+.single-row-two-col-layout {
+    @apply md:flex items-start md:space-x-4;
+
+    & > * {
+        @apply mb-4;
+    }
+
+    img {
+        @apply flex-shrink-0;
+
+        padding: 0 !important;
+    }
+}
+
+.grid-two-col-layout,
+.grid-three-col-layout {
+    @apply gap-x-6 gap-y-4 grid md:grid-cols-2 mb-6;
+
+    p {
+        @apply my-2;
+    }
+
+    img {
+        @apply w-full block;
+
+        padding: 0 !important;
+    }
+}
+
+.grid-three-col-layout {
+    @apply md:grid-cols-2 lg:grid-cols-3;
+}
