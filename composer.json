@@ -28,6 +28,7 @@
         "waynestate/news-api-php": "~2.0",
         "waynestate/parse-menu": "~1.2",
         "waynestate/parse-promos": "~2.0",
+        "waynestate/people-api-php": "~1.0",
         "waynestate/waynestate-api": "~1.2"
     },
     "require-dev": {
