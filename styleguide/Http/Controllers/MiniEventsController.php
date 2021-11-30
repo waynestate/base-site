@@ -11,7 +11,7 @@ class MiniEventsController extends Controller
     /**
      * Construct the controller.
      *
-     * @param EventsRepositoryContract $events
+     * @param EventRepositoryContract $events
      */
     public function __construct(EventRepositoryContract $events)
     {

@@ -33,32 +33,32 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Throwable  $exception
+     * @param  \Throwable  $e
      * @return void
      */
-    public function report(Throwable $exception)
+    public function report(Throwable $e)
     {
-        parent::report($exception);
+        parent::report($e);
     }
 
     /**
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $exception
+     * @param  \Throwable  $e
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Throwable $exception)
+    public function render($request, Throwable $e)
     {
         // Add custom errors when debug is not enabled
         if (config('app.debug') == false) {
-            if ($exception instanceof HttpException && View::exists('errors.'.$exception->getStatusCode())) {
-                return response(view('errors.'.$exception->getStatusCode(), compact('request')), $exception->getStatusCode());
+            if ($e instanceof HttpException && View::exists('errors.'.$e->getStatusCode())) {
+                return response(view('errors.'.$e->getStatusCode(), compact('request')), $e->getStatusCode());
             } else {
                 return response(view('errors.500', compact('request')), 500);
             }
         }
 
-        return parent::render($request, $exception);
+        return parent::render($request, $e);
     }
 }
