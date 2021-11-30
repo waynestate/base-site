@@ -17,7 +17,6 @@ class FooterContactTwoController extends Controller
     public function index(Request $request)
     {
         $request->data['base']['contact'] = app(FooterContact::class)->create(2);
-        dump($request->data);
 
         return view('styleguide-childpage', merge($request->data));
     }
