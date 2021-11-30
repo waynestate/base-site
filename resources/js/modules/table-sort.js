@@ -7,7 +7,7 @@ function createSortableTable(tableGroup) {
     let rows = rowGroup.querySelectorAll('tr');
     let captionElement = table.querySelector('caption');
     if(captionElement !== null) {
-        var caption = captionElement.innerText;
+        var caption = captionElement.innerHTML;
     }
 
     let sortOrder = null;
@@ -51,7 +51,7 @@ function createSortableTable(tableGroup) {
     }
 
     function updateCaption() {
-        captionElement.innerText = caption + ' ' + getSortInfo();
+        captionElement.innerHTML = caption + ' ' + getSortInfo();
     }
 
     function updateLiveRegion() {
@@ -71,7 +71,7 @@ function createSortableTable(tableGroup) {
         if (!header) {
             return null;
         }
-        return header.innerText;
+        return header.innerHTML;
     }
 
     function getSortHeader() {

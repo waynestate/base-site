@@ -4,7 +4,7 @@
     @include('components.page-title', ['title' => $base['page']['title']])
 
     <div class="content">
-        <h2 class="divider-gold text-green font-normal my-4">Two columns image left</h2>
+        <h2 class="my-4">Two columns image left</h2>
 
         <div class="two-col-layout">
             <div class="flex-shrink-0">
@@ -16,8 +16,7 @@
             </div>
         </div>
 <pre class="code-block" tabindex="0">
-{!! htmlspecialchars('<h2 class="divider-gold text-green font-normal my-4">Two columns image left</h2>
-<div class="two-col-layout">
+{!! htmlspecialchars('<div class="two-col-layout">
     <div class="flex-shrink-0">
         <img src="/styleguide/image/300x200" alt="Your image description">
     </div>
@@ -27,7 +26,7 @@
     </div>
 </div>')!!}
 </pre>
-        <h2 class="divider-gold text-green font-normal mt-8 mb-4">Two columns image right</h2>
+        <h2 class="mt-10 mb-4">Two columns image right</h2>
 
         <div class="two-col-layout">
             <div>
@@ -39,8 +38,7 @@
             </div>
         </div>
 <pre class="code-block" tabindex="0">
-{!! htmlspecialchars('<h2 class="divider-gold text-green font-normal my-4">Two columns image right</h2>
-<div class="two-col-layout">
+{!! htmlspecialchars('<div class="two-col-layout">
     <div>
         <p>'.$faker->paragraph.'</p>
         <p>'.$faker->paragraph.'</p>
@@ -51,7 +49,7 @@
 </div>')!!}
 </pre>
 
-        <h2 class="divider-gold font-normal text-green mt-8 mb-4">Two columns with a list</h2>
+        <h2 class="mt-10 mb-4">Two columns with a list</h2>
         <div class="two-col-layout">
             <div class="md:w-2/3">
                 <p>{{ $faker->text(400) }}</p>
@@ -69,8 +67,7 @@
         </div>
 
 <pre class="code-block" tabindex="0">
-{!! htmlspecialchars('<h2 class="divider-gold font-normal text-green my-4">Two columns with list</h2>
-<div class="two-col-layout">
+{!! htmlspecialchars('<div class="two-col-layout">
     <div class="md:w-2/3">
         <p>'.$faker->text(400).'</p>
         <p><a href="#" class="button">'.ucfirst(implode(' ',$faker->words(2))).'</a></p>
@@ -83,7 +80,7 @@
     </div>
 </div>') !!}
 </pre>
-        <h2 class="divider-gold text-green font-normal mt-8 mb-4">Two column grid</h2>
+        <h2 class="mt-10 mb-4">Two column grid</h2>
 
         <div class="grid-two-col-layout">
             <div>
@@ -108,8 +105,7 @@
         </div>
 
 <pre class="code-block" tabindex="0">
-{!! htmlspecialchars('<h2 class="divider-gold font-normal text-green my-4">Two column grid</h2>
-<div class="grid-two-col-layout">
+{!! htmlspecialchars('<div class="grid-two-col-layout">
     <!-- Item one -->
     <div>
         <img src="/styleguide/image/450x250" alt="">
@@ -120,7 +116,7 @@
 </div>') !!}
 </pre>
 
-        <h2 class="divider-gold text-green font-normal mt-8 mb-4">Three column grid</h2>
+        <h2 class="mt-10 mb-4">Three column grid</h2>
 
         <div class="grid-three-col-layout">
             <div>
@@ -151,8 +147,7 @@
         </div>
 
 <pre class="code-block" tabindex="0">
-{!! htmlspecialchars('<h2 class="divider-gold font-normal text-green my-4">Three column grid</h2>
-<div class="grid-three-col-layout">
+{!! htmlspecialchars('<div class="grid-three-col-layout">
     <!-- Item one -->
     <div>
         <img src="/styleguide/image/268x268" alt="">

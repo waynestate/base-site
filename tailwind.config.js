@@ -73,7 +73,9 @@ module.exports = {
             /p-[1-16]\/[1-16]/,
             /m-[1-16]\/[1-16]/,
             /w-[1-5]\/[1-5]/,
+            /grid-cols-[1-5]/,
             /(sm|md|lg|xl|xxl|xxxl|mt)\:w-[1-5]\/[1-5]/,
+            /(sm|md|lg|xl|xxl|xxxl|mt)\:grid-cols-[1-5]/,
             /form_responses/
         ]
     },

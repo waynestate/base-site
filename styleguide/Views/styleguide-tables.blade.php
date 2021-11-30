@@ -5,11 +5,11 @@
 
     <div class="content">
         {!! $base['page']['content']['main'] !!}
-        <p>Be sure to use the table option in the CMS editor, and always use table headers and a caption to describe the data for accessibility. These are what tables look like and the different formats that are available.</p>
+        <p>Be sure to use the table option in the CMS editor, and always use table headers and a caption to describe the data for accessibility.</p>
 
         <h2>Basic table</h2>
         <table>
-            <caption>Previewing an example table.</caption>
+            <caption>Example of a basic table.</caption>
             <thead>
                 <tr>
                     <th scope="col">First name</th>
@@ -31,6 +31,53 @@
             </tbody>
         </table>
 
+        <h2>Sortable table</h2>
+
+        <table class="table-sort">
+            <caption>Use <code>&lt;table class="table-sort"&gt;</code> for this option. Click on each table heading to sort by column. Status: </caption>
+            <thead>
+                <tr>
+                    <th scope="col">First name</th>
+                    <th scope="col">Last name</th>
+                    <th scope="col">Email</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @for ($i = 0; $i < 10; $i++)
+                    <tr>
+                        <td>{{ $faker->firstName }}</td>
+                        <td>{{ $faker->lastName }}</td>
+                        <td>{{ $faker->email }}</td>
+                    </tr>
+                @endfor
+            </tbody>
+        </table>
+
+        <h2>Responsive table</h2>
+
+        <table class="table-stack">
+            <caption>Use <code>&lt;table class="table-stack"&gt;</code> for this option. This table turns data into self-contained cards on mobile for easy reading.</caption>
+            <thead>
+                <tr>
+                    <th scope="col">First name</th>
+                    <th scope="col">Last name</th>
+                    <th scope="col">Email</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @for ($i = 0; $i < 10; $i++)
+                    <tr>
+                        <td>{{ $faker->firstName }}</td>
+                        <td>{{ $faker->lastName }}</td>
+                        <td>{{ $faker->email }}</td>
+                    </tr>
+                @endfor
+            </tbody>
+        </table>
+
+        <h2>Source code</h2>
 <pre class="code-block" tabindex="0">
 {!! htmlspecialchars('<table>
     <caption>Describe your table for screen readers in the caption.</caption>
@@ -56,55 +103,5 @@
     </tbody>
 </table>') !!}
 </pre>
-
-        <hr />
-
-        <h2>Sortable table</h2>
-
-        <table class="table-sort">
-            <caption>Use class="table-sort" for this option. Click on each table heading to sort by column. Status: </caption>
-            <thead>
-                <tr>
-                    <th scope="col">First name</th>
-                    <th scope="col">Last name</th>
-                    <th scope="col">Email</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @for ($i = 0; $i < 10; $i++)
-                    <tr>
-                        <td>{{ $faker->firstName }}</td>
-                        <td>{{ $faker->lastName }}</td>
-                        <td>{{ $faker->email }}</td>
-                    </tr>
-                @endfor
-            </tbody>
-        </table>
-
-        <hr />
-
-        <h2>Responsive table</h2>
-
-        <table class="table-stack">
-            <caption>Use class="table-stack" for this option. This table turns data into self-contained cards for mobile users for easy reading.</caption>
-            <thead>
-                <tr>
-                    <th scope="col">First name</th>
-                    <th scope="col">Last name</th>
-                    <th scope="col">Email</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @for ($i = 0; $i < 10; $i++)
-                    <tr>
-                        <td>{{ $faker->firstName }}</td>
-                        <td>{{ $faker->lastName }}</td>
-                        <td>{{ $faker->email }}</td>
-                    </tr>
-                @endfor
-            </tbody>
-        </table>
     </div>
 @endsection

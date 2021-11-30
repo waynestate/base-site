@@ -35,7 +35,7 @@
 {!! htmlspecialchars('<a href="#" class="gold-gradient-button">My button</a>') !!}
 </pre>
         </div>
-        <h2 class="text-2xl">Increase button text size</h2>
+        <h2>Increase button text size</h2>
         <p>Add class "text-lg" or "text-xl" to your button.</p>
         <div class="pb-4 2xl:flex items-start">
             <a href="#gold-gradient-button" class="button text-lg 2xl:w-1/4 mr-4 flex-shrink-0">Large text button</a>
@@ -49,7 +49,7 @@
 {!! htmlspecialchars('<a href="#" class="button text-xl">My button</a>') !!}
 </pre>
         </div>
-        <h2 class="text-2xl">Give a button two lines</h2>
+        <h2>Give a button two lines</h2>
         <p>Notice the addition of the "button--two-line" class. You must contain each line within &lt;em&gt; &lt;/em&gt; when using this style in the CMS.</p>
         <div class="pb-4 2xl:flex items-start">
             <div class="mr-4 flex-shrink-0 2xl:w-1/4">
@@ -65,10 +65,10 @@
 </a>') !!}
 </pre>
         </div>
-        <h2 class="text-2xl">Give a button two lines with an icon</h2>
+        <h2>Give a button two lines with an icon</h2>
         <p>Your icon must be an SVG or 50x50 pixels and must match the text color.</p>
         <div class="pb-4 2xl:flex items-start">
-            <div class="mr-4 flex-shrink-0">
+            <div class="md:mr-4 flex-shrink-0">
                 <a href="#standard-two-line" class="button button--two-line">
                     <img src="/styleguide/image/50x50" alt="">
                     <div>Two line button</div>
@@ -83,23 +83,18 @@
 </a>') !!}
 </pre>
         </div>
-        <h2 class="text-2xl">Two or three buttons in a row</h2>
+        <h2>Two or three buttons in a row</h2>
+        <p>Do not mix colors or styles in this presentation.</p>
         <div class="pb-4">
-            <div class="my-2 grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-2 items-start">
-                <a href="#standard-two-line" class="button button--two-line">
-                    <div>Two line button</div>
-                    <div>Brief subtext</div>
-                </a>
-                <a href="#standard-two-line" class="button button--two-line">
-                    <div>Two line button</div>
-                    <div>Brief subtext</div>
-                </a>
+            <div class="grid-three-col-layout mt-4 mb-2 gap-x-4 gap-y-2">
+                <a href="#" class="button text-lg">Large text button</a>
+                <a href="#" class="button text-lg">Large text button</a>
             </div>
 <pre class="code-block mb-0 w-full">
-{!! htmlspecialchars('<div class="my-2 grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-2">
-    <a href="#" class="button">Standard button</a>
-    <a href="#" class="button">Standard button</a>
-    <a href="#" class="button">Standard button</a>
+{!! htmlspecialchars('<div class="grid-three-col-layout my-4 gap-x-4 gap-y-2">
+    <a href="#" class="button text-lg">Large text button</a>
+    <a href="#" class="button text-lg">Large text button</a>
+    <a href="#" class="button text-lg">Large text button</a>
 </div>') !!}
 </pre>
         </div>
