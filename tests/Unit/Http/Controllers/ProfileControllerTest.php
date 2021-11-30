@@ -4,10 +4,12 @@ namespace Tests\Unit\Http\Controllers;
 
 use App\Http\Controllers\ProfileController;
 use App\Repositories\PeopleRepository;
+use App\Repositories\ProfileRepository;
 use Tests\TestCase;
 use Mockery as Mockery;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Waynestate\Api\Connector;
 use Waynestate\Api\People;
 
 class ProfileControllerTest extends TestCase
@@ -22,7 +24,7 @@ class ProfileControllerTest extends TestCase
         $this->expectException(NotFoundHttpException::class);
 
         // Construct the news controller
-        $this->profileController = app('App\Http\Controllers\ProfileController', []);
+        $this->profileController = app(ProfileController::class, []);
 
         // Call the profile listing
         $view = $this->profileController->show(new Request());
@@ -46,15 +48,15 @@ class ProfileControllerTest extends TestCase
         $request->accessid = 'aa1234';
 
         // Mock the connector
-        $wsuApi = Mockery::mock('Waynestate\Api\Connector');
+        $wsuApi = Mockery::mock(Connector::class);
         $wsuApi->shouldReceive('nextRequestProduction')->once()->andReturn(true);
         $wsuApi->shouldReceive('sendRequest')->with('profile.users.view', Mockery::type('array'))->once()->andReturn($return);
 
         // Construct the profile repository
-        $profileRepository = app('App\Repositories\ProfileRepository', ['wsuApi' => $wsuApi]);
+        $profileRepository = app(ProfileRepository::class, ['wsuApi' => $wsuApi]);
 
         // Construct the news controller
-        $this->profileController = app('App\Http\Controllers\ProfileController', ['profile' => $profileRepository]);
+        $this->profileController = app(ProfileController::class, ['profile' => $profileRepository]);
 
         // Call the profile listing
         $view = $this->profileController->show($request);

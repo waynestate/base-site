@@ -383,7 +383,7 @@ class PeopleRepositoryTest extends TestCase
         $peopleApi = Mockery::mock(PeopleApi::class);
 
         // Create a fake data request for custom page field data
-        $profile_site_id = $this->faker->numberBetween(1,1000);
+        $profile_site_id = $this->faker->numberBetween(1, 1000);
         $custom_field_page = app(Page::class)->create(1, true, [
             'data' => [
                 'profile_site_id' => $profile_site_id,
@@ -398,8 +398,8 @@ class PeopleRepositoryTest extends TestCase
             'site' => [
                 'people' => [
                     'site_id' => $people_site_id,
-                ]
-            ]
+                ],
+            ],
         ]);
         $return_people_site_id = app(PeopleRepository::class, ['peopleApi' => $peopleApi])->getSiteID($site_config_page);
         $this->assertEquals($people_site_id, $return_people_site_id);
