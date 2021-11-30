@@ -7,6 +7,7 @@ use Factories\Accordion;
 use Factories\FooterContact;
 use Factories\FooterSocial;
 use Factories\HeroImage;
+use Factories\PromoListing;
 use Factories\UnderMenu;
 
 class PromoRepository extends Repository
@@ -84,5 +85,33 @@ class PromoRepository extends Repository
             'under_menu' => $under_menu,
             'accordion_page' => $accordion,
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPromoListingPromos(array $data, $limit = 75)
+    {
+        return [
+            'promos' => app(PromoListing::class)->create(15),
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPromoView($id)
+    {
+        return [
+            'promo' => app(PromoListing::class)->create(1, true),
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBackToPromoListing($referer = null, $scheme = null, $host = null, $uri = null)
+    {
+        return '/styleguide/promolisting';
     }
 }

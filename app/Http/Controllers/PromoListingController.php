@@ -7,7 +7,7 @@
 
 namespace App\Http\Controllers;
 
-use Contracts\Repositories\PromoListingRepositoryContract;
+use Contracts\Repositories\PromoRepositoryContract;
 use Illuminate\Http\Request;
 
 class PromoListingController extends Controller
@@ -15,9 +15,9 @@ class PromoListingController extends Controller
     /**
      * Construct the controller.
      *
-     * @param PromoListingRepositoryContract $promo
+     * @param PromoRepositoryContract $promo
      */
-    public function __construct(PromoListingRepositoryContract $promo)
+    public function __construct(PromoRepositoryContract $promo)
     {
         $this->promo = $promo;
     }
