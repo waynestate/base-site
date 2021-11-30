@@ -36,13 +36,11 @@ class PromoListingController extends Controller
     {
         $promos = $this->promo->getPromoListingPromos($request->data['base']);
 
-        if (!empty($request->data['base']['data']['listing_promo_group_id'])) {
-            return view('promo-listing', merge($request->data, $promos));
-        }
-
         if (!empty($request->data['base']['data']['grid_promo_group_id'])) {
             return view('promo-grid', merge($request->data, $promos));
         }
+
+        return view('promo-listing', merge($request->data, $promos));
     }
 
     /**
