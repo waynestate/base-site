@@ -321,6 +321,6 @@ class ProfileRepository implements ProfileRepositoryContract
      */
     public function getSiteID($data)
     {
-        return !empty($data['data']['profile_site_id']) ? $data['data']['profile_site_id'] : $data['site']['people']['site_id'];
+        return !empty($data['data']['profile_site_id']) ? $data['data']['profile_site_id'] : $data['site']['id'];
     }
 }

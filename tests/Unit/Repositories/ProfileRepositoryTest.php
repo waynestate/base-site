@@ -2,9 +2,12 @@
 
 namespace Tests\Unit\Repositories;
 
+use App\Repositories\ProfileRepository;
+use Factories\Page;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 use Mockery as Mockery;
+use Waynestate\Api\Connector;
 
 class ProfileRepositoryTest extends TestCase
 {
@@ -292,5 +295,33 @@ class ProfileRepositoryTest extends TestCase
         foreach ($profiles['anchors'] as $key => $slug) {
             $this->assertEquals($slug, Str::slug($key));
         }
+    }
+
+    /**
+     * @covers App\Repositories\ProfileRepository::getSiteID
+     * @test
+     */
+    public function getting_profile_site_id_should_return_the_correct_site_id_based_on_custom_field()
+    {
+        // Mock WSU API
+        $wsuApi = Mockery::mock(Connector::class);
+
+        // Create a fake data request for custom page field data
+        $profile_site_id = $this->faker->numberBetween(1, 1000);
+        $custom_field_page = app(Page::class)->create(1, true, [
+            'data' => [
+                'profile_site_id' => $profile_site_id,
+            ],
+        ]);
+        $return_profile_site_id = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getSiteID($custom_field_page);
+        $this->assertEquals($profile_site_id, $return_profile_site_id);
+
+        // Create a fake data request for site config people id
+        $site_config_page = app(Page::class)->create(1, true);
+        $cms_site_id = $site_config_page['site']['id'];
+
+        $return_cms_site_id = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getSiteID($site_config_page);
+
+        $this->assertEquals($cms_site_id, $return_cms_site_id);
     }
 }

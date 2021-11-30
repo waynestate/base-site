@@ -4,6 +4,7 @@ namespace Tests\Unit\Repositories;
 
 use App\Repositories\PeopleRepository;
 use Exception;
+use Factories\Page;
 use Factories\People;
 use Factories\PeopleGroup;
 use Illuminate\Support\Str;
@@ -370,5 +371,37 @@ class PeopleRepositoryTest extends TestCase
         $dropdown = app(PeopleRepository::class, ['peopleApi' => $peopleApi])->getDropdownOfGroups($this->faker->numberBetween(1, 10));
 
         $this->assertCount(1, $dropdown['dropdown_groups']);
+    }
+
+    /**
+     * @covers App\Repositories\PeopleRepository::getSiteID
+     * @test
+     */
+    public function getting_people_site_id_should_return_the_correct_site_id_based_on_custom_field()
+    {
+        // Mock people API
+        $peopleApi = Mockery::mock(PeopleApi::class);
+
+        // Create a fake data request for custom page field data
+        $profile_site_id = $this->faker->numberBetween(1,1000);
+        $custom_field_page = app(Page::class)->create(1, true, [
+            'data' => [
+                'profile_site_id' => $profile_site_id,
+            ],
+        ]);
+        $return_profile_site_id = app(PeopleRepository::class, ['peopleApi' => $peopleApi])->getSiteID($custom_field_page);
+        $this->assertEquals($profile_site_id, $return_profile_site_id);
+
+        // Create a fake data request for site config people id
+        $people_site_id = $this->faker->numberBetween(1, 1000);
+        $site_config_page = app(Page::class)->create(1, true, [
+            'site' => [
+                'people' => [
+                    'site_id' => $people_site_id,
+                ]
+            ]
+        ]);
+        $return_people_site_id = app(PeopleRepository::class, ['peopleApi' => $peopleApi])->getSiteID($site_config_page);
+        $this->assertEquals($people_site_id, $return_people_site_id);
     }
 }
