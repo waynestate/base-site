@@ -16,6 +16,9 @@ class FooterContactTwo extends Page
                 'controller' => 'FooterContactTwoController',
                 'title' => 'Two column',
                 'id' => 104100101,
+                'content' => [
+                    'main' => '<p>You can have up to four columns in your contact footer.</p>',
+                ],
             ],
         ]);
     }
