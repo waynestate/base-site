@@ -125,11 +125,11 @@ function createSortableTable(tableGroup) {
                 let bVal = null;
 
                 if (a[index]) {
-                    aVal = a[index].innerText;
+                    aVal = a[index].innerHTML;
                 }
 
                 if (b[index]) {
-                    bVal = b[index].innerText;
+                    bVal = b[index].innerHTML;
                 }
 
                 if (!isNaN(parseInt(aVal)) && !isNaN(parseInt(bVal))) {
@@ -172,7 +172,7 @@ function toHTML(rows) {
     return rows.map(function (row) {
         row = Array.prototype.slice.call(row.children);
         return '<tr role="row">\n    ' + row.map(function (item) {
-            return '<td role="gridcell">' + item.innerText + '</td>';
+            return '<td role="gridcell">' + item.innerHTML + '</td>';
         }).join('') + '</tr>';
     }).join('');
 }

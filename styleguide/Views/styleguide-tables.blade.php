@@ -24,7 +24,7 @@
                     <tr>
                         <td>{{ $faker->firstName }}</td>
                         <td>{{ $faker->lastName }}</td>
-                        <td>{{ $faker->email }}</td>
+                        <td><a href="//wayne.edu">{{ $faker->email }}</a></td>
                         <td>{{ $faker->text(50) }}</td>
                     </tr>
                 @endfor
@@ -48,7 +48,7 @@
                     <tr>
                         <td>{{ $faker->firstName }}</td>
                         <td>{{ $faker->lastName }}</td>
-                        <td>{{ $faker->email }}</td>
+                        <td><a href="//wayne.edu">{{ $faker->email }}</a></td>
                     </tr>
                 @endfor
             </tbody>
@@ -71,7 +71,7 @@
                     <tr>
                         <td>{{ $faker->firstName }}</td>
                         <td>{{ $faker->lastName }}</td>
-                        <td>{{ $faker->email }}</td>
+                        <td><a href="//wayne.edu">{{ $faker->email }}</a></td>
                     </tr>
                 @endfor
             </tbody>
