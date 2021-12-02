@@ -50,6 +50,11 @@
                         <td>{{ $faker->lastName }}</td>
                         <td><a href="//wayne.edu">{{ $faker->email }}</a></td>
                     </tr>
+                    <tr>
+                        <td>{{ $faker->firstName }}</td>
+                        <td>{{ $faker->lastName }}</td>
+                        <td>{{ $faker->email }}</td>
+                    </tr>
                 @endfor
             </tbody>
         </table>
