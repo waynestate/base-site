@@ -97,121 +97,8 @@
         "target": "",
         "display_name": "Components",
         "class_name": "",
-        "relative_url": "/styleguide/header/title/single",
+        "relative_url": "/styleguide/hero/contained",
         "submenu": {
-            "102100": {
-                "menu_item_id": 102100,
-                "is_active": 1,
-                "page_id": 102100,
-                "target": "",
-                "display_name": "Header title",
-                "class_name": "",
-                "relative_url": "/styleguide/header/title/single",
-                "submenu": {
-                    "102100100": {
-                        "menu_item_id": 102100100,
-                        "is_active": 1,
-                        "page_id": 102100100,
-                        "target": "",
-                        "display_name": "Header title single",
-                        "class_name": "",
-                        "relative_url": "/styleguide/header/title/single",
-                        "submenu": []
-                    },
-                    "102100101": {
-                        "menu_item_id": 102100101,
-                        "is_active": 1,
-                        "page_id": 102100101,
-                        "target": "",
-                        "display_name": "Header title double",
-                        "class_name": "",
-                        "relative_url": "/styleguide/header/title/double/",
-                        "submenu": []
-                    }
-                }
-            },
-            "103100": {
-                "menu_item_id": 103100,
-                "is_active": 1,
-                "page_id": 103100,
-                "target": "",
-                "display_name": "Menu",
-                "class_name": "",
-                "relative_url": "/styleguide/menu/left",
-                "submenu": {
-                    "103100100": {
-                        "menu_item_id": 103100100,
-                        "is_active": 1,
-                        "page_id": 103100100,
-                        "target": "",
-                        "display_name": "Menu left",
-                        "class_name": "",
-                        "relative_url": "/styleguide/menu/left",
-                        "submenu": []
-                    },
-                    "103100101": {
-                        "menu_item_id": 103100101,
-                        "is_active": 1,
-                        "page_id": 103100101,
-                        "target": "",
-                        "display_name": "Menu top",
-                        "class_name": "",
-                        "relative_url": "/styleguide/menu/top",
-                        "submenu": []
-                    }
-                }
-            },
-            "104100": {
-                "menu_item_id": 104100,
-                "is_active": 1,
-                "page_id": 104100,
-                "target": "",
-                "display_name": "Footer contact",
-                "class_name": "",
-                "relative_url": "/styleguide/footer/contact/one",
-                "submenu": {
-                    "104100100": {
-                        "menu_item_id": 104100100,
-                        "is_active": 1,
-                        "page_id": 104100100,
-                        "target": "",
-                        "display_name": "One column",
-                        "class_name": "",
-                        "relative_url": "/styleguide/footer/contact/one",
-                        "submenu": []
-                    },
-                    "104100101": {
-                        "menu_item_id": 104100101,
-                        "is_active": 1,
-                        "page_id": 104100101,
-                        "target": "",
-                        "display_name": "Two column",
-                        "class_name": "",
-                        "relative_url": "/styleguide/footer/contact/two",
-                        "submenu": []
-                    },
-                    "104100102": {
-                        "menu_item_id": 104100102,
-                        "is_active": 1,
-                        "page_id": 104100102,
-                        "target": "",
-                        "display_name": "Three column",
-                        "class_name": "",
-                        "relative_url": "/styleguide/footer/contact/three",
-                        "submenu": []
-                    },
-                    "104100103": {
-                        "menu_item_id": 104100103,
-                        "is_active": 1,
-                        "page_id": 104100103,
-                        "target": "",
-                        "display_name": "Four column",
-                        "class_name": "",
-                        "relative_url": "/styleguide/footer/contact/four",
-                        "submenu": []
-                    }
-                }
-            },
             "105100": {
                 "menu_item_id": 105100,
                 "is_active": 1,
@@ -413,6 +300,130 @@
                 "class_name": "",
                 "relative_url": "/styleguide/featuredpromo",
                 "submenu": []
+            }
+        }
+    },
+    "103": {
+        "menu_item_id": 103,
+        "is_active": 1,
+        "page_id": 103,
+        "target": "",
+        "display_name": "Layout",
+        "class_name": "",
+        "relative_url": "/styleguide/header/title/single",
+        "submenu": {
+            "102100": {
+                "menu_item_id": 102100,
+                "is_active": 1,
+                "page_id": 102100,
+                "target": "",
+                "display_name": "Header title",
+                "class_name": "",
+                "relative_url": "/styleguide/header/title/single",
+                "submenu": {
+                    "102100100": {
+                        "menu_item_id": 102100100,
+                        "is_active": 1,
+                        "page_id": 102100100,
+                        "target": "",
+                        "display_name": "Header title single",
+                        "class_name": "",
+                        "relative_url": "/styleguide/header/title/single",
+                        "submenu": []
+                    },
+                    "102100101": {
+                        "menu_item_id": 102100101,
+                        "is_active": 1,
+                        "page_id": 102100101,
+                        "target": "",
+                        "display_name": "Header title double",
+                        "class_name": "",
+                        "relative_url": "/styleguide/header/title/double/",
+                        "submenu": []
+                    }
+                }
+            },
+            "103100": {
+                "menu_item_id": 103100,
+                "is_active": 1,
+                "page_id": 103100,
+                "target": "",
+                "display_name": "Menu",
+                "class_name": "",
+                "relative_url": "/styleguide/menu/left",
+                "submenu": {
+                    "103100100": {
+                        "menu_item_id": 103100100,
+                        "is_active": 1,
+                        "page_id": 103100100,
+                        "target": "",
+                        "display_name": "Menu left",
+                        "class_name": "",
+                        "relative_url": "/styleguide/menu/left",
+                        "submenu": []
+                    },
+                    "103100101": {
+                        "menu_item_id": 103100101,
+                        "is_active": 1,
+                        "page_id": 103100101,
+                        "target": "",
+                        "display_name": "Menu top",
+                        "class_name": "",
+                        "relative_url": "/styleguide/menu/top",
+                        "submenu": []
+                    }
+                }
+            },
+            "104100": {
+                "menu_item_id": 104100,
+                "is_active": 1,
+                "page_id": 104100,
+                "target": "",
+                "display_name": "Footer contact",
+                "class_name": "",
+                "relative_url": "/styleguide/footer/contact/one",
+                "submenu": {
+                    "104100100": {
+                        "menu_item_id": 104100100,
+                        "is_active": 1,
+                        "page_id": 104100100,
+                        "target": "",
+                        "display_name": "One column",
+                        "class_name": "",
+                        "relative_url": "/styleguide/footer/contact/one",
+                        "submenu": []
+                    },
+                    "104100101": {
+                        "menu_item_id": 104100101,
+                        "is_active": 1,
+                        "page_id": 104100101,
+                        "target": "",
+                        "display_name": "Two column",
+                        "class_name": "",
+                        "relative_url": "/styleguide/footer/contact/two",
+                        "submenu": []
+                    },
+                    "104100102": {
+                        "menu_item_id": 104100102,
+                        "is_active": 1,
+                        "page_id": 104100102,
+                        "target": "",
+                        "display_name": "Three column",
+                        "class_name": "",
+                        "relative_url": "/styleguide/footer/contact/three",
+                        "submenu": []
+                    },
+                    "104100103": {
+                        "menu_item_id": 104100103,
+                        "is_active": 1,
+                        "page_id": 104100103,
+                        "target": "",
+                        "display_name": "Four column",
+                        "class_name": "",
+                        "relative_url": "/styleguide/footer/contact/four",
+                        "submenu": []
+                    }
+                }
             },
             "106100": {
                 "menu_item_id": 106100,
