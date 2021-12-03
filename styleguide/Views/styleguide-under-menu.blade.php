@@ -157,6 +157,7 @@
                     <li>Title</li>
                     <li>Link</li>
                     <li>Filename: 600x218 jpg, Ratio 2.76:1</li>
+                    <li>Secondary Image: 600x218 svg, Ratio 2.76:1</li>
                     <li>Option: SVG dark bg</li>
                 </ul>
             </div>
