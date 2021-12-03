@@ -2,15 +2,17 @@
 
 namespace Tests\Unit\Http\Middleware;
 
+use App\Http\Middleware\Formy;
 use Tests\TestCase;
 use Mockery as Mockery;
 use Illuminate\Http\Request;
+use Waynestate\FormyParser\Parser;
 
 class FormyTest extends TestCase
 {
     /**
-     * @covers App\Http\Middleware\Formy::__construct
-     * @covers App\Http\Middleware\Formy::handle
+     * @covers \App\Http\Middleware\Formy::__construct
+     * @covers \App\Http\Middleware\Formy::handle
      * @test
      */
     public function formy_embed_should_show_form_in_page_content()
@@ -18,9 +20,11 @@ class FormyTest extends TestCase
         // Fake request
         $request = new Request();
         $request->data = [
-            'page' => [
-                'content' => [
-                    'main' => 'original-form-main',
+            'base' => [
+                'page' => [
+                    'content' => [
+                        'main' => 'original-form-main',
+                    ],
                 ],
             ],
         ];
@@ -31,12 +35,12 @@ class FormyTest extends TestCase
         ];
 
         // Mock the parser
-        $parser = Mockery::mock('Waynestate\FormyParser\Parser');
+        $parser = Mockery::mock(Parser::class);
         $parser->shouldReceive('parse')->once()->andReturn($return);
 
         // Call the middleware
-        app('App\Http\Middleware\Formy', ['parser' => $parser])->handle($request, function ($response) use ($return) {
-            $this->assertEquals($return, $response->data['page']['content']['main']);
+        app(Formy::class, ['parser' => $parser])->handle($request, function ($response) use ($return) {
+            $this->assertEquals($return, $response->data['base']['page']['content']['main']);
         });
     }
 }

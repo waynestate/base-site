@@ -2,7 +2,7 @@
     $site => array // ['short-title', 'title', 'subsite-folder']
     $top_menu_output => string // '<ul></ul>'
 --}}
-<div class="menu-top-container bg-green-dark print:bg-transparent">
+<div class="menu-top-container bg-green-600 print:bg-transparent">
     <div class="row flex">
         <div class="flex-grow mx-4 py-2" data-short-title="{{ $site['short-title'] }}">
             @if(

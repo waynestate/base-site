@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+[[ $(grep "APP_ENV=local" .env) && ! -d "tools/php-cs-fixer" ]] && mkdir -p -m 0770 tools/php-cs-fixer
+[[ -d "tools/php-cs-fixer" ]] && composer require --working-dir=tools/php-cs-fixer friendsofphp/php-cs-fixer
+
+exit 0

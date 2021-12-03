@@ -7,7 +7,7 @@
 
 namespace App\Http\Controllers;
 
-use Contracts\Repositories\PromoListingRepositoryContract;
+use Contracts\Repositories\PromoRepositoryContract;
 use Illuminate\Http\Request;
 
 class PromoListingController extends Controller
@@ -15,9 +15,9 @@ class PromoListingController extends Controller
     /**
      * Construct the controller.
      *
-     * @param PromoListingRepositoryContract $promo
+     * @param PromoRepositoryContract $promo
      */
-    public function __construct(PromoListingRepositoryContract $promo)
+    public function __construct(PromoRepositoryContract $promo)
     {
         $this->promo = $promo;
     }
@@ -26,19 +26,21 @@ class PromoListingController extends Controller
      * Display the view.
      *
      * @param Request $request
-     * @return \Illuminate\View\View
+     *
+     * @return \Illuminate\View\View|void
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function index(Request $request)
     {
-        $promos = $this->promo->getPromoListingPromos($request->data);
+        $promos = $this->promo->getPromoListingPromos($request->data['base']);
 
-        if (!empty($request->data['data']['listing_promo_group_id'])) {
-            return view('promo-listing', merge($request->data, $promos));
-        }
-
-        if (!empty($request->data['data']['grid_promo_group_id'])) {
+        if (!empty($request->data['base']['data']['grid_promo_group_id'])) {
             return view('promo-grid', merge($request->data, $promos));
         }
+
+        return view('promo-listing', merge($request->data, $promos));
     }
 
     /**
@@ -46,17 +48,20 @@ class PromoListingController extends Controller
      *
      * @param Request $request
      * @return \Illuminate\View\View
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function show(Request $request)
     {
         $promo = $this->promo->getPromoView($request->id);
 
         if (empty($promo['promo'])) {
-            return abort('404');
+            abort('404');
         }
 
         if (!empty($promo['promo']['title'])) {
-            $request->data['page']['title'] = $promo['promo']['title'];
+            $request->data['base']['page']['title'] = $promo['promo']['title'];
         }
 
         // Set the back URL

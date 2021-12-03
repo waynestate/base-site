@@ -33,8 +33,8 @@ interface MenuRepositoryContract
      * Get the menu items and have them ready for display.
      *
      * @param int $site_id
-     * @param int $parent_id
-     * @param $page_menu_id
+     * @param int|null $parent_id
+     * @param int $page_menu_id
      * @return array
      */
     public function getAllMenus($site_id, $parent_id, $page_menu_id);
@@ -42,7 +42,7 @@ interface MenuRepositoryContract
     /**
      * Get the ID of the menu that will be used for the top menu.
      *
-     * @param int $top_menu_id
+     * @param int|null $top_menu_id
      * @param int $menu_id
      * @param array $menus
      * @return int
@@ -53,7 +53,7 @@ interface MenuRepositoryContract
      * Get the top menu.
      *
      * @param array $menu
-     * @param int $page_id
+     * @param int|null $page_id
      * @return array
      */
     public function getTopMenu($menu, $page_id);
@@ -62,7 +62,7 @@ interface MenuRepositoryContract
      * Get the site's menu.
      *
      * @param array $menu
-     * @param int $page_id
+     * @param int|null $page_id
      * @return array
      */
     public function getSiteMenu($menu, $page_id);
@@ -71,8 +71,8 @@ interface MenuRepositoryContract
      * Trim the site's menu.
      *
      * @param array $menu
-     * @param int $parentId
-     * @param int $topMenuId
+     * @param int|null $parentId
+     * @param int|null $topMenuId
      * @return array
      */
     public function trimSiteMenu($menu, $parentId, $topMenuId);
@@ -81,8 +81,8 @@ interface MenuRepositoryContract
      * Get the breadcrumbs.
      *
      * @param array $menu
-     * @param string $siteTitle
-     * @param string $subsiteFolder
+     * @param string|null $siteTitle
+     * @param string|null $subsiteFolder
      * @return array
      */
     public function getBreadcrumbs($menu, $siteTitle, $subsiteFolder);

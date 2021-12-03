@@ -3,6 +3,12 @@
 namespace Styleguide\Repositories;
 
 use App\Repositories\PromoRepository as Repository;
+use Factories\Accordion;
+use Factories\FooterContact;
+use Factories\FooterSocial;
+use Factories\HeroImage;
+use Factories\PromoListing;
+use Factories\UnderMenu;
 
 class PromoRepository extends Repository
 {
@@ -12,7 +18,7 @@ class PromoRepository extends Repository
     public function getHomepagePromos(int $page_id = null)
     {
         return [
-            //'key' => app('Factories\YourFactory')->create(5),
+            //'key' => app(\Factories\YourFactory::class)->create(5),
         ];
     }
 
@@ -27,7 +33,7 @@ class PromoRepository extends Repository
         ];
 
         // Only pull under_menu promos if they match the page_ids that are specified
-        $under_menu = !empty($under_menu_page_ids[$data['page']['id']]) ? app('Factories\UnderMenu')->create($under_menu_page_ids[$data['page']['id']]) : null;
+        $under_menu = !empty($under_menu_page_ids[$data['page']['id']]) ? app(UnderMenu::class)->create($under_menu_page_ids[$data['page']['id']]) : null;
 
         // Define the pages that have hero images: page_id => quanity
         $hero_page_ids = [
@@ -43,7 +49,7 @@ class PromoRepository extends Repository
         ];
 
         // Only pull hero promos if they match the pages_ids that are specificed
-        $hero = !empty($hero_page_ids[$data['page']['id']]) ? app('Factories\HeroImage')->create($hero_page_ids[$data['page']['id']]) : null;
+        $hero = !empty($hero_page_ids[$data['page']['id']]) ? app(HeroImage::class)->create($hero_page_ids[$data['page']['id']]) : null;
 
         // Define the pages that the childpage accordion should show on page_id => quanity
         $accordion_page_ids = [
@@ -51,20 +57,21 @@ class PromoRepository extends Repository
         ];
 
         // Only pull accordion for childpage template
-        $accordion = !empty($accordion_page_ids[$data['page']['id']]) ? app('Factories\Accordion')->create($accordion_page_ids[$data['page']['id']]) : null;
+        $accordion = !empty($accordion_page_ids[$data['page']['id']]) ? app(Accordion::class)->create($accordion_page_ids[$data['page']['id']]) : null;
 
         // Get all the social icons
         $social = collect([
             'twitter',
+            'tiktok',
             'facebook',
             'instagram',
+            'youtube',
+            'snapchat',
             'linkedin',
             'flickr',
             'pinterest',
-            'youtube',
-            'snapchat',
         ])->map(function ($name) {
-            return app('Factories\FooterSocial')->create(1, true, ['title' => $name]);
+            return app(FooterSocial::class)->create(1, true, ['title' => $name]);
         })
         ->reject(function ($item) {
             return empty($item);
@@ -72,11 +79,39 @@ class PromoRepository extends Repository
         ->toArray();
 
         return [
-            'contact' => app('Factories\FooterContact')->create(1),
+            'contact' => app(FooterContact::class)->create(1),
             'social' => $social,
             'hero' => $hero,
             'under_menu' => $under_menu,
             'accordion_page' => $accordion,
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPromoListingPromos(array $data, $limit = 75)
+    {
+        return [
+            'promos' => app(PromoListing::class)->create(15),
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPromoView($id)
+    {
+        return [
+            'promo' => app(PromoListing::class)->create(1, true),
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBackToPromoListing($referer = null, $scheme = null, $host = null, $uri = null)
+    {
+        return '/styleguide/promolisting';
     }
 }

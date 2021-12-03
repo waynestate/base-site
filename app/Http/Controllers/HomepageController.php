@@ -38,9 +38,9 @@ class HomepageController extends Controller
     {
         // $promos = $this->promo->getHomepagePromos();
 
-        $articles = $this->article->listing($request->data['site']['news']['application_id']);
+        $articles = $this->article->listing($request->data['base']['site']['news']['application_id']);
 
-        $events = $this->event->getEvents($request->data['site']['id']);
+        $events = $this->event->getEvents($request->data['base']['site']['id']);
 
         return view('homepage', merge($request->data, $articles, $events));
     }

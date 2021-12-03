@@ -20,7 +20,7 @@ interface ArticleRepositoryContract
      *
      * @param int $id
      * @param array $application_ids
-     * @param boolean $preview
+     * @param boolean|null $preview
      * @return array
      */
     public function find($id, $application_ids, $preview);

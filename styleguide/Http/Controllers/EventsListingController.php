@@ -26,7 +26,7 @@ class EventsListingController extends Controller
      */
     public function index(Request $request)
     {
-        $events = $this->events->getEvents($request->data['site']['id']);
+        $events = $this->events->getEvents($request->data['base']['site']['id']);
 
         return view('styleguide-events-listing', merge($request->data, $events));
     }

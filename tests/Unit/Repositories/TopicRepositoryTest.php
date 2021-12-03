@@ -2,8 +2,11 @@
 
 namespace Tests\Unit\Repositories;
 
+use App\Repositories\TopicRepository;
+use Factories\Topic;
 use Tests\TestCase;
 use Mockery as Mockery;
+use Waynestate\Api\News;
 
 class TopicRepositoryTest extends TestCase
 {
@@ -14,13 +17,13 @@ class TopicRepositoryTest extends TestCase
     public function getting_topics_should_return_array_of_topics()
     {
         // Fake return
-        $return = app('Factories\Topic')->create(5);
+        $return = app(Topic::class)->create(5);
 
         // Mock the connector and set the return
-        $newsApi = Mockery::mock('Waynestate\Api\News');
+        $newsApi = Mockery::mock(News::class);
         $newsApi->shouldReceive('request')->andReturn($return);
 
-        $topicRepository = app('App\Repositories\TopicRepository', ['newsApi' => $newsApi]);
+        $topicRepository = app(TopicRepository::class, ['newsApi' => $newsApi]);
 
         // Get the articles
         $topics = $topicRepository->listing($this->faker->randomDigit);
@@ -35,13 +38,13 @@ class TopicRepositoryTest extends TestCase
     public function getting_topics_with_exception_should_return_empty_array()
     {
         // Fake return
-        $return = app('Factories\Topic')->create(5);
+        $return = app(Topic::class)->create(5);
 
         // Mock the connector and set the return
-        $newsApi = Mockery::mock('Waynestate\Api\News');
+        $newsApi = Mockery::mock(News::class);
         $newsApi->shouldReceive('request')->andThrow(new \Exception);
 
-        $topics = app('App\Repositories\TopicRepository', ['newsApi' => $newsApi])->listing(1);
+        $topics = app(TopicRepository::class, ['newsApi' => $newsApi])->listing(1);
 
         $this->assertCount(0, $topics['topics']);
     }
@@ -53,14 +56,14 @@ class TopicRepositoryTest extends TestCase
     public function finding_topic_should_return_topic()
     {
         // Fake return
-        $return = app('Factories\Topic')->create(1, true);
+        $return = app(Topic::class)->create(1, true);
 
         // Mock the connector and set the return
-        $newsApi = Mockery::mock('Waynestate\Api\News');
+        $newsApi = Mockery::mock(News::class);
         $newsApi->shouldReceive('request')->andReturn($return);
 
         // Get the news categories
-        $topic = app('App\Repositories\TopicRepository', ['newsApi' => $newsApi])->find($this->faker->word);
+        $topic = app(TopicRepository::class, ['newsApi' => $newsApi])->find($this->faker->word);
 
         // Make sure they are the same as the ones we created
         $this->assertEquals($return['data']['topic_id'], $topic['topic']['data']['topic_id']);
@@ -73,13 +76,13 @@ class TopicRepositoryTest extends TestCase
     public function sorting_topics_by_letter_should_be_in_order()
     {
         // Fake return
-        $topics = app('Factories\Topic')->create(5);
+        $topics = app(Topic::class)->create(5);
 
         // Mock the connector and set the return
-        $newsApi = Mockery::mock('Waynestate\Api\News');
+        $newsApi = Mockery::mock(News::class);
 
         // Get the news categories
-        $sorted = app('App\Repositories\TopicRepository', ['newsApi' => $newsApi])->sortByLetter($topics['data']);
+        $sorted = app(TopicRepository::class, ['newsApi' => $newsApi])->sortByLetter($topics['data']);
 
         foreach ($sorted as $letter=>$topics) {
             foreach ($topics as $topic) {
@@ -94,13 +97,13 @@ class TopicRepositoryTest extends TestCase
      */
     public function setting_selected_topic()
     {
-        $topics = app('Factories\Topic')->create(5);
+        $topics = app(Topic::class)->create(5);
 
-        $newsApi = Mockery::mock('Waynestate\Api\News');
+        $newsApi = Mockery::mock(News::class);
 
         $first = collect($topics['data'])->first();
 
-        $selected = app('App\Repositories\TopicRepository', ['newsApi' => $newsApi])->setSelected($topics['data'], $first['slug']);
+        $selected = app(TopicRepository::class, ['newsApi' => $newsApi])->setSelected($topics['data'], $first['slug']);
 
         $this->assertTrue(collect($selected)->first()['selected']);
     }

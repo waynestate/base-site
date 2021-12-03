@@ -2,6 +2,8 @@
 
 namespace Styleguide\Pages;
 
+use Factories\Page as PageFactory;
+
 class HeroFullTextOverlay extends Page
 {
     /** {@inheritdoc} **/
@@ -12,7 +14,7 @@ class HeroFullTextOverlay extends Page
      */
     public function getPageData()
     {
-        return app('Factories\Page')->create(1, true, [
+        return app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'HeroFullTextOverlayController',
                 'title' => 'Full width - Text overlay',

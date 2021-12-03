@@ -3,6 +3,7 @@
 namespace Styleguide\Repositories;
 
 use App\Repositories\DummyRepository as Repository;
+use Factories\DummyFactory;
 
 class DummyRepository extends Repository
 {
@@ -12,7 +13,7 @@ class DummyRepository extends Repository
     public function getDummy()
     {
         return [
-            'dummy' => app('Factories\DummyFactory')->create(5)
+            'dummy' => app(DummyFactory::class)->create(5)
         ];
     }
 }

@@ -315,4 +315,12 @@ class ProfileRepository implements ProfileRepositoryContract
 
         return $referer;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSiteID($data)
+    {
+        return !empty($data['data']['profile_site_id']) ? $data['data']['profile_site_id'] : $data['site']['id'];
+    }
 }

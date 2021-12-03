@@ -30,10 +30,13 @@ class ArticleController extends Controller
      *
      * @param Request $request
      * @return \Illuminate\View\View
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function index(Request $request)
     {
-        $topics = $this->topic->listing($request->data['site']['news']['application_id'], $request->data['site']['subsite-folder']);
+        $topics = $this->topic->listing($request->data['base']['site']['news']['application_id'], $request->data['base']['site']['subsite-folder']);
 
         if (!empty($topics['topics']['data'])) {
             $topics['topics']['data'] = $this->topic->setSelected($topics['topics']['data'], $request->slug);
@@ -42,10 +45,10 @@ class ArticleController extends Controller
         }
 
         if (!empty($request->slug) && empty($selected_topic['selected'])) {
-            return abort('404');
+            abort('404');
         }
 
-        $articles = $this->article->listing($request->data['site']['news']['application_id'], 25, $request->query('page'), !empty($selected_topic['topic_id']) ? $selected_topic['topic_id'] : null);
+        $articles = $this->article->listing($request->data['base']['site']['news']['application_id'], 25, $request->query('page'), !empty($selected_topic['topic_id']) ? $selected_topic['topic_id'] : null);
 
         if (!empty($articles['articles']['meta'])) {
             $articles['articles']['meta'] = $this->article->setPaging($articles['articles']['meta'], $request->query('page'));
@@ -53,7 +56,7 @@ class ArticleController extends Controller
 
         // Force the menu to be shown if categories are found
         if (!empty($topics['topics']['data'])) {
-            $request->data['show_site_menu'] = true;
+            $request->data['base']['show_site_menu'] = true;
         }
 
         return view('articles', merge($request->data, $articles, $topics));
@@ -64,31 +67,34 @@ class ArticleController extends Controller
      *
      * @param Request $request
      * @return \Illuminate\View\View
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function show(Request $request)
     {
-        $article = $this->article->find($request->id, $request->data['site']['news']['application_id'], $request->preview);
+        $article = $this->article->find($request->id, $request->data['base']['site']['news']['application_id'], $request->preview);
 
         if (empty($article['article']['data'])) {
             if ($request->preview) {
                 return redirect($request->server->get('REDIRECT_URL'));
             }
 
-            return abort('404');
+            abort('404');
         }
 
-        $request->data['page']['title'] = $article['article']['data']['title'];
+        $request->data['base']['page']['title'] = $article['article']['data']['title'];
 
         if (!empty($article['article']['data']['hero_image']['url'])) {
-            $request->data['hero'][]['relative_url'] = $article['article']['data']['hero_image']['url'];
+            $request->data['base']['hero'][]['relative_url'] = $article['article']['data']['hero_image']['url'];
         }
 
         $image = $this->article->getImage($article['article']['data']);
 
-        $request->data['meta']['image'] = $image['url'];
-        $request->data['meta']['image_alt'] = $image['alt_text'];
+        $request->data['base']['meta']['image'] = $image['url'];
+        $request->data['base']['meta']['image_alt'] = $image['alt_text'];
 
-        $topics = $this->topic->listing($request->data['site']['news']['application_id']);
+        $topics = $this->topic->listing($request->data['base']['site']['news']['application_id']);
 
         if (!empty($topics['topics']['data'])) {
             $topics['topics']['data'] = $this->topic->setSelected($topics['topics']['data'], $request->slug);
@@ -98,7 +104,7 @@ class ArticleController extends Controller
 
         // Force the menu to be shown if categories are found
         if (!empty($topics['topics']['data'])) {
-            $request->data['show_site_menu'] = true;
+            $request->data['base']['show_site_menu'] = true;
         }
 
         return view('article', merge($request->data, $article, $topics));

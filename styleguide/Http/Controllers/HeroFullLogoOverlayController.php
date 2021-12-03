@@ -34,7 +34,7 @@ class HeroFullLogoOverlayController extends Controller
         ]);
 
         // Set option
-        $request->data['hero'] = collect($request->data['hero'])->map(function ($item) {
+        $request->data['base']['hero'] = collect($request->data['base']['hero'])->map(function ($item) {
             $item['option'] = "Logo Overlay";
             $item['description'] = '<p>' . $this->faker->text(100) . '</p><p><a href="https://wayne.edu" class="button">Button</a></p>';
             $item['secondary_relative_url'] = '/styleguide/image/600x250?text=600x250';

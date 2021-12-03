@@ -8,7 +8,7 @@ interface ProfileRepositoryContract
      * Get the profile listing.
      *
      * @param int $site_id
-     * @param int $selected_group
+     * @param int|null $selected_group
      * @return array
      */
     public function getProfiles($site_id, $selected_group);
@@ -25,8 +25,8 @@ interface ProfileRepositoryContract
     /**
      * Get the dropdown config options.
      *
-     * @param int $selected_group
-     * @param int $forced_profile_group_id
+     * @param int|null $selected_group
+     * @param int|null $forced_profile_group_id
      * @return array
      */
     public function getDropdownOptions($selected_group, $forced_profile_group_id);
@@ -66,11 +66,19 @@ interface ProfileRepositoryContract
     /**
      * Get the back url based on the http referer.
      *
-     * @param string $referer
-     * @param string $scheme
-     * @param string $host
-     * @param string $uri
+     * @param string|null $referer
+     * @param string|null $scheme
+     * @param string|null $host
+     * @param string|null $uri
      * @return string
      */
     public function getBackToProfileListUrl($referer, $scheme, $host, $uri);
+
+    /**
+     * Get the Site ID based off the request data
+     *
+     * @param array $data
+     * @return int
+     */
+    public function getSiteID($data);
 }

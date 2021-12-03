@@ -2,16 +2,25 @@
 
 namespace Tests\Unit\Http\Controllers;
 
+use App\Http\Controllers\ArticleController;
+use App\Repositories\ArticleRepository;
+use App\Repositories\TopicRepository;
+use Factories\ApiError;
+use Factories\Article;
+use Factories\Topic;
+use Illuminate\Routing\Redirector;
+use Styleguide\Pages\News as StyleguideNews;
 use Tests\TestCase;
 use Mockery as Mockery;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Waynestate\Api\News;
 
 class ArticleControllerTest extends TestCase
 {
     /**
-     * @covers App\Http\Controllers\ArticleController::__construct
-     * @covers App\Http\Controllers\ArticleController::show
+     * @covers \App\Http\Controllers\ArticleController::__construct
+     * @covers \App\Http\Controllers\ArticleController::show
      * @test
      */
     public function news_view_with_no_item_should_404()
@@ -19,24 +28,24 @@ class ArticleControllerTest extends TestCase
         $this->expectException(NotFoundHttpException::class);
 
         // Fake return
-        $return = app('Factories\ApiError')->create(1, true);
+        $return = app(ApiError::class)->create(1, true);
 
         // Mock the connector
-        $newsApi = Mockery::mock('Waynestate\Api\News');
+        $newsApi = Mockery::mock(News::class);
         $newsApi->shouldReceive('request')->andReturn($return);
 
         // Construct the news repository
-        $articleRepository = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi]);
+        $articleRepository = app(ArticleRepository::class, ['newsApi' => $newsApi]);
 
         // Construct the news controller
-        $articleController = app('App\Http\Controllers\ArticleController', ['article' => $articleRepository]);
+        $articleController = app(ArticleController::class, ['article' => $articleRepository]);
 
         // Call the news listing
         $view = $articleController->show(new Request());
     }
 
     /**
-     * @covers App\Http\Controllers\ArticleController::show
+     * @covers \App\Http\Controllers\ArticleController::show
      * @test
      */
     public function news_item_that_is_not_published_should_404()
@@ -45,20 +54,20 @@ class ArticleControllerTest extends TestCase
 
         // Fake return
         $return = [
-            'news' => app('Factories\Article')->create(1, true, [
+            'news' => app(Article::class)->create(1, true, [
                 'status' => 'draft',
             ]),
         ];
 
         // Mock the connector
-        $newsApi = Mockery::mock('Waynestate\Api\News');
+        $newsApi = Mockery::mock(News::class);
         $newsApi->shouldReceive('request')->andReturn($return);
 
         // Construct the news repository
-        $articleRepository = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi]);
+        $articleRepository = app(ArticleRepository::class, ['newsApi' => $newsApi]);
 
         // Construct the news controller
-        $articleController = app('App\Http\Controllers\ArticleController', ['article' => $articleRepository]);
+        $articleController = app(ArticleController::class, ['article' => $articleRepository]);
 
         // Call the news listing
         $view = $articleController->show(new Request());
@@ -71,22 +80,23 @@ class ArticleControllerTest extends TestCase
     public function news_item_that_is_draft_should_allow_preview()
     {
         // Fake return
-        $return =  app('Factories\Article')->create(1, true, [
+        $return =  app(Article::class)->create(1, true, [
             'status' => 'draft',
         ]);
 
         // Mock the connector
-        $newsApi = Mockery::mock('Waynestate\Api\News');
+        $newsApi = Mockery::mock(News::class);
         $newsApi->shouldReceive('request')->andReturn($return);
 
         // Construct the news repository
-        $articleRepository = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi]);
+        $articleRepository = app(ArticleRepository::class, ['newsApi' => $newsApi]);
 
         // Construct the news controller
-        $articleController = app('App\Http\Controllers\ArticleController', ['article' => $articleRepository]);
+        $articleController = app(ArticleController::class, ['article' => $articleRepository]);
 
         $request = new Request();
-        $request->data = app('Styleguide\Pages\News')->getPageData();
+        $base['base'] = app(StyleguideNews::class)->getPageData();
+        $request->data = $base;
         $request->preview = true;
 
         // Call the news listing
@@ -105,23 +115,24 @@ class ArticleControllerTest extends TestCase
         $return =  null;
 
         // Mock the connector
-        $newsApi = Mockery::mock('Waynestate\Api\News');
+        $newsApi = Mockery::mock(News::class);
         $newsApi->shouldReceive('request')->andReturn($return);
 
         // Construct the news repository
-        $articleRepository = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi]);
+        $articleRepository = app(ArticleRepository::class, ['newsApi' => $newsApi]);
 
         // Construct the news controller
-        $articleController = app('App\Http\Controllers\ArticleController', ['article' => $articleRepository]);
+        $articleController = app(ArticleController::class, ['article' => $articleRepository]);
 
         $request = new Request();
-        $request->data = app('Styleguide\Pages\News')->getPageData();
+        $base['base'] = app(StyleguideNews::class)->getPageData();
+        $request->data = $base;
         $request->preview = true;
 
         // Call the news listing
         $view = $articleController->show($request);
 
-        $this->assertInstanceOf('Illuminate\Routing\Redirector', $view);
+        $this->assertInstanceOf(Redirector::class, $view);
     }
 
     /**
@@ -131,27 +142,28 @@ class ArticleControllerTest extends TestCase
     public function page_title_should_be_news_item_title()
     {
         // Fake return
-        $return = app('Factories\Article')->create(1, true);
+        $return = app(Article::class)->create(1, true);
 
         // Fake request
         $request = new Request();
-        $request->data = app('Styleguide\Pages\News')->getPageData();
+        $base['base'] = app(StyleguideNews::class)->getPageData();
+        $request->data = $base;
 
         // Mock the connector
-        $newsApi = Mockery::mock('Waynestate\Api\News');
+        $newsApi = Mockery::mock(News::class);
         $newsApi->shouldReceive('request')->andReturn($return);
 
         // Construct the news repository
-        $ArticleRepository = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi]);
+        $ArticleRepository = app(ArticleRepository::class, ['newsApi' => $newsApi]);
 
         // Construct the news controller
-        $ArticleController = app('App\Http\Controllers\ArticleController', ['article' => $ArticleRepository]);
+        $ArticleController = app(ArticleController::class, ['article' => $ArticleRepository]);
 
         // Call the news listing
         $view = $ArticleController->show($request);
 
         // Make sure the news title is the page title
-        $this->assertEquals($view->getData()['article']['data']['title'], $view->getData()['page']['title']);
+        $this->assertEquals($view->getData()['article']['data']['title'], $view->getData()['base']['page']['title']);
     }
 
     /**
@@ -162,15 +174,15 @@ class ArticleControllerTest extends TestCase
     {
         $this->expectException(NotFoundHttpException::class);
 
-        $newsApi = Mockery::mock('Waynestate\Api\News');
-        $articleRepository = app('App\Repositories\ArticleRepository', ['newsApi' => $newsApi]);
+        $newsApi = Mockery::mock(News::class);
+        $articleRepository = app(ArticleRepository::class, ['newsApi' => $newsApi]);
 
-        $newsApi = Mockery::mock('Waynestate\Api\News');
-        $newsApi->shouldReceive('request')->once()->andReturn(app('Factories\Topic')->create(5));
-        $topicRepository = app('App\Repositories\topicRepository', ['newsApi' => $newsApi]);
+        $newsApi = Mockery::mock(News::class);
+        $newsApi->shouldReceive('request')->once()->andReturn(app(Topic::class)->create(5));
+        $topicRepository = app(TopicRepository::class, ['newsApi' => $newsApi]);
 
         // Construct the news controller
-        $ArticleController = app('App\Http\Controllers\ArticleController', ['article' => $articleRepository, 'topic' => $topicRepository]);
+        $ArticleController = app(ArticleController::class, ['article' => $articleRepository, 'topic' => $topicRepository]);
 
         $request = new Request();
         $request->path = '/'.config('base.news_listing_route').'/'.config('base.news_topic_route');

@@ -1,17 +1,17 @@
 .form_responses {
     & * {
-        @apply .border .border-grey .py-1 .px-2 .rounded-sm;
+        @apply border border-gray py-1 px-2 rounded-sm;
     }
 }
 
 .form_response {
-    @apply .border-0;
+    @apply border-0;
 }
 
 .form_responses div[id*="maxlength"] {
-    @apply .border-0;
+    @apply border-0;
 }
 
 button.default {
-    @extend .button;
+    @extend button;
 }

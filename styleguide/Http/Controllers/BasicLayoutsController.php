@@ -3,10 +3,11 @@
 namespace Styleguide\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Factories\Accordion;
 use Illuminate\Http\Request;
 use Faker\Factory;
 
-class TableStackController extends Controller
+class BasicLayoutsController extends Controller
 {
     /**
      * Construct the controller.
@@ -19,13 +20,13 @@ class TableStackController extends Controller
     }
 
     /**
-     * Display an example table stack.
+     * Display the styleguide view.
      *
      * @param Request $request
      * @return \Illuminate\View\View
      */
     public function index(Request $request)
     {
-        return view('styleguide-tablestack', merge($request->data, $this->faker));
+        return view('styleguide-basic-layouts', merge($request->data, $this->faker));
     }
 }

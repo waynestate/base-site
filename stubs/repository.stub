@@ -37,6 +37,46 @@ class DummyRepository implements DummyRepositoryContract
      */
     public function getDummy()
     {
+        /*
+         * Get formy data
+        $params = [
+            'method' => 'formy.submissions.listing',
+            'form_id' => 00000,
+            'labels' => 0000, // ID of 'approved' label
+            'status' => 0,
+        ];
+
+        return $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+            $this->wsuApi->nextRequestProduction();
+
+            return $this->wsuApi->sendRequest($params['method'], $params);
+        });
+         */
+
+        /*
+         * Get promos
+        $group_reference = [
+            1234 => 'dummy',
+        ];
+
+        $group_config = [
+            'dummy' => 'page_id:'.$page_id.'|randomize|first',
+        ];
+
+        $params = [
+            'method' => 'cms.promotions.listing',
+            'promo_group_id' => array_keys($group_reference),
+            'filename_url' => true,
+            'is_active' => '1',
+        ];
+
+        $promos = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+            return $this->wsuApi->sendRequest($params['method'], $params);
+        });
+
+        return $this->parsePromos->parse($promos, $group_reference, $group_config);
+         */
+
         return [
             'dummy' => []
         ];

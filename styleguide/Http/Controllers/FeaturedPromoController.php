@@ -3,6 +3,7 @@
 namespace Styleguide\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Factories\FeaturedPromo;
 use Illuminate\Http\Request;
 
 class FeaturedPromoController extends Controller
@@ -15,7 +16,7 @@ class FeaturedPromoController extends Controller
      */
     public function index(Request $request)
     {
-        $promos['featured_promo'] = app('Factories\FeaturedPromo')->create(1, true);
+        $promos['featured_promo'] = app(FeaturedPromo::class)->create(1, true);
 
         return view('styleguide-featured-promo', merge($request->data, $promos));
     }

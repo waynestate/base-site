@@ -3,6 +3,7 @@
 namespace Styleguide\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Factories\MiniList;
 use Illuminate\Http\Request;
 
 class MiniListController extends Controller
@@ -15,7 +16,7 @@ class MiniListController extends Controller
      */
     public function index(Request $request)
     {
-        $promos['minilist'] = app('Factories\MiniList')->create(4);
+        $promos['minilist'] = app(MiniList::class)->create(4);
 
         return view('styleguide-minilist', merge($request->data, $promos));
     }

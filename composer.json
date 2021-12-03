@@ -9,11 +9,13 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=7.3.7",
-        "fakerphp/faker": "^1.13",
+        "php": "^7.3|^8.0",
+        "fakerphp/faker": "^1.15",
         "fideloper/proxy": "^4.0",
-        "laravel/framework": "^6.0",
-        "laravel/tinker": "^1.0",
+        "fruitcake/laravel-cors": "^2.0",
+        "guzzlehttp/guzzle": "^7.3.0",
+        "laravel/framework": "^8.40",
+        "laravel/tinker": "^2.5",
         "predis/predis": "^1.1",
         "waynestate/apdatetime": "^1.0",
         "waynestate/display-menu": "~1.0",
@@ -23,19 +25,19 @@
         "waynestate/error-500": "~1.1",
         "waynestate/formy-parser": "~1.0",
         "waynestate/image-faker": "~1.0",
-        "waynestate/news-api-php": "~1.0",
+        "waynestate/news-api-php": "~2.0",
         "waynestate/parse-menu": "~1.2",
         "waynestate/parse-promos": "~2.0",
+        "waynestate/people-api-php": "~1.0",
         "waynestate/waynestate-api": "~1.2"
     },
     "require-dev": {
-        "facade/ignition": "^1.16.15",
-        "friendsofphp/php-cs-fixer": "^2.2",
-        "laravel/envoy": "^1.4",
-        "mockery/mockery": "^1.0",
-        "phpunit/phpunit": "^8.0",
-        "php-coveralls/php-coveralls": "^2.1",
-        "nunomaduro/collision": "^3.0"
+        "facade/ignition": "^2.5",
+        "laravel/envoy": "^2.7.0",
+        "mockery/mockery": "^1.4.2",
+        "phpunit/phpunit": "^9.3.3",
+        "php-coveralls/php-coveralls": "^2.4",
+        "nunomaduro/collision": "^5.0"
     },
     "autoload": {
         "files": [
@@ -66,7 +68,8 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi",
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "make php-cs-fixer"
         ]
     },
     "config": {
@@ -74,7 +77,7 @@
         "sort-packages": true,
         "optimize-autoloader": true,
         "platform": {
-            "php": "7.3.7"
+            "php": "7.3.20"
         }
     },
     "minimum-stability": "dev",

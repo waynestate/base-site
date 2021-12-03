@@ -6,11 +6,12 @@
 @import "~@waynestate/wsuheader/dist/header";
 @import "~@waynestate/wsufooter/dist/footer";
 @import "components/global";
-@import "components/heading-lined";
+@import "components/global-tables";
+@import "components/global-headings";
+@import "components/global-buttons";
 @import "components/accordion";
 @import "components/banner";
 @import "components/bg-gradient";
-@import "components/button";
 @import "components/carousel";
 @import "components/content";
 @import "components/flickity";
@@ -25,11 +26,12 @@
 @import "components/row";
 @import "components/skip";
 @import "components/slate";
-@import "components/table-stack";
 @import "components/text-shadow";
 @import "components/visually-hidden";
 @import "components/table-of-contents";
 @import "components/print";
+@import "components/cms-layouts";
+@import "components/play-video-button";
 
 // Tailwind
 @tailwind components;

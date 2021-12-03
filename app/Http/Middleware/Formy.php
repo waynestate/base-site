@@ -20,13 +20,13 @@ class Formy
     /**
      * Parse the page content and replace form embeds with form html.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-        $request->data['page']['content'] = collect($request->data['page']['content'])
+        $request->data['base']['page']['content'] = collect($request->data['base']['page']['content'])
             ->map(function ($content) {
                 return $this->parser->parse(stripslashes($content));
             })

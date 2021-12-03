@@ -10,7 +10,10 @@ $finder = Finder::create()
     ->in(__DIR__ . '/config')
     ->in(__DIR__ . '/routes')
     ->in(__DIR__ . '/styleguide')
-    ->in(__DIR__ . '/tests');
+    ->in(__DIR__ . '/tests')
+    ->name('*.php')
+    ->ignoreDotFiles(true)
+    ->ignoreVCS(true);
 
 $fixers = [
     '@PSR2' => true,
@@ -20,7 +23,9 @@ $fixers = [
     'indentation_type' => true,
     'array_indentation' => true,
     'line_ending' => true,
-    'method_argument_space' => ['ensure_fully_multiline' => true],
+    'method_argument_space' => [
+        'on_multiline' => 'ensure_fully_multiline'
+    ],
     'no_break_comment' => true,
     'no_closing_tag' => true,
     'no_spaces_after_function_name' => true,
@@ -28,7 +33,9 @@ $fixers = [
     'no_trailing_whitespace' => true,
     'no_trailing_whitespace_in_comment' => true,
     'single_blank_line_at_eof' => true,
-    'single_class_element_per_statement' => ['elements' => ['property']],
+    'single_class_element_per_statement' => [
+        'elements' => ['property']
+    ],
     'single_import_per_statement' => true,
     'switch_case_semicolon_to_colon' => true,
     'switch_case_space' => true,
@@ -36,10 +43,9 @@ $fixers = [
     'no_trailing_comma_in_singleline_array' => true,
     'whitespace_after_comma_in_array' => true,
     'no_whitespace_before_comma_in_array' => true,
-    'trailing_comma_in_multiline_array' => true,
+    'trailing_comma_in_multiline' => true,
 ];
 
-return Config::create()
+return (new Config())
     ->setFinder($finder)
-    ->setRules($fixers)
-    ->setUsingCache(true);
+    ->setRules($fixers);

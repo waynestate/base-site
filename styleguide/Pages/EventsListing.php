@@ -2,6 +2,8 @@
 
 namespace Styleguide\Pages;
 
+use Factories\Page as PageFactory;
+
 class EventsListing extends Page
 {
     /**
@@ -9,7 +11,7 @@ class EventsListing extends Page
      */
     public function getPageData()
     {
-        return app('Factories\Page')->create(1, true, [
+        return app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'EventsListingController',
                 'title' => 'Events listing',

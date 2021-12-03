@@ -53,6 +53,6 @@ class PageRepository extends Repository
             }
         }
 
-        return abort('404');
+        abort('404');
     }
 }

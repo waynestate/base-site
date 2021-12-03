@@ -7,7 +7,7 @@ DOTENV := .env
 
 # Tasks
 all: install
-install: yarn composerinstall generatekey
+install: yarn composerinstall generatekey php-cs-fixer
 update: yarnupgrade composerupdate
 status: yarncheck
 build: webpackdev
@@ -54,17 +54,20 @@ runtests: $(COMPOSERFILE)
 	php artisan config:clear
 	php vendor/bin/phpunit
 
+php-cs-fixer:
+	chmod +x php-cs-fixer-script.sh && ./php-cs-fixer-script.sh
+
 phplint: $(COMPOSERFILE)
-	php-cs-fixer fix
+	tools/php-cs-fixer/vendor/bin/php-cs-fixer fix
 
 phplintdry: $(COMPOSERFILE)
-	php-cs-fixer fix --diff --dry-run
+	tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --diff --dry-run
 
 stylelint:
 	stylelint ./resources/scss/**/*.scss --syntax scss
 
 coverage: $(COMPOSERFILE)
-	phpbrew ext enable xdebug && php vendor/bin/phpunit --coverage-html coverages && phpbrew ext disable xdebug
+	phpbrew ext enable xdebug && XDEBUG_MODE=coverage php vendor/bin/phpunit --coverage-html coverages && phpbrew ext disable xdebug
 
 envoy: $(DEPLOY)
 	envoy run deploy

@@ -22,9 +22,12 @@ class PromoListing implements FactoryContract
      */
     public function create($limit = 1, $flatten = false, $options = [])
     {
+        $promo_group_id = $this->faker->numberBetween(1, 200);
+
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
                 'promo_item_id' => $i,
+                'promo_group_id' => $promo_group_id,
                 'relative_url' => '/styleguide/image/300x400?text=300x400',
                 'title' => $this->faker->name,
                 'link' => 'https://wayne.edu',

@@ -19,7 +19,7 @@ class HeaderTitleDoubleController extends Controller
     }
 
     /**
-     * Display the double header view.
+     * Display the double header view with a custom short title
      *
      * @param Request $request
      * @return \Illuminate\View\View
@@ -31,6 +31,8 @@ class HeaderTitleDoubleController extends Controller
             'base.surtitle_main_site_enabled' => true,
             'base.top_menu_enabled' => true,
         ]);
+
+        $request->data['base']['site']['short-title'] = $this->faker->sentence(2);
 
         return view('styleguide-childpage', merge($request->data));
     }

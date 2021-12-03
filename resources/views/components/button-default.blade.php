@@ -2,12 +2,12 @@
     $button => array // ['title', 'link', 'excerpt']
 --}}
 
-@if(!empty($button['excerpt']))
-    <a href="{{ $button['link'] }}" class="button expanded text-left">
-        <div class="block text-lg xl:text-xl leading-tight">{{ $button['title'] }}</div>
-        <div class="text-sm pb-1 leading-tight font-normal">{{ $button['excerpt'] }}</div>
-    </a>
-@else
-    <a href="{{ $button['link'] }}" class="button expanded">{{ $button['title'] }}</a>
-@endif
+@if(!empty($button['link']))
+    <a href="{{ $button['link'] }}" class="button @if(!empty($button['excerpt']) || !empty($button['relative_url']) || !empty($button['secondary_relative_url']))button--two-line @endif {{ $class ?? '' }}">
+        @if(!empty($button['relative_url']) || !empty($button['secondary_relative_url']))<img src="{{ $button['relative_url'] ?? $button['secondary_relative_url'] }}" alt="{{ $button['filename_alt_text'] ?? $button['secondary_alt_text'] }}">@endif
 
+        <div>{{ $button['title'] }}</div>
+
+        @if(!empty($button['excerpt']))<div>{{ $button['excerpt'] }}</div>@endif
+    </a>
+@endif

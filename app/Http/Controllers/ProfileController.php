@@ -31,10 +31,10 @@ class ProfileController extends Controller
     public function index(Request $request)
     {
         // Determine what site to pull profiles from
-        $site_id = !empty($request->data['data']['profile_site_id']) ? $request->data['data']['profile_site_id'] : $request->data['site']['id'];
+        $site_id = $this->profile->getSiteID($request->data['base']);
 
         // Determine if we are forcing the profiles from custom page data
-        $forced_profile_group_id = !empty($request->data['data']['profile_group_id']) ? $request->data['data']['profile_group_id'] : null;
+        $forced_profile_group_id = !empty($request->data['base']['data']['profile_group_id']) ? $request->data['base']['data']['profile_group_id'] : null;
 
         // Get the groups for the dropdown
         $dropdown_groups = $this->profile->getDropdownOfGroups($site_id);
@@ -52,7 +52,7 @@ class ProfileController extends Controller
         $profiles = $this->profile->getProfiles($site_id, $group_ids);
 
         // Disable hero images
-        $request->data['hero'] = false;
+        $request->data['base']['hero'] = false;
 
         return view('profile-listing', merge($request->data, $profiles, $dropdown_groups, $dropdown_group_options));
     }
@@ -61,40 +61,42 @@ class ProfileController extends Controller
      * Display the individual profile view.
      *
      * @param Request $request
-     * @param int $accessid
      * @return \Illuminate\View\View
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function show(Request $request)
     {
         if (empty($request->accessid)) {
-            abort(404);
+            abort('404');
         }
 
         // Determine what site to pull profiles from
-        $site_id = !empty($request->data['data']['profile_site_id']) ? $request->data['data']['profile_site_id'] : $request->data['site']['id'];
+        $site_id = $this->profile->getSiteID($request->data['base']);
 
         // Get the profile information
         $profile = $this->profile->getProfile($site_id, $request->accessid);
 
         // Make sure the profile exists
         if (empty($profile['profile'])) {
-            return abort('404');
+            abort('404');
         }
 
         // Get the fields to display
         $fields = $this->profile->getFields();
 
         // Change page title to profile name
-        $request->data['page']['title'] = $this->profile->getPageTitleFromName($profile);
+        $request->data['base']['page']['title'] = $this->profile->getPageTitleFromName($profile);
 
         // Set the back URL
         $request->data['back_url'] = $this->profile->getBackToProfileListUrl($request->server->get('HTTP_REFERER'), $request->server->get('REQUEST_SCHEME'), $request->server->get('HTTP_HOST'), $request->server->get('REQUEST_URI'));
 
         // Make it a full width view
-        $request->data['show_site_menu'] = false;
+        $request->data['base']['show_site_menu'] = false;
 
         // Disable hero images
-        $request->data['hero'] = false;
+        $request->data['base']['hero'] = false;
 
         return view('profile-view', merge($request->data, $profile, $fields));
     }
