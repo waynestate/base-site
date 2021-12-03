@@ -3,7 +3,8 @@
 @section('content')
     @include('components.page-title', ['title' => $base['page']['title']])
 
-    <p>The web team can enable under menu buttons on your site. Here are the available options.</p> 
+    <p>Under menu buttons are available through promotion groups. You may not mix button types on a single page.</p>
+    <p>At the bottom of the menu on the left, you can see the standard button in use.</p>
 
     @if(!empty($buttons))
         <h2 class="mb-4">Default buttons</h2>
@@ -12,7 +13,7 @@
                 @include('components.button-default', ['button' => $buttons['default'], 'class' => 'w-72'])
             </div>
             <div>
-                <h3 class="text-sm uppercase tracking-wider">Promo setup:</h3>
+                <h3 class="text-sm ">Promo setup:</h3>
                 <ul class="ml-6 list-disc text-sm">
                     <li>Title</li>
                     <li>Option: None or 'Default'</li>
@@ -25,7 +26,7 @@
                 @include('components.button-default', ['button' => $buttons['default_two_lines'], 'class' => 'w-72'])
             </div>
             <div>
-                <h3 class="text-sm uppercase tracking-wider">Promo setup:</h3>
+                <h3 class="text-sm ">Promo setup:</h3>
                 <ul class="ml-6 list-disc text-sm">
                     <li>Title</li>
                     <li>Excerpt</li>
@@ -39,7 +40,7 @@
                 @include('components.button-default', ['button' => $buttons['default_icon'], 'class' => 'w-72'])
             </div>
             <div>
-                <h3 class="text-sm uppercase tracking-wider">Promo setup:</h3>
+                <h3 class="text-sm ">Promo setup:</h3>
                 <ul class="ml-6 list-disc text-sm">
                     <li>Title</li>
                     <li>Excerpt</li>
@@ -57,7 +58,7 @@
                 @include('components.button-green', ['button' => $buttons['green'], 'class' => 'w-72'])
             </div>
             <div>
-                <h3 class="text-sm uppercase tracking-wider">Promo setup:</h3>
+                <h3 class="text-sm ">Promo setup:</h3>
                 <ul class="ml-6 list-disc text-sm">
                     <li>Title</li>
                     <li>Option: Green</li>
@@ -70,7 +71,7 @@
                 @include('components.button-green', ['button' => $buttons['green_two_lines'], 'class' => 'w-72'])
             </div>
             <div>
-                <h3 class="text-sm uppercase tracking-wider">Promo setup:</h3>
+                <h3 class="text-sm ">Promo setup:</h3>
                 <ul class="ml-6 list-disc text-sm">
                     <li>Title</li>
                     <li>Excerpt</li>
@@ -84,7 +85,7 @@
                 @include('components.button-green', ['button' => $buttons['green_icon'], 'class' => 'w-72'])
             </div>
             <div>
-                <h3 class="text-sm uppercase tracking-wider">Promo setup:</h3>
+                <h3 class="text-sm ">Promo setup:</h3>
                 <ul class="ml-6 list-disc text-sm">
                     <li>Title</li>
                     <li>Excerpt</li>
@@ -102,7 +103,7 @@
                 @include('components.button-bg-image-light', ['button' => $buttons['bg_image_light'], 'class' => 'w-72'])
             </div>
             <div>
-                <h3 class="text-sm uppercase tracking-wider">Promo setup:</h3>
+                <h3 class="text-sm ">Promo setup:</h3>
                 <ul class="ml-6 list-disc text-sm">
                     <li>Title</li>
                     <li>Link</li>
@@ -117,7 +118,7 @@
                 @include('components.button-bg-image-dark', ['button' => $buttons['bg_image_dark'], 'class' => 'w-72'])
             </div>
             <div>
-                <h3 class="text-sm uppercase tracking-wider">Promo setup:</h3>
+                <h3 class="text-sm ">Promo setup:</h3>
                 <ul class="ml-6 list-disc text-sm">
                     <li>Title</li>
                     <li>Link</li>
@@ -135,7 +136,7 @@
                 @include('components.button-svg-light-bg', ['button' => $buttons['svg_light_bg'], 'class' => 'w-72'])
             </div>
             <div>
-                <h3 class="text-sm uppercase tracking-wider">Promo setup:</h3>
+                <h3 class="text-sm ">Promo setup:</h3>
                 <ul class="ml-6 list-disc text-sm">
                     <li>Title</li>
                     <li>Link</li>
@@ -151,7 +152,7 @@
                 @include('components.button-svg-dark-bg', ['button' => $buttons['svg_dark_bg'], 'class' => 'w-72'])
             </div>
             <div>
-                <h3 class="text-sm uppercase tracking-wider">Promo setup:</h3>
+                <h3 class="text-sm ">Promo setup:</h3>
                 <ul class="ml-6 list-disc text-sm">
                     <li>Title</li>
                     <li>Link</li>
