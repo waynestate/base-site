@@ -14,7 +14,7 @@ a {
 }
 
 @responsive {
-    .white-links a {
+    .white-links a:not(.button) {
         @apply text-white underline;
 
         &:hover {

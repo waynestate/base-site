@@ -11,27 +11,31 @@
         @include('components.accordion', ['items' => $base['accordion_page']])
     @endif
 
-    <pre class="bg-gray-100 overflow-scroll p-4" tabindex="0">
-    {!! htmlspecialchars('
-<ul class="accordion">
+<pre class="code-block" tabindex="0">
+{!! htmlspecialchars('<ul class="accordion">
+    <!-- Item one -->
     <li>
-        <a href="#panel1a" id="panel1a"><span aria-hidden="true"></span>Accordion 1</a>
+        <a href="#unique-name-1" id="unique-name-1"><span aria-hidden="true"></span>Accordion 1</a>
         <div class="content">
             <p>Panel 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </div>
     </li>
+
+    <!-- Item two -->
     <li>
-        <a href="#panel2a" id="panel2a"><span aria-hidden="true"></span>Accordion 2</a>
+        <a href="#unique-name-2" id="unique-name-2"><span aria-hidden="true"></span>Accordion 2</a>
         <div class="content">
             <p>Panel 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </div>
     </li>
+
+    <!-- Item three -->
     <li>
-        <a href="#panel3a" id="panel3a"><span aria-hidden="true"></span>Accordion 3</a>
+        <a href="#unique-name-3" id="unique-name-3"><span aria-hidden="true"></span>Accordion 3</a>
         <div class="content">
             <p>Panel 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </div>
     </li>
 </ul>') !!}
-    </pre>
+</pre>
 @endsection

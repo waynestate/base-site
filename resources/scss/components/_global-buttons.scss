@@ -1,5 +1,5 @@
 .button {
-    @apply bg-gray-200 text-green align-middle mb-2 px-4 py-2 rounded text-center text-sm font-bold inline-block transition-all;
+    @apply bg-gray-200 text-green align-middle mb-2 px-4 py-2 rounded text-center text-sm font-bold inline-block transition-all leading-tight;
 
     &:hover {
         @apply bg-gray-100;
@@ -10,13 +10,13 @@
     @apply justify-start text-left inline-grid;
 
     & > *:not(img):nth-of-type(1) {
-        @apply block text-lg xl:text-xl leading-tight not-italic;
+        @apply block text-lg leading-none xl:text-xl xl:leading-none not-italic;
 
         grid-area: 1 / 2 / 2 / 3;
     }
 
     & > *:not(img):nth-of-type(2) {
-        @apply text-sm pb-1 leading-tight font-normal not-italic;
+        @apply text-sm py-1 leading-tight font-normal not-italic;
 
         grid-area: 2 / 2 / 3 / 3;
     }
@@ -24,7 +24,7 @@
     & > img {
         @apply row-span-2 mr-3;
 
-        width: 3rem;
+        width: 2.5rem;
         padding: 0 !important;
         grid-area: 1 / 1 / 3 / 2;
     }
