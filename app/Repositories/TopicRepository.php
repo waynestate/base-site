@@ -108,7 +108,7 @@ class TopicRepository implements TopicRepositoryContract
             if (!empty($topic)) {
                 $item['selected'] = $item['slug'] === $topic ? true : false;
             } else {
-                $item['selected'] = $item['slug'] === '' ? true :false;
+                $item['selected'] = $item['slug'] === '' ? true : false;
             }
 
             return $item;
