@@ -1,8 +1,8 @@
 {{--
     $events => array // ['title', 'url', 'date', 'start_time', 'is_all_day']
-    $heading => string // 'Events'
     $cal_name => string // 'main/'
     $link_text => string // 'More events'
+    $button_class => string // 'green-gradient-button'
 --}}
 
 <ul class="my-4">
@@ -33,8 +33,8 @@
     @endforeach
 </ul>
 
-<div class="text-left mt-4">
-    <a class="button" href="//events.wayne.edu/{{ $cal_name ?? 'main/' }}month/" class="hover:underline">
+<div class="mt-4">
+    <a class="button {{ $button_class ?? '' }}" href="//events.wayne.edu/{{ $cal_name ?? 'main/' }}month/" class="hover:underline">
         {{ $link_text ?? 'More events' }}
     </a>
 </div>

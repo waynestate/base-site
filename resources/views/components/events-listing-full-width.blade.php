@@ -1,8 +1,8 @@
 {{--
     $events => array // ['title', 'url', 'date', 'start_time', 'is_all_day']
-    $heading => string // 'Events'
     $cal_name => string // 'main/'
     $link_text => string // 'More events'
+    $button_class => string // 'green-gradient-button'
 --}}
 
 <ul class="lg:col-count-2 my-4">
@@ -31,7 +31,7 @@
 </ul>
 
 <div class="text-center mt-4">
-    <a class="button" href="//events.wayne.edu/{{ $cal_name ?? 'main/' }}month/" class="hover:underline">
+    <a class="button {{ $button_class ?? ''}}" href="//events.wayne.edu/{{ $cal_name ?? 'main/' }}month/" class="hover:underline">
         {{ $link_text ?? 'More events' }}
     </a>
 </div>

@@ -27,7 +27,7 @@ class TopicRepositoryTest extends TestCase
             'topic_id' => '0',
             'name' => 'All topics',
             'slug' => '',
-            'url' => '/'.(!empty($subsite_folder) ? $subsite_folder : '').config('base.news_listing_route'),
+            'url' => '/',
         ];
 
         $return = collect($return)->map(function ($item) use ($all_topics) {
