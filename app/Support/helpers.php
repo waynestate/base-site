@@ -22,7 +22,7 @@ function merge()
         // Make sure every key has a string name
         collect($value)->each(function ($value, $key) {
             if (! is_string($key)) {
-                throw new Exception('Merged variables must have key as a string, but a '.gettype($key).' was given. '."\n\n Key: ".$key."\n Values: ".json_encode(array_keys($value)));
+                throw new Exception('Merged variables must have key as a string, but a '.gettype($key).' was given. '."\n\n Key: ".$key."\n Values: ".(is_array($value) ? json_encode(array_keys($value)) : $value));
             }
         });
 
