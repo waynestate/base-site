@@ -1,4 +1,4 @@
-@responsive {
+@layer utilities {
     // Gradient overlay
     .bg-gradient-darkest::before {
         @apply absolute inset-0;

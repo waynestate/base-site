@@ -7,7 +7,7 @@
         {!! $base['page']['content']['main'] !!}
         <p>Be sure to use the table option in the CMS editor, and always use table headers and a caption to describe the data for accessibility.</p>
 
-        <h2>Basic table</h2>
+        <h2 clas>Basic table</h2>
         <table>
             <caption>Example of a basic table.</caption>
             <thead>
