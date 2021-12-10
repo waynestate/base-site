@@ -49,9 +49,9 @@ class ProfileControllerTest extends TestCase
         $request->data = [
             'base' => [
                 'site' => [
-                    'id' => 1
-                ]
-            ]
+                    'id' => 1,
+                ],
+            ],
         ];
 
         // Mock the connector
@@ -90,9 +90,9 @@ class ProfileControllerTest extends TestCase
                 'site' => [
                     'people' => [
                         'site_id' => 1,
-                    ]
-                ]
-            ]
+                    ],
+                ],
+            ],
         ];
 
         // Mock the connector

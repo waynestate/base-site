@@ -77,8 +77,8 @@ class ArticleControllerTest extends TestCase
                         'application_id' => 1,
                     ],
                     'subsite-folder' => null,
-                ]
-            ]
+                ],
+            ],
         ];
 
         // Call the news listing
@@ -206,8 +206,8 @@ class ArticleControllerTest extends TestCase
                         'application_id' => 1,
                     ],
                     'subsite-folder' => null,
-                ]
-            ]
+                ],
+            ],
         ];
 
         // Call the news listing

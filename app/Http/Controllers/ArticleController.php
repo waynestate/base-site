@@ -73,7 +73,7 @@ class ArticleController extends Controller
      */
     public function show(Request $request)
     {
-        if(empty($request->data['base']['site']['news']['application_id'])){
+        if (empty($request->data['base']['site']['news']['application_id'])) {
             abort('404');
         }
 
