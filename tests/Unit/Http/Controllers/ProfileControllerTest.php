@@ -46,6 +46,13 @@ class ProfileControllerTest extends TestCase
 
         $request = new Request();
         $request->accessid = 'aa1234';
+        $request->data = [
+            'base' => [
+                'site' => [
+                    'id' => 1
+                ]
+            ]
+        ];
 
         // Mock the connector
         $wsuApi = Mockery::mock(Connector::class);
@@ -78,6 +85,15 @@ class ProfileControllerTest extends TestCase
 
         $request = new Request();
         $request->accessid = 'aa1234';
+        $request->data = [
+            'base' => [
+                'site' => [
+                    'people' => [
+                        'site_id' => 1,
+                    ]
+                ]
+            ]
+        ];
 
         // Mock the connector
         $peopleApi = Mockery::mock(People::class);
