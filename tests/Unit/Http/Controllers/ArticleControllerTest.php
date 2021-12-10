@@ -69,8 +69,20 @@ class ArticleControllerTest extends TestCase
         // Construct the news controller
         $articleController = app(ArticleController::class, ['article' => $articleRepository]);
 
+        $request = new Request();
+        $request->data = [
+            'base' => [
+                'site' => [
+                    'news' => [
+                        'application_id' => 1,
+                    ],
+                    'subsite-folder' => null,
+                ]
+            ]
+        ];
+
         // Call the news listing
-        $view = $articleController->show(new Request());
+        $view = $articleController->show($request);
     }
 
     /**
@@ -187,6 +199,16 @@ class ArticleControllerTest extends TestCase
         $request = new Request();
         $request->path = '/'.config('base.news_listing_route').'/'.config('base.news_topic_route');
         $request->slug = 'invalid-category';
+        $request->data = [
+            'base' => [
+                'site' => [
+                    'news' => [
+                        'application_id' => 1,
+                    ],
+                    'subsite-folder' => null,
+                ]
+            ]
+        ];
 
         // Call the news listing
         $view = $ArticleController->index($request);
