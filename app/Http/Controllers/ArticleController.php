@@ -73,6 +73,10 @@ class ArticleController extends Controller
      */
     public function show(Request $request)
     {
+        if(empty($request->data['base']['site']['news']['application_id'])){
+            abort('404');
+        }
+
         $article = $this->article->find($request->id, $request->data['base']['site']['news']['application_id'], $request->preview);
 
         if (empty($article['article']['data'])) {
