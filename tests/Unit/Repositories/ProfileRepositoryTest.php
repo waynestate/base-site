@@ -211,7 +211,7 @@ class ProfileRepositoryTest extends TestCase
 
         // If no forced ID and no selection has been made the result should be all group_ids from the dropdown
         $group_ids = app(ProfileRepository::class)->getGroupIds(null, null, $dropdown);
-        $this->assertEquals(implode(array_keys($dropdown), '|'), $group_ids);
+        $this->assertEquals(implode('|', array_keys($dropdown)), $group_ids);
 
         // Forcing a group ID
         $forced_id = $this->faker->numberBetween(0, $limit - 1);
