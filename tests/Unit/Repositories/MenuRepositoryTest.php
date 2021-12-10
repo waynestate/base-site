@@ -302,7 +302,7 @@ class MenuRepositoryTest extends TestCase
         $menu = app(Menu::class)->create(5);
 
         // Set the page id
-        $page_id = reset(reset($menu)['submenu'])['page_id'];
+        $page_id = null;
 
         // Get the site menu
         $site_menu = app(MenuRepository::class)->getSiteMenu($menu, $page_id);

@@ -89,15 +89,17 @@ class ArticleRepository implements ArticleRepositoryContract
             ];
         }
 
-        $doc = new \DOMDocument();
-        @$doc->loadHTML($article['body']);
-        $images = $doc->getElementsByTagName('img');
+        if (!empty($article['body'])) {
+            $doc = new \DOMDocument();
+            @$doc->loadHTML($article['body']);
+            $images = $doc->getElementsByTagName('img');
 
-        if ($images->item(0) !== null) {
-            return [
-                'url' => $images->item(0)->getAttribute('src'),
-                'alt_text' => $images->item(0)->getAttribute('alt'),
-            ];
+            if ($images->item(0) !== null) {
+                return [
+                    'url' => $images->item(0)->getAttribute('src'),
+                    'alt_text' => $images->item(0)->getAttribute('alt'),
+                ];
+            }
         }
 
         return [
