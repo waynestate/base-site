@@ -1,12 +1,8 @@
 {{--
     $articles => array // ['link', 'title']
-    $heading => string // 'News'
     $url => string '/news/'
     $link_text => string // 'More news'
-    $class => string // ''
 --}}
-<h2{!! !empty($class) ? ' class="'.$class.'"' : '' !!}>{{ $heading ?? 'News' }}</h2>
-
 <ul>
     @foreach($articles as $item)
         <li class="mb-4">
