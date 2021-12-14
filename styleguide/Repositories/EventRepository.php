@@ -12,8 +12,17 @@ class EventRepository extends Repository
      */
     public function getEvents($site_id)
     {
-        return [
-            'events' => app(Event::class)->create(4),
-        ];
+        $events['events'] = app(Event::class)->create(5);
+
+        // Put random stlyeguide dates in order
+        if (!empty($events['events'])) {
+            $events['events'] = collect($events['events'])->sortBy(function ($item, $key) {
+                return $key;
+            })->toArray();
+        } else {
+            $events = [];
+        }
+
+        return $events;
     }
 }

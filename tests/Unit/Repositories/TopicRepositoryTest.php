@@ -23,6 +23,18 @@ class TopicRepositoryTest extends TestCase
         $newsApi = Mockery::mock(News::class);
         $newsApi->shouldReceive('request')->andReturn($return);
 
+        $all_topics = [
+            'topic_id' => '0',
+            'name' => 'All topics',
+            'slug' => '',
+            'url' => '/',
+        ];
+
+        $return = collect($return)->map(function ($item) use ($all_topics) {
+            $item = collect($item)->prepend($all_topics);
+            return $item;
+        })->prepend($all_topics)->toArray();
+
         $topicRepository = app(TopicRepository::class, ['newsApi' => $newsApi]);
 
         // Get the articles

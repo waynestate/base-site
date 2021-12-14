@@ -185,7 +185,4 @@ module.exports = {
             },
         },
     },
-    plugins: [
-        require('glhd-tailwindcss-transitions')(), // https://github.com/glhd/tailwindcss-plugins/
-    ],
 }

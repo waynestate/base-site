@@ -14,7 +14,7 @@ class ArticleListing extends Page
         return app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'ArticleListingController',
-                'title' => 'Article listing',
+                'title' => 'News article listing',
                 'id' => 108100,
             ],
             'site' => [

@@ -36,3 +36,15 @@
 // Tailwind
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    @variants responsive {
+        .col-count-2 {
+            column-count: 2;
+        }
+
+       .break-avoid {
+           break-inside: avoid;
+       } 
+    }
+}
