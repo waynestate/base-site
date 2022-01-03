@@ -2,6 +2,8 @@
 
 namespace Styleguide\Pages;
 
+use Factories\Page as PageFactory;
+
 class Accordion extends Page
 {
     /**
@@ -9,16 +11,11 @@ class Accordion extends Page
      */
     public function getPageData()
     {
-        return app('Factories\Page')->create(1, true, [
+        return app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'AccordionController',
                 'title' => 'Accordion',
                 'id' => 107100,
-                'content' => [
-                    'main' => '<p>'.$this->faker->paragraph(8).'</p>
-                    <p>'.$this->faker->paragraph(8).'</p>
-                    <p>'.$this->faker->paragraph(8).'</p>',
-                ],
             ],
         ]);
     }

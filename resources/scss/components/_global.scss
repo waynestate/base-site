@@ -20,51 +20,106 @@ a {
         &:hover {
             @apply no-underline;
         }
-
-        @screen print {
-            @apply text-black;
-        }
     }
+}
+
+p {
+    @apply mb-4;
 }
 
 // Tailwind preflight sets this to .5 which isn't ADA compliant
 input::placeholder,
 textarea::placeholder {
-    @apply opacity-100 text-grey-darker;
+    @apply opacity-100 text-gray-500;
 }
 
-// Global headings
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    @apply font-bold mb-4 leading-tight;
+hr {
+    @apply border-b border-solid border-gray-200 my-5;
 }
 
-h1 {
-    @apply text-4xl;
+blockquote {
+    @apply ml-8 my-8 border-l-4 border-gray-400 pl-4 pt-2 pb-1;
+
+    > *:last-child {
+        @apply mb-2;
+    }
+
+    cite {
+        @apply block mb-4;
+    }
 }
 
-h2 {
-    @apply text-3xl mb-2;
+figure {
+    @apply mt-2 mb-4 mx-auto;
+
+    // Overriding display: inline-block; from CKEditor
+    // so that the caption wraps appropriately
+    display: table !important;
+    padding: 0 !important;
+    clear: both;
+
+    img {
+        padding: 0 !important;
+    }
+
+    figcaption {
+        @apply text-sm text-gray-500 text-left;
+
+        display: table-caption;
+        caption-side: bottom;
+    }
+
+    @screen mt {
+        @apply w-auto mb-4;
+
+        &[style*="float:right"],
+        &.float-right {
+            @apply ml-6 max-w-half;
+        }
+
+        &[style*="float:left"],
+        &.float-left {
+            @apply mr-6 max-w-half;
+        }
+
+        &[style*="text:center"],
+        &.text-center {
+            @apply ml-auto mr-auto;
+        }
+    }
 }
 
-h3 {
-    @apply text-2xl mb-1;
+// Images remain at their specified width
+// Text appears above and below for small
+@media (max-width: theme('screens.mt')) {
+    figure {
+        @apply block my-0 mx-auto;
+
+        &[style*="float:right"],
+        &[style*="float:left"],
+        &.float-right,
+        &.float-left {
+            float: none !important;
+        }
+    }
 }
 
-h4 {
-    @apply text-xl mb-1;
-}
+// Floated images can only be 50% of column width for readability
+@screen mt {
+    img {
+        &[style*="float:right"],
+        &[style*="float:left"] {
+            padding: 0 !important;
+        }
 
-h5 {
-    @apply text-lg mb-1;
-}
+        &[style*="float:right"] {
+            @apply ml-6 my-2 max-w-half;
+        }
 
-h6 {
-    @apply text-sm mb-1;
+        &[style*="float:left"] {
+            @apply mr-6 my-2 max-w-half;
+        }
+    }
 }
 
 // Firefox uses the outline focus color as the text color. Since our overall background is white we need to change it.
@@ -72,6 +127,15 @@ a.text-white:-moz-focusring {
     outline-color: #000;
 }
 
+code {
+    @apply bg-gray-100 py-0.5 px-1 rounded text-sm;
+}
+
+.code-block {
+    @apply block bg-gray-100 overflow-scroll text-sm py-2 px-3 mb-4;
+}
+
+// Keep footer at the bottom of the browser
 footer {
     @apply mt-auto;
 }

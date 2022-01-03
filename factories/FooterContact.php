@@ -25,7 +25,7 @@ class FooterContact implements FactoryContract
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
                 'link' => '/',
-                'title' => $this->faker->text(15),
+                'title' => $this->faker->text(30),
                 'description' =>
                     '<p>
                         ' .$this->faker->name.'<br />

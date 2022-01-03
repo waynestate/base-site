@@ -3,9 +3,9 @@
 @section('content')
     <img class="w-full block" src="/styleguide/image/1600x580?text=Full%20width%20image" alt="">
 
-    <div class="bg-grey-lightest mb-4">
+    <div class="bg-gray-100 mb-4">
         <div class="row py-4">
-            <p class="mx-4 py-2 text-4xl text-grey-darkest font-serif text-center">"{{ $faker->paragraph(3) }}"</p>
+            <p class="mx-4 py-2 text-4xl text-gray-600 font-serif text-center">"{{ $faker->paragraph(3) }}"</p>
         </div>
     </div>
 

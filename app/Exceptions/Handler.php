@@ -2,7 +2,7 @@
 
 namespace App\Exceptions;
 
-use Exception;
+use Throwable;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Facades\View;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -33,32 +33,32 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Exception  $exception
+     * @param  \Throwable  $e
      * @return void
      */
-    public function report(Exception $exception)
+    public function report(Throwable $e)
     {
-        parent::report($exception);
+        parent::report($e);
     }
 
     /**
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
+     * @param  \Throwable  $e
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $exception)
+    public function render($request, Throwable $e)
     {
         // Add custom errors when debug is not enabled
         if (config('app.debug') == false) {
-            if ($exception instanceof HttpException && View::exists('errors.'.$exception->getStatusCode())) {
-                return response(view('errors.'.$exception->getStatusCode(), compact('request')), $exception->getStatusCode());
+            if ($e instanceof HttpException && View::exists('errors.'.$e->getStatusCode())) {
+                return response(view('errors.'.$e->getStatusCode(), compact('request')), $e->getStatusCode());
             } else {
                 return response(view('errors.500', compact('request')), 500);
             }
         }
 
-        return parent::render($request, $exception);
+        return parent::render($request, $e);
     }
 }

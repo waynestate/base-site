@@ -1,49 +1,49 @@
 .main-menu {
-    @apply .py-4 .px-0 .mb-2;
+    @apply py-4 px-0 mb-2;
 
     ul {
-        @apply .m-0 .mb-2 .p-0;
+        @apply m-0 mb-2 p-0;
     }
 
     li {
-        @apply .text-sm .m-0 .p-0;
+        @apply text-sm m-0 p-0;
     }
 
     li a {
-        @apply .text-black .block .p-2 .px-3;
+        @apply text-black block p-2 px-3;
     }
 
     // Indent each level
     li > ul > li a {
-        @apply .pl-8;
+        @apply pl-8;
     }
 
     li > ul > li > ul > li a {
-        @apply .pl-12;
+        @apply pl-12;
     }
 
     li > ul > li > ul > li > ul > li > a {
-        @apply .pl-16;
+        @apply pl-16;
     }
 
     li a:hover {
-        @apply .bg-grey-lighter;
+        @apply bg-gray-200;
     }
 
     // Bottom borders on child <li>
     > li {
         @screen mt {
-            @apply .border-b .border-solid .border-grey-lighter;
+            @apply border-b border-solid border-gray-200;
         }
     }
 
     // Selected State
     .selected {
-        @apply .font-bold;
+        @apply font-bold;
     }
 
     // Don't cascade the selected state to child lists of the item
     .selected ul {
-        @apply .font-normal;
+        @apply font-normal;
     }
 }

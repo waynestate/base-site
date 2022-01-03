@@ -2,6 +2,8 @@
 
 namespace Styleguide\Pages;
 
+use Factories\Page as PageFactory;
+
 class ArticleListing extends Page
 {
     /**
@@ -9,10 +11,10 @@ class ArticleListing extends Page
      */
     public function getPageData()
     {
-        return app('Factories\Page')->create(1, true, [
+        return app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'ArticleListingController',
-                'title' => 'Article listing',
+                'title' => 'News article listing',
                 'id' => 108100,
             ],
             'site' => [

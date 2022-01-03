@@ -3,6 +3,7 @@
 namespace Styleguide\Repositories;
 
 use App\Repositories\ArticleRepository as Repository;
+use Factories\Article;
 
 class ArticleRepository extends Repository
 {
@@ -14,7 +15,7 @@ class ArticleRepository extends Repository
         // Stop the paging after page 3 so it doesn't go on forever
         $limit = $page >= 3 ? 5 : $limit;
 
-        $articles['articles'] = app('Factories\Article')->create($limit);
+        $articles['articles'] = app(Article::class)->create($limit);
 
         return $articles;
     }
@@ -25,7 +26,7 @@ class ArticleRepository extends Repository
     public function find($id, $application_ids, $preview = null)
     {
         return [
-            'article' => app('Factories\Article')->create(1, true),
+            'article' => app(Article::class)->create(1, true),
         ];
     }
 }

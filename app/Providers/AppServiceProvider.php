@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Repositories\PeopleRepository;
+use App\Repositories\ProfileRepository;
+use Contracts\Repositories\ProfileRepositoryContract;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Waynestate\Api\Connector;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -76,11 +80,25 @@ class AppServiceProvider extends ServiceProvider
         // Bind all repositories following the filename convention
         collect(Storage::disk('base')->allFiles('contracts'))
             ->reject(function ($filename) {
-                return in_array(basename($filename), ['RequestDataRepositoryContract.php']);
+                return in_array(basename($filename), ['RequestDataRepositoryContract.php', 'ProfileRepositoryContract.php']);
             })
             ->each(function ($filename) {
                 $this->app->bind('Contracts\Repositories\\'.basename($filename, '.php'), $this->getPrefix().'\Repositories\\'.basename(str_replace('Contract', '', $filename), '.php'));
             });
+
+        // Get the Site Information to determine if we load the ProfileRepository or PeopleRepository
+        try {
+            $site = json_decode(Storage::disk('public')->get('index.json'), true);
+        } catch (FileNotFoundException $e) {
+            $site = [];
+        }
+        if (!using_styleguide() && empty($site['site']['people']['site_id'])) {
+            $this->app->bind(ProfileRepositoryContract::class, ProfileRepository::class);
+        } elseif (using_styleguide()) {
+            $this->app->bind(ProfileRepositoryContract::class, \Styleguide\Repositories\PeopleRepository::class);
+        } else {
+            $this->app->bind(ProfileRepositoryContract::class, PeopleRepository::class);
+        }
     }
 
     /**

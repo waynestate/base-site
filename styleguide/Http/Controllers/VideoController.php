@@ -3,6 +3,7 @@
 namespace Styleguide\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Factories\Video;
 use Illuminate\Http\Request;
 
 class VideoController extends Controller
@@ -15,7 +16,7 @@ class VideoController extends Controller
      */
     public function index(Request $request)
     {
-        $promos['video'] = app('Factories\Video')->create(1, true);
+        $promos['video'] = app(Video::class)->create(1, true);
 
         return view('styleguide-video', merge($request->data, $promos));
     }

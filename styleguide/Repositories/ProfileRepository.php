@@ -3,6 +3,8 @@
 namespace Styleguide\Repositories;
 
 use App\Repositories\ProfileRepository as Repository;
+use Factories\Profile;
+use Factories\ProfileGroup;
 
 class ProfileRepository extends Repository
 {
@@ -14,7 +16,7 @@ class ProfileRepository extends Repository
         $limit = is_int($selected_group) ? rand(2, 5) : 20;
 
         return [
-            'profiles' => app('Factories\Profile')->create($limit),
+            'profiles' => app(Profile::class)->create($limit),
         ];
     }
 
@@ -23,7 +25,7 @@ class ProfileRepository extends Repository
      */
     public function getDropdownOfGroups($site_id)
     {
-        $groups = collect(app('Factories\ProfileGroup')->create(10))->map(function ($item) {
+        $groups = collect(app(ProfileGroup::class)->create(10))->map(function ($item) {
             return $item['display_name'];
         })
         ->prepend('All Profiles', '')
@@ -40,7 +42,7 @@ class ProfileRepository extends Repository
     public function getProfile($site_id, $accessid)
     {
         return [
-            'profile' => app('Factories\Profile')->create(1, true),
+            'profile' => app(Profile::class)->create(1, true),
         ];
     }
 

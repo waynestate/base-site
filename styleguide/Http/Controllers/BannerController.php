@@ -3,6 +3,7 @@
 namespace Styleguide\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Factories\Banner;
 use Illuminate\Http\Request;
 
 class BannerController extends Controller
@@ -15,7 +16,7 @@ class BannerController extends Controller
      */
     public function index(Request $request)
     {
-        $request->data['banner'] = app('Factories\Banner')->create(1, true);
+        $request->data['base']['banner'] = app(Banner::class)->create(1, true);
 
         return view('styleguide-childpage', merge($request->data));
     }

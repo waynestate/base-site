@@ -35,7 +35,11 @@
 
     # Look at the raw request to see if it is in the '_static' dir and block it
     RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /_static/(.*)\ HTTP/(.*) [OR]
-    RewriteCond %{REQUEST_URI} \.(json|map)$
+    RewriteCond %{REQUEST_URI} \.(json)$
+    RewriteRule ^ - [F]
+
+    RewriteCond %{HTTP_HOST} !(?:\.local|www-dev2?\..*|www2\..*)$
+    RewriteCond %{REQUEST_URI} \.(map)$
     RewriteRule ^ - [F]
 
     # All other files rewrite to the _static/* directory

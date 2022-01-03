@@ -6,12 +6,12 @@
             @if(!empty($promo['relative_url']))
                 @image($promo['relative_url'], $promo['filename_alt_text'], 'sm:h-64 md:h-auto mx-auto md:mx-0')
             @else
-                <img src="/_resources/images/no-photo.svg" alt="{{ $page['title'] }}" class="sm:h-64 md:h-auto block mx-auto md:mx-0">
+                <img src="/_resources/images/no-photo.svg" alt="{{ $base['page']['title'] }}" class="sm:h-64 md:h-auto block mx-auto md:mx-0">
             @endif
         </div>
 
         <div class="w-full md:w-2/3 px-4">
-            @include('components.page-title', ['title' => $page['title']])
+            @include('components.page-title', ['title' => $base['page']['title']])
 
             <div class="content">
                 @if(!empty($promo['excerpt']))

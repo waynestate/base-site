@@ -1,0 +1,110 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    @apply font-bold;
+}
+
+h1 {
+    @apply text-4xl mb-2;
+}
+
+h2 {
+    @apply text-3xl mb-1;
+}
+
+h3 {
+    @apply text-2xl;
+}
+
+h4 {
+    @apply text-xl;
+}
+
+h5 {
+    @apply text-lg;
+}
+
+h6 {
+    @apply text-base;
+}
+
+// Heading styles
+.divider-gold {
+    @apply relative overflow-hidden mb-2;
+
+    &::after {
+        content: "";
+
+        @apply absolute inline w-full h-0.5 ml-4 top-1/2 bottom-auto bg-gold;
+    }
+}
+
+.divider-green {
+    @apply relative overflow-hidden mb-2;
+
+    &::after {
+        content: "";
+
+        @apply absolute inline w-full h-0.5 ml-4 top-1/2 bottom-auto bg-green;
+    }
+}
+
+.bar-gold {
+    @apply relative mb-2 pl-3;
+
+    &::before {
+        content: "";
+
+        @apply absolute h-full w-1 left-0 bg-gold ;
+    }
+}
+
+.bar-green {
+    @apply relative mb-2 pl-3;
+
+    &::before {
+        content: "";
+
+        @apply absolute h-full w-1 left-0 bg-green ;
+    }
+}
+
+.heading-lined {
+    overflow: hidden;
+    position: relative;
+    font-weight: 900;
+
+    &::before {
+        content: '';
+        background-color: #acc9c0;
+        height: 2px;
+        width: 50%;
+        position: absolute;
+        top: 55%;
+        left: -30px;
+    }
+
+    &::after {
+        content: '';
+        background-color: #acc9c0;
+        height: 2px;
+        width: 50%;
+        position: absolute;
+        top: 55%;
+        right: -30px;
+    }
+}
+
+.gold-line {
+    @apply relative;
+
+    &::after {
+        content: "";
+        top: 55%;
+
+        @apply bg-gold w-full absolute h-0.5 ml-4;
+    }
+}

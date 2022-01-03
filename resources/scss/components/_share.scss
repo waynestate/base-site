@@ -1,16 +1,16 @@
 .addthis_sharing_toolbox {
-    @apply .block;
+    @apply block;
 
     min-height: 32px;
 
     svg {
-        fill: theme('colors.grey.darker') !important;
+        fill: theme('colors.gray.600') !important;
         width: 20px !important;
         height: 20px !important;
     }
 
     &::before {
-        @apply .text-grey-darker .bg-grey-lighter .uppercase .float-left .leading-tight .text-sm;
+        @apply text-gray-500 bg-gray-200 uppercase float-left leading-tight text-sm;
 
         padding: 6px 11px 7px;
         letter-spacing: 0.1em;
@@ -26,7 +26,7 @@
 }
 
 a.at-icon-wrapper.at-share-btn {
-    @apply .mb-0;
+    @apply mb-0;
 
-    background: theme('colors.grey.lighter') !important;
+    background: theme('colors.gray.200') !important;
 }

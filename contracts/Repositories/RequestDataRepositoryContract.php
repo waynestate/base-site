@@ -9,6 +9,9 @@ interface RequestDataRepositoryContract
      *
      * @param array $data
      * @return mixed
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function getRequestData(array $data);
 }

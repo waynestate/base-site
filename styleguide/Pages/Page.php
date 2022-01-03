@@ -3,6 +3,7 @@
 namespace Styleguide\Pages;
 
 use Contracts\Pages\StyleguidePageContract;
+use Factories\Page as PageFactory;
 use Styleguide\Repositories\MenuRepository;
 use Faker\Factory;
 
@@ -26,7 +27,7 @@ class Page implements StyleguidePageContract
      */
     public function getPageData()
     {
-        return app('Factories\Page')->create(1, true, [
+        return app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'ChildpageController',
                 'title' => 'Childpage',

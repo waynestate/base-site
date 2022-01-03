@@ -1,34 +1,34 @@
 .slideout-menu {
-    @apply .bg-green-dark .fixed .top-0 .right-0 .bottom-0;
+    @apply bg-green-600 fixed top-0 right-0 bottom-0;
 
     width: 250px;
     height: 100%;
     z-index: 10;
 
     ul.main-menu {
-        @apply .bg-green-dark .p-0;
+        @apply bg-green-600 p-0;
 
         li a {
-            @apply .text-white;
+            @apply text-white;
         }
 
         // Indent second level now since first level is shown
         li > ul > li a {
-            @apply .pl-8;
+            @apply pl-8;
         }
 
         // Indent third level now since first level is shown
         li > ul > li > ul > li a {
-            @apply .pl-12;
+            @apply pl-12;
         }
 
         // Selected State
         .selected > a {
-            @apply .text-yellow;
+            @apply text-gold;
         }
 
         a:hover {
-            @apply .text-yellow;
+            @apply text-gold;
 
             background: transparent;
         }
@@ -36,25 +36,25 @@
 
     // Main Menu within slideout
     .slideout-main-menu {
-        @apply .block;
+        @apply block;
 
         ul ul li {
-            @apply .bg-green-darker;
+            @apply bg-green-800;
         }
 
         ul li .main-menu-toggle {
-            @apply .bg-green-darker .uppercase .text-base .pr-6;
+            @apply bg-green-800 uppercase text-base pr-6;
 
             cursor: pointer;
         }
 
         // Menu Header top level (MAIN MENU)
         ul ul {
-            @apply .border-solid .border-b-4 .border-green-darker;
+            @apply border-solid border-b-4 border-green-800;
         }
     }
 
     h2 {
-        @apply .text-white .p-0 .pb-3 .pl-3 .mt-8;
+        @apply text-white p-0 pb-3 pl-3 mt-8;
     }
 }

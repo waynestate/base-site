@@ -1,5 +1,5 @@
 .menu-icon {
-    @apply .relative .inline-block;
+    @apply relative inline-block;
 
     vertical-align: middle;
     width: 20px;
@@ -8,7 +8,7 @@
 }
 
 .menu-icon::after {
-    @apply .bg-white .shadow-white .absolute .block .w-full;
+    @apply bg-white shadow-white absolute block w-full;
 
     top: 0;
     left: 0;
@@ -17,5 +17,5 @@
 }
 
 .menu-icon:hover::after {
-    @apply .bg-grey .shadow-grey;
+    @apply bg-gray-400 shadow-grey;
 }

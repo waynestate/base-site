@@ -1,4 +1,7 @@
 <?php
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PromoListingController;
+use App\Http\Controllers\WildCardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,11 +15,11 @@
 */
 
 // Individual promo view route
-Route::get('{any?}view/{title}-{id}', 'PromoListingController@show')
+Route::get('{any?}view/{title}-{id}', [PromoListingController::class, 'show'])
     ->where(['any' => '.*', 'title' => '.+', 'id' => '\d+']);
 
 // Profile view
-Route::get('{any?}profile/{accessid?}', 'ProfileController@show')
+Route::get('{any?}profile/{accessid?}', [ProfileController::class, 'show'])
     ->where(['any' => '.*', 'accessid' => '[a-zA-Z]{2}\d{4}']);
 
 // News listing by topic
@@ -28,5 +31,5 @@ Route::get('{any?}'.config('base.news_view_route').'/{slug}-{id}', config('base.
     ->where(['any' => '.*', 'slug' => '.+', 'id' => '\d+']);
 
 // The wild card route is a catch all route that tries to resolve the requests path to a json file
-Route::match(['get', 'post'], '{path}', 'WildCardController@index')
+Route::match(['get', 'post'], '{path}', [WildCardController::class, 'index'])
     ->where('path', '.*');

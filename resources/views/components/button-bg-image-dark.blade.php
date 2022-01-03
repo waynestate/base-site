@@ -3,10 +3,15 @@
 --}}
 
 @if(!empty($button['link']) && !empty($button['relative_url']))
-    <a href="{{ $button['link'] }}" class="content-button block min-w-full relative rounded bg-cover bg-green-darkest overflow-hidden my-2" style="padding-top: 36.39%; background-image: url('{{ $button['relative_url'] }}'); ">
-        <div class="absolute inset-0 p-4 rounded bg-green-darkest opacity-65"></div>
-        <div class="absolute inset-0 p-4 flex items-center">
-            <div class="min-w-full text-lg xl:text-xl font-bold text-white leading-tight text-center">{{ $button['title'] }}</div>
+    <a href="{{ $button['link'] }}" class="group block relative rounded bg-green-900 overflow-hidden {{ $class ?? '' }}">
+        @if(!empty($button['relative_url'])) @image($button['relative_url'], $button['filename_alt_text']) @endif
+        <div class="absolute inset-0 bg-green-900 opacity-75 group-hover:opacity-90 transition-all"></div>
+        <div class="absolute inset-0 flex items-center">
+            @if(!empty($button['secondary_relative_url']))
+                @image($button['secondary_relative_url'], $button['secondary_alt_text'])
+            @else
+                <div class="w-full text-lg xl:text-xl font-bold text-white leading-tight text-center px-4">{{ $button['title'] }}</div>
+            @endif
         </div>
     </a>
 @endif

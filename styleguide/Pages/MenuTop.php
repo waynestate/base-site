@@ -2,6 +2,8 @@
 
 namespace Styleguide\Pages;
 
+use Factories\Page as PageFactory;
+
 class MenuTop extends Page
 {
     /**
@@ -9,7 +11,7 @@ class MenuTop extends Page
      */
     public function getPageData()
     {
-        return app('Factories\Page')->create(1, true, [
+        return app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'MenuTopController',
                 'title' => 'Menu top',

@@ -2,6 +2,8 @@
 
 namespace Styleguide\Pages;
 
+use Factories\Page;
+
 class DummyPage extends Page
 {
     /**
@@ -9,7 +11,7 @@ class DummyPage extends Page
      */
     public function getPageData()
     {
-        return app('Factories\Page')->create(1, true, [
+        return app(Page::class)->create(1, true, [
             'page' => [
                 'controller' => 'DummyController',
                 'title' => 'DummyTitle',

@@ -1,166 +1,67 @@
 // Content returning from CMS
 .content {
-    ul {
-        list-style-type: disc;
+    // This allows tables to scroll
+    @apply overflow-scroll;
 
-        @apply .ml-8;
+    dl,
+    ol,
+    ul {
+        @apply mb-4;
+    }
+
+    ul {
+        @apply ml-8 list-disc;
     }
 
     ol {
-        list-style-type: decimal;
-
-        @apply .ml-8;
-    }
-
-    hr {
-        @apply .border-b .border-solid .border-grey-lighter .my-5;
-    }
-
-    p,
-    dl,
-    & > ol,
-    & > ul {
-        @apply .mb-5;
-    }
-
-    abbr,
-    abbr[title] {
-        @apply .no-underline;
-    }
-
-    blockquote {
-        @apply .ml-8 .my-8 .border-l-4 .border-grey .pl-4 .pt-2 .pb-1;
-
-        > *:last-child {
-            @apply .mb-2;
-        }
-
-        cite {
-            @apply .block .mb-4;
-        }
+        @apply ml-8 list-decimal;
     }
 
     // Tailwind preflight sets images to block
     img {
-        @apply .inline;
+        @apply inline;
     }
 
-    // Images remain at their specified width
-    // Text appears above and below for small
-    @media (max-width: theme('screens.mt')) {
-        img,
-        figure {
-            @apply .block .my-0 .mx-auto;
+    // TODO wtf stylelint
+    // Do not rearrange this any of this link and heading link css
+    // Underline all content links
+    a {
+        @apply underline;
+    }
 
-            &[style*="float:right"],
-            &[style*="float:left"],
-            &.float-right,
-            &.float-left {
-                float: none !important;
-            }
+    // Bottom border instead of underline all heading links
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        a {
+            @apply no-underline border-b border-green;
         }
-    }
-
-    // Floated images can only be 50% of column width for readability
-    @screen mt {
-        img {
-            &[style*="float:right"],
-            &[style*="float:left"] {
-                padding: 0 !important;
-            }
-
-            &[style*="float:right"] {
-                @apply .ml-6 .my-2 .max-w-half;
-            }
-
-            &[style*="float:left"] {
-                @apply .mr-6 .my-2 .max-w-half;
-            }
+        // Prevent users from having gold text
+        &.text-gold {
+            @apply text-black;
         }
     }
 
-    figure {
-        @apply .mt-2 .mb-4 .mx-auto;
-
-        // Overriding display: inline-block; from CKEditor
-        // so that the caption wraps appropriately
-        display: table !important;
-        padding: 0 !important;
-        clear: both;
-
-        img {
-            padding: 0 !important;
-        }
-
-        figcaption {
-            @apply .text-sm .text-grey-darker .text-left;
-
-            display: table-caption;
-            caption-side: bottom;
-        }
-
-        @screen mt {
-            @apply .w-auto .mb-4;
-
-            &[style*="float:right"],
-            &.float-right {
-                @apply .ml-6 .max-w-half;
-            }
-
-            &[style*="float:left"],
-            &.float-left {
-                @apply .mr-6 .max-w-half;
-            }
-
-            &[style*="text:center"],
-            &.text-center {
-                @apply .ml-auto .mr-auto;
-            }
-        }
+    a:hover,
+    a:focus {
+        @apply no-underline;
     }
 
-    table {
-        @apply .border-collapse .w-full .mb-4 .text-left;
-
-        thead tr {
-            @apply .border .border-solid .border-green-dark;
-
-            th {
-                @apply .bg-green-dark .font-bold .px-4 .py-3 .text-white .leading-none;
-            }
-
-            a {
-                @apply .text-white;
-            }
-        }
-
-        tbody tr {
-            @apply .border .border-grey-light .border-t-0 .border-solid .align-top;
-
-            td {
-                @apply .text-sm .px-4 .py-2;
-            }
-
-            &:nth-child(odd) {
-                @apply .bg-grey-lighter;
-            }
-
-            &:nth-child(even) {
-                @apply .bg-grey-lightest;
-            }
-
-            &:hover {
-                @apply .bg-yellow-lightest;
-            }
-        }
-    }
-
-    // All content links
-    a:not(.button, .content-button) {
-        @apply .underline;
-
-        &:hover {
-            @apply .no-underline;
-        }
+    h1 a:hover,
+    h1 a:focus,
+    h2 a:hover,
+    h2 a:focus,
+    h3 a:hover,
+    h3 a:focus,
+    h4 a:hover,
+    h4 a:focus,
+    h5 a:hover,
+    h5 a:focus,
+    h6 a:hover,
+    h6 a:focus {
+        @apply border-0;
     }
 }

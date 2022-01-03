@@ -2,6 +2,8 @@
 
 namespace Styleguide\Pages;
 
+use Factories\Page as PageFactory;
+
 class FooterContactTwo extends Page
 {
     /**
@@ -9,11 +11,14 @@ class FooterContactTwo extends Page
      */
     public function getPageData()
     {
-        return app('Factories\Page')->create(1, true, [
+        return app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'FooterContactTwoController',
                 'title' => 'Two column',
                 'id' => 104100101,
+                'content' => [
+                    'main' => '<p>You can have up to four columns in your contact footer.</p>',
+                ],
             ],
         ]);
     }

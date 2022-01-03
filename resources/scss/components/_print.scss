@@ -9,7 +9,7 @@
     }
 
     a[href]::after {
-        @apply .font-normal;
+        @apply font-normal;
 
         content: " (" attr(href) ") ";
     }
@@ -20,7 +20,7 @@
 
     .menu-top-container {
         &.fixed {
-            @apply .relative;
+            @apply relative;
         }
 
         h1 > a[href]::after {
@@ -33,7 +33,7 @@
     }
 
     .wsufooter {
-        @apply .bg-transparent;
+        @apply bg-transparent;
     }
 
     .pt-hero {
@@ -46,21 +46,21 @@
 
     .content {
         pre {
-            @apply .border .bg-transparent .overflow-auto .whitespace-pre-wrap;
+            @apply border bg-transparent overflow-auto whitespace-pre-wrap;
 
             word-wrap: break-word;
         }
 
         hr {
-            @apply .border-black;
+            @apply border-black;
         }
 
         a.button {
-            @apply .p-0 .bg-transparent .text-black .rounded-none .text-left .text-base .underline .font-normal;
+            @apply p-0 bg-transparent text-black rounded-none text-left text-base underline font-normal;
         }
 
         figure figcaption {
-            @apply .text-base .text-black;
+            @apply text-base text-black;
         }
     }
 }

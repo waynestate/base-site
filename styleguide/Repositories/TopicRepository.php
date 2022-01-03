@@ -3,6 +3,7 @@
 namespace Styleguide\Repositories;
 
 use App\Repositories\TopicRepository as Repository;
+use Factories\Topic;
 
 class TopicRepository extends Repository
 {
@@ -11,7 +12,7 @@ class TopicRepository extends Repository
      */
     public function listing($application_ids, $subsite_folder = null)
     {
-        $topics['topics'] = app('Factories\Topic')->create(20);
+        $topics['topics'] = app(Topic::class)->create(20);
 
         return $topics;
     }
@@ -22,7 +23,7 @@ class TopicRepository extends Repository
     public function find($slug)
     {
         return [
-            'topics' => app('Factories\Topic')->create(1, true),
+            'topics' => app(Topic::class)->create(1, true),
         ];
     }
 

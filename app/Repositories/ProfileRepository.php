@@ -170,7 +170,7 @@ class ProfileRepository implements ProfileRepositoryContract
 
         // Use all the IDs from the dropdown since the initial selection is "All Profiles"
         if ($group_ids === null) {
-            $group_ids = ltrim(implode(array_keys($dropdown_groups), '|'), '|');
+            $group_ids = ltrim(implode('|', array_keys($dropdown_groups)), '|');
         }
 
         return $group_ids;
@@ -314,5 +314,13 @@ class ProfileRepository implements ProfileRepositoryContract
         }
 
         return $referer;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSiteID($data)
+    {
+        return !empty($data['data']['profile_site_id']) ? $data['data']['profile_site_id'] : $data['site']['id'];
     }
 }

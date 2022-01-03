@@ -7,12 +7,12 @@
 
         @if(config('base.ga_code') != 'UA-' && config('base.ga_name') != null)
             ga('create', '{{ config('base.ga_code') }}', 'wayne.edu', {'name': '{{ config('base.ga_name') }}'});
-            ga('{{ config('base.ga_name') }}.send', 'pageview', '{{ $server['path_with_query'] }}');
+            ga('{{ config('base.ga_name') }}.send', 'pageview', '{{ $base['server']['path_with_query'] }}');
         @endif
 
         @if(config('base.ga_code_all_wsu') != 'UA-')
             ga('create', '{{ config('base.ga_code_all_wsu') }}', 'wayne.edu', {'name': 'allWayneState'});
-            ga('allWayneState.send', 'pageview', '{{ $server['path_with_query'] }}');
+            ga('allWayneState.send', 'pageview', '{{ $base['server']['path_with_query'] }}');
         @endif
     </script>
 @endif

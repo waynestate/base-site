@@ -1,16 +1,16 @@
 @extends('components.content-area')
 
 @section('content')
-    @include('components.page-title', ['title' => $page['title']])
+    @include('components.page-title', ['title' => $base['page']['title']])
 
     @if(!empty($articles['data']))
         <ul>
             @foreach($articles['data'] as $article)
-                <li class="mb-3 pb-4 border-b border-grey-lighter">
+                <li class="mb-3 pb-4 border-b border-gray-200">
                     <a href="{{ $article['link'] }}" class="font-bold text-lg block">
                         {{ $article['title'] }}
                     </a>
-                    <time class="block text-sm text-grey-darker mt-1 leading-tight" datetime="{{ $article['article_date'] }}">{{ apdatetime(date('F j, Y', strtotime($article['article_date']))) }}</time>
+                    <time class="block text-sm text-gray-500 mt-1 leading-tight" datetime="{{ $article['article_date'] }}">{{ apdatetime(date('F j, Y', strtotime($article['article_date']))) }}</time>
                 </li>
             @endforeach
         </ul>

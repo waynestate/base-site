@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Faker\Factory;
 
-class TableSortableController extends Controller
+class HeadingStylesController extends Controller
 {
     /**
      * Construct the controller.
@@ -19,13 +19,13 @@ class TableSortableController extends Controller
     }
 
     /**
-     * Display an example table stack.
+     * Display the view.
      *
      * @param Request $request
      * @return \Illuminate\View\View
      */
     public function index(Request $request)
     {
-        return view('styleguide-tablesort', merge($request->data, $this->faker));
+        return view('styleguide-heading-styles', merge($request->data, $this->faker));
     }
 }

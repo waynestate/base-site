@@ -8,9 +8,9 @@
     @foreach($buttons as $button)
         <li class="min-w-full px-4 mt:px-0{{ empty($class) ? ' mb-4' : '' }}">
             @if(!empty($button['option']) && view()->exists('components.button-'.\Illuminate\Support\Str::slug($button['option'])))
-                @include('components.button-'.\Illuminate\Support\Str::slug($button['option']), ['button' => $button])
+                @include('components.button-'.\Illuminate\Support\Str::slug($button['option']), ['button' => $button, 'class' => 'w-full'])
             @else
-                @include('components.button-default', ['button' => $button])
+                @include('components.button-default', ['button' => $button, 'class' => 'w-full'])
             @endif
         </li>
     @endforeach

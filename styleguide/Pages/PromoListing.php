@@ -2,6 +2,8 @@
 
 namespace Styleguide\Pages;
 
+use Factories\Page as PageFactory;
+
 class PromoListing extends Page
 {
     /**
@@ -9,7 +11,7 @@ class PromoListing extends Page
      */
     public function getPageData()
     {
-        return app('Factories\Page')->create(1, true, [
+        return app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'PromoListingController',
                 'title' => 'Promo listing',
@@ -18,8 +20,8 @@ class PromoListing extends Page
                     'main' => '
                         <h2>Page setup</h2>
                         <ul>
-                            <li>Custom page field required <code class="bg-grey-lighter py-1 px-2 rounded text-sm">listing_promo_group_id</code>.</li>
-                            <li>Enable individual item view custom page field <code class="bg-grey-lighter py-1 px-2 rounded text-sm">promotion_view_boolean</code>.</li>
+                            <li>Custom page field required <code class="bg-gray-200 py-1 px-2 rounded text-sm">listing_promo_group_id</code>.</li>
+                            <li>Enable individual item view custom page field <code class="bg-gray-200 py-1 px-2 rounded text-sm">promotion_view_boolean</code>.</li>
                             <li>If using individual view, you need to create a CMS page titled "Promo view", with the url "view".</li>
                         </ul>
                         <h2>Promo group setup</h2>
