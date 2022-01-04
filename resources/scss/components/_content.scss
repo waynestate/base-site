@@ -1,8 +1,5 @@
 // Content returning from CMS
 .content {
-    // This allows tables to scroll
-    @apply overflow-scroll;
-
     dl,
     ol,
     ul {
