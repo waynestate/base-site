@@ -1,11 +1,15 @@
 .banner {
+    @apply absolute hidden mt:flex z-40 bg-gold text-green-800 hover:text-green-900 items-center justify-center mr-4 right-0 pt-0 duration-500;
+
+    transition-property: height, padding;
     width: 140px;
     height: 30px;
 
     // Pointy bottom
     &::after {
-        @apply border-gold absolute;
+        @apply border-gold absolute duration-500;
 
+        transition-property: top;
         border-left-color: transparent;
         border-right-color: transparent;
         border-style: solid;
@@ -13,11 +17,12 @@
         top: 30px;
         content: "";
         left: 0;
-        transition: all 0.25s ease-out;
-        transition-delay: 0.1s;
     }
 
     &:hover {
+        @apply duration-500;
+
+        transition-property: height, padding;
         height: 38px;
         padding-top: 8px;
 
@@ -26,12 +31,11 @@
         }
     }
 
-    .title {
-        padding-top: 0.3125rem;
+    &__title {
+        @apply uppercase text-sm tracking-wide pt-1.5 pt-1;
     }
 
-    .excerpt {
-        padding-top: 0.125rem;
-        padding-left: 0.2em;
+    &__excerpt {
+        @apply normal-case text-xl italic font-serif pt-0.5 pl-1;
     }
 }

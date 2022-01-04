@@ -185,4 +185,9 @@ module.exports = {
             },
         },
     },
+    variants: {
+        extend: {
+            transitionTimingFunction: ['hover', 'focus'],
+        }
+    }
 }
