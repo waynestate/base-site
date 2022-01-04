@@ -33,7 +33,7 @@
 
                 @if(!empty($base['banner']))
                     <div class="min-w-full px-4 mt:px-0 mb-4 mt:hidden">
-                        <a href="{{ $base['banner']['link'] }}" class="button expanded uppercase">{{ $base['banner']['title'] }} <span class="excerpt normal-case text-xl italic font-serif">{{ $base['banner']['excerpt'] }}</span></a>
+                        <a href="{{ $base['banner']['link'] }}" class="button w-full banner__title">{{ $base['banner']['title'] }} <span class="banner__excerpt">{{ $base['banner']['excerpt'] }}</span></a>
                     </div>
                 @endif
 
