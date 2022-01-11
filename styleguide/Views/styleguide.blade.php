@@ -4,9 +4,9 @@
     @include('components.page-title', ['title' => $base['page']['title']])
 
     <div class="content">
-        <p>Welcome to your style guide! This is essentially a how-to resource that will help you to determine what features you can 
-        incorporate into your website, and how to implement them. The style guide is specific to your site and provides you with the 
-        ability to customize your pages and visually enhance your content for a better user experience.</p>
+        <p>The style guide is specific to each site, so please be sure you are viewing the correct one at <strong>[yourdomain].wayne.edu/styleguide</strong> (ex: <a href="//mac.wayne.edu/styleguide">mac.wayne.edu/styleguide</a>).
+
+        <p>Your style guide is a how-to resource that will help you to determine what features you can incorporate into your website and how to implement them. It provides you with the ability to customize your pages and visually enhance your content for a better user experience.</p>
 
         <p>There are a variety of options available to use depending on your needs, but you can explore the menu to decide which items 
         would fit best when adding or editing your pages. Some experience with basic html is beneficial and will help when incorporating 
