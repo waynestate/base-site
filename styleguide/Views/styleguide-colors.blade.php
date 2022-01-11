@@ -164,5 +164,85 @@
                 </div>
             </div>
         </div>
+
+        <div class="flex flex-col space-y-3 sm:flex-row text-xs sm:space-x-4">
+            <div class="w-32 flex-shrink-0">
+                <div class="h-10 flex flex-col justify-center">
+                    <div class="text-sm font-semibold text-gray-900">Gray</div>
+                    <code class="text-xs text-gray-900">colors.gray</code>
+                </div>
+            </div>
+            <div class="min-w-0 flex-1 grid grid-cols-2 md:grid-cols-5 2xl:grid-cols-10 gap-x-4 gap-y-3 2xl:gap-x-2">
+                <div class="space-y-1.5">
+                    <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-gray-50"></div>
+                    <div class="px-0.5">
+                        <div class="font-medium text-gray-900">50</div>
+                        <div>#FAFAFA</div>
+                    </div>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-gray-100"></div>
+                    <div class="px-0.5">
+                        <div class="font-medium text-gray-900">100</div>
+                    <div>#F5F5F5</div>
+                </div>
+            </div>
+            <div class="space-y-1.5">
+                <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-gray-200"></div>
+                    <div class="px-0.5">
+                        <div class="font-medium text-gray-900">200</div>
+                        <div>#E5E5E5</div>
+                    </div>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-gray-300"></div>
+                    <div class="px-0.5">
+                        <div class="font-medium text-gray-900">300</div>
+                        <div>#D4D4D4</div>
+                    </div>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-gray"></div>
+                    <div class="px-0.5">
+                        <div class="font-medium text-gray-900">Gray</div>
+                    <div>#A3A3A3</div></div>
+                </div>
+                <div class="space-y-1.5">
+                        <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-gray-500"></div>
+                    <div class="px-0.5">
+                        <div class="font-medium text-gray-900">500</div>
+                        <div>#737373</div>
+                    </div>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-gray-600"></div>
+                    <div class="px-0.5">
+                        <div class="font-medium text-gray-900">600</div>
+                        <div>#525252</div>
+                    </div>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-gray-700"></div>
+                    <div class="px-0.5">
+                        <div class="font-medium text-gray-900">700</div>
+                        <div>#404040</div>
+                    </div>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-gray-800"></div>
+                    <div class="px-0.5">
+                        <div class="font-medium text-gray-900">800</div>
+                        <div>#262626</div>
+                    </div>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="h-10 w-full rounded ring-1 ring-inset ring-black ring-opacity-0 bg-gray-900"></div>
+                    <div class="px-0.5">
+                        <div class="font-medium text-gray-900">900</div>
+                        <div>#171717</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection

@@ -15,6 +15,6 @@ class ColorsController extends Controller
      */
     public function index(Request $request)
     {
-        return view('colors', merge($request->data));
+        return view('styleguide-colors', merge($request->data));
     }
 }
