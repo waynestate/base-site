@@ -27,8 +27,8 @@
         </ul>
 
         <h2>&lt;h2&gt; Heading level 2</h2>
-        <p>{{ $faker->text(40) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a> {{ $faker->text(300) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a></p>
-
+        <p>Heading level 2 contains a primary section of content. All heading text should be brief, clear, informative and unique. Headings should not be utilized to format content. There can be multiple heading 2’s on a page. </p>
+        
         <h3>&lt;h3&gt; Heading level 3</h3>
         <p>{{ $faker->text(40) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a> {{ $faker->text(300) }} <a href="https://base.wayne.edu">{{ $faker->text(40) }}</a></p>
 
