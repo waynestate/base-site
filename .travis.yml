@@ -6,6 +6,10 @@ cache:
     directories:
         - $HOME/.composer/cache/files
 
+env:
+    global:
+        - XDEBUG_MODE=coverage
+
 branches:
   only:
   - master
@@ -33,7 +37,8 @@ script:
   - make phplintdry
   - make stylelint
   - make runtests
+  - mkdir -p build/logs
   - php vendor/bin/phpunit --coverage-clover build/logs/clover.xml
 
-after_script:
-  - php vendor/bin/php-coveralls -v
+after_success:
+  - travis_retry php vendor/bin/php-coveralls
