@@ -1,5 +1,5 @@
 sudo: false
-dist: trusty
+dist: xenial
 language: php
 cache:
     yarn: true
@@ -12,12 +12,12 @@ branches:
   - develop
 
 php:
-  - 8.0
+  - 8.0.9
 
 before_install:
   # Install nvm for nodejs
-  - nvm install 14
-  - nvm use 14
+  - nvm install 16
+  - nvm use 16
   # Install yarn
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH=vendor/bin:node_modules/.bin:$HOME/.yarn/bin:$PATH
