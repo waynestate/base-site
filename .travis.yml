@@ -1,5 +1,5 @@
 sudo: false
-dist: trusty
+dist: xenial
 language: php
 cache:
     yarn: true
@@ -12,12 +12,12 @@ branches:
   - develop
 
 php:
-  - 7.3
+  - 8.0
 
 before_install:
   # Install nvm for nodejs
-  - nvm install 14
-  - nvm use 14
+  - nvm install 16
+  - nvm use 16
   # Install yarn
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH=vendor/bin:node_modules/.bin:$HOME/.yarn/bin:$PATH
@@ -33,7 +33,8 @@ script:
   - make phplintdry
   - make stylelint
   - make runtests
-  - php vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+  - mkdir -p build/logs
+  - XDEBUG_MODE=coverage php vendor/bin/phpunit --coverage-clover build/logs/clover.xml
 
-after_script:
-  - php vendor/bin/php-coveralls -v
+after_success:
+  - travis_retry php vendor/bin/php-coveralls

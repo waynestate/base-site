@@ -75,10 +75,7 @@
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
-        "optimize-autoloader": true,
-        "platform": {
-            "php": "7.3.20"
-        }
+        "optimize-autoloader": true
     },
     "minimum-stability": "dev",
     "prefer-stable": true
