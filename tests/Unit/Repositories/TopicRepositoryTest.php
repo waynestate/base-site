@@ -119,4 +119,21 @@ class TopicRepositoryTest extends TestCase
 
         $this->assertTrue(collect($selected)->first()['selected']);
     }
+
+    /**
+     * @covers App\Repositories\TopicRepository::setSelected
+     * @test
+     */
+    public function setting_no_selected_topic()
+    {
+        $topics = app(Topic::class)->create(5);
+
+        $newsApi = Mockery::mock(News::class);
+
+        $first = collect($topics['data'])->first();
+
+        $selected = app(TopicRepository::class, ['newsApi' => $newsApi])->setSelected($topics['data'], null);
+
+        $this->assertFalse(collect($selected)->first()['selected']);
+    }
 }
