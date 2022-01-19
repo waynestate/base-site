@@ -36,7 +36,7 @@
         <p>Heading level 3 is a subsection of a heading level 2. All heading text should be brief, clear, informative and unique. Headings should not be utilized to format content. There can be multiple heading 3’s on a page but they must be under the content of a heading level 2 and related to the content of a heading level 2.</p>
 
         <h4>&lt;h4&gt; Heading level 4</h4>
-        <p>Heading level 4 is a subsection of a heading level 3. All heading text should be brief, clear, informative and unique. Headings should not be utilized to format content. There can be multiple heading 4’s on a pagebut they must be under the content of a heading level 3 and related to the content of a heading level 3.</p>
+        <p>Heading level 4 is a subsection of a heading level 3. All heading text should be brief, clear, informative and unique. Headings should not be utilized to format content. There can be multiple heading 4’s on a page but they must be under the content of a heading level 3 and related to the content of a heading level 3.</p>
 
         <h5>&lt;h5&gt; Heading level 5</h5>
         <p>Heading level 5 is a subsection of a heading level 4. These are not common and we do recommend restructuring your content if you get to a heading level 5. You may want to create a new page or condense your information. </p>
