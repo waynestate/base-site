@@ -13,7 +13,7 @@
         some of the features into your site.</p>
 
         <p>We do offer a <a href="//go.wayne.edu/webtraining">CMS self-paced web training</a> that covers how to edit and manage the content on your site. This training is required for university staff.</p>
-
+        
         <h2>Basic text formatting</h2>
         <p class="mb-1">These HTML classes are available for formatting paragraph or span elements. Add <code>class="text-lg"</code>, replacing "text-lg" with any of the names in the list below.</p>
         <ul>
@@ -25,7 +25,10 @@
             <li><span class="text-lg">text-lg</span></li>
             <li><span class="text-xl">text-xl</span></li>
         </ul>
-    <p><strong>Note:</strong> Heading level 1 is the title of the webpage. This is only used once per page. Content creators should focus on heading level 2 - heading level 6 on their webpages.</p>
+        
+        <h1>&lt;h1&gt; Heading level 1</h1>
+        <p>Heading level 1 is the title of the webpage. This is only used once per page. Content creators should focus on heading level 2 - heading level 6 on their webpages.</p>
+        
         <h2>&lt;h2&gt; Heading level 2</h2>
         <p>Heading level 2 contains a primary section of content. All heading text should be brief, clear, informative and unique. Headings should not be utilized to format content. There can be multiple heading 2’s on a page. </p>
         
