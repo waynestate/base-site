@@ -25,7 +25,7 @@
             <li><span class="text-lg">text-lg</span></li>
             <li><span class="text-xl">text-xl</span></li>
         </ul>
-
+    <p><strong>Note:</strong> Heading level 1 is the title of the webpage. This is only used once per page. Content creators should focus on heading level 2 - heading level 6 on their webpages.</p>
         <h2>&lt;h2&gt; Heading level 2</h2>
         <p>Heading level 2 contains a primary section of content. All heading text should be brief, clear, informative and unique. Headings should not be utilized to format content. There can be multiple heading 2’s on a page. </p>
         
