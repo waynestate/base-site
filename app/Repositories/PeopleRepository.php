@@ -58,8 +58,13 @@ class PeopleRepository implements ProfileRepositoryContract
                 $profile['link'] = '/profile/'.$profile['accessid'];
 
                 foreach ($profile['field_data'] as $data) {
-                    $profile['data'][$data['field']['name']] = $data['value'];
+                    if ($data['field']['type'] == 'file') {
+                        $profile['data'][$data['field']['name']]['url'] = $data['value'];
+                    } else {
+                        $profile['data'][$data['field']['name']] = $data['value'];
+                    }
                 }
+
                 $profile['data']['AccessID'] = $profile['accessid'];
 
                 $profile['groups'] = collect($profile['groups'])->keyBy('id')->toArray();
@@ -259,7 +264,11 @@ class PeopleRepository implements ProfileRepositoryContract
             $profile['data']['link'] = '/profile/'.$profile['data']['accessid'];
 
             foreach ($profile['data']['field_data'] as $data) {
-                $profile['data']['data'][$data['field']['name']] = $data['value'];
+                if ($data['field']['type'] == 'file') {
+                    $profile['data']['data'][$data['field']['name']]['url'] = $data['value'];
+                } else {
+                    $profile['data']['data'][$data['field']['name']] = $data['value'];
+                }
             }
 
             $profile_return['profile'] = $profile['data'];

@@ -30,6 +30,18 @@ class People implements FactoryContract
             $first_name = $this->faker->firstName;
             $last_name = $this->faker->lastName;
             $email = $this->faker->email;
+            $title = $this->faker->sentence(3);
+            $picture = '/styleguide/image/400x533?text=400x533%20('.$i.')';
+            $phone = $this->faker->phoneNumber;
+            $department = '<p>'.$this->faker->sentence.'</p>';
+            $office = '<p>300 Prentis</p>';
+            $biography = '<p>'.$this->faker->paragraph(15).'</p>';
+            $research_interests = [
+                '<p>'.$this->faker->paragraph(10).'</p>',
+                '<p>'.$this->faker->paragraph(10).'</p>',
+                '<p>'.$this->faker->paragraph(10).'</p>',
+            ];
+
             $site_id = $options['site_id'] ?? 2;
 
             $data[$i] = [
@@ -69,6 +81,62 @@ class People implements FactoryContract
                             'global' => 1,
                         ],
                     ],
+                    [
+                        'value' => $title,
+                        'field' => [
+                            'name' => 'Title',
+                            'type' => 'text',
+                            'global' => 1,
+                        ],
+                    ],
+                    [
+                        'value' => $picture,
+                        'field' => [
+                            'name' => 'Picture',
+                            'type' => 'file',
+                            'global' => 1,
+                        ],
+                    ],
+                    [
+                        'value' => $phone,
+                        'field' => [
+                            'name' => 'Phone',
+                            'type' => 'text',
+                            'global' => 1,
+                        ],
+                    ],
+                    [
+                        'value' => $department,
+                        'field' => [
+                            'name' => 'Department',
+                            'type' => 'text',
+                            'global' => 1,
+                        ],
+                    ],
+                    [
+                        'value' => $office,
+                        'field' => [
+                            'name' => 'Office',
+                            'type' => 'text',
+                            'global' => 1,
+                        ],
+                    ],
+                    [
+                        'value' => $biography,
+                        'field' => [
+                            'name' => 'Biography',
+                            'type' => 'text',
+                            'global' => 1,
+                        ],
+                    ],
+                    [
+                        'value' => $research_interests,
+                        'field' => [
+                            'name' => 'Research Interests',
+                            'type' => 'text',
+                            'global' => 1,
+                        ],
+                    ],
                 ],
                 'groups' => [
                     $groups->random(),
@@ -81,17 +149,13 @@ class People implements FactoryContract
                     'Email' => $email,
                     'Title' => $this->faker->sentence(3),
                     'Picture' => [
-                        'url' => '/styleguide/image/400x533?text=400x533%20('.$i.')',
+                        'url' => $picture,
                     ],
-                    'Phone' => $this->faker->phoneNumber,
-                    'Department' => '<p>'.$this->faker->sentence.'</p>',
-                    'Office' => '<p>300 Prentis</p>',
-                    'Biography' => '<p>'.$this->faker->paragraph(15).'</p>',
-                    'Research Interests' => [
-                        '<p>'.$this->faker->paragraph(10).'</p>',
-                        '<p>'.$this->faker->paragraph(10).'</p>',
-                        '<p>'.$this->faker->paragraph(10).'</p>',
-                    ],
+                    'Phone' => $phone,
+                    'Department' => $biography,
+                    'Office' => $office,
+                    'Biography' => $biography,
+                    'Research Interests' => $research_interests,
                 ],
             ];
 
