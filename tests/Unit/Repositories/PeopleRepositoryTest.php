@@ -187,10 +187,18 @@ class PeopleRepositoryTest extends TestCase
      * @covers App\Repositories\PeopleRepository::getProfiles
      * @test
      */
-    public function getting_profiles_should_append_link()
+    public function getting_profiles_should_append_data()
     {
         // Fake return
         $return['data'] = app(People::class)->create(5);
+
+        // Remove Factory (Styleguide data) to test against the getProfiles
+        $return['data'] = collect($return['data'])->map(function ($profile) {
+            unset($profile['link']);
+            unset($profile['data']);
+
+            return $profile;
+        })->toArray();
 
         // Mock the connector and set the return
         $peopleApi = Mockery::mock(PeopleApi::class);
@@ -199,7 +207,8 @@ class PeopleRepositoryTest extends TestCase
         $profiles = app(PeopleRepository::class, ['peopleApi' => $peopleApi])->getProfiles($this->faker->numberBetween(1, 10));
 
         collect($profiles['profiles'])->each(function ($item) {
-            $this->assertTrue(!empty($item['link']));
+            $this->assertNotEmpty($item['link']);
+            $this->assertNotEmpty($item['data']['Picture']['url']);
         });
     }
 
@@ -207,7 +216,7 @@ class PeopleRepositoryTest extends TestCase
      * @covers App\Repositories\PeopleRepository::getProfile
      * @test
      */
-    public function getting_profile_should_append_link()
+    public function getting_profile_should_append_data()
     {
         $site_id = $this->faker->numberBetween(1, 10);
         $accessid = $this->faker->word;
@@ -215,13 +224,18 @@ class PeopleRepositoryTest extends TestCase
         // Fake return
         $return['data'] = app(People::class)->create(1, true);
 
+        // Remove Factory (Styleguide data) to test against the getProfiles
+        unset($return['data']['link']);
+        unset($return['data']['data']);
+
         // Mock the connector and set the return
         $peopleApi = Mockery::mock(PeopleApi::class);
         $peopleApi->shouldReceive('request')->andReturn($return);
 
         $profile = app(PeopleRepository::class, ['peopleApi' => $peopleApi])->getProfile($site_id, $accessid);
 
-        $this->assertTrue(!empty($profile['profile']['link']));
+        $this->assertNotEmpty($profile['profile']['link']);
+        $this->assertNotEmpty($profile['profile']['data']['Picture']['url']);
     }
 
     /**
