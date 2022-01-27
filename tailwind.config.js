@@ -71,7 +71,18 @@ module.exports = {
         path.join(__dirname, "node_modules/mediabox/dist/mediabox.js"),
     ],
     safelist: [
-        '/form_responses/',
+        {
+            pattern: /at-/,
+        },
+        {
+            pattern: /w-[1-5]\/[1-5]/,
+            variants: ['sm','md','lg','xl','xxl','xxxl','mt'],
+        },
+        {
+            pattern: /grid(-cols-[1-4])?/,
+            variants: ['sm','md','lg','2xl'],
+        },
+        '/form_responses/'
     ],
     theme: {
         screens: screens,
