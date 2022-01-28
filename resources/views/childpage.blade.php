@@ -7,7 +7,7 @@
         {!! $base['page']['content']['main'] !!}
     </div>
 
-    @if(!empty($accordion_page))
-        @include('components.accordion', ['items' => $accordion_page])
+    @if(!empty($base['accordion_page']))
+        @include('components.accordion', ['items' => $base['accordion_page']])
     @endif
 @endsection
