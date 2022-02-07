@@ -4,7 +4,7 @@
 --}}
 <div class="menu-top-container bg-green-600 print:bg-transparent">
     <div class="row flex">
-        <div class="flex-grow mx-4 py-2" data-short-title="{{ $site['short-title'] }}">
+        <div class="grow-0 mx-4 py-2" data-short-title="{{ $site['short-title'] }}">
             @if(
                 (
                     config('base.surtitle') !== null &&

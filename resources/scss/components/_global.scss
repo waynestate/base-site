@@ -13,7 +13,7 @@ a {
     @apply text-green no-underline;
 }
 
-@responsive {
+@layer utilities {
     .white-links a:not(.button) {
         @apply text-white underline;
 
