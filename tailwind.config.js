@@ -60,7 +60,6 @@ const screens = {
 }
 
 module.exports = {
-    mode: 'jit',
     content: [
         path.join(__dirname, "resources/views/**/*.blade.php"),
         path.join(__dirname, "styleguide/Views/**/*.blade.php"),
