@@ -52,7 +52,7 @@ yarncheck: $(YARNFILE)
 runtests: $(COMPOSERFILE)
 	php artisan view:clear
 	php artisan config:clear
-	php vendor/bin/phpunit
+	php artisan test
 
 php-cs-fixer:
 	chmod +x php-cs-fixer-script.sh && ./php-cs-fixer-script.sh
