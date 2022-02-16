@@ -4,6 +4,7 @@ namespace Tests;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Faker\Factory;
+use Illuminate\Routing\Middleware\ThrottleRequests;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -29,6 +30,10 @@ abstract class TestCase extends BaseTestCase
 
         // Don't run through the exception handler so we have cleaner errors in CLI
         $this->withoutExceptionHandling();
+
+        $this->withoutMiddleware(
+            ThrottleRequests::class,
+        );
 
         // Create a new faker that every test can use
         $this->faker = (new Factory)->create();
