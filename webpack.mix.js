@@ -25,7 +25,7 @@ fs.copyFileSync('vendor/waynestate/error-403/dist/403.php', 'resources/views/err
 fs.copyFileSync('vendor/waynestate/error-429/dist/429.php', 'resources/views/errors/429.blade.php', fs.constants.COPYFILE_FICLONE);
 fs.copyFileSync('vendor/waynestate/error-500/dist/500.php', 'resources/views/errors/500.blade.php', fs.constants.COPYFILE_FICLONE);
 fs.copyFileSync('vendor/waynestate/error-500/dist/500.php', 'resources/views/errors/500.blade.php', fs.constants.COPYFILE_FICLONE);
-mix.copy('hooks/pre-commit', '.git/hooks/');
+fs.copyFileSync('hooks/pre-commit', '.git/hooks/pre-commit', fs.constants.COPYFILE_FICLONE);
 replace.sync({
     files: 'resources/views/components/footer.blade.php',
     from: /2\d{3}/g,
