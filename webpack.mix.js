@@ -25,6 +25,14 @@ fs.copyFileSync('vendor/waynestate/error-403/dist/403.php', 'resources/views/err
 fs.copyFileSync('vendor/waynestate/error-429/dist/429.php', 'resources/views/errors/429.blade.php', fs.constants.COPYFILE_FICLONE);
 fs.copyFileSync('vendor/waynestate/error-500/dist/500.php', 'resources/views/errors/500.blade.php', fs.constants.COPYFILE_FICLONE);
 fs.copyFileSync('vendor/waynestate/error-500/dist/500.php', 'resources/views/errors/500.blade.php', fs.constants.COPYFILE_FICLONE);
+if(!fs.existsSync('.git/hooks')) {
+    fs.mkdir('.git/hooks', (err) => {
+        if (err) {
+            return console.error(err);
+        }
+        console.log('.git/hooks directory created.');
+    });
+}
 fs.copyFileSync('hooks/pre-commit', '.git/hooks/pre-commit', fs.constants.COPYFILE_FICLONE);
 replace.sync({
     files: 'resources/views/components/footer.blade.php',
@@ -35,15 +43,15 @@ replace.sync({
 
 // Error Files
 mix.copy([
-        'vendor/waynestate/error-404/dist/404.css',
-        'vendor/waynestate/error-404/dist/404.css.map',
-        'vendor/waynestate/error-403/dist/403.css',
-        'vendor/waynestate/error-403/dist/403.css.map',
-        'vendor/waynestate/error-429/dist/429.css',
-        'vendor/waynestate/error-429/dist/429.css.map',
-        'vendor/waynestate/error-500/dist/500.css',
-        'vendor/waynestate/error-500/dist/500.css.map'
-    ], 'public/_resources/css')
+    'vendor/waynestate/error-404/dist/404.css',
+    'vendor/waynestate/error-404/dist/404.css.map',
+    'vendor/waynestate/error-403/dist/403.css',
+    'vendor/waynestate/error-403/dist/403.css.map',
+    'vendor/waynestate/error-429/dist/429.css',
+    'vendor/waynestate/error-429/dist/429.css.map',
+    'vendor/waynestate/error-500/dist/500.css',
+    'vendor/waynestate/error-500/dist/500.css.map'
+], 'public/_resources/css')
 
     // Header files
     .copy([
@@ -68,16 +76,16 @@ mix.copy([
 
 // Compile assets and setup browersync
 mix.js('resources/js/main.js', 'public/_resources/js')
-   .sass('resources/scss/main.scss', 'public/_resources/css/main.css')
-   .sourceMaps()
-   .options({
+    .sass('resources/scss/main.scss', 'public/_resources/css/main.css')
+    .sourceMaps()
+    .options({
         processCssUrls: false,
         postCss: [
             require('tailwindcss'),
             require('autoprefixer')
         ]
     })
-   .browserSync({
+    .browserSync({
         proxy: 'https://' + package.name + '.wayne.local',
         open: false,
         files: [
@@ -97,7 +105,7 @@ mix.js('resources/js/main.js', 'public/_resources/js')
 fs.symlink(
     path.resolve('./storage/app/public'),
     path.resolve('./public/_static'),
-    function (err) { err != null && err.errno != -17 ? console.log(err) : console.log("Done."); }
+    function (err) { err != null && err.errno != -17 ? console.log(err) : console.log("./storage/app/public symlinked to ./public/_static/ created."); }
 );
 
 config = {
