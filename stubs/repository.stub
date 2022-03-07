@@ -78,7 +78,7 @@ class DummyRepository implements DummyRepositoryContract
          */
 
         return [
-            'dummy' => []
+            'dummy' => [],
         ];
     }
 }

@@ -13,7 +13,7 @@ class DummyRepository extends Repository
     public function getDummy()
     {
         return [
-            'dummy' => app(DummyFactory::class)->create(5)
+            'dummy' => app(DummyFactory::class)->create(5),
         ];
     }
 }
