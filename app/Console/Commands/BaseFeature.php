@@ -15,7 +15,7 @@ class BaseFeature extends Command
     /**
      * @var string
      */
-    protected $description = 'Scaffold out files for a new feature';
+    protected $description = 'Scaffold out files for a new feature, use singular form of feature name, e.g. "Spotlight"';
 
     /**
      * Scaffold files.
@@ -50,8 +50,8 @@ class BaseFeature extends Command
     {
         $this->initializeStub('contract');
         $this->replaceContract();
-        $this->stub = str_replace('getDummys', 'get'.$this->feature.'s', $this->stub);
-        $this->stub = str_replace('dummys', strtolower($this->feature).'s', $this->stub);
+        $this->stub = str_replace('getDummy', 'get'.$this->feature, $this->stub);
+        $this->stub = str_replace('dummy', strtolower($this->feature), $this->stub);
 
         Storage::disk('base')->put('contracts\Repositories\/'.$this->feature.'RepositoryContract.php', $this->stub);
     }
@@ -61,8 +61,8 @@ class BaseFeature extends Command
         $this->initializeStub('repository');
         $this->replaceContract();
         $this->stub = str_replace('DummyRepository', $this->feature.'Repository', $this->stub);
-        $this->stub = str_replace('getDummy()', 'get'.$this->feature.'s()', $this->stub);
-        $this->stub = str_replace('dummy', strtolower($this->feature).'s', $this->stub);
+        $this->stub = str_replace('getDummy', 'get'.$this->feature, $this->stub);
+        $this->stub = str_replace('dummy', strtolower($this->feature), $this->stub);
 
         Storage::disk('base')->put('app\Repositories\/'.$this->feature.'Repository.php', $this->stub);
     }
@@ -71,8 +71,8 @@ class BaseFeature extends Command
     {
         $this->initializeStub('repository-styleguide');
         $this->stub = str_replace('DummyRepository', $this->feature.'Repository', $this->stub);
-        $this->stub = str_replace('getDummy()', 'get'.$this->feature.'s()', $this->stub);
-        $this->stub = str_replace('dummy', strtolower($this->feature).'s', $this->stub);
+        $this->stub = str_replace('getDummy', 'get'.$this->feature, $this->stub);
+        $this->stub = str_replace('dummy', strtolower($this->feature), $this->stub);
         $this->stub = str_replace('DummyFactory', $this->feature, $this->stub);
 
         Storage::disk('base')->put('styleguide\Repositories\/'.$this->feature.'Repository.php', $this->stub);
@@ -86,8 +86,8 @@ class BaseFeature extends Command
 
         $item['menu_item_id']++;
         $item['page_id'] = $item['menu_item_id'];
-        $item['display_name'] = $this->feature.'s';
-        $item['relative_url'] = '/styleguide/'.strtolower($this->feature).'s';
+        $item['display_name'] = $this->feature;
+        $item['relative_url'] = '/styleguide/'.strtolower($this->feature);
 
         $menu[101]['submenu'][999]['submenu'][$item['menu_item_id']] = $item;
 
@@ -100,11 +100,11 @@ class BaseFeature extends Command
 
         $this->initializeStub('page');
         $this->replaceController();
-        $this->stub = str_replace('DummyPage', $this->feature.'s', $this->stub);
-        $this->stub = str_replace('DummyTitle', $this->feature.'s', $this->stub);
+        $this->stub = str_replace('DummyPage', $this->feature, $this->stub);
+        $this->stub = str_replace('DummyTitle', $this->feature, $this->stub);
         $this->stub = str_replace('DummyId', end($menu[101]['submenu'])['menu_item_id'], $this->stub);
 
-        Storage::disk('base')->put('styleguide\Pages\/'.$this->feature.'s.php', $this->stub);
+        Storage::disk('base')->put('styleguide\Pages\/'.$this->feature.'.php', $this->stub);
     }
 
     public function view()
@@ -125,7 +125,7 @@ class BaseFeature extends Command
 
     public function setFeature($feature)
     {
-        $this->feature = ucfirst(rtrim($feature, 's'));
+        $this->feature = ucfirst($feature);
 
         if (Storage::disk('base')->exists('app\Http\Controllers\/'.$this->feature.'Controller.php')) {
             die($this->error('Feature already exists, please use another name.'));
@@ -150,15 +150,15 @@ class BaseFeature extends Command
     public function replaceVariables()
     {
         $this->stub = str_replace(
-            ['$dummy', '$this->dummy', '$dummys', '->getDummys'],
-            ['$'.strtolower($this->feature), '$this->'.strtolower($this->feature), '$'.strtolower($this->feature).'s', '->get'.$this->feature.'s'],
+            ['$dummy', '$this->dummy', '->getDummy'],
+            ['$'.strtolower($this->feature), '$this->'.strtolower($this->feature), '->get'.$this->feature],
             $this->stub
         );
     }
 
     public function getView()
     {
-        return strtolower(preg_replace('/(?<!^)[A-Z]/', '-$0', $this->feature)).'s';
+        return strtolower(preg_replace('/(?<!^)[A-Z]/', '-$0', $this->feature));
     }
 
     public function getMenu()

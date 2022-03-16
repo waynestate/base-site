@@ -5,9 +5,9 @@ namespace Contracts\Repositories;
 interface DummyRepositoryContract
 {
     /**
-     * Get the dummys listing.
+     * Get the dummy listing.
      *
      * @return array
      */
-    public function getDummys();
+    public function getDummyItems();
 }
