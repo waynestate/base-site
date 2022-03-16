@@ -61,7 +61,7 @@ class BaseFeature extends Command
         $this->initializeStub('repository');
         $this->replaceContract();
         $this->stub = str_replace('DummyRepository', $this->feature.'Repository', $this->stub);
-        $this->stub = str_replace('getDummy()', 'get'.$this->feature.'()', $this->stub);
+        $this->stub = str_replace('getDummy', 'get'.$this->feature, $this->stub);
         $this->stub = str_replace('dummy', strtolower($this->feature), $this->stub);
 
         Storage::disk('base')->put('app\Repositories\/'.$this->feature.'Repository.php', $this->stub);
@@ -71,7 +71,7 @@ class BaseFeature extends Command
     {
         $this->initializeStub('repository-styleguide');
         $this->stub = str_replace('DummyRepository', $this->feature.'Repository', $this->stub);
-        $this->stub = str_replace('getDummy()', 'get'.$this->feature, $this->stub);
+        $this->stub = str_replace('getDummy', 'get'.$this->feature, $this->stub);
         $this->stub = str_replace('dummy', strtolower($this->feature), $this->stub);
         $this->stub = str_replace('DummyFactory', $this->feature, $this->stub);
 

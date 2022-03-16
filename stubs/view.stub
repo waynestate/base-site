@@ -7,9 +7,9 @@
         {!! $base['page']['content']['main'] !!}
     </div>
 
-    @if(!empty($dummys))
+    @if(!empty($dummyitems))
         <ul>
-            @foreach($dummys as $item)
+            @foreach($dummyitems as $item)
                 <li>{{ $item['title'] }}</li>
             @endforeach
         </ul>

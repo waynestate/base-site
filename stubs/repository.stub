@@ -35,7 +35,7 @@ class DummyRepository implements DummyRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getDummys()
+    public function getDummyItems()
     {
         /*
          * Get formy data
@@ -58,11 +58,11 @@ class DummyRepository implements DummyRepositoryContract
         /*
          * Get promos
         $group_reference = [
-            1234 => 'dummys',
+            1234 => 'dummyitems',
         ];
 
         $group_config = [
-            'dummys' => 'page_id:'.$page_id.'|randomize|first',
+            'dummyitems' => 'page_id:'.$page_id.'|randomize|first',
         ];
 
         $params = [
@@ -80,7 +80,7 @@ class DummyRepository implements DummyRepositoryContract
          */
 
         return [
-            'dummys' => [],
+            'dummyitems' => [],
         ];
     }
 }

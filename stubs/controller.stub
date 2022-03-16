@@ -30,8 +30,8 @@ class DummyController extends Controller
      */
     public function index(Request $request)
     {
-        $dummys = $this->dummy->getDummys();
+        $dummyitems = $this->dummy->getDummyItems();
 
-        return view('DummyView', merge($request->data, $dummys));
+        return view('DummyView', merge($request->data, $dummyitems));
     }
 }
