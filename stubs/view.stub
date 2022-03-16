@@ -7,9 +7,9 @@
         {!! $base['page']['content']['main'] !!}
     </div>
 
-    @if(!empty($dummys))
-        <ul>
-            @foreach($dummys as $item)
+    @if(!empty($dummyitems))
+        <ul class="list-disc">
+            @foreach($dummyitems as $item)
                 <li>{{ $item['title'] }}</li>
             @endforeach
         </ul>

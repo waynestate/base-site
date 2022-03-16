@@ -35,7 +35,7 @@ class DummyRepository implements DummyRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getDummy()
+    public function getDummyItems()
     {
         /*
          * Get formy data
@@ -46,21 +46,23 @@ class DummyRepository implements DummyRepositoryContract
             'status' => 0,
         ];
 
-        return $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+        $submissions = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             $this->wsuApi->nextRequestProduction();
 
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
+
+        return $submissions;
          */
 
         /*
          * Get promos
         $group_reference = [
-            1234 => 'dummy',
+            1234 => 'dummyitems',
         ];
 
         $group_config = [
-            'dummy' => 'page_id:'.$page_id.'|randomize|first',
+            'dummyitems' => 'page_id:'.$page_id.'|randomize|first',
         ];
 
         $params = [
@@ -78,7 +80,7 @@ class DummyRepository implements DummyRepositoryContract
          */
 
         return [
-            'dummy' => [],
+            'dummyitems' => [],
         ];
     }
 }
