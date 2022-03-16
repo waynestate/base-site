@@ -10,10 +10,10 @@ class DummyRepository extends Repository
     /**
      * {@inheritdoc}
      */
-    public function getDummy()
+    public function getDummys()
     {
         return [
-            'dummy' => app(DummyFactory::class)->create(5),
+            'dummys' => app(DummyFactory::class)->create(5),
         ];
     }
 }
