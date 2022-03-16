@@ -102,7 +102,7 @@ class BaseFeature extends Command
         $this->replaceController();
         $this->stub = str_replace('DummyPage', $this->feature, $this->stub);
         $this->stub = str_replace('DummyTitle', $this->feature, $this->stub);
-        $this->stub = str_replace('DummyId', end($menu[101]['submenu'])['menu_item_id'], $this->stub);
+        $this->stub = str_replace('DummyId', end($menu[101]['submenu'][999]['submenu'])['menu_item_id'], $this->stub);
 
         Storage::disk('base')->put('styleguide\Pages\/'.$this->feature.'.php', $this->stub);
     }
