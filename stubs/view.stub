@@ -8,7 +8,7 @@
     </div>
 
     @if(!empty($dummyitems))
-        <ul>
+        <ul class="list-disc">
             @foreach($dummyitems as $item)
                 <li>{{ $item['title'] }}</li>
             @endforeach
