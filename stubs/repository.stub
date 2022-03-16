@@ -46,11 +46,13 @@ class DummyRepository implements DummyRepositoryContract
             'status' => 0,
         ];
 
-        return $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+        $submissions = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             $this->wsuApi->nextRequestProduction();
 
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
+
+        return $submissions;
          */
 
         /*
