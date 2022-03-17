@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use Contracts\Repositories\ProfileRepositoryContract;
 use Illuminate\Cache\Repository;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Waynestate\Api\People;
 
