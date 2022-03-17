@@ -32,6 +32,7 @@ $fixers = [
     'no_spaces_inside_parenthesis' => true,
     'no_trailing_whitespace' => true,
     'no_trailing_whitespace_in_comment' => true,
+    'no_unused_imports' => true,
     'single_blank_line_at_eof' => true,
     'single_class_element_per_statement' => [
         'elements' => ['property']

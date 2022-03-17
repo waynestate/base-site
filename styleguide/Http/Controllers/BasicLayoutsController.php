@@ -3,7 +3,6 @@
 namespace Styleguide\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Factories\Accordion;
 use Illuminate\Http\Request;
 use Faker\Factory;
 
