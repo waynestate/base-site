@@ -89,6 +89,8 @@ class ArticleController extends Controller
 
         $request->data['base']['page']['title'] = $article['article']['data']['title'];
 
+        $request->data['page']['description'] = $article['article']['data']['meta_description'];
+
         if (!empty($article['article']['data']['hero_image']['url'])) {
             $request->data['base']['hero'][]['relative_url'] = $article['article']['data']['hero_image']['url'];
         }

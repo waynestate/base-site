@@ -48,6 +48,7 @@ class Article implements FactoryContract
                 'short_title' => $this->faker->sentence(rand(3, 6)),
                 'sub_title' => null,
                 'permalink' => $this->faker->slug,
+                'meta_description' => $this->faker->sentence,
                 'body' => '<p>'.$this->faker->paragraph(8).'</p>
                 <p>'.$this->faker->paragraph(8).'</p>
                 <figure class="figure" style="padding-bottom:10px; float:right">
