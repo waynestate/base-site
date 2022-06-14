@@ -3,7 +3,7 @@ table {
 
     &:not([class]),
     &.table-sort {
-        @apply block overflow-x-auto border-collapse;
+        @apply block overflow-x-scroll border-collapse;
     }
 
     @screen mt {
@@ -55,11 +55,6 @@ table {
         &:hover {
             @apply bg-gold-50;
         }
-    }
-
-    &:not([class]) td,
-    &.table-sort td {
-        @apply whitespace-nowrap;
     }
 }
 
