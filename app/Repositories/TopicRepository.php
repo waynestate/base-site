@@ -36,7 +36,7 @@ class TopicRepository implements TopicRepositoryContract
             'method' => 'topics',
         ];
 
-        $topics['topics'] = $this->cache->remember('newsroom-topics', config('cache.ttl'), function () use ($params, $subsite_folder) {
+        $topics['topics'] = $this->cache->remember('newsroom-topics'.md5(serialize($params)), config('cache.ttl'), function () use ($params, $subsite_folder) {
             try {
                 $topics = $this->newsApi->request($params['method'], $params);
             } catch (\Exception $e) {
