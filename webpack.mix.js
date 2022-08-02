@@ -67,11 +67,8 @@ mix.copy([
     ], 'public/_resources/fonts')
 
     // Images
-    .copy([
-        'resources/images/**/*.jpg',
-        'resources/images/**/*.gif',
-        'resources/images/**/*.png',
-        'resources/images/**/*.svg'
+    .copyDirectory([
+        'resources/images'
     ], 'public/_resources/images');
 
 // Compile assets and setup browersync
