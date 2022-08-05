@@ -3,7 +3,7 @@
 @section('content')
     @include('components.page-title', ['title' => $base['page']['title']])
 
-    @if(!empty($paginate->items()))
+    @if(!empty($paginate) && !empty($paginate->items()))
         <ul>
             @foreach($paginate->items() as $article)
                 <li class="mb-3 pb-4 border-b border-gray-200">

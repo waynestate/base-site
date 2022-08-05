@@ -62,8 +62,8 @@ class ArticleController extends Controller
             $request->data['base']['show_site_menu'] = true;
         }
 
-        $paginate = $this->paginate->paginate($articles['articles']['data'], 5, $request->page);
-        
+        $paginate = $this->paginate->paginate($articles['articles']['data'] ?? [], 5, $request->page); // LengthAwarePaginator
+
         // Paginate added so we can use methods in the blade.
         return view('articles', merge($request->data, $articles, $topics) + ['paginate' => $paginate]);
     }
