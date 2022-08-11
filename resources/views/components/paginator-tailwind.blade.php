@@ -1,7 +1,7 @@
 @if ($paginator->hasPages())
-    <div class="">
+    <div>
         <div>
-            <p class="">
+            <p>
                 {!! __('Showing') !!}
                 @if ($paginator->firstItem())
                     <span class="font-medium">{{ $paginator->firstItem() }}</span>
@@ -55,7 +55,7 @@
                         {!! __('pagination.next') !!}
                     </a>
                 @else
-                    <span class="">
+                    <span>
                         {!! __('pagination.next') !!}
                     </span>
                 @endif
