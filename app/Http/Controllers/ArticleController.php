@@ -9,6 +9,7 @@ namespace App\Http\Controllers;
 
 use Contracts\Repositories\ArticleRepositoryContract;
 use Contracts\Repositories\TopicRepositoryContract;
+use Contracts\Repositories\PaginatorRepositoryContract;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -18,11 +19,13 @@ class ArticleController extends Controller
      *
      * @param ArticleRepositoryContract $article
      * @param TopicRepositoryContract $topic
+     * @param PaginatorRepositoryContract $paginate
      */
-    public function __construct(ArticleRepositoryContract $article, TopicRepositoryContract $topic)
+    public function __construct(ArticleRepositoryContract $article, TopicRepositoryContract $topic, PaginatorRepositoryContract $paginate)
     {
         $this->article = $article;
         $this->topic = $topic;
+        $this->paginate = $paginate;
     }
 
     /**
@@ -48,7 +51,7 @@ class ArticleController extends Controller
             abort('404');
         }
 
-        $articles = $this->article->listing($request->data['base']['site']['news']['application_id'], 25, $request->query('page'), !empty($selected_topic['topic_id']) ? $selected_topic['topic_id'] : null);
+        $articles = $this->article->listing($request->data['base']['site']['news']['application_id'], 50, $request->query('page'), !empty($selected_topic['topic_id']) ? $selected_topic['topic_id'] : null);
 
         if (!empty($articles['articles']['meta'])) {
             $articles['articles']['meta'] = $this->article->setPaging($articles['articles']['meta'], $request->query('page'));
@@ -59,7 +62,10 @@ class ArticleController extends Controller
             $request->data['base']['show_site_menu'] = true;
         }
 
-        return view('articles', merge($request->data, $articles, $topics));
+        $paginate = $this->paginate->paginate($articles['articles']['data'] ?? [], 5, $request->page); // LengthAwarePaginator
+
+        // Paginate added so we can use methods in the blade.
+        return view('articles', merge($request->data, $articles, $topics) + ['paginate' => $paginate]);
     }
 
     /**

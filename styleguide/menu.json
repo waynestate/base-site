@@ -300,6 +300,16 @@
                 "class_name": "",
                 "relative_url": "/styleguide/featuredpromo",
                 "submenu": []
+            },
+            "116101": {
+                "menu_item_id": 116101,
+                "is_active": 1,
+                "page_id": 116101,
+                "target": "",
+                "display_name": "Paginator",
+                "class_name": "",
+                "relative_url": "/styleguide/paginator",
+                "submenu": []
             }
         }
     },
@@ -678,9 +688,20 @@
                         "class_name": "",
                         "relative_url": "/styleguide/sitespecific",
                         "submenu": []
+                    },
+                    "99902": {
+                        "menu_item_id": 99902,
+                        "is_active": 1,
+                        "page_id": 99902,
+                        "target": "",
+                        "display_name": "Paginator",
+                        "class_name": "",
+                        "relative_url": "/styleguide/paginator",
+                        "submenu": []
                     }
                 }
             }
         }
     }
 }
+
