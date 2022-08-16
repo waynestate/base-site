@@ -14,7 +14,7 @@ class BasicLayouts extends Page
         return app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'BasicLayoutsController',
-                'title' => 'Basic layouts',
+                'title' => 'Basic responsive layouts',
                 'id' => 100200,
             ],
         ]);
