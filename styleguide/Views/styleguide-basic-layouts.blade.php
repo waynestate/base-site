@@ -4,11 +4,69 @@
     @include('components.page-title', ['title' => $base['page']['title']])
 
     <div class="content">
-        <h2 class="my-4">Two columns image left</h2>
+        <p>Use these examples to style your content in the CMS editor</p>
+    </div>
+
+    <div class="content">
+        <h2 class="my-4">Two equal columns</h2>
+        <h3 class="mb-0">Example columns with text</h3>
+
+        <div class="grid-two-col-layout">
+            <div>
+                <p>{{ $faker->text(400) }}</p>
+            </div>
+
+            <div>
+                <p>{{ $faker->text(400) }}</p>
+            </div>
+        </div>
+
+        <h3 class="mt-0">Example grid</h3>
+
+        <div class="grid-two-col-layout mt-4">
+            <div>
+                <img src="/styleguide/image/425x240" alt="Two column placeholder image 1">
+                <p>{{ $faker->text(60) }}</p>
+            </div>
+
+            <div>
+                <img src="/styleguide/image/425x240" alt="Two column placeholder image 2">
+                <p>{{ $faker->text(60) }}</p>
+            </div>
+
+            <div>
+                <img src="/styleguide/image/425x240" alt="Two column placeholder image 3">
+                <p>{{ $faker->text(60) }}</p>
+            </div>
+
+            <div>
+                <img src="/styleguide/image/425x240" alt="Two column placeholder image 4">
+                <p>{{ $faker->text(60) }}</p>
+            </div>
+        </div>
+
+<pre class="code-block" tabindex="0">
+{!! htmlspecialchars('<div class="grid-two-col-layout">
+    <!-- Item one -->
+    <div>
+        <img src="https://base.wayne.edu/styleguide/image/425x240" alt="Placeholder image">
+        <p>'.$faker->text(30).'</p>
+    </div>
+
+    <!-- Item two -->
+    <div>
+        <img src="https://base.wayne.edu/styleguide/image/425x240" alt="Placeholder image">
+        <p>'.$faker->text(30).'</p>
+    </div>
+
+    <!-- Add more items to make a grid -->
+</div>') !!}
+</pre>
+        <h2 class="mt-10 my-4">Two columns image left</h2>
 
         <div class="two-col-layout">
-            <div class="flex-shrink-0">
-                <img src="/styleguide/image/300x200" alt="">
+            <div class="md:w-1/3 flex-shrink-0">
+                <img src="/styleguide/image/300x200" alt="Image left placeholder image">
             </div>
             <div>
                 <p>{{ $faker->text(250) }}</p>
@@ -17,12 +75,12 @@
         </div>
 <pre class="code-block" tabindex="0">
 {!! htmlspecialchars('<div class="two-col-layout">
-    <div class="flex-shrink-0">
-        <img src="/styleguide/image/300x200" alt="Your image description">
+    <div class="md:w-1/3 flex-shrink-0">
+        <img src="https://base.wayne.edu/styleguide/image/300x200" alt="Your image description">
     </div>
     <div>
-        <p>'.$faker->paragraph.'</p>
-        <p>'.$faker->paragraph.'</p>
+        <p>'.$faker->text(60).'</p>
+        <p>'.$faker->text(60).'</p>
     </div>
 </div>')!!}
 </pre>
@@ -33,33 +91,33 @@
                 <p>{{ $faker->text(250) }}</p>
                 <p>{{ $faker->text(250) }}</p>
             </div>
-            <div class="flex-shrink-0">
-                <img src="/styleguide/image/300x200" alt="">
+            <div class="md:w-1/3 flex-shrink-0">
+                <img src="/styleguide/image/300x200" alt="Image right placeholder image">
             </div>
         </div>
 <pre class="code-block" tabindex="0">
 {!! htmlspecialchars('<div class="two-col-layout">
     <div>
-        <p>'.$faker->paragraph.'</p>
-        <p>'.$faker->paragraph.'</p>
+        <p>'.$faker->text(60).'</p>
+        <p>'.$faker->text(60).'</p>
     </div>
-    <div>
-        <img src="/styleguide/image/300x200" alt="Your image description">
+    <div class="md:w-1/3 flex-shrink-0">
+        <img src="https://base.wayne.edu/styleguide/image/300x200" alt="Your image description">
     </div>
 </div>')!!}
 </pre>
 
         <h2 class="mt-10 mb-4">Two columns with a list</h2>
         <div class="two-col-layout">
-            <div class="md:w-2/3">
+            <div>
                 <p>{{ $faker->text(400) }}</p>
                 <p><a href="#" class="button">{{ ucfirst(implode(' ',$faker->words(2))) }}</a></p>
             </div>
-            <div class="md:w-1/3">
+            <div class="md:w-1/3 flex-shrink-0">
                 <ul>
-                    <li><a href="#">{{ ucfirst(implode(' ',$faker->words(4))) }}</a></li>
-                    <li><a href="#">{{ ucfirst(implode(' ',$faker->words(4))) }}</a></li>
-                    <li><a href="#">{{ ucfirst(implode(' ',$faker->words(4))) }}</a></li>
+                    <li><a href="/">{{ ucfirst(implode(' ',$faker->words(4))) }}</a></li>
+                    <li><a href="/">{{ ucfirst(implode(' ',$faker->words(4))) }}</a></li>
+                    <li><a href="/">{{ ucfirst(implode(' ',$faker->words(4))) }}</a></li>
                     <li><a href="#">{{ ucfirst(implode(' ',$faker->words(4))) }}</a></li>
                     <li><a href="#">{{ ucfirst(implode(' ',$faker->words(4))) }}</a></li>
                 </ul>
@@ -68,11 +126,11 @@
 
 <pre class="code-block" tabindex="0">
 {!! htmlspecialchars('<div class="two-col-layout">
-    <div class="md:w-2/3">
-        <p>'.$faker->text(400).'</p>
+    <div>
+        <p>'.$faker->text(60).'</p>
         <p><a href="#" class="button">'.ucfirst(implode(' ',$faker->words(2))).'</a></p>
     </div>
-    <div class="md:w-1/3">
+    <div class="md:w-1/3 flex-shrink-0">
         <ul>
             <li><a href="#">'.ucfirst(implode(' ',$faker->words(4))).'</a></li>
             <li><a href="#">'.ucfirst(implode(' ',$faker->words(4))).'</a></li>
@@ -80,45 +138,9 @@
     </div>
 </div>') !!}
 </pre>
-        <h2 class="mt-10 mb-4">Two column grid</h2>
+        <h2 class="mt-10">Three equal columns</h2>
 
-        <div class="grid-two-col-layout">
-            <div>
-                <img src="/styleguide/image/450x250?text=450x250" alt="">
-                <p>{{ $faker->text(50) }}</p>
-            </div>
-
-            <div>
-                <img src="/styleguide/image/450x250" alt="">
-                <p>{{ $faker->text(50) }}</p>
-            </div>
-
-            <div>
-                <img src="/styleguide/image/450x250" alt="">
-                <p>{{ $faker->text(50) }}</p>
-            </div>
-
-            <div>
-                <img src="/styleguide/image/450x250" alt="">
-                <p>{{ $faker->text(50) }}</p>
-            </div>
-        </div>
-
-<pre class="code-block" tabindex="0">
-{!! htmlspecialchars('<div class="grid-two-col-layout">
-    <!-- Item one -->
-    <div>
-        <img src="/styleguide/image/450x250" alt="">
-        <p>'.$faker->paragraph.'</p>
-    </div>
-
-    <!-- Duplicate this item as many times as necessary -->
-</div>') !!}
-</pre>
-
-        <h2 class="mt-10 mb-4">Three column grid</h2>
-
-        <div class="grid-three-col-layout">
+        <div class="grid-three-col-layout mt-4">
             <div>
                 <img src="/styleguide/image/268x200" alt="">
                 <p>{{ $faker->text(60) }}</p>
@@ -151,10 +173,22 @@
     <!-- Item one -->
     <div>
         <img src="/styleguide/image/268x268" alt="">
-        <p>'.$faker->paragraph.'</p>
+        <p>'.$faker->text(60).'</p>
     </div>
 
-    <!-- Duplicate this item as many times as necessary -->
+    <!-- Item two -->
+    <div>
+        <img src="/styleguide/image/268x268" alt="">
+        <p>'.$faker->text(60).'</p>
+    </div>
+
+    <!-- Item three -->
+    <div>
+        <img src="/styleguide/image/268x268" alt="">
+        <p>'.$faker->text(60).'</p>
+    </div>
+
+    <!-- Add more items to make a grid -->
 </div>') !!}
 </pre>
     </div>

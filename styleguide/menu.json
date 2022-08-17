@@ -18,6 +18,16 @@
                 "relative_url": "/styleguide",
                 "submenu": []
             },
+            "100200": {
+                "menu_item_id": 100200,
+                "is_active": 1,
+                "page_id": 100200,
+                "target": "",
+                "display_name": "Basic layouts",
+                "class_name": "",
+                "relative_url": "/styleguide/basiclayouts",
+                "submenu": []
+            },
             "100900": {
                 "menu_item_id": 100900,
                 "is_active": 1,
@@ -66,16 +76,6 @@
                 "display_name": "Figure",
                 "class_name": "",
                 "relative_url": "/styleguide/figure",
-                "submenu": []
-            },
-            "100200": {
-                "menu_item_id": 100200,
-                "is_active": 1,
-                "page_id": 100200,
-                "target": "",
-                "display_name": "Basic layouts",
-                "class_name": "",
-                "relative_url": "/styleguide/basiclayouts",
                 "submenu": []
             },
             "100800": {

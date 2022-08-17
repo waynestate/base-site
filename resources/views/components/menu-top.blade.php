@@ -17,7 +17,7 @@
                     <a href="{{ config('base.surtitle_url') }}" class="text-white print:text-black">{{ config('base.surtitle') }}</a>
                 </h1>
 
-                <h2 class="font-normal mb-1 text-2xl">
+                <h2 class="font-normal mb-1 text-2xl leading-none">
                     <a href="/{{ $site['subsite-folder'] !== null ? rtrim($site['subsite-folder'], '/') : '' }}" class="text-white print:text-black">
                         @if($site['short-title'] !== '')
                             <span class="mt:hidden">{{ $site['short-title'] }}</span>

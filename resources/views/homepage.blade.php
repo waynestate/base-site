@@ -11,14 +11,14 @@
         <div class="row -mx-4 flex flex-wrap">
             @if(!empty($articles['data']))
                 <div class="w-full md:w-1/2 px-4">
-                    <h2>News articles</h2>
+                    <h2 class="mb-2">News articles</h2>
                     @include('components/article-listing', ['articles' => $articles['data'], 'url' => ($base['site']['subsite-folder'] !== null ? $base['site']['subsite-folder'] : '').config('base.news_listing_route').'/'])
                 </div>
             @endif
 
             @if(!empty($events))
                 <div class="w-full md:w-1/2 px-4">
-                    <h2>Events</h2>
+                    <h2 class="mb-2">Events</h2>
                     @include('components/events-listing', ['events' => $events, 'cal_name' => !empty($base['site']['events']['path']) ? $base['site']['events']['path'] : null])
                 </div>
             @endif
