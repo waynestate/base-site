@@ -26,7 +26,6 @@ class HeroFullLogoOverlayController extends Controller
      */
     public function index(Request $request)
     {
-
         // Set this controller in the allowed controllers list
         config([
             'base.hero_contained' => false,
