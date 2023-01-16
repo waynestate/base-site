@@ -13,7 +13,7 @@ abstract class TestCase extends BaseTestCase
     /**
      * Ran before every test.
      */
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -36,6 +36,6 @@ abstract class TestCase extends BaseTestCase
         );
 
         // Create a new faker that every test can use
-        $this->faker = (new Factory)->create();
+        $this->faker = (new Factory())->create();
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PromoListingController;
 use App\Http\Controllers\WildCardController;
