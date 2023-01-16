@@ -220,6 +220,7 @@ class ProfileRepository implements ProfileRepositoryContract
             'method' => 'profile.users.view',
             'site_id' => $site_id,
             'accessid' => $accessid,
+            'include_courses' => 'true',
         ];
 
         $profiles = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
@@ -228,9 +229,14 @@ class ProfileRepository implements ProfileRepositoryContract
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
-        $profile['profile'] = empty($profiles['error']) ? Arr::get($profiles['profiles'], $site_id, []) : [];
+        if (!empty($profiles['error'])) {
+            return ['profile'=> []];
+        }
 
-        return $profile;
+        return [
+            'profile' =>  Arr::get($profiles['profiles'], $site_id, []),
+            'courses' => Arr::get($profiles['profiles'], 'courses', []),
+        ];
     }
 
     /**
