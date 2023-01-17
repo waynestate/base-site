@@ -33,6 +33,8 @@ class ProfileController extends Controller
         // Determine what site to pull profiles from
         $site_id = $this->profile->getSiteID($request->data['base']);
 
+            
+
         // Determine if we are forcing the profiles from custom page data
         $forced_profile_group_id = !empty($request->data['base']['data']['profile_group_id']) ? $request->data['base']['data']['profile_group_id'] : null;
 

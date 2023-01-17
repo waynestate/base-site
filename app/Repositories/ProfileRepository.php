@@ -206,6 +206,11 @@ class ProfileRepository implements ProfileRepositoryContract
                 return $item['display_name'];
             })->toArray();
 
+        if (count($profile_groups['results']) == 1) {
+            $groups['single_group'] = current($profile_groups['results']);
+            $groups['single_group'] = $groups['single_group']['id'];
+        }
+
         $groups['dropdown_groups'] = ['' => 'All Profiles'] + $groupsArray;
 
         return $groups;
