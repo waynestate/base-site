@@ -16,17 +16,15 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Google Analytics
+    | Google Tag Manager
     |--------------------------------------------------------------------------
     |
-    | The UA- code can be obtained at https://www.google.com/analytics/. The
-    | name is a unique identifier, typically the domain name. By default we
-    | also include the global allWayneState GA code.
+    | The GTM code can be obtained at https://tagmanager.google.com/. There
+    | is no default container. Ensure the site domain has been added to
+    | the lookup table of the main container or has its own.
     |
     */
-    'ga_code' => 'UA-',
-    'ga_code_all_wsu' => 'UA-',
-    'ga_name' => 'Base',
+    'gtm_code' => 'GTM-NCBVKQ2',
 
     /*
     |--------------------------------------------------------------------------
