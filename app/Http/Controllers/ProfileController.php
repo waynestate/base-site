@@ -86,6 +86,11 @@ class ProfileController extends Controller
         // Re-label future and current semesters
         if (!empty($profile['courses'])) {
             foreach ($profile['courses'] as $semester => $courses) {
+                // Dedupe courses per-semester
+                $courses = collect($courses)->unique(function ($item) {
+                    return $item['short_code'].$item['course_number'];
+                })->toArray();
+
                 $semester_start = reset($courses)['start_date'];
                 $semester_end = reset($courses)['end_date'];
 

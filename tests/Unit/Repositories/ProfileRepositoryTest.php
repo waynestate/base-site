@@ -159,6 +159,31 @@ class ProfileRepositoryTest extends TestCase
     }
 
     /**
+     * @covers App\Repositories\ProfileRepository::getProfile
+     * @test
+     */
+    public function getting_profile_that_exists_should_return_two_arrays()
+    {
+        $site_id = $this->faker->numberBetween(1, 10);
+        $accessid = $this->faker->word;
+
+        // Fake return
+        $return = [
+            'profiles' => [$site_id => []],
+            'courses' => [],
+        ];
+
+        // Mock the Connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('profile.users.view', Mockery::type('array'))->once()->andReturn($return);
+        $wsuApi->shouldReceive('nextRequestProduction')->once();
+
+        $profile = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getProfile($site_id, $accessid);
+
+        $this->assertTrue(is_array($profile['profile']) && is_array($profile['courses'])) ;
+    }
+
+    /**
      * @covers App\Repositories\ProfileRepository::getProfiles
      * @test
      */
