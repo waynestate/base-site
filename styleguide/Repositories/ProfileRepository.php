@@ -3,6 +3,7 @@
 namespace Styleguide\Repositories;
 
 use App\Repositories\ProfileRepository as Repository;
+use Factories\Courses;
 use Factories\Profile;
 use Factories\ProfileGroup;
 
@@ -43,6 +44,7 @@ class ProfileRepository extends Repository
     {
         return [
             'profile' => app(Profile::class)->create(1, true),
+            'courses' => app(Courses::class)->create(1, true),
         ];
     }
 

@@ -64,6 +64,20 @@
                     @endif
                 @endforeach
 
+                @if(!empty($courses))
+                    <h2>Courses taught by {{ $base['page']['title'] }}</h2>
+                    @foreach($courses as $semester => $course_list)
+                        <h3>{{ $semester }}</h3>
+                        <ul>
+                        @foreach($course_list as $course)
+                            <li>
+                                <a href="https://bulletins.wayne.edu/search/?q={{ $course['short_code'] }}+{{ $course['course_number'] }}">{{ $course['short_code'] }}{{ $course['course_number'] }} - {{ $course['course_name'] }}</a>
+                            </li>
+                        @endforeach
+                        </ul>
+                    @endforeach
+                @endif
+
                 @if($back_url != '')
                     <p class="pt-4 print:hidden">
                         <a href="{{ $back_url }}" class="button">&larr; Return to listing</a>
