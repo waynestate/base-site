@@ -24,7 +24,7 @@ class Event implements FactoryContract
     {
         for ($i = 1; $i <= $limit; $i++) {
             $date = $this->faker->dateTimeThisMonth('now')->format('Y-m-d');
-            $title = ($i !== 2)?$this->faker->sentence(rand(6, 10)):$title;
+            $title = ($i !== 2) ? $this->faker->sentence(rand(6, 10)) : $title;
 
             $event = [
                 'url' => 'https://wayne.edu',

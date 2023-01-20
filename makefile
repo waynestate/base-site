@@ -7,7 +7,7 @@ DOTENV := .env
 
 # Tasks
 all: install
-install: yarn composerinstall generatekey php-cs-fixer
+install: yarn composerinstall generatekey
 update: yarnupgrade composerupdate
 status: yarncheck
 build: webpackdev
@@ -54,14 +54,11 @@ runtests: $(COMPOSERFILE)
 	php artisan config:clear
 	php artisan test
 
-php-cs-fixer:
-	chmod +x php-cs-fixer-script.sh && ./php-cs-fixer-script.sh
-
 phplint: $(COMPOSERFILE)
-	tools/php-cs-fixer/vendor/bin/php-cs-fixer fix
+	./vendor/bin/pint
 
 phplintdry: $(COMPOSERFILE)
-	tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --diff --dry-run
+	./vendor/bin/pint --test -v
 
 stylelint:
 	stylelint ./resources/scss/**/*.scss --syntax scss

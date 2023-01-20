@@ -1,7 +1,6 @@
 <?php
+
 use Sami\Sami;
-use Sami\RemoteRepository\GitHubRemoteRepository;
-use Sami\Version\GitVersionCollection;
 use Symfony\Component\Finder\Finder;
 use Sami\Parser\Filter\TrueFilter;
 

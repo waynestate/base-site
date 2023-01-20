@@ -33,10 +33,11 @@
     "require-dev": {
         "spatie/laravel-ignition": "^1.0",
         "laravel/envoy": "^2.7.0",
+        "laravel/pint": "^1.4",
         "mockery/mockery": "^1.4.2",
-        "phpunit/phpunit": "^9.3.3",
         "php-coveralls/php-coveralls": "^2.4",
-        "nunomaduro/collision": "^6.1"
+        "nunomaduro/collision": "^6.1",
+        "phpunit/phpunit": "^9.3.3"
     },
     "autoload": {
         "files": [
@@ -67,8 +68,7 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi",
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
-            "make php-cs-fixer"
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ]
     },
     "config": {
