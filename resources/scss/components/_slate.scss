@@ -6,12 +6,16 @@
 
 .form_response {
     @apply border-0;
+
+    label {
+        @apply border-0;
+    }
 }
 
 .form_responses div[id*="maxlength"] {
     @apply border-0;
 }
 
-button.default {
-    @extend button;
+.form_button_submit {
+    @extend .button;
 }
