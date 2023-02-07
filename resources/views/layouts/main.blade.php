@@ -14,10 +14,11 @@
     
     @if(!empty($base['page']['canonical']))<link rel="canonical" href="{{ $base['page']['canonical'] }}">@endif
 
-    @include('components.ga')
+    @include('components.gtm-head')
 </head>
 <body class="font-sans font-normal text-black leading-normal text-base">
 
+@include('components.gtm-body')
 @include('components.skip')
 
 <header>

@@ -33,11 +33,17 @@ class ProfileController extends Controller
         // Determine what site to pull profiles from
         $site_id = $this->profile->getSiteID($request->data['base']);
 
-        // Determine if we are forcing the profiles from custom page data
-        $forced_profile_group_id = !empty($request->data['base']['data']['profile_group_id']) ? $request->data['base']['data']['profile_group_id'] : null;
-
         // Get the groups for the dropdown
         $dropdown_groups = $this->profile->getDropdownOfGroups($site_id);
+
+        // If only one profile group no drop will appear
+        if (!empty($request->data['data']['profile_group_id'])) {
+            $forced_profile_group_id = $request->data['data']['profile_group_id'];
+        } elseif (!empty($dropdown_groups['single_group'])) {
+            $forced_profile_group_id = $dropdown_groups['single_group'];
+        } else {
+            $forced_profile_group_id = null;
+        }
 
         // Set the selected group
         $selected_group = $request->query('group') !== '' ? $request->query('group') : null;
