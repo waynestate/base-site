@@ -215,8 +215,7 @@ class PeopleRepository implements ProfileRepositoryContract
         }
 
         if (count($groupsArray) == 1) {
-            $groups['single_group'] = current($groupsArray);
-            $groups['single_group'] = $groups['single_group']['id'];
+            $groups['single_group'] = key($groupsArray);
         }
 
         $groups['dropdown_groups'] = ['' => 'All Profiles'] + $groupsArray;
