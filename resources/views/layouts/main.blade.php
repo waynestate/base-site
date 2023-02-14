@@ -8,9 +8,9 @@
     <link rel="icon" type="image/x-icon" href="https://wayne.edu/favicon.ico">
     <link rel="stylesheet" href="{{ mix('_resources/css/main.css') }}">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin>
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com/">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
     
     @if(!empty($base['page']['canonical']))<link rel="canonical" href="{{ $base['page']['canonical'] }}">@endif
 
