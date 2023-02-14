@@ -4,6 +4,8 @@ namespace App\Repositories;
 
 use Contracts\Repositories\RequestDataRepositoryContract;
 use Contracts\Repositories\MenuRepositoryContract;
+use Exception;
+use Illuminate\Support\Facades\Log;
 use Waynestate\Api\Connector;
 use Waynestate\Menuitems\ParseMenu;
 use Waynestate\Menu\DisplayMenu;
@@ -45,7 +47,12 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
     public function getRequestData(array $data)
     {
         // Get all the menus for this site
-        $menus = $this->getAllMenus($data['site']['id'], $data['site']['parent']['id'], $data['menu']['id']);
+        try {
+            $menus = $this->getAllMenus($data['site']['id'], $data['site']['parent']['id'], $data['menu']['id']);
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+            $menus = [];
+        }
 
         // Return an array of all the menus needed for the view
         return $this->getMenus($data, $menus);
@@ -61,12 +68,12 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
 
         // Get the top menu
         $top_menu = $top_menu_id === null ? null : $this->getTopMenu(
-            $menus[$top_menu_id],
+            $menus[$top_menu_id] ?? [],
             $data['page']['id']
         );
 
         $site_menu = $data['menu']['id'] === null ? null : $this->getSiteMenu(
-            $menus[$data['menu']['id']],
+            $menus[$data['menu']['id']] ?? [],
             $data['page']['id']
         );
 
@@ -160,7 +167,7 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
         }
 
         if (!empty($menus['error'])) {
-            throw new \Exception($menus['error']['message']);
+            throw new Exception($menus['error']['message']);
         }
 
         return $menus;
