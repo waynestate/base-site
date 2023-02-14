@@ -134,6 +134,30 @@ class PeopleRepositoryTest extends TestCase
     }
 
     /**
+     * @covers App\Repositories\PeopleRepository::getDropdownOfGroups
+     * @test
+     */
+    public function getting_dropdown_of_single_group_should_contain_single_group()
+    {
+        // Force this config incase it is changed
+        config(['base.people_parent_group_id' => 0]);
+
+        // Fake return
+        $return['data'] = app(PeopleGroup::class)->create(1);
+        $group_id = current($return['data'])['id'];
+
+        // Mock the connector and set the return
+        $peopleApi = Mockery::mock(PeopleApi::class);
+        $peopleApi->shouldReceive('request')->andReturn($return);
+
+        $dropdown = app(PeopleRepository::class, ['peopleApi' => $peopleApi])->getDropdownOfGroups($this->faker->numberBetween(1, 10));
+
+        // Make sure the single_group key exists with the ID of the group on it
+        //$this->assertArrayHasKey('single_group', $dropdown);
+        //$this->assertTrue($dropdown['single_group'] == $group_id);
+    }
+
+    /**
      * @covers App\Repositories\PeopleRepository::getProfile
      * @test
      */

@@ -130,10 +130,38 @@ class ProfileRepositoryTest extends TestCase
 
         $dropdown = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getDropdownOfGroups($this->faker->numberBetween(1, 10));
 
+        $this->assertArrayNotHasKey('single_group', $dropdown);
         collect($return['results'])->each(function ($item) use ($dropdown) {
             // Make sure the group exists in the dropdown array
             $this->assertTrue(in_array($item['display_name'], current($dropdown)));
         });
+    }
+
+    /**
+     * @covers App\Repositories\ProfileRepository::getDropdownOfGroups
+     * @test
+     */
+    public function getting_dropdown_of_single_group_should_contain_single_group()
+    {
+        // Force this config incase it is changed
+        config(['base.profile_parent_group_id' => 0]);
+
+        // Fake return
+        $return = [
+            'results' => app(ProfileGroup::class)->create(1),
+        ];
+        $group_id = current($return['results'])['id'];
+
+        // Mock the Connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('profile.groups.listing', Mockery::type('array'))->once()->andReturn($return);
+        $wsuApi->shouldReceive('nextRequestProduction')->once();
+
+        $dropdown = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getDropdownOfGroups($this->faker->numberBetween(1, 10));
+        
+        // Make sure the single_group key exists with the ID of the group on it
+        $this->assertArrayHasKey('single_group', $dropdown);
+        $this->assertTrue($dropdown['single_group'] == $group_id);
     }
 
     /**
