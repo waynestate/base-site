@@ -153,8 +153,8 @@ class PeopleRepositoryTest extends TestCase
         $dropdown = app(PeopleRepository::class, ['peopleApi' => $peopleApi])->getDropdownOfGroups($this->faker->numberBetween(1, 10));
 
         // Make sure the single_group key exists with the ID of the group on it
-        //$this->assertArrayHasKey('single_group', $dropdown);
-        //$this->assertTrue($dropdown['single_group'] == $group_id);
+        $this->assertArrayHasKey('single_group', $dropdown);
+        $this->assertTrue($dropdown['single_group'] == $group_id);
     }
 
     /**
