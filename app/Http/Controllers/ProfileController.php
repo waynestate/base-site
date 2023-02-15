@@ -113,7 +113,7 @@ class ProfileController extends Controller
 
         // Change page title to profile name
         $request->data['base']['page']['title'] = $this->profile->getPageTitleFromName($profile);
-        $request->data['page']['canonical'] = $request->data['server']['url'];
+        $request->data['page']['canonical'] = $request->data['server']['url'] ?? '';
 
         // Set the back URL
         $request->data['back_url'] = $this->profile->getBackToProfileListUrl($request->server->get('HTTP_REFERER'), $request->server->get('REQUEST_SCHEME'), $request->server->get('HTTP_HOST'), $request->server->get('REQUEST_URI'));
@@ -123,6 +123,7 @@ class ProfileController extends Controller
 
         // Disable hero images
         $request->data['base']['hero'] = false;
+
 
         return view('profile-view', merge($request->data, $profile, $fields));
     }
