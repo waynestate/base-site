@@ -124,7 +124,6 @@ class ProfileController extends Controller
         // Disable hero images
         $request->data['base']['hero'] = false;
 
-
         return view('profile-view', merge($request->data, $profile, $fields));
     }
 }

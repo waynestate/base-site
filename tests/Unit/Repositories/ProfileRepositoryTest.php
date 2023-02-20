@@ -158,7 +158,7 @@ class ProfileRepositoryTest extends TestCase
         $wsuApi->shouldReceive('nextRequestProduction')->once();
 
         $dropdown = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getDropdownOfGroups($this->faker->numberBetween(1, 10));
-        
+
         // Make sure the single_group key exists with the ID of the group on it
         $this->assertArrayHasKey('single_group', $dropdown);
         $this->assertTrue($dropdown['single_group'] == $group_id);
