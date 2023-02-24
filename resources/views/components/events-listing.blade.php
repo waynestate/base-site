@@ -17,7 +17,7 @@
                     </div>
                 @endif
 
-                <div class="mx-2 grow-0{{ ! $loop->first ? ' ml-19' :'' }}">
+                <div class="mx-2 grow{{ ! $loop->first ? ' ml-19' :'' }}">
                     <div class="mb-2 pb-2 border-b border-solid border-gray-300">
                         <a class="block hover:underline" href="{{ $event['url'] }}">{{ $event['title'] }}
                             <span class="visually-hidden"> on {{ apdatetime(date('M d, Y' , strtotime($key))) }}

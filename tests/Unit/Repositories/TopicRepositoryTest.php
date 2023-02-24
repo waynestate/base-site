@@ -54,7 +54,7 @@ class TopicRepositoryTest extends TestCase
 
         // Mock the connector and set the return
         $newsApi = Mockery::mock(News::class);
-        $newsApi->shouldReceive('request')->andThrow(new \Exception);
+        $newsApi->shouldReceive('request')->andThrow(new \Exception());
 
         $topics = app(TopicRepository::class, ['newsApi' => $newsApi])->listing(1);
 

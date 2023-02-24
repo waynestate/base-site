@@ -368,7 +368,7 @@ class PeopleRepositoryTest extends TestCase
     {
         // Mock the connector and thrown Exception
         $peopleApi = Mockery::mock(PeopleApi::class);
-        $peopleApi->shouldReceive('request')->andThrow(new Exception);
+        $peopleApi->shouldReceive('request')->andThrow(new Exception());
 
         $profiles = app(PeopleRepository::class, ['peopleApi' => $peopleApi])->getProfiles($this->faker->numberBetween(1, 10));
 
@@ -386,7 +386,7 @@ class PeopleRepositoryTest extends TestCase
 
         // Mock the connector and thrown Exception
         $peopleApi = Mockery::mock(PeopleApi::class);
-        $peopleApi->shouldReceive('request')->andThrow(new Exception);
+        $peopleApi->shouldReceive('request')->andThrow(new Exception());
 
         $profiles = app(PeopleRepository::class, ['peopleApi' => $peopleApi])->getProfile($site_id, $accessid);
 
@@ -404,7 +404,7 @@ class PeopleRepositoryTest extends TestCase
 
         // Mock the connector and thrown Exception
         $peopleApi = Mockery::mock(PeopleApi::class);
-        $peopleApi->shouldReceive('request')->andThrow(new Exception);
+        $peopleApi->shouldReceive('request')->andThrow(new Exception());
 
         $dropdown = app(PeopleRepository::class, ['peopleApi' => $peopleApi])->getDropdownOfGroups($this->faker->numberBetween(1, 10));
 

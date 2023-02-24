@@ -22,7 +22,7 @@ Starter repository for creating a new website. Live demo can be found at https:/
 * [Public API documentation](https://base.wayne.edu/api)
 * Commit hook that require the following to pass:
     * Tests using [PHPUnit](https://phpunit.de/)
-    * PHP linting using [PHPCSFixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer)
+    * PHP linting using [Laravel Pint](https://laravel.com/docs/9.x/pint)
     * JS linting using [ESLint](http://eslint.org/)
     * CSS/SCSS linting using [Stylelint](https://stylelint.io/)
 * Menus

@@ -83,11 +83,37 @@ class ProfileController extends Controller
             abort('404');
         }
 
+        // Re-label future and current semesters
+        if (!empty($profile['courses'])) {
+            foreach ($profile['courses'] as $semester => $courses) {
+                // Dedupe courses per-semester
+                $courses = collect($courses)->unique(function ($item) {
+                    return $item['short_code'].$item['course_number'];
+                })->toArray();
+
+                $semester_start = reset($courses)['start_date'];
+                $semester_end = reset($courses)['end_date'];
+
+                if ($semester_start > date('Y-m-d')) {
+                    $profile['courses'][$semester . ' (future)'] = $courses;
+                    unset($profile['courses'][$semester]);
+                } elseif ($semester_start <= date('Y-m-d') && $semester_end >= date('Y-m-d')) {
+                    $profile['courses'][$semester . ' (current)'] = $courses;
+                    unset($profile['courses'][$semester]);
+                } else {
+                    // To keep the original descending order
+                    unset($profile['courses'][$semester]);
+                    $profile['courses'][$semester] = $courses;
+                }
+            }
+        }
+
         // Get the fields to display
         $fields = $this->profile->getFields();
 
         // Change page title to profile name
         $request->data['base']['page']['title'] = $this->profile->getPageTitleFromName($profile);
+        $request->data['page']['canonical'] = $request->data['server']['url'] ?? '';
 
         // Set the back URL
         $request->data['back_url'] = $this->profile->getBackToProfileListUrl($request->server->get('HTTP_REFERER'), $request->server->get('REQUEST_SCHEME'), $request->server->get('HTTP_HOST'), $request->server->get('REQUEST_URI'));

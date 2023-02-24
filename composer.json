@@ -9,12 +9,11 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^8.0.2",
         "fakerphp/faker": "^1.15",
-        "fideloper/proxy": "^4.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.3.0",
-        "laravel/framework": "^8.40",
+        "laravel/framework": "^9.0",
         "laravel/tinker": "^2.5",
         "predis/predis": "^1.1",
         "waynestate/apdatetime": "^1.0",
@@ -32,12 +31,13 @@
         "waynestate/waynestate-api": "~1.2"
     },
     "require-dev": {
-        "facade/ignition": "^2.5",
+        "spatie/laravel-ignition": "^1.0",
         "laravel/envoy": "^2.7.0",
+        "laravel/pint": "^1.4",
         "mockery/mockery": "^1.4.2",
-        "phpunit/phpunit": "^9.3.3",
         "php-coveralls/php-coveralls": "^2.4",
-        "nunomaduro/collision": "^5.0"
+        "nunomaduro/collision": "^6.1",
+        "phpunit/phpunit": "^9.3.3"
     },
     "autoload": {
         "files": [
@@ -68,8 +68,7 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi",
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
-            "make php-cs-fixer"
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ]
     },
     "config": {
