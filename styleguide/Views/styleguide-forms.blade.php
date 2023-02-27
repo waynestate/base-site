@@ -65,7 +65,8 @@
                 </div>
                 <div class="xlarge-4 large-4 medium-12 small-12 columns field_country end">
                     <label for="country">Country <em>*</em></label>
-                    <div class="select">
+                    <div class="select relative flex items-center">
+                        @svg('arrow', 'block')
                         <select name="country" id="country" class="required" aria-required="true">
                             <option value="">Please Select</option>
                             <option value="First Choice">First Choice</option>
@@ -136,7 +137,8 @@
             <div class="row">
                 <div class="xlarge-8 large-8 medium-12 small-12 columns field_f_7594">
                     <label for="f_7594">Drop Down (Single Answer)</label>
-                    <div class="select">
+                    <div class="select relative flex items-center">
+                        @svg('arrow', 'block')
                         <select name="f_7594" id="f_7594">
                             <option value="" selected="selected">Please Select</option>
                             <option value="First Choice">First Choice</option>
