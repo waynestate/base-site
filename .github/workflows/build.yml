@@ -1,0 +1,50 @@
+name: Test
+
+# Trigger the workflow on pull request for develop and master:
+on:
+    pull_request:
+        branches:
+            - 'develop'
+            - 'master'
+
+# Set up the environment and run the tests
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        environment: test
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3.3.0
+              with:
+                    ref: ${{ github.ref }}
+            - name: Setup Node.js environment
+              uses: actions/setup-node@v3.6.0
+              with:
+                    node-version: 16.x
+                    cache: yarn
+            - name: Install node dependences
+              run: make yarn
+            - name: Append node_modules to PATH
+              run: echo "vendor/bin:node_modules/.bin:${HOME}/.yarn/bin" >> $GITHUB_PATH
+            - name: Install composer dependencies
+              run: make composerinstalldev
+            - name: Build the site
+              run: make build
+            - name: Generate key for testing
+              run: make generatekey
+            - name: PHPLint test
+              run: make phplintdry
+            - name: Stylelint test
+              run: make stylelint
+            - name: Run PHPUnit tests
+              run: make runtests
+            - name: Make coverage directory
+              run: mkdir -p build/logs
+            - name: Run the Coverage
+              run: XDEBUG_MODE=coverage php vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+            - name: Upload coverage results to Coveralls
+              env:
+                COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run:
+                php-coveralls --coverage_clover=build/logs/clover.xml -v
+
