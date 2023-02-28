@@ -38,6 +38,16 @@ class Article implements FactoryContract
             'type' => 'Embeddable',
         ];
 
+        $faculty = [];
+        for ($i = 0; $i < 6; $i++) {
+            $faculty[] = [
+                'id' => $this->faker->randomDigit,
+                'first_name' => $this->faker->firstName,
+                'last_name' => $this->faker->lastName,
+                'accessid' => $this->faker->randomLetter.$this->faker->randomLetter.$this->faker->randomNumber(4, true),
+            ];
+        }
+
         for ($i = 1; $i <= $limit; $i++) {
             $data['data'][$i] = [
                 'id' => $i,
@@ -105,6 +115,7 @@ class Article implements FactoryContract
                     0 => $hero,
                     1 => $featured,
                 ],
+                'faculty' => $this->faker->optional(100, [])->randomElements($faculty, rand(1, 3)),
                 'favicon' => null,
                 'user' => null,
                 'applications' => null,
