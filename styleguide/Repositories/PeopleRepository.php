@@ -3,6 +3,7 @@
 namespace Styleguide\Repositories;
 
 use App\Repositories\PeopleRepository as Repository;
+use Factories\Article;
 use Factories\Courses;
 use Factories\People;
 use Factories\PeopleGroup;
@@ -44,9 +45,12 @@ class PeopleRepository extends Repository
      */
     public function getProfile($site_id, $accessid)
     {
+        $articles = app(Article::class)->create(3, true);
+
         return [
             'profile' => app(People::class)->create(1, true),
             'courses' => app(Courses::class)->create(1, true),
+            'articles' => $articles['data'] ?? [],
         ];
     }
 

@@ -78,6 +78,21 @@
                     @endforeach
                 @endif
 
+                @if(!empty($articles))
+                    <h2>Recent university news spotlights</h2>
+                    <ul>
+                        @foreach($articles as $article)
+                            <li>
+                                <a
+                                    href="{{ $article['link'] }}"
+                                >
+                                    {{ $article['title'] }}
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif
+
                 @if($back_url != '')
                     <p class="pt-4 print:hidden">
                         <a href="{{ $back_url }}" class="button">&larr; Return to listing</a>

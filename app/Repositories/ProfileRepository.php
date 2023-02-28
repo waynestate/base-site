@@ -6,6 +6,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Waynestate\Api\Connector;
 use Illuminate\Cache\Repository;
+use Waynestate\Api\News;
 use Waynestate\Promotions\ParsePromos;
 use Contracts\Repositories\ProfileRepositoryContract;
 
@@ -27,11 +28,12 @@ class ProfileRepository implements ProfileRepositoryContract
      * @param ParsePromos $parsePromos
      * @param Repository $cache
      */
-    public function __construct(Connector $wsuApi, ParsePromos $parsePromos, Repository $cache)
+    public function __construct(Connector $wsuApi, ParsePromos $parsePromos, Repository $cache, News $newsApi)
     {
         $this->wsuApi = $wsuApi;
         $this->parsePromos = $parsePromos;
         $this->cache = $cache;
+        $this->newsApi = $newsApi;
     }
 
     /**
@@ -237,10 +239,33 @@ class ProfileRepository implements ProfileRepositoryContract
             return ['profile'=> []];
         }
 
+        if (!empty($profiles['profiles'])) {
+            $profiles['profiles']['articles'] = $this->getNewsArticles($accessid, 10);
+        }
+
         return [
             'profile' =>  Arr::get($profiles['profiles'], $site_id, []),
             'courses' => Arr::get($profiles['profiles'], 'courses', []),
+            'articles' => Arr::get($profiles['profiles'], 'articles', []),
         ];
+    }
+
+    public function getNewsArticles($accessid, $limit = 10)
+    {
+        $params = [
+            'perPage' =>  $limit,
+            'method' => 'articles/faculty/'.$accessid,
+            'env' => config('app.env'),
+        ];
+        $articles = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+            try {
+                $articles = $this->newsApi->request($params['method'], $params);
+                return $articles['data'] ?? [];
+            } catch (\Exception $e) {
+                return [];
+            }
+        });
+        return $articles;
     }
 
     /**
