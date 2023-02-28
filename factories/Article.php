@@ -48,6 +48,16 @@ class Article implements FactoryContract
             ];
         }
 
+        $assets = [];
+        for ($i = 0; $i < 6; $i++) {
+            $assets[] = [
+                'id' => $this->faker->randomDigit,
+                'url' => 'https://wayne.edu',
+                'caption' => $this->faker->sentence,
+                'filename' => substr(md5($this->faker->sentence), 0, 10).'.pdf',
+            ];
+        }
+
         for ($i = 1; $i <= $limit; $i++) {
             $data['data'][$i] = [
                 'id' => $i,
@@ -115,7 +125,8 @@ class Article implements FactoryContract
                     0 => $hero,
                     1 => $featured,
                 ],
-                'faculty' => $this->faker->optional(100, [])->randomElements($faculty, rand(1, 3)),
+                'assets' => $this->faker->optional(75, [])->randomElements($assets, rand(1, 3)),
+                'faculty' => $this->faker->optional(75, [])->randomElements($faculty, rand(1, 3)),
                 'favicon' => null,
                 'user' => null,
                 'applications' => null,
