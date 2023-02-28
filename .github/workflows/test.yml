@@ -1,0 +1,13 @@
+name: Test
+
+# Trigger the workflow on pull request for develop and master:
+on:
+    pull_request:
+        branches:
+            - 'develop'
+            - 'master'
+
+# Set up the environment and run the tests
+jobs:
+    test:
+        runs-on: ubuntu-latest
