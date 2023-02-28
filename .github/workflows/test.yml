@@ -23,6 +23,8 @@ jobs:
                     cache: yarn
             - name: Install node dependences
               run: make yarn
+            - name: Append node_modules to PATH
+              run: echo "vendor/bin:node_modules/.bin:${HOME}/.yarn/bin" >> $GITHUB_PATH
             - name: Install composer dependencies
               run: make composerinstalldev
             - name: Build the site
