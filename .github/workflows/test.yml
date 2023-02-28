@@ -21,9 +21,24 @@ jobs:
               with:
                     node-version: 16.x
                     cache: yarn
-            - name: Make Yarn
+            - name: Install node dependences
               run: make yarn
-            - name: Make Composer
+            - name: Install composer dependencies
               run: make composerinstalldev
-            - name: Make Build
+            - name: Build the site
               run: make build
+            - name: Generate key for testing
+              run: make generatekey
+            - name: PHPLint test
+              run: make phplintdry
+            - name: Stylelint test
+              run: make stylelint
+            - name: Run PHPUnit tests
+              run: make runtests
+            - name: Make coverage directory
+              run: mkdir -p build/logs
+            - name: Run the Coverage
+              run: XDEBUG_MODE=coverage php vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+            - name: Send coverage to coveralls
+              run: php vendor/bin/php-coveralls
+              
