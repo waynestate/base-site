@@ -65,6 +65,7 @@ class MenuRepositoryTest extends TestCase
 
     /**
      * @covers \App\Repositories\MenuRepository::getRequestData
+     * @covers \App\Repositories\MenuRepository::getAllMenus
      * @test
      */
     public function menu_api_error_should_return_empty_menu()
