@@ -4,6 +4,7 @@ namespace Tests\Unit\Repositories;
 
 use App\Repositories\ProfileRepository;
 use Factories\ApiError;
+use Factories\Article;
 use Factories\Page;
 use Factories\Profile;
 use Factories\ProfileGroup;
@@ -11,6 +12,7 @@ use Illuminate\Support\Str;
 use Tests\TestCase;
 use Mockery as Mockery;
 use Waynestate\Api\Connector;
+use Waynestate\Api\News;
 
 class ProfileRepositoryTest extends TestCase
 {
@@ -379,5 +381,24 @@ class ProfileRepositoryTest extends TestCase
         $return_cms_site_id = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getSiteID($site_config_page);
 
         $this->assertEquals($cms_site_id, $return_cms_site_id);
+    }
+
+    /**
+     * @covers App\Repositories\ProfileRepository::getNewsArticles
+     * @test
+     */
+    public function getting_profile_should_get_articles()
+    {
+        // Fake return
+        $return = app(Article::class)->create(5);
+
+        // Mock the connector and set the return
+        $newsApi = Mockery::mock(News::class);
+        $newsApi->shouldReceive('request')->andReturn($return);
+
+        // Get the articles
+        $articles = app(ProfileRepository::class, ['newsApi' => $newsApi])->getNewsArticles('aa0000');
+
+        $this->assertEquals($return['data'], $articles);
     }
 }
