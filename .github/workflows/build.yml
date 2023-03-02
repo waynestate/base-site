@@ -9,7 +9,7 @@ on:
 
 # Set up the environment and run the tests
 jobs:
-    test:
+    build:
         runs-on: ubuntu-latest
         environment: test
         steps:
