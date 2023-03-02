@@ -26,6 +26,22 @@ class Courses implements FactoryContract
 
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
+                'Winter Term 2099' => [[
+                    'start_date' => '2099-01-09',
+                    'end_date' => '2099-05-02',
+                    'professor_accessid' => $accessid,
+                    'professor_name' => $name,
+                    'is_active' => '1',
+                    'year' => '2099',
+                    'month' => '1',
+                    'semester_name' => 'Winter Term 2099',
+                    'course_number' => '3620',
+                    'course_name' => 'Introduction to Microcomputers',
+                    'course_description' => 'Basics of digital systems, number systems, functional blocks of microcomputers, assembly language and machine code, applications of microcomputers and experimental demonstrations.  Introduction to digital logic.',
+                    'pre_reqs' => 'null',
+                    'short_code' => 'ECE',
+                    'subject_name' => 'Electrical and Computer Eng',
+                ]],
                 'Winter Term 2023' => [[
                     'start_date' => '2023-01-09',
                     'end_date' => '2023-05-02',
