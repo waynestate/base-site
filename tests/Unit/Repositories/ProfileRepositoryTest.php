@@ -8,6 +8,7 @@ use Factories\Article;
 use Factories\Page;
 use Factories\Profile;
 use Factories\ProfileGroup;
+use GuzzleHttp\Exception\TransferException;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 use Mockery as Mockery;
@@ -400,5 +401,21 @@ class ProfileRepositoryTest extends TestCase
         $articles = app(ProfileRepository::class, ['newsApi' => $newsApi])->getNewsArticles('aa0000');
 
         $this->assertEquals($return['data'], $articles);
+    }
+
+    /**
+     * @covers App\Repositories\ProfileRepository::getNewsArticles
+     * @test
+     */
+    public function getting_profile_articles_should_be_empty_if_exception_was_thrown()
+    {
+        // Mock the connector and set the return
+        $newsApi = Mockery::mock(News::class);
+        $newsApi->shouldReceive('request')->andThrow(new TransferException('test'));
+
+        // Get the articles
+        $articles = app(ProfileRepository::class, ['newsApi' => $newsApi])->getNewsArticles('aa0000');
+
+        $this->assertEmpty($articles);
     }
 }
