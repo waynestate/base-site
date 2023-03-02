@@ -250,6 +250,9 @@ class ProfileRepository implements ProfileRepositoryContract
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getNewsArticles($accessid, $limit = 10)
     {
         $params = [
@@ -257,14 +260,17 @@ class ProfileRepository implements ProfileRepositoryContract
             'method' => 'articles/faculty/'.$accessid,
             'env' => config('app.env'),
         ];
+
         $articles = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             try {
                 $articles = $this->newsApi->request($params['method'], $params);
+
                 return $articles['data'] ?? [];
             } catch (\Exception $e) {
                 return [];
             }
         });
+
         return $articles;
     }
 
