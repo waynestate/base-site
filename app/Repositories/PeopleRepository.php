@@ -5,6 +5,7 @@ namespace App\Repositories;
 use Contracts\Repositories\ProfileRepositoryContract;
 use Illuminate\Cache\Repository;
 use Illuminate\Support\Str;
+use Waynestate\Api\News;
 use Waynestate\Api\People;
 
 class PeopleRepository implements ProfileRepositoryContract
@@ -21,10 +22,11 @@ class PeopleRepository implements ProfileRepositoryContract
      * @param people $peopleApi
      * @param Repository $cache
      */
-    public function __construct(People $peopleApi, Repository $cache)
+    public function __construct(People $peopleApi, Repository $cache, News $newsApi)
     {
         $this->peopleApi = $peopleApi;
         $this->cache = $cache;
+        $this->newsApi = $newsApi;
     }
 
     /**
