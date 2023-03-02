@@ -9,9 +9,9 @@ on:
 
 # Set up the environment and run the tests
 jobs:
-    test:
+    build:
         runs-on: ubuntu-latest
-        environment: test
+        environment: build
         steps:
             - name: Checkout
               uses: actions/checkout@v3.3.0

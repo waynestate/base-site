@@ -48,6 +48,16 @@ interface ProfileRepositoryContract
      */
     public function getProfile($site_id, $accessid);
 
+    /*
+     * Get the articles for the profile if available
+     *
+     * @param string $accessid
+     * @param int $limit
+     *
+     * @return array
+     */
+    public function getNewsArticles($accessid, $limit = 10);
+
     /**
      * Get the fields to show and hide.
      *
