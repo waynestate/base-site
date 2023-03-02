@@ -6,6 +6,10 @@ on:
         branches:
             - 'develop'
             - 'master'
+    push:
+        branches:
+            - 'develop'
+            - 'master'
 
 # Set up the environment and run the tests
 jobs:
