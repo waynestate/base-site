@@ -68,7 +68,7 @@
             <div class="md:w-1/3 flex-shrink-0">
                 <img src="/styleguide/image/300x200" alt="Image left placeholder image">
             </div>
-            <div>
+            <div class="w-full">
                 <p>{{ $faker->text(250) }}</p>
                 <p>{{ $faker->text(250) }}</p>
             </div>
@@ -87,7 +87,7 @@
         <h2 class="mt-10 mb-4">Two columns image right</h2>
 
         <div class="two-col-layout">
-            <div>
+            <div class="w-full">
                 <p>{{ $faker->text(250) }}</p>
                 <p>{{ $faker->text(250) }}</p>
             </div>
@@ -97,7 +97,7 @@
         </div>
 <pre class="code-block" tabindex="0">
 {!! htmlspecialchars('<div class="two-col-layout">
-    <div>
+    <div class="w-full">
         <p>'.$faker->text(60).'</p>
         <p>'.$faker->text(60).'</p>
     </div>
@@ -109,7 +109,7 @@
 
         <h2 class="mt-10 mb-4">Two columns with a list</h2>
         <div class="two-col-layout">
-            <div>
+            <div class="w-full">
                 <p>{{ $faker->text(400) }}</p>
                 <p><a href="#" class="button">{{ ucfirst(implode(' ',$faker->words(2))) }}</a></p>
             </div>
@@ -126,7 +126,7 @@
 
 <pre class="code-block" tabindex="0">
 {!! htmlspecialchars('<div class="two-col-layout">
-    <div>
+    <div class="w-full">
         <p>'.$faker->text(60).'</p>
         <p><a href="#" class="button">'.ucfirst(implode(' ',$faker->words(2))).'</a></p>
     </div>
