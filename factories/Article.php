@@ -39,7 +39,7 @@ class Article implements FactoryContract
         ];
 
         $faculty = [];
-        for ($i = 0; $i < 6; $i++) {
+        for ($i = 0; $i < 3; $i++) {
             $faculty[] = [
                 'id' => $this->faker->randomDigit,
                 'first_name' => $this->faker->firstName,
@@ -49,7 +49,7 @@ class Article implements FactoryContract
         }
 
         $assets = [];
-        for ($i = 0; $i < 6; $i++) {
+        for ($i = 0; $i < 3; $i++) {
             $assets[] = [
                 'id' => $this->faker->randomDigit,
                 'url' => 'https://wayne.edu',
@@ -125,8 +125,8 @@ class Article implements FactoryContract
                     0 => $hero,
                     1 => $featured,
                 ],
-                'assets' => $this->faker->optional(75, [])->randomElements($assets, rand(1, 3)),
-                'faculty' => $this->faker->optional(75, [])->randomElements($faculty, rand(1, 3)),
+                'assets' => $this->faker->randomElements($assets, rand(1, 3)),
+                'faculty' => $this->faker->randomElements($faculty, rand(1, 3)),
                 'favicon' => null,
                 'user' => null,
                 'applications' => null,
