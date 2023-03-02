@@ -6,6 +6,7 @@ use App\Repositories\MenuRepository;
 use Factories\ApiError;
 use Factories\Menu;
 use Factories\Page;
+use Illuminate\Support\Facades\Log;
 use Styleguide\Repositories\MenuRepository as StyleguideMenuRepository;
 use Tests\TestCase;
 use Mockery as Mockery;
@@ -63,13 +64,11 @@ class MenuRepositoryTest extends TestCase
     }
 
     /**
-     * @covers \App\Repositories\MenuRepository::getAllMenus
+     * @covers \App\Repositories\MenuRepository::getRequestData
      * @test
      */
-    public function menu_api_error_should_throw_exception()
+    public function menu_api_error_should_return_empty_menu()
     {
-        $this->expectException(\Exception::class);
-
         // Get an error
         $return = app(ApiError::class)->create(1, true);
 
@@ -77,8 +76,15 @@ class MenuRepositoryTest extends TestCase
         $wsuApi = Mockery::mock(Connector::class);
         $wsuApi->shouldReceive('sendRequest')->with('cms.menuitems.listing', Mockery::type('array'))->once()->andReturn($return);
 
+        Log::shouldReceive('error')
+            ->once();
+
+        $pageData = app(Page::class)->create(1, true);
+
         // Get the menus
-        $menus = app(StyleguideMenuRepository::class, ['wsuApi' => $wsuApi])->getAllMenus($this->faker->randomDigit);
+        $menus = app(MenuRepository::class, ['wsuApi' => $wsuApi])->getRequestData($pageData);
+
+        $this->assertEmpty($menus['site_menu']['menu']);
     }
 
     /**
