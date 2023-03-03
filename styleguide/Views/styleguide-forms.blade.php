@@ -65,7 +65,7 @@
                 </div>
                 <div class="xlarge-4 large-4 medium-12 small-12 columns field_country end">
                     <label for="country">Country <em>*</em></label>
-                    <div class="border-gray-400 border overflow-hidden pr-4 select">
+                    <div class="border-gray-400 border select">
                         <select name="country" id="country" class="required" aria-required="true">
                             <option value="">Please Select</option>
                             <option value="First Choice">First Choice</option>
@@ -136,7 +136,7 @@
             <div class="row">
                 <div class="xlarge-8 large-8 medium-12 small-12 columns field_f_7594">
                     <label for="f_7594">Drop Down (Single Answer)</label>
-                    <div class="select border-gray-400 border overflow-hidden pr-4">
+                    <div class="select border-gray-400 border">
                         <select name="f_7594" id="f_7594">
                             <option value="" selected="selected">Please Select</option>
                             <option value="First Choice">First Choice</option>
