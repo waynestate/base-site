@@ -5,6 +5,7 @@ namespace App\Repositories;
 use Contracts\Repositories\ProfileRepositoryContract;
 use Illuminate\Cache\Repository;
 use Illuminate\Support\Str;
+use Waynestate\Api\News;
 use Waynestate\Api\People;
 
 class PeopleRepository implements ProfileRepositoryContract
@@ -21,10 +22,11 @@ class PeopleRepository implements ProfileRepositoryContract
      * @param people $peopleApi
      * @param Repository $cache
      */
-    public function __construct(People $peopleApi, Repository $cache)
+    public function __construct(People $peopleApi, Repository $cache, News $newsApi)
     {
         $this->peopleApi = $peopleApi;
         $this->cache = $cache;
+        $this->newsApi = $newsApi;
     }
 
     /**
@@ -278,6 +280,30 @@ class PeopleRepository implements ProfileRepositoryContract
         }
 
         return $profile_return;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getNewsArticles($accessid, $limit = 10)
+    {
+        $params = [
+            'perPage' =>  $limit,
+            'method' => 'articles/faculty/'.$accessid,
+            'env' => config('app.env'),
+        ];
+
+        $articles = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+            try {
+                $articles = $this->newsApi->request($params['method'], $params);
+
+                return $articles['data'] ?? [];
+            } catch (\Exception $e) {
+                return [];
+            }
+        });
+
+        return $articles;
     }
 
     /**

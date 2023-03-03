@@ -4,12 +4,15 @@ namespace Tests\Unit\Repositories;
 
 use App\Repositories\PeopleRepository;
 use Exception;
+use Factories\Article;
 use Factories\Page;
 use Factories\People;
 use Factories\PeopleGroup;
+use GuzzleHttp\Exception\TransferException;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 use Mockery as Mockery;
+use Waynestate\Api\News;
 use Waynestate\Api\People as PeopleApi;
 
 class PeopleRepositoryTest extends TestCase
@@ -303,7 +306,7 @@ class PeopleRepositoryTest extends TestCase
         $return_user_listing['data'] = app(People::class)->create(10);
         // Mock the connector and set the return
         $peopleApi = Mockery::mock(PeopleApi::class);
-        $peopleApi->shouldReceive('request')->with('sites/'.$site_id.'/users', Mockery::type('array'))->andReturn($return_user_listing);
+        $peopleApi->shouldReceive('request')->with('sites/' . $site_id . '/users', Mockery::type('array'))->andReturn($return_user_listing);
 
         // The People factory creates groups. We need those values rather than factoring more groups that users aren't in.
         $return_group_listing['data'] = collect($return_user_listing['data'])
@@ -313,7 +316,7 @@ class PeopleRepositoryTest extends TestCase
             ->toArray();
 
         // Mock the groups listing
-        $peopleApi->shouldReceive('request')->with('sites/'.$site_id.'/groups', Mockery::type('array'))->andReturn($return_group_listing);
+        $peopleApi->shouldReceive('request')->with('sites/' . $site_id . '/groups', Mockery::type('array'))->andReturn($return_group_listing);
 
         $profiles = app(PeopleRepository::class, ['peopleApi' => $peopleApi])->getProfilesByGroup($site_id, $return_group_listing);
 
@@ -349,7 +352,7 @@ class PeopleRepositoryTest extends TestCase
 
         // Mock the connector and set the return
         $peopleApi = Mockery::mock(PeopleApi::class);
-        $peopleApi->shouldReceive('request')->with('sites/'.$site_id.'/users', Mockery::type('array'))->andReturn($return_user_listing);
+        $peopleApi->shouldReceive('request')->with('sites/' . $site_id . '/users', Mockery::type('array'))->andReturn($return_user_listing);
 
         $profiles = app(PeopleRepository::class, ['peopleApi' => $peopleApi])->getProfilesByGroupOrder($site_id, $comma_groups);
 
@@ -441,5 +444,40 @@ class PeopleRepositoryTest extends TestCase
         ]);
         $return_people_site_id = app(PeopleRepository::class, ['peopleApi' => $peopleApi])->getSiteID($site_config_page);
         $this->assertEquals($people_site_id, $return_people_site_id);
+    }
+
+    /**
+     * @covers App\Repositories\PeopleRepository::getNewsArticles
+     * @test
+     */
+    public function getting_people_profile_should_get_articles()
+    {
+        // Fake return
+        $return = app(Article::class)->create(5);
+
+        // Mock the connector and set the return
+        $newsApi = Mockery::mock(News::class);
+        $newsApi->shouldReceive('request')->andReturn($return);
+
+        // Get the articles
+        $articles = app(PeopleRepository::class, ['newsApi' => $newsApi])->getNewsArticles('aa0000');
+
+        $this->assertEquals($return['data'], $articles);
+    }
+
+    /**
+     * @covers App\Repositories\PeopleRepository::getNewsArticles
+     * @test
+     */
+    public function getting_people_profile_articles_should_be_empty_if_exception_was_thrown()
+    {
+        // Mock the connector and set the return
+        $newsApi = Mockery::mock(News::class);
+        $newsApi->shouldReceive('request')->andThrow(new TransferException('test'));
+
+        // Get the articles
+        $articles = app(PeopleRepository::class, ['newsApi' => $newsApi])->getNewsArticles('aa0000');
+
+        $this->assertEmpty($articles);
     }
 }

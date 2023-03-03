@@ -38,6 +38,26 @@ class Article implements FactoryContract
             'type' => 'Embeddable',
         ];
 
+        $faculty = [];
+        for ($i = 0; $i < 3; $i++) {
+            $faculty[] = [
+                'id' => $this->faker->randomDigit,
+                'first_name' => $this->faker->firstName,
+                'last_name' => $this->faker->lastName,
+                'accessid' => $this->faker->randomLetter.$this->faker->randomLetter.$this->faker->randomNumber(4, true),
+            ];
+        }
+
+        $assets = [];
+        for ($i = 0; $i < 3; $i++) {
+            $assets[] = [
+                'id' => $this->faker->randomDigit,
+                'url' => 'https://wayne.edu',
+                'caption' => $this->faker->sentence,
+                'filename' => substr(md5($this->faker->sentence), 0, 10).'.pdf',
+            ];
+        }
+
         for ($i = 1; $i <= $limit; $i++) {
             $data['data'][$i] = [
                 'id' => $i,
@@ -105,6 +125,8 @@ class Article implements FactoryContract
                     0 => $hero,
                     1 => $featured,
                 ],
+                'assets' => $this->faker->randomElements($assets, rand(1, 3)),
+                'faculty' => $this->faker->randomElements($faculty, rand(1, 3)),
                 'favicon' => null,
                 'user' => null,
                 'applications' => null,

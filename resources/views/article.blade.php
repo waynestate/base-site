@@ -11,6 +11,20 @@
         <div class="content mt:text-xl">
             {!! $article['data']['body'] !!}
 
+            @if(!empty($article['data']['faculty']))
+                <h2 class="border-b mt-4">Faculty spotlight</h2>
+
+                <ul>
+                    @foreach($article['data']['faculty'] as $faculty)
+                        <li>
+                            <a href="https://wayne.edu/people/{{ $faculty['accessid'] }}">
+                                {{ $faculty['first_name'] }} {{ $faculty['last_name'] }}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
+
             @if(!empty($article['data']['assets']))
                 <h2 class="border-b mt-4">Assets</h2>
 
