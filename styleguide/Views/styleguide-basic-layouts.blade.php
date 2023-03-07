@@ -66,7 +66,7 @@
 
         <div class="two-col-layout">
             <div class="md:w-1/3 flex-shrink-0">
-                <img src="/styleguide/image/600x400" alt="Image left placeholder image">
+                <img src="/styleguide/image/600x400" alt="Left placeholder image">
             </div>
             <div class="w-full">
                 <p>{{ $faker->text(250) }}</p>
@@ -92,7 +92,7 @@
                 <p>{{ $faker->text(250) }}</p>
             </div>
             <div class="md:w-1/3 flex-shrink-0">
-                <img src="/styleguide/image/600x400" alt="Image right placeholder image">
+                <img src="/styleguide/image/600x400" alt="Right placeholder image">
             </div>
         </div>
 <pre class="code-block" tabindex="0">
