@@ -66,7 +66,7 @@
 
         <div class="two-col-layout">
             <div class="md:w-1/3 flex-shrink-0">
-                <img src="/styleguide/image/300x200" alt="Image left placeholder image">
+                <img src="/styleguide/image/600x400" alt="Image left placeholder image">
             </div>
             <div class="w-full">
                 <p>{{ $faker->text(250) }}</p>
@@ -76,7 +76,7 @@
 <pre class="code-block" tabindex="0">
 {!! htmlspecialchars('<div class="two-col-layout">
     <div class="md:w-1/3 flex-shrink-0">
-        <img src="https://base.wayne.edu/styleguide/image/300x200" alt="Your image description">
+        <img src="https://via.placeholder.com/600x400" alt="Your image description">
     </div>
     <div>
         <p>'.$faker->text(60).'</p>
@@ -92,7 +92,7 @@
                 <p>{{ $faker->text(250) }}</p>
             </div>
             <div class="md:w-1/3 flex-shrink-0">
-                <img src="/styleguide/image/300x200" alt="Image right placeholder image">
+                <img src="/styleguide/image/600x400" alt="Image right placeholder image">
             </div>
         </div>
 <pre class="code-block" tabindex="0">
@@ -102,7 +102,7 @@
         <p>'.$faker->text(60).'</p>
     </div>
     <div class="md:w-1/3 flex-shrink-0">
-        <img src="https://base.wayne.edu/styleguide/image/300x200" alt="Your image description">
+        <img src="https://via.placeholder.com/600x400" alt="Your image description">
     </div>
 </div>')!!}
 </pre>
