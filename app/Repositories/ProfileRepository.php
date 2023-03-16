@@ -245,7 +245,7 @@ class ProfileRepository implements ProfileRepositoryContract
 
         return [
             'profile' =>  Arr::get($profiles['profiles'], $site_id, []),
-            'courses' => Arr::get($profiles['profiles'], 'courses', []),
+            'courses' => Arr::get($profiles, 'courses', []),
             'articles' => Arr::get($profiles['profiles'], 'articles', []),
         ];
     }
