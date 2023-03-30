@@ -113,7 +113,7 @@ class ProfileController extends Controller
 
         // Change page title to profile name
         $request->data['base']['page']['title'] = $this->profile->getPageTitleFromName($profile);
-        $request->data['page']['canonical'] = $request->data['server']['url'] ?? '';
+        $request->data['base']['page']['canonical'] = $request->data['base']['server']['url'] ?? '';
 
         // Set the back URL
         $request->data['back_url'] = $this->profile->getBackToProfileListUrl($request->server->get('HTTP_REFERER'), $request->server->get('REQUEST_SCHEME'), $request->server->get('HTTP_HOST'), $request->server->get('REQUEST_URI'));
