@@ -92,23 +92,23 @@ class ProfileRepositoryTest extends TestCase
     {
         // The default path if no referer
         $url = app(ProfileRepository::class)->getBackToProfileListUrl();
-        $this->assertTrue($url == config('base.profile_default_back_url'));
+        $this->assertTrue($url == current(config('base.profile_default_back_url')));
 
         // If a referer is passed from a different domain
         $referer = $this->faker->url;
         $url = app(ProfileRepository::class)->getBackToProfileListUrl($referer, 'http', 'wayne.edu', '/');
-        $this->assertTrue($url == config('base.profile_default_back_url'));
+        $this->assertTrue($url == current(config('base.profile_default_back_url')));
 
         // If a referer is passed that is the same page we are on
         $referer = $this->faker->url;
         $parsed = parse_url($referer);
         $url = app(ProfileRepository::class)->getBackToProfileListUrl($referer, $parsed['scheme'], $parsed['host'], $parsed['path']);
-        $this->assertTrue($url == config('base.profile_default_back_url'));
+        $this->assertTrue($url == current(config('base.profile_default_back_url')));
 
         // If referer is passed from the same domain that the site is on
         $referer = $this->faker->url;
         $parsed = parse_url($referer);
-        $url = app(ProfileRepository::class)->getBackToProfileListUrl($referer, $parsed['scheme'], $parsed['host'], $this->faker->word);
+        $url = app(ProfileRepository::class)->getBackToProfileListUrl(null, $referer, $parsed['scheme'], $parsed['host'], $this->faker->word);
         $this->assertEquals($referer, $url);
     }
 

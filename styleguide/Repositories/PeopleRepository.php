@@ -57,7 +57,7 @@ class PeopleRepository extends Repository
     /**
      * {@inheritdoc}
      */
-    public function getBackToProfileListUrl($referer = null, $scheme = null, $host = null, $uri = null)
+    public function getBackToProfileListUrl($subsite_url = null, $referer = null, $scheme = null, $host = null, $uri = null)
     {
         return '/styleguide/profiles';
     }

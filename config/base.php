@@ -124,7 +124,7 @@ return [
     | "Return to Listing" link.
     |
     */
-    'profile_default_back_url' => '/profiles/',
+    'profile_default_back_url' => ['/profiles/'],
 
     /*
     |--------------------------------------------------------------------------

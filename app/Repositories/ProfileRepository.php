@@ -344,14 +344,18 @@ class ProfileRepository implements ProfileRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getBackToProfileListUrl($referer = null, $scheme = null, $host = null, $uri = null)
+    public function getBackToProfileListUrl($subsite_url = null, $referer = null, $scheme = null, $host = null, $uri = null)
     {
-        // Make sure the referer is coming from the site we are currently on and not the current page
+        // If the referrer is come from someplace other than the current site domain
         if ($referer === null
             || $referer == $scheme.'://'.$host.$uri
             || strpos($referer, $host) === false
         ) {
-            return config('base.profile_default_back_url');
+            if (!empty($subsite_url['base']['site']['id']) && array_key_exists($subsite_url['base']['site']['id'], config('base.profile_default_back_url'))) {
+                return config('base.profile_default_back_url')[$subsite_url['base']['site']['id']];
+            } else {
+                return current(config('base.profile_default_back_url'));
+            }
         }
 
         return $referer;
