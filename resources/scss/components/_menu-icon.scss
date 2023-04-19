@@ -19,3 +19,25 @@
 .menu-icon:hover::after {
     @apply bg-gray-400 shadow-grey;
 }
+
+// For under menu items that have class to designate external link
+.main-menu .external {
+    a::after {
+        content: url('/_resources/images/external-link-alt-solid.svg');
+        display: inline-block;
+        margin-left: 0.4em;
+        width: 1em;
+        height: 1em;
+    }
+}
+
+.under-menu .external {
+    div div::after {
+        content: url('/_resources/images/external-link-alt-solid.svg');
+        display: inline-block;
+        margin-left: 0.4em;
+        width: 1em;
+        height: 1em;
+        vertical-align: text-top;
+    }
+}
