@@ -23,7 +23,7 @@
 // For under menu items that have class to designate external link
 .main-menu .external {
     a::after {
-        content: url('/_resources/images/external-link-alt-solid.svg');
+        content: url('/_resources/images/external-link.svg');
         display: inline-block;
         margin-left: 0.4em;
         width: 1em;
@@ -33,7 +33,7 @@
 
 .under-menu .external {
     div div::after {
-        content: url('/_resources/images/external-link-alt-solid.svg');
+        content: url('/_resources/images/external-link.svg');
         display: inline-block;
         margin-left: 0.4em;
         width: 1em;
