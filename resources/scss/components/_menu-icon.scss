@@ -28,6 +28,13 @@
         margin-left: 0.4em;
         width: 1em;
         height: 1em;
+        filter: invert(100%);
+    }
+
+    @screen mt {
+        a::after {
+            filter: invert(0);
+        }
     }
 }
 
