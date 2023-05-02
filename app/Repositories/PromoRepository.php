@@ -230,4 +230,104 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
 
         return $referer;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPromoPagePromos(array $data)
+    {
+        if (!empty($data['data']['promoPage'])) {
+            // Remove all spaces and line breaks
+            $group_info = preg_replace('/\s*\R\s*/', '', $data['data']['promoPage']);
+
+            // Last item cannot have comma at the end of it
+            $group_info = preg_replace('(,})', '}', $group_info);
+
+            // JSON into array
+            $group_info = json_decode($group_info, true);
+
+            // Assign expected group info
+            $group_info['id'] = (!empty($group_info['id']) ? $group_info['id'] : '');
+            $group_info['config'] = (!empty($group_info['config']) ? $group_info['config'] : '');
+            $group_info['singlePromoView'] = (!empty($group_info['singlePromoView']) ? $group_info['singlePromoView'] : '');
+            $group_info['columns'] = (!empty($group_info['columns']) ? $group_info['columns'] : '');
+
+            // Append actual page id to config
+            if (str_contains($group_info['config'], 'page_id')) {
+                $group_info['config'] = preg_replace('/\bpage_id\b/', 'page_id:'.$data['page']['id'], $group_info['config']);
+            }
+
+            // Parse promos
+            $group_reference[$group_info['id']] = 'promos';
+            $group_config['promos'] = $group_info['config'];
+
+            $params = [
+                'method' => 'cms.promotions.listing',
+                'promo_group_id' => array_keys($group_reference),
+                'filename_url' => true,
+                'is_active' => '1',
+            ];
+
+            $promos = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+                return $this->wsuApi->sendRequest($params['method'], $params);
+            });
+
+            $promos = $this->parsePromos->parse($promos, $group_reference, $group_config);
+
+            // Enable the individual promotion view
+            if ($group_info['singlePromoView'] == true) {
+                $promos = $this->addPromoViewLink($promos);
+            }
+
+            // Organize promos by option
+            $promos = $this->organizePromoItemsByOption($promos);
+
+            // Set number of columns
+            $promos['template']['columns'] = $group_info['columns'];
+
+            return $promos;
+        } else {
+            return ['promos' => []];
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addPromoViewLink($promos)
+    {
+        $promos['promos'] = collect($promos['promos'])->map(function ($item) {
+            $item['link'] = 'view/'.Str::slug($item['title']).'-'.$item['promo_item_id'];
+
+            return $item;
+        })->toArray();
+
+        return $promos;
+    }
+
+     /**
+     * {@inheritdoc}
+     */
+    public function organizePromoItemsByOption(array $promos)
+    {
+        $options_exist = collect($promos['promos'])->filter(function ($value) {
+            return !empty($value['option']);
+        })->isNotEmpty();
+
+        if ($options_exist === true) {
+            $promos['promos'] = collect($promos['promos'])->groupBy('option')->toArray();
+
+            if (!empty($promos['promos'][''])) {
+                $no_option_moved_to_bottom = $promos['promos'][''];
+                unset($promos['promos']['']);
+                $promos['promos'][''] = $no_option_moved_to_bottom;
+            }
+
+            $promos['template']['group_by_options'] = true;
+        } else {
+            $promos['template']['group_by_options'] = false;
+        }
+
+        return $promos;
+    }
 }

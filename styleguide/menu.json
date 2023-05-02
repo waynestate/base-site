@@ -648,6 +648,16 @@
                         "relative_url": "/styleguide/promogrid",
                         "submenu": []
                     },
+                    "101110400": {
+                        "menu_item_id": 101110400,
+                        "is_active": 1,
+                        "page_id": 101110400,
+                        "target": "",
+                        "display_name": "Promo page",
+                        "class_name": "",
+                        "relative_url": "/styleguide/promopage",
+                        "submenu": []
+                    },
                     "101110300": {
                         "menu_item_id": 101110300,
                         "is_active": 1,

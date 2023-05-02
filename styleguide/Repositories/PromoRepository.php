@@ -8,10 +8,22 @@ use Factories\FooterContact;
 use Factories\FooterSocial;
 use Factories\HeroImage;
 use Factories\PromoListing;
+use Factories\PromoPage;
 use Factories\UnderMenu;
+use Faker\Factory;
 
 class PromoRepository extends Repository
 {
+    /**
+     * Construct the factory.
+     *
+     * @param Factory $faker
+     */
+    public function __construct(Factory $faker)
+    {
+        $this->faker = $faker->create();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -113,5 +125,28 @@ class PromoRepository extends Repository
     public function getBackToPromoListing($referer = null, $scheme = null, $host = null, $uri = null)
     {
         return '/styleguide/promolisting';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPromoPagePromos(array $data, $limit = 75)
+    {
+        $promos['promos'] = app(PromoPage::class)->create(12);
+
+        if (!empty($data['data']['options'])) {
+            $promos['promos'] = app(PromoPage::class)->create(12);
+            $promos['template']['group_by_options'] = true;
+            $promos['template']['columns'] = $this->faker->randomElement(['', 2, 3, 4]);
+
+            // Organize promos by option
+            $promos = $this->organizePromoItemsByOption($promos);
+
+            dump($promos['template']['columns']);
+        } else {
+            $promos['template']['group_by_options'] = '';
+        }
+
+        return $promos;
     }
 }
