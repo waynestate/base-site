@@ -13,8 +13,24 @@
         <meta name="DC.format" content="text/html" />
         <link href="/_resources/css/429.css" rel="stylesheet" type="text/css"  media="all" />
         <link href="//fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                'event': 'http_error',
+                'error_code': '429',
+                'page': '{{ $request->server("HTTP_HOST") }}{{ $request->server("REQUEST_URI") }}',
+                'referrer': '{{ $request->server("HTTP_REFERER") }}'
+            });
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-NCBVKQ2');
+        </script>
     </head>
     <body>
+        <noscript aria-hidden="true"><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCBVKQ2"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <nav aria-label="Skip navigation" class="skip">
             <ul class="list-reset">
                 <li><a href="#content">Skip to main content</a></li>
@@ -96,16 +112,5 @@
                 </div>
             </div>
         </main>
-
-        <script>
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-            ga('create', 'UA-35684592-1', 'wayne.edu', {'name': 'allWayneState'});
-            ga('allWayneState.send', 'pageview');
-            ga('allWayneState.send', 'event', 'Error', '429', 'page: //{{ $request->server("HTTP_HOST") }}{{ $request->server("REQUEST_URI") }} ref: {{ $request->server("HTTP_REFERER") }}');
-        </script>
     </body>
 </html>
