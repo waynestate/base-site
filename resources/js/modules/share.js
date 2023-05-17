@@ -2,21 +2,16 @@
     "use strict";
 
     // Make sure addthis is desired on this page
-    if(document.querySelector('.addthis_sharing_toolbox') == null) {
+    if(document.querySelector('.sharethis-inline-share-buttons') == null) {
         return;
     }
 
-    if (!window.addthis) {
-        // Load the config first through a script tag since defining it directly here does not work
-        var config = document.createElement('script');
-        config.innerHTML = "var addthis_config = {ui_508_compliant: true, ui_tabindex: 0, pubid: 'waynestate'}";
-        document.body.appendChild(config);
-
+    if (!window.__sharethis__) {
         // Asynchronous load of share icons
-        var addthisScript = document.createElement('script');
-        addthisScript.setAttribute('src', '//s7.addthis.com/js/300/addthis_widget.js');
-        addthisScript.setAttribute('async', 'async');
-        document.body.appendChild(addthisScript);
+        var sharethisScript = document.createElement('script');
+        sharethisScript.setAttribute('src', '//platform-api.sharethis.com/js/sharethis.js#property=642aa5765d783b00125f1bfc&product=inline-share-buttons&source=platform');
+        sharethisScript.setAttribute('async', 'async');
+        document.body.appendChild(sharethisScript);
 
         return;
     }

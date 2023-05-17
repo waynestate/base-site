@@ -6,7 +6,7 @@
     <div class="news-item">
         <time class="block text-sm text-gray-500 mb-6" datetime="{{ $article['data']['article_date'] }}">{{ apdatetime(date('F j, Y', strtotime($article['data']['article_date']))) }}</time>
 
-        <div class="addthis_sharing_toolbox mb-4 print:hidden"></div>
+        <div class="sharethis-inline-share-buttons mb-4 print:hidden"></div>
 
         <div class="content mt:text-xl">
             {!! $article['data']['body'] !!}
