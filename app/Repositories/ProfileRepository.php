@@ -6,6 +6,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Waynestate\Api\Connector;
 use Illuminate\Cache\Repository;
+use Waynestate\Youtube\ParseId;
 use Waynestate\Api\News;
 use Waynestate\Promotions\ParsePromos;
 use Contracts\Repositories\ProfileRepositoryContract;
@@ -239,6 +240,12 @@ class ProfileRepository implements ProfileRepositoryContract
             return ['profile'=> []];
         }
 
+        if (!empty($profiles['profiles'][$site_id]['data']['Youtube Videos'])) {
+            $profiles['profiles'][$site_id]['data']['Youtube Videos'] = collect($profiles['profiles'][$site_id]['data']['Youtube Videos'])->map(function ($youtube_link) {
+                return ParseId::fromUrl($youtube_link);
+            });
+        }
+
         if (!empty($profiles['profiles'])) {
             $profiles['profiles']['articles'] = $this->getNewsArticles($accessid, 10);
         }
@@ -298,6 +305,7 @@ class ProfileRepository implements ProfileRepositoryContract
             'file_fields' => [
                 'Curriculum Vitae',
                 'Syllabi',
+                'Youtube Videos',
             ],
             // Hide these in the main tube of content
             'hidden_fields' => [
@@ -309,6 +317,7 @@ class ProfileRepository implements ProfileRepositoryContract
                 'Last Name',
                 'Picture',
                 'Photo Download',
+                'Youtube Videos',
             ],
             // Build the users name based on these fields
             'name_fields' => [
