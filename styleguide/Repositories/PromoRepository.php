@@ -9,6 +9,7 @@ use Factories\FooterSocial;
 use Factories\HeroImage;
 use Factories\PromoListing;
 use Factories\PromoPage;
+use Factories\PromoPageWithOptions;
 use Factories\UnderMenu;
 use Faker\Factory;
 
@@ -132,19 +133,26 @@ class PromoRepository extends Repository
      */
     public function getPromoPagePromos(array $data, $limit = 75)
     {
-        $promos['promos'] = app(PromoPage::class)->create(12);
-
-        if (!empty($data['data']['options'])) {
+        if ($data['page']['id'] === 101110200) {
+            // No options
             $promos['promos'] = app(PromoPage::class)->create(12);
-            $promos['template']['group_by_options'] = true;
-            $promos['template']['columns'] = $this->faker->randomElement(['', 2, 3, 4]);
+        } else {
+            $promos['promos'] = app(PromoPageWithOptions::class)->create(12);
+        }
+
+        if (!empty($data['data']['promoPage'])) {
+            $group_info = $this->parsePromoJSON($data);
+
+            // Enable the individual promotion view
+            if ($group_info['singlePromoView'] == true) {
+                $promos = $this->addPromoViewLink($promos);
+            }
 
             // Organize promos by option
             $promos = $this->organizePromoItemsByOption($promos);
 
-            dump($promos['template']['columns']);
-        } else {
-            $promos['template']['group_by_options'] = '';
+            // Set number of columns
+            $promos['template']['columns'] = $group_info['columns'];
         }
 
         return $promos;

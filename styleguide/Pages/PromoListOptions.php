@@ -4,7 +4,7 @@ namespace Styleguide\Pages;
 
 use Factories\Page as PageFactory;
 
-class PromoPage extends Page
+class PromoListOptions extends Page
 {
     /**
      * {@inheritdoc}
@@ -14,8 +14,8 @@ class PromoPage extends Page
         return app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'PromoPageController',
-                'title' => 'Promo page',
-                'id' => 101110400,
+                'title' => 'Promotion list without options',
+                'id' => 101110300,
                 'content' => [
                     'main' => '
                         <h2>Page setup</h2>
@@ -51,8 +51,14 @@ class PromoPage extends Page
                 ],
             ],
             'data' => [
-                'listing_promo_group_id' => 12345,
-                'options' => 'true',
+                'promoPage' => '{
+"id":10378,
+"config":"randomize|limit:20|page_id",
+"columns":"",
+"singlePromoView":"true",
+"showExcerpt":"true",
+"showDescription":"true",
+}',
             ],
         ]);
     }

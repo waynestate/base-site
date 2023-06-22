@@ -1,5 +1,5 @@
 <div class="wsuheader">
-    <div class="wsuheaderwrap">
+    <div class="wsuwrap">
         <div class="wsuwordmark">
             <h1>
                 <a href="https://wayne.edu/" aria-labelledby="wsuheader-title">
@@ -27,13 +27,13 @@
 
             <div class="wsumenuwrap">
                 <div class="wsulogin">
-                    <a href="https://login.wayne.edu"><span class="wsuloginlabel">Login</span></a>
+                    <a href="https://login.wayne.edu"><span class="wsuhidesmall">Login</span></a>
                 </div>
 
                 <div class="wsusearch"><a href="https://wayne.edu/search/" class="wsusearchicon"><span class="wsuhidesmall">Search</span></a></div>
 
                 <div class="wsusearchbar">
-                    <form method="get" action="https://wayne.edu/search/" role="search" aria-label="Primary">
+                    <form method="get" action="https://wayne.edu/search/" role="search">
                         <label for="q">Search:</label>
                         <input name="q" class="wsusearchfield" size="15" id="q" placeholder="Search..." type="text">
                         <button type="submit" class="wsusearchicon"><span>Search</span></button>

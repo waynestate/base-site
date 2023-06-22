@@ -237,25 +237,7 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
     public function getPromoPagePromos(array $data)
     {
         if (!empty($data['data']['promoPage'])) {
-            // Remove all spaces and line breaks
-            $group_info = preg_replace('/\s*\R\s*/', '', $data['data']['promoPage']);
-
-            // Last item cannot have comma at the end of it
-            $group_info = preg_replace('(,})', '}', $group_info);
-
-            // JSON into array
-            $group_info = json_decode($group_info, true);
-
-            // Assign expected group info
-            $group_info['id'] = (!empty($group_info['id']) ? $group_info['id'] : '');
-            $group_info['config'] = (!empty($group_info['config']) ? $group_info['config'] : '');
-            $group_info['singlePromoView'] = (!empty($group_info['singlePromoView']) ? $group_info['singlePromoView'] : '');
-            $group_info['columns'] = (!empty($group_info['columns']) ? $group_info['columns'] : '');
-
-            // Append actual page id to config
-            if (str_contains($group_info['config'], 'page_id')) {
-                $group_info['config'] = preg_replace('/\bpage_id\b/', 'page_id:'.$data['page']['id'], $group_info['config']);
-            }
+            $group_info = $this->parsePromoJSON($data);
 
             // Parse promos
             $group_reference[$group_info['id']] = 'promos';
@@ -289,6 +271,38 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         } else {
             return ['promos' => []];
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function parsePromoJSON($data)
+    {
+        $group_info = [];
+
+        if (!empty($data['data']['promoPage'])) {
+            // Remove all spaces and line breaks
+            $group_info = preg_replace('/\s*\R\s*/', '', $data['data']['promoPage']);
+
+            // Last item cannot have comma at the end of it
+            $group_info = preg_replace('(,})', '}', $group_info);
+
+            // JSON into array
+            $group_info = json_decode($group_info, true);
+
+            // Assign expected group info
+            $group_info['id'] = (!empty($group_info['id']) ? $group_info['id'] : '');
+            $group_info['config'] = (!empty($group_info['config']) ? $group_info['config'] : '');
+            $group_info['singlePromoView'] = (!empty($group_info['singlePromoView']) ? $group_info['singlePromoView'] : '');
+            $group_info['columns'] = (!empty($group_info['columns']) ? $group_info['columns'] : '');
+
+            // Append actual page id to config
+            if (str_contains($group_info['config'], 'page_id')) {
+                $group_info['config'] = preg_replace('/\bpage_id\b/', 'page_id:'.$data['page']['id'], $group_info['config']);
+            }
+        }
+
+        return $group_info;
     }
 
     /**

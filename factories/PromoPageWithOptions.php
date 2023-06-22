@@ -5,7 +5,7 @@ namespace Factories;
 use Contracts\Factories\FactoryContract;
 use Faker\Factory;
 
-class PromoPage implements FactoryContract
+class PromoPageWithOptions implements FactoryContract
 {
     /**
      * Construct the factory.
@@ -44,7 +44,7 @@ class PromoPage implements FactoryContract
                 'secondary_relative_url' => '/styleguide/image/150x150?text=150x150:'.$i, // 4:3
                 'secondary_filename_url' => '',
                 'secondary_alt_text' => 'Secondary placeholder image '.$i,
-                'option' => '',
+                'option' => $this->faker->randomElement(['Gold', 'Green', '']),
                 'start_date' => $this->faker->dateTimeThisMonth('now')->format('Y-m-d H:i:s'),
                 'end_date' => '',
                 'display_start_date' => '0000-00-00 00:00:00',

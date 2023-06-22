@@ -16,6 +16,16 @@ class View extends Page
                 'controller' => 'PromoListingController',
                 'title' => 'Promo view',
                 'id' => 101110300,
+                'content' => [
+                    'main' => '
+                        <h2>Page setup</h2>
+                        <ul>
+                            <li>Create a CMS page titled "Promo view", with the url "view".</li>
+                            <li>Select template "Promo Page."</li>
+                            <li>Add it to the menu for breadcrumbs to display.</li>
+                        </ul>
+                    ',
+                ],
             ],
         ]);
     }

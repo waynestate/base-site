@@ -30,4 +30,10 @@
             </div>
         </div>
     </div>
+
+    @if(using_styleguide() == true)
+        <div class="content">
+            {!! $base['page']['content']['main'] !!}
+        </div>
+    @endif
 @endsection
