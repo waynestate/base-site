@@ -11,9 +11,9 @@
         @if(!empty($template['group_by_options']) && $template['group_by_options'] === true)
             @foreach($promos as $group => $group_items)
                 @if(!empty($group))
-                    <h2 class="border-solid border-b-2 pb-1 border-gold mb-4">{{ $group }}</h2>
+                    <h2 class="border-solid border-b-2 pb-1 border-gold my-4">{{ $group }}</h2>
                 @else
-                    <hr class="border-gold border-b-2" />
+                    <hr class="border-gold border-b-2 my-4" />
                 @endif
                 @if(!empty($template['columns']))
                     <div class="md:grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-{{ $template['columns'] }} gap-6">

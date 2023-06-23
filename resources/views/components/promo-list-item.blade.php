@@ -13,6 +13,11 @@
                 {{ $item['title'] }}
             @if(!empty($item['link']))</a>@endif
         </h3>
+        @if(!empty($item['excerpt']))
+            <div class="text-black mb-1">
+                {{ $item['excerpt'] }}
+            </div>
+        @endif
         @if(!empty($item['description']))
             <div class="text-black">
                 {!! $item['description'] !!}

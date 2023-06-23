@@ -18,11 +18,11 @@ class PromoList extends Page
                 'id' => 101110200,
                 'content' => [
                     'main' => '
+                        <p>Use this template to display a list of promotion items.</p>
                         <ul class="accordion mt-4">
                             <li>
                                 <a href="#definition-page-setup" id="definition-page-setup"><span aria-hidden="true"></span>Page setup</a>
                                 <div class="content">
-                                    <h2>Page setup</h2>
                                     <ul>
                                         <li>Select template "Promo Page."</li>
                                         <li>Select Custom page field <code class="bg-gray-200 py-1 px-2 rounded text-sm">promoPage</code>.</li>
@@ -31,23 +31,21 @@ class PromoList extends Page
 {
 "id":00000,
 "config":"randomize|limit:60|page_id",
-"columns":3,
-"singlePromoView":"true",
 "showExcerpt":"false",
 "showDescription":"true",
+"singlePromoView":"true",
 }
 </pre></li>
                                         <li><strong>ID:</strong> Required promo group ID, you do not need to set config, singlePromoView, or columns.</li>
                                         <li><strong>Config:</strong> Promo group config passed to the API, pipe delimited. Page ID is programatically assigned if \'page_id\' is used.</li>
-                                        <li><strong>Columns:</strong> 2, 3, or 4; if not set, default is 1.</li>
+                                        <li><strong>Columns:</strong> 2, 3, or 4; default is 1.</li>
                                         <li><strong>Single promo view:</strong> true/false; create a CMS page titled "Promo view", with the url "view".</li>
                                     </ul>
                                 </div>
                             </li>
                             <li>
-                                <a href="#definition-promo-setup" id="definition-promo-setup"><span aria-hidden="true"></span>Promo setup</a>
+                                <a href="#definition-promo-setup" id="definition-promo-setup"><span aria-hidden="true"></span>Promo group setup</a>
                                 <div class="content">
-                                    <h2>Promo group setup</h2>
                                     <ul class="mb-4">
                                         <li><strong>Title</strong></li>
                                         <li><strong>Link:</strong> optional, if not using individual view</li>
