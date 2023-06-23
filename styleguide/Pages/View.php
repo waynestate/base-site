@@ -13,9 +13,9 @@ class View extends Page
     {
         return app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'PromoListingController',
-                'title' => 'Promo view',
-                'id' => 101110300,
+                'controller' => 'PromoPageController',
+                'title' => 'Promotion view',
+                'id' => 101110100,
                 'content' => [
                     'main' => '
                         <ul class="accordion mt-4">
@@ -37,7 +37,7 @@ class View extends Page
                                         <li><strong>Link:</strong> Not shown here.</li>
                                         <li><strong>Excerpt:</strong> Displays before description, optional.</li>
                                         <li><strong>Description:</strong> Main body content.</li>
-                                        <li><strong>Filename:</strong> Primary promo image, minimum 600 width x any height, optional.</li>
+                                        <li><strong>Filename:</strong> Primary promo image, 600x450px or minimum 600 width any height, optional.</li>
                                         <li><strong>Option:</strong> Not shown here.</li>
                                     </ul>
                                 </div>

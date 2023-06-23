@@ -643,7 +643,7 @@
                         "is_active": 1,
                         "page_id": 101110300,
                         "target": "",
-                        "display_name": "Promo list grouped by option",
+                        "display_name": "Promo list, grouped by option",
                         "class_name": "",
                         "relative_url": "/styleguide/promolistoptions",
                         "submenu": []
@@ -663,7 +663,7 @@
                         "is_active": 1,
                         "page_id": 101110500,
                         "target": "",
-                        "display_name": "Promo grid, 4 column",
+                        "display_name": "Promo grid, 4 column, grouped by option",
                         "class_name": "",
                         "relative_url": "/styleguide/promogrid4",
                         "submenu": []

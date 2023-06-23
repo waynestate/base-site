@@ -136,7 +136,7 @@ class PromoRepository extends Repository
      */
     public function getPromoPagePromos(array $data, $limit = 75)
     {
-        if ($data['page']['id'] === 101110200) {
+        if ($data['page']['id'] === 101110200 || $data['page']['id'] === 101110400) {
             // No options
             $promos['promos'] = app(PromoPage::class)->create(12);
         } else {

@@ -14,11 +14,11 @@ class PromoGrid4 extends Page
         return app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'PromoPageController',
-                'title' => 'Promotion grid, 4 columns',
+                'title' => 'Promotion grid, 4 columns, grouped by option',
                 'id' => 101110500,
                 'content' => [
                     'main' => '
-                        <p>Use this template to display a grid of promotion items.</p>
+                        <p>Use this template to display a grid of promotion items grouped by their dropdown option.</p>
                         <ul class="accordion mt-4">
                             <li>
                                 <a href="#definition-page-setup" id="definition-page-setup"><span aria-hidden="true"></span>Page setup</a>
