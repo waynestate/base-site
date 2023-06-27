@@ -146,17 +146,15 @@ class PromoRepository extends Repository
         if (!empty($data['data']['promoPage'])) {
             $group_info = $this->parsePromoJSON($data);
 
-            // Enable the individual promotion view
-            if ($group_info['singlePromoView'] == true) {
-                $promos = $this->addPromoViewLink($promos);
-            }
+            // Assign template markers to promos array
+            $promos['template'] = $group_info;
 
-            // Organize promos by option
-            $promos = $this->organizePromoItemsByOption($promos);
-
-            // Set number of columns
-            $promos['template']['columns'] = $group_info['columns'];
+            // Manage data with template flags
+            $promos = $this->changePromoDisplay($promos, $group_info);
         }
+
+        // Organize promos by option
+        $promos = $this->organizePromoItemsByOption($promos);
 
         return $promos;
     }

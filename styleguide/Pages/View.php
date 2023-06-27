@@ -32,14 +32,35 @@ class View extends Page
                             <li>
                                 <a href="#definition-promo-setup" id="definition-promo-setup"><span aria-hidden="true"></span>Promo group setup</a>
                                 <div class="content">
-                                    <ul class="mb-4">
-                                        <li><strong>Title:</strong> Page title.</li>
-                                        <li><strong>Link:</strong> Not shown here.</li>
-                                        <li><strong>Excerpt:</strong> Displays before description, optional.</li>
-                                        <li><strong>Description:</strong> Main body content.</li>
-                                        <li><strong>Filename:</strong> Primary promo image, 600x450px or minimum 600 width any height, optional.</li>
-                                        <li><strong>Option:</strong> Not shown here.</li>
-                                    </ul>
+                                    <table class="mt-2">
+                                        <tr>
+                                            <th colspan="2">Available fields</th>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-bold">Title</td>
+                                            <td>Page title.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-bold">Link</td>
+                                            <td>Not shown here.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-bold">Excerpt</td>
+                                            <td>Single line of unformatted text, like a job title.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-bold">Description</td>
+                                            <td>Formattable text. Main body content.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-bold">Filename</td>
+                                            <td>Primary promo image, 600x450px, or minimum width 600px any height. Optional.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-bold">Option</td>
+                                            <td>Not shown here.</td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </li>
                         </ul>

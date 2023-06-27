@@ -18,43 +18,90 @@ class PromoGrid4 extends Page
                 'id' => 101110500,
                 'content' => [
                     'main' => '
-                        <p>Use this template to display a grid of promotion items grouped by their dropdown option.</p>
+                        <p>Use this template to display a list of promotion items grouped by their dropdown option.</p>
                         <ul class="accordion mt-4">
                             <li>
                                 <a href="#definition-page-setup" id="definition-page-setup"><span aria-hidden="true"></span>Page setup</a>
                                 <div class="content">
                                     <ul>
                                         <li>Select template "Promo Page."</li>
-                                        <li>Select Custom page field <code class="bg-gray-200 py-1 px-2 rounded text-sm">promoPage</code>.</li>
+                                        <li>Select Custom page field <code>promoPage</code>.</li>
                                         <li>Paste this JSON array into the page field and edit the values to set options:<br />
-<pre class="bg-gray-200 py-2 px-2 my-2 rounded text-sm inline-block">
+<pre>
 {
 "id":00000,
 "config":"randomize|limit:60|page_id",
-"columns":3,
+"columns":4,
 "singlePromoView":"true",
 "showExcerpt":"false",
 "showDescription":"true",
 }
-</pre></li>
-                                        <li><strong>ID:</strong> Required promo group ID, you do not need to set config, singlePromoView, or columns.</li>
-                                        <li><strong>Config:</strong> Promo group config passed to the API, pipe delimited. Page ID is programatically assigned if \'page_id\' is used.</li>
-                                        <li><strong>Columns:</strong> 2, 3, or 4; if not set, default is 1.</li>
-                                        <li><strong>Single promo view:</strong> true/false; create a CMS page titled "Promo view", with the url "view".</li>
+</pre>
+                                            <table class="mt-2">
+                                                <tr>
+                                                    <th colspan="2">Configuration settings</th>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-bold">id</td>
+                                                    <td>Promo group ID. Required.</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-bold">config</td>
+                                                    <td>Promo group config, pipe delimited. Use \'page_id\' for per-page items. Optional.</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-bold">columns</td>
+                                                    <td>2, 3, or 4. Default/unset is 1, a list. Optional.</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-bold">singlePromoview</td>
+                                                    <td>True or false. False(default) will enable the promotion\'s link field. Optional.</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-bold">showExcerpt</td>
+                                                    <td>True or false. True is default. Optional.</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-bold">showDescription</td>
+                                                    <td>True or false. True is default. Optional.</td>
+                                                </tr>
+                                            </table>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>
                             <li>
                                 <a href="#definition-promo-setup" id="definition-promo-setup"><span aria-hidden="true"></span>Promo group setup</a>
                                 <div class="content">
-                                    <ul class="mb-4">
-                                        <li><strong>Title</strong></li>
-                                        <li><strong>Link:</strong> optional, if not using individual view</li>
-                                        <li><strong>Excerpt:</strong> optional, displays underneath title</li>
-                                        <li><strong>Description:</strong> optional, displays underneath excerpt</li>
-                                        <li><strong>Filename:</strong> optional, 600x450px or 450x600px recommended.</li>
-                                        <li><strong>Option:</strong> If options are set, promos will grouped by option. Any items without an option are grouped together at the bottom.</li>
-                                    </ul>
+                                    <table class="mt-2">
+                                        <tr>
+                                            <th colspan="2">Available fields</th>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-bold">Title</td>
+                                            <td>Promo title. Will turn into a link if link field is used or single promo view is set.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-bold">Link</td>
+                                            <td>External link. Do not set if using individual promo view.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-bold">Excerpt</td>
+                                            <td>Single line of unformatted text, like a job title.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-bold">Description</td>
+                                            <td>Formattable text. Main body content for single promo view.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-bold">Filename</td>
+                                            <td>600x450px, or minimum width 600px any height.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-bold">Option</td>
+                                            <td>If options are set, promos will be grouped by their option automatically. Any items without an option are grouped together at the bottom.</td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </li>
                         </ul>
@@ -68,7 +115,7 @@ class PromoGrid4 extends Page
 "config":"randomize|limit:20|page_id",
 "columns":4,
 "singlePromoView":"true",
-"showExcerpt":"true",
+"showExcerpt":"false",
 "showDescription":"true",
 }',
             ],
