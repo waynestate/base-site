@@ -113,7 +113,7 @@ class PromoListOptions extends Page
 "config":"randomize|limit:20|page_id",
 "columns":"",
 "singlePromoView":"true",
-"showExcerpt":"true",
+"showExcerpt":"false",
 "showDescription":"true",
 }',
             ],

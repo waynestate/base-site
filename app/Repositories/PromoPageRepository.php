@@ -141,7 +141,7 @@ class PromoPageRepository implements PromoPageRepositoryContract
 
         return $group_info;
     }
-    
+
     /**
      * {@inheritdoc}
      */

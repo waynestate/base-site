@@ -5,7 +5,6 @@ namespace App\Repositories;
 use Contracts\Repositories\RequestDataRepositoryContract;
 use Contracts\Repositories\PromoRepositoryContract;
 use Illuminate\Cache\Repository;
-use Illuminate\Support\Str;
 use Waynestate\Api\Connector;
 use Waynestate\Promotions\ParsePromos;
 

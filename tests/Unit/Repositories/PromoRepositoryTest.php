@@ -4,8 +4,6 @@ namespace Tests\Unit\Repositories;
 
 use App\Repositories\PromoRepository;
 use Factories\Page;
-use Factories\PromoListing;
-use Illuminate\Support\Str;
 use Tests\TestCase;
 use Mockery as Mockery;
 use Waynestate\Api\Connector;
