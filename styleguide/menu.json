@@ -553,7 +553,7 @@
                 "is_active": 1,
                 "page_id": 101105,
                 "target": "",
-                "display_name": "Profile driven",
+                "display_name": "Profiles",
                 "class_name": "",
                 "relative_url": "/styleguide/profiles",
                 "submenu": {
@@ -562,7 +562,7 @@
                         "is_active": 1,
                         "page_id": 101105,
                         "target": "",
-                        "display_name": "Profiles",
+                        "display_name": "Profile listing",
                         "class_name": "",
                         "relative_url": "/styleguide/profiles",
                         "submenu": []
@@ -624,7 +624,7 @@
                 "is_active": 1,
                 "page_id": 101110,
                 "target": "",
-                "display_name": "Promotion driven",
+                "display_name": "Promos",
                 "class_name": "",
                 "relative_url": "/styleguide/promolist",
                 "submenu": {

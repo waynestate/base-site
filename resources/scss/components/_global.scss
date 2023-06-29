@@ -133,7 +133,7 @@ code {
 
 pre,
 .code-block {
-    @apply inline-block bg-gray-100 overflow-scroll text-sm py-2 px-2 my-2 rounded;
+    @apply inline-block bg-gray-100 overflow-x-scroll text-sm p-2 my-2 rounded max-w-full;
 }
 
 // Keep footer at the bottom of the browser

@@ -23,6 +23,12 @@ class PromoPage implements FactoryContract
     public function create($limit = 1, $flatten = false, $options = [])
     {
         $promo_group_id = $this->faker->randomNumber(5);
+        $image = '/styleguide/image/' . $this->faker->randomElement([
+            '600x450?text=600x450', // 4:3
+            '450x600?text=450x600', // 3:4
+            '600x338?text=600x338', // 16:9
+            '600x600?text=600x600', // 1:1
+        ]);
 
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
@@ -32,13 +38,14 @@ class PromoPage implements FactoryContract
                 'link' => 'https://wayne.edu',
                 'promo_item_id' => strval($this->faker->randomNumber(5)),
                 'promo_group_id' => strval($promo_group_id),
-                'relative_url' => '/styleguide/image/600x450?text=600x450:'.$i, // 4:3
+                'option' => $this->faker->randomElement(['Gold', 'Green', '']),
+                'relative_url' => $image.':'.$i,
                 //'relative_url' => '/styleguide/image/450x600', // 3:4
                 //'relative_url' => '/styleguide/image/600x338', // 16:9
                 //'relative_url' => '/styleguide/image/600x600', // 1:1
                 //'relative_url' => '/styleguide/image/600x217', // 2.76:1
                 //'relative_url' => '/styleguide/image/600x200', // 3:1
-                'filename_url' => '/styleguide/image/600x450?text=600x450:'.$i, // 4:3
+                'filename_url' => $image.':'.$i,
                 'filename_alt_text' => 'Placeholder image '.$i,
                 'secondary_image' => '',
                 'secondary_relative_url' => '/styleguide/image/150x150?text=150x150:'.$i, // 4:3

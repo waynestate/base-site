@@ -26,19 +26,19 @@ table {
     }
 
     tr {
-        @apply border border-gray-200 border-t-0 border-solid align-top;
+        @apply align-top;
 
-        &:nth-child(odd) {
+        &:nth-child(even) {
             @apply bg-gray-100;
         }
 
-        &:nth-child(even) {
+        &:nth-child(odd) {
             @apply bg-white;
         }
     }
 
     th {
-        @apply bg-gray-100 font-bold px-4 py-3 text-black leading-none border-t border-gray-200;
+        @apply bg-gray-100 font-bold px-4 py-3 text-green-600 leading-none border-b border-b-gray-300;
     }
 
     td {
