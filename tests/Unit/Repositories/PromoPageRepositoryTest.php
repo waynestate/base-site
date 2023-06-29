@@ -25,12 +25,13 @@ use Waynestate\Api\Connector;
     public function getPromoPagePromos(array $data)
     public function changePromoItemDisplay($promos, $group_info)
     public function organizePromoItemsByOption(array $promos)
-    public function getBackToPromoListing($referer = null, $scheme = null, $host = null, $uri = null)
+    public function getBackToPromoPage($referer = null, $scheme = null, $host = null, $uri = null)
  */
 
 class PromoPageRepositoryTest extends TestCase
 {
     /**
+     * @covers \App\Repositories\PromoPageRepository::__construct
      * @covers \App\Repositories\PromoPageRepository::getPromoPagePromos
      * @test
      */
@@ -64,6 +65,7 @@ class PromoPageRepositoryTest extends TestCase
     }
 
     /**
+     * @covers \App\Repositories\PromoPageRepository::__construct
      * @covers \App\Repositories\PromoPageRepository::getPromoPagePromos
      * @test
      */
@@ -97,7 +99,9 @@ class PromoPageRepositoryTest extends TestCase
     }
 
     /**
+     * @covers \App\Repositories\PromoPageRepository::__construct
      * @covers \App\Repositories\PromoPageRepository::getPromoPagePromos
+     * @covers \App\Repositories\PromoPageRepository::changePromoItemDisplay
      * @test
      */
     public function promo_page_parse_json_returns_promos()
@@ -137,7 +141,10 @@ class PromoPageRepositoryTest extends TestCase
     }
 
     /**
+     * @covers \App\Repositories\PromoPageRepository::__construct
      * @covers \App\Repositories\PromoPageRepository::getPromoPagePromos
+     * @covers \App\Repositories\PromoPageRepository::changePromoItemDisplay
+     * @covers \App\Repositories\PromoPageRepository::organizePromoItemsByOption
      * @test
      */
     public function promo_page_parse_json_returns_promos_by_option()
@@ -180,7 +187,9 @@ class PromoPageRepositoryTest extends TestCase
     }
 
     /**
+     * @covers \App\Repositories\PromoPageRepository::__construct
      * @covers \App\Repositories\PromoPageRepository::getPromoPagePromos
+     * @covers \App\Repositories\PromoPageRepository::changePromoItemDisplay
      * @test
      */
     public function promo_page_unset_excerpt()
@@ -229,7 +238,9 @@ class PromoPageRepositoryTest extends TestCase
     }
 
     /**
+     * @covers \App\Repositories\PromoPageRepository::__construct
      * @covers \App\Repositories\PromoPageRepository::getPromoPagePromos
+     * @covers \App\Repositories\PromoPageRepository::changePromoItemDisplay
      * @test
      */
     public function promo_page_unset_description()
@@ -280,6 +291,7 @@ class PromoPageRepositoryTest extends TestCase
     }
 
     /**
+     * @covers \App\Repositories\PromoPageRepository::__construct
      * @covers \App\Repositories\PromoPageRepository::getPromoPagePromos
      * @test
      */
@@ -323,6 +335,7 @@ class PromoPageRepositoryTest extends TestCase
     }
 
     /**
+     * @covers \App\Repositories\PromoPageRepository::__construct
      * @covers \App\Repositories\PromoPageRepository::getPromoPagePromos
      * @test
      */
@@ -363,16 +376,57 @@ class PromoPageRepositoryTest extends TestCase
     }
 
     /**
-     * @covers \App\Repositories\PromoPageRepository::getPromoListingPromos
+     * @covers \App\Repositories\PromoPageRepository::__construct
+     * @covers \App\Repositories\PromoPageRepository::getPromoPagePromos
      * @test
      */
-    /*
-    public function getting_promos_listing_with_no_page_field_should_be_empty_array()
+    public function promo_page_set_config()
+    {
+        $promo_group_id = $this->faker->numberbetween(1, 3);
+
+        // Fake return
+        $return['promotions'] = app(PromoPage::class)->create(5, false, [
+            'promo_group_id' => $promo_group_id,
+        ]);
+
+        // Fake return starts at 1 for some reason
+        $return['promotions'] = array_values($return['promotions']);
+
+        // Create a fake data request
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'PromoPagePromos',
+            ],
+            'data' => [
+                'promoPage' => '{
+"id":'. $promo_group_id .',
+"config":"limit:2",
+}',
+            ],
+        ]);
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
+
+        // Run the promos through the repository
+        $promos = app(PromoPageRepository::class, ['wsuApi' => $wsuApi])->getPromoPagePromos($data);
+
+        $this->assertCount(2, $promos['promos']);
+    }
+
+    /**
+     * @covers \App\Repositories\PromoPageRepository::__construct
+     * @covers \App\Repositories\PromoPageRepository::getPromoPagePromos
+     * @test
+     */
+
+    public function promo_page_with_no_page_field_should_be_empty_array()
     {
         // Create a fake data request
         $data = app(Page::class)->create(1, true, [
             'page' => [
-                'controller' => 'PromoListingPromos',
+                'controller' => 'PromoPagePromos',
             ],
         ]);
 
@@ -381,12 +435,13 @@ class PromoPageRepositoryTest extends TestCase
         $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->never();
 
         // Get the promos
-        $promos = app(PromoPageRepository::class, ['wsuApi' => $wsuApi])->getPromoListingPromos($data);
+        $promos = app(PromoPageRepository::class, ['wsuApi' => $wsuApi])->getPromoPagePromos($data);
         $this->assertTrue(is_array($promos));
     }
 
 
     /**
+     * @covers \App\Repositories\PromoPageRepository::__construct
      * @covers \App\Repositories\PromoPageRepository::getPromoView
      * @test
      */
@@ -412,30 +467,30 @@ class PromoPageRepositoryTest extends TestCase
     }
 
     /**
-     * @covers \App\Repositories\PromoPageRepository::getBackToPromoListing
+     * @covers \App\Repositories\PromoPageRepository::getBackToPromoPage
      * @test
      */
-    public function getting_back_to_promo_list_url_should_return_url()
+    public function back_to_promo_page_should_return_url()
     {
         // The default path if no referer
-        $url = app(PromoPageRepository::class)->getBackToPromoListing();
+        $url = app(PromoPageRepository::class)->getBackToPromoPage();
         $this->assertTrue($url == '');
 
         // If a referer is passed from a different domain
         $referer = $this->faker->url;
-        $url = app(PromoPageRepository::class)->getBackToPromoListing($referer, 'http', 'wayne.edu', '/');
+        $url = app(PromoPageRepository::class)->getBackToPromoPage($referer, 'http', 'wayne.edu', '/');
         $this->assertTrue($url == '');
 
         // If a referer is passed that is the same page we are on
         $referer = $this->faker->url;
         $parsed = parse_url($referer);
-        $url = app(PromoPageRepository::class)->getBackToPromoListing($referer, $parsed['scheme'], $parsed['host'], $parsed['path']);
+        $url = app(PromoPageRepository::class)->getBackToPromoPage($referer, $parsed['scheme'], $parsed['host'], $parsed['path']);
         $this->assertTrue($url == '');
 
         // If referer is passed from the same domain that the site is on
         $referer = $this->faker->url;
         $parsed = parse_url($referer);
-        $url = app(PromoPageRepository::class)->getBackToPromoListing($referer, $parsed['scheme'], $parsed['host'], $this->faker->word);
+        $url = app(PromoPageRepository::class)->getBackToPromoPage($referer, $parsed['scheme'], $parsed['host'], $this->faker->word);
         $this->assertEquals($referer, $url);
     }
 }

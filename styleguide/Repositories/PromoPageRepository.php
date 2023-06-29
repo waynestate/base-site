@@ -67,7 +67,6 @@ class PromoPageRepository extends Repository
 
         // Organize promos by option
         $promos = $this->organizePromoItemsByOption($promos);
-        dump($promos);
 
         return $promos;
     }

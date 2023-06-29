@@ -150,7 +150,9 @@ class PromoPageRepository implements PromoPageRepositoryContract
         // Enable the individual promotion view
         if ($group_info['singlePromoView'] == "true") {
             $promos['promos'] = collect($promos['promos'])->map(function ($item) {
-                $item['link'] = 'view/'.Str::slug($item['title']).'-'.$item['promo_item_id'];
+                if (!empty($item)) {
+                    $item['link'] = 'view/'.Str::slug($item['title']).'-'.$item['promo_item_id'];
+                }
 
                 return $item;
             })->toArray();
@@ -206,7 +208,7 @@ class PromoPageRepository implements PromoPageRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getBackToPromoListing($referer = null, $scheme = null, $host = null, $uri = null)
+    public function getBackToPromoPage($referer = null, $scheme = null, $host = null, $uri = null)
     {
         // Make sure the referer is coming from the site we are currently on and not the current page
         if ($referer === null

@@ -44,5 +44,5 @@ interface PromoPageRepositoryContract
      *
      * @return array
      */
-    public function getBackToPromoListing($referer = null, $scheme = null, $host = null, $uri = null);
+    public function getBackToPromoPage($referer = null, $scheme = null, $host = null, $uri = null);
 }

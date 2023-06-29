@@ -16,7 +16,7 @@ class PageRepositoryTest extends TestCase
      * @covers \App\Http\Controllers\ArticleController
      * @covers \App\Http\Controllers\DirectoryController
      * @covers \App\Http\Controllers\TopicController
-     * @covers \App\Http\Controllers\PromoListingController
+     * @covers \App\Http\Controllers\PromoPageController
      * @covers \App\Http\Controllers\ContactTableController
      * @covers \Styleguide\Repositories\PageRepository::getRequestData
      * @test
