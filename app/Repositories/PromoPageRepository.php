@@ -53,7 +53,6 @@ class PromoPageRepository implements PromoPageRepositoryContract
 
         $promo['promo'] = empty($promo['error']) ? $promo['promotion'] : [];
 
-
         return $promo;
     }
 
