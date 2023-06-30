@@ -71,7 +71,6 @@ class PromoPageRepository implements PromoPageRepositoryContract
         if (!empty($data['data']['grid_promo_group_id'])) {
             $data['data']['promoPage'] = "{\"id\":\"".$data['data']['grid_promo_group_id']."\",\"columns\":\"3\"}";
         }
-        // Separate promo repository test and write a promopage test
 
         if (!empty($data['data']['promoPage'])) {
             $group_info = $this->parsePromoJSON($data);
@@ -93,7 +92,7 @@ class PromoPageRepository implements PromoPageRepositoryContract
 
             $promos = $this->parsePromos->parse($promos, $group_reference, $group_config);
 
-            // Manage data with template flags
+            // Manipulate promo data from page field settings
             $promos = $this->changePromoItemDisplay($promos, $group_info);
 
             // Organize promos by option

@@ -28,6 +28,8 @@ class PromoPage implements FactoryContract
             '450x600?text=450x600', // 3:4
             '600x338?text=600x338', // 16:9
             '600x600?text=600x600', // 1:1
+            //'600x217', // 2.76:1
+            //'600x200', // 3:1
         ]);
 
         for ($i = 1; $i <= $limit; $i++) {
@@ -40,11 +42,6 @@ class PromoPage implements FactoryContract
                 'promo_group_id' => strval($promo_group_id),
                 'option' => $this->faker->randomElement(['Gold', 'Green', '']),
                 'relative_url' => $image.':'.$i,
-                //'relative_url' => '/styleguide/image/450x600', // 3:4
-                //'relative_url' => '/styleguide/image/600x338', // 16:9
-                //'relative_url' => '/styleguide/image/600x600', // 1:1
-                //'relative_url' => '/styleguide/image/600x217', // 2.76:1
-                //'relative_url' => '/styleguide/image/600x200', // 3:1
                 'filename_url' => $image.':'.$i,
                 'filename_alt_text' => 'Placeholder image '.$i,
                 'secondary_image' => '',
