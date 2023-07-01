@@ -10,24 +10,6 @@ use Tests\TestCase;
 use Mockery as Mockery;
 use Waynestate\Api\Connector;
 
-// Tests
-// getting a list with options
-// id
-// config
-// excerpt
-// single promo view
-// columns
-// description
-// parse promo
-//
-/*
-    public function parsePromoJSON($data)
-    public function getPromoPagePromos(array $data)
-    public function changePromoItemDisplay($promos, $group_info)
-    public function organizePromoItemsByOption(array $promos)
-    public function getBackToPromoPage($referer = null, $scheme = null, $host = null, $uri = null)
- */
-
 class PromoPageRepositoryTest extends TestCase
 {
     /**
@@ -69,6 +51,41 @@ class PromoPageRepositoryTest extends TestCase
      * @covers \App\Repositories\PromoPageRepository::getPromoPagePromos
      * @test
      */
+    public function promo_page_returns_legacy_listing_array_with_individual_view()
+    {
+        $promo_group_id = $this->faker->numberbetween(1, 3);
+
+        // Fake return
+        $return['promotions'] = app(PromoPage::class)->create(5, false, [
+            'promo_group_id' => $promo_group_id,
+        ]);
+
+        // Create a fake data request
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'PromoPagePromos',
+            ],
+            'data' => [
+                'listing_promo_group_id' => $promo_group_id,
+                'promotion_view_boolean' => 'true',
+            ],
+        ]);
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
+
+        // Get the promos
+        $promos = app(PromoPageRepository::class, ['wsuApi' => $wsuApi])->getPromoPagePromos($data);
+
+        $this->assertCount(count($return['promotions']), $promos['promos']);
+    }
+
+    /**
+     * @covers \App\Repositories\PromoPageRepository::__construct
+     * @covers \App\Repositories\PromoPageRepository::getPromoPagePromos
+     * @test
+     */
     public function promo_page_returns_legacy_grid_array()
     {
         $promo_group_id = $this->faker->numberbetween(1, 3);
@@ -85,6 +102,41 @@ class PromoPageRepositoryTest extends TestCase
             ],
             'data' => [
                 'grid_promo_group_id' => $promo_group_id,
+            ],
+        ]);
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
+
+        // Get the promos
+        $promos = app(PromoPageRepository::class, ['wsuApi' => $wsuApi])->getPromoPagePromos($data);
+
+        $this->assertCount(count($return['promotions']), $promos['promos']);
+    }
+
+    /**
+     * @covers \App\Repositories\PromoPageRepository::__construct
+     * @covers \App\Repositories\PromoPageRepository::getPromoPagePromos
+     * @test
+     */
+    public function promo_page_returns_legacy_grid_array_with_individual_view()
+    {
+        $promo_group_id = $this->faker->numberbetween(1, 3);
+
+        // Fake return
+        $return['promotions'] = app(PromoPage::class)->create(5, false, [
+            'promo_group_id' => $promo_group_id,
+        ]);
+
+        // Create a fake data request
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'PromoPagePromos',
+            ],
+            'data' => [
+                'grid_promo_group_id' => $promo_group_id,
+                'promotion_view_boolean' => 'true',
             ],
         ]);
 
