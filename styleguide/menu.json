@@ -553,7 +553,7 @@
                 "is_active": 1,
                 "page_id": 101105,
                 "target": "",
-                "display_name": "Profile driven",
+                "display_name": "Profiles",
                 "class_name": "",
                 "relative_url": "/styleguide/profiles",
                 "submenu": {
@@ -562,7 +562,7 @@
                         "is_active": 1,
                         "page_id": 101105,
                         "target": "",
-                        "display_name": "Profiles",
+                        "display_name": "Profile listing",
                         "class_name": "",
                         "relative_url": "/styleguide/profiles",
                         "submenu": []
@@ -624,34 +624,54 @@
                 "is_active": 1,
                 "page_id": 101110,
                 "target": "",
-                "display_name": "Promotion driven",
+                "display_name": "Promos",
                 "class_name": "",
-                "relative_url": "/styleguide/promolisting",
+                "relative_url": "/styleguide/promolist",
                 "submenu": {
-                    "101110100": {
-                        "menu_item_id": 101110100,
-                        "is_active": 1,
-                        "page_id": 101110100,
-                        "target": "",
-                        "display_name": "Promo listing",
-                        "class_name": "",
-                        "relative_url": "/styleguide/promolisting",
-                        "submenu": []
-                    },
                     "101110200": {
                         "menu_item_id": 101110200,
                         "is_active": 1,
                         "page_id": 101110200,
                         "target": "",
-                        "display_name": "Promo grid",
+                        "display_name": "Promo list",
                         "class_name": "",
-                        "relative_url": "/styleguide/promogrid",
+                        "relative_url": "/styleguide/promolist",
                         "submenu": []
                     },
                     "101110300": {
                         "menu_item_id": 101110300,
                         "is_active": 1,
                         "page_id": 101110300,
+                        "target": "",
+                        "display_name": "Promo list, grouped by option",
+                        "class_name": "",
+                        "relative_url": "/styleguide/promolistoptions",
+                        "submenu": []
+                    },
+                    "101110400": {
+                        "menu_item_id": 101110400,
+                        "is_active": 1,
+                        "page_id": 101110400,
+                        "target": "",
+                        "display_name": "Promo grid, 3 column",
+                        "class_name": "",
+                        "relative_url": "/styleguide/promogrid3",
+                        "submenu": []
+                    },
+                    "101110500": {
+                        "menu_item_id": 101110500,
+                        "is_active": 1,
+                        "page_id": 101110500,
+                        "target": "",
+                        "display_name": "Promo grid, 4 column, grouped by option",
+                        "class_name": "",
+                        "relative_url": "/styleguide/promogrid4",
+                        "submenu": []
+                    },
+                    "101110100": {
+                        "menu_item_id": 101110100,
+                        "is_active": 1,
+                        "page_id": 101110100,
                         "target": "",
                         "display_name": "Promo item view",
                         "class_name": "",

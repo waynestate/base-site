@@ -1,23 +1,23 @@
 <?php
 /*
 * Status: Public
-* Description: Promo Listing template
+* Description: Promo Page template
 * Default: false
 */
 
 namespace App\Http\Controllers;
 
-use Contracts\Repositories\PromoRepositoryContract;
+use Contracts\Repositories\PromoPageRepositoryContract;
 use Illuminate\Http\Request;
 
-class PromoListingController extends Controller
+class PromoPageController extends Controller
 {
     /**
      * Construct the controller.
      *
      * @param PromoRepositoryContract $promo
      */
-    public function __construct(PromoRepositoryContract $promo)
+    public function __construct(PromoPageRepositoryContract $promo)
     {
         $this->promo = $promo;
     }
@@ -34,13 +34,9 @@ class PromoListingController extends Controller
      */
     public function index(Request $request)
     {
-        $promos = $this->promo->getPromoListingPromos($request->data['base']);
+        $promos = $this->promo->getPromoPagePromos($request->data['base']);
 
-        if (!empty($request->data['base']['data']['grid_promo_group_id'])) {
-            return view('promo-grid', merge($request->data, $promos));
-        }
-
-        return view('promo-listing', merge($request->data, $promos));
+        return view('promo-page', merge($request->data, $promos));
     }
 
     /**
