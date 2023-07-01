@@ -61,14 +61,22 @@ class PromoPageRepository implements PromoPageRepositoryContract
      */
     public function getPromoPagePromos(array $data)
     {
-        // Legacy support
+        // Legacy support for listing
         if (!empty($data['data']['listing_promo_group_id'])) {
-            $data['data']['promoPage'] = "{\"id\":\"".$data['data']['listing_promo_group_id']."\"}";
+            if (!empty($data['data']['promotion_view_boolean']) && $data['data']['promotion_view_boolean'] === "true") {
+                $data['data']['promoPage'] = "{\"id\":\"".$data['data']['listing_promo_group_id']."\",\"singlePromoView\":\"true\"}";
+            } else {
+                $data['data']['promoPage'] = "{\"id\":\"".$data['data']['listing_promo_group_id']."\"}";
+            }
         }
 
-        // Legacy support
+        // Legacy support for grid
         if (!empty($data['data']['grid_promo_group_id'])) {
-            $data['data']['promoPage'] = "{\"id\":\"".$data['data']['grid_promo_group_id']."\",\"columns\":\"3\"}";
+            if (!empty($data['data']['promotion_view_boolean']) && $data['data']['promotion_view_boolean'] === "true") {
+                $data['data']['promoPage'] = "{\"id\":\"".$data['data']['grid_promo_group_id']."\",\"columns\":\"3\",\"singlePromoView\":\"true\"}";
+            } else {
+                $data['data']['promoPage'] = "{\"id\":\"".$data['data']['grid_promo_group_id']."\",\"columns\":\"3\"}";
+            }
         }
 
         if (!empty($data['data']['promoPage'])) {
