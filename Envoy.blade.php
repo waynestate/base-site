@@ -130,8 +130,19 @@ echo '----';
 @endtask
 
 @task('init_basedir_remote', ['on' => $remote_server])
-[ -d {{ $release_dir }} ] || mkdir -p -m 02770 {{ $release_dir }};
-[ -d {{ $shared_dir }}/storage ] || mkdir -p -m 02770 {{ $shared_dir }}/storage;
+
+if [ ! -d {{ $release_dir }} ]; then
+    mkdir -p -m 02770 {{ $release_dir }};
+    chgrp marketing {{ $release_dir }};
+    chmod g+s {{ $release_dir }};
+fi
+
+if [ ! -d {{ $shared_dir }}/storage ]; then
+    mkdir -p -m 02770 {{ $shared_dir }}/storage;
+    chgrp marketing {{ $shared_dir }}/storage;
+    chmod g+s {{ $shared_dir }}/storage;
+fi
+
 [ -d {{ $shared_dir }}/storage/debugbar ] || mkdir -p -m 02770 {{ $shared_dir }}/storage/debugbar;
 [ -d {{ $shared_dir }}/storage/logs ] || mkdir -p -m 02770 {{ $shared_dir }}/storage/logs;
 [ -d {{ $shared_dir }}/storage/app ] || mkdir -p -m 02770 {{ $shared_dir }}/storage/app;
@@ -139,9 +150,6 @@ echo '----';
 [ -d {{ $shared_dir }}/storage/framework ] || mkdir -p -m 02770 {{ $shared_dir }}/storage/framework;
 [ -d {{ $shared_dir }}/storage/framework/cache ] || mkdir -p -m 02770 {{ $shared_dir }}/storage/framework/cache;
 [ -d {{ $shared_dir }}/storage/framework/views ] || mkdir -p -m 02770 {{ $shared_dir }}/storage/framework/views;
-
-chmod -R g+s {{ $shared_dir }}/storage
-chmod -R g+s {{ $release_dir }}
 
 [ -d {{ $app_base }}/tmp ] || mkdir -p 02770 {{ $app_base }}/tmp;
 @endtask
@@ -267,11 +275,11 @@ echo "RemoteRelease Prepare Done.";
 shopt -s expand_aliases
 source ~/.bashrc
 echo "Clearing view cache"
-php73 {{ $release_dir }}/{{ $release }}/artisan view:clear
+php80 {{ $release_dir }}/{{ $release }}/artisan view:clear
 echo "Caching configs...";
-php73 {{ $release_dir }}/{{ $release }}/artisan config:cache
+php80 {{ $release_dir }}/{{ $release }}/artisan config:cache
 echo "Caching routes...";
-php73 {{ $release_dir }}/{{ $release }}/artisan route:cache
+php80 {{ $release_dir }}/{{ $release }}/artisan route:cache
 echo "Done caching ";
 @endtask
 
