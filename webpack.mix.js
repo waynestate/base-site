@@ -32,8 +32,9 @@ if(!fs.existsSync('.git/hooks')) {
         }
         console.log('.git/hooks directory created.');
     });
+
+    fs.copyFileSync('hooks/pre-commit', '.git/hooks/pre-commit', fs.constants.COPYFILE_FICLONE);
 }
-fs.copyFileSync('hooks/pre-commit', '.git/hooks/pre-commit', fs.constants.COPYFILE_FICLONE);
 replace.sync({
     files: 'resources/views/components/footer.blade.php',
     from: /2\d{3}/g,
