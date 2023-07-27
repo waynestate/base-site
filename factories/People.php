@@ -156,6 +156,13 @@ class People implements FactoryContract
                     'Office' => $office,
                     'Biography' => $biography,
                     'Research Interests' => $research_interests,
+                    'Youtube Videos' => [
+                        0 => [
+                            'youtube_id' => 'PHqfwq033yQ',
+                            'link' => 'https://www.youtube.com/watch?v=PHqfwq033yQ',
+                            'filename_alt_text' => 'YouTube video from '.$this->faker->firstName,
+                        ],
+                    ],
                 ],
             ];
 

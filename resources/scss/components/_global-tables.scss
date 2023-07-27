@@ -25,36 +25,24 @@ table {
         }
     }
 
-    thead tr {
-        @apply border border-solid border-green-600;
-
-        th {
-            @apply bg-green-600 font-bold px-4 py-3 text-white leading-none;
-        }
-
-        a {
-            @apply text-white;
-        }
-    }
-
-    tbody tr {
-        @apply border border-gray-300 border-t-0 border-solid align-top;
-
-        td {
-            @apply text-sm px-4 py-2;
-        }
-
-        &:nth-child(odd) {
-            @apply bg-gray-200;
-        }
+    tr {
+        @apply align-top;
 
         &:nth-child(even) {
             @apply bg-gray-100;
         }
 
-        &:hover {
-            @apply bg-gold-50;
+        &:nth-child(odd) {
+            @apply bg-white;
         }
+    }
+
+    th {
+        @apply bg-gray-100 font-bold px-4 py-3 text-green-600 leading-none border-b border-b-gray-300;
+    }
+
+    td {
+        @apply text-sm px-4 py-2;
     }
 }
 

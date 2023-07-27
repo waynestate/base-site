@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use Contracts\Repositories\ProfileRepositoryContract;
 use Illuminate\Cache\Repository;
+use Waynestate\Youtube\ParseId;
 use Illuminate\Support\Str;
 use Waynestate\Api\News;
 use Waynestate\Api\People;
@@ -268,6 +269,12 @@ class PeopleRepository implements ProfileRepositoryContract
         if (!empty($profile['data'])) {
             $profile['data']['link'] = '/profile/'.$profile['data']['accessid'];
 
+            if (!empty($profiles['profiles'][$site_id]['data']['Youtube Videos'])) {
+                $profiles['profiles'][$site_id]['data']['Youtube Videos'] = collect($profiles['profiles'][$site_id]['data']['Youtube Videos'])->map(function ($youtube_link) {
+                    return ParseId::fromUrl($youtube_link);
+                });
+            }
+
             foreach ($profile['data']['field_data'] as $data) {
                 if ($data['field']['type'] == 'file') {
                     $profile['data']['data'][$data['field']['name']]['url'] = $data['value'];
@@ -341,6 +348,7 @@ class PeopleRepository implements ProfileRepositoryContract
                 'Last Name',
                 'Picture',
                 'Photo Download',
+                'Youtube Videos',
             ],
             // Build the users name based on these fields
             'name_fields' => [

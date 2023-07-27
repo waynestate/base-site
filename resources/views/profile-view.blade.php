@@ -43,6 +43,14 @@
                         @endif
                     @endif
                 @endforeach
+
+                @if(!empty($profile['data']['Youtube Videos']))
+                    @foreach ($profile['data']['Youtube Videos'] as $item)
+                        <div class="pb-4">
+                            @include('components.video-profile', ['video' =>  $item])
+                        </div>
+                    @endforeach
+                @endif
              </div>
         </div>
 

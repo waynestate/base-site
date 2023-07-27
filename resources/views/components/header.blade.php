@@ -1,7 +1,7 @@
 <div class="wsuheader">
-    <div class="wsuwrap">
+    <div class="wsuheaderwrap">
         <div class="wsuwordmark">
-            <h1>
+            <div>
                 <a href="https://wayne.edu/" aria-labelledby="wsuheader-title">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 605 65" preserveAspectRatio="xMaxYMin meet">
                         <title id="wsuheader-title">Wayne State University</title>
@@ -14,7 +14,7 @@
                         <path class="wm6" d="M41.7 21.8l-2.1 4.8 2.1 4.7c7.4-5.3 8.7-10.7 8.7-10.7l-4.2-4.8h11.9c0 8.2-5.3 17.8-18.1 28.1l-4.3-11-4.3 11c-12.7-10.2-18-19.8-18-28h11.9L21 20.7s1.3 5.4 8.7 10.7l2.1-4.7-2.1-4.8h12v-.1z"/>
                     </svg>
                 </a>
-            </h1>
+            </div>
         </div>
 
         <div class="wsumenu">
@@ -27,13 +27,13 @@
 
             <div class="wsumenuwrap">
                 <div class="wsulogin">
-                    <a href="https://login.wayne.edu"><span class="wsuhidesmall">Login</span></a>
+                    <a href="https://login.wayne.edu"><span class="wsuloginlabel">Login</span></a>
                 </div>
 
                 <div class="wsusearch"><a href="https://wayne.edu/search/" class="wsusearchicon"><span class="wsuhidesmall">Search</span></a></div>
 
                 <div class="wsusearchbar">
-                    <form method="get" action="https://wayne.edu/search/" role="search">
+                    <form method="get" action="https://wayne.edu/search/" role="search" aria-label="Primary">
                         <label for="q">Search:</label>
                         <input name="q" class="wsusearchfield" size="15" id="q" placeholder="Search..." type="text">
                         <button type="submit" class="wsusearchicon"><span>Search</span></button>
