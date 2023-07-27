@@ -23,12 +23,17 @@
 // For under menu items that have class to designate external link
 .main-menu .external {
     a::after {
-        content: url('/_resources/images/external-link.svg');
+        content: '(external link)';
+        font-size: 0;
+        background-image: url('/_resources/images/external-link.svg');
+        background-size: contain;
         display: inline-block;
-        margin-left: 0.4em;
-        width: 1em;
-        height: 1em;
+        margin-left: 7px;
+        width: 11px;
+        height: 11px;
         filter: invert(100%);
+        position: relative;
+        bottom: 1px;
     }
 
     @screen mt {
