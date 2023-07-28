@@ -19,3 +19,41 @@
 .menu-icon:hover::after {
     @apply bg-gray-400 shadow-grey;
 }
+
+// For under menu items that have class to designate external link
+.main-menu .external {
+    a::after {
+        content: '(external link)';
+        font-size: 0;
+        background-image: url('/_resources/images/external-link.svg');
+        background-size: contain;
+        display: inline-block;
+        margin-left: 7px;
+        width: 11px;
+        height: 11px;
+        filter: invert(100%);
+        position: relative;
+        bottom: 1px;
+    }
+
+    @screen mt {
+        a::after {
+            filter: invert(0);
+        }
+    }
+}
+
+.external a.button div:first-of-type::after {
+    content: '(external link)';
+    font-size: 0;
+    background-image: url('/_resources/images/external-link.svg');
+    background-size: contain;
+    display: inline-block;
+    margin-left: 7px;
+    width: 11px;
+    height: 11px;
+    //filter: invert(100%);
+    position: relative;
+    top: -11px;
+    margin-bottom: -11px;
+}
