@@ -43,13 +43,17 @@
     }
 }
 
-.under-menu .external {
-    div div::after {
-        content: url('/_resources/images/external-link.svg');
-        display: inline-block;
-        margin-left: 0.4em;
-        width: 1em;
-        height: 1em;
-        vertical-align: text-top;
-    }
+.external a.button div:first-of-type::after {
+    content: '(external link)';
+    font-size: 0;
+    background-image: url('/_resources/images/external-link.svg');
+    background-size: contain;
+    display: inline-block;
+    margin-left: 7px;
+    width: 11px;
+    height: 11px;
+    //filter: invert(100%);
+    position: relative;
+    top: -11px;
+    margin-bottom: -11px;
 }
