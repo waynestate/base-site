@@ -45,6 +45,13 @@ class Profile implements FactoryContract
                         '<p>'.$this->faker->paragraph(10).'</p>',
                         '<p>'.$this->faker->paragraph(10).'</p>',
                     ],
+                    'Youtube Videos' => [
+                        0 => [
+                            'youtube_id' => 'PHqfwq033yQ',
+                            'link' => 'https://www.youtube.com/watch?v=PHqfwq033yQ',
+                            'filename_alt_text' => 'YouTube video from '.$this->faker->firstName,
+                        ],
+                    ],
                 ],
                 'groups' => [
                     $groups->random()['display_name'],

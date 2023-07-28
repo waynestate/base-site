@@ -47,16 +47,15 @@ const baseColors = {
 }
 
 const screens = {
-    sm: '420px',
-    md: '576px',
-    lg: '732px',
-    xl: '888px',
-    xxl: '1044px',
+    'sm': '420px',
+    'md': '576px',
+    'lg': '732px',
+    'xl': '888px',
+    'xxl': '1044px',
     '2xl': '1044px',
-    xxxl: '1200px',
     '3xl': '1200px',
-    mt: '780px', // Adjust this based on the top menu width
-    print: {'raw': 'print'},
+    'mt': '780px', // Adjust this based on the top menu width
+    'print': {'raw': 'print'},
 }
 
 module.exports = {
@@ -75,11 +74,11 @@ module.exports = {
         },
         {
             pattern: /w-[1-5]\/[1-5]/,
-            variants: ['sm','md','lg','xl','xxl','xxxl','mt'],
+            variants: ['sm','md','lg','xl','2xl','3xl','mt'],
         },
         {
             pattern: /grid(-cols-[1-4])?/,
-            variants: ['sm','md','lg','2xl'],
+            variants: ['sm','md','lg','xl','2xl','3xl','mt'],
         },
         '/form_responses/'
     ],
