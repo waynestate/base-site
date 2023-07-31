@@ -20,40 +20,76 @@
     @apply bg-gray-400 shadow-grey;
 }
 
-// For under menu items that have class to designate external link
-.main-menu .external {
-    a::after {
-        content: '(external link)';
-        font-size: 0;
-        background-image: url('/_resources/images/external-link.svg');
-        background-size: contain;
-        display: inline-block;
-        margin-left: 7px;
-        width: 11px;
-        height: 11px;
-        filter: invert(100%);
-        position: relative;
-        bottom: 1px;
-    }
+.external-icon {
+    content: '(external link)';
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    position: relative;
+    bottom: 1px;
+    background-color: currentColor;
+    mask-image: url('/_resources/images/external-link.svg');
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+}
 
-    @screen mt {
-        a::after {
-            filter: invert(0);
-        }
+// Adding external link icon to menu items 
+.main-menu .external a::after {
+    @extend .external-icon;
+}
+
+@screen mt {
+    .main-menu .external a::after {
+        @extend .external-icon;
     }
 }
 
-.external a.button div:first-of-type::after {
-    content: '(external link)';
-    font-size: 0;
-    background-image: url('/_resources/images/external-link.svg');
-    background-size: contain;
-    display: inline-block;
-    margin-left: 7px;
-    width: 11px;
-    height: 11px;
-    //filter: invert(100%);
-    position: relative;
+// WIP button external link icon
+.under-menu .external-link a.button div:first-of-type::after,
+.under-menu .external-link a.gold-gradient-button div:first-of-type::after {
+    @extend .external-icon;
+    background-color: #062B27;
     top: -11px;
     margin-bottom: -11px;
+}
+
+.under-menu .external a.green-gradient-button div:first-of-type::after {
+    @extend .external-icon;
+    background-color: #fff;
+    top: -11px;
+    margin-bottom: -11px;
+}
+
+// External links in .content -- inline only
+.content a.external-link:not(.button),
+.content a[href^="https://"],
+.content a[href^="http://"],
+.content a[href^="//"] {
+    background-image:url('data:image/svg+xml,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 205 205" style="enable-background:new 0 0 205 205;" xml:space="preserve"><style type="text/css">.st0{fill:%230c5449;}</style><path class="st0" d="M162.1,102.8c-7.3,0-13.3,6-13.3,13.3v59.8H29.1V56.2h59.8c7.3,0,13.3-6,13.3-13.3s-6-13.3-13.3-13.3H15.8c-7.3,0-13.3,6-13.3,13.3v146.3c0,7.3,6,13.3,13.3,13.3h146.3c7.3,0,13.3-6,13.3-13.3v-73.1C175.4,108.7,169.4,102.8,162.1,102.8z"/><path class="st0" d="M189.2,2.5h-59.8c-7.3,0-13.3,6-13.3,13.3s6,13.3,13.3,13.3h27.7L88.9,97.3c-5.2,5.2-5.2,13.6,0,18.8c5.2,5.2,13.6,5.2,18.8,0l68.2-68.2v27.7c0,7.3,6,13.3,13.3,13.3s13.3-6,13.3-13.3V15.8C202.5,8.5,196.5,2.5,189.2,2.5z"/></svg>');
+    background-position: right 0.35em;
+    background-repeat: no-repeat;
+    background-size: 0.65em;
+    padding-right: 0.9em;
+    position: relative;
+    text-decoration: none;
+    margin-right: 0.2rem;
+
+    &::before {
+        content: '';
+        position: absolute;
+        border-bottom: 0.065em solid #0c5449;
+        bottom: 0.095em;
+        right: 0;
+        left: 0;
+    }
+
+    &:hover::before {
+        border-color: transparent;
+    }
+
+    &::after {
+        content: '(external link)';
+        font-size: 0;
+    }
 }
