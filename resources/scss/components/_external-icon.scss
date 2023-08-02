@@ -22,7 +22,7 @@
     @extend .external-icon;
 }
 
-// Strictly inline anchor
+// Strictly inline anchors
 .content a[href*="//"]:not([class*="button"]) {
     @apply relative mr-0.5;
 
