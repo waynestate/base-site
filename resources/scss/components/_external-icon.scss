@@ -1,0 +1,47 @@
+.external-icon {
+    content: '(external link)';
+    display: inline-block;
+    background-color: currentColor;
+    mask-image: url('/_resources/images/external-link.svg');
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+    line-height: 0;
+    width: 0.7em;
+    height: 0.7em;
+    position: relative;
+    bottom: 0.29em;
+    left: 0.25em;
+}
+
+// Strictly inline-block anchors
+.main-menu .external-link a::after,
+.main-menu a[href*="//"]::after,
+.content a[href*="//"][class*="button"]::after,
+.under-menu a[href*="//"][class*="button"] div:first-of-type::after {
+    @extend .external-icon;
+}
+
+// Strictly inline anchor
+.content a[href*="//"]:not([class*="button"]) {
+    @apply relative mr-0.5;
+
+    &::before {
+        content: '';
+        position: absolute;
+        border-bottom: 0.065em solid #0c5449;
+        bottom: 0.095em;
+        right: 0;
+        left: 0;
+    }
+
+    &:hover::before {
+        border-color: transparent;
+    }
+
+    &::after {
+        @extend .external-icon;
+
+        @apply mr-1;
+    }
+}

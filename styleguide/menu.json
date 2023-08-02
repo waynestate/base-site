@@ -378,7 +378,7 @@
                         "page_id": 103100102,
                         "target": "",
                         "display_name": "External menu icon",
-                        "class_name": "external",
+                        "class_name": "external-link",
                         "relative_url": "/styleguide/menu/external",
                         "submenu": []
                     }
