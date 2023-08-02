@@ -15,15 +15,21 @@
 }
 
 // Strictly inline-block anchors
-.main-menu .external-link a::after,
-.main-menu a[href*="//"]::after,
-.content a[href*="//"][class*="button"]::after,
-.under-menu a[href*="//"][class*="button"] div:first-of-type::after {
-    @extend .external-icon;
+.main-menu .external-link a,
+.main-menu a[href*="//"],
+.content a[href*="//"][class*="button"],
+.under-menu a[href*="//"][class*="button"] div:first-of-type {
+    &::before {
+        @apply hidden;
+    }
+
+    &::after {
+        @extend .external-icon;
+    }
 }
 
 // Strictly inline anchors
-.content a[href*="//"]:not([class*="button"]) {
+.content a[href*="//"] {
     @apply relative mr-0.5;
 
     &::before {
