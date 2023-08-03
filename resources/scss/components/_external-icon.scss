@@ -16,9 +16,8 @@
 
 // Strictly inline-block anchors
 .main-menu .external-link a,
-.main-menu a[href*="//"],
-.content a[href*="//"][class*="button"],
-.under-menu a[href*="//"][class*="button"] div:first-of-type {
+.content a.external-link[class*="button"],
+.under-menu a.external-link[class*="button"] div:first-of-type {
     &::before {
         @apply hidden;
     }
@@ -29,7 +28,7 @@
 }
 
 // Strictly inline anchors
-.content a[href*="//"] {
+.content a.external-link {
     @apply relative mr-0.5;
 
     &::before {

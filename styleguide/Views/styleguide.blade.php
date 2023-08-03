@@ -12,7 +12,7 @@
         would fit best when adding or editing your pages. Some experience with basic html is beneficial and will help when incorporating 
         some of the features into your site.</p>
 
-        <p>We do offer a <a href="//go.wayne.edu/webtraining">CMS self-paced web training</a> that covers how to edit and manage the content on your site. This training is required for university staff.</p>
+        <p>We do offer a <a href="//go.wayne.edu/webtraining" class="external-link">CMS self-paced web training</a> that covers how to edit and manage the content on your site. This training is required for university staff.</p>
         
         <h2>Basic text formatting</h2>
         <p class="mb-1">These HTML classes are available for formatting paragraph or span elements. Add <code>class="text-lg"</code>, replacing "text-lg" with any of the names in the list below.</p>
