@@ -61,7 +61,7 @@ class ControllerTest extends TestCase
         // Make sure we catch CR-only line endings.
         $file_data = str_replace("\r", "\n", $file_data);
 
-        $default_headers = array('Status' => 'Status', 'Description' => 'Description', 'Default' => 'Default');
+        $default_headers = ['Status' => 'Status', 'Description' => 'Description', 'Default' => 'Default'];
 
         foreach ($default_headers as $field => $regex) {
             if (preg_match('/^[ \t\/*#@]*' . preg_quote($regex, '/') . ':(.*)$/mi', $file_data, $match) && $match[1]) {
