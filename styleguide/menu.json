@@ -377,7 +377,7 @@
                         "is_active": 1,
                         "page_id": 103100102,
                         "target": "",
-                        "display_name": "External menu icon",
+                        "display_name": "External icon",
                         "class_name": "external",
                         "relative_url": "/styleguide/menu/external",
                         "submenu": []

@@ -1,0 +1,54 @@
+.external-icon {
+    content: '(external link)';
+    display: inline-block;
+    background-color: currentColor;
+    mask-image: url('/_resources/images/external-link.svg');
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+    line-height: 0;
+    width: 0.7em;
+    height: 0.7em;
+    position: relative;
+    bottom: 0.29em;
+    left: 0.25em;
+}
+
+// Strictly inline-block anchors
+.main-menu .external a,
+.content a.external[class*="button"],
+.under-menu a.external[class*="button"] div:first-of-type {
+    &::before {
+        @apply hidden;
+    }
+
+    &::after {
+        @extend .external-icon;
+    }
+}
+
+// Strictly inline anchors
+.content a.external {
+    @apply relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        border-bottom: 0.065em solid #0c5449;
+        bottom: 0.095em;
+        right: 0;
+        left: 0;
+
+        @apply mr-0.5;
+    }
+
+    &:hover::before {
+        border-color: transparent;
+    }
+
+    &::after {
+        @extend .external-icon;
+
+        @apply mr-1.5;
+    }
+}
