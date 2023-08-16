@@ -53,6 +53,13 @@ class ModularPageRepository implements ModularPageRepositoryContract
                     // Modify field name to match component filename
                     $group_title = str_replace('modular_', '', $group_title);
                     $group_title = str_replace('_', '-', $group_title);
+                    /*
+                     * consider multiple text blocks
+                    $position = strpos($group_title, '-');
+                    if ($position !== false) {
+                        $group_title = substr($group_title, 0, $position);
+                    }
+                     */
 
                     // Create array of the groups that are not flattened by 'first'
                     // Use later to reset keys to use group title
