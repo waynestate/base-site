@@ -19,7 +19,7 @@
                 <div class="w-full relative text-white flex flex-col justify-center">
                     <div class="row w-full px-4 pt-10 pb-6 text-center md:white-links content">
                         @if(!empty($image['secondary_relative_url']))<img class="mx-auto mb-4" src="{{ $image['secondary_relative_url'] }}" alt="{{ $image['secondary_alt_text'] }}">@endif
-                        <h1 class="md:text-shadow-darkest leading-tight text-2xl mb-1 @if(in_array($base['page']['controller'], config('base.hero_full_controllers')))xl:text-5xl @else xl:text-3xl @endif">{{ $image['title'] }}</h1>
+                        <div class="md:text-shadow-darkest leading-tight text-2xl mb-1 @if(in_array($base['page']['controller'], config('base.hero_full_controllers')))xl:text-5xl @else xl:text-3xl @endif">{{ $image['title'] }}</div>
                         @if(!empty($image['description']))<div class="md:text-lg">{!! $image['description'] !!}</div>@endif
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                 <div class="relative md:absolute print:relative md:bottom-0 md:inset-x-0 md:text-white md:white-links content md:bg-gradient-darkest">
                     <div class="row">
                         <div class="mx-4 relative pb-0 pt-4 @if(in_array($base['page']['controller'], config('base.hero_full_controllers'))) md:pb-2 md:pt-8 md:pt-20 @else md:pt-12 @endif">
-                            <h1 class="md:text-shadow-darkest leading-tight text-2xl mb-1 @if(in_array($base['page']['controller'], config('base.hero_full_controllers')))xl:text-5xl @else xl:text-3xl @endif">{{ $image['title'] }}</h1>
+                            <div class="md:text-shadow-darkest leading-tight text-2xl mb-1 @if(in_array($base['page']['controller'], config('base.hero_full_controllers')))xl:text-5xl @else xl:text-3xl @endif">{{ $image['title'] }}</div>
                             @if(!empty($image['description']))<div class="md:text-lg">{!! $image['description'] !!}</div>@endif
                         </div>
                     </div>
@@ -43,4 +43,3 @@
         @endif
     @endforeach
 </div>
-
