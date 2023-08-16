@@ -15,7 +15,7 @@ class Data
     /**
      * Set a global data array to the request object containing page information
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next): Response|null
     {
         if (using_styleguide()) {
             $this->prefix = 'Styleguide';

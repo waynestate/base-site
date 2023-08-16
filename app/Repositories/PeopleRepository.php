@@ -30,7 +30,7 @@ class PeopleRepository implements ProfileRepositoryContract
     /**
      * Get the profile listing.
      */
-    public function getProfiles(int $site_id, int $selected_group = null): array
+    public function getProfiles(int $site_id, ?string $selected_group = null): array
     {
         $params = [
             'site_id' => $site_id,

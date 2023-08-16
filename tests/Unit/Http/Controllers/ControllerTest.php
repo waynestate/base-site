@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Http\Controllers;
 
+use Illuminate\Support\Collection;
 use Tests\TestCase;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -32,7 +33,7 @@ class ControllerTest extends TestCase
     /**
      * Get all controller comments.
      */
-    private function getControllerComments(): array
+    private function getControllerComments(): Collection
     {
         return collect(Storage::disk('base')->allFiles('app/Http/Controllers/'))
         ->reject(function ($item) {

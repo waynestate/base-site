@@ -36,7 +36,7 @@ class ProfileRepository implements ProfileRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getProfiles($site_id, $selected_group = null)
+    public function getProfiles(int $site_id, ?string $selected_group = null): array
     {
         $params = [
             'method' => 'profile.users.listing',
@@ -178,7 +178,7 @@ class ProfileRepository implements ProfileRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getDropdownOfGroups($site_id)
+    public function getDropdownOfGroups(int $site_id): array
     {
         $params = [
             'method' => 'profile.groups.listing',
@@ -217,7 +217,7 @@ class ProfileRepository implements ProfileRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getProfile($site_id, $accessid)
+    public function getProfile(int $site_id, string $accessid): array
     {
         $params = [
             'method' => 'profile.users.view',

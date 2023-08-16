@@ -20,7 +20,7 @@ class Formy
     /**
      * Parse the page content and replace form embeds with form html.
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next): Response|null
     {
         $request->data['base']['page']['content'] = collect($request->data['base']['page']['content'])
             ->map(function ($content) {

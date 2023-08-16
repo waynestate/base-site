@@ -11,6 +11,7 @@ use Illuminate\View\View;
 use Contracts\Repositories\ArticleRepositoryContract;
 use Contracts\Repositories\TopicRepositoryContract;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 
 class ArticleController extends Controller
 {
@@ -65,7 +66,7 @@ class ArticleController extends Controller
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-    public function show(Request $request): View
+    public function show(Request $request): View|Redirector
     {
         if (empty($request->data['base']['site']['news']['application_id'])) {
             abort('404');
