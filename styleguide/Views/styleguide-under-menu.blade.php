@@ -11,7 +11,7 @@
         @if(!empty($buttons))
             <h2 class="mb-4">Default buttons</h2>
             <div class="pb-4 md:flex items-start">
-                <div class="md:mr-4 flex-shrink-0">
+                <div class="md:mr-4 shrink-0">
                     @include('components.button-default', ['button' => $buttons['default'], 'class' => 'w-72'])
                 </div>
                 <div>
@@ -24,7 +24,7 @@
             </div>
 
             <div class="pb-4 md:flex items-start">
-                <div class="md:mr-4 flex-shrink-0">
+                <div class="md:mr-4 shrink-0">
                     @include('components.button-default', ['button' => $buttons['default_two_lines'], 'class' => 'w-72'])
                 </div>
                 <div>
@@ -38,7 +38,7 @@
             </div>
 
             <div class="pb-4 md:flex items-start">
-                <div class="md:mr-4 flex-shrink-0">
+                <div class="md:mr-4 shrink-0">
                     @include('components.button-default', ['button' => $buttons['default_icon'], 'class' => 'w-72'])
                 </div>
                 <div>
@@ -56,7 +56,7 @@
             
             <h2 class="mb-4">Green buttons</h2>
             <div class="pb-4 md:flex items-start">
-                <div class="md:mr-4 flex-shrink-0">
+                <div class="md:mr-4 shrink-0">
                     @include('components.button-green', ['button' => $buttons['green'], 'class' => 'w-72'])
                 </div>
                 <div>
@@ -69,7 +69,7 @@
             </div>
 
             <div class="pb-4 md:flex items-start">
-                <div class="md:mr-4 flex-shrink-0">
+                <div class="md:mr-4 shrink-0">
                     @include('components.button-green', ['button' => $buttons['green_two_lines'], 'class' => 'w-72'])
                 </div>
                 <div>
@@ -83,7 +83,7 @@
             </div>
 
             <div class="pb-4 md:flex items-start">
-                <div class="md:mr-4 flex-shrink-0">
+                <div class="md:mr-4 shrink-0">
                     @include('components.button-green', ['button' => $buttons['green_icon'], 'class' => 'w-72'])
                 </div>
                 <div>
@@ -101,7 +101,7 @@
 
             <h2 class="mb-4">Gold buttons</h2>
             <div class="pb-4 md:flex items-start">
-                <div class="md:mr-4 flex-shrink-0">
+                <div class="md:mr-4 shrink-0">
                     @include('components.button-gold', ['button' => $buttons['default'], 'class' => 'w-72'])
                 </div>
                 <div>
@@ -114,7 +114,7 @@
             </div>
 
             <div class="pb-4 md:flex items-start">
-                <div class="md:mr-4 flex-shrink-0">
+                <div class="md:mr-4 shrink-0">
                     @include('components.button-gold', ['button' => $buttons['default_two_lines'], 'class' => 'w-72'])
                 </div>
                 <div>
@@ -128,7 +128,7 @@
             </div>
 
             <div class="pb-4 md:flex items-start">
-                <div class="md:mr-4 flex-shrink-0">
+                <div class="md:mr-4 shrink-0">
                     @include('components.button-gold', ['button' => $buttons['default_icon'], 'class' => 'w-72'])
                 </div>
                 <div>
@@ -146,7 +146,7 @@
 
             <h2 class="mb-4">Image buttons</h2>
             <div class="pb-4 md:flex items-start">
-                <div class="md:mr-4 flex-shrink-0">
+                <div class="md:mr-4 shrink-0">
                     @include('components.button-bg-image-light', ['button' => $buttons['bg_image_light'], 'class' => 'w-72'])
                 </div>
                 <div>
@@ -167,7 +167,7 @@
             </div>
 
             <div class="pb-4 md:flex items-start">
-                <div class="md:mr-4 flex-shrink-0">
+                <div class="md:mr-4 shrink-0">
                     @include('components.button-bg-image-dark', ['button' => $buttons['bg_image_dark'], 'class' => 'w-72'])
                 </div>
                 <div>
@@ -191,7 +191,7 @@
 
             <h2 class="mb-4">SVG buttons</h2>
             <div class="pb-4 md:flex items-start">
-                <div class="md:mr-4 flex-shrink-0">
+                <div class="md:mr-4 shrink-0">
                     @include('components.button-bg-image-light', ['button' => $buttons['svg_light_bg'], 'class' => 'w-72'])
                 </div>
                 <div>
@@ -219,7 +219,7 @@
             </div>
 
             <div class="pb-4 md:flex items-start">
-                <div class="md:mr-4 flex-shrink-0">
+                <div class="md:mr-4 shrink-0">
                     @include('components.button-bg-image-dark', ['button' => $buttons['svg_dark_bg'], 'class' => 'w-72'])
                 </div>
                 <div>
@@ -242,6 +242,30 @@
                             </ul>
                         </li>
                         <li>Option: Bg image dark</li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr />
+
+            <h2>Logo button</h2>
+            <p class="mb-4">Not recommended due to accessibility concerns. The image must have descriptive alternative text if used.</p>
+            <div class="pb-4 md:flex items-start">
+                <div class="md:mr-4 shrink-0">
+                    @include('components.button-logo', ['button' => $buttons['bg_image_light'], 'class' => 'w-72'])
+                </div>
+                <div>
+                    <h3 class="text-sm ">Promo setup:</h3>
+                    <ul class="ml-6 list-disc text-sm">
+                        <li>Title</li>
+                        <li>Link</li>
+                        <li>Primary image/filename: 
+                            <ul class="ml-6 list-disc">
+                                <li>600x218 jpg</li>
+                                <li>Ratio 2.76:1</li>
+                            </ul>
+                        </li>
+                        <li>Option: Logo</li>
                     </ul>
                 </div>
             </div>
