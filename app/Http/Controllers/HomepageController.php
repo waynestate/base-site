@@ -7,6 +7,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Contracts\Repositories\PromoRepositoryContract;
 use Contracts\Repositories\EventRepositoryContract;
@@ -34,7 +35,7 @@ class HomepageController extends Controller
      * @param Request $request
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         // $promos = $this->promo->getHomepagePromos();
 

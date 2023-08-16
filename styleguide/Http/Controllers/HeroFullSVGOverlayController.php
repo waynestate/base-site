@@ -2,6 +2,7 @@
 
 namespace Styleguide\Http\Controllers;
 
+use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class HeroFullSVGOverlayController extends Controller
      * @param Request $request
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         // Set this controller in the allowed controllers list
         config([

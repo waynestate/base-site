@@ -37,7 +37,7 @@ class PageRepository implements RequestDataRepositoryContract, PageRepositoryCon
      * @param $path
      * @return string
      */
-    public function getFilename($path)
+    public function getFilename($path): string
     {
         // Handle the root homepage case since its refered to as index
         $path = $path == '/' ? 'index' : $path;

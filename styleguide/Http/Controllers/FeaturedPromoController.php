@@ -2,6 +2,7 @@
 
 namespace Styleguide\Http\Controllers;
 
+use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Factories\FeaturedPromo;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ class FeaturedPromoController extends Controller
      * @param Request $request
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $promos['featured_promo'] = app(FeaturedPromo::class)->create(1, true);
 

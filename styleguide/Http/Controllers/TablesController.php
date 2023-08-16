@@ -2,6 +2,7 @@
 
 namespace Styleguide\Http\Controllers;
 
+use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Faker\Factory;
@@ -24,7 +25,7 @@ class TablesController extends Controller
      * @param Request $request
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         return view('styleguide-tables', merge($request->data, $this->faker));
     }

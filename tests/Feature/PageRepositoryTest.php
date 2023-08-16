@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Support\Collection;
 use Tests\TestCase;
 use Mockery as Mockery;
 use Illuminate\Support\Facades\Storage;
@@ -66,7 +67,7 @@ class PageRepositoryTest extends TestCase
      * @param $handle_exceptions bool;
      * @return \Illuminate\Support\Collection
      */
-    public function getPageResponses($handle_exceptions = false)
+    public function getPageResponses($handle_exceptions = false): Collection
     {
         return collect(Storage::disk('base')->allFiles('styleguide/Pages'))
             ->reject(function ($filename) {

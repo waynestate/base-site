@@ -2,6 +2,7 @@
 
 namespace Styleguide\Http\Controllers;
 
+use Illuminate\View\View;
 use Contracts\Repositories\ArticleRepositoryContract;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -24,7 +25,7 @@ class ArticleListingController extends Controller
      * @param Request $request
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $articles = $this->article->listing($request->data['base']['site']['id'], 5);
 

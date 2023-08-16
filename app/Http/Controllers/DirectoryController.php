@@ -7,6 +7,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
 use Contracts\Repositories\ProfileRepositoryContract;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,7 @@ class DirectoryController extends Controller
      * @param Request $request
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         // Determine what site to pull profiles from
         $site_id = $this->profile->getSiteID($request->data['base']);

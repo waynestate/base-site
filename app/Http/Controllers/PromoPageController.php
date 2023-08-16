@@ -7,6 +7,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
 use Contracts\Repositories\PromoPageRepositoryContract;
 use Illuminate\Http\Request;
 
@@ -32,7 +33,7 @@ class PromoPageController extends Controller
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $promos = $this->promo->getPromoPagePromos($request->data['base']);
 
@@ -48,7 +49,7 @@ class PromoPageController extends Controller
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-    public function show(Request $request)
+    public function show(Request $request): View
     {
         $promo = $this->promo->getPromoView($request->id);
 

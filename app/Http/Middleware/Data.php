@@ -101,7 +101,7 @@ class Data
      * @param string $controller
      * @return string
      */
-    public function getControllerNamespace($controller)
+    public function getControllerNamespace(string $controller): string
     {
         // First see if it exists as a prefixed controller
         if (class_exists($this->GetPrefix().'\Http\Controllers\\'.$controller)) {
@@ -116,7 +116,7 @@ class Data
      *
      * @return string
      */
-    public function getPrefix()
+    public function getPrefix(): string
     {
         return $this->prefix;
     }
@@ -127,7 +127,7 @@ class Data
      * @param \Illuminate\Http\Request $request
      * @return string
      */
-    public function getPathFromRequest(Request $request)
+    public function getPathFromRequest(Request $request): string
     {
         // When a request object is created manually that hasn't matched a route (ex: tests).
         if ($request->route() === null) {

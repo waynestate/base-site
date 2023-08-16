@@ -2,6 +2,7 @@
 
 namespace Styleguide\Http\Controllers;
 
+use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Factories\Banner;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ class BannerController extends Controller
      * @param Request $request
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $request->data['base']['banner'] = app(Banner::class)->create(1, true);
 

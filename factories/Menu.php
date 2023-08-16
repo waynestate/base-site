@@ -2,6 +2,7 @@
 
 namespace Factories;
 
+use Factories\Menu;
 use Contracts\Factories\FactoryContract;
 use Faker\Factory;
 
@@ -69,7 +70,7 @@ class Menu implements FactoryContract
      *
      * @return \Factories\Menu
      */
-    public function withChildItems()
+    public function withChildItems(): Menu
     {
         $this->setChildItems(true);
 
@@ -81,7 +82,7 @@ class Menu implements FactoryContract
      *
      * @param bool $boolean [description]
      */
-    public function setChildItems($boolean)
+    public function setChildItems(bool $boolean)
     {
         $this->child_items = $boolean;
     }
@@ -91,7 +92,7 @@ class Menu implements FactoryContract
      *
      * @return bool
      */
-    public function getChildItems()
+    public function getChildItems(): bool
     {
         return $this->child_items;
     }

@@ -106,7 +106,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return string
      */
-    public function getPrefix()
+    public function getPrefix(): string
     {
         return $this->prefix;
     }

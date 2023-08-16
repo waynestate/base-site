@@ -34,7 +34,7 @@ class ControllerTest extends TestCase
      *
      * @return array
      */
-    private function getControllerComments()
+    private function getControllerComments(): array
     {
         return collect(Storage::disk('base')->allFiles('app/Http/Controllers/'))
         ->reject(function ($item) {
@@ -51,7 +51,7 @@ class ControllerTest extends TestCase
      * @param string $file
      * @return array
      */
-    private function getCommentData($file)
+    private function getCommentData(string $file): array
     {
         // Pull only the first 8kiB of the file in.
         $fp = fopen($file, 'r');

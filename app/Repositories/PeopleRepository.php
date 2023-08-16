@@ -37,7 +37,7 @@ class PeopleRepository implements ProfileRepositoryContract
      * @param int $selected_group
      * @return array
      */
-    public function getProfiles($site_id, $selected_group = null)
+    public function getProfiles(int $site_id, int $selected_group = null): array
     {
         $params = [
             'site_id' => $site_id,
@@ -87,7 +87,7 @@ class PeopleRepository implements ProfileRepositoryContract
      * @param string $groups
      * @return array
      */
-    public function getProfilesByGroup($site_id)
+    public function getProfilesByGroup(int $site_id): array
     {
         // Get the groups for the dropdown
         $dropdown_groups = $this->getDropdownOfGroups($site_id);
@@ -184,7 +184,7 @@ class PeopleRepository implements ProfileRepositoryContract
      * @param int $site_id
      * @return array
      */
-    public function getDropdownOfGroups($site_id)
+    public function getDropdownOfGroups(int $site_id): array
     {
         $params = [
             'method' => 'sites/'.$site_id.'/groups',
@@ -249,7 +249,7 @@ class PeopleRepository implements ProfileRepositoryContract
      * @param string $accessid
      * @return array
      */
-    public function getProfile($site_id, $accessid)
+    public function getProfile(int $site_id, string $accessid): array
     {
         $params = [
             'site_id' => $site_id,

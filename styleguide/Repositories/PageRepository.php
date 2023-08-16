@@ -21,7 +21,7 @@ class PageRepository extends Repository
      * @param string $path
      * @return object
      */
-    private function getPageClass($path)
+    private function getPageClass(string $path): object
     {
         // Parse the path to break up each folder
         $parsedPath = collect(explode('/', $path));

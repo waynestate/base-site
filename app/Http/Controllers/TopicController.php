@@ -7,6 +7,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Contracts\Repositories\TopicRepositoryContract;
 
@@ -28,7 +29,7 @@ class TopicController extends Controller
      * @param Request $request
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $topics = $this->topic->listing($request->data['base']['site']['news']['application_id']);
 
