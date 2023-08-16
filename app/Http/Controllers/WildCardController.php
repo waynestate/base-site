@@ -14,9 +14,6 @@ class WildCardController extends Controller
 {
     /**
      * Display the view.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
     public function index(Request $request): View
     {

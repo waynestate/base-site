@@ -14,9 +14,6 @@ class ChildpageController extends Controller
 {
     /**
      * Display the childpage view.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
     public function index(Request $request): View
     {

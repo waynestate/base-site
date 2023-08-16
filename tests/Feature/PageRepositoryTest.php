@@ -65,7 +65,6 @@ class PageRepositoryTest extends TestCase
      * blank arrays.
      *
      * @param $handle_exceptions bool;
-     * @return \Illuminate\Support\Collection
      */
     public function getPageResponses($handle_exceptions = false): Collection
     {

@@ -25,8 +25,6 @@ class RedisClear extends Command
 
     /**
      * Construct the RedisClear instance.
-     *
-     * @param Repository $cache
      */
     public function __construct(Repository $cache)
     {

@@ -17,9 +17,6 @@ class PageRepository extends Repository
 
     /**
      * Get the page classname based on the url path.
-     *
-     * @param string $path
-     * @return object
      */
     private function getPageClass(string $path): object
     {

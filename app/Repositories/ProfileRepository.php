@@ -24,10 +24,6 @@ class ProfileRepository implements ProfileRepositoryContract
 
     /**
      * Construct the repository.
-     *
-     * @param Connector $wsuApi
-     * @param ParsePromos $parsePromos
-     * @param Repository $cache
      */
     public function __construct(Connector $wsuApi, ParsePromos $parsePromos, Repository $cache, News $newsApi)
     {

@@ -12,8 +12,6 @@ class UnderMenuController extends Controller
 {
     /**
      * Construct the controller.
-     *
-     * @param Factory $faker
      */
     public function __construct(Factory $faker)
     {
@@ -22,9 +20,6 @@ class UnderMenuController extends Controller
 
     /**
      * Display each under menu button option.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
     public function index(Request $request): View
     {

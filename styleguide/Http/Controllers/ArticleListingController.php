@@ -11,8 +11,6 @@ class ArticleListingController extends Controller
 {
     /**
      * Construct the controller.
-     *
-     * @param ArticleRepositoryContract $article
      */
     public function __construct(ArticleRepositoryContract $article)
     {
@@ -21,9 +19,6 @@ class ArticleListingController extends Controller
 
     /**
      * Display the articles.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
     public function index(Request $request): View
     {

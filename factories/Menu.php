@@ -13,8 +13,6 @@ class Menu implements FactoryContract
 
     /**
      * Construct the factory.
-     *
-     * @param Factory $faker
      */
     public function __construct(Factory $faker)
     {
@@ -67,8 +65,6 @@ class Menu implements FactoryContract
 
     /**
      * Set child items.
-     *
-     * @return \Factories\Menu
      */
     public function withChildItems(): Menu
     {
@@ -89,8 +85,6 @@ class Menu implements FactoryContract
 
     /**
      * Getter for child items config.
-     *
-     * @return bool
      */
     public function getChildItems(): bool
     {

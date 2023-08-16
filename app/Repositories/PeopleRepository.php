@@ -19,9 +19,6 @@ class PeopleRepository implements ProfileRepositoryContract
 
     /**
      * Construct the repository.
-     *
-     * @param people $peopleApi
-     * @param Repository $cache
      */
     public function __construct(People $peopleApi, Repository $cache, News $newsApi)
     {
@@ -32,10 +29,6 @@ class PeopleRepository implements ProfileRepositoryContract
 
     /**
      * Get the profile listing.
-     *
-     * @param int $site_id
-     * @param int $selected_group
-     * @return array
      */
     public function getProfiles(int $site_id, int $selected_group = null): array
     {
@@ -83,9 +76,7 @@ class PeopleRepository implements ProfileRepositoryContract
     /**
      * Gets the profiles based on promo_group_id custom field and generates anchors for each group
      *
-     * @param int $site_id
      * @param string $groups
-     * @return array
      */
     public function getProfilesByGroup(int $site_id): array
     {
@@ -180,9 +171,6 @@ class PeopleRepository implements ProfileRepositoryContract
 
     /**
      * Get the dropdown of groups.
-     *
-     * @param int $site_id
-     * @return array
      */
     public function getDropdownOfGroups(int $site_id): array
     {
@@ -244,10 +232,6 @@ class PeopleRepository implements ProfileRepositoryContract
 
     /**
      * Get the persons profile information.
-     *
-     * @param int $site_id
-     * @param string $accessid
-     * @return array
      */
     public function getProfile(int $site_id, string $accessid): array
     {

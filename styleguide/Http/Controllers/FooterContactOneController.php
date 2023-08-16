@@ -11,9 +11,6 @@ class FooterContactOneController extends Controller
 {
     /**
      * Display the one column footer view.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
     public function index(Request $request): View
     {

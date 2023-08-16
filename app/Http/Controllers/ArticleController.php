@@ -16,9 +16,6 @@ class ArticleController extends Controller
 {
     /**
      * Construct the controller.
-     *
-     * @param ArticleRepositoryContract $article
-     * @param TopicRepositoryContract $topic
      */
     public function __construct(ArticleRepositoryContract $article, TopicRepositoryContract $topic)
     {
@@ -29,8 +26,6 @@ class ArticleController extends Controller
     /**
      * Display the articles.
      *
-     * @param Request $request
-     * @return \Illuminate\View\View
      *
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
@@ -66,8 +61,6 @@ class ArticleController extends Controller
     /**
      * Display the individual article.
      *
-     * @param Request $request
-     * @return \Illuminate\View\View
      *
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException

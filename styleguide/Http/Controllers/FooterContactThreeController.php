@@ -11,9 +11,6 @@ class FooterContactThreeController extends Controller
 {
     /**
      * Display three column footer view.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
     public function index(Request $request): View
     {

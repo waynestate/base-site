@@ -11,9 +11,6 @@ class BannerController extends Controller
 {
     /**
      * Display the banner at the top of the page.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
     public function index(Request $request): View
     {

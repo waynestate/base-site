@@ -11,8 +11,6 @@ class HeadingStylesController extends Controller
 {
     /**
      * Construct the controller.
-     *
-     * @param Factory $faker
      */
     public function __construct(Factory $faker)
     {
@@ -21,9 +19,6 @@ class HeadingStylesController extends Controller
 
     /**
      * Display the view.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
     public function index(Request $request): View
     {

@@ -10,9 +10,6 @@ class Error404Controller extends Controller
 {
     /**
      * Display the 404 error view.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
     public function index(Request $request): View
     {

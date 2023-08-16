@@ -11,9 +11,6 @@ class FooterContactTwoController extends Controller
 {
     /**
      * Display the two column footer view.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
     public function index(Request $request): View
     {

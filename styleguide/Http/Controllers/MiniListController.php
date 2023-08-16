@@ -11,9 +11,6 @@ class MiniListController extends Controller
 {
     /**
      * Display the mini list view.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
     public function index(Request $request): View
     {

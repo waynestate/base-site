@@ -10,9 +10,6 @@ class Error403Controller extends Controller
 {
     /**
      * Display the 403 error view.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
     public function index(Request $request): View
     {

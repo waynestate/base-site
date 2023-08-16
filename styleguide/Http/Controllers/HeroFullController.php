@@ -10,9 +10,6 @@ class HeroFullController extends Controller
 {
     /**
      * Display the full width hero view.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
     public function index(Request $request): View
     {

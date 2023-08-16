@@ -15,8 +15,6 @@ class PromoPageController extends Controller
 {
     /**
      * Construct the controller.
-     *
-     * @param PromoRepositoryContract $promo
      */
     public function __construct(PromoPageRepositoryContract $promo)
     {
@@ -26,7 +24,6 @@ class PromoPageController extends Controller
     /**
      * Display the view.
      *
-     * @param Request $request
      *
      * @return \Illuminate\View\View|void
      *
@@ -43,8 +40,6 @@ class PromoPageController extends Controller
     /**
      * Display the individual item.
      *
-     * @param Request $request
-     * @return \Illuminate\View\View
      *
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException

@@ -11,8 +11,6 @@ class MiniEventsController extends Controller
 {
     /**
      * Construct the controller.
-     *
-     * @param EventRepositoryContract $events
      */
     public function __construct(EventRepositoryContract $events)
     {
@@ -21,9 +19,6 @@ class MiniEventsController extends Controller
 
     /**
      * Display the mini events view.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
     public function index(Request $request): View
     {

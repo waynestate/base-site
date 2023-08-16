@@ -11,8 +11,6 @@ class FullWidthController extends Controller
 {
     /**
      * Construct the controller.
-     *
-     * @param Factory $faker
      */
     public function __construct(Factory $faker)
     {
@@ -21,9 +19,6 @@ class FullWidthController extends Controller
 
     /**
      * Display the full width hero view.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
     public function index(Request $request): View
     {

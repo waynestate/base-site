@@ -10,9 +10,6 @@ class FormsErrorController extends Controller
 {
     /**
      * Display the form view.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
     public function index(Request $request): View
     {

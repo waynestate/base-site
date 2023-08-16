@@ -11,8 +11,6 @@ class HeroContainedTextOverlayController extends Controller
 {
     /**
      * Construct the factory.
-     *
-     * @param Factory $faker
      */
     public function __construct(Factory $faker)
     {
@@ -21,9 +19,6 @@ class HeroContainedTextOverlayController extends Controller
 
     /**
      * Display the full width hero view.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
     public function index(Request $request): View
     {

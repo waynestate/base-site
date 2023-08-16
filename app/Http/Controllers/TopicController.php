@@ -15,8 +15,6 @@ class TopicController extends Controller
 {
     /**
      * Construct the controller.
-     *
-     * @param TopicRepositoryContract $topic
      */
     public function __construct(TopicRepositoryContract $topic)
     {
@@ -25,9 +23,6 @@ class TopicController extends Controller
 
     /**
      * Display the topic listing view.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
     public function index(Request $request): View
     {

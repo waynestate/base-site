@@ -15,8 +15,6 @@ class ContactTableController extends Controller
 {
     /**
      * Construct the controller.
-     *
-     * @param ProfileRepositoryContract $profile
      */
     public function __construct(ProfileRepositoryContract $profile)
     {
@@ -25,9 +23,6 @@ class ContactTableController extends Controller
 
     /**
      * Display the view.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
     public function index(Request $request): View
     {

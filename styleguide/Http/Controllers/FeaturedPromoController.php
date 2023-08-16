@@ -11,9 +11,6 @@ class FeaturedPromoController extends Controller
 {
     /**
      * Display an example featured promo.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
     public function index(Request $request): View
     {

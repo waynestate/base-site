@@ -11,8 +11,6 @@ class Formy
 {
     /**
      * Construct the middleware.
-     *
-     * @param Parser $parser
      */
     public function __construct(Parser $parser)
     {
@@ -21,10 +19,6 @@ class Formy
 
     /**
      * Parse the page content and replace form embeds with form html.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure $next
-     * @return mixed
      */
     public function handle(Request $request, Closure $next): Response
     {

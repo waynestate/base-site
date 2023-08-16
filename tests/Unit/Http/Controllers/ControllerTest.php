@@ -31,8 +31,6 @@ class ControllerTest extends TestCase
 
     /**
      * Get all controller comments.
-     *
-     * @return array
      */
     private function getControllerComments(): array
     {
@@ -47,9 +45,6 @@ class ControllerTest extends TestCase
 
     /**
      * Get comment data from the top of the controller file.
-     *
-     * @param string $file
-     * @return array
      */
     private function getCommentData(string $file): array
     {

@@ -15,8 +15,6 @@ class ProfileController extends Controller
 {
     /**
      * Construct the controller.
-     *
-     * @param ProfileRepositoryContract $profile
      */
     public function __construct(ProfileRepositoryContract $profile)
     {
@@ -25,9 +23,6 @@ class ProfileController extends Controller
 
     /**
      * Display profile listing view.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
     public function index(Request $request): View
     {
@@ -61,8 +56,6 @@ class ProfileController extends Controller
     /**
      * Display the individual profile view.
      *
-     * @param Request $request
-     * @return \Illuminate\View\View
      *
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException

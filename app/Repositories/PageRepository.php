@@ -35,7 +35,6 @@ class PageRepository implements RequestDataRepositoryContract, PageRepositoryCon
      * Find the JSON file path.
      *
      * @param $path
-     * @return string
      */
     public function getFilename($path): string
     {

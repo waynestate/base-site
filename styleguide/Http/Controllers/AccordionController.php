@@ -10,9 +10,6 @@ class AccordionController extends Controller
 {
     /**
      * Display an example accordion.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
     public function index(Request $request): View
     {
