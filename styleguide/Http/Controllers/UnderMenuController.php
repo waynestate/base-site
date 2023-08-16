@@ -104,6 +104,14 @@ class UnderMenuController extends Controller
             'secondary_alt_text' => 'Example dark overlay image',
         ]);
 
+        // Logo
+        $promos['buttons']['logo'] = app(UnderMenu::class)->create(1, true, [
+            'title' => 'Logo button',
+            'option' => 'logo',
+            'relative_url' => "/styleguide/image/600x218",
+            'filename_alt_text' => "Logo button",
+        ]);
+
         // Default button
         $promos['buttons']['under_menu'] = app(UnderMenu::class)->create(3, false, [
             'option' => 'Default',

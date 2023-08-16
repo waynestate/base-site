@@ -252,7 +252,7 @@
             <p class="mb-4">Not recommended due to accessibility concerns. The image must have descriptive alternative text if used.</p>
             <div class="pb-4 md:flex items-start">
                 <div class="md:mr-4 shrink-0">
-                    @include('components.button-logo', ['button' => $buttons['bg_image_light'], 'class' => 'w-72'])
+                    @include('components.button-logo', ['button' => $buttons['logo'], 'class' => 'w-72'])
                 </div>
                 <div>
                     <h3 class="text-sm ">Promo setup:</h3>

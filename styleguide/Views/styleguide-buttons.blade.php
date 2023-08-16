@@ -56,19 +56,20 @@
         <h2 id="button-text-size">Increase button text size</h2>
         <p>Add class "text-lg" or "text-xl" to your button.</p>
         <div class="flex flex-wrap 2xl:flex-nowrap items-start gap-x-4 mb-4">
-            <a href="#gold-gradient-button" class="button text-lg shrink-0 w-full sm:w-1/2 xl:w-1/3 2xl:w-1/4">Large text button</a>
+            <a href="#large-text-button" class="button text-lg shrink-0 w-full sm:w-1/2 xl:w-1/3 2xl:w-1/4">Large text button</a>
 <pre>
 {!! htmlspecialchars('<a href="#" class="button text-lg">My button</a>') !!}
 </pre>
         </div>
         <div class="flex flex-wrap 2xl:flex-nowrap items-start gap-x-4 mb-4">
-            <a href="#gold-gradient-button" class="button text-xl shrink-0 w-full sm:w-1/2 xl:w-1/3 2xl:w-1/4">XL text button</a>
+            <a href="#xl-text-button" class="button text-xl shrink-0 w-full sm:w-1/2 xl:w-1/3 2xl:w-1/4">XL text button</a>
 <pre>
 {!! htmlspecialchars('<a href="#" class="button text-xl">My button</a>') !!}
 </pre>
         </div>
-        <h2>Buttons two lines</h2>
+        <h2>Buttons with two lines</h2>
         <p>With the "two-line-button" class, you must contain each line within a <code>&lt;div&gt; &lt;/div&gt;</code>.</p>
+        <p>Your icon must be an SVG or 50x50 pixels and must match the text color.</p>
         <div class="pb-4 flex flex-wrap xl:flex-nowrap items-start gap-x-4">
             <a href="#standard-two-line" class="two-line-button shrink-0 w-full sm:w-1/2 xl:w-2/5 2xl:w-1/3">
                 <div>Two line button</div>
@@ -81,8 +82,6 @@
 </a>') !!}
 </pre>
         </div>
-        <h2>Give a button two lines with an icon</h2>
-        <p>Your icon must be an SVG or 50x50 pixels and must match the text color.</p>
         <div class="pb-4 flex flex-wrap xl:flex-nowrap items-start gap-x-4">
             <a href="#standard-two-line" class="two-line-button shrink-0 w-full sm:w-1/2 xl:w-2/5 2xl:w-1/3">
                 <img src="/styleguide/image/50x50" alt="">
