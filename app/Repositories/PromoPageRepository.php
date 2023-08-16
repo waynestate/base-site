@@ -185,9 +185,9 @@ class PromoPageRepository implements PromoPageRepositoryContract
         return $promos;
     }
 
-     /**
-     * {@inheritdoc}
-     */
+    /**
+    * {@inheritdoc}
+    */
     public function organizePromoItemsByOption(array $promos)
     {
         $options_exist = collect($promos['promos'])->filter(function ($value) {
