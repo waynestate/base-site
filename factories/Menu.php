@@ -2,7 +2,6 @@
 
 namespace Factories;
 
-use Factories\Menu;
 use Contracts\Factories\FactoryContract;
 use Faker\Factory;
 
