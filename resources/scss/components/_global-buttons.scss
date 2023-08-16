@@ -1,12 +1,14 @@
 .button {
-    @apply bg-gray-200 text-green-800 align-middle mb-2 px-4 py-2 rounded text-center text-sm font-bold inline-block transition-all leading-tight;
+    @apply bg-gray-200 text-green-800 align-middle mb-2 px-4 py-2.5 rounded text-center text-sm font-bold inline-block transition-all leading-tight;
 
     &:hover {
         @apply bg-gray-100;
     }
 }
 
-.button--two-line {
+.two-line-button {
+    @extend .button;
+
     @apply justify-start text-left inline-grid;
 
     & > *:not(img):nth-of-type(1) {
@@ -16,7 +18,7 @@
     }
 
     & > *:not(img):nth-of-type(2) {
-        @apply text-sm py-1 leading-tight font-normal not-italic;
+        @apply text-sm pt-1 leading-tight font-normal not-italic;
 
         grid-area: 2 / 2 / 3 / 3;
     }

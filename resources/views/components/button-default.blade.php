@@ -3,7 +3,7 @@
 --}}
 
 @if(!empty($button['link']))
-    <a href="{{ $button['link'] }}" class="button @if(!empty($button['excerpt']) || !empty($button['relative_url']) || !empty($button['secondary_relative_url']))button--two-line @endif {{ $class ?? '' }}">
+    <a href="{{ $button['link'] }}" class="button @if(!empty($button['excerpt']) || !empty($button['relative_url']) || !empty($button['secondary_relative_url']))two-line-button @endif {{ $class ?? '' }}">
         @if(!empty($button['relative_url']) || !empty($button['secondary_relative_url']))<img src="{{ $button['relative_url'] ?? $button['secondary_relative_url'] }}" alt="{{ $button['filename_alt_text'] ?? $button['secondary_alt_text'] }}">@endif
 
         <div>{{ $button['title'] }}</div>

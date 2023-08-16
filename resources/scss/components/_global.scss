@@ -131,9 +131,10 @@ code {
     @apply inline-block bg-gray-100 py-0.5 px-1 mx-1 rounded text-sm;
 }
 
-pre,
-.code-block {
-    @apply inline-block bg-gray-100 overflow-x-scroll text-sm p-2 my-2 rounded max-w-full;
+pre {
+    @extend code;
+
+    @apply block overflow-x-scroll p-2 mx-0 w-full;
 }
 
 // Keep footer at the bottom of the browser
