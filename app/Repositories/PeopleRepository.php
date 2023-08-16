@@ -253,10 +253,13 @@ class PeopleRepository implements ProfileRepositoryContract
         if (!empty($profile['data'])) {
             $profile['data']['link'] = '/profile/'.$profile['data']['accessid'];
 
-            if (!empty($profiles['profiles'][$site_id]['data']['Youtube Videos'])) {
-                $profiles['profiles'][$site_id]['data']['Youtube Videos'] = collect($profiles['profiles'][$site_id]['data']['Youtube Videos'])->map(function ($youtube_link) {
-                    return ParseId::fromUrl($youtube_link);
-                });
+            if (!empty($profile['data']['data']['Youtube Videos'])) {
+                $profile['data']['data']['Youtube Videos'] = collect($profile['data']['data']['Youtube Videos'])
+                    ->map(function ($video) {
+                        $video['youtube_id'] = ParseId::fromUrl($video['link']);
+                        return $video;
+                    })
+                    ->toArray();
             }
 
             foreach ($profile['data']['field_data'] as $data) {

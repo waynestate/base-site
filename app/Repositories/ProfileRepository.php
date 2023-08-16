@@ -237,9 +237,12 @@ class ProfileRepository implements ProfileRepositoryContract
         }
 
         if (!empty($profiles['profiles'][$site_id]['data']['Youtube Videos'])) {
-            $profiles['profiles'][$site_id]['data']['Youtube Videos'] = collect($profiles['profiles'][$site_id]['data']['Youtube Videos'])->map(function ($youtube_link) {
-                return ParseId::fromUrl($youtube_link);
-            });
+            $profiles['profiles'][$site_id]['data']['Youtube Videos'] = collect($profiles['profiles'][$site_id]['data']['Youtube Videos'])
+                ->map(function ($video) {
+                    $video['youtube_id'] = ParseId::fromUrl($video['link']);
+                    return $video;
+                })
+                ->toArray();
         }
 
         if (!empty($profiles['profiles'])) {

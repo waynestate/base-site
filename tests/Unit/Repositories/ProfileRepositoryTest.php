@@ -418,4 +418,36 @@ class ProfileRepositoryTest extends TestCase
 
         $this->assertEmpty($articles);
     }
+
+    /**
+    * @covers App\Repositories\ProfileRepository::getProfile
+    * @test
+    */
+    public function getting_profile_should_get_youtube_videos(): void
+    {
+        $site_id = $this->faker->numberBetween(1, 10);
+        $accessid = $this->faker->randomLetter().$this->faker->randomLetter().$this->faker->randomNumber(4, true);
+
+        $profile = app(Profile::class)->create(1, true);
+        $profile['data']['AccessID'] = $accessid;
+
+        // Fake return
+        $return = [
+            'profiles' => [$site_id => $profile],
+            'courses' => [],
+        ];
+
+        // Mock the Connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('profile.users.view', Mockery::type('array'))->once()->andReturn($return);
+        $wsuApi->shouldReceive('nextRequestProduction')->once();
+
+        $profile = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getProfile($site_id, $accessid);
+
+        $this->assertTrue(is_array($profile['profile']['data']['Youtube Videos']));
+
+        foreach ($profile['profile']['data']['Youtube Videos'] as $video) {
+            $this->assertTrue(array_key_exists('youtube_id', $video));
+        }
+    }
 }

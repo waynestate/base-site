@@ -480,4 +480,29 @@ class PeopleRepositoryTest extends TestCase
 
         $this->assertEmpty($articles);
     }
+
+    /**
+     * @covers App\Repositories\PeopleRepository::getProfile
+     * @test
+     */
+    public function getting_profile_should_get_youtube_videos(): void
+    {
+        $site_id = $this->faker->numberBetween(1, 10);
+        $accessid = $this->faker->randomLetter().$this->faker->randomLetter().$this->faker->randomNumber(4, true);
+
+        // Fake return
+        $return['data'] = app(People::class)->create(1, true);
+
+        // Mock the connector and set the return
+        $peopleApi = Mockery::mock(PeopleApi::class);
+        $peopleApi->shouldReceive('request')->andReturn($return);
+
+        $profile = app(PeopleRepository::class, ['peopleApi' => $peopleApi])->getProfile($site_id, $accessid);
+
+        $this->assertTrue(is_array($profile['profile']['data']['Youtube Videos']));
+
+        foreach ($profile['profile']['data']['Youtube Videos'] as $video) {
+            $this->assertTrue(array_key_exists('youtube_id', $video));
+        }
+    }
 }
