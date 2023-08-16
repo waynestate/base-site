@@ -29,7 +29,7 @@
 
 // Strictly inline anchors
 .content a.external {
-    @apply relative mr-0.5;
+    @apply relative;
 
     &::before {
         content: '';
@@ -38,6 +38,8 @@
         bottom: 0.095em;
         right: 0;
         left: 0;
+
+        @apply mr-0.5;
     }
 
     &:hover::before {
@@ -47,6 +49,6 @@
     &::after {
         @extend .external-icon;
 
-        @apply mr-1;
+        @apply mr-1.5;
     }
 }
