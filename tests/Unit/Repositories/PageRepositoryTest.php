@@ -14,7 +14,7 @@ class PageRepositoryTest extends TestCase
      * @covers \App\Repositories\PageRepository::getRequestData
      * @test
      */
-    public function non_exisitent_page_should_404()
+    public function non_exisitent_page_should_404(): void
     {
         $this->expectException(NotFoundHttpException::class);
 
@@ -38,7 +38,7 @@ class PageRepositoryTest extends TestCase
      * @covers \App\Repositories\PageRepository::getRequestData
      * @test
      */
-    public function getting_page_data_should_return_parsed_json()
+    public function getting_page_data_should_return_parsed_json(): void
     {
         $path = '1234567890';
 
@@ -61,7 +61,7 @@ class PageRepositoryTest extends TestCase
      * @covers \App\Repositories\PageRepository::getFilename
      * @test
      */
-    public function getting_filename_should_return_correct_filename()
+    public function getting_filename_should_return_correct_filename(): void
     {
         $pageRepository = app(PageRepository::class);
 

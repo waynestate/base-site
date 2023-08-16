@@ -15,7 +15,7 @@ class PromoRepositoryTest extends TestCase
      * @covers \App\Repositories\PromoRepository::getRequestData
      * @test
      */
-    public function getting_promos_with_custom_page_accordion_should_return_accordion_page()
+    public function getting_promos_with_custom_page_accordion_should_return_accordion_page(): void
     {
         // Fake return
         $return = [
@@ -50,7 +50,7 @@ class PromoRepositoryTest extends TestCase
      * @covers \App\Repositories\PromoRepository::getRequestData
      * @test
      */
-    public function subsite_overriding_main_contact_social_and_under_menu()
+    public function subsite_overriding_main_contact_social_and_under_menu(): void
     {
         // Fake return
         $return = [
@@ -150,7 +150,7 @@ class PromoRepositoryTest extends TestCase
      * @covers \App\Repositories\PromoRepository::getRequestData
      * @test
      */
-    public function subsite_using_main_contact_social_and_under_menu()
+    public function subsite_using_main_contact_social_and_under_menu(): void
     {
         // Fake return
         $return = [
@@ -221,7 +221,7 @@ class PromoRepositoryTest extends TestCase
      * @covers \App\Repositories\PromoRepository::getRequestData
      * @test
      */
-    public function subsite_contact_merging_with_main_contact_and_under_menu()
+    public function subsite_contact_merging_with_main_contact_and_under_menu(): void
     {
         // Fake return
         $return = [
@@ -301,7 +301,7 @@ class PromoRepositoryTest extends TestCase
      * @covers \App\Repositories\PromoRepository::getRequestData
      * @test
      */
-    public function subsite_contact_merging_with_no_main_contact()
+    public function subsite_contact_merging_with_no_main_contact(): void
     {
         // Fake return
         $return = [
@@ -360,7 +360,7 @@ class PromoRepositoryTest extends TestCase
      * @covers \App\Repositories\PromoRepository::getRequestData
      * @test
      */
-    public function subsite_under_menu_merging_with_no_main_under_menu()
+    public function subsite_under_menu_merging_with_no_main_under_menu(): void
     {
         // Fake return
         $return = [
@@ -418,7 +418,7 @@ class PromoRepositoryTest extends TestCase
      * @covers \App\Repositories\PromoRepository::getHomepagePromos
      * @test
      */
-    public function getting_homepage_promos_should_return_array()
+    public function getting_homepage_promos_should_return_array(): void
     {
         // Fake return
         $return = [

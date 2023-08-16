@@ -22,7 +22,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getDropdownOptions
      * @test
      */
-    public function getting_dropdown_options_should_return_options()
+    public function getting_dropdown_options_should_return_options(): void
     {
         // Get a random group id
         $random_group_id = $this->faker->numberBetween(1, 9);
@@ -44,7 +44,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getFields
      * @test
      */
-    public function getting_fields_should_return_all_types()
+    public function getting_fields_should_return_all_types(): void
     {
         $fields = app(ProfileRepository::class)->getFields();
 
@@ -55,7 +55,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getPageTitleFromName
      * @test
      */
-    public function getting_page_title_should_come_from_name()
+    public function getting_page_title_should_come_from_name(): void
     {
         $returnNameFields = [
             'name_fields' => [
@@ -88,7 +88,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getBackToProfileListUrl
      * @test
      */
-    public function getting_back_to_profile_list_url_should_return_url()
+    public function getting_back_to_profile_list_url_should_return_url(): void
     {
         // The default path if no referer
         $url = app(ProfileRepository::class)->getBackToProfileListUrl();
@@ -116,7 +116,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getDropdownOfGroups
      * @test
      */
-    public function getting_dropdown_of_groups_should_contain_all_the_groups()
+    public function getting_dropdown_of_groups_should_contain_all_the_groups(): void
     {
         // Force this config incase it is changed
         config(['base.profile_parent_group_id' => 0]);
@@ -144,7 +144,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getDropdownOfGroups
      * @test
      */
-    public function getting_dropdown_of_single_group_should_contain_single_group()
+    public function getting_dropdown_of_single_group_should_contain_single_group(): void
     {
         // Force this config incase it is changed
         config(['base.profile_parent_group_id' => 0]);
@@ -171,7 +171,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getProfile
      * @test
      */
-    public function getting_profile_that_doesnt_exist_should_return_blank_array()
+    public function getting_profile_that_doesnt_exist_should_return_blank_array(): void
     {
         $site_id = $this->faker->numberBetween(1, 10);
         $accessid = $this->faker->word();
@@ -193,7 +193,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getProfile
      * @test
      */
-    public function getting_profile_that_exists_should_return_two_arrays()
+    public function getting_profile_that_exists_should_return_two_arrays(): void
     {
         $site_id = $this->faker->numberBetween(1, 10);
         $accessid = $this->faker->word();
@@ -218,7 +218,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getProfiles
      * @test
      */
-    public function getting_profiles_with_api_error_should_return_blank_array()
+    public function getting_profiles_with_api_error_should_return_blank_array(): void
     {
         // Fake return
         $return = app(ApiError::class)->create(1, true);
@@ -238,7 +238,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getProfiles
      * @test
      */
-    public function getting_profiles_should_append_link()
+    public function getting_profiles_should_append_link(): void
     {
         // Fake return
         $return = app(Profile::class)->create(5);
@@ -259,7 +259,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getGroupIds
      * @test
      */
-    public function getting_profile_group_ids_should_return_correct_string()
+    public function getting_profile_group_ids_should_return_correct_string(): void
     {
         // Fake a dropdown array of group_id => group name
         $limit = $this->faker->numberBetween(1, 10);
@@ -285,7 +285,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::sortGroupsByDisplayOrder
      * @test
      */
-    public function profiles_should_be_grouped()
+    public function profiles_should_be_grouped(): void
     {
         // Force this config incase it is changed
         config(['base.profile_parent_group_id' => 0]);
@@ -322,7 +322,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getProfilesByGroupOrder
      * @test
      */
-    public function profile_group_ids_should_return_ordered_array()
+    public function profile_group_ids_should_return_ordered_array(): void
     {
         // Mock the user listing
         $return_user_listing = app(Profile::class)->create(10);
@@ -360,7 +360,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getSiteID
      * @test
      */
-    public function getting_profile_site_id_should_return_the_correct_site_id_based_on_custom_field()
+    public function getting_profile_site_id_should_return_the_correct_site_id_based_on_custom_field(): void
     {
         // Mock WSU API
         $wsuApi = Mockery::mock(Connector::class);
@@ -388,7 +388,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getNewsArticles
      * @test
      */
-    public function getting_profile_should_get_articles()
+    public function getting_profile_should_get_articles(): void
     {
         // Fake return
         $return = app(Article::class)->create(5);
@@ -407,7 +407,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getNewsArticles
      * @test
      */
-    public function getting_profile_articles_should_be_empty_if_exception_was_thrown()
+    public function getting_profile_articles_should_be_empty_if_exception_was_thrown(): void
     {
         // Mock the connector and set the return
         $newsApi = Mockery::mock(News::class);

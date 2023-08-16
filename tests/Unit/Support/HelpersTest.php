@@ -10,7 +10,7 @@ class HelpersTest extends TestCase
      * @covers ::merge
      * @test
      */
-    public function merge_string_value_should_throw_exception()
+    public function merge_string_value_should_throw_exception(): void
     {
         $this->expectException(\Exception::class);
 
@@ -21,7 +21,7 @@ class HelpersTest extends TestCase
      * @covers ::merge
      * @test
      */
-    public function merge_array_with_zero_key_should_throw_exception()
+    public function merge_array_with_zero_key_should_throw_exception(): void
     {
         $this->expectException(\Exception::class);
 
@@ -32,7 +32,7 @@ class HelpersTest extends TestCase
      * @covers ::merge
      * @test
      */
-    public function merge_array_with_same_key_should_throw_exception()
+    public function merge_array_with_same_key_should_throw_exception(): void
     {
         $this->expectException(\Exception::class);
 
@@ -46,7 +46,7 @@ class HelpersTest extends TestCase
      * @covers ::merge
      * @test
      */
-    public function merge_should_merge_arrays()
+    public function merge_should_merge_arrays(): void
     {
         // Not using faker for the off chance of generating the same key twice
         $merge = merge(['test1' => 'Test1'], ['test2' => 'Test2']);

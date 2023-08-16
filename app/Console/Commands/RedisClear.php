@@ -38,7 +38,7 @@ class RedisClear extends Command
     /**
      * Delete the keys from REDIS which match the database.redis.options.prefix config value.
      */
-    public function handle()
+    public function handle(): void
     {
         // Get the keys for the site
         $num_deleted_keys = 0;

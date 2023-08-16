@@ -22,7 +22,7 @@ class PeopleRepositoryTest extends TestCase
      * @covers App\Repositories\PeopleRepository::getDropdownOptions
      * @test
      */
-    public function getting_dropdown_options_should_return_options()
+    public function getting_dropdown_options_should_return_options(): void
     {
         // Get a random group id
         $random_group_id = $this->faker->numberBetween(1, 9);
@@ -44,7 +44,7 @@ class PeopleRepositoryTest extends TestCase
      * @covers App\Repositories\PeopleRepository::getFields
      * @test
      */
-    public function getting_fields_should_return_all_types()
+    public function getting_fields_should_return_all_types(): void
     {
         $fields = app(PeopleRepository::class)->getFields();
 
@@ -55,7 +55,7 @@ class PeopleRepositoryTest extends TestCase
      * @covers App\Repositories\PeopleRepository::getPageTitleFromName
      * @test
      */
-    public function getting_page_title_should_come_from_name()
+    public function getting_page_title_should_come_from_name(): void
     {
         $returnNameFields = [
             'name_fields' => [
@@ -88,7 +88,7 @@ class PeopleRepositoryTest extends TestCase
      * @covers App\Repositories\PeopleRepository::getBackToProfileListUrl
      * @test
      */
-    public function getting_back_to_profile_list_url_should_return_url()
+    public function getting_back_to_profile_list_url_should_return_url(): void
     {
         // The default path if no referer
         $url = app(PeopleRepository::class)->getBackToProfileListUrl();
@@ -116,7 +116,7 @@ class PeopleRepositoryTest extends TestCase
      * @covers App\Repositories\PeopleRepository::getDropdownOfGroups
      * @test
      */
-    public function getting_dropdown_of_groups_should_contain_all_the_groups()
+    public function getting_dropdown_of_groups_should_contain_all_the_groups(): void
     {
         // Force this config incase it is changed
         config(['base.people_parent_group_id' => 0]);
@@ -140,7 +140,7 @@ class PeopleRepositoryTest extends TestCase
      * @covers App\Repositories\PeopleRepository::getDropdownOfGroups
      * @test
      */
-    public function getting_dropdown_of_single_group_should_contain_single_group()
+    public function getting_dropdown_of_single_group_should_contain_single_group(): void
     {
         // Force this config incase it is changed
         config(['base.people_parent_group_id' => 0]);
@@ -164,7 +164,7 @@ class PeopleRepositoryTest extends TestCase
      * @covers App\Repositories\PeopleRepository::getProfile
      * @test
      */
-    public function getting_profile_that_doesnt_exist_should_return_blank_array()
+    public function getting_profile_that_doesnt_exist_should_return_blank_array(): void
     {
         $site_id = $this->faker->numberBetween(1, 10);
         $accessid = $this->faker->word();
@@ -190,7 +190,7 @@ class PeopleRepositoryTest extends TestCase
      * @covers App\Repositories\PeopleRepository::getProfiles
      * @test
      */
-    public function getting_profiles_with_api_error_should_return_blank_array()
+    public function getting_profiles_with_api_error_should_return_blank_array(): void
     {
         // Fake return
         $return = [
@@ -214,7 +214,7 @@ class PeopleRepositoryTest extends TestCase
      * @covers App\Repositories\PeopleRepository::getProfiles
      * @test
      */
-    public function getting_profiles_should_append_data()
+    public function getting_profiles_should_append_data(): void
     {
         // Fake return
         $return['data'] = app(People::class)->create(5);
@@ -243,7 +243,7 @@ class PeopleRepositoryTest extends TestCase
      * @covers App\Repositories\PeopleRepository::getProfile
      * @test
      */
-    public function getting_profile_should_append_data()
+    public function getting_profile_should_append_data(): void
     {
         $site_id = $this->faker->numberBetween(1, 10);
         $accessid = $this->faker->word();
@@ -269,7 +269,7 @@ class PeopleRepositoryTest extends TestCase
      * @covers App\Repositories\PeopleRepository::getGroupIds
      * @test
      */
-    public function getting_profile_group_ids_should_return_correct_string()
+    public function getting_profile_group_ids_should_return_correct_string(): void
     {
         // Fake a dropdown array of group_id => group name
         $limit = $this->faker->numberBetween(1, 10);
@@ -295,7 +295,7 @@ class PeopleRepositoryTest extends TestCase
      * @covers App\Repositories\PeopleRepository::sortGroupsByDisplayOrder
      * @test
      */
-    public function profiles_should_be_grouped()
+    public function profiles_should_be_grouped(): void
     {
         $site_id = $this->faker->numberBetween(1, 10);
 
@@ -330,7 +330,7 @@ class PeopleRepositoryTest extends TestCase
      * @covers App\Repositories\PeopleRepository::getProfilesByGroupOrder
      * @test
      */
-    public function profile_group_ids_should_return_ordered_array()
+    public function profile_group_ids_should_return_ordered_array(): void
     {
         $site_id = $this->faker->numberBetween(1, 10);
 
@@ -367,7 +367,7 @@ class PeopleRepositoryTest extends TestCase
      * @covers App\Repositories\PeopleRepository::getProfiles
      * @test
      */
-    public function getting_profiles_with_exception_should_return_empty_array()
+    public function getting_profiles_with_exception_should_return_empty_array(): void
     {
         // Mock the connector and thrown Exception
         $peopleApi = Mockery::mock(PeopleApi::class);
@@ -382,7 +382,7 @@ class PeopleRepositoryTest extends TestCase
      * @covers App\Repositories\PeopleRepository::getProfile
      * @test
      */
-    public function getting_profile_with_exception_should_return_empty_array()
+    public function getting_profile_with_exception_should_return_empty_array(): void
     {
         $site_id = $this->faker->numberBetween(1, 10);
         $accessid = $this->faker->word();
@@ -400,7 +400,7 @@ class PeopleRepositoryTest extends TestCase
      * @covers App\Repositories\PeopleRepository::getDropdownOfGroups
      * @test
      */
-    public function getting_dropdown_groups_with_exception_should_return_empty_array()
+    public function getting_dropdown_groups_with_exception_should_return_empty_array(): void
     {
         // Force this config incase it is changed
         config(['base.people_parent_group_id' => 0]);
@@ -418,7 +418,7 @@ class PeopleRepositoryTest extends TestCase
      * @covers App\Repositories\PeopleRepository::getSiteID
      * @test
      */
-    public function getting_people_site_id_should_return_the_correct_site_id_based_on_custom_field()
+    public function getting_people_site_id_should_return_the_correct_site_id_based_on_custom_field(): void
     {
         // Mock people API
         $peopleApi = Mockery::mock(PeopleApi::class);
@@ -450,7 +450,7 @@ class PeopleRepositoryTest extends TestCase
      * @covers App\Repositories\PeopleRepository::getNewsArticles
      * @test
      */
-    public function getting_people_profile_should_get_articles()
+    public function getting_people_profile_should_get_articles(): void
     {
         // Fake return
         $return = app(Article::class)->create(5);
@@ -469,7 +469,7 @@ class PeopleRepositoryTest extends TestCase
      * @covers App\Repositories\PeopleRepository::getNewsArticles
      * @test
      */
-    public function getting_people_profile_articles_should_be_empty_if_exception_was_thrown()
+    public function getting_people_profile_articles_should_be_empty_if_exception_was_thrown(): void
     {
         // Mock the connector and set the return
         $newsApi = Mockery::mock(News::class);

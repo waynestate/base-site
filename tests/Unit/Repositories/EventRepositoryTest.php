@@ -16,7 +16,7 @@ class EventRepositoryTest extends TestCase
      * @covers \App\Repositories\EventRepository::getEvents
      * @test
      */
-    public function getting_events_with_api_error_should_return_empty_array()
+    public function getting_events_with_api_error_should_return_empty_array(): void
     {
         // Fake return
         $return = app(ApiError::class)->create(1, true);
@@ -38,7 +38,7 @@ class EventRepositoryTest extends TestCase
      * @covers \App\Repositories\EventRepository::getEvents
      * @test
      */
-    public function getting_events_grouped_by_date()
+    public function getting_events_grouped_by_date(): void
     {
         // Expected events to be returned
         $expected = app(Event::class)->create(2);

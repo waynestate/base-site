@@ -17,7 +17,7 @@ class PromoPageRepositoryTest extends TestCase
      * @covers \App\Repositories\PromoPageRepository::getPromoPagePromos
      * @test
      */
-    public function promo_page_returns_legacy_listing_array()
+    public function promo_page_returns_legacy_listing_array(): void
     {
         $promo_group_id = $this->faker->numberbetween(1, 3);
 
@@ -51,7 +51,7 @@ class PromoPageRepositoryTest extends TestCase
      * @covers \App\Repositories\PromoPageRepository::getPromoPagePromos
      * @test
      */
-    public function promo_page_returns_legacy_listing_array_with_individual_view()
+    public function promo_page_returns_legacy_listing_array_with_individual_view(): void
     {
         $promo_group_id = $this->faker->numberbetween(1, 3);
 
@@ -86,7 +86,7 @@ class PromoPageRepositoryTest extends TestCase
      * @covers \App\Repositories\PromoPageRepository::getPromoPagePromos
      * @test
      */
-    public function promo_page_returns_legacy_grid_array()
+    public function promo_page_returns_legacy_grid_array(): void
     {
         $promo_group_id = $this->faker->numberbetween(1, 3);
 
@@ -120,7 +120,7 @@ class PromoPageRepositoryTest extends TestCase
      * @covers \App\Repositories\PromoPageRepository::getPromoPagePromos
      * @test
      */
-    public function promo_page_returns_legacy_grid_array_with_individual_view()
+    public function promo_page_returns_legacy_grid_array_with_individual_view(): void
     {
         $promo_group_id = $this->faker->numberbetween(1, 3);
 
@@ -156,7 +156,7 @@ class PromoPageRepositoryTest extends TestCase
      * @covers \App\Repositories\PromoPageRepository::changePromoItemDisplay
      * @test
      */
-    public function promo_page_parse_json_returns_promos()
+    public function promo_page_parse_json_returns_promos(): void
     {
         $promo_group_id = $this->faker->numberbetween(1, 3);
 
@@ -199,7 +199,7 @@ class PromoPageRepositoryTest extends TestCase
      * @covers \App\Repositories\PromoPageRepository::organizePromoItemsByOption
      * @test
      */
-    public function promo_page_parse_json_returns_promos_by_option()
+    public function promo_page_parse_json_returns_promos_by_option(): void
     {
         $promo_group_id = $this->faker->numberbetween(1, 3);
 
@@ -244,7 +244,7 @@ class PromoPageRepositoryTest extends TestCase
      * @covers \App\Repositories\PromoPageRepository::changePromoItemDisplay
      * @test
      */
-    public function promo_page_unset_excerpt()
+    public function promo_page_unset_excerpt(): void
     {
         $promo_group_id = $this->faker->numberbetween(1, 3);
 
@@ -295,7 +295,7 @@ class PromoPageRepositoryTest extends TestCase
      * @covers \App\Repositories\PromoPageRepository::changePromoItemDisplay
      * @test
      */
-    public function promo_page_unset_description()
+    public function promo_page_unset_description(): void
     {
         $promo_group_id = $this->faker->numberbetween(1, 3);
 
@@ -347,7 +347,7 @@ class PromoPageRepositoryTest extends TestCase
      * @covers \App\Repositories\PromoPageRepository::getPromoPagePromos
      * @test
      */
-    public function promo_page_set_single_promo_view()
+    public function promo_page_set_single_promo_view(): void
     {
         $promo_group_id = $this->faker->numberbetween(1, 3);
 
@@ -391,7 +391,7 @@ class PromoPageRepositoryTest extends TestCase
      * @covers \App\Repositories\PromoPageRepository::getPromoPagePromos
      * @test
      */
-    public function promo_page_set_columns()
+    public function promo_page_set_columns(): void
     {
         $promo_group_id = $this->faker->numberbetween(1, 3);
 
@@ -432,7 +432,7 @@ class PromoPageRepositoryTest extends TestCase
      * @covers \App\Repositories\PromoPageRepository::getPromoPagePromos
      * @test
      */
-    public function promo_page_set_config()
+    public function promo_page_set_config(): void
     {
         $promo_group_id = $this->faker->numberbetween(1, 3);
 
@@ -473,7 +473,7 @@ class PromoPageRepositoryTest extends TestCase
      * @test
      */
 
-    public function promo_page_with_no_page_field_should_be_empty_array()
+    public function promo_page_with_no_page_field_should_be_empty_array(): void
     {
         // Create a fake data request
         $data = app(Page::class)->create(1, true, [
@@ -497,7 +497,7 @@ class PromoPageRepositoryTest extends TestCase
      * @covers \App\Repositories\PromoPageRepository::getPromoView
      * @test
      */
-    public function getting_single_promo_should_return_array()
+    public function getting_single_promo_should_return_array(): void
     {
         $promo_return = app(PromoPage::class)->create(1, true);
 
@@ -522,7 +522,7 @@ class PromoPageRepositoryTest extends TestCase
      * @covers \App\Repositories\PromoPageRepository::getBackToPromoPage
      * @test
      */
-    public function back_to_promo_page_should_return_url()
+    public function back_to_promo_page_should_return_url(): void
     {
         // The default path if no referer
         $url = app(PromoPageRepository::class)->getBackToPromoPage();

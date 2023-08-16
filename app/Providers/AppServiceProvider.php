@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         Blade::directive('image', function ($expression) {
             // Since all paramters are concated into a string we need to parse them out into an array
@@ -62,7 +62,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         if (using_styleguide()) {
             $this->prefix = 'Styleguide';

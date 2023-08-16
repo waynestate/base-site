@@ -11,7 +11,7 @@ class ControllerTest extends TestCase
     /**
      * @test
      */
-    public function controllers_should_have_only_one_default()
+    public function controllers_should_have_only_one_default(): void
     {
         $data = $this->getControllerComments()->where('Default', 'true');
 
@@ -21,7 +21,7 @@ class ControllerTest extends TestCase
     /**
      * @test
      */
-    public function controllers_should_have_unique_descriptions()
+    public function controllers_should_have_unique_descriptions(): void
     {
         $all = $this->getControllerComments()->pluck('Description');
         $unique = $all->unique();

@@ -13,7 +13,7 @@ class ComposerServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(Request $request)
+    public function boot(Request $request): void
     {
         View::composer('errors::404', function ($view) use ($request) {
             $view->with('request', $request);
@@ -25,7 +25,7 @@ class ComposerServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         //
     }

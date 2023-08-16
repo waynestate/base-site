@@ -15,7 +15,7 @@ class FormyTest extends TestCase
      * @covers \App\Http\Middleware\Formy::handle
      * @test
      */
-    public function formy_embed_should_show_form_in_page_content()
+    public function formy_embed_should_show_form_in_page_content(): void
     {
         // Fake request
         $request = new Request();
