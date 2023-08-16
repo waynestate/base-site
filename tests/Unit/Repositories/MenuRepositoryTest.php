@@ -413,8 +413,8 @@ class MenuRepositoryTest extends TestCase
         $site_menu = app(MenuRepository::class)->getSiteMenu($menu, $page_id);
 
         // Combine 2 fake words to create a very unique word
-        $folder = $this->faker->word.$this->faker->word.'/';
-        $site_title = $this->faker->sentence;
+        $folder = $this->faker->word().$this->faker->word().'/';
+        $site_title = $this->faker->sentence();
 
         // Get the breadcrumbs
         $breadcrumbs = app(MenuRepository::class)->getBreadcrumbs($site_menu, $site_title, $folder);
@@ -442,7 +442,7 @@ class MenuRepositoryTest extends TestCase
         $folder = ltrim(reset($menu)['relative_url'], '/').'/';
 
         // Get the breadcrumbs
-        $breadcrumbs = app(MenuRepository::class)->getBreadcrumbs($site_menu, $this->faker->sentence, $folder);
+        $breadcrumbs = app(MenuRepository::class)->getBreadcrumbs($site_menu, $this->faker->sentence(), $folder);
 
         // Make sure the first second item are not the same, subsite root already exists
         $this->assertNotEquals($breadcrumbs[1]['relative_url'], $breadcrumbs[2]['relative_url']);

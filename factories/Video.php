@@ -27,8 +27,8 @@ class Video implements FactoryContract
                 'link' => 'https://www.youtube.com/watch?v=QYVv994xz6s',
                 'youtube_id' => 'QYVv994xz6s',
                 'relative_url' => $this->faker->randomElement(['/styleguide/image/800x450?text=Video', '']),
-                'title' => $this->faker->sentence,
-                'excerpt' => $this->faker->sentence,
+                'title' => $this->faker->sentence(),
+                'excerpt' => $this->faker->sentence(),
                 'filename_alt_text' => 'Example video image',
             ];
 

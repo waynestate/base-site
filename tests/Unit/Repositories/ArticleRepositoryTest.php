@@ -24,7 +24,7 @@ class ArticleRepositoryTest extends TestCase
         $newsApi->shouldReceive('request')->andReturn($return);
 
         // Get the news categories
-        $article = app(ArticleRepository::class, ['newsApi' => $newsApi])->find($this->faker->randomDigit, $this->faker->randomDigit);
+        $article = app(ArticleRepository::class, ['newsApi' => $newsApi])->find($this->faker->randomDigit(), $this->faker->randomDigit());
 
         // Make sure they are the same as the ones we created
         $this->assertEquals($return['data']['id'], $article['article']['data']['id']);
@@ -44,7 +44,7 @@ class ArticleRepositoryTest extends TestCase
         $newsApi->shouldReceive('request')->andReturn($return);
 
         // Get the articles
-        $articles = app(ArticleRepository::class, ['newsApi' => $newsApi])->listing(1, 5, $this->faker->randomDigit, [$this->faker->word]);
+        $articles = app(ArticleRepository::class, ['newsApi' => $newsApi])->listing(1, 5, $this->faker->randomDigit(), [$this->faker->word()]);
 
         $this->assertEquals($return['data'], $articles['articles']['data']);
     }
@@ -201,7 +201,7 @@ class ArticleRepositoryTest extends TestCase
     public function article_with_body_image_should_return_url()
     {
         $url = $this->faker->imageUrl();
-        $alt = $this->faker->word;
+        $alt = $this->faker->word();
 
         $article = app(Article::class)->create(1, true, [
             'hero_image' => null,

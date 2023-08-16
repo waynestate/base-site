@@ -26,8 +26,8 @@ class FeaturedPromo implements FactoryContract
             $data[$i] = [
                 'link' => 'https://wayne.edu',
                 'relative_url' => '/styleguide/image/600x450?text=Featured',
-                'title' => $this->faker->sentence,
-                'excerpt' => $this->faker->sentence,
+                'title' => $this->faker->sentence(),
+                'excerpt' => $this->faker->sentence(),
                 'filename_alt_text' => 'Example featured image',
             ];
 

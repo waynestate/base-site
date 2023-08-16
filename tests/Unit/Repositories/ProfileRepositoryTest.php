@@ -95,20 +95,20 @@ class ProfileRepositoryTest extends TestCase
         $this->assertTrue($url == config('base.profile_default_back_url'));
 
         // If a referer is passed from a different domain
-        $referer = $this->faker->url;
+        $referer = $this->faker->url();
         $url = app(ProfileRepository::class)->getBackToProfileListUrl($referer, 'http', 'wayne.edu', '/');
         $this->assertTrue($url == config('base.profile_default_back_url'));
 
         // If a referer is passed that is the same page we are on
-        $referer = $this->faker->url;
+        $referer = $this->faker->url();
         $parsed = parse_url($referer);
         $url = app(ProfileRepository::class)->getBackToProfileListUrl($referer, $parsed['scheme'], $parsed['host'], $parsed['path']);
         $this->assertTrue($url == config('base.profile_default_back_url'));
 
         // If referer is passed from the same domain that the site is on
-        $referer = $this->faker->url;
+        $referer = $this->faker->url();
         $parsed = parse_url($referer);
-        $url = app(ProfileRepository::class)->getBackToProfileListUrl($referer, $parsed['scheme'], $parsed['host'], $this->faker->word);
+        $url = app(ProfileRepository::class)->getBackToProfileListUrl($referer, $parsed['scheme'], $parsed['host'], $this->faker->word());
         $this->assertEquals($referer, $url);
     }
 
@@ -174,7 +174,7 @@ class ProfileRepositoryTest extends TestCase
     public function getting_profile_that_doesnt_exist_should_return_blank_array()
     {
         $site_id = $this->faker->numberBetween(1, 10);
-        $accessid = $this->faker->word;
+        $accessid = $this->faker->word();
 
         // Fake return
         $return = app(ApiError::class)->create(1, true);
@@ -196,7 +196,7 @@ class ProfileRepositoryTest extends TestCase
     public function getting_profile_that_exists_should_return_two_arrays()
     {
         $site_id = $this->faker->numberBetween(1, 10);
-        $accessid = $this->faker->word;
+        $accessid = $this->faker->word();
 
         // Fake return
         $return = [

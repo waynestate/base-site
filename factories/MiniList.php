@@ -25,7 +25,7 @@ class MiniList implements FactoryContract
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
                 'link' => 'https://wayne.edu',
-                'title' => $this->faker->sentence,
+                'title' => $this->faker->sentence(),
             ];
 
             $data[$i] = array_replace_recursive($data[$i], $options);

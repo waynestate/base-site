@@ -103,7 +103,7 @@ class DataTest extends TestCase
         $this->assertTrue(is_string(app(Data::class)->getControllerNamespace('StyleGuideController')));
 
         // When trying to reference a styleguide controller that doesn't exist, test that it defaults to app namespace
-        $controller = ucfirst($this->faker->word).ucfirst($this->faker->word).ucfirst($this->faker->word);
+        $controller = ucfirst($this->faker->word()).ucfirst($this->faker->word()).ucfirst($this->faker->word());
         $namespace = app(Data::class)->getControllerNamespace($controller);
         $this->assertStringContainsString('App\Http\Controllers', $namespace);
     }
@@ -114,7 +114,7 @@ class DataTest extends TestCase
      */
     public function when_the_request_has_no_matched_route_the_path_should_be_path()
     {
-        $actual_path = $this->faker->word;
+        $actual_path = $this->faker->word();
 
         $request = new Request();
         $request = $request->create($actual_path);

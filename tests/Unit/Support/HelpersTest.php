@@ -14,7 +14,7 @@ class HelpersTest extends TestCase
     {
         $this->expectException(\Exception::class);
 
-        $merge = merge($this->faker->word);
+        $merge = merge($this->faker->word());
     }
 
     /**
@@ -25,7 +25,7 @@ class HelpersTest extends TestCase
     {
         $this->expectException(\Exception::class);
 
-        $merge = merge([$this->faker->word]);
+        $merge = merge([$this->faker->word()]);
     }
 
     /**
@@ -37,9 +37,9 @@ class HelpersTest extends TestCase
         $this->expectException(\Exception::class);
 
         // Same key to be used
-        $key = $this->faker->word;
+        $key = $this->faker->word();
 
-        merge([$key => $this->faker->sentence], [$key => $this->faker->sentence]);
+        merge([$key => $this->faker->sentence()], [$key => $this->faker->sentence()]);
     }
 
     /**

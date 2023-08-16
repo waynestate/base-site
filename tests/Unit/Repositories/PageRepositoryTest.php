@@ -24,7 +24,7 @@ class PageRepositoryTest extends TestCase
         // Fake request
         $request = [
             'parameters' => [
-                'path' => $this->faker->word.'/'.$this->faker->word.'/'.$this->faker->word.'/',
+                'path' => $this->faker->word().'/'.$this->faker->word().'/'.$this->faker->word().'/',
             ],
             'server' => [
                 'path' => '',

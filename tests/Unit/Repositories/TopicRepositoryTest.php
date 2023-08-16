@@ -38,7 +38,7 @@ class TopicRepositoryTest extends TestCase
         $topicRepository = app(TopicRepository::class, ['newsApi' => $newsApi]);
 
         // Get the articles
-        $topics = $topicRepository->listing($this->faker->randomDigit);
+        $topics = $topicRepository->listing($this->faker->randomDigit());
 
         $this->assertCount(count($topics['topics']['data']), $return['data']);
     }
@@ -75,7 +75,7 @@ class TopicRepositoryTest extends TestCase
         $newsApi->shouldReceive('request')->andReturn($return);
 
         // Get the news categories
-        $topic = app(TopicRepository::class, ['newsApi' => $newsApi])->find($this->faker->word);
+        $topic = app(TopicRepository::class, ['newsApi' => $newsApi])->find($this->faker->word());
 
         // Make sure they are the same as the ones we created
         $this->assertEquals($return['data']['topic_id'], $topic['topic']['data']['topic_id']);

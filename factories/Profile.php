@@ -28,16 +28,16 @@ class Profile implements FactoryContract
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
                 'data' => [
-                    'AccessID' => $this->faker->randomLetter.$this->faker->randomLetter.$this->faker->randomNumber(4, true),
-                    'First Name' => $this->faker->firstName,
-                    'Last Name' => $this->faker->lastName,
+                    'AccessID' => $this->faker->randomLetter().$this->faker->randomLetter().$this->faker->randomNumber(4, true),
+                    'First Name' => $this->faker->firstName(),
+                    'Last Name' => $this->faker->lastName(),
                     'Title' => $this->faker->sentence(3),
                     'Picture' => [
                         'url' => '/styleguide/image/400x533?text=400x533%20('.$i.')',
                     ],
-                    'Phone' => $this->faker->phoneNumber,
-                    'Email' => $this->faker->email,
-                    'Department' => '<p>'.$this->faker->sentence.'</p>',
+                    'Phone' => $this->faker->phoneNumber(),
+                    'Email' => $this->faker->email(),
+                    'Department' => '<p>'.$this->faker->sentence().'</p>',
                     'Office' => '<p>300 Prentis</p>',
                     'Biography' => '<p>'.$this->faker->paragraph(15).'</p>',
                     'Research Interests' => [
@@ -49,7 +49,7 @@ class Profile implements FactoryContract
                         0 => [
                             'youtube_id' => 'PHqfwq033yQ',
                             'link' => 'https://www.youtube.com/watch?v=PHqfwq033yQ',
-                            'filename_alt_text' => 'YouTube video from '.$this->faker->firstName,
+                            'filename_alt_text' => 'YouTube video from '.$this->faker->firstName(),
                         ],
                     ],
                 ],

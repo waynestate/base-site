@@ -95,20 +95,20 @@ class PeopleRepositoryTest extends TestCase
         $this->assertTrue($url == config('base.profile_default_back_url'));
 
         // If a referer is passed from a different domain
-        $referer = $this->faker->url;
+        $referer = $this->faker->url();
         $url = app(PeopleRepository::class)->getBackToProfileListUrl($referer, 'http', 'wayne.edu', '/');
         $this->assertTrue($url == config('base.profile_default_back_url'));
 
         // If a referer is passed that is the same page we are on
-        $referer = $this->faker->url;
+        $referer = $this->faker->url();
         $parsed = parse_url($referer);
         $url = app(PeopleRepository::class)->getBackToProfileListUrl($referer, $parsed['scheme'], $parsed['host'], $parsed['path']);
         $this->assertTrue($url == config('base.profile_default_back_url'));
 
         // If referer is passed from the same domain that the site is on
-        $referer = $this->faker->url;
+        $referer = $this->faker->url();
         $parsed = parse_url($referer);
-        $url = app(PeopleRepository::class)->getBackToProfileListUrl($referer, $parsed['scheme'], $parsed['host'], $this->faker->word);
+        $url = app(PeopleRepository::class)->getBackToProfileListUrl($referer, $parsed['scheme'], $parsed['host'], $this->faker->word());
         $this->assertEquals($referer, $url);
     }
 
@@ -167,7 +167,7 @@ class PeopleRepositoryTest extends TestCase
     public function getting_profile_that_doesnt_exist_should_return_blank_array()
     {
         $site_id = $this->faker->numberBetween(1, 10);
-        $accessid = $this->faker->word;
+        $accessid = $this->faker->word();
 
         // Fake return
         $return = [
@@ -246,7 +246,7 @@ class PeopleRepositoryTest extends TestCase
     public function getting_profile_should_append_data()
     {
         $site_id = $this->faker->numberBetween(1, 10);
-        $accessid = $this->faker->word;
+        $accessid = $this->faker->word();
 
         // Fake return
         $return['data'] = app(People::class)->create(1, true);
@@ -385,7 +385,7 @@ class PeopleRepositoryTest extends TestCase
     public function getting_profile_with_exception_should_return_empty_array()
     {
         $site_id = $this->faker->numberBetween(1, 10);
-        $accessid = $this->faker->word;
+        $accessid = $this->faker->word();
 
         // Mock the connector and thrown Exception
         $peopleApi = Mockery::mock(PeopleApi::class);

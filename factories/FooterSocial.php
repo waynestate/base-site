@@ -25,7 +25,7 @@ class FooterSocial implements FactoryContract
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
                 'link' => 'https://wayne.edu',
-                'title' => $this->faker->word,
+                'title' => $this->faker->word(),
             ];
 
             $data[$i] = array_replace_recursive($data[$i], $options);

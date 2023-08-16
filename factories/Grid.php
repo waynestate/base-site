@@ -22,7 +22,7 @@ class Grid implements FactoryContract
      */
     public function create($limit = 1, $flatten = false, $options = [])
     {
-        $promo_group_id = $this->faker->randomDigitNotNull;
+        $promo_group_id = $this->faker->randomDigitNotNull();
 
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [

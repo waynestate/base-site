@@ -512,7 +512,7 @@ class PromoPageRepositoryTest extends TestCase
 
 
         // Get the promo
-        $single_promo = app(PromoPageRepository::class, ['wsuApi' => $wsuApi])->getPromoView($this->faker->randomDigit);
+        $single_promo = app(PromoPageRepository::class, ['wsuApi' => $wsuApi])->getPromoView($this->faker->randomDigit());
         $promo['promotion'] = $single_promo['promo'];
 
         $this->assertEquals($promo, ['promotion' => $promo_return]);
@@ -529,20 +529,20 @@ class PromoPageRepositoryTest extends TestCase
         $this->assertTrue($url == '');
 
         // If a referer is passed from a different domain
-        $referer = $this->faker->url;
+        $referer = $this->faker->url();
         $url = app(PromoPageRepository::class)->getBackToPromoPage($referer, 'http', 'wayne.edu', '/');
         $this->assertTrue($url == '');
 
         // If a referer is passed that is the same page we are on
-        $referer = $this->faker->url;
+        $referer = $this->faker->url();
         $parsed = parse_url($referer);
         $url = app(PromoPageRepository::class)->getBackToPromoPage($referer, $parsed['scheme'], $parsed['host'], $parsed['path']);
         $this->assertTrue($url == '');
 
         // If referer is passed from the same domain that the site is on
-        $referer = $this->faker->url;
+        $referer = $this->faker->url();
         $parsed = parse_url($referer);
-        $url = app(PromoPageRepository::class)->getBackToPromoPage($referer, $parsed['scheme'], $parsed['host'], $this->faker->word);
+        $url = app(PromoPageRepository::class)->getBackToPromoPage($referer, $parsed['scheme'], $parsed['host'], $this->faker->word());
         $this->assertEquals($referer, $url);
     }
 }

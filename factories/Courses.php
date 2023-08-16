@@ -21,8 +21,8 @@ class Courses implements FactoryContract
      */
     public function create($limit = 1, $flatten = false, $options = [])
     {
-        $accessid = $this->faker->randomLetter.$this->faker->randomLetter.$this->faker->randomNumber(4, true);
-        $name = $this->faker->firstName . ', ' . $this->faker->lastName;
+        $accessid = $this->faker->randomLetter().$this->faker->randomLetter().$this->faker->randomNumber(4, true);
+        $name = $this->faker->firstName() . ', ' . $this->faker->lastName();
 
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [

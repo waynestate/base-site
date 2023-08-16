@@ -27,7 +27,7 @@ class EventRepositoryTest extends TestCase
         $wsuApi->shouldReceive('nextRequestProduction')->once();
 
         // Get the events
-        $events = app(EventRepository::class, ['wsuApi' => $wsuApi])->getEvents($this->faker->randomDigit);
+        $events = app(EventRepository::class, ['wsuApi' => $wsuApi])->getEvents($this->faker->randomDigit());
 
         // Make sure we have a blank events array
         $this->assertEquals($events, ['events' => []]);
@@ -52,7 +52,7 @@ class EventRepositoryTest extends TestCase
         $wsuApi->shouldReceive('nextRequestProduction')->once();
 
         // Get the events
-        $events = app(EventRepository::class, ['wsuApi' => $wsuApi])->getEvents($this->faker->randomDigit);
+        $events = app(EventRepository::class, ['wsuApi' => $wsuApi])->getEvents($this->faker->randomDigit());
 
         $this->assertEquals($expected, $events['events']);
     }

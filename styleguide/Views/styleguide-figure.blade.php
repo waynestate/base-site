@@ -12,7 +12,7 @@
         <p>{{ $faker->paragraph(8) }}</p>
         <figure class="figure">
             @image('/styleguide/image/400x225', '', 'p-2')
-            <figcaption>{{ $faker->sentence }}</figcaption>
+            <figcaption>{{ $faker->sentence() }}</figcaption>
         </figure>
         <p>{{ $faker->paragraph(8) }}</p>
 
@@ -21,7 +21,7 @@
 
         <figure class="figure float-left">
             @image('/styleguide/image/400x225', '', 'p-2')
-            <figcaption>{{ $faker->sentence }}</figcaption>
+            <figcaption>{{ $faker->sentence() }}</figcaption>
         </figure>
         <p>{{ $faker->paragraph(28) }}</p>
 
@@ -30,7 +30,7 @@
 
         <figure class="figure float-right">
             @image('/styleguide/image/400x225', '', 'p-2')
-            <figcaption>{{ $faker->sentence }}</figcaption>
+            <figcaption>{{ $faker->sentence() }}</figcaption>
         </figure>
         <p>{{ $faker->paragraph(28) }}</p>
 

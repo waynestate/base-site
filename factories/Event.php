@@ -31,7 +31,7 @@ class Event implements FactoryContract
                 'title' => $title,
                 'date' => $date,
                 'start_time' => $this->faker->dateTimeThisMonth('now')->format('H:i:s'),
-                'is_all_day' => $this->faker->boolean,
+                'is_all_day' => $this->faker->boolean(),
             ];
             $event = array_replace_recursive($event, $options);
 
