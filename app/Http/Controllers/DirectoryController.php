@@ -7,6 +7,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
 use Contracts\Repositories\ProfileRepositoryContract;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,6 @@ class DirectoryController extends Controller
 {
     /**
      * Construct the controller.
-     *
-     * @param ProfileRepositoryContract $profile
      */
     public function __construct(ProfileRepositoryContract $profile)
     {
@@ -24,11 +23,8 @@ class DirectoryController extends Controller
 
     /**
      * Display directory listing view.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         // Determine what site to pull profiles from
         $site_id = $this->profile->getSiteID($request->data['base']);

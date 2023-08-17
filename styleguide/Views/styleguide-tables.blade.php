@@ -22,9 +22,9 @@
             <tbody>
                 @for ($i = 0; $i < 10; $i++)
                     <tr>
-                        <td>{{ $faker->firstName }}</td>
-                        <td>{{ $faker->lastName }}</td>
-                        <td><a href="//wayne.edu">{{ $faker->email }}</a></td>
+                        <td>{{ $faker->firstName() }}</td>
+                        <td>{{ $faker->lastName() }}</td>
+                        <td><a href="//wayne.edu">{{ $faker->email() }}</a></td>
                         <td>{{ $faker->text(50) }}</td>
                     </tr>
                 @endfor
@@ -46,14 +46,14 @@
             <tbody>
                 @for ($i = 0; $i < 10; $i++)
                     <tr>
-                        <td>{{ $faker->firstName }}</td>
-                        <td>{{ $faker->lastName }}</td>
-                        <td><a href="//wayne.edu">{{ $faker->email }}</a></td>
+                        <td>{{ $faker->firstName() }}</td>
+                        <td>{{ $faker->lastName() }}</td>
+                        <td><a href="//wayne.edu">{{ $faker->email() }}</a></td>
                     </tr>
                     <tr>
-                        <td>{{ $faker->firstName }}</td>
-                        <td>{{ $faker->lastName }}</td>
-                        <td>{{ $faker->email }}</td>
+                        <td>{{ $faker->firstName() }}</td>
+                        <td>{{ $faker->lastName() }}</td>
+                        <td>{{ $faker->email() }}</td>
                     </tr>
                 @endfor
             </tbody>
@@ -74,9 +74,9 @@
             <tbody>
                 @for ($i = 0; $i < 10; $i++)
                     <tr>
-                        <td>{{ $faker->firstName }}</td>
-                        <td>{{ $faker->lastName }}</td>
-                        <td><a href="//wayne.edu">{{ $faker->email }}</a></td>
+                        <td>{{ $faker->firstName() }}</td>
+                        <td>{{ $faker->lastName() }}</td>
+                        <td><a href="//wayne.edu">{{ $faker->email() }}</a></td>
                     </tr>
                 @endfor
             </tbody>

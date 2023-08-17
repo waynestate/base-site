@@ -23,7 +23,7 @@ class ArticleControllerTest extends TestCase
      * @covers \App\Http\Controllers\ArticleController::show
      * @test
      */
-    public function news_view_with_no_item_should_404()
+    public function news_view_with_no_item_should_404(): void
     {
         $this->expectException(NotFoundHttpException::class);
 
@@ -48,7 +48,7 @@ class ArticleControllerTest extends TestCase
      * @covers \App\Http\Controllers\ArticleController::show
      * @test
      */
-    public function news_item_that_is_not_published_should_404()
+    public function news_item_that_is_not_published_should_404(): void
     {
         $this->expectException(NotFoundHttpException::class);
 
@@ -89,7 +89,7 @@ class ArticleControllerTest extends TestCase
      * @covers App\Http\Controllers\ArticleController::show
      * @test
      */
-    public function news_item_that_is_draft_should_allow_preview()
+    public function news_item_that_is_draft_should_allow_preview(): void
     {
         // Fake return
         $return =  app(Article::class)->create(1, true, [
@@ -121,7 +121,7 @@ class ArticleControllerTest extends TestCase
      * @covers App\Http\Controllers\ArticleController::show
      * @test
      */
-    public function news_item_that_is_published_and_preview_should_redirect()
+    public function news_item_that_is_published_and_preview_should_redirect(): void
     {
         // Fake return
         $return =  null;
@@ -151,7 +151,7 @@ class ArticleControllerTest extends TestCase
      * @covers App\Http\Controllers\ArticleController::show
      * @test
      */
-    public function page_title_should_be_news_item_title()
+    public function page_title_should_be_news_item_title(): void
     {
         // Fake return
         $return = app(Article::class)->create(1, true);
@@ -182,7 +182,7 @@ class ArticleControllerTest extends TestCase
      * @covers App\Http\Controllers\ArticleController::index
      * @test
      */
-    public function news_listing_with_invalid_topic_should_404()
+    public function news_listing_with_invalid_topic_should_404(): void
     {
         $this->expectException(NotFoundHttpException::class);
 

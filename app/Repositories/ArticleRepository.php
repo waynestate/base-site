@@ -16,9 +16,6 @@ class ArticleRepository implements ArticleRepositoryContract
 
     /**
      * Construct the repository.
-     *
-     * @param news $newsApi
-     * @param Repository $cache
      */
     public function __construct(News $newsApi, Repository $cache)
     {

@@ -9,8 +9,6 @@ class People implements FactoryContract
 {
     /**
      * Construct the factory.
-     *
-     * @param Factory $faker
      */
     public function __construct(Factory $faker, PeopleGroup $group)
     {
@@ -26,14 +24,14 @@ class People implements FactoryContract
         $groups = collect($this->group->create(4));
 
         for ($i = 1; $i <= $limit; $i++) {
-            $accessid = $this->faker->randomLetter.$this->faker->randomLetter.$this->faker->randomNumber(4, true);
-            $first_name = $this->faker->firstName;
-            $last_name = $this->faker->lastName;
-            $email = $this->faker->email;
+            $accessid = $this->faker->randomLetter().$this->faker->randomLetter().$this->faker->randomNumber(4, true);
+            $first_name = $this->faker->firstName();
+            $last_name = $this->faker->lastName();
+            $email = $this->faker->email();
             $title = $this->faker->sentence(3);
             $picture = '/styleguide/image/400x533?text=400x533%20('.$i.')';
-            $phone = $this->faker->phoneNumber;
-            $department = '<p>'.$this->faker->sentence.'</p>';
+            $phone = $this->faker->phoneNumber();
+            $department = '<p>'.$this->faker->sentence().'</p>';
             $office = '<p>300 Prentis</p>';
             $biography = '<p>'.$this->faker->paragraph(15).'</p>';
             $research_interests = [
@@ -160,7 +158,7 @@ class People implements FactoryContract
                         0 => [
                             'youtube_id' => 'PHqfwq033yQ',
                             'link' => 'https://www.youtube.com/watch?v=PHqfwq033yQ',
-                            'filename_alt_text' => 'YouTube video from '.$this->faker->firstName,
+                            'filename_alt_text' => 'YouTube video from '.$this->faker->firstName(),
                         ],
                     ],
                 ],

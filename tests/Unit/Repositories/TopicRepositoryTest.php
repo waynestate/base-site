@@ -14,7 +14,7 @@ class TopicRepositoryTest extends TestCase
      * @covers App\Repositories\TopicRepository::listing
      * @test
      */
-    public function getting_topics_should_return_array_of_topics()
+    public function getting_topics_should_return_array_of_topics(): void
     {
         // Fake return
         $return = app(Topic::class)->create(5);
@@ -38,7 +38,7 @@ class TopicRepositoryTest extends TestCase
         $topicRepository = app(TopicRepository::class, ['newsApi' => $newsApi]);
 
         // Get the articles
-        $topics = $topicRepository->listing($this->faker->randomDigit);
+        $topics = $topicRepository->listing($this->faker->randomDigit());
 
         $this->assertCount(count($topics['topics']['data']), $return['data']);
     }
@@ -47,7 +47,7 @@ class TopicRepositoryTest extends TestCase
      * @covers App\Repositories\TopicRepository::listing
      * @test
      */
-    public function getting_topics_with_exception_should_return_empty_array()
+    public function getting_topics_with_exception_should_return_empty_array(): void
     {
         // Fake return
         $return = app(Topic::class)->create(5);
@@ -65,7 +65,7 @@ class TopicRepositoryTest extends TestCase
      * @covers App\Repositories\TopicRepository::find
      * @test
      */
-    public function finding_topic_should_return_topic()
+    public function finding_topic_should_return_topic(): void
     {
         // Fake return
         $return = app(Topic::class)->create(1, true);
@@ -75,7 +75,7 @@ class TopicRepositoryTest extends TestCase
         $newsApi->shouldReceive('request')->andReturn($return);
 
         // Get the news categories
-        $topic = app(TopicRepository::class, ['newsApi' => $newsApi])->find($this->faker->word);
+        $topic = app(TopicRepository::class, ['newsApi' => $newsApi])->find($this->faker->word());
 
         // Make sure they are the same as the ones we created
         $this->assertEquals($return['data']['topic_id'], $topic['topic']['data']['topic_id']);
@@ -85,7 +85,7 @@ class TopicRepositoryTest extends TestCase
      * @covers App\Repositories\TopicRepository::sortByLetter
      * @test
      */
-    public function sorting_topics_by_letter_should_be_in_order()
+    public function sorting_topics_by_letter_should_be_in_order(): void
     {
         // Fake return
         $topics = app(Topic::class)->create(5);
@@ -107,7 +107,7 @@ class TopicRepositoryTest extends TestCase
      * @covers App\Repositories\TopicRepository::setSelected
      * @test
      */
-    public function setting_selected_topic()
+    public function setting_selected_topic(): void
     {
         $topics = app(Topic::class)->create(5);
 
@@ -124,7 +124,7 @@ class TopicRepositoryTest extends TestCase
      * @covers App\Repositories\TopicRepository::setSelected
      * @test
      */
-    public function setting_no_selected_topic()
+    public function setting_no_selected_topic(): void
     {
         $topics = app(Topic::class)->create(5);
 

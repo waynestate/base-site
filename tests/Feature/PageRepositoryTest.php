@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Support\Collection;
 use Tests\TestCase;
 use Mockery as Mockery;
 use Illuminate\Support\Facades\Storage;
@@ -21,7 +22,7 @@ class PageRepositoryTest extends TestCase
      * @covers \Styleguide\Repositories\PageRepository::getRequestData
      * @test
      */
-    public function all_styleguide_routes_should_load_successfully()
+    public function all_styleguide_routes_should_load_successfully(): void
     {
         $this->getPageResponses(false)
             ->each(function ($page) {
@@ -34,7 +35,7 @@ class PageRepositoryTest extends TestCase
     /**
      * @test
      */
-    public function all_styleguide_routes_with_no_data_should_load_successfully()
+    public function all_styleguide_routes_with_no_data_should_load_successfully(): void
     {
         // Overload all styleguide repositories to only return a blank array
         collect(Storage::disk('base')->allFiles('factories'))
@@ -64,9 +65,8 @@ class PageRepositoryTest extends TestCase
      * blank arrays.
      *
      * @param $handle_exceptions bool;
-     * @return \Illuminate\Support\Collection
      */
-    public function getPageResponses($handle_exceptions = false)
+    public function getPageResponses($handle_exceptions = false): Collection
     {
         return collect(Storage::disk('base')->allFiles('styleguide/Pages'))
             ->reject(function ($filename) {

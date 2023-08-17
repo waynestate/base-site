@@ -7,6 +7,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Contracts\Repositories\PromoRepositoryContract;
 use Contracts\Repositories\EventRepositoryContract;
@@ -16,10 +17,6 @@ class HomepageController extends Controller
 {
     /**
      * Construct the controller.
-     *
-     * @param PromoRepositoryContract $promo
-     * @param ArticleRepositoryContract $article
-     * @param EventRepositoryContract $event
      */
     public function __construct(PromoRepositoryContract $promo, ArticleRepositoryContract $article, EventRepositoryContract $event)
     {
@@ -30,11 +27,8 @@ class HomepageController extends Controller
 
     /**
      * Display the homepage view.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         // $promos = $this->promo->getHomepagePromos();
 

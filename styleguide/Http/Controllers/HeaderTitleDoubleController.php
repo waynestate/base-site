@@ -2,6 +2,7 @@
 
 namespace Styleguide\Http\Controllers;
 
+use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Faker\Factory;
@@ -10,8 +11,6 @@ class HeaderTitleDoubleController extends Controller
 {
     /**
      * Construct the controller.
-     *
-     * @param Factory $faker
      */
     public function __construct(Factory $faker)
     {
@@ -20,11 +19,8 @@ class HeaderTitleDoubleController extends Controller
 
     /**
      * Display the double header view with a custom short title
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         config([
             'base.surtitle' => $this->faker->sentence($this->faker->numberBetween(2, 4)),

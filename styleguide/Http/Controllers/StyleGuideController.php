@@ -2,6 +2,7 @@
 
 namespace Styleguide\Http\Controllers;
 
+use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Factories\Accordion;
 use Illuminate\Http\Request;
@@ -11,8 +12,6 @@ class StyleGuideController extends Controller
 {
     /**
      * Construct the controller.
-     *
-     * @param Factory $faker
      */
     public function __construct(Factory $faker)
     {
@@ -21,11 +20,8 @@ class StyleGuideController extends Controller
 
     /**
      * Display the styleguide view.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $promos['accordion'] = app(Accordion::class)->create(5);
 

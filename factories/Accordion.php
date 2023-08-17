@@ -9,8 +9,6 @@ class Accordion implements FactoryContract
 {
     /**
      * Construct the factory.
-     *
-     * @param Factory $faker
      */
     public function __construct(Factory $faker)
     {
@@ -24,8 +22,8 @@ class Accordion implements FactoryContract
     {
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
-                'title' => $this->faker->sentence,
-                'description' => '<p>'.$this->faker->paragraph.' <a href="/styleguide">Example link.</a></p>',
+                'title' => $this->faker->sentence(),
+                'description' => '<p>'.$this->faker->paragraph().' <a href="/styleguide">Example link.</a></p>',
             ];
 
             $data[$i] = array_replace_recursive($data[$i], $options);

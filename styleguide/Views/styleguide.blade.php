@@ -65,7 +65,7 @@
         <blockquote>
             <p>&ldquo;{{ $faker->paragraph(10) }}&rdquo;</p>
             <p>&ldquo;{{ $faker->paragraph(4) }}&rdquo;</p>
-            <cite>&mdash; {{ $faker->Name }}</cite>
+            <cite>&mdash; {{ $faker->name() }}</cite>
         </blockquote>
 
         <h2>PDF links</h2>

@@ -2,6 +2,7 @@
 
 namespace Styleguide\Http\Controllers;
 
+use Illuminate\View\View;
 use Contracts\Repositories\EventRepositoryContract;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -10,8 +11,6 @@ class EventsListingController extends Controller
 {
     /**
      * Construct the controller.
-     *
-     * @param EventsRepositoryContract $events
      */
     public function __construct(EventRepositoryContract $events)
     {
@@ -20,11 +19,8 @@ class EventsListingController extends Controller
 
     /**
      * Display the mini events view.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $events = $this->events->getEvents($request->data['base']['site']['id']);
 

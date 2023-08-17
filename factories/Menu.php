@@ -12,8 +12,6 @@ class Menu implements FactoryContract
 
     /**
      * Construct the factory.
-     *
-     * @param Factory $faker
      */
     public function __construct(Factory $faker)
     {
@@ -66,10 +64,8 @@ class Menu implements FactoryContract
 
     /**
      * Set child items.
-     *
-     * @return \Factories\Menu
      */
-    public function withChildItems()
+    public function withChildItems(): Menu
     {
         $this->setChildItems(true);
 
@@ -81,17 +77,15 @@ class Menu implements FactoryContract
      *
      * @param bool $boolean [description]
      */
-    public function setChildItems($boolean)
+    public function setChildItems(bool $boolean)
     {
         $this->child_items = $boolean;
     }
 
     /**
      * Getter for child items config.
-     *
-     * @return bool
      */
-    public function getChildItems()
+    public function getChildItems(): bool
     {
         return $this->child_items;
     }

@@ -9,8 +9,6 @@ class ApiError implements FactoryContract
 {
     /**
      * Construct the factory.
-     *
-     * @param Factory $faker
      */
     public function __construct(Factory $faker)
     {
@@ -26,7 +24,7 @@ class ApiError implements FactoryContract
             $data[$i] = [
                 'error' => [
                     'status' => $this->faker->numberBetween(100, 199),
-                    'message' => $this->faker->sentence,
+                    'message' => $this->faker->sentence(),
                 ],
             ];
 

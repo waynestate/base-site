@@ -9,8 +9,6 @@ class PromoPage implements FactoryContract
 {
     /**
      * Construct the factory.
-     *
-     * @param Factory $faker
      */
     public function __construct(Factory $faker)
     {
@@ -34,8 +32,8 @@ class PromoPage implements FactoryContract
 
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
-                'title' => $this->faker->name,
-                'excerpt' => $this->faker->jobTitle,
+                'title' => $this->faker->name(),
+                'excerpt' => $this->faker->jobTitle(),
                 'description' => '<p>' . $this->faker->text(70) . ' <a href="https://wayne.edu">'. $this->faker->sentence(3)  .'</a></p>',
                 'link' => 'https://wayne.edu',
                 'promo_item_id' => strval($this->faker->randomNumber(5)),

@@ -2,6 +2,7 @@
 
 namespace Styleguide\Http\Controllers;
 
+use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Faker\Factory;
@@ -10,8 +11,6 @@ class HeroFullTextOverlayController extends Controller
 {
     /**
      * Construct the factory.
-     *
-     * @param Factory $faker
      */
     public function __construct(Factory $faker)
     {
@@ -20,11 +19,8 @@ class HeroFullTextOverlayController extends Controller
 
     /**
      * Display the full width hero view.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         // Set this controller in the allowed controllers list
         config([
@@ -35,7 +31,7 @@ class HeroFullTextOverlayController extends Controller
         // Set option
         $request->data['base']['hero'] = collect($request->data['base']['hero'])->map(function ($item) {
             $item['option'] = "Text Overlay";
-            $item['description'] = '<p>' . ucfirst(implode(' ', $this->faker->words(10))) . ' <a href="https://wayne.edu">' . $this->faker->word . '</a>.</p>';
+            $item['description'] = '<p>' . ucfirst(implode(' ', $this->faker->words(10))) . ' <a href="https://wayne.edu">' . $this->faker->word() . '</a>.</p>';
 
             return $item;
         })->toArray();

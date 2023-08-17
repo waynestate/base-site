@@ -24,10 +24,6 @@ class ProfileRepository implements ProfileRepositoryContract
 
     /**
      * Construct the repository.
-     *
-     * @param Connector $wsuApi
-     * @param ParsePromos $parsePromos
-     * @param Repository $cache
      */
     public function __construct(Connector $wsuApi, ParsePromos $parsePromos, Repository $cache, News $newsApi)
     {
@@ -40,7 +36,7 @@ class ProfileRepository implements ProfileRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getProfiles($site_id, $selected_group = null)
+    public function getProfiles(int $site_id, ?string $selected_group = null): array
     {
         $params = [
             'method' => 'profile.users.listing',
@@ -182,7 +178,7 @@ class ProfileRepository implements ProfileRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getDropdownOfGroups($site_id)
+    public function getDropdownOfGroups(int $site_id): array
     {
         $params = [
             'method' => 'profile.groups.listing',
@@ -221,7 +217,7 @@ class ProfileRepository implements ProfileRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getProfile($site_id, $accessid)
+    public function getProfile(int $site_id, string $accessid): array
     {
         $params = [
             'method' => 'profile.users.view',
@@ -241,9 +237,12 @@ class ProfileRepository implements ProfileRepositoryContract
         }
 
         if (!empty($profiles['profiles'][$site_id]['data']['Youtube Videos'])) {
-            $profiles['profiles'][$site_id]['data']['Youtube Videos'] = collect($profiles['profiles'][$site_id]['data']['Youtube Videos'])->map(function ($youtube_link) {
-                return ParseId::fromUrl($youtube_link);
-            });
+            $profiles['profiles'][$site_id]['data']['Youtube Videos'] = collect($profiles['profiles'][$site_id]['data']['Youtube Videos'])
+                ->map(function ($video) {
+                    $video['youtube_id'] = ParseId::fromUrl($video['link']);
+                    return $video;
+                })
+                ->toArray();
         }
 
         if (!empty($profiles['profiles'])) {

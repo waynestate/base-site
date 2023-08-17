@@ -19,7 +19,7 @@ class ProfileControllerTest extends TestCase
      * @covers App\Http\Controllers\ProfileController::show
      * @test
      */
-    public function no_profile_accessid_should_404()
+    public function no_profile_accessid_should_404(): void
     {
         $this->expectException(NotFoundHttpException::class);
 
@@ -35,7 +35,7 @@ class ProfileControllerTest extends TestCase
      * @covers App\Http\Controllers\ProfileController::show
      * @test
      */
-    public function invalid_profile_should_404_using_profile_repository()
+    public function invalid_profile_should_404_using_profile_repository(): void
     {
         $this->expectException(NotFoundHttpException::class);
 
@@ -74,7 +74,7 @@ class ProfileControllerTest extends TestCase
      * @covers App\Http\Controllers\ProfileController::show
      * @test
      */
-    public function invalid_profile_should_404_using_people_repository()
+    public function invalid_profile_should_404_using_people_repository(): void
     {
         $this->expectException(NotFoundHttpException::class);
 

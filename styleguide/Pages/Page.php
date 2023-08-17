@@ -12,10 +12,6 @@ class Page implements StyleguidePageContract
     /** @var $path **/
     public $path;
 
-    /**
-     * @param MenuRepository $menuRepository
-     * @param Factory $faker
-     */
     public function __construct(MenuRepository $menuRepository, Factory $faker)
     {
         $this->menuRepository = $menuRepository;

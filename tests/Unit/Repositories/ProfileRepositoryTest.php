@@ -22,7 +22,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getDropdownOptions
      * @test
      */
-    public function getting_dropdown_options_should_return_options()
+    public function getting_dropdown_options_should_return_options(): void
     {
         // Get a random group id
         $random_group_id = $this->faker->numberBetween(1, 9);
@@ -44,7 +44,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getFields
      * @test
      */
-    public function getting_fields_should_return_all_types()
+    public function getting_fields_should_return_all_types(): void
     {
         $fields = app(ProfileRepository::class)->getFields();
 
@@ -55,7 +55,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getPageTitleFromName
      * @test
      */
-    public function getting_page_title_should_come_from_name()
+    public function getting_page_title_should_come_from_name(): void
     {
         $returnNameFields = [
             'name_fields' => [
@@ -88,27 +88,27 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getBackToProfileListUrl
      * @test
      */
-    public function getting_back_to_profile_list_url_should_return_url()
+    public function getting_back_to_profile_list_url_should_return_url(): void
     {
         // The default path if no referer
         $url = app(ProfileRepository::class)->getBackToProfileListUrl();
         $this->assertTrue($url == config('base.profile_default_back_url'));
 
         // If a referer is passed from a different domain
-        $referer = $this->faker->url;
+        $referer = $this->faker->url();
         $url = app(ProfileRepository::class)->getBackToProfileListUrl($referer, 'http', 'wayne.edu', '/');
         $this->assertTrue($url == config('base.profile_default_back_url'));
 
         // If a referer is passed that is the same page we are on
-        $referer = $this->faker->url;
+        $referer = $this->faker->url();
         $parsed = parse_url($referer);
         $url = app(ProfileRepository::class)->getBackToProfileListUrl($referer, $parsed['scheme'], $parsed['host'], $parsed['path']);
         $this->assertTrue($url == config('base.profile_default_back_url'));
 
         // If referer is passed from the same domain that the site is on
-        $referer = $this->faker->url;
+        $referer = $this->faker->url();
         $parsed = parse_url($referer);
-        $url = app(ProfileRepository::class)->getBackToProfileListUrl($referer, $parsed['scheme'], $parsed['host'], $this->faker->word);
+        $url = app(ProfileRepository::class)->getBackToProfileListUrl($referer, $parsed['scheme'], $parsed['host'], $this->faker->word());
         $this->assertEquals($referer, $url);
     }
 
@@ -116,7 +116,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getDropdownOfGroups
      * @test
      */
-    public function getting_dropdown_of_groups_should_contain_all_the_groups()
+    public function getting_dropdown_of_groups_should_contain_all_the_groups(): void
     {
         // Force this config incase it is changed
         config(['base.profile_parent_group_id' => 0]);
@@ -144,7 +144,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getDropdownOfGroups
      * @test
      */
-    public function getting_dropdown_of_single_group_should_contain_single_group()
+    public function getting_dropdown_of_single_group_should_contain_single_group(): void
     {
         // Force this config incase it is changed
         config(['base.profile_parent_group_id' => 0]);
@@ -171,10 +171,10 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getProfile
      * @test
      */
-    public function getting_profile_that_doesnt_exist_should_return_blank_array()
+    public function getting_profile_that_doesnt_exist_should_return_blank_array(): void
     {
         $site_id = $this->faker->numberBetween(1, 10);
-        $accessid = $this->faker->word;
+        $accessid = $this->faker->word();
 
         // Fake return
         $return = app(ApiError::class)->create(1, true);
@@ -193,10 +193,10 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getProfile
      * @test
      */
-    public function getting_profile_that_exists_should_return_two_arrays()
+    public function getting_profile_that_exists_should_return_two_arrays(): void
     {
         $site_id = $this->faker->numberBetween(1, 10);
-        $accessid = $this->faker->word;
+        $accessid = $this->faker->word();
 
         // Fake return
         $return = [
@@ -218,7 +218,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getProfiles
      * @test
      */
-    public function getting_profiles_with_api_error_should_return_blank_array()
+    public function getting_profiles_with_api_error_should_return_blank_array(): void
     {
         // Fake return
         $return = app(ApiError::class)->create(1, true);
@@ -238,7 +238,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getProfiles
      * @test
      */
-    public function getting_profiles_should_append_link()
+    public function getting_profiles_should_append_link(): void
     {
         // Fake return
         $return = app(Profile::class)->create(5);
@@ -259,7 +259,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getGroupIds
      * @test
      */
-    public function getting_profile_group_ids_should_return_correct_string()
+    public function getting_profile_group_ids_should_return_correct_string(): void
     {
         // Fake a dropdown array of group_id => group name
         $limit = $this->faker->numberBetween(1, 10);
@@ -285,7 +285,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::sortGroupsByDisplayOrder
      * @test
      */
-    public function profiles_should_be_grouped()
+    public function profiles_should_be_grouped(): void
     {
         // Force this config incase it is changed
         config(['base.profile_parent_group_id' => 0]);
@@ -322,7 +322,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getProfilesByGroupOrder
      * @test
      */
-    public function profile_group_ids_should_return_ordered_array()
+    public function profile_group_ids_should_return_ordered_array(): void
     {
         // Mock the user listing
         $return_user_listing = app(Profile::class)->create(10);
@@ -360,7 +360,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getSiteID
      * @test
      */
-    public function getting_profile_site_id_should_return_the_correct_site_id_based_on_custom_field()
+    public function getting_profile_site_id_should_return_the_correct_site_id_based_on_custom_field(): void
     {
         // Mock WSU API
         $wsuApi = Mockery::mock(Connector::class);
@@ -388,7 +388,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getNewsArticles
      * @test
      */
-    public function getting_profile_should_get_articles()
+    public function getting_profile_should_get_articles(): void
     {
         // Fake return
         $return = app(Article::class)->create(5);
@@ -407,7 +407,7 @@ class ProfileRepositoryTest extends TestCase
      * @covers App\Repositories\ProfileRepository::getNewsArticles
      * @test
      */
-    public function getting_profile_articles_should_be_empty_if_exception_was_thrown()
+    public function getting_profile_articles_should_be_empty_if_exception_was_thrown(): void
     {
         // Mock the connector and set the return
         $newsApi = Mockery::mock(News::class);
@@ -417,5 +417,37 @@ class ProfileRepositoryTest extends TestCase
         $articles = app(ProfileRepository::class, ['newsApi' => $newsApi])->getNewsArticles('aa0000');
 
         $this->assertEmpty($articles);
+    }
+
+    /**
+    * @covers App\Repositories\ProfileRepository::getProfile
+    * @test
+    */
+    public function getting_profile_should_get_youtube_videos(): void
+    {
+        $site_id = $this->faker->numberBetween(1, 10);
+        $accessid = $this->faker->randomLetter().$this->faker->randomLetter().$this->faker->randomNumber(4, true);
+
+        $profile = app(Profile::class)->create(1, true);
+        $profile['data']['AccessID'] = $accessid;
+
+        // Fake return
+        $return = [
+            'profiles' => [$site_id => $profile],
+            'courses' => [],
+        ];
+
+        // Mock the Connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('profile.users.view', Mockery::type('array'))->once()->andReturn($return);
+        $wsuApi->shouldReceive('nextRequestProduction')->once();
+
+        $profile = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getProfile($site_id, $accessid);
+
+        $this->assertTrue(is_array($profile['profile']['data']['Youtube Videos']));
+
+        foreach ($profile['profile']['data']['Youtube Videos'] as $video) {
+            $this->assertTrue(array_key_exists('youtube_id', $video));
+        }
     }
 }

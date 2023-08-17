@@ -21,10 +21,6 @@ class PromoPageRepository implements PromoPageRepositoryContract
 
     /**
      * Construct the repository.
-     *
-     * @param Connector $wsuApi
-     * @param ParsePromos $parsePromos
-     * @param Repository $cache
      */
     public function __construct(Connector $wsuApi, ParsePromos $parsePromos, Repository $cache)
     {
@@ -185,9 +181,9 @@ class PromoPageRepository implements PromoPageRepositoryContract
         return $promos;
     }
 
-     /**
-     * {@inheritdoc}
-     */
+    /**
+    * {@inheritdoc}
+    */
     public function organizePromoItemsByOption(array $promos)
     {
         $options_exist = collect($promos['promos'])->filter(function ($value) {

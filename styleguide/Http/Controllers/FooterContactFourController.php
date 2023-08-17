@@ -2,6 +2,7 @@
 
 namespace Styleguide\Http\Controllers;
 
+use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Factories\FooterContact;
 use Illuminate\Http\Request;
@@ -10,11 +11,8 @@ class FooterContactFourController extends Controller
 {
     /**
      * Display four column footer view.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $request->data['base']['contact'] = app(FooterContact::class)->create(4);
 
