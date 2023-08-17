@@ -35,8 +35,8 @@
         "laravel/pint": "^1.4",
         "mockery/mockery": "^1.4.4",
         "php-coveralls/php-coveralls": "^2.4",
-        "nunomaduro/collision": "^6.1",
-        "phpunit/phpunit": "^9.3.3"
+        "nunomaduro/collision": "^7.0",
+        "phpunit/phpunit": "^10.0"
     },
     "autoload": {
         "files": [

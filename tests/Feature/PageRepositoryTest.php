@@ -2,26 +2,16 @@
 
 namespace Tests\Feature;
 
+use PHPUnit\Framework\Attributes\Test;
 use Illuminate\Support\Collection;
 use Tests\TestCase;
 use Mockery as Mockery;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class PageRepositoryTest extends TestCase
+final class PageRepositoryTest extends TestCase
 {
-    /**
-     * @covers \App\Http\Controllers\HomepageController
-     * @covers \App\Http\Controllers\ChildpageController
-     * @covers \App\Http\Controllers\ProfileController
-     * @covers \App\Http\Controllers\ArticleController
-     * @covers \App\Http\Controllers\DirectoryController
-     * @covers \App\Http\Controllers\TopicController
-     * @covers \App\Http\Controllers\PromoPageController
-     * @covers \App\Http\Controllers\ContactTableController
-     * @covers \Styleguide\Repositories\PageRepository::getRequestData
-     * @test
-     */
+    #[Test]
     public function all_styleguide_routes_should_load_successfully(): void
     {
         $this->getPageResponses(false)
@@ -32,9 +22,7 @@ class PageRepositoryTest extends TestCase
             });
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function all_styleguide_routes_with_no_data_should_load_successfully(): void
     {
         // Overload all styleguide repositories to only return a blank array

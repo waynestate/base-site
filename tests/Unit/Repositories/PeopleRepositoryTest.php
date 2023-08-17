@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Repositories;
 
+use PHPUnit\Framework\Attributes\Test;
 use App\Repositories\PeopleRepository;
 use Exception;
 use Factories\Article;
@@ -15,13 +16,9 @@ use Mockery as Mockery;
 use Waynestate\Api\News;
 use Waynestate\Api\People as PeopleApi;
 
-class PeopleRepositoryTest extends TestCase
+final class PeopleRepositoryTest extends TestCase
 {
-    /**
-     * @covers App\Repositories\PeopleRepository::__construct
-     * @covers App\Repositories\PeopleRepository::getDropdownOptions
-     * @test
-     */
+    #[Test]
     public function getting_dropdown_options_should_return_options(): void
     {
         // Get a random group id
@@ -40,10 +37,7 @@ class PeopleRepositoryTest extends TestCase
         $this->assertEquals(['selected_group' => $random_group_id, 'hide_filtering' => true], $options);
     }
 
-    /**
-     * @covers App\Repositories\PeopleRepository::getFields
-     * @test
-     */
+    #[Test]
     public function getting_fields_should_return_all_types(): void
     {
         $fields = app(PeopleRepository::class)->getFields();
@@ -51,10 +45,7 @@ class PeopleRepositoryTest extends TestCase
         $this->assertTrue(is_array($fields));
     }
 
-    /**
-     * @covers App\Repositories\PeopleRepository::getPageTitleFromName
-     * @test
-     */
+    #[Test]
     public function getting_page_title_should_come_from_name(): void
     {
         $returnNameFields = [
@@ -84,10 +75,7 @@ class PeopleRepositoryTest extends TestCase
         $this->assertEquals('Dr. Anthony Wayne, Jr.', $pageTitle);
     }
 
-    /**
-     * @covers App\Repositories\PeopleRepository::getBackToProfileListUrl
-     * @test
-     */
+    #[Test]
     public function getting_back_to_profile_list_url_should_return_url(): void
     {
         // The default path if no referer
@@ -112,10 +100,7 @@ class PeopleRepositoryTest extends TestCase
         $this->assertEquals($referer, $url);
     }
 
-    /**
-     * @covers App\Repositories\PeopleRepository::getDropdownOfGroups
-     * @test
-     */
+    #[Test]
     public function getting_dropdown_of_groups_should_contain_all_the_groups(): void
     {
         // Force this config incase it is changed
@@ -136,10 +121,7 @@ class PeopleRepositoryTest extends TestCase
         });
     }
 
-    /**
-     * @covers App\Repositories\PeopleRepository::getDropdownOfGroups
-     * @test
-     */
+    #[Test]
     public function getting_dropdown_of_single_group_should_contain_single_group(): void
     {
         // Force this config incase it is changed
@@ -160,10 +142,7 @@ class PeopleRepositoryTest extends TestCase
         $this->assertTrue($dropdown['single_group'] == $group_id);
     }
 
-    /**
-     * @covers App\Repositories\PeopleRepository::getProfile
-     * @test
-     */
+    #[Test]
     public function getting_profile_that_doesnt_exist_should_return_blank_array(): void
     {
         $site_id = $this->faker->numberBetween(1, 10);
@@ -186,10 +165,7 @@ class PeopleRepositoryTest extends TestCase
         $this->assertTrue(is_array($profile['profile']) && count($profile['profile']) == 0);
     }
 
-    /**
-     * @covers App\Repositories\PeopleRepository::getProfiles
-     * @test
-     */
+    #[Test]
     public function getting_profiles_with_api_error_should_return_blank_array(): void
     {
         // Fake return
@@ -210,10 +186,7 @@ class PeopleRepositoryTest extends TestCase
         $this->assertEmpty($profiles['profiles']);
     }
 
-    /**
-     * @covers App\Repositories\PeopleRepository::getProfiles
-     * @test
-     */
+    #[Test]
     public function getting_profiles_should_append_data(): void
     {
         // Fake return
@@ -239,10 +212,7 @@ class PeopleRepositoryTest extends TestCase
         });
     }
 
-    /**
-     * @covers App\Repositories\PeopleRepository::getProfile
-     * @test
-     */
+    #[Test]
     public function getting_profile_should_append_data(): void
     {
         $site_id = $this->faker->numberBetween(1, 10);
@@ -265,10 +235,7 @@ class PeopleRepositoryTest extends TestCase
         $this->assertNotEmpty($profile['profile']['data']['Picture']['url']);
     }
 
-    /**
-     * @covers App\Repositories\PeopleRepository::getGroupIds
-     * @test
-     */
+    #[Test]
     public function getting_profile_group_ids_should_return_correct_string(): void
     {
         // Fake a dropdown array of group_id => group name
@@ -290,11 +257,7 @@ class PeopleRepositoryTest extends TestCase
         $this->assertEquals($selected, $group_ids);
     }
 
-    /**
-     * @covers App\Repositories\PeopleRepository::getProfilesByGroup
-     * @covers App\Repositories\PeopleRepository::sortGroupsByDisplayOrder
-     * @test
-     */
+    #[Test]
     public function profiles_should_be_grouped(): void
     {
         $site_id = $this->faker->numberBetween(1, 10);
@@ -326,10 +289,7 @@ class PeopleRepositoryTest extends TestCase
         });
     }
 
-    /**
-     * @covers App\Repositories\PeopleRepository::getProfilesByGroupOrder
-     * @test
-     */
+    #[Test]
     public function profile_group_ids_should_return_ordered_array(): void
     {
         $site_id = $this->faker->numberBetween(1, 10);
@@ -363,10 +323,7 @@ class PeopleRepositoryTest extends TestCase
         }
     }
 
-    /**
-     * @covers App\Repositories\PeopleRepository::getProfiles
-     * @test
-     */
+    #[Test]
     public function getting_profiles_with_exception_should_return_empty_array(): void
     {
         // Mock the connector and thrown Exception
@@ -378,10 +335,7 @@ class PeopleRepositoryTest extends TestCase
         $this->assertCount(0, $profiles['profiles']);
     }
 
-    /**
-     * @covers App\Repositories\PeopleRepository::getProfile
-     * @test
-     */
+    #[Test]
     public function getting_profile_with_exception_should_return_empty_array(): void
     {
         $site_id = $this->faker->numberBetween(1, 10);
@@ -396,10 +350,7 @@ class PeopleRepositoryTest extends TestCase
         $this->assertCount(0, $profiles['profile']);
     }
 
-    /**
-     * @covers App\Repositories\PeopleRepository::getDropdownOfGroups
-     * @test
-     */
+    #[Test]
     public function getting_dropdown_groups_with_exception_should_return_empty_array(): void
     {
         // Force this config incase it is changed
@@ -414,10 +365,7 @@ class PeopleRepositoryTest extends TestCase
         $this->assertCount(1, $dropdown['dropdown_groups']);
     }
 
-    /**
-     * @covers App\Repositories\PeopleRepository::getSiteID
-     * @test
-     */
+    #[Test]
     public function getting_people_site_id_should_return_the_correct_site_id_based_on_custom_field(): void
     {
         // Mock people API
@@ -446,10 +394,7 @@ class PeopleRepositoryTest extends TestCase
         $this->assertEquals($people_site_id, $return_people_site_id);
     }
 
-    /**
-     * @covers App\Repositories\PeopleRepository::getNewsArticles
-     * @test
-     */
+    #[Test]
     public function getting_people_profile_should_get_articles(): void
     {
         // Fake return
@@ -465,10 +410,7 @@ class PeopleRepositoryTest extends TestCase
         $this->assertEquals($return['data'], $articles);
     }
 
-    /**
-     * @covers App\Repositories\PeopleRepository::getNewsArticles
-     * @test
-     */
+    #[Test]
     public function getting_people_profile_articles_should_be_empty_if_exception_was_thrown(): void
     {
         // Mock the connector and set the return
@@ -481,10 +423,7 @@ class PeopleRepositoryTest extends TestCase
         $this->assertEmpty($articles);
     }
 
-    /**
-     * @covers App\Repositories\PeopleRepository::getProfile
-     * @test
-     */
+    #[Test]
     public function getting_profile_should_get_youtube_videos(): void
     {
         $site_id = $this->faker->numberBetween(1, 10);
