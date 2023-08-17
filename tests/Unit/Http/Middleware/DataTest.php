@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Http\Middleware;
 
+use PHPUnit\Framework\Attributes\Test;
 use App\Http\Middleware\Data;
 use Mockery;
 use Tests\TestCase;
@@ -11,10 +12,7 @@ use Illuminate\Support\Facades\Storage;
 
 class DataTest extends TestCase
 {
-    /**
-     * @covers \App\Http\Middleware\Data::handle
-     * @test
-     */
+    #[Test]
     public function data_middleware_should_run_successfully(): void
     {
         $request = new Request();
@@ -29,11 +27,7 @@ class DataTest extends TestCase
         });
     }
 
-    /**
-     * @covers \App\Http\Middleware\Data::handle
-     * @covers \App\Repositories\PageRepository::getRequestData
-     * @test
-     */
+    #[Test]
     public function no_homepage_found_should_redirect_to_styleguide(): void
     {
         // Change the ENV so it runs through the real data middleware
@@ -50,10 +44,7 @@ class DataTest extends TestCase
         $this->assertEquals('styleguide', basename($redirect->headers->get('location')));
     }
 
-    /**
-     * @covers \App\Http\Middleware\Data::handle
-     * @test
-     */
+    #[Test]
     public function site_methods_should_merge_with_all_methods(): void
     {
         $request = new Request();
@@ -81,19 +72,13 @@ class DataTest extends TestCase
         });
     }
 
-    /**
-     * @covers \App\Http\Middleware\Data::getPrefix
-     * @test
-     */
+    #[Test]
     public function prefix_should_return_string(): void
     {
         $this->assertTrue(is_string(app(Data::class)->getPrefix()));
     }
 
-    /**
-     * @covers \App\Http\Middleware\Data::getControllerNamespace
-     * @test
-     */
+    #[Test]
     public function controller_namespace_should_return_string(): void
     {
         // Test an existing app controller
@@ -108,10 +93,7 @@ class DataTest extends TestCase
         $this->assertStringContainsString('App\Http\Controllers', $namespace);
     }
 
-    /**
-     * @covers \App\Http\Middleware\Data::getPathFromRequest
-     * @test
-     */
+    #[Test]
     public function when_the_request_has_no_matched_route_the_path_should_be_path(): void
     {
         $actual_path = $this->faker->word();
@@ -124,10 +106,7 @@ class DataTest extends TestCase
         $this->assertEquals($path, $actual_path);
     }
 
-    /**
-     * @covers \App\Http\Middleware\Data::getPathFromRequest
-     * @test
-     */
+    #[Test]
     public function when_the_request_has_a_matched_route_the_path_should_have_no_route_parameters(): void
     {
         $actual_path = config('base.news_view_route').'/slug-123';

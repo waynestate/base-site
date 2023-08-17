@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Repositories;
 
+use PHPUnit\Framework\Attributes\Test;
 use App\Repositories\MenuRepository;
 use Factories\ApiError;
 use Factories\Menu;
@@ -14,11 +15,7 @@ use Waynestate\Api\Connector;
 
 class MenuRepositoryTest extends TestCase
 {
-    /**
-     * @covers \App\Repositories\MenuRepository::__construct
-     * @covers \App\Repositories\MenuRepository::getMenus
-     * @test
-     */
+    #[Test]
     public function top_menu_enabled_should_return_top_menu(): void
     {
         // Enable top menu
@@ -41,10 +38,7 @@ class MenuRepositoryTest extends TestCase
         config(['base.top_menu_enabled' => false]);
     }
 
-    /**
-     * @covers \App\Repositories\MenuRepository::getMenus
-     * @test
-     */
+    #[Test]
     public function disable_top_menu_should_show_site_menu(): void
     {
         // Disable top menu
@@ -63,11 +57,7 @@ class MenuRepositoryTest extends TestCase
         $this->assertTrue($menus['show_site_menu']);
     }
 
-    /**
-     * @covers \App\Repositories\MenuRepository::getRequestData
-     * @covers \App\Repositories\MenuRepository::getAllMenus
-     * @test
-     */
+    #[Test]
     public function menu_api_error_should_return_empty_menu(): void
     {
         // Get an error
@@ -88,10 +78,7 @@ class MenuRepositoryTest extends TestCase
         $this->assertEmpty($menus['site_menu']['menu']);
     }
 
-    /**
-     * @covers \App\Repositories\MenuRepository::getAllMenus
-     * @test
-     */
+    #[Test]
     public function getting_a_menu_without_menu_items_should_not_error(): void
     {
         // Get the page data
@@ -108,10 +95,7 @@ class MenuRepositoryTest extends TestCase
         $this->assertArrayHasKey($data['menu']['id'], $menus);
     }
 
-    /**
-     * @covers \App\Repositories\MenuRepository::getSiteMenu
-     * @test
-     */
+    #[Test]
     public function getting_site_menu_with_no_page_found_should_return_root_menu(): void
     {
         // Get a menu with child items
@@ -129,10 +113,7 @@ class MenuRepositoryTest extends TestCase
         }
     }
 
-    /**
-     * @covers \App\Repositories\MenuRepository::getSiteMenu
-     * @test
-     */
+    #[Test]
     public function getting_site_menu_with_page_selected_should_return_is_selected(): void
     {
         // Get a menu
@@ -149,10 +130,7 @@ class MenuRepositoryTest extends TestCase
         $this->assertTrue($site_menu['menu'][$selected_page]['is_selected']);
     }
 
-    /**
-     * @covers \App\Repositories\MenuRepository::getSiteMenu
-     * @test
-     */
+    #[Test]
     public function getting_site_menu_with_unknown_page_id_should_not_be_selected(): void
     {
         // Get a menu
@@ -165,10 +143,7 @@ class MenuRepositoryTest extends TestCase
         $this->assertFalse($site_menu['meta']['has_selected']);
     }
 
-    /**
-     * @covers \App\Repositories\MenuRepository::trimSiteMenu
-     * @test
-     */
+    #[Test]
     public function trimming_site_menu_with_no_page_found_should_return_same_menu(): void
     {
         // Get a menu
@@ -184,10 +159,7 @@ class MenuRepositoryTest extends TestCase
         $this->assertEquals($site_menu, $trimmed);
     }
 
-    /**
-     * @covers \App\Repositories\MenuRepository::trimSiteMenu
-     * @test
-     */
+    #[Test]
     public function trimming_selected_site_menu_with_no_children_should_return_no_trimmed_menu(): void
     {
         $currentConfig = config('base.top_menu_enabled');
@@ -211,10 +183,7 @@ class MenuRepositoryTest extends TestCase
         config(['base.top_menu_enabled' => $currentConfig]);
     }
 
-    /**
-     * @covers \App\Repositories\MenuRepository::trimSiteMenu
-     * @test
-     */
+    #[Test]
     public function trimming_site_menu_while_on_main_site_should_trim_menu(): void
     {
         // Get a menu
@@ -233,10 +202,7 @@ class MenuRepositoryTest extends TestCase
         $this->assertEquals(reset($site_menu['menu'])['submenu'], $trimmed['menu']);
     }
 
-    /**
-     * @covers \App\Repositories\MenuRepository::trimSiteMenu
-     * @test
-     */
+    #[Test]
     public function trimming_site_menu_while_parent_id_is_passed_should_trim_menu(): void
     {
         // Get a menu
@@ -255,10 +221,7 @@ class MenuRepositoryTest extends TestCase
         $this->assertEquals(reset($site_menu['menu'])['submenu'], $trimmed['menu']);
     }
 
-    /**
-     * @covers \App\Repositories\MenuRepository::trimSiteMenu
-     * @test
-     */
+    #[Test]
     public function trimming_site_menu_while_top_menu_id_is_passed_should_trim_menu(): void
     {
         // Get a menu
@@ -277,10 +240,7 @@ class MenuRepositoryTest extends TestCase
         $this->assertEquals(reset($site_menu['menu'])['submenu'], $trimmed['menu']);
     }
 
-    /**
-     * @covers \App\Repositories\MenuRepository::trimSiteMenu
-     * @test
-     */
+    #[Test]
     public function trimming_site_menu_while_top_menu_id_and_parent_id_is_passed_should_not_trim_menu(): void
     {
         // Get a menu
@@ -299,10 +259,7 @@ class MenuRepositoryTest extends TestCase
         $this->assertEquals($site_menu, $trimmed);
     }
 
-    /**
-     * @covers \App\Repositories\MenuRepository::trimSiteMenu
-     * @test
-     */
+    #[Test]
     public function trimming_site_menu_while_top_menu_is_selected_with_no_children_should_reset_selected_state(): void
     {
         // Get a menu
@@ -321,10 +278,7 @@ class MenuRepositoryTest extends TestCase
         $this->assertFalse($trimmed['meta']['has_selected']);
     }
 
-    /**
-     * @covers \App\Repositories\MenuRepository::getTopMenu
-     * @test
-     */
+    #[Test]
     public function getting_top_menu_selected_states(): void
     {
         // Get a menu
@@ -349,10 +303,7 @@ class MenuRepositoryTest extends TestCase
         $this->assertFalse($top_menu['meta']['has_selected']);
     }
 
-    /**
-     * @covers \App\Repositories\MenuRepository::getTopMenu
-     * @test
-     */
+    #[Test]
     public function top_menu_should_be_one_level_deep(): void
     {
         // Get a menu
@@ -368,10 +319,7 @@ class MenuRepositoryTest extends TestCase
         $this->assertCount(0, $top_menu['menu'][$page_id]['submenu']);
     }
 
-    /**
-     * @covers \App\Repositories\MenuRepository::getTopMenuId
-     * @test
-     */
+    #[Test]
     public function setting_top_menu_id_should_return_correct_top_menu(): void
     {
         // Make the repository
@@ -397,10 +345,7 @@ class MenuRepositoryTest extends TestCase
         $this->assertEquals(null, $menuRepository->getTopMenuId());
     }
 
-    /**
-     * @covers \App\Repositories\MenuRepository::getBreadcrumbs
-     * @test
-     */
+    #[Test]
     public function getting_breadcrumbs_with_subsite_should_add_subsite_homepage(): void
     {
         // Get a menu
@@ -423,10 +368,7 @@ class MenuRepositoryTest extends TestCase
         $this->assertEquals('/'.rtrim($folder, '/'), $breadcrumbs[1]['relative_url']);
     }
 
-    /**
-     * @covers \App\Repositories\MenuRepository::getBreadcrumbs
-     * @test
-     */
+    #[Test]
     public function getting_breadcrumbs_if_in_menu_should_not_add_subsite_homepage(): void
     {
         // Get a menu
@@ -448,10 +390,7 @@ class MenuRepositoryTest extends TestCase
         $this->assertNotEquals($breadcrumbs[1]['relative_url'], $breadcrumbs[2]['relative_url']);
     }
 
-    /**
-     * @covers \App\Repositories\MenuRepository::getBreadcrumbs
-     * @test
-     */
+    #[Test]
     public function getting_breadcrumbs_should_return_all_breadcrumbs(): void
     {
         // Get a menu
@@ -480,10 +419,7 @@ class MenuRepositoryTest extends TestCase
         $this->assertCount(3, $breadcrumbs);
     }
 
-    /**
-     * @covers \App\Repositories\MenuRepository::getBreadcrumbs
-     * @test
-     */
+    #[Test]
     public function getting_breadcrumbs_with_no_path_should_return_nothing(): void
     {
         // Get a menu
@@ -499,10 +435,7 @@ class MenuRepositoryTest extends TestCase
         $this->assertCount(0, $breadcrumbs);
     }
 
-    /**
-     * @covers \App\Repositories\MenuRepository::getMenus
-     * @test
-     */
+    #[Test]
     public function homepage_menu_is_disabled_when_config_is_disabled(): void
     {
         // Get the current config for if the menu is enabled or not
@@ -534,10 +467,7 @@ class MenuRepositoryTest extends TestCase
         config(['base.top_menu_enabled' => $currentConfig]);
     }
 
-    /**
-     * @covers \App\Repositories\MenuRepository::getRequestData
-     * @test
-     */
+    #[Test]
     public function getting_all_menus_should_return_array_of_menus(): void
     {
         // Get a page with the HomepageController set
@@ -563,10 +493,7 @@ class MenuRepositoryTest extends TestCase
         $this->assertEquals('', $menus['top_menu_output']);
     }
 
-    /**
-     * @covers \App\Repositories\MenuRepository::getSiteMenuOutput
-     * @test
-     */
+    #[Test]
     public function getting_site_menu_output_should_return_site_menu(): void
     {
         // Get a menu
@@ -582,10 +509,7 @@ class MenuRepositoryTest extends TestCase
         $this->assertMatchesRegularExpression('/<ul/', $output);
     }
 
-    /**
-     * @covers \App\Repositories\MenuRepository::getTopMenuOutput
-     * @test
-     */
+    #[Test]
     public function getting_top_menu_output_should_return_top_menu(): void
     {
         // Get a menu
@@ -601,10 +525,7 @@ class MenuRepositoryTest extends TestCase
         $this->assertMatchesRegularExpression('/<ul/', $output);
     }
 
-    /**
-     * @covers \App\Repositories\MenuRepository::getMenus
-     * @test
-     */
+    #[Test]
     public function page_with_no_menu_should_hide_the_site_menu(): void
     {
         // Get a page with the HomepageController set
@@ -627,10 +548,7 @@ class MenuRepositoryTest extends TestCase
         $this->assertFalse($menu['show_site_menu']);
     }
 
-    /**
-     * @covers \App\Repositories\MenuRepository::getMenus
-     * @test
-     */
+    #[Test]
     public function page_with_menu_and_no_submenu_items_with_top_menu_enabled_showsitemenu_should_be_false(): void
     {
         // Force enable top menu
@@ -658,10 +576,7 @@ class MenuRepositoryTest extends TestCase
         $this->assertFalse($menus['show_site_menu']);
     }
 
-    /**
-     * @covers \App\Repositories\MenuRepository::getMenus
-     * @test
-     */
+    #[Test]
     public function page_should_show_full_width_hero_with_no_site_menu(): void
     {
         // Create a fake data request
@@ -687,10 +602,7 @@ class MenuRepositoryTest extends TestCase
         $this->assertTrue(in_array('ExampleController', config('base.hero_full_controllers')));
     }
 
-    /**
-     * @covers \App\Repositories\MenuRepository::getMenus
-     * @test
-     */
+    #[Test]
     public function page_should_show_full_width_hero_with_site_menu_but_menu_is_hidden(): void
     {
         // Create a fake data request

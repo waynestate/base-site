@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Http\Middleware;
 
+use PHPUnit\Framework\Attributes\Test;
 use App\Http\Middleware\Formy;
 use Tests\TestCase;
 use Mockery as Mockery;
@@ -10,11 +11,7 @@ use Waynestate\FormyParser\Parser;
 
 class FormyTest extends TestCase
 {
-    /**
-     * @covers \App\Http\Middleware\Formy::__construct
-     * @covers \App\Http\Middleware\Formy::handle
-     * @test
-     */
+    #[Test]
     public function formy_embed_should_show_form_in_page_content(): void
     {
         // Fake request

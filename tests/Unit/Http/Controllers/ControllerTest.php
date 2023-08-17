@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Http\Controllers;
 
+use PHPUnit\Framework\Attributes\Test;
 use Illuminate\Support\Collection;
 use Tests\TestCase;
 use Illuminate\Support\Str;
@@ -9,9 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ControllerTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function controllers_should_have_only_one_default(): void
     {
         $data = $this->getControllerComments()->where('Default', 'true');
@@ -19,9 +18,7 @@ class ControllerTest extends TestCase
         $this->assertCount(1, $data, 'Only one controller can have a default=true value: '.$data->implode('File', ' & '));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function controllers_should_have_unique_descriptions(): void
     {
         $all = $this->getControllerComments()->pluck('Description');

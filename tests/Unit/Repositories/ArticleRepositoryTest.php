@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Repositories;
 
+use PHPUnit\Framework\Attributes\Test;
 use App\Repositories\ArticleRepository;
 use Factories\Article;
 use Tests\TestCase;
@@ -10,10 +11,7 @@ use Waynestate\Api\News;
 
 class ArticleRepositoryTest extends TestCase
 {
-    /**
-     * @covers \App\Repositories\ArticleRepository::find
-     * @test
-     */
+    #[Test]
     public function finding_article_should_return_article(): void
     {
         // Fake return
@@ -30,10 +28,7 @@ class ArticleRepositoryTest extends TestCase
         $this->assertEquals($return['data']['id'], $article['article']['data']['id']);
     }
 
-    /**
-     * @covers \App\Repositories\ArticleRepository::listing
-     * @test
-     */
+    #[Test]
     public function getting_articles_should_return_array_of_articles(): void
     {
         // Fake return
@@ -49,11 +44,7 @@ class ArticleRepositoryTest extends TestCase
         $this->assertEquals($return['data'], $articles['articles']['data']);
     }
 
-    /**
-    * @covers \App\Repositories\ArticleRepository::listing
-    * @covers \App\Repositories\ArticleRepository::setPaging
-    * @test
-    */
+    #[Test]
     public function articles_paging_while_on_first_page(): void
     {
         // Fake return
@@ -78,11 +69,7 @@ class ArticleRepositoryTest extends TestCase
         $this->assertEquals(2, $prev['page']);
     }
 
-    /**
-    * @covers \App\Repositories\ArticleRepository::listing
-    * @covers \App\Repositories\ArticleRepository::setPaging
-    * @test
-    */
+    #[Test]
     public function articles_paging_while_on_last_page(): void
     {
         // Fake return
@@ -106,11 +93,7 @@ class ArticleRepositoryTest extends TestCase
         $this->assertTrue(empty($prev['page']));
     }
 
-    /**
-     * @covers \App\Repositories\ArticleRepository::listing
-     * @covers \App\Repositories\ArticleRepository::setPaging
-     * @test
-     */
+    #[Test]
     public function articles_paging_no_page(): void
     {
         // Fake return
@@ -134,10 +117,7 @@ class ArticleRepositoryTest extends TestCase
         $this->assertEquals(2, $prev['page']);
     }
 
-    /**
-     * @covers \App\Repositories\ArticleRepository::listing
-     * @test
-     */
+    #[Test]
     public function getting_articles_with_no_applications(): void
     {
         $articles = app(ArticleRepository::class)->listing([]);
@@ -145,10 +125,7 @@ class ArticleRepositoryTest extends TestCase
         $this->assertCount(0, $articles['articles']);
     }
 
-    /**
-     * @covers \App\Repositories\ArticleRepository::listing
-     * @test
-     */
+    #[Test]
     public function getting_articles_with_exception_should_return_empty_array(): void
     {
         // Fake return
@@ -163,10 +140,7 @@ class ArticleRepositoryTest extends TestCase
         $this->assertCount(0, $articles['articles']);
     }
 
-    /**
-     * @covers \App\Repositories\ArticleRepository::getImage
-     * @test
-     */
+    #[Test]
     public function article_with_no_images_should_return_null(): void
     {
         $article = app(Article::class)->create(1, true, [
@@ -180,10 +154,7 @@ class ArticleRepositoryTest extends TestCase
         $this->assertNull($imageUrl['alt_text']);
     }
 
-    /**
-     * @covers \App\Repositories\ArticleRepository::getImage
-     * @test
-     */
+    #[Test]
     public function article_with_hero_should_return_hero_url(): void
     {
         $article = app(Article::class)->create(1, true);
@@ -194,10 +165,7 @@ class ArticleRepositoryTest extends TestCase
         $this->assertEquals($article['data']['hero_image']['alt_text'], $imageUrl['alt_text']);
     }
 
-    /**
-     * @covers \App\Repositories\ArticleRepository::getImage
-     * @test
-     */
+    #[Test]
     public function article_with_body_image_should_return_url(): void
     {
         $url = $this->faker->imageUrl();
