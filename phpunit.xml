@@ -1,45 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" backupGlobals="false" backupStaticAttributes="false" bootstrap="vendor/autoload.php" colors="true" convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true" processIsolation="false" stopOnFailure="false" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
-    <coverage processUncoveredFiles="true">
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" backupGlobals="false" bootstrap="vendor/autoload.php" colors="true" processIsolation="false" stopOnFailure="false" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.3/phpunit.xsd" cacheDirectory=".phpunit.cache" backupStaticProperties="false">
+  <coverage/>
+  <testsuites>
+    <testsuite name="Feature">
+      <directory suffix="Test.php">./tests/Feature</directory>
+    </testsuite>
+    <testsuite name="Unit">
+      <directory suffix="Test.php">./tests/Unit</directory>
+    </testsuite>
+  </testsuites>
+  <extensions>
+    <bootstrap class="Tests\Bootstrap"/>
+  </extensions>
+  <php>
+    <env name="APP_ENV" value="testing"/>
+    <env name="BCRYPT_ROUNDS" value="4"/>
+    <env name="CACHE_DRIVER" value="array"/>
+    <env name="MAIL_DRIVER" value="array"/>
+    <env name="QUEUE_CONNECTION" value="sync"/>
+    <env name="SESSION_DRIVER" value="array"/>
+    <env name="HTTP_X_FORWARDED_FOR" value="127.0.0.1"/>
+    <env name="APP_CONFIG_CACHE" value="bootstrap/cache/config.phpunit.php"/>
+    <env name="APP_SERVICES_CACHE" value="bootstrap/cache/services.phpunit.php"/>
+    <env name="APP_PACKAGES_CACHE" value="bootstrap/cache/packages.phpunit.php"/>
+    <env name="APP_ROUTES_CACHE" value="bootstrap/cache/routes.phpunit.php"/>
+    <env name="APP_EVENTS_CACHE" value="bootstrap/cache/events.phpunit.php"/>
+  </php>
+  <source>
     <include>
-        <directory suffix=".php">./app</directory>
+      <directory suffix=".php">./app</directory>
     </include>
     <exclude>
-        <directory>./app/Providers</directory>
-        <directory>./app/Console/Commands</directory>
-        <file>./app/Http/Kernel.php</file>
-        <file>./app/Http/Controllers/Controller.php</file>
-        <file>./app/Http/Middleware/EncryptCookies.php</file>
-        <file>./app/Http/Middleware/TrimStrings.php</file>
-        <file>./app/Http/Middleware/TrustProxies.php</file>
-        <file>./app/Http/Middleware/VerifyCsrfToken.php</file>
-        <file>./app/Exceptions/Handler.php</file>
-        <file>./app/Console/Kernel.php</file>
+      <directory>./app/Providers</directory>
+      <directory>./app/Console/Commands</directory>
+      <file>./app/Http/Kernel.php</file>
+      <file>./app/Http/Controllers/Controller.php</file>
+      <file>./app/Http/Middleware/EncryptCookies.php</file>
+      <file>./app/Http/Middleware/TrimStrings.php</file>
+      <file>./app/Http/Middleware/TrustProxies.php</file>
+      <file>./app/Http/Middleware/VerifyCsrfToken.php</file>
+      <file>./app/Exceptions/Handler.php</file>
+      <file>./app/Console/Kernel.php</file>
     </exclude>
-    </coverage>
-    <testsuites>
-        <testsuite name="Feature">
-            <directory suffix="Test.php">./tests/Feature</directory>
-        </testsuite>
-        <testsuite name="Unit">
-            <directory suffix="Test.php">./tests/Unit</directory>
-        </testsuite>
-    </testsuites>
-    <extensions>
-        <extension class="Tests\Bootstrap"/>
-    </extensions>
-    <php>
-        <env name="APP_ENV" value="testing"/>
-        <env name="BCRYPT_ROUNDS" value="4"/>
-        <env name="CACHE_DRIVER" value="array"/>
-        <env name="MAIL_DRIVER" value="array"/>
-        <env name="QUEUE_CONNECTION" value="sync"/>
-        <env name="SESSION_DRIVER" value="array"/>
-        <env name="HTTP_X_FORWARDED_FOR" value="127.0.0.1"/>
-        <env name="APP_CONFIG_CACHE" value="bootstrap/cache/config.phpunit.php"/>
-        <env name="APP_SERVICES_CACHE" value="bootstrap/cache/services.phpunit.php"/>
-        <env name="APP_PACKAGES_CACHE" value="bootstrap/cache/packages.phpunit.php"/>
-        <env name="APP_ROUTES_CACHE" value="bootstrap/cache/routes.phpunit.php"/>
-        <env name="APP_EVENTS_CACHE" value="bootstrap/cache/events.phpunit.php"/>
-    </php>
+  </source>
 </phpunit>
