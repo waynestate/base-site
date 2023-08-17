@@ -9,7 +9,7 @@ use Tests\TestCase;
 use Mockery as Mockery;
 use Waynestate\Api\News;
 
-class ArticleRepositoryTest extends TestCase
+final class ArticleRepositoryTest extends TestCase
 {
     #[Test]
     public function finding_article_should_return_article(): void

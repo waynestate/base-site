@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Storage;
 
-class DataTest extends TestCase
+final class DataTest extends TestCase
 {
     #[Test]
     public function data_middleware_should_run_successfully(): void

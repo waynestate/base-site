@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Waynestate\Api\Connector;
 use Waynestate\Api\People;
 
-class ProfileControllerTest extends TestCase
+final class ProfileControllerTest extends TestCase
 {
     #[Test]
     public function no_profile_accessid_should_404(): void

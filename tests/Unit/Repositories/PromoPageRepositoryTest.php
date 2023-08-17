@@ -11,7 +11,7 @@ use Tests\TestCase;
 use Mockery as Mockery;
 use Waynestate\Api\Connector;
 
-class PromoPageRepositoryTest extends TestCase
+final class PromoPageRepositoryTest extends TestCase
 {
     #[Test]
     public function promo_page_returns_legacy_listing_array(): void

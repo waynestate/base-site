@@ -16,7 +16,7 @@ use Mockery as Mockery;
 use Waynestate\Api\News;
 use Waynestate\Api\People as PeopleApi;
 
-class PeopleRepositoryTest extends TestCase
+final class PeopleRepositoryTest extends TestCase
 {
     #[Test]
     public function getting_dropdown_options_should_return_options(): void

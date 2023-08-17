@@ -9,7 +9,7 @@ use Mockery as Mockery;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class PageRepositoryTest extends TestCase
+final class PageRepositoryTest extends TestCase
 {
     #[Test]
     public function all_styleguide_routes_should_load_successfully(): void

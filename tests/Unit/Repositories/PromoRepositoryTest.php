@@ -9,7 +9,7 @@ use Tests\TestCase;
 use Mockery as Mockery;
 use Waynestate\Api\Connector;
 
-class PromoRepositoryTest extends TestCase
+final class PromoRepositoryTest extends TestCase
 {
     #[Test]
     public function getting_promos_with_custom_page_accordion_should_return_accordion_page(): void

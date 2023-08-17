@@ -16,7 +16,7 @@ use Mockery as Mockery;
 use Waynestate\Api\Connector;
 use Waynestate\Api\News;
 
-class ProfileRepositoryTest extends TestCase
+final class ProfileRepositoryTest extends TestCase
 {
     #[Test]
     public function getting_dropdown_options_should_return_options(): void

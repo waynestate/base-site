@@ -8,7 +8,7 @@ use Tests\TestCase;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
-class ControllerTest extends TestCase
+final class ControllerTest extends TestCase
 {
     #[Test]
     public function controllers_should_have_only_one_default(): void

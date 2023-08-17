@@ -13,7 +13,7 @@ use Tests\TestCase;
 use Mockery as Mockery;
 use Waynestate\Api\Connector;
 
-class MenuRepositoryTest extends TestCase
+final class MenuRepositoryTest extends TestCase
 {
     #[Test]
     public function top_menu_enabled_should_return_top_menu(): void

@@ -9,7 +9,7 @@ use Tests\TestCase;
 use Mockery as Mockery;
 use Waynestate\Api\News;
 
-class TopicRepositoryTest extends TestCase
+final class TopicRepositoryTest extends TestCase
 {
     #[Test]
     public function getting_topics_should_return_array_of_topics(): void

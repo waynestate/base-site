@@ -5,7 +5,7 @@ namespace Tests\Unit\Support;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-class HelpersTest extends TestCase
+final class HelpersTest extends TestCase
 {
     #[Test]
     public function merge_string_value_should_throw_exception(): void

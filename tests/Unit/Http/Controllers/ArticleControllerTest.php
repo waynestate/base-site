@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Waynestate\Api\News;
 
-class ArticleControllerTest extends TestCase
+final class ArticleControllerTest extends TestCase
 {
     #[Test]
     public function news_view_with_no_item_should_404(): void

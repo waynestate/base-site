@@ -10,7 +10,7 @@ use Tests\TestCase;
 use Mockery as Mockery;
 use Waynestate\Api\Connector;
 
-class EventRepositoryTest extends TestCase
+final class EventRepositoryTest extends TestCase
 {
     #[Test]
     public function getting_events_with_api_error_should_return_empty_array(): void

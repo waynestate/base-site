@@ -7,7 +7,7 @@ use App\Repositories\PageRepository;
 use Tests\TestCase;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class PageRepositoryTest extends TestCase
+final class PageRepositoryTest extends TestCase
 {
     /**
      * Passing wrong path should 404.

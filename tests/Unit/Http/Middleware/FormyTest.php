@@ -9,7 +9,7 @@ use Mockery as Mockery;
 use Illuminate\Http\Request;
 use Waynestate\FormyParser\Parser;
 
-class FormyTest extends TestCase
+final class FormyTest extends TestCase
 {
     #[Test]
     public function formy_embed_should_show_form_in_page_content(): void
