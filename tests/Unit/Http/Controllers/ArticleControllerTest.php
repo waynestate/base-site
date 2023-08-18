@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Http\Controllers;
 
+use PHPUnit\Framework\Attributes\Test;
 use App\Http\Controllers\ArticleController;
 use App\Repositories\ArticleRepository;
 use App\Repositories\TopicRepository;
@@ -16,14 +17,10 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Waynestate\Api\News;
 
-class ArticleControllerTest extends TestCase
+final class ArticleControllerTest extends TestCase
 {
-    /**
-     * @covers \App\Http\Controllers\ArticleController::__construct
-     * @covers \App\Http\Controllers\ArticleController::show
-     * @test
-     */
-    public function news_view_with_no_item_should_404()
+    #[Test]
+    public function news_view_with_no_item_should_404(): void
     {
         $this->expectException(NotFoundHttpException::class);
 
@@ -44,11 +41,8 @@ class ArticleControllerTest extends TestCase
         $view = $articleController->show(new Request());
     }
 
-    /**
-     * @covers \App\Http\Controllers\ArticleController::show
-     * @test
-     */
-    public function news_item_that_is_not_published_should_404()
+    #[Test]
+    public function news_item_that_is_not_published_should_404(): void
     {
         $this->expectException(NotFoundHttpException::class);
 
@@ -85,11 +79,8 @@ class ArticleControllerTest extends TestCase
         $view = $articleController->show($request);
     }
 
-    /**
-     * @covers App\Http\Controllers\ArticleController::show
-     * @test
-     */
-    public function news_item_that_is_draft_should_allow_preview()
+    #[Test]
+    public function news_item_that_is_draft_should_allow_preview(): void
     {
         // Fake return
         $return =  app(Article::class)->create(1, true, [
@@ -117,11 +108,8 @@ class ArticleControllerTest extends TestCase
         $this->assertEquals($return, $view->getData()['article']);
     }
 
-    /**
-     * @covers App\Http\Controllers\ArticleController::show
-     * @test
-     */
-    public function news_item_that_is_published_and_preview_should_redirect()
+    #[Test]
+    public function news_item_that_is_published_and_preview_should_redirect(): void
     {
         // Fake return
         $return =  null;
@@ -147,11 +135,8 @@ class ArticleControllerTest extends TestCase
         $this->assertInstanceOf(Redirector::class, $view);
     }
 
-    /**
-     * @covers App\Http\Controllers\ArticleController::show
-     * @test
-     */
-    public function page_title_should_be_news_item_title()
+    #[Test]
+    public function page_title_should_be_news_item_title(): void
     {
         // Fake return
         $return = app(Article::class)->create(1, true);
@@ -178,11 +163,8 @@ class ArticleControllerTest extends TestCase
         $this->assertEquals($view->getData()['article']['data']['title'], $view->getData()['base']['page']['title']);
     }
 
-    /**
-     * @covers App\Http\Controllers\ArticleController::index
-     * @test
-     */
-    public function news_listing_with_invalid_topic_should_404()
+    #[Test]
+    public function news_listing_with_invalid_topic_should_404(): void
     {
         $this->expectException(NotFoundHttpException::class);
 

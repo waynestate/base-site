@@ -9,8 +9,6 @@ class Article implements FactoryContract
 {
     /**
      * Construct the factory.
-     *
-     * @param Factory $faker
      */
     public function __construct(Factory $faker)
     {
@@ -41,41 +39,41 @@ class Article implements FactoryContract
         $faculty = [];
         for ($i = 0; $i < 3; $i++) {
             $faculty[] = [
-                'id' => $this->faker->randomDigit,
-                'first_name' => $this->faker->firstName,
-                'last_name' => $this->faker->lastName,
-                'accessid' => $this->faker->randomLetter.$this->faker->randomLetter.$this->faker->randomNumber(4, true),
+                'id' => $this->faker->randomDigit(),
+                'first_name' => $this->faker->firstName(),
+                'last_name' => $this->faker->lastName(),
+                'accessid' => $this->faker->randomLetter().$this->faker->randomLetter().$this->faker->randomNumber(4, true),
             ];
         }
 
         $assets = [];
         for ($i = 0; $i < 3; $i++) {
             $assets[] = [
-                'id' => $this->faker->randomDigit,
+                'id' => $this->faker->randomDigit(),
                 'url' => 'https://wayne.edu',
-                'caption' => $this->faker->sentence,
-                'filename' => substr(md5($this->faker->sentence), 0, 10).'.pdf',
+                'caption' => $this->faker->sentence(),
+                'filename' => substr(md5($this->faker->sentence()), 0, 10).'.pdf',
             ];
         }
 
         for ($i = 1; $i <= $limit; $i++) {
             $data['data'][$i] = [
                 'id' => $i,
-                'user_id' => $this->faker->randomDigit,
-                'application_id' => $this->faker->randomDigit,
+                'user_id' => $this->faker->randomDigit(),
+                'application_id' => $this->faker->randomDigit(),
                 'favicon_id' => null,
                 'title' => $this->faker->sentence(rand(6, 10)),
                 'short_title' => $this->faker->sentence(rand(3, 6)),
                 'sub_title' => null,
-                'permalink' => $this->faker->slug,
-                'meta_description' => $this->faker->sentence,
+                'permalink' => $this->faker->slug(),
+                'meta_description' => $this->faker->sentence(),
                 'body' => '<p>'.$this->faker->paragraph(8).'</p>
                 <p>'.$this->faker->paragraph(8).'</p>
                 <figure class="figure" style="padding-bottom:10px; float:right">
                     <img alt="Placeholder" height="400" src="/styleguide/image/300x400?text=Figure%20float%20right" style="padding:10px" width="300">
-                    <figcaption>'.$this->faker->paragraph.'</figcaption>
+                    <figcaption>'.$this->faker->paragraph().'</figcaption>
                 </figure>
-                <p>'.$this->faker->paragraph.'</p>
+                <p>'.$this->faker->paragraph().'</p>
                 <blockquote class="blockquote1">
                     <p>'.$this->faker->paragraph(1).'</p>
                 </blockquote>
@@ -90,7 +88,7 @@ class Article implements FactoryContract
                 <h2>'.$this->faker->paragraph(1).'</h2>
                 <figure class="figure" style="padding-bottom:10px; float:left">
                     <img alt="Placeholder" height="600" src="/styleguide/image/800x600?text=Figure%20float%20left" style="padding:10px" width="800">
-                    <figcaption>'.$this->faker->paragraph.'</figcaption>
+                    <figcaption>'.$this->faker->paragraph().'</figcaption>
                 </figure>
                 <p>'.$this->faker->paragraph(8).'</p>
                 <p>'.$this->faker->paragraph(15).'</p>
@@ -101,7 +99,7 @@ class Article implements FactoryContract
                 <div style="text-align:center">
                     <figure class="figure" style="display:inline-block">
                         <img alt="Placeholder" height="450" src="/styleguide/image/800x450?text=Figure%20centered" style="padding:10px" width="800">
-                        <figcaption>'.$this->faker->paragraph.'</figcaption>
+                        <figcaption>'.$this->faker->paragraph().'</figcaption>
                     </figure>
                 </div>
                 <p>'.$this->faker->paragraph(15).'</p>
@@ -116,7 +114,7 @@ class Article implements FactoryContract
                 </p>
                 <p>'.$this->faker->paragraph(8).'</p>
                 ',
-                'article_date' => $this->faker->date,
+                'article_date' => $this->faker->date(),
                 'status' => 'Published',
                 'link' => '/styleguide/'.config('base.news_view_route').'/item-1',
                 'hero_image' => $hero,

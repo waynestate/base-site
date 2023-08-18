@@ -9,8 +9,6 @@ class GenericPromo implements FactoryContract
 {
     /**
      * Construct the factory.
-     *
-     * @param Factory $faker
      */
     public function __construct(Factory $faker)
     {
@@ -27,7 +25,7 @@ class GenericPromo implements FactoryContract
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
                 'title' => ucfirst(implode(' ', $this->faker->words(3))),
-                'excerpt' => $this->faker->sentence,
+                'excerpt' => $this->faker->sentence(),
                 'description' => '<p>' . $this->faker->text(100) . ' <a href="https://wayne.edu">'. $this->faker->sentence(3)  .'</a></p>',
                 'link' => 'https://wayne.edu',
                 'promo_item_id' => strval($this->faker->randomNumber(5)),

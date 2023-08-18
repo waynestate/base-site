@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Http\Middleware;
 
+use PHPUnit\Framework\Attributes\Test;
 use App\Http\Middleware\Data;
 use Mockery;
 use Tests\TestCase;
@@ -9,13 +10,10 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Storage;
 
-class DataTest extends TestCase
+final class DataTest extends TestCase
 {
-    /**
-     * @covers \App\Http\Middleware\Data::handle
-     * @test
-     */
-    public function data_middleware_should_run_successfully()
+    #[Test]
+    public function data_middleware_should_run_successfully(): void
     {
         $request = new Request();
         $request = $request->create('styleguide');
@@ -29,12 +27,8 @@ class DataTest extends TestCase
         });
     }
 
-    /**
-     * @covers \App\Http\Middleware\Data::handle
-     * @covers \App\Repositories\PageRepository::getRequestData
-     * @test
-     */
-    public function no_homepage_found_should_redirect_to_styleguide()
+    #[Test]
+    public function no_homepage_found_should_redirect_to_styleguide(): void
     {
         // Change the ENV so it runs through the real data middleware
         config(['app.env' => 'dev']);
@@ -50,11 +44,8 @@ class DataTest extends TestCase
         $this->assertEquals('styleguide', basename($redirect->headers->get('location')));
     }
 
-    /**
-     * @covers \App\Http\Middleware\Data::handle
-     * @test
-     */
-    public function site_methods_should_merge_with_all_methods()
+    #[Test]
+    public function site_methods_should_merge_with_all_methods(): void
     {
         $request = new Request();
         $request = $request->create('styleguide');
@@ -81,20 +72,14 @@ class DataTest extends TestCase
         });
     }
 
-    /**
-     * @covers \App\Http\Middleware\Data::getPrefix
-     * @test
-     */
-    public function prefix_should_return_string()
+    #[Test]
+    public function prefix_should_return_string(): void
     {
         $this->assertTrue(is_string(app(Data::class)->getPrefix()));
     }
 
-    /**
-     * @covers \App\Http\Middleware\Data::getControllerNamespace
-     * @test
-     */
-    public function controller_namespace_should_return_string()
+    #[Test]
+    public function controller_namespace_should_return_string(): void
     {
         // Test an existing app controller
         $this->assertTrue(is_string(app(Data::class)->getControllerNamespace('Controller')));
@@ -103,18 +88,15 @@ class DataTest extends TestCase
         $this->assertTrue(is_string(app(Data::class)->getControllerNamespace('StyleGuideController')));
 
         // When trying to reference a styleguide controller that doesn't exist, test that it defaults to app namespace
-        $controller = ucfirst($this->faker->word).ucfirst($this->faker->word).ucfirst($this->faker->word);
+        $controller = ucfirst($this->faker->word()).ucfirst($this->faker->word()).ucfirst($this->faker->word());
         $namespace = app(Data::class)->getControllerNamespace($controller);
         $this->assertStringContainsString('App\Http\Controllers', $namespace);
     }
 
-    /**
-     * @covers \App\Http\Middleware\Data::getPathFromRequest
-     * @test
-     */
-    public function when_the_request_has_no_matched_route_the_path_should_be_path()
+    #[Test]
+    public function when_the_request_has_no_matched_route_the_path_should_be_path(): void
     {
-        $actual_path = $this->faker->word;
+        $actual_path = $this->faker->word();
 
         $request = new Request();
         $request = $request->create($actual_path);
@@ -124,11 +106,8 @@ class DataTest extends TestCase
         $this->assertEquals($path, $actual_path);
     }
 
-    /**
-     * @covers \App\Http\Middleware\Data::getPathFromRequest
-     * @test
-     */
-    public function when_the_request_has_a_matched_route_the_path_should_have_no_route_parameters()
+    #[Test]
+    public function when_the_request_has_a_matched_route_the_path_should_have_no_route_parameters(): void
     {
         $actual_path = config('base.news_view_route').'/slug-123';
 

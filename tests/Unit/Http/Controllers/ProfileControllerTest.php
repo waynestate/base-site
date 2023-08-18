@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Http\Controllers;
 
+use PHPUnit\Framework\Attributes\Test;
 use App\Http\Controllers\ProfileController;
 use App\Repositories\PeopleRepository;
 use App\Repositories\ProfileRepository;
@@ -12,14 +13,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Waynestate\Api\Connector;
 use Waynestate\Api\People;
 
-class ProfileControllerTest extends TestCase
+final class ProfileControllerTest extends TestCase
 {
-    /**
-     * @covers App\Http\Controllers\ProfileController::__construct
-     * @covers App\Http\Controllers\ProfileController::show
-     * @test
-     */
-    public function no_profile_accessid_should_404()
+    #[Test]
+    public function no_profile_accessid_should_404(): void
     {
         $this->expectException(NotFoundHttpException::class);
 
@@ -30,12 +27,8 @@ class ProfileControllerTest extends TestCase
         $view = $this->profileController->show(new Request());
     }
 
-    /**
-     * @covers App\Http\Controllers\ProfileController::__construct
-     * @covers App\Http\Controllers\ProfileController::show
-     * @test
-     */
-    public function invalid_profile_should_404_using_profile_repository()
+    #[Test]
+    public function invalid_profile_should_404_using_profile_repository(): void
     {
         $this->expectException(NotFoundHttpException::class);
 
@@ -69,12 +62,8 @@ class ProfileControllerTest extends TestCase
         $view = $this->profileController->show($request);
     }
 
-    /**
-     * @covers App\Http\Controllers\ProfileController::__construct
-     * @covers App\Http\Controllers\ProfileController::show
-     * @test
-     */
-    public function invalid_profile_should_404_using_people_repository()
+    #[Test]
+    public function invalid_profile_should_404_using_people_repository(): void
     {
         $this->expectException(NotFoundHttpException::class);
 

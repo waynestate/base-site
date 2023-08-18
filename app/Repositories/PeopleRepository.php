@@ -19,9 +19,6 @@ class PeopleRepository implements ProfileRepositoryContract
 
     /**
      * Construct the repository.
-     *
-     * @param people $peopleApi
-     * @param Repository $cache
      */
     public function __construct(People $peopleApi, Repository $cache, News $newsApi)
     {
@@ -32,12 +29,8 @@ class PeopleRepository implements ProfileRepositoryContract
 
     /**
      * Get the profile listing.
-     *
-     * @param int $site_id
-     * @param int $selected_group
-     * @return array
      */
-    public function getProfiles($site_id, $selected_group = null)
+    public function getProfiles(int $site_id, ?string $selected_group = null): array
     {
         $params = [
             'site_id' => $site_id,
@@ -83,11 +76,9 @@ class PeopleRepository implements ProfileRepositoryContract
     /**
      * Gets the profiles based on promo_group_id custom field and generates anchors for each group
      *
-     * @param int $site_id
      * @param string $groups
-     * @return array
      */
-    public function getProfilesByGroup($site_id)
+    public function getProfilesByGroup(int $site_id): array
     {
         // Get the groups for the dropdown
         $dropdown_groups = $this->getDropdownOfGroups($site_id);
@@ -180,11 +171,8 @@ class PeopleRepository implements ProfileRepositoryContract
 
     /**
      * Get the dropdown of groups.
-     *
-     * @param int $site_id
-     * @return array
      */
-    public function getDropdownOfGroups($site_id)
+    public function getDropdownOfGroups(int $site_id): array
     {
         $params = [
             'method' => 'sites/'.$site_id.'/groups',
@@ -244,12 +232,8 @@ class PeopleRepository implements ProfileRepositoryContract
 
     /**
      * Get the persons profile information.
-     *
-     * @param int $site_id
-     * @param string $accessid
-     * @return array
      */
-    public function getProfile($site_id, $accessid)
+    public function getProfile(int $site_id, string $accessid): array
     {
         $params = [
             'site_id' => $site_id,
@@ -269,10 +253,13 @@ class PeopleRepository implements ProfileRepositoryContract
         if (!empty($profile['data'])) {
             $profile['data']['link'] = '/profile/'.$profile['data']['accessid'];
 
-            if (!empty($profiles['profiles'][$site_id]['data']['Youtube Videos'])) {
-                $profiles['profiles'][$site_id]['data']['Youtube Videos'] = collect($profiles['profiles'][$site_id]['data']['Youtube Videos'])->map(function ($youtube_link) {
-                    return ParseId::fromUrl($youtube_link);
-                });
+            if (!empty($profile['data']['data']['Youtube Videos'])) {
+                $profile['data']['data']['Youtube Videos'] = collect($profile['data']['data']['Youtube Videos'])
+                    ->map(function ($video) {
+                        $video['youtube_id'] = ParseId::fromUrl($video['link']);
+                        return $video;
+                    })
+                    ->toArray();
             }
 
             foreach ($profile['data']['field_data'] as $data) {

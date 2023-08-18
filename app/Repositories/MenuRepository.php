@@ -27,11 +27,6 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
 
     /**
      * Construct the repository.
-     *
-     * @param Connector $wsuApi
-     * @param Parsemenu $parseMenu
-     * @param DisplayMenu $displayMenu
-     * @param Repository $cache
      */
     public function __construct(Connector $wsuApi, ParseMenu $parseMenu, DisplayMenu $displayMenu, Repository $cache)
     {

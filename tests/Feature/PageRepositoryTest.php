@@ -2,26 +2,17 @@
 
 namespace Tests\Feature;
 
+use PHPUnit\Framework\Attributes\Test;
+use Illuminate\Support\Collection;
 use Tests\TestCase;
 use Mockery as Mockery;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class PageRepositoryTest extends TestCase
+final class PageRepositoryTest extends TestCase
 {
-    /**
-     * @covers \App\Http\Controllers\HomepageController
-     * @covers \App\Http\Controllers\ChildpageController
-     * @covers \App\Http\Controllers\ProfileController
-     * @covers \App\Http\Controllers\ArticleController
-     * @covers \App\Http\Controllers\DirectoryController
-     * @covers \App\Http\Controllers\TopicController
-     * @covers \App\Http\Controllers\PromoPageController
-     * @covers \App\Http\Controllers\ContactTableController
-     * @covers \Styleguide\Repositories\PageRepository::getRequestData
-     * @test
-     */
-    public function all_styleguide_routes_should_load_successfully()
+    #[Test]
+    public function all_styleguide_routes_should_load_successfully(): void
     {
         $this->getPageResponses(false)
             ->each(function ($page) {
@@ -31,10 +22,8 @@ class PageRepositoryTest extends TestCase
             });
     }
 
-    /**
-     * @test
-     */
-    public function all_styleguide_routes_with_no_data_should_load_successfully()
+    #[Test]
+    public function all_styleguide_routes_with_no_data_should_load_successfully(): void
     {
         // Overload all styleguide repositories to only return a blank array
         collect(Storage::disk('base')->allFiles('factories'))
@@ -64,9 +53,8 @@ class PageRepositoryTest extends TestCase
      * blank arrays.
      *
      * @param $handle_exceptions bool;
-     * @return \Illuminate\Support\Collection
      */
-    public function getPageResponses($handle_exceptions = false)
+    public function getPageResponses($handle_exceptions = false): Collection
     {
         return collect(Storage::disk('base')->allFiles('styleguide/Pages'))
             ->reject(function ($filename) {

@@ -2,6 +2,7 @@
 
 namespace Styleguide\Http\Controllers;
 
+use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Faker\Factory;
@@ -10,8 +11,6 @@ class HeaderTitleSingleController extends Controller
 {
     /**
      * Construct the controller.
-     *
-     * @param Factory $faker
      */
     public function __construct(Factory $faker)
     {
@@ -20,11 +19,8 @@ class HeaderTitleSingleController extends Controller
 
     /**
      * Display single title header view
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         config([
             'base.surtitle' => null,

@@ -2,20 +2,17 @@
 
 namespace Tests\Unit\Repositories;
 
+use PHPUnit\Framework\Attributes\Test;
 use App\Repositories\PromoRepository;
 use Factories\Page;
 use Tests\TestCase;
 use Mockery as Mockery;
 use Waynestate\Api\Connector;
 
-class PromoRepositoryTest extends TestCase
+final class PromoRepositoryTest extends TestCase
 {
-    /**
-     * @covers \App\Repositories\PromoRepository::__construct
-     * @covers \App\Repositories\PromoRepository::getRequestData
-     * @test
-     */
-    public function getting_promos_with_custom_page_accordion_should_return_accordion_page()
+    #[Test]
+    public function getting_promos_with_custom_page_accordion_should_return_accordion_page(): void
     {
         // Fake return
         $return = [
@@ -45,12 +42,8 @@ class PromoRepositoryTest extends TestCase
         $this->assertArrayHasKey('accordion_page', $promos);
     }
 
-    /**
-     * @covers \App\Repositories\PromoRepository::__construct
-     * @covers \App\Repositories\PromoRepository::getRequestData
-     * @test
-     */
-    public function subsite_overriding_main_contact_social_and_under_menu()
+    #[Test]
+    public function subsite_overriding_main_contact_social_and_under_menu(): void
     {
         // Fake return
         $return = [
@@ -145,12 +138,8 @@ class PromoRepositoryTest extends TestCase
         $this->assertEquals(6, $promos['under_menu'][6]['promo_group_id']);
     }
 
-    /**
-     * @covers \App\Repositories\PromoRepository::__construct
-     * @covers \App\Repositories\PromoRepository::getRequestData
-     * @test
-     */
-    public function subsite_using_main_contact_social_and_under_menu()
+    #[Test]
+    public function subsite_using_main_contact_social_and_under_menu(): void
     {
         // Fake return
         $return = [
@@ -216,12 +205,8 @@ class PromoRepositoryTest extends TestCase
         $this->assertEquals(3, $promos['under_menu'][3]['promo_group_id']);
     }
 
-    /**
-     * @covers \App\Repositories\PromoRepository::__construct
-     * @covers \App\Repositories\PromoRepository::getRequestData
-     * @test
-     */
-    public function subsite_contact_merging_with_main_contact_and_under_menu()
+    #[Test]
+    public function subsite_contact_merging_with_main_contact_and_under_menu(): void
     {
         // Fake return
         $return = [
@@ -296,12 +281,8 @@ class PromoRepositoryTest extends TestCase
         $this->assertCount(2, $promos['under_menu']);
     }
 
-    /**
-     * @covers \App\Repositories\PromoRepository::__construct
-     * @covers \App\Repositories\PromoRepository::getRequestData
-     * @test
-     */
-    public function subsite_contact_merging_with_no_main_contact()
+    #[Test]
+    public function subsite_contact_merging_with_no_main_contact(): void
     {
         // Fake return
         $return = [
@@ -355,12 +336,8 @@ class PromoRepositoryTest extends TestCase
         $this->assertCount(1, $promos['contact']);
     }
 
-    /**
-     * @covers \App\Repositories\PromoRepository::__construct
-     * @covers \App\Repositories\PromoRepository::getRequestData
-     * @test
-     */
-    public function subsite_under_menu_merging_with_no_main_under_menu()
+    #[Test]
+    public function subsite_under_menu_merging_with_no_main_under_menu(): void
     {
         // Fake return
         $return = [
@@ -414,11 +391,8 @@ class PromoRepositoryTest extends TestCase
         $this->assertCount(1, $promos['under_menu']);
     }
 
-    /**
-     * @covers \App\Repositories\PromoRepository::getHomepagePromos
-     * @test
-     */
-    public function getting_homepage_promos_should_return_array()
+    #[Test]
+    public function getting_homepage_promos_should_return_array(): void
     {
         // Fake return
         $return = [
@@ -430,7 +404,7 @@ class PromoRepositoryTest extends TestCase
         $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
 
         // Get the promos
-        $promos = app(PromoRepository::class, ['wsuApi' => $wsuApi])->getHomepagePromos($this->faker->randomDigit);
+        $promos = app(PromoRepository::class, ['wsuApi' => $wsuApi])->getHomepagePromos($this->faker->randomDigit());
 
         $this->assertTrue(is_array($promos));
     }

@@ -7,17 +7,16 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
 use Contracts\Repositories\ArticleRepositoryContract;
 use Contracts\Repositories\TopicRepositoryContract;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 
 class ArticleController extends Controller
 {
     /**
      * Construct the controller.
-     *
-     * @param ArticleRepositoryContract $article
-     * @param TopicRepositoryContract $topic
      */
     public function __construct(ArticleRepositoryContract $article, TopicRepositoryContract $topic)
     {
@@ -28,13 +27,11 @@ class ArticleController extends Controller
     /**
      * Display the articles.
      *
-     * @param Request $request
-     * @return \Illuminate\View\View
      *
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $topics = $this->topic->listing($request->data['base']['site']['news']['application_id'], $request->data['base']['site']['subsite-folder']);
 
@@ -65,13 +62,11 @@ class ArticleController extends Controller
     /**
      * Display the individual article.
      *
-     * @param Request $request
-     * @return \Illuminate\View\View
      *
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-    public function show(Request $request)
+    public function show(Request $request): View|Redirector
     {
         if (empty($request->data['base']['site']['news']['application_id'])) {
             abort('404');

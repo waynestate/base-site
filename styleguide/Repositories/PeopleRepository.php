@@ -13,7 +13,7 @@ class PeopleRepository extends Repository
     /**
      * {@inheritdoc}
      */
-    public function getProfiles($site_id, $selected_group = null)
+    public function getProfiles(int $site_id, ?string $selected_group = null): array
     {
         $limit = is_int($selected_group) ? rand(2, 5) : 20;
 
@@ -27,7 +27,7 @@ class PeopleRepository extends Repository
     /**
      * {@inheritdoc}
      */
-    public function getDropdownOfGroups($site_id)
+    public function getDropdownOfGroups(int $site_id): array
     {
         $groups = collect(app(PeopleGroup::class)->create(10))->map(function ($item) {
             return $item['name'];
@@ -43,7 +43,7 @@ class PeopleRepository extends Repository
     /**
      * {@inheritdoc}
      */
-    public function getProfile($site_id, $accessid)
+    public function getProfile(int $site_id, string $accessid): array
     {
         $articles = app(Article::class)->create(3, true);
 

@@ -2,26 +2,24 @@
 
 namespace Tests\Unit\Http\Controllers;
 
+use PHPUnit\Framework\Attributes\Test;
+use Illuminate\Support\Collection;
 use Tests\TestCase;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
-class ControllerTest extends TestCase
+final class ControllerTest extends TestCase
 {
-    /**
-     * @test
-     */
-    public function controllers_should_have_only_one_default()
+    #[Test]
+    public function controllers_should_have_only_one_default(): void
     {
         $data = $this->getControllerComments()->where('Default', 'true');
 
         $this->assertCount(1, $data, 'Only one controller can have a default=true value: '.$data->implode('File', ' & '));
     }
 
-    /**
-     * @test
-     */
-    public function controllers_should_have_unique_descriptions()
+    #[Test]
+    public function controllers_should_have_unique_descriptions(): void
     {
         $all = $this->getControllerComments()->pluck('Description');
         $unique = $all->unique();
@@ -31,10 +29,8 @@ class ControllerTest extends TestCase
 
     /**
      * Get all controller comments.
-     *
-     * @return array
      */
-    private function getControllerComments()
+    private function getControllerComments(): Collection
     {
         return collect(Storage::disk('base')->allFiles('app/Http/Controllers/'))
         ->reject(function ($item) {
@@ -47,11 +43,8 @@ class ControllerTest extends TestCase
 
     /**
      * Get comment data from the top of the controller file.
-     *
-     * @param string $file
-     * @return array
      */
-    private function getCommentData($file)
+    private function getCommentData(string $file): array
     {
         // Pull only the first 8kiB of the file in.
         $fp = fopen($file, 'r');
@@ -61,7 +54,7 @@ class ControllerTest extends TestCase
         // Make sure we catch CR-only line endings.
         $file_data = str_replace("\r", "\n", $file_data);
 
-        $default_headers = array('Status' => 'Status', 'Description' => 'Description', 'Default' => 'Default');
+        $default_headers = ['Status' => 'Status', 'Description' => 'Description', 'Default' => 'Default'];
 
         foreach ($default_headers as $field => $regex) {
             if (preg_match('/^[ \t\/*#@]*' . preg_quote($regex, '/') . ':(.*)$/mi', $file_data, $match) && $match[1]) {

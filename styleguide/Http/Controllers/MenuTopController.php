@@ -2,6 +2,7 @@
 
 namespace Styleguide\Http\Controllers;
 
+use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Styleguide\Repositories\MenuRepository;
@@ -18,11 +19,8 @@ class MenuTopController extends Controller
 
     /**
      * Display the top menu view.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         config(['base.top_menu_enabled' => true]);
 

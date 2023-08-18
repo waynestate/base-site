@@ -2,19 +2,18 @@
 
 namespace Tests\Unit\Repositories;
 
+use PHPUnit\Framework\Attributes\Test;
 use App\Repositories\PageRepository;
 use Tests\TestCase;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class PageRepositoryTest extends TestCase
+final class PageRepositoryTest extends TestCase
 {
     /**
      * Passing wrong path should 404.
-     *
-     * @covers \App\Repositories\PageRepository::getRequestData
-     * @test
      */
-    public function non_exisitent_page_should_404()
+    #[Test]
+    public function non_exisitent_page_should_404(): void
     {
         $this->expectException(NotFoundHttpException::class);
 
@@ -24,7 +23,7 @@ class PageRepositoryTest extends TestCase
         // Fake request
         $request = [
             'parameters' => [
-                'path' => $this->faker->word.'/'.$this->faker->word.'/'.$this->faker->word.'/',
+                'path' => $this->faker->word().'/'.$this->faker->word().'/'.$this->faker->word().'/',
             ],
             'server' => [
                 'path' => '',
@@ -34,11 +33,8 @@ class PageRepositoryTest extends TestCase
         app(PageRepository::class)->getRequestData($request);
     }
 
-    /**
-     * @covers \App\Repositories\PageRepository::getRequestData
-     * @test
-     */
-    public function getting_page_data_should_return_parsed_json()
+    #[Test]
+    public function getting_page_data_should_return_parsed_json(): void
     {
         $path = '1234567890';
 
@@ -57,11 +53,8 @@ class PageRepositoryTest extends TestCase
         $this->assertEquals([], $data);
     }
 
-    /**
-     * @covers \App\Repositories\PageRepository::getFilename
-     * @test
-     */
-    public function getting_filename_should_return_correct_filename()
+    #[Test]
+    public function getting_filename_should_return_correct_filename(): void
     {
         $pageRepository = app(PageRepository::class);
 

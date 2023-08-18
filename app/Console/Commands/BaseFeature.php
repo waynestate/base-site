@@ -20,7 +20,7 @@ class BaseFeature extends Command
     /**
      * Scaffold files.
      */
-    public function handle()
+    public function handle(): void
     {
         $this->setFeature($this->argument('feature'));
 

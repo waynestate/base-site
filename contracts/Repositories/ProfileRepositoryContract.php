@@ -8,10 +8,10 @@ interface ProfileRepositoryContract
      * Get the profile listing.
      *
      * @param int $site_id
-     * @param int|null $selected_group
+     * @param string|null $selected_group
      * @return array
      */
-    public function getProfiles($site_id, $selected_group);
+    public function getProfiles(int $site_id, ?string $selected_group = null): array;
 
     /**
      * Gets the profiles based on promo_group_id custom field and generates anchors for each group
@@ -37,7 +37,7 @@ interface ProfileRepositoryContract
      * @param int $site_id
      * @return array
      */
-    public function getDropdownOfGroups($site_id);
+    public function getDropdownOfGroups(int $site_id): array;
 
     /**
      * Get the persons profile information.
@@ -46,7 +46,7 @@ interface ProfileRepositoryContract
      * @param string $accessid
      * @return array
      */
-    public function getProfile($site_id, $accessid);
+    public function getProfile(int $site_id, string $accessid): array;
 
     /*
      * Get the articles for the profile if available

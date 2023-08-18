@@ -11,8 +11,6 @@ class PromoPageRepository extends Repository
 {
     /**
      * Construct the factory.
-     *
-     * @param Factory $faker
      */
     public function __construct(Factory $faker)
     {

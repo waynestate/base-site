@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Symfony\Component\HttpFoundation\Response;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -13,12 +14,8 @@ class Data
 
     /**
      * Set a global data array to the request object containing page information
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure  $next
-     * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next): Response|null
     {
         if (using_styleguide()) {
             $this->prefix = 'Styleguide';
@@ -96,11 +93,8 @@ class Data
 
     /**
      * Get the controller namespace.
-     *
-     * @param string $controller
-     * @return string
      */
-    public function getControllerNamespace($controller)
+    public function getControllerNamespace(string $controller): string
     {
         // First see if it exists as a prefixed controller
         if (class_exists($this->GetPrefix().'\Http\Controllers\\'.$controller)) {
@@ -112,21 +106,16 @@ class Data
 
     /**
      * Get the prefix.
-     *
-     * @return string
      */
-    public function getPrefix()
+    public function getPrefix(): string
     {
         return $this->prefix;
     }
 
     /**
      * Get the path from the request.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return string
      */
-    public function getPathFromRequest(Request $request)
+    public function getPathFromRequest(Request $request): string
     {
         // When a request object is created manually that hasn't matched a route (ex: tests).
         if ($request->route() === null) {
