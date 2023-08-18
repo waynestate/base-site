@@ -275,11 +275,11 @@ echo "RemoteRelease Prepare Done.";
 shopt -s expand_aliases
 source ~/.bashrc
 echo "Clearing view cache"
-php80 {{ $release_dir }}/{{ $release }}/artisan view:clear
+php82 {{ $release_dir }}/{{ $release }}/artisan view:clear
 echo "Caching configs...";
-php80 {{ $release_dir }}/{{ $release }}/artisan config:cache
+php82 {{ $release_dir }}/{{ $release }}/artisan config:cache
 echo "Caching routes...";
-php80 {{ $release_dir }}/{{ $release }}/artisan route:cache
+php82 {{ $release_dir }}/{{ $release }}/artisan route:cache
 echo "Done caching ";
 @endtask
 
