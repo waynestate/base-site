@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Str;
-
 return [
 
     /*
@@ -125,7 +123,7 @@ return [
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => Str::slug(env('APP_NAME', 'laravel')).':',
+            'prefix' => env('APP_NAME', 'laravel').':',
         ],
 
         'default' => [
