@@ -57,7 +57,7 @@ class PromoPageController extends Controller
         }
 
         // Set the back URL
-        $request->data['back_url'] = $this->promo->getBackToPromoListing($request->server->get('HTTP_REFERER'), $request->server->get('REQUEST_SCHEME'), $request->server->get('HTTP_HOST'), $request->server->get('REQUEST_URI'));
+        $request->data['back_url'] = $this->promo->getBackToPromoPage($request->server->get('HTTP_REFERER'), $request->server->get('REQUEST_SCHEME'), $request->server->get('HTTP_HOST'), $request->server->get('REQUEST_URI'));
 
         return view('promo-view', merge($request->data, $promo));
     }
