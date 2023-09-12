@@ -34,7 +34,45 @@
 </header>
 
 <div id="panel">
-    @yield('content-area')
+    @yield('top')
+
+    {{-- define method for replacing hero on homepage --}}
+    @if(!empty($base['hero']) && in_array($base['page']['controller'], config('base.hero_full_controllers')))
+        @include('components.hero', ['images' => $base['hero']])
+
+        @yield('under-hero')
+    @endif
+
+    {{-- can we do this better --}}
+    @if(!in_array($base['page']['controller'], config('base.full_width_controllers')))<div class="row mt:flex">@endif
+
+        <div class="mt:w-1/4 mt:px-4 mt:block print:hidden {{ $base['show_site_menu'] === false ? ' mt:hidden' : '' }}">
+            @include('components.menu-side')
+        </div>
+
+        <main class="content-area w-full mb-8 print:w-full{{ !in_array($base['page']['controller'], config('base.full_width_controllers')) ? ' px-4' : '' }} {{$base['show_site_menu'] === true ? 'mt:w-3/4' : '' }}" tabindex="-1">
+
+            @if(!empty($base['hero']) && !in_array($base['page']['controller'], config('base.hero_full_controllers')))
+                @include('components.hero', ['images' => $base['hero']])
+
+                @yield('under-hero')
+            @endif
+
+            @if(!empty($base['breadcrumbs']))
+                @include('components.breadcrumbs', ['breadcrumbs' => $base['breadcrumbs']])
+            @endif
+
+            <div id="content" tabindex="-1">
+                @yield('content')
+            </div>
+
+        </main>
+
+    @if(!in_array($base['page']['controller'], config('base.full_width_controllers')))</div>@endif
+
+    @yield('bottom')
+
+
 </div>
 
 <footer>
