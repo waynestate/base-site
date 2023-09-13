@@ -114,6 +114,8 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         // Parsed promotions
         $promos = $this->parsePromos->parse($promos, $group_reference, $group_config);
 
+        // TODO slug the hero option
+
         // Override the site's social icons if it doesn't have any
         if (empty($promos['social']) && !empty($promos['main_social'])) {
             $promos['social'] = $promos['main_social'];
