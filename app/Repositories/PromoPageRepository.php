@@ -92,6 +92,8 @@ class PromoPageRepository implements PromoPageRepositoryContract
             $promos = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
                 return $this->wsuApi->sendRequest($params['method'], $params);
             });
+            // dump($promos['promos'])
+            // make unique key, not promos, $promos['promo_page_items']
 
             $promos = $this->parsePromos->parse($promos, $group_reference, $group_config);
 
