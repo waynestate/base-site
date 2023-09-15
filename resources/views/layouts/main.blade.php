@@ -66,6 +66,8 @@
                 @yield('content')
             </div>
 
+            @yield('under-content')
+
         </main>
 
     @if(!in_array($base['page']['controller'], config('base.full_width_controllers')))</div>@endif
