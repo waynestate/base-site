@@ -121,9 +121,10 @@ class PromoPageRepository implements PromoPageRepositoryContract
     {
         $group_info = [];
 
-        if (!empty($data['data']['promoPage'])) {
+        //if (!empty($data['data']['promoPage'])) {
             // Remove all spaces and line breaks
-            $group_info = preg_replace('/\s*\R\s*/', '', $data['data']['promoPage']);
+            //$group_info = preg_replace('/\s*\R\s*/', '', $data['data']['promoPage']);
+            $group_info = preg_replace('/\s*\R\s*/', '', $data);
 
             // Last item cannot have comma at the end of it
             $group_info = preg_replace('(,})', '}', $group_info);
@@ -143,7 +144,7 @@ class PromoPageRepository implements PromoPageRepositoryContract
             if (str_contains($group_info['config'], 'page_id')) {
                 $group_info['config'] = preg_replace('/\bpage_id\b/', 'page_id:'.$data['page']['id'], $group_info['config']);
             }
-        }
+        //}
 
         return $group_info;
     }

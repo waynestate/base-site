@@ -3,11 +3,12 @@
 namespace App\Repositories;
 
 use Contracts\Repositories\ModularPageRepositoryContract;
+use Contracts\Repositories\PromoPageRepositoryContract;
 use Illuminate\Cache\Repository;
 use Waynestate\Api\Connector;
 use Waynestate\Promotions\ParsePromos;
 
-class ModularPageRepository implements ModularPageRepositoryContract
+class ModularPageRepository extends PromoPageRepository implements ModularPageRepositoryContract
 {
     /** @var Connector */
     protected $wsuApi;
@@ -51,40 +52,24 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 // Only use fields with modular in the name
                 if (str_contains($group_title, 'modular')) {
                     // Modify field name to match component filename
-                    $group_title = str_replace('modular_', '', $group_title);
+                    $group_title = str_replace('modular-', '', $group_title);
                     $group_title = str_replace('_', '-', $group_title);
-                    /*
-                     * consider multiple text blocks
-                    $position = strpos($group_title, '-');
-                    if ($position !== false) {
-                        $group_title = substr($group_title, 0, $position);
+
+
+                    if (str_starts_with($group_info, '{') === true) {
+                        $group_info = $this->parsePromoJSON($group_info);
                     }
-                     */
 
                     // Create array of the groups that are not flattened by 'first'
                     // Use later to reset keys to use group title
                     // $promo_group_title[0]['group']['title']
-                    if (!str_contains($group_info, 'first')) {
+                    if (!str_contains($group_info['config'], 'first')) {
                         $array_values[] = $group_title;
                     }
 
-                    // Separate the promo id and config
-                    $group_info = explode(",", $group_info);
-                    $group_id = $group_info[0];
-
-                    // Set page id
-                    if (!empty($group_info[1])) {
-                        if (str_contains($group_info[1], 'page_id')) {
-                            $group_info[1] = preg_replace('/\bpage_id\b/', 'page_id:'.$data['page']['id'], $group_info[1]);
-                        }
-
-                        $group_info = trim($group_info[1]);
-                    } else {
-                        $group_info = '';
-                    }
-
-                    $group_reference[$group_id] = $group_title;
-                    $group_config[$group_title] = $group_info;
+                    // Parse promos
+                    $group_reference[$group_info['id']] = $group_title;
+                    $group_config[$group_title] = $group_info['config'];
                 }
             }
         }
@@ -102,9 +87,9 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
         $promos = $this->parsePromos->parse($promos, $group_reference, $group_config);
 
+        // Reset keys to set group title
+        // $promo_group_title[0]['group']['title']
         if (!empty($promos)) {
-            // Reset keys to set group title
-            // $promo_group_title[0]['group']['title']
             foreach ($promos as $group_title => $values) {
                 if (in_array($group_title, $array_values)) {
                     $promos[$group_title] = array_values($promos[$group_title]);
@@ -112,6 +97,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
             }
         }
 
+        dump($promos);
         return $promos;
     }
 }

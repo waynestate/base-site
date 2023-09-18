@@ -1,5 +1,5 @@
 <div class="col-span-2 lg:col-span-1">
-    <h2 class="mt-0">{{ !empty($data[0]['group']['title']) ? $data[0]['group']['title'] : 'Steps' }}</h2>
+    @if(!empty($data[0]['group']['heading']))<h2 class="mt-0">{{ $data[0]['group']['heading'] }}</h2>@endif
     <ul class="grid grid-cols-1 gap-6">
     @foreach($data as $step)
         <li>
