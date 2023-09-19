@@ -11,7 +11,7 @@
         @if(!empty($promos))
             @foreach($promos as $group_title => $data)
                 @if(!empty($group_title) && !empty($data))
-                    @include('components/modular/'.preg_replace('/-\d+$/', '', $group_title), ['data' => $data])
+                    @include('modular/components/'.preg_replace('/-\d+$/', '', $group_title), ['data' => $data])
                 @endif
             @endforeach
         @endif

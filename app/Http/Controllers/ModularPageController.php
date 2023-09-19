@@ -42,6 +42,6 @@ class ModularPageController extends Controller
 
         $events = $this->event->getEvents($request->data['base']['data']['event_listing_site_id'] ?? $request->data['base']['site']['id']);
 
-        return view('modular-page', merge($request->data, $articles, $events, $promos));
+        return view('modular/modularpage', merge($request->data, $articles, $events, $promos));
     }
 }

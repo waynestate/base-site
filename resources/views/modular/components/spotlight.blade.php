@@ -3,6 +3,7 @@
 --}}
 
 <div class="col-span-2 mx-4 my-6">
+    @if(!empty($data[0]['component']['heading']))<h2 class="mt-0">{{ $data[0]['component']['heading'] }}</h2>@endif
     <blockquote class="relative flex border-gold border-l-12 pt-4 lg:pl-8 mx-auto my-0">
         <div class="flex flex-wrap items-center w-full">
             <div class="content w-full text-lg md:text-xl lg:text-xl lg:leading-relaxed">{!! $data['description'] !!}</div>

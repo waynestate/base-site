@@ -80,11 +80,11 @@ class PromoPageRepository implements PromoPageRepositoryContract
         }
 
         if (!empty($data['data']['promoPage'])) {
-            $group_info = $this->parsePromoJSON($data);
+            $component = $this->parsePromoJSON($data);
 
             // Parse promos
-            $group_reference[$group_info['id']] = 'promos';
-            $group_config['promos'] = $group_info['config'];
+            $group_reference[$component['id']] = 'promos';
+            $group_config['promos'] = $component['config'];
 
             $params = [
                 'method' => 'cms.promotions.listing',
@@ -100,13 +100,13 @@ class PromoPageRepository implements PromoPageRepositoryContract
             $promos = $this->parsePromos->parse($promos, $group_reference, $group_config);
 
             // Manipulate promo data from page field settings
-            $promos = $this->changePromoItemDisplay($promos, $group_info);
+            $promos = $this->changePromoItemDisplay($promos, $component);
 
             // Organize promos by option
             $promos = $this->organizePromoItemsByOption($promos);
 
             // Set number of columns
-            $promos['template']['columns'] = $group_info['columns'];
+            $promos['template']['columns'] = $component['columns'];
 
             return $promos;
         } else {
@@ -117,45 +117,43 @@ class PromoPageRepository implements PromoPageRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function parsePromoJSON($data)
+    public function parsePromoJSON($json, $page_id)
     {
-        $group_info = [];
+        $component = [];
 
-        //if (!empty($data['data']['promoPage'])) {
-            // Remove all spaces and line breaks
-            //$group_info = preg_replace('/\s*\R\s*/', '', $data['data']['promoPage']);
-            $group_info = preg_replace('/\s*\R\s*/', '', $data);
+        // Remove all spaces and line breaks
+        $component = preg_replace('/\s*\R\s*/', '', $json);
 
-            // Last item cannot have comma at the end of it
-            $group_info = preg_replace('(,})', '}', $group_info);
+        // Last item cannot have comma at the end of it
+        $component = preg_replace('(,})', '}', $component);
 
-            // JSON into array
-            $group_info = json_decode($group_info, true);
+        // JSON into array
+        $component = json_decode($component, true);
 
-            // Assign expected group info
-            $group_info['id'] = (!empty($group_info['id']) ? $group_info['id'] : '');
-            $group_info['config'] = (!empty($group_info['config']) ? $group_info['config'] : '');
-            $group_info['singlePromoView'] = (!empty($group_info['singlePromoView']) ? $group_info['singlePromoView'] : '');
-            $group_info['columns'] = (!empty($group_info['columns']) ? $group_info['columns'] : '');
-            $group_info['showExcerpt'] = (!empty($group_info['showExcerpt']) ? $group_info['showExcerpt'] : '');
-            $group_info['showDescription'] = (!empty($group_info['showDescription']) ? $group_info['showDescription'] : '');
+        // Make sure config always exists
+        $component['config'] = (!empty($component['config']) ? $component['config'] : '');
 
-            // Append actual page id to config
-            if (str_contains($group_info['config'], 'page_id')) {
-                $group_info['config'] = preg_replace('/\bpage_id\b/', 'page_id:'.$data['page']['id'], $group_info['config']);
-            }
-        //}
+        // Append actual page id to config
+        if (str_contains($component['config'], 'page_id')) {
+            $component['config'] = preg_replace('/\bpage_id\b/', 'page_id:'.$page_id, $component['config']);
+        }
 
-        return $group_info;
+        // No allowing "first" config option
+        // API seems to do fine with double pipes, so not handling them at this time
+        if (str_contains($component['config'], 'first')) {
+            $component['config'] = preg_replace('/\bfirst\b/', '', $component['config']);
+        }
+
+        return $component;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function changePromoItemDisplay($promos, $group_info)
+    public function changePromoItemDisplay($promos, $component)
     {
         // Enable the individual promotion view
-        if ($group_info['singlePromoView'] == "true") {
+        if ($component['singlePromoView'] == "true") {
             $promos['promos'] = collect($promos['promos'])->map(function ($item) {
                 if (!empty($item)) {
                     $item['link'] = 'view/'.Str::slug($item['title']).'-'.$item['promo_item_id'];
@@ -166,7 +164,7 @@ class PromoPageRepository implements PromoPageRepositoryContract
         }
 
         // Hide excerpt
-        if ($group_info['showExcerpt'] == "false") {
+        if ($component['showExcerpt'] == "false") {
             $promos['promos'] = collect($promos['promos'])->map(function ($item) {
                 unset($item['excerpt']);
 
@@ -175,7 +173,7 @@ class PromoPageRepository implements PromoPageRepositoryContract
         }
 
         // Hide description
-        if ($group_info['showDescription'] == "false") {
+        if ($component['showDescription'] == "false") {
             $promos['promos'] = collect($promos['promos'])->map(function ($item) {
                 unset($item['description']);
 

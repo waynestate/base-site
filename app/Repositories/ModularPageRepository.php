@@ -41,35 +41,25 @@ class ModularPageRepository extends PromoPageRepository implements ModularPageRe
         $group_reference = [];
         $group_config = [];
 
-        // Import ability to use json config
-        // determine page field name 'modular_buttons'
         // learn css container queries
         // take left menu or no menu into account
-        // set up styleguide to use live repository like the promo page
+        // set up configurable events and news ids if set
 
         if (!empty($data['data'])) {
-            foreach ($data['data'] as $group_title => $group_info) {
+            foreach ($data['data'] as $component => $properties) {
                 // Only use fields with modular in the name
-                if (str_contains($group_title, 'modular')) {
+                if (str_contains($component, 'modular')) {
                     // Modify field name to match component filename
-                    $group_title = str_replace('modular-', '', $group_title);
-                    $group_title = str_replace('_', '-', $group_title);
+                    $component = str_replace('modular-', '', $component);
+                    $component = str_replace('_', '-', $component);
 
-
-                    if (str_starts_with($group_info, '{') === true) {
-                        $group_info = $this->parsePromoJSON($group_info);
-                    }
-
-                    // Create array of the groups that are not flattened by 'first'
-                    // Use later to reset keys to use group title
-                    // $promo_group_title[0]['group']['title']
-                    if (!str_contains($group_info['config'], 'first')) {
-                        $array_values[] = $group_title;
+                    if (str_starts_with($properties, '{') === true) {
+                        $components[$component] = $this->parsePromoJSON($properties, $data['page']['id']);
                     }
 
                     // Parse promos
-                    $group_reference[$group_info['id']] = $group_title;
-                    $group_config[$group_title] = $group_info['config'];
+                    $group_reference[$components[$component]['id']] = $component;
+                    $group_config[$component] = $components[$component]['config'];
                 }
             }
         }
@@ -85,19 +75,28 @@ class ModularPageRepository extends PromoPageRepository implements ModularPageRe
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
-        $promos = $this->parsePromos->parse($promos, $group_reference, $group_config);
-
-        // Reset keys to set group title
-        // $promo_group_title[0]['group']['title']
-        if (!empty($promos)) {
-            foreach ($promos as $group_title => $values) {
-                if (in_array($group_title, $array_values)) {
-                    $promos[$group_title] = array_values($promos[$group_title]);
+        // Append component page field data to each promo item 
+        foreach($components as $component => $component_props) {
+            foreach($promos['promotions'] as $key => $item) {
+                if($component_props['id'] === (int)$item['group']['promo_group_id']) {
+                    foreach($component_props as $prop_name => $prop_data) {
+                        $promos['promotions'][$item['promo_item_id']]['component'][$prop_name] = $prop_data;
+                    }
                 }
             }
         }
 
+        $promos = $this->parsePromos->parse($promos, $group_reference, $group_config);
+
+        // Reset promo item key to use component values in template 
+        if (!empty($promos)) {
+            foreach ($promos as $component => $values) {
+                $promos[$component] = array_values($promos[$component]);
+            }
+        }
         dump($promos);
+        dump($components);
+
         return $promos;
     }
 }

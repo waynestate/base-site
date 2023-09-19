@@ -1,5 +1,5 @@
 <div class="col-span-2">
-    @if(!empty($data['group']['heading']))<h2>{{ $data['group']['heading'] }}</h2>@endif
+    @if(!empty($data[0]['component']['heading']))<h2 class="mt-0">{{ $data[0]['component']['heading'] }}</h2>@endif
     <div class="lg:flex border-gold border-l-4 py-4 lg:pl-8 mx-4 lg:mr-4 gap-6 my-6">
         <div>
             @if(!empty($data['group']['heading']))

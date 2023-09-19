@@ -2,9 +2,9 @@
     $image_promo => single // ['title', 'link', 'filename_url', 'filename_alt_text']
 --}}
 
-<div class="col-span-1">
-    @if(!empty($data[0]['group']['heading']))<h2 class="mt-0">{{ $data[0]['group']['heading'] }}</h2>@endif
-    <div class="grid gap-4">
+<div class="col-span-2">
+    @if(!empty($data[0]['component']['heading']))<h2 class="mt-0">{{ $data[0]['component']['heading'] }}</h2>@endif
+    <div class="grid gap-4 lg:grid-cols-2 xl:grid-cols-{{ !empty($data[0]['group']['columns']) ? $data[0]['group']['columns'] : '3' }}">
         @foreach($data as $image_promo)
             <div class="bg-green-800">
                 <a href="{{ $image_promo['link'] }}" class="relative block group">
