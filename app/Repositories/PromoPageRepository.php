@@ -21,10 +21,6 @@ class PromoPageRepository implements PromoPageRepositoryContract
 
     /**
      * Construct the repository.
-     *
-     * @param Connector $wsuApi
-     * @param ParsePromos $parsePromos
-     * @param Repository $cache
      */
     public function __construct(Connector $wsuApi, ParsePromos $parsePromos, Repository $cache)
     {
@@ -64,27 +60,39 @@ class PromoPageRepository implements PromoPageRepositoryContract
         // Legacy support for listing
         if (!empty($data['data']['listing_promo_group_id'])) {
             if (!empty($data['data']['promotion_view_boolean']) && $data['data']['promotion_view_boolean'] === "true") {
-                $data['data']['promoPage'] = "{\"id\":\"".$data['data']['listing_promo_group_id']."\",\"singlePromoView\":\"true\"}";
+                $data['data']['promoPage'] = json_encode([
+                    'id' => $data['data']['listing_promo_group_id'],
+                    'singlePromoView' => true,
+                ]);
             } else {
-                $data['data']['promoPage'] = "{\"id\":\"".$data['data']['listing_promo_group_id']."\"}";
+                $data['data']['promoPage'] = json_encode([
+                    'id' => $data['data']['listing_promo_group_id'],
+                ]);
             }
         }
 
         // Legacy support for grid
         if (!empty($data['data']['grid_promo_group_id'])) {
             if (!empty($data['data']['promotion_view_boolean']) && $data['data']['promotion_view_boolean'] === "true") {
-                $data['data']['promoPage'] = "{\"id\":\"".$data['data']['grid_promo_group_id']."\",\"columns\":\"3\",\"singlePromoView\":\"true\"}";
+                $data['data']['promoPage'] = json_encode([
+                    'id' => $data['data']['grid_promo_group_id'],
+                    'columns' => 3,
+                    'singlePromoView' => true,
+                ]);
             } else {
-                $data['data']['promoPage'] = "{\"id\":\"".$data['data']['grid_promo_group_id']."\",\"columns\":\"3\"}";
+                $data['data']['promoPage'] = json_encode([
+                    'id' => $data['data']['grid_promo_group_id'],
+                    'columns' => 3,
+                ]);
             }
         }
 
         if (!empty($data['data']['promoPage'])) {
-            $component = $this->parsePromoJSON($data);
+            $group_info = $this->parsePromoJSON($data);
 
             // Parse promos
-            $group_reference[$component['id']] = 'promos';
-            $group_config['promos'] = $component['config'];
+            $group_reference[$group_info['id']] = 'promos';
+            $group_config['promos'] = $group_info['config'];
 
             $params = [
                 'method' => 'cms.promotions.listing',
@@ -100,13 +108,13 @@ class PromoPageRepository implements PromoPageRepositoryContract
             $promos = $this->parsePromos->parse($promos, $group_reference, $group_config);
 
             // Manipulate promo data from page field settings
-            $promos = $this->changePromoItemDisplay($promos, $component);
+            $promos = $this->changePromoItemDisplay($promos, $group_info);
 
             // Organize promos by option
             $promos = $this->organizePromoItemsByOption($promos);
 
             // Set number of columns
-            $promos['template']['columns'] = $component['columns'];
+            $promos['template']['columns'] = $group_info['columns'];
 
             return $promos;
         } else {
@@ -117,43 +125,44 @@ class PromoPageRepository implements PromoPageRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function parsePromoJSON($json, $page_id)
+    public function parsePromoJSON($data)
     {
-        $component = [];
+        $group_info = [];
 
-        // Remove all spaces and line breaks
-        $component = preg_replace('/\s*\R\s*/', '', $json);
+        if (!empty($data['data']['promoPage'])) {
+            // Remove all spaces and line breaks
+            $group_info = preg_replace('/\s*\R\s*/', '', $data['data']['promoPage']);
 
-        // Last item cannot have comma at the end of it
-        $component = preg_replace('(,})', '}', $component);
+            // Last item cannot have comma at the end of it
+            $group_info = preg_replace('(,})', '}', $group_info);
 
-        // JSON into array
-        $component = json_decode($component, true);
+            // JSON into array
+            $group_info = json_decode($group_info, true);
 
-        // Make sure config always exists
-        $component['config'] = (!empty($component['config']) ? $component['config'] : '');
+            // Assign expected group info
+            $group_info['id'] = (!empty($group_info['id']) ? $group_info['id'] : '');
+            $group_info['config'] = (!empty($group_info['config']) ? $group_info['config'] : '');
+            $group_info['singlePromoView'] = (!empty($group_info['singlePromoView']) ? $group_info['singlePromoView'] : '');
+            $group_info['columns'] = (!empty($group_info['columns']) ? $group_info['columns'] : '');
+            $group_info['showExcerpt'] = (!empty($group_info['showExcerpt']) ? $group_info['showExcerpt'] : '');
+            $group_info['showDescription'] = (!empty($group_info['showDescription']) ? $group_info['showDescription'] : '');
 
-        // Append actual page id to config
-        if (str_contains($component['config'], 'page_id')) {
-            $component['config'] = preg_replace('/\bpage_id\b/', 'page_id:'.$page_id, $component['config']);
+            // Append actual page id to config
+            if (str_contains($group_info['config'], 'page_id')) {
+                $group_info['config'] = preg_replace('/\bpage_id\b/', 'page_id:'.$data['page']['id'], $group_info['config']);
+            }
         }
 
-        // No allowing "first" config option
-        // API seems to do fine with double pipes, so not handling them at this time
-        if (str_contains($component['config'], 'first')) {
-            $component['config'] = preg_replace('/\bfirst\b/', '', $component['config']);
-        }
-
-        return $component;
+        return $group_info;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function changePromoItemDisplay($promos, $component)
+    public function changePromoItemDisplay($promos, $group_info)
     {
         // Enable the individual promotion view
-        if ($component['singlePromoView'] == "true") {
+        if ($group_info['singlePromoView'] == "true") {
             $promos['promos'] = collect($promos['promos'])->map(function ($item) {
                 if (!empty($item)) {
                     $item['link'] = 'view/'.Str::slug($item['title']).'-'.$item['promo_item_id'];
@@ -164,7 +173,7 @@ class PromoPageRepository implements PromoPageRepositoryContract
         }
 
         // Hide excerpt
-        if ($component['showExcerpt'] == "false") {
+        if ($group_info['showExcerpt'] == "false") {
             $promos['promos'] = collect($promos['promos'])->map(function ($item) {
                 unset($item['excerpt']);
 
@@ -173,7 +182,7 @@ class PromoPageRepository implements PromoPageRepositoryContract
         }
 
         // Hide description
-        if ($component['showDescription'] == "false") {
+        if ($group_info['showDescription'] == "false") {
             $promos['promos'] = collect($promos['promos'])->map(function ($item) {
                 unset($item['description']);
 
@@ -184,9 +193,9 @@ class PromoPageRepository implements PromoPageRepositoryContract
         return $promos;
     }
 
-     /**
-     * {@inheritdoc}
-     */
+    /**
+    * {@inheritdoc}
+    */
     public function organizePromoItemsByOption(array $promos)
     {
         $options_exist = collect($promos['promos'])->filter(function ($value) {
