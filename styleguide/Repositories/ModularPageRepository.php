@@ -51,10 +51,11 @@ class ModularPageRepository extends Repository
         $promos['content-row-2'] = app(GenericPromo::class)->create(1, false, [
             'title' => 'Content row (Promo item title)',
             'component' => [
-                'filename' => 'content-column',
+                'filename' => 'content-row',
             ]
         ]);
 
+        /*
         $promos['content-column-1'] = app(GenericPromo::class)->create(1, false, [
             'title' => 'Content column (promo item title)',
             'component' => [
@@ -69,6 +70,7 @@ class ModularPageRepository extends Repository
                 'filename' => 'content-column',
             ]
         ]);
+         */
 
         $promos['accordion-1'] = app(GenericPromo::class)->create(3, false, [
             'component' => [
