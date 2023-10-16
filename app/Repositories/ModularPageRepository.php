@@ -82,7 +82,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
         $promos = $this->parsePromos->parse($promos, $group_reference, $group_config);
 
-        // Reset promo item key to use component values in template 
+        // Reset promo item key to use component values in template
         if (!empty($promos)) {
             foreach ($promos as $component => $values) {
                 $promos[$component] = array_values($promos[$component]);
@@ -124,7 +124,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
         return $component;
     }
-    
+
     /**
      * {@inheritdoc}
      */
