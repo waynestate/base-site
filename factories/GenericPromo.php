@@ -22,7 +22,7 @@ class GenericPromo implements FactoryContract
     {
         $promo_group_id = $this->faker->randomNumber(5);
 
-        for ($i = 1; $i <= $limit; $i++) {
+        for ($i = 0; $i <= ($limit - 1); $i++) {
             $data[$i] = [
                 'title' => ucfirst(implode(' ', $this->faker->words(3))),
                 'excerpt' => $this->faker->sentence(),
