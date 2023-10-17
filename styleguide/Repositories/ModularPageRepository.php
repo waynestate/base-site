@@ -109,8 +109,6 @@ class ModularPageRepository extends Repository
             ]
         ]);
 
-        dump($promos);
-
         return $promos;
     }
 }
