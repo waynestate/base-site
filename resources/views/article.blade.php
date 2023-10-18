@@ -25,6 +25,24 @@
                 </ul>
             @endif
 
+            @if(!empty($article['data']['programs']))
+                <h2 class="border-b mt-4">Featured program(s)</h2>
+
+                <ul>
+                    @foreach($article['data']['programs'] as $program)
+                        <li>
+                            @if(!empty($program['url']))
+                                <a href="{{ $program['url'] }}">
+                                    @endif
+                                    {{ $program['name'] }}
+                                    @if(!empty($program['url']))
+                                </a>
+                            @endif
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
+
             @if(!empty($article['data']['assets']))
                 <h2 class="border-b mt-4">Assets</h2>
 
