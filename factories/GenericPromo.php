@@ -28,7 +28,7 @@ class GenericPromo implements FactoryContract
                 'excerpt' => $this->faker->sentence(),
                 'description' => '<p>' . $this->faker->text(100) . ' <a href="https://wayne.edu">'. $this->faker->sentence(3)  .'</a></p>',
                 'link' => 'https://wayne.edu',
-                'promo_item_id' => strval($this->faker->randomNumber(5)),
+                'promo_item_id' => $i,
                 'promo_group_id' => strval($promo_group_id),
                 'relative_url' => '/styleguide/image/600x450?text=600x450:'.$i, // 4:3
                 //'relative_url' => '/styleguide/image/450x600', // 3:4

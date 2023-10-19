@@ -37,8 +37,7 @@ class ModularPageController extends Controller
     {
         $promos['promos'] = $this->promo->getModularPromos($request->data['base']);
 
-        //$articles = $this->article->listing($request->data['base']['data']['news_application_id'] ?? $request->data['base']['site']['news']['application_id']);
-        $articles = $this->article->listing(2);
+        $articles = $this->article->listing($request->data['base']['data']['news_application_id'] ?? $request->data['base']['site']['news']['application_id']);
 
         $events = $this->event->getEvents($request->data['base']['data']['event_listing_site_id'] ?? $request->data['base']['site']['id']);
 
