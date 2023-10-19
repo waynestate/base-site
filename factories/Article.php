@@ -46,6 +46,14 @@ class Article implements FactoryContract
             ];
         }
 
+        $programs = [];
+        for($i = 0; $i < 3; $i++) {
+            $programs[] = [
+                'name' => $this->faker->randomElement(['Accounting (BS)', 'Art Education (BA)', 'Biological Sciences (BA)', 'Chemical Engineering (MS)']),
+                'url' => 'https://wayne.edu',
+            ];
+        }
+
         $assets = [];
         for ($i = 0; $i < 3; $i++) {
             $assets[] = [
@@ -125,6 +133,7 @@ class Article implements FactoryContract
                 ],
                 'assets' => $this->faker->randomElements($assets, rand(1, 3)),
                 'faculty' => $this->faker->randomElements($faculty, rand(1, 3)),
+                'programs' => $this->faker->randomElements($programs, rand(1, 3)),
                 'favicon' => null,
                 'user' => null,
                 'applications' => null,
