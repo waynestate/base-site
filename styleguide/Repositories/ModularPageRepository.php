@@ -18,6 +18,69 @@ class ModularPageRepository extends Repository
                 'filename' => 'button-row',
             ]
         ]);
+
+        $promos['content-row-1'] = app(GenericPromo::class)->create(2, false, [
+            'title' => 'Promo item title (h3)',
+            'component' => [
+                'heading' => 'Content row - with heading',
+                'filename' => 'content-row'
+            ]
+        ]);
+
+        $promos['content-row-2'] = app(GenericPromo::class)->create(2, false, [
+            'title' => 'Promo item title (content row - no heading)',
+            'component' => [
+                'filename' => 'content-row',
+            ]
+        ]);
+
+        $promos['catalog-1'] = app(GenericPromo::class)->create(3, false, [
+            'description' => '',
+            'component' => [
+                'heading' => 'Catalog with three columns',
+                'columns' => 3,
+                'filename' => 'catalog',
+                'showExcerpt' => true,
+                'singlePromoView' => true,
+            ]
+        ]);
+
+        $promos['catalog-2'] = app(GenericPromo::class)->create(4, false, [
+            'description' => '',
+            'component' => [
+                'heading' => 'Catalog with four columns',
+                'columns' => 4,
+                'filename' => 'catalog',
+                'showExcerpt' => true,
+                'singlePromoView' => true,
+            ]
+        ]);
+
+        $promos['catalog-3'] = app(GenericPromo::class)->create(2, false, [
+            'excerpt' => '',
+            'component' => [
+                'heading' => 'Catalog with one column',
+                'columns' => '1',
+                'filename' => 'catalog',
+                'showExcerpt' => false,
+                'singlePromoView' => true,
+            ]
+        ]);
+
+        $promos['accordion-1'] = app(GenericPromo::class)->create(3, false, [
+            'component' => [
+                'heading' => 'Accordion 1',
+                'filename' => 'accordion',
+            ]
+        ]);
+
+        $promos['accordion-2'] = app(GenericPromo::class)->create(4, false, [
+            'component' => [
+                'heading' => 'Accordion 2',
+                'filename' => 'accordion',
+            ]
+        ]);
+
         $promos['button-column'] = app(GenericPromo::class)->create(3, false, [
             'component' => [
                 'heading' => 'Button column',
@@ -29,29 +92,6 @@ class ModularPageRepository extends Repository
             'component' => [
                 'heading' => 'Image column',
                 'filename' => 'image-column'
-            ]
-        ]);
-
-        $promos['image-grid'] = app(GenericPromo::class)->create(2, false, [
-            'component' => [
-                'heading' => 'Image grid',
-                'columns' => '2',
-                'filename' => 'image-grid',
-            ]
-        ]);
-
-        $promos['content-row-1'] = app(GenericPromo::class)->create(2, false, [
-            'title' => 'Promo item title',
-            'component' => [
-                'heading' => 'Content row with heading',
-                'filename' => 'content-row'
-            ]
-        ]);
-
-        $promos['content-row-2'] = app(GenericPromo::class)->create(1, false, [
-            'title' => 'Content row (Promo item title)',
-            'component' => [
-                'filename' => 'content-row',
             ]
         ]);
 
@@ -71,20 +111,6 @@ class ModularPageRepository extends Repository
             ]
         ]);
          */
-
-        $promos['accordion-1'] = app(GenericPromo::class)->create(3, false, [
-            'component' => [
-                'heading' => 'Accordion 1',
-                'filename' => 'accordion',
-            ]
-        ]);
-
-        $promos['accordion-2'] = app(GenericPromo::class)->create(3, false, [
-            'component' => [
-                'heading' => 'Accordion 2',
-                'filename' => 'accordion',
-            ]
-        ]);
 
         $promos['video-row'] = app(GenericPromo::class)->create(1, false, [
             'component' => [

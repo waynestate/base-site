@@ -1,4 +1,4 @@
-<div class="col-span-1">
+<div class="col-span-2 md:col-span-1">
     @if(!empty($data[0]['component']['heading']))<h2 class="mt-0">{{ $data[0]['component']['heading'] }}</h2>@endif
     @foreach($data as $item)
         <div class="w-full">

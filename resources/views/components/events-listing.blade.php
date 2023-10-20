@@ -1,6 +1,5 @@
 {{--
     $events => array // ['title', 'url', 'date', 'start_time', 'is_all_day']
-    $cal_name => string // 'main/'
     $link_text => string // 'More events'
 --}}
 
@@ -33,7 +32,7 @@
         @endforeach
         @if($dates == end($events))
             <li class="flex -mx-2 ml-17">
-                <a href="//events.wayne.edu/{{ $cal_name ?? 'main/' }}month/" class="hover:underline">{{ $link_text ?? 'More events' }}</a>
+                <a href="//events.wayne.edu/{{ $dates[0]['calendar_url'] ?? 'main/' }}month/" class="hover:underline">{{ $link_text ?? 'More events' }}</a>
             </li>
         @endif
     @endforeach

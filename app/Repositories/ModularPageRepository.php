@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use Contracts\Repositories\ModularPageRepositoryContract;
 use Illuminate\Cache\Repository;
+use Illuminate\Support\Str;
 use Waynestate\Api\Connector;
 use Waynestate\Promotions\ParsePromos;
 
@@ -80,6 +81,8 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
         $promos = $this->appendComponentProperties($promos, $components);
 
+        $promos = $this->changePromoItemDisplay($promos);
+
         $promos = $this->parsePromos->parse($promos, $group_reference, $group_config);
 
         // Reset promo item key to use component values in template
@@ -143,6 +146,34 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 }
             }
         }
+
+        return $promos;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function changePromoItemDisplay($promos)
+    {
+        $promos['promotions'] = collect($promos['promotions'])->map(function ($item) {
+
+            // Enable the individual promotion view
+            if (!empty($item['component']['singlePromoView']) && $item['component']['singlePromoView'] === true) {
+                $item['link'] = 'view/'.Str::slug($item['title']).'-'.$item['promo_item_id'];
+            }
+
+            // Hide excerpt
+            if (!empty($item['component']['showExcerpt']) && $item['component']['showExcerpt'] === false) {
+                unset($item['excerpt']);
+            }
+
+            // Hide description
+            if (!empty($item['component']['showDescription']) && $item['component']['showDescription'] === false) {
+                unset($item['description']);
+            }
+
+            return $item;
+        })->toArray();
 
         return $promos;
     }

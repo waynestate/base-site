@@ -2,7 +2,7 @@
     $image_promo => single // ['title', 'link', 'filename_url', 'filename_alt_text']
 --}}
 
-<div class="col-span-1">
+<div class="col-span-2 md:col-span-1">
     @if(!empty($data[0]['component']['heading']))<h2 class="mt-0">{{ $data[0]['component']['heading'] }}</h2>@endif
     <div class="grid gap-4">
         @foreach($data as $image_promo)
