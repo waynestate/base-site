@@ -12,7 +12,7 @@
                         @image($step['filename_url'], $step['filename_alt_text'], 'block mx-auto')
                     </div>
                     <div>
-                        <h3 class="text-lg lg:text-base xl:text-xl mt-0 mb-1 underline group-hover:no-underline">{{ $step['title'] }}</h3>
+                        <div class="text-lg lg:text-base xl:text-xl mt-0 mb-1 underline group-hover:no-underline">{{ $step['title'] }}</div>
                         <p class="text-base lg:text-sm xl:text-base text-black mb-0">{{ $step['excerpt'] }}</p>
                     </div>
                 </div>

@@ -122,7 +122,6 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 $promos[$component] = array_values($promos[$component]);
             }
         }
-        dump($promos);
 
         return $promos;
     }
