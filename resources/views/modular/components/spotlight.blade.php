@@ -25,7 +25,7 @@
             </blockquote>
         <{{ !empty($item['link']) ? '/a' : '/div' }}>
         @if(!$loop->last)
-        <hr class="mb-6" />
+            <hr class="mb-6" />
         @endif
     @endforeach
 </div>
