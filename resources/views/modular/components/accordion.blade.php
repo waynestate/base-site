@@ -1,5 +1,5 @@
 {{--
-    $items => array // ['title', 'description']
+    $item => array // ['title', 'description']
 --}}
 <div class="col-span-2">
     @if(!empty($data[0]['component']['heading']))<h2 class="mt-0">{{ $data[0]['component']['heading'] }}</h2>@endif

@@ -1,7 +1,10 @@
+{{--
+    $item => single // ['title', 'excerpt', 'description', 'link', 'filename_url', 'filename_alt_text']
+--}}
 <div class="col-span-2">
     @if(!empty($data[0]['component']['heading']))<h2 class="mt-0">{{ $data[0]['component']['heading'] }}</h2>@endif
-    <div class="lg:flex">
-        @foreach($data as $item)
+    @foreach($data as $item)
+        <div class="lg:flex mb-8">
             <div>
                 @if(!empty($item['group']['heading']))
                     <h2 class="mt-0 text-2xl">{{ $item['title'] }}</h2>
@@ -20,6 +23,6 @@
                     @endif
                 </a>
             </div>
-        @endforeach
-    </div>
+        </div>
+    @endforeach
 </div>

@@ -1,5 +1,5 @@
 {{--
-    $data => single // ['title', 'excerpt', 'description', 'relative_url']
+    $data => array // ['title', 'excerpt', 'description', 'filename_url', 'filename_alt_text', 'link']
 --}}
 
 <div class="col-span-2">

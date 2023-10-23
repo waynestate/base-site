@@ -82,7 +82,7 @@ class ModularPageRepository extends Repository
             ]
         ]);
 
-        $promos['spotlight-1'] = app(Spotlight::class)->create(3, false, [
+        $promos['spotlight-1'] = app(Spotlight::class)->create(1, false, [
             'component' => [
                 'heading' => 'Spotlights',
                 'filename' => 'spotlight',

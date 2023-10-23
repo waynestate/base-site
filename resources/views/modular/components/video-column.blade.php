@@ -1,6 +1,17 @@
-<div class="col-span-2 md:col-span-1">
-    @if(!empty($data[0]['component']['heading']))<h2 class="mt-0">{{ $data[0]['component']['heading'] }}</h2>@endif
-    @foreach($data as $item)
+{{--
+    $item => single // ['title', 'excerpt', 'description', 'link', 'filename_url', 'filename_alt_text']
+--}}
+@if(count($data) > 1 && !empty($data[0]['component']['heading']))
+    <div class="col-span-2">
+        <h2 class="mt-0 mb-0">{{ $data[0]['component']['heading'] }}</h2>
+    </div>
+@endif
+
+@foreach($data as $item)
+    <div class="col-span-2 md:col-span-1">
+        @if(count($data) === 1 && !empty($data[0]['component']['heading']))
+            <h2 class="mt-0">{{ $data[0]['component']['heading'] }}</h2>
+        @endif
         <div class="w-full">
             <a class="play-video-button" href="{{ $item['link'] }}">
                 @if(!empty($item['filename_url']))
@@ -14,5 +25,5 @@
             @if(!empty($item['description']))<div class="content">{!! $item['description'] !!}</div>
             @endif
         </div>
-    @endforeach
-</div>
+    </div>
+@endforeach
