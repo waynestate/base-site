@@ -6,7 +6,7 @@
             <a class="block group" href="{{ $step['link'] }}">
                 <div class="flex gap-3">
                     <div class="w-16 grow-0 shrink-0">
-                        @image($step['relative_url'], $step['filename_alt_text'], 'block mx-auto')
+                        @image($step['filename_url'], $step['filename_alt_text'], 'block mx-auto')
                     </div>
                     <div>
                         <h3 class="text-lg lg:text-base xl:text-xl mt-0 mb-1 underline group-hover:no-underline">{{ $step['title'] }}</h3>

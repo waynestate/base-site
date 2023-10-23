@@ -3,8 +3,8 @@
     @foreach($data as $item)
         <div class="w-full">
             <a class="play-video-button" href="{{ $item['link'] }}">
-                @if(!empty($item['relative_url']))
-                    @image($item['relative_url'], $item['filename_alt_text'], "lazy")
+                @if(!empty($item['filename_url']))
+                    @image($item['filename_url'], $item['filename_alt_text'], "lazy")
                 @else
                     @image('//i.wayne.edu/youtube/'.$item['youtube_id'].'/max', $item['filename_alt_text'], "lazy")
                 @endif

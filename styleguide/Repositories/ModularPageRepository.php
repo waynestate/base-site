@@ -4,6 +4,7 @@ namespace Styleguide\Repositories;
 
 use App\Repositories\ModularPageRepository as Repository;
 use Factories\GenericPromo;
+use Factories\Spotlight;
 
 class ModularPageRepository extends Repository
 {
@@ -81,6 +82,14 @@ class ModularPageRepository extends Repository
             ]
         ]);
 
+        $promos['spotlight-1'] = app(Spotlight::class)->create(3, false, [
+            'component' => [
+                'heading' => 'Spotlights',
+                'filename' => 'spotlight',
+                'singlePromoView' => true,
+            ]
+        ]);
+
         $promos['button-column'] = app(GenericPromo::class)->create(3, false, [
             'component' => [
                 'heading' => 'Button column',
@@ -108,23 +117,6 @@ class ModularPageRepository extends Repository
                 'filename' => 'video-column',
             ]
         ]);
-
-        $promos['content-column-1'] = app(GenericPromo::class)->create(1, false, [
-            'title' => 'Promo item title (content column - no heading)',
-            'component' => [
-                'filename' => 'content-column',
-            ]
-        ]);
-
-        $promos['content-column-2'] = app(GenericPromo::class)->create(1, false, [
-            'title' => 'Promo item title',
-            'component' => [
-                'heading' => 'Content column with heading',
-                'filename' => 'content-column',
-            ]
-        ]);
-
-        //$promos['spotlight-1'] = app(GenericPromo::class)->create(3, false);
 
         $promos['steps-column'] = app(GenericPromo::class)->create(4, false, [
             'component' => [

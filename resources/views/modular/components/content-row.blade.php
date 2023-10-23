@@ -4,7 +4,7 @@
         @if(!empty($data[0]['component']['heading']))
             <h3>{{ $content_block['title'] }}</h3>
         @else
-            <h2>{{ $content_block['title'] }}</h2>
+            <h2 class="mt-0">{{ $content_block['title'] }}</h2>
         @endif
         {!! $content_block['description'] !!}
     @endforeach
