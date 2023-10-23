@@ -95,23 +95,6 @@ class ModularPageRepository extends Repository
             ]
         ]);
 
-        /*
-        $promos['content-column-1'] = app(GenericPromo::class)->create(1, false, [
-            'title' => 'Content column (promo item title)',
-            'component' => [
-                'filename' => 'content-column',
-            ]
-        ]);
-
-        $promos['content-column-2'] = app(GenericPromo::class)->create(1, false, [
-            'title' => 'Promo item title',
-            'component' => [
-                'heading' => 'Content column with heading',
-                'filename' => 'content-column',
-            ]
-        ]);
-         */
-
         $promos['video-row'] = app(GenericPromo::class)->create(1, false, [
             'component' => [
                 'heading' => 'Video row',
@@ -123,6 +106,21 @@ class ModularPageRepository extends Repository
             'component' => [
                 'heading' => 'Video column',
                 'filename' => 'video-column',
+            ]
+        ]);
+
+        $promos['content-column-1'] = app(GenericPromo::class)->create(1, false, [
+            'title' => 'Promo item title (content column - no heading)',
+            'component' => [
+                'filename' => 'content-column',
+            ]
+        ]);
+
+        $promos['content-column-2'] = app(GenericPromo::class)->create(1, false, [
+            'title' => 'Promo item title',
+            'component' => [
+                'heading' => 'Content column with heading',
+                'filename' => 'content-column',
             ]
         ]);
 

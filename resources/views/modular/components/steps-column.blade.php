@@ -1,4 +1,4 @@
-<div class="col-span-2 lg:col-span-1">
+<div class="col-span-2 md:col-span-1">
     @if(!empty($data[0]['component']['heading']))<h2 class="mt-0">{{ $data[0]['component']['heading'] }}</h2>@endif
     <ul class="grid grid-cols-1 gap-6">
     @foreach($data as $step)
