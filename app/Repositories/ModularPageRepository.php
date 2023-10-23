@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use Contracts\Repositories\ModularPageRepositoryContract;
+use Contracts\Repositories\EventRepositoryContract;
+use Contracts\Repositories\ArticleRepositoryContract;
 use Illuminate\Cache\Repository;
 use Illuminate\Support\Str;
 use Waynestate\Api\Connector;
@@ -26,11 +28,18 @@ class ModularPageRepository implements ModularPageRepositoryContract
      * @param ParsePromos $parsePromos
      * @param Repository $cache
      */
-    public function __construct(Connector $wsuApi, ParsePromos $parsePromos, Repository $cache)
-    {
+    public function __construct(
+        Connector $wsuApi,
+        ParsePromos $parsePromos,
+        Repository $cache,
+        ArticleRepositoryContract $article,
+        EventRepositoryContract $event
+    ) {
         $this->wsuApi = $wsuApi;
         $this->parsePromos = $parsePromos;
         $this->cache = $cache;
+        $this->article = $article;
+        $this->event = $event;
     }
 
     /**
@@ -54,7 +63,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
                     $component = str_replace('_', '-', $component);
 
                     if (str_starts_with($properties, '{') === true) {
-                        $components[$component] = $this->parsePromoJSON($properties, $data['page']['id']);
+                        $components[$component] = $this->parseJSON($properties, $data['page']['id']);
                     } else {
                         // If only an ID is entered without json
                         $components[$component]['id'] = (int)$properties;
@@ -85,12 +94,35 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
         $promos = $this->parsePromos->parse($promos, $group_reference, $group_config);
 
+        foreach($components as $component => $properties) {
+            if (str_contains($component, 'news')) {
+                $articles = $this->article->listing($properties['id']);
+                foreach($articles['articles']['data'] as $key => $data) {
+                    $articles['articles']['data'][$key]['component'] = $properties;
+                    $articles['articles']['data'][$key]['component']['filename'] = preg_replace('/-\d+$/', '', $component);
+                }
+                $promos[$component] = $articles['articles']['data'];
+            }
+
+            if (str_contains($component, 'events')) {
+                $events = $this->event->getEvents($properties['id']);
+                foreach($events['events'] as $key => $dates) {
+                    foreach($dates as $date => $data) {
+                        $events['events'][$key]['component'] = $properties;
+                        $events['events'][$key]['component']['filename'] = preg_replace('/-\d+$/', '', $component);
+                    }
+                }
+                $promos[$component] = $events['events'];
+            }
+        }
+
         // Reset promo item key to use component values in template
         if (!empty($promos)) {
             foreach ($promos as $component => $values) {
                 $promos[$component] = array_values($promos[$component]);
             }
         }
+        dump($promos);
 
         return $promos;
     }
@@ -98,7 +130,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function parsePromoJSON($json, $page_id)
+    public function parseJSON($json, $page_id)
     {
         $component = [];
 

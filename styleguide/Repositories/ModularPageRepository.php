@@ -13,7 +13,14 @@ class ModularPageRepository extends Repository
      */
     public function getModularPromos(array $data)
     {
-        $promos['button-row'] = app(GenericPromo::class)->create(3, false, [
+        $promos['news-column'] = app(GenericPromo::class)->create(3, false, [
+            'component' => [
+                'heading' => 'Button row',
+                'filename' => 'button-row',
+            ]
+        ]);
+
+        $promos['events-column'] = app(GenericPromo::class)->create(3, false, [
             'component' => [
                 'heading' => 'Button row',
                 'filename' => 'button-row',
