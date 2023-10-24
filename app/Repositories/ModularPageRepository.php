@@ -189,17 +189,17 @@ class ModularPageRepository implements ModularPageRepositoryContract
         $promos['promotions'] = collect($promos['promotions'])->map(function ($item) {
 
             // Enable the individual promotion view
-            if (!empty($item['component']['singlePromoView']) && $item['component']['singlePromoView'] === true) {
+            if (isset($item['component']['singlePromoView']) && $item['component']['singlePromoView'] === true) {
                 $item['link'] = 'view/'.Str::slug($item['title']).'-'.$item['promo_item_id'];
             }
 
             // Hide excerpt
-            if (!empty($item['component']['showExcerpt']) && $item['component']['showExcerpt'] === false) {
+            if (isset($item['component']['showExcerpt']) && $item['component']['showExcerpt'] === false) {
                 unset($item['excerpt']);
             }
 
             // Hide description
-            if (!empty($item['component']['showDescription']) && $item['component']['showDescription'] === false) {
+            if (isset($item['component']['showDescription']) && $item['component']['showDescription'] === false) {
                 unset($item['description']);
             }
 
