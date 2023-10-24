@@ -34,14 +34,14 @@ final class ModularPageRepositoryTest extends TestCase
                 'id' => $page_id,
             ],
             'data' => [
-                'modular-accordion-1' => '{
-"id":'. $promo_group_id .',
-"config":"randomize|limit:20|page_id|first",
-"columns":"",
-"singlePromoView":"true",
-"showExcerpt":"true",
-"showDescription":"true",
-}',
+                'modular-accordion-1' => json_encode([
+                    'id' => $promo_group_id,
+                    'config' => 'randomize|limit:20|page_id|first',
+                    'columns' => '',
+                    'singlePromoView' => true,
+                    'showExcerpt' => true,
+                    'showDescription' => true,
+                ]),
             ],
         ]);
 
