@@ -86,6 +86,13 @@ class ArticleRepository implements ArticleRepositoryContract
             ];
         }
 
+        if (!empty($article['featured'])) {
+            return [
+                'url' => $article['featured']['url'],
+                'alt_text' => $article['featured']['alt_text'],
+            ];
+        }
+
         if (!empty($article['hero_image'])) {
             return [
                 'url' => $article['hero_image']['url'],

@@ -159,6 +159,7 @@ final class ArticleRepositoryTest extends TestCase
     {
         $article = app(Article::class)->create(1, true, [
             'social_image' => null,
+            'featured' => null,
         ]);
 
         $imageUrl = app(ArticleRepository::class)->getSocialImage($article['data']);
@@ -175,6 +176,7 @@ final class ArticleRepositoryTest extends TestCase
 
         $article = app(Article::class)->create(1, true, [
             'hero_image' => null,
+            'featured' => null,
             'social_image' => null,
             'body' => '<img src="'.$url.'" alt="'.$alt.'">',
         ]);
