@@ -59,7 +59,7 @@ final class ModularPageRepositoryTest extends TestCase
     }
 
     #[Test]
-    public function get_modular_page_promos_with_promo_id_only(): void
+    public function get_modular_page_components_with_promo_id_only(): void
     {
         $promo_group_id = $this->faker->numberbetween(1, 3);
 
@@ -92,7 +92,7 @@ final class ModularPageRepositoryTest extends TestCase
     }
 
     #[Test]
-    public function get_modular_page_promos_with_json_array_should_not_have_singleview_excerpt_and_description(): void
+    public function get_modular_page_components_with_json_array_should_not_have_singleview_excerpt_and_description(): void
     {
         $page_id = $this->faker->numberbetween(10, 50);
         $promo_group_id = $this->faker->numberbetween(1, 3);
@@ -194,7 +194,7 @@ final class ModularPageRepositoryTest extends TestCase
     }
 
     #[Test]
-    public function get_modular_page_promos_with_json_array_should_have_singleview_excerpt_and_description(): void
+    public function get_modular_page_components_with_json_array_should_have_singleview_excerpt_and_description(): void
     {
         $page_id = $this->faker->numberbetween(10, 50);
         $promo_group_id = $this->faker->numberbetween(1, 3);
@@ -240,5 +240,25 @@ final class ModularPageRepositoryTest extends TestCase
         $this->assertEquals($component['link'], 'view/'.Str::slug($component['title']).'-'.$component['promo_item_id']);
         $this->assertArrayHasKey('excerpt', $component);
         $this->assertArrayHasKey('description', $component);
+    }
+
+    #[Test]
+    public function get_modular_page_with_no_data_should_return_empty(): void
+    {
+        // Create a fake data request
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'ModularPage',
+                'id' => $this->faker->numberbetween(10, 50),
+            ],
+        ]);
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+
+        // Run the promos through the repository
+        $components = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
+
+        $this->assertEmpty($components);
     }
 }
