@@ -157,7 +157,9 @@ final class ArticleRepositoryTest extends TestCase
     #[Test]
     public function article_with_hero_should_return_hero_url(): void
     {
-        $article = app(Article::class)->create(1, true);
+        $article = app(Article::class)->create(1, true, [
+            'social_image' => null,
+        ]);
 
         $imageUrl = app(ArticleRepository::class)->getImage($article['data']);
 
@@ -173,6 +175,7 @@ final class ArticleRepositoryTest extends TestCase
 
         $article = app(Article::class)->create(1, true, [
             'hero_image' => null,
+            'social_image' => null,
             'body' => '<img src="'.$url.'" alt="'.$alt.'">',
         ]);
 
@@ -180,5 +183,16 @@ final class ArticleRepositoryTest extends TestCase
 
         $this->assertEquals($url, $image['url']);
         $this->assertEquals($alt, $image['alt_text']);
+    }
+
+    #[Test]
+    public function article_with_social_image_should_return_url(): void
+    {
+        $article = app(Article::class)->create(1, true);
+
+        $imageUrl = app(ArticleRepository::class)->getImage($article['data']);
+
+        $this->assertEquals($article['data']['social_image']['url'], $imageUrl['url']);
+        $this->assertEquals($article['data']['social_image']['alt_text'], $imageUrl['alt_text']);
     }
 }
