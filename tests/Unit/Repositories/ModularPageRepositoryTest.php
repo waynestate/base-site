@@ -55,7 +55,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Run the promos through the repository
         $promos = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
 
-        $this->assertCount(count($return['promotions']), $promos['accordion-1']['promotions']);
+        $this->assertCount(count($return['promotions']), $promos['accordion-1']['data']);
     }
 
     #[Test]
@@ -86,9 +86,9 @@ final class ModularPageRepositoryTest extends TestCase
         $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
 
         // Run the promos through the repository
-        $promos = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularPromos($data);
+        $components = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
 
-        $this->assertCount(count($return['promotions']), $promos['accordion-1']);
+        $this->assertCount(count($return['promotions']), $components['accordion-1']['data']);
     }
 
     #[Test]
@@ -129,15 +129,15 @@ final class ModularPageRepositoryTest extends TestCase
         $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
 
         // Run the promos through the repository
-        $promos = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularPromos($data);
+        $components = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
+        $component = collect($components['accordion-1']['data'])->first();
 
-        $promo = collect($promos['accordion-1'])->first();
-        $this->assertFalse($promo['component']['singlePromoView']);
-        $this->assertFalse($promo['component']['showExcerpt']);
-        $this->assertFalse($promo['component']['showDescription']);
-        $this->assertNotEquals($promo['link'], 'view/'.Str::slug($promo['title']).'-'.$promo['promo_item_id']);
-        $this->assertArrayNotHasKey('excerpt', $promo);
-        $this->assertArrayNotHasKey('description', $promo);
+        $this->assertFalse($components['accordion-1']['component']['singlePromoView']);
+        $this->assertFalse($components['accordion-1']['component']['showExcerpt']);
+        $this->assertFalse($components['accordion-1']['component']['showDescription']);
+        $this->assertNotEquals($component['link'], 'view/'.Str::slug($component['title']).'-'.$component['promo_item_id']);
+        $this->assertArrayNotHasKey('excerpt', $component);
+        $this->assertArrayNotHasKey('description', $component);
     }
 
     #[Test]
@@ -167,7 +167,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Run the promos through the repository
         $modularComponents = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
 
-        $this->assertCount(count($return['data']), $modularComponents['news-1']['articles']['data']);
+        $this->assertCount(count($return['data']), $modularComponents['news-1']['data']['data']);
     }
 
     #[Test]
@@ -190,7 +190,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Run the promos through the repository
         $modularComponents = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
 
-        $this->assertArrayHasKey('events', $modularComponents['events-1']);
+        $this->assertArrayHasKey('data', $modularComponents['events-1']);
     }
 
     #[Test]
@@ -231,14 +231,14 @@ final class ModularPageRepositoryTest extends TestCase
         $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
 
         // Run the promos through the repository
-        $promos = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularPromos($data);
+        $components = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
+        $component = collect($components['accordion-1']['data'])->first();
 
-        $promo = collect($promos['accordion-1'])->first();
-        $this->assertTrue($promo['component']['singlePromoView']);
-        $this->assertTrue($promo['component']['showExcerpt']);
-        $this->assertTrue($promo['component']['showDescription']);
-        $this->assertEquals($promo['link'], 'view/'.Str::slug($promo['title']).'-'.$promo['promo_item_id']);
-        $this->assertArrayHasKey('excerpt', $promo);
-        $this->assertArrayHasKey('description', $promo);
+        $this->assertTrue($components['accordion-1']['component']['singlePromoView']);
+        $this->assertTrue($components['accordion-1']['component']['showExcerpt']);
+        $this->assertTrue($components['accordion-1']['component']['showDescription']);
+        $this->assertEquals($component['link'], 'view/'.Str::slug($component['title']).'-'.$component['promo_item_id']);
+        $this->assertArrayHasKey('excerpt', $component);
+        $this->assertArrayHasKey('description', $component);
     }
 }

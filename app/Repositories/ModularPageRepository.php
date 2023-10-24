@@ -60,11 +60,13 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
         foreach($components['components'] as $name => $component) {
             if(Str::startsWith($name, 'events')) {
-                $modularComponents[$name] = $this->event->getEvents($component['id']);
+                $events = $this->event->getEvents($component['id']);
+                $modularComponents[$name]['data'] = $events['events'];
             } elseif(Str::startsWith($name, 'news')) {
-                $modularComponents[$name] = $this->article->listing($component['id']);
+                $articles = $this->article->listing($component['id']);
+                $modularComponents[$name]['data'] = $articles['articles'];
             } else {
-                $modularComponents[$name]['promotions'] = $promos[$name]['promotions'];
+                $modularComponents[$name]['data'] = $promos[$name]['data'];
             }
 
             $modularComponents[$name]['component'] = $component;
@@ -104,7 +106,9 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
                 if(!Str::startsWith($name, ['events', 'news'])) {
                     $group_reference[$components[$name]['id']] = $name;
-                    $group_config[$name] = $components[$name]['config'];
+                    if(!empty($components[$name]['config'])) {
+                        $group_config[$name] = $components[$name]['config'];
+                    }
                 }
             }
         }
@@ -133,16 +137,19 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
         foreach ($promos as $name => $data) {
             $promos[$name] = [
-                'promotions' => $data,
+                'data' => $data,
                 'component' => $components['components'][$name],
             ];
             $promos[$name]['component']['filename'] = preg_replace('/-\d+$/', '', $name);
 
-            if(Str::contains($promos[$name]['component']['config'], 'first')) {
-                $promos[$name]['promotions'] = $this->adjustPromoData($promos[$name]['promotions'], $promos[$name]['component']);
+            if(
+                !empty($promos[$name]['component']['config']) &&
+                Str::contains($promos[$name]['component']['config'], 'first')
+            ) {
+                $promos[$name]['data'] = $this->adjustPromoData($promos[$name]['data'], $promos[$name]['component']);
             } else {
-                foreach($promos[$name]['promotions'] as $key => $promo) {
-                    $promos[$name]['promotions'][$key] = $this->adjustPromoData($promo, $promos[$name]['component']);
+                foreach($promos[$name]['data'] as $key => $promo) {
+                    $promos[$name]['data'][$key] = $this->adjustPromoData($promo, $promos[$name]['component']);
                 }
             }
         }

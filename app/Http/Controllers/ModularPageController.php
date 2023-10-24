@@ -29,7 +29,7 @@ class ModularPageController extends Controller
      */
     public function index(Request $request)
     {
-        $components = $this->modular->getModularComponents($request->data['base']);
+        $components['components'] = $this->modular->getModularComponents($request->data['base']);
 
         return view('modular/modularpage', merge($request->data, $components));
     }
