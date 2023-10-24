@@ -99,7 +99,7 @@ class ArticleController extends Controller
             $request->data['base']['hero'][]['relative_url'] = $article['article']['data']['hero_image']['url'];
         }
 
-        $image = $this->article->getImage($article['article']['data']);
+        $image = $this->article->getSocialImage($article['article']['data']);
 
         $request->data['base']['meta']['image'] = $image['url'];
         $request->data['base']['meta']['image_alt'] = $image['alt_text'];

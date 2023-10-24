@@ -31,7 +31,7 @@ interface ArticleRepositoryContract
      * @param array $article
      * @return array
      */
-    public function getImage($article);
+    public function getSocialImage($article);
 
     /**
      * Set the paging.
