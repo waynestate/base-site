@@ -142,15 +142,9 @@ class ModularPageRepository implements ModularPageRepositoryContract
             ];
             $promos[$name]['component']['filename'] = preg_replace('/-\d+$/', '', $name);
 
-            if(
-                !empty($promos[$name]['component']['config']) &&
-                Str::contains($promos[$name]['component']['config'], 'first')
-            ) {
-                $promos[$name]['data'] = $this->adjustPromoData($promos[$name]['data'], $promos[$name]['component']);
-            } else {
-                foreach($promos[$name]['data'] as $key => $promo) {
-                    $promos[$name]['data'][$key] = $this->adjustPromoData($promo, $promos[$name]['component']);
-                }
+
+            foreach($promos[$name]['data'] as $key => $promo) {
+                $promos[$name]['data'][$key] = $this->adjustPromoData($promo, $promos[$name]['component']);
             }
         }
 
