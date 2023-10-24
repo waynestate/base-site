@@ -79,6 +79,13 @@ class ArticleRepository implements ArticleRepositoryContract
      */
     public function getImage($article)
     {
+        if (!empty($article['social_image'])) {
+            return [
+                'url' => $article['social_image']['url'],
+                'alt_text' => $article['social_image']['alt_text'],
+            ];
+        }
+
         if (!empty($article['hero_image'])) {
             return [
                 'url' => $article['hero_image']['url'],
