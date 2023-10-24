@@ -77,7 +77,7 @@ class ArticleRepository implements ArticleRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getImage($article)
+    public function getSocialImage($article)
     {
         if (!empty($article['social_image'])) {
             return [
