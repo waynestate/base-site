@@ -16,9 +16,9 @@ class ModularPageController extends Controller
      * Construct the controller.
      *
      */
-    public function __construct(ModularPageRepositoryContract $promo)
+    public function __construct(ModularPageRepositoryContract $modular)
     {
-        $this->promo = $promo;
+        $this->modular = $modular;
     }
 
     /**
@@ -29,8 +29,8 @@ class ModularPageController extends Controller
      */
     public function index(Request $request)
     {
-        $promos['promos'] = $this->promo->getModularPromos($request->data['base']);
+        $components = $this->modular->getModularComponents($request->data['base']);
 
-        return view('modular/modularpage', merge($request->data, $promos));
+        return view('modular/modularpage', merge($request->data, $components));
     }
 }

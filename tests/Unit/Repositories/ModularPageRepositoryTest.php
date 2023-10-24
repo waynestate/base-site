@@ -16,7 +16,7 @@ use Waynestate\Api\News;
 final class ModularPageRepositoryTest extends TestCase
 {
     #[Test]
-    public function get_modular_page_promos_with_json_array(): void
+    public function get_modular_page_components_with_json_array(): void
     {
         $page_id = $this->faker->numberbetween(10, 50);
         $promo_group_id = $this->faker->numberbetween(1, 3);
@@ -53,9 +53,9 @@ final class ModularPageRepositoryTest extends TestCase
         $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
 
         // Run the promos through the repository
-        $promos = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularPromos($data);
+        $promos = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
 
-        $this->assertCount(count($return['promotions']), $promos['accordion-1']);
+        $this->assertCount(count($return['promotions']), $promos['accordion-1']['promotions']);
     }
 
     #[Test]
@@ -156,7 +156,7 @@ final class ModularPageRepositoryTest extends TestCase
                 'controller' => 'ModularPage',
             ],
             'data' => [
-                'modular-news' => 1
+                'modular-news-1' => 1
             ],
         ]);
 
@@ -165,9 +165,9 @@ final class ModularPageRepositoryTest extends TestCase
         $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn([]);
 
         // Run the promos through the repository
-        $promos = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularPromos($data);
+        $modularComponents = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
 
-        $this->assertCount(count($return['data']), $promos['news']);
+        $this->assertCount(count($return['data']), $modularComponents['news-1']['articles']['data']);
     }
 
     #[Test]
@@ -179,7 +179,7 @@ final class ModularPageRepositoryTest extends TestCase
                 'controller' => 'ModularPage',
             ],
             'data' => [
-                'modular-events' => 1
+                'modular-events-1' => 1
             ],
         ]);
 
@@ -188,9 +188,9 @@ final class ModularPageRepositoryTest extends TestCase
         $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn([]);
 
         // Run the promos through the repository
-        $promos = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularPromos($data);
+        $modularComponents = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
 
-        $this->assertArrayHasKey('events', $promos);
+        $this->assertArrayHasKey('events', $modularComponents['events-1']);
     }
 
     #[Test]

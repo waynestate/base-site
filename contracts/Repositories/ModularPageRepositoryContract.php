@@ -9,5 +9,5 @@ interface ModularPageRepositoryContract
      *
      * @return array
      */
-    public function getModularPromos(array $data);
+    public function getModularComponents(array $data);
 }
