@@ -28,6 +28,14 @@ class Article implements FactoryContract
             'type' => 'Hero Image',
         ];
 
+        $social = [
+            'featured' => 0,
+            'url' => '/styleguide/image/1600x580',
+            'caption' => $this->faker->sentence(rand(5, 10)),
+            'alt_text' => $this->faker->sentence(rand(5, 10)),
+            'type' => 'Social Image',
+        ];
+
         $featured = [
             'featured' => 1,
             'url' => '/styleguide/image/1600x580',
@@ -126,6 +134,7 @@ class Article implements FactoryContract
                 'status' => 'Published',
                 'link' => '/styleguide/'.config('base.news_view_route').'/item-1',
                 'hero_image' => $hero,
+                'social_image' => $social,
                 'featured' => $featured,
                 'files' => [
                     0 => $hero,
