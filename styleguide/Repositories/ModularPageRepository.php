@@ -5,6 +5,8 @@ namespace Styleguide\Repositories;
 use App\Repositories\ModularPageRepository as Repository;
 use Factories\GenericPromo;
 use Factories\Spotlight;
+use Factories\Article;
+use Factories\Event;
 
 class ModularPageRepository extends Repository
 {
@@ -13,19 +15,42 @@ class ModularPageRepository extends Repository
      */
     public function getModularPromos(array $data)
     {
-        $promos['news-column'] = app(GenericPromo::class)->create(3, false, [
+        /* Start news */
+        $news = app(Article::class)->create(3, false, [
             'component' => [
-                'heading' => 'Button row',
-                'filename' => 'button-row',
+                'heading' => 'News',
+                'filename' => 'news-column',
             ]
         ]);
 
-        $promos['events-column'] = app(GenericPromo::class)->create(3, false, [
+        if (!empty($news['data'])) {
+            $news['data'] = array_values($news['data']);
+
+            $promos['news-column'] = $news['data'];
+        }
+        /* End news */
+
+        /* Start events */
+        $events = app(Event::class)->create(4, false, [
             'component' => [
-                'heading' => 'Button row',
-                'filename' => 'button-row',
+                'heading' => 'Events',
+                'filename' => 'events-column',
             ]
         ]);
+
+        if(!empty($events)) {
+            $events = array_values($events);
+
+            foreach($events as $key => $event) {
+                $events[$key]['component'] = [
+                    'heading' => 'Events',
+                    'filename' => 'events-column',
+                ];
+            }
+
+            $promos['events-column'] = $events;
+        }
+        /* End events */
 
         $promos['content-row-1'] = app(GenericPromo::class)->create(2, false, [
             'title' => 'Promo item title (h3)',
