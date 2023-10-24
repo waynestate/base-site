@@ -7,7 +7,7 @@
         {!! $base['page']['content']['main'] !!}
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-2 items-start gap-y-8 gap-x-4 lg:gap-x-8 mt-8 mb-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 items-start gap-y-8 sm:gap-x-4 lg:gap-x-8 mt-8 mb-4">
         @if(!empty($promos))
             @foreach($promos as $group_title => $data)
                 @if(!empty($group_title) && !empty($data))

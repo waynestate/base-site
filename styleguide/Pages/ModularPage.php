@@ -18,18 +18,35 @@ class ModularPage extends Page
                 'id' => 101110600,
                 'content' => [
                     'main' => '
-                        <p>Use this template to display many promo groups on a single page.</p>
+                        <p>Use this template to display multiple promo groups on a single page. Row components will be full width, column components will be half. You will want to pair two columns next to each other.</p>
+                        <p class="mb-8">To change the order of the components, we currently have to replace or delete and re-add the custom field.</p>
                         <ul class="accordion mt-4">
                             <li>
                                 <a href="#definition-page-setup" id="definition-page-setup"><span aria-hidden="true"></span>Page setup</a>
                                 <div class="content">
                                     <ul>
                                         <li>Select template "Modular Page."</li>
-                                        <li>Select Custom page field <code>promoPage</code>.</li>
+                                        <li>Select from the following custom page fields:
+                                            <ul class="columns-2">
+                                                <li><code>modular-accordion-1</code></li>
+                                                <li><code>modular-content-row-1</code></li>
+                                                <li><code>modular-video-row-1</code></li>
+                                                <li><code>modular-button-row-1</code></li>
+                                                <li><code>modular-catalog-1</code></li>
+                                                <li><code>modular-button-column-1</code></li>
+                                                <li><code>modular-steps-column-1</code></li>
+                                                <li><code>modular-image-column-1</code></li>
+                                                <li><code>modular-video-column-1</code></li>
+                                                <li><code>news_application_id</code></li>
+                                                <li><code>event_listing_site_id</code></li>
+                                            </ul>
+                                        </li>
+                                        <li>Add a new page field and increase the number if you need to repeat that component, ex. modular-accordion-7.</li>
                                         <li>Paste this JSON array into the page field and edit the values to set options:<br />
 <pre>
 {
 "id":00000,
+"heading":"My heading",
 "config":"randomize|limit:60|page_id",
 "columns":4,
 "singlePromoView":"true",
@@ -40,7 +57,7 @@ class ModularPage extends Page
                                             <table class="mt-2">
                                                 <thead>
                                                     <tr>
-                                                        <th colspan="2">Configuration settings</th>
+                                                        <th colspan="2">JSON settings</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -49,16 +66,20 @@ class ModularPage extends Page
                                                         <td>Promo group ID. Required.</td>
                                                     </tr>
                                                     <tr>
+                                                        <td class="font-bold">heading</td>
+                                                        <td>Provide a heading(h2) for this component. Optional.</td>
+                                                    </tr>
+                                                    <tr>
                                                         <td class="font-bold">config</td>
-                                                        <td>Promo group config, pipe delimited. Use \'page_id\' for per-page items. Optional.</td>
+                                                        <td>Promo group config, pipe delimited. Use \'page_id\' for per-page items. \'First\' is not allowed and will be removed. Optional.</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="font-bold">columns</td>
-                                                        <td>2, 3, or 4. Default/unset is 1, a list. Optional.</td>
+                                                        <td>Only use with catalog component; 2, 3, or 4. Default/unset is 1. Optional.</td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="font-bold">singlePromoview</td>
-                                                        <td>True or false. False(default) will enable the promotion\'s link field. Optional.</td>
+                                                        <td class="font-bold">singlePromoView</td>
+                                                        <td>True or false. False (default) will use the promotion\'s link field. Optional.</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="font-bold">showExcerpt</td>
@@ -103,10 +124,6 @@ class ModularPage extends Page
                                             <tr>
                                                 <td class="font-bold">Filename</td>
                                                 <td>600x450px, or minimum width 600px any height.</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-bold">Option</td>
-                                                <td>If options are set, promos will be grouped by their option automatically. Any items without an option are grouped together at the bottom.</td>
                                             </tr>
                                         </tbody>
                                     </table>
