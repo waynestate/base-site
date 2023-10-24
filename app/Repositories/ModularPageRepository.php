@@ -49,10 +49,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
     {
         $group_reference = [];
         $group_config = [];
-
-        // learn css container queries
-        // take left menu or no menu into account
-        // set up configurable events and news ids if set
+        $components = [];
 
         if (!empty($data['data'])) {
             foreach ($data['data'] as $component => $properties) {
@@ -88,9 +85,11 @@ class ModularPageRepository implements ModularPageRepositoryContract
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
-        $promos = $this->appendComponentProperties($promos, $components);
+        if(!empty($promos['promotions'])) {
+            $promos = $this->appendComponentProperties($promos, $components);
 
-        $promos = $this->changePromoItemDisplay($promos);
+            $promos = $this->changePromoItemDisplay($promos);
+        }
 
         $promos = $this->parsePromos->parse($promos, $group_reference, $group_config);
 

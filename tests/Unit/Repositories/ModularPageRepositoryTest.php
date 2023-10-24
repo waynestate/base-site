@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Repositories;
 
+use Factories\Article;
 use Illuminate\Support\Str;
 use PHPUnit\Framework\Attributes\Test;
 use App\Repositories\ModularPageRepository;
@@ -10,6 +11,7 @@ use Factories\GenericPromo;
 use Tests\TestCase;
 use Mockery as Mockery;
 use Waynestate\Api\Connector;
+use Waynestate\Api\News;
 
 final class ModularPageRepositoryTest extends TestCase
 {
@@ -136,6 +138,59 @@ final class ModularPageRepositoryTest extends TestCase
         $this->assertNotEquals($promo['link'], 'view/'.Str::slug($promo['title']).'-'.$promo['promo_item_id']);
         $this->assertArrayNotHasKey('excerpt', $promo);
         $this->assertArrayNotHasKey('description', $promo);
+    }
+
+    #[Test]
+    public function get_modular_page_components_news(): void
+    {
+        // Fake return
+        $return = app(Article::class)->create(5);
+
+        // Mock the connector and set the return
+        $newsApi = Mockery::mock(News::class);
+        $newsApi->shouldReceive('request')->andReturn($return);
+
+        // Create a fake data request
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'ModularPage',
+            ],
+            'data' => [
+                'modular-news' => 1
+            ],
+        ]);
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn([]);
+
+        // Run the promos through the repository
+        $promos = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularPromos($data);
+
+        $this->assertCount(count($return['data']), $promos['news']);
+    }
+
+    #[Test]
+    public function get_modular_page_components_events(): void
+    {
+        // Create a fake data request
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'ModularPage',
+            ],
+            'data' => [
+                'modular-events' => 1
+            ],
+        ]);
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn([]);
+
+        // Run the promos through the repository
+        $promos = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularPromos($data);
+
+        $this->assertArrayHasKey('events', $promos);
     }
 
     #[Test]
