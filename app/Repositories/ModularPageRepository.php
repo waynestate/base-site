@@ -69,7 +69,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 $modularComponents[$name]['component'] = $components['components'][$name];
             } else {
                 $modularComponents[$name]['data'] = $promos[$name]['data'] ?? [];
-                $modularComponents[$name]['component'] = $promos[$name]['component'];
+                $modularComponents[$name]['component'] = $promos[$name]['component'] ?? [];
             }
         }
 
