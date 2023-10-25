@@ -261,4 +261,34 @@ final class ModularPageRepositoryTest extends TestCase
 
         $this->assertEmpty($components);
     }
+
+    #[Test]
+    public function get_modular_page_test_json_configuration(): void
+    {
+        $page_id = $this->faker->numberbetween(10, 50);
+
+        // Create a fake data request
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'ModularPage',
+                'id' => $page_id,
+            ],
+            'data' => [
+                'modular-accordion-1' => json_encode([
+                    'singlePromoView' => false,
+                    'showExcerpt' => false,
+                    'showDescription' => false,
+                ]),
+            ],
+        ]);
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn([]);
+
+        // Run the promos through the repository
+        $components = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
+
+        $this->assertEmpty($components['accordion-1']['data']);
+    }
 }

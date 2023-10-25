@@ -59,14 +59,14 @@ class ModularPageRepository implements ModularPageRepositoryContract
         $promos = $this->getPromos($components);
 
         foreach($components['components'] as $name => $component) {
-            if(Str::startsWith($name, 'events')) {
+            if(Str::startsWith($name, 'events') && empty($component['id'])) {
                 $events = $this->event->getEvents($component['id']);
-                $modularComponents[$name]['data'] = $events['events'];
-            } elseif(Str::startsWith($name, 'news')) {
+                $modularComponents[$name]['data'] = $events['events'] ?? [];
+            } elseif(Str::startsWith($name, 'news') && !empty($component['id'])) {
                 $articles = $this->article->listing($component['id']);
-                $modularComponents[$name]['data'] = $articles['articles'];
+                $modularComponents[$name]['data'] = $articles['articles'] ?? [];
             } else {
-                $modularComponents[$name]['data'] = $promos[$name]['data'];
+                $modularComponents[$name]['data'] = $promos[$name]['data'] ?? [];
             }
 
             $modularComponents[$name]['component'] = $component;
@@ -104,7 +104,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
                     $components[$name]['id'] = (int)$value;
                 }
 
-                if(!Str::startsWith($name, ['events', 'news'])) {
+                if(!Str::startsWith($name, ['events', 'news']) && !empty($components[$name]['id'])) {
                     $group_reference[$components[$name]['id']] = $name;
                     if(!empty($components[$name]['config'])) {
                         $group_config[$name] = $components[$name]['config'];
