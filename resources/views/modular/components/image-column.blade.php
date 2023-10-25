@@ -2,16 +2,16 @@
     $image_promo => single // ['title', 'link', 'filename_url', 'filename_alt_text']
 --}}
 
-@if(count($data) > 1 && !empty($data[0]['component']['heading']))
+@if(count($data) > 1 && !empty($component['heading']))
     <div class="col-span-2">
-        <h2 class="mt-0 mb-0">{{ $data[0]['component']['heading'] }}</h2>
+        <h2 class="mt-0 mb-0">{{ $component['heading'] }}</h2>
     </div>
 @endif
 
 @foreach($data as $image_promo)
     <div class="col-span-2 md:col-span-1">
-        @if(count($data) === 1 && !empty($data[0]['component']['heading']))
-            <h2 class="mt-0">{{ $data[0]['component']['heading'] }}</h2>
+        @if(count($data['data']) === 1 && !empty($component['heading']))
+            <h2 class="mt-0">{{ $component['heading'] }}</h2>
         @endif
         <div class="grid gap-4">
             <div class="bg-green-800">

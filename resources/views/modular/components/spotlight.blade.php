@@ -3,7 +3,7 @@
 --}}
 
 <div class="col-span-2">
-    @if(!empty($data[0]['component']['heading']))<h2 class="mt-0">{{ $data[0]['component']['heading'] }}</h2>@endif
+    @if(!empty($component['heading']))<h2 class="mt-0">{{ $component['heading'] }}</h2>@endif
     @foreach($data as $item)
         <{{ !empty($item['link']) ? 'a href='.$item['link'] : 'div' }} class="{{ !empty($item['link']) ? 'group' : '' }}">
             <blockquote class="relative flex border-0 m-0 p-0 text-black">
