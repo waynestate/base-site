@@ -59,7 +59,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
         $promos = $this->getPromos($components);
 
         foreach($components['components'] as $name => $component) {
-            if(Str::startsWith($name, 'events') && empty($component['id'])) {
+            if(Str::startsWith($name, 'events') && !empty($component['id'])) {
                 $events = $this->event->getEvents($component['id']);
                 $modularComponents[$name]['data'] = $events['events'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
@@ -72,7 +72,6 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 $modularComponents[$name]['component'] = $promos[$name]['component'];
             }
         }
-        dump($modularComponents);
 
         return $modularComponents;
     }
