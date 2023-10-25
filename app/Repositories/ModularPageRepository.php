@@ -62,15 +62,17 @@ class ModularPageRepository implements ModularPageRepositoryContract
             if(Str::startsWith($name, 'events') && empty($component['id'])) {
                 $events = $this->event->getEvents($component['id']);
                 $modularComponents[$name]['data'] = $events['events'] ?? [];
+                $modularComponents[$name]['component'] = $components['components'][$name];
             } elseif(Str::startsWith($name, 'news') && !empty($component['id'])) {
                 $articles = $this->article->listing($component['id']);
                 $modularComponents[$name]['data'] = $articles['articles'] ?? [];
+                $modularComponents[$name]['component'] = $components['components'][$name];
             } else {
                 $modularComponents[$name]['data'] = $promos[$name]['data'] ?? [];
+                $modularComponents[$name]['component'] = $promos[$name]['component'];
             }
-
-            $modularComponents[$name]['component'] = $component;
         }
+        dump($modularComponents);
 
         return $modularComponents;
     }
@@ -100,6 +102,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
                         }
                         $components[$name]['config'] = implode('|', $config);
                     }
+                    $components[$name]['filename'] = preg_replace('/-\d+$/', '', $name);
                 } else {
                     $components[$name]['id'] = (int)$value;
                 }
@@ -140,8 +143,6 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 'data' => $data,
                 'component' => $components['components'][$name],
             ];
-            $promos[$name]['component']['filename'] = preg_replace('/-\d+$/', '', $name);
-
 
             foreach($promos[$name]['data'] as $key => $promo) {
                 $promos[$name]['data'][$key] = $this->adjustPromoData($promo, $promos[$name]['component']);

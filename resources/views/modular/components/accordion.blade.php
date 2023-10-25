@@ -2,7 +2,7 @@
     $item => array // ['title', 'description']
 --}}
 <div class="col-span-2">
-    @if(!empty($data[0]['component']['heading']))<h2 class="mt-0">{{ $data[0]['component']['heading'] }}</h2>@endif
+    @if(!empty($component['heading']))<h2 class="mt-0">{{ $component['heading'] }}</h2>@endif
     <ul class="accordion">
         @foreach($data as $item)
             <li>

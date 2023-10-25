@@ -3,9 +3,9 @@
 --}}
 
 <div class="col-span-2">
-    @if(!empty($data[0]['component']['heading']))<h2 class="mt-0">{{ $data[0]['component']['heading'] }}</h2>@endif
+    @if(!empty($component['heading']))<h2 class="mt-0">{{ $component['heading'] }}</h2>@endif
 
-    @if(!empty($data[0]['component']['columns']) && $data[0]['component']['columns'] == 1)
+    @if(!empty($component['columns']) && $component['columns'] == 1)
         <div class="grid gap-4">
             @foreach($data as $item)
                 <{{ !empty($item['link']) ? 'a href='.$item['link'] : 'div' }} class="flex items-start space-x-3 md:space-x-6 mb-8 {{ !empty($item['link']) ? 'group' : '' }}">
@@ -32,7 +32,7 @@
             @endforeach
         </div>
     @else
-        <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-{{ !empty($data[0]['component']['columns']) && $data[0]['component']['columns'] >= 3 ? '3' : '2' }} xl:grid-cols-{{ !empty($data[0]['component']['columns']) ? $data[0]['component']['columns'] : '3' }}">
+        <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-{{ !empty($component['columns']) && $component['columns'] >= 3 ? '3' : '2' }} xl:grid-cols-{{ !empty($component['columns']) ? $component['columns'] : '3' }}">
             @foreach($data as $item)
                 <{{ !empty($item['link']) ? 'a href='.$item['link'] : 'div' }} class="flex items-start space-x-3 md:space-x-0 md:block {{ !empty($item['link']) ? 'group' : '' }}">
                     @if(!empty($item['filename_url']))
