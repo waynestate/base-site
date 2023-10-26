@@ -1,7 +1,7 @@
 {{--
     $item => array // ['title', 'description']
 --}}
-<div class="col-span-2 content">
+<div class="col-span-2 content -mb-4">
     @if(!empty($component['heading']))<h2 class="mt-0">{{ $component['heading'] }}</h2>@endif
     @foreach($data as $content_block)
         @if(!empty($component['heading']))

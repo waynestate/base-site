@@ -16,126 +16,128 @@ class ModularPageRepository extends Repository
     public function getModularComponents(array $data): array
     {
         $components = [
-            'news-column-1' => [
-                'data' => app(Article::class)->create(3, false),
-                'component' => [
-                    'heading' => 'News',
-                    'filename' => 'news-column',
-                ],
-            ],
-            'events-column-1' => [
-                'data' => app(Event::class)->create(4, false),
-                'component' => [
-                    'heading' => 'Events',
-                    'filename' => 'events-column',
-                ],
-            ],
-            'content-row-1' => [
-                'data' => app(GenericPromo::class)->create(2, false),
-                'component' => [
-                    'heading' => 'Content row - with heading',
-                    'filename' => 'content-row'
-                ],
-            ],
-            'content-row-2' => [
-                'data' => app(GenericPromo::class)->create(2, false),
-                'component' => [
-                    'heading' => 'Promo item title (content row - no heading)',
-                    'filename' => 'content-row',
-                ],
-            ],
             'catalog-1' => [
-                'data' => app(GenericPromo::class)->create(3, false, [
-                    'description' => '',
-                ]),
-                'component' => [
-                    'heading' => 'Catalog with three columns',
-                    'columns' => 3,
-                    'filename' => 'catalog',
-                    'showExcerpt' => true,
-                    'singlePromoView' => true,
-                ],
-            ],
-            'catalog-2' => [
                 'data' => app(GenericPromo::class)->create(4, false, [
                     'description' => '',
                 ]),
                 'component' => [
-                    'heading' => 'Catalog with four columns',
-                    'columns' => 4,
+                    'heading' => 'Catalog - 4 columns',
                     'filename' => 'catalog',
-                    'showExcerpt' => true,
-                    'singlePromoView' => true,
+                    'columns' => '4',
+                    'showDescription' => false,
                 ],
             ],
-            'catalog-3' => [
-                'data' => app(GenericPromo::class)->create(2, false, [
-                    'excerpt' => '',
 
+            'content-row-1' => [
+                'data' => app(GenericPromo::class)->create(1, false, [
+                    'title' => 'Content from promos'
                 ]),
                 'component' => [
-                    'heading' => 'Catalog with one column',
-                    'columns' => '1',
-                    'filename' => 'catalog',
-                    'showExcerpt' => false,
-                    'singlePromoView' => true,
+                    'filename' => 'content-row',
                 ],
             ],
+
             'accordion-1' => [
-                'data' => app(GenericPromo::class)->create(3, false),
-                'component' => [
-                    'heading' => 'Accordion 1',
-                    'filename' => 'accordion',
-                ],
-            ],
-            'accordion-2' => [
                 'data' => app(GenericPromo::class)->create(4, false),
                 'component' => [
-                    'heading' => 'Accordion 2',
                     'filename' => 'accordion',
                 ],
             ],
-            'spotlight-1' => [
-                'data' => app(Spotlight::class)->create(1, false),
+
+            'image-column-1'=> [
+                'data' => app(GenericPromo::class)->create(1, false, [
+                    'title' => 'Featured news (image column)',
+                    'filename_url' => '/styleguide/image/770x434',
+                ]),
                 'component' => [
-                    'heading' => 'Spotlights',
-                    'filename' => 'spotlight',
-                    'singlePromoView' => true,
+                    'heading' => '',
+                    'filename' => 'image-column',
                 ],
             ],
+
+            'news-column' => [
+                'data' => app(Article::class)->create(3, false),
+                'component' => [
+                    'heading' => 'Base news',
+                    'filename' => 'news-column',
+                ],
+            ],
+
+            'events-column' => [
+                'data' => app(Event::class)->create(4, false),
+                'component' => [
+                    'heading' => 'Base events',
+                    'filename' => 'events-column',
+                ],
+            ],
+
+            'image-column-2' => [
+                'data' => app(GenericPromo::class)->create(1, false, [
+                    'title' => 'Featured event (image column)',
+                    'filename_url' => '/styleguide/image/600x600',
+                ]),
+                'component' => [
+                    'heading' => '',
+                    'filename' => 'image-column',
+                ],
+            ],
+
+            'catalog-2' => [
+                'data' => app(GenericPromo::class)->create(2, false, [
+                ]),
+                'component' => [
+                    'heading' => 'Catalog - 1 column',
+                    'filename' => 'catalog',
+                    'columns' => '1',
+                    'showDescription' => false,
+                ],
+            ],
+
+            'icons-column' => [
+                'data' => app(GenericPromo::class)->create(4, false),
+                'component' => [
+                    'heading' => 'Icons column',
+                    'filename' => 'icons-column',
+                ],
+            ],
+
             'button-column' => [
-                'data' => app(GenericPromo::class)->create(3, false),
+                'data' => app(GenericPromo::class)->create(4, false),
                 'component' => [
                     'heading' => 'Button column',
-                    'filename' => 'button-column'
+                    'filename' => 'button-column',
                 ],
             ],
-            'image-column' => [
-                'data' => app(GenericPromo::class)->create(1, false),
+
+            'spotlight' => [
+                'data' => app(Spotlight::class)->create(1, false),
                 'component' => [
-                    'heading' => 'Image column',
-                    'filename' => 'image-column'
+                    'heading' => 'Spotlight',
+                    'filename' => 'spotlight',
                 ],
             ],
+
             'video-row' => [
                 'data' => app(GenericPromo::class)->create(1, false),
                 'component' => [
-                    'heading' => 'Video row',
+                    'heading' => 'Video',
                     'filename' => 'video-row',
                 ],
             ],
-            'video-column' => [
+
+            'video-column-1' => [
                 'data' => app(GenericPromo::class)->create(1, false),
                 'component' => [
-                    'heading' => 'Video column',
+                    'heading' => 'Video column 1',
                     'filename' => 'video-column',
                 ],
             ],
-            'steps-column' => [
-                'data' => app(GenericPromo::class)->create(4, false),
+
+            'video-column-2' => [
+                'data' => app(GenericPromo::class)->create(1, false),
                 'component' => [
-                    'heading' => 'Steps column',
-                    'filename' => 'steps-column',
+                    'heading' => 'Video column 2',
+                    'filename' => 'video-column',
                 ],
             ],
         ];
