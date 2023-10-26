@@ -140,9 +140,9 @@ class ModularPage extends Page
                 ],
             ],
             'data' => [
-                'modular-events-1' => 1,
+                'modular-events-column-1' => 1,
                 'events_url' => '/main',
-                'modular-news-1' => 2,
+                'modular-news-column-1' => 2,
                 'buttons' => '{}',
                 'image-promos' => '{}',
                 'spotlight' => '{}',
