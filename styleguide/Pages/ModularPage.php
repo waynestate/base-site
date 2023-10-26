@@ -34,7 +34,7 @@ class ModularPage extends Page
                                                 <li><code>modular-button-row-1</code></li>
                                                 <li><code>modular-catalog-1</code></li>
                                                 <li><code>modular-button-column-1</code></li>
-                                                <li><code>modular-steps-column-1</code></li>
+                                                <li><code>modular-icons-column-1</code></li>
                                                 <li><code>modular-image-column-1</code></li>
                                                 <li><code>modular-video-column-1</code></li>
                                                 <li><code>modular-news-column-1</code></li>
