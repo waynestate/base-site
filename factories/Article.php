@@ -28,6 +28,14 @@ class Article implements FactoryContract
             'type' => 'Hero Image',
         ];
 
+        $social = [
+            'featured' => 0,
+            'url' => '/styleguide/image/1600x580',
+            'caption' => $this->faker->sentence(rand(5, 10)),
+            'alt_text' => $this->faker->sentence(rand(5, 10)),
+            'type' => 'Social Image',
+        ];
+
         $featured = [
             'featured' => 1,
             'url' => '/styleguide/image/1600x580',
@@ -43,6 +51,14 @@ class Article implements FactoryContract
                 'first_name' => $this->faker->firstName(),
                 'last_name' => $this->faker->lastName(),
                 'accessid' => $this->faker->randomLetter().$this->faker->randomLetter().$this->faker->randomNumber(4, true),
+            ];
+        }
+
+        $programs = [];
+        for($i = 0; $i < 3; $i++) {
+            $programs[] = [
+                'name' => $this->faker->randomElement(['Accounting (BS)', 'Art Education (BA)', 'Biological Sciences (BA)', 'Chemical Engineering (MS)']),
+                'url' => 'https://wayne.edu',
             ];
         }
 
@@ -118,6 +134,7 @@ class Article implements FactoryContract
                 'status' => 'Published',
                 'link' => '/styleguide/'.config('base.news_view_route').'/item-1',
                 'hero_image' => $hero,
+                'social_image' => $social,
                 'featured' => $featured,
                 'files' => [
                     0 => $hero,
@@ -125,6 +142,7 @@ class Article implements FactoryContract
                 ],
                 'assets' => $this->faker->randomElements($assets, rand(1, 3)),
                 'faculty' => $this->faker->randomElements($faculty, rand(1, 3)),
+                'programs' => $this->faker->randomElements($programs, rand(1, 3)),
                 'favicon' => null,
                 'user' => null,
                 'applications' => null,

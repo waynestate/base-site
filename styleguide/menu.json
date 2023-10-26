@@ -678,6 +678,16 @@
                         "relative_url": "/styleguide/promogrid4",
                         "submenu": []
                     },
+                    "101110600": {
+                        "menu_item_id": 101110600,
+                        "is_active": 1,
+                        "page_id": 101110600,
+                        "target": "",
+                        "display_name": "Modular page",
+                        "class_name": "",
+                        "relative_url": "/styleguide/modularpage",
+                        "submenu": []
+                    },
                     "101110100": {
                         "menu_item_id": 101110100,
                         "is_active": 1,

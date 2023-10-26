@@ -125,7 +125,7 @@ class PromoPageRepository implements PromoPageRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function parsePromoJSON($data)
+    public function parsePromoJSON($data, $pagei_id = 0)
     {
         $group_info = [];
 
