@@ -37,8 +37,8 @@ class ModularPage extends Page
                                                 <li><code>modular-steps-column-1</code></li>
                                                 <li><code>modular-image-column-1</code></li>
                                                 <li><code>modular-video-column-1</code></li>
-                                                <li><code>news_application_id</code></li>
-                                                <li><code>event_listing_site_id</code></li>
+                                                <li><code>modular-news-column-1</code></li>
+                                                <li><code>modular-events-column-1</code></li>
                                             </ul>
                                         </li>
                                         <li>Add a new page field and increase the number if you need to repeat that component, ex. modular-accordion-7.</li>
@@ -140,23 +140,15 @@ class ModularPage extends Page
                 ],
             ],
             'data' => [
-                'events_site_id' => 1,
+                'modular-events-1' => 1,
                 'events_url' => '/main',
-                'news_application_id' => '2',
+                'modular-news-1' => 2,
                 'buttons' => '{}',
                 'image-promos' => '{}',
                 'spotlight' => '{}',
                 'steps' => '{}',
                 'text-promo' => '{}',
                 'video' => '{}',
-                'promoPage' => '{
-"id":10378,
-"config":"randomize|limit:20|page_id",
-"columns":4,
-"singlePromoView":"true",
-"showExcerpt":"false",
-"showDescription":"true",
-}',
             ],
         ]);
     }
