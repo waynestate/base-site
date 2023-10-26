@@ -2,7 +2,7 @@
     $item => single // ['title', 'excerpt', 'description', 'link', 'filename_url', 'filename_alt_text']
 --}}
 <div class="col-span-2">
-    @if(!empty($data[0]['component']['heading']))<h2 class="mt-0">{{ $data[0]['component']['heading'] }}</h2>@endif
+    @if(!empty($component['heading']))<h2 class="mt-0">{{ $component['heading'] }}</h2>@endif
     @foreach($data as $item)
         <div class="lg:flex mb-8">
             <div>

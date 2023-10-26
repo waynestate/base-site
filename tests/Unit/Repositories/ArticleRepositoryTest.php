@@ -197,4 +197,17 @@ final class ArticleRepositoryTest extends TestCase
         $this->assertEquals($article['data']['social_image']['url'], $imageUrl['url']);
         $this->assertEquals($article['data']['social_image']['alt_text'], $imageUrl['alt_text']);
     }
+
+    #[Test]
+    public function article_with_featured_image_should_return_url(): void
+    {
+        $article = app(Article::class)->create(1, true, [
+            'social_image' => null
+        ]);
+
+        $imageUrl = app(ArticleRepository::class)->getSocialImage($article['data']);
+
+        $this->assertEquals($article['data']['featured']['url'], $imageUrl['url']);
+        $this->assertEquals($article['data']['featured']['alt_text'], $imageUrl['alt_text']);
+    }
 }

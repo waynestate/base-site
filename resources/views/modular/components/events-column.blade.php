@@ -4,7 +4,7 @@
 --}}
 
 <div class="col-span-2 md:col-span-1">
-    @if(!empty($data[0]['component']['heading']))<h2 class="mt-0">{{ $data[0]['component']['heading'] }}</h2>@endif
+    @if(!empty($component['heading']))<h2 class="mt-0">{{ $component['heading'] }}</h2>@endif
 
     <ul>
         @foreach($data as $key => $dates)
