@@ -13,150 +13,133 @@ class ModularPageRepository extends Repository
     /**
      * {@inheritdoc}
      */
-    public function getModularPromos(array $data)
+    public function getModularComponents(array $data): array
     {
-        /* Start news */
-        $news = app(Article::class)->create(3, false, [
+        $components['catalog-1'] = [
+            'data' => app(GenericPromo::class)->create(4, false, [
+                'description' => '',
+            ]),
             'component' => [
-                'heading' => 'News',
-                'filename' => 'news-column',
-            ]
-        ]);
+                'heading' => 'Catalog - 4 columns',
+                'filename' => 'catalog',
+                'columns' => '4',
+                'showDescription' => false,
+            ],
+        ];
 
-        if (!empty($news['data'])) {
-            $news['data'] = array_values($news['data']);
-
-            $promos['news-column'] = $news['data'];
-        }
-        /* End news */
-
-        /* Start events */
-        $events = app(Event::class)->create(4, false, [
-            'component' => [
-                'heading' => 'Events',
-                'filename' => 'events-column',
-            ]
-        ]);
-
-        if(!empty($events)) {
-            $events = array_values($events);
-
-            foreach($events as $key => $event) {
-                $events[$key]['component'] = [
-                    'heading' => 'Events',
-                    'filename' => 'events-column',
-                ];
-            }
-
-            $promos['events-column'] = $events;
-        }
-        /* End events */
-
-        $promos['content-row-1'] = app(GenericPromo::class)->create(2, false, [
-            'title' => 'Promo item title (h3)',
-            'component' => [
-                'heading' => 'Content row - with heading',
-                'filename' => 'content-row'
-            ]
-        ]);
-
-        $promos['content-row-2'] = app(GenericPromo::class)->create(2, false, [
-            'title' => 'Promo item title (content row - no heading)',
+        $components['content-row-1'] = [
+            'data' => app(GenericPromo::class)->create(1, false, [
+                'title' => 'Content from promos'
+            ]),
             'component' => [
                 'filename' => 'content-row',
-            ]
-        ]);
+            ],
+        ];
 
-        $promos['catalog-1'] = app(GenericPromo::class)->create(3, false, [
-            'description' => '',
+        $components['accordion-1'] = [
+            'data' => app(GenericPromo::class)->create(4, false),
             'component' => [
-                'heading' => 'Catalog with three columns',
-                'columns' => 3,
+                'filename' => 'accordion',
+            ],
+        ];
+
+        $components['image-column-1'] = [
+            'data' => app(GenericPromo::class)->create(1, false, [
+                'title' => 'Featured news (image column)',
+                'filename_url' => '/styleguide/image/770x434',
+            ]),
+            'component' => [
+                'heading' => '',
+                'filename' => 'image-column',
+            ],
+        ];
+
+        $components['news-column'] = [
+            'data' => app(Article::class)->create(3, false),
+            'component' => [
+                'heading' => 'Base news',
+                'filename' => 'news-column',
+            ],
+        ];
+
+        $components['events-column'] = [
+            'data' => app(Event::class)->create(4, false),
+            'component' => [
+                'heading' => 'Base events',
+                'filename' => 'events-column',
+            ],
+        ];
+
+        $components['image-column-2'] = [
+            'data' => app(GenericPromo::class)->create(1, false, [
+                'title' => 'Featured event (image column)',
+                'filename_url' => '/styleguide/image/600x600',
+            ]),
+            'component' => [
+                'heading' => '',
+                'filename' => 'image-column',
+            ],
+        ];
+
+        $components['catalog-2'] = [
+            'data' => app(GenericPromo::class)->create(2, false, [
+            ]),
+            'component' => [
+                'heading' => 'Catalog - 1 column',
                 'filename' => 'catalog',
-                'showExcerpt' => true,
-                'singlePromoView' => true,
-            ]
-        ]);
-
-        $promos['catalog-2'] = app(GenericPromo::class)->create(4, false, [
-            'description' => '',
-            'component' => [
-                'heading' => 'Catalog with four columns',
-                'columns' => 4,
-                'filename' => 'catalog',
-                'showExcerpt' => true,
-                'singlePromoView' => true,
-            ]
-        ]);
-
-        $promos['catalog-3'] = app(GenericPromo::class)->create(2, false, [
-            'excerpt' => '',
-            'component' => [
-                'heading' => 'Catalog with one column',
                 'columns' => '1',
-                'filename' => 'catalog',
-                'showExcerpt' => false,
-                'singlePromoView' => true,
-            ]
-        ]);
+                'showDescription' => false,
+            ],
+        ];
 
-        $promos['accordion-1'] = app(GenericPromo::class)->create(3, false, [
+        $components['icons-column'] = [
+            'data' => app(GenericPromo::class)->create(4, false),
             'component' => [
-                'heading' => 'Accordion 1',
-                'filename' => 'accordion',
-            ]
-        ]);
+                'heading' => 'Icons column',
+                'filename' => 'icons-column',
+            ],
+        ];
 
-        $promos['accordion-2'] = app(GenericPromo::class)->create(4, false, [
-            'component' => [
-                'heading' => 'Accordion 2',
-                'filename' => 'accordion',
-            ]
-        ]);
-
-        $promos['spotlight-1'] = app(Spotlight::class)->create(1, false, [
-            'component' => [
-                'heading' => 'Spotlights',
-                'filename' => 'spotlight',
-                'singlePromoView' => true,
-            ]
-        ]);
-
-        $promos['button-column'] = app(GenericPromo::class)->create(3, false, [
+        $components['button-column'] = [
+            'data' => app(GenericPromo::class)->create(4, false),
             'component' => [
                 'heading' => 'Button column',
-                'filename' => 'button-column'
-            ]
-        ]);
+                'filename' => 'button-column',
+            ],
+        ];
 
-        $promos['image-column'] = app(GenericPromo::class)->create(1, false, [
+        $components['spotlight'] = [
+            'data' => app(Spotlight::class)->create(1, false),
             'component' => [
-                'heading' => 'Image column',
-                'filename' => 'image-column'
-            ]
-        ]);
+                'heading' => 'Spotlight',
+                'filename' => 'spotlight',
+            ],
+        ];
 
-        $promos['video-row'] = app(GenericPromo::class)->create(1, false, [
+        $components['video-row'] = [
+            'data' => app(GenericPromo::class)->create(1, false),
             'component' => [
-                'heading' => 'Video row',
+                'heading' => 'Video',
                 'filename' => 'video-row',
-            ]
-        ]);
+            ],
+        ];
 
-        $promos['video-column'] = app(GenericPromo::class)->create(1, false, [
+        $components['video-column-1'] = [
+            'data' => app(GenericPromo::class)->create(1, false),
             'component' => [
-                'heading' => 'Video column',
+                'heading' => 'Video column 1',
                 'filename' => 'video-column',
-            ]
-        ]);
+            ],
+        ];
 
-        $promos['steps-column'] = app(GenericPromo::class)->create(4, false, [
+        $components['video-column-2'] = [
+            'data' => app(GenericPromo::class)->create(1, false),
             'component' => [
-                'heading' => 'Steps column',
-                'filename' => 'steps-column',
-            ]
-        ]);
+                'heading' => 'Video column 2',
+                'filename' => 'video-column',
+            ],
+        ];
 
-        return $promos;
+        return $components;
     }
 }

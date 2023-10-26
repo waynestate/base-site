@@ -10,7 +10,7 @@
 
 @foreach($data as $image_promo)
     <div class="col-span-2 md:col-span-1">
-        @if(count($data['data']) === 1 && !empty($component['heading']))
+        @if(count($data) === 1 && !empty($component['heading']))
             <h2 class="mt-0">{{ $component['heading'] }}</h2>
         @endif
         <div class="grid gap-4">
