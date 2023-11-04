@@ -63,10 +63,16 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 $events = $this->event->getEvents($component['id']);
                 $modularComponents[$name]['data'] = $events['events'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
+                if (empty($modularComponents[$name]['component']['cal_name']) && !empty($data['site']['events']['path'])) {
+                    $modularComponents[$name]['component']['cal_name'] = $data['site']['events']['path'];
+                }
             } elseif(Str::startsWith($name, 'news') && !empty($component['id'])) {
                 $articles = $this->article->listing($component['id']);
                 $modularComponents[$name]['data'] = $articles['articles'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
+                if (empty($modularComponents[$name]['component']['news_route'])) {
+                    $modularComponents[$name]['component']['news_route'] = config('base.news_listing_route');
+                }
             } else {
                 $modularComponents[$name]['data'] = $promos[$name]['data'] ?? [];
                 $modularComponents[$name]['component'] = $promos[$name]['component'] ?? [];

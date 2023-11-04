@@ -68,6 +68,7 @@ class ModularPageRepository extends Repository
                 'component' => [
                     'heading' => 'Base events',
                     'filename' => 'events-column',
+                    'calendar_url' => '/myurl'
                 ],
             ],
 
