@@ -38,6 +38,7 @@ class ModularDocs extends Page
                                                 <li><code>modular-image-column-1</code></li>
                                                 <li><code>modular-video-column-1</code></li>
                                                 <li><code>modular-news-column-1</code></li>
+                                                <li><code>modular-news-row-1</code></li>
                                                 <li><code>modular-events-column-1</code></li>
                                             </ul>
                                         </li>

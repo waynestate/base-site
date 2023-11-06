@@ -41,7 +41,7 @@ class ModularDocsController extends Controller
                 ],
             ],
 
-            'content-row_1' => [
+            'content_row_1' => [
                 'data' => app(GenericPromo::class)->create(1, false, [
                     'title' => 'Content from promos'
                 ]),
@@ -54,10 +54,11 @@ class ModularDocsController extends Controller
                 'data' => app(GenericPromo::class)->create(4, false),
                 'component' => [
                     'filename' => 'accordion',
+                    'heading' => 'Accordion',
                 ],
             ],
 
-            'image-column_1'=> [
+            'image_column_1'=> [
                 'data' => app(GenericPromo::class)->create(1, false, [
                     'title' => 'Featured news (image column)',
                     'filename_url' => '/styleguide/image/770x434',
@@ -68,7 +69,7 @@ class ModularDocsController extends Controller
                 ],
             ],
 
-            'news-column' => [
+            'news_column' => [
                 'data' => app(Article::class)->create(3, false),
                 'component' => [
                     'heading' => 'Base news',
@@ -76,7 +77,15 @@ class ModularDocsController extends Controller
                 ],
             ],
 
-            'events-column' => [
+            'news_row_1' => [
+                'data' => app(Article::class)->create(4, false),
+                'component' => [
+                    'heading' => 'Base news',
+                    'filename' => 'news-column',
+                ],
+            ],
+
+            'events_column_1' => [
                 'data' => app(Event::class)->create(4, false),
                 'component' => [
                     'heading' => 'Base events',
@@ -85,7 +94,7 @@ class ModularDocsController extends Controller
                 ],
             ],
 
-            'image-column_2' => [
+            'image_column_2' => [
                 'data' => app(GenericPromo::class)->create(1, false, [
                     'title' => 'Featured event (image column)',
                     'filename_url' => '/styleguide/image/600x600',
@@ -96,7 +105,7 @@ class ModularDocsController extends Controller
                 ],
             ],
 
-            'icons-column' => [
+            'icons_column' => [
                 'data' => app(GenericPromo::class)->create(4, false),
                 'component' => [
                     'heading' => 'Icons column',
@@ -104,7 +113,7 @@ class ModularDocsController extends Controller
                 ],
             ],
 
-            'button-column' => [
+            'button_column' => [
                 'data' => app(GenericPromo::class)->create(4, false),
                 'component' => [
                     'heading' => 'Button column',
@@ -120,7 +129,7 @@ class ModularDocsController extends Controller
                 ],
             ],
 
-            'video-row' => [
+            'video_row' => [
                 'data' => app(GenericPromo::class)->create(1, false),
                 'component' => [
                     'heading' => 'Video',
@@ -128,7 +137,7 @@ class ModularDocsController extends Controller
                 ],
             ],
 
-            'video-column_1' => [
+            'video_column_1' => [
                 'data' => app(GenericPromo::class)->create(1, false),
                 'component' => [
                     'heading' => 'Video column 1',
@@ -136,7 +145,7 @@ class ModularDocsController extends Controller
                 ],
             ],
 
-            'video-column_2' => [
+            'video_column_2' => [
                 'data' => app(GenericPromo::class)->create(1, false),
                 'component' => [
                     'heading' => 'Video column 2',
@@ -144,7 +153,7 @@ class ModularDocsController extends Controller
                 ],
             ],
         ];
-        dump($components);
+
         return view('styleguide-modular-docs', merge($request->data, $components));
     }
 }
