@@ -59,20 +59,28 @@ class ModularPageRepository implements ModularPageRepositoryContract
         $promos = $this->getPromos($components);
 
         foreach($components['components'] as $name => $component) {
-            if(Str::startsWith($name, 'events') && !empty($component['id'])) {
-                $events = $this->event->getEvents($component['id']);
+            if(Str::startsWith($name, 'events')) {
+                $components['components'][$name]['id'] = $component['id'] ?? $data['site']['id'];
+                $events = $this->event->getEvents($component['id'] ?? $data['site']['id']);
                 $modularComponents[$name]['data'] = $events['events'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
                 if (empty($modularComponents[$name]['component']['cal_name']) && !empty($data['site']['events']['path'])) {
                     $modularComponents[$name]['component']['cal_name'] = $data['site']['events']['path'];
                 }
-            } elseif(Str::startsWith($name, 'news') && !empty($component['id'])) {
-                $articles = $this->article->listing($component['id']);
+            } elseif(Str::startsWith($name, 'news')) {
+                $components['components'][$name]['id'] = $component['id'] ?? $data['site']['news']['application_id'];
+                $components['components'][$name]['limit'] = $component['limit'] ?? 4;
+                $components['components'][$name]['news_route'] = $component['news_route'] ?? config('base.news_listing_route');
+                if (!empty($component['featured']) && $component['featured'] === true) {
+                    $articles = $this->article->listing($components['components'][$name]['id'], 50, 1, $component['topics'] ?? []);
+                    $articles['articles']['data'] = collect($articles['articles']['data'])->filter(function ($article) {
+                        return !empty($article['featured']['featured']) && $article['featured']['featured'] === 1;
+                    })->take($component['limit'] ?? 4)->toArray();
+                } else {
+                    $articles = $this->article->listing($components['components'][$name]['id'], $component['limit'] ?? 4, 1, $component['topics'] ?? []);
+                }
                 $modularComponents[$name]['data'] = $articles['articles'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
-                if (empty($modularComponents[$name]['component']['news_route'])) {
-                    $modularComponents[$name]['component']['news_route'] = config('base.news_listing_route');
-                }
             } else {
                 $modularComponents[$name]['data'] = $promos[$name]['data'] ?? [];
                 $modularComponents[$name]['component'] = $promos[$name]['component'] ?? [];
