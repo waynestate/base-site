@@ -7,10 +7,11 @@
         {!! $base['page']['content']['main'] !!}
     </div>
 
+    <div class="grid grid-cols-1 md:grid-cols-2 items-start gap-y-8 sm:gap-x-4 lg:gap-x-8 mt-8 mb-4">
         @include('modular/components/catalog', ['data' => $catalog_1['data'], 'component' => $catalog_1['component']])
 
         <div class="col-span-2">
-            <h3>Configuration</h3>
+            <h3 class="mt-0">Configuration</h3>
             <div class="grid grid-cols-1 lg:grid-cols-3 border-x border-b mb-16">
                 <div class="lg:col-span-1 p-2 bg-gray-100 font-bold lg:border-r border-y order-1 lg:order-none">Page field</div>
                 <div class="lg:col-span-2 p-2 bg-gray-100 font-bold border-y order-3 lg:order-none">Data</div>
@@ -36,7 +37,7 @@
         @include('modular/components/catalog', ['data' => $catalog_2['data'], 'component' => $catalog_2['component']])
 
         <div class="col-span-2">
-            <h3>Configuration</h3>
+            <h3 class="mt-0">Configuration</h3>
             <div class="grid grid-cols-1 lg:grid-cols-3 border-x border-b mb-16">
                 <div class="lg:col-span-1 p-2 bg-gray-100 font-bold lg:border-r border-y order-1 lg:order-none">Page field</div>
                 <div class="lg:col-span-2 p-2 bg-gray-100 font-bold border-y order-3 lg:order-none">Data</div>
@@ -62,7 +63,7 @@
         @include('modular/components/accordion', ['data' => $accordion_1['data'], 'component' => $accordion_1['component']])
 
         <div class="col-span-2">
-            <h3>Configuration</h3>
+            <h3 class="mt-0">Configuration</h3>
             <div class="grid grid-cols-1 lg:grid-cols-3 border-x border-b mb-16">
                 <div class="lg:col-span-1 p-2 bg-gray-100 font-bold lg:border-r border-y order-1 lg:order-none">Page field</div>
                 <div class="lg:col-span-2 p-2 bg-gray-100 font-bold border-y order-3 lg:order-none">Data</div>
@@ -83,7 +84,7 @@
         @include('modular/components/news-row', ['data' => $news_row_1['data'], 'component' => $news_row_1['component']])
 
         <div class="col-span-2">
-            <h3>Configuration</h3>
+            <h3 class="mt-0">Configuration</h3>
             <div class="grid grid-cols-1 lg:grid-cols-3 border-x border-b mb-16">
                 <div class="lg:col-span-1 p-2 bg-gray-100 font-bold lg:border-r border-y order-1 lg:order-none">Page field</div>
                 <div class="lg:col-span-2 p-2 bg-gray-100 font-bold border-y order-3 lg:order-none">Data</div>
@@ -120,7 +121,7 @@ or configure with these options
         @include('modular/components/events-column', ['data' => $events_column_1['data'], 'component' => $events_column_1['component']])
 
         <div class="col-span-2">
-            <h3>Configuration</h3>
+            <h3 class="mt-0">Configuration</h3>
             <div class="grid grid-cols-1 lg:grid-cols-3 border-x border-b mb-16">
                 <div class="lg:col-span-1 p-2 bg-gray-100 font-bold lg:border-r border-y order-1 lg:order-none">Page field</div>
                 <div class="lg:col-span-2 p-2 bg-gray-100 font-bold border-y order-3 lg:order-none">Data</div>
@@ -146,9 +147,11 @@ or configure with these options, ID optional
 "config":"limit:4",
 "cal_name": "myurl/",
 "link_text":"More events"
+}') !!}
 </pre>
                 </div>
             </div>
         </div>
+    </div>
 
 @endsection

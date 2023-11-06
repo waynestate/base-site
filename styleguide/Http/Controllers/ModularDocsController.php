@@ -72,7 +72,7 @@ class ModularDocsController extends Controller
             'news_column' => [
                 'data' => app(Article::class)->create(3, false),
                 'component' => [
-                    'heading' => 'Base news',
+                    'heading' => 'News',
                     'filename' => 'news-column',
                 ],
             ],
@@ -80,7 +80,7 @@ class ModularDocsController extends Controller
             'news_row_1' => [
                 'data' => app(Article::class)->create(4, false),
                 'component' => [
-                    'heading' => 'Base news',
+                    'heading' => 'News row',
                     'filename' => 'news-column',
                 ],
             ],
@@ -88,7 +88,7 @@ class ModularDocsController extends Controller
             'events_column_1' => [
                 'data' => app(Event::class)->create(4, false),
                 'component' => [
-                    'heading' => 'Base events',
+                    'heading' => 'Events column',
                     'filename' => 'events-column',
                     'calendar_url' => '/myurl'
                 ],

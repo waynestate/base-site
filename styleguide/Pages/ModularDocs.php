@@ -18,7 +18,7 @@ class ModularDocs extends Page
                 'id' => 101110700,
                 'content' => [
                     'main' => '
-                        <p>Docs- Use this template to display multiple promo groups on a single page. Row components will be full width, column components will be half. You will want to pair two columns next to each other.</p>
+                        <p>Use this template to display multiple promo groups on a single page. Row components will be full width, column components will be half. You will want to pair two columns next to each other.</p>
                         <p class="mb-8">To change the order of the components, we currently have to replace or delete and re-add the custom field.</p>
                         <ul class="accordion mt-4">
                             <li>
