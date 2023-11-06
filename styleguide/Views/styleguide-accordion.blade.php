@@ -8,9 +8,6 @@
     </div>
 
     @if(!empty($base['accordion_page']))
-        @php
-        dump($base);
-    @endphp
         @include('components.accordion', ['items' => $base['accordion_page']])
     @endif
 
