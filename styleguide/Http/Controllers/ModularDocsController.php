@@ -1,34 +1,47 @@
 <?php
 
-namespace Styleguide\Repositories;
+namespace Styleguide\Http\Controllers;
 
-use App\Repositories\ModularPageRepository as Repository;
+use Illuminate\View\View;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Factories\GenericPromo;
 use Factories\Spotlight;
 use Factories\Article;
 use Factories\Event;
 
-class ModularPageRepository extends Repository
+class ModularDocsController extends Controller
 {
     /**
-     * {@inheritdoc}
+     * Display the banner at the top of the page.
      */
-    public function getModularComponents(array $data): array
+    public function index(Request $request): View
     {
         $components = [
-            'catalog-1' => [
-                'data' => app(GenericPromo::class)->create(4, false, [
+            'catalog_1' => [
+                'data' => app(GenericPromo::class)->create(7, false, [
                     'description' => '',
                 ]),
                 'component' => [
-                    'heading' => 'Catalog - 4 columns',
+                    'heading' => 'Four-column catalog',
                     'filename' => 'catalog',
                     'columns' => '4',
                     'showDescription' => false,
                 ],
             ],
 
-            'content-row-1' => [
+            'catalog_2' => [
+                'data' => app(GenericPromo::class)->create(2, false, [
+                ]),
+                'component' => [
+                    'heading' => 'One-column catalog',
+                    'filename' => 'catalog',
+                    'columns' => '1',
+                    'showDescription' => false,
+                ],
+            ],
+
+            'content_row_1' => [
                 'data' => app(GenericPromo::class)->create(1, false, [
                     'title' => 'Content from promos'
                 ]),
@@ -37,14 +50,15 @@ class ModularPageRepository extends Repository
                 ],
             ],
 
-            'accordion-1' => [
+            'accordion_1' => [
                 'data' => app(GenericPromo::class)->create(4, false),
                 'component' => [
                     'filename' => 'accordion',
+                    'heading' => 'Accordion',
                 ],
             ],
 
-            'image-column-1'=> [
+            'image_column_1'=> [
                 'data' => app(GenericPromo::class)->create(1, false, [
                     'title' => 'Featured news (image column)',
                     'filename_url' => '/styleguide/image/770x434',
@@ -55,24 +69,32 @@ class ModularPageRepository extends Repository
                 ],
             ],
 
-            'news-column' => [
+            'news_column' => [
                 'data' => app(Article::class)->create(3, false),
                 'component' => [
-                    'heading' => 'Base news',
+                    'heading' => 'News',
                     'filename' => 'news-column',
                 ],
             ],
 
-            'events-column' => [
+            'news_row_1' => [
+                'data' => app(Article::class)->create(4, false),
+                'component' => [
+                    'heading' => 'News row',
+                    'filename' => 'news-column',
+                ],
+            ],
+
+            'events_column_1' => [
                 'data' => app(Event::class)->create(4, false),
                 'component' => [
-                    'heading' => 'Base events',
+                    'heading' => 'Events column',
                     'filename' => 'events-column',
                     'calendar_url' => '/myurl'
                 ],
             ],
 
-            'image-column-2' => [
+            'image_column_2' => [
                 'data' => app(GenericPromo::class)->create(1, false, [
                     'title' => 'Featured event (image column)',
                     'filename_url' => '/styleguide/image/600x600',
@@ -83,18 +105,7 @@ class ModularPageRepository extends Repository
                 ],
             ],
 
-            'catalog-2' => [
-                'data' => app(GenericPromo::class)->create(2, false, [
-                ]),
-                'component' => [
-                    'heading' => 'Catalog - 1 column',
-                    'filename' => 'catalog',
-                    'columns' => '1',
-                    'showDescription' => false,
-                ],
-            ],
-
-            'icons-column' => [
+            'icons_column' => [
                 'data' => app(GenericPromo::class)->create(4, false),
                 'component' => [
                     'heading' => 'Icons column',
@@ -102,7 +113,7 @@ class ModularPageRepository extends Repository
                 ],
             ],
 
-            'button-column' => [
+            'button_column' => [
                 'data' => app(GenericPromo::class)->create(4, false),
                 'component' => [
                     'heading' => 'Button column',
@@ -118,7 +129,7 @@ class ModularPageRepository extends Repository
                 ],
             ],
 
-            'video-row' => [
+            'video_row' => [
                 'data' => app(GenericPromo::class)->create(1, false),
                 'component' => [
                     'heading' => 'Video',
@@ -126,7 +137,7 @@ class ModularPageRepository extends Repository
                 ],
             ],
 
-            'video-column-1' => [
+            'video_column_1' => [
                 'data' => app(GenericPromo::class)->create(1, false),
                 'component' => [
                     'heading' => 'Video column 1',
@@ -134,7 +145,7 @@ class ModularPageRepository extends Repository
                 ],
             ],
 
-            'video-column-2' => [
+            'video_column_2' => [
                 'data' => app(GenericPromo::class)->create(1, false),
                 'component' => [
                     'heading' => 'Video column 2',
@@ -143,6 +154,6 @@ class ModularPageRepository extends Repository
             ],
         ];
 
-        return $components;
+        return view('styleguide-modular-docs', merge($request->data, $components));
     }
 }

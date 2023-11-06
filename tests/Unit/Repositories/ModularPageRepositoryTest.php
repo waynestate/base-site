@@ -144,7 +144,7 @@ final class ModularPageRepositoryTest extends TestCase
     public function get_modular_page_components_news(): void
     {
         // Fake return
-        $return = app(Article::class)->create(5);
+        $return = app(Article::class)->create(4);
 
         // Mock the connector and set the return
         $newsApi = Mockery::mock(News::class);
@@ -156,7 +156,7 @@ final class ModularPageRepositoryTest extends TestCase
                 'controller' => 'ModularPage',
             ],
             'data' => [
-                'modular-news-1' => 1
+                'modular-news-column-1' => 1
             ],
         ]);
 
@@ -167,7 +167,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Run the promos through the repository
         $modularComponents = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
 
-        $this->assertCount(count($return['data']), $modularComponents['news-1']['data']['data']);
+        $this->assertCount(count($return['data']), $modularComponents['news-column-1']['data']['data']);
     }
 
     #[Test]
