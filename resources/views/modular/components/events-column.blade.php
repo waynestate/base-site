@@ -37,7 +37,7 @@
             @endforeach
             @if($dates == end($data))
                 <li class="flex -mx-2 ml-17">
-                    <a href="//events.wayne.edu/{{ $dates[0]['calendar_url'] ?? 'main/' }}month/" class="hover:underline">{{ $link_text ?? 'More events' }}</a>
+                    <a href="//events.wayne.edu/{{ $component['cal_name'] ?? 'main/' }}upcoming" class="hover:underline">{{ $component['link_text'] ?? 'More events' }}</a>
                 </li>
             @endif
         @endforeach
