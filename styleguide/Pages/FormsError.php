@@ -15,7 +15,7 @@ class FormsError extends Page
             'page' => [
                 'controller' => 'FormsErrorController',
                 'title' => 'Form Errors',
-                'id' => 111100100,
+                'id' => 111100101,
             ],
         ]);
     }
