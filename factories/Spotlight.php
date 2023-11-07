@@ -5,7 +5,7 @@ namespace Factories;
 use Contracts\Factories\FactoryContract;
 use Faker\Factory;
 
-class GenericPromo implements FactoryContract
+class Spotlight implements FactoryContract
 {
     /**
      * Construct the factory.
@@ -24,19 +24,14 @@ class GenericPromo implements FactoryContract
 
         for ($i = 0; $i <= $limit - 1; $i++) {
             $data[$i] = [
-                'title' => ucfirst(implode(' ', $this->faker->words(3))),
-                'excerpt' => $this->faker->sentence(),
-                'description' => '<p>' . $this->faker->text(100) . ' <a href="https://wayne.edu">'. $this->faker->sentence(3)  .'</a></p>',
+                'title' => $this->faker->name,
+                'excerpt' => $this->faker->jobTitle,
+                'description' => '<p>&ldquo;' . $this->faker->text(200) . '&rdquo;</p>',
                 'link' => 'https://wayne.edu',
                 'promo_item_id' => $i,
                 'promo_group_id' => strval($promo_group_id),
-                'relative_url' => '/styleguide/image/600x450?text=600x450:'.$i, // 4:3
-                //'relative_url' => '/styleguide/image/450x600', // 3:4
-                //'relative_url' => '/styleguide/image/600x338', // 16:9
-                //'relative_url' => '/styleguide/image/600x600', // 1:1
-                //'relative_url' => '/styleguide/image/600x217', // 2.76:1
-                //'relative_url' => '/styleguide/image/600x200', // 3:1
-                'filename_url' => '/styleguide/image/600x450?text=600x450:'.$i, // 4:3
+                'relative_url' => '/styleguide/image/600x600?text=600x600:'.$i,
+                'filename_url' => '/styleguide/image/600x600?text=600x600:'.$i,
                 'filename_alt_text' => 'Placeholder image '.$i,
                 'secondary_image' => '',
                 'secondary_relative_url' => '/styleguide/image/150x150?text=150x150:'.$i, // 4:3

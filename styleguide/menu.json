@@ -239,30 +239,30 @@
                 "class_name": "",
                 "relative_url": "/styleguide/forms",
                 "submenu": {
-                    "111100": {
-                        "menu_item_id": 111100,
+                    "111100100": {
+                        "menu_item_id": 111100100,
                         "is_active": 1,
-                        "page_id": 111100,
+                        "page_id": 111100100,
                         "target": "",
                         "display_name": "Forms",
                         "class_name": "",
                         "relative_url": "/styleguide/forms",
                         "submenu": []
                     },
-                    "111100100": {
-                        "menu_item_id": 111100100,
+                    "111100101": {
+                        "menu_item_id": 111100101,
                         "is_active": 1,
-                        "page_id": 111100100,
+                        "page_id": 111100101,
                         "target": "",
                         "display_name": "Form Errors",
                         "class_name": "",
                         "relative_url": "/styleguide/forms/error",
                         "submenu": []
                     },
-                    "111100101": {
-                        "menu_item_id": 111100101,
+                    "111100102": {
+                        "menu_item_id": 111100102,
                         "is_active": 1,
-                        "page_id": 111100101,
+                        "page_id": 111100102,
                         "target": "",
                         "display_name": "Form Slate",
                         "class_name": "",
@@ -676,6 +676,26 @@
                         "display_name": "Promo grid, 4 column, grouped by option",
                         "class_name": "",
                         "relative_url": "/styleguide/promogrid4",
+                        "submenu": []
+                    },
+                    "101110600": {
+                        "menu_item_id": 101110600,
+                        "is_active": 1,
+                        "page_id": 101110600,
+                        "target": "",
+                        "display_name": "Modular page",
+                        "class_name": "",
+                        "relative_url": "/styleguide/modularpage",
+                        "submenu": []
+                    },
+                    "101110700": {
+                        "menu_item_id": 101110700,
+                        "is_active": 1,
+                        "page_id": 101110700,
+                        "target": "",
+                        "display_name": "Modular docs",
+                        "class_name": "",
+                        "relative_url": "/styleguide/modulardocs",
                         "submenu": []
                     },
                     "101110100": {

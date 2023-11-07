@@ -20,7 +20,7 @@ interface PromoPageRepositoryContract
      *
      * @return array
      */
-    public function parsePromoJSON($data);
+    public function parsePromoJSON($data, $page_id);
 
     /**
      *

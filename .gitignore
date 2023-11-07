@@ -17,6 +17,7 @@ npm-debug.log
 yarn-error.log
 cs_fixer_tmp*
 .php_cs.cache
+.phpunit.cache
 .php-cs-fixer.cache
 /public/mix-manifest.json
 /*.diff

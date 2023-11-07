@@ -80,6 +80,10 @@ module.exports = {
             pattern: /grid(-cols-[1-4])?/,
             variants: ['sm','md','lg','xl','2xl','3xl','mt'],
         },
+        {
+            pattern: /columns(-[1-4])?/,
+            variants: ['sm','md','lg','xl','2xl','3xl','mt'],
+        },
         '/form_responses/'
     ],
     theme: {
@@ -136,6 +140,9 @@ module.exports = {
             },
             opacity: {
                 '65': '.65',
+            },
+            aspectRatio: {
+                'portrait': '3 / 4',
             },
         },
     },

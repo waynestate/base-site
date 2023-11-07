@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use PHPUnit\Framework\Attributes\Test;
 use App\Http\Controllers\ArticleController;
 use App\Repositories\ArticleRepository;
@@ -133,6 +134,35 @@ final class ArticleControllerTest extends TestCase
         $view = $articleController->show($request);
 
         $this->assertInstanceOf(Redirector::class, $view);
+    }
+
+    #[Test]
+    public function news_item_with_external_link_should_redirect_to_link(): void
+    {
+        // Fake return
+        $return = app(Article::class)->create(1, true, [
+            'link' => 'https://today.wayne.edu',
+        ]);
+
+        // Mock the connector
+        $newsApi = Mockery::mock(News::class);
+        $newsApi->shouldReceive('request')->andReturn($return);
+
+        // Construct the news repository
+        $articleRepository = app(ArticleRepository::class, ['newsApi' => $newsApi]);
+
+        // Construct the news controller
+        $articleController = app(ArticleController::class, ['article' => $articleRepository]);
+
+        $request = new Request();
+        $base['base'] = app(StyleguideNews::class)->getPageData();
+        $request->data = $base;
+        $request->preview = true;
+
+        // Call the news listing
+        $view = $articleController->show($request);
+
+        $this->assertInstanceOf(RedirectResponse::class, $view);
     }
 
     #[Test]

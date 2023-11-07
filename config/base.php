@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\TopicController;
+
 return [
 
     /*
@@ -218,8 +221,8 @@ return [
     'news_topic_route' => 'topic',
     'news_topics_route' => 'topics',
     'news_topics_text' => 'Filter by topic',
-    'news_topics_controller' => 'TopicController',
-    'news_controller' => 'ArticleController',
+    'news_topics_controller' => TopicController::class,
+    'news_controller' => ArticleController::class,
 
     /*
     |--------------------------------------------------------------------------

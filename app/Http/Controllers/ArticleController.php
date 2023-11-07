@@ -7,6 +7,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Contracts\Repositories\ArticleRepositoryContract;
 use Contracts\Repositories\TopicRepositoryContract;
@@ -66,7 +67,7 @@ class ArticleController extends Controller
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-    public function show(Request $request): View|Redirector
+    public function show(Request $request): View|Redirector|RedirectResponse
     {
         if (empty($request->data['base']['site']['news']['application_id'])) {
             abort('404');
@@ -82,6 +83,14 @@ class ArticleController extends Controller
             abort('404');
         }
 
+        if(!empty($article['article']['data']['link'])) {
+            $linkURL = parse_url($article['article']['data']['link']);
+
+            if(!empty($linkURL['host'])) {
+                return redirect($article['article']['data']['link']);
+            }
+        }
+
         $request->data['base']['page']['title'] = $article['article']['data']['title'];
         $request->data['base']['page']['description'] = $article['article']['data']['meta_description'];
         $request->data['base']['page']['canonical'] = $request->data['base']['server']['url'] ?? '';
@@ -90,7 +99,7 @@ class ArticleController extends Controller
             $request->data['base']['hero'][]['relative_url'] = $article['article']['data']['hero_image']['url'];
         }
 
-        $image = $this->article->getImage($article['article']['data']);
+        $image = $this->article->getSocialImage($article['article']['data']);
 
         $request->data['base']['meta']['image'] = $image['url'];
         $request->data['base']['meta']['image_alt'] = $image['alt_text'];
