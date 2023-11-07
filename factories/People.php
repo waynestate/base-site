@@ -29,7 +29,7 @@ class People implements FactoryContract
             $last_name = $this->faker->lastName();
             $email = $this->faker->email();
             $title = $this->faker->sentence(3);
-            $picture = '/styleguide/image/400x533?text=400x533%20('.$i.')';
+            $picture = '/styleguide/image/600x800?text=600x800%20('.$i.')';
             $phone = $this->faker->phoneNumber();
             $department = '<p>'.$this->faker->sentence().'</p>';
             $office = '<p>300 Prentis</p>';

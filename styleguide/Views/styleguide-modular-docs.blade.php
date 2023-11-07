@@ -74,7 +74,7 @@
 <pre class="w-full" tabindex="0">
 {!! htmlspecialchars('{
 "id":1234,
-"heading":"My accordion",
+"heading":"My accordion"
 }') !!}
 </pre>
                 </div>
