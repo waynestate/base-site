@@ -11,20 +11,14 @@
                     <option value="{{ $key }}"@if($key == $selected_group) selected="selected"@endif>{{ $value }}</option>
                 @endforeach
             </select>
-            <input type="submit" value="Filter" class="postfix button expanded" />
+            <input type="submit" value="Filter" class="postfix button" />
         </form>
     @endif
 
-    <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-6 mb-12">
+    <ul class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-6 md:gap-x-8 gap-y-4 lg:gap-y-6 mb-12">
         @forelse($profiles as $profile)
             <li class="block">
-                <a href="{{ $profile['link'] }}" class="underline hover:no-underline">
-                    <div class="block bg-cover bg-center w-full pt-portrait lazy mb-1" data-src="{{ $profile['data']['Picture']['url'] ?? '/_resources/images/no-photo.svg' }}"></div>
-                    <span class="font-bold">{{ $profile['data']['First Name'] }} {{ $profile['data']['Last Name'] }}</span>
-                </a>
-                @if(!empty($profile['data']['Title']))
-                    <span class="block text-sm">{{ $profile['data']['Title'] }}</span>
-                @endif
+                @include('components.profile')
             </li>
         @empty
             <li>No profiles found.</li>

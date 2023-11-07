@@ -141,6 +141,9 @@ module.exports = {
             opacity: {
                 '65': '.65',
             },
+            aspectRatio: {
+                'portrait': '3 / 4',
+            },
         },
     },
 }
