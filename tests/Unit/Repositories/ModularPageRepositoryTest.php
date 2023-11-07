@@ -141,6 +141,39 @@ final class ModularPageRepositoryTest extends TestCase
     }
 
     #[Test]
+    public function get_modular_page_components_featured_news(): void
+    {
+        // Fake return
+        $return = app(Article::class)->create(4);
+
+        // Mock the connector and set the return
+        $newsApi = Mockery::mock(News::class);
+        $newsApi->shouldReceive('request')->andReturn($return);
+
+        // Create a fake data request
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'ModularPage',
+            ],
+            'data' => [
+                'modular-news-row-1' => json_encode([
+                    'id' => 1,
+                    'featured' => true,
+                ]),
+            ],
+        ]);
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn([]);
+
+        // Run the promos through the repository
+        $modularComponents = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
+
+        $this->assertCount(count($return['data']), $modularComponents['news-row-1']['data']['data']);
+    }
+
+    #[Test]
     public function get_modular_page_components_news(): void
     {
         // Fake return
