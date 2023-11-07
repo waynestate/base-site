@@ -4,27 +4,20 @@
     @include('components.page-title', ['title' => $base['page']['title']])
 
     @if($hide_filtering == false)
-        <form name="departments" method="get" class="filter formy">
+        <form name="departments" method="get" class="filter formy mb-6">
             <label for="filter-group" class="text-black block mb-2">View by department:</label>
-            <div class="row -mx-4">
-                <div class="w-5/6 px-4 inline-block relative w-64 mb-6 flex items-center text-black">
-                    <div class="border-gray-400 border select">
-                        <select name="group" id="filter-group">
-                            @foreach($dropdown_groups as $key=>$value)
-                                <option value="{{ $key }}"@if($key == $selected_group) selected="selected"@endif>{{ $value }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                <div class="w-1/6 px-4">
-                    <input type="submit" value="Filter" class="postfix button expanded" />
-                </div>
-            </div>
+            <select name="group" id="filter-group">
+                @foreach($dropdown_groups as $key=>$value)
+                    <option value="{{ $key }}"@if($key == $selected_group) selected="selected"@endif>{{ $value }}</option>
+                @endforeach
+            </select>
+            <input type="submit" value="Filter" class="postfix button expanded" />
         </form>
     @endif
 
-    <ul class="row flex flex-wrap -mx-4">
+    <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-6 mb-12">
         @forelse($profiles as $profile)
-            <li class="w-full sm:w-1/2 md:w-1/3 xl:w-1/4 px-4 pb-6">
+            <li class="block">
                 <a href="{{ $profile['link'] }}" class="underline hover:no-underline">
                     <div class="block bg-cover bg-center w-full pt-portrait lazy mb-1" data-src="{{ $profile['data']['Picture']['url'] ?? '/_resources/images/no-photo.svg' }}"></div>
                     <span class="font-bold">{{ $profile['data']['First Name'] }} {{ $profile['data']['Last Name'] }}</span>
