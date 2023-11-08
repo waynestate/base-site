@@ -7,7 +7,6 @@
         {!! $base['page']['content']['main'] !!}
     </div>
 
-    {{-- create fallback for 'accordion_page' --}}
     @if(!empty($components))
         <div class="grid grid-cols-1 md:grid-cols-2 items-start gap-y-8 sm:gap-x-4 lg:gap-x-8 mt-8 mb-4">
             @foreach($components as $componentName => $component)

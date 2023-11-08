@@ -1,4 +1,4 @@
-@extends('components.content-area')
+@extends('layouts.' . (!empty($layout) ? $layout : 'main'))
 
 @section('content')
     @include('components.page-title', ['title' => $base['page']['title']])
@@ -12,7 +12,7 @@
             <h2 class="mb-4">Default buttons</h2>
             <div class="pb-4 md:flex items-start">
                 <div class="md:mr-4 flex-shrink-0">
-                    @include('components.button-default', ['button' => $buttons['default'], 'class' => 'w-72'])
+                    @include('components.buttons.default', ['button' => $buttons['default'], 'class' => 'w-72'])
                 </div>
                 <div>
                     <h3 class="text-sm ">Promo setup:</h3>
@@ -25,7 +25,7 @@
 
             <div class="pb-4 md:flex items-start">
                 <div class="md:mr-4 flex-shrink-0">
-                    @include('components.button-default', ['button' => $buttons['default_two_lines'], 'class' => 'w-72'])
+                    @include('components.buttons.default', ['button' => $buttons['default_two_lines'], 'class' => 'w-72'])
                 </div>
                 <div>
                     <h3 class="text-sm ">Promo setup:</h3>
@@ -39,7 +39,7 @@
 
             <div class="pb-4 md:flex items-start">
                 <div class="md:mr-4 flex-shrink-0">
-                    @include('components.button-default', ['button' => $buttons['default_icon'], 'class' => 'w-72'])
+                    @include('components.buttons.default', ['button' => $buttons['default_icon'], 'class' => 'w-72'])
                 </div>
                 <div>
                     <h3 class="text-sm ">Promo setup:</h3>
@@ -57,7 +57,7 @@
             <h2 class="mb-4">Green buttons</h2>
             <div class="pb-4 md:flex items-start">
                 <div class="md:mr-4 flex-shrink-0">
-                    @include('components.button-green', ['button' => $buttons['green'], 'class' => 'w-72'])
+                    @include('components.buttons.green', ['button' => $buttons['green'], 'class' => 'w-72'])
                 </div>
                 <div>
                     <h3 class="text-sm ">Promo setup:</h3>
@@ -70,7 +70,7 @@
 
             <div class="pb-4 md:flex items-start">
                 <div class="md:mr-4 flex-shrink-0">
-                    @include('components.button-green', ['button' => $buttons['green_two_lines'], 'class' => 'w-72'])
+                    @include('components.buttons.green', ['button' => $buttons['green_two_lines'], 'class' => 'w-72'])
                 </div>
                 <div>
                     <h3 class="text-sm ">Promo setup:</h3>
@@ -84,7 +84,7 @@
 
             <div class="pb-4 md:flex items-start">
                 <div class="md:mr-4 flex-shrink-0">
-                    @include('components.button-green', ['button' => $buttons['green_icon'], 'class' => 'w-72'])
+                    @include('components.buttons.green', ['button' => $buttons['green_icon'], 'class' => 'w-72'])
                 </div>
                 <div>
                     <h3 class="text-sm ">Promo setup:</h3>
@@ -102,7 +102,7 @@
             <h2 class="mb-4">Gold buttons</h2>
             <div class="pb-4 md:flex items-start">
                 <div class="md:mr-4 flex-shrink-0">
-                    @include('components.button-gold', ['button' => $buttons['default'], 'class' => 'w-72'])
+                    @include('components.buttons.gold', ['button' => $buttons['default'], 'class' => 'w-72'])
                 </div>
                 <div>
                     <h3 class="text-sm ">Promo setup:</h3>
@@ -115,7 +115,7 @@
 
             <div class="pb-4 md:flex items-start">
                 <div class="md:mr-4 flex-shrink-0">
-                    @include('components.button-gold', ['button' => $buttons['default_two_lines'], 'class' => 'w-72'])
+                    @include('components.buttons.gold', ['button' => $buttons['default_two_lines'], 'class' => 'w-72'])
                 </div>
                 <div>
                     <h3 class="text-sm ">Promo setup:</h3>
@@ -129,7 +129,7 @@
 
             <div class="pb-4 md:flex items-start">
                 <div class="md:mr-4 flex-shrink-0">
-                    @include('components.button-gold', ['button' => $buttons['default_icon'], 'class' => 'w-72'])
+                    @include('components.buttons.gold', ['button' => $buttons['default_icon'], 'class' => 'w-72'])
                 </div>
                 <div>
                     <h3 class="text-sm ">Promo setup:</h3>
@@ -147,7 +147,7 @@
             <h2 class="mb-4">Image buttons</h2>
             <div class="pb-4 md:flex items-start">
                 <div class="md:mr-4 flex-shrink-0">
-                    @include('components.button-bg-image-light', ['button' => $buttons['bg_image_light'], 'class' => 'w-72'])
+                    @include('components.buttons.bg-image-light', ['button' => $buttons['bg_image_light'], 'class' => 'w-72'])
                 </div>
                 <div>
                     <h3 class="text-sm ">Promo setup:</h3>
@@ -168,7 +168,7 @@
 
             <div class="pb-4 md:flex items-start">
                 <div class="md:mr-4 flex-shrink-0">
-                    @include('components.button-bg-image-dark', ['button' => $buttons['bg_image_dark'], 'class' => 'w-72'])
+                    @include('components.buttons.bg-image-dark', ['button' => $buttons['bg_image_dark'], 'class' => 'w-72'])
                 </div>
                 <div>
                     <h3 class="text-sm ">Promo setup:</h3>
@@ -192,7 +192,7 @@
             <h2 class="mb-4">SVG buttons</h2>
             <div class="pb-4 md:flex items-start">
                 <div class="md:mr-4 flex-shrink-0">
-                    @include('components.button-bg-image-light', ['button' => $buttons['svg_light_bg'], 'class' => 'w-72'])
+                    @include('components.buttons.bg-image-light', ['button' => $buttons['svg_light_bg'], 'class' => 'w-72'])
                 </div>
                 <div>
                     <h3 class="text-sm ">Promo setup:</h3>
@@ -220,7 +220,7 @@
 
             <div class="pb-4 md:flex items-start">
                 <div class="md:mr-4 flex-shrink-0">
-                    @include('components.button-bg-image-dark', ['button' => $buttons['svg_dark_bg'], 'class' => 'w-72'])
+                    @include('components.buttons.bg-image-dark', ['button' => $buttons['svg_dark_bg'], 'class' => 'w-72'])
                 </div>
                 <div>
                     <h3 class="text-sm ">Promo setup:</h3>

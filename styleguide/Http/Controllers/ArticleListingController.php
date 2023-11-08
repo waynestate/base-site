@@ -22,7 +22,7 @@ class ArticleListingController extends Controller
      */
     public function index(Request $request): View
     {
-        $articles = $this->article->listing($request->data['base']['site']['id'], 5);
+        $articles = $this->article->listing($request->data['base']['site']['id'], 4);
 
         return view('styleguide-article-listing', merge($request->data, $articles));
     }

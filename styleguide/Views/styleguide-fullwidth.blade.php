@@ -1,4 +1,4 @@
-@extends('components.content-area')
+@extends('layouts.' . (!empty($layout) ? $layout : 'main'))
 
 @section('content')
     <img class="w-full block" src="/styleguide/image/1600x580?text=Full%20width%20image" alt="">

@@ -24,6 +24,7 @@ class Accordion implements FactoryContract
             $data[$i] = [
                 'title' => $this->faker->sentence(),
                 'description' => '<p>'.$this->faker->paragraph().' <a href="/styleguide">Example link.</a></p>',
+                'promo_item_id' => $i,
             ];
 
             $data[$i] = array_replace_recursive($data[$i], $options);

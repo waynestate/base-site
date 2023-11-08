@@ -56,19 +56,27 @@ class ModularPageRepository extends Repository
             ],
 
             'news-column' => [
-                'data' => app(Article::class)->create(3, false),
+                'data' => app(Article::class)->create(4, false),
                 'component' => [
-                    'heading' => 'Base news',
+                    'heading' => 'News column',
                     'filename' => 'news-column',
+                ],
+            ],
+
+            'news-row' => [
+                'data' => app(Article::class)->create(4, false),
+                'component' => [
+                    'heading' => 'News row',
+                    'filename' => 'news-row',
                 ],
             ],
 
             'events-column' => [
                 'data' => app(Event::class)->create(4, false),
                 'component' => [
-                    'heading' => 'Base events',
+                    'heading' => 'Events column',
                     'filename' => 'events-column',
-                    'calendar_url' => '/myurl'
+                    'cal_name' => 'main/'
                 ],
             ],
 
@@ -80,6 +88,15 @@ class ModularPageRepository extends Repository
                 'component' => [
                     'heading' => '',
                     'filename' => 'image-column',
+                ],
+            ],
+
+            'events-row' => [
+                'data' => app(Event::class)->create(4, false),
+                'component' => [
+                    'heading' => 'Events row',
+                    'filename' => 'events-row',
+                    'cal_name' => '/myurl'
                 ],
             ],
 

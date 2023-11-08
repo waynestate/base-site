@@ -1,4 +1,4 @@
-@extends('components.content-area')
+@extends('layouts.' . (!empty($layout) ? $layout : 'main'))
 
 @section('content')
     @if(using_styleguide() == true)

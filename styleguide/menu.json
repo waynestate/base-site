@@ -205,7 +205,7 @@
                 "is_active": 1,
                 "page_id": 108100,
                 "target": "",
-                "display_name": "News article listing",
+                "display_name": "News",
                 "class_name": "",
                 "relative_url": "/styleguide/articlelisting",
                 "submenu": []
@@ -215,7 +215,7 @@
                 "is_active": 1,
                 "page_id": 109100,
                 "target": "",
-                "display_name": "Events listing",
+                "display_name": "Events",
                 "class_name": "",
                 "relative_url": "/styleguide/eventslisting",
                 "submenu": []

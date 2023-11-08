@@ -1,7 +1,4 @@
-{{-- 
-    add bem classes and a way to pass in a parent class
---}}
-@extends('components.content-area')
+@extends('layouts.' . (!empty($layout) ? $layout : 'main'))
 
 @section('content')
     @include('components.page-title', ['title' => $base['page']['title']])

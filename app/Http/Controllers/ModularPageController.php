@@ -31,6 +31,6 @@ class ModularPageController extends Controller
     {
         $components['components'] = $this->modular->getModularComponents($request->data['base']);
 
-        return view('modular/modularpage', merge($request->data, $components));
+        return view('modularpage', merge($request->data, $components));
     }
 }

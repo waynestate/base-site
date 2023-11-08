@@ -11,5 +11,6 @@
             @include('components/hero/'.$image['option'])
         @else
             @include('components/hero/default')
+        @endif
     @endforeach
 </div>

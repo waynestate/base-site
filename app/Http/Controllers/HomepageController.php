@@ -34,7 +34,8 @@ class HomepageController extends Controller
 
         $articles = $this->article->listing($request->data['base']['site']['news']['application_id']);
 
-        $events = $this->event->getEvents($request->data['base']['site']['id']);
+        //$events = $this->event->getEvents($request->data['base']['site']['id']);
+        $events = $this->event->getEvents(2);
 
         return view('homepage', merge($request->data, $articles, $events));
     }

@@ -1,4 +1,4 @@
-@extends('components.content-area')
+@extends('layouts.' . (!empty($layout) ? $layout : 'main'))
 
 @section('content')
     @include('components.page-title', ['title' => $base['page']['title']])
@@ -8,18 +8,18 @@
     </div>
 
     @if(!empty($articles['data']) || !empty($events))
-        <div class="row -mx-4 flex flex-wrap">
+        <div class="row -mx-4 grid md:grid-cols-2 gap-6">
             @if(!empty($articles['data']))
-                <div class="w-full md:w-1/2 px-4">
-                    <h2 class="mb-2">News</h2>
-                    @include('components/article-listing', ['articles' => $articles['data'], 'url' => ($base['site']['subsite-folder'] !== null ? $base['site']['subsite-folder'] : '').config('base.news_listing_route').'/'])
+                <div>
+                    <h2>News</h2>
+                    @include('components/news-column', ['data' => $articles])
                 </div>
             @endif
 
             @if(!empty($events))
-                <div class="w-full md:w-1/2 px-4">
-                    <h2 class="mb-2">Events</h2>
-                    @include('components/events-listing', ['events' => $events, 'cal_name' => !empty($base['site']['events']['path']) ? $base['site']['events']['path'] : null])
+                <div>
+                    <h2>Events</h2>
+                    @include('components/events-column', ['data' => $events])
                 </div>
             @endif
         </div>

@@ -1,4 +1,4 @@
-@extends('components.content-area')
+@extends('layouts.' . (!empty($layout) ? $layout : 'main'))
 
 @section('content')
     @include('components.page-title', ['title' => $base['page']['title'], 'class' => $pageTitleClass ?? ''])
