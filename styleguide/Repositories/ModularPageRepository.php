@@ -4,6 +4,8 @@ namespace Styleguide\Repositories;
 
 use App\Repositories\ModularPageRepository as Repository;
 use Factories\GenericPromo;
+use Factories\Button;
+use Factories\HeroImage;
 use Factories\Spotlight;
 use Factories\Article;
 use Factories\Event;
@@ -16,6 +18,14 @@ class ModularPageRepository extends Repository
     public function getModularComponents(array $data): array
     {
         $components = [
+            'hero-1' => [
+                'data' => app(HeroImage::class)->create(1, false),
+                'component' => [
+                    'heading' => 'Hero',
+                    'filename' => 'hero',
+                ],
+            ],
+
             'catalog-1' => [
                 'data' => app(GenericPromo::class)->create(4, false, [
                     'description' => '',
@@ -120,18 +130,27 @@ class ModularPageRepository extends Repository
             ],
 
             'button-column' => [
-                'data' => app(GenericPromo::class)->create(4, false),
+                'data' => app(Button::class)->create(4, false),
                 'component' => [
                     'heading' => 'Button column',
                     'filename' => 'button-column',
                 ],
             ],
 
-            'spotlight' => [
+            'button-row' => [
+                'data' => app(Button::class)->create(4, false),
+                'component' => [
+                    'heading' => 'Button row',
+                    'filename' => 'button-row',
+                    'columns' => 4
+                ],
+            ],
+
+            'spotlight-row' => [
                 'data' => app(Spotlight::class)->create(1, false),
                 'component' => [
                     'heading' => 'Spotlight',
-                    'filename' => 'spotlight',
+                    'filename' => 'spotlight-row',
                 ],
             ],
 

@@ -1,8 +1,15 @@
 {{--
     $button => array // ['title', 'link']
 --}}
-<div class="grid gap-y-4 xl:mx-0 items-start">
+
+<ul class="grid grid-cols-1 gap-4 xl:mx-0 items-start">
     @foreach($data as $button)
-        <a href="{{ $button['link'] }}" class="green-button text-lg w-full mb-0">{{ $button['title'] }}</a>
+        <li class="block">
+            @if(!empty($button['option']) && view()->exists('components.button-'.\Illuminate\Support\Str::slug($button['option'])))
+                @include('components.buttons.'.\Illuminate\Support\Str::slug($button['option']), ['button' => $button, 'class' => 'w-full'])
+            @else
+                @include('components.buttons.default', ['button' => $button, 'class' => 'w-full'])
+            @endif
+        </li>
     @endforeach
-</div>
+</ul>

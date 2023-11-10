@@ -1,8 +1,9 @@
+// Docs: https://github.com/Alhadis/Accordion
 import 'accordion/src/accordion.js';
 
 (function() {
     "use strict";
-
+    
     document.querySelectorAll('.accordion').forEach(function(item) {
         let accordion = new Accordion(item, {
             onToggle: function(target){

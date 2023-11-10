@@ -1,14 +1,20 @@
 {{--
     $images => array // ['relative_url', 'title', 'description']
+
+    Add specific classes in base config under global -> sites -> promos -> hero -> class = 'class-name'
+    Add your specific css in scss/subsite/_main.scss
 --}}
 
-<div
-    {!! (in_array($base['page']['controller'], config('base.hero_full_controllers'))) ? ' role="complementary"' : '' !!} 
-    class="mb-4 mt:mx-0{{ !empty($images) && count($images) > 1 ? ' rotate' : '' }}{{!in_array($base['page']['controller'], config('base.hero_full_controllers'))  ? '  -mx-4' : ' ' }}"
->
-    @foreach($images as $image)
+<div {!! (in_array($base['page']['controller'], config('base.hero_full_controllers'))) ? ' role="complementary"' : '' !!}
+    class="GTM-hero mt:mx-0
+    {{ !empty($class) ? $class : '' }}
+    {{ !empty($data) && count($data) > 1 ? ' rotate' : '' }}
+    {{!in_array($base['page']['controller'], config('base.hero_full_controllers'))  ? '  -mx-4' : '' }}
+    {{!empty(config('base.global.sites.'.$base['site']['id'].'.promos.hero.class')) ? ' '.config('base.global.sites.'.$base['site']['id'].'.promos.hero.class') : ''}}
+">
+    @foreach($data as $image)
         @if(!empty($image['option']))
-            @include('components/hero/'.$image['option'])
+            @include('components/hero/'.Str::slug($image['option']))
         @else
             @include('components/hero/default')
         @endif

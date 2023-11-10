@@ -29,6 +29,8 @@ class HeroImage implements FactoryContract
                 'filename_alt_text' => 'Example background image',
                 'secondary_relative_url' => '/styleguide/image/1600x580?text=Secondary%201600x580%20('.$i.')',
                 'secondary_alt_text' => 'Example secondary image',
+                //'option' => $this->faker->randomElement(['Text Overlay', 'Logo Overlay', 'SVG Overlay', '']),
+                'option' => '',
             ];
 
             $data[$i] = array_replace_recursive($data[$i], $options);

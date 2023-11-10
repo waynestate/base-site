@@ -31,6 +31,16 @@ class ModularPageController extends Controller
     {
         $components['components'] = $this->modular->getModularComponents($request->data['base']);
 
+        foreach($components['components'] as $key => $component) {
+            if (str_contains($key, 'hero')) {
+                $request->data['base']['hero'] = $components['components'][$key]['data'];
+                unset($components['components'][$key]);
+            }
+        }
+
+        // Make it a full width view
+        $request->data['base']['show_site_menu'] = false;
+
         return view('modularpage', merge($request->data, $components));
     }
 }

@@ -1,3 +1,4 @@
+// install container queries https://github.com/tailwindlabs/tailwindcss-container-queries
 const twColors = require('tailwindcss/colors')
 const path = require("path");
 
@@ -48,13 +49,12 @@ const baseColors = {
 
 const screens = {
     'sm': '420px',
-    'md': '576px',
-    'lg': '732px',
-    'xl': '888px',
-    'xxl': '1044px',
-    '2xl': '1044px',
-    '3xl': '1200px',
-    'mt': '780px', // Adjust this based on the top menu width
+    'md': '640px',
+    'lg': '844px',
+    'xl': '916px',
+    '2xl': '1200px',
+    '3xl': '1440px',
+    'mt': '844px', // Adjust this based on the top menu width
     'print': {'raw': 'print'},
 }
 
