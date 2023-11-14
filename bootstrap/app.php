@@ -15,6 +15,10 @@ $app = new Illuminate\Foundation\Application(
     realpath(__DIR__.'/../')
 );
 
+// phpinfo();
+dd(__DIR__);
+$app->useEnvironmentPath($_SERVER['DOCUMENT_ROOT'] . '/..');
+
 /*
 |--------------------------------------------------------------------------
 | Bind Important Interfaces

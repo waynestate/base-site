@@ -21,6 +21,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // dd('here');
+        // $this->app->loadEnvironmentFrom('/vagrant/mesg.med/.env');
+        // // app()->useEnvironmentPath('/vagrant/mesg.med');
+        // dd(app()->EnvironmentPath());
+
         Blade::directive('image', function ($expression) {
             // Since all paramters are concated into a string we need to parse them out into an array
             $params = explode(',', $expression);

@@ -3,6 +3,11 @@
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\TopicController;
 
+// if (is_file($_SERVER['DOCUMENT_ROOT'] . '/../config/base.php')) {
+//     return include $_SERVER['DOCUMENT_ROOT'] . '/../config/base.php';
+// }
+app()->loadEnvironmentFrom('/vagrant/mesg.med/.env');
+die(env('APP_NAME'));
 return [
 
     /*
