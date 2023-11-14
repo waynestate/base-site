@@ -205,9 +205,9 @@
                 "is_active": 1,
                 "page_id": 109100,
                 "target": "",
-                "display_name": "Events listing",
+                "display_name": "Event listing",
                 "class_name": "",
-                "relative_url": "/styleguide/eventslisting",
+                "relative_url": "/styleguide/eventlisting",
                 "submenu": []
             },
             "111100": {
@@ -266,9 +266,9 @@
                 "is_active": 1,
                 "page_id": 116100,
                 "target": "",
-                "display_name": "Promo column",
+                "display_name": "Single promo",
                 "class_name": "",
-                "relative_url": "/styleguide/promocolumn",
+                "relative_url": "/styleguide/singlepromo",
                 "submenu": []
             },
             "118100": {
@@ -289,16 +289,6 @@
                 "display_name": "Spotlight",
                 "class_name": "",
                 "relative_url": "/styleguide/spotlightcomponent",
-                "submenu": []
-            },
-            "120100": {
-                "menu_item_id": 120100,
-                "is_active": 1,
-                "page_id": 120100,
-                "target": "",
-                "display_name": "Buttons",
-                "class_name": "",
-                "relative_url": "/styleguide/buttonscomponent",
                 "submenu": []
             }
         }

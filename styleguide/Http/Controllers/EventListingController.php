@@ -5,12 +5,21 @@ namespace Styleguide\Http\Controllers;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Factories\AccordionItems;
+use Faker\Factory;
+use Factories\Event;
 
-class AccordionController extends Controller
+class EventListingController extends Controller
 {
     /**
-     * Display an example accordion.
+     * Construct the controller.
+     */
+    public function __construct(Factory $faker)
+    {
+        $this->faker['faker'] = $faker->create();
+    }
+
+    /**
+     * Article Listing Controller
      */
     public function index(Request $request): View
     {
@@ -26,33 +35,50 @@ class AccordionController extends Controller
     <div class="lg:col-span-1 p-2 bg-gray-100 font-bold lg:border-r border-y order-1 lg:order-none">Page field</div>
     <div class="lg:col-span-2 p-2 bg-gray-100 font-bold border-y order-3 lg:order-none">Data</div>
     <div class="lg:col-span-1 p-2 lg:border-r order-2 lg:order-none">
-        <pre class="w-full">modular-accordion-1</pre>
+        <pre class="w-full">modular-events-column-1</pre>
+        <pre class="w-full">modular-events-row-1</pre>
     </div>
     <div class="lg:col-span-2 p-2 order-4 lg:order-none">
+Use default settings
+<pre class="w-full" tabindex="0">
+{}
+</pre>
+Use default calendar by omitting ID and set other configuration items
 <pre class="w-full" tabindex="0">
 {
-"id":1234,
-"heading":"My accordion",
+"heading": "My events"
+}
+</pre>
+All available configurations
+<pre class="w-full" tabindex="0">
+{
+"id":null,
+"heading":"Events",
+"config":"limit:4",
+"cal_name": "myurl/",
+"link_text":"More events"
 }
 </pre></div></div>',
                     ],
                 ],
                 'component' => [
                     'filename' => 'accordion',
+                    'columns' => '4',
+                    'showDescription' => false,
                 ],
             ],
-            'accordion-2' => [
-                'data' => app(AccordionItems::class)->create(4, false),
+            'events-column-1' => [
+                'data' => app(Event::class)->create(4, false),
                 'component' => [
-                    'heading' => 'My accordion',
-                    'filename' => 'accordion',
+                    'heading' => 'My events',
+                    'filename' => 'events-column',
                 ],
             ],
-            'accordion-3' => [
-                'data' => app(AccordionItems::class)->create(3, false),
+            'events-row-1' => [
+                'data' => app(Event::class)->create(4, false),
                 'component' => [
-                    'heading' => 'My second accordion',
-                    'filename' => 'accordion',
+                    'heading' => 'My event row',
+                    'filename' => 'events-row',
                 ],
             ],
         ];
