@@ -31,11 +31,6 @@ class ModularPageController extends Controller
     {
         $components['components'] = $this->modular->getModularComponents($request->data['base']);
 
-        // Use one controller for all styleguide component page data
-        if (using_styleguide() && !empty($request->data['base']['components'])) {
-            $components['components'] = $request->data['base']['components'];
-        }
-
         // Set hero from components
         if (empty($request->data['base']['hero'])) {
             $hero = collect($components['components'])->reject(function ($data, $component_name) {
