@@ -20,12 +20,15 @@ class GenericPromo implements FactoryContract
      */
     public function create($limit = 1, $flatten = false, $options = [])
     {
+        // Doc https://github.com/fzaninotto/Faker
+
         $promo_group_id = $this->faker->randomNumber(5);
 
         for ($i = 0; $i <= $limit - 1; $i++) {
             $data[$i] = [
-                'title' => ucfirst(implode(' ', $this->faker->words(3))),
-                'excerpt' => $this->faker->sentence(),
+                'title' => ucfirst(implode(' ', $this->faker->words(6))),
+                'excerpt' => $this->faker->catchPhrase,
+                'description' => '<p>' . $this->faker->text(100) . ' <a href="https://wayne.edu">'. $this->faker->sentence(3)  .'</a></p>',
                 'description' => '<p>' . $this->faker->text(100) . ' <a href="https://wayne.edu">'. $this->faker->sentence(3)  .'</a></p>',
                 'link' => 'https://wayne.edu',
                 'promo_item_id' => $i,

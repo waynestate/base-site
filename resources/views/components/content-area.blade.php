@@ -4,7 +4,7 @@
     @yield('top')
 
     @if(!empty($base['hero']) && in_array($base['page']['controller'], config('base.hero_full_controllers')))
-        @include('components.hero', ['images' => $base['hero']])
+        @include('components.hero', ['data' => $base['hero']])
 
         @yield('under-hero')
     @endif
@@ -40,14 +40,14 @@
                 @yield('below_menu')
 
                 @if(!empty($base['under_menu']))
-                    @include('components.under-menu', ['buttons' => $base['under_menu'], 'class' => 'under-menu'])
+                    @include('components.button-column', ['data' => $base['under_menu']])
                 @endif
             </nav>
         </div>
 
         <main class="w-full{{ !in_array($base['page']['controller'], config('base.full_width_controllers')) ? ' px-4' : '' }} {{$base['show_site_menu'] === true ? 'mt:w-3/4' : '' }} content-area mb-8 print:w-full" tabindex="-1">
             @if(!empty($base['hero']) && !in_array($base['page']['controller'], config('base.hero_full_controllers')))
-                @include('components.hero', ['images' => $base['hero']])
+                @include('components.hero', ['data' => $base['hero']])
 
                 @yield('under-hero')
             @endif

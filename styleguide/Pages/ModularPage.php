@@ -119,11 +119,11 @@ class ModularPage extends Page
                                             </tr>
                                             <tr>
                                                 <td class="font-bold">Description</td>
-                                                <td>Formattable text. Main body content for single promo view.</td>
+                                                <td>Formattable text. Main body content for single promo view. Links in the description will be stripped if the promo group has a link.</td>
                                             </tr>
                                             <tr>
                                                 <td class="font-bold">Filename</td>
-                                                <td>600x450px, or minimum width 600px any height.</td>
+                                                <td>Minimum width 600px any height. Common sizes: 600x450px (4:3), 600x800 (3:4), 600x338 (16:9), 770x434(16:9, news), </td>
                                             </tr>
                                         </tbody>
                                     </table>

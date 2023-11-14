@@ -2,9 +2,9 @@
     $items => array // ['title', 'description']
 --}}
 <ul class="accordion">
-    @foreach($items as $key=>$item)
+    @foreach($data as $item)
         <li>
-            <a href="#definition-{{ $key }}" id="definition-{{ $key }}"><span aria-hidden="true"></span>{{ $item['title'] }}</a>
+            <a href="#definition-{{ $item['promo_item_id'] }}" id="definition-{{ $item['promo_item_id'] }}"><span aria-hidden="true"></span>{{ $item['title'] }}</a>
             <div class="content">{!! $item['description'] !!}</div>
         </li>
     @endforeach

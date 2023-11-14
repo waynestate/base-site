@@ -19,6 +19,9 @@ class HeroFull extends Page
                 'controller' => 'HeroFullController',
                 'title' => 'Full width',
                 'id' => 105100103,
+                'content' => [
+                    'main' => '<p></p>',
+                ],
             ],
         ]);
     }

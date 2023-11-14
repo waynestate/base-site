@@ -8,9 +8,27 @@
     </div>
 
     @if(!empty($base['accordion_page']))
-        @include('components.accordion', ['items' => $base['accordion_page']])
+        @include('components.accordion', ['data' => $base['accordion_page']])
     @endif
 
+    <h3 class="mt-8">Configuration</h3>
+    <div class="grid grid-cols-1 lg:grid-cols-3 border-x border-b">
+        <div class="lg:col-span-1 p-2 bg-gray-100 font-bold lg:border-r border-y order-1 lg:order-none">Page field</div>
+        <div class="lg:col-span-2 p-2 bg-gray-100 font-bold border-y order-3 lg:order-none">Data</div>
+        <div class="lg:col-span-1 p-2 lg:border-r order-2 lg:order-none">
+            <pre class="w-full">modular-accordion-1</pre>
+        </div>
+        <div class="lg:col-span-2 p-2 order-4 lg:order-none">
+<pre class="w-full" tabindex="0">
+{!! htmlspecialchars('{
+"id":1234,
+"heading":"My accordion"
+}') !!}
+</pre>
+        </div>
+    </div>
+
+    <h3 class="mt-8">CMS HTML</h3>
 <pre class="code-block" tabindex="0">
 {!! htmlspecialchars('<ul class="accordion">
     <!-- Item one -->

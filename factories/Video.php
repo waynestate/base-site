@@ -22,9 +22,10 @@ class Video implements FactoryContract
     {
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
-                'link' => 'https://www.youtube.com/watch?v=QYVv994xz6s',
-                'youtube_id' => 'QYVv994xz6s',
-                'relative_url' => $this->faker->randomElement(['/styleguide/image/800x450?text=Video', '']),
+                'link' => 'https://www.youtube.com/watch?v=PHqfwq033yQ',
+                'youtube_id' => 'PHqfwq033yQ',
+                'relative_url' => '',
+                //'relative_url' => $this->faker->randomElement(['/styleguide/image/800x450?text=Video', '']),
                 'title' => $this->faker->sentence(),
                 'excerpt' => $this->faker->sentence(),
                 'filename_alt_text' => 'Example video image',
