@@ -38,7 +38,7 @@ class Article implements FactoryContract
 
         $featured = [
             'featured' => 1,
-            'url' => '/styleguide/image/1600x580',
+            'url' => '/styleguide/image/770x434',
             'caption' => $this->faker->sentence(rand(5, 10)),
             'alt_text' => $this->faker->sentence(rand(5, 10)),
             'type' => 'Embeddable',

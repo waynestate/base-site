@@ -45,7 +45,7 @@
                 "target": "",
                 "display_name": "Buttons",
                 "class_name": "",
-                "relative_url": "/styleguide/buttons",
+                "relative_url": "/styleguide/buttonclasses",
                 "submenu": []
             },
             "117100": {
@@ -109,6 +109,16 @@
                 "relative_url": "/styleguide/hero/contained",
                 "submenu": {
                     "105100100": {
+                        "menu_item_id": 105100102,
+                        "is_active": 1,
+                        "page_id": 105100102,
+                        "target": "",
+                        "display_name": "Skinny",
+                        "class_name": "",
+                        "relative_url": "/styleguide/hero/skinny",
+                        "submenu": []
+                    },
+                    "105100100": {
                         "menu_item_id": 105100100,
                         "is_active": 1,
                         "page_id": 105100100,
@@ -116,26 +126,6 @@
                         "display_name": "Contained",
                         "class_name": "",
                         "relative_url": "/styleguide/hero/contained",
-                        "submenu": []
-                    },
-                    "105100101": {
-                        "menu_item_id": 105100101,
-                        "is_active": 1,
-                        "page_id": 105100101,
-                        "target": "",
-                        "display_name": "Contained - Rotate",
-                        "class_name": "",
-                        "relative_url": "/styleguide/hero/containedrotate",
-                        "submenu": []
-                    },
-                    "105100102": {
-                        "menu_item_id": 105100102,
-                        "is_active": 1,
-                        "page_id": 105100102,
-                        "target": "",
-                        "display_name": "Contained - Text overlay",
-                        "class_name": "",
-                        "relative_url": "/styleguide/hero/contained/textoverlay",
                         "submenu": []
                     },
                     "105100103": {
@@ -153,7 +143,7 @@
                         "is_active": 1,
                         "page_id": 105100104,
                         "target": "",
-                        "display_name": "Full width - Rotate",
+                        "display_name": "Rotate",
                         "class_name": "",
                         "relative_url": "/styleguide/hero/full/rotate",
                         "submenu": []
@@ -163,7 +153,7 @@
                         "is_active": 1,
                         "page_id": 105100105,
                         "target": "",
-                        "display_name": "Full width - Text overlay",
+                        "display_name": "Text overlay",
                         "class_name": "",
                         "relative_url": "/styleguide/hero/full/textoverlay",
                         "submenu": []
@@ -173,7 +163,7 @@
                         "is_active": 1,
                         "page_id": 105100106,
                         "target": "",
-                        "display_name": "Full width - SVG overlay",
+                        "display_name": "SVG overlay",
                         "class_name": "",
                         "relative_url": "/styleguide/hero/full/svgoverlay",
                         "submenu": []
@@ -183,7 +173,7 @@
                         "is_active": 1,
                         "page_id": 105100107,
                         "target": "",
-                        "display_name": "Full width - Logo overlay",
+                        "display_name": "Logo overlay",
                         "class_name": "",
                         "relative_url": "/styleguide/hero/full/logooverlay",
                         "submenu": []
@@ -218,16 +208,6 @@
                 "display_name": "Events listing",
                 "class_name": "",
                 "relative_url": "/styleguide/eventslisting",
-                "submenu": []
-            },
-            "110100": {
-                "menu_item_id": 110100,
-                "is_active": 1,
-                "page_id": 110100,
-                "target": "",
-                "display_name": "Mini list",
-                "class_name": "",
-                "relative_url": "/styleguide/minilist",
                 "submenu": []
             },
             "111100": {
@@ -271,24 +251,14 @@
                     }
                 }
             },
-            "112100": {
-                "menu_item_id": 112100,
-                "is_active": 1,
-                "page_id": 112100,
-                "target": "",
-                "display_name": "Banner",
-                "class_name": "",
-                "relative_url": "/styleguide/banner",
-                "submenu": []
-            },
             "114100": {
                 "menu_item_id": 114100,
                 "is_active": 1,
                 "page_id": 114100,
                 "target": "",
-                "display_name": "Under menu",
+                "display_name": "Buttons",
                 "class_name": "",
-                "relative_url": "/styleguide/undermenu",
+                "relative_url": "/styleguide/buttons",
                 "submenu": []
             },
             "116100": {
@@ -296,9 +266,39 @@
                 "is_active": 1,
                 "page_id": 116100,
                 "target": "",
-                "display_name": "Featured Promo",
+                "display_name": "Promo column",
                 "class_name": "",
-                "relative_url": "/styleguide/featuredpromo",
+                "relative_url": "/styleguide/promocolumn",
+                "submenu": []
+            },
+            "118100": {
+                "menu_item_id": 118100,
+                "is_active": 1,
+                "page_id": 118100,
+                "target": "",
+                "display_name": "Catalog",
+                "class_name": "",
+                "relative_url": "/styleguide/catalog",
+                "submenu": []
+            },
+            "119100": {
+                "menu_item_id": 119100,
+                "is_active": 1,
+                "page_id": 119100,
+                "target": "",
+                "display_name": "Spotlight",
+                "class_name": "",
+                "relative_url": "/styleguide/spotlightcomponent",
+                "submenu": []
+            },
+            "120100": {
+                "menu_item_id": 120100,
+                "is_active": 1,
+                "page_id": 120100,
+                "target": "",
+                "display_name": "Buttons",
+                "class_name": "",
+                "relative_url": "/styleguide/buttonscomponent",
                 "submenu": []
             }
         }
@@ -383,6 +383,16 @@
                         "submenu": []
                     }
                 }
+            },
+            "112100": {
+                "menu_item_id": 112100,
+                "is_active": 1,
+                "page_id": 112100,
+                "target": "",
+                "display_name": "Banner",
+                "class_name": "",
+                "relative_url": "/styleguide/banner",
+                "submenu": []
             },
             "104100": {
                 "menu_item_id": 104100,

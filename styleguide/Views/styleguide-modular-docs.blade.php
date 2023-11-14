@@ -8,9 +8,11 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 items-start gap-y-8 sm:gap-x-4 lg:gap-x-8 mt-8 mb-4">
-        @include('modular/components/catalog', ['data' => $catalog_1['data'], 'component' => $catalog_1['component']])
+        <div class="col-span-full">
+            @include('components/catalog', ['data' => $catalog_1['data'], 'component' => $catalog_1['component']])
+        </div>
 
-        <div class="col-span-2">
+        <div class="col-span-full">
             <h3 class="mt-0">Configuration</h3>
             <div class="grid grid-cols-1 lg:grid-cols-3 border-x border-b mb-16">
                 <div class="lg:col-span-1 p-2 bg-gray-100 font-bold lg:border-r border-y order-1 lg:order-none">Page field</div>
@@ -34,9 +36,12 @@
             </div>
         </div>
 
-        @include('modular/components/catalog', ['data' => $catalog_2['data'], 'component' => $catalog_2['component']])
+        <div class="col-span-full">
+            <h2>Catalog list</h2>
+            @include('components/catalog', ['data' => $catalog_2['data'], 'component' => $catalog_2['component']])
+        </div>
 
-        <div class="col-span-2">
+        <div class="col-span-full">
             <h3 class="mt-0">Configuration</h3>
             <div class="grid grid-cols-1 lg:grid-cols-3 border-x border-b mb-16">
                 <div class="lg:col-span-1 p-2 bg-gray-100 font-bold lg:border-r border-y order-1 lg:order-none">Page field</div>
@@ -60,7 +65,7 @@
             </div>
         </div>
 
-        @include('modular/components/accordion', ['data' => $accordion_1['data'], 'component' => $accordion_1['component']])
+        @include('components/accordion', ['data' => $accordion_1['data'], 'component' => $accordion_1['component']])
 
         <div class="col-span-2">
             <h3 class="mt-0">Configuration</h3>
@@ -81,7 +86,7 @@
             </div>
         </div>
 
-        @include('modular/components/news-row', ['data' => $news_row_1['data'], 'component' => $news_row_1['component']])
+        @include('components/news-row', ['data' => $news_row_1['data'], 'component' => $news_row_1['component']])
 
         <div class="col-span-2">
             <h3 class="mt-0">Configuration</h3>
@@ -118,7 +123,7 @@ or configure with these options
             </div>
         </div>
 
-        @include('modular/components/events-column', ['data' => $events_column_1['data'], 'component' => $events_column_1['component']])
+        @include('components/events-column', ['data' => $events_column_1['data'], 'component' => $events_column_1['component']])
 
         <div class="col-span-2">
             <h3 class="mt-0">Configuration</h3>

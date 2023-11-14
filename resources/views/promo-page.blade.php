@@ -1,6 +1,3 @@
-{{-- 
-    add bem classes and a way to pass in a parent class
---}}
 @extends('components.content-area')
 
 @section('content')

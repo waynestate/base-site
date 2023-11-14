@@ -7,6 +7,7 @@ use Factories\GenericPromo;
 use Factories\Spotlight;
 use Factories\Article;
 use Factories\Event;
+use Factories\HeroImage;
 
 class ModularPageRepository extends Repository
 {
@@ -16,6 +17,12 @@ class ModularPageRepository extends Repository
     public function getModularComponents(array $data): array
     {
         $components = [
+            'hero-1' => [
+                'data' => app(HeroImage::class)->create(1, false),
+                'component' => [
+                    'filename' => 'hero',
+                ],
+            ],
             'catalog-1' => [
                 'data' => app(GenericPromo::class)->create(4, false, [
                     'description' => '',
@@ -114,7 +121,7 @@ class ModularPageRepository extends Repository
                 'data' => app(Spotlight::class)->create(1, false),
                 'component' => [
                     'heading' => 'Spotlight',
-                    'filename' => 'spotlight',
+                    'filename' => 'spotlight-row',
                 ],
             ],
 
