@@ -78,6 +78,47 @@
                 "relative_url": "/styleguide/figure",
                 "submenu": []
             },
+            "111100": {
+                "menu_item_id": 111100,
+                "is_active": 1,
+                "page_id": 111100,
+                "target": "",
+                "display_name": "Forms",
+                "class_name": "",
+                "relative_url": "/styleguide/forms",
+                "submenu": {
+                    "111100100": {
+                        "menu_item_id": 111100100,
+                        "is_active": 1,
+                        "page_id": 111100100,
+                        "target": "",
+                        "display_name": "Forms",
+                        "class_name": "",
+                        "relative_url": "/styleguide/forms",
+                        "submenu": []
+                    },
+                    "111100101": {
+                        "menu_item_id": 111100101,
+                        "is_active": 1,
+                        "page_id": 111100101,
+                        "target": "",
+                        "display_name": "Form Errors",
+                        "class_name": "",
+                        "relative_url": "/styleguide/forms/error",
+                        "submenu": []
+                    },
+                    "111100102": {
+                        "menu_item_id": 111100102,
+                        "is_active": 1,
+                        "page_id": 111100102,
+                        "target": "",
+                        "display_name": "Form Slate",
+                        "class_name": "",
+                        "relative_url": "/styleguide/forms/slate",
+                        "submenu": []
+                    }
+                }
+            },
             "100800": {
                 "menu_item_id": 100800,
                 "is_active": 1,
@@ -210,55 +251,14 @@
                 "relative_url": "/styleguide/eventlisting",
                 "submenu": []
             },
-            "111100": {
-                "menu_item_id": 111100,
-                "is_active": 1,
-                "page_id": 111100,
-                "target": "",
-                "display_name": "Forms",
-                "class_name": "",
-                "relative_url": "/styleguide/forms",
-                "submenu": {
-                    "111100100": {
-                        "menu_item_id": 111100100,
-                        "is_active": 1,
-                        "page_id": 111100100,
-                        "target": "",
-                        "display_name": "Forms",
-                        "class_name": "",
-                        "relative_url": "/styleguide/forms",
-                        "submenu": []
-                    },
-                    "111100101": {
-                        "menu_item_id": 111100101,
-                        "is_active": 1,
-                        "page_id": 111100101,
-                        "target": "",
-                        "display_name": "Form Errors",
-                        "class_name": "",
-                        "relative_url": "/styleguide/forms/error",
-                        "submenu": []
-                    },
-                    "111100102": {
-                        "menu_item_id": 111100102,
-                        "is_active": 1,
-                        "page_id": 111100102,
-                        "target": "",
-                        "display_name": "Form Slate",
-                        "class_name": "",
-                        "relative_url": "/styleguide/forms/slate",
-                        "submenu": []
-                    }
-                }
-            },
             "114100": {
                 "menu_item_id": 114100,
                 "is_active": 1,
                 "page_id": 114100,
                 "target": "",
-                "display_name": "Buttons",
+                "display_name": "Button set",
                 "class_name": "",
-                "relative_url": "/styleguide/buttons",
+                "relative_url": "/styleguide/buttonset",
                 "submenu": []
             },
             "116100": {

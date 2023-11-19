@@ -9,7 +9,7 @@ use Faker\Factory;
 use Factories\Button;
 use Factories\GenericPromo;
 
-class ButtonsComponentController extends Controller
+class ButtonSetController extends Controller
 {
     /**
      * Construct the controller.
@@ -69,8 +69,8 @@ class ButtonsComponentController extends Controller
             'title' => 'Icon button',
             'option' => 'Green',
             'excerpt' => 'Excerpt text here',
-            'secondary_relative_url' => $icon_white,
-            'secondary_alt_text' => 'Example white icon',
+            'relative_url' => $icon_white,
+            'filename_alt_text' => 'Example white icon',
         ]);
 
         // SVG overlay bg light
