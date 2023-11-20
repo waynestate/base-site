@@ -9,7 +9,7 @@ use Factories\FooterSocial;
 use Factories\HeroImage;
 use Factories\PromoPage;
 use Factories\PromoPageWithOptions;
-use Factories\UnderMenu;
+use Factories\Button;
 use Faker\Factory;
 
 class PromoRepository extends Repository
@@ -39,11 +39,11 @@ class PromoRepository extends Repository
     {
         // Define the pages that have under menu promos: page_id => quanity
         $under_menu_page_ids = [
-            100 => 4, // Styleguide
+            114100 => 3, // Styleguide
         ];
 
         // Only pull under_menu promos if they match the page_ids that are specified
-        $under_menu = !empty($under_menu_page_ids[$data['page']['id']]) ? app(UnderMenu::class)->create($under_menu_page_ids[$data['page']['id']]) : null;
+        $under_menu = !empty($under_menu_page_ids[$data['page']['id']]) ? app(Button::class)->create($under_menu_page_ids[$data['page']['id']]) : null;
 
         // Define the pages that have hero images: page_id => quanity
         $hero_page_ids = [

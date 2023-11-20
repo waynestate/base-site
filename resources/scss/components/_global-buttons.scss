@@ -23,7 +23,7 @@
 }
 
 .button--two-line {
-    @apply text-left px-2.5 inline-grid auto-rows-auto justify-start justify-items-center;
+    @apply text-left px-2.5 inline-grid auto-rows-auto justify-start;
 
     & .button__title {
         @apply block text-lg leading-none xl:text-xl xl:leading-none not-italic col-start-2 col-end-auto;

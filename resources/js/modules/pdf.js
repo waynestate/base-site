@@ -9,7 +9,7 @@
             pdfSpan.appendChild(pdfLabel);
             link.children[lastChild].appendChild(pdfSpan);
         } else if(!link.classList.contains('button') && link.getElementsByTagName('img').length > 0) {
-            newSpan.appendChild(pdfLabel);
+            pdfSpan.appendChild(pdfLabel);
             link.appendChild(pdfSpan);
 
         } else {

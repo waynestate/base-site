@@ -4,7 +4,7 @@ namespace Styleguide\Pages;
 
 use Factories\Page as PageFactory;
 
-class ButtonClasses extends Page
+class Buttons extends Page
 {
     /**
      * {@inheritdoc}
