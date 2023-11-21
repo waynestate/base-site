@@ -1,0 +1,4 @@
+// pdf.js appends a span for styling
+a[href$=".pdf"] img + span {
+    @apply bg-green-600 text-white rounded-sm absolute right-0 bottom-0 pt-0.5 pb-1 px-2 mr-1 mb-1 leading-none font-bold text-sm tracking-wide;
+}

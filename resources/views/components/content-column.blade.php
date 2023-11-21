@@ -7,5 +7,5 @@
     @else
         <h2 class="mt-0">{{ $content_block['title'] }}</h2>
     @endif
-    {!! $content_block['description'] !!}
+    <div class="content">{!! $content_block['description'] !!}</div>
 @endforeach

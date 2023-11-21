@@ -13,14 +13,13 @@ class Buttons extends Page
     {
         return app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'ButtonsComponentController',
-                'title' => 'Button column',
-                'id' => 114100,
+                'controller' => 'ButtonsController',
+                'title' => 'Buttons',
+                'id' => 100400,
                 'content' => [
-                    'main' => '
-                    <p>This component can be used as buttons under the side menu and as buttons on your page.</p>
-<p>You may not mix button types within a component.</p>
-',
+                    'main' => '<p>'.$this->faker->paragraph(8).'</p>
+                    <p>'.$this->faker->paragraph(8).'</p>
+                    <p>'.$this->faker->paragraph(8).'</p>',
                 ],
             ],
         ]);
