@@ -27,7 +27,7 @@ class Spotlight implements FactoryContract
                 'title' => $this->faker->name,
                 'excerpt' => $this->faker->jobTitle,
                 'description' => '<p>&ldquo;' . $this->faker->text(200) . '&rdquo;</p>',
-                'link' => 'https://wayne.edu',
+                'link' => '#',
                 'promo_item_id' => $i,
                 'promo_group_id' => strval($promo_group_id),
                 'relative_url' => '/styleguide/image/600x600?text=600x600:'.$i,

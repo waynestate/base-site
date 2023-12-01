@@ -16,8 +16,8 @@ class HeroFullTextOverlay extends Page
     {
         return app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'HeroFullTextOverlayController',
-                'title' => 'Full width - Text overlay',
+                'controller' => 'HeroTextController',
+                'title' => 'Text overlay',
                 'id' => 105100105,
                 'content' => [
                     'main' => '

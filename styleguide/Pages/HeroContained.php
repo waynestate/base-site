@@ -13,9 +13,12 @@ class HeroContained extends Page
     {
         return app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'ChildpageController',
+                'controller' => 'HeroContainedController',
                 'title' => 'Contained',
                 'id' => 105100100,
+                'content' => [
+                    'main' => '<p>Adding a hero component above your childpage content.</p>',
+                ],
             ],
         ]);
     }

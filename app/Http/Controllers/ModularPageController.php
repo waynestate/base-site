@@ -31,6 +31,21 @@ class ModularPageController extends Controller
     {
         $components['components'] = $this->modular->getModularComponents($request->data['base']);
 
-        return view('modular/modularpage', merge($request->data, $components));
+        // Set hero from components
+        if (empty($request->data['base']['hero'])) {
+            $hero = collect($components['components'])->reject(function ($data, $component_name) {
+                return !str_contains($component_name, 'hero');
+            })->toArray();
+
+            $hero_key = array_key_first($hero);
+
+            if(!empty($hero)) {
+                $request->data['base']['hero'] = $components['components'][$hero_key]['data'];
+            }
+
+            unset($components['components'][$hero_key]);
+        }
+
+        return view('modularpage', merge($request->data, $components));
     }
 }

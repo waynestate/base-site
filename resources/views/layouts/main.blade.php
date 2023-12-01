@@ -3,7 +3,7 @@
 <head>
     @include('components.meta')
 
-    <title>@include('components.head-title')</title>
+    <title>{{ $base['meta']['title'] ?? 'Wayne State University' }}</title>
 
     <link rel="icon" type="image/x-icon" href="https://wayne.edu/favicon.ico">
     <link rel="stylesheet" href="{{ mix('_resources/css/main.css') }}">

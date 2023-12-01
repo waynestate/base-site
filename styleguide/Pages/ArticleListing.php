@@ -16,6 +16,9 @@ class ArticleListing extends Page
                 'controller' => 'ArticleListingController',
                 'title' => 'News article listing',
                 'id' => 108100,
+                'content' => [
+                    'main' => '<p>List recent news articles from the News Manager.</p>',
+                ],
             ],
             'site' => [
                 'subsite-folder' => 'styleguide/',

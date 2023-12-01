@@ -3,13 +3,13 @@
 namespace Styleguide\Repositories;
 
 use App\Repositories\PromoRepository as Repository;
-use Factories\Accordion;
+use Factories\AccordionItems;
 use Factories\FooterContact;
 use Factories\FooterSocial;
 use Factories\HeroImage;
 use Factories\PromoPage;
 use Factories\PromoPageWithOptions;
-use Factories\UnderMenu;
+use Factories\Button;
 use Faker\Factory;
 
 class PromoRepository extends Repository
@@ -39,23 +39,15 @@ class PromoRepository extends Repository
     {
         // Define the pages that have under menu promos: page_id => quanity
         $under_menu_page_ids = [
-            100 => 4, // Styleguide
+            114100 => 3, // Styleguide
         ];
 
         // Only pull under_menu promos if they match the page_ids that are specified
-        $under_menu = !empty($under_menu_page_ids[$data['page']['id']]) ? app(UnderMenu::class)->create($under_menu_page_ids[$data['page']['id']]) : null;
+        $under_menu = !empty($under_menu_page_ids[$data['page']['id']]) ? app(Button::class)->create($under_menu_page_ids[$data['page']['id']]) : null;
 
         // Define the pages that have hero images: page_id => quanity
         $hero_page_ids = [
             101101 => 1, // Homepage
-            105100100 => 1, // Hero Contained
-            105100101 => 3, // Hero Contained - Rotate
-            105100102 => 1, // Hero Contained - Text overlay
-            105100103 => 1, // Hero Full
-            105100104 => 3, // Hero Full - Rotate
-            105100105 => 1, // Hero Full - Text overlay
-            105100106 => 1, // Hero Full - SVG Overlay
-            105100107 => 1, // Hero Full - Logo overlay
         ];
 
         // Only pull hero promos if they match the pages_ids that are specificed
@@ -67,7 +59,7 @@ class PromoRepository extends Repository
         ];
 
         // Only pull accordion for childpage template
-        $accordion = !empty($accordion_page_ids[$data['page']['id']]) ? app(Accordion::class)->create($accordion_page_ids[$data['page']['id']]) : null;
+        $accordion = !empty($accordion_page_ids[$data['page']['id']]) ? app(AccordionItems::class)->create($accordion_page_ids[$data['page']['id']]) : null;
 
         // Get all the social icons
         $social = collect([
