@@ -16,7 +16,7 @@ class HeroFullSVGOverlay extends Page
     {
         return app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'HeroSVGController',
+                'controller' => 'HeroController',
                 'title' => 'SVG overlay',
                 'id' => 105100106,
                 'content' => [

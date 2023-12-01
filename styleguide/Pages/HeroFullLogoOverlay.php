@@ -13,7 +13,7 @@ class HeroFullLogoOverlay extends Page
     {
         return app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'HeroLogoController',
+                'controller' => 'HeroController',
                 'title' => 'Logo overlay',
                 'id' => 105100107,
                 'content' => [
