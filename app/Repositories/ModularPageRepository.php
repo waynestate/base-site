@@ -55,6 +55,45 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
         $modularComponents = [];
 
+        // Legacy support for accordion
+        if (!empty($data['data']['accordion_page'])) {
+            $data['data']['modular-accordion-999'] = json_encode([
+                'id' => $data['data']['accordion_page']
+            ]);
+        }
+
+        // Legacy support for listing
+        if (!empty($data['data']['listing_promo_group_id'])) {
+            if (!empty($data['data']['promotion_view_boolean']) && $data['data']['promotion_view_boolean'] === "true") {
+                $data['data']['modular-catalog-998'] = json_encode([
+                    'id' => $data['data']['listing_promo_group_id'],
+                    'columns' => 1,
+                    'singlePromoView' => true
+                ]);
+            } else {
+                $data['data']['modular-catalog-998'] = json_encode([
+                    'id' => $data['data']['listing_promo_group_id'],
+                    'columns' => 1
+                ]);
+            }
+        }
+
+        // Legacy support for grid
+        if (!empty($data['data']['grid_promo_group_id'])) {
+            if (!empty($data['data']['promotion_view_boolean']) && $data['data']['promotion_view_boolean'] === "true") {
+                $data['data']['modular-catalog-999'] = json_encode([
+                    'id' => $data['data']['grid_promo_group_id'],
+                    'columns' => 3,
+                    'singlePromoView' => true
+                ]);
+            } else {
+                $data['data']['modular-catalog-999'] = json_encode([
+                    'id' => $data['data']['grid_promo_group_id'],
+                    'columns' => 3
+                ]);
+            }
+        }
+
         $components = $this->parseData($data);
         $promos = $this->getPromos($components);
 
@@ -100,7 +139,14 @@ class ModularPageRepository implements ModularPageRepositoryContract
             if(Str::startsWith($pageField, 'modular-')) {
                 $name = Str::replaceFirst('modular-', '', $pageField);
 
-                if(Str::isJson($value)) {
+                // Remove all spaces and line breaks
+                $value = preg_replace('/\s*\R\s*/', '', $value);
+
+                // Last item cannot have comma at the end of it
+                $value = preg_replace('(,})', '}', $value);
+
+                //if(Str::isJson($value)) { // this isn't working, integers are considered json with this
+                if(str_starts_with($value, '{')) {
                     $components[$name] = json_decode($value, true);
                     if(!empty($components[$name]['config'])) {
                         $config = explode('|', $components[$name]['config']);

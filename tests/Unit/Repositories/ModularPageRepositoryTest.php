@@ -189,7 +189,9 @@ final class ModularPageRepositoryTest extends TestCase
                 'controller' => 'ModularPage',
             ],
             'data' => [
-                'modular-news-column-1' => 1
+                'modular-news-column-1' => json_encode([
+                    'id' => 1
+                ]),
             ],
         ]);
 
@@ -212,7 +214,9 @@ final class ModularPageRepositoryTest extends TestCase
                 'controller' => 'ModularPage',
             ],
             'data' => [
-                'modular-events-1' => 1
+                'modular-events-column-1' => json_encode([
+                    'id' => 1
+                ]),
             ],
         ]);
 
@@ -223,7 +227,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Run the promos through the repository
         $modularComponents = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
 
-        $this->assertArrayHasKey('data', $modularComponents['events-1']);
+        $this->assertArrayHasKey('data', $modularComponents['events-column-1']);
     }
 
     #[Test]
