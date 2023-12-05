@@ -84,6 +84,6 @@ Use default calendar by omitting ID and set other configuration items
             ],
         ];
 
-        return view('modularpage', merge($request->data, $components));
+        return view('childpage', merge($request->data, $components));
     }
 }

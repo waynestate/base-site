@@ -27,19 +27,21 @@ class ChildpageController extends Controller
      */
     public function index(Request $request): View
     {
-        $components['components'] = $this->modular->getModularComponents($request->data['base']);
+        $components['components'] = [];
 
-        // Set hero from components
-        $hero = collect($components['components'])->reject(function ($data, $component_name) {
-            return !str_contains($component_name, 'hero');
-        })->toArray();
+        if(!empty($request->data['base']['data'])) {
+            $components['components'] = $this->modular->getModularComponents($request->data['base']);
 
-        if (!empty($hero)) {
+            // Set hero from components
+            $hero = collect($components['components'])->reject(function ($data, $component_name) {
+                return !str_contains($component_name, 'hero');
+            })->toArray();
+        }
+
+        if(!empty($hero)) {
             $hero_key = array_key_first($hero);
 
-            if(!empty($hero)) {
-                $request->data['base']['hero'] = $components['components'][$hero_key]['data'];
-            }
+            $request->data['base']['hero'] = $components['components'][$hero_key]['data'];
 
             unset($components['components'][$hero_key]);
 

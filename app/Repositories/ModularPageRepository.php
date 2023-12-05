@@ -56,9 +56,9 @@ class ModularPageRepository implements ModularPageRepositoryContract
         $modularComponents = [];
 
         // Legacy support for accordion
-        if (!empty($data['data']['accordion_page'])) {
+        if (!empty($data['data']['accordion_promo_group_id'])) {
             $data['data']['modular-accordion-999'] = json_encode([
-                'id' => $data['data']['accordion_page']
+                'id' => $data['data']['accordion_promo_group_id']
             ]);
         }
 
@@ -146,7 +146,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 $value = preg_replace('(,})', '}', $value);
 
                 //if(Str::isJson($value)) { // this isn't working, integers are considered json with this
-                if(str_starts_with($value, '{')) {
+                if(Str::startsWith($value, '{')) {
                     $components[$name] = json_decode($value, true);
                     if(!empty($components[$name]['config'])) {
                         $config = explode('|', $components[$name]['config']);

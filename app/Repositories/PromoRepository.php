@@ -32,33 +32,6 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
     /**
      * {@inheritdoc}
      */
-    public function getHomepagePromos(int $page_id = 0)
-    {
-        $group_reference = [
-            123 => 'example',
-        ];
-
-        $group_config = [
-            'example' => 'page_id:'.$page_id.'|randomize|first',
-        ];
-
-        $params = [
-            'method' => 'cms.promotions.listing',
-            'promo_group_id' => array_keys($group_reference),
-            'filename_url' => true,
-            'is_active' => '1',
-        ];
-
-        $promos = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
-            return $this->wsuApi->sendRequest($params['method'], $params);
-        });
-
-        return $this->parsePromos->parse($promos, $group_reference, $group_config);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getRequestData(array $data)
     {
         // Get the global promos config
@@ -80,11 +53,6 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
 
             return [$group['id'] => $name];
         })->toArray();
-
-        // If there is an accordion custom page field then inject it into the group reference
-        if (!empty($data['data']['accordion_promo_group_id']) && ! array_key_exists($data['data']['accordion_promo_group_id'], $group_reference)) {
-            $group_reference[$data['data']['accordion_promo_group_id']] = 'accordion_page';
-        }
 
         $params = [
             'method' => 'cms.promotions.listing',

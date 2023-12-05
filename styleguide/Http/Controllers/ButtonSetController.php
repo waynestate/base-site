@@ -239,6 +239,6 @@ When linking to a pdf, "(pdf)" is added automatically.</p>',
             ],
         ];
 
-        return view('modularpage', merge($request->data, $components));
+        return view('childpage', merge($request->data, $components));
     }
 }

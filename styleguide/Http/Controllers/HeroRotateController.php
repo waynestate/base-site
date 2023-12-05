@@ -67,6 +67,6 @@ class HeroRotateController extends Controller
         $request->data['base']['hero'] = $components['components']['hero-1']['data'];
 
 
-        return view('modularpage', merge($request->data, $components));
+        return view('childpage', merge($request->data, $components));
     }
 }

@@ -13,7 +13,7 @@ class ModularPage extends Page
     {
         return app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'ModularPageController',
+                'controller' => 'ChildpageController',
                 'title' => 'Modular page',
                 'id' => 101110600,
                 'content' => [

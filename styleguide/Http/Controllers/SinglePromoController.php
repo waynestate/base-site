@@ -77,6 +77,6 @@ class SinglePromoController extends Controller
             ],
         ];
 
-        return view('modularpage', merge($request->data, $components));
+        return view('childpage', merge($request->data, $components));
     }
 }

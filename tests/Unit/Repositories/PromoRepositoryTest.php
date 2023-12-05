@@ -12,37 +12,6 @@ use Waynestate\Api\Connector;
 final class PromoRepositoryTest extends TestCase
 {
     #[Test]
-    public function getting_promos_with_custom_page_accordion_should_return_accordion_page(): void
-    {
-        // Fake return
-        $return = [
-            'promotions' => [],
-        ];
-
-        // Always force homepage
-        config(['base.hero_rotating_controllers' => ['HomepageController']]);
-
-        // Create a fake data request
-        $data = app(Page::class)->create(1, true, [
-            'page' => [
-                'controller' => 'HomepageController',
-            ],
-            'data' => [
-                'accordion_promo_group_id' => $this->faker->numberbetween(1, 3),
-            ],
-        ]);
-
-        // Mock the connector and set the return
-        $wsuApi = Mockery::mock(Connector::class);
-        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
-
-        // Get the promos
-        $promos = app(PromoRepository::class, ['wsuApi' => $wsuApi])->getRequestData($data);
-
-        $this->assertArrayHasKey('accordion_page', $promos);
-    }
-
-    #[Test]
     public function subsite_overriding_main_contact_social_and_under_menu(): void
     {
         // Fake return
@@ -389,23 +358,5 @@ final class PromoRepositoryTest extends TestCase
         $promos = app(PromoRepository::class, ['wsuApi' => $wsuApi])->getRequestData($data);
 
         $this->assertCount(1, $promos['under_menu']);
-    }
-
-    #[Test]
-    public function getting_homepage_promos_should_return_array(): void
-    {
-        // Fake return
-        $return = [
-            'promotions' => [],
-        ];
-
-        // Mock the connector and set the return
-        $wsuApi = Mockery::mock(Connector::class);
-        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
-
-        // Get the promos
-        $promos = app(PromoRepository::class, ['wsuApi' => $wsuApi])->getHomepagePromos($this->faker->randomDigit());
-
-        $this->assertTrue(is_array($promos));
     }
 }
