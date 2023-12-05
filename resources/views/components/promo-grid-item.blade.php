@@ -12,7 +12,7 @@
                 @image('//i.wayne.edu/youtube/'.$item['youtube_id'].'/max', $item['filename_alt_text'], "lazy w-1/4 shrink-0 md:shrink md:w-full object-cover h-full")
             @endif
         </div>
-    @else
+    @elseif(!empty($item['relative_url']))
         @image($item['relative_url'], $item['filename_alt_text'], "lazy w-1/4 shrink-0 md:shrink md:w-full")
     @endif
     <div class="w-full relative md:pt-2">

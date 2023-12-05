@@ -198,14 +198,23 @@ class ModularPageRepository implements ModularPageRepositoryContract
         $promos = $this->parsePromos->parse($promos, $components['group_reference'], $components['group_config']);
 
         foreach ($promos as $name => $data) {
+            // Adjust promo data
+            $data = collect($data)->map(function ($item) use ($components, $name) {
+                $item = $this->adjustPromoData($item, $components['components'][$name]);
+
+                return $item;
+            })->toArray();
+
+            // Organize by option
+            if(!empty($components['components'][$name]['groupByOptions']) && $components['components'][$name]['groupByOptions'] === true && Str::startsWith($name, 'catalog')) {
+                $data = $this->organizePromoItemsByOption($data);
+            }
+
+            // Build the return
             $promos[$name] = [
                 'data' => $data,
                 'component' => $components['components'][$name],
             ];
-
-            foreach($promos[$name]['data'] as $key => $promo) {
-                $promos[$name]['data'][$key] = $this->adjustPromoData($promo, $promos[$name]['component']);
-            }
         }
 
         return $promos;
@@ -223,6 +232,28 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
         if(isset($component['showDescription']) && $component['showDescription'] === false) {
             unset($data['description']);
+        }
+
+        return $data;
+    }
+
+    /**
+    * {@inheritdoc}
+    */
+    public function organizePromoItemsByOption(array $data)
+    {
+        $options_exist = collect($data)->filter(function ($item) {
+            return !empty($item['option']);
+        })->isNotEmpty();
+
+        if ($options_exist === true) {
+            $data = collect($data)->groupBy('option')->toArray();
+
+            if (!empty($data[''])) {
+                $no_option_moved_to_bottom = $data[''];
+                unset($data['']);
+                $data[''] = $no_option_moved_to_bottom;
+            }
         }
 
         return $data;
