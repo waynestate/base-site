@@ -32,6 +32,45 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
     /**
      * {@inheritdoc}
      */
+    public function getPromoView($id)
+    {
+        $promo['promotion'] = [];
+
+        $params = [
+            'method' => 'cms.promotions.info',
+            'promo_item_id' => $id,
+            'filename_url' => true,
+            'is_active' => '1',
+        ];
+
+        $promo = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+            return $this->wsuApi->sendRequest($params['method'], $params);
+        });
+
+        $promo['promo'] = empty($promo['error']) ? $promo['promotion'] : [];
+
+        return $promo;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBackToPromoPage($referer = null, $scheme = null, $host = null, $uri = null)
+    {
+        // Make sure the referer is coming from the site we are currently on and not the current page
+        if ($referer === null
+            || $referer == $scheme.'://'.$host.$uri
+            || strpos($referer, $host) === false
+        ) {
+            return '';
+        }
+
+        return $referer;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getRequestData(array $data)
     {
         // Get the global promos config

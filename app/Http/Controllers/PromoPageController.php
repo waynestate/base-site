@@ -36,29 +36,4 @@ class PromoPageController extends Controller
 
         return view('promo-page', merge($request->data, $promos));
     }
-
-    /**
-     * Display the individual item.
-     *
-     *
-     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     */
-    public function show(Request $request): View
-    {
-        $promo = $this->promo->getPromoView($request->id);
-
-        if (empty($promo['promo'])) {
-            abort('404');
-        }
-
-        if (!empty($promo['promo']['title'])) {
-            $request->data['base']['page']['title'] = $promo['promo']['title'];
-        }
-
-        // Set the back URL
-        $request->data['back_url'] = $this->promo->getBackToPromoPage($request->server->get('HTTP_REFERER'), $request->server->get('REQUEST_SCHEME'), $request->server->get('HTTP_HOST'), $request->server->get('REQUEST_URI'));
-
-        return view('promo-view', merge($request->data, $promo));
-    }
 }

@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\ChildpageController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\PromoPageController;
 use App\Http\Controllers\WildCardController;
 
 /*
@@ -16,7 +16,7 @@ use App\Http\Controllers\WildCardController;
 */
 
 // Individual promo view route
-Route::get('{any?}view/{title}-{id}', [PromoPageController::class, 'show'])
+Route::get('{any?}view/{title}-{id}', [ChildpageController::class, 'show'])
     ->where(['any' => '.*', 'title' => '.+', 'id' => '\d+']);
 
 // Profile view
