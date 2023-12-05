@@ -490,12 +490,12 @@ final class ModularPageRepositoryTest extends TestCase
 
 
     #[Test]
-    public function promo_page_parse_json_returns_promos_by_option(): void
+    public function return_modular_promos_by_option(): void
     {
         $promo_group_id = $this->faker->numberbetween(1, 3);
 
         // Fake return
-        $return['promotions'] = app(PromoPageWithOptions::class)->create(1, false, [
+        $return['promotions'] = app(PromoPageWithOptions::class)->create(15, false, [
             'promo_group_id' => $promo_group_id,
         ]);
 
@@ -527,6 +527,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Run the promos through the repository
         $components = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
 
+        $this->assertTrue(!empty($components['catalog-1']['data']['']));
         $this->assertCount(count($return['promotions']), $components['catalog-1']['data']);
     }
 

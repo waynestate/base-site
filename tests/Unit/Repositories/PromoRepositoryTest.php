@@ -407,4 +407,75 @@ final class PromoRepositoryTest extends TestCase
         $url = app(PromoRepository::class)->getBackToPromoPage($referer, $parsed['scheme'], $parsed['host'], $this->faker->word());
         $this->assertEquals($referer, $url);
     }
+
+    #[Test]
+    public function restrict_rotating_hero(): void
+    {
+        // Fake return
+        $return = [
+            'promotions' => [
+                [
+                    'promo_item_id' => 1,
+                    'promo_group_id' => 1,
+                ],
+                [
+                    'promo_item_id' => 2,
+                    'promo_group_id' => 2,
+                ],
+                [
+                    'promo_item_id' => 3,
+                    'promo_group_id' => 3,
+                ],
+            ],
+        ];
+
+        // Build the config
+        config(['base.global' => [
+            'all' => [
+                'promos' => [
+                    'hero' => [
+                        'id' => null,
+                        'config' => '|limit:1',
+                    ],
+                ],
+            ],
+        ]]);
+
+        config(['base.hero_rotating_controllers' => ['ChildpageController']]);
+        config(['base.hero_rotating_limit' => 3]);
+
+        // Create a fake data request
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'ChildpageController',
+            ],
+        ]);
+
+        // Get the global promos config
+        $config = config('base.global');
+
+        // Set all the groups
+        $groups = $config['all']['promos'];
+
+        $group_config = collect($groups)->mapWithKeys(function ($group, $name) use ($config, $data) {
+            $value = !empty($group['config']) ? $group['config'] : null;
+            return [$name => str_replace('{$page_id}', $data['page']['id'], $value)];
+        })->reject(function ($value) {
+            return empty($value);
+        })->toArray();
+
+        if (in_array($data['page']['controller'], config('base.hero_rotating_controllers'))) {
+            $group_config = str_replace('|limit:1', '|limit:'.config('base.hero_rotating_limit'), $group_config);
+        }
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
+
+        // Get the promos
+        $promos = app(PromoRepository::class, ['wsuApi' => $wsuApi])->getRequestData($data);
+
+        $this->assertEquals($group_config['hero'], '|limit:'.config('base.hero_rotating_limit'));
+        $this->assertTrue((in_array($data['page']['controller'], config('base.hero_rotating_controllers'))));
+    }
 }
