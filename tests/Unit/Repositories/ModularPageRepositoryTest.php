@@ -358,4 +358,64 @@ final class ModularPageRepositoryTest extends TestCase
 
         $this->assertCount(count($return['promotions']), $promos['accordion-999']['data']);
     }
+
+    #[Test]
+    public function modular_page_returns_legacy_promo_listing_array(): void
+    {
+        $promo_group_id = $this->faker->numberbetween(1, 3);
+
+        // Fake return
+        $return['promotions'] = app(GenericPromo::class)->create(5, false, [
+            'promo_group_id' => $promo_group_id,
+        ]);
+
+        // Create a fake data request
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'Childpage',
+            ],
+            'data' => [
+                'listing_promo_group_id' => $promo_group_id,
+            ],
+        ]);
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
+
+        // Run the promos through the repository
+        $promos = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
+
+        $this->assertCount(count($return['promotions']), $promos['catalog-998']['data']);
+    }
+
+    #[Test]
+    public function modular_page_returns_legacy_promo_grid_array(): void
+    {
+        $promo_group_id = $this->faker->numberbetween(1, 3);
+
+        // Fake return
+        $return['promotions'] = app(GenericPromo::class)->create(5, false, [
+            'promo_group_id' => $promo_group_id,
+        ]);
+
+        // Create a fake data request
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'Childpage',
+            ],
+            'data' => [
+                'grid_promo_group_id' => $promo_group_id,
+            ],
+        ]);
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
+
+        // Run the promos through the repository
+        $promos = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
+
+        $this->assertCount(count($return['promotions']), $promos['catalog-999']['data']);
+    }
 }
