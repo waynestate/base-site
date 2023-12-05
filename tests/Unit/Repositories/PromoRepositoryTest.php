@@ -5,6 +5,7 @@ namespace Tests\Unit\Repositories;
 use PHPUnit\Framework\Attributes\Test;
 use App\Repositories\PromoRepository;
 use Factories\Page;
+use Factories\GenericPromo;
 use Tests\TestCase;
 use Mockery as Mockery;
 use Waynestate\Api\Connector;
@@ -358,5 +359,52 @@ final class PromoRepositoryTest extends TestCase
         $promos = app(PromoRepository::class, ['wsuApi' => $wsuApi])->getRequestData($data);
 
         $this->assertCount(1, $promos['under_menu']);
+    }
+
+    #[Test]
+    public function getting_single_promo_should_return_array(): void
+    {
+        $promo_return = app(GenericPromo::class)->create(1, true);
+
+        // Fake return
+        $return = [
+            'promotion' => $promo_return,
+        ];
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.info', Mockery::type('array'))->once()->andReturn($return);
+
+
+        // Get the promo
+        $single_promo = app(PromoRepository::class, ['wsuApi' => $wsuApi])->getPromoView($this->faker->randomDigit());
+        $promo['promotion'] = $single_promo['promo'];
+
+        $this->assertEquals($promo, ['promotion' => $promo_return]);
+    }
+
+    #[Test]
+    public function back_to_promo_page_should_return_url(): void
+    {
+        // The default path if no referer
+        $url = app(PromoRepository::class)->getBackToPromoPage();
+        $this->assertTrue($url == '');
+
+        // If a referer is passed from a different domain
+        $referer = $this->faker->url();
+        $url = app(PromoRepository::class)->getBackToPromoPage($referer, 'http', 'wayne.edu', '/');
+        $this->assertTrue($url == '');
+
+        // If a referer is passed that is the same page we are on
+        $referer = $this->faker->url();
+        $parsed = parse_url($referer);
+        $url = app(PromoRepository::class)->getBackToPromoPage($referer, $parsed['scheme'], $parsed['host'], $parsed['path']);
+        $this->assertTrue($url == '');
+
+        // If referer is passed from the same domain that the site is on
+        $referer = $this->faker->url();
+        $parsed = parse_url($referer);
+        $url = app(PromoRepository::class)->getBackToPromoPage($referer, $parsed['scheme'], $parsed['host'], $this->faker->word());
+        $this->assertEquals($referer, $url);
     }
 }
