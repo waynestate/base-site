@@ -10,7 +10,7 @@ use Factories\Spotlight;
 use Factories\Article;
 use Factories\Event;
 
-class ModularDocsController extends Controller
+class ChildpageWithComponentsController extends Controller
 {
     /**
      * Display the banner at the top of the page.
@@ -18,15 +18,34 @@ class ModularDocsController extends Controller
     public function index(Request $request): View
     {
         $components = [
+            'accordion_configuration' => [
+                'data' => [
+                    0 => [
+                        'title' => 'Page setup',
+                        'description' => '',
+                        'promo_item_id' => 0,
+                    ],
+                    1 => [
+                        'title' => 'Configuration',
+                        'description' => '',
+                        'promo_item_id' => 0,
+                    ],
+                ],
+                'component' => [
+                    'filename' => 'accordion',
+                ],
+            ],
             'catalog_1' => [
-                'data' => app(GenericPromo::class)->create(7, false, [
+                'data' => app(GenericPromo::class)->create(5, false, [
                     'description' => '',
+                    'link' => '/styleguide/view/title-12345',
                 ]),
                 'component' => [
-                    'heading' => 'Four-column catalog',
+                    'heading' => 'Example component appearance',
                     'filename' => 'catalog',
-                    'columns' => '4',
+                    'columns' => '3',
                     'showDescription' => false,
+                    'singlePromoView' => true,
                 ],
             ],
 
@@ -153,7 +172,8 @@ class ModularDocsController extends Controller
                 ],
             ],
         ];
+        dump($components);
 
-        return view('styleguide-modular-docs', merge($request->data, $components));
+        return view('childpage', merge($request->data, $components));
     }
 }
