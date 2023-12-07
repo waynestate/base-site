@@ -81,7 +81,7 @@ class SinglePromoController extends Controller
                     'link' => '#',
                 ]),
                 'component' => [
-                    'heading' => 'Promo row heading',
+                    'heading' => 'Promo row',
                     'filename' => 'promo-row',
                 ],
             ],
