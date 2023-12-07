@@ -55,6 +55,45 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
         $modularComponents = [];
 
+        // Legacy support for accordion
+        if (!empty($data['data']['accordion_promo_group_id'])) {
+            $data['data']['modular-accordion-999'] = json_encode([
+                'id' => $data['data']['accordion_promo_group_id']
+            ]);
+        }
+
+        // Legacy support for listing
+        if (!empty($data['data']['listing_promo_group_id'])) {
+            if (!empty($data['data']['promotion_view_boolean']) && $data['data']['promotion_view_boolean'] === "true") {
+                $data['data']['modular-catalog-998'] = json_encode([
+                    'id' => $data['data']['listing_promo_group_id'],
+                    'columns' => 1,
+                    'singlePromoView' => true
+                ]);
+            } else {
+                $data['data']['modular-catalog-998'] = json_encode([
+                    'id' => $data['data']['listing_promo_group_id'],
+                    'columns' => 1
+                ]);
+            }
+        }
+
+        // Legacy support for grid
+        if (!empty($data['data']['grid_promo_group_id'])) {
+            if (!empty($data['data']['promotion_view_boolean']) && $data['data']['promotion_view_boolean'] === "true") {
+                $data['data']['modular-catalog-999'] = json_encode([
+                    'id' => $data['data']['grid_promo_group_id'],
+                    'columns' => 3,
+                    'singlePromoView' => true
+                ]);
+            } else {
+                $data['data']['modular-catalog-999'] = json_encode([
+                    'id' => $data['data']['grid_promo_group_id'],
+                    'columns' => 3
+                ]);
+            }
+        }
+
         $components = $this->parseData($data);
         $promos = $this->getPromos($components);
 
@@ -100,7 +139,14 @@ class ModularPageRepository implements ModularPageRepositoryContract
             if(Str::startsWith($pageField, 'modular-')) {
                 $name = Str::replaceFirst('modular-', '', $pageField);
 
-                if(Str::isJson($value)) {
+                // Remove all spaces and line breaks
+                $value = preg_replace('/\s*\R\s*/', '', $value);
+
+                // Last item cannot have comma at the end of it
+                $value = preg_replace('(,})', '}', $value);
+
+                //if(Str::isJson($value)) { // this isn't working, integers are considered json with this
+                if(Str::startsWith($value, '{')) {
                     $components[$name] = json_decode($value, true);
                     if(!empty($components[$name]['config'])) {
                         $config = explode('|', $components[$name]['config']);
@@ -152,14 +198,23 @@ class ModularPageRepository implements ModularPageRepositoryContract
         $promos = $this->parsePromos->parse($promos, $components['group_reference'], $components['group_config']);
 
         foreach ($promos as $name => $data) {
+            // Adjust promo data
+            $data = collect($data)->map(function ($item) use ($components, $name) {
+                $item = $this->adjustPromoData($item, $components['components'][$name]);
+
+                return $item;
+            })->toArray();
+
+            // Organize by option
+            if(!empty($components['components'][$name]['groupByOptions']) && $components['components'][$name]['groupByOptions'] === true && Str::startsWith($name, 'catalog')) {
+                $data = $this->organizePromoItemsByOption($data);
+            }
+
+            // Build the return
             $promos[$name] = [
                 'data' => $data,
                 'component' => $components['components'][$name],
             ];
-
-            foreach($promos[$name]['data'] as $key => $promo) {
-                $promos[$name]['data'][$key] = $this->adjustPromoData($promo, $promos[$name]['component']);
-            }
         }
 
         return $promos;
@@ -177,6 +232,28 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
         if(isset($component['showDescription']) && $component['showDescription'] === false) {
             unset($data['description']);
+        }
+
+        return $data;
+    }
+
+    /**
+    * {@inheritdoc}
+    */
+    public function organizePromoItemsByOption(array $data)
+    {
+        $options_exist = collect($data)->filter(function ($item) {
+            return !empty($item['option']);
+        })->isNotEmpty();
+
+        if ($options_exist === true) {
+            $data = collect($data)->groupBy('option')->toArray();
+
+            if (!empty($data[''])) {
+                $no_option_moved_to_bottom = $data[''];
+                unset($data['']);
+                $data[''] = $no_option_moved_to_bottom;
+            }
         }
 
         return $data;

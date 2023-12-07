@@ -6,9 +6,9 @@ use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Faker\Factory;
-use Factories\GenericPromo;
+use Factories\Icon;
 
-class SinglePromoController extends Controller
+class IconsController extends Controller
 {
     /**
      * Construct the controller.
@@ -27,9 +27,10 @@ class SinglePromoController extends Controller
             'accordion-1' => [
                 'data' => [
                     0 => [
+                        'promo_item_id' => 0,
                         'title' => 'Configuration',
                         'description' => '
-<table>
+<table class="no-stripe">
     <thead>
         <tr>
             <th class="w-2/5">Page field</th>
@@ -39,25 +40,48 @@ class SinglePromoController extends Controller
     <tbody>
         <tr>
             <td>
-                <pre class="w-full">modular-promo-column-1</pre>
-                <pre class="w-full">modular-promo-row-1</pre>
+                <pre class="w-full">modular-icons-column-1</pre>
             </td>
             <td>
 <pre class="w-full" tabindex="0">
 {
 "id":000000,
-"heading":"Promo",
-"config":"randomize|limit:1|page_id",
-"singlePromoView":true,
-"showExcerpt":true,
-"showDescription":false
+"heading":"Icons column"
+}
+</pre>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <pre class="w-full">modular-icons-row-1</pre>
+            </td>
+            <td>
+<pre class="w-full" tabindex="0">
+{
+"id":000000,
+"heading":"Icons row",
+"columns":2
+}
+</pre>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <pre class="w-full">modular-icons-top-row-1</pre>
+            </td>
+            <td>
+<pre class="w-full" tabindex="0">
+{
+"id":000000,
+"heading":"Icons top row",
+"columns":4,
+"showDescription":true
 }
 </pre>
             </td>
         </tr>
     </tbody>
 </table>',
-                        'promo_item_id' => 0,
                     ],
                 ],
                 'component' => [
@@ -66,23 +90,33 @@ class SinglePromoController extends Controller
                     'showDescription' => false,
                 ],
             ],
-            'promo-column-1' => [
-                'data' => app(GenericPromo::class)->create(1, false, [
-                    'excerpt' => '',
+            'icons-column-1' => [
+                'data' => app(Icon::class)->create(4, false, [
+                    'description' => '',
                 ]),
                 'component' => [
-                    'heading' => 'Promo column',
-                    'filename' => 'promo-column',
+                    'heading' => 'Icons column',
+                    'filename' => 'icons-column',
                 ],
             ],
-            'promo-row-1' => [
-                'data' => app(GenericPromo::class)->create(1, false, [
+            'icons-row-1' => [
+                'data' => app(Icon::class)->create(4, false, [
                     'excerpt' => '',
-                    'link' => '#',
                 ]),
                 'component' => [
-                    'heading' => 'Promo row',
-                    'filename' => 'promo-row',
+                    'heading' => 'Icons row',
+                    'filename' => 'icons-row',
+                ],
+            ],
+            'icons-top-row-1' => [
+                'data' => app(Icon::class)->create(4, false, [
+                    'excerpt' => '',
+                    'link' => '',
+                ]),
+                'component' => [
+                    'heading' => 'Icons top row',
+                    'filename' => 'icons-top-row',
+                    'columns' => 4
                 ],
             ],
         ];

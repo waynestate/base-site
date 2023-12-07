@@ -120,25 +120,45 @@ class ButtonSetController extends Controller
                         'promo_item_id' => 1,
                         'title' => 'Configuration',
                         'description' => '
-<p>Visit the modular documentation for more information</p>
-<div class="grid grid-cols-1 lg:grid-cols-3 border-x border-b">
-    <div class="lg:col-span-1 p-2 bg-gray-100 font-bold lg:border-r border-y order-1 lg:order-none">Page field</div>
-    <div class="lg:col-span-2 p-2 bg-gray-100 font-bold border-y order-3 lg:order-none">Data</div>
-    <div class="lg:col-span-1 p-2 lg:border-r order-2 lg:order-none">
-        <pre class="w-full">modular-button-row-1</pre>
-        <pre class="w-full">modular-button-column-1</pre>
-    </div>
-    <div class="lg:col-span-2 p-2 order-4 lg:order-none">
+<table class="no-stripe">
+    <thead>
+        <tr>
+            <th class="md:w-2/5">Page field</th>
+            <th>Data</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <pre class="w-full">modular-button-column-1</pre>
+            </td>
+            <td>
 <pre class="w-full" tabindex="0">
 {
-"id":0000,
-"heading":"My buttons",
-"limit":3
+"id":000000,
+"heading":"Buttons",
+"config":"limit:3|page_id"
 }
 </pre>
-    </div>
-</div>
-',
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <pre class="w-full">modular-button-row-1</pre>
+            </td>
+            <td>
+<pre class="w-full" tabindex="0">
+{
+"id":000000,
+"heading":"Buttons",
+"config":"limit:3|page_id",
+"columns":3
+}
+</pre>
+            </td>
+        </tr>
+    </tbody>
+</table>',
                     ],
                 ],
                 'component' => [
@@ -152,8 +172,9 @@ class ButtonSetController extends Controller
                     'option' => 'Green',
                 ]),
                 'component' => [
-                    'heading' => 'Button row component',
+                    'heading' => 'Button row',
                     'filename' => 'button-row',
+                    'columns' => 3
                 ],
             ],
             'button-column-10' => [
@@ -161,13 +182,13 @@ class ButtonSetController extends Controller
                     'option' => 'Green',
                 ]),
                 'component' => [
-                    'heading' => 'Button column component',
+                    'heading' => 'Button column',
                     'filename' => 'button-column',
                 ],
             ],
             'content-row-10' => [
                 'data' => app(GenericPromo::class)->create(1, false, [
-                    'title' => 'Available button configurations',
+                    'title' => 'Available button styles',
                     'description' => '
 <p><strong>Default options:</strong> Default, Green, Image.<br /> 
 <strong>Additional available options:</strong> Green gradient, Gold, Gold gradient. View these colors on the <a href="/styleguide/buttons">Buttons</a> page.<br />
@@ -239,6 +260,6 @@ When linking to a pdf, "(pdf)" is added automatically.</p>',
             ],
         ];
 
-        return view('modularpage', merge($request->data, $components));
+        return view('childpage', merge($request->data, $components));
     }
 }

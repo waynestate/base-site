@@ -30,28 +30,22 @@ class ArticleListingController extends Controller
                         'promo_item_id' => 0,
                         'title' => 'Configuration',
                         'description' => '
-<p>Visit the modular documentation for more information</p>
-<div class="grid grid-cols-1 lg:grid-cols-3 border-x border-b">
-    <div class="lg:col-span-1 p-2 bg-gray-100 font-bold lg:border-r border-y order-1 lg:order-none">Page field</div>
-    <div class="lg:col-span-2 p-2 bg-gray-100 font-bold border-y order-3 lg:order-none">Data</div>
-    <div class="lg:col-span-1 p-2 lg:border-r order-2 lg:order-none">
-        <pre class="w-full">modular-news-column-1</pre>
-        <pre class="w-full">modular-news-row-1</pre>
-    </div>
-    <div class="lg:col-span-2 p-2 order-4 lg:order-none">
-Use default settings
-<pre class="w-full" tabindex="0">
-{}
-</pre>
-Use default calendar by omitting ID and set other configuration items
-<pre class="w-full" tabindex="0">
-{
-"heading": "My news"
-}
-</pre>
+<table class="no-stripe">
+    <thead>
+        <tr>
+            <th class="md:w-2/5">Page field</th>
+            <th>Data</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <pre class="w-full">modular-news-column-1</pre>
+            </td>
+            <td>
 <pre class="w-full" tabindex="0">
 {
-"id":null,
+"id":7,
 "heading":"News",
 "link_text":"More news",
 "featured":null,
@@ -59,7 +53,31 @@ Use default calendar by omitting ID and set other configuration items
 "news_route":null,
 "topics":[]
 }
-</pre></div></div>',
+</pre>
+Use default calendar by omitting ID and set other configuration items
+<pre class="w-full" tabindex="0">
+{
+"heading": "My news"
+}
+</pre>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <pre class="w-full">modular-news-row-1</pre>
+            </td>
+            <td>
+<pre class="w-full" tabindex="0">
+{
+"heading":"Featured news",
+"featured":true,
+"columns":4
+}
+</pre>
+            </td>
+        </tr>
+    </tbody>
+</table>',
                     ],
                 ],
                 'component' => [
@@ -84,6 +102,6 @@ Use default calendar by omitting ID and set other configuration items
             ],
         ];
 
-        return view('modularpage', merge($request->data, $components));
+        return view('childpage', merge($request->data, $components));
     }
 }

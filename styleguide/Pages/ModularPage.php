@@ -13,7 +13,7 @@ class ModularPage extends Page
     {
         return app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'ModularPageController',
+                'controller' => 'ChildpageController',
                 'title' => 'Modular page',
                 'id' => 101110600,
                 'content' => [
@@ -27,19 +27,6 @@ class ModularPage extends Page
                                     <ul>
                                         <li>Select template "Modular Page."</li>
                                         <li>Select from the following custom page fields:
-                                            <ul class="columns-2">
-                                                <li><code>modular-accordion-1</code></li>
-                                                <li><code>modular-content-row-1</code></li>
-                                                <li><code>modular-video-row-1</code></li>
-                                                <li><code>modular-button-row-1</code></li>
-                                                <li><code>modular-catalog-1</code></li>
-                                                <li><code>modular-button-column-1</code></li>
-                                                <li><code>modular-icons-column-1</code></li>
-                                                <li><code>modular-image-column-1</code></li>
-                                                <li><code>modular-video-column-1</code></li>
-                                                <li><code>modular-news-column-1</code></li>
-                                                <li><code>modular-events-column-1</code></li>
-                                            </ul>
                                         </li>
                                         <li>Add a new page field and increase the number if you need to repeat that component, ex. modular-accordion-7.</li>
                                         <li>Paste this JSON array into the page field and edit the values to set options:<br />

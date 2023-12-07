@@ -44,7 +44,7 @@ class HeroRotateController extends Controller
     <div class="lg:col-span-2 p-2 order-4 lg:order-none">
 <pre class="w-full" tabindex="0">
 {
-"id":0000,
+"id":0000
 }
 </pre>
     </div>
@@ -67,6 +67,6 @@ class HeroRotateController extends Controller
         $request->data['base']['hero'] = $components['components']['hero-1']['data'];
 
 
-        return view('modularpage', merge($request->data, $components));
+        return view('childpage', merge($request->data, $components));
     }
 }

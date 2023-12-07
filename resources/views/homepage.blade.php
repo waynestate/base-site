@@ -12,7 +12,7 @@
             @if(!empty($articles['data']))
                 <div class="w-full md:w-1/2 px-4">
                     <h2 class="mb-2">News</h2>
-                    @include('components/news-column', ['data' => $articles['data'], 'url' => ($base['site']['subsite-folder'] !== null ? $base['site']['subsite-folder'] : '').config('base.news_listing_route').'/'])
+                    @include('components/news-column', ['data' => $articles, 'url' => ($base['site']['subsite-folder'] !== null ? $base['site']['subsite-folder'] : '').config('base.news_listing_route').'/'])
                 </div>
             @endif
 

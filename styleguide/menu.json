@@ -138,8 +138,58 @@
         "target": "",
         "display_name": "Components",
         "class_name": "",
-        "relative_url": "/styleguide/hero/contained",
+        "relative_url": "/styleguide/usingcomponents",
         "submenu": {
+            "101110600": {
+                "menu_item_id": 101110600,
+                "is_active": 1,
+                "page_id": 101110600,
+                "target": "",
+                "display_name": "Using components",
+                "class_name": "",
+                "relative_url": "/styleguide/usingcomponents",
+                "submenu": []
+            },
+            "107100": {
+                "menu_item_id": 107100,
+                "is_active": 1,
+                "page_id": 107100,
+                "target": "",
+                "display_name": "Accordion",
+                "class_name": "",
+                "relative_url": "/styleguide/accordion",
+                "submenu": []
+            },
+            "114100": {
+                "menu_item_id": 114100,
+                "is_active": 1,
+                "page_id": 114100,
+                "target": "",
+                "display_name": "Buttons",
+                "class_name": "",
+                "relative_url": "/styleguide/buttonset",
+                "submenu": []
+            },
+            "118100": {
+                "menu_item_id": 118100,
+                "is_active": 1,
+                "page_id": 118100,
+                "target": "",
+                "display_name": "Catalog",
+                "class_name": "",
+                "relative_url": "/styleguide/catalog",
+                "submenu": []
+            },
+            "109100": {
+                "menu_item_id": 109100,
+                "is_active": 1,
+                "page_id": 109100,
+                "target": "",
+                "display_name": "Event listing",
+                "class_name": "",
+                "relative_url": "/styleguide/eventlisting",
+                "submenu": []
+            },
             "105100": {
                 "menu_item_id": 105100,
                 "is_active": 1,
@@ -221,14 +271,24 @@
                     }
                 }
             },
-            "107100": {
-                "menu_item_id": 107100,
+            "121100": {
+                "menu_item_id": 121100,
                 "is_active": 1,
-                "page_id": 107100,
+                "page_id": 121100,
                 "target": "",
-                "display_name": "Accordion",
+                "display_name": "Icons",
                 "class_name": "",
-                "relative_url": "/styleguide/accordion",
+                "relative_url": "/styleguide/iconscomponent",
+                "submenu": []
+            },
+            "120100": {
+                "menu_item_id": 120100,
+                "is_active": 1,
+                "page_id": 120100,
+                "target": "",
+                "display_name": "Image",
+                "class_name": "",
+                "relative_url": "/styleguide/imagecomponent",
                 "submenu": []
             },
             "108100": {
@@ -236,29 +296,9 @@
                 "is_active": 1,
                 "page_id": 108100,
                 "target": "",
-                "display_name": "News article listing",
+                "display_name": "News listing",
                 "class_name": "",
                 "relative_url": "/styleguide/articlelisting",
-                "submenu": []
-            },
-            "109100": {
-                "menu_item_id": 109100,
-                "is_active": 1,
-                "page_id": 109100,
-                "target": "",
-                "display_name": "Event listing",
-                "class_name": "",
-                "relative_url": "/styleguide/eventlisting",
-                "submenu": []
-            },
-            "114100": {
-                "menu_item_id": 114100,
-                "is_active": 1,
-                "page_id": 114100,
-                "target": "",
-                "display_name": "Button set",
-                "class_name": "",
-                "relative_url": "/styleguide/buttonset",
                 "submenu": []
             },
             "116100": {
@@ -271,16 +311,6 @@
                 "relative_url": "/styleguide/singlepromo",
                 "submenu": []
             },
-            "118100": {
-                "menu_item_id": 118100,
-                "is_active": 1,
-                "page_id": 118100,
-                "target": "",
-                "display_name": "Catalog",
-                "class_name": "",
-                "relative_url": "/styleguide/catalog",
-                "submenu": []
-            },
             "119100": {
                 "menu_item_id": 119100,
                 "is_active": 1,
@@ -290,6 +320,200 @@
                 "class_name": "",
                 "relative_url": "/styleguide/spotlightcomponent",
                 "submenu": []
+            }
+        }
+    },
+    "101": {
+        "menu_item_id": 101,
+        "is_active": 1,
+        "page_id": 101,
+        "target": "",
+        "display_name": "Templates",
+        "class_name": "",
+        "relative_url": "/styleguide/childpage",
+        "submenu": {
+            "101100": {
+                "menu_item_id": 101100,
+                "is_active": 1,
+                "page_id": 101100,
+                "target": "",
+                "display_name": "Childpage",
+                "class_name": "",
+                "relative_url": "/styleguide/childpage",
+                "submenu": []
+            },
+            "101110700": {
+                "menu_item_id": 101110700,
+                "is_active": 1,
+                "page_id": 101110700,
+                "target": "",
+                "display_name": "Childpage with components",
+                "class_name": "",
+                "relative_url": "/styleguide/childpagewithcomponents",
+                "submenu": []
+            },
+            "101101": {
+                "menu_item_id": 101101,
+                "is_active": 1,
+                "page_id": 101101,
+                "target": "",
+                "display_name": "Homepage",
+                "class_name": "",
+                "relative_url": "/styleguide/homepage",
+                "submenu": []
+            },
+            "101109": {
+                "menu_item_id": 101109,
+                "is_active": 1,
+                "page_id": 101109,
+                "target": "",
+                "display_name": "Full width content area",
+                "class_name": "",
+                "relative_url": "/styleguide/fullwidth",
+                "submenu": []
+            },
+            "101102": {
+                "menu_item_id": 101102,
+                "is_active": 1,
+                "page_id": 101102,
+                "target": "",
+                "display_name": "News",
+                "class_name": "",
+                "relative_url": "/styleguide/news",
+                "submenu": {
+                    "101102": {
+                        "menu_item_id": 101102,
+                        "is_active": 1,
+                        "page_id": 101102,
+                        "target": "",
+                        "display_name": "News",
+                        "class_name": "",
+                        "relative_url": "/styleguide/news",
+                        "submenu": []
+                    },
+                    "101103": {
+                        "menu_item_id": 101103,
+                        "is_active": 1,
+                        "page_id": 101103,
+                        "target": "",
+                        "display_name": "News view",
+                        "class_name": "",
+                        "relative_url": "/styleguide/news/item-1",
+                        "submenu": []
+                    },
+                    "101104": {
+                        "menu_item_id": 101104,
+                        "is_active": 1,
+                        "page_id": 101104,
+                        "target": "",
+                        "display_name": "Topics",
+                        "class_name": "",
+                        "relative_url": "/styleguide/news/topics",
+                        "submenu": []
+                    }
+                }
+            },
+            "101105": {
+                "menu_item_id": 101105,
+                "is_active": 1,
+                "page_id": 101105,
+                "target": "",
+                "display_name": "Profiles",
+                "class_name": "",
+                "relative_url": "/styleguide/profiles",
+                "submenu": {
+                    "101105": {
+                        "menu_item_id": 101105,
+                        "is_active": 1,
+                        "page_id": 101105,
+                        "target": "",
+                        "display_name": "Profile listing",
+                        "class_name": "",
+                        "relative_url": "/styleguide/profiles",
+                        "submenu": []
+                    },
+                    "101106": {
+                        "menu_item_id": 101106,
+                        "is_active": 1,
+                        "page_id": 101106,
+                        "target": "",
+                        "display_name": "Profile view",
+                        "class_name": "",
+                        "relative_url": "/styleguide/profile/aa0000",
+                        "submenu": []
+                    },
+                    "101107": {
+                        "menu_item_id": 101107,
+                        "is_active": 1,
+                        "page_id": 101107,
+                        "target": "",
+                        "display_name": "Directory",
+                        "class_name": "",
+                        "relative_url": "/styleguide/directory",
+                        "submenu": []
+                    },
+                    "101108": {
+                        "menu_item_id": 101108,
+                        "is_active": 1,
+                        "page_id": 101108,
+                        "target": "",
+                        "display_name": "Directory ordered",
+                        "class_name": "",
+                        "relative_url": "/styleguide/directoryordered",
+                        "submenu": []
+                    },
+                    "101113": {
+                        "menu_item_id": 101113,
+                        "is_active": 1,
+                        "page_id": 101113,
+                        "target": "",
+                        "display_name": "Contact tables",
+                        "class_name": "",
+                        "relative_url": "/styleguide/contacttables",
+                        "submenu": []
+                    },
+                    "101114": {
+                        "menu_item_id": 101114,
+                        "is_active": 1,
+                        "page_id": 101114,
+                        "target": "",
+                        "display_name": "Contact tables, no table of contents",
+                        "class_name": "",
+                        "relative_url": "/styleguide/contacttablesnotoc",
+                        "submenu": []
+                    }
+                }
+            },
+            "101110": {
+                "menu_item_id": 101110100,
+                "is_active": 1,
+                "page_id": 101110100,
+                "target": "",
+                "display_name": "Promo item view",
+                "class_name": "",
+                "relative_url": "/styleguide/view/title-12345",
+                "submenu": []
+            },
+            "999": {
+                "menu_item_id": 999,
+                "is_active": 1,
+                "page_id": 999,
+                "target": "",
+                "display_name": "Site specific",
+                "class_name": "",
+                "relative_url": "/styleguide/sitespecific",
+                "submenu": {
+                    "99901": {
+                        "menu_item_id": 99901,
+                        "is_active": 1,
+                        "page_id": 99901,
+                        "target": "",
+                        "display_name": "Create site specific templates",
+                        "class_name": "",
+                        "relative_url": "/styleguide/sitespecific",
+                        "submenu": []
+                    }
+                }
             }
         }
     },
@@ -472,261 +696,6 @@
                         "display_name": "Error 500",
                         "class_name": "",
                         "relative_url": "/styleguide/error/500",
-                        "submenu": []
-                    }
-                }
-            }
-        }
-    },
-    "101": {
-        "menu_item_id": 101,
-        "is_active": 1,
-        "page_id": 101,
-        "target": "",
-        "display_name": "Templates",
-        "class_name": "",
-        "relative_url": "/styleguide/childpage",
-        "submenu": {
-            "101100": {
-                "menu_item_id": 101100,
-                "is_active": 1,
-                "page_id": 101100,
-                "target": "",
-                "display_name": "Childpage",
-                "class_name": "",
-                "relative_url": "/styleguide/childpage",
-                "submenu": []
-            },
-            "101101": {
-                "menu_item_id": 101101,
-                "is_active": 1,
-                "page_id": 101101,
-                "target": "",
-                "display_name": "Homepage",
-                "class_name": "",
-                "relative_url": "/styleguide/homepage",
-                "submenu": []
-            },
-            "101109": {
-                "menu_item_id": 101109,
-                "is_active": 1,
-                "page_id": 101109,
-                "target": "",
-                "display_name": "Full width content area",
-                "class_name": "",
-                "relative_url": "/styleguide/fullwidth",
-                "submenu": []
-            },
-            "101102": {
-                "menu_item_id": 101102,
-                "is_active": 1,
-                "page_id": 101102,
-                "target": "",
-                "display_name": "News",
-                "class_name": "",
-                "relative_url": "/styleguide/news",
-                "submenu": {
-                    "101102": {
-                        "menu_item_id": 101102,
-                        "is_active": 1,
-                        "page_id": 101102,
-                        "target": "",
-                        "display_name": "News",
-                        "class_name": "",
-                        "relative_url": "/styleguide/news",
-                        "submenu": []
-                    },
-                    "101103": {
-                        "menu_item_id": 101103,
-                        "is_active": 1,
-                        "page_id": 101103,
-                        "target": "",
-                        "display_name": "News view",
-                        "class_name": "",
-                        "relative_url": "/styleguide/news/item-1",
-                        "submenu": []
-                    },
-                    "101104": {
-                        "menu_item_id": 101104,
-                        "is_active": 1,
-                        "page_id": 101104,
-                        "target": "",
-                        "display_name": "Topics",
-                        "class_name": "",
-                        "relative_url": "/styleguide/news/topics",
-                        "submenu": []
-                    }
-                }
-            },
-            "101105": {
-                "menu_item_id": 101105,
-                "is_active": 1,
-                "page_id": 101105,
-                "target": "",
-                "display_name": "Profiles",
-                "class_name": "",
-                "relative_url": "/styleguide/profiles",
-                "submenu": {
-                    "101105": {
-                        "menu_item_id": 101105,
-                        "is_active": 1,
-                        "page_id": 101105,
-                        "target": "",
-                        "display_name": "Profile listing",
-                        "class_name": "",
-                        "relative_url": "/styleguide/profiles",
-                        "submenu": []
-                    },
-                    "101106": {
-                        "menu_item_id": 101106,
-                        "is_active": 1,
-                        "page_id": 101106,
-                        "target": "",
-                        "display_name": "Profile view",
-                        "class_name": "",
-                        "relative_url": "/styleguide/profile/aa0000",
-                        "submenu": []
-                    },
-                    "101107": {
-                        "menu_item_id": 101107,
-                        "is_active": 1,
-                        "page_id": 101107,
-                        "target": "",
-                        "display_name": "Directory",
-                        "class_name": "",
-                        "relative_url": "/styleguide/directory",
-                        "submenu": []
-                    },
-                    "101108": {
-                        "menu_item_id": 101108,
-                        "is_active": 1,
-                        "page_id": 101108,
-                        "target": "",
-                        "display_name": "Directory ordered",
-                        "class_name": "",
-                        "relative_url": "/styleguide/directoryordered",
-                        "submenu": []
-                    },
-                    "101113": {
-                        "menu_item_id": 101113,
-                        "is_active": 1,
-                        "page_id": 101113,
-                        "target": "",
-                        "display_name": "Contact tables",
-                        "class_name": "",
-                        "relative_url": "/styleguide/contacttables",
-                        "submenu": []
-                    },
-                    "101114": {
-                        "menu_item_id": 101114,
-                        "is_active": 1,
-                        "page_id": 101114,
-                        "target": "",
-                        "display_name": "Contact tables, no table of contents",
-                        "class_name": "",
-                        "relative_url": "/styleguide/contacttablesnotoc",
-                        "submenu": []
-                    }
-                }
-            },
-            "101110": {
-                "menu_item_id": 101110,
-                "is_active": 1,
-                "page_id": 101110,
-                "target": "",
-                "display_name": "Promos",
-                "class_name": "",
-                "relative_url": "/styleguide/promolist",
-                "submenu": {
-                    "101110200": {
-                        "menu_item_id": 101110200,
-                        "is_active": 1,
-                        "page_id": 101110200,
-                        "target": "",
-                        "display_name": "Promo list",
-                        "class_name": "",
-                        "relative_url": "/styleguide/promolist",
-                        "submenu": []
-                    },
-                    "101110300": {
-                        "menu_item_id": 101110300,
-                        "is_active": 1,
-                        "page_id": 101110300,
-                        "target": "",
-                        "display_name": "Promo list, grouped by option",
-                        "class_name": "",
-                        "relative_url": "/styleguide/promolistoptions",
-                        "submenu": []
-                    },
-                    "101110400": {
-                        "menu_item_id": 101110400,
-                        "is_active": 1,
-                        "page_id": 101110400,
-                        "target": "",
-                        "display_name": "Promo grid, 3 column",
-                        "class_name": "",
-                        "relative_url": "/styleguide/promogrid3",
-                        "submenu": []
-                    },
-                    "101110500": {
-                        "menu_item_id": 101110500,
-                        "is_active": 1,
-                        "page_id": 101110500,
-                        "target": "",
-                        "display_name": "Promo grid, 4 column, grouped by option",
-                        "class_name": "",
-                        "relative_url": "/styleguide/promogrid4",
-                        "submenu": []
-                    },
-                    "101110600": {
-                        "menu_item_id": 101110600,
-                        "is_active": 1,
-                        "page_id": 101110600,
-                        "target": "",
-                        "display_name": "Modular page",
-                        "class_name": "",
-                        "relative_url": "/styleguide/modularpage",
-                        "submenu": []
-                    },
-                    "101110700": {
-                        "menu_item_id": 101110700,
-                        "is_active": 1,
-                        "page_id": 101110700,
-                        "target": "",
-                        "display_name": "Modular docs",
-                        "class_name": "",
-                        "relative_url": "/styleguide/modulardocs",
-                        "submenu": []
-                    },
-                    "101110100": {
-                        "menu_item_id": 101110100,
-                        "is_active": 1,
-                        "page_id": 101110100,
-                        "target": "",
-                        "display_name": "Promo item view",
-                        "class_name": "",
-                        "relative_url": "/styleguide/view/title-12345",
-                        "submenu": []
-                    }
-                }
-            },
-            "999": {
-                "menu_item_id": 999,
-                "is_active": 1,
-                "page_id": 999,
-                "target": "",
-                "display_name": "Site specific",
-                "class_name": "",
-                "relative_url": "/styleguide/sitespecific",
-                "submenu": {
-                    "99901": {
-                        "menu_item_id": 99901,
-                        "is_active": 1,
-                        "page_id": 99901,
-                        "target": "",
-                        "display_name": "Create site specific templates",
-                        "class_name": "",
-                        "relative_url": "/styleguide/sitespecific",
                         "submenu": []
                     }
                 }

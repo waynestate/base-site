@@ -5,9 +5,7 @@ namespace Contracts\Repositories;
 interface PromoRepositoryContract
 {
     /**
-     * Get promotions for the homepage.
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public function getHomepagePromos(int $page_id);
+    public function getRequestData(array $data);
 }

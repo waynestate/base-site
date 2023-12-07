@@ -5,12 +5,21 @@ namespace Styleguide\Http\Controllers;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Factories\AccordionItems;
+use Faker\Factory;
+use Factories\GenericPromo;
 
-class AccordionController extends Controller
+class ImageController extends Controller
 {
     /**
-     * Display an example accordion.
+     * Construct the controller.
+     */
+    public function __construct(Factory $faker)
+    {
+        $this->faker['faker'] = $faker->create();
+    }
+
+    /**
+     * Article Listing Controller
      */
     public function index(Request $request): View
     {
@@ -24,20 +33,22 @@ class AccordionController extends Controller
 <table>
     <thead>
         <tr>
-            <th>Page field</th>
+            <th class="w-2/5">Page field</th>
             <th>Data</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>
-                <pre class="w-full">modular-accordion-1</pre>
+                <pre class="w-full">modular-image-column-1</pre>
             </td>
             <td>
 <pre class="w-full" tabindex="0">
 {
 "id":000000,
-"heading":"Accordion"
+"heading":"Image column",
+"config":"randomize|limit:1|page_id",
+"singlePromoView":true
 }
 </pre>
             </td>
@@ -48,20 +59,15 @@ class AccordionController extends Controller
                 ],
                 'component' => [
                     'filename' => 'accordion',
+                    'columns' => '4',
+                    'showDescription' => false,
                 ],
             ],
-            'accordion-2' => [
-                'data' => app(AccordionItems::class)->create(4, false),
+            'image-1' => [
+                'data' => app(GenericPromo::class)->create(1, false),
                 'component' => [
-                    'heading' => 'My accordion',
-                    'filename' => 'accordion',
-                ],
-            ],
-            'accordion-3' => [
-                'data' => app(AccordionItems::class)->create(3, false),
-                'component' => [
-                    'heading' => 'My second accordion',
-                    'filename' => 'accordion',
+                    'heading' => 'Image column',
+                    'filename' => 'image-column',
                 ],
             ],
         ];

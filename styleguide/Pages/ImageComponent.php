@@ -4,7 +4,7 @@ namespace Styleguide\Pages;
 
 use Factories\Page as PageFactory;
 
-class SinglePromo extends Page
+class ImageComponent extends Page
 {
     /**
      * {@inheritdoc}
@@ -13,11 +13,11 @@ class SinglePromo extends Page
     {
         return app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'SinglePromoController',
-                'title' => 'Single promo',
-                'id' => 116100,
+                'controller' => 'ImageController',
+                'title' => 'Image',
+                'id' => 120100,
                 'content' => [
-                    'main' => '<p>Single promo item with image or video.</p>',
+                    'main' => '<p>Single image with a title and gradient overlay.</p>',
                 ],
             ],
         ]);

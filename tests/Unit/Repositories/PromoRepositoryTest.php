@@ -5,43 +5,13 @@ namespace Tests\Unit\Repositories;
 use PHPUnit\Framework\Attributes\Test;
 use App\Repositories\PromoRepository;
 use Factories\Page;
+use Factories\GenericPromo;
 use Tests\TestCase;
 use Mockery as Mockery;
 use Waynestate\Api\Connector;
 
 final class PromoRepositoryTest extends TestCase
 {
-    #[Test]
-    public function getting_promos_with_custom_page_accordion_should_return_accordion_page(): void
-    {
-        // Fake return
-        $return = [
-            'promotions' => [],
-        ];
-
-        // Always force homepage
-        config(['base.hero_rotating_controllers' => ['HomepageController']]);
-
-        // Create a fake data request
-        $data = app(Page::class)->create(1, true, [
-            'page' => [
-                'controller' => 'HomepageController',
-            ],
-            'data' => [
-                'accordion_promo_group_id' => $this->faker->numberbetween(1, 3),
-            ],
-        ]);
-
-        // Mock the connector and set the return
-        $wsuApi = Mockery::mock(Connector::class);
-        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
-
-        // Get the promos
-        $promos = app(PromoRepository::class, ['wsuApi' => $wsuApi])->getRequestData($data);
-
-        $this->assertArrayHasKey('accordion_page', $promos);
-    }
-
     #[Test]
     public function subsite_overriding_main_contact_social_and_under_menu(): void
     {
@@ -392,20 +362,120 @@ final class PromoRepositoryTest extends TestCase
     }
 
     #[Test]
-    public function getting_homepage_promos_should_return_array(): void
+    public function getting_single_promo_should_return_array(): void
+    {
+        $promo_return = app(GenericPromo::class)->create(1, true);
+
+        // Fake return
+        $return = [
+            'promotion' => $promo_return,
+        ];
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.info', Mockery::type('array'))->once()->andReturn($return);
+
+
+        // Get the promo
+        $single_promo = app(PromoRepository::class, ['wsuApi' => $wsuApi])->getPromoView($this->faker->randomDigit());
+        $promo['promotion'] = $single_promo['promo'];
+
+        $this->assertEquals($promo, ['promotion' => $promo_return]);
+    }
+
+    #[Test]
+    public function back_to_promo_page_should_return_url(): void
+    {
+        // The default path if no referer
+        $url = app(PromoRepository::class)->getBackToPromoPage();
+        $this->assertTrue($url == '');
+
+        // If a referer is passed from a different domain
+        $referer = $this->faker->url();
+        $url = app(PromoRepository::class)->getBackToPromoPage($referer, 'http', 'wayne.edu', '/');
+        $this->assertTrue($url == '');
+
+        // If a referer is passed that is the same page we are on
+        $referer = $this->faker->url();
+        $parsed = parse_url($referer);
+        $url = app(PromoRepository::class)->getBackToPromoPage($referer, $parsed['scheme'], $parsed['host'], $parsed['path']);
+        $this->assertTrue($url == '');
+
+        // If referer is passed from the same domain that the site is on
+        $referer = $this->faker->url();
+        $parsed = parse_url($referer);
+        $url = app(PromoRepository::class)->getBackToPromoPage($referer, $parsed['scheme'], $parsed['host'], $this->faker->word());
+        $this->assertEquals($referer, $url);
+    }
+
+    #[Test]
+    public function restrict_rotating_hero(): void
     {
         // Fake return
         $return = [
-            'promotions' => [],
+            'promotions' => [
+                [
+                    'promo_item_id' => 1,
+                    'promo_group_id' => 1,
+                ],
+                [
+                    'promo_item_id' => 2,
+                    'promo_group_id' => 2,
+                ],
+                [
+                    'promo_item_id' => 3,
+                    'promo_group_id' => 3,
+                ],
+            ],
         ];
+
+        // Build the config
+        config(['base.global' => [
+            'all' => [
+                'promos' => [
+                    'hero' => [
+                        'id' => null,
+                        'config' => '|limit:1',
+                    ],
+                ],
+            ],
+        ]]);
+
+        config(['base.hero_rotating_controllers' => ['ChildpageController']]);
+        config(['base.hero_rotating_limit' => 3]);
+
+        // Create a fake data request
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'ChildpageController',
+            ],
+        ]);
+
+        // Get the global promos config
+        $config = config('base.global');
+
+        // Set all the groups
+        $groups = $config['all']['promos'];
+
+        $group_config = collect($groups)->mapWithKeys(function ($group, $name) use ($config, $data) {
+            $value = !empty($group['config']) ? $group['config'] : null;
+            return [$name => str_replace('{$page_id}', $data['page']['id'], $value)];
+        })->reject(function ($value) {
+            return empty($value);
+        })->toArray();
+
+        if (in_array($data['page']['controller'], config('base.hero_rotating_controllers'))) {
+            $group_config = str_replace('|limit:1', '|limit:'.config('base.hero_rotating_limit'), $group_config);
+        }
 
         // Mock the connector and set the return
         $wsuApi = Mockery::mock(Connector::class);
         $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
 
         // Get the promos
-        $promos = app(PromoRepository::class, ['wsuApi' => $wsuApi])->getHomepagePromos($this->faker->randomDigit());
+        $promos = app(PromoRepository::class, ['wsuApi' => $wsuApi])->getRequestData($data);
 
-        $this->assertTrue(is_array($promos));
+        $this->assertEquals($group_config['hero'], '|limit:'.config('base.hero_rotating_limit'));
+        $this->assertTrue((in_array($data['page']['controller'], config('base.hero_rotating_controllers'))));
     }
 }
