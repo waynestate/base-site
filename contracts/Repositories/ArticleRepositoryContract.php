@@ -13,7 +13,7 @@ interface ArticleRepositoryContract
      * @param array $topics
      * @return array
      */
-    public function listing($application_ids, $limit=5, $page=1, $topics=[]);
+    public function listing($application_ids, $limit = 5, $page = 1, $topics = []);
 
     /**
      * Get an individual article by id.

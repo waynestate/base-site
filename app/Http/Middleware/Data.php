@@ -128,7 +128,7 @@ class Data
         // Check the route uri and trim off all parts that are route parameters.
         $path = collect(explode('/', $uri))
             ->filter(function ($item) {
-                if (! strstr($item, '{')) {
+                if (!strstr($item, '{')) {
                     return $item;
                 }
             })

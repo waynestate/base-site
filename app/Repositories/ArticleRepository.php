@@ -26,7 +26,7 @@ class ArticleRepository implements ArticleRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function listing($application_ids, $limit=5, $page=1, $topics=[])
+    public function listing($application_ids, $limit = 5, $page = 1, $topics = [])
     {
         if (empty($application_ids)) {
             return ['articles' => []];
@@ -128,11 +128,11 @@ class ArticleRepository implements ArticleRepositoryContract
             $meta['next_page_url'] = null;
             $meta['prev_page_url'] = ($meta['total'] < $meta['per_page']) ? null : url()->current().'?page=2';
         } elseif ($page == $meta['last_page']) {
-            $meta['next_page_url'] = url()->current().'?page='.($page-1);
+            $meta['next_page_url'] = url()->current().'?page='.($page - 1);
             $meta['prev_page_url'] = null;
         } else {
-            $meta['next_page_url'] = url()->current().(($page-1 == 1) ? '' : '?page='.($page-1));
-            $meta['prev_page_url'] = url()->current().'?page='.($page+1);
+            $meta['next_page_url'] = url()->current().(($page - 1 == 1) ? '' : '?page='.($page - 1));
+            $meta['prev_page_url'] = url()->current().'?page='.($page + 1);
         }
 
         return $meta;

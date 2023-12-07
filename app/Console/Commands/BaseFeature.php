@@ -91,7 +91,7 @@ class BaseFeature extends Command
 
         $menu[101]['submenu'][999]['submenu'][$item['menu_item_id']] = $item;
 
-        Storage::disk('base')->put('styleguide/menu.json', json_encode($menu, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES));
+        Storage::disk('base')->put('styleguide/menu.json', json_encode($menu, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
     }
 
     public function page()
