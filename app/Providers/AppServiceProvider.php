@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
             $params = explode(',', $expression);
 
             // We have three parameters that are optional so we need to set them as blank strings if they weren't passed in
-            for ($i=0; $i <= 2; $i++) {
+            for ($i = 0; $i <= 2; $i++) {
                 if (empty($params[$i])) {
                     $params[$i] = "''";
                 }
@@ -45,7 +45,7 @@ class AppServiceProvider extends ServiceProvider
             }
 
             // We have three parameters that are optional so we need to set them as blank strings if they weren't passed in
-            for ($i=0; $i <= 2; $i++) {
+            for ($i = 0; $i <= 2; $i++) {
                 if (empty($params[$i])) {
                     $params[$i] = "''";
                 }

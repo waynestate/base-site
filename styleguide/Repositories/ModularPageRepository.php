@@ -65,7 +65,7 @@ class ModularPageRepository extends Repository
                 ],
             ],
 
-            'image-column-1'=> [
+            'image-column-1' => [
                 'data' => app(GenericPromo::class)->create(1, false, [
                     'title' => 'Featured news (image column)',
                     'filename_url' => '/styleguide/image/770x434',
