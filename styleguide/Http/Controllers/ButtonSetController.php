@@ -77,7 +77,7 @@ class ButtonSetController extends Controller
         ]);
 
         // Image
-        $image[1]= app(Button::class)->create(1, true, [
+        $image[1] = app(Button::class)->create(1, true, [
             'title' => 'Image',
             'option' => 'Image',
             'relative_url' => "/styleguide/image/600x218?text=Primary+image+only",
@@ -85,7 +85,7 @@ class ButtonSetController extends Controller
         ]);
 
         // PDF
-        $image[2]= app(Button::class)->create(1, true, [
+        $image[2] = app(Button::class)->create(1, true, [
             'title' => 'PDF',
             'option' => 'Image',
             'relative_url' => "/styleguide/image/600x218?text=Image+linking+to+a+pdf",
@@ -94,7 +94,7 @@ class ButtonSetController extends Controller
         ]);
 
         // SVG overlay
-        $image[3]= app(Button::class)->create(1, true, [
+        $image[3] = app(Button::class)->create(1, true, [
             'title' => 'SVG overlay on dark background',
             'option' => 'Image',
             'relative_url' => "/styleguide/image/600x218",
