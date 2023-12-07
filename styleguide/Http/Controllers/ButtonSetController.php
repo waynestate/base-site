@@ -120,7 +120,7 @@ class ButtonSetController extends Controller
                         'promo_item_id' => 1,
                         'title' => 'Configuration',
                         'description' => '
-<table>
+<table class="no-stripe">
     <thead>
         <tr>
             <th class="md:w-2/5">Page field</th>
@@ -131,7 +131,6 @@ class ButtonSetController extends Controller
         <tr>
             <td>
                 <pre class="w-full">modular-button-column-1</pre>
-                <pre class="w-full">modular-button-row-1</pre>
             </td>
             <td>
 <pre class="w-full" tabindex="0">
@@ -139,6 +138,21 @@ class ButtonSetController extends Controller
 "id":000000,
 "heading":"Buttons",
 "config":"limit:3|page_id"
+}
+</pre>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <pre class="w-full">modular-button-row-1</pre>
+            </td>
+            <td>
+<pre class="w-full" tabindex="0">
+{
+"id":000000,
+"heading":"Buttons",
+"config":"limit:3|page_id",
+"columns":3
 }
 </pre>
             </td>
@@ -160,6 +174,7 @@ class ButtonSetController extends Controller
                 'component' => [
                     'heading' => 'Button row',
                     'filename' => 'button-row',
+                    'columns' => 3
                 ],
             ],
             'button-column-10' => [

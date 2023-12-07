@@ -6,9 +6,9 @@ use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Faker\Factory;
-use Factories\Article;
+use Factories\Icon;
 
-class ArticleListingController extends Controller
+class IconsController extends Controller
 {
     /**
      * Construct the controller.
@@ -33,45 +33,49 @@ class ArticleListingController extends Controller
 <table class="no-stripe">
     <thead>
         <tr>
-            <th class="md:w-2/5">Page field</th>
+            <th class="w-2/5">Page field</th>
             <th>Data</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>
-                <pre class="w-full">modular-news-column-1</pre>
+                <pre class="w-full">modular-icons-column-1</pre>
             </td>
             <td>
 <pre class="w-full" tabindex="0">
 {
-"id":7,
-"heading":"News",
-"link_text":"More news",
-"featured":null,
-"limit":4,
-"news_route":null,
-"topics":[]
-}
-</pre>
-Use default calendar by omitting ID and set other configuration items
-<pre class="w-full" tabindex="0">
-{
-"heading": "My news"
+"id":000000,
+"heading":"Icons column"
 }
 </pre>
             </td>
         </tr>
         <tr>
             <td>
-                <pre class="w-full">modular-news-row-1</pre>
+                <pre class="w-full">modular-icons-row-1</pre>
             </td>
             <td>
 <pre class="w-full" tabindex="0">
 {
-"heading":"Featured news",
-"featured":true,
-"columns":4
+"id":000000,
+"heading":"Icons row",
+"columns":2
+}
+</pre>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <pre class="w-full">modular-icons-top-row-1</pre>
+            </td>
+            <td>
+<pre class="w-full" tabindex="0">
+{
+"id":000000,
+"heading":"Icons top row",
+"columns":4,
+"showDescription":true
 }
 </pre>
             </td>
@@ -86,18 +90,33 @@ Use default calendar by omitting ID and set other configuration items
                     'showDescription' => false,
                 ],
             ],
-            'news-column-1' => [
-                'data' => app(Article::class)->create(5, false),
+            'icons-column-1' => [
+                'data' => app(Icon::class)->create(4, false, [
+                    'description' => '',
+                ]),
                 'component' => [
-                    'heading' => 'News column',
-                    'filename' => 'news-column',
+                    'heading' => 'Icons column',
+                    'filename' => 'icons-column',
                 ],
             ],
-            'news-row-1' => [
-                'data' => app(Article::class)->create(4, false),
+            'icons-row-1' => [
+                'data' => app(Icon::class)->create(4, false, [
+                    'excerpt' => '',
+                ]),
                 'component' => [
-                    'heading' => 'News row',
-                    'filename' => 'news-row',
+                    'heading' => 'Icons row',
+                    'filename' => 'icons-row',
+                ],
+            ],
+            'icons-top-row-1' => [
+                'data' => app(Icon::class)->create(4, false, [
+                    'excerpt' => '',
+                    'link' => '',
+                ]),
+                'component' => [
+                    'heading' => 'Icons top row',
+                    'filename' => 'icons-top-row',
+                    'columns' => 4
                 ],
             ],
         ];

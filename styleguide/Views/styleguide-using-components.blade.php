@@ -10,26 +10,6 @@
         <p>To add multiple components of the same type, like two accordions on a page, you will need to increment the number in the page field; i.e. <code>modular-accordion-1</code>, <code>modular-accordion-2</code></p>
         <p class="mb-8">To change the order of the components, you will need to copy and paste your data in the correct order until we develop a better way to rearrange page fields.</p>
 
-        <h2>Full width component page fields</h2>
-        <ul class="columns-2">
-            <li><code>modular-hero-1</code></li>
-            <li><code>modular-accordion-1</code></li>
-            <li><code>modular-content-row-1</code></li>
-            <li><code>modular-video-row-1</code></li>
-            <li><code>modular-button-row-1</code></li>
-            <li><code>modular-catalog-1</code></li>
-        </ul>
-
-        <h2>Column components</h2>
-        <ul class="columns-2">
-            <li><code>modular-button-column-1</code></li>
-            <li><code>modular-icons-column-1</code></li>
-            <li><code>modular-image-column-1</code></li>
-            <li><code>modular-video-column-1</code></li>
-            <li><code>modular-news-column-1</code></li>
-            <li><code>modular-events-column-1</code></li>
-        </ul>
-
         <h2>Configuring components</h2>
         <p>You will use a JSON array paired with your page field to configure each component. The specifics of each component can be found on the individual component page from the menu.</p>
         <h3>Example component configuration</h3>
@@ -89,15 +69,35 @@
                 </tr>
                 <tr>
                     <td class="font-bold">singlePromoView</td>
-                    <td>True or false, false is default and will use the promotion's link field if it is set.<br />Creates a link to a detailed page of a single promo item, like a Spotlight.</td>
+                    <td>True or false; false is default and will use the promotion's link field if it is set.<br />Creates a link to a detailed page of a single promo item, like a Spotlight.</td>
                 </tr>
                 <tr>
                     <td class="font-bold">showExcerpt</td>
-                    <td>True or false, true is default.<br />Show or hide the promo's excerpt.</td>
+                    <td>True or false; true is default.<br />Show or hide the promo's excerpt.</td>
                 </tr>
                 <tr>
                     <td class="font-bold">showDescription</td>
-                    <td>True or false, true is default.<br />Show or hide the promo's description. Commonly used in conjunction with "singlePromoView" where the description is hidden from the catalog but displayed on the detailed promo page.</td>
+                    <td>True or false; true is default.<br />Show or hide the promo's description. Commonly used in conjunction with "singlePromoView" where the description is hidden from the catalog but displayed on the detailed promo page.</td>
+                </tr>
+                <tr>
+                    <td class="font-bold">limit</td>
+                    <td>Integer; default is 4.<br />News and events only; Limit the number of items displayed.</td>
+                </tr>
+                <tr>
+                    <td class="font-bold">link_text</td>
+                    <td>News and Events only.<br />To change "More news" or "More events" to your specific text, i.e. "Student news", "Career events".</td>
+                </tr>
+                <tr>
+                    <td class="font-bold">featured</td>
+                    <td>True or false; all articles shown by default.<br />News row only; Display only the articles that have a specific featured image uploaded in the news manager.</td>
+                </tr>
+                <tr>
+                    <td class="font-bold">topics</td>
+                    <td>All topics shown by default.<br />News only; Pass in an array of topics to display i.e. [76, 4]</td>
+                </tr>
+                <tr>
+                    <td class="font-bold">cal_name</td>
+                    <td>Defaults to the site's selected calendar.<br />Events only; the relative url to your calendar that the "more events" link goes to, i.e. "main/".
                 </tr>
             </tbody>
         </table>

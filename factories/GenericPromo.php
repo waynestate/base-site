@@ -29,7 +29,6 @@ class GenericPromo implements FactoryContract
                 'title' => ucfirst(implode(' ', $this->faker->words(6))),
                 'excerpt' => $this->faker->catchPhrase,
                 'description' => '<p>' . $this->faker->text(100) . ' <a href="https://wayne.edu">'. $this->faker->sentence(3)  .'</a></p>',
-                'description' => '<p>' . $this->faker->text(100) . ' <a href="https://wayne.edu">'. $this->faker->sentence(3)  .'</a></p>',
                 'link' => 'https://wayne.edu',
                 'promo_item_id' => $i,
                 'promo_group_id' => strval($promo_group_id),

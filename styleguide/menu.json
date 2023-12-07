@@ -271,6 +271,16 @@
                     }
                 }
             },
+            "121100": {
+                "menu_item_id": 121100,
+                "is_active": 1,
+                "page_id": 121100,
+                "target": "",
+                "display_name": "Icons",
+                "class_name": "",
+                "relative_url": "/styleguide/iconscomponent",
+                "submenu": []
+            },
             "120100": {
                 "menu_item_id": 120100,
                 "is_active": 1,

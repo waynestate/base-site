@@ -47,6 +47,7 @@ class CatalogController extends Controller
 "id":000000,
 "heading":"Catalog",
 "config":"randomize|limit:1|page_id|youtube",
+"columns":3,
 "singlePromoView":true,
 "showExcerpt":true,
 "showDescription":false
