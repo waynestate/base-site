@@ -53,15 +53,15 @@
         <p>Notice the addition of the "button--two-line" class. You must contain each line within &lt;em&gt; &lt;/em&gt; when using this style in the CMS.</p>
         <div class="pb-4 2xl:flex items-start">
             <div class="mr-4 flex-shrink-0 2xl:w-1/4">
-                <a href="#standard-two-line" class="button button--two-line 2xl:w-full">
-                    <div>Two line button</div>
-                    <div>Brief subtext</div>
+                <a href="#" class="button button--two-line w-full">
+                    <div class="button__title">Two line button</div>
+                    <div class="button__excerpt">Subtext</div>
                 </a>
             </div>
 <pre class="code-block mb-0 w-full">
-{!! htmlspecialchars('<a href="#" class="button button--two-line">
-    <em>Nihil quaerat</em>
-    <em>Velit consequuntur explicabo</em>
+{!! htmlspecialchars('<a href="#" class="button button--two-line w-full">
+    <div class="button__title">Two line button</div>
+    <div class="button__excerpt">Subtext</div>
 </a>') !!}
 </pre>
         </div>
@@ -69,17 +69,17 @@
         <p>Your icon must be an SVG or 50x50 pixels and must match the text color.</p>
         <div class="pb-4 2xl:flex items-start">
             <div class="md:mr-4 flex-shrink-0">
-                <a href="#standard-two-line" class="button button--two-line">
-                    <img src="/styleguide/image/50x50" alt="">
-                    <div>Two line button</div>
-                    <div>Brief subtext</div>
+                <a href="#" class="button button--two-line">
+                    <img src="/styleguide/image/50x50" alt="" class="button__image">
+                    <div class="button__title">Two line button</div>
+                    <div class="button__excerpt">Subtext</div>
                 </a>
             </div>
 <pre class="code-block mb-0 w-full">
 {!! htmlspecialchars('<a href="#" class="button button--two-line">
-    <img src="/styleguide/image/50x50" alt="">
-    <em>Nihil quaerat</em>
-    <em>Velit consequuntur explicabo</em>
+    <img src="/styleguide/image/50x50" alt="" class="button__image">
+    <div class="button__title">Two line button</div>
+    <div class="button__excerpt">Subtext</div>
 </a>') !!}
 </pre>
         </div>

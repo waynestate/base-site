@@ -44,7 +44,7 @@ class HeroSVGController extends Controller
     <div class="lg:col-span-2 p-2 order-4 lg:order-none">
 <pre class="w-full" tabindex="0">
 {
-"id":0000,
+"id":0000
 }
 </pre>
     </div>

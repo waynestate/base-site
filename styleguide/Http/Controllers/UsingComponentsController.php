@@ -45,7 +45,6 @@ class UsingComponentsController extends Controller
                     'singlePromoView' => true,
                 ],
             ],
-
         ];
 
         return view('styleguide-using-components', merge($request->data, $components));

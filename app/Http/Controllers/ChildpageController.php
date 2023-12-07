@@ -49,34 +49,9 @@ class ChildpageController extends Controller
 
             unset($components['components'][$hero_key]);
 
-            config(['base.hero_full_controllers' => ['ModularPageController']]);
+            config(['base.hero_full_controllers' => ['ChildpageController']]);
         }
 
         return view('childpage', merge($request->data, $components));
-    }
-
-    /**
-     * Display individual promo item.
-     *
-     *
-     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     */
-    public function show(Request $request): View
-    {
-        $promo = $this->promo->getPromoView($request->id);
-
-        if (empty($promo['promo'])) {
-            abort('404');
-        }
-
-        if (!empty($promo['promo']['title'])) {
-            $request->data['base']['page']['title'] = $promo['promo']['title'];
-        }
-
-        // Set the back URL
-        $request->data['back_url'] = $this->promo->getBackToPromoPage($request->server->get('HTTP_REFERER'), $request->server->get('REQUEST_SCHEME'), $request->server->get('HTTP_HOST'), $request->server->get('REQUEST_URI'));
-
-        return view('promo-view', merge($request->data, $promo));
     }
 }

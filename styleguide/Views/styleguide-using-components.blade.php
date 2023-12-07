@@ -53,7 +53,7 @@
 "showExcerpt":true,
 "showDescription":false,
 "singlePromoView":true,
-"config":"limit:5"
+"config":"randomize|limit:5|page_id"
 }') !!}
 </pre>
                     </td>
@@ -72,20 +72,20 @@
             </thead>
             <tbody>
                 <tr>
-                    <td class="font-bold">id<span class="text-[red]">*</span></td>
-                    <td>Promo group ID</td>
+                    <td class="font-bold">id</td>
+                    <td>Promo group ID<span class="text-[red]">*</span>, News application ID, Events site ID</td>
                 </tr>
                 <tr>
                     <td class="font-bold">heading</td>
-                    <td>Provide a heading(h2) for this component.</td>
+                    <td>Add a component heading (h2)</td>
                 </tr>
                 <tr>
                     <td class="font-bold">config</td>
-                    <td>Configuration options for the specific promo group. <br />Use 'page_id' to enable per-page items. Use "limit:1" instead of "first" to display one item.<br /><a href="https://github.com/waynestate/parse-promos">Detailed promotion config information</a></td>
+                    <td>Configuration options for the specific promo group. <br />Use "page_id" to enable per-page items. Use "limit:1" instead of "first" to display one item.<br /><a href="https://github.com/waynestate/parse-promos">Detailed promotion config information</a></td>
                 </tr>
                 <tr>
                     <td class="font-bold">columns</td>
-                    <td>1 to 4 columns is recommended. Use with the catalog and news components.</td>
+                    <td>1 to 4 columns is recommended. Use with the catalog, button row, and news components.</td>
                 </tr>
                 <tr>
                     <td class="font-bold">singlePromoView</td>

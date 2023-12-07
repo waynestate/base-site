@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Faker\Factory;
 use Factories\GenericPromo;
-use Factories\Video;
 
 class SinglePromoController extends Controller
 {
@@ -30,24 +29,34 @@ class SinglePromoController extends Controller
                     0 => [
                         'title' => 'Configuration',
                         'description' => '
-<p>Visit the modular documentation for more information</p>
-<div class="grid grid-cols-1 lg:grid-cols-3 border-x border-b">
-    <div class="lg:col-span-1 p-2 bg-gray-100 font-bold lg:border-r border-y order-1 lg:order-none">Page field</div>
-    <div class="lg:col-span-2 p-2 bg-gray-100 font-bold border-y order-3 lg:order-none">Data</div>
-    <div class="lg:col-span-1 p-2 lg:border-r order-2 lg:order-none">
-        <pre class="w-full">modular-promo-column-1</pre>
-    </div>
-    <div class="lg:col-span-2 p-2 order-4 lg:order-none">
+<table>
+    <thead>
+        <tr>
+            <th class="w-2/5">Page field</th>
+            <th>Data</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <pre class="w-full">modular-promo-column-1</pre>
+                <pre class="w-full">modular-promo-row-1</pre>
+            </td>
+            <td>
 <pre class="w-full" tabindex="0">
 {
-"id":1234,
-"heading":"My heading",
+"id":000000,
+"heading":"Promo",
 "config":"randomize|limit:1|page_id",
-"singlePromoView":"true",
-"showExcerpt":"false",
-"showDescription":"true"
+"singlePromoView":true,
+"showExcerpt":true,
+"showDescription":false
 }
-</pre></div></div>',
+</pre>
+            </td>
+        </tr>
+    </tbody>
+</table>',
                         'promo_item_id' => 0,
                     ],
                 ],
@@ -62,17 +71,18 @@ class SinglePromoController extends Controller
                     'excerpt' => '',
                 ]),
                 'component' => [
-                    'heading' => 'My image',
+                    'heading' => 'Promo column',
                     'filename' => 'promo-column',
                 ],
             ],
-            'promo-column-2' => [
-                'data' => app(Video::class)->create(1, false, [
+            'promo-row-1' => [
+                'data' => app(GenericPromo::class)->create(1, false, [
                     'excerpt' => '',
+                    'link' => '#',
                 ]),
                 'component' => [
-                    'heading' => 'My video',
-                    'filename' => 'promo-column',
+                    'heading' => 'Promo row heading',
+                    'filename' => 'promo-row',
                 ],
             ],
         ];

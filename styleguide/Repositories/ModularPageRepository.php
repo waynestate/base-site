@@ -115,16 +115,6 @@ class ModularPageRepository extends Repository
                 ],
             ],
 
-            /*
-            'icons-column' => [
-                'data' => app(GenericPromo::class)->create(4, false),
-                'component' => [
-                    'heading' => 'Icons column',
-                    'filename' => 'icons-column',
-                ],
-            ],
-             */
-
             'spotlight' => [
                 'data' => app(Spotlight::class)->create(1, false),
                 'component' => [

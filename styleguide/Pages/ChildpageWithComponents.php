@@ -17,7 +17,7 @@ class ChildpageWithComponents extends Page
                 'title' => 'Childpage with components',
                 'id' => 101110700,
                 'content' => [
-                    'main' => '<p>Normal page content from the CMS will show up here and components will display below.</p>',
+                    'main' => '<p>Normal page content from the CMS will show up here and components will display below.</p><p>See the <a href="/styleguide/usingcomponents">Using components</a> page for configuration details.</p>',
                 ],
             ],
             'site' => [
@@ -27,15 +27,7 @@ class ChildpageWithComponents extends Page
                 ],
             ],
             'data' => [
-                'modular-events-column-1' => 1,
-                'events_url' => '/main',
-                'modular-news-column-1' => 2,
-                'buttons' => '{}',
-                'image-promos' => '{}',
-                'spotlight' => '{}',
-                'steps' => '{}',
-                'text-promo' => '{}',
-                'video' => '{}',
+                'modular-catalog' => '{}',
             ],
         ]);
     }
