@@ -247,7 +247,7 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
                 $rel_subsiteFolder = '/'.rtrim($subsiteFolder, '/');
 
                 // Add the subsite path if it doesn't exist in the breadcrumbs
-                if (! collect($breadcrumbs)->contains('relative_url', $rel_subsiteFolder)) {
+                if (!collect($breadcrumbs)->contains('relative_url', $rel_subsiteFolder)) {
                     $subsite_crumb = [
                         'display_name' => $siteTitle,
                         'relative_url' => $rel_subsiteFolder,

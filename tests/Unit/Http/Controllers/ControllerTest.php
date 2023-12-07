@@ -34,7 +34,7 @@ final class ControllerTest extends TestCase
     {
         return collect(Storage::disk('base')->allFiles('app/Http/Controllers/'))
         ->reject(function ($item) {
-            return basename($item) === 'Controller.php' || ! Str::endsWith($item, '.php');
+            return basename($item) === 'Controller.php' || !Str::endsWith($item, '.php');
         })
         ->map(function ($item) {
             return $this->getCommentData($item);

@@ -58,7 +58,7 @@ class ModularDocsController extends Controller
                 ],
             ],
 
-            'image_column_1'=> [
+            'image_column_1' => [
                 'data' => app(GenericPromo::class)->create(1, false, [
                     'title' => 'Featured news (image column)',
                     'filename_url' => '/styleguide/image/770x434',

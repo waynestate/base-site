@@ -233,7 +233,7 @@ class ProfileRepository implements ProfileRepositoryContract
         });
 
         if (!empty($profiles['error'])) {
-            return ['profile'=> []];
+            return ['profile' => []];
         }
 
         if (!empty($profiles['profiles'][$site_id]['data']['Youtube Videos'])) {
