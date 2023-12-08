@@ -17,7 +17,7 @@
     @endif
     <div class="w-full relative md:pt-2">
         <div class="font-bold text-xl group-hover:underline group-focus:underline">{{ $item['title'] }}</div>
-        @if(!empty($item['excerpt']))<p class="text-base text-black mb-0 mt-1">{{ $item['excerpt'] }}</p>@endif
+        @if(!empty($item['excerpt']))<p class="text-base text-black mb-0 mt-1">{!! strip_tags($item['excerpt'], ['em', 'strong']) !!}</p>@endif 
         @if(!empty($item['description']))
             @if (!empty($item['link']))
                 <div class="w-full text-black mt-1">{!! preg_replace(array('"<a href(.*?)>"', '"</a>"'), array('',''), $item['description']) !!}</div>
