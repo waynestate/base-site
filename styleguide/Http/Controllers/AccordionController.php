@@ -22,8 +22,30 @@ class AccordionController extends Controller
             'accordion-1' => [
                 'data' => [
                     0 => [
-                        'promo_item_id' => 0,
-                        'title' => 'Configuration',
+                        'promo_item_id' => 'promoGroupDetails',
+                        'title' => 'Promotion group details',
+                        'description' => '
+<table class="mt-2">
+    <thead>
+        <tr>
+            <th colspan="2">Available fields</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="font-bold">Title</td>
+            <td>Text on the closed accordion.</td>
+        </tr>
+        <tr>
+            <td class="font-bold">Description</td>
+            <td>Content when the accordion is clicked open.</td>
+        </tr>
+    </tbody>
+</table>',
+                    ],
+                    1 => [
+                        'promo_item_id' => 'componentConfiguration',
+                        'title' => 'Component configuration',
                         'description' => '
 <table>
     <thead>
@@ -45,28 +67,6 @@ class AccordionController extends Controller
 }
 </pre>
             </td>
-        </tr>
-    </tbody>
-</table>',
-                    ],
-                    1 => [
-                        'promo_item_id' => 0,
-                        'title' => 'Promo group setup',
-                        'description' => '
-<table class="mt-2">
-    <thead>
-        <tr>
-            <th colspan="2">Available fields</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td class="font-bold">Title</td>
-            <td>Label on the closed accordion</td>
-        </tr>
-        <tr>
-            <td class="font-bold">Description</td>
-            <td>Content when the accordion is clicked open</td>
         </tr>
     </tbody>
 </table>',

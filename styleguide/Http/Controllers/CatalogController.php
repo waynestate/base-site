@@ -31,7 +31,42 @@ class CatalogController extends Controller
             'accordion-1' => [
                 'data' => [
                     0 => [
-                        'title' => 'Configuration',
+                        'promo_item_id' => 'promoGroupDetails',
+                        'title' => 'Promotion group details',
+                        'description' => '
+<table class="mt-2">
+    <thead>
+        <tr>
+            <th colspan="2">Available fields</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="font-bold">Title</td>
+            <td>Bold text.</td>
+        </tr>
+        <tr>
+            <td class="font-bold">Link</td>
+            <td>Optional external link. Component flag "singlePromoView" sets the link to the individual promo item view.</td>
+        </tr>
+        <tr>
+            <td class="font-bold">Excerpt</td>
+            <td>Optional smaller text under the title.</td>
+        </tr>
+        <tr>
+            <td class="font-bold">Description</td>
+            <td>Optional smaller text under the title and/or excerpt. You might use this area on a singe promo view page and hide it from the catalog component.</td>
+        </tr>
+        <tr>
+            <td class="font-bold">Primary image</td>
+            <td>Minimum width of 600px jpg, png.</td>
+        </tr>
+    </tbody>
+</table>',
+                    ],
+                    1 => [
+                        'promo_item_id' => 'componentConfiguration',
+                        'title' => 'Component configuration',
                         'description' => '
 <table>
     <thead>
@@ -61,7 +96,6 @@ class CatalogController extends Controller
         </tr>
     </tbody>
 </table>',
-                        'promo_item_id' => 0,
                     ],
                 ],
                 'component' => [

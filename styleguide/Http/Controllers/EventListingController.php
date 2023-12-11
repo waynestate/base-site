@@ -27,8 +27,8 @@ class EventListingController extends Controller
             'accordion-1' => [
                 'data' => [
                     0 => [
-                        'promo_item_id' => 0,
-                        'title' => 'Configuration',
+                        'promo_item_id' => 'componentConfiguration',
+                        'title' => 'Component configuration',
                         'description' => '
 <table>
     <thead>

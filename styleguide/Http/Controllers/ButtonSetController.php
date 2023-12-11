@@ -112,7 +112,7 @@ class ButtonSetController extends Controller
             'accordion' => [
                 'data' => [
                     0 => [
-                        'promo_item_id' => 0,
+                        'promo_item_id' => 'promoGroupDetails',
                         'title' => 'Promotion group details',
                         'description' => '
 <table class="mt-2">
@@ -137,7 +137,7 @@ class ButtonSetController extends Controller
         <tr>
 <td class="font-bold">Options</td>
 <td>
-<strong>Default options:</strong> Default, Green, Image<br />
+<strong>Default:</strong> Default, Green, Image<br />
 <strong>Options available by request:</strong> Green gradient, Gold, Gold gradient<br />View these colors on the <a href="/styleguide/buttons">Buttons</a> page.</p>
 </td>
 </tr>
@@ -155,7 +155,7 @@ Icons: 40x40px PNG, SVG<br />Images: 600x218px JPG, PNG recommended with descrip
 ',
                     ],
                     1 => [
-                        'promo_item_id' => 1,
+                        'promo_item_id' => 'componentConfiguration',
                         'title' => 'Component configuration',
                         'description' => '
 <table class="no-stripe">
