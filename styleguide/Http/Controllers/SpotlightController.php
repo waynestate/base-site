@@ -49,10 +49,9 @@ class SpotlightController extends Controller
 {
 "id":000000,
 "heading":"Spotlight",
-"config":"randomize|limit:1|page_id",
-"singlePromoView":true,
-"showExcerpt":true,
-"showDescription":true
+"config":"randomize|page_id|limit:1",
+"singlePromoView":false,
+"showDescription":false
 }
 </pre>
             </td>

@@ -23,6 +23,10 @@ class CatalogController extends Controller
      */
     public function index(Request $request): View
     {
+        $request->data['base']['page']['content']['main'] = '
+<p>Display a grid or listing of items from a single promo group.</p>
+';
+
         $components['components'] = [
             'accordion-1' => [
                 'data' => [

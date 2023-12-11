@@ -16,9 +16,7 @@ class ButtonSet extends Page
                 'controller' => 'ButtonSetController',
                 'title' => 'Button set',
                 'id' => 114100,
-                'content' => [
-                    'main' => '<p>This component can be used as buttons under the side menu and as buttons on your page.</p>',
-                ],
+                'content' => [], // On controller
             ],
         ]);
     }

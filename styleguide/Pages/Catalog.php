@@ -16,9 +16,7 @@ class Catalog extends Page
                 'controller' => 'CatalogController',
                 'title' => 'Catalog',
                 'id' => 118100,
-                'content' => [
-                    'main' => '<p>Display a grid or listing of items from a single promo group.</p>',
-                ],
+                'content' => [], // On controller
             ],
         ]);
     }
