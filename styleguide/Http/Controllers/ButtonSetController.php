@@ -85,7 +85,7 @@ class ButtonSetController extends Controller
             'title' => 'Image',
             'option' => 'Image',
             'relative_url' => "/styleguide/image/600x218?text=Primary+image+only",
-            'filename_alt_text' => "",
+            'filename_alt_text' => "Placeholder image",
         ]);
 
         // PDF
