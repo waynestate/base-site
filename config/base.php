@@ -89,7 +89,7 @@ return [
     | as if it was in this array.
     |
     */
-    'hero_full_controllers' => [],
+    'hero_full_controllers' => ['HomepageController'],
 
     /*
     |--------------------------------------------------------------------------

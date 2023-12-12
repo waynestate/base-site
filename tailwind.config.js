@@ -121,6 +121,8 @@ module.exports = {
                 '3/4': '75%',
                 '16/9': '56.35%',
                 'hero': '36.3%',
+                'hero-medium': '29.3%',
+                'hero-skinny': '16.667%',
                 'full': '100%',
                 'portrait' : '133%',
             },

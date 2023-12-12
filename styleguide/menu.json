@@ -200,16 +200,6 @@
                 "relative_url": "/styleguide/hero/contained",
                 "submenu": {
                     "105100100": {
-                        "menu_item_id": 105100102,
-                        "is_active": 1,
-                        "page_id": 105100102,
-                        "target": "",
-                        "display_name": "Skinny",
-                        "class_name": "",
-                        "relative_url": "/styleguide/hero/skinny",
-                        "submenu": []
-                    },
-                    "105100100": {
                         "menu_item_id": 105100100,
                         "is_active": 1,
                         "page_id": 105100100,
@@ -236,37 +226,47 @@
                         "target": "",
                         "display_name": "Rotate",
                         "class_name": "",
-                        "relative_url": "/styleguide/hero/full/rotate",
+                        "relative_url": "/styleguide/hero/rotate",
                         "submenu": []
                     },
-                    "105100107": {
+                    "105100105": {
                         "menu_item_id": 105100105,
                         "is_active": 1,
                         "page_id": 105100105,
                         "target": "",
                         "display_name": "Text overlay",
                         "class_name": "",
-                        "relative_url": "/styleguide/hero/full/textoverlay",
+                        "relative_url": "/styleguide/hero/textoverlay",
                         "submenu": []
                     },
-                    "105100108": {
+                    "105100106": {
                         "menu_item_id": 105100106,
                         "is_active": 1,
                         "page_id": 105100106,
                         "target": "",
                         "display_name": "SVG overlay",
                         "class_name": "",
-                        "relative_url": "/styleguide/hero/full/svgoverlay",
+                        "relative_url": "/styleguide/hero/svgoverlay",
                         "submenu": []
                     },
-                    "105100109": {
+                    "105100107": {
                         "menu_item_id": 105100107,
                         "is_active": 1,
                         "page_id": 105100107,
                         "target": "",
                         "display_name": "Logo overlay",
                         "class_name": "",
-                        "relative_url": "/styleguide/hero/full/logooverlay",
+                        "relative_url": "/styleguide/hero/logooverlay",
+                        "submenu": []
+                    },
+                    "105100108": {
+                        "menu_item_id": 105100108,
+                        "is_active": 1,
+                        "page_id": 105100108,
+                        "target": "",
+                        "display_name": "Skinny",
+                        "class_name": "",
+                        "relative_url": "/styleguide/hero/skinny",
                         "submenu": []
                     }
                 }
