@@ -16,7 +16,9 @@ class ButtonSet extends Page
                 'controller' => 'ButtonSetController',
                 'title' => 'Button set',
                 'id' => 114100,
-                'content' => [], // On controller
+                'content' => [
+                    'main' => '',
+                ],
             ],
         ]);
     }

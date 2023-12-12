@@ -136,6 +136,9 @@ module.exports = {
             minHeight: {
                 'hero': '36.3vw',
             },
+            dropShadow: {
+                'px': '0 1px 1px rgba(12, 84, 73, 0.5)',
+            },
             boxShadow: {
                 'white': '0 7px 0 '+ twColors.white +', 0 14px 0 '+ twColors.white,
                 'grey': '0 7px 0 '+ twColors.gray +', 0 14px 0 '+ twColors.gray,

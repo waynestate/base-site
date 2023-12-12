@@ -281,16 +281,6 @@
                 "relative_url": "/styleguide/iconscomponent",
                 "submenu": []
             },
-            "120100": {
-                "menu_item_id": 120100,
-                "is_active": 1,
-                "page_id": 120100,
-                "target": "",
-                "display_name": "Image",
-                "class_name": "",
-                "relative_url": "/styleguide/imagecomponent",
-                "submenu": []
-            },
             "108100": {
                 "menu_item_id": 108100,
                 "is_active": 1,

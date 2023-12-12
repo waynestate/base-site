@@ -27,6 +27,86 @@ class ButtonSetController extends Controller
         $request->data['base']['page']['content']['main'] = '
 <p>This component serves as the buttons under the side menu and as button components on your page.</p>
 ';
+        $promotion_group_details = '
+<table class="mt-2">
+    <thead>
+        <tr>
+            <th colspan="2">Available fields</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="font-bold">Title</td>
+            <td>Text to appear on the button.</td>
+        </tr>
+        <tr>
+            <td class="font-bold">Link</td>
+            <td>Your URL. When linking to a pdf, "(pdf)" is added automatically.</td>
+        </tr>
+        <tr>
+            <td class="font-bold">Excerpt</td>
+            <td>Add a 2-3 word second line of text.</td>
+        </tr>
+        <tr>
+            <td class="font-bold">Options</td>
+            <td>
+                <strong>Default:</strong> Default, Green, Image<br />
+                <strong>Options available by request:</strong> Green gradient, Gold, Gold gradient<br />View these colors on the <a href="/styleguide/buttons">Buttons</a> page.</p>
+            </td>
+        </tr>
+        <tr>
+            <td class="font-bold">Primary image</td>
+            <td>
+            Icons: 40x40px PNG, SVG<br />Images: 600x218px JPG, PNG recommended with descriptive alternative text.<br />Text within the image is not recommended because it cannot maintain readability when scaled.</td>
+        </tr>
+        <tr>
+            <td class="font-bold">Secondary image</td>
+            <td>SVG overlay image of the same dimensions as the primary image.<br />Text can be used within the SVG because it is scalable. You must provide enough contrast between the background and overlay image to meet accessibility standards. Secondary image alternative text not used.</td>
+        </tr>
+    </tbody>
+</table>
+';
+        $component_configuration = '
+<table class="no-stripe">
+    <thead>
+        <tr>
+            <th class="md:w-2/5">Page field</th>
+            <th>Data</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <pre class="w-full">modular-button-column-1</pre>
+            </td>
+            <td>
+<pre class="w-full" tabindex="0">
+{
+"id":000000,
+"heading":"Buttons",
+"config":"page_id|limit:3"
+}
+</pre>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <pre class="w-full">modular-button-row-1</pre>
+            </td>
+            <td>
+<pre class="w-full" tabindex="0">
+{
+"id":000000,
+"heading":"Buttons",
+"config":"page_id|limit:3",
+"columns":3
+}
+</pre>
+            </td>
+        </tr>
+    </tbody>
+</table>
+';
 
         $icon_green = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI2LjAuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxMDAgMTAwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6IzA4MzUyRjt9Cjwvc3R5bGU+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik01MCwyLjVDMjMuOCwyLjUsMi41LDIzLjgsMi41LDUwUzIzLjgsOTcuNSw1MCw5Ny41Uzk3LjUsNzYuMiw5Ny41LDUwUzc2LjIsMi41LDUwLDIuNXogTTQzLjgsMjAuOQoJYzEuNi0xLjUsMy41LTIuMiw1LjYtMi4yYzIuMiwwLDQuMSwwLjcsNS42LDIuMmMxLjYsMS41LDIuMywzLjIsMi4zLDUuM2MwLDItMC44LDMuOC0yLjQsNS4yYy0xLjYsMS40LTMuNCwyLjItNS42LDIuMgoJYy0yLjIsMC00LjEtMC43LTUuNi0yLjJjLTEuNi0xLjQtMi40LTMuMi0yLjQtNS4yQzQxLjQsMjQuMSw0Mi4yLDIyLjMsNDMuOCwyMC45eiBNNjMuMyw4MS4zSDM3Ljd2LTNjMC43LTAuMSwxLjQtMC4xLDIuMS0wLjIKCXMxLjMtMC4yLDEuNy0wLjRjMC45LTAuMywxLjUtMC44LDEuOC0xLjRzMC41LTEuNCwwLjUtMi40VjUwLjRjMC0wLjktMC4yLTEuOC0wLjYtMi41Yy0wLjQtMC43LTEtMS4zLTEuNi0xLjcKCWMtMC41LTAuMy0xLjItMC42LTIuMi0wLjlzLTEuOS0wLjUtMi43LTAuNnYtM2wxOS44LTEuMWwwLjYsMC42djMyLjFjMCwwLjksMC4yLDEuNywwLjYsMi40YzAuNCwwLjcsMSwxLjIsMS43LDEuNQoJYzAuNSwwLjIsMS4xLDAuNSwxLjgsMC42YzAuNiwwLjIsMS4zLDAuMywyLDAuNHYzLjFDNjMuMiw4MS4zLDYzLjMsODEuMyw2My4zLDgxLjN6Ii8+Cjwvc3ZnPgo=";
         $icon_white = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBkPSJNNTAgMi41QzIzLjggMi41IDIuNSAyMy44IDIuNSA1MFMyMy44IDk3LjUgNTAgOTcuNSA5Ny41IDc2LjIgOTcuNSA1MCA3Ni4yIDIuNSA1MCAyLjV6bS02LjIgMTguNGMxLjYtMS41IDMuNS0yLjIgNS42LTIuMiAyLjIgMCA0LjEuNyA1LjYgMi4yIDEuNiAxLjUgMi4zIDMuMiAyLjMgNS4zIDAgMi0uOCAzLjgtMi40IDUuMi0xLjYgMS40LTMuNCAyLjItNS42IDIuMi0yLjIgMC00LjEtLjctNS42LTIuMi0xLjYtMS40LTIuNC0zLjItMi40LTUuMi4xLTIuMS45LTMuOSAyLjUtNS4zem0xOS41IDYwLjRIMzcuN3YtM2MuNy0uMSAxLjQtLjEgMi4xLS4yczEuMy0uMiAxLjctLjRjLjktLjMgMS41LS44IDEuOC0xLjQuMy0uNi41LTEuNC41LTIuNFY1MC40YzAtLjktLjItMS44LS42LTIuNS0uNC0uNy0xLTEuMy0xLjYtMS43LS41LS4zLTEuMi0uNi0yLjItLjlzLTEuOS0uNS0yLjctLjZ2LTNsMTkuOC0xLjEuNi42djMyLjFjMCAuOS4yIDEuNy42IDIuNC40LjcgMSAxLjIgMS43IDEuNS41LjIgMS4xLjUgMS44LjYuNi4yIDEuMy4zIDIgLjR2My4xeiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==";
@@ -111,98 +191,19 @@ class ButtonSetController extends Controller
         $components = [
             'accordion' => [
                 'data' => [
-                    0 => [
-                        'promo_item_id' => 'promoGroupDetails',
-                        'title' => 'Promotion group details',
-                        'description' => '
-<table class="mt-2">
-    <thead>
-        <tr>
-            <th colspan="2">Available fields</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td class="font-bold">Title</td>
-            <td>Text to appear on the button.</td>
-        </tr>
-        <tr>
-            <td class="font-bold">Link</td>
-            <td>Your URL. When linking to a pdf, "(pdf)" is added automatically.</td>
-        </tr>
-        <tr>
-            <td class="font-bold">Excerpt</td>
-            <td>Add a 2-3 word second line of text.</td>
-        </tr>
-        <tr>
-<td class="font-bold">Options</td>
-<td>
-<strong>Default:</strong> Default, Green, Image<br />
-<strong>Options available by request:</strong> Green gradient, Gold, Gold gradient<br />View these colors on the <a href="/styleguide/buttons">Buttons</a> page.</p>
-</td>
-</tr>
-<tr>
-<td class="font-bold">Primary image</td>
-<td>
-Icons: 40x40px PNG, SVG<br />Images: 600x218px JPG, PNG recommended with descriptive alternative text.<br />Text within the image is not recommended because it cannot maintain readability when scaled.</td>
-</tr>
-<tr>
-<td class="font-bold">Secondary image</td>
-<td>SVG overlay image of the same dimensions as the primary image.<br />Text can be used within the SVG because it is scalable. You must provide enough contrast between the background and overlay image to meet accessibility standards. Secondary image alternative text not used.</td>
-</tr>
-    </tbody>
-</table>
-',
-                    ],
-                    1 => [
+                    2 => [
                         'promo_item_id' => 'componentConfiguration',
                         'title' => 'Component configuration',
-                        'description' => '
-<table class="no-stripe">
-    <thead>
-        <tr>
-            <th class="md:w-2/5">Page field</th>
-            <th>Data</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                <pre class="w-full">modular-button-column-1</pre>
-            </td>
-            <td>
-<pre class="w-full" tabindex="0">
-{
-"id":000000,
-"heading":"Buttons",
-"config":"page_id|limit:3"
-}
-</pre>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <pre class="w-full">modular-button-row-1</pre>
-            </td>
-            <td>
-<pre class="w-full" tabindex="0">
-{
-"id":000000,
-"heading":"Buttons",
-"config":"limit:3|page_id",
-"columns":3
-}
-</pre>
-            </td>
-        </tr>
-    </tbody>
-</table>',
+                        'description' => $component_configuration,
+                    ],
+                    1 => [
+                        'promo_item_id' => 'promoGroupDetails',
+                        'title' => 'Promotion group details',
+                        'description' => $promotion_group_details,
                     ],
                 ],
                 'component' => [
                     'filename' => 'accordion',
-                    'columns' => '4',
-                    'showDescription' => false,
                 ],
             ],
             'button_row_1' => [

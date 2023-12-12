@@ -23,7 +23,7 @@ class HeroController extends Controller
     public function index(Request $request): View
     {
 
-        $component_config = '
+        $component_configuration = '
 <table class="mt-2">
     <thead>
         <tr>
@@ -42,8 +42,6 @@ class HeroController extends Controller
 "config":"randomize|page_id|limit:1"
 }
 </pre>
-<p>The last array item cannot have a comma.</p>
-<p><a href="https://github.com/waynestate/parse-promos">View the promo config documentation on Github.</a></p>
         </td>
     </tr>
 </table>
@@ -75,7 +73,7 @@ class HeroController extends Controller
         </tr>
         <tr>
             <td class="font-bold">Options</td>
-            <td>None, Text ovrrlay, Logo overlay, SVG overlay</td>
+            <td>None, Skinny, Text overlay, Logo overlay, SVG overlay</td>
         </tr>
     </tbody>
 </table>';
@@ -86,7 +84,7 @@ class HeroController extends Controller
                     0 => [
                         'title' => 'Component configuration',
                         'promo_item_id' => 'componentConfiguration',
-                        'description' => $component_config,
+                        'description' => $component_configuration,
                     ],
                     1 => [
                         'title' => 'Promotion group details',

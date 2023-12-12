@@ -16,7 +16,7 @@
         @endif
 
         <div class="md:mt-0 content">
-            <div class="font-bold text-2xl mt-1 group-hover:underline group-focus:underline">{{ $item['title'] }}</div>
+            <div class="font-bold text-xl lg:text-2xl mt-1 group-hover:underline group-focus:underline">{{ $item['title'] }}</div>
             @if(!empty($item['excerpt']))
                 <div class="text-black mt-1">{!! strip_tags($item['excerpt'], ['em', 'strong']) !!}</div>
             @endif

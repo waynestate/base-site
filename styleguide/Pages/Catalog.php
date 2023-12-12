@@ -16,7 +16,9 @@ class Catalog extends Page
                 'controller' => 'CatalogController',
                 'title' => 'Catalog',
                 'id' => 118100,
-                'content' => [], // On controller
+                'content' => [
+                    'main' => '',
+                ],
             ],
         ]);
     }

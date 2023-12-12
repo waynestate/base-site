@@ -17,7 +17,7 @@ class SpotlightComponent extends Page
                 'title' => 'Spotlight',
                 'id' => 119100,
                 'content' => [
-                    'main' => '<p>Single promo item for a quote with a citation and image.</p>',
+                    'main' => '',
                 ],
             ],
         ]);

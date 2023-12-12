@@ -18,13 +18,7 @@ class AccordionController extends Controller
 <p>Display one or more accordions to your page.</p>
 ';
 
-        $components['components'] = [
-            'accordion-1' => [
-                'data' => [
-                    0 => [
-                        'promo_item_id' => 'promoGroupDetails',
-                        'title' => 'Promotion group details',
-                        'description' => '
+        $promotion_group_details = '
 <table class="mt-2">
     <thead>
         <tr>
@@ -41,12 +35,9 @@ class AccordionController extends Controller
             <td>Content when the accordion is clicked open.</td>
         </tr>
     </tbody>
-</table>',
-                    ],
-                    1 => [
-                        'promo_item_id' => 'componentConfiguration',
-                        'title' => 'Component configuration',
-                        'description' => '
+</table>
+';
+        $component_configuration = '
 <table>
     <thead>
         <tr>
@@ -69,7 +60,21 @@ class AccordionController extends Controller
             </td>
         </tr>
     </tbody>
-</table>',
+</table>
+';
+
+        $components['components'] = [
+            'accordion' => [
+                'data' => [
+                    0 => [
+                        'promo_item_id' => 'componentConfiguration',
+                        'title' => 'Component configuration',
+                        'description' => $component_configuration,
+                    ],
+                    1 => [
+                        'promo_item_id' => 'promoGroupDetails',
+                        'title' => 'Promotion group details',
+                        'description' => $promotion_group_details,
                     ],
                 ],
                 'component' => [

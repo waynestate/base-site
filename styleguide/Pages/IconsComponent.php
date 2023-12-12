@@ -17,7 +17,7 @@ class IconsComponent extends Page
                 'title' => 'Icons',
                 'id' => 121100,
                 'content' => [
-                    'main' => '<p>List of promo items with small icons.</p>',
+                    'main' => '',
                 ],
             ],
         ]);

@@ -24,45 +24,11 @@ class SpotlightController extends Controller
      */
     public function index(Request $request): View
     {
-        $components['components'] = [
-            'accordion-1' => [
-                'data' => [
-                    0 => [
-                        'promo_item_id' => 0,
-                        'title' => 'Configuration',
-                        'description' => '
-<table>
-    <thead>
-        <tr>
-            <th class="w-2/5">Page field</th>
-            <th>Data</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                <pre class="w-full">modular-spotlight-column-1</pre>
-                <pre class="w-full">modular-spotlight-row-1</pre>
-            </td>
-            <td>
-<pre class="w-full" tabindex="0">
-{
-"id":000000,
-"heading":"Spotlight",
-"config":"randomize|page_id|limit:1",
-"singlePromoView":false,
-"showDescription":false
-}
-</pre>
-            </td>
-        </tr>
-    </tbody>
-</table>',
-                    ],
-                    1 => [
-                        'promo_item_id' => 0,
-                        'title' => 'Promo group setup',
-                        'description' => '
+        $request->data['base']['page']['content']['main'] = '
+<p>Single promo item for a quote with a citation and image.</p>
+';
+
+        $promotion_group_details = '
 <table class="mt-2">
     <thead>
         <tr>
@@ -91,7 +57,51 @@ class SpotlightController extends Controller
             <td>Primary promo image, 600x600px or any square size. Other sizes will be centered to fit in the circle.</td>
         </tr>
     </tbody>
-</table>',
+</table>
+';
+
+        $component_configuration = '
+<table>
+    <thead>
+        <tr>
+            <th class="w-2/5">Page field</th>
+            <th>Data</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <pre class="w-full">modular-spotlight-column-1</pre>
+                <pre class="w-full">modular-spotlight-row-1</pre>
+            </td>
+            <td>
+<pre class="w-full" tabindex="0">
+{
+"id":000000,
+"heading":"Spotlight",
+"config":"randomize|page_id|limit:1",
+"singlePromoView":false,
+"showDescription":false
+}
+</pre>
+            </td>
+        </tr>
+    </tbody>
+</table>
+';
+
+        $components['components'] = [
+            'accordion' => [
+                'data' => [
+                    0 => [
+                        'title' => 'Component configuration',
+                        'promo_item_id' => 'componentConfiguration',
+                        'description' => $component_configuration,
+                    ],
+                    1 => [
+                        'title' => 'Promotion group details',
+                        'promo_item_id' => 'promotionGroupDetails',
+                        'description' => $promotion_group_details,
                     ],
                 ],
                 'component' => [

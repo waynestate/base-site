@@ -23,13 +23,43 @@ class IconsController extends Controller
      */
     public function index(Request $request): View
     {
-        $components['components'] = [
-            'accordion-1' => [
-                'data' => [
-                    0 => [
-                        'promo_item_id' => 0,
-                        'title' => 'Configuration',
-                        'description' => '
+        $request->data['base']['page']['content']['main'] = '
+<p>List of promo items with small icons.</p>
+';
+
+        $promotion_group_details = '
+<table class="mt-2">
+    <thead>
+        <tr>
+            <th colspan="2">Available fields</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="font-bold">Title</td>
+            <td>Bold text.</td>
+        </tr>
+        <tr>
+            <td class="font-bold">Link</td>
+            <td>Optional external link. Component flag "singlePromoView" sets the link to the individual promo item view.</td>
+        </tr>
+        <tr>
+            <td class="font-bold">Excerpt</td>
+            <td>Optional smaller text under the title.</td>
+        </tr>
+        <tr>
+            <td class="font-bold">Description</td>
+            <td>Optional smaller text under the title and/or excerpt. You might use this area on a singe promo view page and hide it from the component.</td>
+        </tr>
+        <tr>
+            <td class="font-bold">Primary image</td>
+            <td>Minimum width of 160px svg, png, jpg.</td>
+        </tr>
+    </tbody>
+</table>
+';
+
+        $component_configuration = '
 <table class="no-stripe">
     <thead>
         <tr>
@@ -81,12 +111,25 @@ class IconsController extends Controller
             </td>
         </tr>
     </tbody>
-</table>',
+</table>
+';
+
+        $components['components'] = [
+            'accordion-1' => [
+                'data' => [
+                    0 => [
+                        'title' => 'Component configuration',
+                        'promo_item_id' => 'componentConfiguration',
+                        'description' => $component_configuration,
+                    ],
+                    1 => [
+                        'title' => 'Promotion group details',
+                        'promo_item_id' => 'promotionGroupDetails',
+                        'description' => $promotion_group_details,
                     ],
                 ],
                 'component' => [
                     'filename' => 'accordion',
-                    'columns' => '4',
                     'showDescription' => false,
                 ],
             ],

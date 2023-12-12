@@ -16,7 +16,9 @@ class Accordion extends Page
                 'controller' => 'AccordionController',
                 'title' => 'Accordion',
                 'id' => 107100,
-                'content' => [], // On controller
+                'content' => [
+                    'main' => '',
+                ],
             ],
         ]);
     }

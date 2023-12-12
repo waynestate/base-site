@@ -5,7 +5,7 @@ namespace Factories;
 use Contracts\Factories\FactoryContract;
 use Faker\Factory;
 
-class PromoPageWithOptions implements FactoryContract
+class PromoWithOptions implements FactoryContract
 {
     /**
      * Construct the factory.
