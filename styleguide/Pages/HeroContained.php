@@ -6,6 +6,9 @@ use Factories\Page as PageFactory;
 
 class HeroContained extends Page
 {
+    /** {@inheritdoc} **/
+    public $path = '/styleguide/hero/contained';
+
     /**
      * {@inheritdoc}
      */
@@ -13,11 +16,11 @@ class HeroContained extends Page
     {
         return app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'HeroContainedController',
+                'controller' => 'HeroController',
                 'title' => 'Contained',
                 'id' => 105100100,
                 'content' => [
-                    'main' => '<p>Adding a hero component above your childpage content.</p>',
+                    'main' => '',
                 ],
             ],
         ]);

@@ -8,7 +8,7 @@ use PHPUnit\Framework\Attributes\Test;
 use App\Repositories\ModularPageRepository;
 use Factories\Page;
 use Factories\GenericPromo;
-use Factories\PromoPageWithOptions;
+use Factories\PromoWithOptions;
 use Tests\TestCase;
 use Mockery as Mockery;
 use Waynestate\Api\Connector;
@@ -496,7 +496,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Create a fake data request
         $data = app(Page::class)->create(1, true, [
             'page' => [
-                'controller' => 'PromoPagePromos',
+                'controller' => 'Childpage',
             ],
             'data' => [
                 'listing_promo_group_id' => $promo_group_id,
@@ -529,7 +529,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Create a fake data request
         $data = app(Page::class)->create(1, true, [
             'page' => [
-                'controller' => 'PromoPagePromos',
+                'controller' => 'Childpage',
             ],
             'data' => [
                 'grid_promo_group_id' => $promo_group_id,
@@ -555,7 +555,7 @@ final class ModularPageRepositoryTest extends TestCase
         $promo_group_id = $this->faker->numberbetween(1, 3);
 
         // Fake return
-        $return['promotions'] = app(PromoPageWithOptions::class)->create(15, false, [
+        $return['promotions'] = app(PromoWithOptions::class)->create(15, false, [
             'promo_group_id' => $promo_group_id,
         ]);
 

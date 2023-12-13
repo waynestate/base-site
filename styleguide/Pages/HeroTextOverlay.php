@@ -4,8 +4,11 @@ namespace Styleguide\Pages;
 
 use Factories\Page as PageFactory;
 
-class ImageComponent extends Page
+class HeroTextOverlay extends Page
 {
+    /** {@inheritdoc} **/
+    public $path = '/styleguide/hero/textoverlay';
+
     /**
      * {@inheritdoc}
      */
@@ -13,11 +16,11 @@ class ImageComponent extends Page
     {
         return app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'ImageController',
-                'title' => 'Image',
-                'id' => 120100,
+                'controller' => 'HeroController',
+                'title' => 'Text overlay',
+                'id' => 105100105,
                 'content' => [
-                    'main' => '<p>Single image with a title and gradient overlay.</p>',
+                    'main' => '',
                 ],
             ],
         ]);

@@ -17,7 +17,7 @@ class Accordion extends Page
                 'title' => 'Accordion',
                 'id' => 107100,
                 'content' => [
-                    'main' => '<p>You can now add more than one accordion to a page.</p>',
+                    'main' => '',
                 ],
             ],
         ]);

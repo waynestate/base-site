@@ -18,13 +18,17 @@
             @if(!empty($component['columns']) && $component['columns'] == 1)
                 <div class="grid gap-6">
                     @foreach($group_items as $item)
-                        @include('components/promo-list-item')
+                        @include('components/promo/list-item-small')
                     @endforeach
                 </div>
             @else
-                <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-{{ !empty($component['columns']) && count($data) % 2 == 0 ? '2' : '3' }} xl:grid-cols-{{ !empty($component['columns']) ? $component['columns'] : '3' }}">
+                <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-{{ !empty($component['columns']) && count($data) % 2 == 0 ? '2' : '3' }} xl:grid-cols-{{ !empty($component['columns']) ? $component['columns'] : '3' }}">
                     @foreach($group_items as $item)
-                        @include('components/promo-grid-item')
+                        @if(!empty($component['gradientOverlay']) && $component['gradientOverlay'] === true)
+                            @include('components/promo/grid-item-gradient-overlay')
+                        @else
+                            @include('components/promo/grid-item')
+                        @endif
                     @endforeach
                 </div>
             @endif
@@ -33,13 +37,17 @@
         @if(!empty($component['columns']) && $component['columns'] == 1)
             <div class="grid gap-6">
                 @foreach($data as $item)
-                    @include('components/promo-list-item')
+                    @include('components/promo/list-item-small')
                 @endforeach
             </div>
         @else
-            <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-{{ !empty($component['columns']) && count($data) % 2 == 0 ? '2' : '3' }} xl:grid-cols-{{ !empty($component['columns']) ? $component['columns'] : '3' }}">
+            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-{{ !empty($component['columns']) && count($data) % 2 == 0 ? '2' : '3' }} xl:grid-cols-{{ !empty($component['columns']) ? $component['columns'] : '3' }}">
                 @foreach($data as $item)
-                    @include('components/promo-grid-item')
+                    @if(!empty($component['gradientOverlay']) && $component['gradientOverlay'] === true)
+                        @include('components/promo/grid-item-gradient-overlay')
+                    @else
+                        @include('components/promo/grid-item')
+                    @endif
                 @endforeach
             </div>
         @endif

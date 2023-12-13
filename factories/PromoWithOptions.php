@@ -5,7 +5,7 @@ namespace Factories;
 use Contracts\Factories\FactoryContract;
 use Faker\Factory;
 
-class PromoPageWithOptions implements FactoryContract
+class PromoWithOptions implements FactoryContract
 {
     /**
      * Construct the factory.
@@ -21,6 +21,7 @@ class PromoPageWithOptions implements FactoryContract
     public function create($limit = 1, $flatten = false, $options = [])
     {
         $promo_group_id = $this->faker->randomNumber(5);
+
         $image = '/styleguide/image/' . $this->faker->randomElement([
             '600x450?text=600x450', // 4:3
             '450x600?text=450x600', // 3:4
@@ -32,7 +33,7 @@ class PromoPageWithOptions implements FactoryContract
                 'title' => $this->faker->name(),
                 'excerpt' => $this->faker->jobTitle(),
                 'description' => '<p>' . $this->faker->text(70) . ' <a href="https://wayne.edu">'. $this->faker->sentence(3)  .'</a></p>',
-                'link' => 'https://wayne.edu',
+                'link' => '#',
                 'promo_item_id' => strval($this->faker->randomNumber(5)),
                 'promo_group_id' => strval($promo_group_id),
                 'relative_url' => $image.':'.$i,

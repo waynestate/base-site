@@ -13,11 +13,11 @@ class ChildpageWithComponents extends Page
     {
         return app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'ChildpageController',
+                'controller' => 'ChildpageWithComponentsController',
                 'title' => 'Childpage with components',
                 'id' => 101110700,
                 'content' => [
-                    'main' => '<p>Normal page content from the CMS will show up here and components will display below.</p><p>See the <a href="/styleguide/usingcomponents">Using components</a> page for configuration details.</p>',
+                    'main' => '',
                 ],
             ],
             'site' => [
@@ -25,9 +25,6 @@ class ChildpageWithComponents extends Page
                 'news' => [
                     'application_id' => 1,
                 ],
-            ],
-            'data' => [
-                'modular-catalog' => '{}',
             ],
         ]);
     }

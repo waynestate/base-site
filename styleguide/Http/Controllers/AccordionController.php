@@ -14,13 +14,30 @@ class AccordionController extends Controller
      */
     public function index(Request $request): View
     {
-        $components['components'] = [
-            'accordion-1' => [
-                'data' => [
-                    0 => [
-                        'promo_item_id' => 0,
-                        'title' => 'Configuration',
-                        'description' => '
+        $request->data['base']['page']['content']['main'] = '
+<p>Display one or more accordions to your page.</p>
+';
+
+        $promotion_group_details = '
+<table class="mt-2">
+    <thead>
+        <tr>
+            <th colspan="2">Available fields</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="font-bold">Title</td>
+            <td>Text on the closed accordion.</td>
+        </tr>
+        <tr>
+            <td class="font-bold">Description</td>
+            <td>Content when the accordion is clicked open.</td>
+        </tr>
+    </tbody>
+</table>
+';
+        $component_configuration = '
 <table>
     <thead>
         <tr>
@@ -43,7 +60,21 @@ class AccordionController extends Controller
             </td>
         </tr>
     </tbody>
-</table>',
+</table>
+';
+
+        $components['components'] = [
+            'accordion' => [
+                'data' => [
+                    0 => [
+                        'promo_item_id' => 'componentConfiguration',
+                        'title' => 'Component configuration',
+                        'description' => $component_configuration,
+                    ],
+                    1 => [
+                        'promo_item_id' => 'promoGroupDetails',
+                        'title' => 'Promotion group details',
+                        'description' => $promotion_group_details,
                     ],
                 ],
                 'component' => [

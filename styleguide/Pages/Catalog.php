@@ -17,7 +17,7 @@ class Catalog extends Page
                 'title' => 'Catalog',
                 'id' => 118100,
                 'content' => [
-                    'main' => '<p>Display a grid or listing of items from a single promo group.</p>',
+                    'main' => '',
                 ],
             ],
         ]);

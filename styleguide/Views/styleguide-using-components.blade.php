@@ -33,7 +33,7 @@
 "showExcerpt":true,
 "showDescription":false,
 "singlePromoView":true,
-"config":"randomize|limit:5|page_id"
+"config":"randomize|page_id|limit:5"
 }') !!}
 </pre>
                     </td>
@@ -61,43 +61,99 @@
                 </tr>
                 <tr>
                     <td class="font-bold">config</td>
-                    <td>Configuration options for the specific promo group. <br />Use "page_id" to enable per-page items. Use "limit:1" instead of "first" to display one item.<br /><a href="https://github.com/waynestate/parse-promos">Detailed promotion config information</a></td>
+                    <td>
+Configuration options for the specific promo group. <br />
+Use "page_id" to enable per-page items.<br />
+Use "limit:1" to display one item.<br />
+Use "randomize" to shuffle the order of promotion items.<br />
+Use "youtube" when you are putting a video url in the promo link field to populate the play button overlay.<br /> 
+<a href="https://github.com/waynestate/parse-promos">Detailed promotion config information</a>
+                    </td>
                 </tr>
                 <tr>
                     <td class="font-bold">columns</td>
-                    <td>1 to 4 columns is recommended. Use with the catalog, button row, and news components.</td>
+                    <td>
+Define how many columns the component will display.<br />
+1 to 4 columns is recommended.<br />
+Use with the catalog, button row, and news components.
+                    </td>
                 </tr>
                 <tr>
                     <td class="font-bold">singlePromoView</td>
-                    <td>True or false; false is default and will use the promotion's link field if it is set.<br />Creates a link to a detailed page of a single promo item, like a Spotlight.</td>
+                    <td>
+Creates a link to a detailed page of a single promo item, like a Spotlight.<br />
+True or false; false is default and will use the promotion's link field if it is set.
+                    </td>
                 </tr>
                 <tr>
                     <td class="font-bold">showExcerpt</td>
-                    <td>True or false; true is default.<br />Show or hide the promo's excerpt.</td>
+                    <td>
+Show or hide the promo's excerpt.<br />
+True or false; true is default.
+                    </td>
                 </tr>
                 <tr>
                     <td class="font-bold">showDescription</td>
-                    <td>True or false; true is default.<br />Show or hide the promo's description. Commonly used in conjunction with "singlePromoView" where the description is hidden from the catalog but displayed on the detailed promo page.</td>
+                    <td>
+Show or hide the promo's description.<br />
+True or false; true is default.<br />
+Commonly used in conjunction with "singlePromoView" where the description is hidden from the catalog but displayed on the detailed promo page.
+                    </td>
+                </tr>
+                <tr>
+                    <td class="font-bold">gradientOverlay</td>
+                    <td>
+Moves the title, excerpt and/description on top of the image with a gradient for contrast.<br />
+True or false; false is default.<br />
+Single promo and catalog components only.
+                    </td>
+                </tr>
+                <tr>
+                    <td class="font-bold">groupByOptions</td>
+                    <td>
+Group promotion items by the options in the options dropdown.<br />
+True or false; false is default.<br />
+Catalog component only.
+                    </td>
                 </tr>
                 <tr>
                     <td class="font-bold">limit</td>
-                    <td>Integer; default is 4.<br />News and events only; Limit the number of items displayed.</td>
+                    <td>
+Limit the number of items displayed.<br />
+Integer; default is 4.<br />
+News and events only. For promotion based components, see "config."
+                    </td>
                 </tr>
                 <tr>
                     <td class="font-bold">link_text</td>
-                    <td>News and Events only.<br />To change "More news" or "More events" to your specific text, i.e. "Student news", "Career events".</td>
+                    <td>
+To change "More news" or "More events" to your specific text, i.e. "Student news", "Career events".<br />
+News and Events only.
+                    </td>
                 </tr>
                 <tr>
                     <td class="font-bold">featured</td>
-                    <td>True or false; all articles shown by default.<br />News row only; Display only the articles that have a specific featured image uploaded in the news manager.</td>
+                    <td>
+Display only the articles that have a specific featured image uploaded in the news manager.<br />
+True or false; all articles shown by default.<br />
+News row only.
+                    </td>
                 </tr>
                 <tr>
                     <td class="font-bold">topics</td>
-                    <td>All topics shown by default.<br />News only; Pass in an array of topics to display i.e. [76, 4]</td>
+                    <td>
+Pass in an array of topics to display i.e. [76, 4]<br />
+All topics shown by default.<br />
+News components only.
+                    </td>
                 </tr>
                 <tr>
                     <td class="font-bold">cal_name</td>
-                    <td>Defaults to the site's selected calendar.<br />Events only; the relative url to your calendar that the "more events" link goes to, i.e. "main/".
+                    <td>
+The relative url to your calendar that the "more events" link goes to, i.e. "main/".<br />
+Defaults to the site's selected calendar.<br />
+Events components only.
+                    </td>
                 </tr>
             </tbody>
         </table>

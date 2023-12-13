@@ -4,8 +4,11 @@ namespace Styleguide\Pages;
 
 use Factories\Page as PageFactory;
 
-class IconsComponent extends Page
+class HeroHalf extends Page
 {
+    /** {@inheritdoc} **/
+    public $path = '/styleguide/hero/skinny';
+
     /**
      * {@inheritdoc}
      */
@@ -13,9 +16,9 @@ class IconsComponent extends Page
     {
         return app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'IconsController',
-                'title' => 'Icons',
-                'id' => 121100,
+                'controller' => 'HeroController',
+                'title' => 'Half',
+                'id' => 105100109,
                 'content' => [
                     'main' => '',
                 ],
