@@ -268,6 +268,16 @@
                         "class_name": "",
                         "relative_url": "/styleguide/hero/skinny",
                         "submenu": []
+                    },
+                    "105100109": {
+                        "menu_item_id": 105100109,
+                        "is_active": 1,
+                        "page_id": 105100109,
+                        "target": "",
+                        "display_name": "Half",
+                        "class_name": "",
+                        "relative_url": "/styleguide/hero/half",
+                        "submenu": []
                     }
                 }
             },

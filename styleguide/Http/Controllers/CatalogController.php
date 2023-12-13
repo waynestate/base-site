@@ -32,10 +32,6 @@ class CatalogController extends Controller
      */
     public function index(Request $request): View
     {
-        $request->data['base']['page']['content']['main'] = '';
-        $promotion_group_details = '';
-        $component_configuration = '';
-
         $request->data['base']['page']['content']['main'] = '
 <p>Display a grid or listing of items from a single promo group.</p>
 ';
@@ -133,19 +129,6 @@ class CatalogController extends Controller
                     'gradientOverlay' => false,
                 ],
             ],
-            'catalog-10' => [
-                'data' => app(GenericPromo::class)->create(5, false, [
-                    'relative_url' => '/styleguide/image/450x600',
-                    'description' => '',
-                ]),
-                'component' => [
-                    'heading' => 'Three-column catalog',
-                    'filename' => 'catalog',
-                    'columns' => '3',
-                    'showDescription' => false,
-                    'gradientOverlay' => true,
-                ],
-            ],
             'catalog-2' => [
                 'data' => app(GenericPromo::class)->create(3, false, [
                     'excerpt' => '',
@@ -167,6 +150,19 @@ class CatalogController extends Controller
                     'columns' => '4',
                     'showDescription' => false,
                     'groupByOptions' => true,
+                ],
+            ],
+            'catalog-10' => [
+                'data' => app(GenericPromo::class)->create(5, false, [
+                    'relative_url' => '/styleguide/image/450x600',
+                    'description' => '',
+                ]),
+                'component' => [
+                    'heading' => 'Catalog with gradient overlay',
+                    'filename' => 'catalog',
+                    'columns' => '3',
+                    'showDescription' => false,
+                    'gradientOverlay' => true,
                 ],
             ],
         ];

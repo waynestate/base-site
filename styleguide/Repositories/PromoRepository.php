@@ -6,8 +6,7 @@ use App\Repositories\PromoRepository as Repository;
 use Factories\FooterContact;
 use Factories\FooterSocial;
 use Factories\HeroImage;
-use Factories\PromoPage;
-use Factories\PromoPageWithOptions;
+use Factories\GenericPromo;
 use Factories\Button;
 use Faker\Factory;
 
@@ -121,7 +120,7 @@ class PromoRepository extends Repository
     public function getPromoView($id)
     {
         return [
-            'promo' => app(PromoPage::class)->create(1, true, [
+            'promo' => app(GenericPromo::class)->create(1, true, [
                 'description' => '
                     <p>'.$this->faker->text(300).' <a href="https://wayne.edu">'.$this->faker->sentence(3).'</a></p>
                     <p>'.$this->faker->text(100).' <a href="https://wayne.edu">'.$this->faker->sentence(3).'</a> '. $this->faker->text(200).'</p>
@@ -145,33 +144,5 @@ class PromoRepository extends Repository
     public function getBackToPromoListing($referer = null, $scheme = null, $host = null, $uri = null)
     {
         return '/styleguide/promolist';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPromoPagePromos(array $data, $limit = 75)
-    {
-        if ($data['page']['id'] === 101110200 || $data['page']['id'] === 101110400) {
-            // No options
-            $promos['promos'] = app(PromoPage::class)->create(12);
-        } else {
-            $promos['promos'] = app(PromoPageWithOptions::class)->create(12);
-        }
-
-        if (!empty($data['data']['promoPage'])) {
-            $group_info = $this->parsePromoJSON($data);
-
-            // Assign template markers to promos array
-            $promos['template'] = $group_info;
-
-            // Manage data with template flags
-            $promos = $this->changePromoDisplay($promos, $group_info);
-        }
-
-        // Organize promos by option
-        $promos = $this->organizePromoItemsByOption($promos);
-
-        return $promos;
     }
 }

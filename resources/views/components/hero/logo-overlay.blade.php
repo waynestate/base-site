@@ -3,7 +3,7 @@
     <div class="hero__content-position w-full relative text-white flex flex-col justify-center">
         <div class="hero__content row w-full px-4 pt-10 pb-6 text-center md:white-links content">
             @if(!empty($hero['secondary_relative_url']))<img class="hero__secondary-image mx-auto mb-4" src="{{ $hero['secondary_relative_url'] }}" alt="{{ $hero['secondary_alt_text'] }}">@endif
-            <div class="hero__title md:text-shadow-darkest leading-tight text-2xl mb-1 @if(in_array($base['page']['controller'], config('base.hero_full_controllers')))xl:text-5xl @else xl:text-3xl @endif">
+            <div class="hero__title md:drop-shadow-px leading-tight text-2xl mb-1 @if(in_array($base['page']['controller'], config('base.hero_full_controllers')))xl:text-5xl @else xl:text-3xl @endif">
                 {{ $hero['title'] }}
             </div>
             @if(!empty($hero['description']))<div class="hero__description md:text-lg">{!! $hero['description'] !!}</div>@endif

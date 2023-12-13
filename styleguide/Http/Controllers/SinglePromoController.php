@@ -64,7 +64,7 @@ You might use this area on a singe promo view page and hide it from the catalog 
 ';
 
         $component_configuration = '
-<table>
+<table class="no-stripe">
     <thead>
         <tr>
             <th class="w-2/5">Page field</th>
@@ -75,18 +75,34 @@ You might use this area on a singe promo view page and hide it from the catalog 
         <tr>
             <td>
                 <pre class="w-full">modular-promo-column-1</pre>
+            </td>
+            <td>
+<pre class="w-full" tabindex="0">
+{
+"id":000000,
+"heading":"Promo column",
+"config":"page_id|randomize|limit:1|youtube",
+"singlePromoView":true,
+"showExcerpt":true,
+"showDescription":false,
+"gradientOverlay":false
+}
+</pre>
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <pre class="w-full">modular-promo-row-1</pre>
             </td>
             <td>
 <pre class="w-full" tabindex="0">
 {
 "id":000000,
-"heading":"Promo",
-"config":"randomize|limit:1|page_id",
+"heading":"Promo row",
+"config":"page_id|randomize|limit:1|youtube",
 "singlePromoView":true,
 "showExcerpt":true,
 "showDescription":false,
-"gradientOverlay":false
 }
 </pre>
             </td>

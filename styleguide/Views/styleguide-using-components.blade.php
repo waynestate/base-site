@@ -61,7 +61,14 @@
                 </tr>
                 <tr>
                     <td class="font-bold">config</td>
-                    <td>Configuration options for the specific promo group. <br />Use "page_id" to enable per-page items. Use "limit:1" instead of "first" to display one item.<br /><a href="https://github.com/waynestate/parse-promos">Detailed promotion config information</a></td>
+                    <td>
+Configuration options for the specific promo group. <br />
+Use "page_id" to enable per-page items.<br />
+Use "limit:1" to display one item.<br />
+Use "randomize" to shuffle the order of promotion items.<br />
+Use "youtube" when you are putting a video url in the promo link field to populate the play button overlay.<br /> 
+<a href="https://github.com/waynestate/parse-promos">Detailed promotion config information</a>
+                    </td>
                 </tr>
                 <tr>
                     <td class="font-bold">columns</td>

@@ -5,11 +5,11 @@
 
 <{{ !empty($item['link']) ? 'a href='.$item['link'] : 'div' }} class="bg-green-800 relative block overflow-hidden {{ !empty($item['link']) ? 'group' : '' }}">
     @if(!empty($item['youtube_id']))
-        <div class="play-video-button w-1/4 shrink-0 md:shrink md:w-full relative bg-green aspect-video">
+        <div class="play-video-button w-1/4 md:w-full">
             @if(!empty($item['relative_url']))
-                @image($item['relative_url'], $item['filename_alt_text'], "lazy w-full object-cover h-full")
+                @image($item['relative_url'], $item['filename_alt_text'], "lazy w-full")
             @else
-                @image('//i.wayne.edu/youtube/'.$item['youtube_id'].'/max', $item['filename_alt_text'], "lazy w-full object-cover h-full")
+                @image('//i.wayne.edu/youtube/'.$item['youtube_id'].'/max', $item['filename_alt_text'], "lazy w-full")
             @endif
         </div>
     @elseif(!empty($item['relative_url']))

@@ -111,6 +111,8 @@ class SpotlightController extends Controller
             'spotlight-1' => [
                 'data' => app(Spotlight::class)->create(1, false, [
                     'link' => '',
+                    'relative_url' => '/styleguide/image/600x600',
+                    'filename_url' => '/styleguide/image/600x600',
                 ]),
                 'component' => [
                     'heading' => 'Spotlight column',
@@ -122,6 +124,8 @@ class SpotlightController extends Controller
                 'data' => app(GenericPromo::class)->create(1, false, [
                     'title' => $this->faker->name,
                     'excerpt' => '&ldquo;' . $this->faker->text(200) . '&rdquo;',
+                    'relative_url' => '/styleguide/image/600x600',
+                    'filename_url' => '/styleguide/image/600x600',
                 ]),
                 'component' => [
                     'heading' => 'Spotlight row',
