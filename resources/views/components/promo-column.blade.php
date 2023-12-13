@@ -4,8 +4,8 @@
 --}}
 @foreach($data as $item)
     @if(!empty($component['gradientOverlay']) && $component['gradientOverlay'] === true)
-        @include('components/promo-grid-item-gradient-overlay')
+        @include('components/promo/grid-item-gradient-overlay')
     @else
-        @include('components/promo-grid-item')
+        @include('components/promo/grid-item')
     @endif
 @endforeach
