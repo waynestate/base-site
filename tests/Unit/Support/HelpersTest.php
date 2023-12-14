@@ -64,7 +64,7 @@ final class HelpersTest extends TestCase
         $post_merge = merge($pre_merge);
         $this->assertEquals('Wayne State University', $post_merge['base']['meta']['title']);
 
-        // If on a regaular page
+        // If on a regular page
         $pre_merge['base']['page']['title'] = $this->faker->word();
         $pre_merge['base']['server']['path'] = '/path';
         $post_merge = merge($pre_merge);

@@ -3,11 +3,8 @@
 namespace Tests\Unit\Http\Controllers;
 
 use PHPUnit\Framework\Attributes\Test;
-use Illuminate\Support\Collection;
 use Tests\TestCase;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\ChildpageController;
 use App\Repositories\ModularPageRepository;
 use Styleguide\Pages\ChildpageWithComponents;
@@ -36,7 +33,7 @@ final class ChildpageControllerTest extends TestCase
         $wsuApi = Mockery::mock(Connector::class);
         $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
 
-        // Create a hero 
+        // Create a hero
         $request->data['base']['data']['modular-hero-1'] = json_encode(['id' => $promo_group_id]);
 
         // Construct the modular repository
