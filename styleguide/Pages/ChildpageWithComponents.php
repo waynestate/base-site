@@ -20,6 +20,7 @@ class ChildpageWithComponents extends Page
                     'main' => '',
                 ],
             ],
+            'meta' => [],
             'site' => [
                 'subsite-folder' => 'styleguide/',
                 'news' => [

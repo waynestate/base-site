@@ -38,7 +38,6 @@ class ChildpageController extends Controller
                 return !str_contains($component_name, 'hero');
             })->toArray();
         }
-        dump($hero);
 
         if(!empty($hero)) {
             $hero_key = array_key_first($hero);

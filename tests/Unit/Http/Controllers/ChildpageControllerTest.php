@@ -40,16 +40,14 @@ final class ChildpageControllerTest extends TestCase
         $request->data['base']['data']['modular-hero-1'] = json_encode(['id' => $promo_group_id]);
 
         // Construct the modular repository
-        $ModularRepository = app(ModularPageRepository::class, ['wsuApi' => $wsuApi]);
+        $components = app(ModularPageRepository::class, ['wsuApi' => $wsuApi]);
 
         // Construct the childpage with modular components controller
-        $ChildpageController = app(ChildpageController::class, ['components' => $ModularRepository]);
+        $ChildpageController = app(ChildpageController::class, ['components' => $components]);
 
-        dump($request);
-        die;
         // Create the view
         $view = $ChildpageController->index($request);
 
-        $this->assertEquals($return, $view->getData()['hero']);
+        $this->assertEquals($return['promotions'], $view->getData()['base']['hero']);
     }
 }
