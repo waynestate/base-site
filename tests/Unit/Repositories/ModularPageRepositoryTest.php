@@ -34,7 +34,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Create a fake data request
         $data = app(Page::class)->create(1, true, [
             'page' => [
-                'controller' => 'ModularPage',
+                'controller' => 'ChildpageController',
                 'id' => $page_id,
             ],
             'data' => [
@@ -75,7 +75,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Create a fake data request
         $data = app(Page::class)->create(1, true, [
             'page' => [
-                'controller' => 'ModularPage',
+                'controller' => 'ChildpageController',
             ],
             'data' => [
                 'modular-accordion-1' => $promo_group_id,
@@ -110,7 +110,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Create a fake data request
         $data = app(Page::class)->create(1, true, [
             'page' => [
-                'controller' => 'ModularPage',
+                'controller' => 'ChildpageController',
                 'id' => $page_id,
             ],
             'data' => [
@@ -154,7 +154,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Create a fake data request
         $data = app(Page::class)->create(1, true, [
             'page' => [
-                'controller' => 'ModularPage',
+                'controller' => 'ChildpageController',
             ],
             'data' => [
                 'modular-news-row-1' => json_encode([
@@ -187,7 +187,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Create a fake data request
         $data = app(Page::class)->create(1, true, [
             'page' => [
-                'controller' => 'ModularPage',
+                'controller' => 'ChildpageController',
             ],
             'data' => [
                 'modular-news-column-1' => json_encode([
@@ -212,7 +212,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Create a fake data request
         $data = app(Page::class)->create(1, true, [
             'page' => [
-                'controller' => 'ModularPage',
+                'controller' => 'ChildpageController',
             ],
             'data' => [
                 'modular-events-column-1' => json_encode([
@@ -238,7 +238,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Create a fake data request
         $data = app(Page::class)->create(1, true, [
             'page' => [
-                'controller' => 'ModularPage',
+                'controller' => 'ChildpageController',
             ],
             'data' => [
                 'modular-events-column-1' => json_encode([
@@ -271,7 +271,7 @@ final class ModularPageRepositoryTest extends TestCase
                 ],
             ],
             'page' => [
-                'controller' => 'ModularPage',
+                'controller' => 'ChildpageController',
             ],
             'data' => [
                 'modular-events-column-1' => json_encode([
@@ -309,7 +309,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Create a fake data request
         $data = app(Page::class)->create(1, true, [
             'page' => [
-                'controller' => 'ModularPage',
+                'controller' => 'ChildpageController',
                 'id' => $page_id,
             ],
             'data' => [
@@ -349,7 +349,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Create a fake data request
         $data = app(Page::class)->create(1, true, [
             'page' => [
-                'controller' => 'ModularPage',
+                'controller' => 'ChildpageController',
                 'id' => $this->faker->numberbetween(10, 50),
             ],
         ]);
@@ -371,7 +371,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Create a fake data request
         $data = app(Page::class)->create(1, true, [
             'page' => [
-                'controller' => 'ModularPage',
+                'controller' => 'ChildpageController',
                 'id' => $page_id,
             ],
             'data' => [
@@ -406,7 +406,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Create a fake data request
         $data = app(Page::class)->create(1, true, [
             'page' => [
-                'controller' => 'Childpage',
+                'controller' => 'ChildpageController',
             ],
             'data' => [
                 'accordion_promo_group_id' => $promo_group_id,
@@ -436,7 +436,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Create a fake data request
         $data = app(Page::class)->create(1, true, [
             'page' => [
-                'controller' => 'Childpage',
+                'controller' => 'ChildpageController',
             ],
             'data' => [
                 'listing_promo_group_id' => $promo_group_id,
@@ -466,7 +466,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Create a fake data request
         $data = app(Page::class)->create(1, true, [
             'page' => [
-                'controller' => 'Childpage',
+                'controller' => 'ChildpageController',
             ],
             'data' => [
                 'grid_promo_group_id' => $promo_group_id,
@@ -496,7 +496,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Create a fake data request
         $data = app(Page::class)->create(1, true, [
             'page' => [
-                'controller' => 'Childpage',
+                'controller' => 'ChildpageController',
             ],
             'data' => [
                 'listing_promo_group_id' => $promo_group_id,
@@ -529,7 +529,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Create a fake data request
         $data = app(Page::class)->create(1, true, [
             'page' => [
-                'controller' => 'Childpage',
+                'controller' => 'ChildpageController',
             ],
             'data' => [
                 'grid_promo_group_id' => $promo_group_id,
@@ -562,7 +562,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Create a fake data request
         $data = app(Page::class)->create(1, true, [
             'page' => [
-                'controller' => 'Childpage',
+                'controller' => 'ChildpageController',
             ],
             'data' => [
                 'modular-catalog-1' => '{
@@ -607,7 +607,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Create a fake data request
         $data = app(Page::class)->create(1, true, [
             'page' => [
-                'controller' => 'Childpage',
+                'controller' => 'ChildpageController',
             ],
             'data' => [
                 'modular-catalog-1' => '{

@@ -27,15 +27,10 @@ class UsingComponents extends Page
                 ],
             ],
             'data' => [
+                'modular-hero-1' => '{"id":"1"}',
+                'modular-buttons' => '{}',
                 'modular-events-column-1' => 1,
-                'events_url' => '/main',
                 'modular-news-column-1' => 2,
-                'buttons' => '{}',
-                'image-promos' => '{}',
-                'spotlight' => '{}',
-                'steps' => '{}',
-                'text-promo' => '{}',
-                'video' => '{}',
             ],
         ]);
     }
