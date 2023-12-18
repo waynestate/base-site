@@ -1448,12 +1448,12 @@
   resolved "https://registry.yarnpkg.com/@ungap/structured-clone/-/structured-clone-1.2.0.tgz#756641adb587851b5ccb3e095daf27ae581c8406"
   integrity sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==
 
-"@waynestate/wsufooter@^1.0.9":
+"@waynestate/wsufooter@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@waynestate/wsufooter/-/wsufooter-1.1.0.tgz#e04bf9ed772ac19d3154fada418bbc45fafb5279"
   integrity sha512-d1DRATJmgLdmE7ne4k6IHhWjH4pv0ofFLjscgtvPCv+F0+bv4SHUwZDmkB6B9rHIqIwNXq8jegi+0IXocrtu4A==
 
-"@waynestate/wsuheader@^2.1.0":
+"@waynestate/wsuheader@^2.2.0":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@waynestate/wsuheader/-/wsuheader-2.2.1.tgz#d1f88552170ea535bf8509f8c2f6bb49654726cf"
   integrity sha512-4dUCSgsVWZKvvc5KDuGnem+jB/83ibskWyf45KpUEQ7yMFRoLS27Fin5vV5DlDdWD3kybCAOEtAoV2u+qZBDlQ==
