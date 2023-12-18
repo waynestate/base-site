@@ -36,9 +36,9 @@ jobs:
                     restore-keys: |
                         ${{ runner.os }}-php-
             - name: Setup Node.js environment
-              uses: actions/setup-node@v3.6.0
+              uses: actions/setup-node@v4.0.1
               with:
-                    node-version: 16.x
+                    node-version: 20.x
                     cache: yarn
             - name: Install node dependences
               run: make yarn
