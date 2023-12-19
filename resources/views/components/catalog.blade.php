@@ -18,7 +18,7 @@
             @if(!empty($component['columns']) && $component['columns'] == 1)
                 <div class="grid gap-6">
                     @foreach($group_items as $item)
-                        @include('components/promo/list-item-large')
+                        @include('components/promo/list-item')
                     @endforeach
                 </div>
             @else
@@ -33,7 +33,7 @@
         @if(!empty($component['columns']) && $component['columns'] == 1)
             <div class="grid gap-6">
                 @foreach($data as $item)
-                    @include('components/promo/list-item-large')
+                    @include('components/promo/list-item')
                 @endforeach
             </div>
         @else
