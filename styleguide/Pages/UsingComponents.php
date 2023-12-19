@@ -26,12 +26,6 @@ class UsingComponents extends Page
                     'application_id' => 1,
                 ],
             ],
-            'data' => [
-                'modular-hero-1' => '{"id":"1"}',
-                'modular-buttons' => '{}',
-                'modular-events-column-1' => 1,
-                'modular-news-column-1' => 2,
-            ],
         ]);
     }
 }

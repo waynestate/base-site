@@ -103,6 +103,7 @@ You might use this area on a singe promo view page and hide it from the catalog 
 "singlePromoView":true,
 "showExcerpt":true,
 "showDescription":false,
+"imagePosition":alternate,
 }
 </pre>
             </td>

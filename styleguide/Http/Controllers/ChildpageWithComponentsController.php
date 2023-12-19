@@ -137,6 +137,18 @@ class ChildpageWithComponentsController extends Controller
                 ],
             ],
 
+            'catalog-10' => [
+                'data' => app(GenericPromo::class)->create(4, false, [
+                    'description' => '',
+                ]),
+                'component' => [
+                    'heading' => 'Three column catalog',
+                    'filename' => 'catalog',
+                    'columns' => '3',
+                    'showDescription' => false,
+                ],
+            ],
+
             'content-row-1' => [
                 'data' => app(GenericPromo::class)->create(1, false, [
                     'title' => 'Content row',
@@ -205,6 +217,7 @@ class ChildpageWithComponentsController extends Controller
                     'filename' => 'catalog',
                     'columns' => '1',
                     'showDescription' => false,
+                    'imageSize' => 'small',
                 ],
             ],
 
@@ -218,25 +231,18 @@ class ChildpageWithComponentsController extends Controller
             ],
 
             'promo-row-1' => [
-                'data' => app(GenericPromo::class)->create(1, false),
+                'data' => app(GenericPromo::class)->create(2, false),
                 'component' => [
-                    'heading' => 'Video row',
+                    'heading' => 'Promo row',
                     'filename' => 'promo-row',
+                    'imagePosition' => 'alternate',
                 ],
             ],
 
-            'promo-row-2' => [
+            'promo-column-3' => [
                 'data' => app(Video::class)->create(1, false),
                 'component' => [
-                    'filename' => 'promo-row',
-                    'imagePosition' => 'right',
-                ],
-            ],
-
-            'promo-column-1' => [
-                'data' => app(Video::class)->create(1, false),
-                'component' => [
-                    'heading' => 'Video column',
+                    'heading' => 'Promo column',
                     'filename' => 'promo-column',
                 ],
             ],
@@ -245,7 +251,6 @@ class ChildpageWithComponentsController extends Controller
                 'data' => app(GenericPromo::class)->create(4, false, [
                     'option' => 'Default',
                     'excerpt' => '',
-                    'relative_url' => '',
                 ]),
                 'component' => [
                     'heading' => 'Button column',

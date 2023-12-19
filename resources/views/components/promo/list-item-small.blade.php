@@ -3,7 +3,7 @@
     $item => array // ['title', 'link', 'description', 'excerpt', 'relative_url', 'option']
 --}}
 
-<{{ !empty($item['link']) ? 'a href='.$item['link'] : 'div' }} class="flex items-start space-x-3 md:space-x-6 mb-8 {{ !empty($item['link']) ? 'group' : '' }}">
+<{{ !empty($item['link']) ? 'a href='.$item['link'] : 'div' }} class=" flex items-start space-x-3 md:space-x-6 mb-8 {{ !empty($item['link']) ? 'group' : '' }}">
     @if(!empty($item['youtube_id']))
         <div class="play-video-button w-1/4 shrink-0">
             @if(!empty($item['filename_url']))
