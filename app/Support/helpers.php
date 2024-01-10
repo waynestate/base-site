@@ -39,7 +39,10 @@ function merge()
     $merged = $merged->toArray();
 
     // Add computed title tag
-    if (!empty($merged['base']) && !array_key_exists('title', $merged['base']['meta'])) {
+    if (
+        !empty($merged['base']) &&
+        !array_key_exists('title', !empty($merged['base']['meta']) ? $merged['base']['meta'] : [])
+    ) {
         $merged['base']['meta']['title'] = stringify_page_title($merged['base']);
     }
 

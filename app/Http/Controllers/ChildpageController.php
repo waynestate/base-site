@@ -9,7 +9,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\View\View;
 use Illuminate\Http\Request;
-use Contracts\Repositories\PromoRepositoryContract;
 use Contracts\Repositories\ModularPageRepositoryContract;
 
 class ChildpageController extends Controller
@@ -19,10 +18,8 @@ class ChildpageController extends Controller
      *
      */
     public function __construct(
-        PromoRepositoryContract $promo,
         ModularPageRepositoryContract $components
     ) {
-        $this->promo = $promo;
         $this->components = $components;
     }
 

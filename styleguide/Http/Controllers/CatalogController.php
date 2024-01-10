@@ -59,7 +59,8 @@ class CatalogController extends Controller
 "showExcerpt":true,
 "showDescription":false,
 "groupByOptions":false,
-"gradientOverlay":false
+"gradientOverlay":false,
+"imageSize":small
 }
 </pre>
             </td>
@@ -118,7 +119,7 @@ class CatalogController extends Controller
                 ],
             ],
             'catalog-1' => [
-                'data' => app(GenericPromo::class)->create(5, false, [
+                'data' => app(GenericPromo::class)->create(3, false, [
                     'description' => '',
                 ]),
                 'component' => [
@@ -126,12 +127,21 @@ class CatalogController extends Controller
                     'filename' => 'catalog',
                     'columns' => '3',
                     'showDescription' => false,
-                    'gradientOverlay' => false,
+                ],
+            ],
+            'catalog-9' => [
+                'data' => app(GenericPromo::class)->create(2, false, [
+                    'description' => '',
+                ]),
+                'component' => [
+                    'heading' => 'Two-column catalog',
+                    'filename' => 'catalog',
+                    'columns' => '2',
+                    'showDescription' => false,
                 ],
             ],
             'catalog-2' => [
                 'data' => app(GenericPromo::class)->create(3, false, [
-                    'excerpt' => '',
                 ]),
                 'component' => [
                     'heading' => 'One-column catalog',
@@ -145,15 +155,15 @@ class CatalogController extends Controller
                     'excerpt' => '',
                 ]),
                 'component' => [
-                    'heading' => 'Catalog sorted by option',
+                    'heading' => 'Four-column catalog sorted by option',
                     'filename' => 'catalog',
                     'columns' => '4',
-                    'showDescription' => false,
+                    'showDescription' => true,
                     'groupByOptions' => true,
                 ],
             ],
-            'catalog-10' => [
-                'data' => app(GenericPromo::class)->create(5, false, [
+            'catalog-5' => [
+                'data' => app(GenericPromo::class)->create(3, false, [
                     'relative_url' => '/styleguide/image/450x600',
                     'description' => '',
                 ]),
@@ -163,6 +173,20 @@ class CatalogController extends Controller
                     'columns' => '3',
                     'showDescription' => false,
                     'gradientOverlay' => true,
+                ],
+            ],
+            'catalog-6' => [
+                'data' => app(GenericPromo::class)->create(3, false, [
+                    'relative_url' => '',
+                    'excerpt' => '',
+                    'youtube_id' => '',
+                    'link' => '',
+                ]),
+                'component' => [
+                    'heading' => 'Catalog without images',
+                    'filename' => 'catalog',
+                    'columns' => '3',
+                    'showDescription' => true,
                 ],
             ],
         ];

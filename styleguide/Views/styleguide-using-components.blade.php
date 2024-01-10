@@ -117,6 +117,23 @@ Catalog component only.
                     </td>
                 </tr>
                 <tr>
+                    <td class="font-bold">imagePosition</td>
+                    <td>
+Moves the image from the left to the right, or alternates their position if the item limit is greater than one.<br />
+Left, right, alternate; left is default.<br />
+Promo row component only.
+                    </td>
+                </tr>
+                <tr>
+                    <td class="font-bold">imageSize</td>
+                    <td>
+                        w-1/4' : 'md:w-2/5
+Uses a small 1/4 width or large 2/5 width.<br />
+Small or large; large is default.<br />
+Promo row component only.
+                    </td>
+                </tr>
+                <tr>
                     <td class="font-bold">limit</td>
                     <td>
 Limit the number of items displayed.<br />

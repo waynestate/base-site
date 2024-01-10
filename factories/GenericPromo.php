@@ -26,7 +26,7 @@ class GenericPromo implements FactoryContract
 
         $relative_url = '/styleguide/image/' . $this->faker->randomElement([
             '600x450?text=600x450', // 4:3
-            '450x600?text=450x600', // 3:4
+            //'450x600?text=450x600', // 3:4
             '600x338?text=600x338', // 16:9
             '600x600?text=600x600', // 1:1
             //'600x217', // 2.76:1
