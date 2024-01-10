@@ -138,19 +138,16 @@ class CatalogController extends Controller
                     'filename' => 'catalog',
                     'columns' => '2',
                     'showDescription' => false,
-                    'gradientOverlay' => false,
                 ],
             ],
             'catalog-2' => [
                 'data' => app(GenericPromo::class)->create(3, false, [
-                    'excerpt' => '',
                 ]),
                 'component' => [
                     'heading' => 'One-column catalog',
                     'filename' => 'catalog',
                     'columns' => '1',
                     'showDescription' => false,
-                    'imageSize' => 'small',
                 ],
             ],
             'catalog-3' => [
@@ -161,7 +158,7 @@ class CatalogController extends Controller
                     'heading' => 'Four-column catalog sorted by option',
                     'filename' => 'catalog',
                     'columns' => '4',
-                    'showDescription' => false,
+                    'showDescription' => true,
                     'groupByOptions' => true,
                 ],
             ],

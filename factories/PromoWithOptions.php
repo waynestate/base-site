@@ -24,7 +24,7 @@ class PromoWithOptions implements FactoryContract
 
         $image = '/styleguide/image/' . $this->faker->randomElement([
             '600x450?text=600x450', // 4:3
-            '450x600?text=450x600', // 3:4
+            //'450x600?text=450x600', // 3:4
             '600x600?text=600x600', // 1:1
         ]);
 

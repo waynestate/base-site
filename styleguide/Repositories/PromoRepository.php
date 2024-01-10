@@ -62,6 +62,11 @@ class PromoRepository extends Repository
                 'option' => 'Skinny',
                 'relative_url' => '/styleguide/image/3200x600',
             ]),
+            // Half
+            105100109 => app(HeroImage::class)->create(3, false, [
+                'option' => 'Half',
+                'relative_url' => '/styleguide/image/1920x1080',
+            ]),
         ];
 
         // Only pull hero promos if they match the page ids that are specificed
@@ -75,6 +80,7 @@ class PromoRepository extends Repository
             105100106,
             105100107,
             105100108,
+            105100109,
         ];
 
         // Set the config for full width hero if they match the page ids that are specified

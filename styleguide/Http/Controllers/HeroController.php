@@ -42,6 +42,7 @@ class HeroController extends Controller
 "config":"randomize|page_id|limit:1"
 }
 </pre>
+Note: Any limit above 1 will enable rotate.
         </td>
     </tr>
 </table>
@@ -73,7 +74,7 @@ class HeroController extends Controller
         </tr>
         <tr>
             <td class="font-bold">Options</td>
-            <td>None, Skinny, Text overlay, Logo overlay, SVG overlay</td>
+            <td>None, Skinny, Text overlay, Half, Logo overlay, SVG overlay</td>
         </tr>
     </tbody>
 </table>';

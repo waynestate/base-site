@@ -126,19 +126,7 @@ class ChildpageWithComponentsController extends Controller
                 ],
             ],
             'catalog-1' => [
-                'data' => app(GenericPromo::class)->create(4, false, [
-                    'description' => '',
-                ]),
-                'component' => [
-                    'heading' => 'Four column catalog',
-                    'filename' => 'catalog',
-                    'columns' => '4',
-                    'showDescription' => false,
-                ],
-            ],
-
-            'catalog-10' => [
-                'data' => app(GenericPromo::class)->create(4, false, [
+                'data' => app(GenericPromo::class)->create(3, false, [
                     'description' => '',
                 ]),
                 'component' => [
@@ -233,7 +221,7 @@ class ChildpageWithComponentsController extends Controller
             'promo-row-1' => [
                 'data' => app(GenericPromo::class)->create(2, false),
                 'component' => [
-                    'heading' => 'Promo row',
+                    'heading' => 'Promo row with alternating image position',
                     'filename' => 'promo-row',
                     'imagePosition' => 'alternate',
                 ],
@@ -248,7 +236,7 @@ class ChildpageWithComponentsController extends Controller
             ],
 
             'button-column' => [
-                'data' => app(GenericPromo::class)->create(4, false, [
+                'data' => app(Button::class)->create(4, false, [
                     'option' => 'Default',
                     'excerpt' => '',
                 ]),
