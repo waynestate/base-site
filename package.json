@@ -26,8 +26,8 @@
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.8",
-    "@waynestate/wsufooter": "^1.0.9",
-    "@waynestate/wsuheader": "^2.1.0",
+    "@waynestate/wsufooter": "^1.1.0",
+    "@waynestate/wsuheader": "^2.2.0",
     "accordion": "^3.0.2",
     "autoprefixer": "^10.4.13",
     "browser-sync": "^2.28.1",
