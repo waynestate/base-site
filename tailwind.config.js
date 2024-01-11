@@ -133,15 +133,21 @@ module.exports = {
                 '17': '4.25rem',
                 '19': '4.75rem',
             },
+            height: {
+                'hero': '36.25vw',
+            },
             minHeight: {
-                'hero': '36.3vw',
+                'hero': '36.25vw',
+            },
+            maxHeight: {
+                'hero': '500px',
             },
             dropShadow: {
                 'px': '0 1px 1px rgba(12, 84, 73, 0.5)',
             },
             boxShadow: {
                 'white': '0 7px 0 '+ twColors.white +', 0 14px 0 '+ twColors.white,
-                'grey': '0 7px 0 '+ twColors.gray +', 0 14px 0 '+ twColors.gray,
+                'gray': '0 7px 0 '+ twColors.gray +', 0 14px 0 '+ twColors.gray,
             },
             opacity: {
                 '65': '.65',
