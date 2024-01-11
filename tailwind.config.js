@@ -51,7 +51,6 @@ const screens = {
     'md': '576px',
     'lg': '732px',
     'xl': '888px',
-    'xxl': '1044px',
     '2xl': '1044px',
     '3xl': '1200px',
     'mt': '780px', // Adjust this based on the top menu width
@@ -113,14 +112,15 @@ module.exports = {
         },
         extend: {
             colors: baseColors,
-            maxWidth: {
+            maxWidth: ({ theme }) => ({
                 'half': '50%',
-                'screen-xxxl': screens.xxxl,
-            },
+                'screen-3xl': theme('screens.3xl'),
+            }),
             padding: {
                 '3/4': '75%',
                 '16/9': '56.35%',
                 'hero': '36.3%',
+                'hero-half': '56.25%',
                 'hero-medium': '29.3%',
                 'hero-skinny': '16.667%',
                 'full': '100%',
