@@ -24,6 +24,7 @@ var Flickity = require('flickity');
             resize: true,
             setGallerySize: true,
             wrapAround: true,
+            adaptiveHeight: true,
         });
 
         document.querySelector('.rotate').removeAttribute('tabindex');
