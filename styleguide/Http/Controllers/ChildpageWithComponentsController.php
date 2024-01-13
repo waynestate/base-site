@@ -107,7 +107,7 @@ class ChildpageWithComponentsController extends Controller
             'hero-1' => [
                 'data' => app(HeroImage::class)->create(1, false, [
                     'relative_url' => '/styleguide/image/3200x600',
-                    'option' => 'skinny',
+                    'option' => 'banner',
                 ]),
                 'component' => [
                     'filename' => 'hero',

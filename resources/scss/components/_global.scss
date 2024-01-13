@@ -37,18 +37,6 @@ hr {
     @apply border-b border-solid border-gray-200 my-5;
 }
 
-blockquote {
-    @apply ml-8 my-8 border-l-4 border-gray-400 pl-4 pt-2 pb-1;
-
-    > *:last-child {
-        @apply mb-2;
-    }
-
-    cite {
-        @apply block mb-4;
-    }
-}
-
 figure {
     @apply mt-2 mb-4 mx-auto;
 

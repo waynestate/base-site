@@ -180,6 +180,16 @@
                 "relative_url": "/styleguide/catalog",
                 "submenu": []
             },
+            "120100": {
+                "menu_item_id": 120100,
+                "is_active": 1,
+                "page_id": 120100,
+                "target": "",
+                "display_name": "Content",
+                "class_name": "",
+                "relative_url": "/styleguide/content",
+                "submenu": []
+            },
             "109100": {
                 "menu_item_id": 109100,
                 "is_active": 1,
@@ -197,16 +207,16 @@
                 "target": "",
                 "display_name": "Hero image",
                 "class_name": "",
-                "relative_url": "/styleguide/hero/contained",
+                "relative_url": "/styleguide/hero/banner",
                 "submenu": {
-                    "105100100": {
-                        "menu_item_id": 105100100,
+                    "105100108": {
+                        "menu_item_id": 105100108,
                         "is_active": 1,
-                        "page_id": 105100100,
+                        "page_id": 105100108,
                         "target": "",
-                        "display_name": "Contained",
+                        "display_name": "Banner",
                         "class_name": "",
-                        "relative_url": "/styleguide/hero/contained",
+                        "relative_url": "/styleguide/hero/banner",
                         "submenu": []
                     },
                     "105100103": {
@@ -257,16 +267,6 @@
                         "display_name": "Logo overlay",
                         "class_name": "",
                         "relative_url": "/styleguide/hero/logooverlay",
-                        "submenu": []
-                    },
-                    "105100108": {
-                        "menu_item_id": 105100108,
-                        "is_active": 1,
-                        "page_id": 105100108,
-                        "target": "",
-                        "display_name": "Skinny",
-                        "class_name": "",
-                        "relative_url": "/styleguide/hero/skinny",
                         "submenu": []
                     },
                     "105100109": {
@@ -603,9 +603,9 @@
                 "is_active": 1,
                 "page_id": 112100,
                 "target": "",
-                "display_name": "Banner",
+                "display_name": "Flag",
                 "class_name": "",
-                "relative_url": "/styleguide/banner",
+                "relative_url": "/styleguide/flag",
                 "submenu": []
             },
             "104100": {

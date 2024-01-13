@@ -120,9 +120,6 @@ module.exports = {
                 '3/4': '75%',
                 '16/9': '56.35%',
                 'hero': '36.3%',
-                'hero-half': '56.25%',
-                'hero-medium': '29.3%',
-                'hero-skinny': '16.667%',
                 'full': '100%',
                 'portrait' : '133%',
             },
@@ -134,13 +131,18 @@ module.exports = {
                 '19': '4.75rem',
             },
             height: {
-                'hero': '36.25vw',
-            },
-            minHeight: {
+                'hero-skinny': '18.75vw',
                 'hero': '36.25vw',
             },
             maxHeight: {
-                'hero': '500px',
+                'hero-skinny': '250px',
+                'hero': '600px',
+            },
+            minHeight: {
+                'hero': '600px',
+            },
+            borderWidth: {
+                '12' : '12px',
             },
             dropShadow: {
                 'px': '0 1px 1px rgba(12, 84, 73, 0.5)',
@@ -154,6 +156,9 @@ module.exports = {
             },
             aspectRatio: {
                 'portrait': '3 / 4',
+            },
+            transitionProperty: {
+                'height': 'height'
             },
         },
     },

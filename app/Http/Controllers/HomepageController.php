@@ -30,6 +30,7 @@ class HomepageController extends Controller
      */
     public function index(Request $request): View
     {
+        // $request->data['base']['show_site_menu'] = false;
         // $promos = $this->promo->getHomepagePromos();
 
         $articles = $this->article->listing($request->data['base']['site']['news']['application_id']);

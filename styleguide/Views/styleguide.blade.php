@@ -62,11 +62,14 @@
 
         <h2>Blockquote</h2>
 
+        <p>{{ $faker->paragraph(6) }}</p>
+
         <blockquote>
-            <p>&ldquo;{{ $faker->paragraph(10) }}&rdquo;</p>
             <p>&ldquo;{{ $faker->paragraph(4) }}&rdquo;</p>
             <cite>&mdash; {{ $faker->name() }}</cite>
         </blockquote>
+
+        <p>{{ $faker->paragraph(6) }}</p>
 
         <h2>PDF links</h2>
 

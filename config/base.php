@@ -263,7 +263,7 @@ return [
                     'id' => 3001,
                     'config' => 'page_id:{$page_id}|randomize|limit:1',
                 ],
-                'banner' => [
+                'flag' => [
                     'id' => 4246,
                     'config' => 'page_id:{$page_id}|first',
                 ],

@@ -4,17 +4,17 @@ namespace Styleguide\Http\Controllers;
 
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
-use Factories\Banner;
+use Factories\Flag;
 use Illuminate\Http\Request;
 
-class BannerController extends Controller
+class FlagController extends Controller
 {
     /**
-     * Display the banner at the top of the page.
+     * Display the flag at the top of the page.
      */
     public function index(Request $request): View
     {
-        $request->data['base']['banner'] = app(Banner::class)->create(1, true);
+        $request->data['base']['flag'] = app(Flag::class)->create(1, true);
 
         return view('styleguide-childpage', merge($request->data));
     }

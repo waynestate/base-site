@@ -7,7 +7,7 @@ use Factories\Page as PageFactory;
 class HeroHalf extends Page
 {
     /** {@inheritdoc} **/
-    public $path = '/styleguide/hero/skinny';
+    public $path = '/styleguide/hero/half';
 
     /**
      * {@inheritdoc}

@@ -4,10 +4,10 @@ namespace Styleguide\Pages;
 
 use Factories\Page as PageFactory;
 
-class HeroContained extends Page
+class HeroBanner extends Page
 {
     /** {@inheritdoc} **/
-    public $path = '/styleguide/hero/contained';
+    public $path = '/styleguide/hero/banner';
 
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class HeroContained extends Page
         return app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'HeroController',
-                'title' => 'Contained',
-                'id' => 105100100,
+                'title' => 'Banner',
+                'id' => 105100108,
                 'content' => [
                     'main' => '',
                 ],

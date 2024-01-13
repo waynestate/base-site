@@ -5,12 +5,10 @@
     Add your specific css in scss/subsite/_main.scss
 --}}
 @if(!empty($data))
-    <div {!! (in_array($base['page']['controller'], config('base.hero_full_controllers'))) ? ' role="complementary"' : '' !!}
-        class="GTM-hero mt:mx-0
+    <div role="complementary" class="GTM-hero 
         {{ !empty($class) ? $class : '' }}
-        {{ !empty($data) && count($data) > 1 ? ' rotate' : '' }}
-        {{!in_array($base['page']['controller'], config('base.hero_full_controllers'))  ? '  -mx-4' : '' }}
         {{!empty(config('base.global.sites.'.$base['site']['id'].'.promos.hero.class')) ? ' '.config('base.global.sites.'.$base['site']['id'].'.promos.hero.class') : ''}}
+        {{ !empty($data) && count($data) > 1 ? ' rotate' : '' }}
     ">
         @foreach($data as $hero)
             @if(!empty($hero['relative_url']))

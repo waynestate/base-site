@@ -6,6 +6,7 @@ use App\Repositories\PromoRepository as Repository;
 use Factories\FooterContact;
 use Factories\FooterSocial;
 use Factories\HeroImage;
+use Factories\HeroImageRotate;
 use Factories\GenericPromo;
 use Factories\Button;
 use Faker\Factory;
@@ -33,6 +34,8 @@ class PromoRepository extends Repository
         // Only pull under_menu promos if they match the page_ids that are specified
         $under_menu = !empty($under_menu_page_ids[$data['page']['id']]) ? app(Button::class)->create($under_menu_page_ids[$data['page']['id']]) : null;
 
+        $hero_option = $this->faker->randomElement(['Text Overlay', 'SVG Overlay', 'Half', 'Logo Overlay', '']);
+
         // Define the pages that have hero images
         $hero_page_ids = [
             // Homepage
@@ -42,7 +45,7 @@ class PromoRepository extends Repository
             // Full width
             105100103 => app(HeroImage::class)->create(1, false),
             // Rotate
-            105100104 => app(HeroImage::class)->create(4, false),
+            105100104 => app(HeroImageRotate::class)->create(4, false),
             // Text overlay
             105100105 => app(HeroImage::class)->create(1, false, [
                 'option' => 'Text Overlay',
@@ -57,13 +60,13 @@ class PromoRepository extends Repository
                 'option' => 'Logo Overlay',
                 'secondary_relative_url' => '/styleguide/image/600x250?text=600x250',
             ]),
-            // Skinny
+            // Banner
             105100108 => app(HeroImage::class)->create(1, false, [
-                'option' => 'Skinny',
+                'option' => 'Banner',
                 'relative_url' => '/styleguide/image/3200x600',
             ]),
             // Half
-            105100109 => app(HeroImage::class)->create(3, false, [
+            105100109 => app(HeroImage::class)->create(1, false, [
                 'option' => 'Half',
                 'relative_url' => '/styleguide/image/1920x1080',
             ]),
