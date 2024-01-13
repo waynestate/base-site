@@ -39,6 +39,8 @@ class FullWidthController extends Controller
             'hero_1' => [
                 'data' => app(HeroImage::class)->create(1, false, [
                     'option' => 'Text overlay',
+                    'title' => 'Your future <em>starts here</em>',
+                    'description' => '',
                 ]),
                 'component' => [
                     'filename' => 'hero',
@@ -200,6 +202,8 @@ class FullWidthController extends Controller
             config(['base.hero_full_controllers' => ['ChildpageWithComponentsController']]);
         }
 
-        return view('styleguide-fullwidth', merge($request->data, $this->faker, $components));
+        $heroClass['heroClass'] = 'full-width-styleguide-hero';
+
+        return view('styleguide-fullwidth', merge($request->data, $this->faker, $components, $heroClass));
     }
 }

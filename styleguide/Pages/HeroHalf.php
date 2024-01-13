@@ -17,7 +17,7 @@ class HeroHalf extends Page
         return app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'HeroController',
-                'title' => 'Half',
+                'title' => 'Hero half',
                 'id' => 105100109,
                 'content' => [
                     'main' => '',

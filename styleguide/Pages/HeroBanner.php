@@ -17,7 +17,7 @@ class HeroBanner extends Page
         return app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'HeroController',
-                'title' => 'Banner',
+                'title' => 'Hero banner',
                 'id' => 105100108,
                 'content' => [
                     'main' => '',

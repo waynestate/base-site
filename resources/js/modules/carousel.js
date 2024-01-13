@@ -47,8 +47,10 @@ var Flickity = require('flickity');
            item.addEventListener('click', EnableTabbableItems);
         });
 
+        // Allows the carousel to adjust the height after all the content has loaded
         carousel.resize()
 
+        // Adding these transitions after load prevents the initial load being delayed 
         document.querySelector('.flickity-viewport').style['transition-property'] = 'height';
         document.querySelector('.flickity-viewport').style['transition-timing-function'] = 'cubic-bezier(0.4, 0, 0.2, 1)';
         document.querySelector('.flickity-viewport').style['transition-duration'] = '1000ms';

@@ -234,9 +234,9 @@
                         "is_active": 1,
                         "page_id": 105100104,
                         "target": "",
-                        "display_name": "Rotate",
+                        "display_name": "Carousel",
                         "class_name": "",
-                        "relative_url": "/styleguide/hero/rotate",
+                        "relative_url": "/styleguide/hero/carousel",
                         "submenu": []
                     },
                     "105100105": {

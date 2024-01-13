@@ -1,0 +1,17 @@
+.full-width-styleguide-hero .hero {
+    &__content {
+        @apply italic;
+    }
+
+    &__title {
+        @apply text-7xl mb-8 font-light;
+
+        em {
+            @apply text-gold font-bold;
+        }
+    }
+
+    &__description {
+        @apply text-3xl;
+    }
+}

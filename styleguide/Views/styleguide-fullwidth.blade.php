@@ -1,7 +1,7 @@
 @extends('components.content-area')
 
 @section('head')
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital@1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,300;1,400;1,700&display=swap" rel="stylesheet">
 @endsection
 
 @section('content')

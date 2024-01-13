@@ -6,8 +6,8 @@
 --}}
 @if(!empty($data))
     <div role="complementary" class="GTM-hero 
-        {{ !empty($class) ? $class : '' }}
-        {{!empty(config('base.global.sites.'.$base['site']['id'].'.promos.hero.class')) ? ' '.config('base.global.sites.'.$base['site']['id'].'.promos.hero.class') : ''}}
+        {{ $heroClass ?? '' }}
+        {{ config('base.global.sites.'.$base['site']['id'].'.promos.hero.class') ?? ''}}
         {{ !empty($data) && count($data) > 1 ? ' rotate' : '' }}
     ">
         @foreach($data as $hero)

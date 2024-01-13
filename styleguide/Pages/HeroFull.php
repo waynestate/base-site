@@ -17,7 +17,7 @@ class HeroFull extends Page
         return app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'HeroController',
-                'title' => 'Full width',
+                'title' => 'Hero full  width',
                 'id' => 105100103,
                 'content' => [
                     'main' => '',
