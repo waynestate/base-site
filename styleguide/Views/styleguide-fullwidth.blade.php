@@ -4,17 +4,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,300;1,400;1,700&display=swap" rel="stylesheet">
 @endsection
 
+@section('hero-buttons')
+    @include('components/button-row', ['data' => $button_row_1['data'], 'component' => $button_row_1['component']])
+@endsection
+
 @section('content')
     <div class="row px-4">
         @include('components.page-title', ['title' => $base['page']['title']])
-        
+
+        @include('components/icons-row', ['data' => $icons_row_1['data'], 'component' => $icons_row_1['component']])
+
         <div class="content">
             {!! $base['page']['content']['main'] !!}
-
-            <blockquote class="italic">
-                <p>&ldquo;{{ $faker->paragraph(6) }}&rdquo;</p>
-                <cite>&mdash; {{ $faker->name }}</cite>
-            </blockquote>
         </div>
     </div>
 
