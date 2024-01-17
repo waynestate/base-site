@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Faker\Factory;
 use Factories\GenericPromo;
-use Factories\Video;
 
 class SinglePromoController extends Controller
 {
@@ -24,37 +23,111 @@ class SinglePromoController extends Controller
      */
     public function index(Request $request): View
     {
-        $components['components'] = [
-            'accordion-1' => [
-                'data' => [
-                    0 => [
-                        'title' => 'Configuration',
-                        'description' => '
-<p>Visit the modular documentation for more information</p>
-<div class="grid grid-cols-1 lg:grid-cols-3 border-x border-b">
-    <div class="lg:col-span-1 p-2 bg-gray-100 font-bold lg:border-r border-y order-1 lg:order-none">Page field</div>
-    <div class="lg:col-span-2 p-2 bg-gray-100 font-bold border-y order-3 lg:order-none">Data</div>
-    <div class="lg:col-span-1 p-2 lg:border-r order-2 lg:order-none">
-        <pre class="w-full">modular-promo-column-1</pre>
-    </div>
-    <div class="lg:col-span-2 p-2 order-4 lg:order-none">
+        $request->data['base']['page']['content']['main'] = '';
+
+        $promotion_group_details = '
+<table class="mt-2">
+    <thead>
+        <tr>
+            <th colspan="2">Available fields</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="font-bold">Title</td>
+            <td>Bold text.</td>
+        </tr>
+        <tr>
+            <td class="font-bold">Link</td>
+            <td>
+Optional external link.<br />
+Component flag "singlePromoView" sets the link to the individual promo item view.
+            </td>
+        </tr>
+        <tr>
+            <td class="font-bold">Excerpt</td>
+            <td>Optional smaller text under the title.</td>
+        </tr>
+        <tr>
+            <td class="font-bold">Description</td>
+            <td>
+Optional smaller text under the title and/or excerpt.<br />
+You might use this area on a singe promo view page and hide it from the catalog component.
+            </td>
+        </tr>
+        <tr>
+            <td class="font-bold">Primary image</td>
+            <td>Minimum width of 600px jpg, png.</td>
+        </tr>
+    </tbody>
+</table>
+';
+
+        $component_configuration = '
+<table class="no-stripe">
+    <thead>
+        <tr>
+            <th class="w-2/5">Page field</th>
+            <th>Data</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <pre class="w-full">modular-promo-column-1</pre>
+            </td>
+            <td>
 <pre class="w-full" tabindex="0">
 {
-"id":1234,
-"heading":"My heading",
-"config":"randomize|limit:1|page_id",
-"singlePromoView":"true",
-"showExcerpt":"false",
-"showDescription":"true"
+"id":000000,
+"heading":"Promo column",
+"config":"page_id|randomize|limit:1|youtube",
+"singlePromoView":true,
+"showExcerpt":true,
+"showDescription":false,
+"gradientOverlay":false
 }
-</pre></div></div>',
-                        'promo_item_id' => 0,
+</pre>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <pre class="w-full">modular-promo-row-1</pre>
+            </td>
+            <td>
+<pre class="w-full" tabindex="0">
+{
+"id":000000,
+"heading":"Promo row",
+"config":"page_id|randomize|limit:1|youtube",
+"singlePromoView":true,
+"showExcerpt":true,
+"showDescription":false,
+"imagePosition":alternate,
+}
+</pre>
+            </td>
+        </tr>
+    </tbody>
+</table>
+';
+
+        $components['components'] = [
+            'accordion' => [
+                'data' => [
+                    0 => [
+                        'title' => 'Component configuration',
+                        'promo_item_id' => 'componentConfiguration',
+                        'description' => $component_configuration,
+                    ],
+                    1 => [
+                        'title' => 'Promotion group details',
+                        'promo_item_id' => 'promotionGroupDetails',
+                        'description' => $promotion_group_details,
                     ],
                 ],
                 'component' => [
                     'filename' => 'accordion',
-                    'columns' => '4',
-                    'showDescription' => false,
                 ],
             ],
             'promo-column-1' => [
@@ -62,21 +135,32 @@ class SinglePromoController extends Controller
                     'excerpt' => '',
                 ]),
                 'component' => [
-                    'heading' => 'My image',
+                    'heading' => 'Promo column',
                     'filename' => 'promo-column',
                 ],
             ],
             'promo-column-2' => [
-                'data' => app(Video::class)->create(1, false, [
-                    'excerpt' => '',
+                'data' => app(GenericPromo::class)->create(1, false, [
+                    'description' => '',
                 ]),
                 'component' => [
-                    'heading' => 'My video',
+                    'heading' => 'Gradient overlay',
                     'filename' => 'promo-column',
+                    'gradientOverlay' => true,
+                ],
+            ],
+            'promo-row-1' => [
+                'data' => app(GenericPromo::class)->create(1, false, [
+                    'excerpt' => '',
+                    'link' => '#',
+                ]),
+                'component' => [
+                    'heading' => 'Promo row',
+                    'filename' => 'promo-row',
                 ],
             ],
         ];
 
-        return view('modularpage', merge($request->data, $components));
+        return view('childpage', merge($request->data, $components));
     }
 }

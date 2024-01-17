@@ -9,7 +9,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\View\View;
 use Illuminate\Http\Request;
-use Contracts\Repositories\PromoRepositoryContract;
+use Contracts\Repositories\HomepageRepositoryContract;
 use Contracts\Repositories\EventRepositoryContract;
 use Contracts\Repositories\ArticleRepositoryContract;
 
@@ -18,7 +18,7 @@ class HomepageController extends Controller
     /**
      * Construct the controller.
      */
-    public function __construct(PromoRepositoryContract $promo, ArticleRepositoryContract $article, EventRepositoryContract $event)
+    public function __construct(HomepageRepositoryContract $promo, ArticleRepositoryContract $article, EventRepositoryContract $event)
     {
         $this->promo = $promo;
         $this->article = $article;

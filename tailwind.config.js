@@ -121,6 +121,8 @@ module.exports = {
                 '3/4': '75%',
                 '16/9': '56.35%',
                 'hero': '36.3%',
+                'hero-medium': '29.3%',
+                'hero-skinny': '16.667%',
                 'full': '100%',
                 'portrait' : '133%',
             },
@@ -133,6 +135,9 @@ module.exports = {
             },
             minHeight: {
                 'hero': '36.3vw',
+            },
+            dropShadow: {
+                'px': '0 1px 1px rgba(12, 84, 73, 0.5)',
             },
             boxShadow: {
                 'white': '0 7px 0 '+ twColors.white +', 0 14px 0 '+ twColors.white,

@@ -37,6 +37,10 @@ table {
         }
     }
 
+    &.no-stripe tr {
+        @apply bg-white;
+    }
+
     th {
         @apply bg-gray-100 font-bold px-4 py-3 text-green-600 leading-none border-b border-b-gray-300;
     }

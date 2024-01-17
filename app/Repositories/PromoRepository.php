@@ -32,28 +32,40 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
     /**
      * {@inheritdoc}
      */
-    public function getHomepagePromos(int $page_id = 0)
+    public function getPromoView($id)
     {
-        $group_reference = [
-            123 => 'example',
-        ];
-
-        $group_config = [
-            'example' => 'page_id:'.$page_id.'|randomize|first',
-        ];
+        $promo['promotion'] = [];
 
         $params = [
-            'method' => 'cms.promotions.listing',
-            'promo_group_id' => array_keys($group_reference),
+            'method' => 'cms.promotions.info',
+            'promo_item_id' => $id,
             'filename_url' => true,
             'is_active' => '1',
         ];
 
-        $promos = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+        $promo = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
-        return $this->parsePromos->parse($promos, $group_reference, $group_config);
+        $promo['promo'] = empty($promo['error']) ? $promo['promotion'] : [];
+
+        return $promo;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBackToPromoPage($referer = null, $scheme = null, $host = null, $uri = null)
+    {
+        // Make sure the referer is coming from the site we are currently on and not the current page
+        if ($referer === null
+            || $referer == $scheme.'://'.$host.$uri
+            || strpos($referer, $host) === false
+        ) {
+            return '';
+        }
+
+        return $referer;
     }
 
     /**
@@ -80,11 +92,6 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
 
             return [$group['id'] => $name];
         })->toArray();
-
-        // If there is an accordion custom page field then inject it into the group reference
-        if (!empty($data['data']['accordion_promo_group_id']) && !array_key_exists($data['data']['accordion_promo_group_id'], $group_reference)) {
-            $group_reference[$data['data']['accordion_promo_group_id']] = 'accordion_page';
-        }
 
         $params = [
             'method' => 'cms.promotions.listing',

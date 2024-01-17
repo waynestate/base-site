@@ -17,7 +17,7 @@ class SinglePromo extends Page
                 'title' => 'Single promo',
                 'id' => 116100,
                 'content' => [
-                    'main' => '<p>Single promo item with image or video that takes up one column and is full width on small views.</p>',
+                    'main' => '<p>Single promo item with image or video.</p>',
                 ],
             ],
         ]);
