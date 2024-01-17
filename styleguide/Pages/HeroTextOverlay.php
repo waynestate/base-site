@@ -17,7 +17,7 @@ class HeroTextOverlay extends Page
         return app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'HeroController',
-                'title' => 'Text overlay',
+                'title' => 'Hero text overlay',
                 'id' => 105100105,
                 'content' => [
                     'main' => '',

@@ -27,6 +27,11 @@ p {
     @apply mb-4;
 }
 
+// To maintain consistent spacing when using paragraphs inside of grid
+.grid p:last-of-type {
+    @apply mb-0;
+}
+
 // Tailwind preflight sets this to .5 which isn't ADA compliant
 input::placeholder,
 textarea::placeholder {
@@ -35,18 +40,6 @@ textarea::placeholder {
 
 hr {
     @apply border-b border-solid border-gray-200 my-5;
-}
-
-blockquote {
-    @apply ml-8 my-8 border-l-4 border-gray-400 pl-4 pt-2 pb-1;
-
-    > *:last-child {
-        @apply mb-2;
-    }
-
-    cite {
-        @apply block mb-4;
-    }
 }
 
 figure {

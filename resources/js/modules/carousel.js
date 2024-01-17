@@ -4,7 +4,7 @@ var Flickity = require('flickity');
     "use strict";
 
     if(document.querySelector('.rotate') !== null) {
-        new Flickity('.rotate', {
+        var carousel = new Flickity('.rotate', {
             on: {
                 ready: function() {
                     // Get the height of the first image that loaded and dynamically set the height
@@ -24,6 +24,7 @@ var Flickity = require('flickity');
             resize: true,
             setGallerySize: true,
             wrapAround: true,
+            adaptiveHeight: true,
         });
 
         document.querySelector('.rotate').removeAttribute('tabindex');
@@ -45,5 +46,15 @@ var Flickity = require('flickity');
         document.querySelectorAll('.flickity-button').forEach(function (item) {
            item.addEventListener('click', EnableTabbableItems);
         });
+
+        // Allows the carousel to adjust the height after all the content has loaded
+        carousel.resize()
+
+        // Adding these transitions after load prevents the initial load being delayed 
+        document.querySelector('.flickity-viewport').style['transition-property'] = 'height';
+        document.querySelector('.flickity-viewport').style['transition-timing-function'] = 'cubic-bezier(0.4, 0, 0.2, 1)';
+        document.querySelector('.flickity-viewport').style['transition-duration'] = '1000ms';
     }
 })(Flickity);
+
+

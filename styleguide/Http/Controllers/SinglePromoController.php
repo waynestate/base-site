@@ -159,6 +159,89 @@ You might use this area on a singe promo view page and hide it from the catalog 
                     'filename' => 'promo-row',
                 ],
             ],
+            'promo-row-2' => [
+                'data' => app(GenericPromo::class)->create(1, false, [
+                    'relative_url' => '',
+                    'link' => '',
+                    'excerpt' => '',
+                    'youtube_id' => '',
+                    'title' => 'Content promo row without images',
+                    'description' => 'Without a component heading, promo item titles are h2. <br />With a component heading, the promo item titles are h3.',
+                ]),
+                'component' => [
+                    'heading' => '',
+                    'filename' => 'promo-row',
+                ],
+            ],
+            'promo-row-3' => [
+                'data' => app(GenericPromo::class)->create(1, false, [
+                    'relative_url' => '',
+                    'link' => '',
+                    'excerpt' => '',
+                    'youtube_id' => '',
+                    'title' => 'Promo row item title',
+                    'description' => $this->faker['faker']->paragraph(8).' <a href="#">'.$this->faker['faker']->sentence.'</a>',
+                ]),
+                'component' => [
+                    'heading' => 'Promo row with heading',
+                    'filename' => 'promo-row',
+                ],
+            ],
+            'promo-row-4' => [
+                'data' => app(GenericPromo::class)->create(1, false, [
+                    'relative_url' => '',
+                    'link' => '',
+                    'excerpt' => '',
+                    'youtube_id' => '',
+                    'title' => 'Promo item title without component heading',
+                    'description' => $this->faker['faker']->paragraph(8).' <a href="#">'.$this->faker['faker']->sentence.'</a>',
+                ]),
+                'component' => [
+                    'filename' => 'promo-row',
+                ],
+            ],
+            'promo-column-5' => [
+                'data' => app(GenericPromo::class)->create(1, false, [
+                    'relative_url' => '',
+                    'link' => '',
+                    'excerpt' => '',
+                    'youtube_id' => '',
+                    'title' => 'Content promo columns without images',
+                    'description' => 'Promo column component headings are h2.<br />With or without a component heading, promo item titles are h3.',
+                ]),
+                'component' => [
+                    'heading' => '',
+                    'filename' => 'promo-row',
+                ],
+            ],
+            'promo-column-6' => [
+                'data' => app(GenericPromo::class)->create(1, false, [
+                    'relative_url' => '',
+                    'link' => '',
+                    'excerpt' => '',
+                    'youtube_id' => '',
+                    'title' => 'Promo column item title 1',
+                    'description' => $this->faker['faker']->paragraph(8).' <a href="#">'.$this->faker['faker']->sentence.'</a>',
+                ]),
+                'component' => [
+                    'heading' => '',
+                    'filename' => 'promo-column',
+                ],
+            ],
+            'promo-column-7' => [
+                'data' => app(GenericPromo::class)->create(1, false, [
+                    'relative_url' => '',
+                    'link' => '',
+                    'excerpt' => '',
+                    'youtube_id' => '',
+                    'title' => 'Promo column item title 2',
+                    'description' => $this->faker['faker']->paragraph(8).' <a href="#">'.$this->faker['faker']->sentence.'</a>',
+                ]),
+                'component' => [
+                    'heading' => '',
+                    'filename' => 'promo-column',
+                ],
+            ],
         ];
 
         return view('childpage', merge($request->data, $components));

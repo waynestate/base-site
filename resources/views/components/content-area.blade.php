@@ -3,7 +3,7 @@
 @section('content-area')
     @yield('top')
 
-    @if(!empty($base['hero']) && in_array($base['page']['controller'], config('base.hero_full_controllers')))
+    @if(!empty($base['hero']))
         @include('components.hero', ['data' => $base['hero']])
 
         @yield('under-hero')
@@ -31,9 +31,9 @@
                     {!! $base['site_menu_output'] !!}
                 @endif
 
-                @if(!empty($base['banner']))
+                @if(!empty($base['flag']))
                     <div class="min-w-full px-4 mt:px-0 mb-4 mt:hidden">
-                        <a href="{{ $base['banner']['link'] }}" class="button w-full banner__title">{{ $base['banner']['title'] }} <span class="banner__excerpt">{{ $base['banner']['excerpt'] }}</span></a>
+                        <a href="{{ $base['flag']['link'] }}" class="button w-full flag__title">{{ $base['flag']['title'] }} <span class="flag__excerpt">{{ $base['flag']['excerpt'] }}</span></a>
                     </div>
                 @endif
 
@@ -45,18 +45,13 @@
             </nav>
         </div>
 
-        <main class="w-full{{ !in_array($base['page']['controller'], config('base.full_width_controllers')) ? ' px-4' : '' }} {{$base['show_site_menu'] === true ? 'mt:w-3/4' : '' }} content-area mb-8 print:w-full" tabindex="-1">
-            @if(!empty($base['hero']) && !in_array($base['page']['controller'], config('base.hero_full_controllers')))
-                @include('components.hero', ['data' => $base['hero']])
-
-                @yield('under-hero')
-            @endif
+        <main class="w-full {{$base['show_site_menu'] === true ? 'mt:w-3/4' : '' }} content-area mb-8 print:w-full" tabindex="-1">
 
             @if(!empty($base['breadcrumbs']))
                 @include('components.breadcrumbs', ['breadcrumbs' => $base['breadcrumbs']])
             @endif
 
-            <div id="content" tabindex="-1">
+            <div id="content" tabindex="-1" class="{{ !in_array($base['page']['controller'], config('base.full_width_controllers')) ? 'px-4' : '' }}">
                 @yield('content')
             </div>
         </main>

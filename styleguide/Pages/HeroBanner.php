@@ -4,10 +4,10 @@ namespace Styleguide\Pages;
 
 use Factories\Page as PageFactory;
 
-class HeroRotate extends Page
+class HeroBanner extends Page
 {
     /** {@inheritdoc} **/
-    public $path = '/styleguide/hero/rotate';
+    public $path = '/styleguide/hero/banner';
 
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class HeroRotate extends Page
         return app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'HeroController',
-                'title' => 'Rotate',
-                'id' => 105100104,
+                'title' => 'Hero banner',
+                'id' => 105100108,
                 'content' => [
                     'main' => '',
                 ],

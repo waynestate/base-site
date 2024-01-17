@@ -15,6 +15,8 @@
     @if(!empty($base['page']['canonical']))<link rel="canonical" href="{{ $base['page']['canonical'] }}">@endif
 
     @include('components.gtm-head')
+
+    @yield('head')
 </head>
 <body class="font-sans font-normal text-black leading-normal text-base">
 
@@ -28,8 +30,8 @@
         @include('components.menu-top', ['site' => $base['site'], 'top_menu_output' => $base['top_menu_output']])
     @endif
 
-    @if(!empty($base['banner']))
-        @include('components.banner', ['banner' => $base['banner']])
+    @if(!empty($base['flag']))
+        @include('components.flag', ['flag' => $base['flag']])
     @endif
 </header>
 

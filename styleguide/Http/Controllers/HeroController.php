@@ -74,7 +74,7 @@ Note: Any limit above 1 will enable rotate.
         </tr>
         <tr>
             <td class="font-bold">Options</td>
-            <td>None, Skinny, Text overlay, Half, Logo overlay, SVG overlay</td>
+            <td>None, Banner, Text overlay, Half, Logo overlay, SVG overlay</td>
         </tr>
     </tbody>
 </table>';

@@ -5,7 +5,7 @@ namespace Factories;
 use Contracts\Factories\FactoryContract;
 use Faker\Factory;
 
-class Banner implements FactoryContract
+class Flag implements FactoryContract
 {
     /**
      * Construct the factory.
@@ -22,7 +22,7 @@ class Banner implements FactoryContract
     {
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
-                'class' => 'banner',
+                'class' => 'flag',
                 'title' => 'Make a',
                 'link' => 'https://wayne.edu',
                 'excerpt' => 'Gift',

@@ -17,7 +17,7 @@ class HeroLogoOverlay extends Page
         return app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'HeroController',
-                'title' => 'Logo overlay',
+                'title' => 'Hero logo overlay',
                 'id' => 105100107,
                 'content' => [
                     'main' => '',

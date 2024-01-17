@@ -51,7 +51,6 @@ const screens = {
     'md': '576px',
     'lg': '732px',
     'xl': '888px',
-    'xxl': '1044px',
     '2xl': '1044px',
     '3xl': '1200px',
     'mt': '780px', // Adjust this based on the top menu width
@@ -113,16 +112,14 @@ module.exports = {
         },
         extend: {
             colors: baseColors,
-            maxWidth: {
+            maxWidth: ({ theme }) => ({
                 'half': '50%',
-                'screen-xxxl': screens.xxxl,
-            },
+                'screen-3xl': theme('screens.3xl'),
+            }),
             padding: {
                 '3/4': '75%',
                 '16/9': '56.35%',
                 'hero': '36.3%',
-                'hero-medium': '29.3%',
-                'hero-skinny': '16.667%',
                 'full': '100%',
                 'portrait' : '133%',
             },
@@ -133,21 +130,35 @@ module.exports = {
                 '17': '4.25rem',
                 '19': '4.75rem',
             },
+            height: {
+                'hero-skinny': '18.75vw',
+                'hero': '36.25vw',
+            },
+            maxHeight: {
+                'hero-skinny': '250px',
+                'hero': '600px',
+            },
             minHeight: {
-                'hero': '36.3vw',
+                'hero': '600px',
+            },
+            borderWidth: {
+                '12' : '12px',
             },
             dropShadow: {
                 'px': '0 1px 1px rgba(12, 84, 73, 0.5)',
             },
             boxShadow: {
                 'white': '0 7px 0 '+ twColors.white +', 0 14px 0 '+ twColors.white,
-                'grey': '0 7px 0 '+ twColors.gray +', 0 14px 0 '+ twColors.gray,
+                'gray': '0 7px 0 '+ twColors.gray +', 0 14px 0 '+ twColors.gray,
             },
             opacity: {
                 '65': '.65',
             },
             aspectRatio: {
                 'portrait': '3 / 4',
+            },
+            transitionProperty: {
+                'height': 'height'
             },
         },
     },

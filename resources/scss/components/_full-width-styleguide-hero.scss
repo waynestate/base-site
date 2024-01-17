@@ -1,0 +1,21 @@
+.full-width-styleguide-hero .hero {
+    &__title {
+        @apply text-5xl xl:text-7xl mb-4 italic font-light;
+
+        em {
+            @apply text-gold font-bold;
+        }
+    }
+
+    &__content {
+        @apply mb-4;
+
+        .button {
+            @apply xl:py-4;
+
+            @media only screen and (max-width: 576px) {
+                @apply bg-green text-white hover:bg-green-700 focus:bg-green-700;
+            }
+        }
+    }
+}
