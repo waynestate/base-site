@@ -180,16 +180,6 @@
                 "relative_url": "/styleguide/catalog",
                 "submenu": []
             },
-            "120100": {
-                "menu_item_id": 120100,
-                "is_active": 1,
-                "page_id": 120100,
-                "target": "",
-                "display_name": "Content",
-                "class_name": "",
-                "relative_url": "/styleguide/content",
-                "submenu": []
-            },
             "109100": {
                 "menu_item_id": 109100,
                 "is_active": 1,

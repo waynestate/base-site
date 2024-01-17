@@ -137,13 +137,16 @@ class ChildpageWithComponentsController extends Controller
                 ],
             ],
 
-            'content-row-1' => [
+            'promo-row-1' => [
                 'data' => app(GenericPromo::class)->create(1, false, [
-                    'title' => 'Content row',
+                    'youtube_id' => '',
+                    'relative_url' => '',
+                    'link' => '',
+                    'title' => 'No image content - promo row',
                     'description' => '<p>Example placement of an introductory paragraph describing the information laid out in the accordion below.</p><p>This is a separate promo group using the "content row" component. Below this is a different promo group with the accordion data and no component heading specified.</p>',
                 ]),
                 'component' => [
-                    'filename' => 'content-row',
+                    'filename' => 'promo-row',
                 ],
             ],
 
@@ -218,7 +221,7 @@ class ChildpageWithComponentsController extends Controller
                 ],
             ],
 
-            'promo-row-1' => [
+            'promo-row-2' => [
                 'data' => app(GenericPromo::class)->create(2, false),
                 'component' => [
                     'heading' => 'Promo row with alternating image position',

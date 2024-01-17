@@ -5,7 +5,7 @@
     <{{ !empty($item['link']) ? 'a href='.$item['link'] : 'div' }} class="{{ !empty($item['link']) ? 'group' : '' }}">
         <blockquote class="flex gap-x-6 border-0 m-0 p-0 relative">
             <div class="flex flex-wrap content-center w-full">
-                <div class="content text-black w-full text-lg md:text-xl lg:leading-relaxed">
+                <div class="content text-black w-full text-lg md:text-xl lg:leading-relaxed mb-4">
                     @if(!empty($item['description']) && !empty($component['showDescription']) && $component['showDescription'] === true)
                         {!! (!empty($item['link']) ? preg_replace(array('"<a href(.*?)>"', '"</a>"'), array('',''), $item['description']) : $item['description']) !!}
                     @else

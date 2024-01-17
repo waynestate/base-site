@@ -47,16 +47,29 @@ class FullWidthController extends Controller
                     'filename' => 'hero',
                 ],
             ],
+
             'icons_row_1' => [
                 'data' => app(Icon::class)->create(6, false, [
                     'excerpt' => '',
                 ]),
                 'component' => [
-                    'heading' => 'Icon row',
-                    'filename' => 'iconw-row',
+                    'filename' => 'icons-row',
                     'columns' => 2,
                 ],
             ],
+
+            'icons_row_2' => [
+                'data' => app(Icon::class)->create(4, false, [
+                    'link' => '',
+                    'description' => '',
+                ]),
+                'component' => [
+                    'heading' => 'Facts',
+                    'filename' => 'icons-top-row',
+                    'columns' => 4,
+                ],
+            ],
+
             'button_row_1' => [
                 'data' => app(Button::class)->create(3, false, [
                 ]),
@@ -65,6 +78,7 @@ class FullWidthController extends Controller
                     'filename' => 'button-row',
                 ],
             ],
+
             'catalog_1' => [
                 'data' => app(GenericPromo::class)->create(3, false, [
                     'description' => '',
@@ -110,7 +124,7 @@ class FullWidthController extends Controller
             'news_row' => [
                 'data' => app(Article::class)->create(4, false),
                 'component' => [
-                    'heading' => 'Base news',
+                    'heading' => 'Featured news',
                     'filename' => 'news-row',
                 ],
             ],
@@ -118,7 +132,7 @@ class FullWidthController extends Controller
             'events_column' => [
                 'data' => app(Event::class)->create(4, false),
                 'component' => [
-                    'heading' => 'Base events',
+                    'heading' => 'Special events',
                     'filename' => 'events-column',
                     'calendar_url' => '/myurl'
                 ],
@@ -149,11 +163,11 @@ class FullWidthController extends Controller
                 ],
             ],
 
-            'spotlight' => [
+            'spotlight_column' => [
                 'data' => app(Spotlight::class)->create(2, false),
                 'component' => [
                     'heading' => 'Spotlight',
-                    'filename' => 'spotlight-row',
+                    'filename' => 'spotlight-column',
                     'showDescription' => true,
                 ],
             ],
@@ -161,7 +175,7 @@ class FullWidthController extends Controller
             'promo_row_1' => [
                 'data' => app(GenericPromo::class)->create(2, false),
                 'component' => [
-                    'heading' => 'Promo row with alternating image position',
+                    'heading' => 'Featured section',
                     'filename' => 'promo-row',
                     'imagePosition' => 'alternate',
                 ],
@@ -174,9 +188,9 @@ class FullWidthController extends Controller
                 ]),
                 'component' => [
                     'heading' => 'Highlights',
-                    'filename' => 'promo-column',
+                    'filename' => 'catalog',
                     'columns' => '3',
-                    'showDescription' => false
+                    'showDescription' => false,
                 ],
             ],
 
@@ -188,6 +202,20 @@ class FullWidthController extends Controller
                 'component' => [
                     'heading' => 'Button column',
                     'filename' => 'button-column',
+                ],
+            ],
+
+            'promo_row_2' => [
+                'data' => app(GenericPromo::class)->create(2, false, [
+                    'relative_url' => '',
+                    'link' => '',
+                    'excerpt' => '',
+                    'youtube_id' => '',
+                    'description' => '<p>'.$this->faker['faker']->paragraph(13).'</p><p>'.$this->faker['faker']->paragraph(13).'</p>',
+                ]),
+                'component' => [
+                    'filename' => 'promo-row',
+                    'columns' => '2',
                 ],
             ],
         ];
