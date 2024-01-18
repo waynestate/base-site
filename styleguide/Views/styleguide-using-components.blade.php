@@ -127,8 +127,7 @@ Promo row component only.
                 <tr>
                     <td class="font-bold">imageSize</td>
                     <td>
-                        w-1/4' : 'md:w-2/5
-Uses a small 1/4 width or large 2/5 width.<br />
+Uses a small (25%) width or large (40%) width.<br />
 Small or large; large is default.<br />
 Promo row component only.
                     </td>
