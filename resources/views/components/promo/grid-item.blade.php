@@ -9,7 +9,7 @@
             @if(!empty($item['relative_url']))
                 @image($item['relative_url'], $item['filename_alt_text'], "lazy block w-full")
             @else
-                @image('//i.wayne.edu/youtube/'.$item['youtube_id'].'/max', $item['filename_alt_text'], "lazy block w-full")
+                @image('//i.wayne.edu/youtube/'.$item['youtube_id'].'/max', $item['title'], "lazy block w-full")
             @endif
         </div>
     @elseif(!empty($item['relative_url']))

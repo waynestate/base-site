@@ -12,7 +12,7 @@
                     @if(!empty($item['relative_url']))
                         @image($item['relative_url'], $item['filename_alt_text'], "w-full lazy")
                     @else
-                        @image('//i.wayne.edu/youtube/'.$item['youtube_id'].'/max', $item['filename_alt_text'], "w-full lazy")
+                        @image('//i.wayne.edu/youtube/'.$item['youtube_id'].'/max', $item['title'], "w-full lazy")
                     @endif
                 </div>
             @elseif(!empty($item['relative_url']))
