@@ -248,6 +248,14 @@ class ChildpageWithComponentsController extends Controller
                     'filename' => 'button-column',
                 ],
             ],
+
+            'page-content' => [
+                'data' => '',
+                'component' => [
+                    'filename' => 'page-content',
+                ]
+
+            ]
         ];
 
         if(!empty($components['components'])) {

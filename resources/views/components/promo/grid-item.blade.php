@@ -7,17 +7,17 @@
     @if(!empty($item['youtube_id']))
         <div class="play-video-button">
             @if(!empty($item['relative_url']))
-                @image($item['relative_url'], $item['filename_alt_text'], "lazy block w-full")
+                @image($item['relative_url'], $item['filename_alt_text'], "lazy block w-full mb-2")
             @else
-                @image('//i.wayne.edu/youtube/'.$item['youtube_id'].'/max', $item['title'], "lazy block w-full")
+                @image('//i.wayne.edu/youtube/'.$item['youtube_id'].'/max', $item['title'], "lazy block w-full mb-2")
             @endif
         </div>
     @elseif(!empty($item['relative_url']))
-        @image($item['relative_url'], $item['filename_alt_text'], "lazy block w-full")
+        @image($item['relative_url'], $item['filename_alt_text'], "lazy block w-full mb-2")
     @endif
 
     <div class="w-full {{ !empty($component['gradientOverlay']) && $component['gradientOverlay'] === true ? 'bg-gradient-darkest absolute inset-x-0 bottom-0' : '' }}">
-        <div class="content {{ !empty($component['gradientOverlay']) && $component['gradientOverlay'] === true ? 'white-links text-white relative p-4 pt-14 drop-shadow-px' : '' }}">
+        <div class="content {{ !empty($component['gradientOverlay']) && $component['gradientOverlay'] === true ? 'white-links text-white relative p-4 pt-20 drop-shadow-px' : '' }}">
             @if(!empty($item['youtube_id']) || !empty($item['relative_url']))
                 <div class="my-1 font-bold {{ !empty($component['columns']) ? ($component['columns'] < 4 ? 'text-lg' : 'text-base') : 'text-xl' }} group-hover:underline group-focus:underline leading-snug xl:leading-tight">
                     {{ $item['title'] }}

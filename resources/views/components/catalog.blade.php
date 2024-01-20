@@ -31,13 +31,13 @@
         @endforeach
     @else
         @if(!empty($component['columns']) && $component['columns'] == 1)
-            <div class="grid gap-8 mt-6">
+            <div class="grid gap-8">
                 @foreach($data as $item)
                     @include('components/promo/list-item', [$component['imageSize'] = 'small'])
                 @endforeach
             </div>
         @else
-            <div class="grid gap-8 mt-6 {{ !empty($component['columns']) && $component['columns'] % 2 == 0 ? (count($data) >= 4 ? ' sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-'.($component['columns']) : ' md:grid-cols-'.$component['columns']) : (count($data) >= 3 ? ' sm:grid-cols-1 md:grid-cols-3' : ' md:grid-cols-'.$component['columns']) }}"> 
+            <div class="grid gap-8 {{ !empty($component['columns']) && $component['columns'] % 2 == 0 ? (count($data) >= 4 ? ' sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-'.($component['columns']) : ' md:grid-cols-'.$component['columns']) : (count($data) >= 3 ? ' sm:grid-cols-1 md:grid-cols-3' : ' md:grid-cols-'.$component['columns']) }}"> 
                 @foreach($data as $item)
                     @include('components/promo/grid-item')
                 @endforeach

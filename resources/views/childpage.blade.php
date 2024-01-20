@@ -3,9 +3,11 @@
 @section('content')
     @include('components.page-title', ['title' => $base['page']['title']])
 
-    <div class="content">
-        {!! $base['page']['content']['main'] !!}
-    </div>
+    @if(empty($components['page-content']))
+        <div class="content">
+            {!! $base['page']['content']['main'] !!}
+        </div>
+    @endif
 
     @if(!empty($components))
         <div class="grid grid-cols-1 md:grid-cols-2 items-start gap-y-8 sm:gap-x-4 lg:gap-x-8 mt-8 mb-4">

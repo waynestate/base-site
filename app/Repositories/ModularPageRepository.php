@@ -120,6 +120,17 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 }
                 $modularComponents[$name]['data'] = $articles['articles'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
+            } elseif(Str::startsWith($name, 'page-content')) {
+                if(!empty($components['components'][$name]['filename'])) {
+                    $modularComponents[$name]['data'][0]['title'] = $components['components'][$name]['filename'];
+                    $modularComponents[$name]['component'] = $components['components'][$name];
+                }
+            } elseif(Str::startsWith($name, 'page-heading')) {
+                if(!empty($components['components'][$name]['heading'])) {
+                    $modularComponents[$name]['data'][0]['title'] = $components['components'][$name]['heading'];
+                    $modularComponents[$name]['component'] = $components['components'][$name];
+                    unset($modularComponents[$name]['component']['heading']);
+                }
             } else {
                 $modularComponents[$name]['data'] = $promos[$name]['data'] ?? [];
                 $modularComponents[$name]['component'] = $promos[$name]['component'] ?? [];
