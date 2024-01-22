@@ -24,9 +24,9 @@ class IconsController extends Controller
     public function index(Request $request): View
     {
         $request->data['base']['page']['content']['main'] = '
-<ul class="grid gap-y-2">
-    <li><strong>Purpose:</strong> The "icons" component is an effective way to present a list of promotional items accompanied by icons, offering a visually appealing and informative display.</li>
-    <li><strong>Visual representation:</strong> Utilize this component to showcase content that can easily be associated with icons. Icons can represent different types of content, providing a quick visual cue for users.</li>
+<ul>
+    <li><strong>Purpose:</strong> Present a list of promotional items accompanied by icons, offering a visually appealing and informative display.</li>
+    <li><strong>Visual representation:</strong> Showcase content that can easily be associated with icons. Icons can represent different types of content, providing a quick visual cue for users.</li>
     <li><strong>Enhanced readability:</strong> Icons complement textual information by offering a visual reference, aiding users in quickly identifying and differentiating between various items or content categories within the list.</li>
     <li><strong>Customization:</strong> Tailor the icons to align with the respective content. For instance, if highlighting various academic disciplines or departments, you can customize the icons to align with each field of study. Ensure consistency in icon design for better comprehension.</li>
     <li><strong>Accessibility:</strong> Clarity in icon representation: Ensure icons are clear and easily recognizable, even at smaller sizes, to maintain accessibility for users who might rely on screen readers or have visual impairments.</li>
