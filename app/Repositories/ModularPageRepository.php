@@ -156,11 +156,14 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 // Last item cannot have comma at the end of it
                 $value = preg_replace('(,})', '}', $value);
 
-                //if(Str::isJson($value)) { // this isn't working, integers are considered json with this
                 if(Str::startsWith($value, '{')) {
                     $components[$name] = json_decode($value, true);
                     if(!empty($components[$name]['config'])) {
                         $config = explode('|', $components[$name]['config']);
+                        // Add youtube
+                        if(strpos($components[$name]['config'], 'youtube') === false) {
+                            array_push($config, 'youtube');
+                        }
                         foreach($config as $key => $value) {
                             if(Str::startsWith($value, 'page_id')) {
                                 $config[$key] = 'page_id:'.$data['page']['id'];

@@ -25,7 +25,13 @@ class SpotlightController extends Controller
     public function index(Request $request): View
     {
         $request->data['base']['page']['content']['main'] = '
-<p>Single promo item for a quote with a citation and image.</p>
+<p>Utilize a spotlight to highlight a compelling quote from a student, a prominent figure within the university or an influential source.</p>
+<h3> Content placement and timing</h3>
+<ul>
+    <li><strong>Strategic placement:</strong> Determine strategic placement within the webpage layout, perhaps near the top of a landing page or within a prominent section that receives high traffic.</li>
+    <li><strong>Rotational or static display:</strong> You may choose to have a many spotlights in rotation, or a static spotlight if the highlighted content doesn\'t frequently change.</li>
+</ul>
+
 ';
 
         $promotion_group_details = '

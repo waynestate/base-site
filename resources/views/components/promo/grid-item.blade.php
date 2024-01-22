@@ -3,18 +3,20 @@
     $item => array // ['title', 'link', 'description', 'excerpt', 'relative_url', 'option']
 --}}
 
-<{{ !empty($item['link']) ? 'a href='.$item['link'] : 'div' }} class="block {{ !empty($component['gradientOverlay']) && $component['gradientOverlay'] === true ? 'bg-green-800 relative overflow-hidden' : '' }} {{ !empty($item['link']) ? 'group' : '' }}">
-    @if(!empty($item['youtube_id']))
-        <div class="play-video-button">
-            @if(!empty($item['relative_url']))
-                @image($item['relative_url'], $item['filename_alt_text'], "lazy block w-full mb-2")
-            @else
-                @image('//i.wayne.edu/youtube/'.$item['youtube_id'].'/max', $item['title'], "lazy block w-full mb-2")
-            @endif
-        </div>
-    @elseif(!empty($item['relative_url']))
-        @image($item['relative_url'], $item['filename_alt_text'], "lazy block w-full mb-2")
-    @endif
+<{{ !empty($item['link']) ? 'a href='.$item['link'] : 'div' }} class="block {{ !empty($component['gradientOverlay']) && $component['gradientOverlay'] === true ? 'bg-green-800 relative overflow-hidden' : '' }} {{ !empty($item['link']) ? 'group' : '' }} {{ $loop->last != true && !empty($component['filename']) && $component['filename'] != 'catalog' ? 'mt-6 mb-8' : '' }}">
+    <div class="{{ !empty($component['gradientOverlay']) ? '' : 'mb-2' }}">
+        @if(!empty($item['youtube_id']))
+            <div class="play-video-button">
+                @if(!empty($item['relative_url']))
+                    @image($item['relative_url'], $item['filename_alt_text'], "lazy block w-full")
+                @else
+                    @image('//i.wayne.edu/youtube/'.$item['youtube_id'].'/max', $item['title'], "lazy block w-full")
+                @endif
+            </div>
+        @elseif(!empty($item['relative_url']))
+            @image($item['relative_url'], $item['filename_alt_text'], "lazy block w-full")
+        @endif
+    </div>
 
     <div class="w-full {{ !empty($component['gradientOverlay']) && $component['gradientOverlay'] === true ? 'bg-gradient-darkest absolute inset-x-0 bottom-0' : '' }}">
         <div class="content {{ !empty($component['gradientOverlay']) && $component['gradientOverlay'] === true ? 'white-links text-white relative p-4 pt-20 drop-shadow-px' : '' }}">

@@ -33,7 +33,19 @@ class CatalogController extends Controller
     public function index(Request $request): View
     {
         $request->data['base']['page']['content']['main'] = '
-<p>Display a grid or listing of items from a single promo group.</p>
+<ul>
+    <li><strong>Purpose:</strong> The catalog component is ideal for showcasing a collection of items from a single promo group in a multiple-column grid or single-column list format.</li>
+    <li><strong>Visual presentation:</strong> Display items such as program highlights, courses, or any categorized content in a grid or list layout. The grid can feature thumbnail images with brief descriptions, while the list format might include more detailed information per item.</li>
+    <li><strong>Customization:</strong> Tailor the catalog\'s appearance to suit your needs by adjusting the number of columns and items displayed per row.</li>
+    <li><strong>Linking and detail views:</strong> Enable users to click on individual items within the catalog to access detailed information about each item. This might include a dedicated page for a specific catalog item providing comprehensive details, images, and a call-to-action for further engagement.
+</ul>
+<h2>Use cases</h2>
+<ul>
+    <li><strong>Program highlights:</strong> Feature unique aspects of programs, such as lab experiences, hands-on projects, cutting-edge industry equipment, or collaborations with industry partners. Each catalog item can include a description highlighting these program-specific highlights, giving insight into the program\'s strengths and distinguishing features.</li>
+    <li><strong>Course listings:</strong> Display courses available within a program, department, or semester, allowing students to explore offerings and find detailed information about each course.</li>
+    <li><strong>Service offerings:</strong> Showcase different services provided by the university, allowing users to explore and access detailed information about each service.</li>
+    <li><strong>Student success stories:</strong> Showcase successful projects, research, or initiatives undertaken by students within different programs.</li>
+</ul>
 ';
         $component_configuration = '
 <table>
