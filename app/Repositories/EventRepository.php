@@ -56,4 +56,43 @@ class EventRepository implements EventRepositoryContract
 
         return $events;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEventsFullListing($site_id, $limit = 4)
+    {
+        $params = [
+            'method' => 'calendar.events.fulllisting',
+            'site' => $site_id,
+            'limit' => 50,
+            'end_date' => date('Y-m-d', strtotime('+6 month')),
+        ];
+
+        $events['events'] = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params, $limit) {
+            $this->wsuApi->nextRequestProduction();
+
+            $events_listing = $this->wsuApi->sendRequest($params['method'], $params);
+
+            if (!empty($events_listing['events'])) {
+                $events = collect($events_listing['events'])
+                    ->map(function ($event) {
+                        if (!empty($event['images'])) {
+                            $event['display_image'] = collect($event['images'])->first();
+                        } else {
+                            $event['display_image']['full_url'] = "https://wayne.edu/opengraph/wsu-social-share-square.jpg";
+                            $event['display_image']['description'] = "Event on wayne.edu";
+                        }
+
+                        return $event;
+                    })
+                    ->take($limit ?? 4)
+                    ->toArray();
+            }
+
+            return $events ?? [];
+        });
+
+        return $events;
+    }
 }

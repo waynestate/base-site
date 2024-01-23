@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Faker\Factory;
 use Factories\Event;
+use Factories\EventFullListing;
 
 class EventListingController extends Controller
 {
@@ -41,6 +42,7 @@ class EventListingController extends Controller
         <tr>
             <td>
                 <pre class="w-full">modular-events-column-1</pre>
+                <pre class="w-full">modular-events-featured-column-1</pre>
                 <pre class="w-full">modular-events-row-1</pre>
             </td>
             <td>
@@ -81,6 +83,13 @@ All available configurations
                 'component' => [
                     'heading' => 'Events column',
                     'filename' => 'events-column',
+                ],
+            ],
+            'events-featured-column-1' => [
+                'data' => app(EventFullListing::class)->create(4, false),
+                'component' => [
+                    'heading' => 'Featured events column',
+                    'filename' => 'events-featured-column',
                 ],
             ],
             'events-row-1' => [

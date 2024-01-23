@@ -100,7 +100,11 @@ class ModularPageRepository implements ModularPageRepositoryContract
         foreach($components['components'] as $name => $component) {
             if(Str::startsWith($name, 'events')) {
                 $components['components'][$name]['id'] = $component['id'] ?? $data['site']['id'];
-                $events = $this->event->getEvents($component['id'] ?? $data['site']['id']);
+                if(strpos($name, 'featured') != false) {
+                    $events = $this->event->getEventsFullListing($component['id'] ?? $data['site']['id'], $limit ?? 4);
+                } else {
+                    $events = $this->event->getEvents($component['id'] ?? $data['site']['id']);
+                }
                 $modularComponents[$name]['data'] = $events['events'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
                 if (empty($modularComponents[$name]['component']['cal_name']) && !empty($data['site']['events']['path'])) {
