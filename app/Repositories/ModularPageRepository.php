@@ -120,25 +120,17 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 }
                 $modularComponents[$name]['data'] = $articles['articles'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
-            } elseif(Str::startsWith($name, 'page-content')) {
-                if(!empty($components['components'][$name]['filename'])) {
-                    $modularComponents[$name]['data'][0]['title'] = $components['components'][$name]['filename'];
-                    $modularComponents[$name]['component'] = $components['components'][$name];
-                }
+            } elseif(Str::startsWith($name, 'page-content') || Str::startsWith($name, 'page-heading')) {
+                // If there's JSON but no news, events or promo data, assign the component array as data
+                // Page-content and page-heading components
+                $modularComponents[$name]['data'][] = $components['components'][$name] ?? [];
+                $modularComponents[$name]['component'] = $components['components'][$name] ?? [];
+                unset($modularComponents[$name]['component']['heading']);
             } else {
-                if(empty($promos[$name]['data']) || empty($promos[$name]['component'])) {
-                    // If there's JSON but no news, events or promo data, assign the component array as data
-                    // Page-content and page-heading components
-                    $modularComponents[$name]['data'][] = $components['components'][$name] ?? [];
-                    $modularComponents[$name]['component'] = $components['components'][$name] ?? [];
-                    unset($modularComponents[$name]['component']['heading']);
-                } else {
-                    $modularComponents[$name]['data'] = $promos[$name]['data'] ?? [];
-                    $modularComponents[$name]['component'] = $promos[$name]['component'] ?? [];
-                }
+                $modularComponents[$name]['data'] = $promos[$name]['data'] ?? [];
+                $modularComponents[$name]['component'] = $promos[$name]['component'] ?? [];
             }
         }
-        dump($modularComponents);
 
         return $modularComponents;
     }

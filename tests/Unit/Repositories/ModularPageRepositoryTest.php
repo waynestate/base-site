@@ -93,6 +93,28 @@ final class ModularPageRepositoryTest extends TestCase
     }
 
     #[Test]
+    public function get_modular_page_components_page_heading_and_page_content(): void
+    {
+        // Create a fake data request
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'ChildpageController',
+            ],
+            'data' => [
+                'modular-page-content' => '{}',
+                'modular-page-heading' => '{"heading": "Test"}',
+            ],
+        ]);
+
+        // Run the promos through the repository
+        $components = app(ModularPageRepository::class)->getModularComponents($data);
+
+        $this->assertArrayHasKey('data', $components['page-content']);
+        $this->assertArrayHasKey('heading', $components['page-heading']['data'][0]);
+        $this->assertTrue(empty($components['page-heading']['component']['heading']));
+    }
+
+    #[Test]
     public function get_modular_page_components_with_json_array_should_not_have_singleview_excerpt_and_description(): void
     {
         $page_id = $this->faker->numberbetween(10, 50);
