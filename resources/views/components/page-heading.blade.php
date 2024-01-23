@@ -5,6 +5,6 @@
     }
 --}}
 
-@foreach ($data as $heading)
-    <h2 class="mt-0 -mb-3">{{ $heading['title'] }}</h2>
+@foreach ($data as $item)
+    <h2 class="mt-0 -mb-3">{{ $item['heading'] }}</h2>
 @endforeach

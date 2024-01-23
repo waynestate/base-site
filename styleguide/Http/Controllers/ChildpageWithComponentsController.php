@@ -158,6 +158,17 @@ class ChildpageWithComponentsController extends Controller
                 ],
             ],
 
+            'page-heading-1' => [
+                'data' => [
+                    0 => [
+                        'heading' => 'News',
+                    ],
+                ],
+                'component' => [
+                    'filename' => 'page-heading',
+                ],
+            ],
+
             'promo-column-1' => [
                 'data' => app(GenericPromo::class)->create(1, false, [
                     'title' => 'Featured article (promo column)',
@@ -174,15 +185,24 @@ class ChildpageWithComponentsController extends Controller
             'news-column' => [
                 'data' => app(Article::class)->create(3, false),
                 'component' => [
-                    'heading' => 'Base news',
                     'filename' => 'news-column',
+                ],
+            ],
+
+            'page-heading-2' => [
+                'data' => [
+                    0 => [
+                        'heading' => 'Events',
+                    ],
+                ],
+                'component' => [
+                    'filename' => 'page-heading',
                 ],
             ],
 
             'events-column' => [
                 'data' => app(Event::class)->create(4, false),
                 'component' => [
-                    'heading' => 'Base events',
                     'filename' => 'events-column',
                     'calendar_url' => '/myurl'
                 ],
