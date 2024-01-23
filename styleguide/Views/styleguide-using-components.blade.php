@@ -6,9 +6,9 @@
     <div class="content">
         {!! $base['page']['content']['main'] !!}
 
-        <p>You can display multiple data sets, like promo groups, events, and news, on a single page by adding custom page fields for each component. The available components are listed in this menu.</p>
-        <p>To add multiple components of the same type, like two accordions on a page, you will need to increment the number in the page field; i.e. <code>modular-accordion-1</code>, <code>modular-accordion-2</code></p>
-        <p class="mb-8">To change the order of the components, you will need to copy and paste your data in the correct order until we develop a better way to rearrange page fields.</p>
+        <p>Using components empowers the web team with greater flexibility to achieve diverse web objectives. You can display multiple data sets—like promo groups, events and news—on a single page by adding custom page fields for each component. The available components are listed in this menu.</p>
+        <p>For adding multiple components of the same type (e.g., two accordions on a page), simply increase the number in the page field. For instance, use <code>modular-accordion-1</code> and <code>modular-accordion-2</code> to include two accordions.</p>
+        <p>As for changing the order of components, the current method involves manually copying and pasting data in the desired sequence. We're actively working on a more efficient way to rearrange page fields, streamlining the process for easier reordering.</p>
 
         <h2>Configuring components</h2>
         <p>You will use a JSON array paired with your page field to configure each component. The specifics of each component can be found on the individual component page from the menu.</p>
@@ -127,8 +127,7 @@ Promo row component only.
                 <tr>
                     <td class="font-bold">imageSize</td>
                     <td>
-                        w-1/4' : 'md:w-2/5
-Uses a small 1/4 width or large 2/5 width.<br />
+Uses a small (25%) width or large (40%) width.<br />
 Small or large; large is default.<br />
 Promo row component only.
                     </td>
@@ -175,12 +174,4 @@ Events components only.
             </tbody>
         </table>
     </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 items-start gap-y-8 sm:gap-x-4 lg:gap-x-8 mt-8 mb-4">
-        <div class="col-span-full">
-            <h2 class="mt-0">{{ $catalog_1['component']['heading'] }}</h2>
-            @include('components/catalog', ['data' => $catalog_1['data'], 'component' => $catalog_1['component']])
-        </div>
-    </div>
-
 @endsection

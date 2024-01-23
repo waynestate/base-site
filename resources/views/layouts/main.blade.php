@@ -35,7 +35,7 @@
     @endif
 </header>
 
-<div id="panel">
+<div id="panel" class="site-theme">
     @yield('content-area')
 </div>
 

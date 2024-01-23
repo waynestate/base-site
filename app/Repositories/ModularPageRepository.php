@@ -120,6 +120,12 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 }
                 $modularComponents[$name]['data'] = $articles['articles'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
+            } elseif(Str::startsWith($name, 'page-content') || Str::startsWith($name, 'page-heading')) {
+                // If there's JSON but no news, events or promo data, assign the component array as data
+                // Page-content and page-heading components
+                $modularComponents[$name]['data'][] = $components['components'][$name] ?? [];
+                $modularComponents[$name]['component'] = $components['components'][$name] ?? [];
+                unset($modularComponents[$name]['component']['heading']);
             } else {
                 $modularComponents[$name]['data'] = $promos[$name]['data'] ?? [];
                 $modularComponents[$name]['component'] = $promos[$name]['component'] ?? [];
@@ -145,11 +151,14 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 // Last item cannot have comma at the end of it
                 $value = preg_replace('(,})', '}', $value);
 
-                //if(Str::isJson($value)) { // this isn't working, integers are considered json with this
                 if(Str::startsWith($value, '{')) {
                     $components[$name] = json_decode($value, true);
                     if(!empty($components[$name]['config'])) {
                         $config = explode('|', $components[$name]['config']);
+                        // Add youtube
+                        if(strpos($components[$name]['config'], 'youtube') === false) {
+                            array_push($config, 'youtube');
+                        }
                         foreach($config as $key => $value) {
                             if(Str::startsWith($value, 'page_id')) {
                                 $config[$key] = 'page_id:'.$data['page']['id'];

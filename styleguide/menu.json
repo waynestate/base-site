@@ -357,7 +357,7 @@
                 "is_active": 1,
                 "page_id": 101109,
                 "target": "",
-                "display_name": "Full width content area",
+                "display_name": "Custom full-width",
                 "class_name": "",
                 "relative_url": "/styleguide/fullwidth",
                 "submenu": []

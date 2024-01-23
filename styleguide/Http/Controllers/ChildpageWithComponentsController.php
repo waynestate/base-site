@@ -21,7 +21,8 @@ class ChildpageWithComponentsController extends Controller
     public function index(Request $request): View
     {
         $request->data['base']['page']['content']['main'] = '
-<p>Childpage with example components.</p>
+<h2 class="mt-0">Page body</h2>
+<p>This an example of CMS page content on a childpage with components, moved to the placement of a page field.</p>
 ';
         $component_configuration = '
 <table>
@@ -157,6 +158,17 @@ class ChildpageWithComponentsController extends Controller
                 ],
             ],
 
+            'page-heading-1' => [
+                'data' => [
+                    0 => [
+                        'heading' => 'News',
+                    ],
+                ],
+                'component' => [
+                    'filename' => 'page-heading',
+                ],
+            ],
+
             'promo-column-1' => [
                 'data' => app(GenericPromo::class)->create(1, false, [
                     'title' => 'Featured article (promo column)',
@@ -173,15 +185,24 @@ class ChildpageWithComponentsController extends Controller
             'news-column' => [
                 'data' => app(Article::class)->create(3, false),
                 'component' => [
-                    'heading' => 'Base news',
                     'filename' => 'news-column',
+                ],
+            ],
+
+            'page-heading-2' => [
+                'data' => [
+                    0 => [
+                        'heading' => 'Events',
+                    ],
+                ],
+                'component' => [
+                    'filename' => 'page-heading',
                 ],
             ],
 
             'events-column' => [
                 'data' => app(Event::class)->create(4, false),
                 'component' => [
-                    'heading' => 'Base events',
                     'filename' => 'events-column',
                     'calendar_url' => '/myurl'
                 ],
@@ -248,6 +269,17 @@ class ChildpageWithComponentsController extends Controller
                     'filename' => 'button-column',
                 ],
             ],
+
+            'page-content' => [
+                'data' => [
+                    0 => [
+                        'title' => 'Page content',
+                    ]
+                ],
+                'component' => [
+                    'filename' => 'page-content',
+                ]
+            ]
         ];
 
         if(!empty($components['components'])) {
