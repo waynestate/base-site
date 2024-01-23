@@ -190,6 +190,16 @@
                 "relative_url": "/styleguide/eventlisting",
                 "submenu": []
             },
+            "122100": {
+                "menu_item_id": 122100,
+                "is_active": 1,
+                "page_id": 122100,
+                "target": "",
+                "display_name": "Heading",
+                "class_name": "",
+                "relative_url": "/styleguide/headingcomponent",
+                "submenu": []
+            },
             "105100": {
                 "menu_item_id": 105100,
                 "is_active": 1,
@@ -279,6 +289,16 @@
                 "display_name": "Icons",
                 "class_name": "",
                 "relative_url": "/styleguide/iconscomponent",
+                "submenu": []
+            },
+            "123100": {
+                "menu_item_id": 123100,
+                "is_active": 1,
+                "page_id": 123100,
+                "target": "",
+                "display_name": "Page content",
+                "class_name": "",
+                "relative_url": "/styleguide/components/pagecontent",
                 "submenu": []
             },
             "108100": {

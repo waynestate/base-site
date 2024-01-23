@@ -158,14 +158,14 @@ class ChildpageWithComponentsController extends Controller
                 ],
             ],
 
-            'page-heading-1' => [
+            'heading-1' => [
                 'data' => [
                     0 => [
                         'heading' => 'News',
                     ],
                 ],
                 'component' => [
-                    'filename' => 'page-heading',
+                    'filename' => 'heading',
                 ],
             ],
 
@@ -189,14 +189,14 @@ class ChildpageWithComponentsController extends Controller
                 ],
             ],
 
-            'page-heading-2' => [
+            'heading-2' => [
                 'data' => [
                     0 => [
                         'heading' => 'Events',
                     ],
                 ],
                 'component' => [
-                    'filename' => 'page-heading',
+                    'filename' => 'heading',
                 ],
             ],
 

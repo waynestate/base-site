@@ -102,7 +102,7 @@ final class ModularPageRepositoryTest extends TestCase
             ],
             'data' => [
                 'modular-page-content' => '{}',
-                'modular-page-heading' => '{"heading": "Test"}',
+                'modular-heading' => '{"heading": "Test"}',
             ],
         ]);
 
@@ -110,8 +110,8 @@ final class ModularPageRepositoryTest extends TestCase
         $components = app(ModularPageRepository::class)->getModularComponents($data);
 
         $this->assertArrayHasKey('data', $components['page-content']);
-        $this->assertArrayHasKey('heading', $components['page-heading']['data'][0]);
-        $this->assertTrue(empty($components['page-heading']['component']['heading']));
+        $this->assertArrayHasKey('heading', $components['heading']['data'][0]);
+        $this->assertTrue(empty($components['heading']['component']['heading']));
     }
 
     #[Test]
