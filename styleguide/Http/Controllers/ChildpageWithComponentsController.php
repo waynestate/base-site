@@ -21,7 +21,8 @@ class ChildpageWithComponentsController extends Controller
     public function index(Request $request): View
     {
         $request->data['base']['page']['content']['main'] = '
-<p>Childpage with example components.</p>
+<h2 class="mt-0">Page body</h2>
+<p>This an example of CMS page content on a childpage with components, moved to the placement of a page field.</p>
 ';
         $component_configuration = '
 <table>
@@ -250,11 +251,14 @@ class ChildpageWithComponentsController extends Controller
             ],
 
             'page-content' => [
-                'data' => '',
+                'data' => [
+                    0 => [
+                        'title' => 'Page content',
+                    ]
+                ],
                 'component' => [
                     'filename' => 'page-content',
                 ]
-
             ]
         ];
 

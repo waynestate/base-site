@@ -16,6 +16,7 @@
         <ul>
             <li><strong>Purpose:</strong> Facilitate easy navigation to pages not within one step of the menu or to resources not within the website but relevant to the page content.</li>
             <li><strong>Examples:</strong> "Schedule appointment" "Make a payment," "Check application status," "Program requirements" etc.</li>
+            <li><strong>Note:</strong> On mobile, the under-menu buttons are inserted beneath the first paragraph.</li>
         </ul>
 
         <h2>Guidelines for button usage</h2>
