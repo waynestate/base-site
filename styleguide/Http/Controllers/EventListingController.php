@@ -24,6 +24,9 @@ class EventListingController extends Controller
      */
     public function index(Request $request): View
     {
+        $request->data['base']['page']['content']['main'] = '
+<p>Adding events from the events calendar. Featured event components display images uploaded to each event.</p>
+            ';
         $components['components'] = [
             'accordion-1' => [
                 'data' => [
@@ -44,6 +47,7 @@ class EventListingController extends Controller
                 <pre class="w-full">modular-events-column-1</pre>
                 <pre class="w-full">modular-events-featured-column-1</pre>
                 <pre class="w-full">modular-events-row-1</pre>
+                <pre class="w-full">modular-events-featured-row-1</pre>
             </td>
             <td>
 Use default settings
@@ -83,20 +87,33 @@ All available configurations
                 'component' => [
                     'heading' => 'Events column',
                     'filename' => 'events-column',
+                    'cal_name' => '#'
                 ],
             ],
             'events-featured-column-1' => [
-                'data' => app(EventFullListing::class)->create(4, false),
+                'data' => app(EventFullListing::class)->create(3, false),
                 'component' => [
                     'heading' => 'Featured events column',
                     'filename' => 'events-featured-column',
+                    'cal_name' => '#'
                 ],
             ],
             'events-row-1' => [
-                'data' => app(Event::class)->create(4, false),
+                'data' => app(EventFullListing::class)->create(4, false),
                 'component' => [
                     'heading' => 'Events row',
                     'filename' => 'events-row',
+                    'columns' => 2,
+                    'cal_name' => '#'
+                ],
+            ],
+            'events-featured-row-1' => [
+                'data' => app(EventFullListing::class)->create(4, false),
+                'component' => [
+                    'heading' => 'Featured events row',
+                    'filename' => 'events-featured-row',
+                    'columns' => 4,
+                    'cal_name' => '#'
                 ],
             ],
         ];

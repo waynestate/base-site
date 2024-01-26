@@ -36,8 +36,9 @@ class EventRepository implements EventRepositoryContract
         $params = [
             'method' => 'calendar.events.listing',
             'site' => $site_id,
-            'limit' => $limit ?? 4,
-            'end_date' => $end_date ?? date('Y-m-d', strtotime('+6 month')),
+            'limit' => $limit,
+            'start_date' => date('Y-m-d', strtotime('+1 month')),
+            'end_date' => date('Y-m-d', strtotime('+6 month')),
         ];
 
         $events['events'] = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
@@ -66,7 +67,7 @@ class EventRepository implements EventRepositoryContract
             'method' => 'calendar.events.fulllisting',
             'site' => $site_id,
             'limit' => 50,
-            'end_date' => date('Y-m-d', strtotime('+6 month')),
+            'end_date' => $end_date ?? date('Y-m-d', strtotime('+6 month')),
         ];
 
         $events['events'] = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params, $limit) {
@@ -86,7 +87,7 @@ class EventRepository implements EventRepositoryContract
 
                         return $event;
                     })
-                    ->take($limit ?? 4)
+                    ->take($limit)
                     ->toArray();
             }
 

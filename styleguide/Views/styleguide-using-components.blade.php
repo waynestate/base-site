@@ -75,21 +75,23 @@ Use "youtube" when you are putting a video url in the promo link field to popula
                     <td>
 Define how many columns the component will display.<br />
 1 to 4 columns is recommended.<br />
-Use with the catalog, button row, and news components.
+Use with the catalog, button row, icon row, events row, and news row components.
                     </td>
                 </tr>
                 <tr>
                     <td class="font-bold">singlePromoView</td>
                     <td>
 Creates a link to a detailed page of a single promo item, like a Spotlight.<br />
-True or false; false is default and will use the promotion's link field if it is set.
+True or false; false is default and will use the promotion's link field if it is set.<br />
+Use with the catalog, spoltight, promo row, promo column, and icon components.
                     </td>
                 </tr>
                 <tr>
                     <td class="font-bold">showExcerpt</td>
                     <td>
 Show or hide the promo's excerpt.<br />
-True or false; true is default.
+True or false; true is default.<br />
+Use with the catalog, spoltight, promo row, promo column, and icon components.
                     </td>
                 </tr>
                 <tr>
@@ -97,7 +99,8 @@ True or false; true is default.
                     <td>
 Show or hide the promo's description.<br />
 True or false; true is default.<br />
-Commonly used in conjunction with "singlePromoView" where the description is hidden from the catalog but displayed on the detailed promo page.
+Commonly used in conjunction with "singlePromoView" where the description is hidden from the catalog but displayed on the detailed promo page.<br />
+Use with the catalog, spoltight, promo row, promo column, and icon components.
                     </td>
                 </tr>
                 <tr>
@@ -105,7 +108,7 @@ Commonly used in conjunction with "singlePromoView" where the description is hid
                     <td>
 Moves the title, excerpt and/description on top of the image with a gradient for contrast.<br />
 True or false; false is default.<br />
-Single promo and catalog components only.
+Promo row, promo column, and catalog components only.
                     </td>
                 </tr>
                 <tr>
@@ -148,6 +151,14 @@ News and Events only.
                     </td>
                 </tr>
                 <tr>
+                    <td class="font-bold">news_route</td>
+                    <td>
+Change the url path for news items. Example: "/facultynews"<br />
+Null default; Example: "/facultynews"<br />
+News components only.
+                    </td>
+                </tr>
+                <tr>
                     <td class="font-bold">featured</td>
                     <td>
 Display only the articles that have a specific featured image uploaded in the news manager.<br />
@@ -169,6 +180,44 @@ News components only.
 The relative url to your calendar that the "more events" link goes to, i.e. "main/".<br />
 Defaults to the site's selected calendar.<br />
 Events components only.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>All available components</h3>
+        <table class="mt-2">
+            <thead>
+                <tr>
+                    <th>Page field name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+<ul class="columns-2">
+    <li>modular-accordion-1</li>
+    <li>modular-button-column-1</li>
+    <li>modular-button-row-1</li>
+    <li>modular-catalog-1</li>
+    <li>modular-events-column-1</li>
+    <li>modular-events-featured-column-1</li>
+    <li>modular-events-featured-row-1</li>
+    <li>modular-events-row-1</li>
+    <li>modular-heading-1</li>
+    <li>modular-hero-1</li>
+    <li>modular-icons-column-1</li>
+    <li>modular-icons-row-1</li>
+    <li>modular-icons-top-row-1</li>
+    <li>modular-news-column-1</li>
+    <li>modular-news-featured-column-1</li>
+    <li>modular-news-row-1</li>
+    <li>modular-page-content</li>
+    <li>modular-promo-column-1</li>
+    <li>modular-promo-row-1</li>
+    <li>modular-spotlight-column-1</li>
+    <li>modular-spotlight-row-1</li>
+</ul>
                     </td>
                 </tr>
             </tbody>

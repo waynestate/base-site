@@ -81,7 +81,7 @@ You might use this area on a singe promo view page and hide it from the catalog 
 {
 "id":000000,
 "heading":"Promo column",
-"config":"page_id|randomize|limit:1|youtube",
+"config":"randomize|limit:1|youtube",
 "singlePromoView":true,
 "showExcerpt":true,
 "showDescription":false,
@@ -99,7 +99,7 @@ You might use this area on a singe promo view page and hide it from the catalog 
 {
 "id":000000,
 "heading":"Promo row",
-"config":"page_id|randomize|limit:1|youtube",
+"config":"randomize|limit:1|youtube",
 "singlePromoView":true,
 "showExcerpt":true,
 "showDescription":false,

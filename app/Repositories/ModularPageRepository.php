@@ -100,10 +100,11 @@ class ModularPageRepository implements ModularPageRepositoryContract
         foreach($components['components'] as $name => $component) {
             if(Str::startsWith($name, 'events')) {
                 $components['components'][$name]['id'] = $component['id'] ?? $data['site']['id'];
-                if(strpos($name, 'featured') != false) {
-                    $events = $this->event->getEventsFullListing($component['id'] ?? $data['site']['id'], $limit ?? 4);
+                $limit = $components['components'][$name]['limit'] ?? 4;
+                if(strpos($name, 'events-column') !== false) {
+                    $events = $this->event->getEvents($component['id'] ?? $data['site']['id'], $limit);
                 } else {
-                    $events = $this->event->getEvents($component['id'] ?? $data['site']['id']);
+                    $events = $this->event->getEventsFullListing($component['id'] ?? $data['site']['id'], $limit);
                 }
                 $modularComponents[$name]['data'] = $events['events'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
@@ -112,15 +113,15 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 }
             } elseif(Str::startsWith($name, 'news')) {
                 $components['components'][$name]['id'] = $component['id'] ?? $data['site']['news']['application_id'];
-                $components['components'][$name]['limit'] = $component['limit'] ?? 4;
+                $limit = $component['limit'] ?? 4;
                 $components['components'][$name]['news_route'] = $component['news_route'] ?? config('base.news_listing_route');
                 if (!empty($component['featured']) && $component['featured'] === true) {
                     $articles = $this->article->listing($components['components'][$name]['id'], 50, 1, $component['topics'] ?? []);
                     $articles['articles']['data'] = collect($articles['articles']['data'])->filter(function ($article) {
                         return !empty($article['featured']['featured']) && $article['featured']['featured'] === 1;
-                    })->take($component['limit'] ?? 4)->toArray();
+                    })->take($limit)->toArray();
                 } else {
-                    $articles = $this->article->listing($components['components'][$name]['id'], $component['limit'] ?? 4, 1, $component['topics'] ?? []);
+                    $articles = $this->article->listing($components['components'][$name]['id'], $limit, 1, $component['topics'] ?? []);
                 }
                 $modularComponents[$name]['data'] = $articles['articles'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];

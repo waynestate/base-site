@@ -17,7 +17,7 @@ class EventListing extends Page
                 'title' => 'Events listing',
                 'id' => 109100,
                 'content' => [
-                    'main' => '<p>Adding events from the events calendar to your page.</p>',
+                    'main' => '',
                 ],
             ],
         ]);

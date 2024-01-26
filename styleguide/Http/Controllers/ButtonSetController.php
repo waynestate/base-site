@@ -84,7 +84,7 @@ class ButtonSetController extends Controller
 {
 "id":000000,
 "heading":"Buttons",
-"config":"page_id|limit:3"
+"config":"limit:3"
 }
 </pre>
             </td>
@@ -98,7 +98,7 @@ class ButtonSetController extends Controller
 {
 "id":000000,
 "heading":"Buttons",
-"config":"page_id|limit:3",
+"config":"limit:3",
 "columns":3
 }
 </pre>
