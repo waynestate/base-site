@@ -314,6 +314,33 @@ final class ModularPageRepositoryTest extends TestCase
     }
 
     #[Test]
+    public function get_modular_page_events_full_listing(): void
+    {
+        // Create a fake data request
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'ChildpageController',
+            ],
+            'data' => [
+                'modular-events-featured-column-1' => json_encode([
+                    'id' => 1,
+                    'cal_name' => '',
+                ]),
+            ],
+        ]);
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn([]);
+
+        // Run the promos through the repository
+        $modularComponents = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
+        $component = collect($modularComponents['events-featured-column-1']['data'])->first();
+
+        $this->assertArrayHasKey('display_image', $component);
+    }
+
+    #[Test]
     public function get_all_modular_page_config_options(): void
     {
         $page_id = $this->faker->numberbetween(10, 50);
