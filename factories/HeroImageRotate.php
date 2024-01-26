@@ -29,7 +29,7 @@ class HeroImageRotate implements FactoryContract
                 'filename_alt_text' => 'Example background image',
                 'secondary_relative_url' => '/styleguide/image/400x250?text=Secondary%20image%20('.$i.')',
                 'secondary_alt_text' => 'Example secondary image',
-                'option' => $this->faker->randomElement(['Text Overlay', 'Half', 'Logo Overlay', '']),
+                'option' => $this->faker->randomElement(['Text Overlay', 'Half', 'Logo Overlay', 'Banner large']),
             ];
 
             $data[$i] = array_replace_recursive($data[$i], $options);

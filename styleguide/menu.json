@@ -207,16 +207,16 @@
                 "target": "",
                 "display_name": "Hero image",
                 "class_name": "",
-                "relative_url": "/styleguide/hero/banner",
+                "relative_url": "/styleguide/hero/bannersmall",
                 "submenu": {
                     "105100108": {
                         "menu_item_id": 105100108,
                         "is_active": 1,
                         "page_id": 105100108,
                         "target": "",
-                        "display_name": "Banner",
+                        "display_name": "Banner small",
                         "class_name": "",
-                        "relative_url": "/styleguide/hero/banner",
+                        "relative_url": "/styleguide/hero/bannersmall",
                         "submenu": []
                     },
                     "105100103": {
@@ -224,9 +224,9 @@
                         "is_active": 1,
                         "page_id": 105100103,
                         "target": "",
-                        "display_name": "Full width",
+                        "display_name": "Banner large",
                         "class_name": "",
-                        "relative_url": "/styleguide/hero/full",
+                        "relative_url": "/styleguide/hero/bannerlarge",
                         "submenu": []
                     },
                     "105100104": {

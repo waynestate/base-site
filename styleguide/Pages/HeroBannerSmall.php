@@ -4,11 +4,8 @@ namespace Styleguide\Pages;
 
 use Factories\Page as PageFactory;
 
-class HeroBanner extends Page
+class HeroBannerSmall extends Page
 {
-    /** {@inheritdoc} **/
-    public $path = '/styleguide/hero/banner';
-
     /**
      * {@inheritdoc}
      */
@@ -17,7 +14,7 @@ class HeroBanner extends Page
         return app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'HeroController',
-                'title' => 'Hero banner',
+                'title' => 'Hero banner small',
                 'id' => 105100108,
                 'content' => [
                     'main' => '',
