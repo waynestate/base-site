@@ -55,19 +55,16 @@ final class EventRepositoryTest extends TestCase
     public function getting_events_full_listing(): void
     {
         // Expected events to be returned
-        $expected = app(Event::class)->create(2);
-
-        // Maniuplate events to mimic the API return since they aren't grouped yet
-        $return['events'] = collect($expected)->flatten(1)->toArray();
+        $return['events'] = app(EventFullListing::class)->create(4);
 
         // Mock the connector and set the return
         $wsuApi = Mockery::mock(Connector::class);
-        $wsuApi->shouldReceive('sendRequest')->with('calendar.events.listing', Mockery::type('array'))->once()->andReturn($return);
+        $wsuApi->shouldReceive('sendRequest')->with('calendar.events.fulllisting', Mockery::type('array'))->once()->andReturn($return);
         $wsuApi->shouldReceive('nextRequestProduction')->once();
 
         // Get the events
-        $events = app(EventRepository::class, ['wsuApi' => $wsuApi])->getEvents($this->faker->randomDigit());
+        $events = app(EventRepository::class, ['wsuApi' => $wsuApi])->getEventsFullListing($this->faker->randomDigit());
 
-        $this->assertEquals($expected, $events['events']);
+        $this->assertEquals($return, $events);
     }
 }
