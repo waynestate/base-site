@@ -23,8 +23,12 @@ class EventFullListing implements FactoryContract
         for ($i = 1; $i <= $limit; $i++) {
             $date = $this->faker->dateTimeBetween('+10 days', '+15 days')->format('Y-m-d');
             $title = $this->faker->sentence(rand(6, 10));
-            $image = $this->faker->randomElement(['/styleguide/image/600x600?text=600x600:'.$i, '']);
+            $imagex = $this->faker->randomElement([
+                '/styleguide/image/600x600?text=600x600:'.$i, 
+                ''
+            ]);
             $description = $this->faker->text(100);
+            $image = '/styleguide/image/600x600?text=600x600:'.$i;
 
             $event = [
                 'event_id' => $i,
@@ -36,8 +40,10 @@ class EventFullListing implements FactoryContract
                 'repeat_end_date' => $this->faker->dateTimeBetween('+1 month', '+2 months')->format('Y-m-d'),
                 'end_date' => $this->faker->dateTimeBetween('+10 days', '+15 days')->format('Y-m-d'),
                 'images' => [
-                    'full_url' => $image,
-                    'description' => $description,
+                    0 => [
+                        'full_url' => $image,
+                        'description' => $description,
+                    ],
                 ],
                 'display_image' => [
                     'full_url' => $image,

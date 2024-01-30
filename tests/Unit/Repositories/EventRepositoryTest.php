@@ -67,4 +67,33 @@ final class EventRepositoryTest extends TestCase
 
         $this->assertEquals($return, $events);
     }
+
+    #[Test]
+    public function getting_events_full_listing_missing_image(): void
+    {
+        // Expected events to be returned
+        $return['events'] = app(EventFullListing::class)->create(1, false, [
+            'display_image' => [
+                'full_url' => 'https://wayne.edu/opengraph/wsu-social-share-square.jpg',
+                'description' => 'Event on wayne.edu'
+            ],
+            'images' => [
+                0 => [
+                    'full_url' => 'https://wayne.edu/opengraph/wsu-social-share-square.jpg',
+                    'description' => 'Event on wayne.edu'
+                ],
+            ],
+        ]);
+
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('calendar.events.fulllisting', Mockery::type('array'))->once()->andReturn($return);
+        $wsuApi->shouldReceive('nextRequestProduction')->once();
+
+        // Get the events
+        $events = app(EventRepository::class, ['wsuApi' => $wsuApi])->getEventsFullListing($this->faker->randomDigit());
+
+        $this->assertEquals($return, $events);
+    }
 }
