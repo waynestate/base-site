@@ -190,6 +190,16 @@
                 "relative_url": "/styleguide/eventlisting",
                 "submenu": []
             },
+            "122100": {
+                "menu_item_id": 122100,
+                "is_active": 1,
+                "page_id": 122100,
+                "target": "",
+                "display_name": "Heading",
+                "class_name": "",
+                "relative_url": "/styleguide/headingcomponent",
+                "submenu": []
+            },
             "105100": {
                 "menu_item_id": 105100,
                 "is_active": 1,
@@ -197,16 +207,16 @@
                 "target": "",
                 "display_name": "Hero image",
                 "class_name": "",
-                "relative_url": "/styleguide/hero/banner",
+                "relative_url": "/styleguide/hero/bannersmall",
                 "submenu": {
                     "105100108": {
                         "menu_item_id": 105100108,
                         "is_active": 1,
                         "page_id": 105100108,
                         "target": "",
-                        "display_name": "Banner",
+                        "display_name": "Banner small",
                         "class_name": "",
-                        "relative_url": "/styleguide/hero/banner",
+                        "relative_url": "/styleguide/hero/bannersmall",
                         "submenu": []
                     },
                     "105100103": {
@@ -214,9 +224,9 @@
                         "is_active": 1,
                         "page_id": 105100103,
                         "target": "",
-                        "display_name": "Full width",
+                        "display_name": "Banner large",
                         "class_name": "",
-                        "relative_url": "/styleguide/hero/full",
+                        "relative_url": "/styleguide/hero/bannerlarge",
                         "submenu": []
                     },
                     "105100104": {
@@ -279,6 +289,16 @@
                 "display_name": "Icons",
                 "class_name": "",
                 "relative_url": "/styleguide/iconscomponent",
+                "submenu": []
+            },
+            "123100": {
+                "menu_item_id": 123100,
+                "is_active": 1,
+                "page_id": 123100,
+                "target": "",
+                "display_name": "Page content",
+                "class_name": "",
+                "relative_url": "/styleguide/components/pagecontent",
                 "submenu": []
             },
             "108100": {

@@ -3,7 +3,7 @@
     $item => array // ['title', 'link', 'description', 'excerpt', 'relative_url', 'option']
 --}}
 
-<{{ !empty($item['link']) ? 'a href='.$item['link'] : 'div' }} class="block {{ !empty($component['imageSize']) && $component['imageSize'] === 'small' ? 'flex items-start' : 'md:flex xl:items-center' }} gap-x-3 lg:gap-x-6 {{ !empty($item['link']) ? 'group' : '' }} {{ $loop->last != true && !empty($component['filename']) && $component['filename'] != 'catalog' ? 'mt-6 mb-8' : '' }}">
+<{{ !empty($item['link']) ? 'a href='.$item['link'] : 'div' }} class="block {{ !empty($component['imageSize']) && $component['imageSize'] === 'small' ? 'flex items-start' : 'md:flex xl:items-center' }} gap-x-3 lg:gap-x-6 {{ !empty($item['link']) ? 'group' : '' }} {{ $loop->iteration > 1 && !empty($component['filename']) && $component['filename'] != 'catalog' ? 'mt-6' : '' }}">
     @if(!empty($item['youtube_id']) || !empty($item['relative_url']))
         <div class="shrink-0 grow-0 {{ !empty($component['imageSize']) && $component['imageSize'] === 'small' ? 'w-1/4' : 'md:w-2/5' }}  
             @if(!empty($component['imagePosition']) && ($component['imagePosition'] === 'right' || ($component['imagePosition'] === 'alternate' && $loop->even))) md:order-2 @endif">

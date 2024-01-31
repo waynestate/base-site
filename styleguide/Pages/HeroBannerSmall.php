@@ -4,7 +4,7 @@ namespace Styleguide\Pages;
 
 use Factories\Page as PageFactory;
 
-class EventListing extends Page
+class HeroBannerSmall extends Page
 {
     /**
      * {@inheritdoc}
@@ -13,9 +13,9 @@ class EventListing extends Page
     {
         return app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'EventListingController',
-                'title' => 'Events listing',
-                'id' => 109100,
+                'controller' => 'HeroController',
+                'title' => 'Hero banner small',
+                'id' => 105100108,
                 'content' => [
                     'main' => '',
                 ],

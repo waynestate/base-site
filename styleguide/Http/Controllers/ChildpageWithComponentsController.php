@@ -16,7 +16,7 @@ use Factories\Video;
 class ChildpageWithComponentsController extends Controller
 {
     /**
-     * Display the banner at the top of the page.
+     * Display a childpage using components.
      */
     public function index(Request $request): View
     {
@@ -108,7 +108,7 @@ class ChildpageWithComponentsController extends Controller
             'hero-1' => [
                 'data' => app(HeroImage::class)->create(1, false, [
                     'relative_url' => '/styleguide/image/3200x600',
-                    'option' => 'banner',
+                    'option' => 'banner small',
                 ]),
                 'component' => [
                     'filename' => 'hero',
@@ -158,14 +158,14 @@ class ChildpageWithComponentsController extends Controller
                 ],
             ],
 
-            'page-heading-1' => [
+            'heading-1' => [
                 'data' => [
                     0 => [
                         'heading' => 'News',
                     ],
                 ],
                 'component' => [
-                    'filename' => 'page-heading',
+                    'filename' => 'heading',
                 ],
             ],
 
@@ -189,14 +189,14 @@ class ChildpageWithComponentsController extends Controller
                 ],
             ],
 
-            'page-heading-2' => [
+            'heading-2' => [
                 'data' => [
                     0 => [
                         'heading' => 'Events',
                     ],
                 ],
                 'component' => [
-                    'filename' => 'page-heading',
+                    'filename' => 'heading',
                 ],
             ],
 

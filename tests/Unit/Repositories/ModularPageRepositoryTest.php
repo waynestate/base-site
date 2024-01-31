@@ -13,6 +13,7 @@ use Tests\TestCase;
 use Mockery as Mockery;
 use Waynestate\Api\Connector;
 use Waynestate\Api\News;
+use Factories\EventFullListing;
 
 final class ModularPageRepositoryTest extends TestCase
 {
@@ -102,7 +103,7 @@ final class ModularPageRepositoryTest extends TestCase
             ],
             'data' => [
                 'modular-page-content' => '{}',
-                'modular-page-heading' => '{"heading": "Test"}',
+                'modular-heading' => '{"heading": "Test"}',
             ],
         ]);
 
@@ -110,8 +111,8 @@ final class ModularPageRepositoryTest extends TestCase
         $components = app(ModularPageRepository::class)->getModularComponents($data);
 
         $this->assertArrayHasKey('data', $components['page-content']);
-        $this->assertArrayHasKey('heading', $components['page-heading']['data'][0]);
-        $this->assertTrue(empty($components['page-heading']['component']['heading']));
+        $this->assertArrayHasKey('heading', $components['heading']['data'][0]);
+        $this->assertTrue(empty($components['heading']['component']['heading']));
     }
 
     #[Test]
@@ -311,6 +312,35 @@ final class ModularPageRepositoryTest extends TestCase
         $component = collect($modularComponents)->first();
 
         $this->assertTrue(!empty($component['component']['cal_name']));
+    }
+
+    #[Test]
+    public function get_modular_page_events_full_listing(): void
+    {
+        // Create a fake data request
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'ChildpageController',
+            ],
+            'data' => [
+                'modular-events-featured-column-1' => json_encode([
+                    'id' => 1,
+                ]),
+            ],
+        ]);
+
+        //$data['data']['components']['modular-events-featured-column-1']['data'] = app(EventFullListing::class)->create(4);
+        $events = app(EventFullListing::class)->create(4);
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn([]);
+
+        // Run the promos through the repository
+        $component = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
+
+        // TODO figure out how to get events to return with the component
+        $this->assertArrayHasKey('filename', $component['events-featured-column-1']['component']);
     }
 
     #[Test]

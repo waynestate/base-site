@@ -11,10 +11,10 @@ class ModularPageRepository extends Repository
     /**
      * {@inheritdoc}
      */
+    /*
     public function getModularComponents(array $data): array
     {
         $components = [];
-        /*
         $components = [
             'hero-1' => [
                 'data' => app(HeroImage::class)->create(1, false),
@@ -34,8 +34,8 @@ class ModularPageRepository extends Repository
                 ],
             ],
         ];
-         */
 
         return $components;
     }
+     */
 }

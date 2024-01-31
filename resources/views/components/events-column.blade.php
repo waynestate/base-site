@@ -29,10 +29,10 @@
                 </div>
             </li>
         @endforeach
-        @if($dates == end($data) && (!empty($component['cal_name']) || !empty($base['site']['events']['path'])))
-            <li class="flex -mx-2 ml-17">
-                <a href="//events.wayne.edu/{{ $component['cal_name'] ?? $base['site']['events']['path'].'main/' }}upcoming" class="hover:underline">{{ $component['link_text'] ?? 'More events' }}</a>
-            </li>
-        @endif
     @endforeach
 </ul>
+@if(!empty($component['cal_name']) || !empty($base['site']['events']['path']))
+    <div class="mt-4">
+        <a class="button" href="//events.wayne.edu/{{ $component['cal_name'] ?? $base['site']['events']['path'].'main/' }}upcoming">{{ $component['link_text'] ?? 'More events' }}</a>
+    </div>
+@endif

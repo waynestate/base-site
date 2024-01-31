@@ -40,38 +40,36 @@ class ArticleListingController extends Controller
     <tbody>
         <tr>
             <td>
-                <pre class="w-full">modular-news-column-1</pre>
+<pre class="w-full">modular-news-column-1</pre>
+<pre class="w-full">modular-news-featured-column-1</pre>
+<pre class="w-full">modular-news-row-1</pre>
             </td>
             <td>
+Use default settings
+
+<pre class="w-full" tabindex="0">
+{}
+</pre>
+
+Use default calendar by omitting ID and set other configuration items
+
 <pre class="w-full" tabindex="0">
 {
-"id":7,
+"heading": "News"
+}
+</pre>
+
+All available configurations
+<pre class="w-full" tabindex="0">
+{
+"id":0,
 "heading":"News",
 "link_text":"More news",
-"featured":null,
+"featured":true,
 "limit":4,
+"columns":4,
 "news_route":null,
 "topics":[]
-}
-</pre>
-Use default calendar by omitting ID and set other configuration items
-<pre class="w-full" tabindex="0">
-{
-"heading": "My news"
-}
-</pre>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <pre class="w-full">modular-news-row-1</pre>
-            </td>
-            <td>
-<pre class="w-full" tabindex="0">
-{
-"heading":"Featured news",
-"featured":true,
-"columns":4
 }
 </pre>
             </td>
@@ -91,6 +89,13 @@ Use default calendar by omitting ID and set other configuration items
                 'component' => [
                     'heading' => 'News column',
                     'filename' => 'news-column',
+                ],
+            ],
+            'news-featured-column-1' => [
+                'data' => app(Article::class)->create(4, false),
+                'component' => [
+                    'heading' => 'Featured news column',
+                    'filename' => 'news-featured-column',
                 ],
             ],
             'news-row-1' => [

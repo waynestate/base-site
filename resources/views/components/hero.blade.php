@@ -15,7 +15,7 @@
                 @if(!empty($hero['option']))
                     @include('components/hero/'.Str::slug($hero['option']))
                 @else
-                    @include('components/hero/default')
+                    @include('components/hero/banner-small')
                 @endif
             @endif
         @endforeach

@@ -42,8 +42,10 @@ class PromoRepository extends Repository
             101101 => app(HeroImage::class)->create(1, false),
             // Contained
             105100100 => app(HeroImage::class)->create(1, false),
-            // Full width
-            105100103 => app(HeroImage::class)->create(1, false),
+            // Banner large
+            105100103 => app(HeroImage::class)->create(1, false, [
+                'option' => 'Banner large',
+            ]),
             // Rotate
             105100104 => app(HeroImageRotate::class)->create(4, false),
             // Text overlay
@@ -60,9 +62,8 @@ class PromoRepository extends Repository
                 'option' => 'Logo Overlay',
                 'secondary_relative_url' => '/styleguide/image/600x250?text=600x250',
             ]),
-            // Banner
+            // Banner small
             105100108 => app(HeroImage::class)->create(1, false, [
-                'option' => 'Banner',
                 'relative_url' => '/styleguide/image/3200x600',
             ]),
             // Half
