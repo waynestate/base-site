@@ -81,8 +81,8 @@ class EventRepository implements EventRepositoryContract
                         if (!empty($event['images'])) {
                             $event['display_image'] = collect($event['images'])->first();
                         } else {
-                            $event['display_image']['full_url'] = "https://wayne.edu/opengraph/wsu-social-share-square.jpg";
-                            $event['display_image']['description'] = "Event on wayne.edu";
+                            $event['display_image']['full_url'] = 'https://wayne.edu/opengraph/wsu-social-share-square.jpg';
+                            $event['display_image']['description'] = 'Event on wayne.edu';
                         }
 
                         return $event;

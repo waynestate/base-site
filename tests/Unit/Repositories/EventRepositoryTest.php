@@ -7,6 +7,7 @@ use App\Repositories\EventRepository;
 use Factories\ApiError;
 use Factories\Event;
 use Factories\EventFullListing;
+use Factories\EventFullListingNoImage;
 use Tests\TestCase;
 use Mockery as Mockery;
 use Waynestate\Api\Connector;
@@ -72,28 +73,19 @@ final class EventRepositoryTest extends TestCase
     public function getting_events_full_listing_missing_image(): void
     {
         // Expected events to be returned
-        $return['events'] = app(EventFullListing::class)->create(1, false, [
-            'display_image' => [
-                'full_url' => 'https://wayne.edu/opengraph/wsu-social-share-square.jpg',
-                'description' => 'Event on wayne.edu'
-            ],
-            'images' => [
-                0 => [
-                    'full_url' => 'https://wayne.edu/opengraph/wsu-social-share-square.jpg',
-                    'description' => 'Event on wayne.edu'
-                ],
-            ],
-        ]);
-
+        $noimage['events'] = app(EventFullListingNoImage::class)->create(1);
 
         // Mock the connector and set the return
         $wsuApi = Mockery::mock(Connector::class);
-        $wsuApi->shouldReceive('sendRequest')->with('calendar.events.fulllisting', Mockery::type('array'))->once()->andReturn($return);
+        $wsuApi->shouldReceive('sendRequest')->with('calendar.events.fulllisting', Mockery::type('array'))->once()->andReturn($noimage);
         $wsuApi->shouldReceive('nextRequestProduction')->once();
+
 
         // Get the events
         $events = app(EventRepository::class, ['wsuApi' => $wsuApi])->getEventsFullListing($this->faker->randomDigit());
+        $event = collect($events['events'])->first();
 
-        $this->assertEquals($return, $events);
+        $this->assertTrue(!empty($event['display_image']['full_url']));
+        $this->assertTrue(!empty($event['display_image']['description']));
     }
 }
