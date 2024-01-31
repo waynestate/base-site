@@ -1,10 +1,10 @@
 {{--
-    $hero => array // ['relative_url', 'title', 'description', 'link']
+    $hero => array // ['filename_url', 'title', 'description', 'link']
 --}}
 
 <div class="hero__wrapper w-full relative xl:flex items-center">
     <div class="hero__primary-image w-full xl:w-[60%] shrink-0">
-        <div class="w-full aspect-video bg-center bg-cover{{ $loop->first !== true ? ' lazy' : '' }}" @if($loop->first === true) style="background-image: url('{{ $hero['relative_url'] }}')" @else data-src="{{ $hero['relative_url'] }}"@endif>
+        <div class="w-full aspect-video bg-center bg-cover{{ $loop->first !== true ? ' lazy' : '' }}" @if($loop->first === true) style="background-image: url('{{ $hero['filename_url'] }}')" @else data-src="{{ $hero['filename_url'] }}"@endif>
              <span class="visually-hidden">{{ $hero['filename_alt_text'] }}
         </div>
     </div>

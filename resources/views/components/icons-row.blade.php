@@ -5,7 +5,7 @@
     @foreach($data as $item)
         <li>
             <{{ !empty($item['link']) ? 'a href='.$item['link'] : 'div' }} class="flex items-start gap-x-4 {{ !empty($item['link']) ? 'group' : '' }}">
-                @image($item['relative_url'], $item['filename_alt_text'], 'grow-0 shrink-0 w-16 '.(!empty($component['columns']) && $component['columns'] >= 3 ? ' xl:w-16' : ' xl:w-20'))
+                @image($item['filename_url'], $item['filename_alt_text'], 'grow-0 shrink-0 w-16 '.(!empty($component['columns']) && $component['columns'] >= 3 ? ' xl:w-16' : ' xl:w-20'))
                 <div>
                     <div class="font-bold text-xl xl:text-2xl mt-0 mb-1 no-underline group-hover:underline">{{ $item['title'] }}</div>
                     @if(!empty($item['excerpt']))<div class="text-sm lg:text-base text-black">{{ $item['excerpt'] }}</div>@endif

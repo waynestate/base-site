@@ -1,26 +1,26 @@
 {{--
     This component's image is 1/4 width on small views
-    $item => array // ['title', 'link', 'description', 'excerpt', 'relative_url', 'option']
+    $item => array // ['title', 'link', 'description', 'excerpt', 'filename_url', 'option']
 --}}
 
 <{{ !empty($item['link']) ? 'a href='.$item['link'] : 'div' }} class="block {{ !empty($component['gradientOverlay']) && $component['gradientOverlay'] === true ? 'bg-green-800 relative overflow-hidden' : '' }} {{ !empty($item['link']) ? 'group' : '' }} {{ $loop->last != true && !empty($component['filename']) && $component['filename'] != 'catalog' ? 'mt-6 mb-8' : '' }}">
     <div class="{{ !empty($component['gradientOverlay']) ? '' : 'mb-2' }}">
         @if(!empty($item['youtube_id']))
             <div class="play-video-button">
-                @if(!empty($item['relative_url']))
-                    @image($item['relative_url'], $item['filename_alt_text'], "lazy block w-full")
+                @if(!empty($item['filename_url']))
+                    @image($item['filename_url'], $item['filename_alt_text'], "lazy block w-full")
                 @else
                     @image('//i.wayne.edu/youtube/'.$item['youtube_id'].'/max', $item['title'], "lazy block w-full")
                 @endif
             </div>
-        @elseif(!empty($item['relative_url']))
-            @image($item['relative_url'], $item['filename_alt_text'], "lazy block w-full")
+        @elseif(!empty($item['filename_url']))
+            @image($item['filename_url'], $item['filename_alt_text'], "lazy block w-full")
         @endif
     </div>
 
     <div class="w-full {{ !empty($component['gradientOverlay']) && $component['gradientOverlay'] === true ? 'bg-gradient-darkest absolute inset-x-0 bottom-0' : '' }}">
         <div class="content {{ !empty($component['gradientOverlay']) && $component['gradientOverlay'] === true ? 'white-links text-white relative p-4 pt-20 drop-shadow-px' : '' }}">
-            @if(!empty($item['youtube_id']) || !empty($item['relative_url']))
+            @if(!empty($item['youtube_id']) || !empty($item['filename_url']))
                 <div class="my-1 font-bold {{ !empty($component['columns']) ? ($component['columns'] < 4 ? 'text-lg' : 'text-base') : 'text-xl' }} group-hover:underline group-focus:underline leading-snug xl:leading-tight">
                     {{ $item['title'] }}
                 </div>
