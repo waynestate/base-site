@@ -131,11 +131,11 @@ module.exports = {
                 '19': '4.75rem',
             },
             height: {
-                'hero-skinny': '18.75vw',
+                'hero-small': '18.75vw',
                 'hero': '36.25vw',
             },
             maxHeight: {
-                'hero-skinny': '250px',
+                'hero-small': '250px',
                 'hero': '600px',
             },
             minHeight: {
