@@ -37,7 +37,6 @@ class EventRepository implements EventRepositoryContract
             'method' => 'calendar.events.listing',
             'site' => $site_id,
             'limit' => $limit,
-            'start_date' => date('Y-m-d', strtotime('+1 month')),
             'end_date' => date('Y-m-d', strtotime('+6 month')),
         ];
 
