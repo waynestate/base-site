@@ -47,17 +47,39 @@
         <h2>Unordered lists</h2>
 
         <ul>
-            <li>First</li>
-            <li>Second</li>
-            <li>Third</li>
+            <li>{{ $faker->sentence() }}</li>
+            <li>{{ $faker->sentence() }}</li>
+            <li>{{ $faker->sentence() }}</li>
+            <ul>
+                <li>{{ $faker->sentence() }}</li>
+                <li>{{ $faker->sentence() }}</li>
+                <ul>
+                    <li>{{ $faker->sentence() }}</li>
+                    <li>{{ $faker->sentence() }}</li>
+                </ul>
+            </ul>
+            <li>{{ $faker->sentence() }}</li>
+            <li>{{ $faker->sentence() }}</li>
+            <li>{{ $faker->sentence() }}</li>
         </ul>
 
         <h2>Ordered lists</h2>
 
         <ol>
-            <li>First</li>
-            <li>Second</li>
-            <li>Third</li>
+            <li>{{ $faker->sentence() }}</li>
+            <li>{{ $faker->sentence() }}</li>
+            <li>{{ $faker->sentence() }}</li>
+            <ol>
+                <li>{{ $faker->sentence() }}</li>
+                <li>{{ $faker->sentence() }}</li>
+                <ol>
+                    <li>{{ $faker->sentence() }}</li>
+                    <li>{{ $faker->sentence() }}</li>
+                </ol>
+            </ol>
+            <li>{{ $faker->sentence() }}</li>
+            <li>{{ $faker->sentence() }}</li>
+            <li>{{ $faker->sentence() }}</li>
         </ol>
 
         <h2>Blockquote</h2>

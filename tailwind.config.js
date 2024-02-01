@@ -158,7 +158,13 @@ module.exports = {
                 'portrait': '3 / 4',
             },
             transitionProperty: {
-                'height': 'height'
+                'height': 'height',
+            },
+            listStyleType: {
+                'circle':'circle',
+                'square':'square',
+                'lower-alpha':'lower-alpha',
+                'lower-roman':'lower-roman',
             },
         },
     },
