@@ -8,14 +8,14 @@
 
     ul {
         @apply ml-8 list-disc;
+    }
 
-        ul {
-            @apply mb-0 list-circle;
+    ul ul {
+        @apply mb-0 list-circle;
+    }
 
-            ul {
-                @apply mb-0 list-square;
-            }
-        }
+    ul ul ul {
+        @apply mb-0 list-square;
     }
 
     ol {
