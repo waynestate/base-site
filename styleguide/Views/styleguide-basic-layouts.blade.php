@@ -8,7 +8,7 @@
     </div>
 
     <div class="content">
-        <h2 class="my-4">Two equal columns</h2>
+        <h2 id="two-equal-columns" class="my-4">Two equal columns</h2>
         <h3 class="mb-0">Example columns with text</h3>
 
         <div class="grid-two-col-layout">
@@ -62,7 +62,7 @@
     <!-- Add more items to make a grid -->
 </div>') !!}
 </pre>
-        <h2 class="mt-10 my-4">Two columns image left</h2>
+        <h2 id="two-columns-image-left" class="mt-10 my-4">Two columns image left</h2>
 
         <div class="two-col-layout">
             <div class="md:w-1/3 flex-shrink-0">
@@ -84,7 +84,7 @@
     </div>
 </div>')!!}
 </pre>
-        <h2 class="mt-10 mb-4">Two columns image right</h2>
+        <h2 id="two-columns-image-right" class="mt-10 mb-4">Two columns image right</h2>
 
         <div class="two-col-layout">
             <div class="w-full">
@@ -107,7 +107,7 @@
 </div>')!!}
 </pre>
 
-        <h2 class="mt-10 mb-4">Two columns with a list</h2>
+        <h2 id="two-columns-with-a-list" class="mt-10 mb-4">Two columns with a list</h2>
         <div class="two-col-layout">
             <div class="w-full">
                 <p>{{ $faker->text(400) }}</p>
@@ -138,7 +138,7 @@
     </div>
 </div>') !!}
 </pre>
-        <h2 class="mt-10">Three equal columns</h2>
+        <h2 id="three-equal-columns" class="mt-10">Three equal columns</h2>
 
         <div class="grid-three-col-layout mt-4">
             <div>
