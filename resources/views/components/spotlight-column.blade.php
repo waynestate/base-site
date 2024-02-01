@@ -1,5 +1,5 @@
 {{--
-    $data => array // ['title', 'excerpt', 'description', 'filename_url', 'filename_alt_text', 'link']
+    $data => array // ['title', 'excerpt', 'description', 'relative_url', 'filename_alt_text', 'link']
 --}}
 @foreach($data as $item)
     <{{ !empty($item['link']) ? 'a href='.$item['link'] : 'div' }} class="{{ !empty($item['link']) ? 'group' : '' }}">
@@ -15,7 +15,7 @@
                 <div class="w-full flex items-center gap-x-2 mb-4">
                     <div class="w-20 lg:w-1/4 shrink-0">
                         <div class="rounded-full overflow-hidden w-full pt-full relative">
-                            @image($item['filename_url'], $item['filename_alt_text'], 'block inset-0 absolute z-10 w-full h-full object-cover')
+                            @image($item['relative_url'], $item['filename_alt_text'], 'block inset-0 absolute z-10 w-full h-full object-cover')
                         </div>
                     </div>
                     <cite class="not-italic">
