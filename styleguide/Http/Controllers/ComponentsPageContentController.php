@@ -14,20 +14,21 @@ class ComponentsPageContentController extends Controller
     public function index(Request $request): View
     {
         $request->data['base']['page']['content']['main'] = '
-<p style="margin-top: -1rem;">Move the CMS page content to the location of the <code>modular-page-content</code> page field.</p>
+<p style="margin-top: -1rem;">Move the CMS page content to the location of the <code>modular-page-content-row</code> or <code>modular-page-content-column</code> page field.</p>
 ';
 
         $component_configuration = '
 <table class="mt-2">
     <thead>
         <tr>
-            <th>Page field</th>
+            <th class="w-1/2">Page field</th>
             <th>Data</th>
         </tr>
     </thead>
     <tr>
         <td>
-<pre class="w-full">modular-page-content</pre>
+<pre class="w-full">modular-page-content-row</pre>
+<pre class="w-full">modular-page-content-column</pre>
         </td>
         <td>
 <pre class="w-full" tabindex="0">
@@ -39,14 +40,14 @@ class ComponentsPageContentController extends Controller
 ';
 
         $components['components'] = [
-            'page-content' => [
+            'page-content-row' => [
                 'data' => [
                     0 => [
                         'filename' => 'page-content',
                     ],
                 ],
                 'component' => [
-                    'filename' => 'page-content',
+                    'filename' => 'page-content-row',
                 ],
             ],
             'accordion-1' => [

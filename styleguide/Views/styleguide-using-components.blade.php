@@ -12,7 +12,7 @@
 
         <h2>Configuring components</h2>
         <p>You will use a JSON array paired with your page field to configure each component. The specifics of each component can be found on the individual component page from the menu.</p>
-        <h3>Example component configuration</h3>
+        <h3 id="example-component-configurations">Example component configuration</h3>
         <p>Adding this data set into your CMS page fields area will display your promo data as a catalog component.</p>  
         <table class="mt-2">
             <thead>
@@ -41,7 +41,7 @@
             </tbody>
         </table>
 
-        <h3>JSON data explained</h3>
+        <h3 id="json-data-explained">JSON data explained</h3>
         <p>Legend: <span class="text-[red]">*</span> Designates a required configuration.</p>
         <table class="mt-2">
             <thead>
@@ -185,7 +185,7 @@ Events components only.
             </tbody>
         </table>
 
-        <h3>All available components</h3>
+        <h3 id="all-available-components">All available components</h3>
         <table class="mt-2">
             <thead>
                 <tr>
@@ -212,7 +212,8 @@ Events components only.
     <li>modular-news-column-1</li>
     <li>modular-news-featured-column-1</li>
     <li>modular-news-row-1</li>
-    <li>modular-page-content</li>
+    <li>modular-page-content-row</li>
+    <li>modular-page-content-column</li>
     <li>modular-promo-column-1</li>
     <li>modular-promo-row-1</li>
     <li>modular-spotlight-column-1</li>

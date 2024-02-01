@@ -679,4 +679,52 @@ final class ModularPageRepositoryTest extends TestCase
 
         $this->assertTrue(!empty($components['catalog-1']['component']['columns']));
     }
+
+    #[Test]
+    public function replace_modular_page_relative_url_with_filename_if_on_base(): void
+    {
+        $page_id = $this->faker->numberbetween(10, 50);
+        $promo_group_id = $this->faker->numberbetween(1, 3);
+
+        // Fake return
+        $return['promotions'] = app(GenericPromo::class)->create(5, false, [
+            'relative_url' => '/promo/image.jpg',
+            'filename_url' => 'https://base.wayne.edu/promo/image.jpg',
+            'secondary_relative_url' => '/promo/image2.jpg',
+            'secondary_filename_url' => 'https://base.wayne.edu/promo/image2.jpg',
+            'promo_group_id' => $promo_group_id,
+            'page_id' => $page_id,
+            'group' => [
+                'promo_group_id' => $promo_group_id,
+            ],
+        ]);
+
+        // Create a fake data request
+        $data = app(Page::class)->create(1, true, [
+            'site' => [
+                'id' => 1561,
+            ],
+            'page' => [
+                'controller' => 'ChildpageController',
+                'id' => $page_id,
+            ],
+            'data' => [
+                'modular-promo-column-1' => json_encode([
+                    'id' => $promo_group_id,
+                    'config' => 'randomize|limit:2',
+                ]),
+            ],
+        ]);
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
+
+        // Run the promos through the repository
+        $components = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
+        $component = collect($components['promo-column-1']['data'])->first();
+
+        $this->assertTrue($component['relative_url'] === $component['filename_url']);
+        $this->assertTrue($component['secondary_relative_url'] === $component['secondary_filename_url']);
+    }
 }

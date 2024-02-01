@@ -10,8 +10,24 @@
         @apply ml-8 list-disc;
     }
 
+    ul ul {
+        @apply mb-0 list-circle;
+    }
+
+    ul ul ul {
+        @apply mb-0 list-square;
+    }
+
     ol {
         @apply ml-8 list-decimal;
+    }
+
+    ol ol {
+        @apply mb-0 list-lower-alpha;
+    }
+
+    ol ol ol {
+        @apply mb-0 list-lower-roman;
     }
 
     // Tailwind preflight sets images to block

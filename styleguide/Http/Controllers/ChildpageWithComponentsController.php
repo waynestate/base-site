@@ -270,14 +270,14 @@ class ChildpageWithComponentsController extends Controller
                 ],
             ],
 
-            'page-content' => [
+            'page-content-row' => [
                 'data' => [
                     0 => [
                         'title' => 'Page content',
                     ]
                 ],
                 'component' => [
-                    'filename' => 'page-content',
+                    'filename' => 'page-content-row',
                 ]
             ]
         ];
