@@ -95,7 +95,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
         }
 
         $components = $this->parseData($data);
-        $promos = $this->getPromos($components);
+        $promos = $this->getPromos($components, $data['site']['id'] ?? '');
 
         foreach($components['components'] as $name => $component) {
             if(Str::startsWith($name, 'events')) {
@@ -196,7 +196,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
         ];
     }
 
-    public function getPromos($components)
+    public function getPromos($components, $site_id)
     {
         $params = [
             'method' => 'cms.promotions.listing',
@@ -208,6 +208,21 @@ class ModularPageRepository implements ModularPageRepositoryContract
         $promos = $this->cache->remember($params['method'] . md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
+
+        // TODO Allowing the use of another site's promo items only from base
+        if (!empty($site_id) && $site_id === 1561) {
+            $promos['promotions'] = collect($promos['promotions'])->map(function ($promo) {
+                if (!empty($promo['filename_url'])) {
+                    $promo['relative_url'] = $promo['filename_url'];
+                }
+
+                if (!empty($promo['secondary_filename_url'])) {
+                    $promo['secondary_relative_url'] = $promo['secondary_filename_url'];
+                }
+
+                return $promo;
+            })->toArray();
+        }
 
         $promos = $this->parsePromos->parse($promos, $components['group_reference'], $components['group_config']);
 
