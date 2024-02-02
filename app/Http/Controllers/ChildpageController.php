@@ -45,8 +45,6 @@ class ChildpageController extends Controller
             $request->data['base']['hero'] = $components['components'][$hero_key]['data'];
 
             unset($components['components'][$hero_key]);
-
-            config(['base.hero_full_controllers' => ['ChildpageController']]);
         }
 
         return view('childpage', merge($request->data, $components));

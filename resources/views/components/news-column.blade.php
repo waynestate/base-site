@@ -14,5 +14,7 @@
         @endforeach
     </ul>
 
-    <a href="/{{ $component['news_route'] ?? config('base.news_listing_route') }}" class="block my-4 underline hover:no-underline">{{ $component['link_text'] ?? 'More news' }}</a>
+    <div class="mt-6">
+        <a href="/{{ !empty($base['site']['subsite-folder']) ?? '' }}{{ $component['news_route'] ?? config('base.news_listing_route') }}" class="button">{{ $component['link_text'] ?? 'More news' }}</a>
+    </div>
 @endif

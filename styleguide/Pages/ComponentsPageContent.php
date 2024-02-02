@@ -4,7 +4,7 @@ namespace Styleguide\Pages;
 
 use Factories\Page as PageFactory;
 
-class Banner extends Page
+class ComponentsPageContent extends Page
 {
     /**
      * {@inheritdoc}
@@ -13,9 +13,12 @@ class Banner extends Page
     {
         return app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'BannerController',
-                'title' => 'Banner',
-                'id' => 112100,
+                'controller' => 'ComponentsPageContentController',
+                'title' => 'Page content',
+                'id' => 123100,
+                'content' => [
+                    'main' => '',
+                ],
             ],
         ]);
     }

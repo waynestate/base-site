@@ -1,11 +1,11 @@
 {{--
-    $data => array // ['title', 'excerpt', 'description', 'filename_url', 'filename_alt_text', 'link']
+    $data => array // ['title', 'excerpt', 'description', 'relative_url', 'filename_alt_text', 'link']
 --}}
 @foreach($data as $item)
     <{{ !empty($item['link']) ? 'a href='.$item['link'] : 'div' }} class="{{ !empty($item['link']) ? 'group' : '' }}">
         <blockquote class="flex gap-x-6 border-0 m-0 p-0 relative">
             <div class="flex flex-wrap content-center w-full">
-                <div class="content text-black w-full text-lg md:text-xl lg:leading-relaxed">
+                <div class="content text-black w-full text-lg md:text-xl lg:leading-relaxed mb-4">
                     @if(!empty($item['description']) && !empty($component['showDescription']) && $component['showDescription'] === true)
                         {!! (!empty($item['link']) ? preg_replace(array('"<a href(.*?)>"', '"</a>"'), array('',''), $item['description']) : $item['description']) !!}
                     @else
@@ -16,7 +16,7 @@
                 <div class="w-full flex items-center lg:items-start gap-x-2 mb-4 lg:mb-2">
                     <div class="w-20 lg:w-1/4 lg:absolute top-0 right-0 shrink-0">
                         <div class="rounded-full overflow-hidden w-full pt-full relative">
-                            @image($item['filename_url'], $item['filename_alt_text'], 'block inset-0 absolute z-10 w-full h-full object-cover')
+                            @image($item['relative_url'], $item['filename_alt_text'], 'block inset-0 absolute z-10 w-full h-full object-cover')
                         </div>
                     </div>
                     <cite class="not-italic">

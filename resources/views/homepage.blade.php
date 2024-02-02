@@ -8,17 +8,17 @@
     </div>
 
     @if(!empty($articles['data']) || !empty($events))
-        <div class="row -mx-4 flex flex-wrap">
+        <div class="row md:flex gap-4 xl:gap-8">
             @if(!empty($articles['data']))
-                <div class="w-full md:w-1/2 px-4">
-                    <h2 class="mb-2">News</h2>
+                <div class="lg:w-1/2">
+                    <h2>News</h2>
                     @include('components/news-column', ['data' => $articles, 'url' => ($base['site']['subsite-folder'] !== null ? $base['site']['subsite-folder'] : '').config('base.news_listing_route').'/'])
                 </div>
             @endif
 
             @if(!empty($events))
-                <div class="w-full md:w-1/2 px-4">
-                    <h2 class="mb-2">Events</h2>
+                <div class="lg:w-1/2">
+                    <h2>Events</h2>
                     @include('components/events-column', ['data' => $events, 'cal_name' => !empty($base['site']['events']['path']) ? $base['site']['events']['path'] : null])
                 </div>
             @endif

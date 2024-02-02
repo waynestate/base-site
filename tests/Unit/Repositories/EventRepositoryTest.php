@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\Test;
 use App\Repositories\EventRepository;
 use Factories\ApiError;
 use Factories\Event;
+use Factories\EventFullListing;
+use Factories\EventFullListingNoImage;
 use Tests\TestCase;
 use Mockery as Mockery;
 use Waynestate\Api\Connector;
@@ -48,5 +50,42 @@ final class EventRepositoryTest extends TestCase
         $events = app(EventRepository::class, ['wsuApi' => $wsuApi])->getEvents($this->faker->randomDigit());
 
         $this->assertEquals($expected, $events['events']);
+    }
+
+    #[Test]
+    public function getting_events_full_listing(): void
+    {
+        // Expected events to be returned
+        $return['events'] = app(EventFullListing::class)->create(4);
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('calendar.events.fulllisting', Mockery::type('array'))->once()->andReturn($return);
+        $wsuApi->shouldReceive('nextRequestProduction')->once();
+
+        // Get the events
+        $events = app(EventRepository::class, ['wsuApi' => $wsuApi])->getEventsFullListing($this->faker->randomDigit());
+
+        $this->assertEquals($return, $events);
+    }
+
+    #[Test]
+    public function getting_events_full_listing_missing_image(): void
+    {
+        // Expected events to be returned
+        $noimage['events'] = app(EventFullListingNoImage::class)->create(1);
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('calendar.events.fulllisting', Mockery::type('array'))->once()->andReturn($noimage);
+        $wsuApi->shouldReceive('nextRequestProduction')->once();
+
+
+        // Get the events
+        $events = app(EventRepository::class, ['wsuApi' => $wsuApi])->getEventsFullListing($this->faker->randomDigit());
+        $event = collect($events['events'])->first();
+
+        $this->assertTrue(!empty($event['display_image']['full_url']));
+        $this->assertTrue(!empty($event['display_image']['description']));
     }
 }

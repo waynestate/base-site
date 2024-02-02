@@ -1,5 +1,5 @@
 {{--
-    $item => array // ['title', 'link', 'excerpt', 'filename_url', 'filename_alt_text']
+    $item => array // ['title', 'link', 'excerpt', 'relative_url', 'filename_alt_text']
 --}}
 <ul class="grid items-start gap-6 lg:gap-8 mt-2 mb-8 lg:my-8 md:grid-cols-2 lg:grid-cols-{{ !empty($component['columns']) && $component['columns'] >= 3 ? '3' : '2' }} xl:grid-cols-{{ !empty($component['columns']) ? $component['columns'] : '2' }}">
     @foreach($data as $item)

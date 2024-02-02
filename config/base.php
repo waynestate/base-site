@@ -78,21 +78,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Hero Full Width
-    |--------------------------------------------------------------------------
-    |
-    | This enables hero images to span 100% across the top of the site. You
-    | can specify which controllers you want this to work on by adding to
-    | the array. If a controller is not listed it will be contained
-    | within the content-area. If a page isn't in the menu and top
-    | menu is enabled then the controller will automatically act
-    | as if it was in this array.
-    |
-    */
-    'hero_full_controllers' => ['HomepageController'],
-
-    /*
-    |--------------------------------------------------------------------------
     | Hero Rotating
     |--------------------------------------------------------------------------
     |
@@ -263,7 +248,7 @@ return [
                     'id' => 3001,
                     'config' => 'page_id:{$page_id}|randomize|limit:1',
                 ],
-                'banner' => [
+                'flag' => [
                     'id' => 4246,
                     'config' => 'page_id:{$page_id}|first',
                 ],

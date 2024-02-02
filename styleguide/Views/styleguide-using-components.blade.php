@@ -6,13 +6,13 @@
     <div class="content">
         {!! $base['page']['content']['main'] !!}
 
-        <p>You can display multiple data sets, like promo groups, events, and news, on a single page by adding custom page fields for each component. The available components are listed in this menu.</p>
-        <p>To add multiple components of the same type, like two accordions on a page, you will need to increment the number in the page field; i.e. <code>modular-accordion-1</code>, <code>modular-accordion-2</code></p>
-        <p class="mb-8">To change the order of the components, you will need to copy and paste your data in the correct order until we develop a better way to rearrange page fields.</p>
+        <p>Using components empowers the web team with greater flexibility to achieve diverse web objectives. You can display multiple data sets—like promo groups, events and news—on a single page by adding custom page fields for each component. The available components are listed in this menu.</p>
+        <p>For adding multiple components of the same type (e.g., two accordions on a page), simply increase the number in the page field. For instance, use <code>modular-accordion-1</code> and <code>modular-accordion-2</code> to include two accordions.</p>
+        <p>As for changing the order of components, the current method involves manually copying and pasting data in the desired sequence. We're actively working on a more efficient way to rearrange page fields, streamlining the process for easier reordering.</p>
 
         <h2>Configuring components</h2>
         <p>You will use a JSON array paired with your page field to configure each component. The specifics of each component can be found on the individual component page from the menu.</p>
-        <h3>Example component configuration</h3>
+        <h3 id="example-component-configurations">Example component configuration</h3>
         <p>Adding this data set into your CMS page fields area will display your promo data as a catalog component.</p>  
         <table class="mt-2">
             <thead>
@@ -41,7 +41,7 @@
             </tbody>
         </table>
 
-        <h3>JSON data explained</h3>
+        <h3 id="json-data-explained">JSON data explained</h3>
         <p>Legend: <span class="text-[red]">*</span> Designates a required configuration.</p>
         <table class="mt-2">
             <thead>
@@ -75,21 +75,23 @@ Use "youtube" when you are putting a video url in the promo link field to popula
                     <td>
 Define how many columns the component will display.<br />
 1 to 4 columns is recommended.<br />
-Use with the catalog, button row, and news components.
+Use with the catalog, button row, icon row, events row, and news row components.
                     </td>
                 </tr>
                 <tr>
                     <td class="font-bold">singlePromoView</td>
                     <td>
 Creates a link to a detailed page of a single promo item, like a Spotlight.<br />
-True or false; false is default and will use the promotion's link field if it is set.
+True or false; false is default and will use the promotion's link field if it is set.<br />
+Use with the catalog, spoltight, promo row, promo column, and icon components.
                     </td>
                 </tr>
                 <tr>
                     <td class="font-bold">showExcerpt</td>
                     <td>
 Show or hide the promo's excerpt.<br />
-True or false; true is default.
+True or false; true is default.<br />
+Use with the catalog, spoltight, promo row, promo column, and icon components.
                     </td>
                 </tr>
                 <tr>
@@ -97,7 +99,8 @@ True or false; true is default.
                     <td>
 Show or hide the promo's description.<br />
 True or false; true is default.<br />
-Commonly used in conjunction with "singlePromoView" where the description is hidden from the catalog but displayed on the detailed promo page.
+Commonly used in conjunction with "singlePromoView" where the description is hidden from the catalog but displayed on the detailed promo page.<br />
+Use with the catalog, spoltight, promo row, promo column, and icon components.
                     </td>
                 </tr>
                 <tr>
@@ -105,7 +108,7 @@ Commonly used in conjunction with "singlePromoView" where the description is hid
                     <td>
 Moves the title, excerpt and/description on top of the image with a gradient for contrast.<br />
 True or false; false is default.<br />
-Single promo and catalog components only.
+Promo row, promo column, and catalog components only.
                     </td>
                 </tr>
                 <tr>
@@ -127,8 +130,7 @@ Promo row component only.
                 <tr>
                     <td class="font-bold">imageSize</td>
                     <td>
-                        w-1/4' : 'md:w-2/5
-Uses a small 1/4 width or large 2/5 width.<br />
+Uses a small (25%) width or large (40%) width.<br />
 Small or large; large is default.<br />
 Promo row component only.
                     </td>
@@ -146,6 +148,14 @@ News and events only. For promotion based components, see "config."
                     <td>
 To change "More news" or "More events" to your specific text, i.e. "Student news", "Career events".<br />
 News and Events only.
+                    </td>
+                </tr>
+                <tr>
+                    <td class="font-bold">news_route</td>
+                    <td>
+Change the url path for news items. Example: "/facultynews"<br />
+Null default; Example: "/facultynews"<br />
+News components only.
                     </td>
                 </tr>
                 <tr>
@@ -174,13 +184,44 @@ Events components only.
                 </tr>
             </tbody>
         </table>
-    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 items-start gap-y-8 sm:gap-x-4 lg:gap-x-8 mt-8 mb-4">
-        <div class="col-span-full">
-            <h2 class="mt-0">{{ $catalog_1['component']['heading'] }}</h2>
-            @include('components/catalog', ['data' => $catalog_1['data'], 'component' => $catalog_1['component']])
-        </div>
+        <h3 id="all-available-components">All available components</h3>
+        <table class="mt-2">
+            <thead>
+                <tr>
+                    <th>Page field name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+<ul class="columns-2">
+    <li>modular-accordion-1</li>
+    <li>modular-button-column-1</li>
+    <li>modular-button-row-1</li>
+    <li>modular-catalog-1</li>
+    <li>modular-events-column-1</li>
+    <li>modular-events-featured-column-1</li>
+    <li>modular-events-featured-row-1</li>
+    <li>modular-events-row-1</li>
+    <li>modular-heading-1</li>
+    <li>modular-hero-1</li>
+    <li>modular-icons-column-1</li>
+    <li>modular-icons-row-1</li>
+    <li>modular-icons-top-row-1</li>
+    <li>modular-news-column-1</li>
+    <li>modular-news-featured-column-1</li>
+    <li>modular-news-row-1</li>
+    <li>modular-page-content-row</li>
+    <li>modular-page-content-column</li>
+    <li>modular-promo-column-1</li>
+    <li>modular-promo-row-1</li>
+    <li>modular-spotlight-column-1</li>
+    <li>modular-spotlight-row-1</li>
+</ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-
 @endsection

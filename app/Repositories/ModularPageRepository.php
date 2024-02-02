@@ -95,12 +95,17 @@ class ModularPageRepository implements ModularPageRepositoryContract
         }
 
         $components = $this->parseData($data);
-        $promos = $this->getPromos($components);
+        $promos = $this->getPromos($components, $data['site']['id'] ?? '');
 
         foreach($components['components'] as $name => $component) {
             if(Str::startsWith($name, 'events')) {
                 $components['components'][$name]['id'] = $component['id'] ?? $data['site']['id'];
-                $events = $this->event->getEvents($component['id'] ?? $data['site']['id']);
+                $limit = $components['components'][$name]['limit'] ?? 4;
+                if(strpos($name, 'events-column') !== false) {
+                    $events = $this->event->getEvents($component['id'] ?? $data['site']['id'], $limit);
+                } else {
+                    $events = $this->event->getEventsFullListing($component['id'] ?? $data['site']['id'], $limit);
+                }
                 $modularComponents[$name]['data'] = $events['events'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
                 if (empty($modularComponents[$name]['component']['cal_name']) && !empty($data['site']['events']['path'])) {
@@ -108,18 +113,24 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 }
             } elseif(Str::startsWith($name, 'news')) {
                 $components['components'][$name]['id'] = $component['id'] ?? $data['site']['news']['application_id'];
-                $components['components'][$name]['limit'] = $component['limit'] ?? 4;
+                $limit = $component['limit'] ?? 4;
                 $components['components'][$name]['news_route'] = $component['news_route'] ?? config('base.news_listing_route');
                 if (!empty($component['featured']) && $component['featured'] === true) {
                     $articles = $this->article->listing($components['components'][$name]['id'], 50, 1, $component['topics'] ?? []);
                     $articles['articles']['data'] = collect($articles['articles']['data'])->filter(function ($article) {
                         return !empty($article['featured']['featured']) && $article['featured']['featured'] === 1;
-                    })->take($component['limit'] ?? 4)->toArray();
+                    })->take($limit)->toArray();
                 } else {
-                    $articles = $this->article->listing($components['components'][$name]['id'], $component['limit'] ?? 4, 1, $component['topics'] ?? []);
+                    $articles = $this->article->listing($components['components'][$name]['id'], $limit, 1, $component['topics'] ?? []);
                 }
                 $modularComponents[$name]['data'] = $articles['articles'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
+            } elseif(Str::startsWith($name, 'page-content') || Str::startsWith($name, 'heading')) {
+                // If there's JSON but no news, events or promo data, assign the component array as data
+                // Page-content and heading components
+                $modularComponents[$name]['data'][] = $components['components'][$name] ?? [];
+                $modularComponents[$name]['component'] = $components['components'][$name] ?? [];
+                unset($modularComponents[$name]['component']['heading']);
             } else {
                 $modularComponents[$name]['data'] = $promos[$name]['data'] ?? [];
                 $modularComponents[$name]['component'] = $promos[$name]['component'] ?? [];
@@ -145,11 +156,14 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 // Last item cannot have comma at the end of it
                 $value = preg_replace('(,})', '}', $value);
 
-                //if(Str::isJson($value)) { // this isn't working, integers are considered json with this
                 if(Str::startsWith($value, '{')) {
                     $components[$name] = json_decode($value, true);
                     if(!empty($components[$name]['config'])) {
                         $config = explode('|', $components[$name]['config']);
+                        // Add youtube
+                        if(strpos($components[$name]['config'], 'youtube') === false) {
+                            array_push($config, 'youtube');
+                        }
                         foreach($config as $key => $value) {
                             if(Str::startsWith($value, 'page_id')) {
                                 $config[$key] = 'page_id:'.$data['page']['id'];
@@ -182,7 +196,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
         ];
     }
 
-    public function getPromos($components)
+    public function getPromos($components, $site_id)
     {
         $params = [
             'method' => 'cms.promotions.listing',
@@ -194,6 +208,21 @@ class ModularPageRepository implements ModularPageRepositoryContract
         $promos = $this->cache->remember($params['method'] . md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
+
+        // TODO Allowing the use of another site's promo items only from base
+        if (!empty($site_id) && $site_id === 1561) {
+            $promos['promotions'] = collect($promos['promotions'])->map(function ($promo) {
+                if (!empty($promo['filename_url'])) {
+                    $promo['relative_url'] = $promo['filename_url'];
+                }
+
+                if (!empty($promo['secondary_filename_url'])) {
+                    $promo['secondary_relative_url'] = $promo['secondary_filename_url'];
+                }
+
+                return $promo;
+            })->toArray();
+        }
 
         $promos = $this->parsePromos->parse($promos, $components['group_reference'], $components['group_config']);
 

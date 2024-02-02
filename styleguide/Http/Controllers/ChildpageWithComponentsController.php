@@ -16,12 +16,13 @@ use Factories\Video;
 class ChildpageWithComponentsController extends Controller
 {
     /**
-     * Display the banner at the top of the page.
+     * Display a childpage using components.
      */
     public function index(Request $request): View
     {
         $request->data['base']['page']['content']['main'] = '
-<p>Childpage with example components.</p>
+<h2 class="mt-0">Page body</h2>
+<p>This an example of CMS page content on a childpage with components, moved to the placement of a page field.</p>
 ';
         $component_configuration = '
 <table>
@@ -107,7 +108,7 @@ class ChildpageWithComponentsController extends Controller
             'hero-1' => [
                 'data' => app(HeroImage::class)->create(1, false, [
                     'relative_url' => '/styleguide/image/3200x600',
-                    'option' => 'skinny',
+                    'option' => 'banner small',
                 ]),
                 'component' => [
                     'filename' => 'hero',
@@ -137,13 +138,16 @@ class ChildpageWithComponentsController extends Controller
                 ],
             ],
 
-            'content-row-1' => [
+            'promo-row-1' => [
                 'data' => app(GenericPromo::class)->create(1, false, [
-                    'title' => 'Content row',
+                    'youtube_id' => '',
+                    'relative_url' => '',
+                    'link' => '',
+                    'title' => 'No image content - promo row',
                     'description' => '<p>Example placement of an introductory paragraph describing the information laid out in the accordion below.</p><p>This is a separate promo group using the "content row" component. Below this is a different promo group with the accordion data and no component heading specified.</p>',
                 ]),
                 'component' => [
-                    'filename' => 'content-row',
+                    'filename' => 'promo-row',
                 ],
             ],
 
@@ -151,6 +155,17 @@ class ChildpageWithComponentsController extends Controller
                 'data' => app(GenericPromo::class)->create(4, false),
                 'component' => [
                     'filename' => 'accordion',
+                ],
+            ],
+
+            'heading-1' => [
+                'data' => [
+                    0 => [
+                        'heading' => 'News',
+                    ],
+                ],
+                'component' => [
+                    'filename' => 'heading',
                 ],
             ],
 
@@ -170,15 +185,24 @@ class ChildpageWithComponentsController extends Controller
             'news-column' => [
                 'data' => app(Article::class)->create(3, false),
                 'component' => [
-                    'heading' => 'Base news',
                     'filename' => 'news-column',
+                ],
+            ],
+
+            'heading-2' => [
+                'data' => [
+                    0 => [
+                        'heading' => 'Events',
+                    ],
+                ],
+                'component' => [
+                    'filename' => 'heading',
                 ],
             ],
 
             'events-column' => [
                 'data' => app(Event::class)->create(4, false),
                 'component' => [
-                    'heading' => 'Base events',
                     'filename' => 'events-column',
                     'calendar_url' => '/myurl'
                 ],
@@ -218,7 +242,7 @@ class ChildpageWithComponentsController extends Controller
                 ],
             ],
 
-            'promo-row-1' => [
+            'promo-row-2' => [
                 'data' => app(GenericPromo::class)->create(2, false),
                 'component' => [
                     'heading' => 'Promo row with alternating image position',
@@ -245,6 +269,17 @@ class ChildpageWithComponentsController extends Controller
                     'filename' => 'button-column',
                 ],
             ],
+
+            'page-content-row' => [
+                'data' => [
+                    0 => [
+                        'title' => 'Page content',
+                    ]
+                ],
+                'component' => [
+                    'filename' => 'page-content-row',
+                ]
+            ]
         ];
 
         if(!empty($components['components'])) {

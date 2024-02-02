@@ -5,19 +5,17 @@
     Add your specific css in scss/subsite/_main.scss
 --}}
 @if(!empty($data))
-    <div {!! (in_array($base['page']['controller'], config('base.hero_full_controllers'))) ? ' role="complementary"' : '' !!}
-        class="GTM-hero mt:mx-0
-        {{ !empty($class) ? $class : '' }}
+    <div role="complementary" class="GTM-hero 
+        {{ $heroClass ?? '' }}
+        {{ config('base.global.sites.'.$base['site']['id'].'.promos.hero.class') ?? ''}}
         {{ !empty($data) && count($data) > 1 ? ' rotate' : '' }}
-        {{!in_array($base['page']['controller'], config('base.hero_full_controllers'))  ? '  -mx-4' : '' }}
-        {{!empty(config('base.global.sites.'.$base['site']['id'].'.promos.hero.class')) ? ' '.config('base.global.sites.'.$base['site']['id'].'.promos.hero.class') : ''}}
     ">
         @foreach($data as $hero)
             @if(!empty($hero['relative_url']))
                 @if(!empty($hero['option']))
                     @include('components/hero/'.Str::slug($hero['option']))
                 @else
-                    @include('components/hero/default')
+                    @include('components/hero/banner-small')
                 @endif
             @endif
         @endforeach

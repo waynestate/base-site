@@ -1,5 +1,5 @@
 {{--
-    $item => array // ['title', 'link', 'excerpt', 'filename_url', 'filename_alt_text']
+    $item => array // ['title', 'link', 'excerpt', 'relative_url', 'filename_alt_text']
 --}}
 <ul class="grid grid-cols-1 items-start gap-6 lg:gap-8 mt-2 mb-8 lg:my-8">
     @foreach($data as $item)

@@ -31,6 +31,7 @@ class Icon implements FactoryContract
                 'description' => '<p>'.ucfirst(implode(' ', $this->faker->words(10))).' <a href="#">'.implode(' ', $this->faker->words(2)).'</a>.</p>',
                 //'description' => '<p>' . $this->faker->text(20) . ' <a href="https://wayne.edu">'. $this->faker->sentence(3)  .'</a></p>',
                 'promo_item_id' => $i,
+                'filename_url' => $icon_green,
                 'relative_url' => $icon_green,
                 'filename_alt_text' => 'Placeholder icon '.$i,
                 'option' => '',
