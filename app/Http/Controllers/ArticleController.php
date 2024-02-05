@@ -104,7 +104,7 @@ class ArticleController extends Controller
         $request->data['base']['meta']['image'] = $image['url'];
         $request->data['base']['meta']['image_alt'] = $image['alt_text'];
 
-        $topics = $this->topic->listing($request->data['base']['site']['news']['application_id']);
+        $topics = $this->topic->listing($request->data['base']['site']['news']['application_id'], $request->data['base']['site']['subsite-folder']);
 
         if (!empty($topics['topics']['data'])) {
             $topics['topics']['data'] = $this->topic->setSelected($topics['topics']['data'], $request->slug);
