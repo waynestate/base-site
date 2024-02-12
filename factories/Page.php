@@ -4,6 +4,7 @@ namespace Factories;
 
 use Contracts\Factories\FactoryContract;
 use Faker\Factory;
+use Storage;
 
 class Page implements FactoryContract
 {
@@ -20,11 +21,14 @@ class Page implements FactoryContract
      */
     public function create($limit = 1, $flatten = false, $options = [])
     {
+        $package_json = Storage::disk('base')->get('package.json');
+        $base_info = json_decode($package_json, true);
+
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
                 'site' => [
                     'id' => 2,
-                    'title' => 'Site style guide',
+                    'title' => 'Base - Style guide (v'.$base_info['version'].')',
                     'short-title' => '',
                     'keywords' => '',
                     'subsite-folder' => null,
