@@ -10,15 +10,19 @@
     </div>
 
     <div class="hero__content-position relative p-6 xl:px-12 2xl:px-16">
-        <div class="hero__content border-l-12 border-gold border-solid pl-4 2xl:pl-8 py-4">
+        <div class="hero__content border-l-12 border-gold border-solid pl-6 2xl:pl-8 pt-4 pb-8">
             <h2 class="hero__title text-green-700 3xl:text-4xl mb-1 font-black">
                 @if(!empty($hero['link']))<a href="{{ $hero['link'] }}" class="hero__link text-green-700 no-underline hover:underline focus:underline">@endif
-                    {{ $hero['title'] }}
+                    {!! strip_tags($hero['title'], ['em', 'strong']) !!}
                 @if(!empty($hero['link']))</a>@endif
             </h2>
-            <div class="hero__description text-lg 3xl:text-xl text-green-700">
+            <div class="hero__description text-lg 3xl:text-xl text-green-700 content">
                 @if(!empty($hero['description']))
-                    {!! $hero['description'] !!}
+                    @if(!empty($hero['link']))
+                        {!! preg_replace(array('"<a href(.*?)>"', '"</a>"'), array('',''), $hero['description']) !!}
+                    @else
+                        {!! $hero['description'] !!}
+                    @endif
                 @endif
             </div>
         </div>
