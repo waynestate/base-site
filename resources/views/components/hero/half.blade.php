@@ -11,7 +11,7 @@
 
     <div class="hero__content-position relative p-6 xl:px-12 2xl:px-16">
         <div class="hero__content border-l-12 border-gold border-solid pl-6 2xl:pl-8 pt-4 pb-8">
-            <h2 class="hero__title text-green-700 3xl:text-4xl mb-1 font-black">
+            <h2 class="hero__title text-green-700 3xl:text-4xl mb-3 font-black">
                 @if(!empty($hero['link']))<a href="{{ $hero['link'] }}" class="hero__link text-green-700 no-underline hover:underline focus:underline">@endif
                     {!! strip_tags($hero['title'], ['em', 'strong']) !!}
                 @if(!empty($hero['link']))</a>@endif
