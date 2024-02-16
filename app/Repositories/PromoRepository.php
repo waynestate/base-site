@@ -73,6 +73,8 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
      */
     public function getRequestData(array $data)
     {
+
+        $group_reference  = $this->createGroupReference($data);
         // Get the global promos config
         $config = config('base.global');
 
