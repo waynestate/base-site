@@ -42,6 +42,7 @@ class FullWidthController extends Controller
                     'option' => 'Text overlay',
                     'title' => 'Your future <em>starts here</em>',
                     'description' => '',
+                    'link' => '',
                 ]),
                 'component' => [
                     'filename' => 'hero',

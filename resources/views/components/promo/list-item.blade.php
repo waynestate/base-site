@@ -40,4 +40,4 @@
             @endif
         </div>
     </div>
-<{{ !empty($item['link']) ? '/a' : '/div' }}>
+{!! !empty($item['link']) ? '</a>' : '</div>' !!}

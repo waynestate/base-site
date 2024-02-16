@@ -1,4 +1,4 @@
-@extends('layouts.' . (!empty($base['layout']) ? $base['layout'] : 'main'))
+@extends('layouts.' . (!empty($layout) ? $layout : 'main'))
 
 @section('content')
     @if(using_styleguide() == true)
