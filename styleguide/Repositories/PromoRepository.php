@@ -26,6 +26,10 @@ class PromoRepository extends Repository
      */
     public function getRequestData(array $data)
     {
+        // To extend a Styleguide repository
+        // Not: $data = parent::getRequestData($data);
+        // $promoRepoRequestData = Container::getInstance()->make(PromoRepository::class)->getRequestData($data);
+
         // Define the pages that have under menu promos: page_id => quanity
         $under_menu_page_ids = [
             114100 => 3, // Styleguide
