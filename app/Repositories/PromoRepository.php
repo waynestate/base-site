@@ -85,7 +85,7 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         |     stubs/extend-repository-styleguide.stub => styleguide/Repositories/PromosExtendedRepository.php
         |
         |     Update config/base.app Global Data 'callbacks' and replace:
-        |     '\Repositories\PromoRepository@getRequestData' => '\Repositories\PromoExtendedRepository@getRequestData'
+        |     '\Repositories\PromoRepository@getRequestData' => '\Repositories\PromosExtendedRepository@getRequestData'
         |
         */
 
