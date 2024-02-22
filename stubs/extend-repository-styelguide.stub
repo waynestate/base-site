@@ -23,7 +23,7 @@ class PromosExtendedRepository extends Repository
     {
         /*
         // Extend a Styleguide repository
-        $promoRepoRequestData = Container::getInstance()->make(PromoRepository::class)->getRequestData($data);
+        $promoRepoRequestData = app()->make(PromoRepository::class)->getRequestData($data);
 
         // Example page specific Hero
         if(!empty($data['page']['id']) && $data['page']['id'] === 99999) {
@@ -36,14 +36,13 @@ class PromosExtendedRepository extends Repository
             $hero = $promoRepoRequestdata['hero'];
         }
 
+        $page_field_label = [];
         // Example addition to the Global Promos data
         if(!empty($data['page']['id']) && $data['page']['id'] === 99998) {
-            $page_field_data = app(GenericPromo::class)->create(3, false, [
+            $page_field_label = app(GenericPromo::class)->create(3, false, [
                 'relative_url' => '/styleguide/image/800x600',
                 'secondary_relative_url' => '/styleguide/image/100x100',
             ]);
-        } else {
-            $page_field_data = [];
         }
 
         /*
@@ -52,6 +51,7 @@ class PromosExtendedRepository extends Repository
             'social' => $promoRepoRequestData['social'],
             'hero' => $hero,
             'under_menu' => $promoRepoRequestData['under_menu'],
+            'page_field_label' => $page_field_label,
         ];
          */
     }
