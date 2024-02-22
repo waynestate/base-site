@@ -84,14 +84,7 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
             $groups = array_merge($groups, $config['sites'][$data['site']['id']]['promos']);
         }
 
-        // Setup the group reference
-        $group_reference = collect($groups)->reject(function ($group) {
-            return empty($group['id']);
-        })->mapWithKeys(function ($group, $name) {
-            $group_reference[$group['id']] = $name;
-
-            return [$group['id'] => $name];
-        })->toArray();
+        $group_reference = $this->createGlobalPromoGroupReference($data, $config, $groups);
 
         $params = [
             'method' => 'cms.promotions.listing',
@@ -104,7 +97,38 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
-        // Setup the group reference array for this site
+        $group_config = $this->createGlobalPromoGroupConfig($data, $config, $groups);
+
+        $promos = $this->parsePromos->parse($promos, $group_reference, $group_config);
+
+        $global_promos = $this->manipulateGlobalPromos($promos, $groups);
+
+        return $global_promos;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createGlobalPromoGroupReference(array $data, array $config, array $groups)
+    {
+        // Setup the group reference of promo group IDs
+        $group_reference = collect($groups)->reject(function ($group) {
+            return empty($group['id']);
+        })->mapWithKeys(function ($group, $name) {
+            $group_reference[$group['id']] = $name;
+
+            return [$group['id'] => $name];
+        })->toArray();
+
+        return $group_reference;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createGlobalPromoGroupConfig(array $data, array $config, array $groups)
+    {
+        // Inject global promo config
         $group_config = collect($groups)->mapWithKeys(function ($group, $name) use ($config, $data) {
             $value = !empty($group['config']) ? $group['config'] : null;
 
@@ -118,9 +142,14 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
             $group_config = str_replace('|limit:1', '|limit:'.config('base.hero_rotating_limit'), $group_config);
         }
 
-        // Parsed promotions
-        $promos = $this->parsePromos->parse($promos, $group_reference, $group_config);
+        return $group_config;
+    }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function manipulateGlobalPromos(array $promos, array $groups)
+    {
         // Override the site's social icons if it doesn't have any
         if (empty($promos['social']) && !empty($promos['main_social'])) {
             $promos['social'] = $promos['main_social'];
