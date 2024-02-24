@@ -1,9 +1,44 @@
-@extends('layouts.' . (!empty($layout) ? $layout : 'main'))
+<!DOCTYPE html>
+<html class="bg-white antialiased" lang="en">
+<head>
+    @include('components.meta')
 
-@section('content-area')
+    <title>{{ $base['meta']['title'] ?? 'Wayne State University' }}</title>
+
+    <link rel="icon" type="image/x-icon" href="https://wayne.edu/favicon.ico">
+    <link rel="stylesheet" href="{{ mix('_resources/css/main.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    
+    @if(!empty($base['page']['canonical']))<link rel="canonical" href="{{ $base['page']['canonical'] }}">@endif
+
+    @include('components.gtm-head')
+
+    @yield('head')
+</head>
+<body class="font-sans font-normal text-black leading-normal text-base">
+
+@include('components.gtm-body')
+@include('components.skip')
+
+<header>
+    @include('components.header')
+
+    @if(!empty($base['site']))
+        @include('components.menu-top', ['site' => $base['site'], 'top_menu_output' => $base['top_menu_output']])
+    @endif
+
+    @if(!empty($base['flag']))
+        @include('components.flag', ['flag' => $base['flag']])
+    @endif
+</header>
+
+<div id="panel" class="site-theme">
     @yield('top')
 
-    @if(!empty($base['hero']))
+    @if(!empty($base['hero']) && in_array($base['page']['controller'], config('base.hero_full_controllers')))
         @include('components.hero', ['data' => $base['hero']])
 
         @yield('under-hero')
@@ -47,6 +82,12 @@
 
         <main class="w-full {{$base['show_site_menu'] === true ? 'mt:w-3/4' : '' }} content-area mb-8 print:w-full" tabindex="-1">
 
+            @if(!empty($base['hero']) && !in_array($base['page']['controller'], config('base.hero_full_controllers')))
+                @include('components.hero', ['data' => $base['hero']])
+
+                @yield('under-hero')
+            @endif
+
             @if(!empty($base['breadcrumbs']))
                 @include('components.breadcrumbs', ['breadcrumbs' => $base['breadcrumbs']])
             @endif
@@ -58,4 +99,20 @@
     @if(!in_array($base['page']['controller'], config('base.full_width_controllers')))</div>@endif
 
     @yield('bottom')
-@endsection
+</div>
+
+<footer>
+    @if(!empty($base['social']))
+        @include('components.footer-social', ['social' => $base['social']])
+    @endif
+
+    @if(!empty($base['contact']))
+        @include('components.footer-contact', ['contact' => $base['contact']])
+    @endif
+
+    @include('components.footer')
+</footer>
+
+<script src="{{ mix('_resources/js/main.js') }}"></script>
+</body>
+</html>

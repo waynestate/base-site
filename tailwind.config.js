@@ -156,6 +156,7 @@ module.exports = {
             },
             aspectRatio: {
                 'portrait': '3 / 4',
+                'hero': '2.76 / 1',
             },
             transitionProperty: {
                 'height': 'height',
