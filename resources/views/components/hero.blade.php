@@ -18,7 +18,11 @@
                     @if(!empty($base['layout']) && $base['layout'] === 'contained-hero') 
                         @include('components/hero/banner-large')
                     @else
-                        @include('components/hero/banner-small')
+                        @if(config('base.layout') === 'contained-hero')
+                            @include('components/hero/banner-contained')
+                        @else
+                            @include('components/hero/banner-small')
+                        @endif
                     @endif
                 @endif
             @endif
