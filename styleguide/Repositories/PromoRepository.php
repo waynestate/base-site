@@ -87,6 +87,8 @@ class PromoRepository extends Repository
                 'option' => 'Half',
                 'relative_url' => '/styleguide/image/1920x1080',
             ]),
+            // Childpage
+            101100 => app(HeroImage::class)->create(1, false),
         ];
 
         // Only pull hero promos if they match the page ids that are specificed
