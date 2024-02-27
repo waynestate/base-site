@@ -23,7 +23,7 @@ class PromosExtendedRepository extends Repository
     {
         /*
         // Extend a Styleguide repository
-        $promoRepoRequestData = app()->make(PromoRepository::class)->getRequestData($data);
+        $promoRepoRequestData = app(PromoRepository::class)->getRequestData($data);
 
         // Example page specific Hero
         if(!empty($data['page']['id']) && $data['page']['id'] === 99999) {

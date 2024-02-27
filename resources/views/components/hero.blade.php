@@ -19,7 +19,7 @@
                         @include('components/hero/banner-large')
                     @else
                         @if(config('base.layout') === 'contained-hero')
-                            @include('components/hero/banner-contained')
+                            @include('components/hero/banner-large')
                         @else
                             @include('components/hero/banner-small')
                         @endif

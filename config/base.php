@@ -35,6 +35,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | Create a new layout when adjustments to the content area are needed.
+    | Layouts are stored in resources/layouts
     |
     */
     'layout' => 'main',
