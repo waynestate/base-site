@@ -28,7 +28,7 @@ class Page implements FactoryContract
             $data[$i] = [
                 'site' => [
                     'id' => 2,
-                    'title' => 'Base - Style guide (v'.$base_info['version'].')',
+                    'title' => 'Base - Style guide (v'.($base_info['baseVersion'] ?? $base_info['version']).')',
                     'short-title' => '',
                     'keywords' => '',
                     'subsite-folder' => null,
