@@ -1,5 +1,5 @@
-@extends('components.content-area')
-
+@extends('layouts.' . (!empty($base['layout']) ? $base['layout'] : 'main'))
+    
 @section('content')
     @include('components.page-title', ['title' => $base['page']['title']])
 

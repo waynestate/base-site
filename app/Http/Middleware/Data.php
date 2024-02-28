@@ -52,6 +52,10 @@ class Data
         // Merge server and page data so global repositories can use them
         $request->data = merge($data, $page);
 
+        // Get the site layout and merge
+        $layout['layout'] = config('base.layout');
+        $request->data = merge($request->data, $layout);
+
         // Get the global data config
         $config = config('base.global');
 

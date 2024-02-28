@@ -15,7 +15,15 @@
                 @if(!empty($hero['option']))
                     @include('components/hero/'.Str::slug($hero['option']))
                 @else
-                    @include('components/hero/banner-small')
+                    @if(!empty($base['layout']) && $base['layout'] === 'contained-hero') 
+                        @include('components/hero/banner-large')
+                    @else
+                        @if(config('base.layout') === 'contained-hero')
+                            @include('components/hero/banner-large')
+                        @else
+                            @include('components/hero/banner-small')
+                        @endif
+                    @endif
                 @endif
             @endif
         @endforeach

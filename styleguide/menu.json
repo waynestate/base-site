@@ -534,8 +534,39 @@
         "target": "",
         "display_name": "Layout",
         "class_name": "",
-        "relative_url": "/styleguide/header/title/single",
+        "relative_url": "/styleguide/layout/main",
         "submenu": {
+            "103200": {
+                "menu_item_id": 120100,
+                "is_active": 1,
+                "page_id": 120100,
+                "target": "",
+                "display_name": "Site layout",
+                "class_name": "",
+                "relative_url": "/styleguide/layout/main",
+                "submenu": {
+                    "102100100": {
+                        "menu_item_id": 120100100,
+                        "is_active": 1,
+                        "page_id": 120100100,
+                        "target": "",
+                        "display_name": "Main default layout",
+                        "class_name": "",
+                        "relative_url": "/styleguide/layout/main",
+                        "submenu": []
+                    },
+                    "102100101": {
+                        "menu_item_id": 120100101,
+                        "is_active": 1,
+                        "page_id": 120100101,
+                        "target": "",
+                        "display_name": "Contained hero layout",
+                        "class_name": "",
+                        "relative_url": "/styleguide/layout/containedhero",
+                        "submenu": []
+                    }
+                }
+            },
             "102100": {
                 "menu_item_id": 102100,
                 "is_active": 1,

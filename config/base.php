@@ -31,6 +31,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Site layout
+    |--------------------------------------------------------------------------
+    |
+    | Create a new layout when adjustments to the content area are needed.
+    | Layouts are stored in resources/layouts
+    |
+    */
+    'layout' => 'main',
+
+    /*
+    |--------------------------------------------------------------------------
     | Top Menu Enabled
     |--------------------------------------------------------------------------
     |
@@ -75,6 +86,21 @@ return [
     |
     */
     'homepage_menu_enabled' => true,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Hero Full Width
+    |--------------------------------------------------------------------------
+    |
+    | This enables hero images to span 100% across the top of the site. You
+    | can specify which controllers you want this to work on by adding to
+    | the array. If a controller is not listed it will be contained
+    | within the content-area. If a page isn't in the menu and top
+    | menu is enabled then the controller will automatically act
+    | as if it was in this array.
+    |
+    */
+    'hero_full_controllers' => ['HomepageController'],
 
     /*
     |--------------------------------------------------------------------------
