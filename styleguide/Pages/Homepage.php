@@ -28,6 +28,9 @@ class Homepage extends Page
                 'news' => [
                     'application_id' => 1,
                 ],
+                'events' => [
+                    'path' => 'main'
+                ],
             ],
         ]);
     }
