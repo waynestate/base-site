@@ -27,6 +27,15 @@ class Fullwidth extends Page
                     <p>'.$this->faker->paragraph(8).'</p>',
                 ],
             ],
+            'site' => [
+                'subsite-folder' => 'styleguide/',
+                'news' => [
+                    'application_id' => 1,
+                ],
+                'events' => [
+                    'path' => 'main'
+                ],
+            ],
         ]);
     }
 }
