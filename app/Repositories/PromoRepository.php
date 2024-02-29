@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use Contracts\Repositories\RequestDataRepositoryContract;
 use Contracts\Repositories\PromoRepositoryContract;
+use Contracts\Repositories\ModularPageRepositoryContract;
 use Illuminate\Cache\Repository;
 use Waynestate\Api\Connector;
 use Waynestate\Promotions\ParsePromos;
@@ -22,11 +23,17 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
     /**
      * Construct the repository.
      */
-    public function __construct(Connector $wsuApi, ParsePromos $parsePromos, Repository $cache)
+    public function __construct(
+        Connector $wsuApi, 
+        ParsePromos $parsePromos, 
+        Repository $cache,
+        ModularPageRepositoryContract $components
+    )
     {
         $this->wsuApi = $wsuApi;
         $this->parsePromos = $parsePromos;
         $this->cache = $cache;
+        $this->components = $components;
     }
 
     /**
@@ -118,6 +125,20 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         $promos = $this->parsePromos->parse($promos, $group_reference, $group_config);
 
         $global_promos = $this->manipulateGlobalPromos($promos, $groups);
+
+        $global_promos['components'] = $this->components->getModularComponents($data);
+
+        // Set hero from components
+        $hero = collect($global_promos['components'])->reject(function ($data, $component_name) {
+            return !str_contains($component_name, 'hero');
+        })->toArray();
+
+        if(!empty($hero)) {
+            $hero_key = array_key_first($hero);
+            $global_promos['hero'] = $global_promos['components'][$hero_key]['data'];
+            config(['base.hero_full_controllers' => $data['page']['controller']]);
+            unset($global_promos['components'][$hero_key]);
+        }
 
         return $global_promos;
     }
