@@ -17,6 +17,6 @@
         @endforeach
     </ul>
     <div class="text-center mt-6">
-        <a href="/{{ !empty($base['site']['subsite-folder']) ?? '' }}{{ $component['news_route'] ?? config('base.news_listing_route') }}" class="button">{{ $component['link_text'] ?? 'More news' }}</a>
+        <a href="/{{ $base['site']['subsite-folder'] ?? '' }}{{ $component['news_route'] ?? config('base.news_listing_route') }}" class="button">{{ $component['link_text'] ?? 'More news' }}</a>
     </div>
 @endif
