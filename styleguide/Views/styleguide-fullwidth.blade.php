@@ -56,9 +56,6 @@
             @if(!empty($events_column['data']))
                 <div class="col-span-full lg:col-span-6 xl:col-span-8">
                     @include('components/'.$events_column['component']['filename'], ['data' => $events_column['data'], 'component' => $events_column['component']])
-                    <div class="text-right">
-                        <a href="#" class="button mt-4">More events</a>
-                    </div>
                 </div>
             @endif
         </div>

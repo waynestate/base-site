@@ -135,7 +135,6 @@ class FullWidthController extends Controller
                 'component' => [
                     'heading' => 'Special events',
                     'filename' => 'events-column',
-                    'calendar_url' => '/myurl'
                 ],
             ],
 
