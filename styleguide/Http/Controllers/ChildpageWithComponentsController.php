@@ -87,7 +87,7 @@ class ChildpageWithComponentsController extends Controller
     </tbody>
 </table>
 ';
-        $components['components'] = [
+        $request->data['base']['components'] = [
             'accordion' => [
                 'data' => [
                     0 => [
@@ -282,9 +282,9 @@ class ChildpageWithComponentsController extends Controller
             ]
         ];
 
-        if(!empty($components['components'])) {
+        if(!empty($request->data['base']['components'])) {
             // Set hero from components
-            $hero = collect($components['components'])->reject(function ($data, $component_name) {
+            $hero = collect($request->data['base']['components'])->reject(function ($data, $component_name) {
                 return !str_contains($component_name, 'hero');
             })->toArray();
         }
@@ -292,13 +292,13 @@ class ChildpageWithComponentsController extends Controller
         if(!empty($hero)) {
             $hero_key = array_key_first($hero);
 
-            $request->data['base']['hero'] = $components['components'][$hero_key]['data'];
+            $request->data['base']['hero'] = $request->data['base']['components'][$hero_key]['data'];
 
-            unset($components['components'][$hero_key]);
+            unset($request->data['base']['components'][$hero_key]);
 
-            config(['base.hero_full_controllers' => ['ChildpageWithComponentsController']]);
+            config(['base.hero_full_controllers' => [$request->data['base']['page']['controller']]]);
         }
 
-        return view('childpage', merge($request->data, $components));
+        return view('childpage', merge($request->data));
     }
 }

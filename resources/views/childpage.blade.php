@@ -3,15 +3,15 @@
 @section('content')
     @include('components.page-title', ['title' => $base['page']['title']])
 
-    @if(empty($components['page-content-row']) && empty($components['page-content-column']))
+    @if(empty($base['components']['page-content-row']) && empty($base['components']['page-content-column']))
         <div class="content">
             {!! $base['page']['content']['main'] !!}
         </div>
     @endif
 
-    @if(!empty($components))
+    @if(!empty($base['components']))
         <div class="grid grid-cols-1 md:grid-cols-2 items-start gap-y-8 sm:gap-x-4 lg:gap-x-8 mt-8 mb-4">
-            @foreach($components as $componentName => $component)
+            @foreach($base['components'] as $componentName => $component)
                 @if(!empty($component['data']) && !empty($component['component']['filename']))
                     @if(\View::exists('components/'.$component['component']['filename']))
                         <div class="col-span-2 {{ str_contains($component['component']['filename'], 'column') ? 'md:col-span-1' : 'md:col-span-2' }}">
