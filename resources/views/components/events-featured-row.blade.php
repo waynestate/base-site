@@ -19,6 +19,6 @@
 </ul>
 @if(!empty($component['cal_name']) || !empty($base['site']['events']['path']))
     <div class="text-center mt-6">
-        <a class="button" href="//events.wayne.edu/{{ $component['cal_name'] ?? $base['site']['events']['path'].'/' }}upcoming">{{ $component['link_text'] ?? 'More events' }}</a>
+        <a class="button" href="//events.wayne.edu/{{ $component['cal_name'] ?? $base['site']['events']['path'] }}upcoming">{{ $component['link_text'] ?? 'More events' }}</a>
     </div>
 @endif
