@@ -44,7 +44,7 @@
     RewriteRule ^ - [F]
 
     # Check if we are on a site other than base, rewrite the file to the _static/sites/{subdomain} directory
-    RewriteCond %{HTTP_HOST} (?:www-dev\.|)(?!base)(.*)\.wayne\.(?:edu|localhost)$
+    RewriteCond %{HTTP_HOST} (?:www-dev\.|)(?!base)?(.*)\.wayne\.(?:edu|localhost)$
     RewriteCond %{DOCUMENT_ROOT}/_static/sites/%1/%{REQUEST_URI} -f
     RewriteRule ^(.+) %{DOCUMENT_ROOT}/_static/sites/%1/$1 [L]
 
