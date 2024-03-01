@@ -45,7 +45,7 @@ Starter repository for creating a new website. Live demo can be found at https:/
 1. run `make install`
 1. run `make build`
 1. run `make watch`
-1. open https://domain.local:3000/ (for BrowserSync)
+1. open https://domain.localhost:3000/ (for BrowserSync)
 
 ## Deployment
 
@@ -188,7 +188,7 @@ $menus = [
 
 1. Create a CMS page for the profile listing page (ex: `profiles`) and select the `ProfileController` as the template.
 1. Create a CMS page for the profile view, it must be: `profile` and select the `ProfileController` as the template.
-1. You can now visit `https://domain.local/profiles` and `http://domain.local/profile/{accessid}`.
+1. You can now visit `https://domain.localhost/profiles` and `http://domain.localhost/profile/{accessid}`.
 
 ## Style guide development for a new feature
 

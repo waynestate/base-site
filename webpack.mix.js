@@ -88,7 +88,7 @@ mix.js('resources/js/main.js', 'public/_resources/js')
         ]
     })
     .browserSync({
-        proxy: 'https://' + package.name + '.wayne.local',
+        proxy: 'https://' + package.name + '.wayne.localhost',
         open: false,
         files: [
             'app/**/*.php',
