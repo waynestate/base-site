@@ -49,6 +49,7 @@
     RewriteRule ^(.+) %{DOCUMENT_ROOT}/_static/sites/%1/$1 [L]
 
     # All other files rewrite to the _static/* directory
+    RewriteCond %{HTTP_HOST} (?:www-dev\.|)base\.wayne\.(?:edu|localhost)$
     RewriteCond %{DOCUMENT_ROOT}/_static/%{REQUEST_URI} -f
     RewriteRule ^(.+) %{DOCUMENT_ROOT}/_static/$1 [L]
 
