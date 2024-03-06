@@ -281,7 +281,7 @@ return [
             ],
             'callbacks' => [
                 '\Repositories\MenuRepository@getRequestData',
-                '\Repositories\PromoRepository@getRequestData',
+                '\Repositories\PromoExtendedRepository@getRequestData',
             ],
         ],
         'sites' => [

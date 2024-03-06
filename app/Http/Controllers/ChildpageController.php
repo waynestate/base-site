@@ -28,7 +28,6 @@ class ChildpageController extends Controller
      */
     public function index(Request $request): View
     {
-
         return view('childpage', merge($request->data));
     }
 }

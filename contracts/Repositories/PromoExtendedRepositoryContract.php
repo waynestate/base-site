@@ -2,23 +2,8 @@
 
 namespace Contracts\Repositories;
 
-interface PromoRepositoryContract
+interface PromoExtendedRepositoryContract
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getPromoView($id);
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBackToPromoPage($referer = null, $scheme = null, $host = null, $uri = null);
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRequestData(array $data);
-
     /**
      * {@inheritdoc}
      */
