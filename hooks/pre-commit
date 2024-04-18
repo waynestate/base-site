@@ -1,19 +1,21 @@
 #!/bin/bash
 
-# Run on either wild wayne or local machine
-wild_wayne_test=${WILD_WAYNE}
+# Run the pre-commit hook to check for any errors before committing
+# ${DOCKER_ENV} comes from the environment variables in the docker-compose.yml file for the wsu docker container
+docker_test=${DOCKER_ENV}
 
 # Current working directory of the site
 site_folder=${PWD##*/}
 
 export PATH=/usr/local/bin:$PATH
+echo "Folder: ${site_folder}";
 
 # Make sure vagrant command is found
-if [ "$wild_wayne_test" != "true" ]; then
-    if hash vagrant 2>/dev/null; then
-        printf "vagrant command found...\n"
+if [ "${docker_test}" != "true" ]; then
+    if [ "$(which docker)" != "" ]; then
+        printf "docker command found...\n"
     else
-        printf "Vagrant command could not be found. If you plan to develop without using vagrant then delete this check.\n"
+        printf "Docker command could not be found. If you plan to develop without using docker then delete this check.\n"
         exit 1
     fi
 fi
@@ -28,12 +30,12 @@ if [[ "$branch" == "master" ]]; then
 fi
 
 # PHP linting
-if [ "$wild_wayne_test" = "true" ]; then
+if [ "${docker_test}" = "true" ]; then
     printf "Running phplint...\n"
     phplint="$(make phplintdry)"
 else
     printf "Running phplint...\n"
-    phplint="$(vagrant ssh -c "cd /vagrant/${site_folder}; make phplintdry")"
+    phplint="$(docker exec -i wsu-${site_folder} bash -i -c "make phplintdry")"
 fi
 
 # Check if the last command (PHPLint) didn't exit with a 0 success
@@ -44,12 +46,12 @@ if  (( $? != 0 )); then
 fi
 
 # Style linting
-if [ "$wild_wayne_test" = "true" ]; then
+if [ "${docker_test}" = "true" ]; then
     printf "Running stylelint...\n"
     stylelint="$(make stylelint)"
 else
     printf "Running stylelint...\n"
-    stylelint="$(vagrant ssh -c "cd /vagrant/${site_folder}; make stylelint")"
+    stylelint="$(docker exec -i wsu-${site_folder} bash -i -c "make stylelint")"
 fi
 
 # Check if the last command (Stylelint) didn't exit with a 0 success
@@ -60,12 +62,12 @@ if  (( $? != 0 )); then
 fi
 
 # PHP tests
-if [ "$wild_wayne_test" = "true" ]; then
+if [ "${docker_test}" = "true" ]; then
     printf "Running tests...\n"
     phpunit="$(phpunit)"
 else
     printf "Running tests...\n"
-    phpunit="$(vagrant ssh -c "cd /vagrant/${site_folder}; phpunit")"
+    phpunit="$(docker exec -i wsu-${site_folder} bash -i -c "phpunit")"
 fi
 
 # Check if the last command (PHPUnit) didn't exit with a 0 success
