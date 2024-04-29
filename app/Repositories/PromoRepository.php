@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use Contracts\Repositories\RequestDataRepositoryContract;
 use Contracts\Repositories\PromoRepositoryContract;
+use Contracts\Repositories\ModularPageRepositoryContract;
 use Illuminate\Cache\Repository;
 use Waynestate\Api\Connector;
 use Waynestate\Promotions\ParsePromos;
@@ -22,11 +23,16 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
     /**
      * Construct the repository.
      */
-    public function __construct(Connector $wsuApi, ParsePromos $parsePromos, Repository $cache)
-    {
+    public function __construct(
+        Connector $wsuApi,
+        ParsePromos $parsePromos,
+        Repository $cache,
+        ModularPageRepositoryContract $components
+    ) {
         $this->wsuApi = $wsuApi;
         $this->parsePromos = $parsePromos;
         $this->cache = $cache;
+        $this->components = $components;
     }
 
     /**
@@ -117,7 +123,7 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
 
         $promos = $this->parsePromos->parse($promos, $group_reference, $group_config);
 
-        $global_promos = $this->manipulateGlobalPromos($promos, $groups);
+        $global_promos = $this->manipulateGlobalPromos($promos, $groups, $data);
 
         return $global_promos;
     }
@@ -164,7 +170,7 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
     /**
      * {@inheritdoc}
      */
-    public function manipulateGlobalPromos(array $promos, array $groups)
+    public function manipulateGlobalPromos(array $promos, array $groups, array $data)
     {
         // Override the site's social icons if it doesn't have any
         if (empty($promos['social']) && !empty($promos['main_social'])) {
@@ -190,6 +196,21 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         // Remove the uncessary promo groups
         unset($promos['main_social']);
         unset($promos['main_contact']);
+
+        // Add modular components into global data
+        $promos['components'] = $this->components->getModularComponents($data);
+
+        // Set hero from components
+        $hero = collect($promos['components'])->reject(function ($data, $component_name) {
+            return !str_contains($component_name, 'hero');
+        })->toArray();
+
+        if(!empty($hero)) {
+            $hero_key = array_key_first($hero);
+            $promos['hero'] = $promos['components'][$hero_key]['data'];
+            config(['base.hero_full_controllers' => $data['page']['controller']]);
+            unset($promos['components'][$hero_key]);
+        }
 
         return $promos;
     }
