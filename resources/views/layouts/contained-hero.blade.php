@@ -83,9 +83,9 @@
         <main class="w-full {{$base['show_site_menu'] === true ? 'mt:w-3/4' : '' }} content-area mb-8 print:w-full" tabindex="-1">
 
             @if(!empty($base['hero']) && !in_array($base['page']['controller'], config('base.hero_full_controllers')))
-                @include('components.hero', ['data' => $base['hero']])
-
-                @yield('under-hero')
+                <div class="mt:px-4">
+                    @include('components.hero', ['data' => $base['hero']])
+                </div>
             @endif
 
             @if(!empty($base['breadcrumbs']))

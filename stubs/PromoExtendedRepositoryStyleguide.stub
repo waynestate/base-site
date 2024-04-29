@@ -2,11 +2,11 @@
 
 namespace Styleguide\Repositories;
 
-use App\Repositories\PromosExtendedRepository as Repository;
+use App\Repositories\PromoExtendedRepository as Repository;
 use Faker\Factory;
 use Factories\GenericPromo;
 
-class PromosExtendedRepository extends Repository
+class PromoExtendedRepository extends Repository
 {
     /**
      * Construct the factory.

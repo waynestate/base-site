@@ -2,9 +2,9 @@
 
 namespace App\Repositories;
 
-use Contracts\Repositories\PromosExtendedRepositoryContract;
+use Contracts\Repositories\PromoExtendedRepositoryContract;
 
-class PromosExtendedRepository extends PromoRepository implements PromosExtendedRepositoryContract
+class PromoExtendedRepository extends PromoRepository implements PromoExtendedRepositoryContract
 {
     /**
      * {@inheritdoc}

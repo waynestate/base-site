@@ -32,5 +32,5 @@ interface PromoRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function manipulateGlobalPromos(array $promos, array $groups);
+    public function manipulateGlobalPromos(array $promos, array $groups, array $data);
 }
