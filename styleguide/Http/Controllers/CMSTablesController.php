@@ -22,6 +22,6 @@ class CMSTablesController extends Controller
      */
     public function index(Request $request): View
     {
-        return view('styleguide-tables', merge($request->data, $this->faker));
+        return view('styleguide-cms-tables', merge($request->data, $this->faker));
     }
 }

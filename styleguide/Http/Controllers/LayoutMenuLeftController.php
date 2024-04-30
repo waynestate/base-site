@@ -6,7 +6,7 @@ use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class MenuLeftController extends Controller
+class LayoutMenuLeftController extends Controller
 {
     /**
      * Display menu left view.

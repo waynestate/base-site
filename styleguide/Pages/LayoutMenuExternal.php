@@ -4,7 +4,7 @@ namespace Styleguide\Pages;
 
 use Factories\Page as PageFactory;
 
-class MenuExternal extends Page
+class LayoutMenuExternal extends Page
 {
     /**
      * {@inheritdoc}
@@ -13,7 +13,7 @@ class MenuExternal extends Page
     {
         return app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'MenuTopController',
+                'controller' => 'LayoutMenuTopController',
                 'title' => 'External menu icon',
                 'id' => 103100102,
                 'content' => [

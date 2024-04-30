@@ -190,6 +190,16 @@
                 "relative_url": "/styleguide/component/eventlisting",
                 "submenu": []
             },
+            "112100": {
+                "menu_item_id": 112100,
+                "is_active": 1,
+                "page_id": 112100,
+                "target": "",
+                "display_name": "Flag",
+                "class_name": "",
+                "relative_url": "/styleguide/component/flag",
+                "submenu": []
+            },
             "122100": {
                 "menu_item_id": 122100,
                 "is_active": 1,
@@ -574,7 +584,7 @@
                 "target": "",
                 "display_name": "Header title",
                 "class_name": "",
-                "relative_url": "/styleguide/header/title/single",
+                "relative_url": "/styleguide/layout/header/title/single",
                 "submenu": {
                     "102100100": {
                         "menu_item_id": 102100100,
@@ -583,7 +593,7 @@
                         "target": "",
                         "display_name": "Header title single",
                         "class_name": "",
-                        "relative_url": "/styleguide/header/title/single",
+                        "relative_url": "/styleguide/layout/header/title/single",
                         "submenu": []
                     },
                     "102100101": {
@@ -593,7 +603,7 @@
                         "target": "",
                         "display_name": "Header title double",
                         "class_name": "",
-                        "relative_url": "/styleguide/header/title/double/",
+                        "relative_url": "/styleguide/layout/header/title/double/",
                         "submenu": []
                     }
                 }
@@ -605,7 +615,7 @@
                 "target": "",
                 "display_name": "Menu",
                 "class_name": "",
-                "relative_url": "/styleguide/menu/left",
+                "relative_url": "/styleguide/layout/menu/left",
                 "submenu": {
                     "103100100": {
                         "menu_item_id": 103100100,
@@ -614,7 +624,7 @@
                         "target": "",
                         "display_name": "Menu left",
                         "class_name": "",
-                        "relative_url": "/styleguide/menu/left",
+                        "relative_url": "/styleguide/layout/menu/left",
                         "submenu": []
                     },
                     "103100101": {
@@ -624,7 +634,7 @@
                         "target": "",
                         "display_name": "Menu top",
                         "class_name": "",
-                        "relative_url": "/styleguide/menu/top",
+                        "relative_url": "/styleguide/layout/menu/top",
                         "submenu": []
                     },
                     "103100102": {
@@ -634,20 +644,10 @@
                         "target": "",
                         "display_name": "External icon",
                         "class_name": "external",
-                        "relative_url": "/styleguide/menu/external",
+                        "relative_url": "/styleguide/layout/menu/external",
                         "submenu": []
                     }
                 }
-            },
-            "112100": {
-                "menu_item_id": 112100,
-                "is_active": 1,
-                "page_id": 112100,
-                "target": "",
-                "display_name": "Flag",
-                "class_name": "",
-                "relative_url": "/styleguide/flag",
-                "submenu": []
             },
             "104100": {
                 "menu_item_id": 104100,
@@ -656,7 +656,7 @@
                 "target": "",
                 "display_name": "Footer contact",
                 "class_name": "",
-                "relative_url": "/styleguide/footer/contact/one",
+                "relative_url": "/styleguide/layout/footer/contact/one",
                 "submenu": {
                     "104100100": {
                         "menu_item_id": 104100100,
@@ -665,7 +665,7 @@
                         "target": "",
                         "display_name": "One column",
                         "class_name": "",
-                        "relative_url": "/styleguide/footer/contact/one",
+                        "relative_url": "/styleguide/layout/footer/contact/one",
                         "submenu": []
                     },
                     "104100101": {
@@ -675,7 +675,7 @@
                         "target": "",
                         "display_name": "Two column",
                         "class_name": "",
-                        "relative_url": "/styleguide/footer/contact/two",
+                        "relative_url": "/styleguide/layout/footer/contact/two",
                         "submenu": []
                     },
                     "104100102": {
@@ -685,7 +685,7 @@
                         "target": "",
                         "display_name": "Three column",
                         "class_name": "",
-                        "relative_url": "/styleguide/footer/contact/three",
+                        "relative_url": "/styleguide/layout/footer/contact/three",
                         "submenu": []
                     },
                     "104100103": {
@@ -695,7 +695,7 @@
                         "target": "",
                         "display_name": "Four column",
                         "class_name": "",
-                        "relative_url": "/styleguide/footer/contact/four",
+                        "relative_url": "/styleguide/layout/footer/contact/four",
                         "submenu": []
                     }
                 }
@@ -716,7 +716,7 @@
                         "target": "",
                         "display_name": "Error 403",
                         "class_name": "",
-                        "relative_url": "/styleguide/error/403",
+                        "relative_url": "/styleguide/error403",
                         "submenu": []
                     },
                     "106100101": {

@@ -16,6 +16,6 @@ class CMSVideoController extends Controller
     {
         $promos['video'] = app(Video::class)->create(1, true);
 
-        return view('styleguide-video', merge($request->data, $promos));
+        return view('styleguide-cms-video', merge($request->data, $promos));
     }
 }

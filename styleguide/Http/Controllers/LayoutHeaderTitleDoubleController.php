@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Faker\Factory;
 
-class HeaderTitleDoubleController extends Controller
+class LayoutHeaderTitleDoubleController extends Controller
 {
     /**
      * Construct the controller.

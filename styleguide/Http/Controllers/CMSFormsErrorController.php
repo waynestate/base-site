@@ -13,6 +13,6 @@ class CMSFormsErrorController extends Controller
      */
     public function index(Request $request): View
     {
-        return view('styleguide-forms-error', merge($request->data));
+        return view('styleguide-cms-forms-error', merge($request->data));
     }
 }

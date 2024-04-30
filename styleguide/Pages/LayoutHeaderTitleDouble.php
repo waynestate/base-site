@@ -4,7 +4,7 @@ namespace Styleguide\Pages;
 
 use Factories\Page as PageFactory;
 
-class HeaderTitleDouble extends Page
+class LayoutHeaderTitleDouble extends Page
 {
     /**
      * {@inheritdoc}
@@ -13,7 +13,7 @@ class HeaderTitleDouble extends Page
     {
         return app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'HeaderTitleDoubleController',
+                'controller' => 'LayoutHeaderTitleDoubleController',
                 'title' => 'Header title double',
                 'id' => 102100101,
             ],

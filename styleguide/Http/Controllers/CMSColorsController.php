@@ -13,6 +13,6 @@ class CMSColorsController extends Controller
      */
     public function index(Request $request): View
     {
-        return view('styleguide-colors', merge($request->data));
+        return view('styleguide-cms-colors', merge($request->data));
     }
 }

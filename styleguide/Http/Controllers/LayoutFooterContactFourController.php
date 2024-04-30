@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Factories\FooterContact;
 use Illuminate\Http\Request;
 
-class FooterContactFourController extends Controller
+class LayoutFooterContactFourController extends Controller
 {
     /**
      * Display four column footer view.

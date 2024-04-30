@@ -22,6 +22,6 @@ class CMSFigureController extends Controller
      */
     public function index(Request $request): View
     {
-        return view('styleguide-figure', merge($request->data, $this->faker));
+        return view('styleguide-cms-figure', merge($request->data, $this->faker));
     }
 }

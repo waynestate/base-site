@@ -4,7 +4,7 @@ namespace Styleguide\Pages;
 
 use Factories\Page as PageFactory;
 
-class FooterContactOne extends Page
+class LayoutFooterContactOne extends Page
 {
     /**
      * {@inheritdoc}
@@ -13,7 +13,7 @@ class FooterContactOne extends Page
     {
         return app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'FooterContactOneController',
+                'controller' => 'LayoutFooterContactOneController',
                 'title' => 'One column',
                 'id' => 104100100,
                 'content' => [

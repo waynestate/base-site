@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Factories\FooterContact;
 use Illuminate\Http\Request;
 
-class FooterContactOneController extends Controller
+class LayoutFooterContactOneController extends Controller
 {
     /**
      * Display the one column footer view.

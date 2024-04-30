@@ -13,6 +13,6 @@ class CMSFormsController extends Controller
      */
     public function index(Request $request): View
     {
-        return view('styleguide-forms', merge($request->data));
+        return view('styleguide-cms-forms', merge($request->data));
     }
 }

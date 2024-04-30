@@ -22,6 +22,6 @@ class CMSHeadingStylesController extends Controller
      */
     public function index(Request $request): View
     {
-        return view('styleguide-heading-styles', merge($request->data, $this->faker));
+        return view('styleguide-cms-heading-styles', merge($request->data, $this->faker));
     }
 }

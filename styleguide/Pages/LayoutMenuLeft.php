@@ -4,7 +4,7 @@ namespace Styleguide\Pages;
 
 use Factories\Page as PageFactory;
 
-class MenuLeft extends Page
+class LayoutMenuLeft extends Page
 {
     /**
      * {@inheritdoc}
@@ -13,7 +13,7 @@ class MenuLeft extends Page
     {
         return app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'MenuLeftController',
+                'controller' => 'LayoutMenuLeftController',
                 'title' => 'Menu left',
                 'id' => 103100100,
             ],

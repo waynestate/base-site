@@ -47,6 +47,6 @@ class ComponentGuideController extends Controller
             ],
         ];
 
-        return view('styleguide-using-components', merge($request->data, $components));
+        return view('styleguide-component-guide', merge($request->data, $components));
     }
 }

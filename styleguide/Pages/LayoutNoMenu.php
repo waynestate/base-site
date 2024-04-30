@@ -4,10 +4,10 @@ namespace Styleguide\Pages;
 
 use Factories\Page as PageFactory;
 
-class NoMenu extends Page
+class LayoutNoMenu extends Page
 {
     /** {@inheritdoc} **/
-    public $path = '/styleguide/no/menu';
+    public $path = '/styleguide/layout/nomenu';
 
     /**
      * {@inheritdoc}

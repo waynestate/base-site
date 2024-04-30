@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Factories\Flag;
 use Illuminate\Http\Request;
 
-class FlagController extends Controller
+class ComponentFlagController extends Controller
 {
     /**
      * Display the flag at the top of the page.

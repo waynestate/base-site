@@ -4,7 +4,7 @@ namespace Styleguide\Pages;
 
 use Factories\Page as PageFactory;
 
-class Flag extends Page
+class ComponentFlag extends Page
 {
     /**
      * {@inheritdoc}
@@ -13,7 +13,7 @@ class Flag extends Page
     {
         return app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'FlagController',
+                'controller' => 'ComponentFlagController',
                 'title' => 'Flag',
                 'id' => 112100,
             ],
