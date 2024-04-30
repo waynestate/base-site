@@ -13,10 +13,10 @@
     RewriteCond %{HTTP_HOST} ^www\.(.*)
     RewriteRule ^.*$ https://%1%{REQUEST_URI} [L,R=307]
 
-    # If HTTP and we are not on foo.local, www-dev.foo, www-dev2.foo or www2.foo
+    # If HTTP and we are not on foo.local, foo.localhost, www-dev.foo, www-dev2.foo or www2.foo
     # then force HTTPS
     RewriteCond %{HTTPS} !=on
-    RewriteCond %{HTTP_HOST} !(?:\.local|www-dev2?\..*|www2\..*)$
+    RewriteCond %{HTTP_HOST} !(?:\.local|\.localhost|www-dev2?\..*|www2\..*)$
     RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=307]
 
     # Redirect Trailing Slashes If Not A Folder...
@@ -38,7 +38,7 @@
     RewriteCond %{REQUEST_URI} \.(json)$
     RewriteRule ^ - [F]
 
-    RewriteCond %{HTTP_HOST} !(?:\.local|www-dev2?\..*|www2\..*)$
+    RewriteCond %{HTTP_HOST} !(?:\.local|\.localhost|www-dev2?\..*|www2\..*)$
     RewriteCond %{REQUEST_URI} \.(map)$
     RewriteRule ^ - [F]
 
