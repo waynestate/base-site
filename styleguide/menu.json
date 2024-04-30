@@ -25,7 +25,7 @@
                 "target": "",
                 "display_name": "Basic layouts",
                 "class_name": "",
-                "relative_url": "/styleguide/basiclayouts",
+                "relative_url": "/styleguide/cms/basiclayouts",
                 "submenu": []
             },
             "100900": {
@@ -35,7 +35,7 @@
                 "target": "",
                 "display_name": "Heading styles",
                 "class_name": "",
-                "relative_url": "/styleguide/headingstyles",
+                "relative_url": "/styleguide/cms/headingstyles",
                 "submenu": []
             },
             "100400": {
@@ -45,7 +45,7 @@
                 "target": "",
                 "display_name": "Buttons",
                 "class_name": "",
-                "relative_url": "/styleguide/buttons",
+                "relative_url": "/styleguide/cms/buttons",
                 "submenu": []
             },
             "117100": {
@@ -55,7 +55,7 @@
                 "target": "",
                 "display_name": "Video",
                 "class_name": "",
-                "relative_url": "/styleguide/video",
+                "relative_url": "/styleguide/cms/video",
                 "submenu": []
             },
             "113100": {
@@ -65,7 +65,7 @@
                 "target": "",
                 "display_name": "Tables",
                 "class_name": "",
-                "relative_url": "/styleguide/tables",
+                "relative_url": "/styleguide/cms/tables",
                 "submenu": []
             },
             "115100": {
@@ -75,7 +75,7 @@
                 "target": "",
                 "display_name": "Figure",
                 "class_name": "",
-                "relative_url": "/styleguide/figure",
+                "relative_url": "/styleguide/cms/figure",
                 "submenu": []
             },
             "111100": {
@@ -85,7 +85,7 @@
                 "target": "",
                 "display_name": "Forms",
                 "class_name": "",
-                "relative_url": "/styleguide/forms",
+                "relative_url": "/styleguide/cms/forms",
                 "submenu": {
                     "111100100": {
                         "menu_item_id": 111100100,
@@ -94,7 +94,7 @@
                         "target": "",
                         "display_name": "Forms",
                         "class_name": "",
-                        "relative_url": "/styleguide/forms",
+                        "relative_url": "/styleguide/cms/forms",
                         "submenu": []
                     },
                     "111100101": {
@@ -104,7 +104,7 @@
                         "target": "",
                         "display_name": "Form Errors",
                         "class_name": "",
-                        "relative_url": "/styleguide/forms/error",
+                        "relative_url": "/styleguide/cms/forms/error",
                         "submenu": []
                     },
                     "111100102": {
@@ -114,7 +114,7 @@
                         "target": "",
                         "display_name": "Form Slate",
                         "class_name": "",
-                        "relative_url": "/styleguide/forms/slate",
+                        "relative_url": "/styleguide/cms/forms/slate",
                         "submenu": []
                     }
                 }
@@ -126,7 +126,7 @@
                 "target": "",
                 "display_name": "Colors",
                 "class_name": "",
-                "relative_url": "/styleguide/colors",
+                "relative_url": "/styleguide/cms/colors",
                 "submenu": []
             }
         }
@@ -138,7 +138,7 @@
         "target": "",
         "display_name": "Components",
         "class_name": "",
-        "relative_url": "/styleguide/usingcomponents",
+        "relative_url": "/styleguide/component/guide",
         "submenu": {
             "101110600": {
                 "menu_item_id": 101110600,
@@ -147,7 +147,7 @@
                 "target": "",
                 "display_name": "Using components",
                 "class_name": "",
-                "relative_url": "/styleguide/usingcomponents",
+                "relative_url": "/styleguide/component/guide",
                 "submenu": []
             },
             "107100": {
@@ -157,7 +157,7 @@
                 "target": "",
                 "display_name": "Accordion",
                 "class_name": "",
-                "relative_url": "/styleguide/accordion",
+                "relative_url": "/styleguide/component/accordion",
                 "submenu": []
             },
             "114100": {
@@ -167,7 +167,7 @@
                 "target": "",
                 "display_name": "Buttons",
                 "class_name": "",
-                "relative_url": "/styleguide/buttonset",
+                "relative_url": "/styleguide/component/buttons",
                 "submenu": []
             },
             "118100": {
@@ -177,7 +177,7 @@
                 "target": "",
                 "display_name": "Catalog",
                 "class_name": "",
-                "relative_url": "/styleguide/catalog",
+                "relative_url": "/styleguide/component/catalog",
                 "submenu": []
             },
             "109100": {
@@ -187,7 +187,7 @@
                 "target": "",
                 "display_name": "Event listing",
                 "class_name": "",
-                "relative_url": "/styleguide/eventlisting",
+                "relative_url": "/styleguide/component/eventlisting",
                 "submenu": []
             },
             "122100": {
@@ -197,7 +197,7 @@
                 "target": "",
                 "display_name": "Heading",
                 "class_name": "",
-                "relative_url": "/styleguide/headingcomponent",
+                "relative_url": "/styleguide/component/heading",
                 "submenu": []
             },
             "105100": {
@@ -207,7 +207,7 @@
                 "target": "",
                 "display_name": "Hero image",
                 "class_name": "",
-                "relative_url": "/styleguide/hero/bannersmall",
+                "relative_url": "/styleguide/component/hero/bannersmall",
                 "submenu": {
                     "105100108": {
                         "menu_item_id": 105100108,
@@ -216,7 +216,7 @@
                         "target": "",
                         "display_name": "Banner small",
                         "class_name": "",
-                        "relative_url": "/styleguide/hero/bannersmall",
+                        "relative_url": "/styleguide/component/hero/bannersmall",
                         "submenu": []
                     },
                     "105100103": {
@@ -226,7 +226,7 @@
                         "target": "",
                         "display_name": "Banner large",
                         "class_name": "",
-                        "relative_url": "/styleguide/hero/bannerlarge",
+                        "relative_url": "/styleguide/component/hero/bannerlarge",
                         "submenu": []
                     },
                     "105100104": {
@@ -236,7 +236,7 @@
                         "target": "",
                         "display_name": "Carousel",
                         "class_name": "",
-                        "relative_url": "/styleguide/hero/carousel",
+                        "relative_url": "/styleguide/component/hero/carousel",
                         "submenu": []
                     },
                     "105100105": {
@@ -246,7 +246,7 @@
                         "target": "",
                         "display_name": "Text overlay",
                         "class_name": "",
-                        "relative_url": "/styleguide/hero/textoverlay",
+                        "relative_url": "/styleguide/component/hero/textoverlay",
                         "submenu": []
                     },
                     "105100106": {
@@ -256,7 +256,7 @@
                         "target": "",
                         "display_name": "SVG overlay",
                         "class_name": "",
-                        "relative_url": "/styleguide/hero/svgoverlay",
+                        "relative_url": "/styleguide/component/hero/svgoverlay",
                         "submenu": []
                     },
                     "105100107": {
@@ -266,7 +266,7 @@
                         "target": "",
                         "display_name": "Logo overlay",
                         "class_name": "",
-                        "relative_url": "/styleguide/hero/logooverlay",
+                        "relative_url": "/styleguide/component/hero/logooverlay",
                         "submenu": []
                     },
                     "105100109": {
@@ -276,7 +276,7 @@
                         "target": "",
                         "display_name": "Half",
                         "class_name": "",
-                        "relative_url": "/styleguide/hero/half",
+                        "relative_url": "/styleguide/component/hero/half",
                         "submenu": []
                     }
                 }
@@ -288,7 +288,7 @@
                 "target": "",
                 "display_name": "Icons",
                 "class_name": "",
-                "relative_url": "/styleguide/iconscomponent",
+                "relative_url": "/styleguide/component/icons",
                 "submenu": []
             },
             "123100": {
@@ -298,7 +298,7 @@
                 "target": "",
                 "display_name": "Page content",
                 "class_name": "",
-                "relative_url": "/styleguide/components/pagecontent",
+                "relative_url": "/styleguide/component/pagecontent",
                 "submenu": []
             },
             "108100": {
@@ -308,7 +308,7 @@
                 "target": "",
                 "display_name": "News listing",
                 "class_name": "",
-                "relative_url": "/styleguide/articlelisting",
+                "relative_url": "/styleguide/component/articlelisting",
                 "submenu": []
             },
             "116100": {
@@ -318,7 +318,7 @@
                 "target": "",
                 "display_name": "Single promo",
                 "class_name": "",
-                "relative_url": "/styleguide/singlepromo",
+                "relative_url": "/styleguide/component/singlepromo",
                 "submenu": []
             },
             "119100": {
@@ -328,7 +328,7 @@
                 "target": "",
                 "display_name": "Spotlight",
                 "class_name": "",
-                "relative_url": "/styleguide/spotlightcomponent",
+                "relative_url": "/styleguide/component/spotlight",
                 "submenu": []
             }
         }
