@@ -87,7 +87,7 @@ class ChildpageWithComponentsController extends Controller
     </tbody>
 </table>
 ';
-        $request->data['base']['components'] = [
+        $components = [
             'accordion' => [
                 'data' => [
                     0 => [
@@ -298,6 +298,9 @@ class ChildpageWithComponentsController extends Controller
 
             config(['base.hero_full_controllers' => [$request->data['base']['page']['controller']]]);
         }
+
+        // Assign components globally
+        $request->data['base']['components'] = $components;
 
         return view('childpage', merge($request->data));
     }
