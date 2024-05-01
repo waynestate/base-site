@@ -25,60 +25,16 @@ class ComponentSinglePromoController extends Controller
     {
         $request->data['base']['page']['content']['main'] = '';
 
-        $promotion_group_details = '
-<table class="mt-2">
-    <thead>
-        <tr>
-            <th colspan="2">Available fields</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td class="font-bold">Title</td>
-            <td>Bold text.</td>
-        </tr>
-        <tr>
-            <td class="font-bold">Link</td>
-            <td>
-Optional external link.<br />
-Component flag "singlePromoView" sets the link to the individual promo item view.
-            </td>
-        </tr>
-        <tr>
-            <td class="font-bold">Excerpt</td>
-            <td>Optional smaller text under the title.</td>
-        </tr>
-        <tr>
-            <td class="font-bold">Description</td>
-            <td>
-Optional smaller text under the title and/or excerpt.<br />
-You might use this area on a singe promo view page and hide it from the catalog component.
-            </td>
-        </tr>
-        <tr>
-            <td class="font-bold">Primary image</td>
-            <td>Minimum width of 600px jpg, png.</td>
-        </tr>
-    </tbody>
-</table>
-';
-
-        $component_configuration = '
-<table class="no-stripe">
-    <thead>
-        <tr>
-            <th class="w-2/5">Page field</th>
-            <th>Data</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                <pre class="w-full">modular-promo-column-1</pre>
-            </td>
-            <td>
-<pre class="w-full" tabindex="0">
-{
+        $components = [
+            'accordion' => [
+                'data' => [
+                    0 => [
+                        'title' => 'Component configuration',
+                        'promo_item_id' => 'componentConfiguration',
+                        'description' => '',
+                        'tr1' => [
+                            'Page field' => 'modular-promo-column-1',
+                            'Data' => '{
 "id":000000,
 "heading":"Promo column",
 "config":"randomize|limit:1|youtube",
@@ -86,48 +42,36 @@ You might use this area on a singe promo view page and hide it from the catalog 
 "showExcerpt":true,
 "showDescription":false,
 "gradientOverlay":false
-}
-</pre>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <pre class="w-full">modular-promo-row-1</pre>
-            </td>
-            <td>
-<pre class="w-full" tabindex="0">
-{
+}',
+                        ],
+                        'tr2' => [
+                            'Page field' => 'modular-promo-row-1',
+                            'Data' => '{
 "id":000000,
 "heading":"Promo row",
 "config":"randomize|limit:1|youtube",
 "singlePromoView":true,
 "showExcerpt":true,
 "showDescription":false,
-"imagePosition":alternate,
-}
-</pre>
-            </td>
-        </tr>
-    </tbody>
-</table>
-';
-
-        $components = [
-            'accordion' => [
-                'data' => [
-                    0 => [
-                        'title' => 'Component configuration',
-                        'promo_item_id' => 'componentConfiguration',
-                        'description' => $component_configuration,
+"imagePosition":"alternate"
+}',
+                        ],
                     ],
                     1 => [
                         'title' => 'Promotion group details',
                         'promo_item_id' => 'promotionGroupDetails',
-                        'description' => $promotion_group_details,
+                        'description' => '',
+                        'table' => [
+                            'Title' => 'Bold text.',
+                            'Link' => 'Optional external link.<br /> Component flag "singlePromoView" sets the link to the individual promo item view.',
+                            'Excerpt' => 'Optional smaller text under the title.',
+                            'Description' => 'Optional smaller text under the title and/or excerpt. <br /> You might use this area on a singe promo view page and hide it from the catalog component.',
+                            'Primary image' => 'Minimum width of 600px jpg, png.',
+                        ],
                     ],
                 ],
                 'component' => [
-                    'filename' => 'accordion',
+                    'filename' => 'accordion-styleguide',
                 ],
             ],
             'promo-column-1' => [

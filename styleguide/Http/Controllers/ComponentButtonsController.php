@@ -123,7 +123,7 @@ class ComponentButtonsController extends Controller
                         ],
                     ],
                     1 => [
-                        'promo_item_id' => 'promoGroupDetails',
+                        'promo_item_id' => 'promotionGroupDetails',
                         'title' => 'Promotion group details',
                         'description' => '',
                         'table' => [

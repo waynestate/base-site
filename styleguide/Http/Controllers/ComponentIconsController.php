@@ -27,110 +27,53 @@ class ComponentIconsController extends Controller
 <p>Present a list of promotional items accompanied by icons, offering a visually appealing and informative display.</p>
 ';
 
-        $promotion_group_details = '
-<table class="mt-2">
-    <thead>
-        <tr>
-            <th colspan="2">Available fields</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td class="font-bold">Title</td>
-            <td>Bold text.</td>
-        </tr>
-        <tr>
-            <td class="font-bold">Link</td>
-            <td>Optional external link. Component flag "singlePromoView" sets the link to the individual promo item view.</td>
-        </tr>
-        <tr>
-            <td class="font-bold">Excerpt</td>
-            <td>Optional smaller text under the title.</td>
-        </tr>
-        <tr>
-            <td class="font-bold">Description</td>
-            <td>Optional smaller text under the title and/or excerpt. You might use this area on a singe promo view page and hide it from the component.</td>
-        </tr>
-        <tr>
-            <td class="font-bold">Primary image</td>
-            <td>Minimum width of 160px svg, png, jpg.</td>
-        </tr>
-    </tbody>
-</table>
-';
-
-        $component_configuration = '
-<table class="no-stripe">
-    <thead>
-        <tr>
-            <th class="w-2/5">Page field</th>
-            <th>Data</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                <pre class="w-full">modular-icons-column-1</pre>
-            </td>
-            <td>
-<pre class="w-full" tabindex="0">
-{
-"id":000000,
-"heading":"Icons column"
-}
-</pre>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <pre class="w-full">modular-icons-row-1</pre>
-            </td>
-            <td>
-<pre class="w-full" tabindex="0">
-{
-"id":000000,
-"heading":"Icons row",
-"columns":2
-}
-</pre>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <pre class="w-full">modular-icons-top-row-1</pre>
-            </td>
-            <td>
-<pre class="w-full" tabindex="0">
-{
-"id":000000,
-"heading":"Icons top row",
-"columns":4,
-"showDescription":true
-}
-</pre>
-            </td>
-        </tr>
-    </tbody>
-</table>
-';
-
         $components = [
-            'accordion-1' => [
+            'accordion' => [
                 'data' => [
                     0 => [
                         'title' => 'Component configuration',
                         'promo_item_id' => 'componentConfiguration',
-                        'description' => $component_configuration,
+                        'description' => '',
+                        'tr1' => [
+                            'Page field' => 'modular-icons-column-1',
+                            'Data' => '{
+"id":000000,
+"heading":"Icons column"
+}',
+                        ],
+                        'tr2' => [
+                            'Page field' => 'modular-icons-row-1',
+                            'Data' => '{
+"id":000000,
+"heading":"Icons row",
+"columns":2
+}',
+                        ],
+                        'tr3' => [
+                            'Page field' => 'modular-icons-top-row-1',
+                            'Data' => '{
+"id":000000,
+"heading":"Icons top row",
+"columns":4,
+"showDescription":true
+}',
+                        ],
                     ],
                     1 => [
                         'title' => 'Promotion group details',
                         'promo_item_id' => 'promotionGroupDetails',
-                        'description' => $promotion_group_details,
+                        'description' => '',
+                        'table' => [
+                            'Title' => 'Bold text.',
+                            'Link' => 'Optional external link. Component flag "singlePromoView" sets the link to the individual promo item view.',
+                            'Excerpt' => 'Optional smaller text under the title.',
+                            'Description' => 'Optional smaller text under the title and/or excerpt. You might use this area on a singe promo view page and hide it from the component.',
+                            'Primary image' => 'Minimum width of 160px svg, png, jpg.',
+                        ],
                     ],
                 ],
                 'component' => [
-                    'filename' => 'accordion',
-                    'showDescription' => false,
+                    'filename' => 'accordion-styleguide',
                 ],
             ],
             'icons-column-1' => [

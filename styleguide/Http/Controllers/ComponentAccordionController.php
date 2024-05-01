@@ -34,7 +34,7 @@ class ComponentAccordionController extends Controller
                         ],
                     ],
                     1 => [
-                        'promo_item_id' => 'promoGroupDetails',
+                        'promo_item_id' => 'promotionGroupDetails',
                         'title' => 'Promo group details',
                         'description' => '',
                         'table' => [

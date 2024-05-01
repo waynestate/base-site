@@ -19,40 +19,23 @@ class ComponentHeadingController extends Controller
 <p>Add a page heading that spans an entire row. Suggested to use over two related columns, like an "Events" heading over a promo-column featured image, and an events-column. You would not use this when you can add a heading to an individual component.</p>
 ';
 
-        $component_configuration = '
-<table class="mt-2">
-    <thead>
-        <tr>
-            <th>Page field</th>
-            <th>Data</th>
-        </tr>
-    </thead>
-    <tr>
-        <td>
-<pre class="w-full">modular-heading</pre>
-        </td>
-        <td>
-<pre class="w-full" tabindex="0">
-{
-"heading": "My heading"
-}
-</pre>
-        </td>
-    </tr>
-</table>
-';
-
         $components = [
-            'accordion-1' => [
+            'accordion' => [
                 'data' => [
                     0 => [
                         'title' => 'Component configuration',
                         'promo_item_id' => 'componentConfiguration',
-                        'description' => $component_configuration,
+                        'description' => '',
+                        'tr1' => [
+                            'Page field' => 'modular-heading-1',
+                            'Data' => '{
+"heading":"My heading"
+}',
+                        ],
                     ],
                 ],
                 'component' => [
-                    'filename' => 'accordion',
+                    'filename' => 'accordion-styleguide',
                 ],
             ],
             'heading-1' => [

@@ -28,7 +28,7 @@
                         </tbody>
                     @endif
 
-                    @if($item['promo_item_id'] === 'promoGroupDetails')
+                    @if($item['promo_item_id'] === 'promotionGroupDetails')
                         <thead>
                             <tr>
                                 <th colspan="2">Available fields</th>
