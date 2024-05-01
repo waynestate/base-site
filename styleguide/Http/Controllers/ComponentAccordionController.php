@@ -15,52 +15,7 @@ class ComponentAccordionController extends Controller
     public function index(Request $request): View
     {
         $request->data['base']['page']['content']['main'] = '
-<p>Accordions are helpful for pages where a person needs to scan a number of (more than 8) headings and choosing a single item to get information.</p>
-';
-
-        $promotion_group_details = '
-<table class="mt-2">
-    <thead>
-        <tr>
-            <th colspan="2">Available fields</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td class="font-bold">Title</td>
-            <td>Text on the closed accordion.</td>
-        </tr>
-        <tr>
-            <td class="font-bold">Description</td>
-            <td>Content when the accordion is clicked open.</td>
-        </tr>
-    </tbody>
-</table>
-';
-        $component_configuration = '
-<table>
-    <thead>
-        <tr>
-            <th>Page field</th>
-            <th>Data</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                <pre class="w-full">modular-accordion-1</pre>
-            </td>
-            <td>
-<pre class="w-full" tabindex="0">
-{
-"id":000000,
-"heading":"Accordion"
-}
-</pre>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<p>Use accordions on pages where a person needs to scan a number of headings and choosing a single item to get information.</p>
 ';
 
         $components = [
@@ -69,16 +24,26 @@ class ComponentAccordionController extends Controller
                     0 => [
                         'promo_item_id' => 'componentConfiguration',
                         'title' => 'Component configuration',
-                        'description' => $component_configuration,
+                        'description' => '',
+                        'Page field' => '<code>modular-accordion</code>',
+                        'Data' => '<pre>{
+"id":0000,
+"heading":"My accordion"
+}</pre>',
                     ],
                     1 => [
                         'promo_item_id' => 'promoGroupDetails',
-                        'title' => 'Promotion group details',
-                        'description' => $promotion_group_details,
+                        'title' => 'Promo group details',
+                        'description' => '',
+                        'Title' => 'Text on closed accordion',
+                        'Description' => 'Content when the accordion is clicked open',
+                        'Filename' => 'Optional image, variable size',
+                        'Excerpt' => 'Image caption',
+                        'Option' => 'Image orientation: Right, Left, Center',
                     ],
                 ],
                 'component' => [
-                    'filename' => 'accordion',
+                    'filename' => 'accordion-styleguide',
                 ],
             ],
             'accordion-2' => [
