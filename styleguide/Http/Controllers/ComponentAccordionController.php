@@ -25,21 +25,25 @@ class ComponentAccordionController extends Controller
                         'promo_item_id' => 'componentConfiguration',
                         'title' => 'Component configuration',
                         'description' => '',
-                        'Page field' => '<code>modular-accordion</code>',
-                        'Data' => '<pre>{
-"id":0000,
+                        'tr1' => [
+                            'Page field' => 'modular-accordion-1',
+                            'Data' => '{
+"id":000000,
 "heading":"My accordion"
-}</pre>',
+}',
+                        ],
                     ],
                     1 => [
                         'promo_item_id' => 'promoGroupDetails',
                         'title' => 'Promo group details',
                         'description' => '',
-                        'Title' => 'Text on closed accordion',
-                        'Description' => 'Content when the accordion is clicked open',
-                        'Filename' => 'Optional image, variable size',
-                        'Excerpt' => 'Image caption',
-                        'Option' => 'Image orientation: Right, Left, Center',
+                        'table' => [
+                            'Title' => 'Text on closed accordion',
+                            'Description' => 'Content when the accordion is clicked open',
+                            'Filename' => 'Optional image, variable size',
+                            'Excerpt' => 'Image caption',
+                            'Option' => 'Image orientation: Right, Left, Center',
+                        ],
                     ],
                 ],
                 'component' => [

@@ -8,7 +8,7 @@
             <div class="content">
                 {!! $item['description'] !!}
 
-                <table style="cell-padding: 5px;" class="mt-4 {{ $loop->first ? 'no-stripe' : '' }}">
+                <table style="cell-padding: 5px;" class="mt-4 {{ ($item['promo_item_id'] === 'componentConfiguration') ? 'no-stripe' : '' }}">
                     @if($item['promo_item_id'] === 'componentConfiguration')
                         <thead>
                             <tr>
