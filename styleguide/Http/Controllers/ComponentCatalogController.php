@@ -36,22 +36,16 @@ class ComponentCatalogController extends Controller
 <p>The catalog component is ideal for showcasing a collection of items from a single promo group in a multiple-column grid or single-column list format.</p>
 ';
 
-        $component_configuration = '
-<table>
-    <thead>
-        <tr>
-            <th>Page field</th>
-            <th>Data</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                <pre class="w-full">modular-catalog-1</pre>
-            </td>
-            <td>
-<pre class="w-full" tabindex="0">
-{
+        $components = [
+            'accordion' => [
+                'data' => [
+                    2 => [
+                        'promo_item_id' => 'componentConfiguration',
+                        'title' => 'Component configuration',
+                        'description' => '<p>Image size can only be used with a one-column catalog.</p>',
+                        'tr1' => [
+                            'Page field' => 'modular-catalog-1',
+                            'Data' => '{
 "id":000000,
 "heading":"Catalog",
 "config":"randomize|limit:3",
@@ -61,62 +55,25 @@ class ComponentCatalogController extends Controller
 "showDescription":false,
 "groupByOptions":false,
 "gradientOverlay":false,
-"imageSize":small
-}
-</pre>
-            </td>
-        </tr>
-    </tbody>
-</table>
-';
-        $promotion_group_details = '
-<table class="mt-2">
-    <thead>
-        <tr>
-            <th colspan="2">Available fields</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td class="font-bold">Title</td>
-            <td>Bold text.</td>
-        </tr>
-        <tr>
-            <td class="font-bold">Link</td>
-            <td>Optional external link. Component flag "singlePromoView" sets the link to the individual promo item view.</td>
-        </tr>
-        <tr>
-            <td class="font-bold">Excerpt</td>
-            <td>Optional smaller text under the title.</td>
-        </tr>
-        <tr>
-            <td class="font-bold">Description</td>
-            <td>Optional smaller text under the title and/or excerpt. You might use this area on a singe promo view page and hide it from the catalog component.</td>
-        </tr>
-        <tr>
-            <td class="font-bold">Primary image</td>
-            <td>Minimum width of 600px jpg, png.</td>
-        </tr>
-    </tbody>
-</table>
-';
-
-        $components = [
-            'accordion' => [
-                'data' => [
-                    0 => [
-                        'title' => 'Component configuration',
-                        'promo_item_id' => 'componentConfiguration',
-                        'description' => $component_configuration,
+"imageSize":"small"
+}',
+                        ],
                     ],
                     1 => [
+                        'promo_item_id' => 'promoGroupDetails',
                         'title' => 'Promotion group details',
-                        'promo_item_id' => 'promotionGroupDetails',
-                        'description' => $promotion_group_details,
+                        'description' => '',
+                        'table' => [
+                            'Title' => 'Bold text.',
+                            'Link' => 'Optional external link. Component flag "singlePromoView" sets the link to the individual promo item view.',
+                            'Excerpt' => 'Optional smaller text under the title.',
+                            'Description' => 'Optional smaller text under the title and/or excerpt. You might use this area on a singe promo view page and hide it from the catalog component.',
+                            'Primary image' => 'Minimum width of 600px jpg, png.',
+                        ],
                     ],
                 ],
                 'component' => [
-                    'filename' => 'accordion',
+                    'filename' => 'accordion-styleguide',
                 ],
             ],
             'catalog-1' => [

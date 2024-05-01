@@ -9,7 +9,7 @@
        
     <div class="grid grid-cols-1 md:grid-cols-2 items-start gap-y-8 sm:gap-x-4 lg:gap-x-8 mt-8 mb-4">
         <div class="col-span-full">
-            @include('components/accordion', ['data' => $accordion['data'], 'component' => $accordion['component']])
+            @include('components/accordion-styleguide', ['data' => $accordion['data'], 'component' => $accordion['component']])
         </div>
         <div class="col-span-full">
             <h2 class="mt-0">{{ $button_row_1['component']['heading'] }}</h2>

@@ -6,9 +6,9 @@
         <li>
             <a href="#definition-{{ $item['promo_item_id'] }}" id="definition-{{ $item['promo_item_id'] }}"><span aria-hidden="true"></span>{{ $item['title'] }}</a>
             <div class="content">
-                <p>{!! $item['description'] !!}</p>
+                {!! $item['description'] !!}
 
-                <table style="cell-padding: 5px;" class="{{ $loop->first ? 'no-stripe' : '' }}">
+                <table style="cell-padding: 5px;" class="mt-4 {{ $loop->first ? 'no-stripe' : '' }}">
                     @if($item['promo_item_id'] === 'componentConfiguration')
                         <thead>
                             <tr>
@@ -16,29 +16,29 @@
                                 <th>Data</th>
                             </tr>
                         </thead>
-                        <tr>
-                            @foreach($item as $key => $detail)
-                                @if($key != 'title' && $key != 'description' && $key != 'promo_item_id')
-                                    <td>
-                                        {!! $detail !!}
-                                    </td>
+                        <tbody>
+                            @foreach($item as $tr => $details)
+                                @if(strpos($tr, 'tr') !== false)
+                                    <tr>
+                                        <td><pre class="w-full">{!! $details['Page field'] !!}</pre></td>
+                                        <td><pre class="w-full">{!! $details['Data'] !!}</pre></td>
+                                    </tr>
                                 @endif
                             @endforeach
-                        </tr>
+                        </tbody>
                     @endif
+
                     @if($item['promo_item_id'] === 'promoGroupDetails')
                         <thead>
                             <tr>
                                 <th colspan="2">Available fields</th>
                             </tr>
                         </thead>
-                        @foreach($item as $key => $detail)
-                            @if($key != 'title' && $key != 'description' && $key != 'promo_item_id')
+                        @foreach($item['table'] as $key => $detail)
                             <tr>
                                 <td class="font-bold">{{ $key }}</td>
                                 <td>{!! $detail !!}</td>
                             </tr>
-                            @endif
                         @endforeach
                     @endif
                 </table>

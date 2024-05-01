@@ -27,86 +27,6 @@ class ComponentButtonsController extends Controller
         $request->data['base']['page']['content']['main'] = '
 <p>This component serves as the buttons under the side menu and as button components on your page.</p>
 ';
-        $promotion_group_details = '
-<table class="mt-2">
-    <thead>
-        <tr>
-            <th colspan="2">Available fields</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td class="font-bold">Title</td>
-            <td>Text to appear on the button.</td>
-        </tr>
-        <tr>
-            <td class="font-bold">Link</td>
-            <td>Your URL. When linking to a pdf, "(pdf)" is added automatically.</td>
-        </tr>
-        <tr>
-            <td class="font-bold">Excerpt</td>
-            <td>Add a 2-3 word second line of text.</td>
-        </tr>
-        <tr>
-            <td class="font-bold">Options</td>
-            <td>
-                <strong>Default:</strong> Default, Green, Image<br />
-                <strong>Options available by request:</strong> Green gradient, Gold, Gold gradient<br />View these colors on the <a href="/styleguide/buttons">Buttons</a> page.</p>
-            </td>
-        </tr>
-        <tr>
-            <td class="font-bold">Primary image</td>
-            <td>
-            Icons: 40x40px PNG, SVG<br />Images: 600x218px JPG, PNG recommended with descriptive alternative text.<br />Text within the image is not recommended because it cannot maintain readability when scaled.</td>
-        </tr>
-        <tr>
-            <td class="font-bold">Secondary image</td>
-            <td>SVG overlay image of the same dimensions as the primary image.<br />Text can be used within the SVG because it is scalable. You must provide enough contrast between the background and overlay image to meet accessibility standards. Secondary image alternative text not used.</td>
-        </tr>
-    </tbody>
-</table>
-';
-        $component_configuration = '
-<table class="no-stripe">
-    <thead>
-        <tr>
-            <th class="md:w-2/5">Page field</th>
-            <th>Data</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                <pre class="w-full">modular-button-column-1</pre>
-            </td>
-            <td>
-<pre class="w-full" tabindex="0">
-{
-"id":000000,
-"heading":"Buttons",
-"config":"limit:3"
-}
-</pre>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <pre class="w-full">modular-button-row-1</pre>
-            </td>
-            <td>
-<pre class="w-full" tabindex="0">
-{
-"id":000000,
-"heading":"Buttons",
-"config":"limit:3",
-"columns":3
-}
-</pre>
-            </td>
-        </tr>
-    </tbody>
-</table>
-';
 
         // Default button
         $default[1] = app(Button::class)->create(1, true, [
@@ -183,16 +103,41 @@ class ComponentButtonsController extends Controller
                     2 => [
                         'promo_item_id' => 'componentConfiguration',
                         'title' => 'Component configuration',
-                        'description' => $component_configuration,
+                        'description' => '',
+                        'tr1' => [
+                            'Page field' => 'modular-button-column-1',
+                            'Data' => '{
+"id":000000,
+"heading":"Buttons",
+"config":"limit:3"
+}',
+                        ],
+                        'tr2' => [
+                            'Page field' => 'modular-button-row-1',
+                            'Data' => '{
+"id":000000,
+"heading":"Buttons",
+"config":"limit:3",
+"columns":3
+}',
+                        ],
                     ],
                     1 => [
                         'promo_item_id' => 'promoGroupDetails',
                         'title' => 'Promotion group details',
-                        'description' => $promotion_group_details,
+                        'description' => '',
+                        'table' => [
+                            'Title' => 'Text to appear on the button.',
+                            'Link' => 'Your URL. When linking to a pdf, "(pdf)" is added automatically.',
+                            'Excerpt' => 'Add a 2-3 word second line of text.',
+                            'Options' => 'Default: Default, Green, Image, Green gradient',
+                            'Primary image' => 'Icons: 40x40px PNG, SVG <br /> Images: 600x218px JPG, PNG recommended with descriptive alternative text. <br /> Text within the image is not allowed; it cannot maintain readability when scaled.',
+                            'Secondary image' => 'SVG overlay image of the same dimensions as the primary image. <br /> Text can be used within the SVG because it is scalable. You must provide enough contrast between the background and overlay image to meet accessibility standards. Secondary image alternative text not used.',
+                        ],
                     ],
                 ],
                 'component' => [
-                    'filename' => 'accordion',
+                    'filename' => 'accordion-styleguide',
                 ],
             ],
             'button_row_1' => [
