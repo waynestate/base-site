@@ -31,7 +31,7 @@
     @endif
 
     @if(!empty($base['flag']))
-        @include('components.flag', ['flag' => $base['flag'], 'class' => 'flag--mt'])
+        @include('components.flag', ['flag' => $base['flag']])
     @endif
 </header>
 
@@ -67,7 +67,9 @@
                 @endif
 
                 @if(!empty($base['flag']))
-                    @include('components.flag', ['flag' => $base['flag'], 'class' => 'flag--sm'])
+                    <div class="min-w-full px-4 mt:px-0 mb-4 mt:hidden">
+                        <a href="{{ $base['flag']['link'] }}" class="button w-full flag__title">{{ $base['flag']['title'] }} <span class="flag__excerpt">{{ $base['flag']['excerpt'] }}</span></a>
+                    </div>
                 @endif
 
                 @yield('below_menu')

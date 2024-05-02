@@ -23,9 +23,9 @@ class Flag implements FactoryContract
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
                 'class' => 'flag',
-                'title' => 'Make a <em>Gift</em>',
+                'title' => 'Make a',
                 'link' => 'https://wayne.edu',
-                //'excerpt' => 'Gift',
+                'excerpt' => 'Gift',
             ];
 
             $data[$i] = array_replace_recursive($data[$i], $options);
