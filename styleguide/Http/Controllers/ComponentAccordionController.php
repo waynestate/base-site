@@ -40,9 +40,9 @@ class ComponentAccordionController extends Controller
                         'table' => [
                             'Title' => 'Text on closed accordion',
                             'Description' => 'Content when the accordion is clicked open',
-                            'Filename' => 'Optional image, variable size',
+                            'Primary image' => 'Optional image',
                             'Excerpt' => 'Image caption',
-                            'Option' => 'Image orientation: Right, Left, Center',
+                            'Option' => 'Image orientation: Left, Center, Right(default)',
                         ],
                     ],
                 ],
