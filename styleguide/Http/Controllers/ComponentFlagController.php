@@ -26,8 +26,8 @@ class ComponentFlagController extends Controller
                         'title' => 'Promo group details',
                         'description' => '',
                         'table' => [
-                            'Title' => 'Smaller upercase text',
-                            'Excerpt' => 'Larger italicized text',
+                            'Title' => 'Smaller upercase text. Emphasize part of your title with <code>&lt;em&gt;</code> for larger, italicized text.',
+                            'Excerpt' => 'Optional larger italicized text, if not using em in the title.',
                             'Link' => 'URL',
                         ],
                     ],
