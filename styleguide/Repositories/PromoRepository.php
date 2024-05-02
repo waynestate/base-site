@@ -3,22 +3,26 @@
 namespace Styleguide\Repositories;
 
 use App\Repositories\PromoRepository as Repository;
+use Contracts\Repositories\ModularPageRepositoryContract;
+use Faker\Factory;
 use Factories\FooterContact;
 use Factories\FooterSocial;
 use Factories\HeroImage;
 use Factories\HeroImageRotate;
 use Factories\GenericPromo;
 use Factories\Button;
-use Faker\Factory;
 
 class PromoRepository extends Repository
 {
     /**
      * Construct the factory.
      */
-    public function __construct(Factory $faker)
-    {
+    public function __construct(
+        Factory $faker,
+        ModularPageRepositoryContract $modular
+    ) {
         $this->faker = $faker->create();
+        $this->modular = $modular;
     }
 
     /**

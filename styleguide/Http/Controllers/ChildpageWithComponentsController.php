@@ -21,90 +21,9 @@ class ChildpageWithComponentsController extends Controller
     public function index(Request $request): View
     {
         $request->data['base']['page']['content']['main'] = '
-<h2 class="mt-0">Page body</h2>
-<p>This an example of CMS page content on a childpage with components, moved to the placement of a page field.</p>
+<p>This an example of CMS page content on a childpage with components.</p>
 ';
-        $component_configuration = '
-<table>
-    <thead>
-        <tr>
-            <th>Page field</th>
-            <th>Data</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                <pre class="w-full">modular-catalog-1</pre>
-            </td>
-            <td>
-<pre class="w-full" tabindex="0">
-{
-"id":000000,
-"heading":"Catalog",
-"config":"randomize|limit:1|page_id|youtube",
-"columns":3,
-"singlePromoView":true,
-"showExcerpt":true,
-"showDescription":false,
-"groupByOptions":false,
-"gradientOverlay":false
-}
-</pre>
-            </td>
-        </tr>
-    </tbody>
-</table>
-';
-        $promotion_group_details = '
-<table class="mt-2">
-    <thead>
-        <tr>
-            <th colspan="2">Available fields</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td class="font-bold">Title</td>
-            <td>Bold text.</td>
-        </tr>
-        <tr>
-            <td class="font-bold">Link</td>
-            <td>Optional external link. Component flag "singlePromoView" sets the link to the individual promo item view.</td>
-        </tr>
-        <tr>
-            <td class="font-bold">Excerpt</td>
-            <td>Optional smaller text under the title.</td>
-        </tr>
-        <tr>
-            <td class="font-bold">Description</td>
-            <td>Optional smaller text under the title and/or excerpt. You might use this area on a singe promo view page and hide it from the catalog component.</td>
-        </tr>
-        <tr>
-            <td class="font-bold">Primary image</td>
-            <td>Minimum width of 600px jpg, png.</td>
-        </tr>
-    </tbody>
-</table>
-';
-        $request->data['base']['components'] = [
-            'accordion' => [
-                'data' => [
-                    0 => [
-                        'title' => 'Component configuration',
-                        'promo_item_id' => 'componentConfiguration',
-                        'description' => $component_configuration,
-                    ],
-                    1 => [
-                        'title' => 'Promotion group details',
-                        'promo_item_id' => 'promotionGroupDetails',
-                        'description' => $promotion_group_details,
-                    ],
-                ],
-                'component' => [
-                    'filename' => 'accordion',
-                ],
-            ],
+        $components = [
             'hero-1' => [
                 'data' => app(HeroImage::class)->create(1, false, [
                     'relative_url' => '/styleguide/image/3200x600',
@@ -269,18 +188,10 @@ class ChildpageWithComponentsController extends Controller
                     'filename' => 'button-column',
                 ],
             ],
-
-            'page-content-row' => [
-                'data' => [
-                    0 => [
-                        'title' => 'Page content',
-                    ]
-                ],
-                'component' => [
-                    'filename' => 'page-content-row',
-                ]
-            ]
         ];
+
+        // Assign components globally
+        $request->data['base']['components'] = $components;
 
         if(!empty($request->data['base']['components'])) {
             // Set hero from components
