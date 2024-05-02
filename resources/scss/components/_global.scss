@@ -56,10 +56,7 @@ figure {
     }
 
     figcaption {
-        @apply text-sm text-gray-500 text-left;
-
-        display: table-caption;
-        caption-side: bottom;
+        @apply text-sm text-green italic text-left mt-1 table-caption caption-bottom;
     }
 
     @screen mt {
