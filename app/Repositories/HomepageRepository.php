@@ -31,14 +31,14 @@ class HomepageRepository implements HomepageRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getHomepagePromos(int $page_id = 0)
+    public function getHomepagePromos(array $data): array
     {
         $group_reference = [
             123 => 'example',
         ];
 
         $group_config = [
-            'example' => 'page_id:'.$page_id.'|randomize|first',
+            'example' => 'randomize|first',
         ];
 
         $params = [
