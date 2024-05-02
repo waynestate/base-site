@@ -20,9 +20,19 @@ class HomepageRepository extends Repository
      */
     public function getHomepagePromos(int $page_id = null)
     {
-        return [
-            //'key' => app(\Factories\YourFactory::class)->create(5),
-            'promos' => app(\Factories\GenericPromo::class)->create(5),
+        $promos => [
+            'homepageItems' => app(\Factories\GenericPromo::class)->create(5, false),
+            'components' => [
+                'catalog-1'=> [
+                    'data' => app(\Factories\CatalogPromo::class)->create(4, false),
+                    'component' => [
+                        'filename' => 'catalog-1',
+                        'gradientOverlay' => true,
+                    ],
+                ],
+            ],
         ];
+
+        return $promos;
     }
 }

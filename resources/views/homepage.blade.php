@@ -7,6 +7,11 @@
         {!! $base['page']['content']['main'] !!}
     </div>
 
+    @if(!empty($components['catalog-1']['data']))
+        <div>
+            @include('components.catalog', ['data' => $components['catalog-1']['data'], 'component' => $components['catalog-1']['component'], 'class' => 'my-class'])
+        </div>
+    @endif
     @if(!empty($articles['data']) || !empty($events))
         <div class="row md:flex gap-4 xl:gap-8">
             @if(!empty($articles['data']))
