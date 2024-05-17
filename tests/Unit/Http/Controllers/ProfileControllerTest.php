@@ -55,7 +55,7 @@ final class ProfileControllerTest extends TestCase
         // Construct the profile repository
         $profileRepository = app(ProfileRepository::class, ['wsuApi' => $wsuApi]);
 
-        // Construct the news controller
+        // Construct the profile controller
         $this->profileController = app(ProfileController::class, ['profile' => $profileRepository]);
 
         // Call the profile listing
