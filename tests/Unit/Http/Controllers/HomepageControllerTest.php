@@ -7,7 +7,6 @@ use Tests\TestCase;
 use Illuminate\Http\Request;
 use App\Http\Controllers\HomepageController;
 use App\Repositories\ModularPageRepository;
-use App\Repositories\PromoRepository;
 use Styleguide\Pages\Homepage;
 use Factories\Page;
 use Factories\GenericPromo;
@@ -17,8 +16,7 @@ use Waynestate\Api\Connector;
 
 final class HomepageControllerTest extends TestCase
 {
-
-    #[Test]  
+    #[Test]
     #[Description('Test if the homepage controller is returning the modular component array data.')]
     public function homepage_with_modular_components_should_return_to_the_view(): void
     {
@@ -53,9 +51,9 @@ final class HomepageControllerTest extends TestCase
         // Mock the connector and set the return
         $wsuApi = Mockery::mock(Connector::class);
         $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
-        
+
         // Pass in the modular repository component data
-       // $modularComponents['modularComponents'] = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
+        // $modularComponents['modularComponents'] = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
 
         // Create a modular catalog component
         $request->data['base']['data']['modular-catalog-1'] = json_encode(['id' => $promo_group_id]);
