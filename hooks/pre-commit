@@ -1,4 +1,37 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+faketty () {
+  # Create a temporary file for storing the status code
+  tmp=$(mktemp)
+
+  # Ensure it worked or fail with status 99
+  [ "$tmp" ] || return 99
+
+  # Produce a script that runs the command provided to faketty as
+  # arguments and stores the status code in the temporary file
+  cmd="$(printf '%q ' "$@")"'; echo $? > '$tmp
+
+  # Run the script through /bin/sh with fake tty
+  if [ "$(uname)" = "Darwin" ]; then
+    # MacOS
+    script -Fq /dev/null /bin/sh -c "$cmd"
+  else
+    script -qfc "/bin/sh -c $(printf "%q " "$cmd")" /dev/null
+  fi
+
+  # Ensure that the status code was written to the temporary file or
+  # fail with status 99
+  [ -s $tmp ] || return 99
+
+  # Collect the status code from the temporary file
+  err=$(cat $tmp)
+
+  # Remove the temporary file
+  rm -f $tmp
+
+  # Return the status code
+  return $err
+}
 
 # Run the pre-commit hook to check for any errors before committing
 # ${DOCKER_ENV} comes from the environment variables in the docker-compose.yml file for the wsu docker container
@@ -35,7 +68,7 @@ if [ "${docker_test}" = "true" ]; then
     phplint="$(make phplintdry)"
 else
     printf "Running phplint...\n"
-    phplint="$(docker exec -i wsu-${site_folder} bash -i -c "make phplintdry")"
+    phplint="$(faketty docker exec -it wsu-${site_folder} bash -i -c "make phplintdry")"
 fi
 
 # Check if the last command (PHPLint) didn't exit with a 0 success
@@ -43,6 +76,8 @@ if  (( $? != 0 )); then
     printf "phplint has reported errors. Please fix them before committing.\n"
     printf ">> run: make phplint\n\n"
     exit 1
+else
+    printf "phplint has passed.\n"
 fi
 
 # Style linting
@@ -51,14 +86,16 @@ if [ "${docker_test}" = "true" ]; then
     stylelint="$(make stylelint)"
 else
     printf "Running stylelint...\n"
-    stylelint="$(docker exec -i wsu-${site_folder} bash -i -c "make stylelint")"
+    stylelint="$(faketty docker exec -it wsu-${site_folder} bash -i -c "make stylelint")"
 fi
 
 # Check if the last command (Stylelint) didn't exit with a 0 success
 if  (( $? != 0 )); then
-    printf "Styleint has reported errors. Please fix them before committing.\n"
+    printf "stylelint has reported errors. Please fix them before committing.\n"
     printf ">> run: make stylelint\n\n"
     exit 1
+else
+    printf "stylelint has passed.\n"
 fi
 
 # PHP tests
@@ -67,7 +104,7 @@ if [ "${docker_test}" = "true" ]; then
     phpunit="$(phpunit)"
 else
     printf "Running tests...\n"
-    phpunit="$(docker exec -i wsu-${site_folder} bash -i -c "phpunit")"
+    phpunit="$(faketty docker exec -it wsu-${site_folder} bash -i -c "phpunit")"
 fi
 
 # Check if the last command (PHPUnit) didn't exit with a 0 success
@@ -75,6 +112,8 @@ if  (( $? != 0 )); then
     printf "phpunit tests failed. Please fix them before committing.\n"
     printf ">> run: make runtests\n"
     exit 1
+else
+    printf "phpunit tests have passed.\n"
 fi
 
 exit 0;
