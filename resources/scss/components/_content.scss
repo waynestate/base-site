@@ -94,3 +94,93 @@
         }
     }
 }
+
+.content > ol.policy-numbering {
+    counter-reset: section;
+    list-style-type: none;
+    line-height: 1.5;
+
+    p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        margin-top: 1rem;
+    }
+
+    li {
+        position: relative;
+        padding-left: 4rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+        &::before {
+            counter-increment: section;
+            content: counters(section, ".") ".0 ";
+            position: absolute;
+            left: 0;
+        }
+    }
+
+    // Reset the counter for nested lists
+    ol {
+        counter-reset: section;
+        list-style-type: none;
+
+        li {
+            padding-left: 4rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        &::before {
+            counter-increment: section;
+            content: counters(section, ".") " ";
+        }
+    }
+
+    // Avoid incremeting ul bullets
+    ul {
+        counter-reset: section;
+
+        li {
+            padding-left: 2rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            list-style-type: lower-alpha;
+        }
+        &::before {
+            display: none;
+        }
+    }
+
+    ul li ul {
+        li {
+            padding-left: 2rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            list-style-type: lower-roman;
+        }
+        &::before {
+            display: none;
+        }
+    }
+
+    // Third level
+    ol li ol li {
+        padding-left: 4rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+        list-style-type: none;
+    }
+
+    // Fourth level
+    ol li ol li ol li {
+        padding-left: 4rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+        list-style-type: none;
+    }
+}
