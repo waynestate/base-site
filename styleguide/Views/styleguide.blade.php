@@ -82,6 +82,30 @@
             <li>{{ $faker->sentence() }}</li>
         </ol>
 
+        <h2>Policy lists</h2>
+
+        <ol class="policy-numbering">
+            <li>{{ $faker->sentence() }}</li>
+            <li>{{ $faker->sentence() }}</li>
+            <li>{{ $faker->sentence() }}
+                <ol>
+                    <li>{{ $faker->sentence() }}</li>
+                    <li>{{ $faker->sentence() }}
+                        <ul>
+                            <li>{{ $faker->sentence() }}</li>
+                            <li>{{ $faker->sentence() }}
+                                <ul>
+                                    <li>{{ $faker->sentence() }}</li>
+                                    <li>{{ $faker->sentence() }}</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+
+            </li>
+        </ol>
+
         <h2>Blockquote</h2>
 
         <p>{{ $faker->paragraph(6) }}</p>
