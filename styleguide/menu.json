@@ -38,6 +38,16 @@
                 "relative_url": "/styleguide/cms/headingstyles",
                 "submenu": []
             },
+            "100300": {
+                "menu_item_id": 100300,
+                "is_active": 1,
+                "page_id": 100300,
+                "target": "",
+                "display_name": "List styles",
+                "class_name": "",
+                "relative_url": "/styleguide/cms/liststyles",
+                "submenu": []
+            },
             "100400": {
                 "menu_item_id": 100400,
                 "is_active": 1,
