@@ -1,41 +1,73 @@
-.flag {
-    @apply absolute hidden mt:flex z-40 bg-gold text-green-800 hover:text-green-900 items-center justify-center mr-4 right-0 pt-0 duration-500;
+.flag__container {
+    .flag {
+        &__title {
+            @apply uppercase text-sm tracking-wide leading-3 relative z-50;
+        }
 
-    transition-property: height, padding;
-    width: 140px;
-    height: 30px;
-
-    // Pointy bottom
-    &::after {
-        @apply border-gold absolute duration-500;
-
-        transition-property: top;
-        border-left-color: transparent;
-        border-right-color: transparent;
-        border-style: solid;
-        border-width: 12px 70px 0;
-        top: 30px;
-        content: "";
-        left: 0;
-    }
-
-    &:hover {
-        @apply duration-500;
-
-        transition-property: height, padding;
-        height: 38px;
-        padding-top: 8px;
-
-        &::after {
-            top: 38px;
+        em,
+        &__excerpt {
+            @apply normal-case text-xl italic font-serif pl-0.5 leading-3;
         }
     }
 
-    &__title {
-        @apply uppercase text-sm tracking-wide pt-1.5 pt-1;
+    &.flag--sm {
+        @apply mx-4;
+
+        .flag {
+            @extend .gold-gradient-button;
+
+            @apply w-full font-normal mt:hidden;
+        }
     }
 
-    &__excerpt {
-        @apply normal-case text-xl italic font-serif pt-0.5 pl-1;
+    &.flag--mt {
+        @apply row relative;
+
+        .flag {
+            @apply absolute hidden mt:flex z-40 bg-gold text-green-800 hover:text-green-900 items-center justify-center mr-4 right-0 px-2 duration-500;
+
+            transition-property: height, padding;
+            min-width: 140px;
+            height: 28px;
+
+            &__container {
+                @apply row relative;
+            }
+
+            // Pointy bottom
+            &::after {
+                @apply bg-gold absolute duration-500;
+
+                clip-path: polygon(0 0, 100% 0, 100% 4%, 50% 14%, 0 4%);
+                //clip-path: polygon(0 0, 100% 0, 100% 12%, 50% 4%, 0 12%);
+                transition-property: top;
+                width: 100%;
+                height: 8rem;
+                top: 24px;
+                content: "";
+                left: 0;
+
+                /*
+                @apply border-gold absolute duration-500;
+
+                border-left-color: transparent;
+                border-right-color: transparent;
+                border-style: solid;
+                border-width: 12px 70px 0;
+                */
+            }
+
+            &:hover {
+                @apply duration-500;
+
+                transition-property: height, padding;
+                height: 30px;
+                padding-top: 8px;
+
+                &::after {
+                    top: 28px;
+                }
+            }
+        }
     }
 }

@@ -7,5 +7,5 @@ interface HomepageRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getHomepagePromos(int $page_id = 0);
+    public function getHomepagePromos(array $data): array;
 }
