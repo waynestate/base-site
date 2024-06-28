@@ -1,33 +1,59 @@
 // Content returning from CMS
 .content {
-    dl,
-    ol,
     ul {
-        @apply mb-4;
-    }
-
-    ul {
-        @apply ml-8 list-disc;
+        @apply list-disc;
     }
 
     ul ul {
-        @apply mb-0 list-circle;
+        @apply list-circle;
     }
 
     ul ul ul {
-        @apply mb-0 list-square;
+        @apply list-square;
     }
 
     ol {
-        @apply ml-8 list-decimal;
+        @apply list-decimal;
     }
 
     ol ol {
-        @apply mb-0 list-lower-alpha;
+        @apply list-lower-alpha;
     }
 
     ol ol ol {
-        @apply mb-0 list-lower-roman;
+        @apply list-lower-roman;
+    }
+
+    li {
+        @apply mb-1;
+    }
+
+    dl dt:not([class*='font-']) {
+        @apply font-bold;
+    }
+
+    dl dd:not([class*='mb-']) {
+        @apply mb-3;
+    }
+
+    ol:not([class*='ml-']),
+    ul:not([class*='ml-']) {
+        @apply ml-8;
+    }
+
+    ol:not([class*='mb-']),
+    ul:not([class*='mb-']) {
+        @apply mb-4;
+    }
+
+    ul.list-none,
+    ul.list-none ul {
+        list-style-type: none;
+    }
+
+    ol:first-of-type:not([class*='mb-']),
+    ul:first-of-type:not([class*='mb-']) {
+        @apply mb-0;
     }
 
     // Tailwind preflight sets images to block
@@ -36,7 +62,7 @@
     }
 
     // TODO wtf stylelint
-    // Do not rearrange this any of this link and heading link css
+    // Do not rearrange any of this link and heading link css
     // Underline all content links
     a {
         @apply underline;

@@ -4,7 +4,7 @@ namespace Styleguide\Pages;
 
 use Factories\Page as PageFactory;
 
-class ComponentHeading extends Page
+class ComponentHeading3 extends Page
 {
     /**
      * {@inheritdoc}
@@ -14,8 +14,8 @@ class ComponentHeading extends Page
         return app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'ComponentHeadingController',
-                'title' => 'Heading',
-                'id' => 122100100,
+                'title' => 'H3',
+                'id' => 122100200,
                 'content' => [
                     'main' => '',
                 ],

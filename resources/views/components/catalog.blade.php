@@ -7,9 +7,9 @@
         @foreach($data as $group => $group_items)
             @if(!empty($group))
                 @if(!empty($component['heading']))
-                    <h3 class="border-solid border-b-2 pb-1 border-gold mt-6 mt-4">{{ $group }}</h3>
+                    @include('partials/heading', ['heading' => $group, 'headingClass' => 'divider-gold pb-1 mt-6 ', 'headingLevel' => !empty($component['headingLevel']) ? $component['headingLevel'] : 'h3'])
                 @else
-                    <h2 class="border-solid border-b-2 pb-1 border-gold mt-6 mt-4">{{ $group }}</h2>
+                    @include('partials/heading', ['heading' => $group, 'headingClass' => 'divider-gold pb-1 mt-6 '.($component['headingClass'] ?? ''), 'headingLevel' => !empty($component['headingLevel']) ? $component['headingLevel'] : 'h2'])
                 @endif
             @else
                 <hr class="border-gold border-b-2 mt-6" />

@@ -57,7 +57,15 @@
                 </tr>
                 <tr>
                     <td class="font-bold">heading</td>
-                    <td>Add a component heading (h2)</td>
+                    <td>Add a component heading<br />Default is h2</td>
+                </tr>
+                <tr>
+                    <td class="font-bold">headingClass</td>
+                    <td>Add any number of classes to a component heading.<br />"text-green divider-gold"</td>
+                </tr>
+                <tr>
+                    <td class="font-bold">headingLevel</td>
+                    <td>Change default component heading level from h2 to h3 or h4.<br />"h3"</td>
                 </tr>
                 <tr>
                     <td class="font-bold">config</td>
