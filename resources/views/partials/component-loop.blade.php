@@ -4,7 +4,9 @@
             @if(!empty($component['data']) && !empty($component['component']['filename']))
                 @if(\View::exists('components/'.$component['component']['filename']))
                     <div class="col-span-2 {{ str_contains($component['component']['filename'], 'column') ? 'md:col-span-1' : 'md:col-span-2' }}">
-                        @if(!empty($component['component']['heading']))<h2 class="mt-0" id="{{ Str::slug($component['component']['heading']) }}">{{ $component['component']['heading'] }}</h2>@endif
+                        @if(!empty($component['component']['heading']))
+                            @include('partials/heading', ['heading' => $component['component']['heading'], 'headingClass' => 'mt-0 '.($component['component']['headingClass'] ?? ''), 'headingLevel' => !empty($component['component']['headingLevel']) ? $component['component']['headingLevel'] : 'h2'])
+                        @endif
 
                         @include('components/'.$component['component']['filename'], ['data' => $component['data'], 'component' => $component['component']])
                     </div>

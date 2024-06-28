@@ -29,7 +29,9 @@ class ComponentHeadingController extends Controller
                         'tr1' => [
                             'Page field' => 'modular-heading-1',
                             'Data' => '{
-"heading":"My heading"
+"heading":"My heading",
+"headingClass":"gold-divider text-green",
+"headingLevel":"h3"
 }',
                         ],
                     ],
@@ -68,6 +70,13 @@ class ComponentHeadingController extends Controller
                 ],
             ],
         ];
+
+        // Different data for h3 page
+        if($request->data['base']['page']['id'] === 122100200) {
+            $components['heading-1']['data'][0]['heading'] = "My example h3";
+            $components['heading-1']['component']['headingLevel'] = "h3";
+            $components['heading-1']['component']['headingClass'] = "divider-gold text-green";
+        }
 
         // Assign components globally
         $request->data['base']['components'] = $components;
