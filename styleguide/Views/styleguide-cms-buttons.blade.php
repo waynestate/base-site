@@ -60,8 +60,8 @@
             </div>
 <pre class="code-block mb-0 w-full">
 {!! htmlspecialchars('<a href="#" class="button button--two-line w-full">
-    <div class="button__title">Two line button</div>
-    <div class="button__excerpt">Subtext</div>
+    <strong class="button__title">Two line button</strong>
+    <em class="button__excerpt">Subtext</em>
 </a>') !!}
 </pre>
         </div>
@@ -78,8 +78,8 @@
 <pre class="code-block mb-0 w-full">
 {!! htmlspecialchars('<a href="#" class="button button--two-line">
     <img src="/styleguide/image/50x50" alt="" class="button__image">
-    <div class="button__title">Two line button</div>
-    <div class="button__excerpt">Subtext</div>
+    <strong class="button__title">Two line button</strong>
+    <em class="button__excerpt">Subtext</em>
 </a>') !!}
 </pre>
         </div>
