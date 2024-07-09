@@ -158,6 +158,8 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
                 if(Str::startsWith($value, '{')) {
                     $components[$name] = json_decode($value, true);
+
+                    // Convert config for use with promo api
                     if(!empty($components[$name]['config'])) {
                         $config = explode('|', $components[$name]['config']);
                         // Add youtube
@@ -175,6 +177,17 @@ class ModularPageRepository implements ModularPageRepositoryContract
                         }
                         $components[$name]['config'] = implode('|', $config);
                     }
+
+                    // Only allow approved headings
+                    if(!empty($components[$name]['headingLevel'])) {
+                        $approvedLevels = ['h2','h3','h4'];
+                        $components[$name]['headingLevel'] = strtolower($components[$name]['headingLevel']);
+                        if(!in_array($components[$name]['headingLevel'], $approvedLevels)) {
+                            $components[$name]['headingLevel'] = 'h2';
+                        }
+                    }
+
+                    // Remove 'modular-' to get the filename
                     $components[$name]['filename'] = preg_replace('/-\d+$/', '', $name);
                 } else {
                     $components[$name]['id'] = (int)$value;
