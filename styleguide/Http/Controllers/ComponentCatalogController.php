@@ -91,7 +91,7 @@ class ComponentCatalogController extends Controller
                 'data' => app(GenericPromo::class)->create(3, false, [
                 ]),
                 'component' => [
-                    'heading' => 'One-column catalog',
+                    'heading' => 'One-column catalog lkjla',
                     'filename' => 'catalog',
                     'columns' => '1',
                     'showDescription' => false,
