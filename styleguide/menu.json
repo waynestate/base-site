@@ -218,7 +218,28 @@
                 "display_name": "Heading",
                 "class_name": "",
                 "relative_url": "/styleguide/component/heading",
-                "submenu": []
+                "submenu": {
+                    "122100100": {
+                        "menu_item_id": 122100100,
+                        "is_active": 1,
+                        "page_id": 122100100,
+                        "target": "",
+                        "display_name": "H2",
+                        "class_name": "",
+                        "relative_url": "/styleguide/component/heading",
+                        "submenu": []
+                    },
+                    "122100200": {
+                        "menu_item_id": 122100200,
+                        "is_active": 1,
+                        "page_id": 122100200,
+                        "target": "",
+                        "display_name": "H3",
+                        "class_name": "",
+                        "relative_url": "/styleguide/component/heading3",
+                        "submenu": []
+                    }
+                }
             },
             "105100": {
                 "menu_item_id": 105100,
