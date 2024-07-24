@@ -208,7 +208,9 @@ return [
     | color or image.
     |
     */
-    'full_width_controllers' => [],
+    'full_width_controllers' => [
+        'FullWidthController',
+    ],
 
     /*
     |--------------------------------------------------------------------------
