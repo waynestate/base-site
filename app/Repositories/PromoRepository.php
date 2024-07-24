@@ -8,6 +8,7 @@ use Contracts\Repositories\ModularPageRepositoryContract;
 use Illuminate\Cache\Repository;
 use Waynestate\Api\Connector;
 use Waynestate\Promotions\ParsePromos;
+use Illuminate\Support\Str;
 
 class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryContract
 {
@@ -206,10 +207,21 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         })->toArray();
 
         if(!empty($hero)) {
+            $hero_key = collect($hero)->reject(function ($data, $component_name) {
+                return str_contains($component_name, 'buttons');
+            })->toArray();
             $hero_key = array_key_first($hero);
             $promos['hero'] = $promos['components'][$hero_key]['data'];
-            config(['base.hero_full_controllers' => $data['page']['controller']]);
             unset($promos['components'][$hero_key]);
+
+            $hero_buttons = collect($hero)->reject(function ($data, $component_name) {
+                return !str_contains($component_name, 'buttons');
+            })->toArray();
+            $hero_buttons_key = array_key_first($hero_buttons);
+            $promos['hero_buttons'] = $promos['components'][$hero_buttons_key]['data'];
+            unset($promos['components'][$hero_buttons_key]);
+
+            config(['base.hero_full_controllers' => $data['page']['controller']]);
         }
 
         return $promos;
