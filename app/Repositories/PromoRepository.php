@@ -210,6 +210,7 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
             $hero_key = collect($hero)->reject(function ($data, $component_name) {
                 return str_contains($component_name, 'buttons');
             })->toArray();
+
             $hero_key = array_key_first($hero);
             $promos['hero'] = $promos['components'][$hero_key]['data'];
             unset($promos['components'][$hero_key]);
@@ -217,13 +218,15 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
             $hero_buttons = collect($hero)->reject(function ($data, $component_name) {
                 return !str_contains($component_name, 'buttons');
             })->toArray();
-            $hero_buttons_key = array_key_first($hero_buttons);
-            $promos['hero_buttons'] = $promos['components'][$hero_buttons_key];
-            unset($promos['components'][$hero_buttons_key]);
+
+            if(!empty($hero_buttons)) {
+                $hero_buttons_key = array_key_first($hero_buttons);
+                $promos['hero_buttons'] = $promos['components'][$hero_buttons_key];
+                unset($promos['components'][$hero_buttons_key]);
+            }
 
             config(['base.hero_full_controllers' => $data['page']['controller']]);
         }
-        dump($promos);
 
         return $promos;
     }
