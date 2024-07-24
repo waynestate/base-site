@@ -72,15 +72,31 @@ module.exports = {
             pattern: /at-/,
         },
         {
-            pattern: /my(-[1-16])?/,
+            pattern: /my(-[1-24])?/,
             variants: ['md','lg','xl','2xl','mt'],
         },
         {
-            pattern: /mt(-[1-16])?/,
+            pattern: /mt(-[1-24])?/,
             variants: ['md','lg','xl','2xl','mt'],
         },
         {
-            pattern: /mb(-[1-16])?/,
+            pattern: /mb(-[1-24])?/,
+            variants: ['md','lg','xl','2xl','mt'],
+        },
+        {
+            pattern: /px(-[1-16])?/,
+            variants: ['md','lg','xl','2xl','mt'],
+        },
+        {
+            pattern: /py(-[1-24])?/,
+            variants: ['md','lg','xl','2xl','mt'],
+        },
+        {
+            pattern: /pt(-[1-24])?/,
+            variants: ['md','lg','xl','2xl','mt'],
+        },
+        {
+            pattern: /pb(-[1-24])?/,
             variants: ['md','lg','xl','2xl','mt'],
         },
         {
@@ -96,15 +112,15 @@ module.exports = {
             variants: ['md','lg','xl','2xl','mt'],
         },
         {
-            pattern: /gap(-[1-16])?/,
+            pattern: /gap(-[1-24])?/,
             variants: ['md','lg','xl','2xl','mt'],
         },
         {
-            pattern: /gap(-x-[1-16])?/,
+            pattern: /gap(-x-[1-24])?/,
             variants: ['md','lg','xl','2xl','mt'],
         },
         {
-            pattern: /gap(-y-[1-16])?/,
+            pattern: /gap(-y-[1-24])?/,
             variants: ['md','lg','xl','2xl','mt'],
         },
         '/form_responses/'
