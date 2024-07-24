@@ -639,7 +639,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Run the promos through the repository
         $components = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
 
-        $this->assertTrue(!empty($components['catalog-1']['data']['']));
+        $this->assertTrue(!empty($components['catalog-1']['data']['items']));
         $this->assertCount(count($return['promotions']), $components['catalog-1']['data']);
     }
 
