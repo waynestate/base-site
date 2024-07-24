@@ -125,7 +125,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 }
                 $modularComponents[$name]['data'] = $articles['articles'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
-            } elseif(Str::startsWith($name, 'page-content') || Str::startsWith($name, 'heading')) {
+            } elseif(Str::startsWith($name, 'page-content') || Str::startsWith($name, 'heading') || Str::startsWith($name, 'layout')) {
                 // If there's JSON but no news, events or promo data, assign the component array as data
                 // Page-content and heading components
                 $modularComponents[$name]['data'][] = $components['components'][$name] ?? [];
@@ -176,6 +176,13 @@ class ModularPageRepository implements ModularPageRepositoryContract
                         $components[$name]['config'] = implode('|', $config);
                     }
                     $components[$name]['filename'] = preg_replace('/-\d+$/', '', $name);
+
+                    // Restrict heading levels
+                    if(!empty($components[$name]['headingLevel'])) {
+                        $acceptableHeadings = ['h2', 'h3', 'h4'];
+                        $headingLevel = strtolower($components[$name]['headingLevel']);
+                        $components[$name]['headingLevel'] = in_array($headingLevel, $acceptableHeadings) ? $headingLevel : 'h2';
+                    }
                 } else {
                     $components[$name]['id'] = (int)$value;
                 }
@@ -234,9 +241,10 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 return $item;
             })->toArray();
 
-            // Organize by option
-            if(!empty($components['components'][$name]['groupByOptions']) && $components['components'][$name]['groupByOptions'] === true && Str::startsWith($name, 'catalog')) {
+            // Organize by option if groupByOptions = true OR any items in the group have the option of "heading"
+            if(!empty($components['components'][$name]['groupByOptions']) && $components['components'][$name]['groupByOptions'] === true && Str::startsWith($name, 'catalog') || collect($data)->contains('option', 'Heading')) {
                 $data = $this->organizePromoItemsByOption($data);
+                $components['components'][$name]['groupByOptions'] = true;
             }
 
             // Build the return
@@ -253,6 +261,12 @@ class ModularPageRepository implements ModularPageRepositoryContract
     {
         if(isset($component['singlePromoView']) && $component['singlePromoView'] === true) {
             $data['link'] = 'view/'.Str::slug($data['title']).'-'.$data['promo_item_id'];
+        }
+
+        if(isset($component['showTitle']) && $component['showTitle'] === false) {
+            if(empty($data['option']) || !empty($data['option']) && $data['option'] != 'Heading') {
+                unset($data['title']);
+            }
         }
 
         if(isset($component['showExcerpt']) && $component['showExcerpt'] === false) {
@@ -281,7 +295,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
             if (!empty($data[''])) {
                 $no_option_moved_to_bottom = $data[''];
                 unset($data['']);
-                $data[''] = $no_option_moved_to_bottom;
+                $data['items'] = $no_option_moved_to_bottom;
             }
         }
 
