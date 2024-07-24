@@ -39,7 +39,7 @@
     @yield('top')
 
     @if(!empty($base['hero']))
-        @include('components.hero', ['data' => $base['hero']])
+        @include('components.hero', ['data' => $base['hero'], 'hero_buttons' => $base['hero_buttons'] ?? ''])
 
         @yield('under-hero')
     @endif

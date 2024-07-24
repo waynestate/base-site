@@ -218,11 +218,12 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
                 return !str_contains($component_name, 'buttons');
             })->toArray();
             $hero_buttons_key = array_key_first($hero_buttons);
-            $promos['hero_buttons'] = $promos['components'][$hero_buttons_key]['data'];
+            $promos['hero_buttons'] = $promos['components'][$hero_buttons_key];
             unset($promos['components'][$hero_buttons_key]);
 
             config(['base.hero_full_controllers' => $data['page']['controller']]);
         }
+        dump($promos);
 
         return $promos;
     }

@@ -72,16 +72,40 @@ module.exports = {
             pattern: /at-/,
         },
         {
+            pattern: /my(-[1-16])?/,
+            variants: ['md','lg','xl','2xl','mt'],
+        },
+        {
+            pattern: /mt(-[1-16])?/,
+            variants: ['md','lg','xl','2xl','mt'],
+        },
+        {
+            pattern: /mb(-[1-16])?/,
+            variants: ['md','lg','xl','2xl','mt'],
+        },
+        {
             pattern: /w-[1-5]\/[1-5]/,
-            variants: ['sm','md','lg','xl','2xl','3xl','mt'],
+            variants: ['md','lg','xl','2xl','mt'],
         },
         {
             pattern: /grid(-cols-[1-4])?/,
-            variants: ['sm','md','lg','xl','2xl','3xl','mt'],
+            variants: ['md','lg','xl','2xl','mt'],
         },
         {
             pattern: /columns(-[1-4])?/,
-            variants: ['sm','md','lg','xl','2xl','3xl','mt'],
+            variants: ['md','lg','xl','2xl','mt'],
+        },
+        {
+            pattern: /gap(-[1-16])?/,
+            variants: ['md','lg','xl','2xl','mt'],
+        },
+        {
+            pattern: /gap(-x-[1-16])?/,
+            variants: ['md','lg','xl','2xl','mt'],
+        },
+        {
+            pattern: /gap(-y-[1-16])?/,
+            variants: ['md','lg','xl','2xl','mt'],
         },
         '/form_responses/'
     ],
