@@ -35,7 +35,7 @@ class PageRepository extends Repository
 
         // Compare the path's class_name to the filesystem so we can eliminate case sensitivity issues
         $class_name = collect(Storage::disk('base')->allFiles('styleguide/Pages'))->filter(function ($item) use ($filename) {
-            return strtolower(basename($item)) == strtolower($filename).'.php';
+            return strtolower(basename($item)) == strtolower(preg_replace('/-/', '', $filename)).'.php';
         })->map(function ($item) {
             return basename($item, '.php');
         })->first();
