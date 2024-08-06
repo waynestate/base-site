@@ -26,6 +26,15 @@ interface ArticleRepositoryContract
     public function find($id, $application_ids, $preview);
 
     /**
+     * Build the fully qualified URI for the article
+     *
+     * @param array $article
+     * @param array $request
+     * @return array
+     */
+    public function getCanonicalUrl(array $article, array $request);
+
+    /**
      * Get the image for the meta data.
      *
      * @param array $article
