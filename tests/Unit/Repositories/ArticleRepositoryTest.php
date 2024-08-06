@@ -210,4 +210,29 @@ final class ArticleRepositoryTest extends TestCase
         $this->assertEquals($article['data']['featured']['url'], $imageUrl['url']);
         $this->assertEquals($article['data']['featured']['alt_text'], $imageUrl['alt_text']);
     }
+
+    #[Test]
+    public function article_with_news_route_should_return_canonical_url(): void
+    {
+        $article = app(Article::class)->create(
+            1,
+            true,
+            [
+            'permalink' => 'permalink',
+            'id' => 123,
+        ]
+        );
+
+        $request = [
+            'server' => ['url' => 'https://example.com/subsite/news/slug-id'],
+            'site' => [
+                'subsite-folder' => 'subsite/',
+                'news' => ['route_path' => '/news/{$permalink}-{$id}'],
+            ],
+        ];
+
+        $url = app(ArticleRepository::class)->getCanonicalUrl($article['data'], $request);
+
+        $this->assertEquals($url, 'https://example.com/subsite/news/permalink-123');
+    }
 }

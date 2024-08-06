@@ -93,7 +93,7 @@ class ArticleController extends Controller
 
         $request->data['base']['page']['title'] = $article['article']['data']['title'];
         $request->data['base']['page']['description'] = $article['article']['data']['meta_description'];
-        $request->data['base']['page']['canonical'] = $request->data['base']['server']['url'] ?? '';
+        $request->data['base']['page']['canonical'] = $this->article->getCanonicalUrl($article['article']['data'], $request->data['base']);
 
         if (!empty($article['article']['data']['hero_image']['url'])) {
             $request->data['base']['hero'][]['relative_url'] = $article['article']['data']['hero_image']['url'];
