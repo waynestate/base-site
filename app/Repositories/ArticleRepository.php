@@ -77,6 +77,29 @@ class ArticleRepository implements ArticleRepositoryContract
     /**
      * {@inheritdoc}
      */
+    public function getCanonicalUrl(array $article, array $request)
+    {
+        // Fallback if there is no route path defined for news
+        if (empty($article) || empty($request['site']['news']['route_path'])) {
+            return $request['server']['url'] ?? '';
+        }
+
+        // Use the domain of the current page
+        $uri = parse_url($request['server']['url']);
+
+        // Build up the fully qualified URL for the article
+        return
+            trim($uri['scheme'] . '://' . $uri['host'] . '/' . $request['site']['subsite-folder'], '/') .
+            str_replace(
+                ['{$permalink}', '{$id}'],
+                [$article['permalink'], $article['id']],
+                $request['site']['news']['route_path']
+            );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getSocialImage($article)
     {
         if (!empty($article['social_image'])) {
