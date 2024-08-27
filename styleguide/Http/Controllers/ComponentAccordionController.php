@@ -58,7 +58,26 @@ class ComponentAccordionController extends Controller
                 ],
             ],
             'accordion-3' => [
-                'data' => app(AccordionItems::class)->create(3, false),
+                'data' => app(AccordionItems::class)->create(3, false, [
+                    'description' => '<p>Text<ul>
+	<li>One</li>
+	<li>Two
+	<ul>
+		<li>Four</li>
+		<li>Five
+		<ul>
+			<li>Seven</li>
+			<li>Eight</li>
+			<li>Nine</li>
+		</ul>
+		</li>
+		<li>Six</li>
+	</ul>
+	</li>
+	<li>Three</li>
+</ul>
+</p>',
+                ]),
                 'component' => [
                     'heading' => 'My second accordion',
                     'filename' => 'accordion',
