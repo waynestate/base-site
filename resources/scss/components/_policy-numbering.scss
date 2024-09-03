@@ -1,5 +1,5 @@
 // Policy numbering style
-.content ol.policy-numbering {
+.content > ol.policy-numbering {
     counter-reset: section;
     list-style-type: none;
     line-height: 1.5;
