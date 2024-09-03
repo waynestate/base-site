@@ -8,7 +8,6 @@ use Contracts\Repositories\ModularPageRepositoryContract;
 use Illuminate\Cache\Repository;
 use Waynestate\Api\Connector;
 use Waynestate\Promotions\ParsePromos;
-use Illuminate\Support\Str;
 
 class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryContract
 {
