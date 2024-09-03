@@ -128,9 +128,6 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 }
                 $modularComponents[$name]['data'] = $articles['articles'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
-<<<<<<< Updated upstream
-            } elseif(Str::startsWith($name, 'page-content') || Str::startsWith($name, 'heading')) {
-=======
             } elseif(Str::contains($name, 'profile')) {
                 // Determine what site to pull profiles from
                 $site_id = $this->profile->getSiteID($data);
@@ -160,7 +157,6 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 $modularComponents[$name]['data'] = $profiles ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
             } elseif(Str::startsWith($name, 'page-content') || Str::startsWith($name, 'heading') || Str::startsWith($name, 'layout')) {
->>>>>>> Stashed changes
                 // If there's JSON but no news, events or promo data, assign the component array as data
                 // Page-content and heading components
                 $modularComponents[$name]['data'][] = $components['components'][$name] ?? [];
