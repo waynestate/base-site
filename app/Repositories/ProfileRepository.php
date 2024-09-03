@@ -54,6 +54,7 @@ class ProfileRepository implements ProfileRepositoryContract
         if (empty($profile_listing['error'])) {
             $profile_listing = collect($profile_listing)->map(function ($item) {
                 $item['link'] = '/profile/'.$item['data']['AccessID'];
+                $item['full_name'] = $this->getPageTitleFromName(['profile' => $item]);
 
                 return $item;
             })->toArray();
@@ -334,6 +335,10 @@ class ProfileRepository implements ProfileRepositoryContract
      */
     public function getPageTitleFromName($profile)
     {
+        if (empty($profile)) {
+            return '';
+        }
+
         $name_fields = $this->getFields()['name_fields'];
 
         $name = collect($profile['profile']['data'])->filter(function ($value, $key) use ($name_fields) {
