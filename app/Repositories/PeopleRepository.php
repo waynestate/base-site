@@ -61,6 +61,7 @@ class PeopleRepository implements ProfileRepositoryContract
                 }
 
                 $profile['data']['AccessID'] = $profile['accessid'];
+                $profile['full_name'] = $this->getPageTitleFromName(['profile' => $profile]);
 
                 $profile['groups'] = collect($profile['groups'])->keyBy('id')->toArray();
 
@@ -352,6 +353,10 @@ class PeopleRepository implements ProfileRepositoryContract
      */
     public function getPageTitleFromName($profile)
     {
+        if (empty($profile)) {
+            return '';
+        }
+
         $name_fields = $this->getFields()['name_fields'];
 
         $name = collect($profile['profile']['data'])->filter(function ($value, $key) use ($name_fields) {

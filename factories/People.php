@@ -27,6 +27,7 @@ class People implements FactoryContract
             $accessid = $this->faker->randomLetter().$this->faker->randomLetter().$this->faker->randomNumber(4, true);
             $first_name = $this->faker->firstName();
             $last_name = $this->faker->lastName();
+            $suffix = $this->faker->suffix();
             $email = $this->faker->email();
             $title = $this->faker->sentence(3);
             $picture = '/styleguide/image/600x800?text=600x800%20('.$i.')';
@@ -140,6 +141,7 @@ class People implements FactoryContract
                     $groups->random(),
                 ],
                 'link' => '/styleguide/profile/aa0000',
+                'full_name' => $first_name . ' ' . $last_name,
                 'data' => [
                     'AccessID' => $accessid,
                     'First Name' => $first_name,
@@ -163,6 +165,21 @@ class People implements FactoryContract
                     ],
                 ],
             ];
+
+            // Randomly include a suffix
+            if (rand(0, 1) === 1) {
+                $data[$i]['suffix'] = $suffix;
+                $data[$i]['field_data'][] = [
+                    'value' => $suffix,
+                    'field' => [
+                        'name' => 'Suffix',
+                        'type' => 'text',
+                        'global' => 1,
+                    ],
+                ];
+                $data[$i]['data']['Suffix'] = $suffix;
+                $data[$i]['full_name'] = $first_name . ' ' . $last_name . ', ' . $suffix;
+            }
 
             $data[$i] = array_replace_recursive($data[$i], $options);
         }
