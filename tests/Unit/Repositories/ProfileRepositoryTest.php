@@ -226,6 +226,28 @@ final class ProfileRepositoryTest extends TestCase
     }
 
     #[Test]
+    public function getting_profiles_should_append_full_name(): void
+    {
+        // Fake return
+        $return = app(Profile::class)->create(5);
+
+        // Mock the Connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('profile.users.listing', Mockery::type('array'))->once()->andReturn($return);
+        $wsuApi->shouldReceive('nextRequestProduction')->once();
+
+        // Ensure the full name function requires a profile
+        $blank_full_name = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getPageTitleFromName([]);
+        $this->assertTrue(empty($blank_full_name));
+
+        $profiles = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getProfiles($this->faker->numberBetween(1, 10));
+
+        collect($profiles['profiles'])->each(function ($item) {
+            $this->assertTrue(!empty($item['full_name']));
+        });
+    }
+
+    #[Test]
     public function getting_profile_group_ids_should_return_correct_string(): void
     {
         // Fake a dropdown array of group_id => group name

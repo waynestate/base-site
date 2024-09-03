@@ -195,6 +195,7 @@ final class PeopleRepositoryTest extends TestCase
         // Remove Factory (Styleguide data) to test against the getProfiles
         $return['data'] = collect($return['data'])->map(function ($profile) {
             unset($profile['link']);
+            unset($profile['full_name']);
             unset($profile['data']);
 
             return $profile;
@@ -208,6 +209,7 @@ final class PeopleRepositoryTest extends TestCase
 
         collect($profiles['profiles'])->each(function ($item) {
             $this->assertNotEmpty($item['link']);
+            $this->assertNotEmpty($item['full_name']);
             $this->assertNotEmpty($item['data']['Picture']['url']);
         });
     }
@@ -228,6 +230,10 @@ final class PeopleRepositoryTest extends TestCase
         // Mock the connector and set the return
         $peopleApi = Mockery::mock(PeopleApi::class);
         $peopleApi->shouldReceive('request')->andReturn($return);
+
+        // Ensure the full name function requires a profile
+        $blank_full_name = app(PeopleRepository::class, ['peopleApi' => $peopleApi])->getPageTitleFromName([]);
+        $this->assertTrue(empty($blank_full_name));
 
         $profile = app(PeopleRepository::class, ['peopleApi' => $peopleApi])->getProfile($site_id, $accessid);
 
