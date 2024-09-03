@@ -5,6 +5,7 @@ namespace App\Repositories;
 use Contracts\Repositories\ModularPageRepositoryContract;
 use Contracts\Repositories\EventRepositoryContract;
 use Contracts\Repositories\ArticleRepositoryContract;
+use Contracts\Repositories\ProfileRepositoryContract;
 use Illuminate\Cache\Repository;
 use Illuminate\Support\Str;
 use Waynestate\Api\Connector;
@@ -35,13 +36,15 @@ class ModularPageRepository implements ModularPageRepositoryContract
         ParsePromos $parsePromos,
         Repository $cache,
         ArticleRepositoryContract $article,
-        EventRepositoryContract $event
+        EventRepositoryContract $event,
+        ProfileRepositoryContract $profile
     ) {
         $this->wsuApi = $wsuApi;
         $this->parsePromos = $parsePromos;
         $this->cache = $cache;
         $this->article = $article;
         $this->event = $event;
+        $this->profile = $profile;
     }
 
     /**
@@ -125,7 +128,39 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 }
                 $modularComponents[$name]['data'] = $articles['articles'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
+<<<<<<< Updated upstream
             } elseif(Str::startsWith($name, 'page-content') || Str::startsWith($name, 'heading')) {
+=======
+            } elseif(Str::contains($name, 'profile')) {
+                // Determine what site to pull profiles from
+                $site_id = $this->profile->getSiteID($data);
+
+                // Determine if we are forcing the profiles from custom page data
+                $forced_profile_group_id = !empty($data['data']['profile_group_id']) ? $data['data']['profile_group_id'] : null;
+
+                // Get the groups for the dropdown
+                $dropdown_groups = $this->profile->getDropdownOfGroups($site_id);
+
+                // Set the selected group
+                /* TODO  convert request to data
+                $selected_group = $request->query('group') !== '' ? $request->query('group') : null;
+                 */
+                $selected_group = null;
+
+                // Get the options for the dropdown
+                $dropdown_group_options = $this->profile->getDropdownOptions($selected_group, $forced_profile_group_id);
+
+                // Determine which group(s) to filter by
+                $group_ids = $this->profile->getGroupIds($selected_group, $forced_profile_group_id, $dropdown_groups['dropdown_groups']);
+
+                // Get the profiles
+                $profiles = $this->profile->getProfiles($site_id, $group_ids);
+                // assign $dropdown_groups
+                // $dropdown_group_options
+                $modularComponents[$name]['data'] = $profiles ?? [];
+                $modularComponents[$name]['component'] = $components['components'][$name];
+            } elseif(Str::startsWith($name, 'page-content') || Str::startsWith($name, 'heading') || Str::startsWith($name, 'layout')) {
+>>>>>>> Stashed changes
                 // If there's JSON but no news, events or promo data, assign the component array as data
                 // Page-content and heading components
                 $modularComponents[$name]['data'][] = $components['components'][$name] ?? [];
@@ -180,7 +215,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
                     $components[$name]['id'] = (int)$value;
                 }
 
-                if(!Str::startsWith($name, ['events', 'news']) && !empty($components[$name]['id'])) {
+                if(!Str::contains($name, ['events', 'news']) && !empty($components[$name]['id'])) {
                     $group_reference[$components[$name]['id']] = $name;
                     if(!empty($components[$name]['config'])) {
                         $group_config[$name] = $components[$name]['config'];
