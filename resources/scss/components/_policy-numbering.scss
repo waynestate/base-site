@@ -3,6 +3,7 @@
     counter-reset: section;
     list-style-type: none;
     line-height: 1.5;
+    margin-left: 1rem;
 
     p {
         font-size: 0.9rem;
@@ -23,18 +24,27 @@
             position: absolute;
             left: 0;
         }
+
+        @media only screen and (max-width: 576px) {
+            padding-left: 2rem;
+        }
     }
 
     // Reset the counter for nested lists
     ol {
         counter-reset: section;
         list-style-type: none;
+        margin-left: 0;
 
         li {
             padding-left: 4rem;
             margin-top: 1rem;
             margin-bottom: 1rem;
             font-size: 0.9rem;
+
+            @media only screen and (max-width: 576px) {
+                padding-left: 2rem;
+            }
         }
 
         li::before {
@@ -45,6 +55,11 @@
     // Avoid incremeting ul bullets
     ul {
         counter-reset: section;
+        margin-left: 1rem;
+
+        @media only screen and (max-width: 576px) {
+            margin-left: -0.5rem;
+        }
 
         li {
             padding-left: 2rem;
@@ -52,6 +67,10 @@
             margin-bottom: 1rem;
             font-size: 0.9rem;
             list-style-type: lower-alpha;
+
+            @media only screen and (max-width: 576px) {
+                padding-left: 0.5rem;
+            }
         }
 
         li::before {
@@ -60,12 +79,20 @@
     }
 
     ul li ul {
+        @media only screen and (max-width: 576px) {
+            margin-left: 0.5rem;
+        }
+
         li {
             padding-left: 2rem;
             margin-top: 1rem;
             margin-bottom: 1rem;
             font-size: 0.9rem;
             list-style-type: lower-roman;
+
+            @media only screen and (max-width: 576px) {
+                padding-left: 0.5rem;
+            }
         }
 
         li::before {
