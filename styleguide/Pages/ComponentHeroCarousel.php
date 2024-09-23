@@ -13,7 +13,7 @@ class ComponentHeroCarousel extends Page
     {
         return app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'componentHeroController',
+                'controller' => 'ComponentHeroController',
                 'title' => 'Hero carousel',
                 'id' => 105100104,
                 'content' => [
