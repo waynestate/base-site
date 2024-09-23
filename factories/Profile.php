@@ -53,6 +53,11 @@ class Profile implements FactoryContract
                 'link' => '/styleguide/profile/aa0000',
             ];
 
+            // Randomly include a suffix
+            if (rand(0, 1) === 1) {
+                $data[$i]['data']['Suffix'] = $this->faker->suffix();
+            }
+
             $data[$i] = array_replace_recursive($data[$i], $options);
         }
 

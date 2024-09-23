@@ -10,7 +10,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
     @if(!empty($base['page']['canonical']))<link rel="canonical" href="{{ $base['page']['canonical'] }}">@endif
 
@@ -31,7 +31,7 @@
     @endif
 
     @if(!empty($base['flag']))
-        @include('components.flag', ['flag' => $base['flag']])
+        @include('components.flag', ['flag' => $base['flag'], 'class' => 'flag--mt'])
     @endif
 </header>
 
@@ -67,9 +67,7 @@
                 @endif
 
                 @if(!empty($base['flag']))
-                    <div class="min-w-full px-4 mt:px-0 mb-4 mt:hidden">
-                        <a href="{{ $base['flag']['link'] }}" class="button w-full flag__title">{{ $base['flag']['title'] }} <span class="flag__excerpt">{{ $base['flag']['excerpt'] }}</span></a>
-                    </div>
+                    @include('components.flag', ['flag' => $base['flag'], 'class' => 'flag--sm'])
                 @endif
 
                 @yield('below_menu')
