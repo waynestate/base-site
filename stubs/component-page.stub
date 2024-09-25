@@ -1,0 +1,25 @@
+<?php
+
+namespace Styleguide\Pages;
+
+use Factories\Page as PageFactory;
+
+class ComponentDummyComponent extends Page
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function getPageData()
+    {
+        return app(PageFactory::class)->create(1, true, [
+            'page' => [
+                'controller' => 'ComponentDummyComponentController',
+                'title' => 'Dummy Component',
+                'id' => DummyId,
+                'content' => [
+                    'main' => '<p>Dummy Component promos.</p>',
+                ],
+            ],
+        ]);
+    }
+}

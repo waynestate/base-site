@@ -371,6 +371,16 @@
                 "class_name": "",
                 "relative_url": "/styleguide/component/spotlight",
                 "submenu": []
+            },
+            "9999": {
+                "menu_item_id": 9999,
+                "is_active": 1,
+                "page_id": 999900,
+                "target": "",
+                "display_name": "Site specific",
+                "class_name": "",
+                "relative_url": "/styleguide/component/sitespecific",
+                "submenu": []
             }
         }
     },
