@@ -137,6 +137,9 @@ class ModularPageRepository implements ModularPageRepositoryContract
             }
         }
 
+        // Create headings
+        $modularComponents = $this->createHeadings($modularComponents);
+
         return $modularComponents;
     }
 
@@ -176,13 +179,6 @@ class ModularPageRepository implements ModularPageRepositoryContract
                         $components[$name]['config'] = implode('|', $config);
                     }
                     $components[$name]['filename'] = preg_replace('/-\d+$/', '', $name);
-
-                    // Restrict heading levels
-                    if(!empty($components[$name]['headingLevel'])) {
-                        $acceptableHeadings = ['h2', 'h3', 'h4'];
-                        $headingLevel = strtolower($components[$name]['headingLevel']);
-                        $components[$name]['headingLevel'] = in_array($headingLevel, $acceptableHeadings) ? $headingLevel : 'h2';
-                    }
                 } else {
                     $components[$name]['id'] = (int)$value;
                 }
@@ -244,7 +240,6 @@ class ModularPageRepository implements ModularPageRepositoryContract
             // Organize by option if groupByOptions = true OR any items in the group have the option of "heading"
             if(!empty($components['components'][$name]['groupByOptions']) && $components['components'][$name]['groupByOptions'] === true && Str::startsWith($name, 'catalog') || collect($data)->contains('option', 'Heading')) {
                 $data = $this->organizePromoItemsByOption($data);
-                $components['components'][$name]['groupByOptions'] = true;
             }
 
             // Build the return
@@ -300,5 +295,36 @@ class ModularPageRepository implements ModularPageRepositoryContract
         }
 
         return $data;
+    }
+
+    /**
+    * {@inheritdoc}
+    */
+    public function createHeadings(array $components)
+    {
+        $modularComponents = collect($components)->map(function ($values, $key) use ($components) {
+            if(!empty($values['data']['Heading'])) {
+                $values['heading'] = $values['data']['Heading'][0];
+                unset($values['data']['Heading']);
+            }
+
+            if(!empty($values['component']['heading'])) {
+                $values['heading']['title'] = $values['component']['heading'];
+            }
+
+            if(!empty($values['component']['headingLevel'])) {
+                $restrictHeadingLevels = ['h2', 'h3', 'h4'];
+                $headingLevel = strtolower($values['component']['headingLevel']);
+                $values['heading']['level']  = in_array($headingLevel, $restrictHeadingLevels) ? $headingLevel : 'h2';
+            }
+
+            if(!empty($values['component']['headingClass'])) {
+                $values['heading']['class'] = $values['component']['headingClass'];
+            }
+
+            return $values;
+        })->toArray();
+
+        return $modularComponents; 
     }
 }

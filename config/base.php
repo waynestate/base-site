@@ -199,6 +199,27 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Heading Components
+    |--------------------------------------------------------------------------
+    |
+    | Specify components that handle the heading option within their own file
+    | and do not want to use the heading from the component loop
+    |
+    */
+    'heading_components' => [],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Full Width Components
+    |--------------------------------------------------------------------------
+    |
+    | Here you can specify in an array which components display under the content area
+    |
+    */
+    'full_width_components' => [],
+
+    /*
+    |--------------------------------------------------------------------------
     | Full Width Content Area
     |--------------------------------------------------------------------------
     |

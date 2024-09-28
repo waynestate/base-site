@@ -77,7 +77,7 @@ class ComponentCatalogController extends Controller
                 ],
             ],
             'catalog-1' => [
-                'data' => app(GenericPromo::class)->create(3, false, [
+                'data' => app(GenericPromo::class)->create(4, false, [
                     'description' => '',
                 ]),
                 'component' => [
@@ -149,7 +149,10 @@ class ComponentCatalogController extends Controller
             ],
         ];
 
+        $components['catalog-1']['data'][3]['option'] = "Heading";
         $components['catalog-3']['data'] = $this->components->organizePromoItemsByOption($components['catalog-3']['data']);
+
+
 
         // Assign components globally
         $request->data['base']['components'] = $components;
