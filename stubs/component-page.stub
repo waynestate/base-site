@@ -4,7 +4,7 @@ namespace Styleguide\Pages;
 
 use Factories\Page as PageFactory;
 
-class ComponentHeroCarousel extends Page
+class ComponentDummyComponent extends Page
 {
     /**
      * {@inheritdoc}
@@ -13,11 +13,11 @@ class ComponentHeroCarousel extends Page
     {
         return app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'ComponentHeroController',
-                'title' => 'Hero carousel',
-                'id' => 105100104,
+                'controller' => 'ComponentDummyComponentController',
+                'title' => 'Dummy Component',
+                'id' => DummyId,
                 'content' => [
-                    'main' => '',
+                    'main' => '<p>Dummy Component promos.</p>',
                 ],
             ],
         ]);
