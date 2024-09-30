@@ -2,7 +2,7 @@
     $breadcrumbs => array // ['display_name', 'relative_url']
 --}}
 <nav id="breadcrumbs-menu" class="breadcrumbs mt-6 mb-2 print:mt-0 max-w-screen-3xl px-4 mx-auto" aria-label="Breadcrumbs">
-    <ul class="text-sm">
+    <ul class="text-sm @if(!empty($base['banner']))mt:w-4/5 @endif">
         @foreach($breadcrumbs as $key=>$crumb)
             @if($key == 0)
                 <li class="inline">
