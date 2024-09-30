@@ -1,0 +1,18 @@
+{{--
+    $data => array [
+        ['title', 'link', 'excerpt', 'description']
+        ... Promotion items from "id" field
+    ]
+    $component => array [
+        "filename" => "dummy-component"
+        "id" => 1234
+        ... All key:values from the custom field config
+    ]
+
+    // Debug to see component config
+    @php dump($component) @endphp
+--}}
+
+@foreach($data as $item)
+    @php dump($item) @endphp
+@endforeach
