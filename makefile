@@ -61,7 +61,7 @@ phplintdry: $(COMPOSERFILE)
 	./vendor/bin/pint --test -v
 
 stylelint:
-	stylelint ./resources/scss/**/*.scss --syntax scss
+	stylelint ./resources/scss/**/*.scss
 
 coverage: $(COMPOSERFILE)
 	phpbrew ext enable xdebug && XDEBUG_MODE=coverage php vendor/bin/phpunit --coverage-html coverages && phpbrew ext disable xdebug
