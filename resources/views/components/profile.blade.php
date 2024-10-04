@@ -7,6 +7,6 @@
     </div>
     <div class="underline group-hover:no-underline group-focus:no-underline font-bold">{{ $profile['full_name'] }}</div>
     @if(!empty($profile['data']['Title']))
-        <div class="text-black text-sm">{{ $profile['data']['Title'] }}</div>
+        <div class="text-black text-sm">{!! strip_tags($profile['data']['Title'], '<br>') !!}</div>
     @endif
 </a>
