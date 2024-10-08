@@ -13,7 +13,7 @@
         .button {
             @apply xl:py-4;
 
-            @media only screen and (max-width: 576px) {
+            @media only screen and (width <= 576px) {
                 @apply bg-green text-white hover:bg-green-700 focus:bg-green-700;
             }
         }
