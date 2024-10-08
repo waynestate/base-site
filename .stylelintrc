@@ -15,6 +15,7 @@
             "ignoreFunctions": [
                 "theme"
             ]
-        }]
+        }],
+        "media-query-no-invalid": null
     }
 }
