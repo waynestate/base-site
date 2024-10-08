@@ -9,6 +9,8 @@
                 "screen",
                 "layer"
             ]
-        }]
+        }],
+        "no-invalid-double-slash-comments": null,
+        "selector-class-pattern": null
     }
 }
