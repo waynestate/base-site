@@ -35,6 +35,17 @@ $shared_subdirs = [
 $exclude_addon_pattens = [
     'node_modules',
 ];
+
+function getReleaseHash() {
+    $process = new Process(['git', 'rev-parse', 'HEAD']);
+    $process->run();
+
+    return trim($process->getOutput());
+}
+
+function isReleaseCurrent($dir, $hash) {
+    return file_exists($dir . '/release_' . $hash . '.tgz');
+}
 ?>
 
 @setup
@@ -54,9 +65,9 @@ $date = $now->format('YmdHis');
 
 $remote_server = (isset($on) && $on == 'production') ? 'production' : 'dev';
 if(!isset($branch)){
-$branch = (isset($remote_server) && $remote_server == 'production' ? "master" : "develop");
+    $branch = (isset($remote_server) && $remote_server == 'production' ? "master" : "develop");
 }else{
-$remote_server = 'dev';
+    $remote_server = 'dev';
 }
 
 $source_name = 'source';
@@ -76,6 +87,9 @@ $localdeploy_dirname = '.envoydeploy';
 $localdeploy_base = $local_dir.'/'.$localdeploy_dirname;
 $localdeploy_source_dir = $localdeploy_base.'/'.$source_name;
 $localdeploy_tmp_dir = $localdeploy_base.'/tmp';
+
+$release_hash = getReleaseHash();
+$release_current = isReleaseCurrent($localdeploy_tmp_dir, $release_hash);
 @endsetup
 
 @servers($envoy_servers)
@@ -97,6 +111,7 @@ link_newrelease_on_remote
 cache_remote_release
 cleanup_oldreleases_on_remote
 clean_localsrc
+update_conf_for_refresh
 @endmacro
 
 @macro('rollback')
@@ -109,6 +124,8 @@ echo 'Current Release Name: {{$release}}';
 echo 'Current branch is {{$branch}}';
 echo 'Deployment Start at {{$dateDisplay}}';
 echo 'App base {{ $localdeploy_base }}';
+echo 'Deploy hash {{ $release_hash }}';
+echo 'Is this a redeploy? {{ ($release_current)?'Yes':'No' }}';
 echo '----';
 @endtask
 
@@ -155,97 +172,102 @@ fi
 @endtask
 
 @task('updaterepo_localsrc', ['on' => 'local'])
-echo "LocalSource Repository update...";
-if [ -d {{ $localdeploy_source_dir }}/.git ]; then
-echo "Repository exists only update...";
-echo "Cleaning up old _resources"
-[ -d {{ $localdeploy_source_dir }}/public/_resources ] && rm -rf {{ $localdeploy_source_dir }}/public/_resources
-cd {{ $localdeploy_source_dir }};
-git fetch origin;
-git checkout -B {{ $branch }} origin/{{ $branch }};
-git pull origin {{ $branch }};
-else
-echo "No Previous Repository exits and cloning...";
-git clone {{ $source_repo }} --branch={{ $branch }} --depth=1 {{ $localdeploy_source_dir }};
-fi
-echo "LocalSource Repository updated.";
+    echo "LocalSource Repository update...";
+    if [ ! {{ $release_current }} ]; then
+        if [ -d {{ $localdeploy_source_dir }}/.git ]; then
+            echo "Repository exists only update...";
+            echo "Cleaning up old _resources"
+            [ -d {{ $localdeploy_source_dir }}/public/_resources ] && rm -rf {{ $localdeploy_source_dir }}/public/_resources
+            cd {{ $localdeploy_source_dir }};
+            git fetch origin;
+            git checkout -B {{ $branch }} origin/{{ $branch }};
+            git pull origin {{ $branch }};
+        else
+            echo "No Previous Repository exits and cloning...";
+            git clone {{ $source_repo }} --branch={{ $branch }} --depth=1 {{ $localdeploy_source_dir }};
+        fi
+        echo "LocalSource Repository updated.";
+    fi
 @endtask
 
 @task('depsinstall_localsrc', ['on' => 'local'])
-echo "LocalSource Dependencies install...";
-cd {{ $localdeploy_source_dir }};
+    if [ ! {{ $release_current }} ]; then
+        echo "LocalSource Dependencies install...";
+        cd {{ $localdeploy_source_dir }};
 
-echo "Composer install...";
-if [ "{{ $remote_server }}" = "production" ]; then
-make composerinstallproduction
-else
-make composerinstalldev
-fi
-echo "Composer installed.";
+        echo "Composer install...";
+        if [ "{{ $remote_server }}" = "production" ]; then
+        make composerinstallproduction
+        else
+        make composerinstalldev
+        fi
+        echo "Composer installed.";
 
-echo "Generate the artisan key...";
-make generatekey
+        echo "Generate the artisan key...";
+        make generatekey
 
-echo "Yarn install...";
-make yarn;
-echo "Yarn installed.";
+        echo "Yarn install...";
+        make yarn;
+        echo "Yarn installed.";
 
-echo "Compile assets...";
-make buildproduction;
-echo "Assets compiled.";
+        echo "Compile assets...";
+        make buildproduction;
+        echo "Assets compiled.";
 
-echo "LocalSource Dependencies installed.";
+        echo "LocalSource Dependencies installed.";
+    fi
 @endtask
 
 @task('packrelease_localsrc', ['on' => 'local'])
-echo "LocalSource Pack release...";
-[ -f {{ $localdeploy_tmp_dir }}/release.tgz ] && rm -rf {{ $localdeploy_tmp_dir }}/release.tgz;
-cd {{ $localdeploy_base }}/;
-tar --exclude=storage --exclude=node_modules --exclude-vcs -czf {{ $localdeploy_tmp_dir }}/release.tgz {{ $source_name }};
-echo "LocalSource Pack release Done.";
+    if [ ! {{ $release_current }} ]; then
+        echo "LocalSource Pack release...";
+        [ -f {{ $localdeploy_tmp_dir }}/release_{{ $release_hash }}.tgz ] && rm -rf {{ $localdeploy_tmp_dir }}/release_{{ $release_hash }}.tgz;
+        cd {{ $localdeploy_base }}/;
+        tar --exclude=storage --exclude=node_modules --exclude-vcs -czf {{ $localdeploy_tmp_dir }}/release_{{ $release_hash }}.tgz {{ $source_name }};
+        echo "LocalSource Pack release Done.";
+    fi
 @endtask
 
 @task('rcpreleasepack_to_remote', ['on' => 'local'])
-echo "rcp localpack release to remote...";
-echo {{ $localdeploy_tmp_dir }};
-if [ -f {{ $localdeploy_tmp_dir }}/release.tgz ]; then
-rsync -avz --progress --port 22 {{ $localdeploy_tmp_dir }}/release.tgz {{ $server_map[$remote_server] }}:{{ $tmp_dir }}/;
-else
-echo "localpack release NOT EXISTS.";
-exit 1;
-fi
-echo "rcp localpack release to remote Done.";
+    echo "rcp localpack release to remote...";
+    if [ -f {{ $localdeploy_tmp_dir }}/release_{{ $release_hash }}.tgz ]; then
+        rsync -avz --info=progress2 --port 22 {{ $localdeploy_tmp_dir }}/release_{{ $release_hash }}.tgz {{ $server_map[$remote_server] }}:{{ $tmp_dir }}/;
+    else
+        echo "localpack release NOT EXISTS.";
+    exit 1;
+    fi
+    echo "rcp localpack release to remote Done.";
 @endtask
 
 @task('clean_localsrc', ['on' => 'local'])
-echo "clean .envoydeploy directory...";
-[ -d {{ $localdeploy_base }} ] && rm -rf {{ $localdeploy_base }};
-echo ".envoydeploy folder cleaned"
+    echo "cleaning previous local release files...";
+    find {{ $localdeploy_tmp_dir }} -type f -name "*.tgz" ! -name "release_{{ $release_hash }}.tgz" -exec rm -f {} \;
+    echo "previous local release files cleaned"
 @endtask
 
 @task('extractreleasepack_on_remote', ['on' => $remote_server])
-echo "extract pack release on remote...";
-if [ -f {{ $tmp_dir }}/release.tgz ]; then
-[ -d {{ $tmp_dir }}/{{ $source_name }} ] && rm -rf {{ $tmp_dir }}/{{ $source_name }};
-tar zxf {{ $tmp_dir }}/release.tgz -C {{ $tmp_dir }} --warning=no-timestamp;
-if [ -d {{ $tmp_dir }}/{{ $source_name }} ]; then
-if [ -d {{ $source_dir }} ]; then
-echo "Previous Remote Source Dir Exists,Moving.";
-[ -d {{ $app_base }}/source_prev ] && rm -rf {{ $app_base }}/source_prev;
-mv {{ $source_dir }} {{ $app_base }}/source_prev;
-mv {{ $tmp_dir }}/{{ $source_name }} {{ $source_dir }};
-else
-mv {{ $tmp_dir }}/{{ $source_name }} {{ $source_dir }};
-fi
-else
-echo "extract pack release on remote ERROR.";
-exit 1;
-fi
-else
-echo "pack release NOT EXISTS.";
-exit 1;
-fi
-echo "extract pack release on remote Done.";
+    echo "extract pack release on remote...";
+    if [ -f {{ $tmp_dir }}/release_{{ $release_hash }}.tgz ]; then
+        [ -d {{ $tmp_dir }}/{{ $source_name }} ] && rm -rf {{ $tmp_dir }}/{{ $source_name }};
+        tar zxf {{ $tmp_dir }}/release_{{ $release_hash }}.tgz -C {{ $tmp_dir }} --warning=no-timestamp;
+        if [ -d {{ $tmp_dir }}/{{ $source_name }} ]; then
+            if [ -d {{ $source_dir }} ]; then
+                echo "Previous Remote Source Dir Exists,Moving.";
+                [ -d {{ $app_base }}/source_prev ] && rm -rf {{ $app_base }}/source_prev;
+                mv {{ $source_dir }} {{ $app_base }}/source_prev;
+                mv {{ $tmp_dir }}/{{ $source_name }} {{ $source_dir }};
+            else
+                mv {{ $tmp_dir }}/{{ $source_name }} {{ $source_dir }};
+            fi
+        else
+            echo "extract pack release on remote ERROR.";
+            exit 1;
+        fi
+        else
+            echo "pack release NOT EXISTS.";
+            exit 1;
+    fi
+    echo "extract pack release on remote Done.";
 @endtask
 
 @task('syncshareddata_remotesrc', ['on' => $remote_server])
@@ -265,10 +287,10 @@ echo "RemoteRelease Environment file setup Done.";
 @endtask
 
 @task('prepare_remoterelease', ['on' => $remote_server])
-echo "RemoteRelease Prepare...";
-rsync --progress -e ssh -avzh --delay-updates --delete {{ $source_dir }}/ {{ $release_dir }}/{{ $release }}/;
-chmod -R g+s {{ $release_dir }}/{{ $release }}
-echo "RemoteRelease Prepare Done.";
+    echo "RemoteRelease Prepare...";
+    mv {{ $source_dir }} {{ $release_dir }}/{{ $release }}
+    chmod -R g+s {{ $release_dir }}/{{ $release }}
+    echo "RemoteRelease Prepare Done.";
 @endtask
 
 @task('cache_remote_release', ['on' => $remote_server])
@@ -307,11 +329,19 @@ fi
 @endtask
 
 @task('cleanup_oldreleases_on_remote', ['on' => $remote_server])
-echo 'Cleanup up old releases';
-cd {{ $release_dir }} && (ls -rd {{ $release_dir }}/*|head -n 4;ls -d {{ $release_dir }}/*)|sort|uniq -u|xargs rm -rf
-echo "Cleanup up done.";
+    echo 'Cleanup up old releases';
+    cd {{ $release_dir }} && ls -d release_* | sort -r | tail -n +4
+    nohup bash -c "(cd {{ $release_dir }} && ls -d release_* | sort -r | tail -n +4 | xargs rm -rf) > /dev/null 2>&1 &"
+    echo 'Remove everything out of the remote temp directory'
+    find {{ $tmp_dir }} -type f -name "*.tgz" ! -name "release_{{ $release_hash }}.tgz" -exec rm -f {} \;
+    echo "Cleanup up done.";
 @endtask
 
 @task('notice_done')
-echo "Deployment ({{ $release }}) done.";
+    echo "Deployment ({{ $release }}) done.";
+@endtask
+
+@task('update_conf_for_refresh', ['on' => $remote_server])
+    echo "Updating config for refreshing opcache";
+    sed -i -e 's/#release_.*/#{{ $release }}/g' {{ $app_base }}/conf/{{ $appname }}.conf
 @endtask
