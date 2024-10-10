@@ -13,7 +13,7 @@
 
             <div class="content">
                 @if(!empty($profile['data']['Title']))
-                    <p>{{ $profile['data']['Title'] }}</p>
+                    <p>{!! strip_tags($profile['data']['Title'], '<br>') !!}</p>
                 @endif
 
                 @foreach($profile['data'] as $field=>$data)

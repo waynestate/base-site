@@ -106,7 +106,7 @@ class ProfileController extends Controller
         $fields = $this->profile->getFields();
 
         // Change page title to profile name
-        $request->data['base']['page']['title'] = $profile['profile']['full_name'] ?? '';
+        $request->data['base']['page']['title'] = $this->profile->getPageTitleFromName(['profile' => $profile['profile']]);
         $request->data['base']['page']['canonical'] = $request->data['base']['server']['url'] ?? '';
 
         // Set the back URL

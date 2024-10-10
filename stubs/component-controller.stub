@@ -1,0 +1,78 @@
+<?php
+
+namespace Styleguide\Http\Controllers;
+
+use Illuminate\View\View;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Faker\Factory;
+use Factories\GenericPromo;
+
+class ComponentDummyComponentController extends Controller
+{
+    /**
+     * Construct the controller.
+     */
+    public function __construct(Factory $faker)
+    {
+        $this->faker['faker'] = $faker->create();
+    }
+
+    /**
+     * Article Listing Controller
+     */
+    public function index(Request $request): View
+    {
+        $request->data['base']['page']['content']['main'] = '';
+
+        $components = [
+            'accordion' => [
+                'data' => [
+                    0 => [
+                        'title' => 'Component configuration',
+                        'promo_item_id' => 'componentConfiguration',
+                        'description' => '',
+                        'tr1' => [
+                            'Page field' => 'modular-dummy-component-1',
+                            'Data' => '{
+"id":000000,
+"heading":"Dummy Component",
+"config":"randomize|limit:1|youtube"
+}',
+                        ],
+                    ],
+                    1 => [
+                        'title' => 'Promotion group details',
+                        'promo_item_id' => 'promotionGroupDetails',
+                        'description' => '',
+                        'table' => [
+                            'Title' => 'Bold text.',
+                            'Link' => 'Optional external link.<br /> Component flag "singlePromoView" sets the link to the individual promo item view.',
+                            'Excerpt' => 'Optional smaller text under the title.',
+                            'Description' => 'Optional smaller text under the title and/or excerpt. <br /> You might use this area on a singe promo view page and hide it from the catalog component.',
+                            'Primary image' => 'Minimum width of 600px jpg, png.',
+                        ],
+                    ],
+                ],
+                'component' => [
+                    'filename' => 'accordion-styleguide',
+                ],
+            ],
+            'dummy-component-1' => [
+                'data' => app(GenericPromo::class)->create(4, false, [
+                    'excerpt' => '',
+                    'link' => '#',
+                ]),
+                'component' => [
+                    'heading' => 'Dummy Component Component',
+                    'filename' => 'dummy-component',
+                ],
+            ],
+        ];
+
+        // Assign components globally
+        $request->data['base']['components'] = $components;
+
+        return view('childpage', merge($request->data));
+    }
+}

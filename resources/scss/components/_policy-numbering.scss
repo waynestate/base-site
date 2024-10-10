@@ -25,7 +25,7 @@
             left: 0;
         }
 
-        @media only screen and (max-width: 576px) {
+        @media only screen and (width <= 576px) {
             padding-left: 2rem;
         }
     }
@@ -42,7 +42,7 @@
             margin-bottom: 1rem;
             font-size: 0.9rem;
 
-            @media only screen and (max-width: 576px) {
+            @media only screen and (width <= 576px) {
                 padding-left: 2rem;
             }
         }
@@ -57,7 +57,7 @@
         counter-reset: section;
         margin-left: 1rem;
 
-        @media only screen and (max-width: 576px) {
+        @media only screen and (width <= 576px) {
             margin-left: -0.5rem;
         }
 
@@ -68,7 +68,7 @@
             font-size: 0.9rem;
             list-style-type: lower-alpha;
 
-            @media only screen and (max-width: 576px) {
+            @media only screen and (width <= 576px) {
                 padding-left: 0.5rem;
             }
         }
@@ -79,7 +79,7 @@
     }
 
     ul li ul {
-        @media only screen and (max-width: 576px) {
+        @media only screen and (width <= 576px) {
             margin-left: 0.5rem;
         }
 
@@ -90,7 +90,7 @@
             font-size: 0.9rem;
             list-style-type: lower-roman;
 
-            @media only screen and (max-width: 576px) {
+            @media only screen and (width <= 576px) {
                 padding-left: 0.5rem;
             }
         }

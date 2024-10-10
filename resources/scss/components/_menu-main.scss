@@ -13,7 +13,7 @@
         @apply text-black block p-2 px-3;
     }
 
-    // Indent each level
+    /* Indent each level */
     li > ul > li a {
         @apply pl-8;
     }
@@ -30,19 +30,19 @@
         @apply bg-gray-200;
     }
 
-    // Bottom borders on child <li>
+    /* Bottom borders on child <li> */
     > li {
         @screen mt {
             @apply border-b border-solid border-gray-200;
         }
     }
 
-    // Selected State
+    /* Selected State */
     .selected {
         @apply font-bold;
     }
 
-    // Don't cascade the selected state to child lists of the item
+    /* Don't cascade the selected state to child lists of the item */
     .selected ul {
         @apply font-normal;
     }
