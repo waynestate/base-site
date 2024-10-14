@@ -38,7 +38,7 @@ h6 {
     &::after {
         content: "";
 
-        @apply absolute inline w-full h-0.5 ml-4 top-1/2 bottom-auto bg-gold;
+        @apply absolute inline w-full h-0.5 ml-4 top-[60%] bottom-auto bg-gold;
     }
 }
 
@@ -48,7 +48,7 @@ h6 {
     &::after {
         content: "";
 
-        @apply absolute inline w-full h-0.5 ml-4 top-1/2 bottom-auto bg-green;
+        @apply absolute inline w-full h-0.5 ml-4 top-[60%] bottom-auto bg-green;
     }
 }
 

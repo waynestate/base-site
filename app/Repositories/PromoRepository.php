@@ -205,7 +205,7 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
             return !str_contains($component_name, 'hero');
         })->toArray();
 
-        if(!empty($hero)) {
+        if (!empty($hero)) {
             $hero_key = array_key_first($hero);
             $promos['hero'] = $promos['components'][$hero_key]['data'];
             config(['base.hero_full_controllers' => [$data['page']['controller']]]);

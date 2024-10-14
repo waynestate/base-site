@@ -1,7 +1,7 @@
 // Restricts the embedded font from combining two characters like "fi"
 html {
     font-feature-settings: "liga" 0;
-    text-rendering: optimizeLegibility;
+    text-rendering: optimizelegibility;
 }
 
 body {
@@ -45,8 +45,6 @@ hr {
 figure {
     @apply mt-2 mb-4 mx-auto;
 
-    // Overriding display: inline-block; from CKEditor
-    // so that the caption wraps appropriately
     display: table !important;
     padding: 0 !important;
     clear: both;
