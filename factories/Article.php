@@ -55,7 +55,7 @@ class Article implements FactoryContract
         }
 
         $programs = [];
-        for($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 3; $i++) {
             $programs[] = [
                 'name' => $this->faker->randomElement(['Accounting (BS)', 'Art Education (BA)', 'Biological Sciences (BA)', 'Chemical Engineering (MS)']),
                 'url' => 'https://wayne.edu',

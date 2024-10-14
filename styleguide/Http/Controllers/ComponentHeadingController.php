@@ -72,7 +72,7 @@ class ComponentHeadingController extends Controller
         ];
 
         // Different data for h3 page
-        if($request->data['base']['page']['id'] === 122100200) {
+        if ($request->data['base']['page']['id'] === 122100200) {
             $components['heading-1']['data'][0]['heading'] = "My example h3";
             $components['heading-1']['component']['headingLevel'] = "h3";
             $components['heading-1']['component']['headingClass'] = "divider-gold text-green";

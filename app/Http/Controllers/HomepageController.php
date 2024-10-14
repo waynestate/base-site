@@ -42,7 +42,7 @@ class HomepageController extends Controller
 
         $modularComponents['modularComponents'] = [];
 
-        if(!empty($request->data['base']['data'])) {
+        if (!empty($request->data['base']['data'])) {
             $modularComponents['modularComponents'] = $this->modularComponent->getModularComponents($request->data['base']);
             $promos['components'] = $modularComponents['modularComponents'];
         }

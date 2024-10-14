@@ -193,14 +193,14 @@ class ChildpageWithComponentsController extends Controller
         // Assign components globally
         $request->data['base']['components'] = $components;
 
-        if(!empty($request->data['base']['components'])) {
+        if (!empty($request->data['base']['components'])) {
             // Set hero from components
             $hero = collect($request->data['base']['components'])->reject(function ($data, $component_name) {
                 return !str_contains($component_name, 'hero');
             })->toArray();
         }
 
-        if(!empty($hero)) {
+        if (!empty($hero)) {
             $hero_key = array_key_first($hero);
 
             $request->data['base']['hero'] = $request->data['base']['components'][$hero_key]['data'];
