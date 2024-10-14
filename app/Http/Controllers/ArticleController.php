@@ -83,10 +83,10 @@ class ArticleController extends Controller
             abort('404');
         }
 
-        if(!empty($article['article']['data']['link'])) {
+        if (!empty($article['article']['data']['link'])) {
             $linkURL = parse_url($article['article']['data']['link']);
 
-            if(!empty($linkURL['host'])) {
+            if (!empty($linkURL['host'])) {
                 return redirect($article['article']['data']['link']);
             }
         }

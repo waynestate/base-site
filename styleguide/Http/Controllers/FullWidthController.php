@@ -220,14 +220,14 @@ class FullWidthController extends Controller
             ],
         ];
 
-        if(!empty($components)) {
+        if (!empty($components)) {
             // Set hero from components
             $hero = collect($components)->reject(function ($data, $component_name) {
                 return !str_contains($component_name, 'hero');
             })->toArray();
         }
 
-        if(!empty($hero)) {
+        if (!empty($hero)) {
             $hero_key = array_key_first($hero);
 
             $request->data['base']['hero'] = $components[$hero_key]['data'];

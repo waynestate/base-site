@@ -125,7 +125,7 @@ class PromoRepository extends Repository
         ];
 
         // Set the config for full width hero if they match the page ids that are specified
-        if(in_array($data['page']['id'], $hero_full_width_ids)) {
+        if (in_array($data['page']['id'], $hero_full_width_ids)) {
             config([
                 'base.hero_full_controllers' => ['HeroController'],
             ]);

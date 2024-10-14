@@ -30,11 +30,11 @@ class LayoutController extends Controller
 </ul>
 ';
         // Override layout
-        if($request->data['base']['page']['id'] === 120100100) {
+        if ($request->data['base']['page']['id'] === 120100100) {
             $request->data['base']['layout'] = 'main';
         }
 
-        if($request->data['base']['page']['id'] === 120100101) {
+        if ($request->data['base']['page']['id'] === 120100101) {
             $request->data['base']['layout'] = 'contained-hero';
         }
 
