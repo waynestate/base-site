@@ -8,7 +8,6 @@ use Illuminate\Routing\Middleware\ThrottleRequests;
 
 abstract class TestCase extends BaseTestCase
 {
-
     /**
      * Ran before every test.
      */
