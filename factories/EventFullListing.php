@@ -49,7 +49,7 @@ class EventFullListing implements FactoryContract
                     'full_url' => $image,
                     'description' => $description,
                 ],
-                'is_all_day' => $this->faker->boolean,
+                'is_all_day' => $this->faker->boolean(),
             ];
             $event = array_replace_recursive($event, $options);
 

@@ -43,7 +43,7 @@ class GenericPromo implements FactoryContract
             ]);
 
             $excerpt = $this->faker->randomElement([
-                $this->faker->catchPhrase,
+                $this->faker->catchPhrase(),
                 $this->faker->jobTitle(),
             ]);
 

@@ -6,13 +6,22 @@ use App\Repositories\PeopleRepository;
 use App\Repositories\ProfileRepository;
 use Contracts\Repositories\ProfileRepositoryContract;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
-use Waynestate\Api\Connector;
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\ServiceProvider;
+use Waynestate\Api\Connector;
 
 class AppServiceProvider extends ServiceProvider
 {
+    /**
+     * The path to your application's "home" route.
+     *
+     * Typically, users are redirected here after authentication.
+     *
+     * @var string
+     */
+    public const HOME = '/home';
+
     /** @var $prefx **/
     protected $prefix = 'App';
 
