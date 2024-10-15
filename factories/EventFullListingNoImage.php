@@ -34,7 +34,7 @@ class EventFullListingNoImage implements FactoryContract
                 'repeat_end_date' => $this->faker->dateTimeBetween('+1 month', '+2 months')->format('Y-m-d'),
                 'end_date' => $this->faker->dateTimeBetween('+10 days', '+15 days')->format('Y-m-d'),
                 'images' => '',
-                'is_all_day' => $this->faker->boolean,
+                'is_all_day' => $this->faker->boolean(),
             ];
             $event = array_replace_recursive($event, $options);
 
