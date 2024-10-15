@@ -19,6 +19,8 @@
     <env name="MAIL_DRIVER" value="array"/>
     <env name="QUEUE_CONNECTION" value="sync"/>
     <env name="SESSION_DRIVER" value="array"/>
+    <env name="DB_CONNECTION" value="sqlite"/>
+    <env name="DB_DATABASE" value=":memory:"/>
     <env name="HTTP_X_FORWARDED_FOR" value="127.0.0.1"/>
     <env name="APP_CONFIG_CACHE" value="bootstrap/cache/config.phpunit.php"/>
     <env name="APP_SERVICES_CACHE" value="bootstrap/cache/services.phpunit.php"/>
