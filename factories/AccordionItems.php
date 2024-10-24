@@ -23,7 +23,7 @@ class AccordionItems implements FactoryContract
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
                 'title' => $this->faker->sentence(),
-                'description' => '<p>'.$this->faker->paragraph(5).' <a href="#">Example link.</a><ul><li>'.$this->faker->sentence.'</li><li>'.$this->faker->sentence.'</li><li>'.$this->faker->sentence.'</li></ul></p>',
+                'description' => '<p>'.$this->faker->paragraph(5).' <a href="#">Example link.</a><ul><li>'.$this->faker->sentence().'</li><li>'.$this->faker->sentence().'</li><li>'.$this->faker->sentence().'</li></ul></p>',
                 'promo_item_id' => $this->faker->numberBetween(1000, 10000),
                 'relative_url' => $this->faker->randomElement([
                     '/styleguide/image/600x450?text=600x450', // 4:3
@@ -34,7 +34,7 @@ class AccordionItems implements FactoryContract
                 ]),
                 'filename_alt_text' => 'Placeholder image '.$i,
                 'option' => $this->faker->randomElement(['Left','Right','Center','']),
-                'excerpt' => $this->faker->sentence,
+                'excerpt' => $this->faker->sentence(),
             ];
 
             $data[$i] = array_replace_recursive($data[$i], $options);
