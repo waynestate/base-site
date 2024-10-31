@@ -32,8 +32,6 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->throttleApi('60,1');
 
-        $middleware->replace(\Illuminate\Http\Middleware\TrustProxies::class, \App\Http\Middleware\TrustProxies::class);
-
         $middleware->alias([
             'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
             'data' => \App\Http\Middleware\Data::class,
