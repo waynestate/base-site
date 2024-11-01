@@ -49,7 +49,7 @@ class Button implements FactoryContract
             $data[$i] = [
                 'link' => '#',
                 'title' => ucfirst(implode(' ', $this->faker->words(3))),
-                //'excerpt' => $this->faker->catchPhrase,
+                //'excerpt' => $this->faker->catchPhrase(),
                 'description' => '',
                 'promo_item_id' => $i,
                 'relative_url' => $image,
