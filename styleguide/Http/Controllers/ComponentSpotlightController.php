@@ -77,7 +77,7 @@ class ComponentSpotlightController extends Controller
             ],
             'spotlight-2' => [
                 'data' => app(GenericPromo::class)->create(1, false, [
-                    'title' => $this->faker->name,
+                    'title' => $this->faker->name(),
                     'excerpt' => '&ldquo;' . $this->faker->text(200) . '&rdquo;',
                     'relative_url' => '/styleguide/image/600x600',
                     'filename_url' => '/styleguide/image/600x600',
