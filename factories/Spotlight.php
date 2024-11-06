@@ -24,8 +24,8 @@ class Spotlight implements FactoryContract
 
         for ($i = 0; $i <= $limit - 1; $i++) {
             $data[$i] = [
-                'title' => $this->faker->name,
-                'excerpt' => $this->faker->jobTitle,
+                'title' => $this->faker->name(),
+                'excerpt' => $this->faker->jobTitle(),
                 'description' => '<p>&ldquo;' . $this->faker->text(200) . '&rdquo;</p>',
                 'link' => '#',
                 'promo_item_id' => $i,

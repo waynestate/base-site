@@ -9,16 +9,15 @@
       <directory suffix="Test.php">./tests/Unit</directory>
     </testsuite>
   </testsuites>
-  <extensions>
-    <bootstrap class="Tests\Bootstrap"/>
-  </extensions>
   <php>
     <env name="APP_ENV" value="testing"/>
     <env name="BCRYPT_ROUNDS" value="4"/>
-    <env name="CACHE_DRIVER" value="array"/>
+    <env name="CACHE_STORE" value="array"/>
     <env name="MAIL_DRIVER" value="array"/>
     <env name="QUEUE_CONNECTION" value="sync"/>
     <env name="SESSION_DRIVER" value="array"/>
+    <env name="DB_CONNECTION" value="sqlite"/>
+    <env name="DB_DATABASE" value=":memory:"/>
     <env name="HTTP_X_FORWARDED_FOR" value="127.0.0.1"/>
     <env name="APP_CONFIG_CACHE" value="bootstrap/cache/config.phpunit.php"/>
     <env name="APP_SERVICES_CACHE" value="bootstrap/cache/services.phpunit.php"/>
@@ -37,7 +36,6 @@
       <file>./app/Http/Controllers/Controller.php</file>
       <file>./app/Http/Middleware/EncryptCookies.php</file>
       <file>./app/Http/Middleware/TrimStrings.php</file>
-      <file>./app/Http/Middleware/TrustProxies.php</file>
       <file>./app/Http/Middleware/VerifyCsrfToken.php</file>
       <file>./app/Exceptions/Handler.php</file>
       <file>./app/Console/Kernel.php</file>
