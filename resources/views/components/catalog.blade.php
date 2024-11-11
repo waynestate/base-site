@@ -8,9 +8,8 @@
             @if(!empty($group) && $group != 'Heading')
                 @if(!empty($group) && $group != 'items')
                     @if(!empty($component['heading']))
-                        @include('partials/heading', ['heading' => $group, 'headingClass' => 'divider-gold pb-1 mt-6 ', 'headingLevel' => !empty($component['headingLevel']) ? $component['headingLevel'] : 'h3'])
+                        @include('partials/heading', [$component['heading'] => $group, 'headingClass' => 'divider-gold pb-1 mt-6 '])
                     @else
-                        @include('partials/heading', ['heading' => $group, 'headingClass' => 'divider-gold pb-1 mt-6 '.($component['headingClass'] ?? ''), 'headingLevel' => !empty($component['headingLevel']) ? $component['headingLevel'] : 'h2'])
                     @endif
                 @else
                     @if(count($data) > 2)

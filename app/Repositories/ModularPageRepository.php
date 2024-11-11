@@ -238,7 +238,11 @@ class ModularPageRepository implements ModularPageRepositoryContract
             })->toArray();
 
             // Organize by option if groupByOptions = true OR any items in the group have the option of "heading"
-            if(!empty($components['components'][$name]['groupByOptions']) && $components['components'][$name]['groupByOptions'] === true && Str::startsWith($name, 'catalog') || collect($data)->contains('option', 'Heading')) {
+            if(!empty($components['components'][$name]['groupByOptions']) 
+                && $components['components'][$name]['groupByOptions'] === true 
+                && Str::startsWith($name, 'catalog') 
+                /* || collect($data)->contains('option', 'Heading'))  */
+                ){
                 $data = $this->organizePromoItemsByOption($data);
             }
 
@@ -302,7 +306,10 @@ class ModularPageRepository implements ModularPageRepositoryContract
     */
     public function createHeadings(array $components)
     {
-        $modularComponents = collect($components)->map(function ($values, $key) use ($components) {
+        $modularComponents = collect($components)->mapToGroups(function ($values, $key) use($components) {
+            dump($values['data']);
+            die;
+            /*
             if(!empty($values['data']['Heading'])) {
                 $values['heading'] = $values['data']['Heading'][0];
                 unset($values['data']['Heading']);
@@ -321,6 +328,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
             if(!empty($values['component']['headingClass'])) {
                 $values['heading']['class'] = $values['component']['headingClass'];
             }
+             */
 
             return $values;
         })->toArray();
