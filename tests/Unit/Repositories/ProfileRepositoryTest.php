@@ -52,6 +52,7 @@ final class ProfileRepositoryTest extends TestCase
             'name_fields' => [
                 'Honorific',
                 'First Name',
+                'Middle name',
                 'Last Name',
                 'Suffix',
             ],
@@ -60,6 +61,7 @@ final class ProfileRepositoryTest extends TestCase
         $return['profile']['data'] = [
             'Honorific' => 'Dr.',
             'First Name' => 'Anthony',
+            'Middle name' => 'M.',
             'Last Name' => 'Wayne',
             'Suffix' => 'Jr.',
         ];
@@ -72,7 +74,7 @@ final class ProfileRepositoryTest extends TestCase
         $pageTitle = $profile->getPageTitleFromName($return);
 
         // Make sure the page title equals all the name fields
-        $this->assertEquals('Dr. Anthony Wayne, Jr.', $pageTitle);
+        $this->assertEquals('Dr. Anthony M. Wayne, Jr.', $pageTitle);
     }
 
     #[Test]

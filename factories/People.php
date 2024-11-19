@@ -26,6 +26,7 @@ class People implements FactoryContract
         for ($i = 1; $i <= $limit; $i++) {
             $accessid = $this->faker->randomLetter().$this->faker->randomLetter().$this->faker->randomNumber(4, true);
             $first_name = $this->faker->firstName();
+            $middle_name = $this->faker->firstName();
             $last_name = $this->faker->lastName();
             $suffix = $this->faker->suffix();
             $email = $this->faker->email();
@@ -46,6 +47,7 @@ class People implements FactoryContract
             $data[$i] = [
                 'id' => $i,
                 'first_name' => $first_name,
+                'middle_name' => $middle_name,
                 'last_name' => $last_name,
                 'accessid' => $accessid,
                 'email' => $email,
@@ -60,6 +62,14 @@ class People implements FactoryContract
                         'value' => $first_name,
                         'field' => [
                             'name' => 'First Name',
+                            'type' => 'text',
+                            'global' => 1,
+                        ],
+                    ],
+                    [
+                        'value' => $middle_name,
+                        'field' => [
+                            'name' => 'Middle Name',
                             'type' => 'text',
                             'global' => 1,
                         ],
@@ -141,10 +151,11 @@ class People implements FactoryContract
                     $groups->random(),
                 ],
                 'link' => '/styleguide/profile/aa0000',
-                'full_name' => $first_name . ' ' . $last_name,
+                'full_name' => $first_name . ' ' . $middle_name . ' ' . $last_name,
                 'data' => [
                     'AccessID' => $accessid,
                     'First Name' => $first_name,
+                    'Middle Name' => $middle_name,
                     'Last Name' => $last_name,
                     'Email' => $email,
                     'Title' => $this->faker->sentence(3),
