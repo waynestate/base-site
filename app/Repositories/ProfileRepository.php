@@ -315,6 +315,7 @@ class ProfileRepository implements ProfileRepositoryContract
                 'Suffix',
                 'Honorific',
                 'First Name',
+                'Middle name',
                 'Last Name',
                 'Picture',
                 'Photo Download',
@@ -324,6 +325,7 @@ class ProfileRepository implements ProfileRepositoryContract
             'name_fields' => [
                 'Honorific',
                 'First Name',
+                'Middle name',
                 'Last Name',
                 'Suffix',
             ],
