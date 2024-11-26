@@ -1,5 +1,5 @@
 const twColors = require('tailwindcss/colors')
-const path = require("path");
+const path = require('path')
 
 const baseColors = {
     transparent: 'transparent',
@@ -43,29 +43,29 @@ const baseColors = {
         700: '#c89f1f',
         800: '#b69018',
         900: '#a48111',
-    }
+    },
 }
 
 const screens = {
-    'sm': '420px',
-    'md': '576px',
-    'lg': '732px',
-    'xl': '888px',
+    sm: '420px',
+    md: '576px',
+    lg: '732px',
+    xl: '888px',
     '2xl': '1044px',
     '3xl': '1200px',
-    'mt': '780px', // Adjust this based on the top menu width
-    'print': {'raw': 'print'},
+    mt: '780px', // Adjust this based on the top menu width
+    print: { raw: 'print' },
 }
 
 module.exports = {
     content: [
-        path.join(__dirname, "resources/views/**/*.blade.php"),
-        path.join(__dirname, "styleguide/Views/**/*.blade.php"),
-        path.join(__dirname, "factories/**/*.php"),
-        path.join(__dirname, "resources/js/**/*.js"),
-        path.join(__dirname, "node_modules/slideout/dist/slideout.js"),
-        path.join(__dirname, "node_modules/flickity/dist/flickity.pkgd.js"),
-        path.join(__dirname, "node_modules/mediabox/dist/mediabox.js"),
+        path.join(__dirname, 'resources/views/**/*.blade.php'),
+        path.join(__dirname, 'styleguide/Views/**/*.blade.php'),
+        path.join(__dirname, 'factories/**/*.php'),
+        path.join(__dirname, 'resources/js/**/*.js'),
+        path.join(__dirname, 'node_modules/slideout/dist/slideout.js'),
+        path.join(__dirname, 'node_modules/flickity/dist/flickity.pkgd.js'),
+        path.join(__dirname, 'node_modules/mediabox/dist/mediabox.js'),
     ],
     safelist: [
         {
@@ -73,22 +73,22 @@ module.exports = {
         },
         {
             pattern: /w-[1-5]\/[1-5]/,
-            variants: ['sm','md','lg','xl','2xl','3xl','mt'],
+            variants: ['sm', 'md', 'lg', 'xl', '2xl', '3xl', 'mt'],
         },
         {
             pattern: /grid(-cols-[1-4])?/,
-            variants: ['sm','md','lg','xl','2xl','3xl','mt'],
+            variants: ['sm', 'md', 'lg', 'xl', '2xl', '3xl', 'mt'],
         },
         {
             pattern: /columns(-[1-4])?/,
-            variants: ['sm','md','lg','xl','2xl','3xl','mt'],
+            variants: ['sm', 'md', 'lg', 'xl', '2xl', '3xl', 'mt'],
         },
-        '/form_responses/'
+        '/form_responses/',
     ],
     theme: {
         screens: screens,
         fontFamily: {
-            'sans': [
+            sans: [
                 'Lato',
                 'system-ui',
                 'BlinkMacSystemFont',
@@ -103,69 +103,61 @@ module.exports = {
                 'Helvetica Neue',
                 'sans-serif',
             ],
-            'serif': [
-                'Georgia',
-                'Times',
-                'Times New Roman',
-                'serif',
-            ],
+            serif: ['Georgia', 'Times', 'Times New Roman', 'serif'],
         },
         extend: {
             colors: baseColors,
             maxWidth: ({ theme }) => ({
-                'half': '50%',
+                half: '50%',
                 'screen-3xl': theme('screens.3xl'),
             }),
             padding: {
                 '3/4': '75%',
                 '16/9': '56.35%',
-                'hero': '36.3%',
-                'full': '100%',
-                'portrait' : '133%',
-            },
-            spacing: {
-                '14': '3.5rem',
+                hero: '36.3%',
+                full: '100%',
+                portrait: '133%',
             },
             margin: {
-                '17': '4.25rem',
-                '19': '4.75rem',
+                17: '4.25rem',
+                19: '4.75rem',
             },
             height: {
                 'hero-small': '18.75vw',
-                'hero': '36.25vw',
+                hero: '36.25vw',
             },
             maxHeight: {
                 'hero-small': '250px',
-                'hero': '600px',
+                hero: '600px',
             },
             minHeight: {
-                'hero': '600px',
+                hero: '600px',
             },
             borderWidth: {
-                '12' : '12px',
+                12: '12px',
             },
             dropShadow: {
-                'px': '0 1px 1px rgba(12, 84, 73, 0.5)',
+                px: '0 1px 1px rgba(12, 84, 73, 0.5)',
             },
             boxShadow: {
-                'white': '0 7px 0 '+ twColors.white +', 0 14px 0 '+ twColors.white,
-                'gray': '0 7px 0 '+ twColors.gray +', 0 14px 0 '+ twColors.gray,
+                white: '0 7px 0 ' + twColors.white + ', 0 14px 0 ' + twColors.white,
+                gray: '0 7px 0 ' + twColors.gray + ', 0 14px 0 ' + twColors.gray,
             },
             opacity: {
-                '65': '.65',
+                65: '.65',
             },
             aspectRatio: {
-                'portrait': '3 / 4',
-                'hero': '2.76 / 1',
+                portrait: '3 / 4',
+                hero: '2.76 / 1',
             },
             transitionProperty: {
-                'height': 'height',
+                height: 'height',
             },
             listStyleType: {
-                'circle':'circle',
-                'square':'square',
-                'lower-alpha':'lower-alpha',
-                'lower-roman':'lower-roman',
+                circle: 'circle',
+                square: 'square',
+                'lower-alpha': 'lower-alpha',
+                'lower-roman': 'lower-roman',
             },
         },
     },
