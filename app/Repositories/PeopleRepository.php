@@ -2,23 +2,18 @@
 
 namespace App\Repositories;
 
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
-use Waynestate\Api\Connector;
+use Contracts\Repositories\ProfileRepositoryContract;
 use Illuminate\Cache\Repository;
 use Waynestate\Youtube\ParseId;
+use Illuminate\Support\Str;
 use Waynestate\Api\News;
-use Waynestate\Promotions\ParsePromos;
-use Contracts\Repositories\ProfileRepositoryContract;
+use Waynestate\Api\People;
 use Illuminate\Support\Facades\Config;
 
-class ProfileRepository implements ProfileRepositoryContract
+class PeopleRepository implements ProfileRepositoryContract
 {
-    /** @var Connector */
-    protected $wsuApi;
-
-    /** @var ParsePromos */
-    protected $parsePromos;
+    /** @var People */
+    protected $peopleApi;
 
     /** @var Repository */
     protected $cache;
@@ -26,51 +21,66 @@ class ProfileRepository implements ProfileRepositoryContract
     /**
      * Construct the repository.
      */
-    public function __construct(Connector $wsuApi, ParsePromos $parsePromos, Repository $cache, News $newsApi)
+    public function __construct(People $peopleApi, Repository $cache, News $newsApi)
     {
-        $this->wsuApi = $wsuApi;
-        $this->parsePromos = $parsePromos;
+        $this->peopleApi = $peopleApi;
         $this->cache = $cache;
         $this->newsApi = $newsApi;
     }
 
     /**
-     * {@inheritdoc}
+     * Get the profile listing.
      */
     public function getProfiles(int $site_id, ?string $selected_group = null): array
     {
         $params = [
-            'method' => 'profile.users.listing',
             'site_id' => $site_id,
+            'method' => 'sites/'.$site_id.'/users',
             'groups' => $selected_group,
+            'env' => config('app.env'),
         ];
 
-        $profile_listing = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
-            $this->wsuApi->nextRequestProduction();
-
-            return $this->wsuApi->sendRequest($params['method'], $params);
+        $profiles = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+            try {
+                return $this->peopleApi->request($params['method'], $params);
+            } catch (\Exception $e) {
+                return [];
+            }
         });
 
-        // Build the link
-        if (empty($profile_listing['error'])) {
-            $profile_listing = collect($profile_listing)->map(function ($item) {
-                $item['link'] = '/profile/'.$item['data']['AccessID'];
-                $item['full_name'] = $this->getPageTitleFromName(['profile' => $item]);
+        $profile_return['profiles'] = [];
+        if (!empty($profiles['data'])) {
+            $profile_return['profiles'] = collect($profiles['data'])->mapWithKeys(function ($profile) {
+                $profile['link'] = '/profile/'.$profile['accessid'];
 
-                return $item;
-            })->toArray();
+                foreach ($profile['field_data'] as $data) {
+                    if ($data['field']['type'] == 'file') {
+                        $profile['data'][$data['field']['name']]['url'] = $data['value'];
+                    } else {
+                        $profile['data'][$data['field']['name']] = $data['value'];
+                    }
+                }
+
+                $profile['data']['AccessID'] = $profile['accessid'];
+                $profile['full_name'] = $this->getPageTitleFromName(['profile' => $profile]);
+
+                $profile['groups'] = collect($profile['groups'])->keyBy('id')->toArray();
+
+                return [$profile['data']['AccessID'] => $profile];
+            })
+            ->sortBy('last_name')
+            ->toArray();
         }
 
-        // Make sure the return is an array
-        $profiles['profiles'] = empty($profile_listing['error']) ? $profile_listing : [];
-
-        return $profiles;
+        return $profile_return;
     }
 
     /**
-     * {@inheritdoc}
+     * Gets the profiles based on promo_group_id custom field and generates anchors for each group
+     *
+     * @param string $groups
      */
-    public function getProfilesByGroup($site_id)
+    public function getProfilesByGroup(int $site_id): array
     {
         // Get the groups for the dropdown
         $dropdown_groups = $this->getDropdownOfGroups($site_id);
@@ -83,12 +93,10 @@ class ProfileRepository implements ProfileRepositoryContract
 
         // Organize profiles by the group they are in keyed by accessid
         $grouped = collect($all_profiles['profiles'])->keyBy('data.AccessID')
-        ->groupBy([
-            function ($profile) {
-                return $profile['groups'];
-            },
-        ], $preserveKeys = true)
-        ->toArray();
+            ->groupBy(function ($profile) {
+                return collect($profile['groups'])->pluck('name')->toArray();
+            })
+            ->toArray();
 
         // Follow the ordering of groups from the CMS
         $profiles['profiles'] = $this->sortGroupsByDisplayOrder($grouped, $dropdown_groups['dropdown_groups']);
@@ -124,17 +132,18 @@ class ProfileRepository implements ProfileRepositoryContract
     {
         $profile_listing = $this->getProfiles($site_id);
 
-        $group_order = explode('|', $groups);
+        $group_order = explode(',', $groups);
 
-        $profiles = [];
+        $profiles['profiles'] = [];
 
         // Retain the order of the groups as they were piped in
         if (!empty($profile_listing)) {
             foreach ($group_order as $group) {
                 foreach ($profile_listing['profiles'] as $profile) {
                     if (array_key_exists($group, $profile['groups'])) {
-                        $profiles['profiles'][$profile['groups'][$group]][] = $profile;
-                        $profiles['anchors'][$profile['groups'][$group]] = Str::slug($profile['groups'][$group]);
+                        $group_name = $profile['groups'][$group]['name'];
+                        $profiles['profiles'][$group_name][] = $profile;
+                        $profiles['anchors'][$group_name] = Str::slug($group_name);
                     }
                 }
             }
@@ -142,6 +151,7 @@ class ProfileRepository implements ProfileRepositoryContract
 
         return $profiles;
     }
+
 
     /**
      * {@inheritdoc}
@@ -162,50 +172,40 @@ class ProfileRepository implements ProfileRepositoryContract
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function getGroupIds($selected_group, $forced_profile_group_id, $dropdown_groups)
-    {
-        // Use the selected group or the forced one from custom page fields
-        $group_ids = $forced_profile_group_id === null ? $selected_group : $forced_profile_group_id;
-
-        // Use all the IDs from the dropdown since the initial selection is "All Profiles"
-        if ($group_ids === null) {
-            $group_ids = ltrim(implode('|', array_keys($dropdown_groups)), '|');
-        }
-
-        return $group_ids;
-    }
-
-    /**
-     * {@inheritdoc}
+     * Get the dropdown of groups.
      */
     public function getDropdownOfGroups(int $site_id): array
     {
         $params = [
-            'method' => 'profile.groups.listing',
-            'site_id' => $site_id,
+            'method' => 'sites/'.$site_id.'/groups',
+            'env' => config('app.env'),
         ];
 
         $profile_groups = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
-            $this->wsuApi->nextRequestProduction();
-
-            return $this->wsuApi->sendRequest($params['method'], $params);
+            try {
+                return $this->peopleApi->request($params['method'], $params);
+            } catch (\Exception $e) {
+                return [];
+            }
         });
 
-        // Filter down the groups based on the parent group from the config
-        $profile_groups['results'] = collect($profile_groups['results'])
-            ->filter(function ($item) {
-                return (int) $item['parent_id'] === config('profile.profile_parent_group_id');
-            })
-            ->toArray();
+        if (!empty($profile_groups['data'])) {
+            // Filter down the groups based on the parent group from the config
+            $profile_groups['data'] = collect($profile_groups['data'])
+                ->filter(function ($item) {
+                    return (int)$item['parent_id'] === config('profile.profile_parent_group_id');
+                })
+                ->toArray();
 
-        // Only return the display name ordered by the display order
-        $groupsArray = collect($profile_groups['results'])
-            ->sortBy('display_order')
-            ->map(function ($item) {
-                return $item['display_name'];
-            })->toArray();
+            // Only return the display name ordered by the display order
+            $groupsArray = collect($profile_groups['data'])
+                ->sortBy('display_order')
+                ->mapWithKeys(function ($item) {
+                    return [$item['id'] => $item['name']];
+                })->toArray();
+        } else {
+            $groupsArray = [];
+        }
 
         if (count($groupsArray) == 1) {
             $groups['single_group'] = key($groupsArray);
@@ -219,45 +219,63 @@ class ProfileRepository implements ProfileRepositoryContract
     /**
      * {@inheritdoc}
      */
+    public function getGroupIds($selected_group, $forced_profile_group_id, $dropdown_groups)
+    {
+        // Use the selected group or the forced one from custom page fields
+        $group_ids = $forced_profile_group_id === null ? $selected_group : $forced_profile_group_id;
+
+        // Use all the IDs from the dropdown since the initial selection is "All Profiles"
+        if ($group_ids === null) {
+            $group_ids = ltrim(implode(',', array_keys($dropdown_groups)), ',');
+        }
+
+        return $group_ids;
+    }
+
+    /**
+     * Get the persons profile information.
+     */
     public function getProfile(int $site_id, string $accessid): array
     {
         $params = [
-            'method' => 'profile.users.view',
             'site_id' => $site_id,
-            'accessid' => $accessid,
-            'include_courses' => 'true',
+            'method' => 'users/'.$accessid.'/sites/'.$site_id,
+            'env' => config('app.env'),
         ];
 
-        $profiles = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
-            $this->wsuApi->nextRequestProduction();
-
-            return $this->wsuApi->sendRequest($params['method'], $params);
+        $profile = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+            try {
+                return $this->peopleApi->request($params['method'], $params);
+            } catch (\Exception $e) {
+                return [];
+            }
         });
 
-        if (!empty($profiles['error'])) {
-            return ['profile' => []];
+        $profile_return['profile'] = [];
+        if (!empty($profile['data'])) {
+            $profile['data']['link'] = '/profile/'.$profile['data']['accessid'];
+
+            if (!empty($profile['data']['data']['Youtube Videos'])) {
+                $profile['data']['data']['Youtube Videos'] = collect($profile['data']['data']['Youtube Videos'])
+                    ->map(function ($video) {
+                        $video['youtube_id'] = ParseId::fromUrl($video['link']);
+                        return $video;
+                    })
+                    ->toArray();
+            }
+
+            foreach ($profile['data']['field_data'] as $data) {
+                if ($data['field']['type'] == 'file') {
+                    $profile['data']['data'][$data['field']['name']]['url'] = $data['value'];
+                } else {
+                    $profile['data']['data'][$data['field']['name']] = $data['value'];
+                }
+            }
+
+            $profile_return['profile'] = $profile['data'];
         }
 
-        if (!empty($profiles['profiles'][$site_id]['data']['Youtube Videos'])) {
-            $profiles['profiles'][$site_id]['data']['Youtube Videos'] = collect($profiles['profiles'][$site_id]['data']['Youtube Videos'])->map(function ($video) use ($profiles, $site_id) {
-                return [
-                    'youtube_id' => ParseId::fromUrl($video['link']),
-                    'link' => $video['link'],
-                    'filename_alt_text' => $profiles['profiles'][$site_id]['data']['First Name'] . ' ' .
-                        $profiles['profiles'][$site_id]['data']['Last Name'] . ' video',
-                ];
-            })->toArray();
-        }
-
-        if (!empty($profiles['profiles'])) {
-            $profiles['profiles']['articles'] = $this->getNewsArticles($accessid, 10);
-        }
-
-        return [
-            'profile' =>  Arr::get($profiles['profiles'], $site_id, []),
-            'courses' => Arr::get($profiles, 'courses', []),
-            'articles' => Arr::get($profiles['profiles'], 'articles', []),
-        ];
+        return $profile_return;
     }
 
     /**
@@ -308,7 +326,6 @@ class ProfileRepository implements ProfileRepositoryContract
             'file_fields' => [
                 'Curriculum Vitae',
                 'Syllabi',
-                'Youtube Videos',
             ],
             // Hide these in the main tube of content
             'hidden_fields' => [
@@ -317,7 +334,7 @@ class ProfileRepository implements ProfileRepositoryContract
                 'Suffix',
                 'Honorific',
                 'First Name',
-                'Middle name',
+                'Middle Name',
                 'Last Name',
                 'Picture',
                 'Photo Download',
@@ -327,7 +344,7 @@ class ProfileRepository implements ProfileRepositoryContract
             'name_fields' => [
                 'Honorific',
                 'First Name',
-                'Middle name',
+                'Middle Name',
                 'Last Name',
                 'Suffix',
             ],
@@ -380,7 +397,7 @@ class ProfileRepository implements ProfileRepositoryContract
      */
     public function getSiteID($data)
     {
-        return !empty(config('profile.profile_site_id')) ? config('profile.profile_site_id') : $data['site']['id'];
+        return !empty(config('profile.profile_site_id')) ? config('profile.profile_site_id') : $data['site']['people']['site_id'];
     }
 
     /**
@@ -426,6 +443,7 @@ class ProfileRepository implements ProfileRepositoryContract
 
         // legacy support for profile_site_id
         if (!empty($data['data']['profile_site_id'])) {
+            dump($data['data']['profile_site_id'],'parseProfileConfig');
             Config::set('profile.profile_site_id', $data['data']['profile_site_id']);
         }
     }

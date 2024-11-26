@@ -91,4 +91,11 @@ interface ProfileRepositoryContract
      * @return int
      */
     public function getSiteID($data);
+
+    /**
+     * Parse the profile config from the custom fields
+     *
+     * @param array $data
+     */
+    public function parseProfileConfig(array $data);
 }
