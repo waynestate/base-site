@@ -10,6 +10,7 @@ use Waynestate\Youtube\ParseId;
 use Waynestate\Api\News;
 use Waynestate\Promotions\ParsePromos;
 use Contracts\Repositories\ProfileRepositoryContract;
+use Illuminate\Support\Facades\Config;
 
 class ProfileRepository implements ProfileRepositoryContract
 {
@@ -195,7 +196,7 @@ class ProfileRepository implements ProfileRepositoryContract
         // Filter down the groups based on the parent group from the config
         $profile_groups['results'] = collect($profile_groups['results'])
             ->filter(function ($item) {
-                return (int) $item['parent_id'] === config('base.profile_parent_group_id');
+                return (int) $item['parent_id'] === config('profile.profile_parent_group_id');
             })
             ->toArray();
 
@@ -367,7 +368,7 @@ class ProfileRepository implements ProfileRepositoryContract
             || $referer == $scheme.'://'.$host.$uri
             || strpos($referer, $host) === false
         ) {
-            return config('base.profile_default_back_url');
+            return config('profile.profile_default_back_url');
         }
 
         return $referer;
@@ -378,6 +379,53 @@ class ProfileRepository implements ProfileRepositoryContract
      */
     public function getSiteID($data)
     {
-        return !empty($data['data']['profile_site_id']) ? $data['data']['profile_site_id'] : $data['site']['id'];
+        return !empty(config('profile.profile_site_id')) ? config('profile.profile_site_id') : $data['site']['id'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function parseProfileConfig(array $data)
+    {
+        $profile_config = [];
+
+        if (!empty($data['data']['profile_data'])) {
+            // Remove all spaces and line breaks
+            $value = preg_replace('/\s*\R\s*/', '', $data['data']['profile_data']);
+
+            // Last item cannot have comma at the end of it
+            $value = preg_replace('(,})', '}', $value);
+
+            // Parse the JSON
+            if (Str::startsWith($value, '{')) {
+                $profile_config = json_decode($value, true);
+
+                if (!empty($profile_config['site_id'])) {
+                    Config::set('profile.profile_site_id', $profile_config['site_id']);
+                }
+
+                if (!empty($profile_config['group_id'])) {
+                    Config::set('profile.profile_group_id', $profile_config['group_id']);
+                }
+
+                if (!empty($profile_config['parent_group_id'])) {
+                    Config::set('profile.profile_parent_group_id', $profile_config['parent_group_id']);
+                }
+
+                if (!empty($profile_config['default_back_url'])) {
+                    Config::set('profile.profile_default_back_url', $profile_config['default_back_url']);
+                }
+            }
+        }
+
+        // legacy support for profile_group_id
+        if (!empty($data['data']['profile_group_id'])) {
+            Config::set('profile.profile_group_id', $data['data']['profile_group_id']);
+        }
+
+        // legacy support for profile_site_id
+        if (!empty($data['data']['profile_site_id'])) {
+            Config::set('profile.profile_site_id', $data['data']['profile_site_id']);
+        }
     }
 }

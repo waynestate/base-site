@@ -26,11 +26,14 @@ class DirectoryController extends Controller
      */
     public function index(Request $request): View
     {
+        // Parse profile config from custom fields
+        $this->profile->parseProfileConfig($request->data['base']);
+
         // Determine what site to pull profiles from
         $site_id = $this->profile->getSiteID($request->data['base']);
 
         if (!empty($request->data['base']['data']['profile_group_id'])) {
-            $profiles = $this->profile->getProfilesByGroupOrder($site_id, $request->data['base']['data']['profile_group_id']);
+            $profiles = $this->profile->getProfilesByGroupOrder($site_id, config('profile.profile_group_id'));
         } else {
             $profiles = $this->profile->getProfilesByGroup($site_id);
         }
