@@ -443,7 +443,6 @@ class PeopleRepository implements ProfileRepositoryContract
 
         // legacy support for profile_site_id
         if (!empty($data['data']['profile_site_id'])) {
-            dump($data['data']['profile_site_id'],'parseProfileConfig');
             Config::set('profile.profile_site_id', $data['data']['profile_site_id']);
         }
     }
