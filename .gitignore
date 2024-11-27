@@ -8,6 +8,7 @@
 .DS_Store
 /public/_static
 /public/hot
+/public/build
 /public/storage
 /public/_resources
 /shared
