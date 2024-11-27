@@ -15,6 +15,7 @@ use Tests\TestCase;
 use Mockery as Mockery;
 use Waynestate\Api\Connector;
 use Waynestate\Api\News;
+use Illuminate\Support\Facades\Config;
 
 final class ProfileRepositoryTest extends TestCase
 {
@@ -353,8 +354,8 @@ final class ProfileRepositoryTest extends TestCase
                 'profile_site_id' => $profile_site_id,
             ],
         ]);
-        
-        app(ProfileRepsoitory::class, ['wsuApi' => $wsuApi])->parseProfileConfig($custom_field_page);
+
+        app(ProfileRepository::class, ['wsuApi' => $wsuApi])->parseProfileConfig($custom_field_page);
 
         $return_profile_site_id = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getSiteID($custom_field_page);
         $this->assertEquals($profile_site_id, $return_profile_site_id);
@@ -363,6 +364,9 @@ final class ProfileRepositoryTest extends TestCase
         $site_config_page = app(Page::class)->create(1, true);
         $cms_site_id = $site_config_page['site']['id'];
 
+        // Reset the profile_site_id
+        Config::set('profile.profile_site_id', null);
+        app(ProfileRepository::class, ['wsuApi' => $wsuApi])->parseProfileConfig($site_config_page);
         $return_cms_site_id = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getSiteID($site_config_page);
 
         $this->assertEquals($cms_site_id, $return_cms_site_id);

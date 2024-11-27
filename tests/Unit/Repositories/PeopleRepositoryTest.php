@@ -15,6 +15,7 @@ use Tests\TestCase;
 use Mockery as Mockery;
 use Waynestate\Api\News;
 use Waynestate\Api\People as PeopleApi;
+use Illuminate\Support\Facades\Config;
 
 final class PeopleRepositoryTest extends TestCase
 {
@@ -402,6 +403,8 @@ final class PeopleRepositoryTest extends TestCase
             ],
         ]);
 
+        // Reset the profile_site_id
+        Config::set('profile.profile_site_id', null);
         app(PeopleRepository::class, ['peopleApi' => $peopleApi])->parseProfileConfig($site_config_page);
 
         $return_people_site_id = app(PeopleRepository::class, ['peopleApi' => $peopleApi])->getSiteID($site_config_page);
