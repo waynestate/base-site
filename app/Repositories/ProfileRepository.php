@@ -386,7 +386,7 @@ class ProfileRepository implements ProfileRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function parseProfileConfig(array $data)
+    public function parseProfileConfig(array $data): void
     {
         $profile_config = [];
 

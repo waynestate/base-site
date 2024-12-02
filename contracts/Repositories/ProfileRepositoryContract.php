@@ -97,5 +97,5 @@ interface ProfileRepositoryContract
      *
      * @param array $data
      */
-    public function parseProfileConfig(array $data);
+    public function parseProfileConfig(array $data): void;
 }

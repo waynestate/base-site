@@ -74,7 +74,7 @@ class ProfileRepository extends Repository
     /**
      * {@inheritdoc}
      */
-    public function parseProfileConfig(array $data)
+    public function parseProfileConfig(array $data): void
     {
         // There is no need to parse the profile config in the styleguide
     }
