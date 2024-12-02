@@ -429,4 +429,38 @@ final class ProfileRepositoryTest extends TestCase
             $this->assertTrue(array_key_exists('youtube_id', $video));
         }
     }
+
+    #[Test]
+    public function get_profile_data_with_json_array(): void
+    {
+        $site_id = $this->faker->numberBetween(1, 10);
+        $group_id = $this->faker->numberBetween(1, 10);
+        $parent_group_id = $this->faker->numberBetween(1, 10);
+        $back_url = $this->faker->url();
+
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'ProfileController',
+            ],
+            'data' => [
+                'profile_data' => json_encode([
+                    'site_id' => $site_id,
+                    'group_id' => $group_id,
+                    'parent_group_id' => $parent_group_id,
+                    'default_back_url' => $back_url,
+                ]),
+            'profile_group_id' => $group_id,
+            'profile_site_id' => $site_id
+            ],
+        ]);
+
+        $wsuApi = Mockery::mock(Connector::class);
+
+        app(ProfileRepository::class, ['wsuApi' => $wsuApi])->parseProfileConfig($data);
+
+        $this->assertEquals($site_id, config('profile.profile_site_id'));
+        $this->assertEquals($group_id, config('profile.profile_group_id'));
+        $this->assertEquals($parent_group_id, config('profile.profile_parent_group_id'));
+        $this->assertEquals($back_url, config('profile.profile_default_back_url'));
+    }
 }
