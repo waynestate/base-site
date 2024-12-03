@@ -70,12 +70,4 @@ class ProfileRepository extends Repository
         // There is no need to sort the groups in the styleguide since the order is random
         return $grouped;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function parseProfileConfig(array $data): void
-    {
-        // There is no need to parse the profile config in the styleguide
-    }
 }

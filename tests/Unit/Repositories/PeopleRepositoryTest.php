@@ -83,18 +83,18 @@ final class PeopleRepositoryTest extends TestCase
     {
         // The default path if no referer
         $url = app(PeopleRepository::class)->getBackToProfileListUrl();
-        $this->assertTrue($url == config('profile.profile_default_back_url'));
+        $this->assertTrue($url == config('profile.default_back_url'));
 
         // If a referer is passed from a different domain
         $referer = $this->faker->url();
         $url = app(PeopleRepository::class)->getBackToProfileListUrl($referer, 'http', 'wayne.edu', '/');
-        $this->assertTrue($url == config('profile.profile_default_back_url'));
+        $this->assertTrue($url == config('profile.default_back_url'));
 
         // If a referer is passed that is the same page we are on
         $referer = $this->faker->url();
         $parsed = parse_url($referer);
         $url = app(PeopleRepository::class)->getBackToProfileListUrl($referer, $parsed['scheme'], $parsed['host'], $parsed['path']);
-        $this->assertTrue($url == config('profile.profile_default_back_url'));
+        $this->assertTrue($url == config('profile.default_back_url'));
 
         // If referer is passed from the same domain that the site is on
         $referer = $this->faker->url();
@@ -404,7 +404,7 @@ final class PeopleRepositoryTest extends TestCase
         ]);
 
         // Reset the profile_site_id
-        Config::set('profile.profile_site_id', null);
+        Config::set('profile.site_id', null);
         app(PeopleRepository::class, ['peopleApi' => $peopleApi])->parseProfileConfig($site_config_page);
 
         $return_people_site_id = app(PeopleRepository::class, ['peopleApi' => $peopleApi])->getSiteID($site_config_page);
@@ -490,9 +490,9 @@ final class PeopleRepositoryTest extends TestCase
 
         app(PeopleRepository::class, ['wsuApi' => $wsuApi])->parseProfileConfig($data);
 
-        $this->assertEquals($site_id, config('profile.profile_site_id'));
-        $this->assertEquals($group_id, config('profile.profile_group_id'));
-        $this->assertEquals($parent_group_id, config('profile.profile_parent_group_id'));
-        $this->assertEquals($back_url, config('profile.profile_default_back_url'));
+        $this->assertEquals($site_id, config('profile.site_id'));
+        $this->assertEquals($group_id, config('profile.group_id'));
+        $this->assertEquals($parent_group_id, config('profile.parent_group_id'));
+        $this->assertEquals($back_url, config('profile.default_back_url'));
     }
 }
