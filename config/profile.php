@@ -10,7 +10,7 @@ return [
     | "Return to Listing" link.
     |
     */
-    'profile_default_back_url' => '/profiles',
+    'default_back_url' => '/profiles',
 
     /*
     |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ return [
     | groups are added to the root then leave this value as 0.
     |
     */
-    'profile_parent_group_id' => 0,
+    'parent_group_id' => 0,
 
     /*
     |--------------------------------------------------------------------------
@@ -47,7 +47,7 @@ return [
     | This value is a pipe delimited string of group ids.
     |
     */
-    'profile_group_id' => null,
+    'group_id' => null,
 
     /*
     |--------------------------------------------------------------------------
@@ -59,7 +59,7 @@ return [
     | this value as null.
     |
     */
-    'profile_site_id' => null,
+    'site_id' => null,
 
     /*
     |--------------------------------------------------------------------------

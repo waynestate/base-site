@@ -33,7 +33,7 @@ class ProfileController extends Controller
         $site_id = $this->profile->getSiteID($request->data['base']);
 
         // Determine if we are forcing the profiles from custom page data
-        $forced_profile_group_id = config('profile.profile_group_id');
+        $forced_profile_group_id = config('profile.group_id');
 
         // Get the groups for the dropdown
         $dropdown_groups = $this->profile->getDropdownOfGroups($site_id);
