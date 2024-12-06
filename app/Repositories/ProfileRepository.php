@@ -416,5 +416,10 @@ class ProfileRepository implements ProfileRepositoryContract
         if (!empty($data['data']['profile_site_id'])) {
             Config::set('profile.site_id', $data['data']['profile_site_id']);
         }
+
+        // legacy support for table_of_contents
+        if (!empty($data['data']['table_of_contents'])) {
+            Config::set('profile.table_of_contents', $data['data']['table_of_contents']);
+        }
     }
 }
