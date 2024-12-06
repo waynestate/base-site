@@ -8,6 +8,7 @@ use Waynestate\Youtube\ParseId;
 use Illuminate\Support\Str;
 use Waynestate\Api\News;
 use Waynestate\Api\People;
+use Illuminate\Support\Facades\Config;
 
 class PeopleRepository implements ProfileRepositoryContract
 {
@@ -131,7 +132,7 @@ class PeopleRepository implements ProfileRepositoryContract
     {
         $profile_listing = $this->getProfiles($site_id);
 
-        $group_order = explode(',', $groups);
+        $group_order = preg_split('/[\s,|]+/', $groups);
 
         $profiles['profiles'] = [];
 
@@ -192,7 +193,7 @@ class PeopleRepository implements ProfileRepositoryContract
             // Filter down the groups based on the parent group from the config
             $profile_groups['data'] = collect($profile_groups['data'])
                 ->filter(function ($item) {
-                    return (int)$item['parent_id'] === config('base.profile_parent_group_id');
+                    return (int)$item['parent_id'] === config('profile.parent_group_id');
                 })
                 ->toArray();
 
@@ -385,7 +386,7 @@ class PeopleRepository implements ProfileRepositoryContract
             || $referer == $scheme.'://'.$host.$uri
             || strpos($referer, $host) === false
         ) {
-            return config('base.profile_default_back_url');
+            return config('profile.default_back_url');
         }
 
         return $referer;
@@ -396,6 +397,46 @@ class PeopleRepository implements ProfileRepositoryContract
      */
     public function getSiteID($data)
     {
-        return !empty($data['data']['profile_site_id']) ? $data['data']['profile_site_id'] : $data['site']['people']['site_id'];
+        return !empty(config('profile.site_id')) ? config('profile.site_id') : $data['site']['people']['site_id'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function parseProfileConfig(array $data): void
+    {
+        $profile_config = [];
+
+        if (!empty($data['data']['profile_data'])) {
+            // Remove all spaces and line breaks
+            $value = preg_replace('/\s*\R\s*/', '', $data['data']['profile_data']);
+
+            // Last item cannot have comma at the end of it
+            $value = preg_replace('(,})', '}', $value);
+
+            // Parse the JSON
+            if (Str::startsWith($value, '{')) {
+                $profile_config = json_decode($value, true);
+
+                foreach ($profile_config as $key => $value) {
+                    Config::set('profile.'.$key, $value);
+                }
+            }
+        }
+
+        // legacy support for profile_group_id
+        if (!empty($data['data']['profile_group_id'])) {
+            Config::set('profile.group_id', $data['data']['profile_group_id']);
+        }
+
+        // legacy support for profile_site_id
+        if (!empty($data['data']['profile_site_id'])) {
+            Config::set('profile.site_id', $data['data']['profile_site_id']);
+        }
+
+        // legacy support for table_of_contents
+        if (!empty($data['data']['table_of_contents'])) {
+            Config::set('profile.table_of_contents', $data['data']['table_of_contents']);
+        }
     }
 }

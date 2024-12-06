@@ -15,6 +15,7 @@ use Tests\TestCase;
 use Mockery as Mockery;
 use Waynestate\Api\News;
 use Waynestate\Api\People as PeopleApi;
+use Illuminate\Support\Facades\Config;
 
 final class PeopleRepositoryTest extends TestCase
 {
@@ -82,18 +83,18 @@ final class PeopleRepositoryTest extends TestCase
     {
         // The default path if no referer
         $url = app(PeopleRepository::class)->getBackToProfileListUrl();
-        $this->assertTrue($url == config('base.profile_default_back_url'));
+        $this->assertTrue($url == config('profile.default_back_url'));
 
         // If a referer is passed from a different domain
         $referer = $this->faker->url();
         $url = app(PeopleRepository::class)->getBackToProfileListUrl($referer, 'http', 'wayne.edu', '/');
-        $this->assertTrue($url == config('base.profile_default_back_url'));
+        $this->assertTrue($url == config('profile.default_back_url'));
 
         // If a referer is passed that is the same page we are on
         $referer = $this->faker->url();
         $parsed = parse_url($referer);
         $url = app(PeopleRepository::class)->getBackToProfileListUrl($referer, $parsed['scheme'], $parsed['host'], $parsed['path']);
-        $this->assertTrue($url == config('base.profile_default_back_url'));
+        $this->assertTrue($url == config('profile.default_back_url'));
 
         // If referer is passed from the same domain that the site is on
         $referer = $this->faker->url();
@@ -106,7 +107,7 @@ final class PeopleRepositoryTest extends TestCase
     public function getting_dropdown_of_groups_should_contain_all_the_groups(): void
     {
         // Force this config incase it is changed
-        config(['base.people_parent_group_id' => 0]);
+        config(['profile.people_parent_group_id' => 0]);
 
         // Fake return
         $return['data'] = app(PeopleGroup::class)->create(5);
@@ -127,7 +128,7 @@ final class PeopleRepositoryTest extends TestCase
     public function getting_dropdown_of_single_group_should_contain_single_group(): void
     {
         // Force this config incase it is changed
-        config(['base.people_parent_group_id' => 0]);
+        config(['profile.people_parent_group_id' => 0]);
 
         // Fake return
         $return['data'] = app(PeopleGroup::class)->create(1);
@@ -271,7 +272,7 @@ final class PeopleRepositoryTest extends TestCase
         $site_id = $this->faker->numberBetween(1, 10);
 
         // Force this config incase it is changed
-        config(['base.people_parent_group_id' => 0]);
+        config(['profile.people_parent_group_id' => 0]);
 
         // Mock the user listing
         $return_user_listing['data'] = app(People::class)->create(10);
@@ -362,7 +363,7 @@ final class PeopleRepositoryTest extends TestCase
     public function getting_dropdown_groups_with_exception_should_return_empty_array(): void
     {
         // Force this config incase it is changed
-        config(['base.people_parent_group_id' => 0]);
+        config(['profile.people_parent_group_id' => 0]);
 
         // Mock the connector and thrown Exception
         $peopleApi = Mockery::mock(PeopleApi::class);
@@ -386,6 +387,9 @@ final class PeopleRepositoryTest extends TestCase
                 'profile_site_id' => $profile_site_id,
             ],
         ]);
+
+        app(PeopleRepository::class, ['peopleApi' => $peopleApi])->parseProfileConfig($custom_field_page);
+
         $return_profile_site_id = app(PeopleRepository::class, ['peopleApi' => $peopleApi])->getSiteID($custom_field_page);
         $this->assertEquals($profile_site_id, $return_profile_site_id);
 
@@ -398,6 +402,11 @@ final class PeopleRepositoryTest extends TestCase
                 ],
             ],
         ]);
+
+        // Reset the profile_site_id
+        Config::set('profile.site_id', null);
+        app(PeopleRepository::class, ['peopleApi' => $peopleApi])->parseProfileConfig($site_config_page);
+
         $return_people_site_id = app(PeopleRepository::class, ['peopleApi' => $peopleApi])->getSiteID($site_config_page);
         $this->assertEquals($people_site_id, $return_people_site_id);
     }
@@ -451,5 +460,39 @@ final class PeopleRepositoryTest extends TestCase
         foreach ($profile['profile']['data']['Youtube Videos'] as $video) {
             $this->assertTrue(array_key_exists('youtube_id', $video));
         }
+    }
+
+    #[Test]
+    public function get_profile_data_with_json_array(): void
+    {
+        $site_id = $this->faker->numberBetween(1, 10);
+        $group_id = $this->faker->numberBetween(1, 10);
+        $parent_group_id = $this->faker->numberBetween(1, 10);
+        $back_url = $this->faker->url();
+
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'ProfileController',
+            ],
+            'data' => [
+                'profile_data' => json_encode([
+                    'site_id' => $site_id,
+                    'group_id' => $group_id,
+                    'parent_group_id' => $parent_group_id,
+                    'default_back_url' => $back_url,
+                ]),
+            'profile_group_id' => $group_id,
+            'profile_site_id' => $site_id
+            ],
+        ]);
+
+        $wsuApi = Mockery::mock(Connector::class);
+
+        app(PeopleRepository::class, ['wsuApi' => $wsuApi])->parseProfileConfig($data);
+
+        $this->assertEquals($site_id, config('profile.site_id'));
+        $this->assertEquals($group_id, config('profile.group_id'));
+        $this->assertEquals($parent_group_id, config('profile.parent_group_id'));
+        $this->assertEquals($back_url, config('profile.default_back_url'));
     }
 }

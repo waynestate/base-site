@@ -25,15 +25,34 @@ class ContactTablesNoTOC extends Page
                 'controller' => 'ContactTableController',
                 'title' => 'Contact tables, no table of contents',
                 'id' => 101114,
-                'content' => ['main' => '<p>In order to choose which groups show:</p>
+                'content' => ['main' => '<p>In order to choose which groups show, "group_id" is required. Groups will be displayed in the order they are entered in the custom field</p>
+    <table class="mt-2">
+                        <thead>
+                            <tr>
+                                <th>Page field</th>
+                                <th>Data</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><pre class="w-full">profile_data</pre></td>
+                                <td>
+<pre class="w-full" tabindex="0">
+{
+"site_id":000000,
+"group_id":"1234|5678",
+"parent_group_id":"1234",
+"table_of_contents":"hide",
+"default_back_url":"/profiles/",
+}
+</pre>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+<p>In order to hide the table of contents:</p>
     <ol>
-        <li>Add a custom field named "profile_group_id"</li>
-        <li>Add in the IDs of the groups separated by the "," character</li>
-        <li>Groups will be displayed in the order they are entered in the custom field</li>
-    </ol>
-    <p>In order to hide the table of contents:</p>
-    <ol>
-        <li>Add a custom field to the page named "table_of_contents"</li>
+        <li>Use variable named "table_of_contents"</li>
         <li>Set the value to "hide"</li>
     </ol>'],
             ],
