@@ -11,6 +11,7 @@ class Directory extends Page
      */
     public function getPageData()
     {
+        config(['profile.group_id' => null]);
         return app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'DirectoryController',

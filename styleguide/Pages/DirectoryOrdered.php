@@ -15,6 +15,9 @@ class DirectoryOrdered extends Page
             'data' => [
                 'profile_group_id' => '0|1',
             ],
+            'data' => [
+                'profile_group_id' => '0,1',
+            ],
             'page' => [
                 'controller' => 'DirectoryController',
                 'title' => 'Directory ordered',
