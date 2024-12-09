@@ -1,4 +1,5 @@
 <?php
+
 /*
 * Status: Private
 * Description: Homepage Template

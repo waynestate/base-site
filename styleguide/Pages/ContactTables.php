@@ -12,13 +12,8 @@ class ContactTables extends Page
     public function getPageData()
     {
         return app(PageFactory::class)->create(1, true, [
-            'site' => [
-                'people' => [
-                    'site_id' => 1,
-                ],
-            ],
             'data' => [
-                'profile_group_id' => '0,1,2,3',
+                'profile_group_id' => '0|1|2|3',
             ],
             'page' => [
                 'controller' => 'ContactTableController',

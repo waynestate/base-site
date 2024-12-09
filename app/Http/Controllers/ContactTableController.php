@@ -1,4 +1,5 @@
 <?php
+
 /*
 * Status: Public
 * Description: ContactTable Template

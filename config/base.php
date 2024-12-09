@@ -129,8 +129,6 @@ return [
     'surtitle_main_site_enabled' => false,
     'surtitle_url' => '/',
 
-
-
     /*
     |--------------------------------------------------------------------------
     | Default Meta Image

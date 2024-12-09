@@ -12,13 +12,8 @@ class DirectoryOrdered extends Page
     public function getPageData()
     {
         return app(PageFactory::class)->create(1, true, [
-            'site' => [
-                'people' => [
-                    'site_id' => 1,
-                ],
-            ],
             'data' => [
-                'profile_group_id' => '0,1',
+                'profile_group_id' => '0|1',
             ],
             'page' => [
                 'controller' => 'DirectoryController',
