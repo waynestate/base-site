@@ -22,10 +22,11 @@ class Profile implements FactoryContract
     public function create($limit = 1, $flatten = false, $options = [])
     {
         $groups = collect($this->group->create(4));
-        $first_name = $this->faker->firstName();
-        $last_name = $this->faker->lastName();
 
         for ($i = 1; $i <= $limit; $i++) {
+            $first_name = $this->faker->firstName();
+            $last_name = $this->faker->lastName();
+
             $data[$i] = [
                 'data' => [
                     'AccessID' => $this->faker->randomLetter().$this->faker->randomLetter().$this->faker->randomNumber(4, true),
