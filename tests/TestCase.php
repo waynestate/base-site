@@ -26,7 +26,7 @@ abstract class TestCase extends BaseTestCase
         // Reset the WSU API key so we never make real connections to the API
         config(['base.wsu_api_key' => '']);
 
-        // Reset the group_id config 
+        // Reset the group_id config
         config(['profile.group_id' => null]);
 
         // Don't run through the exception handler so we have cleaner errors in CLI
