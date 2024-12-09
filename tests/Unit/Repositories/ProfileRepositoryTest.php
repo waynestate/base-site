@@ -436,8 +436,6 @@ final class ProfileRepositoryTest extends TestCase
     {
         $site_id = $this->faker->numberBetween(1, 10);
         $group_id = $this->faker->numberBetween(1, 10);
-        $parent_group_id = $this->faker->numberBetween(1, 10);
-        $back_url = $this->faker->url();
 
         $data = app(Page::class)->create(1, true, [
             'page' => [
@@ -446,12 +444,10 @@ final class ProfileRepositoryTest extends TestCase
             'data' => [
                 'profile_data' => json_encode([
                     'site_id' => $site_id,
-                    'group_id' => $group_id,
-                    'parent_group_id' => $parent_group_id,
-                    'default_back_url' => $back_url,
                 ]),
-            'profile_group_id' => $group_id,
-            'profile_site_id' => $site_id
+                'profile_group_id' => $group_id,
+                'table_of_contents' => 'hide',
+                'profile_site_id' => $site_id,
             ],
         ]);
 
@@ -461,7 +457,5 @@ final class ProfileRepositoryTest extends TestCase
 
         $this->assertEquals($site_id, config('profile.site_id'));
         $this->assertEquals($group_id, config('profile.group_id'));
-        $this->assertEquals($parent_group_id, config('profile.parent_group_id'));
-        $this->assertEquals($back_url, config('profile.default_back_url'));
     }
 }

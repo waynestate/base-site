@@ -53,7 +53,7 @@ class ProfileController extends Controller
 
         // Disable hero images
         $request->data['base']['hero'] = false;
-
+dump(config('profile'));
         return view('profile-listing', merge($request->data, $profiles, $dropdown_groups, $dropdown_group_options));
     }
 
