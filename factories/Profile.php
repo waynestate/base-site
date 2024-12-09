@@ -24,6 +24,9 @@ class Profile implements FactoryContract
         $groups = collect($this->group->create(4));
 
         for ($i = 1; $i <= $limit; $i++) {
+            $first_name = $this->faker->firstName();
+            $last_name = $this->faker->lastName();
+
             $data[$i] = [
                 'data' => [
                     'AccessID' => $this->faker->randomLetter().$this->faker->randomLetter().$this->faker->randomNumber(4, true),
