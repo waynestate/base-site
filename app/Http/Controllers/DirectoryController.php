@@ -38,7 +38,7 @@ class DirectoryController extends Controller
         } else {
             $profiles = $this->profile->getProfilesByGroup($site_id);
         }
-dump(config('profile'));
+
         return view('directory', merge($request->data, $profiles));
     }
 }

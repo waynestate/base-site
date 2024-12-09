@@ -408,17 +408,17 @@ class ProfileRepository implements ProfileRepositoryContract
         }
 
         // legacy support for profile_group_id
-        if (!empty($data['data']['profile_group_id'])) {
+        if (!empty($data['data']['profile_group_id']) && empty($profile_config['group_id'])) {
             Config::set('profile.group_id', $data['data']['profile_group_id']);
         }
 
         // legacy support for profile_site_id
-        if (!empty($data['data']['profile_site_id'])) {
+        if (!empty($data['data']['profile_site_id']) && empty($profile_config['site_id'])) {
             Config::set('profile.site_id', $data['data']['profile_site_id']);
         }
 
         // legacy support for table_of_contents
-        if (!empty($data['data']['table_of_contents'])) {
+        if (!empty($data['data']['table_of_contents']) && empty($profile_config['table_of_contents'])) {
             Config::set('profile.table_of_contents', $data['data']['table_of_contents']);
         }
     }

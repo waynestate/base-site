@@ -4,12 +4,15 @@ namespace Tests\Unit\Http\Controllers;
 
 use PHPUnit\Framework\Attributes\Test;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DirectoryController;
+use App\Repositories\PeopleRepository;
 use App\Repositories\ProfileRepository;
 use Tests\TestCase;
 use Mockery as Mockery;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Waynestate\Api\Connector;
+use Waynestate\Api\People;
 
 final class ProfileControllerTest extends TestCase
 {
@@ -58,5 +61,75 @@ final class ProfileControllerTest extends TestCase
 
         // Call the profile listing
         $view = $this->profileController->show($request);
+    }
+
+    #[Test]
+    public function invalid_profile_should_404_using_people_repository(): void
+    {
+        $this->expectException(NotFoundHttpException::class);
+
+        // Fake return
+        $return = [
+            'profiles' => [],
+        ];
+
+        $request = new Request();
+        $request->accessid = 'aa1234';
+        $request->data = [
+            'base' => [
+                'site' => [
+                    'people' => [
+                        'site_id' => 1,
+                    ],
+                ],
+            ],
+        ];
+
+        // Mock the connector
+        $peopleApi = Mockery::mock(People::class);
+        $peopleApi->shouldReceive('request')->with('users/'.$request->accessid.'/sites/1', Mockery::type('array'))->andReturn($return);
+
+        // Construct the people repository
+        $peopleRepository = app(PeopleRepository::class, ['peopleApi' => $peopleApi]);
+
+        // Construct the people controller
+        $this->profileController = app(ProfileController::class, ['profile' => $peopleRepository]);
+
+        // Call the people listing
+        $view = $this->profileController->show($request);
+    }
+    #[Test]
+    public function empty_group_id_should_return_all_profiles(): void
+    {
+        // Fake return
+        $return = [
+            'profiles' => [],
+        ];
+
+        $request = new Request();
+        $request->data = [
+            'base' => [
+                'site' => [
+                    'people' => [
+                        'site_id' => 1,
+                    ],
+                ],
+            ],
+        ];
+
+        // Mock the connector
+        $peopleApi = Mockery::mock(People::class);
+        $peopleApi->shouldReceive('request')->with('users', Mockery::type('array'))->andReturn($return);
+
+        // Construct the people repository
+        $peopleRepository = app(PeopleRepository::class, ['peopleApi' => $peopleApi]);
+
+        // Construct the people controller
+        $this->directoryController = app(DirectoryController::class, ['profile' => $peopleRepository]);
+
+        // Call the people listing
+        $view = $this->directoryController->index($request);
+
+        $this->assertEquals(config('profile.group_id'), null);
     }
 }
