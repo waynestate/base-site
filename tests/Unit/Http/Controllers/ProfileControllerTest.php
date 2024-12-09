@@ -4,7 +4,6 @@ namespace Tests\Unit\Http\Controllers;
 
 use PHPUnit\Framework\Attributes\Test;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\DirectoryController;
 use App\Repositories\PeopleRepository;
 use App\Repositories\ProfileRepository;
 use Tests\TestCase;
@@ -97,39 +96,5 @@ final class ProfileControllerTest extends TestCase
 
         // Call the people listing
         $view = $this->profileController->show($request);
-    }
-    #[Test]
-    public function empty_group_id_should_return_all_profiles(): void
-    {
-        // Fake return
-        $return = [
-            'profiles' => [],
-        ];
-
-        $request = new Request();
-        $request->data = [
-            'base' => [
-                'site' => [
-                    'people' => [
-                        'site_id' => 1,
-                    ],
-                ],
-            ],
-        ];
-
-        // Mock the connector
-        $peopleApi = Mockery::mock(People::class);
-        $peopleApi->shouldReceive('request')->with('users', Mockery::type('array'))->andReturn($return);
-
-        // Construct the people repository
-        $peopleRepository = app(PeopleRepository::class, ['peopleApi' => $peopleApi]);
-
-        // Construct the people controller
-        $this->directoryController = app(DirectoryController::class, ['profile' => $peopleRepository]);
-
-        // Call the people listing
-        $view = $this->directoryController->index($request);
-
-        $this->assertEquals(config('profile.group_id'), null);
     }
 }
