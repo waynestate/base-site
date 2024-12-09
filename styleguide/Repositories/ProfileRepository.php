@@ -2,13 +2,13 @@
 
 namespace Styleguide\Repositories;
 
-use App\Repositories\PeopleRepository as Repository;
+use App\Repositories\ProfileRepository as Repository;
 use Factories\Article;
 use Factories\Courses;
-use Factories\People;
-use Factories\PeopleGroup;
+use Factories\Profile;
+use Factories\ProfileGroup;
 
-class PeopleRepository extends Repository
+class ProfileRepository extends Repository
 {
     /**
      * {@inheritdoc}
@@ -17,10 +17,10 @@ class PeopleRepository extends Repository
     {
         $limit = is_int($selected_group) ? rand(2, 5) : 20;
 
-        $people = app(People::class)->create($limit);
+        $profiles = app(Profile::class)->create($limit);
 
         return [
-            'profiles' => collect($people)->sortBy('last_name')->toArray(),
+            'profiles' => collect($profiles)->sortBy('last_name')->toArray(),
         ];
     }
 
@@ -29,8 +29,8 @@ class PeopleRepository extends Repository
      */
     public function getDropdownOfGroups(int $site_id): array
     {
-        $groups = collect(app(PeopleGroup::class)->create(10))->map(function ($item) {
-            return $item['name'];
+        $groups = collect(app(ProfileGroup::class)->create(10))->map(function ($item) {
+            return $item['display_name'];
         })
         ->prepend('All Profiles', '')
         ->toArray();
@@ -48,7 +48,7 @@ class PeopleRepository extends Repository
         $articles = app(Article::class)->create(3, true);
 
         return [
-            'profile' => app(People::class)->create(1, true),
+            'profile' => app(Profile::class)->create(1, true),
             'courses' => app(Courses::class)->create(1, true),
             'articles' => $articles['data'] ?? [],
         ];

@@ -22,6 +22,8 @@ class Profile implements FactoryContract
     public function create($limit = 1, $flatten = false, $options = [])
     {
         $groups = collect($this->group->create(4));
+        $first_name = $this->faker->firstName();
+        $last_name = $this->faker->lastName();
 
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
@@ -44,13 +46,18 @@ class Profile implements FactoryContract
                         '<p>'.$this->faker->paragraph(10).'</p>',
                     ],
                     'Youtube Videos' => [
-                        0 => 'https://www.youtube.com/watch?v=PHqfwq033yQ',
+                        0 => [
+                            'youtube_id' => 'PHqfwq033yQ',
+                            'link' => 'https://www.youtube.com/watch?v=PHqfwq033yQ',
+                            'filename_alt_text' => 'YouTube video from '.$this->faker->firstName(),
+                        ],
                     ],
                 ],
                 'groups' => [
                     $groups->random()['display_name'],
                 ],
                 'link' => '/styleguide/profile/aa0000',
+                'full_name' => $first_name . ' ' . $last_name,
             ];
 
             // Randomly include a suffix
