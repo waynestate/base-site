@@ -19,12 +19,31 @@ class ContactTables extends Page
                 'controller' => 'ContactTableController',
                 'title' => 'Contact tables',
                 'id' => 101113,
-                'content' => ['main' => '<p>In order to choose which groups show:</p>
-    <ol>
-        <li>Add a custom field named "profile_group_id"</li>
-        <li>Add in the IDs of the groups separated by the "|" character</li>
-        <li>Groups will be displayed in the order they are entered in the custom field</li>
-    </ol>'],
+                'content' => ['main' => '<p>onfigurable with in the CMS page custom field. Using a custom field named "profile_data".</p>
+                    <table class="mt-2">
+                        <thead>
+                            <tr>
+                                <th>Page field</th>
+                                <th>Data</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><pre class="w-full">profile_data</pre></td>
+                                <td>
+<pre class="w-full" tabindex="0">
+{
+"site_id":000000,
+"group_id":"1234|5678",
+"parent_group_id":"1234",
+"table_of_contents":"hide",
+"default_back_url":"/profiles/",
+}
+</pre>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>'],
             ],
         ]);
     }

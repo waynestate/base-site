@@ -2,6 +2,10 @@
 
 @section('content')
     @include('components.page-title', ['title' => $base['page']['title']])
+    
+    <div class="content">
+        {!! $base['page']['content']['main'] !!}
+    </div>
 
     @if($hide_filtering == false)
         <form name="departments" method="get" class="filter formy mb-6">
