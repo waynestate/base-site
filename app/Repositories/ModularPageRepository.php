@@ -53,91 +53,17 @@ class ModularPageRepository implements ModularPageRepositoryContract
             return [];
         }
 
-        $modularComponents = [];
+        $components = [];
 
-        // Legacy support for accordion
-        if (!empty($data['data']['accordion_promo_group_id'])) {
-            $data['data']['modular-accordion-999'] = json_encode([
-                'id' => $data['data']['accordion_promo_group_id']
-            ]);
-        }
+        $data = $this->legacyPageFieldSupport($data);
 
-        // Legacy support for listing
-        if (!empty($data['data']['listing_promo_group_id'])) {
-            if (!empty($data['data']['promotion_view_boolean']) && $data['data']['promotion_view_boolean'] === "true") {
-                $data['data']['modular-catalog-998'] = json_encode([
-                    'id' => $data['data']['listing_promo_group_id'],
-                    'columns' => 1,
-                    'singlePromoView' => true
-                ]);
-            } else {
-                $data['data']['modular-catalog-998'] = json_encode([
-                    'id' => $data['data']['listing_promo_group_id'],
-                    'columns' => 1
-                ]);
-            }
-        }
+        $rawComponents = $this->parseComponentJSON($data);
 
-        // Legacy support for grid
-        if (!empty($data['data']['grid_promo_group_id'])) {
-            if (!empty($data['data']['promotion_view_boolean']) && $data['data']['promotion_view_boolean'] === "true") {
-                $data['data']['modular-catalog-999'] = json_encode([
-                    'id' => $data['data']['grid_promo_group_id'],
-                    'columns' => 3,
-                    'singlePromoView' => true
-                ]);
-            } else {
-                $data['data']['modular-catalog-999'] = json_encode([
-                    'id' => $data['data']['grid_promo_group_id'],
-                    'columns' => 3
-                ]);
-            }
-        }
+        $promos = $this->getPromos($rawComponents, $data['site']['id'] ?? '');
 
-        $components = $this->parseData($data);
-        $promos = $this->getPromos($components, $data['site']['id'] ?? '');
+        $components = $this->configureComponents($rawComponents, $promos, $data);
 
-        foreach ($components['components'] as $name => $component) {
-            if (Str::startsWith($name, 'events')) {
-                $components['components'][$name]['id'] = $component['id'] ?? $data['site']['id'];
-                $limit = $components['components'][$name]['limit'] ?? 4;
-                if (strpos($name, 'events-column') !== false) {
-                    $events = $this->event->getEvents($component['id'] ?? $data['site']['id'], $limit);
-                } else {
-                    $events = $this->event->getEventsFullListing($component['id'] ?? $data['site']['id'], $limit);
-                }
-                $modularComponents[$name]['data'] = $events['events'] ?? [];
-                $modularComponents[$name]['component'] = $components['components'][$name];
-                if (empty($modularComponents[$name]['component']['cal_name']) && !empty($data['site']['events']['path'])) {
-                    $modularComponents[$name]['component']['cal_name'] = $data['site']['events']['path'];
-                }
-            } elseif (Str::startsWith($name, 'news')) {
-                $components['components'][$name]['id'] = $component['id'] ?? $data['site']['news']['application_id'];
-                $limit = $component['limit'] ?? 4;
-                $components['components'][$name]['news_route'] = $component['news_route'] ?? config('base.news_listing_route');
-                if (!empty($component['featured']) && $component['featured'] === true) {
-                    $articles = $this->article->listing($components['components'][$name]['id'], 50, 1, $component['topics'] ?? []);
-                    $articles['articles']['data'] = collect($articles['articles']['data'])->filter(function ($article) {
-                        return !empty($article['featured']['featured']) && $article['featured']['featured'] === 1;
-                    })->take($limit)->toArray();
-                } else {
-                    $articles = $this->article->listing($components['components'][$name]['id'], $limit, 1, $component['topics'] ?? []);
-                }
-                $modularComponents[$name]['data'] = $articles['articles'] ?? [];
-                $modularComponents[$name]['component'] = $components['components'][$name];
-            } elseif (Str::startsWith($name, 'page-content') || Str::startsWith($name, 'heading')) {
-                // If there's JSON but no news, events or promo data, assign the component array as data
-                // Page-content and heading components
-                $modularComponents[$name]['data'][] = $components['components'][$name] ?? [];
-                $modularComponents[$name]['component'] = $components['components'][$name] ?? [];
-                unset($modularComponents[$name]['component']['heading']);
-            } else {
-                $modularComponents[$name]['data'] = $promos[$name]['data'] ?? [];
-                $modularComponents[$name]['component'] = $promos[$name]['component'] ?? [];
-            }
-        }
-
-        return $modularComponents;
+        return $components;
     }
 
     public function parseData(array $data)
@@ -249,6 +175,162 @@ class ModularPageRepository implements ModularPageRepositoryContract
         return $promos;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function configureComponents(array $components, array $promos, array $data): array
+    {
+        $modularComponents = [];
+
+        foreach ($components['components'] as $name => $component) {
+            if (array_key_exists($name, $promos)) {
+                // Assign promo data to components
+                $modularComponents[$name]['data'] = $promos[$name]['data'] ?? [];
+                $modularComponents[$name]['component'] = $promos[$name]['component'] ?? [];
+
+                if (Str::contains($name, 'social')) {
+                    $photo = current($modularComponents[$name]['data']);
+                    $modularComponents[$name]['data'] = [];
+                    $social_feed = $this->socialfeed->getSocialFeed($component['labelId'], $component['limit'] ?? 6, '');
+                    $modularComponents[$name]['data']['photo'] = $photo;
+                    $modularComponents[$name]['data']['social-feed'] = $social_feed['social_feed'];
+                    $modularComponents[$name]['component'] = $components['components'][$name];
+                }
+            } elseif (Str::contains($name, 'events')) {
+                $events_id = config('base.events_id') ?? $data['site']['id'];
+                $events_path = !empty($data['site']['events']['path']) ? $data['site']['events']['path'] : config('base.events_path');
+                $calendarURL = $component['cal_name'] ?? $events_path ?? '';
+                $components['components'][$name]['id'] = $component['id'] ?? $events_id;
+                $limit = $components['components'][$name]['limit'] ?? 4;
+                if (strpos($name, 'events-column') !== false) {
+                    $events = $this->event->getEvents($component['id'] ?? $events_id, $limit);
+                } elseif (!empty($component['title']) && !empty($component['heading'])) {
+                    $events = $this->event->getEventsByTitle($component['id'] ?? $events_id, $component['heading'] ?? 'Events', $component['title'] ?? 'All events', $limit);
+                } else {
+                    $events = $this->event->getEventsFullListing($component['id'] ?? $events_id, $limit);
+                }
+                $modularComponents[$name]['data'] = $events['events'] ?? [];
+                $modularComponents[$name]['component'] = $components['components'][$name];
+                $modularComponents[$name]['component']['cal_name'] = $calendarURL;
+            } elseif (Str::contains($name, 'news')) {
+                $components['components'][$name]['id'] = $component['id'] ?? $data['site']['news']['application_id'];
+                $limit = $component['limit'] ?? 4;
+                $components['components'][$name]['news_route'] = $component['news_route'] ?? config('base.news_listing_route');
+                if (!empty($component['featured']) && $component['featured'] === true) {
+                    $articles = $this->article->listing($components['components'][$name]['id'], 50, 1, $component['topics'] ?? []);
+                    $articles['articles']['data'] = collect($articles['articles']['data'])->filter(function ($article) {
+                        return !empty($article['featured']['featured']) && $article['featured']['featured'] === 1;
+                    })->take($limit)->toArray();
+                } else {
+                    $articles = $this->article->listing($components['components'][$name]['id'], $limit, 1, $component['topics'] ?? []);
+                }
+                $modularComponents[$name]['data'] = $articles['articles'] ?? [];
+                $modularComponents[$name]['component'] = $components['components'][$name];
+            } elseif(Str::contains($name, 'social-feed-grid')) {
+                $social_feed = $this->socialfeed->getSocialFeed($component['labelId'], $component['limit'] ?? 16, '');
+                $modularComponents[$name]['data']['social-feed'] = $social_feed['social_feed'];
+                $modularComponents[$name]['component'] = $components['components'][$name];
+            } else {
+                // If there's JSON but no news, events or promo data, assign the component array as data
+                $modularComponents[$name]['data'][] = $components['components'][$name] ?? [];
+                $modularComponents[$name]['component'] = $components['components'][$name] ?? [];
+
+                if (Str::startsWith($name, 'heading')) {
+                    unset($modularComponents[$name]['component']['heading']);
+                }
+            }
+
+            if (Str::contains($name, 'spotlight') && (!empty($component['accessId']) || !empty($component['accessIds']))) {
+                $accessIds = explode(',', strip_tags($component['accessId'] ?? $component['accessIds']));
+                $spotlightProfiles = $this->profile->getSpotlightProfileByAccessId($accessIds, $component['limit'] ?? 6);
+                $spotlightPromos = !empty(array_column($modularComponents[$name]['data'], 'promo_item_id')) ? $modularComponents[$name]['data'] : [];
+                $mergedProfilesAndPromos = $spotlightPromos + $spotlightProfiles;
+                shuffle($mergedProfilesAndPromos);
+                $modularComponents[$name]['data'] = $mergedProfilesAndPromos;
+            }
+        }
+
+        return $modularComponents;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureComponents(array $components, array $promos, array $data): array
+    {
+        $modularComponents = [];
+
+        foreach ($components['components'] as $name => $component) {
+            if (array_key_exists($name, $promos)) {
+                // Assign promo data to components
+                $modularComponents[$name]['data'] = $promos[$name]['data'] ?? [];
+                $modularComponents[$name]['component'] = $promos[$name]['component'] ?? [];
+
+                if (Str::contains($name, 'social')) {
+                    $photo = current($modularComponents[$name]['data']);
+                    $modularComponents[$name]['data'] = [];
+                    $social_feed = $this->socialfeed->getSocialFeed($component['labelId'], $component['limit'] ?? 6, '');
+                    $modularComponents[$name]['data']['photo'] = $photo;
+                    $modularComponents[$name]['data']['social-feed'] = $social_feed['social_feed'];
+                    $modularComponents[$name]['component'] = $components['components'][$name];
+                }
+            } elseif (Str::contains($name, 'events')) {
+                $events_id = config('base.events_id') ?? $data['site']['id'];
+                $events_path = !empty($data['site']['events']['path']) ? $data['site']['events']['path'] : config('base.events_path');
+                $calendarURL = $component['cal_name'] ?? $events_path ?? '';
+                $components['components'][$name]['id'] = $component['id'] ?? $events_id;
+                $limit = $components['components'][$name]['limit'] ?? 4;
+                if (strpos($name, 'events-column') !== false) {
+                    $events = $this->event->getEvents($component['id'] ?? $events_id, $limit);
+                } elseif (!empty($component['title']) && !empty($component['heading'])) {
+                    $events = $this->event->getEventsByTitle($component['id'] ?? $events_id, $component['heading'] ?? 'Events', $component['title'] ?? 'All events', $limit);
+                } else {
+                    $events = $this->event->getEventsFullListing($component['id'] ?? $events_id, $limit);
+                }
+                $modularComponents[$name]['data'] = $events['events'] ?? [];
+                $modularComponents[$name]['component'] = $components['components'][$name];
+                $modularComponents[$name]['component']['cal_name'] = $calendarURL;
+            } elseif (Str::contains($name, 'news')) {
+                $components['components'][$name]['id'] = $component['id'] ?? $data['site']['news']['application_id'];
+                $limit = $component['limit'] ?? 4;
+                $components['components'][$name]['news_route'] = $component['news_route'] ?? config('base.news_listing_route');
+                if (!empty($component['featured']) && $component['featured'] === true) {
+                    $articles = $this->article->listing($components['components'][$name]['id'], 50, 1, $component['topics'] ?? []);
+                    $articles['articles']['data'] = collect($articles['articles']['data'])->filter(function ($article) {
+                        return !empty($article['featured']['featured']) && $article['featured']['featured'] === 1;
+                    })->take($limit)->toArray();
+                } else {
+                    $articles = $this->article->listing($components['components'][$name]['id'], $limit, 1, $component['topics'] ?? []);
+                }
+                $modularComponents[$name]['data'] = $articles['articles'] ?? [];
+                $modularComponents[$name]['component'] = $components['components'][$name];
+            } elseif(Str::contains($name, 'social-feed-grid')) {
+                $social_feed = $this->socialfeed->getSocialFeed($component['labelId'], $component['limit'] ?? 16, '');
+                $modularComponents[$name]['data']['social-feed'] = $social_feed['social_feed'];
+                $modularComponents[$name]['component'] = $components['components'][$name];
+            } else {
+                // If there's JSON but no news, events or promo data, assign the component array as data
+                $modularComponents[$name]['data'][] = $components['components'][$name] ?? [];
+                $modularComponents[$name]['component'] = $components['components'][$name] ?? [];
+
+                if (Str::startsWith($name, 'heading')) {
+                    unset($modularComponents[$name]['component']['heading']);
+                }
+            }
+
+            if (Str::contains($name, 'spotlight') && (!empty($component['accessId']) || !empty($component['accessIds']))) {
+                $accessIds = explode(',', strip_tags($component['accessId'] ?? $component['accessIds']));
+                $spotlightProfiles = $this->profile->getSpotlightProfileByAccessId($accessIds, $component['limit'] ?? 6);
+                $spotlightPromos = !empty(array_column($modularComponents[$name]['data'], 'promo_item_id')) ? $modularComponents[$name]['data'] : [];
+                $mergedProfilesAndPromos = $spotlightPromos + $spotlightProfiles;
+                shuffle($mergedProfilesAndPromos);
+                $modularComponents[$name]['data'] = $mergedProfilesAndPromos;
+            }
+        }
+
+        return $modularComponents;
+    }
+
     public function adjustPromoData($data, $component)
     {
         if (isset($component['singlePromoView']) && $component['singlePromoView'] === true) {
@@ -282,6 +364,53 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 $no_option_moved_to_bottom = $data[''];
                 unset($data['']);
                 $data[''] = $no_option_moved_to_bottom;
+            }
+        }
+
+        return $data;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function legacyPageFieldSupport(array $data)
+    {
+        // Legacy support for accordion
+        if (!empty($data['data']['accordion_promo_group_id'])) {
+            $data['data']['modular-accordion-999'] = json_encode([
+                'id' => $data['data']['accordion_promo_group_id']
+            ]);
+        }
+
+        // Legacy support for listing
+        if (!empty($data['data']['listing_promo_group_id'])) {
+            if (!empty($data['data']['promotion_view_boolean']) && $data['data']['promotion_view_boolean'] === "true") {
+                $data['data']['modular-catalog-998'] = json_encode([
+                    'id' => $data['data']['listing_promo_group_id'],
+                    'columns' => 1,
+                    'singlePromoView' => true
+                ]);
+            } else {
+                $data['data']['modular-catalog-998'] = json_encode([
+                    'id' => $data['data']['listing_promo_group_id'],
+                    'columns' => 1
+                ]);
+            }
+        }
+
+        // Legacy support for grid
+        if (!empty($data['data']['grid_promo_group_id'])) {
+            if (!empty($data['data']['promotion_view_boolean']) && $data['data']['promotion_view_boolean'] === "true") {
+                $data['data']['modular-catalog-999'] = json_encode([
+                    'id' => $data['data']['grid_promo_group_id'],
+                    'columns' => 3,
+                    'singlePromoView' => true
+                ]);
+            } else {
+                $data['data']['modular-catalog-999'] = json_encode([
+                    'id' => $data['data']['grid_promo_group_id'],
+                    'columns' => 3
+                ]);
             }
         }
 
