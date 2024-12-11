@@ -42,7 +42,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
         ParsePromos $parsePromos,
         Repository $cache,
         ArticleRepositoryContract $article,
-        EventRepositoryContract $event,
+        EventRepositoryContract $event
     ) {
         $this->wsuApi = $wsuApi;
         $this->parsePromos = $parsePromos;
