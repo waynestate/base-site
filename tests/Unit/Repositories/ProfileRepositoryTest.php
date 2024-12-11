@@ -432,7 +432,7 @@ final class ProfileRepositoryTest extends TestCase
     }
 
     #[Test]
-    public function get_profile_data_with_json_array(): void
+    public function get_profiles_with_json_array(): void
     {
         $site_id = $this->faker->numberBetween(1, 10);
         $group_id = $this->faker->numberBetween(1, 10);
@@ -442,7 +442,7 @@ final class ProfileRepositoryTest extends TestCase
                 'controller' => 'ProfileController',
             ],
             'data' => [
-                'profile_data' => json_encode([
+                'profiles' => json_encode([
                     'site_id' => $site_id,
                 ]),
                 'profile_group_id' => $group_id,

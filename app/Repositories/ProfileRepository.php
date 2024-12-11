@@ -390,9 +390,9 @@ class ProfileRepository implements ProfileRepositoryContract
     {
         $profile_config = [];
 
-        if (!empty($data['data']['profile_data'])) {
+        if (!empty($data['data']['profiles'])) {
             // Remove all spaces and line breaks
-            $value = preg_replace('/\s*\R\s*/', '', $data['data']['profile_data']);
+            $value = preg_replace('/\s*\R\s*/', '', $data['data']['profiles']);
 
             // Last item cannot have comma at the end of it
             $value = preg_replace('(,})', '}', $value);

@@ -22,7 +22,7 @@ class DirectoryOrdered extends Page
                 'controller' => 'DirectoryController',
                 'title' => 'Directory ordered',
                 'id' => 101108,
-                'content' => ['main' => '<p>onfigurable with in the CMS page custom field. Using a custom field named "profile_data".</p>
+                'content' => ['main' => '<p>onfigurable with in the CMS page custom field. Using a custom field named "profiles".</p>
                     <table class="mt-2">
                         <thead>
                             <tr>
@@ -32,7 +32,7 @@ class DirectoryOrdered extends Page
                         </thead>
                         <tbody>
                             <tr>
-                                <td><pre class="w-full">profile_data</pre></td>
+                                <td><pre class="w-full">profiles</pre></td>
                                 <td>
 <pre class="w-full" tabindex="0">
 {

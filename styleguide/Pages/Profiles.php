@@ -17,7 +17,7 @@ class Profiles extends Page
                 'title' => 'Profile listing',
                 'id' => 101105,
                 'content' => [
-                    'main' => '<p>Profiles are configurable with in the CMS page custom field. Using a custom field named "profile_data".</p>
+                    'main' => '<p>Profiles are configurable with in the CMS page custom field. Using a custom field named "profiles".</p>
 
                     <table class="mt-2">
                         <thead>
@@ -28,7 +28,7 @@ class Profiles extends Page
                         </thead>
                         <tbody>
                             <tr>
-                                <td><pre class="w-full">profile_data</pre></td>
+                                <td><pre class="w-full">profiles</pre></td>
                                 <td>
 <pre class="w-full" tabindex="0">
 {
