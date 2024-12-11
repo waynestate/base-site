@@ -70,6 +70,9 @@ class ProfileController extends Controller
             abort('404');
         }
 
+        // Parse profile config from custom fields
+        $this->profile->parseProfileConfig($request->data['base']);
+
         // Determine what site to pull profiles from
         $site_id = $this->profile->getSiteID($request->data['base']);
 
