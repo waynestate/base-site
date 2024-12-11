@@ -32,11 +32,6 @@ class FullWidthController extends Controller
     {
         $request->data['base']['show_site_menu'] = false;
 
-        config([
-            'base.full_width_controllers' => ['FullWidthController'],
-            'base.top_menu_enabled' => true,
-        ]);
-
         $components = [
             'hero_1' => [
                 'data' => app(HeroImage::class)->create(1, false, [
@@ -241,6 +236,8 @@ class FullWidthController extends Controller
 
         $heroClass['heroClass'] = 'full-width-styleguide-hero';
 
-        return view('styleguide-fullwidth', merge($request->data, $this->faker, $components, $heroClass));
+        $request->data['base']['components'] = $components;
+
+        return view('childpage', merge($request->data, $this->faker, $components, $heroClass));
     }
 }
