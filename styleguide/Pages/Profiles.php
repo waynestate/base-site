@@ -17,7 +17,7 @@ class Profiles extends Page
                 'title' => 'Profile listing',
                 'id' => 101105,
                 'content' => [
-                    'main' => '<p>Profiles are configurable with in the CMS page custom field. Using a custom field named "profile_config".Additionally, the "profile_config" is need on the profile view page. </p>
+                    'main' => '<p>Profiles are configurable with in the CMS page custom field. Using a custom field named "profile-config". Additionally, the "profile-config" is need on the profile view page. </p>
 
                     <table class="mt-2">
                         <thead>
@@ -28,7 +28,7 @@ class Profiles extends Page
                         </thead>
                         <tbody>
                             <tr>
-                                <td><pre class="w-full">profile_config</pre></td>
+                                <td><pre class="w-full">profile-config</pre></td>
                                 <td>
 <pre class="w-full" tabindex="0">
 {

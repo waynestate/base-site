@@ -442,7 +442,7 @@ final class ProfileRepositoryTest extends TestCase
                 'controller' => 'ProfileController',
             ],
             'data' => [
-                'profile_config' => json_encode([
+                'profile-config' => json_encode([
                     'site_id' => $site_id,
                 ]),
                 'profile_group_id' => $group_id,
