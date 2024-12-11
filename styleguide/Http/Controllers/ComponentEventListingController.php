@@ -60,11 +60,19 @@ Use default calendar by omitting ID and set other configuration items
 "heading": "My events"
 }
 </pre>
+Display specific events by passing in one or more event title keywords separated by a pipe (|) character.
+<pre class="w-full" tabindex="0">
+{
+"heading": "My events",
+"title": "Event title|Second event title"
+}
+</pre>
 All available configurations
 <pre class="w-full" tabindex="0">
 {
 "id":null,
 "heading":"Events",
+"title":"Event title|Second event title|Third event title",
 "config":"limit:4",
 "cal_name": "myurl/",
 "link_text":"More events"
@@ -99,7 +107,9 @@ All available configurations
                 ],
             ],
             'events-row-1' => [
-                'data' => app(EventFullListing::class)->create(4, false),
+                'data' => [
+                    '0' => app(EventFullListing::class)->create(4, false),
+                    ],
                 'component' => [
                     'heading' => 'Events row',
                     'filename' => 'events-row',
