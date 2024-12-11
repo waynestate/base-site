@@ -21,6 +21,12 @@ class ModularPageRepository implements ModularPageRepositoryContract
     /** @var Repository */
     protected $cache;
 
+    /** @var ArticleRepositoryContract */
+    protected $article;
+
+    /** @var EventRepositoryContract */
+    protected $event;
+
     /**
      * Construct the repository.
      *
@@ -29,6 +35,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
      * @param Repository $cache
      * @param ArticleRepositoryContract $article
      * @param EventRepositoryContract $event
+     *
      */
     public function __construct(
         Connector $wsuApi,
@@ -53,49 +60,139 @@ class ModularPageRepository implements ModularPageRepositoryContract
             return [];
         }
 
+        $components = [];
+
+        $data = $this->legacyPageFieldSupport($data);
+
+        $rawComponents = $this->parseComponentJSON($data);
+
+        $promos = $this->getPromos($rawComponents, $data['site']['id'] ?? '');
+
+        $components = $this->configureComponents($rawComponents, $promos, $data);
+
+        return $components;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function parseComponentJSON(array $data)
+    {
+        $components = [];
+        $group_reference = [];
+        $group_config = [];
+
+        foreach ($data['data'] as $pageField => $value) {
+            if (Str::startsWith($pageField, 'modular-')) {
+                $name = Str::replaceFirst('modular-', '', $pageField);
+
+                // Remove all spaces and line breaks
+                $value = preg_replace('/\s*\R\s*/', '', $value);
+
+                // Last item cannot have comma at the end of it
+                $value = preg_replace('(,})', '}', $value);
+
+                if (Str::startsWith($value, '{')) {
+                    $components[$name] = json_decode($value, true);
+                    if (!empty($components[$name]['config'])) {
+                        $config = explode('|', $components[$name]['config']);
+                        // Add youtube
+                        if (strpos($components[$name]['config'], 'youtube') === false) {
+                            array_push($config, 'youtube');
+                        }
+                        foreach ($config as $key => $value) {
+                            if (Str::startsWith($value, 'page_id')) {
+                                $config[$key] = 'page_id:'.$data['page']['id'];
+                            }
+
+                            if (Str::startsWith($value, 'first')) {
+                                unset($config[$key]);
+                            }
+                        }
+                        $components[$name]['config'] = implode('|', $config);
+                    }
+
+                    $components[$name]['filename'] = preg_replace('/-\d+$/', '', $name);
+                } else {
+                    $components[$name]['id'] = (int)$value;
+                }
+
+                if (!Str::contains($name, ['events', 'news']) && !empty($components[$name]['id'])) {
+                    $group_reference[$components[$name]['id']] = $name;
+                    if (!empty($components[$name]['config'])) {
+                        $group_config[$name] = $components[$name]['config'];
+                    }
+                }
+            }
+        }
+
+        return [
+            'components' => $components,
+            'group_reference' => $group_reference,
+            'group_config' => $group_config,
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPromos($components, $site_id)
+    {
+        $params = [
+            'method' => 'cms.promotions.listing',
+            'promo_group_id' => array_keys($components['group_reference']),
+            'filename_url' => true,
+            'is_active' => '1',
+        ];
+
+        $promos = $this->cache->remember($params['method'] . md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+            return $this->wsuApi->sendRequest($params['method'], $params);
+        });
+
+        // TODO Allowing the use of another site's promo items only from base
+        if (!empty($site_id) && $site_id === 1561) {
+            $promos['promotions'] = collect($promos['promotions'])->map(function ($promo) {
+                if (!empty($promo['filename_url'])) {
+                    $promo['relative_url'] = $promo['filename_url'];
+                }
+
+                if (!empty($promo['secondary_filename_url'])) {
+                    $promo['secondary_relative_url'] = $promo['secondary_filename_url'];
+                }
+
+                return $promo;
+            })->toArray();
+        }
+
+        $promos = $this->parsePromos->parse($promos, $components['group_reference'], $components['group_config']);
+
+        foreach ($promos as $name => $data) {
+            // Adjust promo data
+            $data = collect($data)->map(function ($item) use ($components, $name) {
+                return $this->adjustPromoData($item, $components['components'][$name]);
+            })->toArray();
+
+            // Organize by option
+            if (!empty($components['components'][$name]['groupByOptions']) && $components['components'][$name]['groupByOptions'] === true && Str::startsWith($name, 'catalog')) {
+                $data = $this->organizePromoItemsByOption($data);
+            }
+
+            // Build the return
+            $promos[$name] = [
+                'data' => $data,
+                'component' => $components['components'][$name],
+            ];
+        }
+
+        return $promos;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureComponents(array $components, array $promos, array $data): array
+    {
         $modularComponents = [];
-
-        // Legacy support for accordion
-        if (!empty($data['data']['accordion_promo_group_id'])) {
-            $data['data']['modular-accordion-999'] = json_encode([
-                'id' => $data['data']['accordion_promo_group_id']
-            ]);
-        }
-
-        // Legacy support for listing
-        if (!empty($data['data']['listing_promo_group_id'])) {
-            if (!empty($data['data']['promotion_view_boolean']) && $data['data']['promotion_view_boolean'] === "true") {
-                $data['data']['modular-catalog-998'] = json_encode([
-                    'id' => $data['data']['listing_promo_group_id'],
-                    'columns' => 1,
-                    'singlePromoView' => true
-                ]);
-            } else {
-                $data['data']['modular-catalog-998'] = json_encode([
-                    'id' => $data['data']['listing_promo_group_id'],
-                    'columns' => 1
-                ]);
-            }
-        }
-
-        // Legacy support for grid
-        if (!empty($data['data']['grid_promo_group_id'])) {
-            if (!empty($data['data']['promotion_view_boolean']) && $data['data']['promotion_view_boolean'] === "true") {
-                $data['data']['modular-catalog-999'] = json_encode([
-                    'id' => $data['data']['grid_promo_group_id'],
-                    'columns' => 3,
-                    'singlePromoView' => true
-                ]);
-            } else {
-                $data['data']['modular-catalog-999'] = json_encode([
-                    'id' => $data['data']['grid_promo_group_id'],
-                    'columns' => 3
-                ]);
-            }
-        }
-
-        $components = $this->parseData($data);
-        $promos = $this->getPromos($components, $data['site']['id'] ?? '');
 
         foreach ($components['components'] as $name => $component) {
             if (Str::startsWith($name, 'events')) {
@@ -140,115 +237,6 @@ class ModularPageRepository implements ModularPageRepositoryContract
         return $modularComponents;
     }
 
-    public function parseData(array $data)
-    {
-        $components = [];
-        $group_reference = [];
-        $group_config = [];
-
-        foreach ($data['data'] as $pageField => $value) {
-            if (Str::startsWith($pageField, 'modular-')) {
-                $name = Str::replaceFirst('modular-', '', $pageField);
-
-                // Remove all spaces and line breaks
-                $value = preg_replace('/\s*\R\s*/', '', $value);
-
-                // Last item cannot have comma at the end of it
-                $value = preg_replace('(,})', '}', $value);
-
-                if (Str::startsWith($value, '{')) {
-                    $components[$name] = json_decode($value, true);
-                    if (!empty($components[$name]['config'])) {
-                        $config = explode('|', $components[$name]['config']);
-                        // Add youtube
-                        if (strpos($components[$name]['config'], 'youtube') === false) {
-                            array_push($config, 'youtube');
-                        }
-                        foreach ($config as $key => $value) {
-                            if (Str::startsWith($value, 'page_id')) {
-                                $config[$key] = 'page_id:'.$data['page']['id'];
-                            }
-
-                            if (Str::startsWith($value, 'first')) {
-                                unset($config[$key]);
-                            }
-                        }
-                        $components[$name]['config'] = implode('|', $config);
-                    }
-                    $components[$name]['filename'] = preg_replace('/-\d+$/', '', $name);
-                } else {
-                    $components[$name]['id'] = (int)$value;
-                }
-
-                if (!Str::startsWith($name, ['events', 'news']) && !empty($components[$name]['id'])) {
-                    $group_reference[$components[$name]['id']] = $name;
-                    if (!empty($components[$name]['config'])) {
-                        $group_config[$name] = $components[$name]['config'];
-                    }
-                }
-            }
-        }
-
-        return [
-            'components' => $components,
-            'group_reference' => $group_reference,
-            'group_config' => $group_config,
-        ];
-    }
-
-    public function getPromos($components, $site_id)
-    {
-        $params = [
-            'method' => 'cms.promotions.listing',
-            'promo_group_id' => array_keys($components['group_reference']),
-            'filename_url' => true,
-            'is_active' => '1',
-        ];
-
-        $promos = $this->cache->remember($params['method'] . md5(serialize($params)), config('cache.ttl'), function () use ($params) {
-            return $this->wsuApi->sendRequest($params['method'], $params);
-        });
-
-        // TODO Allowing the use of another site's promo items only from base
-        if (!empty($site_id) && $site_id === 1561) {
-            $promos['promotions'] = collect($promos['promotions'])->map(function ($promo) {
-                if (!empty($promo['filename_url'])) {
-                    $promo['relative_url'] = $promo['filename_url'];
-                }
-
-                if (!empty($promo['secondary_filename_url'])) {
-                    $promo['secondary_relative_url'] = $promo['secondary_filename_url'];
-                }
-
-                return $promo;
-            })->toArray();
-        }
-
-        $promos = $this->parsePromos->parse($promos, $components['group_reference'], $components['group_config']);
-
-        foreach ($promos as $name => $data) {
-            // Adjust promo data
-            $data = collect($data)->map(function ($item) use ($components, $name) {
-                $item = $this->adjustPromoData($item, $components['components'][$name]);
-
-                return $item;
-            })->toArray();
-
-            // Organize by option
-            if (!empty($components['components'][$name]['groupByOptions']) && $components['components'][$name]['groupByOptions'] === true && Str::startsWith($name, 'catalog')) {
-                $data = $this->organizePromoItemsByOption($data);
-            }
-
-            // Build the return
-            $promos[$name] = [
-                'data' => $data,
-                'component' => $components['components'][$name],
-            ];
-        }
-
-        return $promos;
-    }
-
     public function adjustPromoData($data, $component)
     {
         if (isset($component['singlePromoView']) && $component['singlePromoView'] === true) {
@@ -282,6 +270,53 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 $no_option_moved_to_bottom = $data[''];
                 unset($data['']);
                 $data[''] = $no_option_moved_to_bottom;
+            }
+        }
+
+        return $data;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function legacyPageFieldSupport(array $data)
+    {
+        // Legacy support for accordion
+        if (!empty($data['data']['accordion_promo_group_id'])) {
+            $data['data']['modular-accordion-999'] = json_encode([
+                'id' => $data['data']['accordion_promo_group_id']
+            ]);
+        }
+
+        // Legacy support for listing
+        if (!empty($data['data']['listing_promo_group_id'])) {
+            if (!empty($data['data']['promotion_view_boolean']) && $data['data']['promotion_view_boolean'] === "true") {
+                $data['data']['modular-catalog-998'] = json_encode([
+                    'id' => $data['data']['listing_promo_group_id'],
+                    'columns' => 1,
+                    'singlePromoView' => true
+                ]);
+            } else {
+                $data['data']['modular-catalog-998'] = json_encode([
+                    'id' => $data['data']['listing_promo_group_id'],
+                    'columns' => 1
+                ]);
+            }
+        }
+
+        // Legacy support for grid
+        if (!empty($data['data']['grid_promo_group_id'])) {
+            if (!empty($data['data']['promotion_view_boolean']) && $data['data']['promotion_view_boolean'] === "true") {
+                $data['data']['modular-catalog-999'] = json_encode([
+                    'id' => $data['data']['grid_promo_group_id'],
+                    'columns' => 3,
+                    'singlePromoView' => true
+                ]);
+            } else {
+                $data['data']['modular-catalog-999'] = json_encode([
+                    'id' => $data['data']['grid_promo_group_id'],
+                    'columns' => 3
+                ]);
             }
         }
 
