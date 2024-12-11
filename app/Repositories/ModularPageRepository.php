@@ -169,8 +169,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
         foreach ($promos as $name => $data) {
             // Adjust promo data
             $data = collect($data)->map(function ($item) use ($components, $name) {
-                $item = $this->adjustPromoData($item, $components['components'][$name]);
-                return $item;
+                return $this->adjustPromoData($item, $components['components'][$name]);
             })->toArray();
 
             // Organize by option
@@ -275,33 +274,6 @@ class ModularPageRepository implements ModularPageRepositoryContract
         }
 
         return $data;
-    }
-
-    /**
-    * {@inheritdoc}
-    */
-    public function getHeroFromComponents(array $promos, $data)
-    {
-        // Set hero from components
-        $hero = collect($promos['components'])->reject(function ($data, $component_name) {
-            return !str_contains($component_name, 'hero');
-        })->toArray();
-
-        if (!empty($hero)) {
-            $hero_key = array_key_first($hero);
-
-            // Minimal hero overwrites any other hero data
-            if ($hero_key === 'misb-minimal-hero' && !empty($promos['components'][$hero_key]['component']['filename'])) {
-                $promos['hero'] = $promos['components'][$hero_key]['component'];
-            } else {
-                $promos['hero'] = $promos['components'][$hero_key]['data'];
-            }
-
-            config(['base.hero_full_controllers' => $data['page']['controller']]);
-            unset($promos['components'][$hero_key]);
-        }
-
-        return $promos;
     }
 
     /**
