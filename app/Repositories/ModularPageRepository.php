@@ -21,6 +21,12 @@ class ModularPageRepository implements ModularPageRepositoryContract
     /** @var Repository */
     protected $cache;
 
+    /** @var ArticleRepositoryContract */
+    protected $article;
+
+    /** @var EventRepositoryContract */
+    protected $event;
+
     /**
      * Construct the repository.
      *
@@ -101,10 +107,12 @@ class ModularPageRepository implements ModularPageRepositoryContract
             if (Str::startsWith($name, 'events')) {
                 $components['components'][$name]['id'] = $component['id'] ?? $data['site']['id'];
                 $limit = $components['components'][$name]['limit'] ?? 4;
-                if (strpos($name, 'events-column') !== false) {
-                    $events = $this->event->getEvents($component['id'] ?? $data['site']['id'], $limit);
-                } else {
+                if (!empty($component['title'])) {
+                    $events = $this->event->getEventsByTitle($component['id'] ?? $data['site']['id'], $component['title'], $limit);
+                } elseif (strpos($name, 'events-featured') !== false) {
                     $events = $this->event->getEventsFullListing($component['id'] ?? $data['site']['id'], $limit);
+                } else {
+                    $events = $this->event->getEvents($component['id'] ?? $data['site']['id'], $limit);
                 }
                 $modularComponents[$name]['data'] = $events['events'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
@@ -175,6 +183,18 @@ class ModularPageRepository implements ModularPageRepositoryContract
                         }
                         $components[$name]['config'] = implode('|', $config);
                     }
+                    if (!empty($components[$name]['heading'])) {
+                        $heading = $components[$name]['heading'];
+                    } else {
+                        $heading = 'Events';
+                    }
+
+                    if (!empty($components[$name]['title'])) {
+                        $title = explode('|', $components[$name]['title']);
+                        foreach ($title as $key => $value) {
+                            $title[$key] = $value;
+                        }
+                    }
                     $components[$name]['filename'] = preg_replace('/-\d+$/', '', $name);
                 } else {
                     $components[$name]['id'] = (int)$value;
@@ -185,6 +205,18 @@ class ModularPageRepository implements ModularPageRepositoryContract
                     if (!empty($components[$name]['config'])) {
                         $group_config[$name] = $components[$name]['config'];
                     }
+                }
+
+                if (Str::contains($name, 'events') && !empty($components[$name]['heading'])) {
+                    $components[$name]['heading'] = Str::contains(strToLower($heading), 'events') ? $heading : $heading . ' events';
+                } elseif (Str::contains($name, 'events') && empty($components[$name]['heading'])) {
+                    $components[$name]['heading'] = 'Events';
+                }
+
+                if (Str::contains($name, 'events') && !empty($components[$name]['title']) && sizeof($title) > 0) {
+                    $components[$name]['title'] = $title;
+                } else {
+                    $components[$name]['title'] = '';
                 }
             }
         }
