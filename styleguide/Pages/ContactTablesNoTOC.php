@@ -20,7 +20,7 @@ class ContactTablesNoTOC extends Page
                 'controller' => 'ContactTableController',
                 'title' => 'Contact tables, no table of contents',
                 'id' => 101114,
-                'content' => ['main' => '<p>onfigurable with in the CMS page custom field. Using a custom field named "profiles".</p>
+                'content' => ['main' => '<p>Configurable with in the CMS page custom field. Using a custom field named "profile_config".</p>
                     <table class="mt-2">
                         <thead>
                             <tr>
@@ -30,7 +30,7 @@ class ContactTablesNoTOC extends Page
                         </thead>
                         <tbody>
                             <tr>
-                                <td><pre class="w-full">profiles</pre></td>
+                                <td><pre class="w-full">profile_config</pre></td>
                                 <td>
 <pre class="w-full" tabindex="0">
 {
