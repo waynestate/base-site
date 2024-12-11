@@ -5,7 +5,6 @@ namespace App\Repositories;
 use Contracts\Repositories\ModularPageRepositoryContract;
 use Contracts\Repositories\EventRepositoryContract;
 use Contracts\Repositories\ArticleRepositoryContract;
-use Contracts\Repositories\ProfileRepositoryContract;
 use Illuminate\Cache\Repository;
 use Illuminate\Support\Str;
 use Waynestate\Api\Connector;
@@ -28,9 +27,6 @@ class ModularPageRepository implements ModularPageRepositoryContract
     /** @var EventRepositoryContract */
     protected $event;
 
-    /** @var ProfileRepositoryContract */
-    protected $profile;
-
     /**
      * Construct the repository.
      *
@@ -39,7 +35,6 @@ class ModularPageRepository implements ModularPageRepositoryContract
      * @param Repository $cache
      * @param ArticleRepositoryContract $article
      * @param EventRepositoryContract $event
-     * @param ProfileRepositoryContract $profile
      *
      */
     public function __construct(
@@ -48,14 +43,12 @@ class ModularPageRepository implements ModularPageRepositoryContract
         Repository $cache,
         ArticleRepositoryContract $article,
         EventRepositoryContract $event,
-        ProfileRepositoryContract $profile,
     ) {
         $this->wsuApi = $wsuApi;
         $this->parsePromos = $parsePromos;
         $this->cache = $cache;
         $this->article = $article;
         $this->event = $event;
-        $this->profile = $profile;
     }
 
     /**
@@ -119,19 +112,6 @@ class ModularPageRepository implements ModularPageRepositoryContract
                         $components[$name]['config'] = implode('|', $config);
                     }
 
-                    if (!empty($components[$name]['heading'])) {
-                        $heading = $components[$name]['heading'];
-                    } else {
-                        $heading = 'Events';
-                    }
-
-                    if (!empty($components[$name]['title'])) {
-                        $title = explode('|', $components[$name]['title']);
-                        foreach ($title as $key => $value) {
-                            $title[$key] = $value;
-                        }
-                    }
-
                     $components[$name]['filename'] = preg_replace('/-\d+$/', '', $name);
                 } else {
                     $components[$name]['id'] = (int)$value;
@@ -142,18 +122,6 @@ class ModularPageRepository implements ModularPageRepositoryContract
                     if (!empty($components[$name]['config'])) {
                         $group_config[$name] = $components[$name]['config'];
                     }
-                }
-
-                if (Str::contains($name, 'events') && !empty($components[$name]['heading'])) {
-                    $components[$name]['heading'] = $heading;
-                } elseif (Str::contains($name, 'events') && empty($components[$name]['heading'])) {
-                    $components[$name]['heading'] = 'Events';
-                }
-
-                if (Str::contains($name, 'events') && !empty($components[$name]['title']) && sizeof($title) > 0) {
-                    $components[$name]['title'] = $title;
-                } else {
-                    unset($components[$name]['title']);
                 }
             }
         }
@@ -205,7 +173,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 return $item;
             })->toArray();
 
-            // Organize by option if groupByOptions = true
+            // Organize by option
             if (!empty($components['components'][$name]['groupByOptions']) && $components['components'][$name]['groupByOptions'] === true && Str::startsWith($name, 'catalog')) {
                 $data = $this->organizePromoItemsByOption($data);
             }
@@ -228,27 +196,20 @@ class ModularPageRepository implements ModularPageRepositoryContract
         $modularComponents = [];
 
         foreach ($components['components'] as $name => $component) {
-            if (array_key_exists($name, $promos)) {
-                // Assign promo data to components
-                $modularComponents[$name]['data'] = $promos[$name]['data'] ?? [];
-                $modularComponents[$name]['component'] = $promos[$name]['component'] ?? [];
-            } elseif (Str::contains($name, 'events')) {
-                $events_id = config('base.events_id') ?? $data['site']['id'];
-                $events_path = !empty($data['site']['events']['path']) ? $data['site']['events']['path'] : config('base.events_path');
-                $calendarURL = $component['cal_name'] ?? $events_path ?? '';
-                $components['components'][$name]['id'] = $component['id'] ?? $events_id;
+            if (Str::startsWith($name, 'events')) {
+                $components['components'][$name]['id'] = $component['id'] ?? $data['site']['id'];
                 $limit = $components['components'][$name]['limit'] ?? 4;
                 if (strpos($name, 'events-column') !== false) {
-                    $events = $this->event->getEvents($component['id'] ?? $events_id, $limit);
-                } elseif (!empty($component['title']) && !empty($component['heading'])) {
-                    $events = $this->event->getEventsByTitle($component['id'] ?? $events_id, $component['heading'] ?? 'Events', $component['title'] ?? 'All events', $limit);
+                    $events = $this->event->getEvents($component['id'] ?? $data['site']['id'], $limit);
                 } else {
-                    $events = $this->event->getEventsFullListing($component['id'] ?? $events_id, $limit);
+                    $events = $this->event->getEventsFullListing($component['id'] ?? $data['site']['id'], $limit);
                 }
                 $modularComponents[$name]['data'] = $events['events'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
-                $modularComponents[$name]['component']['cal_name'] = $calendarURL;
-            } elseif (Str::contains($name, 'news')) {
+                if (empty($modularComponents[$name]['component']['cal_name']) && !empty($data['site']['events']['path'])) {
+                    $modularComponents[$name]['component']['cal_name'] = $data['site']['events']['path'];
+                }
+            } elseif (Str::startsWith($name, 'news')) {
                 $components['components'][$name]['id'] = $component['id'] ?? $data['site']['news']['application_id'];
                 $limit = $component['limit'] ?? 4;
                 $components['components'][$name]['news_route'] = $component['news_route'] ?? config('base.news_listing_route');
@@ -262,23 +223,15 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 }
                 $modularComponents[$name]['data'] = $articles['articles'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
-            } else {
+            } elseif (Str::startsWith($name, 'page-content') || Str::startsWith($name, 'heading')) {
                 // If there's JSON but no news, events or promo data, assign the component array as data
+                // Page-content and heading components
                 $modularComponents[$name]['data'][] = $components['components'][$name] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name] ?? [];
-
-                if (Str::startsWith($name, 'heading')) {
-                    unset($modularComponents[$name]['component']['heading']);
-                }
-            }
-
-            if (Str::contains($name, 'spotlight') && (!empty($component['accessId']) || !empty($component['accessIds']))) {
-                $accessIds = explode(',', strip_tags($component['accessId'] ?? $component['accessIds']));
-                $spotlightProfiles = $this->profile->getSpotlightProfileByAccessId($accessIds, $component['limit'] ?? 6);
-                $spotlightPromos = !empty(array_column($modularComponents[$name]['data'], 'promo_item_id')) ? $modularComponents[$name]['data'] : [];
-                $mergedProfilesAndPromos = $spotlightPromos + $spotlightProfiles;
-                shuffle($mergedProfilesAndPromos);
-                $modularComponents[$name]['data'] = $mergedProfilesAndPromos;
+                unset($modularComponents[$name]['component']['heading']);
+            } else {
+                $modularComponents[$name]['data'] = $promos[$name]['data'] ?? [];
+                $modularComponents[$name]['component'] = $promos[$name]['component'] ?? [];
             }
         }
 
@@ -299,11 +252,6 @@ class ModularPageRepository implements ModularPageRepositoryContract
             unset($data['description']);
         }
 
-        if (!empty($data['relative_url']) && isset($component['hideImages']) && $component['hideImages'] === true) {
-            unset($data['relative_url']);
-            unset($data['filename_url']);
-        }
-
         return $data;
     }
 
@@ -321,8 +269,8 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
             if (!empty($data[''])) {
                 $no_option_moved_to_bottom = $data[''];
-                $data['items'] = $no_option_moved_to_bottom;
                 unset($data['']);
+                $data[''] = $no_option_moved_to_bottom;
             }
         }
 
