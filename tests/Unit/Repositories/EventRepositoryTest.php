@@ -106,6 +106,7 @@ final class EventRepositoryTest extends TestCase
                     return true;
                 }
             }
+            return false;
         })->take(4)->toArray();
 
         // Mock the connector and set the return
@@ -139,5 +140,42 @@ final class EventRepositoryTest extends TestCase
         $events = app(EventRepository::class, ['wsuApi' => $wsuApi])->getEventsByTitle($this->faker->randomDigit(), $titles);
 
         $this->assertEquals($expected, $events);
+    }
+
+    #[Test]
+    public function getting_events_by_title_should_return_unique_events(): void
+    {
+        // Create a set of duplicate events
+        $events_listing = app(EventByTitle::class)->create(4);
+        $return['events'] = array_merge($events_listing, $events_listing);
+
+        // Get the titles from the events
+        $titles = collect($return['events'])->pluck('title')->take(2)->toArray();
+
+        // Filter the expected events to only include those with the matching titles and unique event IDs
+        $expected['events']['filtered_by_title'] = collect($return['events'])->filter(function ($event) use ($titles) {
+            foreach ($titles as $title) {
+                if (Str::contains($event['title'], $title, ignoreCase: true)) {
+                    return true;
+                }
+            }
+            return false;
+        })->unique('event_id')->take(4)->toArray();
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('calendar.events.fulllisting', Mockery::type('array'))->once()->andReturn($return);
+        $wsuApi->shouldReceive('nextRequestProduction')->once();
+
+        // Get the events by title
+        $events = app(EventRepository::class, ['wsuApi' => $wsuApi])->getEventsByTitle($this->faker->randomDigit(), $titles);
+
+        $this->assertEquals($expected, $events);
+
+        // Assert that each event in the returned events is unique
+        $expected_event_ids = array_column($expected['events']['filtered_by_title'], 'event_id');
+        $event_ids = array_column($events['events']['filtered_by_title'], 'event_id');
+
+        $this->assertEquals($expected_event_ids, $event_ids);
     }
 }
