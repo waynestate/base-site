@@ -147,7 +147,17 @@ class EventRepository implements EventRepositoryContract
                         }
                     }
                 }
-                $events['filtered_by_title'] = collect($events['filtered_by_title'])->take($limit)->toArray();
+
+                // Make sure only unique events are returned
+                $filtered_events = [];
+                $event_ids = [];
+
+                foreach ($events['filtered_by_title'] as $event) {
+                    if (!in_array($event['event_id'], $event_ids)) {
+                        $event_ids[] = $event['event_id'];
+                        $filtered_events[] = $event;
+                    }
+                } $events['filtered_by_title'] = collect($filtered_events)->take($limit)->values()->toArray();
             } return $events ?? [];
         });
 
