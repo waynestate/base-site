@@ -73,7 +73,7 @@ All available configurations
 "id":null,
 "heading":"Events",
 "filterTitle":"Title 1|Title 2|Title 3",
-"config":"limit:4",
+"limit":4,
 "cal_name": "myurl/",
 "link_text":"More events"
 }
