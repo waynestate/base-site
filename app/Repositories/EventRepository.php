@@ -117,47 +117,27 @@ class EventRepository implements EventRepositoryContract
 
             // If events are returned, group them by date and assign images for featured events
             if (!empty($events_listing['events'])) {
-                $events_listing = collect($events_listing['events'])
+                $events_listing['events'] = collect($events_listing['events'])
                     ->map(function ($event) {
                         if (!empty($event['images'])) {
                             $event['display_image'] = collect($event['images'])->first();
                         } else {
-                            $event['display_image'] = [];
                             $event['display_image']['full_url'] = 'https://wayne.edu/opengraph/wsu-social-share-square.jpg';
                             $event['display_image']['description'] = 'Event on wayne.edu';
                         }
 
                         return $event;
-                    })
-                    ->groupBy('date')
-                    ->toArray();
+                    })->toArray();
 
-                // Initialize filtered_by_title as an empty array
-                $events['filtered_by_title'] = [];
-
-                // Add only the events with titles matching the parsed title(s) to the events array
-                if (!empty($titles)) {
-                    foreach ($events_listing as $date => $events_details) {
-                        foreach ($events_details as $event) {
-                            foreach ($titles as $title) {
-                                if (Str::contains($event['title'], $title, ignoreCase: true)) {
-                                    $events['filtered_by_title'][] = $event;
-                                }
-                            }
+                // Filter the expected events to only include those with the matching titles and unique event IDs
+                $events['filtered_by_title'] = collect($events_listing['events'])->filter(function ($event) use ($titles) {
+                    foreach ($titles as $title) {
+                        if (Str::contains($event['title'], $title, ignoreCase: true)) {
+                            return true;
                         }
                     }
-                }
-
-                // Make sure only unique events are returned
-                $filtered_events = [];
-                $event_ids = [];
-
-                foreach ($events['filtered_by_title'] as $event) {
-                    if (!in_array($event['event_id'], $event_ids)) {
-                        $event_ids[] = $event['event_id'];
-                        $filtered_events[] = $event;
-                    }
-                } $events['filtered_by_title'] = collect($filtered_events)->take($limit)->values()->toArray();
+                    return false;
+                })->unique('event_id')->take(4)->toArray();
             } return $events ?? [];
         });
 
