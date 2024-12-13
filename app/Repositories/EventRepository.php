@@ -125,14 +125,13 @@ class EventRepository implements EventRepositoryContract
                             $event['display_image']['full_url'] = 'https://wayne.edu/opengraph/wsu-social-share-square.jpg';
                             $event['display_image']['description'] = 'Event on wayne.edu';
                         }
-
                         return $event;
                     })->toArray();
 
                 // Filter the expected events to only include those with the matching titles and unique event IDs
                 $events['filtered_by_title'] = collect($events_listing['events'])->filter(function ($event) use ($titles) {
                     foreach ($titles as $title) {
-                        if (Str::contains($event['title'], $title, ignoreCase: true)) {
+                        if (Str::contains($event['title'], trim($title), ignoreCase: true)) {
                             return true;
                         }
                     }
