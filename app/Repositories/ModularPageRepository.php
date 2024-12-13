@@ -107,8 +107,8 @@ class ModularPageRepository implements ModularPageRepositoryContract
             if (Str::startsWith($name, 'events')) {
                 $components['components'][$name]['id'] = $component['id'] ?? $data['site']['id'];
                 $limit = $components['components'][$name]['limit'] ?? 4;
-                if (!empty($component['title'])) {
-                    $events = $this->event->getEventsByTitle($component['id'] ?? $data['site']['id'], $component['title'], $limit);
+                if (!empty($component['filterTitle'])) {
+                    $events = $this->event->getEventsByTitle($component['id'] ?? $data['site']['id'], $component['filterTitle'], $limit);
                 } elseif (strpos($name, 'events-featured') !== false) {
                     $events = $this->event->getEventsFullListing($component['id'] ?? $data['site']['id'], $limit);
                 } else {
@@ -189,10 +189,10 @@ class ModularPageRepository implements ModularPageRepositoryContract
                         $heading = 'Events';
                     }
 
-                    if (!empty($components[$name]['title'])) {
-                        $title = explode('|', $components[$name]['title']);
-                        foreach ($title as $key => $value) {
-                            $title[$key] = $value;
+                    if (!empty($components[$name]['filterTitle'])) {
+                        $filterTitle = explode('|', $components[$name]['filterTitle']);
+                        foreach ($filterTitle as $key => $value) {
+                            $filterTitle[$key] = $value;
                         }
                     }
                     $components[$name]['filename'] = preg_replace('/-\d+$/', '', $name);
@@ -213,10 +213,10 @@ class ModularPageRepository implements ModularPageRepositoryContract
                     $components[$name]['heading'] = 'Events';
                 }
 
-                if (Str::contains($name, 'events') && !empty($components[$name]['title']) && sizeof($title) > 0) {
-                    $components[$name]['title'] = $title;
+                if (Str::contains($name, 'events') && !empty($components[$name]['filterTitle']) && sizeof($filterTitle) > 0) {
+                    $components[$name]['filterTitle'] = $filterTitle;
                 } else {
-                    $components[$name]['title'] = '';
+                    $components[$name]['filterTitle'] = '';
                 }
             }
         }

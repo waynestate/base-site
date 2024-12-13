@@ -64,7 +64,7 @@ Display specific events by passing in one or more event title keywords separated
 <pre class="w-full" tabindex="0">
 {
 "heading": "My events",
-"title": "Event title|Second event title"
+"filterTitle": "Title 1|Title 2"
 }
 </pre>
 All available configurations
@@ -72,7 +72,7 @@ All available configurations
 {
 "id":null,
 "heading":"Events",
-"title":"Event title|Second event title|Third event title",
+"filterTitle":"Title 1|Title 2|Title 3",
 "config":"limit:4",
 "cal_name": "myurl/",
 "link_text":"More events"

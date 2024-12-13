@@ -68,6 +68,14 @@
                     <td>Change default component heading level from h2 to h3 or h4.<br />"h3"</td>
                 </tr>
                 <tr>
+                    <td class="font-bold">filterTitle</td>
+                    <td>Available for events components.<br />
+                        Used to filter displayed events by the given title(s).<br />
+                        Each title is separated by the pipe char (|). <br />
+                        <a href="https://base.wayne.edu/styleguide/component/eventlisting">Promotion config information</a>
+                    </td>
+                </tr>
+                <tr>
                     <td class="font-bold">config</td>
                     <td>
 Configuration options for the specific promo group. <br />
