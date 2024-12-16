@@ -88,6 +88,7 @@ class EventRepository implements EventRepositoryContract
                         return $event;
                     })
                     ->take($limit)
+                    ->groupBy('date')
                     ->toArray();
             }
 
@@ -129,17 +130,19 @@ class EventRepository implements EventRepositoryContract
                     })->toArray();
 
                 // Filter the expected events to only include those with the matching titles and unique event IDs
-                $events['filtered_by_title'] = collect($events_listing['events'])->filter(function ($event) use ($titles) {
+                $events['events'] = collect($events_listing['events'])->filter(function ($event) use ($titles) {
                     foreach ($titles as $title) {
                         if (Str::contains($event['title'], trim($title), ignoreCase: true)) {
                             return true;
                         }
                     }
                     return false;
-                })->unique('event_id')->take(4)->toArray();
-            } return $events ?? [];
+                })->unique('event_id')->groupBy('date')->take(4)->toArray();
+            }
+
+            return $events ?? [];
         });
 
-        return ['events' => $events];
+        return $events;
     }
 }
