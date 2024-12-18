@@ -11,6 +11,7 @@ use Factories\Icon;
 use Factories\Spotlight;
 use Factories\Button;
 use Factories\GenericPromo;
+use Factories\ContentPromo;
 use Factories\Article;
 use Factories\Event;
 
@@ -44,28 +45,6 @@ class FullWidthController extends Controller
                 ],
             ],
 
-            'icons_row_1' => [
-                'data' => app(Icon::class)->create(6, false, [
-                    'excerpt' => '',
-                ]),
-                'component' => [
-                    'filename' => 'icons-row',
-                    'columns' => 2,
-                ],
-            ],
-
-            'icons_row_2' => [
-                'data' => app(Icon::class)->create(4, false, [
-                    'link' => '',
-                    'description' => '',
-                ]),
-                'component' => [
-                    'heading' => 'Facts',
-                    'filename' => 'icons-top-row',
-                    'columns' => 4,
-                ],
-            ],
-
             'button_row_1' => [
                 'data' => app(Button::class)->create(3, false, [
                 ]),
@@ -75,61 +54,14 @@ class FullWidthController extends Controller
                 ],
             ],
 
-            'catalog_1' => [
-                'data' => app(GenericPromo::class)->create(3, false, [
-                    'description' => '',
+            'icons_row_1' => [
+                'data' => app(Icon::class)->create(6, false, [
+                    'excerpt' => '',
                 ]),
                 'component' => [
-                    'heading' => 'Three column catalog',
-                    'filename' => 'catalog',
-                    'columns' => '3',
-                    'showDescription' => false,
-                ],
-            ],
-
-            'content_row_1' => [
-                'data' => app(GenericPromo::class)->create(1, false, [
-                    'title' => 'Content row',
-                    'description' => '<p>Example placement of an introductory paragraph describing the information laid out in the accordion below.</p><p>This is a separate promo group using the "content row" component. Below this is a different promo group with the accordion data and no component heading specified.</p>',
-                ]),
-                'component' => [
-                    'filename' => 'content-row',
-                ],
-            ],
-
-            'accordion_1' => [
-                'data' => app(GenericPromo::class)->create(4, false),
-                'component' => [
-                    'filename' => 'accordion',
-                ],
-            ],
-
-            'promo_column_2' => [
-                'data' => app(GenericPromo::class)->create(1, false, [
-                    'title' => 'Featured promo (promo column)',
-                    'relative_url' => '/styleguide/image/770x434',
-                    'description' => '',
-                ]),
-                'component' => [
-                    'heading' => '',
-                    'filename' => 'promo-column',
-                    'gradientOverlay' => true,
-                ],
-            ],
-
-            'news_row' => [
-                'data' => app(Article::class)->create(4, false),
-                'component' => [
-                    'heading' => 'Featured news',
-                    'filename' => 'news-row',
-                ],
-            ],
-
-            'events_column' => [
-                'data' => app(Event::class)->create(4, false),
-                'component' => [
-                    'heading' => 'Special events',
-                    'filename' => 'events-column',
+                    'heading' => 'Lead in statement',
+                    'filename' => 'icons-row',
+                    'columns' => 2,
                 ],
             ],
 
@@ -146,20 +78,78 @@ class FullWidthController extends Controller
                 ],
             ],
 
-            'catalog_2' => [
-                'data' => app(GenericPromo::class)->create(2, false, [
+            'events_column' => [
+                'data' => app(Event::class)->create(4, false),
+                'component' => [
+                    'heading' => 'Special events',
+                    'filename' => 'events-column',
+                ],
+            ],
+
+            'promo_row_1' => [
+                'data' => app(ContentPromo::class)->create(2, false),
+                'component' => [
+                    'heading' => 'Something to remember',
+                    'filename' => 'promo-row',
+                ],
+            ],
+
+            'icons_row_2' => [
+                'data' => app(Icon::class)->create(4, false, [
+                    'link' => '',
+                    'description' => '',
                 ]),
                 'component' => [
-                    'heading' => 'Single column catalog',
+                    'heading' => 'Facts',
+                    'filename' => 'icons-top-row',
+                    'columns' => 4,
+                ],
+            ],
+
+            'promo_row_2' => [
+                'data' => app(ContentPromo::class)->create(2, false, [
+                    'relative_url' => '',
+                    'filename_url' => '',
+                ]),
+                'component' => [
+                    'heading' => 'Call to action statement',
+                    'filename' => 'promo-row',
+                ],
+            ],
+
+            'catalog_1' => [
+                'data' => app(GenericPromo::class)->create(3, false, [
+                    'description' => '',
+                ]),
+                'component' => [
+                    'heading' => 'Highlights',
                     'filename' => 'catalog',
-                    'columns' => '1',
+                    'columns' => '3',
                     'showDescription' => false,
-                    'imageSize' => 'small',
+                    'sectionClass' => 'bg-gray-100 py-8'
+                ],
+            ],
+
+            /*
+            'accordion_1' => [
+                'data' => app(GenericPromo::class)->create(4, false),
+                'component' => [
+                    'filename' => 'accordion',
+                ],
+            ],
+             */
+
+            'news_row' => [
+                'data' => app(Article::class)->create(4, false),
+                'component' => [
+                    'heading' => 'Featured news',
+                    'filename' => 'news-row',
+                    'sectionClass' => 'bg-gray-100'
                 ],
             ],
 
             'spotlight_column' => [
-                'data' => app(Spotlight::class)->create(2, false),
+                'data' => app(Spotlight::class)->create(1, false),
                 'component' => [
                     'heading' => 'Spotlight',
                     'filename' => 'spotlight-column',
@@ -173,19 +163,6 @@ class FullWidthController extends Controller
                     'heading' => 'Featured section',
                     'filename' => 'promo-row',
                     'imagePosition' => 'alternate',
-                ],
-            ],
-
-            'promo_column_3' => [
-                'data' => app(GenericPromo::class)->create(3, false, [
-                    'relative_url' => '/styleguide/image/600x450',
-                    'description' => '',
-                ]),
-                'component' => [
-                    'heading' => 'Highlights',
-                    'filename' => 'catalog',
-                    'columns' => '3',
-                    'showDescription' => false,
                 ],
             ],
 
@@ -213,6 +190,19 @@ class FullWidthController extends Controller
                     'columns' => '2',
                 ],
             ],
+
+            'catalog_2' => [
+                'data' => app(GenericPromo::class)->create(2, false, [
+                ]),
+                'component' => [
+                    'heading' => 'Single column catalog',
+                    'filename' => 'catalog',
+                    'columns' => '1',
+                    'showDescription' => false,
+                    'imageSize' => 'small',
+                ],
+            ],
+
         ];
 
         if (!empty($components)) {
@@ -235,6 +225,7 @@ class FullWidthController extends Controller
         $heroClass['heroClass'] = 'full-width-styleguide-hero';
 
         $request->data['base']['components'] = $components;
+        //dump($request->data['base']['components']);
 
         return view('childpage', merge($request->data, $this->faker, $components, $heroClass));
     }
