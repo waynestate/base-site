@@ -38,7 +38,13 @@ class EventFullListingNoImage implements FactoryContract
             ];
             $event = array_replace_recursive($event, $options);
 
-            $data[$i] = $event;
+            $data[$date][] = $event;
+        }
+
+        if ($limit === 1 && $flatten === true) {
+            foreach ($data as $date => $event) {
+                $data[$date] = current($event);
+            }
         }
 
         return $data;
