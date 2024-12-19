@@ -137,7 +137,7 @@ class EventRepository implements EventRepositoryContract
                         }
                     }
                     return false;
-                })->unique('event_id')->groupBy('date')->take(4)->toArray();
+                })->unique('event_id')->groupBy('date')->take($limit)->toArray();
             }
 
             return $events ?? [];
