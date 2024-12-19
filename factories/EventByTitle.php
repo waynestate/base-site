@@ -5,7 +5,7 @@ namespace Factories;
 use Contracts\Factories\FactoryContract;
 use Faker\Factory;
 
-class EventFullListing implements FactoryContract
+class EventByTitle implements FactoryContract
 {
     /**
      * Construct the factory.
@@ -20,19 +20,16 @@ class EventFullListing implements FactoryContract
      */
     public function create($limit = 1, $flatten = false, $options = [])
     {
-        for ($i = 1; $i <= $limit; $i++) {
+        for ($i = 0; $i <= $limit; $i++) {
             $date = $this->faker->dateTimeBetween('+10 days', '+15 days')->format('Y-m-d');
             $title = $this->faker->sentence(rand(6, 10));
-            $imagex = $this->faker->randomElement([
-                '/styleguide/image/600x600?text=600x600:'.$i,
-                ''
-            ]);
             $description = $this->faker->text(100);
             $image = '/styleguide/image/600x600?text=600x600:'.$i;
 
             $event = [
                 'event_id' => $i,
                 'url' => 'https://wayne.edu',
+                'heading' => $title,
                 'title' => $title,
                 'date' => $date,
                 'start_time' => $this->faker->time('H:i:s', 'now'),
