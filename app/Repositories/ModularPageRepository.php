@@ -35,6 +35,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
      * @param Repository $cache
      * @param ArticleRepositoryContract $article
      * @param EventRepositoryContract $event
+     *
      */
     public function __construct(
         Connector $wsuApi,

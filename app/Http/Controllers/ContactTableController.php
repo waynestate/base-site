@@ -1,4 +1,5 @@
 <?php
+
 /*
 * Status: Public
 * Description: ContactTable Template
@@ -26,13 +27,16 @@ class ContactTableController extends Controller
      */
     public function index(Request $request): View
     {
+        // Parse profile config from custom fields
+        $this->profile->parseProfileConfig($request->data['base']);
+
         // Determine what site to pull profiles from
         $site_id = $this->profile->getSiteID($request->data['base']);
 
-        $profiles = $this->profile->getProfilesByGroupOrder($site_id, $request->data['base']['data']['profile_group_id']);
+        $profiles = $this->profile->getProfilesByGroupOrder($site_id, config('profile.group_id'));
 
         // show table of contents if custom field 'table_of_contents' is not set to 'hide'
-        if (isset($request->data['base']['data']['table_of_contents']) && $request->data['base']['data']['table_of_contents'] === 'hide') {
+        if (config('profile.table_of_contents') === 'hide') {
             $profiles['anchors'] = [];
         }
 

@@ -15,6 +15,7 @@ use Tests\TestCase;
 use Mockery as Mockery;
 use Waynestate\Api\Connector;
 use Waynestate\Api\News;
+use Illuminate\Support\Facades\Config;
 
 final class ProfileRepositoryTest extends TestCase
 {
@@ -52,6 +53,7 @@ final class ProfileRepositoryTest extends TestCase
             'name_fields' => [
                 'Honorific',
                 'First Name',
+                'Middle name',
                 'Last Name',
                 'Suffix',
             ],
@@ -60,6 +62,7 @@ final class ProfileRepositoryTest extends TestCase
         $return['profile']['data'] = [
             'Honorific' => 'Dr.',
             'First Name' => 'Anthony',
+            'Middle name' => 'M.',
             'Last Name' => 'Wayne',
             'Suffix' => 'Jr.',
         ];
@@ -72,7 +75,7 @@ final class ProfileRepositoryTest extends TestCase
         $pageTitle = $profile->getPageTitleFromName($return);
 
         // Make sure the page title equals all the name fields
-        $this->assertEquals('Dr. Anthony Wayne, Jr.', $pageTitle);
+        $this->assertEquals('Dr. Anthony M. Wayne, Jr.', $pageTitle);
     }
 
     #[Test]
@@ -80,18 +83,18 @@ final class ProfileRepositoryTest extends TestCase
     {
         // The default path if no referer
         $url = app(ProfileRepository::class)->getBackToProfileListUrl();
-        $this->assertTrue($url == config('base.profile_default_back_url'));
+        $this->assertTrue($url == config('profile.default_back_url'));
 
         // If a referer is passed from a different domain
         $referer = $this->faker->url();
         $url = app(ProfileRepository::class)->getBackToProfileListUrl($referer, 'http', 'wayne.edu', '/');
-        $this->assertTrue($url == config('base.profile_default_back_url'));
+        $this->assertTrue($url == config('profile.default_back_url'));
 
         // If a referer is passed that is the same page we are on
         $referer = $this->faker->url();
         $parsed = parse_url($referer);
         $url = app(ProfileRepository::class)->getBackToProfileListUrl($referer, $parsed['scheme'], $parsed['host'], $parsed['path']);
-        $this->assertTrue($url == config('base.profile_default_back_url'));
+        $this->assertTrue($url == config('profile.default_back_url'));
 
         // If referer is passed from the same domain that the site is on
         $referer = $this->faker->url();
@@ -104,7 +107,7 @@ final class ProfileRepositoryTest extends TestCase
     public function getting_dropdown_of_groups_should_contain_all_the_groups(): void
     {
         // Force this config incase it is changed
-        config(['base.profile_parent_group_id' => 0]);
+        config(['profile.parent_group_id' => 0]);
 
         // Fake return
         $return = [
@@ -129,7 +132,7 @@ final class ProfileRepositoryTest extends TestCase
     public function getting_dropdown_of_single_group_should_contain_single_group(): void
     {
         // Force this config incase it is changed
-        config(['base.profile_parent_group_id' => 0]);
+        config(['profile.parent_group_id' => 0]);
 
         // Fake return
         $return = [
@@ -273,7 +276,7 @@ final class ProfileRepositoryTest extends TestCase
     public function profiles_should_be_grouped(): void
     {
         // Force this config incase it is changed
-        config(['base.profile_parent_group_id' => 0]);
+        config(['profile.parent_group_id' => 0]);
 
         // Mock the user listing
         $return_user_listing = app(Profile::class)->create(10);
@@ -351,6 +354,9 @@ final class ProfileRepositoryTest extends TestCase
                 'profile_site_id' => $profile_site_id,
             ],
         ]);
+
+        app(ProfileRepository::class, ['wsuApi' => $wsuApi])->parseProfileConfig($custom_field_page);
+
         $return_profile_site_id = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getSiteID($custom_field_page);
         $this->assertEquals($profile_site_id, $return_profile_site_id);
 
@@ -358,6 +364,10 @@ final class ProfileRepositoryTest extends TestCase
         $site_config_page = app(Page::class)->create(1, true);
         $cms_site_id = $site_config_page['site']['id'];
 
+        // Reset the profile_site_id
+        Config::set('profile.site_id', null);
+
+        app(ProfileRepository::class, ['wsuApi' => $wsuApi])->parseProfileConfig($site_config_page);
         $return_cms_site_id = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getSiteID($site_config_page);
 
         $this->assertEquals($cms_site_id, $return_cms_site_id);
@@ -419,5 +429,33 @@ final class ProfileRepositoryTest extends TestCase
         foreach ($profile['profile']['data']['Youtube Videos'] as $video) {
             $this->assertTrue(array_key_exists('youtube_id', $video));
         }
+    }
+
+    #[Test]
+    public function get_profile_config_with_json_array(): void
+    {
+        $site_id = $this->faker->numberBetween(1, 10);
+        $group_id = $this->faker->numberBetween(1, 10);
+
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'ProfileController',
+            ],
+            'data' => [
+                'profile-config' => json_encode([
+                    'site_id' => $site_id,
+                ]),
+                'profile_group_id' => $group_id,
+                'table_of_contents' => 'hide',
+                'profile_site_id' => $site_id,
+            ],
+        ]);
+
+        $wsuApi = Mockery::mock(Connector::class);
+
+        app(ProfileRepository::class, ['wsuApi' => $wsuApi])->parseProfileConfig($data);
+
+        $this->assertEquals($site_id, config('profile.site_id'));
+        $this->assertEquals($group_id, config('profile.group_id'));
     }
 }

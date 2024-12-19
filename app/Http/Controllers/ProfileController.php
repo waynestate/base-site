@@ -1,4 +1,5 @@
 <?php
+
 /*
 * Status: Public
 * Description: Profile Template
@@ -26,11 +27,14 @@ class ProfileController extends Controller
      */
     public function index(Request $request): View
     {
+        // Parse profile config from custom fields
+        $this->profile->parseProfileConfig($request->data['base']);
+
         // Determine what site to pull profiles from
         $site_id = $this->profile->getSiteID($request->data['base']);
 
         // Determine if we are forcing the profiles from custom page data
-        $forced_profile_group_id = !empty($request->data['base']['data']['profile_group_id']) ? $request->data['base']['data']['profile_group_id'] : null;
+        $forced_profile_group_id = config('profile.group_id');
 
         // Get the groups for the dropdown
         $dropdown_groups = $this->profile->getDropdownOfGroups($site_id);
@@ -65,6 +69,9 @@ class ProfileController extends Controller
         if (empty($request->accessid)) {
             abort('404');
         }
+
+        // Parse profile config from custom fields
+        $this->profile->parseProfileConfig($request->data['base']);
 
         // Determine what site to pull profiles from
         $site_id = $this->profile->getSiteID($request->data['base']);
