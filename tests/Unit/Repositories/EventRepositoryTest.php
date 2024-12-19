@@ -91,23 +91,25 @@ final class EventRepositoryTest extends TestCase
     }
 
     #[Test]
-    public function getting_events_by_title_should_return_only_events_matching_string_array(): void
+    public function getting_events_by_title_should_only_return_events_matching_string_array(): void
     {
         // Create events
-        $return['events'] = app(EventByTitle::class)->create(4);
+        $return['events'] = collect(app(EventByTitle::class)->create(2))->flatten(1)->toArray();
 
-        // Get the titles
-        $titles = collect($return['events'])->pluck('title')->take(1)->toArray();
+        // Get the titles from the events
+        $titles = collect($return['events'])->filter(function ($value) {
+            return $value['title'];
+        })->pluck('title')->take(2)->toArray();
 
         // Get the expected events filtered by title
-        $expected['events']['filtered_by_title'] = collect($return['events'])->filter(function ($event) use ($titles) {
+        $expected['events'] = collect($return['events'])->filter(function ($event) use ($titles) {
             foreach ($titles as $title) {
-                if (Str::contains($event['title'], $title, ignoreCase: true)) {
+                if (Str::contains($event['title'], trim($title), ignoreCase: true)) {
                     return true;
                 }
             }
             return false;
-        })->take(4)->toArray();
+        })->unique('event_id')->groupBy('date')->take(4)->toArray();
 
         // Mock the connector and set the return
         $wsuApi = Mockery::mock(Connector::class);
@@ -126,10 +128,10 @@ final class EventRepositoryTest extends TestCase
         // Create events
         $return['events'] = app(EventByTitle::class)->create(4);
 
-        // Get the expected events filtered by title
-        $expected['events']['filtered_by_title'] = [];
-
         $titles = [];
+
+        // Get the expected events filtered by title
+        $expected['events'] = [];
 
         // Mock the connector and set the return
         $wsuApi = Mockery::mock(Connector::class);
@@ -146,21 +148,32 @@ final class EventRepositoryTest extends TestCase
     public function getting_events_by_title_should_return_unique_events(): void
     {
         // Create a set of duplicate events
-        $events_listing = app(EventByTitle::class)->create(4);
-        $return['events'] = array_merge($events_listing, $events_listing);
+        $dupe['events'] = app(EventByTitle::class)->create(2, false, [
+            'event_id' => 100,
+            'title' => 'Class registration',
+        ]);
+        $duplicate['events'] = app(EventByTitle::class)->create(2, false, [
+            'event_id' => 200,
+            'title' => 'A high priority meeting',
+        ]);
+
+        // Merge the duplicate events
+        $return['events'] = collect($dupe['events'])->merge($duplicate['events'])->flatten(1)->toArray();
 
         // Get the titles from the events
-        $titles = collect($return['events'])->pluck('title')->take(2)->toArray();
+        $titles = collect($return['events'])->filter(function ($value) {
+            return $value['title'];
+        })->pluck('title')->take(2)->toArray();
 
-        // Filter the expected events to only include those with the matching titles and unique event IDs
-        $expected['events']['filtered_by_title'] = collect($return['events'])->filter(function ($event) use ($titles) {
+        // Get the expected events filtered by title
+        $expected['events'] = collect($return['events'])->filter(function ($event) use ($titles) {
             foreach ($titles as $title) {
-                if (Str::contains($event['title'], $title, ignoreCase: true)) {
+                if (Str::contains($event['title'], trim($title), ignoreCase: true)) {
                     return true;
                 }
             }
             return false;
-        })->unique('event_id')->take(4)->toArray();
+        })->unique('event_id')->groupBy('date')->take(4)->toArray();
 
         // Mock the connector and set the return
         $wsuApi = Mockery::mock(Connector::class);
@@ -173,8 +186,8 @@ final class EventRepositoryTest extends TestCase
         $this->assertEquals($expected, $events);
 
         // Assert that each event in the returned events is unique
-        $expected_event_ids = array_column($expected['events']['filtered_by_title'], 'event_id');
-        $event_ids = array_column($events['events']['filtered_by_title'], 'event_id');
+        $event_ids = collect($events['events'])->flatten(1)->pluck('event_id')->toArray();
+        $expected_event_ids = collect($expected['events'])->flatten(1)->pluck('event_id')->toArray();
 
         $this->assertEquals($expected_event_ids, $event_ids);
     }
