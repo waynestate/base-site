@@ -58,7 +58,10 @@ final class EventRepositoryTest extends TestCase
     public function getting_events_full_listing(): void
     {
         // Expected events to be returned
-        $return['events'] = app(EventFullListing::class)->create(4);
+        $expected['events'] = app(EventFullListing::class)->create(4);
+
+        // Maniuplate events to mimic the API return
+        $return['events'] = collect($expected['events'])->flatten(1)->toArray();
 
         // Mock the connector and set the return
         $wsuApi = Mockery::mock(Connector::class);
@@ -68,7 +71,7 @@ final class EventRepositoryTest extends TestCase
         // Get the events
         $events = app(EventRepository::class, ['wsuApi' => $wsuApi])->getEventsFullListing($this->faker->randomDigit());
 
-        $this->assertEquals($return, $events);
+        $this->assertEquals($expected, $events);
     }
 
     #[Test]
@@ -77,14 +80,17 @@ final class EventRepositoryTest extends TestCase
         // Expected events to be returned
         $noimage['events'] = app(EventFullListingNoImage::class)->create(1);
 
+        // Maniuplate events to mimic the API return
+        $return['events'] = collect($noimage['events'])->flatten(1)->toArray();
+
         // Mock the connector and set the return
         $wsuApi = Mockery::mock(Connector::class);
-        $wsuApi->shouldReceive('sendRequest')->with('calendar.events.fulllisting', Mockery::type('array'))->once()->andReturn($noimage);
+        $wsuApi->shouldReceive('sendRequest')->with('calendar.events.fulllisting', Mockery::type('array'))->once()->andReturn($return);
         $wsuApi->shouldReceive('nextRequestProduction')->once();
 
         // Get the events
         $events = app(EventRepository::class, ['wsuApi' => $wsuApi])->getEventsFullListing($this->faker->randomDigit());
-        $event = collect($events['events'])->first();
+        $event = collect($events['events'])->flatten(1)->first();
 
         $this->assertTrue(!empty($event['display_image']['full_url']));
         $this->assertTrue(!empty($event['display_image']['description']));

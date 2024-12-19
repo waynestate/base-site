@@ -107,9 +107,7 @@ All available configurations
                 ],
             ],
             'events-row-1' => [
-                'data' => [
-                    '0' => app(EventFullListing::class)->create(4, false),
-                    ],
+                'data' => app(Event::class)->create(4, false),
                 'component' => [
                     'heading' => 'Events row',
                     'filename' => 'events-row',
