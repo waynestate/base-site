@@ -220,7 +220,6 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 } else {
                     $articles = $this->article->listing($components['components'][$name]['id'], $limit, 1, $component['topics'] ?? []);
                 }
-                // $modularComponents[$name]['data'] = $articles['articles'] ?? [];
                 $modularComponents[$name]['data'] = $articles['articles']['data'] ?? [];
                 $modularComponents[$name]['meta'] = $articles['articles']['meta'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
