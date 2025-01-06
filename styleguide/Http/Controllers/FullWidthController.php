@@ -123,7 +123,7 @@ class FullWidthController extends Controller
             ],
 
             'news_row' => [
-                'data' => app(Article::class)->create(4, false),
+                'data' => app(Article::class)->create(4, false)['data'],
                 'component' => [
                     'heading' => 'Featured news',
                     'filename' => 'news-row',

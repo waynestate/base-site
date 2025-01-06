@@ -102,7 +102,7 @@ class ChildpageWithComponentsController extends Controller
             ],
 
             'news-column' => [
-                'data' => app(Article::class)->create(3, false),
+                'data' => app(Article::class)->create(3, false)['data'],
                 'component' => [
                     'filename' => 'news-column',
                 ],
