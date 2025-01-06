@@ -220,7 +220,9 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 } else {
                     $articles = $this->article->listing($components['components'][$name]['id'], $limit, 1, $component['topics'] ?? []);
                 }
-                $modularComponents[$name]['data'] = $articles['articles'] ?? [];
+                // $modularComponents[$name]['data'] = $articles['articles'] ?? [];
+                $modularComponents[$name]['data'] = $articles['articles']['data'] ?? [];
+                $modularComponents[$name]['meta'] = $articles['articles']['meta'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
             } elseif (Str::startsWith($name, 'page-content') || Str::startsWith($name, 'heading')) {
                 // If there's JSON but no news, events or promo data, assign the component array as data

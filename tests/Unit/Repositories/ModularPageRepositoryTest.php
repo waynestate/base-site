@@ -194,7 +194,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Run the promos through the repository
         $modularComponents = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
 
-        $this->assertCount(count($return['data']), $modularComponents['news-row-1']['data']['data']);
+        $this->assertCount(count($return['data']), $modularComponents['news-row-1']['data']);
     }
 
     #[Test]
@@ -226,7 +226,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Run the promos through the repository
         $modularComponents = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
 
-        $this->assertCount(count($return['data']), $modularComponents['news-column-1']['data']['data']);
+        $this->assertCount(count($return['data']), $modularComponents['news-column-1']['data']);
     }
 
     #[Test]
