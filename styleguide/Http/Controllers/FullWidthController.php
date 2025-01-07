@@ -11,7 +11,8 @@ use Factories\Icon;
 use Factories\Spotlight;
 use Factories\Button;
 use Factories\GenericPromo;
-use Factories\Article;
+use Factories\ArticleMeta;
+use Factories\ArticleComponent;
 use Factories\Event;
 
 class FullWidthController extends Controller
@@ -123,7 +124,8 @@ class FullWidthController extends Controller
             ],
 
             'news_row' => [
-                'data' => app(Article::class)->create(4, false)['data'],
+                'data' => app(ArticleComponent::class)->create(4, false),
+                'meta' => app(ArticleMeta::class)->create(),
                 'component' => [
                     'heading' => 'Featured news',
                     'filename' => 'news-row',

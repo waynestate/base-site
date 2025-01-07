@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Faker\Factory;
 use Factories\Article;
+use Factories\ArticleMeta;
+use Factories\ArticleComponent;
 
 class ComponentArticleListingController extends Controller
 {
@@ -85,24 +87,24 @@ All available configurations
                 ],
             ],
             'news-column-1' => [
-                'data' => app(Article::class)->create(5, false)['data'],
-                'meta' => app(Article::class)->create(5, false)['meta'],
+                'data' => app(ArticleComponent::class)->create(5, false),
+                'meta' => app(ArticleMeta::class)->create(),
                 'component' => [
                     'heading' => 'News column',
                     'filename' => 'news-column',
                 ],
             ],
             'news-featured-column-1' => [
-                'data' => app(Article::class)->create(4, false)['data'],
-                'meta' => app(Article::class)->create(4, false)['meta'],
+                'data' => app(ArticleComponent::class)->create(4, false),
+                'meta' => app(ArticleMeta::class)->create(),
                 'component' => [
                     'heading' => 'Featured news column',
                     'filename' => 'news-featured-column',
                 ],
             ],
             'news-row-1' => [
-                'data' => app(Article::class)->create(4, false)['data'],
-                'meta' => app(Article::class)->create(4, false)['meta'],
+                'data' => app(ArticleComponent::class)->create(4, false),
+                'meta' => app(ArticleMeta::class)->create(),
                 'component' => [
                     'heading' => 'News row',
                     'filename' => 'news-row',
