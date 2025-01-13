@@ -54,7 +54,7 @@ class ProfileRepository implements ProfileRepositoryContract
         // Build the link
         if (empty($profile_listing['error'])) {
             $profile_listing = collect($profile_listing)->map(function ($item) {
-                $item['link'] = '/profile/'.$item['data']['AccessID'];
+                $item['link'] = 'profile/'.$item['data']['AccessID'];
                 $item['full_name'] = $this->getPageTitleFromName(['profile' => $item]);
 
                 return $item;
