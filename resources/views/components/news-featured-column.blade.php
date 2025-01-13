@@ -3,9 +3,9 @@
     $url => string '/news/'
     $link_text => string // 'More news'
 --}}
-@if(!empty($data['data']))
+@if(!empty($data))
     <ul>
-        @foreach($data['data'] as $item)
+        @foreach($data as $item)
             @if($loop->iteration === 1)
                 <li class="bg-green-800">
                     <a href="{{ $item['link'] }}" class="relative block mb-6 group">

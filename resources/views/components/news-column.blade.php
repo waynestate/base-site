@@ -3,9 +3,9 @@
     $url => string '/news/'
     $link_text => string // 'More news'
 --}}
-@if(!empty($data['data']))
+@if(!empty($data))
     <ul>
-        @foreach($data['data'] as $item)
+        @foreach($data as $item)
             <li class="mb-4">
                 <a href="{{ $item['link'] }}" class="underline hover:no-underline font-normal">
                     {{ $item['title'] }}

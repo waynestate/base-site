@@ -48,7 +48,7 @@ class HomepageController extends Controller
             $promos['components'] = $modularComponents['modularComponents'];
         }
 
-        $articles = $this->article->listing($request->data['base']['site']['news']['application_id']);
+        $articles['data'] = $this->article->listing($request->data['base']['site']['news']['application_id']);
 
         $events = $this->event->getEvents($request->data['base']['site']['id']);
 
