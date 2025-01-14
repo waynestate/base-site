@@ -34,9 +34,9 @@ class DirectoryController extends Controller
         $site_id = $this->profile->getSiteID($request->data['base']);
 
         if (!empty(config('profile.group_id'))) {
-            $profiles = $this->profile->getProfilesByGroupOrder($site_id, config('profile.group_id'));
+            $profiles = $this->profile->getProfilesByGroupOrder($site_id, config('profile.group_id'), $request->data['base']['site']['subsite-folder']);
         } else {
-            $profiles = $this->profile->getProfilesByGroup($site_id);
+            $profiles = $this->profile->getProfilesByGroup($site_id, $request->data['base']['site']['subsite-folder']);
         }
 
         return view('directory', merge($request->data, $profiles));

@@ -11,7 +11,7 @@ interface ProfileRepositoryContract
      * @param string|null $selected_group
      * @return array
      */
-    public function getProfiles(int $site_id, ?string $selected_group = null): array;
+    public function getProfiles(int $site_id, ?string $selected_group = null, $subsite_url = null): array;
 
     /**
      * Gets the profiles based on promo_group_id custom field and generates anchors for each group
@@ -20,7 +20,7 @@ interface ProfileRepositoryContract
      * @param string $groups
      * @return array
      */
-    public function getProfilesByGroupOrder($site_id, $groups);
+    public function getProfilesByGroupOrder($site_id, $groups, $subsite_url = null): array;
 
     /**
      * Get the dropdown config options.
