@@ -293,6 +293,7 @@ echo "RemoteRelease Environment file setup Done.";
     echo "RemoteRelease Prepare...";
     mv {{ $source_dir }} {{ $release_dir }}/{{ $release }}
     chmod -R g+s {{ $release_dir }}/{{ $release }}
+    chmod -R 02770 {{ $release_dir }}/{{ $release }}/bootstrap/cache
     echo "RemoteRelease Prepare Done.";
 @endtask
 
