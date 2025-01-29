@@ -40,6 +40,10 @@
             @apply p-4 pt-0 pl-8 border-t-0;
 
             transition: 0.3s ease all;
+
+            > * {
+                @apply mt-0;
+            }
         }
     }
 
