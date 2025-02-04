@@ -14,7 +14,7 @@
                 !config('base.global.sites.' . $site['id'] . '.surtitle_disabled')
             )
                 <div class="text-base mb-0 font-normal leading-tight">
-                    <a href="{{ config('base.surtitle_url') }}" class="text-white print:text-black">{{ config('base.surtitle') }}</a>
+                    <a href="{{ config('base.surtitle_url') }}" class="text-white print:text-black inline-block py-[3px]">{{ config('base.surtitle') }}</a>
                 </div>
 
                 <div class="font-normal mb-1 text-2xl leading-none">
