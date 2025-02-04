@@ -1,4 +1,4 @@
-// Combination of normalize and tailwind resets
+/* Combination of normalize and tailwind resets */
 @tailwind base;
 
 @import "~mediabox/dist/mediabox";
@@ -35,10 +35,10 @@
 @import "components/full-width-styleguide-hero";
 @import "components/policy-numbering";
 
-// Site specific
+/* Site specific */
 @import "site-specific/theme";
 
-// Tailwind
+/* Tailwind */
 @tailwind components;
 @tailwind utilities;
 

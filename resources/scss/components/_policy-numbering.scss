@@ -1,4 +1,4 @@
-// Policy numbering style
+/* Policy numbering style */
 .content > ol.policy-numbering {
     counter-reset: section;
     list-style-type: none;
@@ -30,7 +30,7 @@
         }
     }
 
-    // Reset the counter for nested lists
+    /* Reset the counter for nested lists */
     ol {
         counter-reset: section;
         list-style-type: none;
@@ -52,7 +52,8 @@
             content: counters(section, ".") " ";
         }
     }
-    // Avoid incremeting ul bullets
+
+    /* Avoid incremeting ul bullets */
     ul {
         counter-reset: section;
         margin-left: 1rem;
@@ -100,7 +101,7 @@
         }
     }
 
-    // Third level
+    /* Third level */
     ol li ol li {
         padding-left: 4rem;
         margin-top: 1rem;
@@ -109,7 +110,7 @@
         list-style-type: none;
     }
 
-    // Fourth level
+    /* Fourth level */
     ol li ol li ol li {
         padding-left: 4rem;
         margin-top: 1rem;

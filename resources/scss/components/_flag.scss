@@ -34,7 +34,7 @@
                 @apply row relative;
             }
 
-            // Pointy bottom
+            /* Pointy bottom */
             &::after {
                 @apply bg-gold absolute duration-500;
 

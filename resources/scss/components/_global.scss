@@ -1,4 +1,4 @@
-// Restricts the embedded font from combining two characters like "fi"
+/* Restricts the embedded font from combining two characters like "fi" */
 html {
     font-feature-settings: "liga" 0;
     text-rendering: optimizelegibility;
@@ -8,7 +8,7 @@ body {
     @apply min-h-screen flex flex-col;
 }
 
-// Links outside of content aren't underlined
+/* Links outside of content aren't underlined */
 a {
     @apply text-green no-underline;
 }
@@ -27,12 +27,12 @@ p {
     @apply mb-4;
 }
 
-// To maintain consistent spacing when using paragraphs inside of grid
+/* To maintain consistent spacing when using paragraphs inside of grid */
 .grid p:last-of-type {
     @apply mb-0;
 }
 
-// Tailwind preflight sets this to .5 which isn't ADA compliant
+/* Tailwind preflight sets this to .5 which isn't ADA compliant */
 input::placeholder,
 textarea::placeholder {
     @apply opacity-100 text-gray-500;
@@ -77,8 +77,9 @@ figure {
     }
 }
 
-// Images remain at their specified width
-// Text appears above and below for small
+/* Images remain at their specified width */
+
+/* Text appears above and below for small */
 @media (max-width: theme('screens.mt')) {
     figure {
         @apply block my-0 mx-auto;
@@ -92,7 +93,7 @@ figure {
     }
 }
 
-// Floated images can only be 50% of column width for readability
+/* Floated images can only be 50% of column width for readability */
 @screen mt {
     img {
         &[style*="float:right"],
@@ -110,7 +111,7 @@ figure {
     }
 }
 
-// Firefox uses the outline focus color as the text color. Since our overall background is white we need to change it.
+/* Firefox uses the outline focus color as the text color. Since our overall background is white we need to change it. */
 a.text-white:-moz-focusring {
     outline-color: #000;
 }
@@ -124,7 +125,7 @@ pre,
     @apply inline-block bg-gray-100 overflow-x-scroll text-sm p-2 my-2 rounded max-w-full;
 }
 
-// Keep footer at the bottom of the browser
+/* Keep footer at the bottom of the browser */
 footer {
     @apply mt-auto;
 }
