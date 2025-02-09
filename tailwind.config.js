@@ -87,6 +87,10 @@ module.exports = {
             pattern: /col-start(-[1-4])?/,
             variants: ['md', 'lg', 'xl'],
         },
+        {
+            pattern: /colspan-([1-12])?/,
+            variants: [,'md','lg','xl','2xl','mt'],
+        },
         '/form_responses/',
     ],
     theme: {
