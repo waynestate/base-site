@@ -3,7 +3,7 @@ import 'accordion/src/accordion.js';
 (function() {
     "use strict";
 
-    document.querySelectorAll('.accordion').forEach(function(item) {
+    document.querySelectorAll('ul.accordion').forEach(function(item) {
         let accordion = new Accordion(item, {
             onToggle: function(target){
                 // Remove IDs from content folds so the browser doesn't jump around when opening an accordion item
