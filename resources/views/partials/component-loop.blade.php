@@ -7,27 +7,11 @@
 --}}
 
 @if(!empty($base['components']))
-    <div class="grid md:grid-cols-modular {{ $base['components']['layout-config']['component']['gap'] ?? '' }} {{ $base['components']['layout-config']['component']['margin'] ?? '' }}">
+    <div class="flex flex-wrap items-start mt:justify-center gap-y-16">
         @foreach($base['components'] as $componentName => $component)
             @if(!empty($component['data']) && !empty($component['component']['filename']) && \View::exists('components/'.$component['component']['filename']))
-                <section id="{{ Str::slug($componentName) }}" 
-                    class="modular-{{ $component['component']['filename']}} 
-                    {{ str_contains($component['component']['filename'], 'column') 
-                        ? 'col-span-2 '.(($loop->iteration % 2 === 0) ? 'bg-gold' : 'bg-green-300')
-                        : 'col-span-2 md:col-span-full bg-gold-100' }} 
-                        px-container
-                        py-8
-                        md:grid md:grid-cols-subgrid 
-                        place-content-start
-                    {{ $component['component']['sectionClass'] ?? '' }}" 
-                    @if(!empty($component['component']['backgroundImageURL'])) style="background-image:url('{{ $component['component']['backgroundImageUrl'] }}')"@endif
-                >
-                    <div class="component__container {{ $component['component']['containerClass'] ?? '' }} 
-                        {{ str_contains($component['component']['filename'], 'column') 
-                            ? 'grid-content '.(($loop->iteration % 2 === 0) ? 'bg-gold-100' : 'bg-green-100')
-                            : 'col-span-full bg-gold' }} 
-                        relative
-                    ">
+                <section id="{{ Str::slug($componentName) }}" class="{{ !empty($component['component']['sectionClass']) ? $component['component']['sectionClass'] : $component['component']['filename'] }} w-full {{ !empty($component['component']['column-span']) ? 'mt:colspan-'.$component['component']['column-span'] : '' }} {{ ($loop->iteration % 2 === 0) ? 'xbg-gold-100' : 'xbg-green-100' }} relative">
+                    <div class="component__container {{ strpos($component['component']['filename'], 'page-content') !== 0 ? 'px-container' : '' }}">
                         @if(!empty($component['component']['heading']))
                             @include('partials/heading', ['heading' => $component['component']['heading'], 'headingClass' => 'mt-0 '.($component['component']['headingClass'] ?? ''), 'headingLevel' => !empty($component['component']['headingLevel']) ? $component['component']['headingLevel'] : 'h2'])
                         @endif
