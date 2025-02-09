@@ -6,14 +6,15 @@ use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Faker\Factory;
+use Factories\AccordionItems;
+use Factories\ArticleMeta;
+use Factories\ArticleComponent;
+use Factories\Button;
+use Factories\Event;
+use Factories\GenericPromo;
 use Factories\HeroImage;
 use Factories\Icon;
 use Factories\Spotlight;
-use Factories\Button;
-use Factories\GenericPromo;
-use Factories\ArticleMeta;
-use Factories\ArticleComponent;
-use Factories\Event;
 
 class FullWidthController extends Controller
 {
@@ -26,14 +27,14 @@ class FullWidthController extends Controller
     }
 
     /**
-     * Display the full width hero view.
+     * Display the full width template.
      */
     public function index(Request $request): View
     {
         $request->data['base']['show_site_menu'] = false;
 
         $components = [
-            'hero_1' => [
+            'hero' => [
                 'data' => app(HeroImage::class)->create(1, false, [
                     'option' => 'Text overlay',
                     'title' => 'Your future <em>starts here</em>',
@@ -55,40 +56,21 @@ class FullWidthController extends Controller
                 ],
             ],
 
-            'icons_row_2' => [
-                'data' => app(Icon::class)->create(4, false, [
-                    'link' => '',
-                    'description' => '',
-                ]),
-                'component' => [
-                    'heading' => 'Facts',
-                    'filename' => 'icons-top-row',
-                    'columns' => 4,
-                ],
-            ],
-
-            'button_row_1' => [
-                'data' => app(Button::class)->create(3, false, [
-                ]),
-                'component' => [
-                    'heading' => 'Button row',
-                    'filename' => 'button-row',
-                ],
-            ],
-
-            'catalog_1' => [
+            'catalog_3' => [
                 'data' => app(GenericPromo::class)->create(3, false, [
+                    'relative_url' => '/styleguide/image/600x450',
                     'description' => '',
                 ]),
                 'component' => [
-                    'heading' => 'Three column catalog',
+                    'heading' => 'Catalog',
                     'filename' => 'catalog',
                     'columns' => '3',
                     'showDescription' => false,
+                    'sectionClass' => 'bg-gray-100 py-10',
                 ],
             ],
 
-            'content_row_1' => [
+            'promo-row' => [
                 'data' => app(GenericPromo::class)->create(1, false, [
                     'title' => 'Content row',
                     'description' => '<p>Example placement of an introductory paragraph describing the information laid out in the accordion below.</p><p>This is a separate promo group using the "content row" component. Below this is a different promo group with the accordion data and no component heading specified.</p>',
@@ -98,10 +80,14 @@ class FullWidthController extends Controller
                 ],
             ],
 
-            'accordion_1' => [
-                'data' => app(GenericPromo::class)->create(4, false),
+            'heading-1' => [
+                'data' => [
+                    0 => [
+                        'heading' => 'My example heading',
+                    ],
+                ],
                 'component' => [
-                    'filename' => 'accordion',
+                    'filename' => 'heading',
                 ],
             ],
 
@@ -115,6 +101,15 @@ class FullWidthController extends Controller
                     'heading' => '',
                     'filename' => 'promo-column',
                     'gradientOverlay' => true,
+                    'column-span' => '6',
+                ],
+            ],
+
+            'accordion_1' => [
+                'data' => app(AccordionItems::class)->create(4, false),
+                'component' => [
+                    'filename' => 'accordion',
+                    'column-span' => '6',
                 ],
             ],
 
@@ -124,14 +119,7 @@ class FullWidthController extends Controller
                 'component' => [
                     'heading' => 'Featured news',
                     'filename' => 'news-row',
-                ],
-            ],
-
-            'events_column' => [
-                'data' => app(Event::class)->create(4, false),
-                'component' => [
-                    'heading' => 'Special events',
-                    'filename' => 'events-column',
+                    'sectionClass' => 'bg-gray-100 py-10',
                 ],
             ],
 
@@ -145,6 +133,39 @@ class FullWidthController extends Controller
                     'heading' => '',
                     'filename' => 'promo-column',
                     'gradientOverlay' => true,
+                    'column-span' => '5',
+                ],
+            ],
+
+            'events_column' => [
+                'data' => app(Event::class)->create(4, false),
+                'component' => [
+                    'heading' => 'Special events',
+                    'filename' => 'events-column',
+                    'column-span' => '7'
+                ],
+            ],
+
+            'icons_row_2' => [
+                'data' => app(Icon::class)->create(5, false, [
+                    'link' => '',
+                    'description' => '',
+                ]),
+                'component' => [
+                    'heading' => 'Icons top row',
+                    'filename' => 'icons-top-row',
+                    'columns' => 5,
+                    'headingClass' => 'divider-gold mb-8',
+                ],
+            ],
+
+            'spotlight_row' => [
+                'data' => app(Spotlight::class)->create(1, false),
+                'component' => [
+                    'heading' => 'Spotlight',
+                    'filename' => 'spotlight-row',
+                    'showDescription' => true,
+                    'sectionClass' => 'bg-gold-100 py-10'
                 ],
             ],
 
@@ -152,42 +173,12 @@ class FullWidthController extends Controller
                 'data' => app(GenericPromo::class)->create(2, false, [
                 ]),
                 'component' => [
-                    'heading' => 'Single column catalog',
+                    'heading' => 'One column catalog',
                     'filename' => 'catalog',
                     'columns' => '1',
                     'showDescription' => false,
                     'imageSize' => 'small',
-                ],
-            ],
-
-            'spotlight_column' => [
-                'data' => app(Spotlight::class)->create(2, false),
-                'component' => [
-                    'heading' => 'Spotlight',
-                    'filename' => 'spotlight-column',
-                    'showDescription' => true,
-                ],
-            ],
-
-            'promo_row_1' => [
-                'data' => app(GenericPromo::class)->create(2, false),
-                'component' => [
-                    'heading' => 'Featured section',
-                    'filename' => 'promo-row',
-                    'imagePosition' => 'alternate',
-                ],
-            ],
-
-            'promo_column_3' => [
-                'data' => app(GenericPromo::class)->create(3, false, [
-                    'relative_url' => '/styleguide/image/600x450',
-                    'description' => '',
-                ]),
-                'component' => [
-                    'heading' => 'Highlights',
-                    'filename' => 'catalog',
-                    'columns' => '3',
-                    'showDescription' => false,
+                    'column-span' => 8,
                 ],
             ],
 
@@ -197,8 +188,20 @@ class FullWidthController extends Controller
                     'excerpt' => '',
                 ]),
                 'component' => [
-                    'heading' => 'Button column',
+                    'heading' => 'Resrouces: Button column',
                     'filename' => 'button-column',
+                    'column-span' => '4',
+                    'headingLevel' => 'h4'
+                ],
+            ],
+
+            'promo_row_1' => [
+                'data' => app(GenericPromo::class)->create(2, false),
+                'component' => [
+                    'heading' => 'Promo row alternate',
+                    'filename' => 'promo-row',
+                    'imagePosition' => 'alternate',
+                    'sectionClass' => 'bg-gray-100 py-10',
                 ],
             ],
 
@@ -212,7 +215,19 @@ class FullWidthController extends Controller
                 ]),
                 'component' => [
                     'filename' => 'promo-row',
-                    'columns' => '2',
+                    'heading' => 'Promo row',
+                    'column-span' => 10,
+                    'headingClass' => 'divider-gold',
+                ],
+            ],
+
+            'button_row_1' => [
+                'data' => app(Button::class)->create(3, false, [
+                ]),
+                'component' => [
+                    'heading' => 'Button row',
+                    'filename' => 'button-row',
+                    'sectionClass' => 'bg-gold-100 py-10',
                 ],
             ],
         ];
