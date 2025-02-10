@@ -47,19 +47,47 @@
             </thead>
             <tbody>
                 <tr>
-                    <td class="font-bold">id</td>
-                    <td>Promo group ID, News application ID, or Events site ID</td>
-                    <td><code class="border border-gray-300 mt-2">"id":00000</code></td>
+                    <td class="font-bold">cal_name</td>
+                    <td>
+The events.wayne.edu relative path to your calendar that "more events" links to.<br />
+Defaults to the site's selected calendar.<br />
+Events components only.
+                    </td>
+                    <td><code class="border border-gray-300 mt-2">"cal_name":"main/"</code></td>
                 </tr>
                 <tr>
-                    <td class="font-bold">column-span</td>
+                    <td class="font-bold">columnSpan</td>
                     <td>Width of the component; 1-12. All adjacent columns should equal 12; 6+6, 5+7, 4+8, 4+4+4.<br />3=25%, 4=33%, 6=50%<br /></td>
-                    <td><code class="border border-gray-300 mt-2">"column-span":6</code></td>
+                    <td><code class="border border-gray-300 mt-2">"columnSpan":6</code></td>
                 </tr>
                 <tr>
                     <td class="font-bold">columns</td>
                     <td>Number of columns to display.<br /> Used with catalog, button row, icons row, events row, news row.</td>
                     <td><code class="border border-gray-300 mt-2">"columns":3</code></td>
+                </tr>
+                <tr>
+                    <td class="font-bold">config</td>
+                    <td>Promo item configuration: "page_id" will show items per-page, "limit:1" will display one item, "randomize" will shuffle the order. <a href="https://github.com/waynestate/parse-promos"><br />Promotion config info on github.</a></td>
+                    <td><code class="border border-gray-300 mt-2">"config":"page_id"</code>
+                    <code class="border border-gray-300 mt-2">"config":"page_id|randomize|limit:1"</code></td>
+                </tr>
+                <tr>
+                    <td class="font-bold">featured</td>
+                    <td>
+Display only the articles that have a specific featured image uploaded in the news manager.<br />
+True or false; all articles shown by default.<br />
+News row and events only.
+                    </td>
+                    <td><code class="border border-gray-300 mt-2">"featured":true</code></td>
+                </tr>
+                <tr>
+                    <td class="font-bold">gradientOverlay</td>
+                    <td>
+Moves the title, excerpt and/description on top of the image with a gradient for contrast.<br />
+True or false; false is default.<br />
+Promo row, promo column, and catalog components only.
+                    </td>
+                    <td><code class="border border-gray-300 mt-2">"gradientOverlay":true</code></td>
                 </tr>
                 <tr>
                     <td class="font-bold">heading</td>
@@ -77,56 +105,9 @@
                     <td><code class="border border-gray-300 mt-2">"headingLevel":"h3"</code></td>
                 </tr>
                 <tr>
-                    <td class="font-bold">config</td>
-                    <td>Promo item configuration: "page_id" will show items per-page, "limit:1" will display one item, "randomize" will shuffle the order. <a href="https://github.com/waynestate/parse-promos"><br />Promotion config info on github.</a></td>
-                    <td><code class="border border-gray-300 mt-2">"config":"page_id"</code>
-                    <code class="border border-gray-300 mt-2">"config":"page_id|randomize|limit:1"</code></td>
-                </tr>
-                <tr>
-                    <td class="font-bold">singlePromoView</td>
-                    <td>
-Creates a link to page of the promo item.<br />
-True or false; true will override the promotion's link field if it is set.<br />
-Use with the catalog, spoltight, promo row, promo column, and icon components.
-                    </td>
-                    <td><code class="border border-gray-300 mt-2">"singlePromoView":true</code></td>
-                </tr>
-                <tr>
-                    <td class="font-bold">showExcerpt</td>
-                    <td>
-Show or hide the promo's excerpt.<br />
-True or false; true is default.<br />
-Use with the catalog, spoltight, promo row, promo column, and icon components.
-                    </td>
-                    <td><code class="border border-gray-300 mt-2">"showExcerpt":false</code></td>
-                </tr>
-                <tr>
-                    <td class="font-bold">showDescription</td>
-                    <td>
-Show or hide the promo's description.<br />
-True or false; true is default.<br />
-Commonly used in conjunction with "singlePromoView" where the description is hidden from the catalog but displayed on the detailed promo page.<br />
-Use with the catalog, spoltight, promo row, promo column, and icon components.
-                    </td>
-                    <td><code class="border border-gray-300 mt-2">"showDescription":false</code></td>
-                </tr>
-                <tr>
-                    <td class="font-bold">gradientOverlay</td>
-                    <td>
-Moves the title, excerpt and/description on top of the image with a gradient for contrast.<br />
-True or false; false is default.<br />
-Promo row, promo column, and catalog components only.
-                    </td>
-                    <td><code class="border border-gray-300 mt-2">"gradientOverlay":true</code></td>
-                </tr>
-                <tr>
-                    <td class="font-bold">groupByOptions</td>
-                    <td>
-Group promotion items by the options in the options dropdown.<br />
-True or false; false is default.<br />
-Catalog component only.
-                    </td>
-                    <td><code class="border border-gray-300 mt-2">"groupByOptions":true</code></td>
+                    <td class="font-bold">id</td>
+                    <td>Promo group ID, News application ID, or Events site ID</td>
+                    <td><code class="border border-gray-300 mt-2">"id":00000</code></td>
                 </tr>
                 <tr>
                     <td class="font-bold">imagePosition</td>
@@ -172,13 +153,32 @@ News components only.
                     <td><code class="border border-gray-300 mt-2">"news_route":"/facultynews"</code></td>
                 </tr>
                 <tr>
-                    <td class="font-bold">featured</td>
+                    <td class="font-bold">showDescription</td>
                     <td>
-Display only the articles that have a specific featured image uploaded in the news manager.<br />
-True or false; all articles shown by default.<br />
-News row and events only.
+Show or hide the promo's description.<br />
+True or false; true is default.<br />
+Commonly used in conjunction with "singlePromoView" where the description is hidden from the catalog but displayed on the detailed promo page.<br />
+Use with the catalog, spoltight, promo row, promo column, and icon components.
                     </td>
-                    <td><code class="border border-gray-300 mt-2">"featured":true</code></td>
+                    <td><code class="border border-gray-300 mt-2">"showDescription":false</code></td>
+                </tr>
+                <tr>
+                    <td class="font-bold">showExcerpt</td>
+                    <td>
+Show or hide the promo's excerpt.<br />
+True or false; true is default.<br />
+Use with the catalog, spoltight, promo row, promo column, and icon components.
+                    </td>
+                    <td><code class="border border-gray-300 mt-2">"showExcerpt":false</code></td>
+                </tr>
+                <tr>
+                    <td class="font-bold">singlePromoView</td>
+                    <td>
+Creates a link to page of the promo item.<br />
+True or false; true will override the promotion's link field if it is set.<br />
+Use with the catalog, spoltight, promo row, promo column, and icon components.
+                    </td>
+                    <td><code class="border border-gray-300 mt-2">"singlePromoView":true</code></td>
                 </tr>
                 <tr>
                     <td class="font-bold">topics</td>
@@ -188,15 +188,6 @@ All topics shown by default.<br />
 News components only.
                     </td>
                     <td><code class="border border-gray-300 mt-2">"topics":[76, 4]</code></td>
-                </tr>
-                <tr>
-                    <td class="font-bold">cal_name</td>
-                    <td>
-The events.wayne.edu relative path to your calendar that "more events" links to.<br />
-Defaults to the site's selected calendar.<br />
-Events components only.
-                    </td>
-                    <td><code class="border border-gray-300 mt-2">"cal_name":"main/"</code></td>
                 </tr>
             </tbody>
         </table>
