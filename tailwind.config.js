@@ -129,6 +129,10 @@ module.exports = {
             spacing: {
                 'container': 'max(1rem, (100% - 73rem) / 2)',
                 'container-lg': 'max(1rem, (100% - 73rem) / 2)',
+                'gutter': '1rem',
+                'gutter-md': '1.5rem',
+                'gutter-lg': '3rem',
+                'gutter-xl': '4rem',
             },
             margin: {
                 17: '4.25rem',
