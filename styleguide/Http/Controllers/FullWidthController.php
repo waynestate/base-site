@@ -5,6 +5,7 @@ namespace Styleguide\Http\Controllers;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Contracts\Repositories\ModularPageRepositoryContract;
 use Faker\Factory;
 use Factories\AccordionItems;
 use Factories\ArticleMeta;
@@ -21,9 +22,13 @@ class FullWidthController extends Controller
     /**
      * Construct the controller.
      */
-    public function __construct(Factory $faker)
+    public function __construct(
+        Factory $faker,
+        ModularPageRepositoryContract $components
+    )
     {
         $this->faker['faker'] = $faker->create();
+        $this->components = $components;
     }
 
     /**
@@ -53,6 +58,7 @@ class FullWidthController extends Controller
                 'component' => [
                     'filename' => 'icons-row',
                     'columns' => 2,
+                    'backgroundImageUrl' => '/styleguide/image/3200x1140',
                 ],
             ],
 
@@ -101,7 +107,7 @@ class FullWidthController extends Controller
                     'heading' => '',
                     'filename' => 'promo-column',
                     'gradientOverlay' => true,
-                    'column-span' => '6',
+                    'columnSpan' => '6',
                 ],
             ],
 
@@ -109,7 +115,7 @@ class FullWidthController extends Controller
                 'data' => app(AccordionItems::class)->create(4, false),
                 'component' => [
                     'filename' => 'accordion',
-                    'column-span' => '6',
+                    'columnSpan' => '6',
                 ],
             ],
 
@@ -133,7 +139,7 @@ class FullWidthController extends Controller
                     'heading' => '',
                     'filename' => 'promo-column',
                     'gradientOverlay' => true,
-                    'column-span' => '5',
+                    'columnSpan' => '5',
                 ],
             ],
 
@@ -142,7 +148,7 @@ class FullWidthController extends Controller
                 'component' => [
                     'heading' => 'Special events',
                     'filename' => 'events-column',
-                    'column-span' => '7'
+                    'columnSpan' => '7'
                 ],
             ],
 
@@ -178,7 +184,7 @@ class FullWidthController extends Controller
                     'columns' => '1',
                     'showDescription' => false,
                     'imageSize' => 'small',
-                    'column-span' => 8,
+                    'columnSpan' => 8,
                 ],
             ],
 
@@ -190,7 +196,7 @@ class FullWidthController extends Controller
                 'component' => [
                     'heading' => 'Resrouces: Button column',
                     'filename' => 'button-column',
-                    'column-span' => '4',
+                    'columnSpan' => '4',
                     'headingLevel' => 'h4'
                 ],
             ],
@@ -216,7 +222,7 @@ class FullWidthController extends Controller
                 'component' => [
                     'filename' => 'promo-row',
                     'heading' => 'Promo row',
-                    'column-span' => 10,
+                    'columnSpan' => 10,
                     'headingClass' => 'divider-gold',
                 ],
             ],
@@ -228,6 +234,8 @@ class FullWidthController extends Controller
                     'heading' => 'Button row',
                     'filename' => 'button-row',
                     'sectionClass' => 'bg-gold-100 py-10',
+                    'backgroundImageUrl' => '/styleguide/image/3200x400',
+                    'sectionStyle' => 'padding-top:6rem; padding-bottom: 6rem;',
                 ],
             ],
         ];
@@ -250,6 +258,9 @@ class FullWidthController extends Controller
         }
 
         $heroClass['heroClass'] = 'full-width-styleguide-hero';
+
+        $components = $this->components->componentClasses($components);
+        $components = $this->components->componentStyles($components);
 
         $request->data['base']['components'] = $components;
 

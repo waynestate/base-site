@@ -70,6 +70,10 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
         $components = $this->configureComponents($rawComponents, $promos, $data);
 
+        $components = $this->componentClasses($components);
+
+        $components = $this->componentStyles($components);
+
         return $components;
     }
 
@@ -223,6 +227,9 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 $modularComponents[$name]['data'] = $articles['articles']['data'] ?? [];
                 $modularComponents[$name]['meta'] = $articles['articles']['meta'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
+            } elseif (Str::startsWith($name, 'layout-config')) {
+                dump($name);
+
             } elseif (Str::startsWith($name, 'page-content') || Str::startsWith($name, 'heading')) {
                 // If there's JSON but no news, events or promo data, assign the component array as data
                 // Page-content and heading components
@@ -275,6 +282,73 @@ class ModularPageRepository implements ModularPageRepositoryContract
         }
 
         return $data;
+    }
+
+    public function componentClasses($components)
+    {
+        $columnSpan = '';
+        $sectionClass = '';
+        $background = '';
+
+        $expected_classes = [
+            'section',
+            'size',
+            'background',
+        ];
+
+        foreach($components as $componentName => $component) {
+            if (!empty($component['component']['sectionClass'])) {
+                $classes[$componentName]['section'] = $component['component']['sectionClass'];
+            } else {
+                $classes[$componentName]['section'] = $component['component']['filename'];
+            }
+
+            if(!empty($component['component']['columnSpan'])) {
+                $classes[$componentName]['size'] = 'px-4 mt:colspan-'.$component['component']['columnSpan'];
+            } else {
+                $classes[$componentName]['size'] = 'px-container';
+            }
+
+            if(!empty($component['component']['backgroundImageUrl'])) {
+                $classes[$componentName]['background'] = 'bg-cover bg-top';
+            }
+
+            // Forcing a space delimeter
+            foreach($classes[$componentName] as $option => $class) {
+                if(in_array($option, $expected_classes)) {
+                    $classes[$componentName][] = $class;
+                    $components[$componentName]['component']['componentClasses'] = implode(' ', $classes[$componentName]);
+                }
+            }
+
+        }
+
+        return $components;
+    }
+
+    public function componentStyles($components)
+    {
+        $expected_styles = [
+            'backgroundImageUrl',
+            'sectionStyle',
+        ];
+
+        foreach($components as $componentName => $component) {
+
+            if(!empty($component['component']['backgroundImageUrl'])) {
+                $styles[$componentName]['backgroundImageUrl'] = "background-image:url('".$component['component']['backgroundImageUrl']."');";
+            }
+
+            // Forcing a space delimeter
+            foreach($component['component'] as $option => $style) {
+                if(in_array($option, $expected_styles)) {
+                    $styles[$componentName][] = $style;
+                    $components[$componentName]['component']['componentStyle'] = "style=\"".implode(' ', $styles[$componentName])."\"";
+                }
+            }
+        }
+
+        return $components;
     }
 
     /**
