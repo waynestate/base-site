@@ -230,6 +230,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
             } elseif (Str::startsWith($name, 'layout-config')) {
                 // Take layout config out of the loop
                 // Maybe define layoutClass
+                // showSiteMenu
                 dump($name);
 
             } elseif (Str::startsWith($name, 'page-content') || Str::startsWith($name, 'heading')) {
