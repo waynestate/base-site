@@ -228,6 +228,8 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 $modularComponents[$name]['meta'] = $articles['articles']['meta'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
             } elseif (Str::startsWith($name, 'layout-config')) {
+                // Take layout config out of the loop
+                // Maybe define layoutClass
                 dump($name);
 
             } elseif (Str::startsWith($name, 'page-content') || Str::startsWith($name, 'heading')) {
@@ -286,10 +288,6 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
     public function componentClasses($components)
     {
-        $columnSpan = '';
-        $sectionClass = '';
-        $background = '';
-
         $expected_classes = [
             'section',
             'size',
