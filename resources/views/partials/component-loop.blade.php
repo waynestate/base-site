@@ -18,6 +18,7 @@
                             @include('components/'.$component['component']['filename'], ['data' => $component['data'], 'component' => $component['component']])
                         @endif
                 </section>
+                {{-- <hr class="block w-full -my-gutter-xl" /> --}}
             @endif
         @endforeach
     </div>

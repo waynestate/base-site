@@ -100,15 +100,19 @@ class ModularPageRepository implements ModularPageRepositoryContract
                     $components[$name] = json_decode($value, true);
                     if (!empty($components[$name]['config'])) {
                         $config = explode('|', $components[$name]['config']);
+
                         // Add youtube
                         if (strpos($components[$name]['config'], 'youtube') === false) {
                             array_push($config, 'youtube');
                         }
+
                         foreach ($config as $key => $value) {
+                            // Assign selected page values
                             if (Str::startsWith($value, 'page_id')) {
                                 $config[$key] = 'page_id:'.$data['page']['id'];
                             }
 
+                            // Preserve the array
                             if (Str::startsWith($value, 'first')) {
                                 unset($config[$key]);
                             }
@@ -231,6 +235,8 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 // Take layout config out of the loop
                 // Maybe define layoutClass
                 // showSiteMenu
+                // showSiteTitle
+                // showPageContent
                 dump($name);
 
             } elseif (Str::startsWith($name, 'page-content') || Str::startsWith($name, 'heading')) {
@@ -293,33 +299,41 @@ class ModularPageRepository implements ModularPageRepositoryContract
             'section',
             'size',
             'background',
+            'gutter',
         ];
 
-        foreach($components as $componentName => $component) {
+        foreach ($components as $componentName => $component) {
             if (!empty($component['component']['sectionClass'])) {
                 $classes[$componentName]['section'] = $component['component']['sectionClass'];
             } else {
-                $classes[$componentName]['section'] = $component['component']['filename'];
+                $classes[$componentName]['section'] = $component['component']['filename'] ?? '';
             }
 
-            if(!empty($component['component']['columnSpan'])) {
+            if (!empty($component['component']['columnSpan'])) {
                 $classes[$componentName]['size'] = 'px-4 mt:colspan-'.$component['component']['columnSpan'];
             } else {
                 $classes[$componentName]['size'] = 'px-container';
             }
 
-            if(!empty($component['component']['backgroundImageUrl'])) {
+            if (!empty($component['component']['backgroundImageUrl'])) {
                 $classes[$componentName]['background'] = 'bg-cover bg-top';
             }
 
+            if (!Str::contains($componentName, 'heading')) {
+                $classes[$componentName]['gutter'] = '-mb-gutter-xl';
+            }
+
+            /*
+            {{ $base['layout-config']['layoutClass'] ?? 'gap-y-gutter-xl' }}
+             */
+
             // Forcing a space delimeter
-            foreach($classes[$componentName] as $option => $class) {
-                if(in_array($option, $expected_classes)) {
+            foreach ($classes[$componentName] as $option => $class) {
+                if (in_array($option, $expected_classes)) {
                     $classes[$componentName][] = $class;
                     $components[$componentName]['component']['componentClasses'] = implode(' ', $classes[$componentName]);
                 }
             }
-
         }
 
         return $components;
@@ -332,15 +346,15 @@ class ModularPageRepository implements ModularPageRepositoryContract
             'sectionStyle',
         ];
 
-        foreach($components as $componentName => $component) {
+        foreach ($components as $componentName => $component) {
 
-            if(!empty($component['component']['backgroundImageUrl'])) {
+            if (!empty($component['component']['backgroundImageUrl'])) {
                 $styles[$componentName]['backgroundImageUrl'] = "background-image:url('".$component['component']['backgroundImageUrl']."');";
             }
 
             // Forcing a space delimeter
-            foreach($component['component'] as $option => $style) {
-                if(in_array($option, $expected_styles)) {
+            foreach ($component['component'] as $option => $style) {
+                if (in_array($option, $expected_styles)) {
                     $styles[$componentName][] = $style;
                     $components[$componentName]['component']['componentStyle'] = "style=\"".implode(' ', $styles[$componentName])."\"";
                 }

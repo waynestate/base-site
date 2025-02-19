@@ -19,10 +19,10 @@ class PromoRepository extends Repository
      */
     public function __construct(
         Factory $faker,
-        ModularPageRepositoryContract $modular
+        ModularPageRepositoryContract $components
     ) {
         $this->faker = $faker->create();
-        $this->modular = $modular;
+        $this->components = $components;
     }
 
     /**
@@ -45,6 +45,8 @@ class PromoRepository extends Repository
         |     '\Repositories\PromoRepository@getRequestData' => '\Repositories\PromosExtendedRepository@getRequestData'
         |
         */
+
+        //$promos = parent::getRequestData($data);
 
         // Define the pages that have under menu promos: page_id => quanity
         $under_menu_page_ids = [
@@ -152,12 +154,34 @@ class PromoRepository extends Repository
         })
         ->toArray();
 
-        return [
+
+        dump('promo repository');
+
+        // Add modular components into global data
+        $components = $this->components->getModularComponents($data);
+
+        // Set hero from components
+        $hero = collect($components)->reject(function ($data, $componentName) {
+            return !str_contains($componentName, 'hero');
+        })->toArray();
+
+        if (!empty($hero)) {
+            $hero_key = array_key_first($hero);
+            $hero = $components[$hero_key]['data'];
+            config(['base.hero_full_controllers' => [$data['page']['controller']]]);
+            unset($components[$hero_key]);
+        }
+
+        $promos =  merge([
             'contact' => app(FooterContact::class)->create(1),
             'social' => $social,
             'hero' => $hero,
             'under_menu' => $under_menu,
-        ];
+            'components' => $components,
+        ]);
+        dump($promos);
+
+        return $promos;
     }
 
     /**

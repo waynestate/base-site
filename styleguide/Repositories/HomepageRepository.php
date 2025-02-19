@@ -20,6 +20,7 @@ class HomepageRepository extends Repository
      */
     public function getHomepagePromos(array $data): array
     {
+        dump('homepage repository');
         $promos = [
             'homepageItems' => app(\Factories\GenericPromo::class)->create(5, false),
             'components' => [
