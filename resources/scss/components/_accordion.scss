@@ -4,7 +4,7 @@
     max-mt:w-full and max-[780px]:w-full aren't working
 */
 section.accordion {
-    @media (width: <= 780px) {
+    @media (width <= 780px) {
         @apply w-full;
     }
 }

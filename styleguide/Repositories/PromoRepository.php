@@ -56,6 +56,7 @@ class PromoRepository extends Repository
         // Only pull under_menu promos if they match the page_ids that are specified
         $under_menu = !empty($under_menu_page_ids[$data['page']['id']]) ? app(Button::class)->create($under_menu_page_ids[$data['page']['id']]) : null;
 
+// TODO move all this to a styleguide hero repository
         $hero_option = $this->faker->randomElement(['Text Overlay', 'SVG Overlay', 'Half', 'Logo Overlay', '']);
 
         // Define the pages that have hero images
@@ -132,6 +133,7 @@ class PromoRepository extends Repository
                 'base.hero_full_controllers' => ['HeroController'],
             ]);
         }
+// End hero repository data
 
         // Get all the social icons
         $social = collect([
@@ -155,10 +157,14 @@ class PromoRepository extends Repository
         ->toArray();
 
 
+// Start components
         dump('promo repository');
 
         // Add modular components into global data
         $components = $this->components->getModularComponents($data);
+
+        // Set some modular-layout-config data?
+        //$request->data['base']['show_site_menu'] = false;
 
         // Set hero from components
         $hero = collect($components)->reject(function ($data, $componentName) {
@@ -172,16 +178,17 @@ class PromoRepository extends Repository
             unset($components[$hero_key]);
         }
 
-        $promos =  merge([
+        $global_promos =  merge([
             'contact' => app(FooterContact::class)->create(1),
             'social' => $social,
             'hero' => $hero,
             'under_menu' => $under_menu,
             'components' => $components,
         ]);
-        dump($promos);
 
-        return $promos;
+        dump($global_promos);
+
+        return $global_promos;
     }
 
     /**

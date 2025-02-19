@@ -5,8 +5,6 @@ namespace Styleguide\Pages;
 use Factories\Page as PageFactory;
 use Factories\ArticleMeta;
 
-//TODO move all factories to be extended from Page
-
 class FullWidth extends Page
 {
     /** {@inheritdoc} **/
@@ -38,31 +36,40 @@ class FullWidth extends Page
         ]);
 
         $components = [
+            // TODO make this work and  add it to styleguide menu
+            /*
+            'modular-layout-config' => [
+                'component' => [
+                    'layoutClass' => '',
+                    'pageClass' => '',
+                ],
+            ], 
+             */
+            'modular-hero' => [
+                'component' => [
+                    'id' => $this->faker->numberBetween(1000, 10000),
+                    'filename' => 'hero',
+                    'heroClass' => 'full-width-styleguide-hero', //TODO make this work
+                ],
+            ],
             'modular-spotlight' => [
                 'component' => [
                     'id' => $this->faker->numberBetween(1000, 10000),
                     'filename' => 'spotlight',
                     'heading' => 'Spotlight',
                     'showDescription' => true,
-                    'sectionClass' => 'bg-gold-100 py-10'
+                    'sectionClass' => 'bg-gold-100 py-10',
                 ],
             ],
             'modular-icons-row-1' => [
                 'component' => [
                     'id' => $this->faker->numberBetween(1000, 10000),
                     'filename' => 'icons-row',
-                    'limit' => 6,
+                    'limit' => 6, // TODO extract this from 'config' or implode specified values
                     'columns' => 2,
                     'backgroundImageUrl' => '/styleguide/image/3200x1140',
                 ],
             ],
-            'modular-hero' => [
-                'component' => [
-                    'id' => $this->faker->numberBetween(1000, 10000),
-                    'filename' => 'hero',
-                ],
-            ],
-
             'modular-catalog-3' => [
                 'component' => [
                     'id' => $this->faker->numberBetween(1000, 10000),
@@ -79,8 +86,7 @@ class FullWidth extends Page
                 'component' => [
                     'id' => $this->faker->numberBetween(1000, 10000),
                     'filename' => 'content-row',
-                    'limit' => 4,
-                    'heading' => 'Promo row',
+                    'heading' => 'Content row',
                 ],
             ],
 
@@ -98,7 +104,6 @@ class FullWidth extends Page
                 'component' => [
                     'id' => $this->faker->numberBetween(1000, 10000),
                     'filename' => 'promo-column',
-                    'limit' => 6,
                     'heading' => '',
                     'gradientOverlay' => true,
                     'columnSpan' => '6',
@@ -168,7 +173,7 @@ class FullWidth extends Page
                     'id' => $this->faker->numberBetween(1000, 10000),
                     'filename' => 'catalog',
                     'heading' => 'One column catalog',
-                    'limit' => 3,
+                    'limit' => 2,
                     'columns' => '1',
                     'showDescription' => false,
                     'imageSize' => 'small',
@@ -181,7 +186,7 @@ class FullWidth extends Page
                     'id' => $this->faker->numberBetween(1000, 10000),
                     'filename' => 'button-column',
                     'limit' => 3,
-                    'heading' => 'Resrouces: Button column',
+                    'heading' => 'Resources: Button column',
                     'columnSpan' => '4',
                     'headingLevel' => 'h4'
                 ],
@@ -191,7 +196,7 @@ class FullWidth extends Page
                 'component' => [
                     'id' => $this->faker->numberBetween(1000, 10000),
                     'filename' => 'promo-row',
-                    'limit' => 3,
+                    'limit' => 2,
                     'heading' => 'Promo row alternate',
                     'imagePosition' => 'alternate',
                     'sectionClass' => 'bg-gray-100 py-10',
@@ -202,9 +207,10 @@ class FullWidth extends Page
                 'component' => [
                     'id' => $this->faker->numberBetween(1000, 10000),
                     'filename' => 'promo-row',
-                    'heading' => 'Promo row',
+                    'heading' => 'Content row',
                     'columnSpan' => 10,
                     'headingClass' => 'divider-gold',
+                    'showImages' => false, // TODO
                 ],
             ],
 
@@ -213,6 +219,7 @@ class FullWidth extends Page
                     'id' => $this->faker->numberBetween(1000, 10000),
                     'filename' => 'button-row',
                     'heading' => 'Button row',
+                    'limit' => 3,
                     'sectionClass' => 'bg-gold-100 py-10',
                     'backgroundImageUrl' => '/styleguide/image/3200x400',
                     'sectionStyle' => 'padding-top:6rem; padding-bottom: 6rem;',

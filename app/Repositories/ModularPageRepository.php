@@ -237,7 +237,9 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 // showSiteMenu
                 // showSiteTitle
                 // showPageContent
-                dump($name);
+                // showMenu -> if false add controller to full width config 
+                //dump($name);
+                //$request->data['base']['show_site_menu'] = false;
 
             } elseif (Str::startsWith($name, 'page-content') || Str::startsWith($name, 'heading')) {
                 // If there's JSON but no news, events or promo data, assign the component array as data

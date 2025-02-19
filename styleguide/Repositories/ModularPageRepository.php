@@ -11,6 +11,7 @@ class ModularPageRepository extends Repository
      */
     public function getModularComponents(array $data): array
     {
+        // Extending the original repository
         $components = parent::getModularComponents($data);
 
         foreach ($components as $key => $component) {

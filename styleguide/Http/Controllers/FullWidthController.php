@@ -28,10 +28,9 @@ class FullWidthController extends Controller
     {
         // TODO move to layout config
         $request->data['base']['show_site_menu'] = false;
-        $heroClass['heroClass'] = 'full-width-styleguide-hero';
 
         dump('modular controller');
 
-        return view('childpage', merge($request->data, $heroClass));
+        return view('childpage', merge($request->data));
     }
 }
