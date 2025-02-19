@@ -13,7 +13,7 @@ class Page implements StyleguidePageContract
     public $path;
 
     public function __construct(
-        MenuRepository $menuRepository, 
+        MenuRepository $menuRepository,
         Factory $faker
     ) {
         $this->menuRepository = $menuRepository;

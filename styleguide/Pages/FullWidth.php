@@ -3,16 +3,8 @@
 namespace Styleguide\Pages;
 
 use Factories\Page as PageFactory;
-use Faker\Factory;
-use Factories\AccordionItems;
 use Factories\ArticleMeta;
-use Factories\ArticleComponent;
-use Factories\Button;
-use Factories\Event;
-use Factories\GenericPromo;
-use Factories\HeroImage;
-use Factories\Icon;
-use Factories\Spotlight;
+
 //TODO move all factories to be extended from Page
 
 class FullWidth extends Page
@@ -230,7 +222,7 @@ class FullWidth extends Page
 
         // TODO move to modular repo
         // Array of options to json encode
-        foreach($components as $componentName => $componentData) {
+        foreach ($components as $componentName => $componentData) {
             $page['data'][$componentName] = json_encode($componentData['component']);
         }
 

@@ -3,16 +3,6 @@
 namespace Styleguide\Repositories;
 
 use App\Repositories\ModularPageRepository as Repository;
-use Factories\AccordionItems;
-use Factories\ArticleMeta;
-use Factories\ArticleComponent;
-use Factories\Button;
-use Factories\Event;
-use Factories\GenericPromo;
-use Factories\HeroImage;
-use Factories\Icon;
-use Factories\IconsRow;
-use Factories\Spotlight;
 
 class ModularPageRepository extends Repository
 {
@@ -23,7 +13,7 @@ class ModularPageRepository extends Repository
     {
         $components = parent::getModularComponents($data);
 
-        foreach($components as $key => $component) {
+        foreach ($components as $key => $component) {
 
             // Transform filename into factory name
             $factoryName = str_replace(['row', 'column', '-', '_'], '', $component['component']['filename']);
