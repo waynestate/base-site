@@ -86,6 +86,15 @@ class ModularPageRepository implements ModularPageRepositoryContract
         $group_reference = [];
         $group_config = [];
 
+        // Array of options to json encode
+        if(using_styleguide()) {
+            foreach ($data['data'] as $componentName => $componentData) {
+                $componentName = json_encode($componentData['component']);
+            }
+        }
+
+        dump($data['data']);
+        die;
         foreach ($data['data'] as $pageField => $value) {
             if (Str::startsWith($pageField, 'modular-')) {
                 $name = Str::replaceFirst('modular-', '', $pageField);
@@ -298,17 +307,19 @@ class ModularPageRepository implements ModularPageRepositoryContract
     public function componentClasses($components)
     {
         $expected_classes = [
+            'filename',
             'section',
             'size',
             'background',
             'gutter',
         ];
 
+        dump($components);
         foreach ($components as $componentName => $component) {
+            $classes[$componentName]['filename'] = $component['component']['filename'] ?? '';
+
             if (!empty($component['component']['sectionClass'])) {
                 $classes[$componentName]['section'] = $component['component']['sectionClass'];
-            } else {
-                $classes[$componentName]['section'] = $component['component']['filename'] ?? '';
             }
 
             if (!empty($component['component']['columnSpan'])) {

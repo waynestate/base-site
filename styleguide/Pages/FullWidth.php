@@ -35,7 +35,7 @@ class FullWidth extends Page
             ],
         ]);
 
-        $components = [
+        $page['data'] = [
             // TODO make this work and  add it to styleguide menu
             /*
             'modular-layout-config' => [
@@ -115,6 +115,7 @@ class FullWidth extends Page
                     'id' => $this->faker->numberBetween(1000, 10000),
                     'filename' => 'accordion',
                     'columnSpan' => '6',
+                    'sectionClass' => 'end',
                 ],
             ],
 
@@ -226,14 +227,6 @@ class FullWidth extends Page
                 ],
             ],
         ];
-
-        // TODO move to modular repo
-        // Array of options to json encode
-        foreach ($components as $componentName => $componentData) {
-            $page['data'][$componentName] = json_encode($componentData['component']);
-        }
-
-        $page['_components'] = $components;
 
         return $page;
     }

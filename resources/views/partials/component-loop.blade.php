@@ -6,7 +6,7 @@
 --}}
 
 @if(!empty($base['components']))
-    <div id="component-loop" class="flex flex-wrap items-start mt:justify-center {{ $base['layout-config']['layoutClass'] ?? 'gap-y-gutter-xl' }}">
+    <div id="component-loop" class="flex flex-wrap items-start mt:justify-center {{ $base['layout-config']['layoutClass'] ?? '[&>section]:mb-gutter-xl' }}">
         @foreach($base['components'] as $componentName => $component)
             @if(!empty($component['data']) && !empty($component['component']['filename']) && \View::exists('components/'.$component['component']['filename']))
                 <section id="{{ Str::slug($componentName) }}" class="relative w-full {{ $component['component']['componentClasses'] ?? ''}}" {!! $component['component']['componentStyle'] ?? '' !!}>
@@ -18,7 +18,9 @@
                             @include('components/'.$component['component']['filename'], ['data' => $component['data'], 'component' => $component['component']])
                         @endif
                 </section>
-                {{-- <hr class="block w-full -my-gutter-xl" /> --}}
+                @if(Str::contains($component['component']['componentClasses'], 'end'))
+                    <hr class="row-break" />
+                @endif
             @endif
         @endforeach
     </div>
