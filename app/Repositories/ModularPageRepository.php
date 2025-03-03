@@ -243,7 +243,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
             } elseif (Str::startsWith($name, 'layout-config')) {
                 // Take layout config out of the loop
                 // Maybe define layoutClass
-                // showSiteMenu
+                // showSiteMenu, consider breadcrumbs
                 // showSiteTitle
                 // showPageContent
                 // showMenu -> if false add controller to full width config 
