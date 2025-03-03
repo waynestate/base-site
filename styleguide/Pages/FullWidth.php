@@ -47,14 +47,12 @@ class FullWidth extends Page
              */
             'modular-hero' => [
                 'component' => [
-                    'id' => $this->faker->numberBetween(1000, 10000),
                     'filename' => 'hero',
                     'heroClass' => 'full-width-styleguide-hero', //TODO make this work
                 ],
             ],
             'modular-spotlight' => [
                 'component' => [
-                    'id' => $this->faker->numberBetween(1000, 10000),
                     'filename' => 'spotlight',
                     'heading' => 'Spotlight',
                     'showDescription' => true,
@@ -63,7 +61,6 @@ class FullWidth extends Page
             ],
             'modular-icons-row-1' => [
                 'component' => [
-                    'id' => $this->faker->numberBetween(1000, 10000),
                     'filename' => 'icons-row',
                     'limit' => 6, // TODO extract this from 'config' or implode specified values
                     'columns' => 2,
@@ -72,7 +69,6 @@ class FullWidth extends Page
             ],
             'modular-catalog-3' => [
                 'component' => [
-                    'id' => $this->faker->numberBetween(1000, 10000),
                     'filename' => 'catalog',
                     'limit' => 6,
                     'heading' => 'Catalog',
@@ -84,7 +80,6 @@ class FullWidth extends Page
 
             'modular-promo-row' => [
                 'component' => [
-                    'id' => $this->faker->numberBetween(1000, 10000),
                     'filename' => 'content-row',
                     'heading' => 'Content row',
                 ],
@@ -102,7 +97,6 @@ class FullWidth extends Page
 
             'modular-promo-column-2' => [
                 'component' => [
-                    'id' => $this->faker->numberBetween(1000, 10000),
                     'filename' => 'promo-column',
                     'heading' => '',
                     'gradientOverlay' => true,
@@ -112,7 +106,6 @@ class FullWidth extends Page
 
             'modular-accordion-1' => [
                 'component' => [
-                    'id' => $this->faker->numberBetween(1000, 10000),
                     'filename' => 'accordion',
                     'columnSpan' => '6',
                     'sectionClass' => 'end',
@@ -121,7 +114,6 @@ class FullWidth extends Page
 
             'modular-news_row' => [
                 'component' => [
-                    'id' => $this->faker->numberBetween(1000, 10000),
                     'filename' => 'news-row',
                     'heading' => 'Featured news',
                     'sectionClass' => 'bg-gray-100 py-10',
@@ -131,7 +123,6 @@ class FullWidth extends Page
 
             'modular-promo-column-1' => [
                 'component' => [
-                    'id' => $this->faker->numberBetween(1000, 10000),
                     'filename' => 'promo-column',
                     'heading' => '',
                     'gradientOverlay' => true,
@@ -141,7 +132,6 @@ class FullWidth extends Page
 
             'modular-events-column' => [
                 'component' => [
-                    'id' => $this->faker->numberBetween(1000, 10000),
                     'filename' => 'events-column',
                     'heading' => 'Special events',
                     'columnSpan' => '7'
@@ -150,7 +140,6 @@ class FullWidth extends Page
 
             'modular-icons-top-row-2' => [
                 'component' => [
-                    'id' => $this->faker->numberBetween(1000, 10000),
                     'filename' => 'icons-top-row',
                     'heading' => 'Icons top row',
                     'limit' => 5,
@@ -161,7 +150,6 @@ class FullWidth extends Page
 
             'modular-spotlight-row' => [
                 'component' => [
-                    'id' => $this->faker->numberBetween(1000, 10000),
                     'filename' => 'spotlight-row',
                     'heading' => 'Spotlight',
                     'showDescription' => true,
@@ -171,7 +159,6 @@ class FullWidth extends Page
 
             'modular-catalog-2' => [
                 'component' => [
-                    'id' => $this->faker->numberBetween(1000, 10000),
                     'filename' => 'catalog',
                     'heading' => 'One column catalog',
                     'limit' => 2,
@@ -184,7 +171,6 @@ class FullWidth extends Page
 
             'modular-button-column' => [
                 'component' => [
-                    'id' => $this->faker->numberBetween(1000, 10000),
                     'filename' => 'button-column',
                     'limit' => 3,
                     'heading' => 'Resources: Button column',
@@ -195,7 +181,6 @@ class FullWidth extends Page
 
             'modular-promo-row-1' => [
                 'component' => [
-                    'id' => $this->faker->numberBetween(1000, 10000),
                     'filename' => 'promo-row',
                     'limit' => 2,
                     'heading' => 'Promo row alternate',
@@ -206,7 +191,6 @@ class FullWidth extends Page
 
             'modular-promo-row-2' => [
                 'component' => [
-                    'id' => $this->faker->numberBetween(1000, 10000),
                     'filename' => 'promo-row',
                     'heading' => 'Content row',
                     'columnSpan' => 10,
@@ -217,7 +201,6 @@ class FullWidth extends Page
 
             'modular-button-row-1' => [
                 'component' => [
-                    'id' => $this->faker->numberBetween(1000, 10000),
                     'filename' => 'button-row',
                     'heading' => 'Button row',
                     'limit' => 3,

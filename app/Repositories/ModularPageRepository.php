@@ -86,15 +86,17 @@ class ModularPageRepository implements ModularPageRepositoryContract
         $group_reference = [];
         $group_config = [];
 
-        // Array of options to json encode
+        // Encode styleguide page components
         if(using_styleguide()) {
             foreach ($data['data'] as $componentName => $componentData) {
-                $componentName = json_encode($componentData['component']);
+                $componentData['component']['id'] = rand(1, 1000);
+                $data['data'][$componentName] = json_encode($componentData['component']);
+                // why did accordion 1 not have any data returned 
+                // dont use api when in styleguiide thru modular repo 
+                //
             }
         }
 
-        dump($data['data']);
-        die;
         foreach ($data['data'] as $pageField => $value) {
             if (Str::startsWith($pageField, 'modular-')) {
                 $name = Str::replaceFirst('modular-', '', $pageField);

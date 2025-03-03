@@ -20,7 +20,7 @@ class ModularPageRepository extends Repository
             $factoryName = str_replace(['row', 'column', '-', '_'], '', $component['component']['filename']);
             $factoryPath = '\\Factories\\'.ucwords($factoryName, '-');
 
-            // Load factory
+            // Attach fake promos from factory to components
             $components[$key]['data'] = app($factoryPath)->create($component['component']['limit'] ?? 1, false);
         }
 
