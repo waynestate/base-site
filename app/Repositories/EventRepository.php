@@ -46,6 +46,7 @@ class EventRepository implements EventRepositoryContract
 
             $events_listing = $this->wsuApi->sendRequest($params['method'], $params);
 
+
             if (!empty($events_listing['events'])) {
                 $events_listing = collect($events_listing['events'])->groupBy('date')->toArray();
             } else {
@@ -67,7 +68,7 @@ class EventRepository implements EventRepositoryContract
             'method' => 'calendar.events.fulllisting',
             'site' => $site_id,
             'limit' => 50,
-            'end_date' => $end_date ?? date('Y-m-d', strtotime('+6 month')),
+            'end_date' => date('Y-m-d', strtotime('+6 month')),
         ];
 
         $events['events'] = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params, $limit) {
@@ -88,7 +89,6 @@ class EventRepository implements EventRepositoryContract
                         return $event;
                     })
                     ->take($limit)
-                    ->groupBy('date')
                     ->toArray();
             }
 
