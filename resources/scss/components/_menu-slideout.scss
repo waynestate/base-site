@@ -12,17 +12,17 @@
             @apply text-white;
         }
 
-        // Indent second level now since first level is shown
+        /* Indent second level now since first level is shown */
         li > ul > li a {
             @apply pl-8;
         }
 
-        // Indent third level now since first level is shown
+        /* Indent third level now since first level is shown */
         li > ul > li > ul > li a {
             @apply pl-12;
         }
 
-        // Selected State
+        /* Selected State */
         .selected > a {
             @apply text-gold;
         }
@@ -34,7 +34,7 @@
         }
     }
 
-    // Main Menu within slideout
+    /* Main Menu within slideout */
     .slideout-main-menu {
         @apply block;
 
@@ -48,7 +48,7 @@
             cursor: pointer;
         }
 
-        // Menu Header top level (MAIN MENU)
+        /* Menu Header top level (MAIN MENU) */
         ul ul {
             @apply border-solid border-b-4 border-green-800;
         }

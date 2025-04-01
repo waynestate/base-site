@@ -18,7 +18,7 @@
             cursor: pointer;
             user-select: none;
 
-            // Open symbol
+            /* Open symbol */
             & span::before {
                 @apply absolute left-0 pl-4 top-0 pt-4;
 
@@ -30,16 +30,20 @@
             @apply outline outline-0;
         }
 
-        // Close symbol
+        /* Close symbol */
         &.open > a span::before {
             content: '\2013';
         }
 
-        // Content area
+        /* Content area */
         > .fold {
             @apply p-4 pt-0 pl-8 border-t-0;
 
             transition: 0.3s ease all;
+
+            > * {
+                @apply mt-0;
+            }
         }
     }
 

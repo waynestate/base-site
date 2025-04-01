@@ -4,6 +4,7 @@ use App\Providers\AppServiceProvider;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Request;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withProviders()
@@ -32,6 +33,15 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->throttleApi('60,1');
 
+        $middleware->trustProxies(
+            at: '*',
+            headers: Request::HEADER_X_FORWARDED_FOR |
+            Request::HEADER_X_FORWARDED_HOST |
+            Request::HEADER_X_FORWARDED_PORT |
+            Request::HEADER_X_FORWARDED_PROTO
+        );
+
+
         $middleware->alias([
             'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
             'data' => \App\Http\Middleware\Data::class,
@@ -41,7 +51,6 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->priority([
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \App\Http\Middleware\Authenticate::class,
             \Illuminate\Routing\Middleware\ThrottleRequests::class,
             \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,

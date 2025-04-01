@@ -54,7 +54,7 @@ table {
     @media (max-width: theme('screens.md')) {
         @apply w-full;
 
-        // Hide table head
+        /* Hide table head */
         thead tr {
             @apply absolute;
 
@@ -70,7 +70,7 @@ table {
             @apply flex px-4 pt-0 pb-1 my-2;
         }
 
-        // Add data labels
+        /* Add data labels */
         td::before {
             @apply block font-bold pr-1.5;
 

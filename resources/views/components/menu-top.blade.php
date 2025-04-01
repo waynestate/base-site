@@ -2,19 +2,22 @@
     $site => array // ['short-title', 'title', 'subsite-folder']
     $top_menu_output => string // '<ul></ul>'
 --}}
+
+@php
+    $hasSurtitle = (
+        (config('base.surtitle') !== null &&
+        ($site['parent']['id'] === null && config('base.surtitle_main_site_enabled') === true) ||
+        ($site['parent']['id'] !== null && config('base.surtitle') !== null)) &&
+        !config('base.global.sites.' . $site['id'] . '.surtitle_disabled')
+    );
+@endphp
+
 <div class="menu-top-container bg-green-600 print:bg-transparent">
     <div class="row flex justify-between">
-        <div class="grow-0 mx-4 py-2" data-short-title="{{ $site['short-title'] }}">
-            @if(
-                (
-                    config('base.surtitle') !== null &&
-                    ($site['parent']['id'] === null && config('base.surtitle_main_site_enabled') === true) ||
-                    ($site['parent']['id'] !== null && config('base.surtitle') !== null)
-                ) &&
-                !config('base.global.sites.' . $site['id'] . '.surtitle_disabled')
-            )
+        <div class="grow-0 mx-4 {{ $hasSurtitle ? 'py-[5px]' : 'py-2' }}" data-short-title="{{ $site['short-title'] }}">
+            @if($hasSurtitle)
                 <div class="text-base mb-0 font-normal leading-tight">
-                    <a href="{{ config('base.surtitle_url') }}" class="text-white print:text-black">{{ config('base.surtitle') }}</a>
+                    <a href="{{ config('base.surtitle_url') }}" class="text-white print:text-black inline-block py-[3px]">{{ config('base.surtitle') }}</a>
                 </div>
 
                 <div class="font-normal mb-1 text-2xl leading-none">

@@ -37,7 +37,7 @@ class ProfileRepository implements ProfileRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getProfiles(int $site_id, ?string $selected_group = null): array
+    public function getProfiles(int $site_id, ?string $selected_group = null, $subsite_url = null): array
     {
         $params = [
             'method' => 'profile.users.listing',
@@ -53,8 +53,9 @@ class ProfileRepository implements ProfileRepositoryContract
 
         // Build the link
         if (empty($profile_listing['error'])) {
-            $profile_listing = collect($profile_listing)->map(function ($item) {
-                $item['link'] = '/profile/'.$item['data']['AccessID'];
+            $profile_listing = collect($profile_listing)->map(function ($item) use ($subsite_url) {
+                $item['link'] = '/'.$subsite_url.'profile/'.$item['data']['AccessID'];
+
                 $item['full_name'] = $this->getPageTitleFromName(['profile' => $item]);
 
                 return $item;
@@ -70,7 +71,7 @@ class ProfileRepository implements ProfileRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getProfilesByGroup($site_id)
+    public function getProfilesByGroup($site_id, $subsite_url = null): array
     {
         // Get the groups for the dropdown
         $dropdown_groups = $this->getDropdownOfGroups($site_id);
@@ -79,7 +80,7 @@ class ProfileRepository implements ProfileRepositoryContract
         $group_ids = $this->getGroupIds(null, null, $dropdown_groups['dropdown_groups']);
 
         // Get all the profiles
-        $all_profiles = $this->getProfiles($site_id, $group_ids);
+        $all_profiles = $this->getProfiles($site_id, $group_ids, $subsite_url);
 
         // Organize profiles by the group they are in keyed by accessid
         $grouped = collect($all_profiles['profiles'])->keyBy('data.AccessID')
@@ -120,9 +121,9 @@ class ProfileRepository implements ProfileRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getProfilesByGroupOrder($site_id, $groups)
+    public function getProfilesByGroupOrder($site_id, $groups, $subsite_url = null): array
     {
-        $profile_listing = $this->getProfiles($site_id);
+        $profile_listing = $this->getProfiles($site_id, null, $subsite_url);
 
         $group_order = preg_split('/[\s,|]+/', $groups);
 
