@@ -23,10 +23,9 @@ interface EventRepositoryContract
     /**
      * Get event listing filtered by title.
      *
-     * @param int $site_id
-     * @param array $titles
-     * @param int $limit
+     * @param array $events
+     * @param string $title
      * @return array
      */
-    public function getEventsByTitle($site_id, $titles, $limit);
+    public function filterTitle($events, $title);
 }

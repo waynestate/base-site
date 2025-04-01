@@ -32,7 +32,7 @@ class EventRepository implements EventRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getEvents($site_id, $limit = 4)
+    public function getEvents($site_id, $title = '', $limit = 4)
     {
         $params = [
             'method' => 'calendar.events.listing',
@@ -46,7 +46,6 @@ class EventRepository implements EventRepositoryContract
 
             $events_listing = $this->wsuApi->sendRequest($params['method'], $params);
 
-
             if (!empty($events_listing['events'])) {
                 $events_listing = collect($events_listing['events'])->groupBy('date')->toArray();
             } else {
@@ -56,13 +55,17 @@ class EventRepository implements EventRepositoryContract
             return $events_listing;
         });
 
+        if(!empty($title)) {
+            $events = $this->filterTitle($events, $title);
+        }
+
         return $events;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getEventsFullListing($site_id, $limit = 4)
+    public function getEventsFullListing($site_id, $title = '', $limit = 4)
     {
         $params = [
             'method' => 'calendar.events.fulllisting',
@@ -95,53 +98,24 @@ class EventRepository implements EventRepositoryContract
             return $events ?? [];
         });
 
+        if(!empty($title)) {
+            $events = $this->filterTitle($events, $title);
+        }
+
+
         return $events;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getEventsByTitle($site_id, $titles, $limit = 4)
+    public function filterTitle($events, $title)
     {
-        $params = [
-            'method' => 'calendar.events.fulllisting',
-            'site' => $site_id,
-            'limit' => 100,
-            'end_date' => date('Y-m-d', strtotime('+12 month')),
-            'firstonly' => false,
-        ];
-
-        $events = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params, $titles, $limit) {
-            $this->wsuApi->nextRequestProduction();
-
-            $events_listing = $this->wsuApi->sendRequest($params['method'], $params);
-
-            // If events are returned, group them by date and assign images for featured events
-            if (!empty($events_listing['events'])) {
-                $events_listing['events'] = collect($events_listing['events'])
-                    ->map(function ($event) {
-                        if (!empty($event['images'])) {
-                            $event['display_image'] = collect($event['images'])->first();
-                        } else {
-                            $event['display_image']['full_url'] = 'https://wayne.edu/opengraph/wsu-social-share-square.jpg';
-                            $event['display_image']['description'] = 'Event on wayne.edu';
-                        }
-                        return $event;
-                    })->toArray();
-
-                // Filter the expected events to only include those with the matching titles and unique event IDs
-                $events['events'] = collect($events_listing['events'])->filter(function ($event) use ($titles) {
-                    foreach ($titles as $title) {
-                        if (Str::contains($event['title'], trim($title), ignoreCase: true)) {
-                            return true;
-                        }
-                    }
-                    return false;
-                })->unique('event_id')->groupBy('date')->take($limit)->toArray();
-            }
-
-            return $events ?? [];
-        });
+        $events['events'] = collect($events['events'])->map(function ($event_listing) use ($title) {
+            return collect($event_listing)->filter(function ($event) use ($title) {
+                return Str::contains($event['title'], $title);
+            })->toArray();
+        })->toArray();
 
         return $events;
     }
