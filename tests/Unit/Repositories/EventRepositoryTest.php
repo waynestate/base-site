@@ -58,9 +58,10 @@ final class EventRepositoryTest extends TestCase
     {
         // Expected events to be returned
         $expected['events'] = app(EventFullListing::class)->create(4);
+        $expected['events'] = collect($expected['events'])->flatten(1)->toArray();
 
         // Maniuplate events to mimic the API return
-        $return['events'] = collect($expected['events'])->flatten(1)->toArray();
+        $return['events'] = $expected['events'];
 
         // Mock the connector and set the return
         $wsuApi = Mockery::mock(Connector::class);
