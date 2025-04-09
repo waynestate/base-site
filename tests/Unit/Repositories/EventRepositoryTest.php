@@ -90,7 +90,7 @@ final class EventRepositoryTest extends TestCase
 
         // Get the events
         $events = app(EventRepository::class, ['wsuApi' => $wsuApi])->getEventsFullListing($this->faker->randomDigit());
-        $event = collect($events['events'])->flatten(1)->first();
+        $event = collect($events)->flatten(1)->first();
 
         $this->assertTrue(!empty($event['display_image']['full_url']));
         $this->assertTrue(!empty($event['display_image']['description']));
