@@ -7,7 +7,6 @@ use App\Repositories\EventRepository;
 use Illuminate\Support\Str;
 use Factories\ApiError;
 use Factories\Event;
-use Factories\EventByTitle;
 use Factories\EventFullListing;
 use Factories\EventFullListingNoImage;
 use Tests\TestCase;
@@ -97,104 +96,27 @@ final class EventRepositoryTest extends TestCase
     }
 
     #[Test]
-    public function getting_events_by_title_should_only_return_events_matching_string_array(): void
+    public function getting_events_grouped_by_date_filtered_by_title(): void
     {
-        // Create events
-        $return['events'] = collect(app(EventByTitle::class)->create(2))->flatten(1)->toArray();
+        $expected = app(Event::class)->create(4);
 
-        // Get the titles from the events
-        $titles = collect($return['events'])->filter(function ($value) {
-            return $value['title'];
-        })->pluck('title')->take(2)->toArray();
+        $title = collect($expected)->flatten(1)->pluck('title')->random();
 
-        // Get the expected events filtered by title
-        $expected['events'] = collect($return['events'])->filter(function ($event) use ($titles) {
-            foreach ($titles as $title) {
-                if (Str::contains($event['title'], trim($title), ignoreCase: true)) {
-                    return true;
-                }
-            }
-            return false;
-        })->unique('event_id')->groupBy('date')->take(4)->toArray();
+        // Maniuplate events to mimic the API return since they aren't grouped yet
+        $return['events'] = collect($expected)->flatten(1)->toArray();
+
+        $expected = collect($return['events'])->filter(function ($event) use ($title) {
+            return Str::contains($event['title'], $title);
+        })->groupBy('date')->toArray();
 
         // Mock the connector and set the return
         $wsuApi = Mockery::mock(Connector::class);
-        $wsuApi->shouldReceive('sendRequest')->with('calendar.events.fulllisting', Mockery::type('array'))->once()->andReturn($return);
+        $wsuApi->shouldReceive('sendRequest')->with('calendar.events.listing', Mockery::type('array'))->once()->andReturn($return);
         $wsuApi->shouldReceive('nextRequestProduction')->once();
 
-        // Get the events
-        $events = app(EventRepository::class, ['wsuApi' => $wsuApi])->getEventsByTitle($this->faker->randomDigit(), $titles);
+        $events = app(EventRepository::class, ['wsuApi' => $wsuApi])->getEvents($this->faker->randomDigit(), $title);
 
-        $this->assertEquals($expected, $events);
+        $this->assertEquals($expected, $events['events']);
     }
 
-    #[Test]
-    public function getting_events_by_title_with_no_titles_should_return_empty_array(): void
-    {
-        // Create events
-        $return['events'] = app(EventByTitle::class)->create(4);
-
-        $titles = [];
-
-        // Get the expected events filtered by title
-        $expected['events'] = [];
-
-        // Mock the connector and set the return
-        $wsuApi = Mockery::mock(Connector::class);
-        $wsuApi->shouldReceive('sendRequest')->with('calendar.events.fulllisting', Mockery::type('array'))->once()->andReturn($return);
-        $wsuApi->shouldReceive('nextRequestProduction')->once();
-
-        // Get the events
-        $events = app(EventRepository::class, ['wsuApi' => $wsuApi])->getEventsByTitle($this->faker->randomDigit(), $titles);
-
-        $this->assertEquals($expected, $events);
-    }
-
-    #[Test]
-    public function getting_events_by_title_should_return_unique_events(): void
-    {
-        // Create a set of duplicate events
-        $dupe['events'] = app(EventByTitle::class)->create(2, false, [
-            'event_id' => 100,
-            'title' => 'Class registration',
-        ]);
-        $duplicate['events'] = app(EventByTitle::class)->create(2, false, [
-            'event_id' => 200,
-            'title' => 'A high priority meeting',
-        ]);
-
-        // Merge the duplicate events
-        $return['events'] = collect($dupe['events'])->merge($duplicate['events'])->flatten(1)->toArray();
-
-        // Get the titles from the events
-        $titles = collect($return['events'])->filter(function ($value) {
-            return $value['title'];
-        })->pluck('title')->take(2)->toArray();
-
-        // Get the expected events filtered by title
-        $expected['events'] = collect($return['events'])->filter(function ($event) use ($titles) {
-            foreach ($titles as $title) {
-                if (Str::contains($event['title'], trim($title), ignoreCase: true)) {
-                    return true;
-                }
-            }
-            return false;
-        })->unique('event_id')->groupBy('date')->take(4)->toArray();
-
-        // Mock the connector and set the return
-        $wsuApi = Mockery::mock(Connector::class);
-        $wsuApi->shouldReceive('sendRequest')->with('calendar.events.fulllisting', Mockery::type('array'))->once()->andReturn($return);
-        $wsuApi->shouldReceive('nextRequestProduction')->once();
-
-        // Get the events by title
-        $events = app(EventRepository::class, ['wsuApi' => $wsuApi])->getEventsByTitle($this->faker->randomDigit(), $titles);
-
-        $this->assertEquals($expected, $events);
-
-        // Assert that each event in the returned events is unique
-        $event_ids = collect($events['events'])->flatten(1)->pluck('event_id')->toArray();
-        $expected_event_ids = collect($expected['events'])->flatten(1)->pluck('event_id')->toArray();
-
-        $this->assertEquals($expected_event_ids, $event_ids);
-    }
 }

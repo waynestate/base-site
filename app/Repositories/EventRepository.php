@@ -55,7 +55,7 @@ class EventRepository implements EventRepositoryContract
             return $events_listing;
         });
 
-        if(!empty($title)) {
+        if (!empty($title)) {
             $events = $this->filterTitle($events, $title);
         }
 
@@ -98,10 +98,9 @@ class EventRepository implements EventRepositoryContract
             return $events ?? [];
         });
 
-        if(!empty($title)) {
+        if (!empty($title)) {
             $events = $this->filterTitle($events, $title);
         }
-
 
         return $events;
     }
@@ -111,11 +110,18 @@ class EventRepository implements EventRepositoryContract
      */
     public function filterTitle($events, $title)
     {
-        $events['events'] = collect($events['events'])->map(function ($event_listing) use ($title) {
-            return collect($event_listing)->filter(function ($event) use ($title) {
-                return Str::contains($event['title'], $title);
-            })->toArray();
-        })->toArray();
+        foreach ($events['events'] as $date => $event) {
+            foreach ($event as $key => $item) {
+                if (!isset($item['title']) || !Str::contains($item['title'], $title)) {
+                    unset($events['events'][$date][$key]);
+                    if (empty($events['events'][$date])) {
+                        unset($events['events'][$date]);
+                    }
+                } else {
+                    $events['events'][$date][$key] = $item;
+                }
+            }
+        }
 
         return $events;
     }
