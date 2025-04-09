@@ -104,7 +104,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 if (strpos($name, 'events-column') !== false) {
                     $events = $this->event->getEvents($component['id'] ?? $data['site']['id'], $component['filterTitle'] ?? '', $limit);
                 } else {
-                    $events = $this->event->getEventsFullListing($component['id'] ?? $data['site']['id'], $limit);
+                    $events = $this->event->getEventsFullListing($component['id'] ?? $data['site']['id'], $component['filterTitle'] ?? '', $limit);
                 }
                 $modularComponents[$name]['data'] = $events['events'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
