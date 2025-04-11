@@ -1,12 +1,16 @@
-## Summary
+## Reason for change
 
 <!-- Explain what this PR does -->
 
 ---
 
-## Related Issues
+## Reminders
 
-Closes #...
+- Update package version number
+- Frontend accessibility check
+- Styleguide example in place
+- New functionality covered by tests
+- Screenshots of multiple screen sizes
 
 ---
 
@@ -16,3 +20,10 @@ Closes #...
 
 ```bash
 git log origin/master..HEAD --pretty=format:"- %s"
+
+---
+
+## Demo
+
+| Before | After |
+|--------|--------|
