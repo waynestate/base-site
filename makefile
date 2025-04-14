@@ -16,7 +16,14 @@ deploy: install buildproduction runtests envoy
 deployproduction: install buildproduction runtests envoyproduction
 
 # Commands
+# Commands
 yarn: $(YARNFILE)
+	@if ! grep -q ".yarn" .gitignore > /dev/null 2>&1; then echo ".yarn/" >> .gitignore; fi
+	corepack enable yarn
+	yarn set version --only-if-needed stable
+	yarn config set --home nodeLinker node-modules
+	yarn config set --home enableImmutableInstalls false
+	yarn config set --home enableTelemetry 0
 	yarn
 
 generatekey: $(DOTENV)
