@@ -372,6 +372,16 @@
                 "relative_url": "/styleguide/component/spotlight",
                 "submenu": []
             },
+            "124100": {
+                "menu_item_id": 124100,
+                "is_active": 1,
+                "page_id": 124100,
+                "target": "",
+                "display_name": "Layout config",
+                "class_name": "",
+                "relative_url": "/styleguide/component/layoutconfig",
+                "submenu": []
+            },
             "9999": {
                 "menu_item_id": 9999,
                 "is_active": 1,

@@ -28,6 +28,20 @@
                         </tbody>
                     @endif
 
+                    @if($item['promo_item_id'] === 'configurationDetails')
+                        <thead>
+                            <tr>
+                                <th colspan="2">Available options</th>
+                            </tr>
+                        </thead>
+                        @foreach($item['table'] as $key => $detail)
+                            <tr>
+                                <td class="font-bold">{{ $key }}</td>
+                                <td>{!! $detail !!}</td>
+                            </tr>
+                        @endforeach
+                    @endif
+
                     @if($item['promo_item_id'] === 'promotionGroupDetails')
                         <thead>
                             <tr>

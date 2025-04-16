@@ -8,8 +8,17 @@
                             @include('partials/heading', ['heading' => $component['component']['heading'], 'headingClass' => 'mt-0 '.($component['component']['headingClass'] ?? ''), 'headingLevel' => !empty($component['component']['headingLevel']) ? $component['component']['headingLevel'] : 'h2'])
                         @endif
 
+<<<<<<< Updated upstream
                         @include('components/'.$component['component']['filename'], ['data' => $component['data'], 'component' => $component['component']])
                     </div>
+=======
+                        @if(!empty($component['data']))
+                            @include('components/'.$component['component']['filename'], ['data' => $component['data'], 'component' => $component['component']])
+                        @endif
+                </section>
+                @if(!empty($component['component']['componentClasses']) && Str::contains($component['component']['componentClasses'], 'end'))
+                    <hr class="row-break" />
+>>>>>>> Stashed changes
                 @endif
             @endif
         @endforeach

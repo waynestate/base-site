@@ -3,8 +3,9 @@
 @section('content')
     @include('components.page-title', ['title' => $base['page']['title']])
 
-    <div class="content">
+    <div class="content [&_a.button]:text-gold">
         <p>The style guide is specific to each site, so please be sure you are viewing the correct one at <strong>[yourdomain].wayne.edu/styleguide</strong> (ex: <a href="//mac.wayne.edu/styleguide" class="external">mac.wayne.edu/styleguide</a>).
+        <p><a class="button" href="#">My button yay</a></p>
 
         <p>Your style guide is a how-to resource that will help you to determine what features you can incorporate into your website and how to implement them. It provides you with the ability to customize your pages and visually enhance your content for a better user experience.</p>
 
