@@ -1,10 +1,17 @@
 /* Combination of normalize and tailwind resets */
 @tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @import "~mediabox/dist/mediabox";
 @import "~flickity/dist/flickity";
 @import "~@waynestate/wsuheader/dist/header";
 @import "~@waynestate/wsufooter/dist/footer";
+
+/* Partials */
+@import "partials/component-loop";
+
+/* Components */
 @import "components/global";
 @import "components/global-tables";
 @import "components/global-headings";
@@ -34,20 +41,7 @@
 @import "components/pdf";
 @import "components/full-width-styleguide-hero";
 @import "components/policy-numbering";
+@import "components/layout";
 
 /* Site specific */
 @import "site-specific/theme";
-
-/* Tailwind */
-@tailwind components;
-@tailwind utilities;
-
-@layer utilities {
-    .col-count-2 {
-        column-count: 2;
-    }
-
-    .break-avoid {
-       break-inside: avoid;
-    }
-}

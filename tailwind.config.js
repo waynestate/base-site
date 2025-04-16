@@ -83,6 +83,14 @@ module.exports = {
             pattern: /columns(-[1-4])?/,
             variants: ['sm', 'md', 'lg', 'xl', '2xl', '3xl', 'mt'],
         },
+        {
+            pattern: /col-start(-[1-4])?/,
+            variants: ['md', 'lg', 'xl'],
+        },
+        {
+            pattern: /colspan-([1-12])?/,
+            variants: [,'md','lg','xl','2xl','mt'],
+        },
         '/form_responses/',
     ],
     theme: {
@@ -117,6 +125,14 @@ module.exports = {
                 hero: '36.3%',
                 full: '100%',
                 portrait: '133%',
+            },
+            spacing: {
+                'container': 'max(1rem, (100% - 73rem) / 2)',
+                'container-lg': 'max(1rem, (100% - 73rem) / 2)',
+                'gutter': '1rem',
+                'gutter-md': '1.5rem',
+                'gutter-lg': '3rem',
+                'gutter-xl': '4rem',
             },
             margin: {
                 17: '4.25rem',
@@ -158,6 +174,10 @@ module.exports = {
                 square: 'square',
                 'lower-alpha': 'lower-alpha',
                 'lower-roman': 'lower-roman',
+            },
+            gridTemplateColumns: {
+                'modular': '[start] minmax(1em, 1fr) [content-start] minmax(0, 36.5rem) [content-end] minmax(0, 36.5rem) [end] minmax(1em, 1fr)',
+                'x': '[start] minmax(1em, 1fr) [content-start] repeat(auto-fill, minmax(0, 73rem)) [end] minmax(1em, 1fr)',
             },
         },
     },

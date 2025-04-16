@@ -70,6 +70,10 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
         $components = $this->configureComponents($rawComponents, $promos, $data);
 
+        $components = $this->componentClasses($components);
+
+        $components = $this->componentStyles($components);
+
         return $components;
     }
 
@@ -81,6 +85,17 @@ class ModularPageRepository implements ModularPageRepositoryContract
         $components = [];
         $group_reference = [];
         $group_config = [];
+
+        // Encode styleguide page components
+        if(using_styleguide()) {
+            foreach ($data['data'] as $componentName => $componentData) {
+                $componentData['component']['id'] = rand(1, 1000);
+                $data['data'][$componentName] = json_encode($componentData['component']);
+                // why did accordion 1 not have any data returned 
+                // dont use api when in styleguiide thru modular repo 
+                //
+            }
+        }
 
         foreach ($data['data'] as $pageField => $value) {
             if (Str::startsWith($pageField, 'modular-')) {
@@ -96,15 +111,19 @@ class ModularPageRepository implements ModularPageRepositoryContract
                     $components[$name] = json_decode($value, true);
                     if (!empty($components[$name]['config'])) {
                         $config = explode('|', $components[$name]['config']);
+
                         // Add youtube
                         if (strpos($components[$name]['config'], 'youtube') === false) {
                             array_push($config, 'youtube');
                         }
+
                         foreach ($config as $key => $value) {
+                            // Assign selected page values
                             if (Str::startsWith($value, 'page_id')) {
                                 $config[$key] = 'page_id:'.$data['page']['id'];
                             }
 
+                            // Preserve the array
                             if (Str::startsWith($value, 'first')) {
                                 unset($config[$key]);
                             }
@@ -223,6 +242,16 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 $modularComponents[$name]['data'] = $articles['articles']['data'] ?? [];
                 $modularComponents[$name]['meta'] = $articles['articles']['meta'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
+            } elseif (Str::startsWith($name, 'layout-config')) {
+                // Take layout config out of the loop
+                // Maybe define layoutClass
+                // showSiteMenu, consider breadcrumbs
+                // showSiteTitle
+                // showPageContent
+                // showMenu -> if false add controller to full width config 
+                //dump($name);
+                //$request->data['base']['show_site_menu'] = false;
+
             } elseif (Str::startsWith($name, 'page-content') || Str::startsWith($name, 'heading')) {
                 // If there's JSON but no news, events or promo data, assign the component array as data
                 // Page-content and heading components
@@ -275,6 +304,79 @@ class ModularPageRepository implements ModularPageRepositoryContract
         }
 
         return $data;
+    }
+
+    public function componentClasses($components)
+    {
+        $expected_classes = [
+            'filename',
+            'section',
+            'size',
+            'background',
+            'gutter',
+        ];
+
+        dump($components);
+        foreach ($components as $componentName => $component) {
+            $classes[$componentName]['filename'] = $component['component']['filename'] ?? '';
+
+            if (!empty($component['component']['sectionClass'])) {
+                $classes[$componentName]['section'] = $component['component']['sectionClass'];
+            }
+
+            if (!empty($component['component']['columnSpan'])) {
+                $classes[$componentName]['size'] = 'px-4 mt:colspan-'.$component['component']['columnSpan'];
+            } else {
+                $classes[$componentName]['size'] = 'px-container';
+            }
+
+            if (!empty($component['component']['backgroundImageUrl'])) {
+                $classes[$componentName]['background'] = 'bg-cover bg-top';
+            }
+
+            if (!Str::contains($componentName, 'heading')) {
+                $classes[$componentName]['gutter'] = '-mb-gutter-xl';
+            }
+
+            /*
+            {{ $base['layout-config']['layoutClass'] ?? 'gap-y-gutter-xl' }}
+             */
+
+            // Forcing a space delimeter
+            foreach ($classes[$componentName] as $option => $class) {
+                if (in_array($option, $expected_classes)) {
+                    $classes[$componentName][] = $class;
+                    $components[$componentName]['component']['componentClasses'] = implode(' ', $classes[$componentName]);
+                }
+            }
+        }
+
+        return $components;
+    }
+
+    public function componentStyles($components)
+    {
+        $expected_styles = [
+            'backgroundImageUrl',
+            'sectionStyle',
+        ];
+
+        foreach ($components as $componentName => $component) {
+
+            if (!empty($component['component']['backgroundImageUrl'])) {
+                $styles[$componentName]['backgroundImageUrl'] = "background-image:url('".$component['component']['backgroundImageUrl']."');";
+            }
+
+            // Forcing a space delimeter
+            foreach ($component['component'] as $option => $style) {
+                if (in_array($option, $expected_styles)) {
+                    $styles[$componentName][] = $style;
+                    $components[$componentName]['component']['componentStyle'] = "style=\"".implode(' ', $styles[$componentName])."\"";
+                }
+            }
+        }
+
+        return $components;
     }
 
     /**

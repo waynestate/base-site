@@ -71,12 +71,14 @@ class ChildpageWithComponentsController extends Controller
                 ],
             ],
 
+/*
             'accordion-1' => [
                 'data' => app(GenericPromo::class)->create(4, false),
                 'component' => [
                     'filename' => 'accordion',
                 ],
             ],
+ */
 
             'heading-1' => [
                 'data' => [
@@ -211,6 +213,7 @@ class ChildpageWithComponentsController extends Controller
 
             config(['base.hero_full_controllers' => [$request->data['base']['page']['controller']]]);
         }
+        //dump($request->data['base']);
 
         return view('childpage', merge($request->data));
     }
