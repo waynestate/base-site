@@ -87,13 +87,13 @@ class ModularPageRepository implements ModularPageRepositoryContract
         $group_config = [];
 
         // Encode styleguide page components
+        // Allows us to use components on a name-basis only, using default factory data
         if(using_styleguide()) {
             foreach ($data['data'] as $componentName => $componentData) {
                 $componentData['component']['id'] = rand(1, 1000);
                 $data['data'][$componentName] = json_encode($componentData['component']);
                 // why did accordion 1 not have any data returned 
-                // dont use api when in styleguiide thru modular repo 
-                //
+                // dont use api when in styleguide thru modular repo 
             }
         }
 
@@ -242,16 +242,6 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 $modularComponents[$name]['data'] = $articles['articles']['data'] ?? [];
                 $modularComponents[$name]['meta'] = $articles['articles']['meta'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
-            } elseif (Str::startsWith($name, 'layout-config')) {
-                // Take layout config out of the loop
-                // Maybe define layoutClass
-                // showSiteMenu, consider breadcrumbs
-                // showSiteTitle
-                // showPageContent
-                // showMenu -> if false add controller to full width config 
-                //dump($name);
-                //$request->data['base']['show_site_menu'] = false;
-
             } elseif (Str::startsWith($name, 'page-content') || Str::startsWith($name, 'heading')) {
                 // If there's JSON but no news, events or promo data, assign the component array as data
                 // Page-content and heading components
