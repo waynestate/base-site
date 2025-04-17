@@ -87,13 +87,15 @@ class ModularPageRepository implements ModularPageRepositoryContract
         $group_config = [];
 
         // Encode styleguide page components
-        // Allows us to use components on a name-basis only, using default factory data
-        if(using_styleguide()) {
+        if (using_styleguide()) {
             foreach ($data['data'] as $componentName => $componentData) {
-                $componentData['component']['id'] = rand(1, 1000);
-                $data['data'][$componentName] = json_encode($componentData['component']);
-                // why did accordion 1 not have any data returned 
-                // dont use api when in styleguide thru modular repo 
+                if (!empty($componentData['component'])) {
+                    $componentData['component']['id'] = rand(1, 1000);
+                    $data['data'][$componentName] = json_encode($componentData['component']);
+                    // why did accordion 1 not have any data returned
+                    // dont use api when in styleguiide thru modular repo
+                    //
+                }
             }
         }
 

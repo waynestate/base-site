@@ -59,7 +59,7 @@ class PromoRepository extends Repository
 
         /*
         |--------------------------------------------------------------------------
-        | Move this to styleguide hero repository 
+        | Move this to styleguide hero repository
         |--------------------------------------------------------------------------
         */
 
@@ -162,7 +162,7 @@ class PromoRepository extends Repository
 
         /*
         |--------------------------------------------------------------------------
-        | Modular components 
+        | Modular components
         |--------------------------------------------------------------------------
         */
 
@@ -183,7 +183,7 @@ class PromoRepository extends Repository
 
         /*
         |--------------------------------------------------------------------------
-        | Setting global variables 
+        | Setting global variables
         |--------------------------------------------------------------------------
         */
 

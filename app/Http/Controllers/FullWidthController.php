@@ -3,7 +3,7 @@
 /*
 * Status: Public
 * Description: Full Width Template
-* Default: true
+* Default: false
 */
 
 namespace App\Http\Controllers;

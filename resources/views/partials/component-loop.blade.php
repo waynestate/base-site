@@ -18,7 +18,7 @@
                             @include('components/'.$component['component']['filename'], ['data' => $component['data'], 'component' => $component['component']])
                         @endif
                 </section>
-                @if(Str::contains($component['component']['componentClasses'], 'end'))
+                @if(!empty($component['component']['componentClasses']) && Str::contains($component['component']['componentClasses'], 'end'))
                     <hr class="row-break" />
                 @endif
             @endif

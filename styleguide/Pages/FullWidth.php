@@ -43,7 +43,7 @@ class FullWidth extends Page
                     'layoutClass' => '',
                     'pageClass' => '',
                 ],
-            ], 
+            ],
              */
             'modular-hero' => [
                 'component' => [
