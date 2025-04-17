@@ -5,6 +5,11 @@
 @import "~flickity/dist/flickity";
 @import "~@waynestate/wsuheader/dist/header";
 @import "~@waynestate/wsufooter/dist/footer";
+
+/* Partials */
+@import "partials/component-loop";
+
+/* Components */
 @import "components/global";
 @import "components/global-tables";
 @import "components/global-headings";
