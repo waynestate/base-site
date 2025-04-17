@@ -9,6 +9,9 @@
 @endsection
 
 @section('content')
+    @include('partials.component-loop')
+
+    {{--
     <div class="row px-4">
         @include('components.page-title', ['title' => $base['page']['title']])
 
@@ -87,6 +90,7 @@
             </div>
         </div>
     @endif
+    --}}
 
 
 @endsection
