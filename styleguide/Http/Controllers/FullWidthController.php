@@ -241,6 +241,8 @@ class FullWidthController extends Controller
 
         $heroClass['heroClass'] = 'full-width-styleguide-hero';
 
+        $request->data['base']['components'] = $components;
+
         return view('styleguide-fullwidth', merge($request->data, $this->faker, $components, $heroClass));
     }
 }
