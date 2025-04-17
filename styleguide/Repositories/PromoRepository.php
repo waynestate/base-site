@@ -46,6 +46,7 @@ class PromoRepository extends Repository
         |
         */
 
+        // Use real promo repository data
         //$promos = parent::getRequestData($data);
 
         // Define the pages that have under menu promos: page_id => quanity
@@ -56,7 +57,12 @@ class PromoRepository extends Repository
         // Only pull under_menu promos if they match the page_ids that are specified
         $under_menu = !empty($under_menu_page_ids[$data['page']['id']]) ? app(Button::class)->create($under_menu_page_ids[$data['page']['id']]) : null;
 
-        // TODO move all this to a styleguide hero repository
+        /*
+        |--------------------------------------------------------------------------
+        | Move this to styleguide hero repository 
+        |--------------------------------------------------------------------------
+        */
+
         $hero_option = $this->faker->randomElement(['Text Overlay', 'SVG Overlay', 'Half', 'Logo Overlay', '']);
 
         // Define the pages that have hero images
@@ -154,20 +160,14 @@ class PromoRepository extends Repository
         })
         ->toArray();
 
-
         /*
         |--------------------------------------------------------------------------
         | Modular components 
         |--------------------------------------------------------------------------
-        |
-        |
         */
 
         // Add modular components into global data
         $components = $this->components->getModularComponents($data);
-
-        // TODO:Layout config - Set some modular-layout-config data?
-        //$request->data['base']['show_site_menu'] = false;
 
         // Set hero from components
         $hero = collect($components)->reject(function ($data, $componentName) {
@@ -180,6 +180,12 @@ class PromoRepository extends Repository
             config(['base.hero_full_controllers' => [$data['page']['controller']]]);
             unset($components[$hero_key]);
         }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Setting global variables 
+        |--------------------------------------------------------------------------
+        */
 
         $global_promos =  merge([
             'contact' => app(FooterContact::class)->create(1),
