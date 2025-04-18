@@ -1,6 +1,7 @@
 <?php
 
 namespace Styleguide\Http\Controllers;
+use Contracts\Repositories\ModularPageRepositoryContract;
 
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
@@ -16,6 +17,16 @@ use Factories\Video;
 
 class ChildpageWithComponentsController extends Controller
 {
+    /**
+     * Construct the controller.
+     */
+    public function __construct(
+        ModularPageRepositoryContract $components
+    )
+    {
+        $this->components = $components;
+    }
+
     /**
      * Display a childpage using components.
      */
@@ -192,6 +203,9 @@ class ChildpageWithComponentsController extends Controller
             ],
         ];
 
+        $components = $this->components->componentClasses($components);
+        $components = $this->components->componentStyles($components);
+
         // Assign components globally
         $request->data['base']['components'] = $components;
 
@@ -211,7 +225,6 @@ class ChildpageWithComponentsController extends Controller
 
             config(['base.hero_full_controllers' => [$request->data['base']['page']['controller']]]);
         }
-
         return view('childpage', merge($request->data));
     }
 }
