@@ -1,6 +1,7 @@
 <?php
 
 namespace Styleguide\Http\Controllers;
+use Contracts\Repositories\ModularPageRepositoryContract;
 
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
@@ -20,9 +21,13 @@ class FullWidthController extends Controller
     /**
      * Construct the controller.
      */
-    public function __construct(Factory $faker)
+    public function __construct(
+        Factory $faker,
+        ModularPageRepositoryContract $components
+    )
     {
         $this->faker['faker'] = $faker->create();
+        $this->components = $components;
     }
 
     /**
@@ -57,6 +62,9 @@ class FullWidthController extends Controller
                 'component' => [
                     'filename' => 'icons-row',
                     'columns' => 2,
+                    'backgroundImageUrl' => '/styleguide/image/3200x1140',
+                    'heading' => 'Icons row',
+                    'sectionClass' => 'mt-gutter-lg py-gutter-lg',
                 ],
             ],
 
@@ -72,15 +80,6 @@ class FullWidthController extends Controller
                 ],
             ],
 
-            'button_row_1' => [
-                'data' => app(Button::class)->create(3, false, [
-                ]),
-                'component' => [
-                    'heading' => 'Button row',
-                    'filename' => 'button-row',
-                ],
-            ],
-
             'catalog_1' => [
                 'data' => app(GenericPromo::class)->create(3, false, [
                     'description' => '',
@@ -90,6 +89,7 @@ class FullWidthController extends Controller
                     'filename' => 'catalog',
                     'columns' => '3',
                     'showDescription' => false,
+                    'sectionClass' => 'py-gutter-lg bg-gray-100',
                 ],
             ],
 
@@ -103,13 +103,6 @@ class FullWidthController extends Controller
                 ],
             ],
 
-            'accordion_1' => [
-                'data' => app(GenericPromo::class)->create(4, false),
-                'component' => [
-                    'filename' => 'accordion',
-                ],
-            ],
-
             'promo_column_2' => [
                 'data' => app(GenericPromo::class)->create(1, false, [
                     'title' => 'Featured promo (promo column)',
@@ -120,6 +113,16 @@ class FullWidthController extends Controller
                     'heading' => '',
                     'filename' => 'promo-column',
                     'gradientOverlay' => true,
+                    'columnSpan' => '6',
+                ],
+            ],
+
+            'accordion_1' => [
+                'data' => app(GenericPromo::class)->create(4, false),
+                'component' => [
+                    'filename' => 'accordion',
+                    'columnSpan' => '6',
+                    'sectionClass' => 'end',
                 ],
             ],
 
@@ -129,14 +132,7 @@ class FullWidthController extends Controller
                 'component' => [
                     'heading' => 'Featured news',
                     'filename' => 'news-row',
-                ],
-            ],
-
-            'events_column' => [
-                'data' => app(Event::class)->create(4, false),
-                'component' => [
-                    'heading' => 'Special events',
-                    'filename' => 'events-column',
+                    'sectionClass' => 'bg-gray-100 py-gutter-lg',
                 ],
             ],
 
@@ -150,6 +146,16 @@ class FullWidthController extends Controller
                     'heading' => '',
                     'filename' => 'promo-column',
                     'gradientOverlay' => true,
+                    'columnSpan' => 5,
+                ],
+            ],
+
+            'events_column' => [
+                'data' => app(Event::class)->create(4, false),
+                'component' => [
+                    'heading' => 'Special events',
+                    'filename' => 'events-column',
+                    'columnSpan' => 7,
                 ],
             ],
 
@@ -162,37 +168,7 @@ class FullWidthController extends Controller
                     'columns' => '1',
                     'showDescription' => false,
                     'imageSize' => 'small',
-                ],
-            ],
-
-            'spotlight_column' => [
-                'data' => app(Spotlight::class)->create(2, false),
-                'component' => [
-                    'heading' => 'Spotlight',
-                    'filename' => 'spotlight-column',
-                    'showDescription' => true,
-                ],
-            ],
-
-            'promo_row_1' => [
-                'data' => app(GenericPromo::class)->create(2, false),
-                'component' => [
-                    'heading' => 'Featured section',
-                    'filename' => 'promo-row',
-                    'imagePosition' => 'alternate',
-                ],
-            ],
-
-            'promo_column_3' => [
-                'data' => app(GenericPromo::class)->create(3, false, [
-                    'relative_url' => '/styleguide/image/600x450',
-                    'description' => '',
-                ]),
-                'component' => [
-                    'heading' => 'Highlights',
-                    'filename' => 'catalog',
-                    'columns' => '3',
-                    'showDescription' => false,
+                    'columnSpan' => 8,
                 ],
             ],
 
@@ -204,6 +180,28 @@ class FullWidthController extends Controller
                 'component' => [
                     'heading' => 'Button column',
                     'filename' => 'button-column',
+                    'columnSpan' => 4,
+                ],
+            ],
+
+            'spotlight_row' => [
+                'data' => app(Spotlight::class)->create(1, false),
+                'component' => [
+                    'heading' => 'Spotlight',
+                    'filename' => 'spotlight-column',
+                    'showDescription' => true,
+                    'sectionClass' => 'bg-gold-100 py-gutter-lg'
+                ],
+            ],
+
+            'promo_row_1' => [
+                'data' => app(GenericPromo::class)->create(2, false),
+                'component' => [
+                    'heading' => 'Featured section',
+                    'filename' => 'promo-row',
+                    'imagePosition' => 'alternate',
+                    'columnSpan' => 10,
+                    'sectionClass' => 'end'
                 ],
             ],
 
@@ -217,9 +215,22 @@ class FullWidthController extends Controller
                 ]),
                 'component' => [
                     'filename' => 'promo-row',
+                    'heading' => 'Promo row',
                     'columns' => '2',
                 ],
             ],
+
+            'button_row_1' => [
+                'data' => app(Button::class)->create(3, false, [
+                ]),
+                'component' => [
+                    'heading' => 'Button row with background image',
+                    'filename' => 'button-row',
+                    'backgroundImageUrl' => '/styleguide/image/3200x1140',
+                    'sectionClass' => 'py-gutter-xl'
+                ],
+            ],
+
         ];
 
         if (!empty($components)) {
@@ -241,8 +252,11 @@ class FullWidthController extends Controller
 
         $heroClass['heroClass'] = 'full-width-styleguide-hero';
 
+        $components = $this->components->componentClasses($components);
+        $components = $this->components->componentStyles($components);
+
         $request->data['base']['components'] = $components;
 
-        return view('styleguide-fullwidth', merge($request->data, $this->faker, $components, $heroClass));
+        return view('childpage', merge($request->data, $this->faker, $components, $heroClass));
     }
 }
