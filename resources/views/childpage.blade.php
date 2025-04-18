@@ -8,6 +8,4 @@
             {!! $base['page']['content']['main'] !!}
         </div>
     @endif
-
-    @include('partials.component-loop')
 @endsection
