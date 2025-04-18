@@ -1,5 +1,7 @@
 /* Combination of normalize and tailwind resets */
 @tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @import "~mediabox/dist/mediabox";
 @import "~flickity/dist/flickity";
@@ -42,17 +44,3 @@
 
 /* Site specific */
 @import "site-specific/theme";
-
-/* Tailwind */
-@tailwind components;
-@tailwind utilities;
-
-@layer utilities {
-    .col-count-2 {
-        column-count: 2;
-    }
-
-    .break-avoid {
-       break-inside: avoid;
-    }
-}
