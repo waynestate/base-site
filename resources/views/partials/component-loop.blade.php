@@ -6,10 +6,11 @@
 --}}
 
 @if(!empty($base['components']))
-    <div id="component-loop" class="flex flex-wrap items-start mt:justify-center {{ $base['layout-config']['layoutClass'] ?? '[&>section]:mb-gutter-xl' }}">
+    <div id="component-loop" class="flex flex-wrap items-start mt:justify-center">
         @foreach($base['components'] as $componentName => $component)
             @if(!empty($component['data']) && !empty($component['component']['filename']) && \View::exists('components/'.$component['component']['filename']))
-                <section id="{{ Str::slug($componentName) }}" class="relative w-full {{ $component['component']['componentClasses'] ?? ''}}" {!! $component['component']['componentStyle'] ?? '' !!}>
+                <section id="{{ Str::slug($componentName) }}" 
+                    class="relative w-full {{ $component['component']['componentClasses'] ?? ''}}" {!! $component['component']['componentStyle'] ?? '' !!}>
                         @if(!empty($component['component']['heading']))
                             @include('partials/heading', ['heading' => $component['component']['heading'], 'headingClass' => 'mt-0 '.($component['component']['headingClass'] ?? ''), 'headingLevel' => !empty($component['component']['headingLevel']) ? $component['component']['headingLevel'] : 'h2'])
                         @endif
