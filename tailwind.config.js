@@ -91,6 +91,18 @@ module.exports = {
             pattern: /colspan-([1-12])?/,
             variants: [,'md','lg','xl','2xl','mt'],
         },
+        {
+            pattern: /px-container?/,
+            variants: [,'md','lg','xl','2xl','mt'],
+        },
+        {
+            pattern: /px-container?/,
+            variants: [,'md','lg','xl','2xl','mt'],
+        },
+        {
+            pattern: /gutter?/,
+            variants: [,'md','lg','xl','2xl','mt'],
+        },
         '/form_responses/',
     ],
     theme: {
