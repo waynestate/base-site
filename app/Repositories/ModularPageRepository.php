@@ -294,10 +294,6 @@ class ModularPageRepository implements ModularPageRepositoryContract
         foreach ($components as $componentName => $component) {
             $classes[$componentName]['filename'] = $component['component']['filename'] ?? '';
 
-            if (!empty($component['component']['sectionClass'])) {
-                $classes[$componentName]['section'] = $component['component']['sectionClass'];
-            }
-
             if (!empty($component['component']['columnSpan'])) {
                 $classes[$componentName]['size'] = 'px-4 mt:colspan-'.$component['component']['columnSpan'];
             } else {
@@ -308,12 +304,16 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 $classes[$componentName]['background'] = 'bg-cover bg-top';
             }
 
-            // Section gutters, bottom margin 
+            if (!empty($component['component']['sectionClass'])) {
+                $classes[$componentName]['section'] = $component['component']['sectionClass'];
+            }
+
+            // Section gutters, bottom margin
             // - No gutter if component uses margin-bottom class
             // - No gutter on heading component
             // - No gutter on very last component
-            if (empty(preg_grep('/mb-/', $classes[$componentName])) 
-                && !Str::contains($componentName, 'heading') 
+            if (empty(preg_grep('/mb-/', $classes[$componentName]))
+                && !Str::contains($componentName, 'heading')
                 && $componentName != array_key_last($components)
             ) {
                 $classes[$componentName]['gutter'] = 'mb-gutter-xl';
