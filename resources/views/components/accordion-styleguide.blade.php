@@ -4,12 +4,12 @@
 <ul class="accordion">
     @foreach($data as $item)
         <li>
-            <a href="#definition-{{ $item['promo_item_id'] }}" id="definition-{{ $item['promo_item_id'] }}"><span aria-hidden="true"></span>{{ $item['title'] }}</a>
+            <a href="#{{ $item['promo_item_id'] }}"><span aria-hidden="true"></span>{{ $item['title'] }}</a>
             <div class="content">
                 {!! $item['description'] !!}
 
-                <table style="cell-padding: 5px;" class="mt-4 {{ Str::contains($item['promo_item_id'], 'componentConfiguration') ? 'no-stripe' : '' }}">
-                    @if(Str::contains($item['promo_item_id'], 'componentConfiguration'))
+                <table style="cell-padding: 5px;" class="mt-4 {{ Str::contains($item['promo_item_id'], 'component-config') ? 'no-stripe' : '' }}">
+                    @if(Str::contains($item['promo_item_id'], 'component-config'))
                         <thead>
                             <tr>
                                 <th class="md:w-2/5">Page field</th>
@@ -28,7 +28,7 @@
                         </tbody>
                     @endif
 
-                    @if($item['promo_item_id'] === 'promotionGroupDetails')
+                    @if($item['promo_item_id'] === 'promo-details')
                         <thead>
                             <tr>
                                 <th colspan="2">Available fields</th>
