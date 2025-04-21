@@ -84,15 +84,7 @@ module.exports = {
             variants: ['sm', 'md', 'lg', 'xl', '2xl', '3xl', 'mt'],
         },
         {
-            pattern: /col-start(-[1-4])?/,
-            variants: ['md', 'lg', 'xl'],
-        },
-        {
             pattern: /colspan-([1-12])?/,
-            variants: [,'md','lg','xl','2xl','mt'],
-        },
-        {
-            pattern: /px-container?/,
             variants: [,'md','lg','xl','2xl','mt'],
         },
         {
@@ -142,7 +134,8 @@ module.exports = {
                 'container': 'max(1rem, (100% - 73rem) / 2)',
                 'container-lg': 'max(1rem, (100% - 73rem) / 2)',
                 'gutter': '1rem',
-                'gutter-md': '1.5rem',
+                'gutter-sm': '1.5rem',
+                'gutter-md': '2rem',
                 'gutter-lg': '3rem',
                 'gutter-xl': '4rem',
             },
