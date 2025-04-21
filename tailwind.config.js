@@ -92,7 +92,7 @@ module.exports = {
             variants: [,'md','lg','xl','2xl','mt'],
         },
         {
-            pattern: /gutter?/,
+            pattern: /gutter-?/,
             variants: [,'md','lg','xl','2xl','mt'],
         },
         '/form_responses/',

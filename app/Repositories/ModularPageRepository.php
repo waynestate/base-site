@@ -316,7 +316,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 && !Str::contains($componentName, 'heading')
                 && $componentName != array_key_last($components)
             ) {
-                $classes[$componentName]['gutter'] = 'mb-gutter-xl';
+                $classes[$componentName]['gutter'] = 'mb-gutter-md';
             }
 
             // Forcing a space delimeter

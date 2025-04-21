@@ -81,7 +81,7 @@ class ChildpageWithComponentsController extends Controller
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter-lg'
+                    'sectionClass' => '-mt-gutter'
                 ],
             ],
 
@@ -115,7 +115,7 @@ class ChildpageWithComponentsController extends Controller
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter-lg'
+                    'sectionClass' => '-mt-gutter'
                 ],
             ],
 
@@ -168,7 +168,7 @@ class ChildpageWithComponentsController extends Controller
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter-md'
+                    'sectionClass' => '-mt-gutter'
                 ],
             ],
 
@@ -239,7 +239,7 @@ class ChildpageWithComponentsController extends Controller
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter-md'
+                    'sectionClass' => '-mt-gutter'
                 ],
             ],
 
@@ -308,7 +308,7 @@ class ChildpageWithComponentsController extends Controller
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter-md'
+                    'sectionClass' => '-mt-gutter'
                 ],
             ],
 
@@ -364,7 +364,7 @@ class ChildpageWithComponentsController extends Controller
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter-md'
+                    'sectionClass' => '-mt-gutter'
                 ],
             ],
 
@@ -400,7 +400,7 @@ class ChildpageWithComponentsController extends Controller
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter-md'
+                    'sectionClass' => '-mt-gutter'
                 ],
             ],
         ];

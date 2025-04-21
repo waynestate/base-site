@@ -89,7 +89,7 @@ class FullWidthController extends Controller
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter-lg'
+                    'sectionClass' => '-mt-gutter'
                 ],
             ],
             // Catalog with background
@@ -126,7 +126,7 @@ class FullWidthController extends Controller
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter-lg'
+                    'sectionClass' => '-mt-gutter'
                 ],
             ],
 
@@ -200,7 +200,7 @@ class FullWidthController extends Controller
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter-lg'
+                    'sectionClass' => '-mt-gutter'
                 ],
             ],
 
@@ -232,7 +232,7 @@ class FullWidthController extends Controller
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter-lg'
+                    'sectionClass' => '-mt-gutter'
                 ],
             ],
 
@@ -286,7 +286,7 @@ class FullWidthController extends Controller
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter-lg'
+                    'sectionClass' => '-mt-gutter'
                 ],
             ],
 
@@ -313,7 +313,7 @@ class FullWidthController extends Controller
                 'component' => [
                     'filename' => 'button-row',
                     'columns' => 1,
-                    'sectionClass' => 'pt-gutter-lg pb-gutter-xl bg-gray-100 -mt-gutter-xl'
+                    'sectionClass' => 'pt-gutter-lg pb-gutter-xl bg-gray-100 -mt-gutter-md'
                 ],
             ],
 
@@ -338,14 +338,14 @@ class FullWidthController extends Controller
                             'Data' => '{
 "id": 0,
 "columns": 1,
-"sectionClass": "pt-gutter-lg pb-gutter-xl bg-gray-100 -mt-gutter-xl",
+"sectionClass": "pt-gutter-lg pb-gutter-xl bg-gray-100 -mt-gutter",
 }',
                         ],
                     ],
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter-lg'
+                    'sectionClass' => '-mt-gutter'
                 ],
             ],
 
@@ -407,7 +407,7 @@ class FullWidthController extends Controller
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter-lg'
+                    'sectionClass' => '-mt-gutter'
                 ],
             ],
 
@@ -441,7 +441,7 @@ class FullWidthController extends Controller
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter-lg'
+                    'sectionClass' => '-mt-gutter'
                 ],
             ],
 
@@ -477,7 +477,7 @@ class FullWidthController extends Controller
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter-lg'
+                    'sectionClass' => '-mt-gutter'
                 ],
             ],
 
@@ -512,7 +512,7 @@ class FullWidthController extends Controller
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter-md'
+                    'sectionClass' => '-mt-gutter'
                 ],
             ],
 
