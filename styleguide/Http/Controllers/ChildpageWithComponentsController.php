@@ -1,8 +1,8 @@
 <?php
 
 namespace Styleguide\Http\Controllers;
-use Contracts\Repositories\ModularPageRepositoryContract;
 
+use Contracts\Repositories\ModularPageRepositoryContract;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -14,7 +14,6 @@ use Factories\GenericPromo;
 use Factories\ArticleMeta;
 use Factories\ArticleComponent;
 use Factories\Event;
-use Factories\EventFullListing;
 use Factories\Video;
 
 class ChildpageWithComponentsController extends Controller
@@ -25,8 +24,7 @@ class ChildpageWithComponentsController extends Controller
     public function __construct(
         Factory $faker,
         ModularPageRepositoryContract $components
-    )
-    {
+    ) {
         $this->faker = $faker->create();
         $this->components = $components;
     }
@@ -51,7 +49,9 @@ class ChildpageWithComponentsController extends Controller
                     'filename' => 'hero',
                 ],
             ],
-            'button-row' => [
+
+            // Button row
+            'button_row_1' => [
                 'data' => app(Button::class)->create(2, false, [
                     'option' => 'green',
                     'excerpt' => '',
@@ -60,25 +60,72 @@ class ChildpageWithComponentsController extends Controller
                 ]),
                 'component' => [
                     'filename' => 'button-row',
-                    'sectionClass' => 'mb-0',
                 ],
             ],
 
-            'spotlight' => [
+            // Button row - configuration accordion
+            'accordion-1' => [
+                'data' => [
+                    0 => [
+                        'promo_item_id' => 'component-config-button-row',
+                        'title' => 'Button row area configuration',
+                        'description' => '',
+                        'tr1' => [
+                            'Page field' => 'modular-button-row',
+                            'Data' => '{
+"id": 0,
+"columns": 3,
+}',
+                        ],
+                    ],
+                ],
+                'component' => [
+                    'filename' => 'accordion-styleguide',
+                    'sectionClass' => '-mt-gutter-lg'
+                ],
+            ],
+
+            // Spotlight row
+            'spotlight_row' => [
                 'data' => app(Spotlight::class)->create(1, false),
                 'component' => [
                     'heading' => 'Spotlight',
                     'filename' => 'spotlight-row',
                     'showDescription' => true,
+                    'sectionClass' => 'bg-gold-50 py-gutter-md mx-4 rounded'
                 ],
             ],
 
+            // Spotlight row - configuration accordion
+            'accordion-8' => [
+                'data' => [
+                    0 => [
+                        'promo_item_id' => 'component-config-spotlight-row',
+                        'title' => 'Spotlight row area configuration',
+                        'description' => '',
+                        'tr1' => [
+                            'Page field' => 'modular-spotlight-row',
+                            'Data' => '{
+"id": 0,
+"showDescription": true,
+"sectionClass": "bg-gold-50 py-gutter-md mx-4 rounded",
+}',
+                        ],
+                    ],
+                ],
+                'component' => [
+                    'filename' => 'accordion-styleguide',
+                    'sectionClass' => '-mt-gutter-lg'
+                ],
+            ],
+
+            // Additional content
             'promo-row-1' => [
                 'data' => app(GenericPromo::class)->create(1, false, [
                     'youtube_id' => '',
                     'relative_url' => '',
                     'link' => '',
-                    'title' => 'Additional content [promo row]',
+                    'title' => 'Additional content (promo row)',
                     'description' => '<p>Example placement of an introductory paragraph describing the information laid out in the accordion below.</p><p>This is a separate promo group using the "content row" component. Below this is a different promo group with the accordion data and no component heading specified.</p>',
                     'excerpt' => '',
                 ]),
@@ -89,10 +136,39 @@ class ChildpageWithComponentsController extends Controller
                 ],
             ],
 
-            'accordion-1' => [
+            'accordion-99' => [
                 'data' => app(GenericPromo::class)->create(4, false),
                 'component' => [
                     'filename' => 'accordion',
+                ],
+            ],
+
+            // Additional content - configuration accordion
+            'accordion-3' => [
+                'data' => [
+                    0 => [
+                        'promo_item_id' => 'component-config-additional-content',
+                        'title' => 'Additional resources area configuration',
+                        'description' => '',
+                        'tr1' => [
+                            'Page field' => 'modular-promo-row',
+                            'Data' => '{
+"id": 0,
+"showExcerpt": false,
+"sectionClass": "mb-0",
+}',
+                        ],
+                        'tr2' => [
+                            'Page field' => 'modular-accordion',
+                            'Data' => '{
+"id": 0,
+}',
+                        ],
+                    ],
+                ],
+                'component' => [
+                    'filename' => 'accordion-styleguide',
+                    'sectionClass' => '-mt-gutter-md'
                 ],
             ],
 
@@ -110,7 +186,7 @@ class ChildpageWithComponentsController extends Controller
 
             'promo-column-1' => [
                 'data' => app(GenericPromo::class)->create(1, false, [
-                    'title' => 'Featured article [promo column]',
+                    'title' => 'Featured article (promo column)',
                     'relative_url' => '/styleguide/image/770x434',
                     'description' => '',
                 ]),
@@ -128,6 +204,42 @@ class ChildpageWithComponentsController extends Controller
                 'component' => [
                     'filename' => 'news-column',
                     'columnSpan' => 6,
+                ],
+            ],
+
+            // News - configuration accordion
+            'accordion-4' => [
+                'data' => [
+                    0 => [
+                        'promo_item_id' => 'component-config-news',
+                        'title' => 'News area configuration',
+                        'description' => '',
+                        'tr1' => [
+                            'Page field' => 'modular-heading',
+                            'Data' => '{
+"heading": "News",
+}',
+                        ],
+                        'tr2' => [
+                            'Page field' => 'modular-promo-row',
+                            'Data' => '{
+"id": 0,
+"showExcerpt": false,
+"gradientOverlay": true,
+"columnSpan": 6,
+}',
+                        ],
+                        'tr3' => [
+                            'Page field' => 'modular-news-column',
+                            'Data' => '{
+"columnSpan": 6,
+}',
+                        ],
+                    ],
+                ],
+                'component' => [
+                    'filename' => 'accordion-styleguide',
+                    'sectionClass' => '-mt-gutter-md'
                 ],
             ],
 
@@ -154,27 +266,63 @@ class ChildpageWithComponentsController extends Controller
 
             'promo-column-2' => [
                 'data' => app(GenericPromo::class)->create(1, false, [
-                    'title' => 'Featured event [promo column]',
+                    'title' => 'Featured event (promo column)',
                     'relative_url' => '/styleguide/image/600x600',
                     'description' => '',
                 ]),
                 'component' => [
                     'heading' => '',
                     'filename' => 'promo-column',
-                    //'gradientOverlay' => true,
                     'columnSpan' => 5,
                 ],
             ],
 
+            // Events- configuration accordion
+            'accordion-5' => [
+                'data' => [
+                    0 => [
+                        'promo_item_id' => 'component-config-events',
+                        'title' => 'Events area configuration',
+                        'description' => '',
+                        'tr1' => [
+                            'Page field' => 'modular-heading',
+                            'Data' => '{
+"heading": "Events",
+}',
+                        ],
+                        'tr2' => [
+                            'Page field' => 'modular-events-column',
+                            'Data' => '{
+"columnSpan": 7,
+}',
+                        ],
+                        'tr3' => [
+                            'Page field' => 'modular-promo-row',
+                            'Data' => '{
+"id": 0,
+"showExcerpt": false,
+"columnSpan": 5,
+}',
+                        ],
+                    ],
+                ],
+                'component' => [
+                    'filename' => 'accordion-styleguide',
+                    'sectionClass' => '-mt-gutter-md'
+                ],
+            ],
+
+            // Video promo column
             'promo-column-3' => [
                 'data' => app(Video::class)->create(1, false),
                 'component' => [
-                    'heading' => 'Promo column',
+                    'heading' => 'Video promo column',
                     'filename' => 'promo-column',
                     'columnSpan' => 8,
                 ],
             ],
 
+            // Video buttons
             'button-column' => [
                 'data' => app(Button::class)->create(4, false, [
                     'option' => 'Default',
@@ -183,10 +331,44 @@ class ChildpageWithComponentsController extends Controller
                 'component' => [
                     'heading' => 'Button column',
                     'filename' => 'button-column',
+                    'headingLevel' => 'h3',
                     'columnSpan' => 4,
                 ],
             ],
 
+            // Video - configuration accordion
+            'accordion-6' => [
+                'data' => [
+                    0 => [
+                        'promo_item_id' => 'component-config-video',
+                        'title' => 'Video area configuration',
+                        'description' => '',
+                        'tr1' => [
+                            'Page field' => 'modular-promo-column',
+                            'Data' => '{
+"id":0,
+"heading":"Video promo column"
+"columnSpan": 8,
+}',
+                        ],
+                        'tr2' => [
+                            'Page field' => 'modular-button-column',
+                            'Data' => '{
+"id": 0,
+"heading":"Button column"
+"columnSpan": 4,
+"headingLevel": "h3",
+}',
+                        ],
+                    ],
+                ],
+                'component' => [
+                    'filename' => 'accordion-styleguide',
+                    'sectionClass' => '-mt-gutter-md'
+                ],
+            ],
+
+            // Catalog
             'catalog-1' => [
                 'data' => app(GenericPromo::class)->create(6, false, [
                     'description' => '',
@@ -196,6 +378,29 @@ class ChildpageWithComponentsController extends Controller
                     'filename' => 'catalog',
                     'columns' => '3',
                     'showDescription' => false,
+                ],
+            ],
+
+            // Catalog - configuration accordion
+            'accordion-7' => [
+                'data' => [
+                    0 => [
+                        'promo_item_id' => 'component-config-catalog',
+                        'title' => 'Catalog area configuration',
+                        'description' => '',
+                        'tr1' => [
+                            'Page field' => 'modular-catalog-column',
+                            'Data' => '{
+"id":0,
+"heading":"Video promo column"
+"columnSpan": 8,
+}',
+                        ],
+                    ],
+                ],
+                'component' => [
+                    'filename' => 'accordion-styleguide',
+                    'sectionClass' => '-mt-gutter-md'
                 ],
             ],
         ];
