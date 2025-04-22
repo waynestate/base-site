@@ -80,7 +80,9 @@
             @include('components.breadcrumbs', ['breadcrumbs' => $base['breadcrumbs'] ?? ''])
 
             <div id="content" tabindex="-1">
-                @yield('content')
+                <div class="px-container">
+                    @yield('content')
+                </div>
 
                 @include('partials.component-loop')
             </div>

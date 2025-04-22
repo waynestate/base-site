@@ -102,7 +102,7 @@ return [
     */
     'hero_full_controllers' => [
         'HomepageController',
-        'FullWidthController',
+        'FullWidthController'
     ],
 
     /*
