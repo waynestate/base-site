@@ -154,13 +154,10 @@ class PromoRepository extends Repository
         })
         ->toArray();
 
-
         /*
         |--------------------------------------------------------------------------
-        | Modular components 
+        | Modular components
         |--------------------------------------------------------------------------
-        |
-        |
         */
 
         // Add modular components into global data
@@ -180,6 +177,12 @@ class PromoRepository extends Repository
             config(['base.hero_full_controllers' => [$data['page']['controller']]]);
             unset($components[$hero_key]);
         }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Setting global variables
+        |--------------------------------------------------------------------------
+        */
 
         $global_promos =  merge([
             'contact' => app(FooterContact::class)->create(1),
