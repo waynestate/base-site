@@ -3,21 +3,25 @@
 namespace Styleguide\Pages;
 
 use Factories\Page as PageFactory;
+use Factories\ArticleMeta;
 
-class ChildpageWithComponents extends Page
+class FullWidth extends Page
 {
+    /** {@inheritdoc} **/
+    public $path = '/styleguide/fullwidth';
+
     /**
      * {@inheritdoc}
      */
     public function getPageData()
     {
-        return app(PageFactory::class)->create(1, true, [
+        $page = app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'ChildpageWithComponentsController',
-                'title' => 'Childpage with components',
-                'id' => 101110700,
+                'controller' => 'FullWidthController',
+                'title' => 'Full width template',
+                'id' => 101109,
                 'content' => [
-                    'main' => '',
+                    'main' => '<p>'.$this->faker->paragraph(8).'</p>'
                 ],
             ],
             'site' => [
@@ -30,5 +34,183 @@ class ChildpageWithComponents extends Page
                 ],
             ],
         ]);
+
+        $page['data'] = [
+            // TODO make this work and  add it to styleguide menu
+            /*
+            'modular-layout-config' => [
+                'component' => [
+                    'layoutClass' => '',
+                    'pageClass' => '',
+                ],
+            ], 
+             */
+            'modular-hero' => [
+                'component' => [
+                    'filename' => 'hero',
+                    'heroClass' => 'full-width-styleguide-hero', //TODO make this work
+                ],
+            ],
+            'modular-spotlight' => [
+                'component' => [
+                    'filename' => 'spotlight',
+                    'heading' => 'Spotlight',
+                    'showDescription' => true,
+                    'sectionClass' => 'bg-gold-100 py-10',
+                ],
+            ],
+            'modular-icons-row-1' => [
+                'component' => [
+                    'filename' => 'icons-row',
+                    'limit' => 6, // TODO extract this from 'config' or implode specified values
+                    'columns' => 2,
+                    'backgroundImageUrl' => '/styleguide/image/3200x1140',
+                ],
+            ],
+            'modular-catalog-3' => [
+                'component' => [
+                    'filename' => 'catalog',
+                    'limit' => 6,
+                    'heading' => 'Catalog',
+                    'columns' => '3',
+                    'showDescription' => false,
+                    'sectionClass' => 'bg-gray-100 py-10',
+                ],
+            ],
+
+            'modular-promo-row' => [
+                'component' => [
+                    'filename' => 'content-row',
+                    'heading' => 'Content row',
+                ],
+            ],
+
+            // TODO why is this breaking
+            /*
+            'modular-heading-1' => [
+                'component' => [
+                    'filename' => 'heading',
+                    'heading' => 'heading',
+                ],
+            ],
+             */
+
+            'modular-promo-column-2' => [
+                'component' => [
+                    'filename' => 'promo-column',
+                    'heading' => '',
+                    'gradientOverlay' => true,
+                    'columnSpan' => '6',
+                ],
+            ],
+
+            'modular-accordion-1' => [
+                'component' => [
+                    'filename' => 'accordion',
+                    'columnSpan' => '6',
+                    'sectionClass' => 'end',
+                ],
+            ],
+
+            'modular-news_row' => [
+                'component' => [
+                    'filename' => 'news-row',
+                    'heading' => 'Featured news',
+                    'sectionClass' => 'bg-gray-100 py-10',
+                ],
+                'meta' => app(ArticleMeta::class)->create(),
+            ],
+
+            'modular-promo-column-1' => [
+                'component' => [
+                    'filename' => 'promo-column',
+                    'heading' => '',
+                    'gradientOverlay' => true,
+                    'columnSpan' => '5',
+                ],
+            ],
+
+            'modular-events-column' => [
+                'component' => [
+                    'filename' => 'events-column',
+                    'heading' => 'Special events',
+                    'columnSpan' => '7'
+                ],
+            ],
+
+            'modular-icons-top-row-2' => [
+                'component' => [
+                    'filename' => 'icons-top-row',
+                    'heading' => 'Icons top row',
+                    'limit' => 5,
+                    'columns' => 5,
+                    'headingClass' => 'divider-gold mb-8',
+                ],
+            ],
+
+            'modular-spotlight-row' => [
+                'component' => [
+                    'filename' => 'spotlight-row',
+                    'heading' => 'Spotlight',
+                    'showDescription' => true,
+                    'sectionClass' => 'bg-gold-100 py-10'
+                ],
+            ],
+
+            'modular-catalog-2' => [
+                'component' => [
+                    'filename' => 'catalog',
+                    'heading' => 'One column catalog',
+                    'limit' => 2,
+                    'columns' => '1',
+                    'showDescription' => false,
+                    'imageSize' => 'small',
+                    'columnSpan' => 8,
+                ],
+            ],
+
+            'modular-button-column' => [
+                'component' => [
+                    'filename' => 'button-column',
+                    'limit' => 3,
+                    'heading' => 'Resources: Button column',
+                    'columnSpan' => '4',
+                    'headingLevel' => 'h4'
+                ],
+            ],
+
+            'modular-promo-row-1' => [
+                'component' => [
+                    'filename' => 'promo-row',
+                    'limit' => 2,
+                    'heading' => 'Promo row alternate',
+                    'imagePosition' => 'alternate',
+                    'sectionClass' => 'bg-gray-100 py-10',
+                ],
+            ],
+
+            'modular-promo-row-2' => [
+                'component' => [
+                    'filename' => 'promo-row',
+                    'heading' => 'Content row',
+                    'columnSpan' => 10,
+                    'headingClass' => 'divider-gold',
+                    'showImages' => false, // TODO
+                ],
+            ],
+
+            'modular-button-row-1' => [
+                'component' => [
+                    'filename' => 'button-row',
+                    'heading' => 'Button row',
+                    'limit' => 3,
+                    'sectionClass' => 'bg-gold-100 py-10',
+                    'backgroundImageUrl' => '/styleguide/image/3200x400',
+                    'sectionStyle' => 'padding-top:6rem; padding-bottom: 6rem;',
+                ],
+            ],
+        ];
+
+        return $page;
     }
 }
