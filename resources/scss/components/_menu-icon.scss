@@ -15,7 +15,3 @@
     height: 2px;
     content: '';
 }
-
-.menu-icon:hover::after {
-    @apply bg-gray-400 shadow-gray;
-}

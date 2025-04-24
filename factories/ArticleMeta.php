@@ -5,7 +5,7 @@ namespace Factories;
 use Contracts\Factories\FactoryContract;
 use Faker\Factory;
 
-class Article implements FactoryContract
+class ArticleMeta implements FactoryContract
 {
     /**
      * Construct the factory.
@@ -20,9 +20,14 @@ class Article implements FactoryContract
      */
     public function create($limit = 1, $flatten = false, $options = [])
     {
-        $data['data'] = app(ArticleComponent::class)->create($limit, $flatten, $options);
-
-        $data['meta'] = app(ArticleMeta::class)->create(1, true);
+        $data = [
+            'total' => '',
+            'per_page' => '',
+            'current_page' => '',
+            'last_page' => 3,
+            'next_page_url' => '',
+            'prev_page_url' => '',
+        ];
 
         return $data;
     }

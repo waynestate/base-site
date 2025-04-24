@@ -14,7 +14,7 @@
     left: 0.25em;
 }
 
-// Strictly inline-block anchors
+/* Strictly inline-block anchors */
 .main-menu .external a,
 .content a.external[class*="button"],
 .under-menu a.external[class*="button"] div:first-of-type {
@@ -27,7 +27,7 @@
     }
 }
 
-// Strictly inline anchors
+/* Strictly inline anchors */
 .content a.external {
     @apply relative;
 

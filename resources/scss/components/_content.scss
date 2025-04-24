@@ -1,4 +1,4 @@
-// Content returning from CMS
+/* Content returning from CMS */
 .content {
     ul {
         @apply list-disc;
@@ -56,19 +56,21 @@
         @apply mb-0;
     }
 
-    // Tailwind preflight sets images to block
+    /* Tailwind preflight sets images to block */
     img {
         @apply inline;
     }
 
-    // TODO wtf stylelint
-    // Do not rearrange any of this link and heading link css
-    // Underline all content links
+    /*
+    TODO wtf stylelint
+    Do not rearrange any of this link and heading link css
+    Underline all content links
+    */
     a {
         @apply underline;
     }
 
-    // Bottom border instead of underline all heading links
+    /* Bottom border instead of underline all heading links */
     h1,
     h2,
     h3,
@@ -78,7 +80,8 @@
         a {
             @apply no-underline border-b border-green;
         }
-        // Prevent users from having gold text
+
+        /* Prevent users from having gold text */
         &.text-gold {
             @apply text-black;
         }

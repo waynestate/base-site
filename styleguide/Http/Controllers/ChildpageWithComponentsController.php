@@ -9,7 +9,8 @@ use Factories\HeroImage;
 use Factories\Spotlight;
 use Factories\Button;
 use Factories\GenericPromo;
-use Factories\Article;
+use Factories\ArticleMeta;
+use Factories\ArticleComponent;
 use Factories\Event;
 use Factories\Video;
 
@@ -102,7 +103,8 @@ class ChildpageWithComponentsController extends Controller
             ],
 
             'news-column' => [
-                'data' => app(Article::class)->create(3, false),
+                'data' => app(ArticleComponent::class)->create(3, false),
+                'meta' => app(ArticleMeta::class)->create(),
                 'component' => [
                     'filename' => 'news-column',
                 ],

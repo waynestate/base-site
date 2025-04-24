@@ -82,6 +82,8 @@
 
             @if(!empty($base['breadcrumbs']))
                 @include('components.breadcrumbs', ['breadcrumbs' => $base['breadcrumbs']])
+            @else
+                <div class="w-full mt:pt-6"></div>
             @endif
 
             <div id="content" tabindex="-1" class="{{ !in_array($base['page']['controller'], config('base.full_width_controllers')) ? 'px-4' : '' }}">

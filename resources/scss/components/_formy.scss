@@ -64,22 +64,22 @@
         }
     }
 
-    // Fieldsets
+    /* Fieldsets */
     fieldset {
         @apply m-0 p-0 border-0;
     }
 
-    // Textareas
+    /* Textareas */
     textarea {
         @apply h-32;
     }
 
-    // Description and text blocks size
+    /* Description and text blocks size */
     p {
         @apply text-base mb-4 leading-normal;
     }
 
-    // Errors
+    /* Errors */
     .error {
         p {
             @apply text-red-500 mx-auto mt-1 mb-4 text-sm;
@@ -97,7 +97,7 @@
         }
     }
 
-    // Labels
+    /* Labels */
     label {
         @apply font-normal;
 
@@ -108,7 +108,7 @@
         }
     }
 
-    // Checkboxes and radio
+    /* Checkboxes and radio */
     div.checkbox input,
     div.radio input {
         @apply m-0 p-0;
@@ -134,7 +134,7 @@
         @apply mb-0;
     }
 
-    // The subit button
+    /* The subit button */
     #formy-button {
         @extend .button;
     }
@@ -146,13 +146,13 @@
         border-radius: 0 !important;
     }
 
-    // Text Headings
+    /* Text Headings */
     h2,
     .field_group h2 {
         @apply border-b border-gray-300 text-xl;
     }
 
-    // Login
+    /* Login */
     .login-info li {
         @apply border-b border-solid border-gray-400 text-sm px-0 py-2;
     }
@@ -175,7 +175,7 @@
         @apply text-right;
     }
 
-    // Required
+    /* Required */
     label em {
         @apply text-red-500;
     }
