@@ -70,6 +70,10 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
         $components = $this->configureComponents($rawComponents, $promos, $data);
 
+        $components = $this->componentClasses($components);
+
+        $components = $this->componentStyles($components);
+
         return $components;
     }
 
@@ -275,6 +279,80 @@ class ModularPageRepository implements ModularPageRepositoryContract
         }
 
         return $data;
+    }
+
+    public function componentClasses($components)
+    {
+        $expected_classes = [
+            'filename',
+            'section',
+            'size',
+            'background',
+            'gutter',
+        ];
+
+        foreach ($components as $componentName => $component) {
+            $classes[$componentName]['filename'] = $component['component']['filename'] ?? '';
+
+            if (!empty($component['component']['columnSpan'])) {
+                $classes[$componentName]['size'] = 'px-4 mt:colspan-'.$component['component']['columnSpan'];
+            } else {
+                $classes[$componentName]['size'] = 'px-container';
+            }
+
+            if (!empty($component['component']['backgroundImageUrl'])) {
+                $classes[$componentName]['background'] = 'bg-cover bg-top';
+            }
+
+            if (!empty($component['component']['sectionClass'])) {
+                $classes[$componentName]['section'] = $component['component']['sectionClass'];
+            }
+
+            // Section gutters, bottom margin
+            // - No gutter if component uses margin-bottom class
+            // - No gutter on heading component
+            // - No gutter on very last component
+            if (empty(preg_grep('/mb-/', $classes[$componentName]))
+                && !Str::contains($componentName, 'heading')
+                && $componentName != array_key_last($components)
+            ) {
+                $classes[$componentName]['gutter'] = 'mb-gutter-md';
+            }
+
+            // Forcing a space delimeter
+            foreach ($classes[$componentName] as $option => $class) {
+                if (in_array($option, $expected_classes)) {
+                    $components[$componentName]['component']['componentClasses'] = implode(' ', $classes[$componentName]);
+                }
+            }
+        }
+
+        return $components;
+    }
+
+    public function componentStyles($components)
+    {
+        $expected_styles = [
+            'backgroundImageUrl',
+            'sectionStyle',
+        ];
+
+        foreach ($components as $componentName => $component) {
+            if (!empty($component['component']['backgroundImageUrl'])) {
+                $styles[$componentName]['backgroundImageUrl'] = "background-image:url('".$component['component']['backgroundImageUrl']."');";
+            }
+
+            // Forcing a space delimeter
+            foreach ($component['component'] as $option => $style) {
+                if (in_array($option, $expected_styles)) {
+                    // Do i need this anymore
+                    //$styles[$componentName][] = $style;
+                    $components[$componentName]['component']['componentStyle'] = "style=\"".implode(' ', $styles[$componentName])."\"";
+                }
+            }
+        }
+
+        return $components;
     }
 
     /**

@@ -100,7 +100,10 @@ return [
     | as if it was in this array.
     |
     */
-    'hero_full_controllers' => ['HomepageController'],
+    'hero_full_controllers' => [
+        'HomepageController',
+        'FullWidthController'
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -196,7 +199,9 @@ return [
     | color or image.
     |
     */
-    'full_width_controllers' => [],
+    'full_width_controllers' => [
+        'FullWidthController',
+    ],
 
     /*
     |--------------------------------------------------------------------------

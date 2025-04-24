@@ -1,5 +1,16 @@
-.accordion.enabled {
-    @apply border-t border-gray-200 p-0 mb-4 ml-0 relative grid grid-cols-1;
+/* 
+    Figure out how to do this with tailwind breakpoints 
+    Need to specifically target max width so the column-span width can override this value
+    max-mt:w-full and max-[780px]:w-full aren't working
+*/
+section.accordion {
+    @media (width <= 780px) {
+        @apply w-full;
+    }
+}
+
+ul.accordion.enabled {
+    @apply border-t border-gray-200 p-0 mb-4 ml-0 relative grid grid-cols-1 w-full;
 
     transition: 0.3s ease all;
 
