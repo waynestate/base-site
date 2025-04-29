@@ -73,7 +73,9 @@
                 @yield('below_menu')
 
                 @if(!empty($base['under_menu']))
-                    @include('components.button-column', ['data' => $base['under_menu']])
+                    <div class="under-menu">
+                        @include('components.button-column', ['data' => $base['under_menu']])
+                    </div>
                 @endif
             </nav>
         </div>
