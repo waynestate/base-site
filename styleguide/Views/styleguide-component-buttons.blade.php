@@ -21,9 +21,17 @@
         </div>
         <div class="col-span-full content">
             <hr />
+            <h2>Mobile CTA buttons</h2>
+            <p>By default, under menu the button(s) will be injected into the page after the first <code>.content</code> paragraph.</p>
+            <p>To control where the buttons are added in the page, add the ID <code>mobile-cta-buttons</code> to any element and the buttons will be injected after that element.</p>
+            <h3>Example</h3>
+            <p id="mobile-cta-buttons">This is the element with the ID <code>mobile-cta-buttons</code>, the buttons will be injected after this element when the menu is collapsed.</p>
+        </div>
+        <div class="col-span-full content">
+            <hr />
             <h2 id="button-appearance-examples">Button appearance examples</h2>
             <p>A button's appearance depends on which fields you add to the promotion item.</p>
-            <p>For "Default" and "Green" buttons, the excerpt displays as a second line line of text, and the primary image displays as a small icon next to either one or two lines of text. 
+            <p>For "Default" and "Green" buttons, the excerpt displays as a second line line of text, and the primary image displays as a small icon next to either one or two lines of text.</p>
             <p class="mb-0">For "Image" buttons, a primary and secondary image create a layered effect. None of the text fields are used when "Image" is selected.</p> 
         </div>
         <div class="col-span-1">

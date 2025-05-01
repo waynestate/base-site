@@ -1,27 +1,36 @@
 (function () {
     "use strict";
+
+    // Only move the under menu buttons if the menu is hidden
     const menu_button = document.querySelector(".menu-toggle");
 
-    // Only move the under menu buttons if the menu is hidden 
-    if (menu_button.offsetHeight !== 0) {
-        const under_menu_dom = document.querySelector(".under-menu");
-        const body_content = document.querySelector("#content .content");
+    if (!menu_button || !menu_button.checkVisibility()) {
+        return;
+    }
 
-        // If the elements exist
-        if (under_menu_dom && body_content) {
+    // Ensure baseline elements exist
+    const under_menu_dom = document.querySelector(".under-menu");
+    const body_content_dom = document.querySelector("#content .content");
 
-            // Remove the visible bullets
-            let under_menu_list = under_menu_dom.querySelector("ul");
-            under_menu_list.setAttribute("style", "list-style:none;margin:0;");
+    if (!under_menu_dom || !body_content_dom) {
+        return;
+    }
 
-            // Inject the elements into the page
-            const first_content_p = body_content.getElementsByTagName("p");
+    // Ensure there is a place to move the buttons
+    const insert_position =
+        document.querySelector("#mobile-cta-buttons") ||
+        body_content_dom.querySelector("p");
 
-            if (first_content_p.length > 0) {
-                first_content_p[0].after(under_menu_list);
-            } else {
-                body_content.appendChild(under_menu_list);
-            }
-        }
+    if (!insert_position) {
+        return;
+    }
+
+    // Get the buttons to move
+    const buttons_under_menu = under_menu_dom.querySelector("ul");
+    buttons_under_menu.classList.add("ml-0", "my-3");
+
+    // Insert the buttons into the new location
+    if (buttons_under_menu.children.length > 0) {
+        insert_position.after(buttons_under_menu);
     }
 })();
