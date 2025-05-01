@@ -5,11 +5,8 @@ namespace Styleguide\Pages;
 use Factories\Page as PageFactory;
 use Factories\ArticleMeta;
 
-class FullWidth extends Page
+class ChildpageWithComponents extends Page
 {
-    /** {@inheritdoc} **/
-    public $path = '/styleguide/fullwidth';
-
     /**
      * {@inheritdoc}
      */
@@ -17,11 +14,11 @@ class FullWidth extends Page
     {
         $page = app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'FullWidthController',
-                'title' => 'Full width template',
-                'id' => 101109,
+                'controller' => 'ChildpageWithComponentsController',
+                'title' => 'Childpage with components',
+                'id' => 101110700,
                 'content' => [
-                    'main' => '<p>'.$this->faker->paragraph(8).'</p>'
+                    'main' => '',
                 ],
             ],
             'site' => [
