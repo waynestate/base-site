@@ -46,6 +46,9 @@ class PromoRepository extends Repository
         |
         */
 
+        // Use real promo repository data
+        //$promos = parent::getRequestData($data);
+
         // Define the pages that have under menu promos: page_id => quanity
         $under_menu_page_ids = [
             114100 => 3, // Styleguide
@@ -53,6 +56,12 @@ class PromoRepository extends Repository
 
         // Only pull under_menu promos if they match the page_ids that are specified
         $under_menu = !empty($under_menu_page_ids[$data['page']['id']]) ? app(Button::class)->create($under_menu_page_ids[$data['page']['id']]) : null;
+
+        /*
+        |--------------------------------------------------------------------------
+        | Move this to styleguide hero repository
+        |--------------------------------------------------------------------------
+        */
 
         $hero_option = $this->faker->randomElement(['Text Overlay', 'SVG Overlay', 'Half', 'Logo Overlay', '']);
 

@@ -12,8 +12,10 @@ class Page implements StyleguidePageContract
     /** @var $path **/
     public $path;
 
-    public function __construct(MenuRepository $menuRepository, Factory $faker)
-    {
+    public function __construct(
+        MenuRepository $menuRepository,
+        Factory $faker
+    ) {
         $this->menuRepository = $menuRepository;
         $this->faker = $faker->create();
     }
@@ -23,13 +25,15 @@ class Page implements StyleguidePageContract
      */
     public function getPageData()
     {
-        return app(PageFactory::class)->create(1, true, [
+        $page = app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'ChildpageController',
                 'title' => 'Childpage',
                 'id' => 1,
             ],
         ]);
+
+        return $page;
     }
 
     /**

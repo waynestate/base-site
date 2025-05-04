@@ -86,6 +86,19 @@ class ModularPageRepository implements ModularPageRepositoryContract
         $group_reference = [];
         $group_config = [];
 
+        // Encode styleguide page components
+        if (using_styleguide()) {
+            foreach ($data['data'] as $componentName => $componentData) {
+                if (!empty($componentData['component'])) {
+                    $componentData['component']['id'] = rand(1, 1000);
+                    $data['data'][$componentName] = json_encode($componentData['component']);
+                    // why did accordion 1 not have any data returned
+                    // dont use api when in styleguiide thru modular repo
+                    //
+                }
+            }
+        }
+
         foreach ($data['data'] as $pageField => $value) {
             if (Str::startsWith($pageField, 'modular-')) {
                 $name = Str::replaceFirst('modular-', '', $pageField);
@@ -100,15 +113,19 @@ class ModularPageRepository implements ModularPageRepositoryContract
                     $components[$name] = json_decode($value, true);
                     if (!empty($components[$name]['config'])) {
                         $config = explode('|', $components[$name]['config']);
+
                         // Add youtube
                         if (strpos($components[$name]['config'], 'youtube') === false) {
                             array_push($config, 'youtube');
                         }
+
                         foreach ($config as $key => $value) {
+                            // Assign selected page values
                             if (Str::startsWith($value, 'page_id')) {
                                 $config[$key] = 'page_id:'.$data['page']['id'];
                             }
 
+                            // Preserve the array
                             if (Str::startsWith($value, 'first')) {
                                 unset($config[$key]);
                             }
@@ -318,6 +335,10 @@ class ModularPageRepository implements ModularPageRepositoryContract
             ) {
                 $classes[$componentName]['gutter'] = 'mb-gutter-md';
             }
+
+            /*
+            {{ $base['layout-config']['layoutClass'] ?? 'gap-y-gutter-xl' }}
+             */
 
             // Forcing a space delimeter
             foreach ($classes[$componentName] as $option => $class) {
