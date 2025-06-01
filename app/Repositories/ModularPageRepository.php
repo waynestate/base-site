@@ -283,51 +283,94 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
     public function componentClasses($components)
     {
-        $expected_classes = [
-            'filename',
-            'section',
-            'size',
-            'background',
-            'gutter',
-        ];
-
         foreach ($components as $componentName => $component) {
-            $classes[$componentName]['filename'] = $component['component']['filename'] ?? '';
+            // Establishing final arrays so they will always exist
+            $components[$componentName]['component']['containerClass'] = $component['component']['containerClass'] ?? [];
+            $components[$componentName]['component']['backgroundClass'] = $component['component']['backgroundClass'] ?? [];
+            $components[$componentName]['component']['componentClass'] = $component['component']['componentClass'] ?? [];
 
+            // containerClass => filename
+            if (!empty($component['component']['filename'])) {
+                $components[$componentName]['component']['containerClass'][] = $component['component']['filename'];
+            }
+
+            // containerClass => columnSpan
             if (!empty($component['component']['columnSpan'])) {
-                $classes[$componentName]['size'] = 'px-4 mt:colspan-'.$component['component']['columnSpan'];
+                // Inject the column span class
+                array_push($components[$componentName]['component']['containerClass'], 'px-4', 'mt:colspan-'.$component['component']['columnSpan']);
             } else {
-                $classes[$componentName]['size'] = 'px-container';
+                // Default width
+                $components[$componentName]['component']['containerClass'][] = 'px-container';
             }
 
-            if (!empty($component['component']['backgroundImageUrl'])) {
-                $classes[$componentName]['background'] = 'bg-cover bg-top';
+            // Collect all legacy class names
+            $classes = ($component['component']['sectionClass'] ?? '').' '.($component['component']['componentClass'] ?? '').' '.($component['component']['classes'] ?? '');
+
+            // Group the classes based on the container they will be applied to
+            // Set backgroundClass, containerClass, componentClass
+            if (!empty($classes)) {
+                $classes = explode(' ', $classes);
+
+                foreach ($classes as $class) {
+                    if (strpos($class, 'bg-') !== false) {
+                        // backgroundClass
+                        $components[$componentName]['component']['backgroundClass'][] = $class;
+                    } elseif (strpos($class, 'my-') !== false | strpos($class, 'mt-') !== false | strpos($class, 'mb-') !== false |  strpos($class, 'end') !== false) {
+                        // containerClass
+                        $components[$componentName]['component']['containerClass'][] = $class;
+                    } else {
+                        // componentClass
+                        $components[$componentName]['component']['componentClass'][] = $class;
+                    }
+                }
             }
 
-            if (!empty($component['component']['sectionClass'])) {
-                $classes[$componentName]['section'] = $component['component']['sectionClass'];
+            // Default background image positioning classes
+            // Be careful not to overwrite existing backgroundClass values
+            if (!empty($component['component']['backgroundImageUrl']) && empty($component['component']['backgroundClass'])) {
+                $components[$componentName]['component']['backgroundClass'] = ['bg-cover', 'bg-top'];
             }
 
-            // Section gutters, bottom margin
+            // Section gutters, bottom padding
             // - No gutter if component uses margin-bottom class
             // - No gutter on heading component
             // - No gutter on very last component
-            if (empty(preg_grep('/mb-/', $classes[$componentName]))
+            if (empty(preg_grep('/mb-/', $components[$componentName]['component']['containerClass']))
                 && !Str::contains($componentName, 'heading')
                 && $componentName != array_key_last($components)
             ) {
-                $classes[$componentName]['gutter'] = 'mb-gutter-md';
+                $components[$componentName]['component']['containerClass'] []= 'mb-gutter';
             }
 
-            // Forcing a space delimeter
-            foreach ($classes[$componentName] as $option => $class) {
-                if (in_array($option, $expected_classes)) {
-                    $components[$componentName]['component']['componentClasses'] = implode(' ', $classes[$componentName]);
-                }
+            // Implode party, hooray strings
+            $components[$componentName]['component']['containerClass'] = implode(' ',$components[$componentName]['component']['containerClass']);
+            $components[$componentName]['component']['backgroundClass'] = implode(' ',$components[$componentName]['component']['backgroundClass']);
+            $components[$componentName]['component']['componentClass'] = implode(' ',$components[$componentName]['component']['componentClass']);
+        }
+
+        dump($components);
+        return $components;
+
+        /*
+        // Component classes concatenated
+        // Forcing a space delimeter
+        foreach ($classes[$componentName] as $option => $class) {
+            if (in_array($option, $expected_classes)) {
+                $components[$componentName]['component']['componentClasses'] = implode(' ', $classes[$componentName]);
             }
         }
 
-        return $components;
+        // Capture and reassign classes that start with bg-
+        $string = $component['component']['sectionClass'] ?? '';
+        $pattern = '/\bbg\-\S+\b/i';
+
+        if (preg_match_all($pattern, $string, $backgroundClasses)) {
+            $components[$componentName]['component']['background'] = implode(' ', current($backgroundClasses));
+
+            // Remove bg classes
+            $classes[$componentName]['section'] = preg_replace($pattern, '', $string);
+        }
+        */
     }
 
     public function componentStyles($components)
