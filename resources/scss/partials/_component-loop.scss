@@ -70,13 +70,13 @@
 }
 
 // Contain or expand the background if the left menu is present
-.layout {
+.layout--full-width {
     .component__background {
         @apply absolute inset-0 -z-10; 
     }
 }
 
-.layout--show-menu {
+.layout--left-menu {
     .component__background {
         @apply block h-full w-full; 
     }
