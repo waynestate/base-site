@@ -44,7 +44,7 @@
         @yield('under-hero')
     @endif
 
-    <div class="{{ (in_array($base['page']['controller'], config('base.full_width_controllers'))) ? '' : 'max-w-[75em] mx-auto mt:flex' }}">
+    <div class="layout {{ (in_array($base['page']['controller'], config('base.full_width_controllers'))) ? 'layout--full-width' : 'layout--left-menu  max-w-[75em] mx-auto mt:flex' }}">
         <nav id="menu" class="px-container-lg mt:w-80 {{ $base['show_site_menu'] === false ? ' mt:hidden' : '' }}" aria-label="Page menu" tabindex="-1">
             @if(!empty($base['top_menu_output']) && $base['site_menu'] !== $base['top_menu'] && config('base.top_menu_enabled'))
                 @if(!empty($base['top_menu_output']))

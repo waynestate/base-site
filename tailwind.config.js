@@ -133,11 +133,12 @@ module.exports = {
             spacing: {
                 'container': 'max(1rem, (100% - 73rem) / 2)',
                 'container-lg': 'max(1rem, (100% - 73rem) / 2)',
-                'gutter': '1rem',
-                'gutter-sm': '1.5rem',
-                'gutter-md': '2rem',
-                'gutter-lg': '3rem',
-                'gutter-xl': '4rem',
+                'gutter-xs': '0.5rem',
+                'gutter-sm': '1rem',
+                'gutter': '2rem',
+                'gutter-md': '3rem',
+                'gutter-lg': '4rem',
+                'gutter-xl': '5rem',
             },
             margin: {
                 17: '4.25rem',
