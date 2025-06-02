@@ -338,13 +338,13 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 && !Str::contains($componentName, 'heading')
                 && $componentName != array_key_last($components)
             ) {
-                $components[$componentName]['component']['containerClass'] []= 'mb-gutter';
+                $components[$componentName]['component']['containerClass'] [] = 'mb-gutter';
             }
 
             // Implode party, assign all classes to their respective container
-            $components[$componentName]['component']['containerClass'] = implode(' ',$components[$componentName]['component']['containerClass']);
-            $components[$componentName]['component']['backgroundClass'] = implode(' ',$components[$componentName]['component']['backgroundClass']);
-            $components[$componentName]['component']['componentClass'] = implode(' ',$components[$componentName]['component']['componentClass']);
+            $components[$componentName]['component']['containerClass'] = implode(' ', $components[$componentName]['component']['containerClass']);
+            $components[$componentName]['component']['backgroundClass'] = implode(' ', $components[$componentName]['component']['backgroundClass']);
+            $components[$componentName]['component']['componentClass'] = implode(' ', $components[$componentName]['component']['componentClass']);
         }
 
         return $components;

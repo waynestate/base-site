@@ -49,7 +49,7 @@ class TemplateGuideController extends Controller
 
 
             // ------------------------------------
-            // Column span 
+            // Column span
             // ------------------------------------
             'promo-row-1000' => [
                 'data' => app(EmptyPromo::class)->create(1, false, [
@@ -205,7 +205,7 @@ class TemplateGuideController extends Controller
             ],
 
             // ------------------------------------
-            // Two unequal columns 
+            // Two unequal columns
             // ------------------------------------
             'promo-row-200' => [
                 'data' => app(EmptyPromo::class)->create(1, false, [
@@ -355,7 +355,7 @@ class TemplateGuideController extends Controller
 
 
             // ------------------------------------
-            // Narrow column 
+            // Narrow column
             // ------------------------------------
             'promo-row-400' => [
                 'data' => app(EmptyPromo::class)->create(1, false, [
@@ -404,7 +404,7 @@ class TemplateGuideController extends Controller
 
 
             // ------------------------------------
-            // Row pairs 
+            // Row pairs
             // ------------------------------------
             'promo-row-500' => [
                 'data' => app(EmptyPromo::class)->create(1, false, [
@@ -477,7 +477,7 @@ class TemplateGuideController extends Controller
             ],
 
             // ------------------------------------
-            // Gutters 
+            // Gutters
             // ------------------------------------
             'promo-row-600' => [
                 'data' => app(EmptyPromo::class)->create(1, false, [
