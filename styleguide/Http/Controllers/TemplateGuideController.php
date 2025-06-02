@@ -402,6 +402,19 @@ class TemplateGuideController extends Controller
                 ],
             ],
 
+            // Button row
+            'button-row-1000' => [
+                'data' => app(Button::class)->create(3, false, [
+                ]),
+                'component' => [
+                    'heading' => 'Button row with background image',
+                    'filename' => 'button-row',
+                    'backgroundImageUrl' => '/_resources/images/background.svg',
+                    'classes' => 'py-gutter-xl px-4 pt-xl pb-xl mt-gutter-lg text-white',
+                    'sectionStyle' => 'background-size:350px;',
+                ],
+            ],
+
 
             // ------------------------------------
             // Row pairs

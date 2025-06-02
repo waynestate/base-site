@@ -354,19 +354,20 @@ class ModularPageRepository implements ModularPageRepositoryContract
     {
         $expected_styles = [
             'backgroundImageUrl',
-            'sectionStyle',
+            //'sectionStyle',
         ];
 
         foreach ($components as $componentName => $component) {
             if (!empty($component['component']['backgroundImageUrl'])) {
-                $component['component']['backgroundImageUrl'] = "background-image:url('".$component['component']['backgroundImageUrl']."');";
+                //$component['component']['backgroundImageUrl'] = "background-image:url('".$component['component']['backgroundImageUrl']."');";
+                $components[$componentName]['component']['backgroundImageUrl'] = "style=\"background-image:url('".$component['component']['backgroundImageUrl']."');\"";
             }
 
             // Forcing a space delimeter
             foreach ($component['component'] as $option => $style) {
                 if (in_array($option, $expected_styles)) {
                     $styles[$componentName][] = $style;
-                    $components[$componentName]['component']['componentStyle'] = "style=\"".implode(' ', $styles[$componentName])."\"";
+                    //$components[$componentName]['component']['componentStyle'] = "style=\"".implode(' ', $styles[$componentName])."\"";
                 }
             }
         }

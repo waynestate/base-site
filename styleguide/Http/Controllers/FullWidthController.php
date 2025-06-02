@@ -55,7 +55,7 @@ class FullWidthController extends Controller
             ],
 
             // Icons row
-            'icons_row_1' => [
+            'icons-row-100' => [
                 'data' => app(Icon::class)->create(6, false, [
                     'excerpt' => '',
                 ]),
@@ -64,12 +64,12 @@ class FullWidthController extends Controller
                     'columns' => 2,
                     'backgroundImageUrl' => '/styleguide/image/3200x1140',
                     'heading' => 'Icons row',
-                    'sectionClass' => 'py-gutter-lg',
+                    'classes' => 'py-gutter-lg',
                 ],
             ],
 
             // Icons accordion
-            'accordion-1' => [
+            'accordion-101' => [
                 'data' => [
                     0 => [
                         'promo_item_id' => 'component-config-icons',
@@ -82,18 +82,18 @@ class FullWidthController extends Controller
 "heading": "Icons row"
 "columns": 2,
 "backgroundImageUrl": "/styleguide/image/3200x1140",
-"sectionClass": "py-gutter-lg",
+"classes": "py-gutter-lg",
 }',
                         ],
                     ],
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter'
+                    'classes' => '-mt-gutter-sm'
                 ],
             ],
             // Catalog with background
-            'catalog_1' => [
+            'catalog-200' => [
                 'data' => app(GenericPromo::class)->create(3, false, [
                     'description' => '',
                 ]),
@@ -102,12 +102,12 @@ class FullWidthController extends Controller
                     'filename' => 'catalog',
                     'columns' => '3',
                     'showDescription' => false,
-                    'sectionClass' => 'bg-gray-100 py-gutter-xl',
+                    'classes' => 'bg-gray-100 bg-top py-gutter-xl',
                 ],
             ],
 
             // Catalog with background accordion
-            'accordion-2' => [
+            'accordion-201' => [
                 'data' => [
                     0 => [
                         'promo_item_id' => 'component-config-catalog',
@@ -119,19 +119,19 @@ class FullWidthController extends Controller
 "id": 0,
 "heading": "Catalog with background"
 "columns": 3,
-"sectionClass": "bg-gray-100 py-gutter-xl",
+"classes": "bg-gray-100 py-gutter-xl",
 }',
                         ],
                     ],
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter'
+                    'classes' => '-mt-gutter-sm'
                 ],
             ],
 
             // Resources - heading
-            'heading-1' => [
+            'heading-300' => [
                 'data' => [
                     0 => [
                         'heading' => 'Resources',
@@ -143,7 +143,7 @@ class FullWidthController extends Controller
             ],
 
             // Resources - image
-            'promo_column_2' => [
+            'promo-column-301' => [
                 'data' => app(GenericPromo::class)->create(1, false, [
                     'title' => 'Preview (promo column)',
                     'relative_url' => '/styleguide/image/770x434',
@@ -158,17 +158,17 @@ class FullWidthController extends Controller
             ],
 
             // Resources - accordion
-            'accordion_1' => [
+            'accordion-302' => [
                 'data' => app(GenericPromo::class)->create(4, false),
                 'component' => [
                     'filename' => 'accordion',
                     'columnSpan' => 6,
-                    'sectionClass' => 'end',
+                    'classes' => 'end',
                 ],
             ],
 
             // Resources - configuration accordion
-            'accordion-3' => [
+            'accordion-303' => [
                 'data' => [
                     0 => [
                         'promo_item_id' => 'component-config-resources',
@@ -193,29 +193,30 @@ class FullWidthController extends Controller
                             'Data' => '{
 "id": 0,
 "columnSpan": 6,
-"sectionClass": "end",
+"classes": "end",
 }',
                         ],
                     ],
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter'
+                    'classes' => '-mt-gutter-sm'
                 ],
             ],
 
-            'news_row' => [
+            // News
+            'news-row-400' => [
                 'data' => app(ArticleComponent::class)->create(4, false),
                 'meta' => app(ArticleMeta::class)->create(),
                 'component' => [
                     'heading' => 'News',
                     'filename' => 'news-row',
-                    'sectionClass' => 'bg-gray-100 py-gutter-lg',
+                    'classes' => 'bg-gray-100 py-gutter-lg',
                 ],
             ],
 
             // News - configuration accordion
-            'accordion-4' => [
+            'accordion-401' => [
                 'data' => [
                     0 => [
                         'promo_item_id' => 'component-config-news',
@@ -225,19 +226,19 @@ class FullWidthController extends Controller
                             'Page field' => 'modular-news-row',
                             'Data' => '{
 "heading": "My news"
-"sectionClass": "bg-gray-100 py-gutter-lg",
+"classes": "bg-gray-100 py-gutter-lg",
 }',
                         ],
                     ],
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter'
+                    'classes' => '-mt-gutter-sm'
                 ],
             ],
 
-            // Events
-            'promo_column_1' => [
+            // Events - Promo image
+            'promo-column-501' => [
                 'data' => app(GenericPromo::class)->create(1, false, [
                     'title' => 'Featured event (promo column)',
                     'relative_url' => '/styleguide/image/600x600',
@@ -251,7 +252,8 @@ class FullWidthController extends Controller
                 ],
             ],
 
-            'events_column' => [
+            // Events - Column
+            'events-column-502' => [
                 'data' => app(Event::class)->create(4, false),
                 'component' => [
                     'heading' => 'Events',
@@ -260,8 +262,8 @@ class FullWidthController extends Controller
                 ],
             ],
 
-            // Events - configuration accordion
-            'accordion-5' => [
+            // Events - Configuration accordion
+            'accordion-503' => [
                 'data' => [
                     0 => [
                         'promo_item_id' => 'component-config-events',
@@ -286,12 +288,12 @@ class FullWidthController extends Controller
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter'
+                    'classes' => '-mt-gutter-sm'
                 ],
             ],
 
-            // Icons top row Facts
-            'icons_row_2' => [
+            // Icons top row
+            'icons-row-600' => [
                 'data' => app(Icon::class)->create(4, false, [
                     'link' => '',
                     'description' => '',
@@ -300,11 +302,12 @@ class FullWidthController extends Controller
                     'heading' => 'Facts',
                     'filename' => 'icons-top-row',
                     'columns' => 4,
-                    'sectionClass' => 'pt-gutter-xl bg-gray-100'
+                    'classes' => 'pt-gutter-xl bg-gray-100'
                 ],
             ],
 
-            'button_row_2' => [
+            // Icons top row - Button
+            'button-row-601' => [
                 'data' => app(Button::class)->create(1, false, [
                     'title' => 'Get more facts',
                     'option' => 'Green gradient',
@@ -313,12 +316,12 @@ class FullWidthController extends Controller
                 'component' => [
                     'filename' => 'button-row',
                     'columns' => 1,
-                    'sectionClass' => 'pt-gutter-lg pb-gutter-xl bg-gray-100 -mt-gutter-md'
+                    'classes' => 'pt-gutter-lg pb-gutter-xl bg-gray-100 -mt-gutter-md'
                 ],
             ],
 
-            // Facts - configuration accordion
-            'accordion-6' => [
+            // Icons top row - Configuration accordion
+            'accordion-602' => [
                 'data' => [
                     0 => [
                         'promo_item_id' => 'component-config-facts',
@@ -330,7 +333,7 @@ class FullWidthController extends Controller
 "id": 0,
 "heading": "Facts",
 "columns": 4,
-"sectionClass": "pt-gutter-xl bg-gray-100",
+"classes": "pt-gutter-xl bg-gray-100",
 }',
                         ],
                         'tr2' => [
@@ -338,19 +341,19 @@ class FullWidthController extends Controller
                             'Data' => '{
 "id": 0,
 "columns": 1,
-"sectionClass": "pt-gutter-lg pb-gutter-xl bg-gray-100 -mt-gutter",
+"classes": "pt-gutter-lg pb-gutter-xl bg-gray-100 -mt-gutter-sm",
 }',
                         ],
                     ],
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter'
+                    'classes' => '-mt-gutter-sm'
                 ],
             ],
 
             // Single column catalog
-            'catalog_2' => [
+            'catalog-700' => [
                 'data' => app(GenericPromo::class)->create(2, false, [
                     'description' => '',
                 ]),
@@ -365,7 +368,7 @@ class FullWidthController extends Controller
             ],
 
             // Button column
-            'button_column' => [
+            'button-column-701' => [
                 'data' => app(Button::class)->create(4, false, [
                     'option' => 'Default',
                     'excerpt' => '',
@@ -374,12 +377,12 @@ class FullWidthController extends Controller
                     'heading' => 'Button column',
                     'filename' => 'button-column',
                     'columnSpan' => 4,
-                    'sectionClass' => 'end',
+                    'classes' => 'end',
                 ],
             ],
 
             // Single column catalog and buttons - configuration accordion
-            'accordion-7' => [
+            'accordion-702' => [
                 'data' => [
                     0 => [
                         'promo_item_id' => 'component-config-catalog-and-buttons',
@@ -400,30 +403,30 @@ class FullWidthController extends Controller
                             'Data' => '{
 "id": 0,
 "columnSpan": 4,
-"sectionClass": "end",
+"classes": "end",
 }',
                         ],
                     ],
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter'
+                    'classes' => '-mt-gutter-sm'
                 ],
             ],
 
             // Spotlight row
-            'spotlight_row' => [
+            'spotlight-row-800' => [
                 'data' => app(Spotlight::class)->create(1, false),
                 'component' => [
                     'heading' => 'Spotlight',
                     'filename' => 'spotlight-row',
                     'showDescription' => true,
-                    'sectionClass' => 'bg-gold-50 py-gutter-xl'
+                    'classes' => 'bg-gold-50 py-gutter-xl'
                 ],
             ],
 
             // Spotlight row - configuration accordion
-            'accordion-8' => [
+            'accordion-801' => [
                 'data' => [
                     0 => [
                         'promo_item_id' => 'component-config-spotlight-row',
@@ -434,31 +437,31 @@ class FullWidthController extends Controller
                             'Data' => '{
 "id": 0,
 "showDescription": true,
-"sectionClass": "bg-gold-50 py-gutter-xl",
+"classes": "bg-gold-50 py-gutter-xl",
 }',
                         ],
                     ],
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter'
+                    'classes' => '-mt-gutter-sm'
                 ],
             ],
 
-            // Smaller-width section
-            'promo_row_1' => [
+            // Narrow column
+            'promo-row-900' => [
                 'data' => app(GenericPromo::class)->create(2, false),
                 'component' => [
-                    'heading' => 'Smaller-width section',
+                    'heading' => 'Narrow column',
                     'filename' => 'promo-row',
                     'imagePosition' => 'alternate',
                     'columnSpan' => 10,
-                    'sectionClass' => 'end'
+                    'classes' => 'end'
                 ],
             ],
 
-            // Smaller-width section - configuration accordion
-            'accordion-9' => [
+            // Narrow column - configuration accordion
+            'accordion-901' => [
                 'data' => [
                     0 => [
                         'promo_item_id' => 'component-config-smaller-width',
@@ -470,31 +473,32 @@ class FullWidthController extends Controller
 "id": 0,
 "imagePosition": "alternate",
 "columnSpan": 10,
-"sectionClass": "end",
+"classes": "end",
 }',
                         ],
                     ],
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter'
+                    'classes' => '-mt-gutter-sm'
                 ],
             ],
 
             // Button row
-            'button_row_1' => [
+            'button-row-1000' => [
                 'data' => app(Button::class)->create(3, false, [
                 ]),
                 'component' => [
                     'heading' => 'Button row with background image',
                     'filename' => 'button-row',
-                    'backgroundImageUrl' => '/styleguide/image/3200x1140',
-                    'sectionClass' => 'py-gutter-xl mb-gutter-lg'
+                    'backgroundImageUrl' => '/_resources/images/background.svg',
+                    'classes' => 'py-gutter-xl px-4 pt-xl pb-xl mt-gutter-lg text-white',
+                    'sectionStyle' => 'background-size:350px;',
                 ],
             ],
 
             // Button row - configuration accordion
-            'accordion-10' => [
+            'accordion-1001' => [
                 'data' => [
                     0 => [
                         'promo_item_id' => 'component-config-button-row',
@@ -504,15 +508,15 @@ class FullWidthController extends Controller
                             'Page field' => 'modular-button-row',
                             'Data' => '{
 "id": 0,
-"backgroundImageUrl": "/styleguide/image/3200x1140",
-"sectionClass": "py-gutter-xl",
+"backgroundImageUrl": "/_resources/images/background.svg",
+"classes": "py-gutter-xl",
 }',
                         ],
                     ],
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter'
+                    'classes' => '-mt-gutter-sm mb-gutter-xl'
                 ],
             ],
 
