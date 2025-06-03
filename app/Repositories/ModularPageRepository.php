@@ -298,6 +298,9 @@ class ModularPageRepository implements ModularPageRepositoryContract
             if (!empty($component['component']['columnSpan'])) {
                 // Inject the column span class
                 array_push($components[$componentName]['component']['containerClass'], 'px-4', 'mt:colspan-'.$component['component']['columnSpan']);
+            } elseif (!empty($component['component']['filename']) && strpos($component['component']['filename'], 'column') !== false) {
+                // Inject the column span class
+                array_push($components[$componentName]['component']['containerClass'], 'px-4', 'mt:colspan-6');
             } else {
                 // Default width
                 $components[$componentName]['component']['containerClass'][] = 'px-container';
