@@ -81,7 +81,7 @@ class ChildpageWithComponentsController extends Controller
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter'
+                    'sectionClass' => '-mt-gutter-sm'
                 ],
             ],
 
@@ -92,7 +92,7 @@ class ChildpageWithComponentsController extends Controller
                     'heading' => 'Spotlight',
                     'filename' => 'spotlight-row',
                     'showDescription' => true,
-                    'sectionClass' => 'bg-gold-50 py-gutter-md mx-4 rounded'
+                    'sectionClass' => 'bg-gold-50 p-gutter rounded'
                 ],
             ],
 
@@ -108,14 +108,14 @@ class ChildpageWithComponentsController extends Controller
                             'Data' => '{
 "id": 0,
 "showDescription": true,
-"sectionClass": "bg-gold-50 py-gutter-md mx-4 rounded",
+"sectionClass": "bg-gold-50 p-gutter rounded",
 }',
                         ],
                     ],
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter'
+                    'sectionClass' => '-mt-gutter-sm'
                 ],
             ],
 
@@ -168,7 +168,7 @@ class ChildpageWithComponentsController extends Controller
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter'
+                    'sectionClass' => '-mt-gutter-sm'
                 ],
             ],
 
@@ -239,7 +239,7 @@ class ChildpageWithComponentsController extends Controller
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter'
+                    'sectionClass' => '-mt-gutter-sm'
                 ],
             ],
 
@@ -308,7 +308,7 @@ class ChildpageWithComponentsController extends Controller
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter'
+                    'sectionClass' => '-mt-gutter-sm'
                 ],
             ],
 
@@ -364,7 +364,7 @@ class ChildpageWithComponentsController extends Controller
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter'
+                    'sectionClass' => '-mt-gutter-sm'
                 ],
             ],
 
@@ -400,7 +400,7 @@ class ChildpageWithComponentsController extends Controller
                 ],
                 'component' => [
                     'filename' => 'accordion-styleguide',
-                    'sectionClass' => '-mt-gutter'
+                    'sectionClass' => '-mt-gutter-sm'
                 ],
             ],
         ];

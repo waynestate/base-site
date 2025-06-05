@@ -337,8 +337,6 @@ class TemplateGuideController extends Controller
                     'filename' => 'news-column',
                     'columnSpan' => 6,
                     'classes' => 'col-bg rounded bg-gold-50 py-2',
-                    'cal_name' => 'main/',
-                    'link_text' => 'More events',
                 ],
             ],
 
@@ -350,6 +348,8 @@ class TemplateGuideController extends Controller
                     'filename' => 'events-column',
                     'columnSpan' => 6,
                     'classes' => 'col-bg rounded bg-gold-50 py-2 end',
+                    'cal_name' => 'main/',
+                    'link_text' => 'More events',
                 ],
             ],
 
@@ -402,7 +402,60 @@ class TemplateGuideController extends Controller
                 ],
             ],
 
+            // ------------------------------------
+            // Offset column
+            // ------------------------------------
+            'promo-row-900' => [
+                'data' => app(EmptyPromo::class)->create(1, false, [
+                    'title' => 'Offset column',
+                    'description' => '',
+                ]),
+                'component' => [
+                    'filename' => 'promo-row',
+                ],
+            ],
+
+            // Offset column - Config accordion
+            'accordion-901' => [
+                'data' => [
+                    0 => [
+                        'promo_item_id' => 'component-config-offset-column',
+                        'title' => 'Offset column configuration',
+                        'description' => '',
+                        'tr1' => [
+                            'Page field' => 'modular-events-column',
+                            'Data' => '{
+"id": 0,
+"columnSpan": 6,
+"classes": "mt:-ml-colspan-6 end",
+"cal_name": "myurl/",
+"link_text":"More events"
+}',
+                        ],
+                    ],
+                ],
+                'component' => [
+                    'filename' => 'accordion-styleguide',
+                    'classes' => '-mt-gutter'
+                ],
+            ],
+
+            // Offset column - Events
+            'events-column-904' => [
+                'data' => app(Event::class)->create(4, false),
+                'component' => [
+                    'heading' => 'Events',
+                    'filename' => 'events-column',
+                    'columnSpan' => 6,
+                    'classes' => 'bg-gold-50 rounded py-2 end mt:right-colspan-6',
+                    'cal_name' => 'main/',
+                    'link_text' => 'More events',
+                ],
+            ],
+
+            // ------------------------------------
             // Button row
+            // ------------------------------------
             'button-row-1000' => [
                 'data' => app(Button::class)->create(3, false, [
                 ]),

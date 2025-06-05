@@ -73,23 +73,23 @@ module.exports = {
         },
         {
             pattern: /w-[1-5]\/[1-5]/,
-            variants: ['sm', 'md', 'lg', 'xl', '2xl', '3xl', 'mt'],
+            variants: ['sm', 'md', 'lg', 'xl', 'mt'],
         },
         {
             pattern: /grid(-cols-[1-4])?/,
-            variants: ['sm', 'md', 'lg', 'xl', '2xl', '3xl', 'mt'],
+            variants: ['sm', 'md', 'lg', 'xl', 'mt'],
         },
         {
             pattern: /columns(-[1-4])?/,
-            variants: ['sm', 'md', 'lg', 'xl', '2xl', '3xl', 'mt'],
+            variants: ['sm', 'md', 'lg', 'xl', 'mt'],
         },
         {
             pattern: /colspan-([1-12])?/,
-            variants: [,'md','lg','xl','2xl','mt'],
+            variants: ['mt'],
         },
         {
             pattern: /px-container?/,
-            variants: [,'md','lg','xl','2xl','mt'],
+            variants: [,'md','lg','xl','mt'],
         },
         {
             pattern: /gutter-?/,
@@ -139,6 +139,18 @@ module.exports = {
                 'gutter-md': '3rem',
                 'gutter-lg': '4rem',
                 'gutter-xl': '5rem',
+                'span-1': 'calc(1 * var(--column-min))',
+                'span-2': 'calc(2 * var(--column-min))',
+                'span-3': 'calc(3 * var(--column-min))',
+                'span-4': 'calc(4 * var(--column-min))',
+                'span-5': 'calc(5 * var(--column-min))',
+                'span-6': 'calc(6 * var(--column-min))',
+                'span-7': 'calc(7 * var(--column-min))',
+                'span-8': 'calc(8 * var(--column-min))',
+                'span-9': 'calc(9 * var(--column-min))',
+                'span-10': 'calc(10 * var(--column-min))',
+                'span-11': 'calc(11 * var(--column-min))',
+                'span-12': 'calc(12 * var(--column-min))',
             },
             margin: {
                 17: '4.25rem',

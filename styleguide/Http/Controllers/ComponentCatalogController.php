@@ -2,14 +2,14 @@
 
 namespace Styleguide\Http\Controllers;
 
+use Contracts\Repositories\ModularPageRepositoryContract;
+use Contracts\Repositories\PromoRepositoryContract;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Faker\Factory;
 use Factories\GenericPromo;
 use Factories\PromoWithOptions;
-use Contracts\Repositories\PromoRepositoryContract;
-use Contracts\Repositories\ModularPageRepositoryContract;
 
 class ComponentCatalogController extends Controller
 {
@@ -19,12 +19,10 @@ class ComponentCatalogController extends Controller
      */
     public function __construct(
         Factory $faker,
-        PromoRepositoryContract $promo,
         ModularPageRepositoryContract $components
     ) {
-        $this->promo = $promo;
-        $this->components = $components;
         $this->faker['faker'] = $faker->create();
+        $this->components = $components;
     }
 
     /**
@@ -148,6 +146,9 @@ class ComponentCatalogController extends Controller
                 ],
             ],
         ];
+
+        $components = $this->components->componentClasses($components);
+        $components = $this->components->componentStyles($components);
 
         $components['catalog-3']['data'] = $this->components->organizePromoItemsByOption($components['catalog-3']['data']);
 
