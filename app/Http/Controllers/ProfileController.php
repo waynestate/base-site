@@ -49,7 +49,7 @@ class ProfileController extends Controller
         $group_ids = $this->profile->getGroupIds($selected_group, $forced_profile_group_id, $dropdown_groups['dropdown_groups']);
 
         // Get the profiles
-        $profiles = $this->profile->getProfiles($site_id, $group_ids);
+        $profiles = $this->profile->getProfiles($site_id, $group_ids, $request->data['base']['site']['subsite-folder']);
 
         // Disable hero images
         $request->data['base']['hero'] = false;
