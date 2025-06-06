@@ -1,11 +1,7 @@
 @extends('layouts.' . (!empty($base['layout']) ? $base['layout'] : 'main'))
 
 @section('content')
-    @include('components.page-title', ['title' => $base['page']['title']])
-
-    <div class="content">
-        {!! $base['page']['content']['main'] !!}
-    </div>
+    @include('components.page-content')
     
     @if(!empty($profiles))
         @foreach($profiles as $key => $groups)

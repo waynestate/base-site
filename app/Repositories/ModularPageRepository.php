@@ -56,6 +56,8 @@ class ModularPageRepository implements ModularPageRepositoryContract
      */
     public function getModularComponents(array $data): array
     {
+        dump('modular ---->', $data['data']);
+
         if (empty($data['data'])) {
             return [];
         }
@@ -73,6 +75,8 @@ class ModularPageRepository implements ModularPageRepositoryContract
         $components = $this->componentClasses($components);
 
         $components = $this->componentStyles($components);
+        dump('here');
+        dump($components);
 
         return $components;
     }
@@ -227,6 +231,18 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 $modularComponents[$name]['data'] = $articles['articles']['data'] ?? [];
                 $modularComponents[$name]['meta'] = $articles['articles']['meta'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
+            } elseif (Str::startsWith($name, 'layout-config')) {
+                if (!empty($component['component']['showSiteMenu'])) {
+
+                }
+                // Take layout config out of the loop
+                // Maybe define layoutClass
+                // showSiteMenu, consider breadcrumbs
+                // showSiteTitle
+                // showPageContent
+                // showMenu -> if false add controller to full width config 
+                //dump($name);
+                //$request->data['base']['show_site_menu'] = false;
             } elseif (Str::startsWith($name, 'page-content') || Str::startsWith($name, 'heading')) {
                 // If there's JSON but no news, events or promo data, assign the component array as data
                 // Page-content and heading components

@@ -197,8 +197,12 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         unset($promos['main_social']);
         unset($promos['main_contact']);
 
+        dump($promos['components']);
         // Add modular components into global data
         $promos['components'] = $this->components->getModularComponents($data);
+
+        // Set page variables from component
+        // show;hide the menu
 
         // Set hero from components
         $hero = collect($promos['components'])->reject(function ($data, $component_name) {
