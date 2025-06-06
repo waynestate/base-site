@@ -427,7 +427,7 @@ class TemplateGuideController extends Controller
                             'Data' => '{
 "id": 0,
 "columnSpan": 6,
-"classes": "end mt:right-colspan-3",
+"classes": "end mt:right-span-3",
 "cal_name": "myurl/",
 "link_text":"More events"
 }',
@@ -447,7 +447,7 @@ class TemplateGuideController extends Controller
                     'heading' => 'Events',
                     'filename' => 'events-column',
                     'columnSpan' => 6,
-                    'classes' => 'bg-gold-50 rounded py-2 end mt:right-colspan-3',
+                    'classes' => 'bg-gold-50 rounded py-2 end mt:right-span-3',
                     'cal_name' => 'main/',
                     'link_text' => 'More events',
                 ],

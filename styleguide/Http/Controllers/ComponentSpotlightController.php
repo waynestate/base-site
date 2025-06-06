@@ -77,7 +77,7 @@ class ComponentSpotlightController extends Controller
                     'heading' => 'Spotlight column',
                     'filename' => 'spotlight-column',
                     'showDescription' => true,
-                    'classes' => 'mt:right-colspan-3',
+                    'classes' => 'mt:right-span-3',
                 ],
             ],
             'spotlight-2' => [

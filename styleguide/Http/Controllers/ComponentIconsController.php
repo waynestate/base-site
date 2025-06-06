@@ -88,7 +88,7 @@ class ComponentIconsController extends Controller
                 'component' => [
                     'heading' => 'Icons column 1',
                     'filename' => 'icons-column',
-                    'classes' => 'mt:right-colspan-3',
+                    'classes' => 'mt:right-span-3',
                 ],
             ],
             'icons-row-1' => [

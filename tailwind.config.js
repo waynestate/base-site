@@ -88,6 +88,14 @@ module.exports = {
             variants: ['mt'],
         },
         {
+            pattern: /left-span-([1-12])?/,
+            variants: ['mt'],
+        },
+        {
+            pattern: /right-span-([1-12])?/,
+            variants: ['mt'],
+        },
+        {
             pattern: /px-container?/,
             variants: [,'md','lg','xl','mt'],
         },
@@ -139,12 +147,12 @@ module.exports = {
                 'gutter-md': '3rem',
                 'gutter-lg': '4rem',
                 'gutter-xl': '5rem',
-                'colspan-1': 'calc(1 * var(--column-min))',
-                'colspan-2': 'calc(2 * var(--column-min))',
-                'colspan-3': 'calc(3 * var(--column-min))',
-                'colspan-4': 'calc(4 * var(--column-min))',
-                'colspan-5': 'calc(5 * var(--column-min))',
-                'colspan-6': 'calc(6 * var(--column-min))',
+                'span-1': 'calc(1 * var(--column-min))',
+                'span-2': 'calc(2 * var(--column-min))',
+                'span-3': 'calc(3 * var(--column-min))',
+                'span-4': 'calc(4 * var(--column-min))',
+                'span-5': 'calc(5 * var(--column-min))',
+                'span-6': 'calc(6 * var(--column-min))',
             },
             margin: {
                 17: '4.25rem',

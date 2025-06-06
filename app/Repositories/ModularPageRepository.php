@@ -344,7 +344,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
             // - No gutter on very last component
             if (empty(preg_grep('/mb-/', $components[$componentName]['component']['containerClass']))
                 && !Str::contains($componentName, 'heading')
-                && $componentName != array_key_last($components)
+                //&& $componentName != array_key_last($components)
             ) {
                 $components[$componentName]['component']['containerClass'] [] = 'mb-gutter';
             }
