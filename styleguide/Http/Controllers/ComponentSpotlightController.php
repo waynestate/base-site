@@ -2,6 +2,7 @@
 
 namespace Styleguide\Http\Controllers;
 
+use Contracts\Repositories\ModularPageRepositoryContract;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -14,9 +15,12 @@ class ComponentSpotlightController extends Controller
     /**
      * Construct the controller.
      */
-    public function __construct(Factory $faker)
-    {
+    public function __construct(
+        Factory $faker,
+        ModularPageRepositoryContract $components
+    ) {
         $this->faker = $faker->create();
+        $this->components = $components;
     }
 
     /**
@@ -73,6 +77,7 @@ class ComponentSpotlightController extends Controller
                     'heading' => 'Spotlight column',
                     'filename' => 'spotlight-column',
                     'showDescription' => true,
+                    'classes' => 'mt:right-colspan-3',
                 ],
             ],
             'spotlight-2' => [
@@ -88,6 +93,9 @@ class ComponentSpotlightController extends Controller
                 ],
             ],
         ];
+
+        $components = $this->components->componentClasses($components);
+        $components = $this->components->componentStyles($components);
 
         // Assign components globally
         $request->data['base']['components'] = $components;

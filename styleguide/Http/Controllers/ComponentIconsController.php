@@ -88,17 +88,7 @@ class ComponentIconsController extends Controller
                 'component' => [
                     'heading' => 'Icons column 1',
                     'filename' => 'icons-column',
-                    'classes' => 'bg-gold-50 mt:left-colspan-6',
-                ],
-            ],
-            'icons-column-9' => [
-                'data' => app(Icon::class)->create(4, false, [
-                    'description' => '',
-                ]),
-                'component' => [
-                    'heading' => 'Icons column 2',
-                    'filename' => 'icons-column',
-                    'classes' => 'bg-gold-50 mt:right-colspan-6',
+                    'classes' => 'mt:right-colspan-3',
                 ],
             ],
             'icons-row-1' => [

@@ -2,6 +2,7 @@
 
 namespace Styleguide\Http\Controllers;
 
+use Contracts\Repositories\ModularPageRepositoryContract;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -9,12 +10,21 @@ use Illuminate\Http\Request;
 class ComponentPageContentController extends Controller
 {
     /**
+     * Construct the controller.
+     */
+    public function __construct(
+        ModularPageRepositoryContract $components
+    ) {
+        $this->components = $components;
+    }
+
+    /**
      * Display page content from a page field
      */
     public function index(Request $request): View
     {
         $request->data['base']['page']['content']['main'] = '
-<p style="margin-top: -1rem;">Move the CMS page content to the location of the <code>modular-page-content-row</code> or <code>modular-page-content-column</code> page field.</p>
+<p>Move the CMS page content to the location of the <code>modular-page-content-row</code> or <code>modular-page-content-column</code> page field.</p>
 ';
 
         $component_configuration = '
@@ -63,6 +73,9 @@ class ComponentPageContentController extends Controller
                 ],
             ],
         ];
+
+        $components = $this->components->componentClasses($components);
+        $components = $this->components->componentStyles($components);
 
         // Assign components globally
         $request->data['base']['components'] = $components;
