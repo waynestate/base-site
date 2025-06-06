@@ -284,11 +284,6 @@ class ModularPageRepository implements ModularPageRepositoryContract
     public function componentClasses($components)
     {
         foreach ($components as $componentName => $component) {
-
-            // if the column is on its own row, maybe new class called sole, single, column-left, column-right
-            // margin-right: calc(100% - 1120px);
-            // 100%-73rem
-
             // Establishing final arrays so they will always exist
             $components[$componentName]['component']['containerClass'] = $component['component']['containerClass'] ?? [];
             $components[$componentName]['component']['backgroundClass'] = $component['component']['backgroundClass'] ?? [];
