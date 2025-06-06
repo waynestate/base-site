@@ -7,7 +7,6 @@ use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Faker\Factory;
-use Factories\HeroImage;
 use Factories\Icon;
 use Factories\Button;
 use Factories\GenericPromo;

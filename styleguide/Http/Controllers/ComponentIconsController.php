@@ -17,8 +17,7 @@ class ComponentIconsController extends Controller
     public function __construct(
         Factory $faker,
         ModularPageRepositoryContract $components
-    )
-    {
+    ) {
         $this->faker['faker'] = $faker->create();
         $this->components = $components;
     }

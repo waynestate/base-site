@@ -3,7 +3,6 @@
 namespace Styleguide\Http\Controllers;
 
 use Contracts\Repositories\ModularPageRepositoryContract;
-use Contracts\Repositories\PromoRepositoryContract;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
