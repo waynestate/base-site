@@ -35,19 +35,6 @@ class TemplateGuideController extends Controller
     public function index(Request $request): View
     {
         $components = [
-            'hero_1' => [
-                'data' => app(HeroImage::class)->create(1, false, [
-                    'option' => 'Banner small',
-                    'title' => 'Your future <em>starts here</em>',
-                    'description' => '',
-                    'link' => '',
-                ]),
-                'component' => [
-                    'filename' => 'hero',
-                ],
-            ],
-
-
             // ------------------------------------
             // Column span
             // ------------------------------------
@@ -408,7 +395,7 @@ class TemplateGuideController extends Controller
             'promo-row-900' => [
                 'data' => app(EmptyPromo::class)->create(1, false, [
                     'title' => 'Offset column',
-                    'description' => '<p>Individual columns on their own row are centered by default. 
+                    'description' => '<p>Individual columns in their own row are centered by default. 
 To align columns to the left or right of the content area, apply a class to shift the component by <span class="italic">n</span> number of columns. 
 Use <code>mt:left-span-3</code> to move a component 3 columns from the left.
 Use <code>mt:right-span-3</code> to move a component 3 columns from the right.
@@ -459,16 +446,49 @@ Span values range from 1 to 12. It is important to include the <code>mt:</code> 
             ],
 
             // ------------------------------------
-            // Button row
+            // Background image - Button row
             // ------------------------------------
-            'button-row-1000' => [
+            'promo-row-999' => [
+                'data' => app(EmptyPromo::class)->create(1, false, [
+                    'title' => 'Component background image',
+                    'description' => '',
+                ]),
+                'component' => [
+                    'filename' => 'promo-row',
+                ],
+            ],
+
+            // Background image - Config accordion
+            'accordion-1001' => [
+                'data' => [
+                    0 => [
+                        'promo_item_id' => 'component-config-background-image',
+                        'title' => 'Background image component configuration',
+                        'description' => '',
+                        'tr1' => [
+                            'Page field' => 'modular-button-row',
+                            'Data' => '{
+"id": 0,
+"backgroundImageUrl": "/_resources/images/background.svg",
+"classes": "py-gutter-lg px-gutter-lg rounded text-white",
+}',
+                        ],
+                    ],
+                ],
+                'component' => [
+                    'filename' => 'accordion-styleguide',
+                    'classes' => '-mt-gutter'
+                ],
+            ],
+
+            // Background image - Button row
+            'button-row-1002' => [
                 'data' => app(Button::class)->create(3, false, [
                 ]),
                 'component' => [
-                    'heading' => 'Button row with background image',
                     'filename' => 'button-row',
                     'backgroundImageUrl' => '/_resources/images/background.svg',
-                    'classes' => 'py-gutter-xl px-4 pt-xl pb-xl mt-gutter-lg text-white',
+                    'classes' => 'py-gutter-lg px-gutter-lg text-white rounded',
                     'sectionStyle' => 'background-size:350px;',
                 ],
             ],
@@ -492,7 +512,7 @@ Span values range from 1 to 12. It is important to include the <code>mt:</code> 
                 'data' => [
                     0 => [
                         'promo_item_id' => 'component-config-row-pairs',
-                        'title' => 'Row pairs configuration accordion',
+                        'title' => 'Row pairs configuration',
                         'description' => '',
                         'tr1' => [
                             'Page field' => 'modular-icons-top-row',
@@ -657,23 +677,6 @@ Padding is used in the example below, however use <code>m</code> for margin inst
                 ],
             ],
         ];
-
-        if (!empty($components)) {
-            // Set hero from components
-            $hero = collect($components)->reject(function ($data, $component_name) {
-                return !str_contains($component_name, 'hero');
-            })->toArray();
-        }
-
-        if (!empty($hero)) {
-            $hero_key = array_key_first($hero);
-
-            $request->data['base']['hero'] = $components[$hero_key]['data'];
-
-            unset($components[$hero_key]);
-
-            config(['base.hero_full_controllers' => ['ChildpageWithComponentsController']]);
-        }
 
         $heroClass['heroClass'] = 'full-width-styleguide-hero';
 
