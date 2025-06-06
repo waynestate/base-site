@@ -298,6 +298,9 @@ class ModularPageRepository implements ModularPageRepositoryContract
             if (!empty($component['component']['columnSpan'])) {
                 // Inject the column span class
                 array_push($components[$componentName]['component']['containerClass'], 'px-4', 'mt:colspan-'.$component['component']['columnSpan']);
+            } elseif (!empty($component['component']['filename']) && strpos($component['component']['filename'], 'column') !== false) {
+                // Inject the column span class
+                array_push($components[$componentName]['component']['containerClass'], 'px-4', 'mt:colspan-6');
             } else {
                 // Default width
                 $components[$componentName]['component']['containerClass'][] = 'px-container';
@@ -315,7 +318,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
                     if (strpos($class, 'bg-') !== false) {
                         // backgroundClass
                         $components[$componentName]['component']['backgroundClass'][] = $class;
-                    } elseif (strpos($class, 'my-') !== false | strpos($class, 'mt-') !== false | strpos($class, 'mb-') !== false |  strpos($class, 'end') !== false) {
+                    } elseif (strpos($class, 'my-') !== false | strpos($class, 'mt-') !== false | strpos($class, 'mb-') !== false | strpos($class, 'end') !== false | strpos($class, 'left') !== false | strpos($class, 'right') !== false) {
                         // containerClass
                         $components[$componentName]['component']['containerClass'][] = $class;
                     } else {
@@ -333,10 +336,8 @@ class ModularPageRepository implements ModularPageRepositoryContract
             // Section gutters, bottom padding
             // - No gutter if component uses margin-bottom class
             // - No gutter on heading component
-            // - No gutter on very last component
             if (empty(preg_grep('/mb-/', $components[$componentName]['component']['containerClass']))
                 && !Str::contains($componentName, 'heading')
-                && $componentName != array_key_last($components)
             ) {
                 $components[$componentName]['component']['containerClass'] [] = 'mb-gutter';
             }
