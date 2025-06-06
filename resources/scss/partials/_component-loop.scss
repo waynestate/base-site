@@ -1,7 +1,7 @@
 @layer base {
     :root {
         --column-max: 100px;
-        --column-min: 8.33335%;
+        --column-min: 8.3335%;
     }
 }
 
@@ -73,6 +73,7 @@
 .component__background {
     @apply absolute inset-0 -z-10; 
 }
+
 .layout--full-width {
     .component__background {
         @apply absolute inset-0 -z-10; 
