@@ -408,7 +408,12 @@ class TemplateGuideController extends Controller
             'promo-row-900' => [
                 'data' => app(EmptyPromo::class)->create(1, false, [
                     'title' => 'Offset column',
-                    'description' => '',
+                    'description' => '<p>Individual columns on their own row are centered by default. 
+To align columns to the left or right of the content area, apply a class to shift the component by <span class="italic">n</span> number of columns. 
+Use <code>mt:left-span-3</code> to move a component 3 columns from the left.
+Use <code>mt:right-span-3</code> to move a component 3 columns from the right.
+Span values range from 1 to 12. It is important to include the <code>mt:</code> prefix, otherwise the component may be missing from mobile view.
+</p>',
                 ]),
                 'component' => [
                     'filename' => 'promo-row',
