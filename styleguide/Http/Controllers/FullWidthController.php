@@ -54,7 +54,9 @@ class FullWidthController extends Controller
                 ],
             ],
 
+            // ------------------------------------
             // Icons row
+            // ------------------------------------
             'icons-row-100' => [
                 'data' => app(Icon::class)->create(6, false, [
                     'excerpt' => '',
@@ -92,7 +94,10 @@ class FullWidthController extends Controller
                     'classes' => '-mt-gutter-sm'
                 ],
             ],
+
+            // ------------------------------------
             // Catalog with background
+            // ------------------------------------
             'catalog-200' => [
                 'data' => app(GenericPromo::class)->create(3, false, [
                     'description' => '',
@@ -130,7 +135,9 @@ class FullWidthController extends Controller
                 ],
             ],
 
+            // ------------------------------------
             // Resources - heading
+            // ------------------------------------
             'heading-300' => [
                 'data' => [
                     0 => [
@@ -204,7 +211,9 @@ class FullWidthController extends Controller
                 ],
             ],
 
-            // News
+            // ------------------------------------
+            // Featured News row
+            // ------------------------------------
             'news-row-400' => [
                 'data' => app(ArticleComponent::class)->create(4, false),
                 'meta' => app(ArticleMeta::class)->create(),
@@ -237,7 +246,9 @@ class FullWidthController extends Controller
                 ],
             ],
 
+            // ------------------------------------
             // Events - Promo image
+            // ------------------------------------
             'promo-column-501' => [
                 'data' => app(GenericPromo::class)->create(1, false, [
                     'title' => 'Featured event (promo column)',
@@ -292,7 +303,9 @@ class FullWidthController extends Controller
                 ],
             ],
 
+            // ------------------------------------
             // Icons top row
+            // ------------------------------------
             'icons-row-600' => [
                 'data' => app(Icon::class)->create(4, false, [
                     'link' => '',
@@ -352,7 +365,9 @@ class FullWidthController extends Controller
                 ],
             ],
 
+            // ------------------------------------
             // Single column catalog
+            // ------------------------------------
             'catalog-700' => [
                 'data' => app(GenericPromo::class)->create(2, false, [
                     'description' => '',
@@ -414,7 +429,9 @@ class FullWidthController extends Controller
                 ],
             ],
 
+            // ------------------------------------
             // Spotlight row
+            // ------------------------------------
             'spotlight-row-800' => [
                 'data' => app(Spotlight::class)->create(1, false),
                 'component' => [
@@ -448,7 +465,9 @@ class FullWidthController extends Controller
                 ],
             ],
 
+            // ------------------------------------
             // Narrow column
+            // ------------------------------------
             'promo-row-900' => [
                 'data' => app(GenericPromo::class)->create(2, false),
                 'component' => [
@@ -484,7 +503,9 @@ class FullWidthController extends Controller
                 ],
             ],
 
+            // ------------------------------------
             // Button row
+            // ------------------------------------
             'button-row-1000' => [
                 'data' => app(Button::class)->create(3, false, [
                 ]),
