@@ -35,28 +35,25 @@ class HomepageController extends Controller
 
         $promos = $this->promo->getHomepagePromos($request->data);
 
-        if(empty($request->data['base']['data'])) {
+        if (empty($request->data['base']['data'])) {
             $components = [
                 'modular-news-column' => [
-                    'id' => 6,
                     'heading' => 'News',
                     'columnSpan' => 6,
                 ],
                 'modular-events-column' => [
-                    'id' => 1112,
                     'heading' => 'Events',
                     'columnSpan' => 6,
+                    'classes' => 'mb-gutter',
                 ],
             ];
 
-
             foreach ($components as $componentName => $componentData) {
-                //$componentData['component']['id'] = rand(1, 1000);
-                $request->data['base']['data']['data'][$componentName] = json_encode($componentData);
+                $request->data['base']['data'][$componentName] = json_encode($componentData);
             }
 
             // Add modular components into global data
-            $request->data['base']['components'] = $this->components->getModularComponents($request->data['base']['data']);
+            $request->data['base']['components'] = $this->components->getModularComponents($request->data['base']);
         }
 
         return view('homepage', merge($request->data, $promos));
