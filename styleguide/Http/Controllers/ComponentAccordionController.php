@@ -2,6 +2,7 @@
 
 namespace Styleguide\Http\Controllers;
 
+use Contracts\Repositories\ModularPageRepositoryContract;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -9,6 +10,15 @@ use Factories\AccordionItems;
 
 class ComponentAccordionController extends Controller
 {
+    /**
+     * Construct the controller.
+     */
+    public function __construct(
+        ModularPageRepositoryContract $components
+    ) {
+        $this->components = $components;
+    }
+
     /**
      * Display an example accordion.
      */
@@ -65,6 +75,9 @@ class ComponentAccordionController extends Controller
                 ],
             ],
         ];
+
+        $components = $this->components->componentClasses($components);
+        $components = $this->components->componentStyles($components);
 
         // Assign components globally
         $request->data['base']['components'] = $components;

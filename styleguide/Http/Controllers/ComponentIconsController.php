@@ -2,6 +2,7 @@
 
 namespace Styleguide\Http\Controllers;
 
+use Contracts\Repositories\ModularPageRepositoryContract;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -13,9 +14,12 @@ class ComponentIconsController extends Controller
     /**
      * Construct the controller.
      */
-    public function __construct(Factory $faker)
-    {
+    public function __construct(
+        Factory $faker,
+        ModularPageRepositoryContract $components
+    ) {
         $this->faker['faker'] = $faker->create();
+        $this->components = $components;
     }
 
     /**
@@ -81,8 +85,9 @@ class ComponentIconsController extends Controller
                     'description' => '',
                 ]),
                 'component' => [
-                    'heading' => 'Icons column',
+                    'heading' => 'Icons column 1',
                     'filename' => 'icons-column',
+                    'classes' => 'mt:right-span-3',
                 ],
             ],
             'icons-row-1' => [
@@ -106,6 +111,9 @@ class ComponentIconsController extends Controller
                 ],
             ],
         ];
+
+        $components = $this->components->componentClasses($components);
+        $components = $this->components->componentStyles($components);
 
         // Assign components globally
         $request->data['base']['components'] = $components;
