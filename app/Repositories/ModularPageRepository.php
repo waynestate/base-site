@@ -56,8 +56,6 @@ class ModularPageRepository implements ModularPageRepositoryContract
      */
     public function getModularComponents(array $data): array
     {
-        dump('modular ---->', $data['data']);
-
         if (empty($data['data'])) {
             return [];
         }
@@ -75,10 +73,22 @@ class ModularPageRepository implements ModularPageRepositoryContract
         $components = $this->componentClasses($components);
 
         $components = $this->componentStyles($components);
-        dump('here');
-        dump($components);
 
         return $components;
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function cleanComponentJSON($componentJSON)
+    {
+        // Remove all spaces and line breaks
+        $componentJSON = preg_replace('/\s*\R\s*/', '', $componentJSON);
+
+        // Remove trailing comma
+        $componentJSON = preg_replace('(,})', '}', $componentJSON);
+
+        // Bubble bubble POP!
+        return $componentJSON;
     }
 
     /**
@@ -86,45 +96,60 @@ class ModularPageRepository implements ModularPageRepositoryContract
      */
     public function parseComponentJSON(array $data)
     {
+        // Get data to send through parsePromos
+        // Preserve component data
         $components = [];
         $group_reference = [];
         $group_config = [];
 
-        foreach ($data['data'] as $pageField => $value) {
-            if (Str::startsWith($pageField, 'modular-')) {
-                $name = Str::replaceFirst('modular-', '', $pageField);
+        foreach ($data['data'] as $pageFieldLabel => $componentJSON) {
+            if (Str::startsWith($pageFieldLabel, 'modular-')) {
 
-                // Remove all spaces and line breaks
-                $value = preg_replace('/\s*\R\s*/', '', $value);
+                // Match component name to filename
+                $name = Str::replaceFirst('modular-', '', $pageFieldLabel);
 
-                // Last item cannot have comma at the end of it
-                $value = preg_replace('(,})', '}', $value);
+                // Remove spaces, breaks, trailing commas
+                $componentJSON = $this->cleanComponentJSON($componentJSON);
 
-                if (Str::startsWith($value, '{')) {
-                    $components[$name] = json_decode($value, true);
+                // Make sure this is JSON data
+                if (Str::startsWith($componentJSON, '{')) {
+
+                    // Turn JSON into a PHP array
+                    $components[$name] = json_decode($componentJSON, true);
+
+                    // Set up expected parsePromos group_config
                     if (!empty($components[$name]['config'])) {
-                        $config = explode('|', $components[$name]['config']);
+                        $promoConfig = explode('|', $components[$name]['config']);
+
                         // Add youtube
                         if (strpos($components[$name]['config'], 'youtube') === false) {
-                            array_push($config, 'youtube');
+                            array_push($promoConfig, 'youtube');
                         }
-                        foreach ($config as $key => $value) {
-                            if (Str::startsWith($value, 'page_id')) {
-                                $config[$key] = 'page_id:'.$data['page']['id'];
-                            }
 
-                            if (Str::startsWith($value, 'first')) {
-                                unset($config[$key]);
+                        foreach ($promoConfig as $key => $configItem) {
+                            // Inject page_id
+                            if (Str::startsWith($configItem, 'page_id')) {
+                                $promoConfig[$key] = 'page_id:'.$data['page']['id'];
+                            }
+                            // Component loop expects the return being a multi-dimensional array
+                            if (Str::startsWith($componentJSON, 'first')) {
+                                unset($promoConfig[$key]);
                             }
                         }
-                        $components[$name]['config'] = implode('|', $config);
+
+                        // Poof! Concatenate config to use with parsePromos
+                        $components[$name]['config'] = implode('|', $promoConfig);
                     }
 
+                    // Remove integers from page fields to match the component filename
                     $components[$name]['filename'] = preg_replace('/-\d+$/', '', $name);
                 } else {
-                    $components[$name]['id'] = (int)$value;
+                    // If only an ID is provided without JSON, use it
+                    $components[$name]['id'] = (int)$componentJSON;
                 }
 
+                // Build the parsePromos group_reference and group config
+                // Exclude news and events app IDs
                 if (!Str::contains($name, ['events', 'news']) && !empty($components[$name]['id'])) {
                     $group_reference[$components[$name]['id']] = $name;
                     if (!empty($components[$name]['config'])) {
@@ -198,26 +223,26 @@ class ModularPageRepository implements ModularPageRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function configureComponents(array $components, array $promos, array $data): array
+    public function configureComponents(array $components, array $promos, array $base): array
     {
         $modularComponents = [];
 
         foreach ($components['components'] as $name => $component) {
             if (Str::startsWith($name, 'events')) {
-                $components['components'][$name]['id'] = $component['id'] ?? $data['site']['id'];
+                $components['components'][$name]['id'] = $component['id'] ?? $base['site']['id'];
                 $limit = $components['components'][$name]['limit'] ?? 4;
                 if (strpos($name, 'events-column') !== false) {
-                    $events = $this->event->getEvents($component['id'] ?? $data['site']['id'], $limit);
+                    $events = $this->event->getEvents($component['id'] ?? $base['site']['id'], $limit);
                 } else {
-                    $events = $this->event->getEventsFullListing($component['id'] ?? $data['site']['id'], $limit);
+                    $events = $this->event->getEventsFullListing($component['id'] ?? $base['site']['id'], $limit);
                 }
                 $modularComponents[$name]['data'] = $events['events'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
-                if (empty($modularComponents[$name]['component']['cal_name']) && !empty($data['site']['events']['path'])) {
-                    $modularComponents[$name]['component']['cal_name'] = $data['site']['events']['path'];
+                if (empty($modularComponents[$name]['component']['cal_name']) && !empty($base['site']['events']['path'])) {
+                    $modularComponents[$name]['component']['cal_name'] = $base['site']['events']['path'];
                 }
             } elseif (Str::startsWith($name, 'news')) {
-                $components['components'][$name]['id'] = $component['id'] ?? $data['site']['news']['application_id'];
+                $components['components'][$name]['id'] = $component['id'] ?? $base['site']['news']['application_id'];
                 $limit = $component['limit'] ?? 4;
                 $components['components'][$name]['news_route'] = $component['news_route'] ?? config('base.news_listing_route');
                 if (!empty($component['featured']) && $component['featured'] === true) {
@@ -232,17 +257,16 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 $modularComponents[$name]['meta'] = $articles['articles']['meta'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
             } elseif (Str::startsWith($name, 'layout-config')) {
-                if (!empty($component['component']['showSiteMenu'])) {
-
-                }
                 // Take layout config out of the loop
                 // Maybe define layoutClass
                 // showSiteMenu, consider breadcrumbs
-                // showSiteTitle
+                // showPageTitle
                 // showPageContent
-                // showMenu -> if false add controller to full width config 
+                // showMenu -> if false add controller to full width config
                 //dump($name);
                 //$request->data['base']['show_site_menu'] = false;
+                $modularComponents[$name]['data'] = $promos[$name]['data'] ?? [];
+                $modularComponents[$name]['component'] = $promos[$name]['component'] ?? [];
             } elseif (Str::startsWith($name, 'page-content') || Str::startsWith($name, 'heading')) {
                 // If there's JSON but no news, events or promo data, assign the component array as data
                 // Page-content and heading components
