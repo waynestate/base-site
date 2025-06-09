@@ -39,7 +39,6 @@ jobs:
               uses: actions/setup-node@v4.0.1
               with:
                     node-version: 22.x
-                    cache: yarn
             - name: Install node dependences
               run: make yarn
             - name: Append node_modules to PATH
