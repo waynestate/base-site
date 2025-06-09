@@ -3,6 +3,9 @@
         "sectionClass":"bg-cover bg-center py-16", // class on section element, margins/padding/background
         "backgroundImageUrl":"https://domain.edu/url.jpg",
     }
+
+    Troubleshooting, insert this below the first foreach:
+    @dump($componentName, $component);
 --}}
 
 @if(!empty($base['components']))
