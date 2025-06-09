@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use Contracts\Repositories\RequestDataRepositoryContract;
 use Contracts\Repositories\MenuRepositoryContract;
+use Contracts\Repositories\ModularPageRepositoryContract;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use Waynestate\Api\Connector;
@@ -28,12 +29,13 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
     /**
      * Construct the repository.
      */
-    public function __construct(Connector $wsuApi, ParseMenu $parseMenu, DisplayMenu $displayMenu, Repository $cache)
+    public function __construct(Connector $wsuApi, ParseMenu $parseMenu, DisplayMenu $displayMenu, Repository $cache, ModularPageRepositoryContract $components)
     {
         $this->wsuApi = $wsuApi;
         $this->parseMenu = $parseMenu;
         $this->displayMenu = $displayMenu;
         $this->cache = $cache;
+        $this->components = $components;
     }
 
     /**
@@ -113,6 +115,21 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
         // If no site menu is selected then hide the site menu
         if (empty($menus['site_menu_output'])) {
             $menus['show_site_menu'] = false;
+        }
+
+        // Hide the site menu with the modular layout config component
+        if (array_key_exists('modular-layout-config', $data['data'])) {
+            foreach ($data['data'] as $componentName => $componentJSON) {
+                if ($componentName === 'modular-layout-config') {
+                    $componentJSON = $this->components->cleanComponentJSON($componentJSON);
+
+                    $componentJSON = json_decode($componentJSON, true);
+
+                    if (!empty($componentJSON['showSiteMenu']) && $componentJSON['showSiteMenu'] === false) {
+                        $menus['show_site_menu'] = false;
+                    }
+                }
+            }
         }
 
         return $menus;
