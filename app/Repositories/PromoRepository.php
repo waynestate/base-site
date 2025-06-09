@@ -96,10 +96,12 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         */
 
         // Get the global promos config
-        $config = config('base.global');
+        // TODO global variables adjusted by promos
+        $config = config('base');
+        //dump($config);
 
         // Set all the groups
-        $groups = $config['all']['promos'];
+        $groups = $config['global']['all']['promos'];
 
         // Merge the groups for the site we are on
         if (!empty($config['sites'][$data['site']['id']])) {
@@ -197,7 +199,6 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         unset($promos['main_social']);
         unset($promos['main_contact']);
 
-        dump($promos['components']);
         // Add modular components into global data
         $promos['components'] = $this->components->getModularComponents($data);
 
