@@ -146,6 +146,9 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 } else {
                     // If only an ID is provided without JSON, use it
                     $components[$name]['id'] = (int)$componentJSON;
+
+                    // Remove integers from page fields to match the component filename
+                    $components[$name]['filename'] = preg_replace('/-\d+$/', '', $name);
                 }
 
                 // Build the parsePromos group_reference and group config
@@ -259,14 +262,11 @@ class ModularPageRepository implements ModularPageRepositoryContract
             } elseif (Str::startsWith($name, 'layout-config')) {
                 // Take layout config out of the loop
                 // Maybe define layoutClass
-                // showSiteMenu, consider breadcrumbs
-                // showPageTitle
-                // showPageContent
-                // showMenu -> if false add controller to full width config
+                // showPageTitle, showPageContent, showSiteMenu -> if false add controller to full width config, consider breadcrumbs
+                // Menu toggle in MenuReposity
                 //dump($name);
-                //$request->data['base']['show_site_menu'] = false;
-                $modularComponents[$name]['data'] = $promos[$name]['data'] ?? [];
-                $modularComponents[$name]['component'] = $promos[$name]['component'] ?? [];
+                //dump($component);
+                $modularComponents[$name] = $component;
             } elseif (Str::startsWith($name, 'page-content') || Str::startsWith($name, 'heading')) {
                 // If there's JSON but no news, events or promo data, assign the component array as data
                 // Page-content and heading components

@@ -96,9 +96,7 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         */
 
         // Get the global promos config
-        // TODO global variables adjusted by promos
         $config = config('base');
-        //dump($config);
 
         // Set all the groups
         $groups = $config['global']['all']['promos'];
@@ -202,8 +200,8 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         // Add modular components into global data
         $promos['components'] = $this->components->getModularComponents($data);
 
-        // Set page variables from component
-        // show;hide the menu
+        // Set page variables from layout-config component
+        $promos['layout_config'] = $promos['components']['layout-config'];
 
         // Set hero from components
         $hero = collect($promos['components'])->reject(function ($data, $component_name) {
