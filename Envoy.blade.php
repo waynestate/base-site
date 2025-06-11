@@ -3,9 +3,15 @@
 use Symfony\Component\Process\Process;
 
 /**
+ * Pull in environment
+ */
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+/**
  * Application name
  */
-$appname = ''; // domain
+$appname = env('APP_NAME');
 
 /**
  * Remote server connection string

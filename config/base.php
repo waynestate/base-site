@@ -3,7 +3,7 @@
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\TopicController;
 
-return [
+$global_config = [
 
     /*
     |--------------------------------------------------------------------------
@@ -252,23 +252,23 @@ return [
         'all' => [
             'promos' => [
                 'main_contact' => [
-                    'id' => 2908,
+                    'id' => null,
                     'config' => 'limit:4',
                 ],
                 'main_social' => [
-                    'id' => 2907,
+                    'id' => null,
                     'config' => null,
                 ],
                 'main_under_menu' => [
-                    'id' => 2909,
+                    'id' => null,
                     'config' => 'page_id:{$page_id}',
                 ],
                 'hero' => [
-                    'id' => 3001,
+                    'id' => null,
                     'config' => 'page_id:{$page_id}|randomize|limit:1',
                 ],
                 'flag' => [
-                    'id' => 4246,
+                    'id' => null,
                     'config' => 'page_id:{$page_id}|first',
                 ],
             ],
@@ -301,3 +301,11 @@ return [
         ],
     ],
 ];
+
+// Override any config with local file
+if (!empty(getenv('CONFIG_OVERRIDE')) && file_exists(__DIR__ . '/' . getenv('CONFIG_OVERRIDE'))) {
+    $local_config = include(__DIR__ . '/' . getenv('CONFIG_OVERRIDE'));
+    return array_replace_recursive_distinct($global_config, $local_config);
+}
+
+return $global_config;
