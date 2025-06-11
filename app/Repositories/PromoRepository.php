@@ -201,6 +201,8 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         $promos['components'] = $this->components->getModularComponents($data);
 
         // Set page variables from layout-config component
+        // Can't access the $menu variable from here
+        // Need a new repository for manipulating base data unrelated to promos
         $promos['layout_config'] = $promos['components']['layout-config'];
 
         // Set hero from components
