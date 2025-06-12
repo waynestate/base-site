@@ -48,14 +48,14 @@ class HomepageController extends Controller
                 ],
             ];
 
-            foreach ($components as $componentName => $componentData) {
-                $request->data['base']['data'][$componentName] = json_encode($componentData);
+            foreach ($components as $component_name => $component_data) {
+                $request->data['base']['data'][$component_name] = json_encode($component_data);
             }
 
-            // Add modular components into global data
+            // Add default homepage components into global data
             $request->data['base']['components'] = $this->components->getModularComponents($request->data['base']);
         }
 
-        return view('homepage', merge($request->data, $promos));
+        return view('childpage', merge($request->data, $promos));
     }
 }
