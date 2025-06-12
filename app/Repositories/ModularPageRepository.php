@@ -101,50 +101,50 @@ class ModularPageRepository implements ModularPageRepositoryContract
         $group_reference = [];
         $group_config = [];
 
-        foreach ($data['data'] as $page_field_label => $componentJSON) {
+        foreach ($data['data'] as $page_field_label => $page_field_data) {
             if (Str::startsWith($page_field_label, 'modular-')) {
 
                 // Match component name to filename
                 $name = Str::replaceFirst('modular-', '', $page_field_label);
 
                 // Remove spaces, breaks, trailing commas
-                $componentJSON = $this->cleanComponentJSON($componentJSON);
+                $page_field_data = $this->cleanComponentJSON($page_field_data);
 
                 // Make sure this is JSON data
-                if (Str::startsWith($componentJSON, '{')) {
+                if (Str::startsWith($page_field_data, '{')) {
 
                     // Turn JSON into a PHP array
-                    $components[$name] = json_decode($componentJSON, true);
+                    $components[$name] = json_decode($page_field_data, true);
 
                     // Set up expected parsePromos group_config
                     if (!empty($components[$name]['config'])) {
-                        $promoConfig = explode('|', $components[$name]['config']);
+                        $promo_config = explode('|', $components[$name]['config']);
 
                         // Add youtube
                         if (strpos($components[$name]['config'], 'youtube') === false) {
-                            array_push($promoConfig, 'youtube');
+                            array_push($promo_config, 'youtube');
                         }
 
-                        foreach ($promoConfig as $key => $configItem) {
+                        foreach ($promo_config as $key => $config_item) {
                             // Inject page_id
-                            if (Str::startsWith($configItem, 'page_id')) {
-                                $promoConfig[$key] = 'page_id:'.$data['page']['id'];
+                            if (Str::startsWith($config_item, 'page_id')) {
+                                $promo_config[$key] = 'page_id:'.$data['page']['id'];
                             }
                             // Component loop expects the return being a multi-dimensional array
-                            if (Str::startsWith($componentJSON, 'first')) {
-                                unset($promoConfig[$key]);
+                            if (Str::startsWith($page_field_data, 'first')) {
+                                unset($promo_config[$key]);
                             }
                         }
 
                         // Poof! Concatenate config to use with parsePromos
-                        $components[$name]['config'] = implode('|', $promoConfig);
+                        $components[$name]['config'] = implode('|', $promo_config);
                     }
 
                     // Remove integers from page fields to match the component filename
                     $components[$name]['filename'] = preg_replace('/-\d+$/', '', $name);
                 } else {
                     // If only an ID is provided without JSON, use it
-                    $components[$name]['id'] = (int)$componentJSON;
+                    $components[$name]['id'] = (int)$page_field_data;
 
                     // Remove integers from page fields to match the component filename
                     $components[$name]['filename'] = preg_replace('/-\d+$/', '', $name);
