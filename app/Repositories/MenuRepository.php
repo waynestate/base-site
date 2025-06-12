@@ -29,8 +29,13 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
     /**
      * Construct the repository.
      */
-    public function __construct(Connector $wsuApi, ParseMenu $parseMenu, DisplayMenu $displayMenu, Repository $cache, ModularPageRepositoryContract $components)
-    {
+    public function __construct(
+        Connector $wsuApi,
+        ParseMenu $parseMenu,
+        DisplayMenu $displayMenu,
+        Repository $cache,
+        ModularPageRepositoryContract $components
+    ) {
         $this->wsuApi = $wsuApi;
         $this->parseMenu = $parseMenu;
         $this->displayMenu = $displayMenu;
@@ -41,7 +46,7 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
     /**
      * {@inheritdoc}
      */
-    public function getRequestData(array $data)
+    public function getRequestData(array &$data)
     {
         // Get all the menus for this site
         try {
@@ -125,7 +130,7 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
 
                     $componentJSON = json_decode($componentJSON, true);
 
-                    if (!empty($componentJSON['showSiteMenu']) && $componentJSON['showSiteMenu'] === false) {
+                    if (isset($componentJSON['showSiteMenu']) && $componentJSON['showSiteMenu'] === false) {
                         $menus['show_site_menu'] = false;
                     }
                 }

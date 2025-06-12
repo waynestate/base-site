@@ -87,7 +87,6 @@ class ModularPageRepository implements ModularPageRepositoryContract
         // Remove trailing comma
         $componentJSON = preg_replace('(,})', '}', $componentJSON);
 
-        // Bubble bubble POP!
         return $componentJSON;
     }
 

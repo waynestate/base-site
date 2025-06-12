@@ -77,7 +77,7 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
     /**
      * {@inheritdoc}
      */
-    public function getRequestData(array $data)
+    public function getRequestData(array &$data)
     {
         /*
         |--------------------------------------------------------------------------
@@ -124,6 +124,25 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         $promos = $this->parsePromos->parse($promos, $group_reference, $group_config);
 
         $global_promos = $this->manipulateGlobalPromos($promos, $groups, $data);
+
+        // Assign layout_config to data and remove from the component loop
+        // Default values
+        $layout_config = [
+            'showPageTitle' => true,
+            'showSiteMenu' => true,
+        ];
+
+        if (array_key_exists('layout-config', $global_promos['components'])) {
+            foreach ($global_promos['components'] as $componentName => $componentJSON) {
+                if ($componentName === 'layout-config') {
+                    $layout_config = $componentJSON;
+                    unset($global_promos['components']['layout-config']);
+                }
+            }
+        }
+
+        // TODO Refactor when my brain is working properly
+        $data['layout_config'] = isset($layout_config['layout-config']) ? current($layout_config) : $layout_config;
 
         return $global_promos;
     }
@@ -199,11 +218,6 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
 
         // Add modular components into global data
         $promos['components'] = $this->components->getModularComponents($data);
-
-        // Set page variables from layout-config component
-        // Can't access the $menu variable from here
-        // Need a new repository for manipulating base data unrelated to promos
-        $promos['layout_config'] = $promos['components']['layout-config'];
 
         // Set hero from components
         $hero = collect($promos['components'])->reject(function ($data, $component_name) {

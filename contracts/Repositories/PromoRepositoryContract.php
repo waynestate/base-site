@@ -17,11 +17,6 @@ interface PromoRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getRequestData(array $data);
-
-    /**
-     * {@inheritdoc}
-     */
     public function createGlobalPromoGroupReference(array $data, array $config, array $groups);
 
     /**

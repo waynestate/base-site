@@ -13,5 +13,5 @@ interface RequestDataRepositoryContract
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-    public function getRequestData(array $data);
+    public function getRequestData(array &$data);
 }

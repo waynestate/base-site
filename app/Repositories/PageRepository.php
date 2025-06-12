@@ -11,7 +11,7 @@ class PageRepository implements RequestDataRepositoryContract, PageRepositoryCon
     /**
      * {@inheritdoc}
      */
-    public function getRequestData(array $data)
+    public function getRequestData(array &$data)
     {
         // Page data to return
         $pageData = [];
