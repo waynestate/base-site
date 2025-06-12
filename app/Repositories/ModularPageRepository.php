@@ -101,11 +101,11 @@ class ModularPageRepository implements ModularPageRepositoryContract
         $group_reference = [];
         $group_config = [];
 
-        foreach ($data['data'] as $pageFieldLabel => $componentJSON) {
-            if (Str::startsWith($pageFieldLabel, 'modular-')) {
+        foreach ($data['data'] as $page_field_label => $componentJSON) {
+            if (Str::startsWith($page_field_label, 'modular-')) {
 
                 // Match component name to filename
-                $name = Str::replaceFirst('modular-', '', $pageFieldLabel);
+                $name = Str::replaceFirst('modular-', '', $page_field_label);
 
                 // Remove spaces, breaks, trailing commas
                 $componentJSON = $this->cleanComponentJSON($componentJSON);

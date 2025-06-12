@@ -133,8 +133,6 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
                 if ($component_name === 'layout-config') {
                     if (isset($component_data['showPageTitle']) && $component_data['showPageTitle'] === false) {
                         $layout_config['show_page_title'] = false;
-                    } else {
-                        $layout_config['show_page_title'] = true;
                     }
 
                     if (isset($component_data['pageClass'])) {
@@ -146,7 +144,7 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         }
 
         // Assign to base
-        $data['layout_config'] = $layout_config;
+        $data['layout_config'] = $layout_config ?? [];
 
         return $global_promos;
     }
