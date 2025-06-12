@@ -125,24 +125,28 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
 
         $global_promos = $this->manipulateGlobalPromos($promos, $groups, $data);
 
+        // TODO: Move this to a new middleware file
         // Assign layout_config to data and remove from the component loop
-        // Default values
-        $layout_config = [
-            'showPageTitle' => true,
-            'showSiteMenu' => true,
-        ];
-
+        // Can't override show_site_menu from here
         if (array_key_exists('layout-config', $global_promos['components'])) {
-            foreach ($global_promos['components'] as $componentName => $componentJSON) {
-                if ($componentName === 'layout-config') {
-                    $layout_config = $componentJSON;
+            foreach ($global_promos['components'] as $component_name => $component_data) {
+                if ($component_name === 'layout-config') {
+                    if (isset($component_data['showPageTitle']) && $component_data['showPageTitle'] === false) {
+                        $layout_config['show_page_title'] = false;
+                    } else {
+                        $layout_config['show_page_title'] = true;
+                    }
+
+                    if (isset($component_data['pageClass'])) {
+                        $layout_config['page_class'] = $component_data['pageClass'] ?? '';
+                    }
                     unset($global_promos['components']['layout-config']);
                 }
             }
         }
 
-        // TODO Refactor when my brain is working properly
-        $data['layout_config'] = isset($layout_config['layout-config']) ? current($layout_config) : $layout_config;
+        // Assign to base
+        $data['layout_config'] = $layout_config;
 
         return $global_promos;
     }

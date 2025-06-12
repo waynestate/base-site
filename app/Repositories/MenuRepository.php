@@ -123,6 +123,7 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
         }
 
         // Hide the site menu with the modular layout config component
+        // TODO: move this to a new middleware file to handle page field data and avoid looping twice
         if (array_key_exists('modular-layout-config', $data['data'])) {
             foreach ($data['data'] as $componentName => $componentJSON) {
                 if ($componentName === 'modular-layout-config') {
@@ -132,6 +133,7 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
 
                     if (isset($componentJSON['showSiteMenu']) && $componentJSON['showSiteMenu'] === false) {
                         $menus['show_site_menu'] = false;
+                        config(['base.full_width_controllers' => [$data['page']['controller']]]);
                     }
                 }
             }
