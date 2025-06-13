@@ -35,6 +35,7 @@ class HomepageController extends Controller
 
         $promos = $this->promo->getHomepagePromos($request->data);
 
+        // TODO: Refactor/relocate
         if (empty($request->data['base']['data'])) {
             $components = [
                 'modular-news-column' => [
