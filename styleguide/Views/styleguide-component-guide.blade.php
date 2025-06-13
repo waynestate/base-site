@@ -41,8 +41,8 @@
             </tbody>
         </table>
 
-        <h3 id="json-data-explained">JSON data explained</h3>
-        <p>Legend: <span class="text-[red]">*</span> Designates a required configuration.</p>
+        <h2 id="component-options-explained">Component options explained</h2>
+        <h3>All components</h3>
         <table class="mt-2">
             <thead>
                 <tr>
@@ -53,20 +53,33 @@
             <tbody>
                 <tr>
                     <td class="font-bold">id</td>
-                    <td>Promo group ID<span class="text-[red]">*</span>, News application ID, Events site ID</td>
+                    <td>Promo group ID, News application ID, Events site ID</td>
                 </tr>
                 <tr>
                     <td class="font-bold">heading</td>
-                    <td>Add a component heading<br />Default is h2</td>
+                    <td>Add a component heading</td>
                 </tr>
                 <tr>
                     <td class="font-bold">headingClass</td>
-                    <td>Add any number of classes to a component heading.<br />"text-green divider-gold"</td>
+                    <td>Add any number of classes to a component heading.<br /><code>"text-green divider-gold"<code></td>
                 </tr>
                 <tr>
                     <td class="font-bold">headingLevel</td>
-                    <td>Change default component heading level from h2 to h3 or h4.<br />"h3"</td>
+                    <td>Change default component heading level from h2 to h3 or h4.<br /><code>"h3"<code></td>
                 </tr>
+        </table>
+
+
+        <h3>Promotion components</h3>
+        <table class="mt-2">
+            <thead>
+                <tr>
+                    <th>Key</th>
+                    <th>Value</th>
+                    <th class="w-1/5">Component</th>
+                </tr>
+            </thead>
+            <tbody>
                 <tr>
                     <td class="font-bold">config</td>
                     <td>
@@ -74,32 +87,49 @@ Configuration options for the specific promo group. <br />
 Use "page_id" to enable per-page items.<br />
 Use "limit:1" to display one item.<br />
 Use "randomize" to shuffle the order of promotion items.<br />
-Use "youtube" when you are putting a video url in the promo link field to populate the play button overlay.<br /> 
+Use "youtube" when you are putting a video url in the promo link field to populate the play button overlay.<br />
 <a href="https://github.com/waynestate/parse-promos">Detailed promotion config information</a>
                     </td>
+                    <td class="font-bold">All promotion components</td>
                 </tr>
                 <tr>
                     <td class="font-bold">columns</td>
                     <td>
 Define how many columns the component will display.<br />
-1 to 4 columns is recommended.<br />
-Use with the catalog, button row, icon row, events row, and news row components.
+1 to 4 columns is recommended.
+                    </td>
+                    <td class="font-bold">
+                        Catalog<br /> 
+                        Button row<br /> 
+                        Icon row<br /> 
+                        Events row<br /> 
+                        News row
                     </td>
                 </tr>
                 <tr>
                     <td class="font-bold">singlePromoView</td>
                     <td>
 Creates a link to a detailed page of a single promo item, like a Spotlight.<br />
-True or false; false is default and will use the promotion's link field if it is set.<br />
-Use with the catalog, spoltight, promo row, promo column, and icon components.
+True or false; false is default and will use the promotion's link field if it is set.
+                    </td>
+                    <td class="font-bold">
+                        Catalog<br /> 
+                        Spotlight<br /> 
+                        Promo row, column<br /> 
+                        Icon row, column<br /> 
                     </td>
                 </tr>
                 <tr>
                     <td class="font-bold">showExcerpt</td>
                     <td>
 Show or hide the promo's excerpt.<br />
-True or false; true is default.<br />
-Use with the catalog, spoltight, promo row, promo column, and icon components.
+True or false; true is default.
+                    </td>
+                    <td class="font-bold">
+                        Catalog<br /> 
+                        Spotlight<br /> 
+                        Promo row, column<br /> 
+                        Icon row, column<br /> 
                     </td>
                 </tr>
                 <tr>
@@ -107,81 +137,65 @@ Use with the catalog, spoltight, promo row, promo column, and icon components.
                     <td>
 Show or hide the promo's description.<br />
 True or false; true is default.<br />
-Commonly used in conjunction with "singlePromoView" where the description is hidden from the catalog but displayed on the detailed promo page.<br />
-Use with the catalog, spoltight, promo row, promo column, and icon components.
+Commonly used in conjunction with "singlePromoView" where the description is hidden from the catalog but displayed on the detailed promo page.
+                    </td>
+                    <td class="font-bold">
+                        Catalog<br /> 
+                        Spotlight<br /> 
+                        Promo row, column<br /> 
+                        Icon row, column<br /> 
                     </td>
                 </tr>
                 <tr>
                     <td class="font-bold">gradientOverlay</td>
                     <td>
 Moves the title, excerpt and/description on top of the image with a gradient for contrast.<br />
-True or false; false is default.<br />
-Promo row, promo column, and catalog components only.
+True or false; false is default.
+                    </td>
+                    <td class="font-bold">
+                        Catalog<br />
+                        Promo row<br />
+                        Promo column<br />
                     </td>
                 </tr>
                 <tr>
                     <td class="font-bold">groupByOptions</td>
                     <td>
 Group promotion items by the options in the options dropdown.<br />
-True or false; false is default.<br />
-Catalog component only.
+True or false; false is default.
                     </td>
+                    <td class="font-bold">Catalog</td>
                 </tr>
                 <tr>
                     <td class="font-bold">imagePosition</td>
                     <td>
 Moves the image from the left to the right, or alternates their position if the item limit is greater than one.<br />
-Left, right, alternate; left is default.<br />
-Promo row component only.
+Left, right, alternate; left is default.
                     </td>
+                    <td class="font-bold">Promo row</td>
                 </tr>
                 <tr>
                     <td class="font-bold">imageSize</td>
                     <td>
 Uses a small (25%) width or large (40%) width.<br />
-Small or large; large is default.<br />
-Promo row component only.
+Small or large; large is default.
                     </td>
+                    <td class="font-bold">Promo row</td>
                 </tr>
+            </tbody>
+        </table>
+
+
+        <h3>News and events components</h3>
+        <table class="mt-2">
+            <thead>
                 <tr>
-                    <td class="font-bold">limit</td>
-                    <td>
-Limit the number of items displayed.<br />
-Integer; default is 4.<br />
-News and events only. For promotion based components, see "config."
-                    </td>
+                    <th>Key</th>
+                    <th>Value</th>
+                    <th class="w-1/5">Component</th>
                 </tr>
-                <tr>
-                    <td class="font-bold">link_text</td>
-                    <td>
-To change "More news" or "More events" to your specific text, i.e. "Student news", "Career events".<br />
-News and Events only.
-                    </td>
-                </tr>
-                <tr>
-                    <td class="font-bold">news_route</td>
-                    <td>
-Change the url path for news items. Example: "/facultynews"<br />
-Null default; Example: "/facultynews"<br />
-News components only.
-                    </td>
-                </tr>
-                <tr>
-                    <td class="font-bold">featured</td>
-                    <td>
-Display only the articles that have a specific featured image uploaded in the news manager.<br />
-True or false; all articles shown by default.<br />
-News row only.
-                    </td>
-                </tr>
-                <tr>
-                    <td class="font-bold">topics</td>
-                    <td>
-Pass in an array of topics to display i.e. [76, 4]<br />
-All topics shown by default.<br />
-News components only.
-                    </td>
-                </tr>
+            </thead>
+            <tbody>
                 <tr>
                     <td class="font-bold">cal_name</td>
                     <td>
@@ -189,6 +203,58 @@ The relative url to your calendar that the "more events" link goes to, i.e. "mai
 Defaults to the site's selected calendar.<br />
 Events components only.
                     </td>
+                    <td class="font-bold">Events</td>
+                </tr>
+                <tr>
+                    <td class="font-bold">columns</td>
+                    <td>
+Define how many columns the component will display.<br />
+1 to 4 columns is recommended.
+                    </td>
+                    <td class="font-bold">
+                        Events row<br /> 
+                        News row
+                    </td>
+                </tr>
+                <tr>
+                    <td class="font-bold">featured</td>
+                    <td>
+Display only the articles that have a specific featured image uploaded in the news manager.<br />
+True or false; all articles shown by default.
+                    </td>
+                    <td class="font-bold">News row</td>
+                </tr>
+                <tr>
+                    <td class="font-bold">limit</td>
+                    <td>
+Limit the number of items displayed.<br />
+Integer; default is 4.<br />
+For promotion based components, see "config."
+                    </td>
+                    <td class="font-bold">News<br />Events</td>
+                </tr>
+                <tr>
+                    <td class="font-bold">link_text</td>
+                    <td>
+To change "More news" or "More events" to your specific text, i.e. "Student news", "Career events".
+                    </td>
+                    <td class="font-bold">News<br />Events</td>
+                </tr>
+                <tr>
+                    <td class="font-bold">news_route</td>
+                    <td>
+Change the url path for news items. Example: "/facultynews"<br />
+Null default; Example: "/facultynews"
+                    </td>
+                    <td class="font-bold">News</td>
+                </tr>
+                <tr>
+                    <td class="font-bold">topics</td>
+                    <td>
+Pass in an array of topics to display i.e. [76, 4]<br />
+All topics shown by default.
+                    </td>
+                    <td class="font-bold">News</td>
                 </tr>
             </tbody>
         </table>
