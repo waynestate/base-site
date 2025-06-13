@@ -8,7 +8,6 @@
 
         <p>Using components empowers the web team with greater flexibility to achieve diverse web objectives. You can display multiple data sets—like promo groups, events and news—on a single page by adding custom page fields for each component. The available components are listed in this menu.</p>
         <p>For adding multiple components of the same type (e.g., two accordions on a page), simply increase the number in the page field. For instance, use <code>modular-accordion-1</code> and <code>modular-accordion-2</code> to include two accordions.</p>
-        <p>As for changing the order of components, the current method involves manually copying and pasting data in the desired sequence. We're actively working on a more efficient way to rearrange page fields, streamlining the process for easier reordering.</p>
 
         <h2>Configuring components</h2>
         <p>You will use a JSON array paired with your page field to configure each component. The specifics of each component can be found on the individual component page from the menu.</p>
@@ -23,7 +22,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><pre class="w-full">modular-catalog-1</pre></td>
+                    <td><pre class="w-full">modular-catalog</pre></td>
                     <td>
 <pre class="w-full" tabindex="0">
 {!! htmlspecialchars('{
@@ -54,6 +53,18 @@
                 <tr>
                     <td class="font-bold">id</td>
                     <td>Promo group ID, News application ID, Events site ID</td>
+                </tr>
+                <tr>
+                    <td class="font-bold">backgroundImageUrl</td>
+                    <td>URL for a component background image.</td>
+                </tr>
+                <tr>
+                    <td class="font-bold">columnSpan</td>
+                    <td>Add a width to your column. Column widths can span from 1 to 12 available columns.</td>
+                </tr>
+                <tr>
+                    <td class="font-bold">classes</td>
+                    <td>A string of classes to modify your component; padding, background-color.</td>
                 </tr>
                 <tr>
                     <td class="font-bold">heading</td>
@@ -270,28 +281,28 @@ All topics shown by default.
                 <tr>
                     <td>
 <ul class="columns-2">
-    <li>modular-accordion-1</li>
-    <li>modular-button-column-1</li>
-    <li>modular-button-row-1</li>
-    <li>modular-catalog-1</li>
-    <li>modular-events-column-1</li>
-    <li>modular-events-featured-column-1</li>
-    <li>modular-events-featured-row-1</li>
-    <li>modular-events-row-1</li>
-    <li>modular-heading-1</li>
-    <li>modular-hero-1</li>
-    <li>modular-icons-column-1</li>
-    <li>modular-icons-row-1</li>
-    <li>modular-icons-top-row-1</li>
-    <li>modular-news-column-1</li>
-    <li>modular-news-featured-column-1</li>
-    <li>modular-news-row-1</li>
+    <li>modular-accordion</li>
+    <li>modular-button-column</li>
+    <li>modular-button-row</li>
+    <li>modular-catalog</li>
+    <li>modular-events-column</li>
+    <li>modular-events-featured-column</li>
+    <li>modular-events-featured-row</li>
+    <li>modular-events-row</li>
+    <li>modular-heading</li>
+    <li>modular-hero</li>
+    <li>modular-icons-column</li>
+    <li>modular-icons-row</li>
+    <li>modular-icons-top-row</li>
+    <li>modular-news-column</li>
+    <li>modular-news-featured-column</li>
+    <li>modular-news-row</li>
     <li>modular-page-content-row</li>
     <li>modular-page-content-column</li>
-    <li>modular-promo-column-1</li>
-    <li>modular-promo-row-1</li>
-    <li>modular-spotlight-column-1</li>
-    <li>modular-spotlight-row-1</li>
+    <li>modular-promo-column</li>
+    <li>modular-promo-row</li>
+    <li>modular-spotlight-column</li>
+    <li>modular-spotlight-row</li>
 </ul>
                     </td>
                 </tr>
