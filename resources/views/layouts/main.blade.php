@@ -35,7 +35,7 @@
     @endif
 </header>
 
-<div id="panel" class="site-theme {{ $base['components']['layout-config']['component']['pageClass'] ?? '' }}">
+<div id="panel" @class(['site-theme', $base['layout_config']['page_class'] ?? ''])>
     @yield('top')
 
     @if(!empty($base['hero']))
