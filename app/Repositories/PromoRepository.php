@@ -96,10 +96,10 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         */
 
         // Get the global promos config
-        $config = config('base');
+        $config = config('base.global');
 
         // Set all the groups
-        $groups = $config['global']['all']['promos'];
+        $groups = $config['all']['promos'];
 
         // Merge the groups for the site we are on
         if (!empty($config['sites'][$data['site']['id']])) {
