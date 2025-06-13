@@ -2,6 +2,7 @@
 
 namespace Styleguide\Http\Controllers;
 
+use Contracts\Repositories\ModularPageRepositoryContract;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -13,9 +14,12 @@ class ComponentButtonsController extends Controller
     /**
      * Construct the controller.
      */
-    public function __construct(Factory $faker)
-    {
-        $this->faker['faker'] = $faker->create();
+    public function __construct(
+        Factory $faker,
+        ModularPageRepositoryContract $components
+    ) {
+        $this->faker = $faker->create();
+        $this->components = $components;
     }
 
     /**
@@ -181,6 +185,9 @@ class ComponentButtonsController extends Controller
                 ],
             ],
         ];
+
+        $components = $this->components->componentClasses($components);
+        $components = $this->components->componentStyles($components);
 
         // Assign components globally
         $request->data['base']['components'] = $components;

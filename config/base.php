@@ -100,7 +100,10 @@ return [
     | as if it was in this array.
     |
     */
-    'hero_full_controllers' => ['HomepageController'],
+    'hero_full_controllers' => [
+        'HomepageController',
+        'FullWidthController'
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -154,18 +157,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | People Parent Group
-    |--------------------------------------------------------------------------
-    |
-    | This will limit the groups displayed to only the children groups under
-    | this ID. Typically the group is called "Departments". If all desired
-    | groups are added to the root then leave this value as 0.
-    |
-    */
-    'people_parent_group_id' => 0,
-
-    /*
-    |--------------------------------------------------------------------------
     | Default Meta Image
     |--------------------------------------------------------------------------
     |
@@ -208,7 +199,9 @@ return [
     | color or image.
     |
     */
-    'full_width_controllers' => [],
+    'full_width_controllers' => [
+        'FullWidthController',
+    ],
 
     /*
     |--------------------------------------------------------------------------

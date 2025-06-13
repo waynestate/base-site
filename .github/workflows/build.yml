@@ -38,8 +38,7 @@ jobs:
             - name: Setup Node.js environment
               uses: actions/setup-node@v4.0.1
               with:
-                    node-version: 20.x
-                    cache: yarn
+                    node-version: 22.x
             - name: Install node dependences
               run: make yarn
             - name: Append node_modules to PATH

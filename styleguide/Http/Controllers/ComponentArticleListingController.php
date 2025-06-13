@@ -2,20 +2,26 @@
 
 namespace Styleguide\Http\Controllers;
 
+use Contracts\Repositories\ModularPageRepositoryContract;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Faker\Factory;
 use Factories\Article;
+use Factories\ArticleMeta;
+use Factories\ArticleComponent;
 
 class ComponentArticleListingController extends Controller
 {
     /**
      * Construct the controller.
      */
-    public function __construct(Factory $faker)
-    {
+    public function __construct(
+        Factory $faker,
+        ModularPageRepositoryContract $components
+    ) {
         $this->faker['faker'] = $faker->create();
+        $this->components = $components;
     }
 
     /**
@@ -85,27 +91,33 @@ All available configurations
                 ],
             ],
             'news-column-1' => [
-                'data' => app(Article::class)->create(5, false),
+                'data' => app(ArticleComponent::class)->create(5, false),
+                'meta' => app(ArticleMeta::class)->create(),
                 'component' => [
                     'heading' => 'News column',
                     'filename' => 'news-column',
                 ],
             ],
             'news-featured-column-1' => [
-                'data' => app(Article::class)->create(4, false),
+                'data' => app(ArticleComponent::class)->create(4, false),
+                'meta' => app(ArticleMeta::class)->create(),
                 'component' => [
                     'heading' => 'Featured news column',
                     'filename' => 'news-featured-column',
                 ],
             ],
             'news-row-1' => [
-                'data' => app(Article::class)->create(4, false),
+                'data' => app(ArticleComponent::class)->create(4, false),
+                'meta' => app(ArticleMeta::class)->create(),
                 'component' => [
                     'heading' => 'News row',
                     'filename' => 'news-row',
                 ],
             ],
         ];
+
+        $components = $this->components->componentClasses($components);
+        $components = $this->components->componentStyles($components);
 
         // Assign components globally
         $request->data['base']['components'] = $components;

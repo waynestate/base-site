@@ -2,6 +2,7 @@
 
 namespace Styleguide\Http\Controllers;
 
+use Contracts\Repositories\ModularPageRepositoryContract;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -10,6 +11,15 @@ use Factories\Event;
 
 class ComponentHeadingController extends Controller
 {
+    /**
+     * Construct the controller.
+     */
+    public function __construct(
+        ModularPageRepositoryContract $components
+    ) {
+        $this->components = $components;
+    }
+
     /**
      * Display a page heading from a page field
      */
@@ -70,6 +80,9 @@ class ComponentHeadingController extends Controller
                 ],
             ],
         ];
+
+        $components = $this->components->componentClasses($components);
+        $components = $this->components->componentStyles($components);
 
         // Different data for h3 page
         if ($request->data['base']['page']['id'] === 122100200) {

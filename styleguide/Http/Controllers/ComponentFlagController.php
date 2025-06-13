@@ -2,6 +2,7 @@
 
 namespace Styleguide\Http\Controllers;
 
+use Contracts\Repositories\ModularPageRepositoryContract;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Factories\Flag;
@@ -9,6 +10,15 @@ use Illuminate\Http\Request;
 
 class ComponentFlagController extends Controller
 {
+    /**
+     * Construct the controller.
+     */
+    public function __construct(
+        ModularPageRepositoryContract $components
+    ) {
+        $this->components = $components;
+    }
+
     /**
      * Display the flag at the top of the page.
      */
@@ -37,6 +47,9 @@ class ComponentFlagController extends Controller
                 ],
             ],
         ];
+
+        $components = $this->components->componentClasses($components);
+        $components = $this->components->componentStyles($components);
 
         // Assign components globally
         $request->data['base']['components'] = $components;

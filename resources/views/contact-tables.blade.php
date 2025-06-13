@@ -36,7 +36,7 @@
                     <tbody>
                     @foreach($profile_list as $profile)
                         <tr>
-                            <td>@if(isset($profile['data']['Email']))<a href="mailto:{{$profile['data']['Email']}}">@endif{{$profile['data']['First Name']}} {{$profile['data']['Last Name']}}@if(isset($profile['data']['Email']))</a>@endif</td>
+                            <td>@if(isset($profile['data']['Email']))<a href="mailto:{{$profile['data']['Email']}}">@endif{{$profile['full_name']}}@if(isset($profile['data']['Email']))</a>@endif</td>
                             <td>@if(isset($profile['data']['Title'])){{$profile['data']['Title']}}@endif</td>
                             <td>@if(isset($profile['data']['Office Location'])){{$profile['data']['Office Location']}}@endif</td>
                             <td>@if(isset($profile['data']['Phone'])){{$profile['data']['Phone']}}@endif</td>

@@ -391,8 +391,18 @@
         "target": "",
         "display_name": "Templates",
         "class_name": "",
-        "relative_url": "/styleguide/childpage",
+        "relative_url": "/styleguide/templateguide",
         "submenu": {
+            "101111": {
+                "menu_item_id": 101111,
+                "is_active": 1,
+                "page_id": 101111,
+                "target": "",
+                "display_name": "Template guide",
+                "class_name": "",
+                "relative_url": "/styleguide/templateguide",
+                "submenu": []
+            },
             "101100": {
                 "menu_item_id": 101100,
                 "is_active": 1,
@@ -428,7 +438,7 @@
                 "is_active": 1,
                 "page_id": 101109,
                 "target": "",
-                "display_name": "Custom full-width",
+                "display_name": "Full-width",
                 "class_name": "",
                 "relative_url": "/styleguide/fullwidth",
                 "submenu": []

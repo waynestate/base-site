@@ -1,5 +1,5 @@
 @layer utilities {
-    // Gradient overlay
+    /* Gradient overlay */
     .bg-gradient-darkest::before {
         @apply absolute inset-0;
 
@@ -11,7 +11,7 @@
         }
     }
 
-    // Backgrounds
+    /* Backgrounds */
     .bg-gradient-green {
         @apply bg-green-600;
 

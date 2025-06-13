@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Str;
+
 return [
 
     'migrations' => [
@@ -13,7 +15,7 @@ return [
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('APP_NAME', 'laravel').':',
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME')).':'),
         ],
 
         'default' => [
