@@ -131,7 +131,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
                                 $promo_config[$key] = 'page_id:'.$data['page']['id'];
                             }
                             // Component loop expects the return being a multi-dimensional array
-                            if (Str::startsWith($page_field_data, 'first')) {
+                            if (Str::startsWith($config_item, 'first')) {
                                 unset($promo_config[$key]);
                             }
                         }

@@ -12,6 +12,8 @@ use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Contracts\Repositories\HomepageRepositoryContract;
 use Contracts\Repositories\ModularPageRepositoryContract;
+use Contracts\Repositories\EventRepositoryContract;
+use Contracts\Repositories\ArticleRepositoryContract;
 
 class HomepageController extends Controller
 {
@@ -20,10 +22,14 @@ class HomepageController extends Controller
      */
     public function __construct(
         HomepageRepositoryContract $promo,
-        ModularPageRepositoryContract $components,
+        ModularPageRepositoryContract $modularComponent,
+        ArticleRepositoryContract $article,
+        EventRepositoryContract $event
     ) {
         $this->promo = $promo;
-        $this->components = $components;
+        $this->modularComponent = $modularComponent;
+        $this->article = $article;
+        $this->event = $event;
     }
 
     /**
@@ -35,28 +41,17 @@ class HomepageController extends Controller
 
         $promos = $this->promo->getHomepagePromos($request->data);
 
-        // TODO: Refactor/relocate
-        if (empty($request->data['base']['data'])) {
-            $components = [
-                'modular-news-column' => [
-                    'heading' => 'News',
-                    'columnSpan' => 6,
-                ],
-                'modular-events-column' => [
-                    'heading' => 'Events',
-                    'columnSpan' => 6,
-                    'classes' => 'mb-gutter',
-                ],
-            ];
+        $modularComponents['modularComponents'] = [];
 
-            foreach ($components as $component_name => $component_data) {
-                $request->data['base']['data'][$component_name] = json_encode($component_data);
-            }
-
-            // Add default homepage components into global data
-            $request->data['base']['components'] = $this->components->getModularComponents($request->data['base']);
+        if (!empty($request->data['base']['data'])) {
+            $modularComponents['modularComponents'] = $this->modularComponent->getModularComponents($request->data['base']);
+            $promos['components'] = $modularComponents['modularComponents'];
         }
 
-        return view('childpage', merge($request->data, $promos));
+        $articles['data'] = $this->article->listing($request->data['base']['site']['news']['application_id']);
+
+        $events = $this->event->getEvents($request->data['base']['site']['id']);
+
+        return view('homepage', merge($request->data, $promos, $articles, $events));
     }
 }

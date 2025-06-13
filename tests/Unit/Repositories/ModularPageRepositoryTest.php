@@ -41,11 +41,7 @@ final class ModularPageRepositoryTest extends TestCase
             'data' => [
                 'modular-accordion-1' => json_encode([
                     'id' => $promo_group_id,
-                    'config' => 'randomize|limit:20|page_id|first',
-                    'columns' => '',
-                    'singlePromoView' => true,
-                    'showExcerpt' => true,
-                    'showDescription' => true,
+                    'config' => 'randomize|limit:25|page_id|first',
                 ]),
             ],
         ]);
@@ -79,7 +75,7 @@ final class ModularPageRepositoryTest extends TestCase
                 'controller' => 'ChildpageController',
             ],
             'data' => [
-                'modular-accordion-1' => $promo_group_id,
+                'modular-accordion-2' => $promo_group_id,
             ],
         ]);
 
@@ -90,7 +86,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Run the promos through the repository
         $components = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
 
-        $this->assertCount(count($return['promotions']), $components['accordion-1']['data']);
+        $this->assertCount(count($return['promotions']), $components['accordion-2']['data']);
     }
 
     #[Test]
@@ -137,9 +133,9 @@ final class ModularPageRepositoryTest extends TestCase
                 'id' => $page_id,
             ],
             'data' => [
-                'modular-accordion-1' => json_encode([
+                'modular-accordion-3' => json_encode([
                     'id' => $promo_group_id,
-                    'config' => 'randomize|limit:20|page_id|first',
+                    'config' => 'randomize|limit:21|page_id|first',
                     'columns' => '',
                     'singlePromoView' => false,
                     'showExcerpt' => false,
@@ -154,11 +150,11 @@ final class ModularPageRepositoryTest extends TestCase
 
         // Run the promos through the repository
         $components = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
-        $component = collect($components['accordion-1']['data'])->first();
+        $component = collect($components['accordion-3']['data'])->first();
 
-        $this->assertFalse($components['accordion-1']['component']['singlePromoView']);
-        $this->assertFalse($components['accordion-1']['component']['showExcerpt']);
-        $this->assertFalse($components['accordion-1']['component']['showDescription']);
+        $this->assertFalse($components['accordion-3']['component']['singlePromoView']);
+        $this->assertFalse($components['accordion-3']['component']['showExcerpt']);
+        $this->assertFalse($components['accordion-3']['component']['showDescription']);
         $this->assertNotEquals($component['link'], 'view/'.Str::slug($component['title']).'-'.$component['promo_item_id']);
         $this->assertArrayNotHasKey('excerpt', $component);
         $this->assertArrayNotHasKey('description', $component);
@@ -367,8 +363,8 @@ final class ModularPageRepositoryTest extends TestCase
             'data' => [
                 'modular-catalog-1' => json_encode([
                     'id' => $promo_group_id,
-                    'config' => 'randomize|limit:20|page_id|first',
-                    'columns' => '2',
+                    'config' => 'randomize|limit:22|page_id|first',
+                    'columns' => 2,
                     'singlePromoView' => true,
                     'showExcerpt' => true,
                     'showDescription' => true,
@@ -427,7 +423,7 @@ final class ModularPageRepositoryTest extends TestCase
                 'id' => $page_id,
             ],
             'data' => [
-                'modular-accordion-1' => json_encode([
+                'modular-accordion-4' => json_encode([
                     'singlePromoView' => false,
                     'showExcerpt' => false,
                     'showDescription' => false,
@@ -442,7 +438,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Run the promos through the repository
         $components = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
 
-        $this->assertEmpty($components['accordion-1']['data']);
+        $this->assertEmpty($components['accordion-4']['data']);
     }
 
     #[Test]
@@ -617,9 +613,9 @@ final class ModularPageRepositoryTest extends TestCase
                 'controller' => 'ChildpageController',
             ],
             'data' => [
-                'modular-catalog-1' => '{
+                'modular-catalog-2' => '{
 "id":'. $promo_group_id .',
-"config":"randomize|limit:20",
+"config":"randomize|limit:23",
 "columns":"",
 "singlePromoView":true,
 "showExcerpt":true,
@@ -639,8 +635,8 @@ final class ModularPageRepositoryTest extends TestCase
         // Run the promos through the repository
         $components = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
 
-        $this->assertTrue(!empty($components['catalog-1']['data']['']));
-        $this->assertCount(count($return['promotions']), $components['catalog-1']['data']);
+        $this->assertTrue(!empty($components['catalog-2']['data']['']));
+        $this->assertCount(count($return['promotions']), $components['catalog-2']['data']);
     }
 
     #[Test]
@@ -662,9 +658,9 @@ final class ModularPageRepositoryTest extends TestCase
                 'controller' => 'ChildpageController',
             ],
             'data' => [
-                'modular-catalog-1' => '{
+                'modular-catalog-3' => '{
 "id":'. $promo_group_id .',
-"config":"randomize|limit:20",
+"config":"randomize|limit:24",
 "columns":"2"
 }',
             ],
@@ -677,7 +673,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Run the promos through the repository
         $components = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
 
-        $this->assertTrue(!empty($components['catalog-1']['component']['columns']));
+        $this->assertTrue(!empty($components['catalog-3']['component']['columns']));
     }
 
     #[Test]
