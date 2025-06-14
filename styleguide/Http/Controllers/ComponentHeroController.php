@@ -31,7 +31,7 @@ class ComponentHeroController extends Controller
                 'data' => [
                     0 => [
                         'title' => 'Component configuration',
-                        'promo_item_id' => 'componentConfiguration',
+                        'promo_item_id' => 'component-config',
                         'description' => '<p>Note: Any limit above 1 will enable the carousel.</p>',
                         'tr1' => [
                             'Page field' => 'modular-hero-1',
@@ -43,7 +43,7 @@ class ComponentHeroController extends Controller
                     ],
                     1 => [
                         'title' => 'Promotion group details',
-                        'promo_item_id' => 'promotionGroupDetails',
+                        'promo_item_id' => 'promo-details',
                         'description' => '',
                         'table' => [
                             'Title' => 'Displayed using options "Text overlay," "Logo overlay" and will become a link if link field is used.',

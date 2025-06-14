@@ -1,7 +1,8 @@
 @extends('layouts.' . (!empty($base['layout']) ? $base['layout'] : 'main'))
 
 @section('content')
-    @include('components.page-title', ['title' => $base['page']['title']])
+    @include('partials.page-title', ['title' => $base['page']['title']])
+    @include('components.page-content')
     
     <div class="content">
         {!! $base['page']['content']['main'] !!}

@@ -105,7 +105,7 @@ class ComponentButtonsController extends Controller
             'accordion' => [
                 'data' => [
                     2 => [
-                        'promo_item_id' => 'componentConfiguration',
+                        'promo_item_id' => 'component-config',
                         'title' => 'Component configuration',
                         'description' => '',
                         'tr1' => [
@@ -127,7 +127,7 @@ class ComponentButtonsController extends Controller
                         ],
                     ],
                     1 => [
-                        'promo_item_id' => 'promotionGroupDetails',
+                        'promo_item_id' => 'promo-details',
                         'title' => 'Promotion group details',
                         'description' => '',
                         'table' => [

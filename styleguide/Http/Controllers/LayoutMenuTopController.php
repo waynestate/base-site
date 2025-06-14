@@ -30,6 +30,6 @@ class LayoutMenuTopController extends Controller
         // Parse the top menu again to override the to menu output
         $request->data['base']['top_menu_output'] = $this->menuRepository->getTopMenuOutput($top_menu);
 
-        return view('styleguide-childpage', merge($request->data));
+        return view('childpage', merge($request->data));
     }
 }

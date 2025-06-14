@@ -10,7 +10,7 @@ class PageRepository extends Repository
     /**
      * {@inheritdoc}
      */
-    public function getRequestData(array $data)
+    public function getRequestData(array &$data)
     {
         return $this->getPageClass($data['parameters']['path'])->getPageData();
     }

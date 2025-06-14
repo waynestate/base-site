@@ -9,7 +9,7 @@
                 <img src="/_resources/images/no-photo.svg" alt="{{ $base['page']['title'] }}" class="sm:h-64 lg:h-auto block mx-auto lg:mx-0 mb-4">
             @endif
 
-            @include('components.page-title', ['title' => $base['page']['title'], 'class' => 'block lg:hidden'])
+            @include('partials.page-title', ['title' => $base['page']['title'], 'class' => 'block lg:hidden'])
 
             <div class="content">
                 @if(!empty($profile['data']['Title']))
@@ -55,7 +55,7 @@
         </div>
 
         <div class="w-full lg:w-2/3 px-4">
-            @include('components.page-title', ['title' => $base['page']['title'], 'class' => 'hidden lg:block'])
+            @include('partials.page-title', ['title' => $base['page']['title'], 'class' => 'hidden lg:block'])
 
             <div class="content">
                 @foreach($profile['data'] as $field=>$data)

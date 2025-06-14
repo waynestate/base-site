@@ -36,7 +36,7 @@ class ComponentIconsController extends Controller
                 'data' => [
                     0 => [
                         'title' => 'Component configuration',
-                        'promo_item_id' => 'componentConfiguration',
+                        'promo_item_id' => 'component-config',
                         'description' => '',
                         'tr1' => [
                             'Page field' => 'modular-icons-column-1',
@@ -65,7 +65,7 @@ class ComponentIconsController extends Controller
                     ],
                     1 => [
                         'title' => 'Promotion group details',
-                        'promo_item_id' => 'promotionGroupDetails',
+                        'promo_item_id' => 'promo-details',
                         'description' => '',
                         'table' => [
                             'Title' => 'Bold text.',

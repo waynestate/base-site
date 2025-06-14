@@ -10,7 +10,7 @@ class MenuRepository extends Repository
     /**
      * {@inheritdoc}
      */
-    public function getRequestData(array $data)
+    public function getRequestData(array &$data)
     {
         // If the page data has a menu use that otherwise default to 1
         $menu_id = !empty($data['menu']['id']) ? $data['menu']['id'] : 1;
