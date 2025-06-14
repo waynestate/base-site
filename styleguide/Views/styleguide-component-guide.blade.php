@@ -45,38 +45,59 @@
         <table class="mt-2">
             <thead>
                 <tr>
-                    <th>Key</th>
-                    <th>Value</th>
+                    <th class="w-1/5">Property</th>
+                    <th>Detail</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td class="font-bold">id</td>
-                    <td>Promo group ID, News application ID, Events site ID</td>
+                    <td>
+<code class="mt-1 mb-2">"id":12345</code><br />
+Promo group ID, News application ID, Events site ID
+                    </td>
                 </tr>
                 <tr>
                     <td class="font-bold">backgroundImageUrl</td>
-                    <td>URL for a component background image.</td>
+                    <td>
+<code class="mt-1 mb-2">"backgroundImageUrl":"https://wayne.edu/image.jpg"</code><br />
+URL for a component background image.
+                    </td>
                 </tr>
                 <tr>
                     <td class="font-bold">columnSpan</td>
-                    <td>Add a width to your column. Column widths can span from 1 to 12 available columns.</td>
+                    <td>
+<code class="mt-1 mb-2">"columnSpan":6</code><br />
+Add a width to your column. Column widths can span from 1 to 12 available columns. <a href="/styleguide/templateguide">Read about columnSpan.</a>
+                    </td>
                 </tr>
                 <tr>
                     <td class="font-bold">classes</td>
-                    <td>A string of classes to modify your component; padding, background-color.</td>
+                    <td>
+<code class="mt-1 mb-2">"classes":"bg-green text-white py-gutter-xl"</code><br />
+A string of classes to modify your component.
+                    </td>
                 </tr>
                 <tr>
                     <td class="font-bold">heading</td>
-                    <td>Add a component heading</td>
+                    <td>
+<code class="mt-1 mb-2">"heading":"My heading"</code><br />
+Add a component heading
+                    </td>
                 </tr>
                 <tr>
                     <td class="font-bold">headingClass</td>
-                    <td>Add any number of classes to a component heading.<br /><code>"text-green divider-gold"<code></td>
+                    <td>
+<code class="mt-1 mb-2">"headingClass":"text-green"</code><br />
+Add any number of classes to a component heading.
+                    </td>
                 </tr>
                 <tr>
                     <td class="font-bold">headingLevel</td>
-                    <td>Change default component heading level from h2 to h3 or h4.<br /><code>"h3"<code></td>
+                    <td>
+<code class="mt-1 mb-2">"headingLevel":"h3"</code><br />
+Change default component heading level from h2 to h3 or h4.
+                    </td>
                 </tr>
         </table>
 
@@ -85,8 +106,8 @@
         <table class="mt-2">
             <thead>
                 <tr>
-                    <th>Key</th>
-                    <th>Value</th>
+                    <th class="w-1/5">Property</th>
+                    <th>Detail</th>
                     <th class="w-1/5">Component</th>
                 </tr>
             </thead>
@@ -94,6 +115,7 @@
                 <tr>
                     <td class="font-bold">config</td>
                     <td>
+<code class="mt-1 mb-2">"config":"page_id|randomize|limit:1|youtube"</code><br />
 Configuration options for the specific promo group. <br />
 Use "page_id" to enable per-page items.<br />
 Use "limit:1" to display one item.<br />
@@ -106,6 +128,7 @@ Use "youtube" when you are putting a video url in the promo link field to popula
                 <tr>
                     <td class="font-bold">columns</td>
                     <td>
+<code class="mt-1 mb-2">"columns":3</code><br />
 Define how many columns the component will display.<br />
 1 to 4 columns is recommended.
                     </td>
@@ -120,6 +143,7 @@ Define how many columns the component will display.<br />
                 <tr>
                     <td class="font-bold">singlePromoView</td>
                     <td>
+<code class="mt-1 mb-2">"singlePromoView":false</code><br />
 Creates a link to a detailed page of a single promo item, like a Spotlight.<br />
 True or false; false is default and will use the promotion's link field if it is set.
                     </td>
@@ -133,6 +157,7 @@ True or false; false is default and will use the promotion's link field if it is
                 <tr>
                     <td class="font-bold">showExcerpt</td>
                     <td>
+<code class="mt-1 mb-2">"showExcerpt":true</code><br />
 Show or hide the promo's excerpt.<br />
 True or false; true is default.
                     </td>
@@ -146,6 +171,7 @@ True or false; true is default.
                 <tr>
                     <td class="font-bold">showDescription</td>
                     <td>
+<code class="mt-1 mb-2">"showDescription":true</code><br />
 Show or hide the promo's description.<br />
 True or false; true is default.<br />
 Commonly used in conjunction with "singlePromoView" where the description is hidden from the catalog but displayed on the detailed promo page.
@@ -160,6 +186,7 @@ Commonly used in conjunction with "singlePromoView" where the description is hid
                 <tr>
                     <td class="font-bold">gradientOverlay</td>
                     <td>
+<code class="mt-1 mb-2">"gradientOverlay":false</code><br />
 Moves the title, excerpt and/description on top of the image with a gradient for contrast.<br />
 True or false; false is default.
                     </td>
@@ -172,6 +199,7 @@ True or false; false is default.
                 <tr>
                     <td class="font-bold">groupByOptions</td>
                     <td>
+<code class="mt-1 mb-2">"groupByOptions":false</code><br />
 Group promotion items by the options in the options dropdown.<br />
 True or false; false is default.
                     </td>
@@ -180,6 +208,7 @@ True or false; false is default.
                 <tr>
                     <td class="font-bold">imagePosition</td>
                     <td>
+<code class="mt-1 mb-2">"imagePosition":"left"</code><br />
 Moves the image from the left to the right, or alternates their position if the item limit is greater than one.<br />
 Left, right, alternate; left is default.
                     </td>
@@ -188,6 +217,7 @@ Left, right, alternate; left is default.
                 <tr>
                     <td class="font-bold">imageSize</td>
                     <td>
+<code class="mt-1 mb-2">"imageSize":"large"</code><br />
 Uses a small (25%) width or large (40%) width.<br />
 Small or large; large is default.
                     </td>
@@ -201,8 +231,8 @@ Small or large; large is default.
         <table class="mt-2">
             <thead>
                 <tr>
-                    <th>Key</th>
-                    <th>Value</th>
+                    <th class="w-1/5">Property</th>
+                    <th>Detail</th>
                     <th class="w-1/5">Component</th>
                 </tr>
             </thead>
@@ -210,15 +240,16 @@ Small or large; large is default.
                 <tr>
                     <td class="font-bold">cal_name</td>
                     <td>
-The relative url to your calendar that the "more events" link goes to, i.e. "main/".<br />
+<code class="mt-1 mb-2">"cal_name":"main/"</code><br />
+The relative url to your calendar that the "more events" link goes to.<br />
 Defaults to the site's selected calendar.<br />
-Events components only.
                     </td>
                     <td class="font-bold">Events</td>
                 </tr>
                 <tr>
                     <td class="font-bold">columns</td>
                     <td>
+<code class="mt-1 mb-2">"columns":3</code><br />
 Define how many columns the component will display.<br />
 1 to 4 columns is recommended.
                     </td>
@@ -230,6 +261,7 @@ Define how many columns the component will display.<br />
                 <tr>
                     <td class="font-bold">featured</td>
                     <td>
+<code class="mt-1 mb-2">"featured":true</code><br />
 Display only the articles that have a specific featured image uploaded in the news manager.<br />
 True or false; all articles shown by default.
                     </td>
@@ -238,6 +270,7 @@ True or false; all articles shown by default.
                 <tr>
                     <td class="font-bold">limit</td>
                     <td>
+<code class="mt-1 mb-2">"limit":4</code><br />
 Limit the number of items displayed.<br />
 Integer; default is 4.<br />
 For promotion based components, see "config."
@@ -247,22 +280,24 @@ For promotion based components, see "config."
                 <tr>
                     <td class="font-bold">link_text</td>
                     <td>
-To change "More news" or "More events" to your specific text, i.e. "Student news", "Career events".
+<code class="mt-1 mb-2">"link_text":"Career events"</code><br />
+To change "More news" or "More events" to your specific text.
                     </td>
                     <td class="font-bold">News<br />Events</td>
                 </tr>
                 <tr>
                     <td class="font-bold">news_route</td>
                     <td>
-Change the url path for news items. Example: "/facultynews"<br />
-Null default; Example: "/facultynews"
+<code class="mt-1 mb-2">"news_route":"/facultynews"</code><br />
+Change the url path for news items.
                     </td>
                     <td class="font-bold">News</td>
                 </tr>
                 <tr>
                     <td class="font-bold">topics</td>
                     <td>
-Pass in an array of topics to display i.e. [76, 4]<br />
+<code class="mt-1 mb-2">"topics":[76, 4]</code><br />
+Pass in an array of topics to display.<br />
 All topics shown by default.
                     </td>
                     <td class="font-bold">News</td>
@@ -294,6 +329,7 @@ All topics shown by default.
     <li>modular-icons-column</li>
     <li>modular-icons-row</li>
     <li>modular-icons-top-row</li>
+    <li>modular-layout-config</li>
     <li>modular-news-column</li>
     <li>modular-news-featured-column</li>
     <li>modular-news-row</li>

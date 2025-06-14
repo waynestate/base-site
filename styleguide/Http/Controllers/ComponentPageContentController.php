@@ -64,7 +64,7 @@ class ComponentPageContentController extends Controller
                 'data' => [
                     0 => [
                         'title' => 'Component configuration',
-                        'promo_item_id' => 'componentConfiguration',
+                        'promo_item_id' => 'component-config',
                         'description' => $component_configuration,
                     ],
                 ],

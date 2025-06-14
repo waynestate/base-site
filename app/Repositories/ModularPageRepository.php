@@ -259,12 +259,6 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 $modularComponents[$name]['meta'] = $articles['articles']['meta'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
             } elseif (Str::startsWith($name, 'layout-config')) {
-                // Take layout config out of the loop
-                // Maybe define layoutClass
-                // showPageTitle, showPageContent, showSiteMenu -> if false add controller to full width config, consider breadcrumbs
-                // Menu toggle in MenuReposity
-                //dump($name);
-                //dump($component);
                 $modularComponents[$name] = $component;
             } elseif (Str::startsWith($name, 'page-content') || Str::startsWith($name, 'heading')) {
                 // If there's JSON but no news, events or promo data, assign the component array as data
