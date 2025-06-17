@@ -30,11 +30,12 @@
         "waynestate/waynestate-api": "~1.2"
     },
     "require-dev": {
+        "larastan/larastan": "^3.1",
         "laravel/envoy": "^2.9",
         "laravel/pint": "^1.13",
         "mockery/mockery": "^1.6",
-        "php-coveralls/php-coveralls": "^2.4",
         "nunomaduro/collision": "^8.0",
+        "php-coveralls/php-coveralls": "^2.4",
         "phpunit/phpunit": "^11.0.1"
     },
     "autoload": {
