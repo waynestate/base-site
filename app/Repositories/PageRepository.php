@@ -2,11 +2,11 @@
 
 namespace App\Repositories;
 
-use Illuminate\Support\Facades\Storage;
-use Contracts\Repositories\RequestDataRepositoryContract;
 use Contracts\Repositories\PageRepositoryContract;
+use Contracts\Repositories\RequestDataRepositoryContract;
+use Illuminate\Support\Facades\Storage;
 
-class PageRepository implements RequestDataRepositoryContract, PageRepositoryContract
+class PageRepository implements PageRepositoryContract, RequestDataRepositoryContract
 {
     /**
      * {@inheritdoc}
@@ -17,7 +17,7 @@ class PageRepository implements RequestDataRepositoryContract, PageRepositoryCon
         $pageData = [];
 
         // Set the path
-        $path = !empty($data['parameters']['path']) ? $data['parameters']['path'] : '/';
+        $path = ! empty($data['parameters']['path']) ? $data['parameters']['path'] : '/';
 
         // Get the filename
         $filename = $this->getFilename($path);
@@ -28,18 +28,16 @@ class PageRepository implements RequestDataRepositoryContract, PageRepositoryCon
             return redirect('/styleguide');
         }
 
-        return abort('404');
+        return abort(404);
     }
 
     /**
      * Find the JSON file path.
-     *
-     * @param $path
      */
     public function getFilename($path): string
     {
-        // Handle the root homepage case since its refered to as index
-        $path = $path == '/' ? 'index' : $path;
+        // Handle the root homepage case since its referred to as index
+        $path = $path === '/' ? 'index' : $path;
 
         return str_replace('/', '_', $path).'.json';
     }

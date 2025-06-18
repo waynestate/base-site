@@ -7,10 +7,10 @@ interface ArticleRepositoryContract
     /**
      * Get articles by application and topics.
      *
-     * @param array $application_ids
-     * @param int $limit
-     * @param int $page
-     * @param array $topics
+     * @param  array  $application_ids
+     * @param  int  $limit
+     * @param  int  $page
+     * @param  array  $topics
      * @return array
      */
     public function listing($application_ids, $limit = 5, $page = 1, $topics = []);
@@ -18,9 +18,9 @@ interface ArticleRepositoryContract
     /**
      * Get an individual article by id.
      *
-     * @param int $id
-     * @param array $application_ids
-     * @param boolean|null $preview
+     * @param  int  $id
+     * @param  array  $application_ids
+     * @param  bool|null  $preview
      * @return array
      */
     public function find($id, $application_ids, $preview);
@@ -28,26 +28,20 @@ interface ArticleRepositoryContract
     /**
      * Build the fully qualified URI for the article
      *
-     * @param array $article
-     * @param array $request
-     * @return array
+     * @return array|string
      */
     public function getCanonicalUrl(array $article, array $request);
 
     /**
      * Get the image for the meta data.
      *
-     * @param array $article
+     * @param  array  $article
      * @return array
      */
     public function getSocialImage($article);
 
     /**
      * Set the paging.
-     *
-     * @param array $meta
-     * @param int $page
-     * @return array
      */
-    public function setPaging($meta, $page);
+    public function setPaging(array $meta, ?int $page): array;
 }

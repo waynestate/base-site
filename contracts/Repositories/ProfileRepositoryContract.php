@@ -6,45 +6,48 @@ interface ProfileRepositoryContract
 {
     /**
      * Get the profile listing.
-     *
+     */
+    public function getProfiles(int $site_id, string|array|null $selected_group = null, $subsite_url = null): array;
+
+    /**
      * @param int $site_id
-     * @param string|null $selected_group
+     * @param array|string|null $groups
+     * @param $subsite_url
      * @return array
      */
-    public function getProfiles(int $site_id, ?string $selected_group = null, $subsite_url = null): array;
+    public function getProfilesByGroup(int $site_id, array|string|null $groups, $subsite_url = null): array;
 
     /**
      * Gets the profiles based on promo_group_id custom field and generates anchors for each group
      *
-     * @param int $site_id
-     * @param string $groups
-     * @return array
+     * @param  null  $subsite_url
      */
-    public function getProfilesByGroupOrder($site_id, $groups, $subsite_url = null): array;
+    public function getProfilesByGroupOrder(?int $site_id, string $groups, $subsite_url = null): array;
 
     /**
      * Get the dropdown config options.
      *
-     * @param int|null $selected_group
+     * @param array|string|null $selected_group
      * @param int|null $forced_profile_group_id
-     * @return array
+     * @return mixed
      */
-    public function getDropdownOptions($selected_group, $forced_profile_group_id);
+    public function getDropdownOptions(array|string|null $selected_group = null, ?int $forced_profile_group_id = null): mixed;
+
+    /**
+     * @param $selected_group
+     * @param $forced_profile_group_id
+     * @param $dropdown_groups
+     * @return mixed
+     */
+    public function getGroupIds($selected_group, $forced_profile_group_id, $dropdown_groups): mixed;
 
     /**
      * Get the dropdown of groups.
-     *
-     * @param int $site_id
-     * @return array
      */
     public function getDropdownOfGroups(int $site_id): array;
 
     /**
      * Get the persons profile information.
-     *
-     * @param int $site_id
-     * @param string $accessid
-     * @return array
      */
     public function getProfile(int $site_id, string $accessid): array;
 
@@ -68,7 +71,7 @@ interface ProfileRepositoryContract
     /**
      * Get the page title from the profile name.
      *
-     * @param array $profile
+     * @param  array  $profile
      * @return string
      */
     public function getPageTitleFromName($profile);
@@ -76,10 +79,10 @@ interface ProfileRepositoryContract
     /**
      * Get the back url based on the http referer.
      *
-     * @param string|null $referer
-     * @param string|null $scheme
-     * @param string|null $host
-     * @param string|null $uri
+     * @param  string|null  $referer
+     * @param  string|null  $scheme
+     * @param  string|null  $host
+     * @param  string|null  $uri
      * @return string
      */
     public function getBackToProfileListUrl($referer, $scheme, $host, $uri);
@@ -87,15 +90,13 @@ interface ProfileRepositoryContract
     /**
      * Get the Site ID based off the request data
      *
-     * @param array $data
+     * @param  array  $data
      * @return int
      */
     public function getSiteID($data);
 
     /**
      * Parse the profile config from the custom fields
-     *
-     * @param array $data
      */
     public function parseProfileConfig(array $data): void;
 }

@@ -8,15 +8,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
-use Illuminate\Http\Request;
+use Contracts\Repositories\ArticleRepositoryContract;
+use Contracts\Repositories\EventRepositoryContract;
 use Contracts\Repositories\HomepageRepositoryContract;
 use Contracts\Repositories\ModularPageRepositoryContract;
-use Contracts\Repositories\EventRepositoryContract;
-use Contracts\Repositories\ArticleRepositoryContract;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class HomepageController extends Controller
 {
+    protected HomepageRepositoryContract $promo;
+
+    protected ModularPageRepositoryContract $modularComponent;
+
+    protected ArticleRepositoryContract $article;
+
+    protected EventRepositoryContract $event;
+
     /**
      * Construct the controller.
      */
@@ -43,7 +51,7 @@ class HomepageController extends Controller
 
         $modularComponents['modularComponents'] = [];
 
-        if (!empty($request->data['base']['data'])) {
+        if (! empty($request->data['base']['data'])) {
             $modularComponents['modularComponents'] = $this->modularComponent->getModularComponents($request->data['base']);
             $promos['components'] = $modularComponents['modularComponents'];
         }

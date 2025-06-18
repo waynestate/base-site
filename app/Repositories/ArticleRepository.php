@@ -2,9 +2,9 @@
 
 namespace App\Repositories;
 
-use Waynestate\Api\News;
-use Illuminate\Cache\Repository;
 use Contracts\Repositories\ArticleRepositoryContract;
+use Illuminate\Cache\Repository;
+use Waynestate\Api\News;
 
 class ArticleRepository implements ArticleRepositoryContract
 {
@@ -33,14 +33,14 @@ class ArticleRepository implements ArticleRepositoryContract
         }
 
         $params = [
-            'perPage' =>  $limit,
+            'perPage' => $limit,
             'page' => $page,
             'application_ids' => $application_ids,
             'method' => 'articles',
             'env' => config('app.env'),
         ];
 
-        if (!empty($topics)) {
+        if (! empty($topics)) {
             $params['method'] = 'articles/topics';
             $params['topics'] = $topics;
         }
@@ -89,7 +89,7 @@ class ArticleRepository implements ArticleRepositoryContract
 
         // Build up the fully qualified URL for the article
         return
-            trim($uri['scheme'] . '://' . $uri['host'] . '/' . $request['site']['subsite-folder'], '/') .
+            trim($uri['scheme'].'://'.$uri['host'].'/'.$request['site']['subsite-folder'], '/').
             str_replace(
                 ['{$permalink}', '{$id}'],
                 [$article['permalink'], $article['id']],
@@ -102,28 +102,28 @@ class ArticleRepository implements ArticleRepositoryContract
      */
     public function getSocialImage($article)
     {
-        if (!empty($article['social_image'])) {
+        if (! empty($article['social_image'])) {
             return [
                 'url' => $article['social_image']['url'],
                 'alt_text' => $article['social_image']['alt_text'],
             ];
         }
 
-        if (!empty($article['featured'])) {
+        if (! empty($article['featured'])) {
             return [
                 'url' => $article['featured']['url'],
                 'alt_text' => $article['featured']['alt_text'],
             ];
         }
 
-        if (!empty($article['hero_image'])) {
+        if (! empty($article['hero_image'])) {
             return [
                 'url' => $article['hero_image']['url'],
                 'alt_text' => $article['hero_image']['alt_text'],
             ];
         }
 
-        if (!empty($article['body'])) {
+        if (! empty($article['body'])) {
             $doc = new \DOMDocument();
             @$doc->loadHTML($article['body']);
             $images = $doc->getElementsByTagName('img');
@@ -145,7 +145,7 @@ class ArticleRepository implements ArticleRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function setPaging($meta, $page)
+    public function setPaging(array $meta, ?int $page): array
     {
         if (empty($page)) {
             $meta['next_page_url'] = null;
