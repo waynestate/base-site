@@ -18,8 +18,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public const HOME = '/home';
 
-    /** @var $prefx **/
-    protected $prefix = 'App';
+    protected string $prefix = 'App';
 
     /**
      * Bootstrap any application services.
