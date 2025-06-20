@@ -67,6 +67,14 @@ phplint: $(COMPOSERFILE)
 phplintdry: $(COMPOSERFILE)
 	./vendor/bin/pint --test -v
 
+phpstan: $(COMPOSERFILE)
+	./vendor/bin/phpstan clear-result-cache
+	./vendor/bin/phpstan analyse --memory-limit=512M
+
+phpstandry: $(COMPOSERFILE)
+	./vendor/bin/phpstan clear-result-cache
+	./vendor/bin/phpstan analyse --memory-limit=512M --no-progress
+
 stylelint:
 	stylelint ./resources/scss/**/*.scss
 
