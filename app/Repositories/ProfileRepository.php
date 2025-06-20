@@ -2,15 +2,15 @@
 
 namespace App\Repositories;
 
+use Contracts\Repositories\ProfileRepositoryContract;
+use Illuminate\Cache\Repository;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
 use Waynestate\Api\Connector;
-use Illuminate\Cache\Repository;
-use Waynestate\Youtube\ParseId;
 use Waynestate\Api\News;
 use Waynestate\Promotions\ParsePromos;
-use Contracts\Repositories\ProfileRepositoryContract;
-use Illuminate\Support\Facades\Config;
+use Waynestate\Youtube\ParseId;
 
 class ProfileRepository implements ProfileRepositoryContract
 {
@@ -22,6 +22,8 @@ class ProfileRepository implements ProfileRepositoryContract
 
     /** @var Repository */
     protected $cache;
+
+    protected News $newsApi;
 
     /**
      * Construct the repository.
@@ -37,7 +39,7 @@ class ProfileRepository implements ProfileRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getProfiles(int $site_id, ?string $selected_group = null, $subsite_url = null): array
+    public function getProfiles(int $site_id, string|array|null $selected_group = null, $subsite_url = null): array
     {
         $params = [
             'method' => 'profile.users.listing',
@@ -70,8 +72,11 @@ class ProfileRepository implements ProfileRepositoryContract
 
     /**
      * {@inheritdoc}
+     *
+     * @param  int  $site_id
+     * @param  null  $subsite_url
      */
-    public function getProfilesByGroup($site_id, $subsite_url = null): array
+    public function getProfilesByGroup($site_id, array|string|null $groups = null, $subsite_url = null): array
     {
         // Get the groups for the dropdown
         $dropdown_groups = $this->getDropdownOfGroups($site_id);
@@ -80,16 +85,16 @@ class ProfileRepository implements ProfileRepositoryContract
         $group_ids = $this->getGroupIds(null, null, $dropdown_groups['dropdown_groups']);
 
         // Get all the profiles
-        $all_profiles = $this->getProfiles($site_id, $group_ids, $subsite_url);
+        $all_profiles = $this->getProfiles($site_id, $group_ids, $groups);
 
         // Organize profiles by the group they are in keyed by accessid
         $grouped = collect($all_profiles['profiles'])->keyBy('data.AccessID')
-        ->groupBy([
-            function ($profile) {
-                return $profile['groups'];
-            },
-        ], $preserveKeys = true)
-        ->toArray();
+            ->groupBy([
+                function ($profile) {
+                    return $profile['groups'];
+                },
+            ], $preserveKeys = true)
+            ->toArray();
 
         // Follow the ordering of groups from the CMS
         $profiles['profiles'] = $this->sortGroupsByDisplayOrder($grouped, $dropdown_groups['dropdown_groups']);
@@ -121,7 +126,7 @@ class ProfileRepository implements ProfileRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getProfilesByGroupOrder($site_id, $groups, $subsite_url = null): array
+    public function getProfilesByGroupOrder(?int $site_id, string $groups, $subsite_url = null): array
     {
         $profile_listing = $this->getProfiles($site_id, null, $subsite_url);
 
@@ -130,7 +135,7 @@ class ProfileRepository implements ProfileRepositoryContract
         $profiles = [];
 
         // Retain the order of the groups as they were piped in
-        if (!empty($profile_listing)) {
+        if (! empty($profile_listing)) {
             foreach ($group_order as $group) {
                 foreach ($profile_listing['profiles'] as $profile) {
                     if (array_key_exists($group, $profile['groups'])) {
@@ -147,7 +152,7 @@ class ProfileRepository implements ProfileRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getDropdownOptions($selected_group = null, $forced_profile_group_id = null)
+    public function getDropdownOptions(array|string|null $selected_group = null, ?int $forced_profile_group_id = null): array
     {
         // Default Options
         $options['selected_group'] = $selected_group;
@@ -165,7 +170,7 @@ class ProfileRepository implements ProfileRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getGroupIds($selected_group, $forced_profile_group_id, $dropdown_groups)
+    public function getGroupIds($selected_group, $forced_profile_group_id, $dropdown_groups): mixed
     {
         // Use the selected group or the forced one from custom page fields
         $group_ids = $forced_profile_group_id === null ? $selected_group : $forced_profile_group_id;
@@ -235,27 +240,27 @@ class ProfileRepository implements ProfileRepositoryContract
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
-        if (!empty($profiles['error'])) {
+        if (! empty($profiles['error'])) {
             return ['profile' => []];
         }
 
-        if (!empty($profiles['profiles'][$site_id]['data']['Youtube Videos'])) {
+        if (! empty($profiles['profiles'][$site_id]['data']['Youtube Videos'])) {
             $profiles['profiles'][$site_id]['data']['Youtube Videos'] = collect($profiles['profiles'][$site_id]['data']['Youtube Videos'])->map(function ($video) use ($profiles, $site_id) {
                 return [
                     'youtube_id' => ParseId::fromUrl($video['link']),
                     'link' => $video['link'],
-                    'filename_alt_text' => $profiles['profiles'][$site_id]['data']['First Name'] . ' ' .
-                        $profiles['profiles'][$site_id]['data']['Last Name'] . ' video',
+                    'filename_alt_text' => $profiles['profiles'][$site_id]['data']['First Name'].' '.
+                        $profiles['profiles'][$site_id]['data']['Last Name'].' video',
                 ];
             })->toArray();
         }
 
-        if (!empty($profiles['profiles'])) {
+        if (! empty($profiles['profiles'])) {
             $profiles['profiles']['articles'] = $this->getNewsArticles($accessid, 10);
         }
 
         return [
-            'profile' =>  Arr::get($profiles['profiles'], $site_id, []),
+            'profile' => Arr::get($profiles['profiles'], $site_id, []),
             'courses' => Arr::get($profiles, 'courses', []),
             'articles' => Arr::get($profiles['profiles'], 'articles', []),
         ];
@@ -267,7 +272,7 @@ class ProfileRepository implements ProfileRepositoryContract
     public function getNewsArticles($accessid, $limit = 10)
     {
         $params = [
-            'perPage' =>  $limit,
+            'perPage' => $limit,
             'method' => 'articles/faculty/'.$accessid,
             'env' => config('app.env'),
         ];
@@ -381,7 +386,7 @@ class ProfileRepository implements ProfileRepositoryContract
      */
     public function getSiteID($data)
     {
-        return !empty(config('profile.site_id')) ? config('profile.site_id') : $data['site']['id'];
+        return ! empty(config('profile.site_id')) ? config('profile.site_id') : $data['site']['id'];
     }
 
     /**
@@ -391,7 +396,7 @@ class ProfileRepository implements ProfileRepositoryContract
     {
         $profile_config = [];
 
-        if (!empty($data['data']['profile-config'])) {
+        if (! empty($data['data']['profile-config'])) {
             // Remove all spaces and line breaks
             $value = preg_replace('/\s*\R\s*/', '', $data['data']['profile-config']);
 
@@ -409,17 +414,17 @@ class ProfileRepository implements ProfileRepositoryContract
         }
 
         // legacy support for profile_group_id
-        if (!empty($data['data']['profile_group_id']) && empty($profile_config['group_id'])) {
+        if (! empty($data['data']['profile_group_id']) && empty($profile_config['group_id'])) {
             Config::set('profile.group_id', $data['data']['profile_group_id']);
         }
 
         // legacy support for profile_site_id
-        if (!empty($data['data']['profile_site_id']) && empty($profile_config['site_id'])) {
+        if (! empty($data['data']['profile_site_id']) && empty($profile_config['site_id'])) {
             Config::set('profile.site_id', $data['data']['profile_site_id']);
         }
 
         // legacy support for table_of_contents
-        if (!empty($data['data']['table_of_contents']) && empty($profile_config['table_of_contents'])) {
+        if (! empty($data['data']['table_of_contents']) && empty($profile_config['table_of_contents'])) {
             Config::set('profile.table_of_contents', $data['data']['table_of_contents']);
         }
     }

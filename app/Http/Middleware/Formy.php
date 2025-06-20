@@ -2,13 +2,15 @@
 
 namespace App\Http\Middleware;
 
-use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Http\Request;
 use Closure;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Waynestate\FormyParser\Parser;
 
 class Formy
 {
+    protected Parser $parser;
+
     /**
      * Construct the middleware.
      */
@@ -20,7 +22,7 @@ class Formy
     /**
      * Parse the page content and replace form embeds with form html.
      */
-    public function handle(Request $request, Closure $next): Response|null
+    public function handle(Request $request, Closure $next): ?Response
     {
         $request->data['base']['page']['content'] = collect($request->data['base']['page']['content'])
             ->map(function ($content) {

@@ -2,9 +2,9 @@
 
 namespace App\Repositories;
 
-use Waynestate\Api\News;
-use Illuminate\Cache\Repository;
 use Contracts\Repositories\TopicRepositoryContract;
+use Illuminate\Cache\Repository;
+use Waynestate\Api\News;
 
 class TopicRepository implements TopicRepositoryContract
 {
@@ -26,7 +26,7 @@ class TopicRepository implements TopicRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function listing($application_ids, $subsite_folder = null)
+    public function listing(int|array $application_ids, $subsite_folder = null): array
     {
         $params = [
             'application_ids' => $application_ids,
@@ -44,12 +44,12 @@ class TopicRepository implements TopicRepositoryContract
                 'topic_id' => '0',
                 'name' => 'All topics',
                 'slug' => '',
-                'url' => '/'.(!empty($subsite_folder) ? $subsite_folder : '').config('base.news_listing_route'),
+                'url' => '/'.(! empty($subsite_folder) ? $subsite_folder : '').config('base.news_listing_route'),
             ];
 
-            if (!empty($topics['data'])) {
+            if (! empty($topics['data'])) {
                 $topics['data'] = collect($topics['data'])->map(function ($topic) use ($subsite_folder) {
-                    $topic['url'] = '/'.(!empty($subsite_folder) ? $subsite_folder : '').config('base.news_listing_route').'/'.config('base.news_topic_route').'/'.$topic['slug'];
+                    $topic['url'] = '/'.(! empty($subsite_folder) ? $subsite_folder : '').config('base.news_listing_route').'/'.config('base.news_topic_route').'/'.$topic['slug'];
 
                     return $topic;
                 })->prepend($all_topics)->toArray();
@@ -64,7 +64,7 @@ class TopicRepository implements TopicRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function find($slug)
+    public function find(string $slug): array
     {
         $params = [
             'method' => 'topic/'.$slug,
@@ -80,12 +80,12 @@ class TopicRepository implements TopicRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function sortByLetter($topics)
+    public function sortByLetter(array $topics): array
     {
         $sorted = [];
 
         // Sort topics by letter
-        if (!empty($topics)) {
+        if (! empty($topics)) {
             foreach ($topics as $item) {
                 $sorted[substr($item['name'], 0, 1)][] = $item;
             }
@@ -99,10 +99,10 @@ class TopicRepository implements TopicRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function setSelected($topics, $topic)
+    public function setSelected(array $topics, ?string $topic): array
     {
         return collect($topics)->map(function ($item) use ($topic) {
-            if (!empty($topic)) {
+            if (! empty($topic)) {
                 $item['selected'] = $item['slug'] === $topic ? true : false;
             } else {
                 $item['selected'] = $item['slug'] === '' ? true : false;

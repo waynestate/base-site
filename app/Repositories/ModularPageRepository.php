@@ -2,9 +2,9 @@
 
 namespace App\Repositories;
 
-use Contracts\Repositories\ModularPageRepositoryContract;
-use Contracts\Repositories\EventRepositoryContract;
 use Contracts\Repositories\ArticleRepositoryContract;
+use Contracts\Repositories\EventRepositoryContract;
+use Contracts\Repositories\ModularPageRepositoryContract;
 use Illuminate\Cache\Repository;
 use Illuminate\Support\Str;
 use Waynestate\Api\Connector;
@@ -29,13 +29,6 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
     /**
      * Construct the repository.
-     *
-     * @param Connector $wsuApi
-     * @param ParsePromos $parsePromos
-     * @param Repository $cache
-     * @param ArticleRepositoryContract $article
-     * @param EventRepositoryContract $event
-     *
      */
     public function __construct(
         Connector $wsuApi,
@@ -98,7 +91,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
                 if (Str::startsWith($value, '{')) {
                     $components[$name] = json_decode($value, true);
-                    if (!empty($components[$name]['config'])) {
+                    if (! empty($components[$name]['config'])) {
                         $config = explode('|', $components[$name]['config']);
                         // Add youtube
                         if (strpos($components[$name]['config'], 'youtube') === false) {
@@ -118,12 +111,12 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
                     $components[$name]['filename'] = preg_replace('/-\d+$/', '', $name);
                 } else {
-                    $components[$name]['id'] = (int)$value;
+                    $components[$name]['id'] = (int) $value;
                 }
 
-                if (!Str::contains($name, ['events', 'news']) && !empty($components[$name]['id'])) {
+                if (! Str::contains($name, ['events', 'news']) && ! empty($components[$name]['id'])) {
                     $group_reference[$components[$name]['id']] = $name;
-                    if (!empty($components[$name]['config'])) {
+                    if (! empty($components[$name]['config'])) {
                         $group_config[$name] = $components[$name]['config'];
                     }
                 }
@@ -149,18 +142,18 @@ class ModularPageRepository implements ModularPageRepositoryContract
             'is_active' => '1',
         ];
 
-        $promos = $this->cache->remember($params['method'] . md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+        $promos = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
         // TODO Allowing the use of another site's promo items only from base
-        if (!empty($site_id) && $site_id === 1561) {
+        if (! empty($site_id) && $site_id === 1561) {
             $promos['promotions'] = collect($promos['promotions'])->map(function ($promo) {
-                if (!empty($promo['filename_url'])) {
+                if (! empty($promo['filename_url'])) {
                     $promo['relative_url'] = $promo['filename_url'];
                 }
 
-                if (!empty($promo['secondary_filename_url'])) {
+                if (! empty($promo['secondary_filename_url'])) {
                     $promo['secondary_relative_url'] = $promo['secondary_filename_url'];
                 }
 
@@ -177,7 +170,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
             })->toArray();
 
             // Organize by option
-            if (!empty($components['components'][$name]['groupByOptions']) && $components['components'][$name]['groupByOptions'] === true && Str::startsWith($name, 'catalog')) {
+            if (! empty($components['components'][$name]['groupByOptions']) && $components['components'][$name]['groupByOptions'] === true && Str::startsWith($name, 'catalog')) {
                 $data = $this->organizePromoItemsByOption($data);
             }
 
@@ -209,17 +202,17 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 }
                 $modularComponents[$name]['data'] = $events['events'] ?? [];
                 $modularComponents[$name]['component'] = $components['components'][$name];
-                if (empty($modularComponents[$name]['component']['cal_name']) && !empty($data['site']['events']['path'])) {
+                if (empty($modularComponents[$name]['component']['cal_name']) && ! empty($data['site']['events']['path'])) {
                     $modularComponents[$name]['component']['cal_name'] = $data['site']['events']['path'];
                 }
             } elseif (Str::startsWith($name, 'news')) {
                 $components['components'][$name]['id'] = $component['id'] ?? $data['site']['news']['application_id'];
                 $limit = $component['limit'] ?? 4;
                 $components['components'][$name]['news_route'] = $component['news_route'] ?? config('base.news_listing_route');
-                if (!empty($component['featured']) && $component['featured'] === true) {
+                if (! empty($component['featured']) && $component['featured'] === true) {
                     $articles = $this->article->listing($components['components'][$name]['id'], 50, 1, $component['topics'] ?? []);
                     $articles['articles']['data'] = collect($articles['articles']['data'])->filter(function ($article) {
-                        return !empty($article['featured']['featured']) && $article['featured']['featured'] === 1;
+                        return ! empty($article['featured']['featured']) && $article['featured']['featured'] === 1;
                     })->take($limit)->toArray();
                 } else {
                     $articles = $this->article->listing($components['components'][$name]['id'], $limit, 1, $component['topics'] ?? []);
@@ -260,18 +253,18 @@ class ModularPageRepository implements ModularPageRepositoryContract
     }
 
     /**
-    * {@inheritdoc}
-    */
+     * {@inheritdoc}
+     */
     public function organizePromoItemsByOption(array $data)
     {
         $options_exist = collect($data)->filter(function ($item) {
-            return !empty($item['option']);
+            return ! empty($item['option']);
         })->isNotEmpty();
 
         if ($options_exist === true) {
             $data = collect($data)->groupBy('option')->toArray();
 
-            if (!empty($data[''])) {
+            if (! empty($data[''])) {
                 $no_option_moved_to_bottom = $data[''];
                 unset($data['']);
                 $data[''] = $no_option_moved_to_bottom;
@@ -290,15 +283,15 @@ class ModularPageRepository implements ModularPageRepositoryContract
             $components[$componentName]['component']['componentClass'] = $component['component']['componentClass'] ?? [];
 
             // containerClass => filename
-            if (!empty($component['component']['filename'])) {
+            if (! empty($component['component']['filename'])) {
                 $components[$componentName]['component']['containerClass'][] = $component['component']['filename'];
             }
 
             // containerClass => columnSpan
-            if (!empty($component['component']['columnSpan'])) {
+            if (! empty($component['component']['columnSpan'])) {
                 // Inject the column span class
                 array_push($components[$componentName]['component']['containerClass'], 'px-4', 'mt:colspan-'.$component['component']['columnSpan']);
-            } elseif (!empty($component['component']['filename']) && strpos($component['component']['filename'], 'column') !== false) {
+            } elseif (! empty($component['component']['filename']) && strpos($component['component']['filename'], 'column') !== false) {
                 // Inject the column span class
                 array_push($components[$componentName]['component']['containerClass'], 'px-4', 'mt:colspan-6');
             } else {
@@ -307,11 +300,11 @@ class ModularPageRepository implements ModularPageRepositoryContract
             }
 
             // Collect all legacy class names
-            $classes = ($component['component']['sectionClass'] ?? '').' '.($component['component']['componentClass'] ?? '').' '.($component['component']['classes'] ?? '');
+            $classes = trim(($component['component']['sectionClass'] ?? '').' '.($component['component']['componentClass'] ?? '').' '.($component['component']['classes'] ?? ''));
 
             // Group the classes based on the container they will be applied to
             // Set backgroundClass, containerClass, componentClass
-            if (!empty($classes)) {
+            if (! empty($classes)) {
                 $classes = explode(' ', $classes);
 
                 foreach ($classes as $class) {
@@ -329,7 +322,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
             }
 
             // Default background image positioning classes, won't overwrite existing backgroundClass values
-            if (!empty($component['component']['backgroundImageUrl']) && empty($component['component']['backgroundClass'])) {
+            if (! empty($component['component']['backgroundImageUrl']) && empty($component['component']['backgroundClass'])) {
                 $components[$componentName]['component']['backgroundClass'] = ['bg-cover', 'bg-top'];
             }
 
@@ -337,9 +330,9 @@ class ModularPageRepository implements ModularPageRepositoryContract
             // - No gutter if component uses margin-bottom class
             // - No gutter on heading component
             if (empty(preg_grep('/mb-/', $components[$componentName]['component']['containerClass']))
-                && !Str::contains($componentName, 'heading')
+                && ! Str::contains($componentName, 'heading')
             ) {
-                $components[$componentName]['component']['containerClass'] [] = 'mb-gutter';
+                $components[$componentName]['component']['containerClass'][] = 'mb-gutter';
             }
 
             // Implode party, assign all classes to their respective container
@@ -355,12 +348,12 @@ class ModularPageRepository implements ModularPageRepositoryContract
     {
         $expected_styles = [
             'backgroundImageUrl',
-            //'sectionStyle',
+            // 'sectionStyle',
         ];
 
         foreach ($components as $componentName => $component) {
-            if (!empty($component['component']['backgroundImageUrl'])) {
-                //$component['component']['backgroundImageUrl'] = "background-image:url('".$component['component']['backgroundImageUrl']."');";
+            if (! empty($component['component']['backgroundImageUrl'])) {
+                // $component['component']['backgroundImageUrl'] = "background-image:url('".$component['component']['backgroundImageUrl']."');";
                 $components[$componentName]['component']['backgroundImageUrl'] = "style=\"background-image:url('".$component['component']['backgroundImageUrl']."');\"";
             }
 
@@ -368,7 +361,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
             foreach ($component['component'] as $option => $style) {
                 if (in_array($option, $expected_styles)) {
                     $styles[$componentName][] = $style;
-                    //$components[$componentName]['component']['componentStyle'] = "style=\"".implode(' ', $styles[$componentName])."\"";
+                    // $components[$componentName]['component']['componentStyle'] = "style=\"".implode(' ', $styles[$componentName])."\"";
                 }
             }
         }
@@ -382,40 +375,40 @@ class ModularPageRepository implements ModularPageRepositoryContract
     public function legacyPageFieldSupport(array $data)
     {
         // Legacy support for accordion
-        if (!empty($data['data']['accordion_promo_group_id'])) {
+        if (! empty($data['data']['accordion_promo_group_id'])) {
             $data['data']['modular-accordion-999'] = json_encode([
-                'id' => $data['data']['accordion_promo_group_id']
+                'id' => $data['data']['accordion_promo_group_id'],
             ]);
         }
 
         // Legacy support for listing
-        if (!empty($data['data']['listing_promo_group_id'])) {
-            if (!empty($data['data']['promotion_view_boolean']) && $data['data']['promotion_view_boolean'] === "true") {
+        if (! empty($data['data']['listing_promo_group_id'])) {
+            if (! empty($data['data']['promotion_view_boolean']) && $data['data']['promotion_view_boolean'] === 'true') {
                 $data['data']['modular-catalog-998'] = json_encode([
                     'id' => $data['data']['listing_promo_group_id'],
                     'columns' => 1,
-                    'singlePromoView' => true
+                    'singlePromoView' => true,
                 ]);
             } else {
                 $data['data']['modular-catalog-998'] = json_encode([
                     'id' => $data['data']['listing_promo_group_id'],
-                    'columns' => 1
+                    'columns' => 1,
                 ]);
             }
         }
 
         // Legacy support for grid
-        if (!empty($data['data']['grid_promo_group_id'])) {
-            if (!empty($data['data']['promotion_view_boolean']) && $data['data']['promotion_view_boolean'] === "true") {
+        if (! empty($data['data']['grid_promo_group_id'])) {
+            if (! empty($data['data']['promotion_view_boolean']) && $data['data']['promotion_view_boolean'] === 'true') {
                 $data['data']['modular-catalog-999'] = json_encode([
                     'id' => $data['data']['grid_promo_group_id'],
                     'columns' => 3,
-                    'singlePromoView' => true
+                    'singlePromoView' => true,
                 ]);
             } else {
                 $data['data']['modular-catalog-999'] = json_encode([
                     'id' => $data['data']['grid_promo_group_id'],
-                    'columns' => 3
+                    'columns' => 3,
                 ]);
             }
         }

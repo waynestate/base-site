@@ -8,12 +8,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
 use Contracts\Repositories\ProfileRepositoryContract;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+    protected ProfileRepositoryContract $profile;
+
     /**
      * Construct the controller.
      */
@@ -67,7 +69,7 @@ class ProfileController extends Controller
     public function show(Request $request): View
     {
         if (empty($request->accessid)) {
-            abort('404');
+            abort(404);
         }
 
         // Parse profile config from custom fields
@@ -81,11 +83,11 @@ class ProfileController extends Controller
 
         // Make sure the profile exists
         if (empty($profile['profile'])) {
-            abort('404');
+            abort(404);
         }
 
         // Re-label future and current semesters
-        if (!empty($profile['courses'])) {
+        if (! empty($profile['courses'])) {
             foreach ($profile['courses'] as $semester => $courses) {
                 // Dedupe courses per-semester
                 $courses = collect($courses)->unique(function ($item) {
@@ -96,10 +98,10 @@ class ProfileController extends Controller
                 $semester_end = reset($courses)['end_date'];
 
                 if ($semester_start > date('Y-m-d')) {
-                    $profile['courses'][$semester . ' (future)'] = $courses;
+                    $profile['courses'][$semester.' (future)'] = $courses;
                     unset($profile['courses'][$semester]);
                 } elseif ($semester_start <= date('Y-m-d') && $semester_end >= date('Y-m-d')) {
-                    $profile['courses'][$semester . ' (current)'] = $courses;
+                    $profile['courses'][$semester.' (current)'] = $courses;
                     unset($profile['courses'][$semester]);
                 } else {
                     // To keep the original descending order

@@ -2,14 +2,14 @@
 
 namespace App\Repositories;
 
-use Contracts\Repositories\RequestDataRepositoryContract;
-use Contracts\Repositories\PromoRepositoryContract;
 use Contracts\Repositories\ModularPageRepositoryContract;
+use Contracts\Repositories\PromoRepositoryContract;
+use Contracts\Repositories\RequestDataRepositoryContract;
 use Illuminate\Cache\Repository;
 use Waynestate\Api\Connector;
 use Waynestate\Promotions\ParsePromos;
 
-class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryContract
+class PromoRepository implements PromoRepositoryContract, RequestDataRepositoryContract
 {
     /** @var Connector */
     protected $wsuApi;
@@ -19,6 +19,8 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
 
     /** @var Repository */
     protected $cache;
+
+    protected ModularPageRepositoryContract $components;
 
     /**
      * Construct the repository.
@@ -102,7 +104,7 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         $groups = $config['all']['promos'];
 
         // Merge the groups for the site we are on
-        if (!empty($config['sites'][$data['site']['id']])) {
+        if (! empty($config['sites'][$data['site']['id']])) {
             $groups = array_merge($groups, $config['sites'][$data['site']['id']]['promos']);
         }
 
@@ -151,8 +153,8 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
     public function createGlobalPromoGroupConfig(array $data, array $config, array $groups)
     {
         // Inject global promo config
-        $group_config = collect($groups)->mapWithKeys(function ($group, $name) use ($config, $data) {
-            $value = !empty($group['config']) ? $group['config'] : null;
+        $group_config = collect($groups)->mapWithKeys(function ($group, $name) use ($data) {
+            $value = ! empty($group['config']) ? $group['config'] : null;
 
             return [$name => str_replace('{$page_id}', $data['page']['id'], $value)];
         })->reject(function ($value) {
@@ -173,23 +175,23 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
     public function manipulateGlobalPromos(array $promos, array $groups, array $data)
     {
         // Override the site's social icons if it doesn't have any
-        if (empty($promos['social']) && !empty($promos['main_social'])) {
+        if (empty($promos['social']) && ! empty($promos['main_social'])) {
             $promos['social'] = $promos['main_social'];
         }
 
         // Inject the main contact footer if we are on a subsite
         $main_contact = $promos['main_contact'] ?? [];
-        if (!empty($promos['contact']) && (!isset($groups['contact']['merge_with_main_contact']) || $groups['contact']['merge_with_main_contact'] === true)) {
+        if (! empty($promos['contact']) && (! isset($groups['contact']['merge_with_main_contact']) || $groups['contact']['merge_with_main_contact'] === true)) {
             $promos['contact'] = array_merge($promos['contact'], $main_contact);
-        } elseif (empty($promos['contact']) && !empty($promos['main_contact'])) {
+        } elseif (empty($promos['contact']) && ! empty($promos['main_contact'])) {
             $promos['contact'] = $main_contact;
         }
 
         // Inject the main under menu if we are on a subsite
         $main_under_menu = $promos['main_under_menu'] ?? [];
-        if (!empty($promos['under_menu']) && (!isset($groups['under_menu']['merge_with_main_under_menu']) || $groups['under_menu']['merge_with_main_under_menu'] === true)) {
+        if (! empty($promos['under_menu']) && (! isset($groups['under_menu']['merge_with_main_under_menu']) || $groups['under_menu']['merge_with_main_under_menu'] === true)) {
             $promos['under_menu'] = array_merge($promos['under_menu'], $main_under_menu);
-        } elseif (empty($promos['under_menu']) && !empty($main_under_menu)) {
+        } elseif (empty($promos['under_menu']) && ! empty($main_under_menu)) {
             $promos['under_menu'] = $main_under_menu;
         }
 
@@ -202,10 +204,10 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
 
         // Set hero from components
         $hero = collect($promos['components'])->reject(function ($data, $component_name) {
-            return !str_contains($component_name, 'hero');
+            return ! str_contains($component_name, 'hero');
         })->toArray();
 
-        if (!empty($hero)) {
+        if (! empty($hero)) {
             $hero_key = array_key_first($hero);
             $promos['hero'] = $promos['components'][$hero_key]['data'];
             config(['base.hero_full_controllers' => [$data['page']['controller']]]);

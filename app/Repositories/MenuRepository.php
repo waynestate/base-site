@@ -2,16 +2,16 @@
 
 namespace App\Repositories;
 
-use Contracts\Repositories\RequestDataRepositoryContract;
 use Contracts\Repositories\MenuRepositoryContract;
+use Contracts\Repositories\RequestDataRepositoryContract;
 use Exception;
+use Illuminate\Cache\Repository;
 use Illuminate\Support\Facades\Log;
 use Waynestate\Api\Connector;
-use Waynestate\Menuitems\ParseMenu;
 use Waynestate\Menu\DisplayMenu;
-use Illuminate\Cache\Repository;
+use Waynestate\Menuitems\ParseMenu;
 
-class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryContract
+class MenuRepository implements MenuRepositoryContract, RequestDataRepositoryContract
 {
     /** @var Connector */
     protected $wsuApi;
@@ -89,10 +89,10 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
         // Build the return
         $menus = [
             'site_menu' => $site_menu,
-            'site_menu_output' => !empty($site_menu['menu']) ? $this->getSiteMenuOutput($site_menu['menu']) : null,
+            'site_menu_output' => ! empty($site_menu['menu']) ? $this->getSiteMenuOutput($site_menu['menu']) : null,
             'breadcrumbs' => $breadcrumbs,
             'top_menu' => $top_menu,
-            'top_menu_output' => !empty($top_menu['menu']) ? $this->getTopMenuOutput($top_menu['menu']) : null,
+            'top_menu_output' => ! empty($top_menu['menu']) ? $this->getTopMenuOutput($top_menu['menu']) : null,
         ];
 
         // Show the site menu by default
@@ -105,7 +105,7 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
 
         // Hide the site menu if its equal to the top menu so the menu doesn't show twice
         if (config('base.top_menu_enabled') === true &&
-            (!empty($site_menu['menu']) && !empty($top_menu['menu'])) &&
+            (! empty($site_menu['menu']) && ! empty($top_menu['menu'])) &&
             $site_menu['menu'] == $top_menu['menu']) {
             $menus['show_site_menu'] = false;
         }
@@ -154,7 +154,7 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
             $menus[$page_menu_id] = [];
         }
 
-        if (!empty($menus['error'])) {
+        if (! empty($menus['error'])) {
             throw new Exception($menus['error']['message']);
         }
 
@@ -166,7 +166,7 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
      */
     public function getTopMenuId($menu_id = null, $top_menu_id = null, $menus = [])
     {
-        return $top_menu_id !== null && !empty($menus[$top_menu_id]) ? $top_menu_id : $menu_id;
+        return $top_menu_id !== null && ! empty($menus[$top_menu_id]) ? $top_menu_id : $menu_id;
     }
 
     /**
@@ -201,7 +201,9 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
     {
         // Trim first level based on path[0] - only if we are on the main website
         // or we aren't enabling top menu across all subsites
-        if (!empty($menu['meta']['path']) && ($parentId === null || $topMenuId === null) && config('base.top_menu_enabled') === true) {
+        if (! empty($menu['meta']['path']) && ($parentId === null || $topMenuId === null) && config('base.top_menu_enabled') === true) {
+            $trim_menu = null;
+
             foreach ($menu['menu'] as $key => $item) {
                 // If we are on the first path then grab that submenu
                 if ($item['menu_item_id'] == $menu['meta']['path'][0]) {
@@ -231,7 +233,7 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
         $breadcrumbs = [];
 
         // Get the breadcrumbs from the selected path if it exists
-        if (!empty($menu['meta']['path'])) {
+        if (! empty($menu['meta']['path'])) {
             $breadcrumbs = $this->parseMenu->getBreadCrumbs($menu);
 
             // If the subsite root isn't already within the breadcrumbs then add the subsite root crumb
@@ -240,7 +242,7 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
                 $rel_subsiteFolder = '/'.rtrim($subsiteFolder, '/');
 
                 // Add the subsite path if it doesn't exist in the breadcrumbs
-                if (!collect($breadcrumbs)->contains('relative_url', $rel_subsiteFolder)) {
+                if (! collect($breadcrumbs)->contains('relative_url', $rel_subsiteFolder)) {
                     $subsite_crumb = [
                         'display_name' => $siteTitle,
                         'relative_url' => $rel_subsiteFolder,
