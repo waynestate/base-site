@@ -23,6 +23,7 @@ Starter repository for creating a new website. Live demo can be found at https:/
 * Commit hook that require the following to pass:
     * Tests using [PHPUnit](https://phpunit.de/)
     * PHP linting using [Laravel Pint](https://laravel.com/docs/9.x/pint)
+    * Static analysis using [PHPStan/Larastan](https://github.com/larastan/larastan)
     * JS linting using [ESLint](http://eslint.org/)
     * CSS/SCSS linting using [Stylelint](https://stylelint.io/)
 * Menus
@@ -66,6 +67,14 @@ Starter repository for creating a new website. Live demo can be found at https:/
 
 1. `make coverage`
 2. Open the coverages/index.html file in your browser
+
+## Run static analysis
+
+    make phpstan
+
+Or to run without progress bar (useful in CI environments):
+
+    make phpstandry
 
 ## Check for outdated packages
 

@@ -134,4 +134,22 @@ else
     printf "phpunit tests have passed.\n"
 fi
 
+# PHPStan/Larastan analysis
+if [ "${docker_test}" = "true" ]; then
+    printf "Running PHPStan/Larastan analysis...\n"
+    phpstan="$(make phpstandry)"
+else
+    printf "Running PHPStan/Larastan analysis...\n"
+    phpstan="$(faketty docker exec -it wsu-${site_folder} bash -i -c "make phpstandry")"
+fi
+
+# Check if the last command (PHPStan) didn't exit with a 0 success
+if  (( $? != 0 )); then
+    printf "PHPStan/Larastan analysis failed. Please fix the issues before committing.\n"
+    printf ">> run: make phpstan\n"
+    exit 1
+else
+    printf "PHPStan/Larastan analysis has passed.\n"
+fi
+
 exit 0;
