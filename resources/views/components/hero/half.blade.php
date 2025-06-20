@@ -19,7 +19,7 @@
             <div class="hero__description text-lg 3xl:text-xl text-green-700 content">
                 @if(!empty($hero['description']))
                     @if(!empty($hero['link']))
-                        {!! preg_replace(array('"<a href(.*?)>"', '"</a>"'), array('',''), $hero['description']) !!}
+                        {!! preg_replace(['"<a href(.*?)>"', '"</a>"'], '', $hero['description']) !!}
                     @else
                         {!! $hero['description'] !!}
                     @endif
