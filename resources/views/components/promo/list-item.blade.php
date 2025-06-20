@@ -3,7 +3,11 @@
     $item => array // ['title', 'link', 'description', 'excerpt', 'relative_url', 'option']
 --}}
 
-<{{ !empty($item['link']) ? 'a href='.$item['link'] : 'div' }} class="block {{ !empty($component['imageSize']) && $component['imageSize'] === 'small' ? 'flex items-start' : 'md:flex xl:items-center' }} gap-x-3 lg:gap-x-6 {{ !empty($item['link']) ? 'group' : '' }} {{ $loop->iteration > 1 && !empty($component['filename']) && $component['filename'] != 'catalog' ? 'mt-6' : '' }}">
+@if (!empty($item['link']))
+    <a href="{{ $item['link'] }}" class="block {{ !empty($component['imageSize']) && $component['imageSize'] === 'small' ? 'flex items-start' : 'md:flex xl:items-center' }} gap-x-3 lg:gap-x-6 group {{ $loop->iteration > 1 && !empty($component['filename']) && $component['filename'] != 'catalog' ? 'mt-6' : '' }}">
+@else
+    <div class="block {{ !empty($component['imageSize']) && $component['imageSize'] === 'small' ? 'flex items-start' : 'md:flex xl:items-center' }} gap-x-3 lg:gap-x-6 {{ $loop->iteration > 1 && !empty($component['filename']) && $component['filename'] != 'catalog' ? 'mt-6' : '' }}">
+@endif
     @if(!empty($item['youtube_id']) || !empty($item['relative_url']))
         <div class="shrink-0 grow-0 {{ !empty($component['imageSize']) && $component['imageSize'] === 'small' ? 'w-1/4' : 'md:w-2/5' }}  
             @if(!empty($component['imagePosition']) && ($component['imagePosition'] === 'right' || ($component['imagePosition'] === 'alternate' && $loop->even))) md:order-2 @endif">
@@ -31,11 +35,15 @@
             @if(!empty($item['excerpt']))<p class="my-1">{!! strip_tags($item['excerpt'], ['em', 'strong']) !!}</p>@endif 
             @if(!empty($item['description']))
                 @if (!empty($item['link']))
-                    <div>{!! preg_replace(array('"<a href(.*?)>"', '"</a>"'), array('',''), $item['description']) !!}</div>
+                    <div>{!! preg_replace(['"<a href(.*?)>"', '"</a>"'], '', $item['description']) !!}</div>
                 @else
                     <div>{!! $item['description'] !!}</div>
                 @endif
             @endif
         </div>
     </div>
-{!! !empty($item['link']) ? '</a>' : '</div>' !!}
+@if (!empty($item['link']))
+    </a>
+@else
+    </div>
+@endif
