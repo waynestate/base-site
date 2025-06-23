@@ -161,12 +161,12 @@ class PromoRepository extends Repository
         $components = $this->components->getModularComponents($data);
 
         // Set hero from components
-        $hero = collect($components)->reject(function ($data, $componentName) {
+        $hero_modular = collect($components)->reject(function ($data, $componentName) {
             return !str_contains($componentName, 'hero');
         })->toArray();
 
-        if (!empty($hero)) {
-            $hero_key = array_key_first($hero);
+        if (!empty($hero_modular)) {
+            $hero_key = array_key_first($hero_modular);
             $hero = $components[$hero_key]['data'];
             config(['base.hero_full_controllers' => [$data['page']['controller']]]);
             unset($components[$hero_key]);
