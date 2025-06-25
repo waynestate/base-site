@@ -14,6 +14,9 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
+    /** @var ProfileRepositoryContract */
+    protected $profile;
+
     /**
      * Construct the controller.
      */
@@ -42,14 +45,14 @@ class ProfileController extends Controller
         // Set the selected group
         $selected_group = $request->query('group') !== '' ? $request->query('group') : null;
 
-        // Get the options for the dropdown
-        $dropdown_group_options = $this->profile->getDropdownOptions($selected_group, $forced_profile_group_id);
-
         // Determine which group(s) to filter by
         $group_ids = $this->profile->getGroupIds($selected_group, $forced_profile_group_id, $dropdown_groups['dropdown_groups']);
 
         // Get the profiles
         $profiles = $this->profile->getProfiles($site_id, $group_ids);
+
+        // Get the options for the dropdown (pass profiles to determine if filtering should be hidden)
+        $dropdown_group_options = $this->profile->getDropdownOptions($selected_group, $forced_profile_group_id, $profiles);
 
         // Disable hero images
         $request->data['base']['hero'] = false;
