@@ -60,7 +60,7 @@
         transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
 
         @media screen and (-ms-high-contrast: active) {
-            appearance: menulist;
+            appearance: menulist-button;
         }
     }
 

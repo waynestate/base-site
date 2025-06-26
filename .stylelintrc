@@ -9,6 +9,13 @@
                 "layer"
             ]
         }],
+        "at-rule-no-deprecated": null,
+        "declaration-property-value-no-unknown": [true, {
+            "typesSyntax": { 
+                "radial-gradient()": "| <any-value>",
+                "linear-gradient()": "| <any-value>" 
+            }
+        }],
         "no-invalid-double-slash-comments": null,
         "selector-class-pattern": null,
         "function-no-unknown": [ true, {
