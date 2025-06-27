@@ -50,6 +50,7 @@ class ComponentHeroController extends Controller
                             'Link' => 'URL',
                             'Description' => 'Formattable text. If the link field is set, description links will be stripped out.',
                             'Filename' => '1600x580px or 3200x1160px saved at low quality',
+                            'Secondary image' => 'SVG Overlay: 1600x580px or 3200x1160px svg<br />Logo overlay: >600px jpg, png',
                             'Options' => 'Banner small, Banner large, Text overlay, Half, Logo overlay, SVG overlay',
                         ],
                     ],
