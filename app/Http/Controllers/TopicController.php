@@ -27,7 +27,7 @@ class TopicController extends Controller
      */
     public function index(Request $request): View
     {
-        $topics = $this->topic->listing($request->data['base']['site']['news']['application_id']);
+        $topics = $this->topic->listing($request->data['base']['site']['news']['application_id'], $request->data['base']['site']['subsite-folder']);
 
         if (!empty($topics['topics']['data'])) {
             $topics['topics']['data'] = $this->topic->sortByLetter($topics['topics']['data']);
