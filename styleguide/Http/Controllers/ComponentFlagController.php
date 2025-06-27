@@ -32,7 +32,7 @@ class ComponentFlagController extends Controller
             'accordion' => [
                 'data' => [
                     0 => [
-                        'promo_item_id' => 'promo-details',
+                        'promo_item_id' => 'promo_details',
                         'title' => 'Promo group details',
                         'description' => '',
                         'table' => [
