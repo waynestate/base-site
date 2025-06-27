@@ -35,7 +35,7 @@ class ComponentEventListingController extends Controller
             'accordion-1' => [
                 'data' => [
                     0 => [
-                        'promo_item_id' => 'componentConfiguration',
+                        'promo_item_id' => 'component_config',
                         'title' => 'Component configuration',
                         'description' => '
 <table>
