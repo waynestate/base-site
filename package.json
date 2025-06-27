@@ -52,5 +52,10 @@
     "tailwindcss": "^3.4.17",
     "vue-template-compiler": "^2.7.16"
   },
+  "overrides": {
+    "slideout": {
+      "emitter": "https://github.com/Mango/emitter.git#0.0.7"
+    }
+  },
   "packageManager": "yarn@4.9.2"
 }
