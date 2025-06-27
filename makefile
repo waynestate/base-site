@@ -48,13 +48,13 @@ watch: $(MIXFILE)
 	npm run watch-poll
 
 yarnupgrade: $(YARNFILE)
-	yarn upgrade
+	yarn upgrade-interactive
 
 composerupdate: $(COMPOSERFILE)
 	composer update
 
 yarncheck: $(YARNFILE)
-	yarn outdated
+	yarn upgrade-interactive
 
 runtests: $(COMPOSERFILE)
 	php artisan view:clear
@@ -72,6 +72,12 @@ stylelint:
 
 stylelintfix:
 	stylelint ./resources/scss/**/*.scss --fix
+
+eslint:
+	npm run lint
+
+eslintfix:
+	npm run lint:fix
 
 coverage: $(COMPOSERFILE)
 	phpbrew ext enable xdebug && XDEBUG_MODE=coverage php vendor/bin/phpunit --coverage-html coverages && phpbrew ext disable xdebug

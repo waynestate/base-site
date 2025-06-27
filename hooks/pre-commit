@@ -98,6 +98,24 @@ else
     printf "stylelint has passed.\n"
 fi
 
+# JavaScript linting
+if [ "${docker_test}" = "true" ]; then
+    printf "Running eslint...\n"
+    eslint="$(make eslint)"
+else
+    printf "Running eslint...\n"
+    eslint="$(faketty docker exec -it wsu-${site_folder} bash -i -c "make eslint")"
+fi
+
+# Check if the last command (ESLint) didn't exit with a 0 success
+if  (( $? != 0 )); then
+    printf "eslint has reported errors. Please fix them before committing.\n"
+    printf ">> run: make eslint\n\n"
+    exit 1
+else
+    printf "eslint has passed.\n"
+fi
+
 # PHP tests
 if [ "${docker_test}" = "true" ]; then
     printf "Running tests...\n"

@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const package = JSON.parse(fs.readFileSync('./package.json'));
 const ESLintPlugin = require('eslint-webpack-plugin');
-const replace = require('replace-in-file');
+const { replaceInFileSync } = require('replace-in-file');
 
 /*
  |--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ if (!mix.inProduction()) {
     fs.copyFileSync('hooks/pre-commit', '.git/hooks/pre-commit', fs.constants.COPYFILE_FICLONE);
 }
 
-replace.sync({
+replaceInFileSync({
     files: 'resources/views/components/footer.blade.php',
     from: /2\d{3}/g,
     to: "{{ date('Y') }}",
@@ -113,6 +113,7 @@ fs.symlink(
 config = {
     plugins: [
         new ESLintPlugin({
+            overrideConfigFile: 'eslint.config.js',
             exclude: [
                 'node_modules'
             ],
