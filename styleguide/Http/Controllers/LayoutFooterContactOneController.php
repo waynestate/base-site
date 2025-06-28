@@ -16,6 +16,6 @@ class LayoutFooterContactOneController extends Controller
     {
         $request->data['base']['contact'] = app(FooterContact::class)->create(1);
 
-        return view('styleguide-childpage', merge($request->data));
+        return view('childpage', merge($request->data));
     }
 }

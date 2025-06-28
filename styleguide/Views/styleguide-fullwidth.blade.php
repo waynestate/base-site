@@ -9,7 +9,6 @@
 @endsection
 
 @section('content')
-    <div class="content">
-        {!! $base['page']['content']['main'] !!}
-    </div>
+    @include('partials.page-title', ['title' => $base['page']['title']])
+    @include('components.page-content')
 @endsection

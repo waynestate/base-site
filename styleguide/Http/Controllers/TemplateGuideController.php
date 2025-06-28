@@ -58,7 +58,7 @@ class TemplateGuideController extends Controller
                 ]),
                 'component' => [
                     'filename' => 'promo-column',
-                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center',
+                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center overflow-hidden',
                     'columnSpan' => 1,
                 ],
             ],
@@ -69,7 +69,7 @@ class TemplateGuideController extends Controller
                 ]),
                 'component' => [
                     'filename' => 'promo-column',
-                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center',
+                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center overflow-hidden',
                     'columnSpan' => 11,
                 ],
             ],
@@ -81,7 +81,7 @@ class TemplateGuideController extends Controller
                 ]),
                 'component' => [
                     'filename' => 'promo-column',
-                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center',
+                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center overflow-hidden',
                     'columnSpan' => 2,
                 ],
             ],
@@ -92,7 +92,7 @@ class TemplateGuideController extends Controller
                 ]),
                 'component' => [
                     'filename' => 'promo-column',
-                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center',
+                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center overflow-hidden',
                     'columnSpan' => 10,
                 ],
             ],
@@ -115,7 +115,7 @@ class TemplateGuideController extends Controller
                 ]),
                 'component' => [
                     'filename' => 'promo-column',
-                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center',
+                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center overflow-hidden',
                     'columnSpan' => 9,
                 ],
             ],
@@ -127,7 +127,7 @@ class TemplateGuideController extends Controller
                 ]),
                 'component' => [
                     'filename' => 'promo-column',
-                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center',
+                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center overflow-hidden',
                     'columnSpan' => 4,
                 ],
             ],
@@ -138,8 +138,7 @@ class TemplateGuideController extends Controller
                 ]),
                 'component' => [
                     'filename' => 'promo-column',
-                    'classes' => 'col-bg rounded bg-gold-50 py-2',
-                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center',
+                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center overflow-hidden',
                     'columnSpan' => 8,
                 ],
             ],
@@ -151,7 +150,7 @@ class TemplateGuideController extends Controller
                 ]),
                 'component' => [
                     'filename' => 'promo-column',
-                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center',
+                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center overflow-hidden',
                     'columnSpan' => 5,
                 ],
             ],
@@ -162,7 +161,7 @@ class TemplateGuideController extends Controller
                 ]),
                 'component' => [
                     'filename' => 'promo-column',
-                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center',
+                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center overflow-hidden',
                     'columnSpan' => 7,
                 ],
             ],
@@ -174,7 +173,7 @@ class TemplateGuideController extends Controller
                 ]),
                 'component' => [
                     'filename' => 'promo-column',
-                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center',
+                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center overflow-hidden',
                     'columnSpan' => 6,
                 ],
             ],
@@ -185,7 +184,7 @@ class TemplateGuideController extends Controller
                 ]),
                 'component' => [
                     'filename' => 'promo-column',
-                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center',
+                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center overflow-hidden',
                     'columnSpan' => 6,
                 ],
             ],
@@ -248,7 +247,7 @@ class TemplateGuideController extends Controller
                     'showDescription' => false,
                     'imageSize' => 'small',
                     'columnSpan' => 8,
-                    'classes' => 'col-bg rounded bg-gold-50 py-2',
+                    'classes' => 'col-bg rounded bg-gold-50 py-2 overflow-hidden',
                 ],
             ],
 
@@ -262,7 +261,7 @@ class TemplateGuideController extends Controller
                     'heading' => 'Column 2',
                     'filename' => 'button-column',
                     'columnSpan' => 4,
-                    'classes' => 'col-bg rounded bg-gold-50 py-2 end',
+                    'classes' => 'col-bg rounded bg-gold-50 py-2 end overflow-hidden',
                 ],
             ],
 
@@ -322,7 +321,7 @@ class TemplateGuideController extends Controller
                     'heading' => 'News',
                     'filename' => 'news-column',
                     'columnSpan' => 6,
-                    'classes' => 'col-bg rounded bg-gold-50 py-2',
+                    'classes' => 'col-bg rounded bg-gold-50 py-2 overflow-hidden',
                 ],
             ],
 
@@ -333,7 +332,7 @@ class TemplateGuideController extends Controller
                     'heading' => 'Events',
                     'filename' => 'events-column',
                     'columnSpan' => 6,
-                    'classes' => 'col-bg rounded bg-gold-50 py-2 end',
+                    'classes' => 'col-bg rounded bg-gold-50 py-2 end overflow-hidden',
                     'cal_name' => 'main/',
                     'link_text' => 'More events',
                 ],
@@ -365,7 +364,7 @@ class TemplateGuideController extends Controller
                             'Data' => '{
 "id": 0,
 "columnSpan": 10,
-"classes": "end bg-gold-50 rounded px-gutter pb-gutter",
+"classes": "end bg-gold-50 rounded px-gutter pb-gutte overflow-hiddenr",
 }',
                         ],
                     ],
@@ -384,7 +383,7 @@ class TemplateGuideController extends Controller
                 'component' => [
                     'filename' => 'promo-row',
                     'columnSpan' => 10,
-                    'classes' => 'end bg-gold-50 rounded px-gutter pb-gutter',
+                    'classes' => 'end bg-gold-50 rounded px-gutter pb-gutter overflow-hidden',
                 ],
             ],
 
@@ -438,7 +437,7 @@ Span values range from 1 to 12. It is important to include the <code>mt:</code> 
                     'heading' => 'Events',
                     'filename' => 'events-column',
                     'columnSpan' => 6,
-                    'classes' => 'bg-gold-50 rounded py-2 end mt:right-span-3',
+                    'classes' => 'bg-gold-50 rounded py-2 end mt:right-span-3 overflow-hidden',
                     'cal_name' => 'main/',
                     'link_text' => 'More events',
                 ],
@@ -469,7 +468,7 @@ Span values range from 1 to 12. It is important to include the <code>mt:</code> 
                             'Data' => '{
 "id": 0,
 "backgroundImageUrl": "/_resources/images/background.svg",
-"classes": "py-gutter-lg px-gutter-lg rounded text-white",
+"classes": "py-gutter-lg px-gutter-lg rounded text-white overflow-hidden",
 }',
                         ],
                     ],
@@ -487,7 +486,7 @@ Span values range from 1 to 12. It is important to include the <code>mt:</code> 
                 'component' => [
                     'filename' => 'button-row',
                     'backgroundImageUrl' => '/_resources/images/background.svg',
-                    'classes' => 'py-gutter-lg px-gutter-lg text-white rounded',
+                    'classes' => 'py-gutter-lg px-gutter-lg text-white rounded overflow-hidden',
                     'sectionStyle' => 'background-size:350px;',
                 ],
             ],

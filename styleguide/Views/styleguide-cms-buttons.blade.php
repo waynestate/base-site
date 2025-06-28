@@ -1,7 +1,7 @@
 @extends('layouts.' . (!empty($base['layout']) ? $base['layout'] : 'main'))
 
 @section('content')
-    @include('components.page-title', ['title' => $base['page']['title']])
+    @include('partials.page-title', ['title' => $base['page']['title']])
 
     <div class="content">
         <p>Any of these button styles can be used in all of the following examples.</p>

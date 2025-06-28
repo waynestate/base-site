@@ -1,7 +1,7 @@
 @extends('layouts.' . (!empty($base['layout']) ? $base['layout'] : 'main'))
 
 @section('content')
-    @include('components.page-title', ['title' => $base['page']['title']])
+    @include('partials.page-title', ['title' => $base['page']['title']])
 
     <div class="content">
         <p>Any link to a valid YouTube URL starting with "youtu.be" or "youtube.com/watch" will open a lightbox to play the video.</p>

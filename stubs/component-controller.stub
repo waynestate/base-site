@@ -30,7 +30,7 @@ class ComponentDummyComponentController extends Controller
                 'data' => [
                     0 => [
                         'title' => 'Component configuration',
-                        'promo_item_id' => 'componentConfiguration',
+                        'promo_item_id' => 'component-config',
                         'description' => '',
                         'tr1' => [
                             'Page field' => 'modular-dummy-component-1',
@@ -43,7 +43,7 @@ class ComponentDummyComponentController extends Controller
                     ],
                     1 => [
                         'title' => 'Promotion group details',
-                        'promo_item_id' => 'promotionGroupDetails',
+                        'promo_item_id' => 'promo-details',
                         'description' => '',
                         'table' => [
                             'Title' => 'Bold text.',

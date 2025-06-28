@@ -16,6 +16,7 @@ ul.accordion.enabled {
 
     & > li {
         @apply border-b border-gray-200 w-full focus-within:outline outline-2 outline-green focus-within:border-b-0 focus-within:rounded-sm;
+        @apply z-[400];
 
         transition: 0.3s ease all;
 

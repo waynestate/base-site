@@ -28,7 +28,7 @@ class PromoRepository extends Repository
     /**
      * {@inheritdoc}
      */
-    public function getRequestData(array $data)
+    public function getRequestData(array &$data)
     {
         /*
         |--------------------------------------------------------------------------

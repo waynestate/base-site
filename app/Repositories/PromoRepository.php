@@ -77,7 +77,7 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
     /**
      * {@inheritdoc}
      */
-    public function getRequestData(array $data)
+    public function getRequestData(array &$data)
     {
         /*
         |--------------------------------------------------------------------------
@@ -124,6 +124,27 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         $promos = $this->parsePromos->parse($promos, $group_reference, $group_config);
 
         $global_promos = $this->manipulateGlobalPromos($promos, $groups, $data);
+
+        // TODO: Move this to a new middleware file
+        // Assign layout_config to data and remove from the component loop
+        // Can't override show_site_menu from here
+        if (array_key_exists('layout-config', $global_promos['components'])) {
+            foreach ($global_promos['components'] as $component_name => $component_data) {
+                if ($component_name === 'layout-config') {
+                    if (isset($component_data['showPageTitle']) && $component_data['showPageTitle'] === false) {
+                        $layout_config['show_page_title'] = false;
+                    }
+
+                    if (isset($component_data['pageClass'])) {
+                        $layout_config['page_class'] = $component_data['pageClass'] ?? '';
+                    }
+                    unset($global_promos['components']['layout-config']);
+                }
+            }
+        }
+
+        // Assign to base
+        $data['layout_config'] = $layout_config ?? [];
 
         return $global_promos;
     }

@@ -1,7 +1,7 @@
 @extends('layouts.' . (!empty($base['layout']) ? $base['layout'] : 'main'))
 
 @section('content')
-    @include('components.page-title', ['title' => $base['page']['title']])
+    @include('partials.page-title', ['title' => $base['page']['title']])
 
     <div class="content">
         <p>Use these examples to style your content in the CMS editor</p>
