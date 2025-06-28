@@ -80,6 +80,7 @@ class PromoRepository extends Repository
             105100106 => app(HeroImage::class)->create(1, false, [
                 'option' => 'SVG Overlay',
                 'relative_url' => '/styleguide/image/3200x1160',
+                'secondary_relative_url' => '/_resources/images/youtube-play.svg',
             ]),
             // Logo overlay
             105100107 => app(HeroImage::class)->create(1, false, [
@@ -99,7 +100,7 @@ class PromoRepository extends Repository
             // Childpage
             101100 => app(HeroImage::class)->create(1, false),
             // Layout small banner hero
-            120100100 => app(HeroImage::class)->create(1, false, [
+            105100108 => app(HeroImage::class)->create(1, false, [
                 'option' => 'Banner small',
                 'relative_url' => '/styleguide/image/3200x600?text=Small+banner+hero+image',
             ]),
@@ -110,7 +111,7 @@ class PromoRepository extends Repository
         ];
 
         // Only pull hero promos if they match the page ids that are specificed
-        $hero = !empty($hero_page_ids[$data['page']['id']]) ? $hero_page_ids[$data['page']['id']] : null;
+        $styleguide_hero = !empty($hero_page_ids[$data['page']['id']]) ? $hero_page_ids[$data['page']['id']] : null;
 
         // Full width page IDs
         $hero_full_width_ids = [
@@ -181,7 +182,7 @@ class PromoRepository extends Repository
         $global_promos =  merge([
             'contact' => app(FooterContact::class)->create(1),
             'social' => $social,
-            'hero' => $hero,
+            'hero' => $styleguide_hero ?? $hero ?? [],
             'under_menu' => $under_menu,
             'components' => $components,
         ]);

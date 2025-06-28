@@ -3,7 +3,6 @@ const fs = require('fs');
 const path = require('path');
 const package = JSON.parse(fs.readFileSync('./package.json'));
 const ESLintPlugin = require('eslint-webpack-plugin');
-const replace = require('replace-in-file');
 
 /*
  |--------------------------------------------------------------------------
@@ -39,11 +38,13 @@ if (!mix.inProduction()) {
     fs.copyFileSync('hooks/pre-commit', '.git/hooks/pre-commit', fs.constants.COPYFILE_FICLONE);
 }
 
-replace.sync({
-    files: 'resources/views/components/footer.blade.php',
-    from: /2\d{3}/g,
-    to: "{{ date('Y') }}",
-});
+// Replace year in footer file
+const footerPath = 'resources/views/components/footer.blade.php';
+if (fs.existsSync(footerPath)) {
+    let footerContent = fs.readFileSync(footerPath, 'utf8');
+    footerContent = footerContent.replace(/2\d{3}/g, "{{ date('Y') }}");
+    fs.writeFileSync(footerPath, footerContent);
+}
 
 
 // Error Files
@@ -113,6 +114,7 @@ fs.symlink(
 config = {
     plugins: [
         new ESLintPlugin({
+            overrideConfigFile: 'eslint.config.js',
             exclude: [
                 'node_modules'
             ],

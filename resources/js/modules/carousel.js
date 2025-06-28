@@ -1,4 +1,4 @@
-var Flickity = require('flickity');
+import Flickity from 'flickity';
 
 (function(Flickity) {
     "use strict";
