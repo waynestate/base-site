@@ -52,7 +52,7 @@ ul.accordion.enabled {
 
             transition: 0.3s ease all;
 
-            > * {
+            > *:first-child {
                 @apply mt-0;
             }
         }

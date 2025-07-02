@@ -19,3 +19,4 @@ import './modules/slideout';
 import './modules/slideout-main-menu';
 import './modules/carousel';
 import './modules/under-menu';
+import './modules/table-scroll';

@@ -8,7 +8,7 @@
         <p>Be sure to use the table option in the CMS editor, and always use table headers and a caption to describe the data for accessibility.</p>
 
         <h2>Basic table</h2>
-        <table>
+        <table class="overflow-x-scroll">
             <caption>Example of a basic table.</caption>
             <thead>
                 <tr>
@@ -25,15 +25,15 @@
                         <td>{{ $faker->firstName() }}</td>
                         <td>{{ $faker->lastName() }}</td>
                         <td><a href="//wayne.edu">{{ $faker->email() }}</a></td>
-                        <td>{{ $faker->text(50) }}</td>
+                        <td>{{ $faker->text(10) }}</td>
                     </tr>
                 @endfor
             </tbody>
         </table>
 
-        <h2>Sortable table</h2>
+        <h2>Table sort</h2>
 
-        <table class="table-sort">
+        <table class="table-sort overflow-x-scroll">
             <caption>Use <code>&lt;table class="table-sort"&gt;</code> for this option. Click on each table heading to sort by column. Status: </caption>
             <thead>
                 <tr>
@@ -59,24 +59,24 @@
             </tbody>
         </table>
 
-        <h2>Responsive table</h2>
+        <h2>Table stack</h2>
 
         <table class="table-stack">
             <caption>Use <code>&lt;table class="table-stack"&gt;</code> for this option. This table turns data into self-contained cards on mobile for easy reading.</caption>
             <thead>
                 <tr>
-                    <th scope="col">First name</th>
-                    <th scope="col">Last name</th>
+                    <th scope="col" class="w-1/5">Name</th>
                     <th scope="col">Email</th>
+                    <th scope="col">{{ ucfirst(implode(' ',$faker->words(3))) }}</th>
                 </tr>
             </thead>
 
             <tbody>
                 @for ($i = 0; $i < 10; $i++)
                     <tr>
-                        <td>{{ $faker->firstName() }}</td>
-                        <td>{{ $faker->lastName() }}</td>
+                        <td>{{ $faker->firstName() }} {{ $faker->lastName() }}</td>
                         <td><a href="//wayne.edu">{{ $faker->email() }}</a></td>
+                        <td>{{ $faker->text(200) }}</td>
                     </tr>
                 @endfor
             </tbody>

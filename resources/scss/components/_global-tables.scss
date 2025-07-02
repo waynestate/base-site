@@ -1,33 +1,20 @@
 table {
-    @apply text-left mb-4 w-full;
-
-    &:not([class]),
-    &.table-sort {
-        @apply block overflow-x-scroll border-collapse;
-    }
-
-    @screen mt {
-        &:not([class]),
-        &.table-sort {
-            @apply table;
-        }
-    }
+    @apply mb-4 text-sm text-left w-full border-separate border-spacing-0 border rounded-md;
 
     caption {
-        @apply text-left pb-2;
+        @apply text-left mb-4;
 
-        min-width: calc(100vw - 2rem);
-    }
+         max-width: calc(100vw - 2rem);
 
-    @screen mt {
-        caption {
-            min-width: auto;
-        }
+         @screen mt {
+             min-width: auto;
+         }
     }
 
     tr {
         @apply align-top;
 
+<<<<<<< Updated upstream
         &:nth-child(even) {
             @apply bg-gray-100;
         }
@@ -39,42 +26,75 @@ table {
 
     &.no-stripe tr {
         @apply bg-white;
+=======
+        &:last-child td {
+            @apply border-b-0;
+        }
+>>>>>>> Stashed changes
     }
 
     th {
-        @apply bg-gray-100 font-bold px-4 py-3 text-green-600 leading-none border-b border-b-gray-300;
+        @apply px-4 py-3 text-green-600 font-bold leading-none bg-gray-100 border-b;
     }
 
     td {
-        @apply text-sm px-4 py-2;
+        @apply px-4 py-2.5 text-sm border-b;
+    }
+
+    &.card {
+        @apply bg-white shadow-lg rounded-md;
+    }
+
+    &.table-stripe tr {
+        &:nth-child(even) {
+            @apply bg-gray-100;
+        }
+
+        &:nth-child(odd) {
+            @apply bg-white;
+        }
+    }
+
+    &.table-stack {
+        @media (max-width: theme('screens.md')) {
+            @apply w-full border-0 border-spacing-y-6 relative z-0 -mb-16;
+
+            /* Hide table head */
+            thead th {
+                @apply absolute;
+
+                top: -9999em;
+                left: -9999em;
+            }
+
+            tbody tr {
+                /*compensating for border spacing in the table header */
+                @apply align-top relative -top-12;
+            }
+
+            tbody td {
+                @apply p-0 border-0 grid grid-cols-3 sm:grid-cols-4 shadow border-x border-b overflow-hidden;
+
+                &:first-child {
+                    @apply rounded-t border-t;
+                }
+
+                &:last-child {
+                    @apply rounded-b;
+                }
+            }
+
+            td span {
+                @apply grid grid-rows-subgrid col-span-2 sm:col-span-3 col-start-2 pt-1.5 pb-2 px-2 bg-white;
+            }
+
+            /* Add data labels */
+            td::before {
+                @apply font-bold text-green-600 text-right grid grid-rows-subgrid col-span-1 col-start-1 pt-1.5 pb-2 px-2 bg-gray-100 border-r;
+
+                content: attr(data-label) ":";
+            }
+        }
     }
 }
 
-.table-stack {
-    @media (max-width: theme('screens.md')) {
-        @apply w-full;
-
-        /* Hide table head */
-        thead tr {
-            @apply absolute;
-
-            top: -9999em;
-            left: -9999em;
-        }
-
-        tbody tr {
-            @apply block mb-2 py-2 align-top border-t border-gray-300 rounded;
-        }
-
-        tbody td {
-            @apply flex px-4 pt-0 pb-1 my-2;
-        }
-
-        /* Add data labels */
-        td::before {
-            @apply block font-bold pr-1.5;
-
-            content: attr(data-label) ":";
-        }
-    }
-}
