@@ -1,5 +1,5 @@
 table {
-    @apply mb-4 text-sm text-left w-full border-separate border-spacing-0 border rounded-md;
+    @apply mb-4 text-sm text-left min-w-full border-separate border-spacing-0 border rounded-md;
 
     caption {
         @apply text-left mb-4;
@@ -13,24 +13,10 @@ table {
 
     tr {
         @apply align-top;
-
-<<<<<<< Updated upstream
-        &:nth-child(even) {
-            @apply bg-gray-100;
-        }
-
-        &:nth-child(odd) {
-            @apply bg-white;
-        }
     }
 
     &.no-stripe tr {
         @apply bg-white;
-=======
-        &:last-child td {
-            @apply border-b-0;
-        }
->>>>>>> Stashed changes
     }
 
     th {
@@ -57,7 +43,7 @@ table {
 
     &.table-stack {
         @media (max-width: theme('screens.md')) {
-            @apply w-full border-0 border-spacing-y-6 relative z-0 -mb-16;
+            @apply w-full border-0 border-spacing-y-6;
 
             /* Hide table head */
             thead th {
