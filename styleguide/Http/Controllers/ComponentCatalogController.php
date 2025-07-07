@@ -37,7 +37,7 @@ class ComponentCatalogController extends Controller
             'accordion' => [
                 'data' => [
                     2 => [
-                        'promo_item_id' => 'componentConfiguration',
+                        'promo_item_id' => 'component_config',
                         'title' => 'Component configuration',
                         'description' => '<p>Image size can only be used with a one-column catalog.</p>',
                         'tr1' => [
@@ -57,7 +57,7 @@ class ComponentCatalogController extends Controller
                         ],
                     ],
                     1 => [
-                        'promo_item_id' => 'promotionGroupDetails',
+                        'promo_item_id' => 'promo_details',
                         'title' => 'Promotion group details',
                         'description' => '',
                         'table' => [

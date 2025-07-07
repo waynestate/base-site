@@ -8,8 +8,8 @@
             <div class="content">
                 {!! $item['description'] !!}
 
-                <table style="cell-padding: 5px;" class="mt-4 {{ Str::contains($item['promo_item_id'], 'component-config') ? 'no-stripe' : '' }}">
-                    @if(Str::contains($item['promo_item_id'], 'component-config'))
+                <table style="cell-padding: 5px;" class="mt-4 no-stripe">
+                    @if(Str::contains($item['promo_item_id'], 'component_config'))
                         <thead>
                             <tr>
                                 <th class="md:w-2/5">Page field</th>
@@ -28,7 +28,7 @@
                         </tbody>
                     @endif
 
-                    @if($item['promo_item_id'] === 'promo-details')
+                    @if($item['promo_item_id'] === 'promo_details')
                         <thead>
                             <tr>
                                 <th colspan="2">Available fields</th>

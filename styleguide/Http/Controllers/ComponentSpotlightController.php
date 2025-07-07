@@ -36,7 +36,7 @@ class ComponentSpotlightController extends Controller
                 'data' => [
                     0 => [
                         'title' => 'Component configuration',
-                        'promo_item_id' => 'componentConfiguration',
+                        'promo_item_id' => 'component_config',
                         'description' => '',
                         'tr1' => [
                             'Page field' => 'modular-spotlight-column-1</pre><pre>modular-spotlight-row-1',
@@ -51,7 +51,7 @@ class ComponentSpotlightController extends Controller
                     ],
                     1 => [
                         'title' => 'Promotion group details',
-                        'promo_item_id' => 'promotionGroupDetails',
+                        'promo_item_id' => 'promo_details',
                         'description' => '',
                         'table' => [
                             'Title' => 'Displays as a cited name below the quote.',

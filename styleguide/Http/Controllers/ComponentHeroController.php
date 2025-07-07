@@ -31,7 +31,7 @@ class ComponentHeroController extends Controller
                 'data' => [
                     0 => [
                         'title' => 'Component configuration',
-                        'promo_item_id' => 'componentConfiguration',
+                        'promo_item_id' => 'component_config',
                         'description' => '<p>Note: Any limit above 1 will enable the carousel.</p>',
                         'tr1' => [
                             'Page field' => 'modular-hero-1',
@@ -43,13 +43,14 @@ class ComponentHeroController extends Controller
                     ],
                     1 => [
                         'title' => 'Promotion group details',
-                        'promo_item_id' => 'promotionGroupDetails',
+                        'promo_item_id' => 'promo_details',
                         'description' => '',
                         'table' => [
                             'Title' => 'Displayed using options "Text overlay," "Logo overlay" and will become a link if link field is used.',
                             'Link' => 'URL',
                             'Description' => 'Formattable text. If the link field is set, description links will be stripped out.',
                             'Filename' => '1600x580px or 3200x1160px saved at low quality',
+                            'Secondary image' => 'SVG Overlay: 1600x580px or 3200x1160px svg<br />Logo overlay: >600px jpg, png',
                             'Options' => 'Banner small, Banner large, Text overlay, Half, Logo overlay, SVG overlay',
                         ],
                     ],
