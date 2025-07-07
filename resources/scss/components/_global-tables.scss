@@ -54,7 +54,7 @@ table {
             }
 
             tbody tr {
-                /*compensating for border spacing in the table header */
+                /* compensating for border spacing in the table header */
                 @apply align-top relative -top-12;
             }
 
