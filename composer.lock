@@ -6142,16 +6142,16 @@
         },
         {
             "name": "waynestate/image-faker",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/waynestate/image-faker.git",
-                "reference": "d0f048144f32a4c0c1e186df8a7c432e209842fd"
+                "reference": "062f742b95a9c8403759d6066195b6fcd11c1af3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/waynestate/image-faker/zipball/d0f048144f32a4c0c1e186df8a7c432e209842fd",
-                "reference": "d0f048144f32a4c0c1e186df8a7c432e209842fd",
+                "url": "https://api.github.com/repos/waynestate/image-faker/zipball/062f742b95a9c8403759d6066195b6fcd11c1af3",
+                "reference": "062f742b95a9c8403759d6066195b6fcd11c1af3",
                 "shasum": ""
             },
             "require": {
@@ -6190,9 +6190,9 @@
             "description": "Fake image generator using the PHP GD library. Accessible through a Laravel route.",
             "support": {
                 "issues": "https://github.com/waynestate/image-faker/issues",
-                "source": "https://github.com/waynestate/image-faker/tree/1.0.2"
+                "source": "https://github.com/waynestate/image-faker/tree/1.0.3"
             },
-            "time": "2023-03-07T16:31:29+00:00"
+            "time": "2025-07-08T15:45:56+00:00"
         },
         {
             "name": "waynestate/news-api-php",
@@ -9058,12 +9058,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
