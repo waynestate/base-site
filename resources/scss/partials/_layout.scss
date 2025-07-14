@@ -1,0 +1,8 @@
+.layout {
+    &--full-width {
+    }
+
+    &--left-menu {
+      @apply w-full max-w-[75em] mx-auto mt:flex;
+    }
+}
