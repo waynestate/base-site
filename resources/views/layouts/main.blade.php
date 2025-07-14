@@ -35,16 +35,30 @@
     @endif
 </header>
 
-<div id="panel" class="site-theme">
+<div id="panel" class="site-theme grid">
     @yield('top')
+    
+{{--
+TODO delete
+if the base config is set to contained, as long as the option isn't set, any set hero will show up as contained
+force the component option to be contained
+sitewide base config for default hero style 
+default hero position 
 
-    @if(!empty($base['hero']))
-        @include('components.hero', ['data' => $base['hero']])
+@php
+    dump($base['hero']);
+    dump($base['hero']['data']);
+    dump($base['hero']['component']);
+@endphp
+--}}
+
+    @if(!empty($base['hero']) && (empty($base['hero']['component']['option']) || $base['hero']['component']['option'] != 'Banner contained'))
+        @include('components.hero', ['hero' => $base['hero']])
 
         @yield('under-hero')
     @endif
 
-    <div class="layout {{ (in_array($base['page']['controller'], config('base.full_width_controllers'))) ? 'layout--full-width' : 'layout--left-menu  max-w-[75em] mx-auto mt:flex' }}">
+    <div class="layout {{ (in_array($base['page']['controller'], config('base.full_width_controllers'))) ? 'layout--full-width' : 'layout--left-menu' }}">
         <nav id="menu" class="px-container-lg mt:w-80 {{ $base['show_site_menu'] === false ? ' mt:hidden' : '' }}" aria-label="Page menu" tabindex="-1">
             @if(!empty($base['top_menu_output']) && $base['site_menu'] !== $base['top_menu'] && config('base.top_menu_enabled'))
                 @if(!empty($base['top_menu_output']))
@@ -79,6 +93,10 @@
         </nav>
 
         <main class="content-area mx-auto w-full {{ $base['show_site_menu'] === true ? 'max-w-[900px]' : 'max-w-[75rem]' }}{{ (in_array($base['page']['controller'], config('base.full_width_controllers'))) ? ' max-w-full' : '' }}" tabindex="-1">
+            @if(!empty($base['hero']) && isset($base['hero']['component']['option']) && $base['hero']['component']['option'] === 'Banner contained')
+                @include('components.hero', ['hero' => $base['hero']])
+            @endif
+
             @include('components.breadcrumbs', ['breadcrumbs' => $base['breadcrumbs'] ?? ''])
 
             <div id="content" tabindex="-1">

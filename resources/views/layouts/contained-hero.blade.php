@@ -10,7 +10,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
     @if(!empty($base['page']['canonical']))<link rel="canonical" href="{{ $base['page']['canonical'] }}">@endif
 
@@ -35,68 +35,79 @@
     @endif
 </header>
 
-<div id="panel" class="site-theme">
+<div id="panel" class="site-theme grid">
     @yield('top')
+    
+{{--
+TODO delete
+if the base config is set to contained, as long as the option isn't set, any set hero will show up as contained
+force the component option to be contained
+sitewide base config for default hero style 
+default hero position 
 
-    @if(!empty($base['hero']) && in_array($base['page']['controller'], config('base.hero_full_controllers')))
-        @include('components.hero', ['data' => $base['hero']])
+@php
+    dump($base['hero']);
+    dump($base['hero']['data']);
+    dump($base['hero']['component']);
+@endphp
+--}}
+
+    @if(!empty($base['hero']) && (empty($base['hero']['component']['option']) || $base['hero']['component']['option'] != 'Banner contained'))
+        @include('components.hero', ['hero' => $base['hero']])
 
         @yield('under-hero')
     @endif
 
-    @if(!in_array($base['page']['controller'], config('base.full_width_controllers')))<div class="row mt:flex">@endif
-        <div class="mt:w-1/4 mt:px-4 mt:block print:hidden {{ $base['show_site_menu'] === false ? ' mt:hidden' : '' }}">
-            <nav id="menu" aria-label="Page menu" tabindex="-1">
-                @if(!empty($base['top_menu_output']) && $base['site_menu'] !== $base['top_menu'] && config('base.top_menu_enabled'))
-                    @if(!empty($base['top_menu_output']))
-                        <div class="slideout-main-menu mt:hidden">
-                            <ul class="main-menu mb-2">
-                                <li>
-                                    <a role="button" class="main-menu-toggle pt-2 pb-2 pl-3 pr-3 block" tabindex="0" aria-expanded="false">{{ config('base.top_menu_label') }}</a>
-                                    {!! $base['top_menu_output'] !!}
-                                </li>
-                            </ul>
-                        </div>
-                    @else
-                        {!! $base['top_menu_output'] !!}
-                    @endif
-                @endif
-
-                @if(!empty($base['site_menu_output']))
-                    {!! $base['site_menu_output'] !!}
-                @endif
-
-                @if(!empty($base['flag']))
-                    @include('components.flag', ['flag' => $base['flag'], 'class' => 'flag--sm'])
-                @endif
-
-                @yield('below_menu')
-
-                @if(!empty($base['under_menu']))
-                    <div class="under-menu">
-                        @include('components.button-column', ['data' => $base['under_menu']])
+    <div class="layout {{ (in_array($base['page']['controller'], config('base.full_width_controllers'))) ? 'layout--full-width' : 'layout--left-menu' }}">
+        <nav id="menu" class="px-container-lg mt:w-80 {{ $base['show_site_menu'] === false ? ' mt:hidden' : '' }}" aria-label="Page menu" tabindex="-1">
+            @if(!empty($base['top_menu_output']) && $base['site_menu'] !== $base['top_menu'] && config('base.top_menu_enabled'))
+                @if(!empty($base['top_menu_output']))
+                    <div class="slideout-main-menu mt:hidden">
+                        <ul class="main-menu mb-2">
+                            <li>
+                                <a role="button" class="main-menu-toggle pt-2 pb-2 pl-3 pr-3 block" tabindex="0" aria-expanded="false">{{ config('base.top_menu_label') }}</a>
+                                {!! $base['top_menu_output'] !!}
+                            </li>
+                        </ul>
                     </div>
+                @else
+                    {!! $base['top_menu_output'] !!}
                 @endif
-            </nav>
-        </div>
+            @endif
 
-        <main class="w-full {{$base['show_site_menu'] === true ? 'mt:w-3/4' : '' }} content-area mb-8 print:w-full" tabindex="-1">
+            @if(!empty($base['site_menu_output']))
+                {!! $base['site_menu_output'] !!}
+            @endif
 
-            @if(!empty($base['hero']) && !in_array($base['page']['controller'], config('base.hero_full_controllers')))
-                <div class="mt:px-4">
-                    @include('components.hero', ['data' => $base['hero']])
+            @if(!empty($base['flag']))
+                @include('components.flag', ['flag' => $base['flag'], 'class' => 'flag--sm'])
+            @endif
+
+            @yield('below_menu')
+
+            @if(!empty($base['under_menu']))
+                <div class="under-menu">
+                    @include('components.button-column', ['data' => $base['under_menu']])
                 </div>
             @endif
+        </nav>
 
-            @if(!empty($base['breadcrumbs']))
-                @include('components.breadcrumbs', ['breadcrumbs' => $base['breadcrumbs']])
+        <main class="content-area mx-auto w-full {{ $base['show_site_menu'] === true ? 'max-w-[900px]' : 'max-w-[75rem]' }}{{ (in_array($base['page']['controller'], config('base.full_width_controllers'))) ? ' max-w-full' : '' }}" tabindex="-1">
+            @if(!empty($base['hero']) && isset($base['hero']['component']['option']) && $base['hero']['component']['option'] === 'Banner contained')
+                @include('components.hero', ['hero' => $base['hero']])
             @endif
 
-            <div id="content" tabindex="-1" class="{{ !in_array($base['page']['controller'], config('base.full_width_controllers')) ? 'px-4' : '' }}">
-                @yield('content')
+            @include('components.breadcrumbs', ['breadcrumbs' => $base['breadcrumbs'] ?? ''])
+
+            <div id="content" tabindex="-1">
+                <div class="px-container">
+                    @yield('content')
+                </div>
+
+                @include('partials.component-loop')
             </div>
         </main>
-    @if(!in_array($base['page']['controller'], config('base.full_width_controllers')))</div>@endif
+    </div>
 
     @yield('bottom')
 </div>
