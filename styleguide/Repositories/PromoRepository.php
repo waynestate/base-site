@@ -62,40 +62,38 @@ class PromoRepository extends Repository
             101101 => app(HeroImage::class)->create(1, false, [
                 'relative_url' => '/styleguide/image/3200x600?text=Hero+Image',
             ]),
-            // Contained
-            105100100 => app(HeroImage::class)->create(1, false),
+            // Banner contained 
+            105100110 => app(HeroImage::class)->create(1, false, [
+                'relative_url' => '/styleguide/image/1600x580?text=Contained+hero+image',
+            ]),
             // Banner large
             105100103 => app(HeroImage::class)->create(1, false, [
                 'option' => 'Banner large',
-                'relative_url' => '/styleguide/image/3200x1160',
+                'relative_url' => '/styleguide/image/3200x1160?text=Banner+large',
             ]),
-            // Rotate
+            // Rotate carousel
             105100104 => app(HeroImageRotate::class)->create(4, false),
             // Text overlay
             105100105 => app(HeroImage::class)->create(1, false, [
                 'option' => 'Text Overlay',
-                'relative_url' => '/styleguide/image/3200x1160',
+                'relative_url' => '/styleguide/image/3200x1160?text=Text+overlay',
             ]),
             // SVG overlay
-            105100106 => app(HeroImage::class)->create(1, false, [
+            105100106 => app(HeroImage::class)->create(2, false, [
                 'option' => 'SVG Overlay',
-                'relative_url' => '/styleguide/image/3200x1160',
+                'relative_url' => '/styleguide/image/3200x1160?text=SVG+overlay',
                 'secondary_relative_url' => '/_resources/images/youtube-play.svg',
             ]),
             // Logo overlay
             105100107 => app(HeroImage::class)->create(1, false, [
                 'option' => 'Logo Overlay',
-                'relative_url' => '/styleguide/image/3200x1160',
-                'secondary_relative_url' => '/styleguide/image/600x250?text=600x250',
-            ]),
-            // Banner small
-            105100108 => app(HeroImage::class)->create(1, false, [
-                'relative_url' => '/styleguide/image/3200x600',
+                'relative_url' => '/styleguide/image/3200x1160?text=Logo+overlay+background+image',
+                'secondary_relative_url' => '/styleguide/image/600x250?text=Secondary+image',
             ]),
             // Half
             105100109 => app(HeroImage::class)->create(1, false, [
                 'option' => 'Half',
-                'relative_url' => '/styleguide/image/1920x1080',
+                'relative_url' => '/styleguide/image/1920x1080?text=Half',
             ]),
             // Childpage
             101100 => app(HeroImage::class)->create(1, false),
@@ -111,7 +109,21 @@ class PromoRepository extends Repository
         ];
 
         // Only pull hero promos if they match the page ids that are specificed
-        $styleguide_hero = !empty($hero_page_ids[$data['page']['id']]) ? $hero_page_ids[$data['page']['id']] : null;
+        $styleguide_hero = [
+            'data' => !empty($hero_page_ids[$data['page']['id']]) ? $hero_page_ids[$data['page']['id']] : null,
+            'component' => [
+                //'option' => '',
+            ]
+        ];
+
+        // TODO This is weak
+        if(config('base.layout') == 'contained-hero') {
+            foreach($styleguide_hero['data'] as $hero) {
+                if(!isset($hero['option'])) {
+                    $styleguide_hero['component']['option'] = 'Banner contained';
+                }
+            }
+        }
 
         // Full width page IDs
         $hero_full_width_ids = [
