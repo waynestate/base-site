@@ -36,9 +36,10 @@ return [
     |
     | Create a new layout when adjustments to the content area are needed.
     | Layouts are stored in resources/layouts
+    | ['main', 'contained-hero']
     |
     */
-    'layout' => 'main',
+    'layout' => 'contained-hero',
 
     /*
     |--------------------------------------------------------------------------
