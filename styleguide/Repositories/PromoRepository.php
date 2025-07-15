@@ -117,7 +117,7 @@ class PromoRepository extends Repository
         ];
 
         // TODO This is weak
-        if(config('base.layout') == 'contained-hero') {
+        if(config('base.layout') == 'contained-hero' && !empty($styleguide_hero['data'])) {
             foreach($styleguide_hero['data'] as $hero) {
                 if(!isset($hero['option'])) {
                     $styleguide_hero['component']['option'] = 'Banner contained';

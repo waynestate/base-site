@@ -9,7 +9,7 @@
     Hero buttons are in text-overlay
 --}}
 
-@if(!empty($hero))
+@if(isset($hero['data']))
     <div role="complementary" class="hero GTM-hero {{ $heroClass ?? '' }} {{ config('base.global.sites.'.$base['site']['id'].'.promos.hero.class') ?? ''}} {{ !empty($hero['data']) && count($hero['data']) > 1 ? ' rotate' : '' }}">
         @foreach($hero['data'] as $item)
             <div class="hero__preserve-flickity">
