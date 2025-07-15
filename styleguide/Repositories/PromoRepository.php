@@ -62,7 +62,7 @@ class PromoRepository extends Repository
             101101 => app(HeroImage::class)->create(1, false, [
                 'relative_url' => '/styleguide/image/3200x600?text=Hero+Image',
             ]),
-            // Banner contained 
+            // Banner contained
             105100110 => app(HeroImage::class)->create(1, false, [
                 'relative_url' => '/styleguide/image/1600x580?text=Contained+hero+image',
             ]),
@@ -117,9 +117,9 @@ class PromoRepository extends Repository
         ];
 
         // TODO This is weak
-        if(config('base.layout') == 'contained-hero' && !empty($styleguide_hero['data'])) {
-            foreach($styleguide_hero['data'] as $hero) {
-                if(!isset($hero['option'])) {
+        if (config('base.layout') == 'contained-hero' && !empty($styleguide_hero['data'])) {
+            foreach ($styleguide_hero['data'] as $hero) {
+                if (!isset($hero['option'])) {
                     $styleguide_hero['component']['option'] = 'Banner contained';
                 }
             }
