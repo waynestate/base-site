@@ -12,14 +12,14 @@
         @apply w-full;
     }
 
-    // Contained 
+    /* Contained */
     &--contained {
         .hero__bg {
             @apply aspect-hero max-h-hero w-full bg-cover bg-center relative;
         }
     }
 
-    // Banner small
+    /* Banner small */
     &--banner-small {
         @apply h-hero-small max-h-hero-small;
 
@@ -28,7 +28,7 @@
         }
     }
 
-    // Banner large
+    /* Banner large */
     &--banner-large {
         @apply aspect-hero max-h-hero w-full bg-cover bg-center relative;
 
@@ -37,7 +37,7 @@
         }
     }
 
-    // Half 
+    /* Half */
     &--half {
         @apply relative xl:flex items-center;
 
@@ -66,7 +66,7 @@
          }
     }
 
-    // Logo overlay
+    /* Logo overlay */
     &--logo-overlay {
         @apply relative flex flex-col justify-center bg-green-900 min-h-[500px];
 
@@ -91,7 +91,7 @@
         }
     }
 
-    // Logo overlay
+    /* Logo overlay */
     &--svg-overlay {
         @apply relative aspect-hero max-h-hero;
 

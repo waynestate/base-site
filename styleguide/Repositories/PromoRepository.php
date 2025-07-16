@@ -116,7 +116,7 @@ class PromoRepository extends Repository
             ]
         ];
 
-        // TODO This is weak
+        // TODO Move hero logic to it's own repository
         if (config('base.layout') == 'contained-hero' && !empty($styleguide_hero['data'])) {
             foreach ($styleguide_hero['data'] as $hero) {
                 if (!isset($hero['option'])) {
