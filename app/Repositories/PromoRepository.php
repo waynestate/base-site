@@ -197,6 +197,27 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         unset($promos['main_social']);
         unset($promos['main_contact']);
 
+        if (!empty($promos['hero'])) {
+            $temporary_hero = $promos['hero'];
+            unset($promos['hero']);
+            $promos['hero']['data'] = $temporary_hero;
+
+            foreach ($promos['hero']['data'] as $hero) {
+                if (isset($hero['option']) && $hero['option'] = 'Banner contained') {
+                    $promos['hero']['component']['option'] = 'Banner contained';
+                } else {
+                    if (!isset($hero['option'])) {
+                        // collect the heroes and if any of them have an option
+                        if (config('base.layout') == 'contained-hero') {
+                            $promos['hero']['component']['option'] = 'Banner contained';
+                        } else {
+                            $promos['hero']['component']['option'] = 'Banner small';
+                        }
+                    }
+                }
+            }
+        }
+
         // Add modular components into global data
         $promos['components'] = $this->components->getModularComponents($data);
 
