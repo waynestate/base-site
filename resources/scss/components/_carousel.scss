@@ -1,7 +1,7 @@
 .flickity-button {
-    @apply bg-transparent transition-colors w-20 h-20;
+    @apply bg-transparent transition-colors w-16 h-16;
 
-    filter: drop-shadow(0 1px 1px rgba(0,0,0,0.25)) drop-shadow(0 1px 1px rgba(0,0,0,0.25));
+    filter: drop-shadow(0 1px 1px rgb(0 0 0 / 25%)) drop-shadow(0 1px 1px rgb(0 0 0 / 25%));
 
     &:hover {
         @apply rounded-full bg-green-600/70;
