@@ -18,7 +18,7 @@
                 @elseif(isset($item['option']))
                     @includeIf('components.hero.'.Str::slug($item['option']), ['item' => $item, 'loop' => $loop ?? ''])
                 @else
-                    @include('components.hero.'.Str::slug($base['hero']['component']['option']), ['item' => $item, 'loop' => $loop ?? ''])
+                    @include('components.hero.banner-large'), ['item' => $item, 'loop' => $loop ?? ''])
                 @endif
             </div>
         @endforeach

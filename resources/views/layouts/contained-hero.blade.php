@@ -38,20 +38,6 @@
 <div id="panel" class="site-theme grid">
     @yield('top')
     
-{{--
-TODO delete
-if the base config is set to contained, as long as the option isn't set, any set hero will show up as contained
-force the component option to be contained
-sitewide base config for default hero style 
-default hero position 
-
-@php
-    dump($base['hero']);
-    dump($base['hero']['data']);
-    dump($base['hero']['component']);
-@endphp
---}}
-
     @if(!empty($base['hero']) && (empty($base['hero']['component']['option']) || $base['hero']['component']['option'] != 'Banner contained'))
         @include('components.hero', ['hero' => $base['hero']])
 

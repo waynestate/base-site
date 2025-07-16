@@ -197,22 +197,31 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         unset($promos['main_social']);
         unset($promos['main_contact']);
 
+        // TODO Move hero logic to it's own repository
+        // Force global promos into the component structure
         if (!empty($promos['hero'])) {
+            // Preserve the hero data
             $temporary_hero = $promos['hero'];
             unset($promos['hero']);
-            $promos['hero']['data'] = $temporary_hero;
+
+            // Force hero data into component structure
+            if (empty($promos['hero']['data'])) {
+                $promos['hero']['data'] = $temporary_hero;
+            }
+
+            if (empty($promos['hero']['component'])) {
+                $promos['hero']['component'] = [];
+            }
 
             foreach ($promos['hero']['data'] as $hero) {
-                if (isset($hero['option']) && $hero['option'] = 'Banner contained') {
-                    $promos['hero']['component']['option'] = 'Banner contained';
-                } else {
-                    if (!isset($hero['option'])) {
-                        // collect the heroes and if any of them have an option
-                        if (config('base.layout') == 'contained-hero') {
-                            $promos['hero']['component']['option'] = 'Banner contained';
-                        } else {
-                            $promos['hero']['component']['option'] = 'Banner small';
-                        }
+                // Force the correct component option based on the layout
+                if (count($promos['hero']['data']) === 1) {
+                    if (isset($hero['option']) && $hero['option'] === 'Banner contained') {
+                        $promos['hero']['component']['option'] = 'Banner contained';
+                    } elseif (!isset($hero['option']) && config('base.layout') == 'contained-hero') {
+                        $promos['hero']['component']['option'] = 'Banner contained';
+                    } elseif (!isset($hero['option'])) {
+                        $promos['hero']['component']['option'] = 'Banner small';
                     }
                 }
             }

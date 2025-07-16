@@ -266,7 +266,7 @@ return [
                 ],
                 'hero' => [
                     'id' => 3001,
-                    'config' => 'page_id:{$page_id}|randomize|limit:1',
+                    'config' => 'page_id:{$page_id}|randomize|limit:4',
                 ],
                 'flag' => [
                     'id' => 4246,
