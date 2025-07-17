@@ -91,9 +91,9 @@
         }
     }
 
-    /* Logo overlay */
+    /* SVG overlay */
     &--svg-overlay {
-        @apply relative aspect-hero max-h-hero;
+        @apply relative pt-hero;
 
         .hero__link {
             @apply absolute inset-0;
@@ -104,7 +104,7 @@
         }
 
         .hero__secondary-image {
-            @apply w-full h-full object-contain relative z-2;
+            @apply absolute inset-0 z-2;
         }
     }
 }
