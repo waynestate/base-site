@@ -17,7 +17,7 @@ class ComponentHeroCarousel extends Page
                 'title' => 'Hero carousel',
                 'id' => 105100104,
                 'content' => [
-                    'main' => '<p class="mb-6">Enable the Hero Carousel by adding a hero component with a limit greater than 1.</p><p></p>',
+                    'main' => '<p>Enable the Hero Carousel by adding a hero component with a limit greater than 1.</p>',
                 ],
             ],
         ]);
