@@ -36,13 +36,23 @@ class ComponentHeroButtonsController extends Controller
                     0 => [
                         'title' => 'Component configuration',
                         'promo_item_id' => 'component_config',
-                        'description' => '<p>Note: Setting the option will override the dropdown option.</p>',
+                        'description' => '',
                         'tr1' => [
                             'Page field' => 'modular-hero-buttons',
                             'Data' => '{
 "id":0000,
 "config":"limit:3",
 "option":"Gold gradient"
+}
+
+Note: Setting the option from the config overrides all 
+chosen dropdown options for all buttons.',
+                        ],
+                        'tr2' => [
+                            'Page field' => 'modular-hero',
+                            'Data' => '{
+"id":0000,
+"config":"randomize|limit:1"
 }',
                         ],
                     ],
