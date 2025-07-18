@@ -17,7 +17,7 @@ class ComponentHeroButtons extends Page
                 'title' => 'Hero buttons',
                 'id' => 105100111,
                 'content' => [
-                    'main' => '',
+                    'main' => '<p>You need to set up two components, <code>modular-hero</code> and <code>modular-hero-buttons</code> for the buttons to show.</p>',
                 ],
             ],
         ]);
