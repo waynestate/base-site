@@ -256,6 +256,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
             unset($data['description']);
         }
 
+        // Override promo item option with component option
         if (isset($component['option'])) {
             $data['option'] = $component['option'];
         }
