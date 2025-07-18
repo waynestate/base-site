@@ -505,10 +505,6 @@ final class PromoRepositoryTest extends TestCase
                 'modular-hero-1' => json_encode([
                     'id' => $promo_group_id,
                     'config' => 'limit:2',
-                    'columns' => '',
-                    'singlePromoView' => true,
-                    'showExcerpt' => true,
-                    'showDescription' => true,
                 ]),
             ],
         ]);

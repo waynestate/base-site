@@ -1,19 +1,13 @@
 .flickity-button {
-    background: none;
+    @apply bg-transparent transition-colors w-16 h-16;
+
+    filter: drop-shadow(0 1px 1px rgb(0 0 0 / 25%)) drop-shadow(0 1px 1px rgb(0 0 0 / 25%));
 
     &:hover {
-        background: none;
+        @apply rounded-full bg-green-600/70;
     }
 }
 
 .flickity-button-icon {
-    @apply text-white fill-current;
-}
-
-.flickity-prev-next-button.next .flickity-button-icon {
-    left: 40%;
-}
-
-.flickity-prev-next-button.previous .flickity-button-icon {
-    left: 0%;
+    @apply text-white fill-current mix-blend-normal;
 }

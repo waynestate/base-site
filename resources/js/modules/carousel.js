@@ -50,6 +50,14 @@ import Flickity from 'flickity';
         // Allows the carousel to adjust the height after all the content has loaded
         carousel.resize()
 
+        // Wait for the styleguide image to load 
+        // TODO: Figure out how to wait styleguide images to load before the document is considered loaded
+        var heroImage = document.querySelector('.flickity-enabled .is-selected img');
+        heroImage.addEventListener("load", function () {
+            carousel.resize()
+        });
+
+
         // Adding these transitions after load prevents the initial load being delayed 
         document.querySelector('.flickity-viewport').style['transition-property'] = 'height';
         document.querySelector('.flickity-viewport').style['transition-timing-function'] = 'cubic-bezier(0.4, 0, 0.2, 1)';

@@ -4,6 +4,7 @@ namespace Styleguide\Repositories;
 
 use App\Repositories\PromoRepository as Repository;
 use Contracts\Repositories\ModularPageRepositoryContract;
+use Contracts\Repositories\HeroRepositoryContract;
 use Faker\Factory;
 use Factories\FooterContact;
 use Factories\FooterSocial;
@@ -19,10 +20,12 @@ class PromoRepository extends Repository
      */
     public function __construct(
         Factory $faker,
-        ModularPageRepositoryContract $components
+        ModularPageRepositoryContract $components,
+        HeroRepositoryContract $hero
     ) {
         $this->faker = $faker->create();
         $this->components = $components;
+        $this->hero = $hero;
     }
 
     /**
@@ -46,6 +49,11 @@ class PromoRepository extends Repository
         |
         */
 
+        /*
+        |--------------------------------------------------------------------------
+        | Under menu buttons
+        |--------------------------------------------------------------------------
+        */
         // Define the pages that have under menu promos: page_id => quanity
         $under_menu_page_ids = [
             114100 => 3, // Styleguide
@@ -54,6 +62,11 @@ class PromoRepository extends Repository
         // Only pull under_menu promos if they match the page_ids that are specified
         $under_menu = !empty($under_menu_page_ids[$data['page']['id']]) ? app(Button::class)->create($under_menu_page_ids[$data['page']['id']]) : null;
 
+        /*
+        |--------------------------------------------------------------------------
+        | Global hero per page
+        |--------------------------------------------------------------------------
+        */
         $hero_option = $this->faker->randomElement(['Text Overlay', 'SVG Overlay', 'Half', 'Logo Overlay', '']);
 
         // Define the pages that have hero images
@@ -62,40 +75,45 @@ class PromoRepository extends Repository
             101101 => app(HeroImage::class)->create(1, false, [
                 'relative_url' => '/styleguide/image/3200x600?text=Hero+Image',
             ]),
-            // Contained
-            105100100 => app(HeroImage::class)->create(1, false),
+            // Banner contained
+            105100110 => app(HeroImage::class)->create(1, false, [
+                'relative_url' => '/styleguide/image/1600x580?text=Contained+hero+image',
+            ]),
             // Banner large
             105100103 => app(HeroImage::class)->create(1, false, [
                 'option' => 'Banner large',
-                'relative_url' => '/styleguide/image/3200x1160',
+                'relative_url' => '/styleguide/image/3200x1160?text=Banner+large',
             ]),
-            // Rotate
+            // Buttons
+            105100111 => app(HeroImage::class)->create(1, false, [
+                'option' => 'Text overlay',
+                'relative_url' => '/styleguide/image/1600x580?text=Hero+buttons',
+                'description' => '',
+                'link' => '',
+            ]),
+            // Rotate carousel
             105100104 => app(HeroImageRotate::class)->create(4, false),
             // Text overlay
             105100105 => app(HeroImage::class)->create(1, false, [
                 'option' => 'Text Overlay',
-                'relative_url' => '/styleguide/image/3200x1160',
+                'relative_url' => '/styleguide/image/3200x1160?text=Text+overlay',
             ]),
             // SVG overlay
-            105100106 => app(HeroImage::class)->create(1, false, [
+            105100106 => app(HeroImage::class)->create(2, false, [
                 'option' => 'SVG Overlay',
-                'relative_url' => '/styleguide/image/3200x1160',
+                'relative_url' => '/styleguide/image/3200x1160?text=SVG+overlay',
                 'secondary_relative_url' => '/_resources/images/youtube-play.svg',
             ]),
             // Logo overlay
             105100107 => app(HeroImage::class)->create(1, false, [
                 'option' => 'Logo Overlay',
-                'relative_url' => '/styleguide/image/3200x1160',
-                'secondary_relative_url' => '/styleguide/image/600x250?text=600x250',
-            ]),
-            // Banner small
-            105100108 => app(HeroImage::class)->create(1, false, [
-                'relative_url' => '/styleguide/image/3200x600',
+                'relative_url' => '/styleguide/image/3200x1160?text=Logo+overlay+background+image',
+                'secondary_relative_url' => '/styleguide/image/600x250?text=Secondary+image',
             ]),
             // Half
             105100109 => app(HeroImage::class)->create(1, false, [
                 'option' => 'Half',
-                'relative_url' => '/styleguide/image/1920x1080',
+                'relative_url' => '/styleguide/image/1920x1080?text=Half',
             ]),
             // Childpage
             101100 => app(HeroImage::class)->create(1, false),
@@ -124,14 +142,11 @@ class PromoRepository extends Repository
             105100109,
         ];
 
-        // Set the config for full width hero if they match the page ids that are specified
-        if (in_array($data['page']['id'], $hero_full_width_ids)) {
-            config([
-                'base.hero_full_controllers' => ['HeroController'],
-            ]);
-        }
-
-        // Get all the social icons
+        /*
+        |--------------------------------------------------------------------------
+        | Get all the social icons
+        |--------------------------------------------------------------------------
+        */
         $social = collect([
             'x',
             'twitter',
@@ -154,31 +169,16 @@ class PromoRepository extends Repository
 
         /*
         |--------------------------------------------------------------------------
-        | Modular components
+        | Add modular components into global data
         |--------------------------------------------------------------------------
         */
-
-        // Add modular components into global data
         $components = $this->components->getModularComponents($data);
-
-        // Set hero from components
-        $hero = collect($components)->reject(function ($data, $componentName) {
-            return !str_contains($componentName, 'hero');
-        })->toArray();
-
-        if (!empty($hero)) {
-            $hero_key = array_key_first($hero);
-            $hero = $components[$hero_key]['data'];
-            config(['base.hero_full_controllers' => [$data['page']['controller']]]);
-            unset($components[$hero_key]);
-        }
 
         /*
         |--------------------------------------------------------------------------
         | Setting global variables
         |--------------------------------------------------------------------------
         */
-
         $global_promos =  merge([
             'contact' => app(FooterContact::class)->create(1),
             'social' => $social,
@@ -186,6 +186,13 @@ class PromoRepository extends Repository
             'under_menu' => $under_menu,
             'components' => $components,
         ]);
+
+        /*
+        |--------------------------------------------------------------------------
+        | Set hero
+        |--------------------------------------------------------------------------
+        */
+        $global_promos = $this->hero->setHero($global_promos, $data);
 
         return $global_promos;
     }

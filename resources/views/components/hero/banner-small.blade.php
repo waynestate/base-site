@@ -1,7 +1,7 @@
 {{--
     $hero => array // ['relative_url', 'title']
 --}}
-<div class="hero__wrapper w-full">
-    <div class="hero__primary-image w-full h-hero-small max-h-hero-small bg-cover bg-center relative" style="background-image: url('{{ $hero['relative_url'] }}')"></div>
+<div class="hero__wrapper hero--banner-small">
+    <img class="hero__primary-image {{ $loop->first ? '' : 'lazy'}}" @if($loop->first) src="{{ $item['relative_url'] }}" @else data-src="{{ $item['relative_url'] }}"@endif alt="{{ $item['filename_alt_text'] }}">
 </div>
 

@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use Contracts\Repositories\RequestDataRepositoryContract;
 use Contracts\Repositories\PromoRepositoryContract;
+use Contracts\Repositories\HeroRepositoryContract;
 use Contracts\Repositories\ModularPageRepositoryContract;
 use Illuminate\Cache\Repository;
 use Waynestate\Api\Connector;
@@ -27,12 +28,14 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         Connector $wsuApi,
         ParsePromos $parsePromos,
         Repository $cache,
-        ModularPageRepositoryContract $components
+        ModularPageRepositoryContract $components,
+        HeroRepositoryContract $hero
     ) {
         $this->wsuApi = $wsuApi;
         $this->parsePromos = $parsePromos;
         $this->cache = $cache;
         $this->components = $components;
+        $this->hero = $hero;
     }
 
     /**
@@ -125,6 +128,10 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
 
         $global_promos = $this->manipulateGlobalPromos($promos, $groups, $data);
 
+        $global_promos['components'] = $this->components->getModularComponents($data);
+
+        $global_promos = $this->hero->setHero($global_promos, $data);
+
         return $global_promos;
     }
 
@@ -196,21 +203,6 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         // Remove the uncessary promo groups
         unset($promos['main_social']);
         unset($promos['main_contact']);
-
-        // Add modular components into global data
-        $promos['components'] = $this->components->getModularComponents($data);
-
-        // Set hero from components
-        $hero = collect($promos['components'])->reject(function ($data, $component_name) {
-            return !str_contains($component_name, 'hero');
-        })->toArray();
-
-        if (!empty($hero)) {
-            $hero_key = array_key_first($hero);
-            $promos['hero'] = $promos['components'][$hero_key]['data'];
-            config(['base.hero_full_controllers' => [$data['page']['controller']]]);
-            unset($promos['components'][$hero_key]);
-        }
 
         return $promos;
     }

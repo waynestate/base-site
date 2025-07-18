@@ -1,31 +1,26 @@
 {{--
-    $images => array // ['relative_url', 'title', 'description']
+    $hero['component'] => array // ['option']
+    $hero['data'] => array // ['relative_url', 'title', 'description']
+    $heroClass => string, 'class-name'
 
+    Enable to carousel by increasing the limit of hero items.
     Add specific classes in base config under global -> sites -> promos -> hero -> class = 'class-name'
     Add your specific css in scss/subsite/_main.scss
+    Hero buttons are in text-overlay
 --}}
-@if(!empty($data))
-    <div role="complementary" class="GTM-hero 
-        {{ $heroClass ?? '' }}
-        {{ config('base.global.sites.'.$base['site']['id'].'.promos.hero.class') ?? ''}}
-        {{ !empty($data) && count($data) > 1 ? ' rotate' : '' }}
-    ">
-        @foreach($data as $hero)
-            @if(!empty($hero['relative_url']))
-                @if(!empty($hero['option']))
-                    @include('components/hero/'.Str::slug($hero['option']))
+
+@if(isset($hero['data']))
+    <div role="complementary" class="hero GTM-hero {{ $heroClass ?? '' }} {{ config('base.global.sites.'.$base['site']['id'].'.promos.hero.class') ?? ''}} {{ !empty($hero['data']) && count($hero['data']) > 1 ? ' rotate' : '' }}">
+        @foreach($hero['data'] as $item)
+            <div class="hero__preserve-flickity">
+                @if(isset($base['hero']['component']['option']))
+                    @includeIf('components.hero.'.Str::slug($base['hero']['component']['option']), ['item' => $item, 'loop' => $loop ?? ''])
+                @elseif(isset($item['option']))
+                    @includeIf('components.hero.'.Str::slug($item['option']), ['item' => $item, 'loop' => $loop ?? ''])
                 @else
-                    @if(!empty($base['layout']) && $base['layout'] === 'contained-hero') 
-                        @include('components/hero/banner-large')
-                    @else
-                        @if(config('base.layout') === 'contained-hero')
-                            @include('components/hero/banner-large')
-                        @else
-                            @include('components/hero/banner-small')
-                        @endif
-                    @endif
+                    @include('components.hero.banner-large', ['item' => $item, 'loop' => $loop ?? ''])
                 @endif
-            @endif
+            </div>
         @endforeach
     </div>
 @endif
