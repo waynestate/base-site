@@ -4,6 +4,7 @@ namespace Styleguide\Repositories;
 
 use App\Repositories\PromoRepository as Repository;
 use Contracts\Repositories\ModularPageRepositoryContract;
+use Contracts\Repositories\HeroRepositoryContract;
 use Faker\Factory;
 use Factories\FooterContact;
 use Factories\FooterSocial;
@@ -19,10 +20,12 @@ class PromoRepository extends Repository
      */
     public function __construct(
         Factory $faker,
-        ModularPageRepositoryContract $components
+        ModularPageRepositoryContract $components,
+        HeroRepositoryContract $hero
     ) {
         $this->faker = $faker->create();
         $this->components = $components;
+        $this->hero = $hero;
     }
 
     /**
@@ -46,6 +49,11 @@ class PromoRepository extends Repository
         |
         */
 
+        /*
+        |--------------------------------------------------------------------------
+        | Under menu buttons
+        |--------------------------------------------------------------------------
+        */
         // Define the pages that have under menu promos: page_id => quanity
         $under_menu_page_ids = [
             114100 => 3, // Styleguide
@@ -54,6 +62,11 @@ class PromoRepository extends Repository
         // Only pull under_menu promos if they match the page_ids that are specified
         $under_menu = !empty($under_menu_page_ids[$data['page']['id']]) ? app(Button::class)->create($under_menu_page_ids[$data['page']['id']]) : null;
 
+        /*
+        |--------------------------------------------------------------------------
+        | Global hero per page
+        |--------------------------------------------------------------------------
+        */
         $hero_option = $this->faker->randomElement(['Text Overlay', 'SVG Overlay', 'Half', 'Logo Overlay', '']);
 
         // Define the pages that have hero images
@@ -116,21 +129,7 @@ class PromoRepository extends Repository
         ];
 
         // Only pull hero promos if they match the page ids that are specificed
-        $styleguide_hero = [
-            'data' => !empty($hero_page_ids[$data['page']['id']]) ? $hero_page_ids[$data['page']['id']] : null,
-            'component' => [
-                //'option' => '',
-            ]
-        ];
-
-        // TODO Move hero logic to it's own repository
-        if (config('base.layout') == 'contained-hero' && !empty($styleguide_hero['data'])) {
-            foreach ($styleguide_hero['data'] as $hero) {
-                if (!isset($hero['option'])) {
-                    $styleguide_hero['component']['option'] = 'Banner contained';
-                }
-            }
-        }
+        $styleguide_hero = !empty($hero_page_ids[$data['page']['id']]) ? $hero_page_ids[$data['page']['id']] : null;
 
         // Full width page IDs
         $hero_full_width_ids = [
@@ -143,14 +142,11 @@ class PromoRepository extends Repository
             105100109,
         ];
 
-        // Set the config for full width hero if they match the page ids that are specified
-        if (in_array($data['page']['id'], $hero_full_width_ids)) {
-            config([
-                'base.hero_full_controllers' => ['HeroController'],
-            ]);
-        }
-
-        // Get all the social icons
+        /*
+        |--------------------------------------------------------------------------
+        | Get all the social icons
+        |--------------------------------------------------------------------------
+        */
         $social = collect([
             'x',
             'twitter',
@@ -173,31 +169,16 @@ class PromoRepository extends Repository
 
         /*
         |--------------------------------------------------------------------------
-        | Modular components
+        | Add modular components into global data
         |--------------------------------------------------------------------------
         */
-
-        // Add modular components into global data
         $components = $this->components->getModularComponents($data);
-
-        // Set hero from components
-        $hero = collect($components)->reject(function ($data, $componentName) {
-            return !str_contains($componentName, 'hero');
-        })->toArray();
-
-        if (!empty($hero)) {
-            $hero_key = array_key_first($hero);
-            $hero = $components[$hero_key]['data'];
-            config(['base.hero_full_controllers' => [$data['page']['controller']]]);
-            unset($components[$hero_key]);
-        }
 
         /*
         |--------------------------------------------------------------------------
         | Setting global variables
         |--------------------------------------------------------------------------
         */
-
         $global_promos =  merge([
             'contact' => app(FooterContact::class)->create(1),
             'social' => $social,
@@ -205,6 +186,13 @@ class PromoRepository extends Repository
             'under_menu' => $under_menu,
             'components' => $components,
         ]);
+
+        /*
+        |--------------------------------------------------------------------------
+        | Set hero
+        |--------------------------------------------------------------------------
+        */
+        $global_promos = $this->hero->setHero($global_promos, $data);
 
         return $global_promos;
     }
