@@ -129,9 +129,8 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         $global_promos = $this->manipulateGlobalPromos($promos, $groups, $data);
 
         $global_promos['components'] = $this->components->getModularComponents($data);
-        //dump($global_promos);
 
-        $global_promos = $this->hero->setHero($global_promos, $groups, $data);
+        $global_promos = $this->hero->setHero($global_promos, $data);
 
         return $global_promos;
     }

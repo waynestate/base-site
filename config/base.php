@@ -36,6 +36,7 @@ return [
     |
     | Create a new layout when adjustments to the content area are needed.
     | Layouts are stored in resources/layouts
+    | Sets the default look of the hero; main => small banner, contained-hero => contained hero
     | ['main', 'contained-hero']
     |
     */

@@ -7,5 +7,5 @@ interface HeroRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function setHero(array $promos, array $groups, array $data);
+    public function setHero(array $promos, array $data);
 }

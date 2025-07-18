@@ -71,6 +71,13 @@ class PromoRepository extends Repository
                 'option' => 'Banner large',
                 'relative_url' => '/styleguide/image/3200x1160?text=Banner+large',
             ]),
+            // Buttons
+            105100111 => app(HeroImage::class)->create(1, false, [
+                'option' => 'Text overlay',
+                'relative_url' => '/styleguide/image/1600x580?text=Hero+buttons',
+                'description' => '',
+                'link' => '',
+            ]),
             // Rotate carousel
             105100104 => app(HeroImageRotate::class)->create(4, false),
             // Text overlay

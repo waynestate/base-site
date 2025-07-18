@@ -2,21 +2,14 @@
 
 namespace App\Repositories;
 
-use Contracts\Repositories\RequestDataRepositoryContract;
-use Contracts\Repositories\PromoRepositoryContract;
 use Contracts\Repositories\HeroRepositoryContract;
-use Contracts\Repositories\ModularPageRepositoryContract;
 use Illuminate\Cache\Repository;
 use Waynestate\Api\Connector;
-use Waynestate\Promotions\ParsePromos;
 
 class HeroRepository implements HeroRepositoryContract
 {
     /** @var Connector */
     protected $wsuApi;
-
-    /** @var ParsePromos */
-    protected $parsePromos;
 
     /** @var Repository */
     protected $cache;
@@ -26,20 +19,16 @@ class HeroRepository implements HeroRepositoryContract
      */
     public function __construct(
         Connector $wsuApi,
-        ParsePromos $parsePromos,
         Repository $cache,
-        ModularPageRepositoryContract $components
     ) {
         $this->wsuApi = $wsuApi;
-        $this->parsePromos = $parsePromos;
         $this->cache = $cache;
-        $this->components = $components;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setHero(array $promos, array $groups, array $data)
+    public function setHero(array $promos, array $data)
     {
         // Force global promos into the component structure
         if (!empty($promos['hero'])) {
@@ -70,6 +59,20 @@ class HeroRepository implements HeroRepositoryContract
             }
         }
 
+        // Set hero buttons from components
+        $hero_buttons = collect($promos['components'])->reject(function ($data, $component_name) {
+            return !str_contains($component_name, 'hero-buttons');
+        })->toArray();
+
+        if (!empty($hero_buttons)) {
+            $hero_buttons_key = array_key_first($hero_buttons);
+
+            if (!empty($promos['components'][$hero_buttons_key])) {
+                $promos['hero_buttons'] = $promos['components'][$hero_buttons_key];
+                unset($promos['components'][$hero_buttons_key]);
+            }
+        }
+
         // Override hero from components
         $hero = collect($promos['components'])->reject(function ($data, $component_name) {
             return !str_contains($component_name, 'hero');
@@ -77,11 +80,24 @@ class HeroRepository implements HeroRepositoryContract
 
         if (!empty($hero)) {
             $hero_key = array_key_first($hero);
-            if(!empty($promos['components'][$hero_key]['data'])) {
+
+            if (!empty($promos['components'][$hero_key]['data'])) {
                 $promos['hero'] = $promos['components'][$hero_key];
                 config(['base.hero_full_controllers' => [$data['page']['controller']]]);
                 unset($promos['components'][$hero_key]);
             }
+        }
+
+        // Replace Hero Buttons option with Text Overlay
+        // TODO Make hero buttons it's own option
+        if (!empty($promos['hero'])) {
+            $promos['hero']['data'] = collect($promos['hero']['data'])->map(function ($hero_data) {
+                if (!empty($hero_data['option']) && $hero_data['option'] == 'Buttons') {
+                    $hero_data['option'] = 'Text Overlay';
+                }
+
+                return $hero_data;
+            })->toArray();
         }
 
         return $promos;

@@ -256,6 +256,10 @@ class ModularPageRepository implements ModularPageRepositoryContract
             unset($data['description']);
         }
 
+        if (isset($component['option'])) {
+            $data['option'] = $component['option'];
+        }
+
         return $data;
     }
 

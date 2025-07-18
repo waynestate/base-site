@@ -280,6 +280,16 @@
                         "relative_url": "/styleguide/component/hero/bannercontained",
                         "submenu": []
                     },
+                    "105100111": {
+                        "menu_item_id": 105100111,
+                        "is_active": 1,
+                        "page_id": 105100111,
+                        "target": "",
+                        "display_name": "Buttons",
+                        "class_name": "",
+                        "relative_url": "/styleguide/component/hero/buttons",
+                        "submenu": []
+                    },
                     "105100104": {
                         "menu_item_id": 105100104,
                         "is_active": 1,
