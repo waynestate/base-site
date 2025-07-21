@@ -1,0 +1,48 @@
+// Swiper navigation buttons
+.swiper-button-next,
+.swiper-button-prev {
+    background: none;
+
+    .swiper-button-icon {
+        @apply text-white fill-current;
+    }
+
+    &:hover {
+        background: none;
+    }
+
+    &::after {
+        @apply text-white;
+
+        font-size: 24px;
+    }
+}
+
+.swiper-button-next {
+    .swiper-button-icon {
+        left: 40%;
+    }
+
+    &::after {
+        margin-left: 2px;
+    }
+}
+
+.swiper-button-prev {
+    .swiper-button-icon {
+        left: 0;
+    }
+
+    &::after {
+        margin-right: 2px;
+    }
+}
+
+// Swiper pagination bullets
+.swiper-pagination-bullet {
+    background: rgb(255 255 255 / 50%);
+
+    &.swiper-pagination-bullet-active {
+        background: white;
+    }
+}

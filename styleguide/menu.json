@@ -339,6 +339,16 @@
                         "class_name": "",
                         "relative_url": "/styleguide/component/hero/half",
                         "submenu": []
+                    },
+                    "105100110": {
+                        "menu_item_id": 105100110,
+                        "is_active": 1,
+                        "page_id": 105100110,
+                        "target": "",
+                        "display_name": "Carousel (Swiper)",
+                        "class_name": "",
+                        "relative_url": "/styleguide/component/hero/carousel/swiper",
+                        "submenu": []
                     }
                 }
             },

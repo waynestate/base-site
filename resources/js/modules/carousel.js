@@ -3,8 +3,16 @@ import Flickity from 'flickity';
 (function(Flickity) {
     "use strict";
 
-    if(document.querySelector('.rotate') !== null) {
-        var carousel = new Flickity('.rotate', {
+    const carouselEl = document.querySelector('.rotate');
+
+    if (carouselEl !== null) {
+
+        // If we are using Swiper instead
+        if (carouselEl.dataset.carousel === 'swiper') {
+            return; // Short-circuit
+        }
+
+        const carousel = new Flickity('.rotate', {
             on: {
                 ready: function() {
                     // Get the height of the first image that loaded and dynamically set the height
@@ -27,7 +35,7 @@ import Flickity from 'flickity';
             adaptiveHeight: true,
         });
 
-        document.querySelector('.rotate').removeAttribute('tabindex');
+        carouselEl.removeAttribute('tabindex');
 
         let EnableTabbableItems = function () {
             // Don't allow tabbing to items that aren't selected
@@ -50,19 +58,17 @@ import Flickity from 'flickity';
         // Allows the carousel to adjust the height after all the content has loaded
         carousel.resize()
 
-        // Wait for the styleguide image to load 
+        // Wait for the styleguide image to load
         // TODO: Figure out how to wait styleguide images to load before the document is considered loaded
-        var heroImage = document.querySelector('.flickity-enabled .is-selected img');
+        const heroImage = document.querySelector('.flickity-enabled .is-selected img');
         heroImage.addEventListener("load", function () {
             carousel.resize()
         });
 
 
-        // Adding these transitions after load prevents the initial load being delayed 
+        // Adding these transitions after load prevents the initial load being delayed
         document.querySelector('.flickity-viewport').style['transition-property'] = 'height';
         document.querySelector('.flickity-viewport').style['transition-timing-function'] = 'cubic-bezier(0.4, 0, 0.2, 1)';
         document.querySelector('.flickity-viewport').style['transition-duration'] = '1000ms';
     }
 })(Flickity);
-
-

@@ -10,7 +10,11 @@
 --}}
 
 @if(isset($hero['data']))
-    <div role="complementary" class="hero GTM-hero {{ $heroClass ?? '' }} {{ config('base.global.sites.'.$base['site']['id'].'.promos.hero.class') ?? ''}} {{ !empty($hero['data']) && count($hero['data']) > 1 ? ' rotate' : '' }}">
+    <div
+        role="complementary"
+        class="hero GTM-hero {{ $heroClass ?? '' }} {{ config('base.global.sites.'.$base['site']['id'].'.promos.hero.class') ?? ''}} {{ !empty($hero['data']) && count($hero['data']) > 1 ? ' rotate' : '' }}"
+        {{ !empty($data) && count($data) > 1 && isset($base['heroCarouselType']) && $base['heroCarouselType'] === 'swiper' ? ' data-carousel=swiper' : '' }}
+    >
         @foreach($hero['data'] as $item)
             <div class="hero__preserve-flickity">
                 @if(isset($base['hero']['component']['option']))
