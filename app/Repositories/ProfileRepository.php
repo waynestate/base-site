@@ -423,4 +423,26 @@ class ProfileRepository implements ProfileRepositoryContract
             Config::set('profile.table_of_contents', $data['data']['table_of_contents']);
         }
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function orderProfilesById($profile_listing, $profiles_by_accessid)
+    {
+        $accessids = collect(explode('|', $profiles_by_accessid))->map(function ($item) {
+            return trim($item);
+        })->all();
+
+        // Find the profiles by a specific order
+        $profiles_ordered = collect($accessids)->map(function ($accessid) use ($profile_listing) {
+            return collect($profile_listing)->firstWhere('data.AccessID', $accessid);
+        })->filter(null);
+
+        // Remove the profiles that we found so there aren't duplicates
+        $profiles_all = collect($profile_listing)->reject(function ($profile) use ($accessids) {
+            return in_array($profile['data']['AccessID'], $accessids);
+        });
+
+        return $profiles_ordered->merge($profiles_all)->toArray();
+    }
 }

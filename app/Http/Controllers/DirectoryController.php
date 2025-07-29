@@ -39,6 +39,12 @@ class DirectoryController extends Controller
             $profiles = $this->profile->getProfilesByGroup($site_id, $request->data['base']['site']['subsite-folder']);
         }
 
+        if (!empty(config('profile.profiles_by_accessid'))) {
+            foreach ($profiles['profiles'] as $department_name => $department) {
+                $profiles['profiles'][$department_name] = $this->profile->orderProfilesById($department, config('profile.profiles_by_accessid'));
+            }
+        }
+
         return view('directory', merge($request->data, $profiles));
     }
 }
