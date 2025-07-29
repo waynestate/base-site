@@ -1,67 +1,47 @@
-// Swiper specific styles
-.swiper {
-    width: 100%;
-}
-
-// Swiper navigation buttons
-.swiper-button-next,
-.swiper-button-prev {
-    @apply bg-transparent transition-colors w-16 h-16;
-
-    filter: drop-shadow(0 1px 1px rgb(0 0 0 / 25%)) drop-shadow(0 1px 1px rgb(0 0 0 / 25%));
-
-    &:hover {
-        @apply rounded-full bg-green-600/70;
+.rotate {
+    &.swiper {
+        width: 100%;
     }
 
-    .swiper-button-icon {
-        @apply text-white fill-current mix-blend-normal;
+    .swiper-button-next {
+        transform: rotate(180deg);
     }
 
-    /*
-    &:hover {
-        background: none;
+    .swiper-button-next,
+    .swiper-button-prev {
+        @apply bg-transparent transition-colors w-16 h-16 rounded-full;
+
+        filter: drop-shadow(0 1px 1px rgb(0 0 0 / 25%)) drop-shadow(0 1px 1px rgb(0 0 0 / 25%));
+        height: 4rem;
+        width: 4rem;
+
+        &:hover {
+            @apply rounded-full bg-green-600/70;
+        }
+
+        .swiper-button-icon {
+            @apply text-white fill-current mix-blend-normal;
+
+            height: 60%;
+            width: 60%;
+        }
+
+        &:focus,
+        &:focus-within {
+            box-shadow: 0 0 0 5px #19F;
+            outline: none;
+        }
     }
 
-    &::after {
-        @apply text-white;
+    .swiper-pagination-bullet {
+        background: rgb(255 255 255 / 50%);
 
-        font-size: 24px;
-    }
-     */
-}
-
-.swiper-button-next {
-    transform: rotate(180deg);
-}
-
-/*
-.swiper-button-next {
-    .swiper-button-icon {
-        left: 40%;
+        &.swiper-pagination-bullet-active {
+            background: white;
+        }
     }
 
-    &::after {
-        margin-left: 2px;
-    }
-}
-
-.swiper-button-prev {
-    .swiper-button-icon {
-        left: 0;
-    }
-
-    &::after {
-        margin-right: 2px;
-    }
-}
- */
-
-// Swiper pagination bullets
-.swiper-pagination-bullet {
-    background: rgb(255 255 255 / 50%);
-
-    &.swiper-pagination-bullet-active {
-        background: white;
+    .swiper-notification {
+        display: none;
     }
 }
