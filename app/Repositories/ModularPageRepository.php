@@ -121,6 +121,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
                     $components[$name]['id'] = (int)$value;
                 }
 
+                // TODO add events/news specific ids or something
                 if (!Str::contains($name, ['events', 'news']) && !empty($components[$name]['id'])) {
                     $group_reference[$components[$name]['id']] = $name;
                     if (!empty($components[$name]['config'])) {
