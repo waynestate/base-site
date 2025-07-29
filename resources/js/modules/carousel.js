@@ -51,9 +51,16 @@ import Flickity from 'flickity';
 
         EnableTabbableItems();
 
-        document.querySelectorAll('.flickity-button').forEach(function (item) {
-           item.addEventListener('click', EnableTabbableItems);
-        });
+        // Collect all flickity buttons
+        const flickityButton = document.querySelectorAll('.flickity-button');
+        // If present,
+        if (flickityButton.length > 0) {
+            // iterate through
+            flickityButton.forEach(function (item) {
+                // and add set tabindex to -1
+                item.setAttribute('tabindex', '-1');
+            });
+        }
 
         // Allows the carousel to adjust the height after all the content has loaded
         carousel.resize()
@@ -61,9 +68,11 @@ import Flickity from 'flickity';
         // Wait for the styleguide image to load
         // TODO: Figure out how to wait styleguide images to load before the document is considered loaded
         const heroImage = document.querySelector('.flickity-enabled .is-selected img');
-        heroImage.addEventListener("load", function () {
-            carousel.resize()
-        });
+        if (heroImage !== null) {
+            heroImage.addEventListener("load", function () {
+                carousel.resize()
+            });
+        }
 
 
         // Adding these transitions after load prevents the initial load being delayed

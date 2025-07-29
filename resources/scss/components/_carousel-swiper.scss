@@ -1,12 +1,24 @@
+// Swiper specific styles
+.swiper {
+    width: 100%;
+}
+
 // Swiper navigation buttons
 .swiper-button-next,
 .swiper-button-prev {
-    background: none;
+    @apply bg-transparent transition-colors w-16 h-16;
 
-    .swiper-button-icon {
-        @apply text-white fill-current;
+    filter: drop-shadow(0 1px 1px rgb(0 0 0 / 25%)) drop-shadow(0 1px 1px rgb(0 0 0 / 25%));
+
+    &:hover {
+        @apply rounded-full bg-green-600/70;
     }
 
+    .swiper-button-icon {
+        @apply text-white fill-current mix-blend-normal;
+    }
+
+    /*
     &:hover {
         background: none;
     }
@@ -16,8 +28,14 @@
 
         font-size: 24px;
     }
+     */
 }
 
+.swiper-button-next {
+    transform: rotate(180deg);
+}
+
+/*
 .swiper-button-next {
     .swiper-button-icon {
         left: 40%;
@@ -37,6 +55,7 @@
         margin-right: 2px;
     }
 }
+ */
 
 // Swiper pagination bullets
 .swiper-pagination-bullet {

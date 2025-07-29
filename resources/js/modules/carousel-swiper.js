@@ -40,22 +40,12 @@ import 'swiper/css/pagination';
             carousel.insertAdjacentHTML('beforeend', `
             <div class="swiper-button-prev">
                 <svg class="swiper-button-icon" viewBox="0 0 100 100">
-                    <defs>
-                        <filter id="drop-shadow">
-                            <feDropShadow dx="6" dy="6" stdDeviation="6" flood-opacity="0.8"/>
-                        </filter>
-                    </defs>
-                    <path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" filter="url(#drop-shadow)"></path>
+                    <path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path>
                 </svg>
             </div>
             <div class="swiper-button-next">
                 <svg class="swiper-button-icon" viewBox="0 0 100 100">
-                    <defs>
-                        <filter id="drop-shadow-next">
-                            <feDropShadow dx="-6" dy="6" stdDeviation="6" flood-opacity="0.8"/>
-                        </filter>
-                    </defs>
-                    <path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180)" filter="url(#drop-shadow-next)"></path>
+                    <path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path>
                 </svg>
             </div>
             <div class="swiper-pagination visually-hidden"></div>
