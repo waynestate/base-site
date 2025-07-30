@@ -212,11 +212,6 @@ class ModularPageRepository implements ModularPageRepositoryContract
                         $events = $this->event->getEvents($components['components'][$name]['id'] ?? $data['site']['id'], $limit);
                     }
 
-                    // Set the calendar link
-                    if (empty($modularComponents[$name]['component']['cal_name']) && !empty($data['site']['events']['path'])) {
-                        $modularComponents[$name]['component']['cal_name'] = $data['site']['events']['path'];
-                    }
-
                     // Special data structure for news-events component
                     if (Str::contains($name, 'news-events')) {
                         $modularComponents[$name]['data']['events'] = $events['events'] ?? [];
@@ -226,6 +221,11 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
                     // Assign the component data
                     $modularComponents[$name]['component'] = $components['components'][$name];
+
+                    // Set the calendar link
+                    if (empty($modularComponents[$name]['component']['cal_name']) && !empty($data['site']['events']['path'])) {
+                        $modularComponents[$name]['component']['cal_name'] = $data['site']['events']['path'];
+                    }
                 }
                 if (Str::contains($name, 'news')) {
                     $components['components'][$name]['id'] = $component['news_id'] ?? $component['id'] ?? $data['site']['news']['application_id'];
