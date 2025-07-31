@@ -22,12 +22,12 @@ class HomepageController extends Controller
      */
     public function __construct(
         HomepageRepositoryContract $promo,
-        ModularPageRepositoryContract $modularComponent,
+        ModularPageRepositoryContract $components,
         ArticleRepositoryContract $article,
         EventRepositoryContract $event
     ) {
         $this->promo = $promo;
-        $this->modularComponent = $modularComponent;
+        $this->components = $components;
         $this->article = $article;
         $this->event = $event;
     }
@@ -41,17 +41,16 @@ class HomepageController extends Controller
 
         $promos = $this->promo->getHomepagePromos($request->data);
 
-        $modularComponents['modularComponents'] = [];
+        // Create news and events component
+        $request->data['base']['data'] = [
+            'modular-news-and-events-row' => "{}", ];
 
-        if (!empty($request->data['base']['data'])) {
-            $modularComponents['modularComponents'] = $this->modularComponent->getModularComponents($request->data['base']);
-            $promos['components'] = $modularComponents['modularComponents'];
-        }
+        // Send news and events component data thru modular repository
+        $homepage_components = $this->components->getModularComponents($request->data['base']);
 
-        $articles['data'] = $this->article->listing($request->data['base']['site']['news']['application_id']);
+        // Merge this component with existing components
+        $request->data['base']['components'] = array_merge($request->data['base']['components'], $homepage_components);
 
-        $events = $this->event->getEvents($request->data['base']['site']['id']);
-
-        return view('homepage', merge($request->data, $promos, $articles, $events));
+        return view('homepage', merge($request->data, $promos));
     }
 }
