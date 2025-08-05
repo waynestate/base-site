@@ -458,4 +458,18 @@ final class ProfileRepositoryTest extends TestCase
         $this->assertEquals($site_id, config('profile.site_id'));
         $this->assertEquals($group_id, config('profile.group_id'));
     }
+
+    #[Test]
+    public function getting_profiles_ordered_by_id_should_return_array(): void
+    {
+
+        $profile_listing = app(Profile::class)->create(5);
+
+        $profiles_by_accessid = collect($profile_listing)->pluck('data.AccessID')->shuffle()->implode("|");
+
+        $ordered_profiles = app(ProfileRepository::class)->orderProfilesById($profile_listing, $profiles_by_accessid);
+
+        $this->assertEquals(collect($ordered_profiles)->pluck('data.AccessID')->toArray(), explode('|', $profiles_by_accessid));
+    }
+
 }
