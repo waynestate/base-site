@@ -9,6 +9,7 @@
 @import "~@waynestate/wsufooter/dist/footer";
 
 /* Partials */
+@import "partials/layout";
 @import "partials/component-loop";
 
 /* Components */
@@ -22,7 +23,6 @@
 @import "components/carousel";
 @import "components/content";
 @import "components/external-icon";
-@import "components/flickity";
 @import "components/formy";
 @import "components/icons";
 @import "components/menu-icon";
@@ -41,6 +41,7 @@
 @import "components/pdf";
 @import "components/full-width-styleguide-hero";
 @import "components/policy-numbering";
+@import "components/hero";
 
 /* Site specific */
 @import "site-specific/theme";
