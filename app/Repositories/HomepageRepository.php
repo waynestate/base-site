@@ -66,10 +66,24 @@ class HomepageRepository implements HomepageRepositoryContract
      */
     public function getHomepageComponents(array $data): array
     {
+        $component_exists = false;
+
+        // Allow news-and-events to be overwritten by the matching page field component if it exists
+        if(!empty($data['data'])) {
+            foreach($data['data'] as $componentName=>$componentConfig) {
+                if (stristr($componentName, 'news-and-events') !== false) {
+                    $component_exists = true;
+                    break;
+                }
+            }
+        }
+
         // Create news and events component
-        $data['data'] = [
-            'modular-news-and-events-row-1' => "{}",
-        ];
+        if($component_exists === false) {
+            $data['data'] = [
+                'modular-news-and-events-row' => "{}",
+            ];
+        }
 
         // Send news and events component data thru modular repository
         $homepage_components = $this->components->getModularComponents($data);
