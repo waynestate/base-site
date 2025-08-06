@@ -24,23 +24,13 @@ class HomepageRepository extends Repository
      */
     public function getHomepagePromos(array $data): array
     {
+        /*
         $promos = [
             'homepageItems' => app(\Factories\GenericPromo::class)->create(5, false),
-            /*
-            'components' => [
-                'catalog-1' => [
-                    'data' => app(\Factories\GenericPromo::class)->create(3, false, [
-                        'description' => '',
-                        ]),
-                    'component' => [
-                        'heading' => 'Highlights'
-                    ],
-                ],
-            ],
-             */
         ];
 
         return $promos;
+         */
     }
 
 }
