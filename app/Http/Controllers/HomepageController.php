@@ -42,6 +42,6 @@ class HomepageController extends Controller
         // Add news and events component
         $request->data['base'] = $this->promo->getHomepageComponents($request->data['base']);
 
-        return view('homepage', merge($request->data));
+        return view('childpage', merge($request->data));
     }
 }
