@@ -3,6 +3,7 @@
 namespace Styleguide\Repositories;
 
 use App\Repositories\HomepageRepository as Repository;
+use Contracts\Repositories\ModularPageRepositoryContract;
 use Faker\Factory;
 
 class HomepageRepository extends Repository
@@ -10,9 +11,12 @@ class HomepageRepository extends Repository
     /**
      * Construct the factory.
      */
-    public function __construct(Factory $faker)
-    {
+    public function __construct(
+        Factory $faker,
+        ModularPageRepositoryContract $components,
+    ) {
         $this->faker = $faker->create();
+        $this->components = $components;
     }
 
     /**
@@ -22,6 +26,7 @@ class HomepageRepository extends Repository
     {
         $promos = [
             'homepageItems' => app(\Factories\GenericPromo::class)->create(5, false),
+            /*
             'components' => [
                 'catalog-1' => [
                     'data' => app(\Factories\GenericPromo::class)->create(3, false, [
@@ -32,8 +37,10 @@ class HomepageRepository extends Repository
                     ],
                 ],
             ],
+             */
         ];
 
         return $promos;
     }
+
 }

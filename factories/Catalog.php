@@ -30,7 +30,7 @@ class Catalog implements FactoryContract
         for ($i = 0; $i <= $limit - 1; $i++) {
             $data[$i] = [
                 'title' => 'Call to action',
-                'link' => '#',
+                'link' => '/#',
                 'promo_item_id' => $i,
                 'promo_group_id' => strval($promo_group_id),
                 'relative_url' => $relative_url.':'.$i,

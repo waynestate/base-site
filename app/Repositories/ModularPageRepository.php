@@ -104,24 +104,24 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 if (Str::startsWith($componentConfig, '{')) {
                     $components[$name] = json_decode($componentConfig, true);
 
-                    // Ensure promo config exists
+                    // Ensure promo config exists as a string
                     if (empty($components[$name]['config'])) {
                         $components[$name]['config'] = '';
                     }
 
                     // Modify promo config
-                    $promoConfig = explode('|', $components[$name]['config']);
+                    $promoConfig = explode('|', $components[$name]['config']) ?? [];
 
                     foreach ($promoConfig as $key => $value) {
                         // Insert correct page id into config
                         if (Str::startsWith($value, 'page_id')) {
-                            $config[$key] = 'page_id:'.$data['page']['id'];
+                            $promoConfig[$key] = 'page_id:'.$data['page']['id'];
                         }
 
                         // Prevent 'first' in the promo config
                         // Return must be an array of promo items
                         if (Str::startsWith($value, 'first')) {
-                            unset($config[$key]);
+                            unset($promoConfig[$key]);
                         }
                     }
 
@@ -137,7 +137,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
                     $components[$name]['filename'] = preg_replace('/-\d+$/', '', $name);
                 } else {
                     // Support modular components using a promo_group_id without JSON config
-                    $components[$name]['id'] = (int)$value;
+                    $components[$name]['id'] = $componentConfig;
                 }
 
                 // Create group_reference and group_config from components with promo data for API call
@@ -240,7 +240,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
                     }
 
                     // Provide a default Events heading
-                    if(!array_key_exists('heading', $component)) {
+                    if (!array_key_exists('heading', $component)) {
                         $components['components'][$name]['heading'] = 'Events';
                     }
 
@@ -277,7 +277,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
                     }
 
                     // Provide a default News heading
-                    if(!array_key_exists('heading', $component)) {
+                    if (!array_key_exists('heading', $component)) {
                         $components['components'][$name]['heading'] = 'News';
                     }
 

@@ -39,18 +39,9 @@ class HomepageController extends Controller
     {
         // $request->data['base']['show_site_menu'] = false;
 
-        $promos = $this->promo->getHomepagePromos($request->data);
+        // Add news and events component
+        $request->data['base'] = $this->promo->getHomepageComponents($request->data['base']);
 
-        // Create news and events component
-        $request->data['base']['data'] = [
-            'modular-news-and-events-row' => "{}", ];
-
-        // Send news and events component data thru modular repository
-        $homepage_components = $this->components->getModularComponents($request->data['base']);
-
-        // Merge this component with existing components
-        $request->data['base']['components'] = array_merge($request->data['base']['components'], $homepage_components);
-
-        return view('homepage', merge($request->data, $promos));
+        return view('homepage', merge($request->data));
     }
 }
