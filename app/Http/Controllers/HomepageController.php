@@ -21,7 +21,6 @@ class HomepageController extends Controller
         HomepageRepositoryContract $promo,
     ) {
         $this->promo = $promo;
-        $this->components = $components;
     }
 
     /**
