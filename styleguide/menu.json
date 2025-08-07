@@ -362,6 +362,16 @@
                 "relative_url": "/styleguide/component/pagecontent",
                 "submenu": []
             },
+            "124100": {
+                "menu_item_id": 124100,
+                "is_active": 1,
+                "page_id": 124100,
+                "target": "",
+                "display_name": "News and events",
+                "class_name": "",
+                "relative_url": "/styleguide/component/newsandevents",
+                "submenu": []
+            },
             "108100": {
                 "menu_item_id": 108100,
                 "is_active": 1,
