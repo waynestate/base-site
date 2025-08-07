@@ -11,9 +11,6 @@ namespace App\Http\Controllers;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Contracts\Repositories\HomepageRepositoryContract;
-use Contracts\Repositories\ModularPageRepositoryContract;
-use Contracts\Repositories\EventRepositoryContract;
-use Contracts\Repositories\ArticleRepositoryContract;
 
 class HomepageController extends Controller
 {
@@ -22,14 +19,9 @@ class HomepageController extends Controller
      */
     public function __construct(
         HomepageRepositoryContract $promo,
-        ModularPageRepositoryContract $components,
-        ArticleRepositoryContract $article,
-        EventRepositoryContract $event
     ) {
         $this->promo = $promo;
         $this->components = $components;
-        $this->article = $article;
-        $this->event = $event;
     }
 
     /**
