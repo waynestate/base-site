@@ -73,7 +73,7 @@ class PromoRepository extends Repository
         $hero_page_ids = [
             // Homepage
             101101 => app(HeroImage::class)->create(1, false, [
-                'relative_url' => '/styleguide/image/3200x600?text=Hero+Image',
+                'relative_url' => '/styleguide/image/3200x1160?text=Hero+Image',
             ]),
             // Banner contained
             105100110 => app(HeroImage::class)->create(1, false, [
