@@ -44,11 +44,11 @@ class ComponentNewsAndEventsController extends Controller
 <p>HeadingClass and headingLevel are available.
                         ',
                         'tr1' => [
-                            'Page field' => 'modular-news-and-events-1',
+                            'Page field' => 'modular-news-and-events-row-1',
                             'Data' => '{}',
                         ],
                         'tr2' => [
-                            'Page field' => 'modular-news-and-events-1',
+                            'Page field' => 'modular-news-and-events-row-1',
                             'Data' => '{
 "news_id":0,
 "events_id":0000,

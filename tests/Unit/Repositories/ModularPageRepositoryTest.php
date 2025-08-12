@@ -372,6 +372,7 @@ final class ModularPageRepositoryTest extends TestCase
                     'singlePromoView' => true,
                     'showExcerpt' => true,
                     'showDescription' => true,
+                    'option' => 'Component Override Option',
                 ]),
             ],
         ]);
@@ -393,6 +394,8 @@ final class ModularPageRepositoryTest extends TestCase
         $this->assertEquals($component['link'], 'view/'.Str::slug($component['title']).'-'.$component['promo_item_id']);
         $this->assertArrayHasKey('excerpt', $component);
         $this->assertArrayHasKey('description', $component);
+        // Test that component option overrides promo item option
+        $this->assertEquals('Component Override Option', $component['option']);
     }
 
     #[Test]
