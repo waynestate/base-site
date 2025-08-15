@@ -17,7 +17,7 @@
             <div class="hero__description">
                 @if(!empty($item['description']))
                     @if(!empty($item['link']))
-                        {!! preg_replace(array('"<a href(.*?)>"', '"</a>"'), array('',''), $item['description']) !!}
+                        {!! preg_replace(['"<a href(.*?)>"', '"</a>"'], '', $item['description']) !!}
                     @else
                         {!! $item['description'] !!}
                     @endif

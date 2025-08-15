@@ -27,9 +27,10 @@ interface ProfileRepositoryContract
      *
      * @param int|null $selected_group
      * @param int|null $forced_profile_group_id
+     * @param array $profiles
      * @return array
      */
-    public function getDropdownOptions($selected_group, $forced_profile_group_id);
+    public function getDropdownOptions($selected_group, $forced_profile_group_id, $profiles = []);
 
     /**
      * Get the dropdown of groups.
@@ -98,4 +99,14 @@ interface ProfileRepositoryContract
      * @param array $data
      */
     public function parseProfileConfig(array $data): void;
+
+    /**
+     * Get the group IDs to filter by.
+     *
+     * @param string|null $selected_group
+     * @param string|null $forced_profile_group_id
+     * @param array $dropdown_groups
+     * @return string
+     */
+    public function getGroupIds($selected_group, $forced_profile_group_id, $dropdown_groups);
 }

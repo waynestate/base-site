@@ -23,6 +23,9 @@ class ProfileRepository implements ProfileRepositoryContract
     /** @var Repository */
     protected $cache;
 
+    /** @var News */
+    protected $newsApi;
+
     /**
      * Construct the repository.
      */
@@ -147,7 +150,7 @@ class ProfileRepository implements ProfileRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getDropdownOptions($selected_group = null, $forced_profile_group_id = null)
+    public function getDropdownOptions($selected_group = null, $forced_profile_group_id = null, $profiles = [])
     {
         // Default Options
         $options['selected_group'] = $selected_group;
@@ -157,6 +160,14 @@ class ProfileRepository implements ProfileRepositoryContract
         if ($forced_profile_group_id !== null) {
             $options['selected_group'] = $forced_profile_group_id;
             $options['hide_filtering'] = true;
+        }
+
+        // Hide filtering if all profiles belong to the same group
+        if (!$options['hide_filtering'] && !empty($profiles['profiles'])) {
+            $unique_groups = $this->getUniqueGroupsFromProfiles($profiles['profiles']);
+            if (count($unique_groups) <= 1) {
+                $options['hide_filtering'] = true;
+            }
         }
 
         return $options;
@@ -425,24 +436,22 @@ class ProfileRepository implements ProfileRepositoryContract
     }
 
     /**
-     * {@inheritdoc}
+     * Get unique groups from a collection of profiles.
+     *
+     * @param array $profiles
+     * @return array
      */
-    public function orderProfilesById($profile_listing, $profiles_by_accessid)
+    protected function getUniqueGroupsFromProfiles(array $profiles): array
     {
-        $accessids = collect(explode('|', $profiles_by_accessid))->map(function ($item) {
-            return trim($item);
-        })->all();
-
-        // Find the profiles by a specific order
-        $profiles_ordered = collect($accessids)->map(function ($accessid) use ($profile_listing) {
-            return collect($profile_listing)->firstWhere('data.AccessID', $accessid);
-        })->filter(null);
-
-        // Remove the profiles that we found so there aren't duplicates
-        $profiles_all = collect($profile_listing)->reject(function ($profile) use ($accessids) {
-            return in_array($profile['data']['AccessID'], $accessids);
-        });
-
-        return $profiles_ordered->merge($profiles_all)->toArray();
+        return collect($profiles)
+            ->filter(function ($profile) {
+                return !empty($profile['groups']) && is_array($profile['groups']);
+            })
+            ->flatMap(function ($profile) {
+                return array_values($profile['groups']);
+            })
+            ->unique()
+            ->values()
+            ->toArray();
     }
 }
