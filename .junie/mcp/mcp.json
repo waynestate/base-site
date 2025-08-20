@@ -1,0 +1,11 @@
+{
+    "mcpServers": {
+        "laravel-boost": {
+            "command": "/opt/phpbrew/php/php-8.2.20/bin/php",
+            "args": [
+                "/usr/local/www/sites/base/artisan",
+                "boost:mcp"
+            ]
+        }
+    }
+}
