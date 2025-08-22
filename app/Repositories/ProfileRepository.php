@@ -381,7 +381,7 @@ class ProfileRepository implements ProfileRepositoryContract
             || $referer == $scheme.'://'.$host.$uri
             || strpos($referer, $host) === false
         ) {
-            return config('profile.default_back_url');
+            return config('base.profile_back_url', config('profile.default_back_url'));
         }
 
         return $referer;
