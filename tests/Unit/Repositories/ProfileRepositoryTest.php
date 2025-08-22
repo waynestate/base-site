@@ -472,4 +472,24 @@ final class ProfileRepositoryTest extends TestCase
         $this->assertEquals(collect($ordered_profiles)->pluck('data.AccessID')->toArray(), explode('|', $profiles_by_accessid));
     }
 
+    #[Test]
+    public function order_profiles_by_accessid_can_be_set_in_custom_field(): void
+    {
+        // Create mock profiles data
+        $profile_listing = app(Profile::class)->create(5);
+
+        // Get AccessIDs and create a custom order
+        $access_ids = collect($profile_listing)->pluck('data.AccessID')->toArray();
+        $profiles_by_accessid = implode('|', array_reverse($access_ids));
+
+        // Page field override
+        $data['data']['profiles_by_accessid'] = $profiles_by_accessid;
+
+        // Parse the profile config for the page
+        $profileRepository = app(ProfileRepository::class);
+        $profileRepository->parseProfileConfig($data);
+
+        // Ensure the config value is set
+        $this->assertEquals($profiles_by_accessid, config('profile.profiles_by_accessid'));
+    }
 }
