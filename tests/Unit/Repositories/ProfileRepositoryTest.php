@@ -102,9 +102,9 @@ final class ProfileRepositoryTest extends TestCase
         $url = app(ProfileRepository::class)->getBackToProfileListUrl($referer, $parsed['scheme'], $parsed['host'], $this->faker->word());
         $this->assertEquals($referer, $url);
 
-        // Legacy support for the base.profile_back_url
+        // Legacy support for the base.profile_default_back_url
         $legacy_back_url = 'some/other/url';
-        Config::set('base.profile_back_url', $legacy_back_url);
+        Config::set('base.profile_default_back_url', $legacy_back_url);
         $url = app(ProfileRepository::class)->getBackToProfileListUrl();
         $this->assertEquals($legacy_back_url, $url);
     }

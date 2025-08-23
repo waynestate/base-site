@@ -136,29 +136,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Profile View Back Url
-    |--------------------------------------------------------------------------
-    |
-    | Back URL to use when viewing a Individual Profile view in place for the
-    | "Return to Listing" link.
-    |
-    */
-    'profile_default_back_url' => '/profiles',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Profile Parent Group
-    |--------------------------------------------------------------------------
-    |
-    | This will limit the groups displayed to only the children groups under
-    | this ID. Typically the group is called "Departments". If all desired
-    | groups are added to the root then leave this value as 0.
-    |
-    */
-    'profile_parent_group_id' => 0,
-
-    /*
-    |--------------------------------------------------------------------------
     | Default Meta Image
     |--------------------------------------------------------------------------
     |
