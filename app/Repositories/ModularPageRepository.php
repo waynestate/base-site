@@ -222,14 +222,20 @@ class ModularPageRepository implements ModularPageRepositoryContract
             if (Str::contains($name, 'events') || Str::contains($name, 'news')) {
                 if (Str::contains($name, 'events')) {
                     $components['components'][$name]['id'] = $component['events_id'] ?? $component['id'] ?? $data['site']['id'];
-                    $limit = $components['components'][$name]['limit'] ?? 4;
+
+                    // Restrict events row to 3 items
+                    if (Str::contains($name, 'events-row') && !Str::contains($name, 'featured-events-row')) {
+                        $limit = $components['components'][$name]['limit'] ?? 3;
+                    } else {
+                        $limit = $components['components'][$name]['limit'] ?? 4;
+                    }
 
                     // Use full listing if the name contains featured, or events-row
                     // TODO Find better naming convention
-                    if (Str::contains($name, 'featured') || !Str::contains($name, 'news-and-events')) {
-                        $events = $this->event->getEventsFullListing($components['components'][$name]['id'] ?? $data['site']['id'], $limit);
-                    } else {
+                    if (!Str::contains($name, 'featured') && Str::contains($name, 'column') || Str::contains($name, 'news-and-events')) {
                         $events = $this->event->getEvents($components['components'][$name]['id'] ?? $data['site']['id'], $limit);
+                    } else {
+                        $events = $this->event->getEventsFullListing($components['components'][$name]['id'] ?? $data['site']['id'], $limit);
                     }
 
                     // Special data structure for news-and-events component
@@ -246,6 +252,13 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
                     // Assign the component data
                     $modularComponents[$name]['component'] = $components['components'][$name];
+
+                    // Set featured events default columns
+                    if (Str::contains($name, 'events-featured-row')) {
+                        if (empty($components['components'][$name]['columns'])) {
+                            $modularComponents[$name]['component']['columns'] = 4;
+                        }
+                    }
 
                     // Set the calendar link
                     if (empty($modularComponents[$name]['component']['cal_name']) && !empty($data['site']['events']['path'])) {
