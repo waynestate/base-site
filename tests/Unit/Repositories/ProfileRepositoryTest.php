@@ -83,18 +83,18 @@ final class ProfileRepositoryTest extends TestCase
     {
         // The default path if no referer
         $url = app(ProfileRepository::class)->getBackToProfileListUrl();
-        $this->assertTrue($url == config('profile.default_back_url'));
+        $this->assertTrue($url == config('base.profile.default_back_url'));
 
         // If a referer is passed from a different domain
         $referer = $this->faker->url();
         $url = app(ProfileRepository::class)->getBackToProfileListUrl($referer, 'http', 'wayne.edu', '/');
-        $this->assertTrue($url == config('profile.default_back_url'));
+        $this->assertTrue($url == config('base.profile.default_back_url'));
 
         // If a referer is passed that is the same page we are on
         $referer = $this->faker->url();
         $parsed = parse_url($referer);
         $url = app(ProfileRepository::class)->getBackToProfileListUrl($referer, $parsed['scheme'], $parsed['host'], $parsed['path']);
-        $this->assertTrue($url == config('profile.default_back_url'));
+        $this->assertTrue($url == config('base.profile.default_back_url'));
 
         // If referer is passed from the same domain that the site is on
         $referer = $this->faker->url();
@@ -113,7 +113,7 @@ final class ProfileRepositoryTest extends TestCase
     public function getting_dropdown_of_groups_should_contain_all_the_groups(): void
     {
         // Force this config incase it is changed
-        config(['profile.parent_group_id' => 0]);
+        config(['base.profile.parent_group_id' => 0]);
 
         // Fake return
         $return = [
@@ -138,7 +138,7 @@ final class ProfileRepositoryTest extends TestCase
     public function getting_dropdown_of_single_group_should_contain_single_group(): void
     {
         // Force this config incase it is changed
-        config(['profile.parent_group_id' => 0]);
+        config(['base.profile.parent_group_id' => 0]);
 
         // Fake return
         $return = [
@@ -282,7 +282,7 @@ final class ProfileRepositoryTest extends TestCase
     public function profiles_should_be_grouped(): void
     {
         // Force this config incase it is changed
-        config(['profile.parent_group_id' => 0]);
+        config(['base.profile.parent_group_id' => 0]);
 
         // Mock the user listing
         $return_user_listing = app(Profile::class)->create(10);
@@ -371,7 +371,7 @@ final class ProfileRepositoryTest extends TestCase
         $cms_site_id = $site_config_page['site']['id'];
 
         // Reset the profile_site_id
-        Config::set('profile.site_id', null);
+        Config::set('base.profile.site_id', null);
 
         app(ProfileRepository::class, ['wsuApi' => $wsuApi])->parseProfileConfig($site_config_page);
         $return_cms_site_id = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getSiteID($site_config_page);
@@ -461,8 +461,8 @@ final class ProfileRepositoryTest extends TestCase
 
         app(ProfileRepository::class, ['wsuApi' => $wsuApi])->parseProfileConfig($data);
 
-        $this->assertEquals($site_id, config('profile.site_id'));
-        $this->assertEquals($group_id, config('profile.group_id'));
+        $this->assertEquals($site_id, config('base.profile.site_id'));
+        $this->assertEquals($group_id, config('base.profile.group_id'));
     }
 
     #[Test]
@@ -496,6 +496,6 @@ final class ProfileRepositoryTest extends TestCase
         $profileRepository->parseProfileConfig($data);
 
         // Ensure the config value is set
-        $this->assertEquals($profiles_by_accessid, config('profile.profiles_by_accessid'));
+        $this->assertEquals($profiles_by_accessid, config('base.profile.profiles_by_accessid'));
     }
 }
