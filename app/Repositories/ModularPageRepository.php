@@ -232,7 +232,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
                     // Use full listing if the name contains featured, or events-row
                     // TODO Find better naming convention
-                    if (!Str::contains($name, 'featured') && Str::contains ($name, 'column') || Str::contains($name, 'news-and-events')) {
+                    if (!Str::contains($name, 'featured') && Str::contains($name, 'column') || Str::contains($name, 'news-and-events')) {
                         $events = $this->event->getEvents($components['components'][$name]['id'] ?? $data['site']['id'], $limit);
                     } else {
                         $events = $this->event->getEventsFullListing($components['components'][$name]['id'] ?? $data['site']['id'], $limit);
@@ -255,7 +255,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
                     // Set featured events default columns
                     if (Str::contains($name, 'events-featured-row')) {
-                        if(empty($components['components'][$name]['columns'])) {
+                        if (empty($components['components'][$name]['columns'])) {
                             $modularComponents[$name]['component']['columns'] = 4;
                         }
                     }
