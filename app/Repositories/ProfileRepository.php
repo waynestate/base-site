@@ -460,24 +460,4 @@ class ProfileRepository implements ProfileRepositoryContract
             ->values()
             ->toArray();
     }
-
-    /**
-     * Get unique groups from a collection of profiles.
-     *
-     * @param array $profiles
-     * @return array
-     */
-    protected function getUniqueGroupsFromProfiles(array $profiles): array
-    {
-        return collect($profiles)
-            ->filter(function ($profile) {
-                return !empty($profile['groups']) && is_array($profile['groups']);
-            })
-            ->flatMap(function ($profile) {
-                return array_values($profile['groups']);
-            })
-            ->unique()
-            ->values()
-            ->toArray();
-    }
 }
