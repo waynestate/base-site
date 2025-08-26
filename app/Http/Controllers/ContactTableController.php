@@ -33,10 +33,10 @@ class ContactTableController extends Controller
         // Determine what site to pull profiles from
         $site_id = $this->profile->getSiteID($request->data['base']);
 
-        $profiles = $this->profile->getProfilesByGroupOrder($site_id, config('profile.group_id'));
+        $profiles = $this->profile->getProfilesByGroupOrder($site_id, config('base.profile.group_id'));
 
         // show table of contents if custom field 'table_of_contents' is not set to 'hide'
-        if (config('profile.table_of_contents') === 'hide') {
+        if (config('base.profile.table_of_contents') === 'hide') {
             $profiles['anchors'] = [];
         }
 

@@ -54,7 +54,7 @@ final class DirectoryControllerTest extends TestCase
             ->once()
             ->with($base_data)
             ->andReturnUsing(function ($data) use ($profiles_by_accessid) {
-                Config::set('profile.profiles_by_accessid', $profiles_by_accessid);
+                Config::set('base.profile.profiles_by_accessid', $profiles_by_accessid);
             });
 
         // Mock getSiteID
@@ -134,7 +134,7 @@ final class DirectoryControllerTest extends TestCase
             ->once()
             ->with($base_data)
             ->andReturnUsing(function ($data) use ($group_id) {
-                Config::set('profile.group_id', $group_id);
+                Config::set('base.profile.group_id', $group_id);
             });
 
         // Mock getSiteID

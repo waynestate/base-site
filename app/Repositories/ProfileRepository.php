@@ -195,9 +195,10 @@ class ProfileRepository implements ProfileRepositoryContract
         });
 
         // Filter down the groups based on the parent group from the config
+        $parent_group_id = (config('base.profile_parent_group_id')) ?? config('base.profile.parent_group_id');
         $profile_groups['results'] = collect($profile_groups['results'])
-            ->filter(function ($item) {
-                return (int) $item['parent_id'] === config('base.profile_parent_group_id', config('profile.parent_group_id'));
+            ->filter(function ($item) use ($parent_group_id) {
+                return (int) $item['parent_id'] === $parent_group_id;
             })
             ->toArray();
 
@@ -370,7 +371,7 @@ class ProfileRepository implements ProfileRepositoryContract
             || $referer == $scheme.'://'.$host.$uri
             || strpos($referer, $host) === false
         ) {
-            return config('base.profile_default_back_url', config('profile.default_back_url'));
+            return (config('base.profile_default_back_url')) ?? config('base.profile.default_back_url');
         }
 
         return $referer;
@@ -381,7 +382,7 @@ class ProfileRepository implements ProfileRepositoryContract
      */
     public function getSiteID($data)
     {
-        return !empty(config('profile.site_id')) ? config('profile.site_id') : $data['site']['id'];
+        return !empty(config('base.profile.site_id')) ? config('base.profile.site_id') : $data['site']['id'];
     }
 
     /**
@@ -403,29 +404,29 @@ class ProfileRepository implements ProfileRepositoryContract
                 $profile_config = json_decode($value, true);
 
                 foreach ($profile_config as $key => $value) {
-                    Config::set('profile.'.$key, $value);
+                    Config::set('base.profile.'.$key, $value);
                 }
             }
         }
 
         // Legacy support for profile_group_id
         if (!empty($data['data']['profile_group_id']) && empty($profile_config['group_id'])) {
-            Config::set('profile.group_id', $data['data']['profile_group_id']);
+            Config::set('base.profile.group_id', $data['data']['profile_group_id']);
         }
 
         // Legacy support for profile_site_id
         if (!empty($data['data']['profile_site_id']) && empty($profile_config['site_id'])) {
-            Config::set('profile.site_id', $data['data']['profile_site_id']);
+            Config::set('base.profile.site_id', $data['data']['profile_site_id']);
         }
 
         // Legacy support for table_of_contents
         if (!empty($data['data']['table_of_contents']) && empty($profile_config['table_of_contents'])) {
-            Config::set('profile.table_of_contents', $data['data']['table_of_contents']);
+            Config::set('base.profile.table_of_contents', $data['data']['table_of_contents']);
         }
 
         // Legacy support for profiles_by_accessid
         if (!empty($data['data']['profiles_by_accessid'])) {
-            Config::set('profile.profiles_by_accessid', $data['data']['profiles_by_accessid']);
+            Config::set('base.profile.profiles_by_accessid', $data['data']['profiles_by_accessid']);
         }
     }
 
@@ -449,5 +450,25 @@ class ProfileRepository implements ProfileRepositoryContract
         });
 
         return $profiles_ordered->merge($profiles_all)->toArray();
+    }
+
+    /**
+     * Get unique groups from a collection of profiles.
+     *
+     * @param array $profiles
+     * @return array
+     */
+    protected function getUniqueGroupsFromProfiles(array $profiles): array
+    {
+        return collect($profiles)
+            ->filter(function ($profile) {
+                return !empty($profile['groups']) && is_array($profile['groups']);
+            })
+            ->flatMap(function ($profile) {
+                return array_values($profile['groups']);
+            })
+            ->unique()
+            ->values()
+            ->toArray();
     }
 }

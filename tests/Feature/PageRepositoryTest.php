@@ -76,7 +76,7 @@ final class PageRepositoryTest extends TestCase
                 }
 
                 // Reset the group_id config
-                config(['profile.group_id' => null]);
+                config(['base.profile.group_id' => null]);
 
                 return [
                     'path' => $path,
