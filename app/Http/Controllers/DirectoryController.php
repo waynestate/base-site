@@ -33,15 +33,15 @@ class DirectoryController extends Controller
         // Determine what site to pull profiles from
         $site_id = $this->profile->getSiteID($request->data['base']);
 
-        if (!empty(config('profile.group_id'))) {
-            $profiles = $this->profile->getProfilesByGroupOrder($site_id, config('profile.group_id'), $request->data['base']['site']['subsite-folder']);
+        if (!empty(config('base.profile.group_id'))) {
+            $profiles = $this->profile->getProfilesByGroupOrder($site_id, config('base.profile.group_id'), $request->data['base']['site']['subsite-folder']);
         } else {
             $profiles = $this->profile->getProfilesByGroup($site_id, $request->data['base']['site']['subsite-folder']);
         }
 
-        if (!empty(config('profile.profiles_by_accessid'))) {
+        if (!empty(config('base.profile.profiles_by_accessid'))) {
             foreach ($profiles['profiles'] as $department_name => $department) {
-                $profiles['profiles'][$department_name] = $this->profile->orderProfilesById($department, config('profile.profiles_by_accessid'));
+                $profiles['profiles'][$department_name] = $this->profile->orderProfilesById($department, config('base.profile.profiles_by_accessid'));
             }
         }
 
