@@ -110,7 +110,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
                     }
 
                     // Modify promo config
-                    $promoConfig = explode('|', $components[$name]['config']) ?? [];
+                    $promoConfig = explode('|', $components[$name]['config']);
 
                     foreach ($promoConfig as $key => $value) {
                         // Insert correct page id into config
@@ -389,11 +389,11 @@ class ModularPageRepository implements ModularPageRepositoryContract
             }
 
             // Collect all legacy class names
-            $classes = ($component['component']['sectionClass'] ?? '').' '.($component['component']['componentClass'] ?? '').' '.($component['component']['classes'] ?? '');
+            $classes = trim(($component['component']['sectionClass'] ?? '').' '.($component['component']['componentClass'] ?? '').' '.($component['component']['classes'] ?? ''));
 
             // Group the classes based on the container they will be applied to
             // Set backgroundClass, containerClass, componentClass
-            if (!empty($classes)) {
+            if ($classes !== '') {
                 $classes = explode(' ', $classes);
 
                 foreach ($classes as $class) {

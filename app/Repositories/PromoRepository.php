@@ -21,6 +21,12 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
     /** @var Repository */
     protected $cache;
 
+    /** @var ModularPageRepositoryContract */
+    protected $components;
+
+    /** @var HeroRepositoryContract */
+    protected $hero;
+
     /**
      * Construct the repository.
      */
@@ -158,7 +164,7 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
     public function createGlobalPromoGroupConfig(array $data, array $config, array $groups)
     {
         // Inject global promo config
-        $group_config = collect($groups)->mapWithKeys(function ($group, $name) use ($config, $data) {
+        $group_config = collect($groups)->mapWithKeys(function ($group, $name) use ($data) {
             $value = !empty($group['config']) ? $group['config'] : null;
 
             return [$name => str_replace('{$page_id}', $data['page']['id'], $value)];

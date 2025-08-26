@@ -14,6 +14,8 @@ use Contracts\Repositories\HomepageRepositoryContract;
 
 class HomepageController extends Controller
 {
+    protected HomepageRepositoryContract $promo;
+
     /**
      * Construct the controller.
      */
