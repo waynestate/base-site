@@ -3,10 +3,10 @@ When contributing to this repository, please first discuss the change you wish t
 
 ### How to Contribute
 1. Please open an issue before submitting a pull request.
-2. Fork the waynestate/base-site.
-3. Make your changes on the fork.
-4. Add any necessary tests for your change under the `tests` folder
-5. Submit a PR to the waynestate/base-site **develop** branch.
+1. Fork the waynestate/base-site.
+1. Make your changes on the fork.
+1. Add any necessary tests for your change under the `tests` folder
+1. Submit a PR to the waynestate/base-site **develop** branch.
 
 ### Coding conventions
 
