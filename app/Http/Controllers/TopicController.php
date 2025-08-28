@@ -8,12 +8,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
-use Illuminate\Http\Request;
 use Contracts\Repositories\TopicRepositoryContract;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class TopicController extends Controller
 {
+    protected TopicRepositoryContract $topic;
+
     /**
      * Construct the controller.
      */
@@ -29,7 +31,7 @@ class TopicController extends Controller
     {
         $topics = $this->topic->listing($request->data['base']['site']['news']['application_id'], $request->data['base']['site']['subsite-folder']);
 
-        if (!empty($topics['topics']['data'])) {
+        if (! empty($topics['topics']['data'])) {
             $topics['topics']['data'] = $this->topic->sortByLetter($topics['topics']['data']);
         }
 

@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 
 class DirectoryController extends Controller
 {
+    protected ProfileRepositoryContract $profile;
+
     /**
      * Construct the controller.
      */

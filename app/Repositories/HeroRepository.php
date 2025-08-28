@@ -36,14 +36,11 @@ class HeroRepository implements HeroRepositoryContract
             $temporary_hero = $promos['hero'];
             unset($promos['hero']);
 
-            // Force hero data into component structure
-            if (empty($promos['hero']['data'])) {
-                $promos['hero']['data'] = $temporary_hero;
-            }
-
-            if (empty($promos['hero']['component'])) {
-                $promos['hero']['component'] = [];
-            }
+            // Initialize hero component structure
+            $promos['hero'] = [
+                'data' => $temporary_hero,
+                'component' => [],
+            ];
 
             foreach ($promos['hero']['data'] as $hero) {
                 // Force the correct component option based on the layout

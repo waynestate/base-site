@@ -8,12 +8,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
 use Contracts\Repositories\ProfileRepositoryContract;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ContactTableController extends Controller
 {
+    protected ProfileRepositoryContract $profile;
+
     /**
      * Construct the controller.
      */

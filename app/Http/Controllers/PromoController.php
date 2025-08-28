@@ -8,15 +8,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
-use Illuminate\Http\Request;
 use Contracts\Repositories\PromoRepositoryContract;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PromoController extends Controller
 {
+    protected PromoRepositoryContract $promo;
+
     /**
      * Construct the controller.
-     *
      */
     public function __construct(PromoRepositoryContract $promo)
     {
@@ -27,18 +30,18 @@ class PromoController extends Controller
      * Display individual promo item.
      *
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @throws HttpException
+     * @throws NotFoundHttpException|\Exception
      */
     public function show(Request $request): View
     {
         $promo = $this->promo->getPromoView($request->id);
 
         if (empty($promo['promo'])) {
-            abort('404');
+            abort(404);
         }
 
-        if (!empty($promo['promo']['title'])) {
+        if (! empty($promo['promo']['title'])) {
             $request->data['base']['page']['title'] = $promo['promo']['title'];
         }
 
