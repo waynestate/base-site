@@ -100,4 +100,13 @@ interface ProfileRepositoryContract
      * @return string
      */
     public function getGroupIds($selected_group, $forced_profile_group_id, $dropdown_groups);
+
+    /**
+     * Orders profiles by a pipe-delimited AccessID sequence from $profiles_by_accessid and appends any remaining profiles afterward.
+     *
+     * @param $profile_listing
+     * @param $profiles_by_accessid
+     * @return array
+     */
+    public function orderProfilesById($profile_listing, $profiles_by_accessid): array;
 }
