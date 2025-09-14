@@ -15,7 +15,7 @@
             <div class="hero__preserve-flickity">
                 @if(isset($base['hero']['component']['option']))
                     @includeIf('components.hero.'.Str::slug($base['hero']['component']['option']), ['item' => $item, 'loop' => $loop ?? ''])
-                @elseif(isset($item['option']))
+                @elseif(!empty($item['option']))
                     @includeIf('components.hero.'.Str::slug($item['option']), ['item' => $item, 'loop' => $loop ?? ''])
                 @else
                     @include('components.hero.banner-large', ['item' => $item, 'loop' => $loop ?? ''])
