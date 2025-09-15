@@ -1,7 +1,7 @@
 {
   "name": "base",
   "private": true,
-  "version": "8.14.7",
+  "version": "8.14.15",
   "description": "",
   "scripts": {
     "dev": "npm run development",
@@ -12,7 +12,9 @@
     "prod": "npm run production",
     "production": "mix --production",
     "lint": "eslint resources/js/**/*.js",
-    "lint:fix": "eslint resources/js/**/*.js --fix"
+    "lint:fix": "eslint resources/js/**/*.js --fix",
+    "phpstan": "make phpstan",
+    "phpstan:dry": "make phpstandry"
   },
   "repository": {
     "type": "git",

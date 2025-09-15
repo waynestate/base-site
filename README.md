@@ -23,6 +23,7 @@ Starter repository for creating a new website. Live demo can be found at https:/
 * Commit hook that require the following to pass:
     * Tests using [PHPUnit](https://phpunit.de/)
     * PHP linting using [Laravel Pint](https://laravel.com/docs/9.x/pint)
+    * Static analysis using [PHPStan/Larastan](https://github.com/larastan/larastan)
     * JS linting using [ESLint](http://eslint.org/)
     * CSS/SCSS linting using [Stylelint](https://stylelint.io/)
 * Menus
@@ -65,7 +66,15 @@ Starter repository for creating a new website. Live demo can be found at https:/
 ## Run test coverage
 
 1. `make coverage`
-2. Open the coverages/index.html file in your browser
+1. Open the coverages/index.html file in your browser
+
+## Run static analysis
+
+    make phpstan
+
+Or to run without progress bar (useful in CI environments):
+
+    make phpstandry
 
 ## Check for outdated packages
 
@@ -92,7 +101,7 @@ Email web@wayne.edu with your request.
 1. Add a blank entry to your local `.env.example` file for `your_key`
 1. Add an entry with the actual value to your local `.env` file. 
 1. Commit the .env.example file. You may want to put the actual value in the example file when necessary.
-2. Once the site is deployed you will want to add the actual value to the `.env` on each server.
+1. Once the site is deployed you will want to add the actual value to the `.env` on each server.
 
 ## Developing global data that is passed down to all views via the `$request->data` variable
 
@@ -211,7 +220,7 @@ Feature names should be singular and CamelCased. To create a new feature called 
 ## Lazy loading
 
 1. `<img>` replace with: `@image('/path/to/image.jpg', 'alt text', 'optional classes')`
-1.  Background images: `<div data-src="/path/to/image.jpg"></div>`
+1. Background images: `<div data-src="/path/to/image.jpg"></div>`
 
 ## Contributing
 

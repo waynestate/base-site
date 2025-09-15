@@ -36,7 +36,8 @@ class Profiles extends Page
 "group_id":"1234|5678",
 "parent_group_id":"1234",
 "table_of_contents":"hide",
-"default_back_url":"/profiles/",
+"default_back_url":"/profiles",
+"profiles_by_accessid":"aa0000|aa0001"
 }
 </pre>
                                 </td>

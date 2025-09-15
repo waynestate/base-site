@@ -17,11 +17,11 @@ class BaseModule extends Command
      */
     protected $description = 'Scaffold out files for a new modular component, use singular form of module name, e.g. "spotlight-row"';
 
-    protected $stub; // Stub file contents
-    protected $lowercase; // dummy-component
-    protected $singleword; // dummycomponent
-    protected $camelcase; // DummyComponent
-    protected $titlecase; // Dummy Component
+    protected string $stub; // Stub file contents
+    protected string $lowercase; // dummy-component
+    protected string $singleword; // dummycomponent
+    protected string $camelcase; // DummyComponent
+    protected string $titlecase; // Dummy Component
 
     /**
      * Scaffold files.
@@ -36,7 +36,7 @@ class BaseModule extends Command
         $this->styleguidePage();
 
         $this->newLine();
-        $this->info('"modular-' . $this->lowercase . '" is now ready to use. 🚀');
+        $this->info('"modular-'.$this->lowercase.'" is now ready to use. 🚀');
     }
 
     protected function setModule($module)
@@ -47,7 +47,8 @@ class BaseModule extends Command
         $this->titlecase = str_replace('-', ' ', ucwords($module, '-'));
 
         if (Storage::disk('base')->exists('resources/views/components/'.$this->lowercase.'.blade.php')) {
-            die($this->error('Module "'.$this->lowercase.'" already exists, please use another name.'));
+            $this->error('Module "'.$this->lowercase.'" already exists, please use another name.');
+            exit(1);
         }
     }
 

@@ -23,6 +23,9 @@ class ProfileRepository implements ProfileRepositoryContract
     /** @var Repository */
     protected $cache;
 
+    /** @var News */
+    protected $newsApi;
+
     /**
      * Construct the repository.
      */
@@ -147,7 +150,7 @@ class ProfileRepository implements ProfileRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getDropdownOptions($selected_group = null, $forced_profile_group_id = null)
+    public function getDropdownOptions($selected_group = null, $forced_profile_group_id = null, $profiles = [])
     {
         // Default Options
         $options['selected_group'] = $selected_group;
@@ -157,6 +160,14 @@ class ProfileRepository implements ProfileRepositoryContract
         if ($forced_profile_group_id !== null) {
             $options['selected_group'] = $forced_profile_group_id;
             $options['hide_filtering'] = true;
+        }
+
+        // Hide filtering if all profiles belong to the same group
+        if (!$options['hide_filtering'] && !empty($profiles['profiles'])) {
+            $unique_groups = $this->getUniqueGroupsFromProfiles($profiles['profiles']);
+            if (count($unique_groups) <= 1) {
+                $options['hide_filtering'] = true;
+            }
         }
 
         return $options;
@@ -195,9 +206,10 @@ class ProfileRepository implements ProfileRepositoryContract
         });
 
         // Filter down the groups based on the parent group from the config
+        $parent_group_id = (config('base.profile_parent_group_id')) ?? config('base.profile.parent_group_id');
         $profile_groups['results'] = collect($profile_groups['results'])
-            ->filter(function ($item) {
-                return (int) $item['parent_id'] === config('profile.parent_group_id');
+            ->filter(function ($item) use ($parent_group_id) {
+                return (int) $item['parent_id'] === $parent_group_id;
             })
             ->toArray();
 
@@ -370,7 +382,7 @@ class ProfileRepository implements ProfileRepositoryContract
             || $referer == $scheme.'://'.$host.$uri
             || strpos($referer, $host) === false
         ) {
-            return config('profile.default_back_url');
+            return (config('base.profile_default_back_url')) ?? config('base.profile.default_back_url');
         }
 
         return $referer;
@@ -381,7 +393,7 @@ class ProfileRepository implements ProfileRepositoryContract
      */
     public function getSiteID($data)
     {
-        return !empty(config('profile.site_id')) ? config('profile.site_id') : $data['site']['id'];
+        return !empty(config('base.profile.site_id')) ? config('base.profile.site_id') : $data['site']['id'];
     }
 
     /**
@@ -403,24 +415,71 @@ class ProfileRepository implements ProfileRepositoryContract
                 $profile_config = json_decode($value, true);
 
                 foreach ($profile_config as $key => $value) {
-                    Config::set('profile.'.$key, $value);
+                    Config::set('base.profile.'.$key, $value);
                 }
             }
         }
 
-        // legacy support for profile_group_id
+        // Legacy support for profile_group_id
         if (!empty($data['data']['profile_group_id']) && empty($profile_config['group_id'])) {
-            Config::set('profile.group_id', $data['data']['profile_group_id']);
+            Config::set('base.profile.group_id', $data['data']['profile_group_id']);
         }
 
-        // legacy support for profile_site_id
+        // Legacy support for profile_site_id
         if (!empty($data['data']['profile_site_id']) && empty($profile_config['site_id'])) {
-            Config::set('profile.site_id', $data['data']['profile_site_id']);
+            Config::set('base.profile.site_id', $data['data']['profile_site_id']);
         }
 
-        // legacy support for table_of_contents
+        // Legacy support for table_of_contents
         if (!empty($data['data']['table_of_contents']) && empty($profile_config['table_of_contents'])) {
-            Config::set('profile.table_of_contents', $data['data']['table_of_contents']);
+            Config::set('base.profile.table_of_contents', $data['data']['table_of_contents']);
         }
+
+        // Legacy support for profiles_by_accessid
+        if (!empty($data['data']['profiles_by_accessid'])) {
+            Config::set('base.profile.profiles_by_accessid', $data['data']['profiles_by_accessid']);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function orderProfilesById($profile_listing, $profiles_by_accessid): array
+    {
+        $accessids = collect(explode('|', $profiles_by_accessid))->map(function ($item) {
+            return trim($item);
+        })->all();
+
+        // Find the profiles by a specific order
+        $profiles_ordered = collect($accessids)->map(function ($accessid) use ($profile_listing) {
+            return collect($profile_listing)->firstWhere('data.AccessID', $accessid);
+        })->filter(null);
+
+        // Remove the profiles that we found so there aren't duplicates
+        $profiles_all = collect($profile_listing)->reject(function ($profile) use ($accessids) {
+            return in_array($profile['data']['AccessID'], $accessids);
+        });
+
+        return $profiles_ordered->merge($profiles_all)->toArray();
+    }
+
+    /**
+     * Get unique groups from a collection of profiles.
+     *
+     * @param array $profiles
+     * @return array
+     */
+    protected function getUniqueGroupsFromProfiles(array $profiles): array
+    {
+        return collect($profiles)
+            ->filter(function ($profile) {
+                return !empty($profile['groups']) && is_array($profile['groups']);
+            })
+            ->flatMap(function ($profile) {
+                return array_values($profile['groups']);
+            })
+            ->unique()
+            ->values()
+            ->toArray();
     }
 }

@@ -27,7 +27,7 @@ abstract class TestCase extends BaseTestCase
         config(['base.wsu_api_key' => '']);
 
         // Reset the group_id config
-        config(['profile.group_id' => null]);
+        config(['base.profile.group_id' => null]);
 
         // Don't run through the exception handler so we have cleaner errors in CLI
         $this->withoutExceptionHandling();

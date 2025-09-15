@@ -35,7 +35,7 @@ final class HomepageControllerTest extends TestCase
             'data' => [
                 'modular-catalog-1' => json_encode([
                     'id' => $promo_group_id,
-                    'config' => 'randomize|limit:2',
+                    'config' => 'randomize|limit:2|first',
                 ]),
             ],
         ]);
@@ -53,7 +53,7 @@ final class HomepageControllerTest extends TestCase
         $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
 
         // Pass in the modular repository component data
-        // $modularComponents['modularComponents'] = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
+        $modularComponents['modularComponents'] = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
 
         // Create a modular catalog component
         $request->data['base']['data']['modular-catalog-1'] = json_encode(['id' => $promo_group_id]);
@@ -66,6 +66,5 @@ final class HomepageControllerTest extends TestCase
 
         // Create the view
         $view = $this->modularComponent->index($request);
-        // $this->assertTrue(is_array($HomepageController));
     }
 }
