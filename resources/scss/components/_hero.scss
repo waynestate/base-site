@@ -1,26 +1,23 @@
 .hero {
     /* Flickity applies absolute to this container when enabled */
-    &__preserve-flickity {
-        @apply w-full;
-    }
-
-    &__wrapper {
+    &__preserve-flickity,
+    &__wrapper,
+    &__primary-image {
         @apply w-full; 
     }
 
-    &__primary-image {
-        @apply w-full;
-    }
+    /* Hero size */
+    &--contained,
+    &--large {
+        @apply aspect-hero max-h-hero w-full bg-cover bg-center relative;
 
-    /* Contained */
-    &--contained {
-        .hero__bg {
-            @apply aspect-hero max-h-hero w-full bg-cover bg-center relative;
+        .hero__primary-image {
+            @apply w-full h-full object-cover object-center;
+            //@apply aspect-hero max-h-hero w-full bg-cover bg-center relative;
         }
     }
 
-    /* Banner small */
-    &--banner-small {
+    &--small {
         @apply h-hero-small max-h-hero-small;
 
         .hero__primary-image {
@@ -28,16 +25,14 @@
         }
     }
 
-    /* Banner large */
-    &--banner-large {
-        @apply aspect-hero max-h-hero w-full bg-cover bg-center relative;
-
-        .hero__primary-image {
-            @apply w-full h-full object-cover object-center;
+    /* Hero style */
+    &--banner {
+        .hero__title,
+        .hero__description {
+            @apply hidden;
         }
     }
 
-    /* Text overlay */
     &--text-overlay {
         @apply relative;
 
@@ -70,11 +65,10 @@
         }
     }
 
-    /* Half */
     &--half {
         @apply relative xl:flex items-center;
 
-        .hero__primary-image-wrapper {
+        .hero__primary-image {
             @apply w-full xl:w-[60%] shrink-0;
         }
 
@@ -99,7 +93,6 @@
          }
     }
 
-    /* Logo overlay */
     &--logo-overlay {
         @apply relative flex flex-col justify-center bg-green-900 min-h-[500px];
 
@@ -124,7 +117,6 @@
         }
     }
 
-    /* SVG overlay */
     &--svg-overlay {
         @apply relative pt-hero;
 
@@ -138,6 +130,11 @@
 
         .hero__secondary-image {
             @apply absolute inset-0 z-2;
+        }
+
+        .hero__title,
+        .hero__description {
+            @apply hidden;
         }
     }
 }
