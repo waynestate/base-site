@@ -5,6 +5,7 @@ namespace App\Repositories;
 use Contracts\Repositories\HeroRepositoryContract;
 use Illuminate\Cache\Repository;
 use Waynestate\Api\Connector;
+use Illuminate\Support\Str;
 
 class HeroRepository implements HeroRepositoryContract
 {
@@ -30,31 +31,29 @@ class HeroRepository implements HeroRepositoryContract
      */
     public function setHero(array $promos, array $data)
     {
-        // Force global promos into the component structure
+        // Transform global promos into the component structure
         if (!empty($promos['hero'])) {
-            // Preserve the hero data
+            // Preserve hero data and remove from promos
             $temporary_hero = $promos['hero'];
             unset($promos['hero']);
 
-            // Force hero data into component structure
+            // Give hero data component structure
             if (empty($promos['hero']['data'])) {
                 $promos['hero']['data'] = $temporary_hero;
             }
 
+            // Create component data and set default heroSize
             if (empty($promos['hero']['component'])) {
                 $promos['hero']['component'] = [];
+                $promos['hero']['component']['heroSize'] = config('base.hero_size');
             }
 
+            // Set heroStyle from option
             foreach ($promos['hero']['data'] as $hero) {
-                // Force the correct component option based on the layout
                 if (count($promos['hero']['data']) === 1) {
-                    if (isset($hero['option']) && $hero['option'] === 'Banner contained') {
-                        $promos['hero']['component']['option'] = 'Banner contained';
-                    } elseif (!isset($hero['option']) && config('base.layout') == 'contained-hero') {
-                        $promos['hero']['component']['option'] = 'Banner contained';
-                    } elseif (!isset($hero['option'])) {
-                        $promos['hero']['component']['option'] = 'Banner small';
-                    }
+                    $promos['hero']['component']['heroStyle'] = !empty($hero['option']) ? Str::slug($hero['option']) : 'banner';
+                } else {
+                    $promos['hero']['component']['heroStyle'] = 'carousel';
                 }
             }
         }
@@ -83,22 +82,32 @@ class HeroRepository implements HeroRepositoryContract
 
             if (!empty($promos['components'][$hero_key]['data'])) {
                 $promos['hero'] = $promos['components'][$hero_key];
-                config(['base.hero_full_controllers' => [$data['page']['controller']]]);
+                $promos['hero']['component']['heroSize'] = $promos['hero']['component']['heroSize'] ?? config('base.hero_size');
                 unset($promos['components'][$hero_key]);
             }
         }
 
-        // Replace Hero Buttons option with Text Overlay
-        // TODO Make hero buttons it's own option
+        // Set standard heroStyle and heroSize
         if (!empty($promos['hero'])) {
             $promos['hero']['data'] = collect($promos['hero']['data'])->map(function ($hero_data) {
+                // Replace Hero Buttons option with Text Overlay
                 if (!empty($hero_data['option']) && $hero_data['option'] == 'Buttons') {
                     $hero_data['option'] = 'Text Overlay';
+                }
+
+                // Support old options
+                if (!empty($hero_data['option'])) {
+                    // Remove word 'banner' to set the size
+                    $hero_data['heroSize'] = trim(str_ireplace('banner', '', $hero_data['option']));
+
+                    // Keep 'banner' for style
+                    $hero_data['option'] = trim(str_ireplace(['small','large','contained'], '', $hero_data['option']));
                 }
 
                 return $hero_data;
             })->toArray();
         }
+        dump($promos);
 
         return $promos;
     }
