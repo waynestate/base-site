@@ -44,6 +44,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Hero size
+    |--------------------------------------------------------------------------
+    |
+    | Create a new layout when adjustments to the content area are needed.
+    | Layouts are stored in resources/layouts
+    | Sets the default look of the hero; main => small banner, contained-hero => contained hero
+    | ['contained', 'large', 'small']
+    |
+    */
+    'hero_size' => 'contained',
+
+    /*
+    |--------------------------------------------------------------------------
     | Top Menu Enabled
     |--------------------------------------------------------------------------
     |
