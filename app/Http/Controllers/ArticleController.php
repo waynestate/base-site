@@ -97,7 +97,10 @@ class ArticleController extends Controller
         $request->data['base']['page']['canonical'] = $this->article->getCanonicalUrl($article['article']['data'], $request->data['base']);
 
         if (!empty($article['article']['data']['hero_image']['url'])) {
-            $request->data['base']['hero'][]['relative_url'] = $article['article']['data']['hero_image']['url'];
+            $request->data['base']['hero']['data'][] = [
+                'relative_url' => $article['article']['data']['hero_image']['url'],
+                'filename_alt_text' => $article['article']['data']['hero_image']['alt_text'],
+            ];
         }
 
         $image = $this->article->getSocialImage($article['article']['data']);
