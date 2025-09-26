@@ -304,7 +304,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
                         $modularComponents[$name]['component']['heading'] = '';
                     }
                 }
-            } elseif (Str::startsWith($name, 'page-content') || Str::startsWith($name, 'heading')) {
+            } elseif (Str::startsWith($name, 'page-content') || Str::startsWith($name, 'heading') || Str::contains($name, 'layout')) {
                 // If there's JSON but no news, events or promo data, assign the component array as data
                 // Page-content and heading components
                 $modularComponents[$name]['data'][] = $components['components'][$name] ?? [];
