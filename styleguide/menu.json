@@ -689,6 +689,27 @@
                     }
                 }
             },
+            "105100": {
+                "menu_item_id": 105100,
+                "is_active": 1,
+                "page_id": 105100,
+                "target": "",
+                "display_name": "Page title",
+                "class_name": "",
+                "relative_url": "/styleguide/layout/page/title",
+                "submenu": {
+                    "105100100": {
+                        "menu_item_id": 105100100,
+                        "is_active": 1,
+                        "page_id": 105100100,
+                        "target": "",
+                        "display_name": "Page title",
+                        "class_name": "",
+                        "relative_url": "/styleguide/layout/page/title",
+                        "submenu": []
+                    }
+                }
+            },
             "103100": {
                 "menu_item_id": 103100,
                 "is_active": 1,
