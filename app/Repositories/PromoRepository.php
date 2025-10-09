@@ -136,31 +136,25 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
 
         $global_promos['components'] = $this->components->getModularComponents($data);
 
-        $layout_config = [];
+        // Assign to base
+        $global_promos = $this->hero->setHero($global_promos, $data);
 
         // TODO: Move this to a new middleware file
         // Assign layout_config to data and remove from the component loop
+        // Can't assign to the base object from modular repository
         // Can't override show_site_menu from here
+        $layout_config = [];
+
         if (array_key_exists('layout-config', $global_promos['components'])) {
             foreach ($global_promos['components'] as $component_name => $component_data) {
                 if ($component_name === 'layout-config') {
-                    if (isset($component_data['showPageTitle']) && $component_data['showPageTitle'] === false) {
-                        $layout_config['show_page_title'] = false;
-                    }
-
-                    if (isset($component_data['pageClass'])) {
-                        $layout_config['page_class'] = $component_data['pageClass'] ?? '';
-                    }
+                    $global_promos['layout_config'] = $component_data['component'];
                     unset($global_promos['components']['layout-config']);
                 }
             }
         }
 
-        // Assign to base
-        $data['layout_config'] = $layout_config;
-
-        $global_promos = $this->hero->setHero($global_promos, $data);
-
+        // Global promos is appended to the data object
         return $global_promos;
     }
 
