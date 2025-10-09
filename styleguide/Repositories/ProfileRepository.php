@@ -13,7 +13,7 @@ class ProfileRepository extends Repository
     /**
      * {@inheritdoc}
      */
-    public function getProfiles(int $site_id, ?string $selected_group = null, $subsite_url = null): array
+    public function getProfiles(int $site_id, string|array|null $selected_group = null, $subsite_url = null): array
     {
         $limit = is_int($selected_group) ? rand(2, 5) : 20;
 

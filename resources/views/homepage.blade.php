@@ -1,5 +1,5 @@
 @extends('layouts.' . (!empty($base['layout']) ? $base['layout'] : 'main'))
-
+{{-- this was deleted --}}
 @section('content')
     @include('partials.page-title', ['title' => $base['page']['title']])
     @include('components.page-content')

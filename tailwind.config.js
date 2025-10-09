@@ -205,6 +205,12 @@ module.exports = {
                 'modular': '[start] minmax(1em, 1fr) [content-start] minmax(0, 36.5rem) [content-end] minmax(0, 36.5rem) [end] minmax(1em, 1fr)',
                 'x': '[start] minmax(1em, 1fr) [content-start] repeat(auto-fill, minmax(0, 73rem)) [end] minmax(1em, 1fr)',
             },
+            zIndex: {
+                '1': 1,
+                '2': 2,
+                '3': 3,
+                '4': 4,
+            },
         },
     },
 }

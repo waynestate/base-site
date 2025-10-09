@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use Contracts\Repositories\RequestDataRepositoryContract;
 use Contracts\Repositories\PromoRepositoryContract;
+use Contracts\Repositories\HeroRepositoryContract;
 use Contracts\Repositories\ModularPageRepositoryContract;
 use Illuminate\Cache\Repository;
 use Waynestate\Api\Connector;
@@ -20,6 +21,12 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
     /** @var Repository */
     protected $cache;
 
+    /** @var ModularPageRepositoryContract */
+    protected $components;
+
+    /** @var HeroRepositoryContract */
+    protected $hero;
+
     /**
      * Construct the repository.
      */
@@ -27,12 +34,14 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         Connector $wsuApi,
         ParsePromos $parsePromos,
         Repository $cache,
-        ModularPageRepositoryContract $components
+        ModularPageRepositoryContract $components,
+        HeroRepositoryContract $hero
     ) {
         $this->wsuApi = $wsuApi;
         $this->parsePromos = $parsePromos;
         $this->cache = $cache;
         $this->components = $components;
+        $this->hero = $hero;
     }
 
     /**
@@ -125,6 +134,10 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
 
         $global_promos = $this->manipulateGlobalPromos($promos, $groups, $data);
 
+        $global_promos['components'] = $this->components->getModularComponents($data);
+
+        $layout_config = [];
+
         // TODO: Move this to a new middleware file
         // Assign layout_config to data and remove from the component loop
         // Can't override show_site_menu from here
@@ -144,7 +157,9 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         }
 
         // Assign to base
-        $data['layout_config'] = $layout_config ?? [];
+        $data['layout_config'] = $layout_config;
+
+        $global_promos = $this->hero->setHero($global_promos, $data);
 
         return $global_promos;
     }
@@ -172,7 +187,7 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
     public function createGlobalPromoGroupConfig(array $data, array $config, array $groups)
     {
         // Inject global promo config
-        $group_config = collect($groups)->mapWithKeys(function ($group, $name) use ($config, $data) {
+        $group_config = collect($groups)->mapWithKeys(function ($group, $name) use ($data) {
             $value = !empty($group['config']) ? $group['config'] : null;
 
             return [$name => str_replace('{$page_id}', $data['page']['id'], $value)];
@@ -217,21 +232,6 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         // Remove the uncessary promo groups
         unset($promos['main_social']);
         unset($promos['main_contact']);
-
-        // Add modular components into global data
-        $promos['components'] = $this->components->getModularComponents($data);
-
-        // Set hero from components
-        $hero = collect($promos['components'])->reject(function ($data, $component_name) {
-            return !str_contains($component_name, 'hero');
-        })->toArray();
-
-        if (!empty($hero)) {
-            $hero_key = array_key_first($hero);
-            $promos['hero'] = $promos['components'][$hero_key]['data'];
-            config(['base.hero_full_controllers' => [$data['page']['controller']]]);
-            unset($promos['components'][$hero_key]);
-        }
 
         return $promos;
     }

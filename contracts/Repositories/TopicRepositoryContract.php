@@ -7,10 +7,11 @@ interface TopicRepositoryContract
     /**
      * Topic listing.
      *
-     * @param array $application_ids
+     * @param int|array $application_ids
+     * @param $subsite_folder
      * @return array
      */
-    public function listing($application_ids, $subsite_folder);
+    public function listing(int|array $application_ids, $subsite_folder = null): array;
 
     /**
      * Find topic by id or slug.
@@ -18,7 +19,7 @@ interface TopicRepositoryContract
      * @param string $slug
      * @return array
      */
-    public function find($slug);
+    public function find(string $slug): array;
 
     /**
      * Sort articles by letter
@@ -26,14 +27,14 @@ interface TopicRepositoryContract
      * @param array $topics
      * @return array
      */
-    public function sortByLetter($topics);
+    public function sortByLetter(array $topics): array;
 
     /**
      * Set the selected topic.
      *
      * @param array $topics
-     * @param string $topic
+     * @param string|null $topic
      * @return array
      */
-    public function setSelected($topics, $topic);
+    public function setSelected(array $topics, ?string $topic): array;
 }

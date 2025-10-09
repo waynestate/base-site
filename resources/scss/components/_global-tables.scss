@@ -29,11 +29,11 @@ table {
         @apply align-top border-b;
 
         &:nth-child(even) {
-            //@apply bg-gray-100;
+            /* @apply bg-gray-100; */
         }
 
         &:nth-child(odd) {
-            //@apply bg-white;
+            /* @apply bg-white; */
         }
     }
 

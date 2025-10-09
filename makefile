@@ -20,7 +20,7 @@ deployproduction: install buildproduction runtests envoyproduction
 yarn: $(YARNFILE)
 	@if ! grep -q ".yarn" .gitignore > /dev/null 2>&1; then echo ".yarn/" >> .gitignore; fi
 	corepack enable yarn
-	yarn set version --only-if-needed stable
+	yarn set version self
 	yarn config set --home nodeLinker node-modules
 	yarn config set --home enableImmutableInstalls false
 	yarn config set --home enableTelemetry 0
@@ -66,6 +66,14 @@ phplint: $(COMPOSERFILE)
 
 phplintdry: $(COMPOSERFILE)
 	./vendor/bin/pint --test -v
+
+phpstan: $(COMPOSERFILE)
+	./vendor/bin/phpstan clear-result-cache
+	./vendor/bin/phpstan analyse --memory-limit=512M
+
+phpstandry: $(COMPOSERFILE)
+	./vendor/bin/phpstan clear-result-cache
+	./vendor/bin/phpstan analyse --memory-limit=512M --no-progress
 
 stylelint:
 	stylelint ./resources/scss/**/*.scss

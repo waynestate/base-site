@@ -17,6 +17,10 @@ class BaseFeature extends Command
      */
     protected $description = 'Scaffold out files for a new feature, use singular form of feature name, e.g. "Spotlight"';
 
+    protected string $feature;
+
+    protected string $stub;
+
     /**
      * Scaffold files.
      */
@@ -128,7 +132,8 @@ class BaseFeature extends Command
         $this->feature = ucfirst($feature);
 
         if (Storage::disk('base')->exists('app\Http\Controllers\/'.$this->feature.'Controller.php')) {
-            die($this->error('Feature already exists, please use another name.'));
+            $this->error('Feature already exists, please use another name.');
+            exit(1);
         }
     }
 

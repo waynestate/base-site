@@ -26,6 +26,9 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
     /** @var Repository */
     protected $cache;
 
+    /** @var ModularPageRepositoryContract */
+    protected $components;
+
     /**
      * Construct the repository.
      */
@@ -223,6 +226,8 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
      */
     public function trimSiteMenu($menu, $parentId = null, $topMenuId = null)
     {
+        $trim_menu = [];
+
         // Trim first level based on path[0] - only if we are on the main website
         // or we aren't enabling top menu across all subsites
         if (!empty($menu['meta']['path']) && ($parentId === null || $topMenuId === null) && config('base.top_menu_enabled') === true) {

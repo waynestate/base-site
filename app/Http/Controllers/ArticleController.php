@@ -8,15 +8,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 use Contracts\Repositories\ArticleRepositoryContract;
 use Contracts\Repositories\TopicRepositoryContract;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use Illuminate\View\View;
 
 class ArticleController extends Controller
 {
+    protected $article;
+    protected $topic;
+
     /**
      * Construct the controller.
      */
@@ -37,24 +40,24 @@ class ArticleController extends Controller
     {
         $topics = $this->topic->listing($request->data['base']['site']['news']['application_id'], $request->data['base']['site']['subsite-folder']);
 
-        if (!empty($topics['topics']['data'])) {
+        if (! empty($topics['topics']['data'])) {
             $topics['topics']['data'] = $this->topic->setSelected($topics['topics']['data'], $request->slug);
 
             $selected_topic = collect($topics['topics']['data'])->firstWhere('selected', true);
         }
 
-        if (!empty($request->slug) && empty($selected_topic['selected'])) {
-            abort('404');
+        if (! empty($request->slug) && empty($selected_topic['selected'])) {
+            abort(404);
         }
 
-        $articles = $this->article->listing($request->data['base']['site']['news']['application_id'], 25, $request->query('page'), !empty($selected_topic['topic_id']) ? $selected_topic['topic_id'] : null);
+        $articles = $this->article->listing($request->data['base']['site']['news']['application_id'], 25, $request->query('page'), ! empty($selected_topic['topic_id']) ? $selected_topic['topic_id'] : null);
 
-        if (!empty($articles['articles']['meta'])) {
+        if (! empty($articles['articles']['meta'])) {
             $articles['articles']['meta'] = $this->article->setPaging($articles['articles']['meta'], $request->query('page'));
         }
 
         // Force the menu to be shown if categories are found
-        if (!empty($topics['topics']['data'])) {
+        if (! empty($topics['topics']['data'])) {
             $request->data['base']['show_site_menu'] = true;
         }
 
@@ -71,7 +74,7 @@ class ArticleController extends Controller
     public function show(Request $request): View|Redirector|RedirectResponse
     {
         if (empty($request->data['base']['site']['news']['application_id'])) {
-            abort('404');
+            abort(404);
         }
 
         $article = $this->article->find($request->id, $request->data['base']['site']['news']['application_id'], $request->preview);
@@ -81,13 +84,13 @@ class ArticleController extends Controller
                 return redirect($request->server->get('REDIRECT_URL'));
             }
 
-            abort('404');
+            abort(404);
         }
 
-        if (!empty($article['article']['data']['link'])) {
+        if (! empty($article['article']['data']['link'])) {
             $linkURL = parse_url($article['article']['data']['link']);
 
-            if (!empty($linkURL['host'])) {
+            if (! empty($linkURL['host'])) {
                 return redirect($article['article']['data']['link']);
             }
         }
@@ -97,7 +100,10 @@ class ArticleController extends Controller
         $request->data['base']['page']['canonical'] = $this->article->getCanonicalUrl($article['article']['data'], $request->data['base']);
 
         if (!empty($article['article']['data']['hero_image']['url'])) {
-            $request->data['base']['hero'][]['relative_url'] = $article['article']['data']['hero_image']['url'];
+            $request->data['base']['hero']['data'][] = [
+                'relative_url' => $article['article']['data']['hero_image']['url'],
+                'filename_alt_text' => $article['article']['data']['hero_image']['alt_text'],
+            ];
         }
 
         $image = $this->article->getSocialImage($article['article']['data']);
@@ -107,14 +113,14 @@ class ArticleController extends Controller
 
         $topics = $this->topic->listing($request->data['base']['site']['news']['application_id'], $request->data['base']['site']['subsite-folder']);
 
-        if (!empty($topics['topics']['data'])) {
+        if (! empty($topics['topics']['data'])) {
             $topics['topics']['data'] = $this->topic->setSelected($topics['topics']['data'], $request->slug);
 
             $selected_topic = collect($topics['topics']['data'])->firstWhere('selected', true);
         }
 
         // Force the menu to be shown if categories are found
-        if (!empty($topics['topics']['data'])) {
+        if (! empty($topics['topics']['data'])) {
             $request->data['base']['show_site_menu'] = true;
         }
 

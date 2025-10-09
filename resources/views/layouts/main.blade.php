@@ -37,9 +37,9 @@
 
 <div id="panel" @class(['site-theme', $base['layout_config']['page_class'] ?? ''])>
     @yield('top')
-
-    @if(!empty($base['hero']))
-        @include('components.hero', ['data' => $base['hero']])
+    
+    @if(!empty($base['hero']) && (empty($base['hero']['component']['option']) || $base['hero']['component']['option'] != 'Banner contained'))
+        @include('components.hero', ['hero' => $base['hero']])
 
         @yield('under-hero')
     @endif
@@ -48,6 +48,10 @@
         @include('partials.nav-left')
 
         <main class="content-area mx-auto w-full {{ $base['show_site_menu'] === true ? 'max-w-[900px]' : 'max-w-[75rem]' }}{{ (in_array($base['page']['controller'], config('base.full_width_controllers'))) ? ' max-w-full' : '' }}" tabindex="-1">
+            @if(!empty($base['hero']) && isset($base['hero']['component']['option']) && $base['hero']['component']['option'] === 'Banner contained')
+                @include('components.hero', ['hero' => $base['hero']])
+            @endif
+
             @include('components.breadcrumbs', ['breadcrumbs' => $base['breadcrumbs'] ?? ''])
 
             <div id="content" tabindex="-1">

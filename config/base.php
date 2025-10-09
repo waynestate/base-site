@@ -3,7 +3,7 @@
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\TopicController;
 
-return [
+$global_config = [
 
     /*
     |--------------------------------------------------------------------------
@@ -36,9 +36,11 @@ return [
     |
     | Create a new layout when adjustments to the content area are needed.
     | Layouts are stored in resources/layouts
+    | Sets the default look of the hero; main => small banner, contained-hero => contained hero
+    | ['main', 'contained-hero']
     |
     */
-    'layout' => 'main',
+    'layout' => 'contained-hero',
 
     /*
     |--------------------------------------------------------------------------
@@ -131,29 +133,6 @@ return [
     'surtitle' => null,
     'surtitle_main_site_enabled' => false,
     'surtitle_url' => '/',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Profile View Back Url
-    |--------------------------------------------------------------------------
-    |
-    | Back URL to use when viewing a Individual Profile view in place for the
-    | "Return to Listing" link.
-    |
-    */
-    'profile_default_back_url' => '/profiles',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Profile Parent Group
-    |--------------------------------------------------------------------------
-    |
-    | This will limit the groups displayed to only the children groups under
-    | this ID. Typically the group is called "Departments". If all desired
-    | groups are added to the root then leave this value as 0.
-    |
-    */
-    'profile_parent_group_id' => 0,
 
     /*
     |--------------------------------------------------------------------------
@@ -252,15 +231,15 @@ return [
         'all' => [
             'promos' => [
                 'main_contact' => [
-                    'id' => 2908,
+                    'id' => null,
                     'config' => 'limit:4',
                 ],
                 'main_social' => [
-                    'id' => 2907,
+                    'id' => null,
                     'config' => null,
                 ],
                 'main_under_menu' => [
-                    'id' => 2909,
+                    'id' => null,
                     'config' => 'page_id:{$page_id}',
                 ],
                 'hero' => [
@@ -268,7 +247,7 @@ return [
                     'config' => 'page_id:{$page_id}|randomize|limit:1',
                 ],
                 'flag' => [
-                    'id' => 4246,
+                    'id' => null,
                     'config' => 'page_id:{$page_id}|first',
                 ],
             ],
@@ -300,4 +279,100 @@ return [
             // ],
         ],
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Profile configuration
+    |--------------------------------------------------------------------------
+    |
+    | Anything related to profiles is nested into a 'profile.' prefixed
+    | array and can be accessed through config('base.profile.*')
+    |
+    */
+    'profile' => [
+        /*
+        |--------------------------------------------------------------------------
+        | Profile View Back Url
+        |--------------------------------------------------------------------------
+        |
+        | Back URL to use when viewing a Individual Profile view in place for the
+        | "Return to Listing" link.
+        |
+        */
+        'default_back_url' => '/profiles',
+
+        /*
+        |--------------------------------------------------------------------------
+        | Profile Parent Group
+        |--------------------------------------------------------------------------
+        |
+        | This will limit the groups displayed to only the children groups under
+        | this ID. Typically the group is called "Departments". If all desired
+        | groups are added to the root then leave this value as 0.
+        |
+        */
+        'parent_group_id' => 0,
+
+        /*
+        |--------------------------------------------------------------------------
+        | People Parent Group
+        |--------------------------------------------------------------------------
+        |
+        | This will limit the groups displayed to only the children groups under
+        | this ID. Typically the group is called "Departments". If all desired
+        | groups are added to the root then leave this value as 0.
+        |
+        */
+        'people_parent_group_id' => 0,
+
+        /*
+        |--------------------------------------------------------------------------
+        | Profile Group ID
+        |--------------------------------------------------------------------------
+        |
+        | This will limit the groups displayed to only the children groups under
+        | this ID. Typically the group is called "Departments". If all desired
+        | groups are added to the root then leave this value as null.
+        | This value is a pipe delimited string of group ids.
+        |
+        */
+        'group_id' => null,
+
+        /*
+        |--------------------------------------------------------------------------
+        | Profile Site ID
+        |--------------------------------------------------------------------------
+        |
+        | This will limit the profiles displayed to only the profiles under
+        | this site ID. If all desired profiles are added to the current then leave
+        | this value as null.
+        |
+        */
+        'site_id' => null,
+
+        /*
+        |--------------------------------------------------------------------------
+        | Table of Contents - Contact Table
+        |--------------------------------------------------------------------------
+        |
+        | This will hide the table of contents on the contact table page.
+        |
+        */
+        'table_of_contents' => null,
+    ],
+    /*
+    |--------------------------------------------------------------------------
+    | Legacy support (do not edit or remove)
+    |--------------------------------------------------------------------------
+    */
+    'profile_default_back_url' => null,
+    'profile_parent_group_id' => null,
 ];
+
+// Override any config with local file
+if (!empty(getenv('CONFIG_OVERRIDE')) && file_exists(__DIR__ . '/' . getenv('CONFIG_OVERRIDE'))) {
+    $local_config = include(__DIR__ . '/' . getenv('CONFIG_OVERRIDE'));
+    return array_replace_recursive_distinct($global_config, $local_config);
+}
+
+return $global_config;

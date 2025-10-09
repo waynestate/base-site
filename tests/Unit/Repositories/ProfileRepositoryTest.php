@@ -83,31 +83,37 @@ final class ProfileRepositoryTest extends TestCase
     {
         // The default path if no referer
         $url = app(ProfileRepository::class)->getBackToProfileListUrl();
-        $this->assertTrue($url == config('profile.default_back_url'));
+        $this->assertTrue($url == config('base.profile.default_back_url'));
 
         // If a referer is passed from a different domain
         $referer = $this->faker->url();
         $url = app(ProfileRepository::class)->getBackToProfileListUrl($referer, 'http', 'wayne.edu', '/');
-        $this->assertTrue($url == config('profile.default_back_url'));
+        $this->assertTrue($url == config('base.profile.default_back_url'));
 
         // If a referer is passed that is the same page we are on
         $referer = $this->faker->url();
         $parsed = parse_url($referer);
         $url = app(ProfileRepository::class)->getBackToProfileListUrl($referer, $parsed['scheme'], $parsed['host'], $parsed['path']);
-        $this->assertTrue($url == config('profile.default_back_url'));
+        $this->assertTrue($url == config('base.profile.default_back_url'));
 
         // If referer is passed from the same domain that the site is on
         $referer = $this->faker->url();
         $parsed = parse_url($referer);
         $url = app(ProfileRepository::class)->getBackToProfileListUrl($referer, $parsed['scheme'], $parsed['host'], $this->faker->word());
         $this->assertEquals($referer, $url);
+
+        // Legacy support for the base.profile_default_back_url
+        $legacy_back_url = 'some/other/url';
+        Config::set('base.profile_default_back_url', $legacy_back_url);
+        $url = app(ProfileRepository::class)->getBackToProfileListUrl();
+        $this->assertEquals($legacy_back_url, $url);
     }
 
     #[Test]
     public function getting_dropdown_of_groups_should_contain_all_the_groups(): void
     {
         // Force this config incase it is changed
-        config(['profile.parent_group_id' => 0]);
+        config(['base.profile.parent_group_id' => 0]);
 
         // Fake return
         $return = [
@@ -132,7 +138,7 @@ final class ProfileRepositoryTest extends TestCase
     public function getting_dropdown_of_single_group_should_contain_single_group(): void
     {
         // Force this config incase it is changed
-        config(['profile.parent_group_id' => 0]);
+        config(['base.profile.parent_group_id' => 0]);
 
         // Fake return
         $return = [
@@ -276,7 +282,7 @@ final class ProfileRepositoryTest extends TestCase
     public function profiles_should_be_grouped(): void
     {
         // Force this config incase it is changed
-        config(['profile.parent_group_id' => 0]);
+        config(['base.profile.parent_group_id' => 0]);
 
         // Mock the user listing
         $return_user_listing = app(Profile::class)->create(10);
@@ -365,7 +371,7 @@ final class ProfileRepositoryTest extends TestCase
         $cms_site_id = $site_config_page['site']['id'];
 
         // Reset the profile_site_id
-        Config::set('profile.site_id', null);
+        Config::set('base.profile.site_id', null);
 
         app(ProfileRepository::class, ['wsuApi' => $wsuApi])->parseProfileConfig($site_config_page);
         $return_cms_site_id = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getSiteID($site_config_page);
@@ -455,7 +461,128 @@ final class ProfileRepositoryTest extends TestCase
 
         app(ProfileRepository::class, ['wsuApi' => $wsuApi])->parseProfileConfig($data);
 
-        $this->assertEquals($site_id, config('profile.site_id'));
-        $this->assertEquals($group_id, config('profile.group_id'));
+        $this->assertEquals($site_id, config('base.profile.site_id'));
+        $this->assertEquals($group_id, config('base.profile.group_id'));
+    }
+
+    #[Test]
+    public function getting_dropdown_options_should_hide_filtering_when_all_profiles_in_same_group(): void
+    {
+        // Test with profiles all in the same group
+        $profiles_same_group = [
+            'profiles' => [
+                ['groups' => ['1' => 'Engineering']],
+                ['groups' => ['1' => 'Engineering']],
+                ['groups' => ['1' => 'Engineering']],
+            ],
+        ];
+
+        $options = app(ProfileRepository::class)->getDropdownOptions(null, null, $profiles_same_group);
+        $this->assertEquals(['selected_group' => null, 'hide_filtering' => true], $options);
+
+        // Test with profiles in multiple groups
+        $profiles_multiple_groups = [
+            'profiles' => [
+                ['groups' => ['1' => 'Engineering']],
+                ['groups' => ['2' => 'Business']],
+                ['groups' => ['1' => 'Engineering']],
+            ],
+        ];
+
+        $options = app(ProfileRepository::class)->getDropdownOptions(null, null, $profiles_multiple_groups);
+        $this->assertEquals(['selected_group' => null, 'hide_filtering' => false], $options);
+
+        // Test with empty profiles array
+        $profiles_empty = ['profiles' => []];
+        $options = app(ProfileRepository::class)->getDropdownOptions(null, null, $profiles_empty);
+        $this->assertEquals(['selected_group' => null, 'hide_filtering' => false], $options);
+
+        // Test with profiles that have no groups
+        $profiles_no_groups = [
+            'profiles' => [
+                ['data' => ['name' => 'John Doe']],
+                ['groups' => []],
+            ],
+        ];
+
+        $options = app(ProfileRepository::class)->getDropdownOptions(null, null, $profiles_no_groups);
+        $this->assertEquals(['selected_group' => null, 'hide_filtering' => true], $options);
+
+        // Test that forced group ID still takes precedence
+        $random_group_id = $this->faker->numberBetween(1, 9);
+        $options = app(ProfileRepository::class)->getDropdownOptions(null, $random_group_id, $profiles_multiple_groups);
+        $this->assertEquals(['selected_group' => $random_group_id, 'hide_filtering' => true], $options);
+    }
+
+    #[Test]
+    public function getting_unique_groups_from_profiles_should_return_unique_group_names(): void
+    {
+        $repository = app(ProfileRepository::class);
+
+        // Test with profiles having multiple groups
+        $profiles_multiple_groups = [
+            ['groups' => ['1' => 'Engineering', '2' => 'Computer Science']],
+            ['groups' => ['2' => 'Computer Science', '3' => 'Mathematics']],
+            ['groups' => ['1' => 'Engineering']],
+        ];
+
+        // Use reflection to access the protected method
+        $reflection = new \ReflectionClass($repository);
+        $method = $reflection->getMethod('getUniqueGroupsFromProfiles');
+        $method->setAccessible(true);
+
+        $unique_groups = $method->invokeArgs($repository, [$profiles_multiple_groups]);
+        $expected = ['Engineering', 'Computer Science', 'Mathematics'];
+
+        $this->assertCount(3, $unique_groups);
+        $this->assertEquals($expected, array_values($unique_groups));
+
+        // Test with profiles all in same group
+        $profiles_same_group = [
+            ['groups' => ['1' => 'Engineering']],
+            ['groups' => ['1' => 'Engineering']],
+            ['groups' => ['1' => 'Engineering']],
+        ];
+
+        $unique_groups = $method->invokeArgs($repository, [$profiles_same_group]);
+        $this->assertCount(1, $unique_groups);
+        $this->assertEquals(['Engineering'], $unique_groups);
+
+        // Test with profiles having no groups or invalid groups
+        $profiles_no_groups = [
+            ['data' => ['name' => 'John Doe']],
+            ['groups' => []],
+            ['groups' => null],
+        ];
+
+        $unique_groups = $method->invokeArgs($repository, [$profiles_no_groups]);
+        $this->assertCount(0, $unique_groups);
+        $this->assertEquals([], $unique_groups);
+
+        // Test with empty profiles array
+        $unique_groups = $method->invokeArgs($repository, [[]]);
+        $this->assertCount(0, $unique_groups);
+        $this->assertEquals([], $unique_groups);
+    }
+
+    #[Test]
+    public function order_profiles_by_accessid_can_be_set_in_custom_field(): void
+    {
+        // Create mock profiles data
+        $profile_listing = app(Profile::class)->create(5);
+
+        // Get AccessIDs and create a custom order
+        $access_ids = collect($profile_listing)->pluck('data.AccessID')->toArray();
+        $profiles_by_accessid = implode('|', array_reverse($access_ids));
+
+        // Page field override
+        $data['data']['profiles_by_accessid'] = $profiles_by_accessid;
+
+        // Parse the profile config for the page
+        $profileRepository = app(ProfileRepository::class);
+        $profileRepository->parseProfileConfig($data);
+
+        // Ensure the config value is set
+        $this->assertEquals($profiles_by_accessid, config('base.profile.profiles_by_accessid'));
     }
 }

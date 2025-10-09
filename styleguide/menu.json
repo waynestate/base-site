@@ -270,6 +270,26 @@
                         "relative_url": "/styleguide/component/hero/bannerlarge",
                         "submenu": []
                     },
+                    "105100110": {
+                        "menu_item_id": 105100110,
+                        "is_active": 1,
+                        "page_id": 105100110,
+                        "target": "",
+                        "display_name": "Banner contained",
+                        "class_name": "",
+                        "relative_url": "/styleguide/component/hero/bannercontained",
+                        "submenu": []
+                    },
+                    "105100111": {
+                        "menu_item_id": 105100111,
+                        "is_active": 1,
+                        "page_id": 105100111,
+                        "target": "",
+                        "display_name": "Buttons",
+                        "class_name": "",
+                        "relative_url": "/styleguide/component/hero/buttons",
+                        "submenu": []
+                    },
                     "105100104": {
                         "menu_item_id": 105100104,
                         "is_active": 1,
@@ -340,6 +360,16 @@
                 "display_name": "Page content",
                 "class_name": "",
                 "relative_url": "/styleguide/component/pagecontent",
+                "submenu": []
+            },
+            "124100": {
+                "menu_item_id": 124100,
+                "is_active": 1,
+                "page_id": 124100,
+                "target": "",
+                "display_name": "News and events",
+                "class_name": "",
+                "relative_url": "/styleguide/component/newsandevents",
                 "submenu": []
             },
             "108100": {
@@ -665,6 +695,27 @@
                         "display_name": "Header title double",
                         "class_name": "",
                         "relative_url": "/styleguide/layout/header/title/double/",
+                        "submenu": []
+                    }
+                }
+            },
+            "105100": {
+                "menu_item_id": 105100,
+                "is_active": 1,
+                "page_id": 105100,
+                "target": "",
+                "display_name": "Page title",
+                "class_name": "",
+                "relative_url": "/styleguide/layout/page/title",
+                "submenu": {
+                    "105100100": {
+                        "menu_item_id": 105100100,
+                        "is_active": 1,
+                        "page_id": 105100100,
+                        "target": "",
+                        "display_name": "Page title",
+                        "class_name": "",
+                        "relative_url": "/styleguide/layout/page/title",
                         "submenu": []
                     }
                 }

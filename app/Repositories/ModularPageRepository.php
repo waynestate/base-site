@@ -76,10 +76,11 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
         return $components;
     }
+
     /**
      * {@inheritdoc}
      */
-    public function cleanComponentJSON($componentJSON)
+    public function cleanComponentJSON($componentJSON): string
     {
         // Remove all spaces and line breaks
         $componentJSON = preg_replace('/\s*\R\s*/', '', $componentJSON);
@@ -184,7 +185,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
-        // TODO Allowing the use of another site's promo items only from base
+        // Use another site's promo items only from Base
         if (!empty($site_id) && $site_id === 1561) {
             $promos['promotions'] = collect($promos['promotions'])->map(function ($promo) {
                 if (!empty($promo['filename_url'])) {
@@ -230,37 +231,95 @@ class ModularPageRepository implements ModularPageRepositoryContract
         $modularComponents = [];
 
         foreach ($components['components'] as $name => $component) {
-            if (Str::startsWith($name, 'events')) {
-                $components['components'][$name]['id'] = $component['id'] ?? $base['site']['id'];
-                $limit = $components['components'][$name]['limit'] ?? 4;
-                if (strpos($name, 'events-column') !== false) {
-                    $events = $this->event->getEvents($component['id'] ?? $base['site']['id'], $limit);
-                } else {
-                    $events = $this->event->getEventsFullListing($component['id'] ?? $base['site']['id'], $limit);
+            if (Str::contains($name, 'events') || Str::contains($name, 'news')) {
+                if (Str::contains($name, 'events')) {
+                    $components['components'][$name]['id'] = $component['events_id'] ?? $component['id'] ?? $base['site']['id'];
+
+                    // Restrict events row to 3 items
+                    if (Str::contains($name, 'events-row') && !Str::contains($name, 'featured-events-row')) {
+                        $limit = $components['components'][$name]['limit'] ?? 3;
+                    } else {
+                        $limit = $components['components'][$name]['limit'] ?? 4;
+                    }
+
+                    // Use full listing if the name contains featured, or events-row
+                    // TODO Find better naming convention
+                    if (!Str::contains($name, 'featured') && Str::contains($name, 'column') || Str::contains($name, 'news-and-events')) {
+                        $events = $this->event->getEvents($components['components'][$name]['id'] ?? $base['site']['id'], $limit);
+                    } else {
+                        $events = $this->event->getEventsFullListing($components['components'][$name]['id'] ?? $base['site']['id'], $limit);
+                    }
+
+                    // Special data structure for news-and-events component
+                    if (Str::contains($name, 'news-and-events')) {
+                        $modularComponents[$name]['data']['events'] = $events['events'] ?? [];
+                    } else {
+                        $modularComponents[$name]['data'] = $events['events'] ?? [];
+                    }
+
+                    // Provide a default Events heading
+                    if (!array_key_exists('heading', $component)) {
+                        $components['components'][$name]['heading'] = 'Events';
+                    }
+
+                    // Assign the component data
+                    $modularComponents[$name]['component'] = $components['components'][$name];
+
+                    // Set featured events default columns
+                    if (Str::contains($name, 'events-featured-row')) {
+                        if (empty($components['components'][$name]['columns'])) {
+                            $modularComponents[$name]['component']['columns'] = 4;
+                        }
+                    }
+
+                    // Set the calendar link
+                    if (empty($modularComponents[$name]['component']['cal_name']) && !empty($base['site']['events']['path'])) {
+                        $modularComponents[$name]['component']['cal_name'] = $base['site']['events']['path'];
+                    }
                 }
-                $modularComponents[$name]['data'] = $events['events'] ?? [];
-                $modularComponents[$name]['component'] = $components['components'][$name];
-                if (empty($modularComponents[$name]['component']['cal_name']) && !empty($base['site']['events']['path'])) {
-                    $modularComponents[$name]['component']['cal_name'] = $base['site']['events']['path'];
+                if (Str::contains($name, 'news')) {
+                    $components['components'][$name]['id'] = $component['news_id'] ?? $component['id'] ?? $base['site']['news']['application_id'];
+                    $limit = $component['limit'] ?? 4;
+
+                    // Set the news route
+                    $components['components'][$name]['news_route'] = $component['news_route'] ?? config('base.news_listing_route');
+
+                    // Use featured news
+                    if (!empty($component['featured']) && $component['featured'] === true) {
+                        $articles = $this->article->listing($components['components'][$name]['id'], 50, 1, $component['topics'] ?? []);
+                        $articles['articles']['data'] = collect($articles['articles']['data'])->filter(function ($article) {
+                            return !empty($article['featured']['featured']) && $article['featured']['featured'] === 1;
+                        })->take($limit)->toArray();
+                    } else {
+                        $articles = $this->article->listing($components['components'][$name]['id'], $limit, 1, $component['topics'] ?? []);
+                    }
+
+                    // Special data structure for news-and-events component
+                    if (Str::contains($name, 'news-and-events')) {
+                        $modularComponents[$name]['data']['news'] = $articles['articles']['data'] ?? [];
+                    } else {
+                        $modularComponents[$name]['data'] = $articles['articles']['data'] ?? [];
+                    }
+
+                    // Provide a default News heading
+                    if (!array_key_exists('heading', $component)) {
+                        $components['components'][$name]['heading'] = 'News';
+                    }
+
+                    // Assign the component data
+                    $modularComponents[$name]['component'] = $components['components'][$name];
+                    $modularComponents[$name]['meta'] = $articles['articles']['meta'] ?? [];
+
+                    if (Str::startsWith($name, 'news-and-events')) {
+                        // Clear any set heading
+                        // Headings are set in the component blade
+                        $modularComponents[$name]['component']['heading'] = '';
+                    }
                 }
-            } elseif (Str::startsWith($name, 'news')) {
-                $components['components'][$name]['id'] = $component['id'] ?? $base['site']['news']['application_id'];
-                $limit = $component['limit'] ?? 4;
-                $components['components'][$name]['news_route'] = $component['news_route'] ?? config('base.news_listing_route');
-                if (!empty($component['featured']) && $component['featured'] === true) {
-                    $articles = $this->article->listing($components['components'][$name]['id'], 50, 1, $component['topics'] ?? []);
-                    $articles['articles']['data'] = collect($articles['articles']['data'])->filter(function ($article) {
-                        return !empty($article['featured']['featured']) && $article['featured']['featured'] === 1;
-                    })->take($limit)->toArray();
-                } else {
-                    $articles = $this->article->listing($components['components'][$name]['id'], $limit, 1, $component['topics'] ?? []);
-                }
-                $modularComponents[$name]['data'] = $articles['articles']['data'] ?? [];
-                $modularComponents[$name]['meta'] = $articles['articles']['meta'] ?? [];
-                $modularComponents[$name]['component'] = $components['components'][$name];
-            } elseif (Str::startsWith($name, 'layout-config')) {
-                $modularComponents[$name] = $component;
-            } elseif (Str::startsWith($name, 'page-content') || Str::startsWith($name, 'heading')) {
+                //} elseif (Str::startsWith($name, 'layout-config')) {
+                //   $modularComponents[$name] = $component;
+            } elseif (Str::startsWith($name, 'page-content') || Str::startsWith($name, 'heading') || Str::contains($name, 'layout')) {
+                //} elseif (Str::startsWith($name, ['page-content', 'heading', 'layout'])) {
                 // If there's JSON but no news, events or promo data, assign the component array as data
                 // Page-content and heading components
                 $modularComponents[$name]['data'][] = $components['components'][$name] ?? [];
@@ -287,6 +346,11 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
         if (isset($component['showDescription']) && $component['showDescription'] === false) {
             unset($data['description']);
+        }
+
+        // Override promo item option with component option
+        if (isset($component['option'])) {
+            $data['option'] = $component['option'];
         }
 
         return $data;
@@ -340,11 +404,11 @@ class ModularPageRepository implements ModularPageRepositoryContract
             }
 
             // Collect all legacy class names
-            $classes = ($component['component']['sectionClass'] ?? '').' '.($component['component']['componentClass'] ?? '').' '.($component['component']['classes'] ?? '');
+            $classes = trim(($component['component']['sectionClass'] ?? '').' '.($component['component']['componentClass'] ?? '').' '.($component['component']['classes'] ?? ''));
 
             // Group the classes based on the container they will be applied to
             // Set backgroundClass, containerClass, componentClass
-            if (!empty($classes)) {
+            if ($classes !== '') {
                 $classes = explode(' ', $classes);
 
                 foreach ($classes as $class) {
