@@ -521,7 +521,7 @@ final class PromoRepositoryTest extends TestCase
     }
 
     #[Test]
-    public function get_layout_config(): void
+    public function layout_config_assigned_to_global_promos(): void
     {
         $page_id = $this->faker->numberbetween(10, 50);
         $promo_group_id = $this->faker->numberbetween(1, 3);

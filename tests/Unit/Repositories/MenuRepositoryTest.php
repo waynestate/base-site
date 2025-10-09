@@ -554,7 +554,7 @@ final class MenuRepositoryTest extends TestCase
         // Force enable top menu
         config(['base.top_menu_enabled' => true]);
 
-        // Get a page with the HomepageController set
+        // Get a page with the ChildpageController set
         $page = app(Page::class)->create(
             1,
             true,
@@ -572,6 +572,41 @@ final class MenuRepositoryTest extends TestCase
 
         // Parse the site menu
         $menus = app(MenuRepository::class)->getMenus($page, $menu);
+
+        $this->assertFalse($menus['show_site_menu']);
+    }
+
+    #[Test]
+    public function layout_config_can_hide_site_menu(): void
+    {
+        // Get an error
+        $return = app(ApiError::class)->create(1, true);
+
+        // Mock the Connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.menuitems.listing', Mockery::type('array'))->once()->andReturn($return);
+
+        Log::shouldReceive('error')
+            ->once();
+
+        $pageData = app(Page::class)->create(1, true);
+
+
+        // Create a fake data request
+        $pageData = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'ChildpageController',
+            ],
+            'data' => [
+                'modular-layout-config' => '{"showSiteMenu": false}',
+            ],
+            'menu' => [
+                'id' => 1,
+            ],
+        ]);
+
+        // Get the menus
+        $menus = app(MenuRepository::class, ['wsuApi' => $wsuApi])->getRequestData($pageData);
 
         $this->assertFalse($menus['show_site_menu']);
     }

@@ -319,8 +319,9 @@ final class ModularPageRepositoryTest extends TestCase
                 'controller' => 'ChildpageController',
             ],
             'data' => [
-                'modular-events-featured-column-1' => json_encode([
+                'modular-events-featured-row-1' => json_encode([
                     'id' => 1,
+                    'columns' => null
                 ]),
             ],
         ]);
@@ -336,7 +337,8 @@ final class ModularPageRepositoryTest extends TestCase
         $component = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
 
         // TODO figure out how to get events to return with the component
-        $this->assertArrayHasKey('filename', $component['events-featured-column-1']['component']);
+        $this->assertEquals(4, $component['events-featured-row-1']['component']['columns']);
+        $this->assertArrayHasKey('filename', $component['events-featured-row-1']['component']);
     }
 
     #[Test]
