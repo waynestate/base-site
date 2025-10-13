@@ -18,4 +18,5 @@ import './modules/accordion';
 import './modules/slideout';
 import './modules/slideout-main-menu';
 import './modules/carousel';
+import './modules/carousel-swiper';
 import './modules/under-menu';
