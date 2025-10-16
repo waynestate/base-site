@@ -541,7 +541,9 @@ final class PromoRepositoryTest extends TestCase
                 'controller' => 'ChildpageController',
             ],
             'data' => [
-                'modular-page-config' => '{"showPageTitle": false}',
+                'modular-page-config' => '{
+                    "showPageTitle": false,
+                }',
             ],
         ]);
 

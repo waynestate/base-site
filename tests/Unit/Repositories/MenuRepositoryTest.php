@@ -577,7 +577,7 @@ final class MenuRepositoryTest extends TestCase
     }
 
     #[Test]
-    public function layout_config_can_hide_site_menu(): void
+    public function page_config_can_hide_site_menu(): void
     {
         // Get an error
         $return = app(ApiError::class)->create(1, true);
@@ -598,7 +598,10 @@ final class MenuRepositoryTest extends TestCase
                 'controller' => 'ChildpageController',
             ],
             'data' => [
-                'modular-layout-config' => '{"showSiteMenu": false}',
+                'modular-page-config' => '{
+                    "showSiteMenu": false,
+                    "showBreadcrumbs": false
+                }',
             ],
             'menu' => [
                 'id' => 1,
