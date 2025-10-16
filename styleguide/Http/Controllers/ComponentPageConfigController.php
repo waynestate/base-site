@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Faker\Factory;
 use Factories\EmptyPromo;
 
-class ComponentLayoutConfigController extends Controller
+class ComponentPageConfigController extends Controller
 {
     /**
      * Construct the controller.
@@ -28,7 +28,7 @@ class ComponentLayoutConfigController extends Controller
     public function index(Request $request): View
     {
         $request->data['base']['page']['content']['main'] = '
-<p class="text-lg">Modify template elements.</p>
+<p class="text-lg">Customization options for any childpage.</p>
             ';
 
         $components = [
@@ -45,9 +45,10 @@ class ComponentLayoutConfigController extends Controller
 </thead>
 <tbody>
 <tr>
-<td><pre class="w-full">modular-layout-config</pre></td>
+<td><pre class="w-full">modular-page-config</pre></td>
 <td><pre class="w-full">{
-"showSiteMenu":false,
+"showPageMenu":false,
+"showBreadcrumbs":false,
 "showPageTitle":false,
 "pageClass":"class-name",
 }</pre></td>
@@ -73,8 +74,12 @@ class ComponentLayoutConfigController extends Controller
 </thead>
 <tbody>
 <tr>
-<td class="font-bold">showSiteMenu</td>
-<td>Set to false to hide the left menu and display a full-width layout.</td>
+<td class="font-bold">showPageMenu</td>
+<td>Set to false to hide the left menu.</td>
+</tr>
+<tr>
+<td class="font-bold">showBreadcrumbs</td>
+<td>Set to false to hide breadcrumbs.</td>
 </tr>
 <tr>
 <td class="font-bold">showPageTitle</td>

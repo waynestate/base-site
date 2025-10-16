@@ -4,7 +4,7 @@ namespace Styleguide\Pages;
 
 use Factories\Page as PageFactory;
 
-class ComponentLayoutConfig extends Page
+class ComponentPageConfig extends Page
 {
     /**
      * {@inheritdoc}
@@ -13,11 +13,11 @@ class ComponentLayoutConfig extends Page
     {
         return app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'ComponentLayoutConfigController',
-                'title' => 'Layout config',
+                'controller' => 'ComponentPageConfigController',
+                'title' => 'Page configuration',
                 'id' => 124100,
                 'content' => [
-                    'main' => '<p>Layout config.</p>',
+                    'main' => '<p>Page config.</p>',
                 ],
             ],
         ]);

@@ -407,9 +407,9 @@
                 "is_active": 1,
                 "page_id": 124100,
                 "target": "",
-                "display_name": "Layout config",
+                "display_name": "Page config",
                 "class_name": "",
-                "relative_url": "/styleguide/component/layoutconfig",
+                "relative_url": "/styleguide/component/pageconfig",
                 "submenu": []
             },
             "9999": {
