@@ -521,7 +521,7 @@ final class PromoRepositoryTest extends TestCase
     }
 
     #[Test]
-    public function layout_config_assigned_to_global_promos(): void
+    public function page_config_assigned_to_global_promos(): void
     {
         $page_id = $this->faker->numberbetween(10, 50);
         $promo_group_id = $this->faker->numberbetween(1, 3);
@@ -541,7 +541,7 @@ final class PromoRepositoryTest extends TestCase
                 'controller' => 'ChildpageController',
             ],
             'data' => [
-                'modular-layout-config' => '{"showPageTitle": false}',
+                'modular-page-config' => '{"showPageTitle": false}',
             ],
         ]);
 
@@ -552,6 +552,6 @@ final class PromoRepositoryTest extends TestCase
         // Get the promos
         $promos = app(PromoRepository::class, ['wsuApi' => $wsuApi])->getRequestData($data);
 
-        $this->assertTrue(!empty($promos['layout_config']));
+        $this->assertTrue(!empty($promos['page_config']));
     }
 }

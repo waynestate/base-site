@@ -125,22 +125,8 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
             $menus['show_site_menu'] = false;
         }
 
-        // Hide the site menu with the modular layout config component
-        // TODO: move this to a new middleware file to handle page field data and avoid looping twice
-        if (array_key_exists('modular-layout-config', $data['data'])) {
-            foreach ($data['data'] as $componentName => $componentJSON) {
-                if ($componentName === 'modular-layout-config') {
-                    $componentJSON = $this->components->cleanComponentJSON($componentJSON);
-
-                    $componentJSON = json_decode($componentJSON, true);
-
-                    if (isset($componentJSON['showSiteMenu']) && $componentJSON['showSiteMenu'] === false) {
-                        $menus['show_site_menu'] = false;
-                        config(['base.full_width_controllers' => [$data['page']['controller']]]);
-                    }
-                }
-            }
-        }
+        // Hide the site menu or breadcrumbs with the modular-page-config component
+        $menus = $this->menuDisplayToggles($menus, $data);
 
         return $menus;
     }
@@ -289,5 +275,32 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
         }
 
         return $breadcrumbs;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function menuDisplayToggles($menus, $data)
+    {
+        // TODO: move this to a new middleware file to handle page field data and avoid looping twice
+        if (array_key_exists('modular-page-config', $data['data'])) {
+            foreach ($data['data'] as $componentName => $componentJSON) {
+                if ($componentName === 'modular-page-config') {
+                    $componentJSON = $this->components->cleanComponentJSON($componentJSON);
+
+                    $componentJSON = json_decode($componentJSON, true);
+
+                    if (isset($componentJSON['showPageMenu']) && $componentJSON['showPageMenu'] === false) {
+                        $menus['show_site_menu'] = false;
+                    }
+
+                    if (isset($componentJSON['showBreadcrumbs']) && $componentJSON['showBreadcrumbs'] === false) {
+                        $menus['breadcrumbs'] = [];
+                    }
+                }
+            }
+        }
+
+        return $menus;
     }
 }
