@@ -599,7 +599,7 @@ final class MenuRepositoryTest extends TestCase
             ],
             'data' => [
                 'modular-page-config' => '{
-                    "showSiteMenu": false,
+                    "showPageMenu": false,
                     "showBreadcrumbs": false
                 }',
             ],
