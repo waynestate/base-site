@@ -84,4 +84,13 @@ interface MenuRepositoryContract
      * @return array
      */
     public function getBreadcrumbs($menu, $siteTitle, $subsiteFolder);
+
+    /**
+     * Toggle displaying page menu and breadcrumbs.
+     *
+     * @param  array  $menus
+     * @param  array  $data
+     * @return array
+     */
+    public function menuDisplayToggles($menus, $data);
 }

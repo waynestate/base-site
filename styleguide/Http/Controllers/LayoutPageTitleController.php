@@ -31,6 +31,6 @@ class LayoutPageTitleController extends Controller
 <p>If <code>showTitle</code> is omitted, the default is visible.</p>
 ';
 
-        return view('styleguide-childpage', merge($request->data));
+        return view('childpage', merge($request->data));
     }
 }

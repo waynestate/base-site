@@ -86,7 +86,7 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
     /**
      * {@inheritdoc}
      */
-    public function getRequestData(array $data)
+    public function getRequestData(array &$data)
     {
         /*
         |--------------------------------------------------------------------------
@@ -136,8 +136,25 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
 
         $global_promos['components'] = $this->components->getModularComponents($data);
 
+        // Assign to base
         $global_promos = $this->hero->setHero($global_promos, $data);
 
+        // TODO: Move this to a new middleware file
+        // Assign page_config to data and remove from the component loop
+        // Can't assign to the base object from modular repository
+        // Can't override show_site_menu from here
+        $page_config = [];
+
+        if (array_key_exists('page-config', $global_promos['components'])) {
+            foreach ($global_promos['components'] as $component_name => $component_data) {
+                if ($component_name === 'page-config') {
+                    $global_promos['page_config'] = $component_data['component'];
+                    unset($global_promos['components']['page-config']);
+                }
+            }
+        }
+
+        // Global promos is appended to the data object
         return $global_promos;
     }
 

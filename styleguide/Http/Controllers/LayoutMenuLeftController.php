@@ -15,6 +15,6 @@ class LayoutMenuLeftController extends Controller
     {
         config(['base.top_menu_enabled' => false]);
 
-        return view('styleguide-childpage', merge($request->data));
+        return view('childpage', merge($request->data));
     }
 }

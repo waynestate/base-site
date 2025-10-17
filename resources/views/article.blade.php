@@ -1,7 +1,8 @@
 @extends('layouts.' . (!empty($base['layout']) ? $base['layout'] : 'main'))
 
 @section('content')
-    @include('components.page-title', ['title' => $article['data']['title']])
+    @include('partials.page-title', ['title' => $article['data']['title']])
+    @include('components.page-content')
 
     <div class="news-item">
         <time class="block text-sm text-gray-500 mb-6" datetime="{{ $article['data']['article_date'] }}">{{ apdatetime(date('F j, Y', strtotime($article['data']['article_date']))) }}</time>

@@ -2,16 +2,17 @@
 
 namespace App\Repositories;
 
-use Contracts\Repositories\MenuRepositoryContract;
 use Contracts\Repositories\RequestDataRepositoryContract;
+use Contracts\Repositories\MenuRepositoryContract;
+use Contracts\Repositories\ModularPageRepositoryContract;
 use Exception;
-use Illuminate\Cache\Repository;
 use Illuminate\Support\Facades\Log;
 use Waynestate\Api\Connector;
-use Waynestate\Menu\DisplayMenu;
 use Waynestate\Menuitems\ParseMenu;
+use Waynestate\Menu\DisplayMenu;
+use Illuminate\Cache\Repository;
 
-class MenuRepository implements MenuRepositoryContract, RequestDataRepositoryContract
+class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryContract
 {
     /** @var Connector */
     protected $wsuApi;
@@ -25,21 +26,30 @@ class MenuRepository implements MenuRepositoryContract, RequestDataRepositoryCon
     /** @var Repository */
     protected $cache;
 
+    /** @var ModularPageRepositoryContract */
+    protected $components;
+
     /**
      * Construct the repository.
      */
-    public function __construct(Connector $wsuApi, ParseMenu $parseMenu, DisplayMenu $displayMenu, Repository $cache)
-    {
+    public function __construct(
+        Connector $wsuApi,
+        ParseMenu $parseMenu,
+        DisplayMenu $displayMenu,
+        Repository $cache,
+        ModularPageRepositoryContract $components
+    ) {
         $this->wsuApi = $wsuApi;
         $this->parseMenu = $parseMenu;
         $this->displayMenu = $displayMenu;
         $this->cache = $cache;
+        $this->components = $components;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getRequestData(array $data)
+    public function getRequestData(array &$data)
     {
         // Get all the menus for this site
         try {
@@ -89,10 +99,10 @@ class MenuRepository implements MenuRepositoryContract, RequestDataRepositoryCon
         // Build the return
         $menus = [
             'site_menu' => $site_menu,
-            'site_menu_output' => ! empty($site_menu['menu']) ? $this->getSiteMenuOutput($site_menu['menu']) : null,
+            'site_menu_output' => !empty($site_menu['menu']) ? $this->getSiteMenuOutput($site_menu['menu']) : null,
             'breadcrumbs' => $breadcrumbs,
             'top_menu' => $top_menu,
-            'top_menu_output' => ! empty($top_menu['menu']) ? $this->getTopMenuOutput($top_menu['menu']) : null,
+            'top_menu_output' => !empty($top_menu['menu']) ? $this->getTopMenuOutput($top_menu['menu']) : null,
         ];
 
         // Show the site menu by default
@@ -105,7 +115,7 @@ class MenuRepository implements MenuRepositoryContract, RequestDataRepositoryCon
 
         // Hide the site menu if its equal to the top menu so the menu doesn't show twice
         if (config('base.top_menu_enabled') === true &&
-            (! empty($site_menu['menu']) && ! empty($top_menu['menu'])) &&
+            (!empty($site_menu['menu']) && !empty($top_menu['menu'])) &&
             $site_menu['menu'] == $top_menu['menu']) {
             $menus['show_site_menu'] = false;
         }
@@ -114,6 +124,9 @@ class MenuRepository implements MenuRepositoryContract, RequestDataRepositoryCon
         if (empty($menus['site_menu_output'])) {
             $menus['show_site_menu'] = false;
         }
+
+        // Hide the site menu or breadcrumbs with the modular-page-config component
+        $menus = $this->menuDisplayToggles($menus, $data);
 
         return $menus;
     }
@@ -154,7 +167,7 @@ class MenuRepository implements MenuRepositoryContract, RequestDataRepositoryCon
             $menus[$page_menu_id] = [];
         }
 
-        if (! empty($menus['error'])) {
+        if (!empty($menus['error'])) {
             throw new Exception($menus['error']['message']);
         }
 
@@ -166,7 +179,7 @@ class MenuRepository implements MenuRepositoryContract, RequestDataRepositoryCon
      */
     public function getTopMenuId($menu_id = null, $top_menu_id = null, $menus = [])
     {
-        return $top_menu_id !== null && ! empty($menus[$top_menu_id]) ? $top_menu_id : $menu_id;
+        return $top_menu_id !== null && !empty($menus[$top_menu_id]) ? $top_menu_id : $menu_id;
     }
 
     /**
@@ -199,11 +212,11 @@ class MenuRepository implements MenuRepositoryContract, RequestDataRepositoryCon
      */
     public function trimSiteMenu($menu, $parentId = null, $topMenuId = null)
     {
+        $trim_menu = [];
+
         // Trim first level based on path[0] - only if we are on the main website
         // or we aren't enabling top menu across all subsites
-        if (! empty($menu['meta']['path']) && ($parentId === null || $topMenuId === null) && config('base.top_menu_enabled') === true) {
-            $trim_menu = null;
-
+        if (!empty($menu['meta']['path']) && ($parentId === null || $topMenuId === null) && config('base.top_menu_enabled') === true) {
             foreach ($menu['menu'] as $key => $item) {
                 // If we are on the first path then grab that submenu
                 if ($item['menu_item_id'] == $menu['meta']['path'][0]) {
@@ -233,7 +246,7 @@ class MenuRepository implements MenuRepositoryContract, RequestDataRepositoryCon
         $breadcrumbs = [];
 
         // Get the breadcrumbs from the selected path if it exists
-        if (! empty($menu['meta']['path'])) {
+        if (!empty($menu['meta']['path'])) {
             $breadcrumbs = $this->parseMenu->getBreadCrumbs($menu);
 
             // If the subsite root isn't already within the breadcrumbs then add the subsite root crumb
@@ -242,7 +255,7 @@ class MenuRepository implements MenuRepositoryContract, RequestDataRepositoryCon
                 $rel_subsiteFolder = '/'.rtrim($subsiteFolder, '/');
 
                 // Add the subsite path if it doesn't exist in the breadcrumbs
-                if (! collect($breadcrumbs)->contains('relative_url', $rel_subsiteFolder)) {
+                if (!collect($breadcrumbs)->contains('relative_url', $rel_subsiteFolder)) {
                     $subsite_crumb = [
                         'display_name' => $siteTitle,
                         'relative_url' => $rel_subsiteFolder,
@@ -262,5 +275,32 @@ class MenuRepository implements MenuRepositoryContract, RequestDataRepositoryCon
         }
 
         return $breadcrumbs;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function menuDisplayToggles($menus, $data)
+    {
+        // TODO: move this to a new middleware file to handle page field data and avoid looping twice
+        if (array_key_exists('modular-page-config', $data['data'])) {
+            foreach ($data['data'] as $componentName => $componentJSON) {
+                if ($componentName === 'modular-page-config') {
+                    $componentJSON = $this->components->cleanComponentJSON($componentJSON);
+
+                    $componentJSON = json_decode($componentJSON, true);
+
+                    if (isset($componentJSON['showPageMenu']) && $componentJSON['showPageMenu'] === false) {
+                        $menus['show_site_menu'] = false;
+                    }
+
+                    if (isset($componentJSON['showBreadcrumbs']) && $componentJSON['showBreadcrumbs'] === false) {
+                        $menus['breadcrumbs'] = [];
+                    }
+                }
+            }
+        }
+
+        return $menus;
     }
 }
