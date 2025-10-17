@@ -7,7 +7,6 @@ use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Faker\Factory;
-use Factories\EmptyPromo;
 
 class ComponentPageConfigController extends Controller
 {
@@ -28,74 +27,40 @@ class ComponentPageConfigController extends Controller
     public function index(Request $request): View
     {
         $request->data['base']['page']['content']['main'] = '
-<p class="text-lg">Customization options for any childpage.</p>
+<p class="text-lg">Provides customization options for any childpage template. True is default; you only need to add configuration options that you want to set to false.</p>
             ';
 
         $components = [
-            'promo-row-1' => [
-                'data' => app(EmptyPromo::class)->create(1, false, [
-                    'title' => 'Component configuration',
-                    'description' => '
-<table style="cell-padding: 5px;" class="mt-4 no-stripe">
-<thead>
-<tr>
-<th class="md:w-2/5">Page field</th>
-<th>Data</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><pre class="w-full">modular-page-config</pre></td>
-<td><pre class="w-full">{
-"showPageMenu":false,
-"showBreadcrumbs":false,
-"showPageTitle":false,
-"pageClass":"class-name",
-}</pre></td>
-</tr>
-</tbody>
-</table>
-',
-                ]),
-                'component' => [
-                    'filename' => 'promo-row',
+            'accordion' => [
+                'data' => [
+                    2 => [
+                        'promo_item_id' => 'component_config',
+                        'title' => 'Component configuration',
+                        'description' => '',
+                        'tr1' => [
+                            'Page field' => 'modular-page-config',
+                            'Data' => '{
+"showPageMenu": false,
+"showBreadcrumbs": false,
+"showPageTitle": false,
+"pageClass": "custom-class",
+}',
+                        ],
+                    ],
+                    1 => [
+                        'promo_item_id' => 'promo_details',
+                        'title' => 'Configuration details',
+                        'description' => '',
+                        'table' => [
+                            'showPageMenu' => 'false; hide left menu.',
+                            'showBreadcrumbs' => 'false; hide breadcrumbs.',
+                            'showPageTitle' => 'false; visually hide the page title.',
+                            'pageClass' => 'Add a class to the body of the page.',
+                        ],
+                    ],
                 ],
-            ],
-            'promo-row-2' => [
-                'data' => app(EmptyPromo::class)->create(1, false, [
-                    'title' => 'Options',
-                    'description' => '
-<table>
-<thead>
-<tr>
-<th>Option</th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="font-bold">showPageMenu</td>
-<td>Set to false to hide the left menu.</td>
-</tr>
-<tr>
-<td class="font-bold">showBreadcrumbs</td>
-<td>Set to false to hide breadcrumbs.</td>
-</tr>
-<tr>
-<td class="font-bold">showPageTitle</td>
-<td>Set to false to visually hide the page title.</td>
-</tr>
-<tr>
-<td class="font-bold">pageClass</td>
-<td>Add a class to the body of the page.</td>
-</tr>
-</table>
-',
-                ]),
                 'component' => [
-                    'filename' => 'promo-row',
-                    'headingClass' => 'mt-0',
-                    'classes' => '-mt-gutter'
+                    'filename' => 'accordion-styleguide',
                 ],
             ],
         ];

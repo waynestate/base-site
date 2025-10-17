@@ -101,6 +101,47 @@ Change default component heading level from h2 to h3 or h4.
                 </tr>
         </table>
 
+        <h3>Page config</h3>
+        <p>Customization options for any childpage template. See <a href="/styleguide/component/pageconfig">page config reference</a>.</p>
+        <table class="mt-2">
+            <thead>
+                <tr>
+                    <th class="w-1/5">Property</th>
+                    <th>Detail</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="font-bold">showPageMenu</td>
+                    <td>
+<code class="mt-1 mb-2">"showPageMenu": false</code><br />
+Hide the left menu.
+                    </td>
+                </tr>
+                <tr>
+                    <td class="font-bold">showBreadcrumbs</td>
+                    <td>
+<code class="mt-1 mb-2">"showBreadcrumbs": false</code><br />
+Hide the breadcrumbs.
+                    </td>
+                </tr>
+                <tr>
+                    <td class="font-bold">showPageTitle</td>
+                    <td>
+<code class="mt-1 mb-2">"showPageTitle": false</code><br />
+Visually hide the page title.
+                    </td>
+                </tr>
+                <tr>
+                    <td class="font-bold">pageClass</td>
+                    <td>
+<code class="mt-1 mb-2">"pageClass": "custom-class"</code><br />
+Add a custom class to the page.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
 
         <h3>Promotion components</h3>
         <table class="mt-2">
@@ -333,6 +374,7 @@ All topics shown by default.
     <li>modular-news-column</li>
     <li>modular-news-featured-column</li>
     <li>modular-news-row</li>
+    <li>modular-page-config</li>
     <li>modular-page-content-row</li>
     <li>modular-page-content-column</li>
     <li>modular-promo-column</li>
