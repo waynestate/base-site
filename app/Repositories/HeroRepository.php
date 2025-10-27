@@ -31,33 +31,147 @@ class HeroRepository implements HeroRepositoryContract
      */
     public function setHero(array $promos, array $data)
     {
-        // Transform global promos into the component structure
+        $hero = [];
+
+        // Construct global hero into component
+        // Preserve hero data and remove from promos
         if (!empty($promos['hero'])) {
-            // Preserve hero data and remove from promos
             $temporary_hero = $promos['hero'];
             unset($promos['hero']);
 
-            // Give hero data component structure
-            if (empty($promos['hero']['data'])) {
-                $promos['hero']['data'] = $temporary_hero;
-            }
+            // Transform into a component 
+            $hero = [
+                'data' => $temporary_hero,
+                'component' => [
+                    'heroPlacement' => config('base.hero_placement'),
+                    'heroType' => '',
+                ],
+            ];
+        }
 
-            // Create component data and set default heroSize
-            if (empty($promos['hero']['component'])) {
-                $promos['hero']['component'] = [];
-                $promos['hero']['component']['heroSize'] = config('base.hero_size');
-            }
+        // Override hero from components
+        // Return first hero component
+        $hero_components = collect($promos)->reject(function ($data, $component_name) {
+            return !str_contains($component_name, 'hero');
+        })->toArray();
 
-            // Set heroStyle from option
-            foreach ($promos['hero']['data'] as $hero) {
-                if (count($promos['hero']['data']) === 1) {
-                    $promos['hero']['component']['heroStyle'] = !empty($hero['option']) ? Str::slug($hero['option']) : 'banner';
-                } else {
-                    $promos['hero']['component']['heroStyle'] = 'carousel';
-                }
+        if (!empty($hero_components)) {
+            $hero_key = array_key_first($hero_components);
+
+            if (!empty($promos[$hero_key]['data'])) {
+                $hero['hero'] = $promos[$hero_key];
+                $hero['hero']['component']['heroPlacement'] = $promos['hero']['component']['heroPlacement'] ?? config('base.hero_placement');
+                unset($promos[$hero_key]);
             }
         }
 
+        /*
+         * Set hero from component
+         * Determine heroPlacement and heroType from option 
+         *
+         * 'heroPlacement' = [
+         *     'contained', 
+         *     'banner/full-width/wide/widescreen'
+         * ];
+         *
+         * 'heroType' = [
+         *     'full', // banner-large, large, full 
+         *     'slim', // banner-small, small, slim, half-height
+         *     'split', // half 
+         *     'overlay', // text-overlay, svg-overlay, logo-overlay, buttons
+         *     'carousel', // more than one in array
+         * ];
+         */
+
+        $expected_placement = [
+            'contained', // 'content area'
+            'banner', // 'full-width'
+        ];
+
+        $expected_types = [
+            'banner', 
+            'large',
+            'small', 
+            'slim',
+            'half', 
+            'split',
+            'overlay',
+            'carousel'
+        ];
+
+        // Not a carousel
+        if (!empty($hero) && !empty($hero['data'] && count($hero['data']) === 1)) {
+
+            // Let's just deal with one for right now
+            $hero_data = current($hero['data']);
+            $hero_data['option'] = strtolower($hero_data['option']);
+
+dump(
+    '--- Hero option ---', 
+    $hero_data['option']
+);
+
+            // Support old options
+            if (!empty($hero_data['option'])) {
+
+                // Explode options to compare words
+                $options = explode(' ',strtolower($hero_data['option']));
+
+                // Placement 
+                if (!empty(array_intersect($options, $expected_placement))) {
+                    if (Str::contains($hero_data['option'], 'banner')) {
+                        $hero['component']['heroPlacement'] = 'full-width';
+                    } else {
+                        $hero['component']['heroPlacement'] = 'contained';
+                    }
+                }
+
+                // Type 
+                if (!empty(array_intersect($options, $expected_types))) {
+                    if (Str::contains($hero_data['option'], 'large')) {
+                        $hero['component']['heroType'] = 'large';
+                    } elseif (Str::contains($hero_data['option'], ['slim', 'small'])) {
+                        $hero['component']['heroType'] = 'slim';
+                    } elseif (Str::contains($hero_data['option'], ['split', 'half'])) {
+                        $hero['component']['heroType'] = 'split';
+                    } elseif (Str::contains($hero_data['option'], 'overlay')) {
+                        $hero['component']['heroType'] = 'overlay';
+                    } else {
+                        $hero['component']['heroType'] = 'large';
+                    }
+                }
+            }
+
+        }
+
+        dump(
+            '--- Placement and Style Results ---', 
+            $hero['component']
+        );
+
+
+        //dump($hero);
+
+        // Add hero back into promos
+        $promos['hero'] = $hero;
+
+        return $promos;
+    }
+}
+//global
+            /*
+            // Set heroType from option
+            foreach ($promos['hero']['data'] as $hero_type) {
+                if (count($promos['hero']['data']) === 1) {
+                    $promos['hero']['component']['heroType'] = !empty($hero_type['option']) ? Str::slug(strtolower($hero_type['option'])) : 'banner';
+                } else {
+                    $promos['hero']['component']['heroType'] = 'carousel';
+                }
+            }
+             */
+
+// root
+        /*
         // Set hero buttons from components
         $hero_buttons = collect($promos['components'])->reject(function ($data, $component_name) {
             return !str_contains($component_name, 'hero-buttons');
@@ -71,25 +185,13 @@ class HeroRepository implements HeroRepositoryContract
                 unset($promos['components'][$hero_buttons_key]);
             }
         }
+         */
 
-        // Override hero from components
-        $hero = collect($promos['components'])->reject(function ($data, $component_name) {
-            return !str_contains($component_name, 'hero');
-        })->toArray();
-
-        if (!empty($hero)) {
-            $hero_key = array_key_first($hero);
-
-            if (!empty($promos['components'][$hero_key]['data'])) {
-                $promos['hero'] = $promos['components'][$hero_key];
-                $promos['hero']['component']['heroSize'] = $promos['hero']['component']['heroSize'] ?? config('base.hero_size');
-                unset($promos['components'][$hero_key]);
-            }
-        }
-
+        // Hero items
         // Set standard heroStyle and heroSize
-        if (!empty($promos['hero'])) {
-            $promos['hero']['data'] = collect($promos['hero']['data'])->map(function ($hero_data) {
+        /*
+        if (!empty($hero['data'])) {
+            $hero['data'] = collect($hero['data'])->map(function ($hero_data) {
                 // Replace Hero Buttons option with Text Overlay
                 if (!empty($hero_data['option']) && $hero_data['option'] == 'Buttons') {
                     $hero_data['option'] = 'Text Overlay';
@@ -99,6 +201,7 @@ class HeroRepository implements HeroRepositoryContract
                 if (!empty($hero_data['option'])) {
                     // Remove word 'banner' to set the size
                     $hero_data['heroSize'] = trim(str_ireplace('banner', '', $hero_data['option']));
+                    //full width, half,     
 
                     // Keep 'banner' for style
                     $hero_data['option'] = trim(str_ireplace(['small','large','contained'], '', $hero_data['option']));
@@ -107,8 +210,4 @@ class HeroRepository implements HeroRepositoryContract
                 return $hero_data;
             })->toArray();
         }
-        dump($promos);
-
-        return $promos;
-    }
-}
+         */

@@ -42,6 +42,7 @@
     {{-- placement logic only --}}
 
     @if(!empty($base['hero']) && (!empty($base['hero']['component']['heroSize']) && $base['hero']['component']['heroSize'] != 'contained'))
+        @php dump('here'); @endphp
         @include('components.hero', ['hero' => $base['hero']])
     @endif
 

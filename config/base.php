@@ -44,16 +44,26 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Hero size
+    | Hero placement
     |--------------------------------------------------------------------------
     |
-    | Create a new layout when adjustments to the content area are needed.
-    | Layouts are stored in resources/layouts
-    | Sets the default look of the hero; main => small banner, contained-hero => contained hero
-    | ['contained', 'large', 'small']
-    |
+    | Sets the default placement of the hero
+    | 
+    | 'heroPlacement' = [
+    |     'contained', // content area  
+    |     'full-width' // above content
+    | ];
+    | 
+    | 'heroType' = [
+    |     'large', // banner-large, full 
+    |     'slim', // banner-small, slim, half-height
+    |     'split', // half 
+    |     'overlay', // text-overlay, svg-overlay, logo-overlay, buttons
+    |     'carousel', // more than one in array
+    | ];
+    | 
     */
-    'hero_size' => 'contained',
+    'hero_placement' => 'contained',
 
     /*
     |--------------------------------------------------------------------------
