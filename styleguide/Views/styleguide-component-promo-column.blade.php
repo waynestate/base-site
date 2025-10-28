@@ -1,7 +1,7 @@
 @extends('layouts.' . (!empty($base['layout']) ? $base['layout'] : 'main'))
 
 @section('content')
-    @include('components.page-title', ['title' => $base['page']['title']])
+    @include('partials.page-title', ['title' => $base['page']['title']])
 
     <div class="content">
         <p>This component will display a single promotion item in a column at one time. Can be random on refresh. Image is full width on small views.</p>

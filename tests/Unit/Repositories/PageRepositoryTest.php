@@ -43,8 +43,16 @@ final class PageRepositoryTest extends TestCase
         // Create a temporary file
         file_put_contents($filename, '{}');
 
+        // Defined in order to be passed by reference
+        $parameters = [
+            'parameters' => [
+                'path' => $path,
+            ],
+        ];
+
         // Parse the page data
-        $data = app(PageRepository::class)->getRequestData(['parameters' => ['path' => $path]]);
+        //$data = app(PageRepository::class)->getRequestData(['parameters' => ['path' => $path]]);
+        $data = app(PageRepository::class)->getRequestData($parameters);
 
         // Delete the temp file
         unlink($filename);

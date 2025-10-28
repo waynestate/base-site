@@ -519,4 +519,41 @@ final class PromoRepositoryTest extends TestCase
         // Assert that the (empty) modular hero component replaces the global hero
         $this->assertTrue($promos['hero'] == []);
     }
+
+    #[Test]
+    public function page_config_assigned_to_global_promos(): void
+    {
+        $page_id = $this->faker->numberbetween(10, 50);
+        $promo_group_id = $this->faker->numberbetween(1, 3);
+
+        // Fake return
+        $return['promotions'] = app(GenericPromo::class)->create(1, false, [
+            'promo_group_id' => $promo_group_id,
+            'page_id' => $page_id,
+            'group' => [
+                'promo_group_id' => $promo_group_id,
+            ],
+        ]);
+
+        // Create a fake data request
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'ChildpageController',
+            ],
+            'data' => [
+                'modular-page-config' => '{
+                    "showPageTitle": false,
+                }',
+            ],
+        ]);
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
+
+        // Get the promos
+        $promos = app(PromoRepository::class, ['wsuApi' => $wsuApi])->getRequestData($data);
+
+        $this->assertTrue(!empty($promos['page_config']));
+    }
 }

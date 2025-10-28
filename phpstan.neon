@@ -1,0 +1,15 @@
+includes:
+    - ./vendor/larastan/larastan/extension.neon
+parameters:
+    level: 5
+    paths:
+        - app
+        - bootstrap/app.php
+        - routes
+    excludePaths:
+        - %currentWorkingDirectory%/storage/*
+        - %currentWorkingDirectory%/public/*
+        - %currentWorkingDirectory%/bootstrap/cache/*
+        - %currentWorkingDirectory%/vendor/*
+    inferPrivatePropertyTypeFromConstructor: true # Automatically infer private property types from constructors
+    reportUnmatchedIgnoredErrors: false # Don't fail if an ignore rule no longer matches anything

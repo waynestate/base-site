@@ -96,3 +96,26 @@ function using_styleguide()
 {
     return (config('app.env') == 'testing' || (!empty($_SERVER['REQUEST_URI']) && substr($_SERVER['REQUEST_URI'], 0, 11) == '/styleguide'));
 }
+
+/**
+ * Recursively merge two arrays, with values from array2 replacing values from array1.
+ * Indexed arrays are completely replaced, while associative arrays are merged recursively.
+ *
+ * @param array $array1
+ * @param array $array2
+ * @return array
+ */
+function array_replace_recursive_distinct(array &$array1, array &$array2)
+{
+    $merged = $array1;
+
+    foreach ($array2 as $key => &$value) {
+        if (is_array($value) && isset($merged[$key]) && is_array($merged[$key]) && !array_is_list($merged[$key])) {
+            $merged[$key] = array_replace_recursive_distinct($merged[$key], $value);
+        } else {
+            $merged[$key] = $value;
+        }
+    }
+
+    return $merged;
+}

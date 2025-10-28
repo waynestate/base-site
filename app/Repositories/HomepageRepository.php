@@ -19,6 +19,9 @@ class HomepageRepository implements HomepageRepositoryContract
     /** @var Repository */
     protected $cache;
 
+    /** @var ModularPageRepositoryContract */
+    protected $components;
+
     /**
      * Construct the repository.
      */

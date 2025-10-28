@@ -3,7 +3,11 @@
     $item => array // ['title', 'link', 'description', 'excerpt', 'relative_url', 'option']
 --}}
 
-<{{ !empty($item['link']) ? 'a href='.$item['link'] : 'div' }} class="block {{ !empty($component['gradientOverlay']) && $component['gradientOverlay'] === true ? 'bg-green-800 relative overflow-hidden' : '' }} {{ !empty($item['link']) ? 'group' : '' }} {{ $loop->last != true && !empty($component['filename']) && $component['filename'] != 'catalog' ? 'mt-6 mb-8' : '' }}">
+@if (!empty($item['link']))
+    <a href="{{ $item['link'] }}" class="block {{ !empty($component['gradientOverlay']) && $component['gradientOverlay'] === true ? 'bg-green-800 relative overflow-hidden' : '' }} group {{ $loop->last != true && !empty($component['filename']) && $component['filename'] != 'catalog' ? 'mt-6 mb-8' : '' }}">
+@else
+    <div class="block {{ !empty($component['gradientOverlay']) && $component['gradientOverlay'] === true ? 'bg-green-800 relative overflow-hidden' : '' }} {{ $loop->last != true && !empty($component['filename']) && $component['filename'] != 'catalog' ? 'mt-6 mb-8' : '' }}">
+@endif
     <div class="{{ !empty($component['gradientOverlay']) ? '' : 'mb-2' }}">
         @if(!empty($item['youtube_id']))
             <div class="play-video-button">
@@ -31,7 +35,7 @@
                 @if(!empty($item['excerpt']))<p class="my-1">{!! strip_tags($item['excerpt'], ['em', 'strong']) !!}</p>@endif 
                 @if(!empty($item['description']))
                     @if (!empty($item['link']))
-                        <div>{!! preg_replace(array('"<a href(.*?)>"', '"</a>"'), array('',''), $item['description']) !!}</div>
+                        <div>{!! preg_replace(['"<a href(.*?)>"', '"</a>"'], '', $item['description']) !!}</div>
                     @else
                         <div>{!! $item['description'] !!}</div>
                     @endif
@@ -39,4 +43,8 @@
             </div>
         </div>
     </div>
-{!! !empty($item['link']) ? '</a>' : '</div>' !!}
+@if (!empty($item['link']))
+    </a>
+@else
+    </div>
+@endif

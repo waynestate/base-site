@@ -466,16 +466,103 @@ final class ProfileRepositoryTest extends TestCase
     }
 
     #[Test]
-    public function getting_profiles_ordered_by_id_should_return_array(): void
+    public function getting_dropdown_options_should_hide_filtering_when_all_profiles_in_same_group(): void
     {
+        // Test with profiles all in the same group
+        $profiles_same_group = [
+            'profiles' => [
+                ['groups' => ['1' => 'Engineering']],
+                ['groups' => ['1' => 'Engineering']],
+                ['groups' => ['1' => 'Engineering']],
+            ],
+        ];
 
-        $profile_listing = app(Profile::class)->create(5);
+        $options = app(ProfileRepository::class)->getDropdownOptions(null, null, $profiles_same_group);
+        $this->assertEquals(['selected_group' => null, 'hide_filtering' => true], $options);
 
-        $profiles_by_accessid = collect($profile_listing)->pluck('data.AccessID')->shuffle()->implode("|");
+        // Test with profiles in multiple groups
+        $profiles_multiple_groups = [
+            'profiles' => [
+                ['groups' => ['1' => 'Engineering']],
+                ['groups' => ['2' => 'Business']],
+                ['groups' => ['1' => 'Engineering']],
+            ],
+        ];
 
-        $ordered_profiles = app(ProfileRepository::class)->orderProfilesById($profile_listing, $profiles_by_accessid);
+        $options = app(ProfileRepository::class)->getDropdownOptions(null, null, $profiles_multiple_groups);
+        $this->assertEquals(['selected_group' => null, 'hide_filtering' => false], $options);
 
-        $this->assertEquals(collect($ordered_profiles)->pluck('data.AccessID')->toArray(), explode('|', $profiles_by_accessid));
+        // Test with empty profiles array
+        $profiles_empty = ['profiles' => []];
+        $options = app(ProfileRepository::class)->getDropdownOptions(null, null, $profiles_empty);
+        $this->assertEquals(['selected_group' => null, 'hide_filtering' => false], $options);
+
+        // Test with profiles that have no groups
+        $profiles_no_groups = [
+            'profiles' => [
+                ['data' => ['name' => 'John Doe']],
+                ['groups' => []],
+            ],
+        ];
+
+        $options = app(ProfileRepository::class)->getDropdownOptions(null, null, $profiles_no_groups);
+        $this->assertEquals(['selected_group' => null, 'hide_filtering' => true], $options);
+
+        // Test that forced group ID still takes precedence
+        $random_group_id = $this->faker->numberBetween(1, 9);
+        $options = app(ProfileRepository::class)->getDropdownOptions(null, $random_group_id, $profiles_multiple_groups);
+        $this->assertEquals(['selected_group' => $random_group_id, 'hide_filtering' => true], $options);
+    }
+
+    #[Test]
+    public function getting_unique_groups_from_profiles_should_return_unique_group_names(): void
+    {
+        $repository = app(ProfileRepository::class);
+
+        // Test with profiles having multiple groups
+        $profiles_multiple_groups = [
+            ['groups' => ['1' => 'Engineering', '2' => 'Computer Science']],
+            ['groups' => ['2' => 'Computer Science', '3' => 'Mathematics']],
+            ['groups' => ['1' => 'Engineering']],
+        ];
+
+        // Use reflection to access the protected method
+        $reflection = new \ReflectionClass($repository);
+        $method = $reflection->getMethod('getUniqueGroupsFromProfiles');
+        $method->setAccessible(true);
+
+        $unique_groups = $method->invokeArgs($repository, [$profiles_multiple_groups]);
+        $expected = ['Engineering', 'Computer Science', 'Mathematics'];
+
+        $this->assertCount(3, $unique_groups);
+        $this->assertEquals($expected, array_values($unique_groups));
+
+        // Test with profiles all in same group
+        $profiles_same_group = [
+            ['groups' => ['1' => 'Engineering']],
+            ['groups' => ['1' => 'Engineering']],
+            ['groups' => ['1' => 'Engineering']],
+        ];
+
+        $unique_groups = $method->invokeArgs($repository, [$profiles_same_group]);
+        $this->assertCount(1, $unique_groups);
+        $this->assertEquals(['Engineering'], $unique_groups);
+
+        // Test with profiles having no groups or invalid groups
+        $profiles_no_groups = [
+            ['data' => ['name' => 'John Doe']],
+            ['groups' => []],
+            ['groups' => null],
+        ];
+
+        $unique_groups = $method->invokeArgs($repository, [$profiles_no_groups]);
+        $this->assertCount(0, $unique_groups);
+        $this->assertEquals([], $unique_groups);
+
+        // Test with empty profiles array
+        $unique_groups = $method->invokeArgs($repository, [[]]);
+        $this->assertCount(0, $unique_groups);
+        $this->assertEquals([], $unique_groups);
     }
 
     #[Test]
