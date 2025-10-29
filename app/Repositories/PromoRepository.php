@@ -171,11 +171,6 @@ dump(
             return empty($value);
         })->toArray();
 
-        // If rotating hero images are allowed on this controller then change the limit
-        if (in_array($data['page']['controller'], config('base.hero_rotating_controllers'))) {
-            $group_config = str_replace('|limit:1', '|limit:'.config('base.hero_rotating_limit'), $group_config);
-        }
-
         return $group_config;
     }
 

@@ -132,20 +132,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Hero Rotating
-    |--------------------------------------------------------------------------
-    |
-    | This enables the hero image to have arrows to rotate through them, if
-    | the page has more than one hero image assigned. You can specify
-    | which controllers you want this to work on by adding to the
-    | array.
-    |
-    */
-    'hero_rotating_controllers' => [],
-    'hero_rotating_limit' => 3,
-
-    /*
-    |--------------------------------------------------------------------------
     | Surtitle
     |--------------------------------------------------------------------------
     |
