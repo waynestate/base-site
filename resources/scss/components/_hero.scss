@@ -17,7 +17,7 @@
         }
     }
 
-    &--small {
+    &--slim {
         @apply h-hero-small max-h-hero-small;
 
         .hero__primary-image {
@@ -65,7 +65,7 @@
         }
     }
 
-    &--half {
+    &--split {
         @apply relative xl:flex items-center;
 
         .hero__primary-image {

@@ -1,4 +1,4 @@
-@if(isset($hero['data']))
+@if(!empty($hero['data']))
     <div role="complementary" class="hero GTM-hero 
        {{ $heroClass ?? '' }} 
        {{-- move below into modular repo --}}
@@ -9,7 +9,7 @@
         @foreach($hero['data'] as $item)
 
             @if(count($hero['data']) > 1)<div class="hero__preserve-flickity">@endif
-                <div class="hero__wrapper hero--{{ $base['hero']['component']['heroStyle'] ?? 'banner' }}">
+                <div class="hero__wrapper hero--{{ $item['hero_type'] ?? 'banner' }}">
 
                     <img class="hero__primary-image {{ $loop->first ? '' : 'lazy'}}" @if($loop->first) src="{{ $item['relative_url'] }}" @else data-src="{{ $item['relative_url'] }}"@endif alt="{{ $item['filename_alt_text'] }}">
 

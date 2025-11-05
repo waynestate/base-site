@@ -54,6 +54,17 @@ return [
     |     'full-width' // above content
     | ];
     | 
+    */
+    'hero_placement' => 'contained',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Hero type 
+    |--------------------------------------------------------------------------
+    |
+    | Sets the default type of the hero
+    | Default hero type is 'large' for images in a carousel
+    | 
     | 'heroType' = [
     |     'large', // banner-large, full 
     |     'slim', // banner-small, slim, half-height
@@ -63,7 +74,7 @@ return [
     | ];
     | 
     */
-    'hero_placement' => 'contained',
+    'hero_type' => 'slim',
 
     /*
     |--------------------------------------------------------------------------
