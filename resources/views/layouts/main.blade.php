@@ -42,8 +42,7 @@
     {{-- placement logic only --}}
 
     @if(!empty($base['hero']) && (!empty($base['hero']['component']['heroPlacement']) && $base['hero']['component']['heroPlacement'] != 'contained'))
-        @include('components.hero', ['hero' => $base['hero']])
-        @php dump('full-width'); @endphp
+        @include('components.hero', ['hero' => $base['hero'], 'class' => 'hero--full-width'])
     @endif
 
     <div class="layout {{ (in_array($base['page']['controller'], config('base.full_width_controllers'))) ? 'layout--full-width' : 'layout--left-menu' }}">
@@ -83,8 +82,7 @@
         <main class="content-area mx-auto w-full {{ $base['show_site_menu'] === true ? 'max-w-[900px]' : 'max-w-[75rem]' }} {{ (in_array($base['page']['controller'], config('base.full_width_controllers'))) ? ' max-w-full' : '' }}" tabindex="-1">
 
             @if(!empty($base['hero']) && (!empty($base['hero']['component']['heroPlacement']) && $base['hero']['component']['heroPlacement'] === 'contained'))
-                @include('components.hero', ['hero' => $base['hero']])
-                @php dump('contained'); @endphp
+                @include('components.hero', ['hero' => $base['hero'], 'class' => 'hero--contained'])
             @endif
 
             @include('components.breadcrumbs', ['breadcrumbs' => $base['breadcrumbs'] ?? ''])

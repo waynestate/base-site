@@ -1,62 +1,80 @@
 .hero {
-    /* Flickity applies absolute to this container when enabled */
-    &__preserve-flickity,
-    &__wrapper,
-    &__primary-image {
-        @apply w-full; 
+    $c: &;
+    @apply relative max-w-full;
+
+    &--full-width {
+        @apply mx-auto;
     }
 
-    /* Hero size */
-    &--contained,
-    &--large {
-        @apply aspect-hero max-h-hero w-full bg-cover bg-center relative;
+    &--contained {
+        @apply xl:mx-container;
+    }
 
-        .hero__primary-image {
-            @apply w-full h-full object-cover object-center;
-            //@apply aspect-hero max-h-hero w-full bg-cover bg-center relative;
-        }
+    &__carousel-item {
+        /* Flickity applies absolute to this container when enabled */
+        @apply w-full aspect-hero; 
+    }
+
+    #{$c}__primary-image {
+        @apply w-full h-full object-cover object-center;
     }
 
     &--slim {
         @apply h-hero-small max-h-hero-small;
 
-        .hero__primary-image {
+        #{$c}__primary-image {
             @apply w-full h-full object-cover object-center;
         }
     }
 
-    /* Hero style */
-    &--banner {
-        .hero__title,
-        .hero__description {
+    /* TODO logo overlay 
+    &--variable-height {
+    }
+    */
+
+    &--large {
+        #{$c}__content {
             @apply hidden;
         }
     }
 
-    &--text-overlay {
-        @apply relative;
-
-        .hero__primary-image {
-            @apply aspect-hero max-h-hero w-full bg-cover bg-center relative;
-        }
-        
-        .hero__content-position {
-            @apply px-container z-1 relative lg:absolute print:relative lg:bottom-0 lg:inset-x-0 lg:bg-gradient-darkest lg:pt-28 lg:pb-6;
+    &--svg {
+        #{$c}__secondary-image {
+            //svg overlay
+            @apply absolute inset-0;
         }
 
-        .hero__content {
-            @apply relative z-2 mt-4 lg:mt-0 py-1 lg:py-0 pl-4 lg:pl-0 border-l-12 border-gold border-solid lg:border-0 text-green-900 lg:text-white lg:white-links;
+        #{$c}__content {
+            @apply hidden;
+        }
+    }
+
+    &--overlay {
+        #{$c}__primary-image {
+            @apply aspect-hero max-h-hero;
         }
 
-        .hero__title {
+        #{$c}__secondary-image {
+            //svg overlay
+            @apply absolute inset-0;
+        }
+
+        #{$c}__content {
+            @apply mt-4 py-1 px-4 border-l-12 border-gold border-solid text-green-900;
+            @apply lg:px-container lg:absolute lg:bottom-0 lg:inset-x-0 lg:pt-28 lg:pb-6;
+            @apply lg:mt-0 lg:border-0 lg:text-white lg:white-links;
+            @apply lg:bg-gradient-darkest;
+        }
+
+        #{$c}__title {
             @apply lg:drop-shadow-px leading-tight text-3xl lg:text-5xl font-bold mb-2;
         }
 
-        .hero__description {
-            @apply text-lg content;
+        #{$c}__description {
+            @apply relative text-lg content;
         }
 
-        .hero__buttons {
+        #{$c}__buttons {
             @apply relative mt-5;
 
             .button {
@@ -68,19 +86,19 @@
     &--split {
         @apply relative xl:flex items-center;
 
-        .hero__primary-image {
+        #{$c}__primary-image {
             @apply w-full xl:w-[60%] shrink-0;
         }
 
-        .hero__content-position {
+        #{$c}__content {
             @apply relative p-6 xl:px-12 2xl:px-16;
         }
 
-        .hero__content {
+        #{$c}__content {
             @apply border-l-12 border-gold border-solid pl-6 2xl:pl-8 pt-4 pb-8;
         }
 
-        .hero__title {
+        #{$c}__title {
             @apply text-green-700 3xl:text-4xl mb-3 font-black;
         }
 
@@ -88,7 +106,7 @@
              @apply text-green-700 no-underline hover:underline focus:underline;
          }
 
-         .hero__description {
+        #{$c}__description {
              @apply text-lg 3xl:text-xl text-green-700 content;
          }
     }
@@ -104,15 +122,15 @@
             @apply mx-auto mb-4;
         }
 
-        .hero__content {
+        #{$c}__content {
             @apply row w-full px-4 pt-10 pb-6 text-center content text-white white-links relative;
         }
 
-        .hero__title {
+        #{$c}__title {
             @apply md:drop-shadow-px leading-tight text-2xl mb-1 xl:text-5xl;
         }
 
-        .hero__description {
+        #{$c}__description {
             @apply md:text-lg;
         }
     }
@@ -124,7 +142,7 @@
             @apply absolute inset-0;
         }
 
-        .hero__primary-image {
+        #{$c}__primary-image {
             @apply absolute inset-0 z-1;
         }
 
@@ -132,8 +150,8 @@
             @apply absolute inset-0 z-2;
         }
 
-        .hero__title,
-        .hero__description {
+        #{$c}__title,
+        #{$c}__description {
             @apply hidden;
         }
     }

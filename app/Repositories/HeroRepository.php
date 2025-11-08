@@ -114,6 +114,8 @@ class HeroRepository implements HeroRepositoryContract
                 // Explode options to determine type and placement to support previous settings
                 $hero['data'][$hero_key]['hero_options'] = explode(' ',strtolower($hero_data['option'])); 
 
+                // hero container class
+
                 // Determine hero type
                 if (!empty(array_intersect($hero['data'][$hero_key]['hero_options'], $hero_types))) {
                     if (array_intersect($hero['data'][$hero_key]['hero_options'], $slim)) {
@@ -139,9 +141,10 @@ class HeroRepository implements HeroRepositoryContract
                     }
                 }
 
-                // new config for default hero type
-                // if the hero style is carousel the default hero type is large
-
+                if (in_array('svg', $hero['data'][$hero_key]['hero_options'] )) {
+                    $hero['data'][$hero_key]['hero_classes'][] = 'svg';
+                    dump($hero['data'][$hero_key]);
+                }
 
                 // Determine hero placement
                 if (count($hero['data']) != 1) {
@@ -151,7 +154,6 @@ class HeroRepository implements HeroRepositoryContract
                         if (array_intersect($hero['data'][$hero_key]['hero_options'], $full_width)) {
                             $hero['component']['heroPlacement'] = 'full-width';
                         } elseif (array_intersect($hero['data'][$hero_key]['hero_options'], $contained)) {
-                            dump('here');
                             $hero['component']['heroPlacement'] = 'contained';
                         } else {
                             $hero['component']['heroPlacement'] = $hero['component']['heroPlacement'] ?? config('base.hero_placement');
@@ -169,10 +171,7 @@ class HeroRepository implements HeroRepositoryContract
             $hero['component']['heroPlacement'] = $hero['component']['heroPlacement'] ?? config('base.hero_placement');
         }
 
-        dump(
-            '--- Placement and Style Results ---', 
-            $hero['component']
-        );
+        //dump($hero['component']);
 
         // Add hero back into promos
         unset($promos['hero']);
