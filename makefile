@@ -39,13 +39,13 @@ composerinstallproduction: $(COMPOSERFILE)
 	composer install --prefer-dist --no-dev --no-interaction && composer dump-autoload --optimize;
 
 webpackdev: $(MIXFILE)
-	npm run development
+	npm run dev
 
 webpackprod: $(MIXFILE)
-	npm run production
+	npm run build
 
 watch: $(MIXFILE)
-	npm run watch-poll
+	npm run dev-poll
 
 yarnupgrade: $(YARNFILE)
 	yarn upgrade-interactive
