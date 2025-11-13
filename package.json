@@ -4,17 +4,12 @@
     "version": "8.15.1",
     "description": "",
     "scripts": {
-        "dev": "npm run development",
-        "development": "mix",
-        "watch": "mix watch",
-        "watch-poll": "mix watch -- --watch-options-poll=1000",
-        "hot": "mix watch --hot",
-        "prod": "npm run production",
-        "production": "mix --production",
         "lint": "eslint resources/js/**/*.js",
         "lint:fix": "eslint resources/js/**/*.js --fix",
         "phpstan": "make phpstan",
-        "phpstan:dry": "make phpstandry"
+        "phpstan:dry": "make phpstandry",
+        "dev": "vite",
+        "build": "vite build"
     },
     "repository": {
         "type": "git",
