@@ -1,62 +1,63 @@
 {
-  "name": "base",
-  "private": true,
-  "version": "8.15.2",
-  "description": "",
-  "scripts": {
-    "dev": "npm run development",
-    "development": "mix",
-    "watch": "mix watch",
-    "watch-poll": "mix watch -- --watch-options-poll=1000",
-    "hot": "mix watch --hot",
-    "prod": "npm run production",
-    "production": "mix --production",
-    "lint": "eslint resources/js/**/*.js",
-    "lint:fix": "eslint resources/js/**/*.js --fix",
-    "phpstan": "make phpstan",
-    "phpstan:dry": "make phpstandry"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:waynestate/base-site.git"
-  },
-  "keywords": [],
-  "license": "MIT",
-  "author": "Web Communications <web@wayne.edu>",
-  "bugs": {
-    "url": "https://github.com/waynestate/base-site/issues"
-  },
-  "homepage": "https://base.wayne.edu/",
-  "devDependencies": {
-    "@eslint/js": "^9.38.0",
-    "@tailwindcss/forms": "^0.5.10",
-    "@tailwindcss/typography": "^0.5.19",
-    "@waynestate/wsufooter": "^1.1.0",
-    "@waynestate/wsuheader": "^2.2.1",
-    "accordion": "^3.0.2",
-    "autoprefixer": "^10.4.21",
-    "browser-sync": "^3.0.4",
-    "browser-sync-webpack-plugin": "^2.4.0",
-    "copy-webpack-plugin": "^13.0.1",
-    "eslint": "^9.38.0",
-    "eslint-webpack-plugin": "^5.0.2",
-    "flickity": "^2.3.0",
-    "intersection-observer": "^0.12.2",
-    "laravel-mix": "^6.0.49",
-    "mediabox": "^1.1.3",
-    "postcss": "^8.5.6",
-    "sass": "^1.93.2",
-    "sass-loader": "^16.0.6",
-    "slideout": "^1.0.1",
-    "stylelint": "^16.25.0",
-    "stylelint-config-standard": "^39.0.1",
-    "tailwindcss": "^3.4.18",
-    "vue-template-compiler": "^2.7.16"
-  },
-  "overrides": {
-    "slideout": {
-      "emitter": "https://github.com/Mango/emitter.git#0.0.7"
-    }
-  },
-  "packageManager": "yarn@4.9.2"
+    "name": "base",
+    "private": true,
+    "version": "8.15.2",
+    "description": "",
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production",
+        "lint": "eslint resources/js/**/*.js",
+        "lint:fix": "eslint resources/js/**/*.js --fix",
+        "phpstan": "make phpstan",
+        "phpstan:dry": "make phpstandry"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:waynestate/base-site.git"
+    },
+    "keywords": [],
+    "license": "MIT",
+    "author": "Web Communications <web@wayne.edu>",
+    "bugs": {
+        "url": "https://github.com/waynestate/base-site/issues"
+    },
+    "homepage": "https://base.wayne.edu/",
+    "devDependencies": {
+        "@eslint/js": "^9.38.0",
+        "@tailwindcss/forms": "^0.5.10",
+        "@tailwindcss/typography": "^0.5.19",
+        "@waynestate/wsufooter": "^1.1.0",
+        "@waynestate/wsuheader": "^2.2.1",
+        "accordion": "^3.0.2",
+        "autoprefixer": "^10.4.21",
+        "browser-sync": "^3.0.4",
+        "browser-sync-webpack-plugin": "^2.4.0",
+        "copy-webpack-plugin": "^13.0.1",
+        "eslint": "^9.38.0",
+        "eslint-webpack-plugin": "^5.0.2",
+        "flickity": "^2.3.0",
+        "intersection-observer": "^0.12.2",
+        "mediabox": "^1.1.3",
+        "postcss": "^8.5.6",
+        "sass": "^1.93.2",
+        "sass-loader": "^16.0.6",
+        "slideout": "^1.0.1",
+        "stylelint": "^16.25.0",
+        "stylelint-config-standard": "^39.0.1",
+        "tailwindcss": "^3.4.18",
+        "vue-template-compiler": "^2.7.16",
+        "vite": "^3.0.2",
+        "laravel-vite-plugin": "^0.6.0"
+    },
+    "overrides": {
+        "slideout": {
+            "emitter": "https://github.com/Mango/emitter.git#0.0.7"
+        }
+    },
+    "packageManager": "yarn@4.9.2"
 }
