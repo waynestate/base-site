@@ -17,5 +17,5 @@
 }
 
 .form_button_submit {
-    @extend .button;
+    @extend .button !optional;
 }
