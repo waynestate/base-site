@@ -14,7 +14,7 @@
         @apply mx-4;
 
         .flag {
-            @extend .gold-gradient-button;
+            @extend .gold-gradient-button !optional;
 
             @apply w-full font-normal mt:hidden;
         }

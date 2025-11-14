@@ -65,7 +65,7 @@
 }
 
 .gold-gradient-button {
-    @extend .button;
+    @extend .button !optional;
 
     @apply bg-gold-200 text-green-800;
 
