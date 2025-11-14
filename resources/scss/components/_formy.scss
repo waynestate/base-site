@@ -136,7 +136,7 @@
 
     /* The subit button */
     #formy-button {
-        @extend .button;
+        @extend .button !optional;
     }
 
     .select #country,

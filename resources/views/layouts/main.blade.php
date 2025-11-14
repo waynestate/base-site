@@ -6,12 +6,12 @@
     <title>{{ $base['meta']['title'] ?? 'Wayne State University' }}</title>
 
     <link rel="icon" type="image/x-icon" href="https://wayne.edu/favicon.ico">
-    @vite('resources/_resources/css/main.css')
+    @vite('resources/scss/main.scss')
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    
+
     @if(!empty($base['page']['canonical']))<link rel="canonical" href="{{ $base['page']['canonical'] }}">@endif
 
     @include('components.gtm-head')
@@ -37,7 +37,7 @@
 
 <div id="panel" @class(['site-theme', $base['layout_config']['page_class'] ?? ''])>
     @yield('top')
-    
+
     @if(!empty($base['hero']) && (empty($base['hero']['component']['option']) || $base['hero']['component']['option'] != 'Banner contained'))
         @include('components.hero', ['hero' => $base['hero']])
 
@@ -79,6 +79,6 @@
     @include('components.footer')
 </footer>
 
-@vite('resources/_resources/js/main.js')
+@vite('resources/js/main.js')
 </body>
 </html>
