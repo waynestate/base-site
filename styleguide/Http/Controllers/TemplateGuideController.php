@@ -3,6 +3,7 @@
 namespace Styleguide\Http\Controllers;
 
 use Contracts\Repositories\ModularPageRepositoryContract;
+use Illuminate\Support\Facades\Vite;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -393,8 +394,8 @@ class TemplateGuideController extends Controller
             'promo-row-900' => [
                 'data' => app(EmptyPromo::class)->create(1, false, [
                     'title' => 'Offset column',
-                    'description' => '<p>Individual columns in their own row are centered by default. 
-To align columns to the left or right of the content area, apply a class to shift the component by <span class="italic">n</span> number of columns. 
+                    'description' => '<p>Individual columns in their own row are centered by default.
+To align columns to the left or right of the content area, apply a class to shift the component by <span class="italic">n</span> number of columns.
 Use <code>mt:left-span-3</code> to move a component 3 columns from the left.
 Use <code>mt:right-span-3</code> to move a component 3 columns from the right.
 Span values range from 1 to 12. It is important to include the <code>mt:</code> prefix, otherwise the component may be missing from mobile view.
@@ -465,11 +466,11 @@ Span values range from 1 to 12. It is important to include the <code>mt:</code> 
                         'description' => '',
                         'tr1' => [
                             'Page field' => 'modular-button-row',
-                            'Data' => '{
-"id": 0,
-"backgroundImageUrl": "/_resources/images/background.svg",
-"classes": "py-gutter-lg px-gutter-lg rounded text-white overflow-hidden",
-}',
+                            'Data' => json_encode([
+                                'id' => 0,
+                                'backgroundImageUrl' => Vite::asset('resources/images/background.svg'),
+                                'classes' => 'py-gutter-lg px-gutter-lg rounded text-white overflow-hidden',
+                            ]),
                         ],
                     ],
                 ],
@@ -485,7 +486,7 @@ Span values range from 1 to 12. It is important to include the <code>mt:</code> 
                 ]),
                 'component' => [
                     'filename' => 'button-row',
-                    'backgroundImageUrl' => '/_resources/images/background.svg',
+                    'backgroundImageUrl' => Vite::asset('resources/images/background.svg'),
                     'classes' => 'py-gutter-lg px-gutter-lg text-white rounded overflow-hidden',
                     'sectionStyle' => 'background-size:350px;',
                 ],
@@ -572,7 +573,7 @@ Span values range from 1 to 12. It is important to include the <code>mt:</code> 
                 'data' => app(EmptyPromo::class)->create(1, false, [
                     'title' => 'Customizing gutters',
                     'description' => '
-<p>Control the component\'s padding or margin using the gutter class. 
+<p>Control the component\'s padding or margin using the gutter class.
 Replace the askterisk <code>*</code> in the gutter class with your margin or padding property.
 Padding is used in the example below, however use <code>m</code> for margin instead of <code>p</code> if desired.
 </p>
