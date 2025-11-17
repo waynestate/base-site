@@ -81,7 +81,7 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'resources/scss/main.scss',
+                'resources/css/main.css',
                 'resources/js/main.js',
             ],
             refresh: true,

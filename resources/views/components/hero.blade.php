@@ -5,7 +5,7 @@
 
     Enable to carousel by increasing the limit of hero items.
     Add specific classes in base config under global -> sites -> promos -> hero -> class = 'class-name'
-    Add your specific css in scss/subsite/_main.scss
+    Add your specific css in css/subsite/_main.css
     Hero buttons are in text-overlay
 --}}
 
