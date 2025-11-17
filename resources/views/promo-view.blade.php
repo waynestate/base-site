@@ -9,7 +9,7 @@
         @if(!empty($promo['relative_url']))
             @image($promo['relative_url'], $promo['filename_alt_text'], 'mx-auto md:mx-0')
         @else
-            <img src="/_resources/images/no-photo.svg" alt="{{ $base['page']['title'] }}" class="sm:h-64 md:h-auto block mx-auto md:mx-0">
+            <img src="@vite('/resources/images/no-photo.svg')" alt="{{ $base['page']['title'] }}" class="sm:h-64 md:h-auto block mx-auto md:mx-0">
         @endif
     </div>
 

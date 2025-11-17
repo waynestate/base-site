@@ -1,3 +1,9 @@
+// Import images/fonts using vite
+import.meta.glob([
+    '../images/**',
+    '../fonts/**',
+]);
+
 // Polyfills
 import 'intersection-observer';
 import './polyfills/foreach';
