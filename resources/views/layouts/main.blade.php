@@ -6,7 +6,7 @@
     <title>{{ $base['meta']['title'] ?? 'Wayne State University' }}</title>
 
     <link rel="icon" type="image/x-icon" href="https://wayne.edu/favicon.ico">
-    @vite('resources/scss/main.scss')
+    @vite('resources/css/main.css')
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

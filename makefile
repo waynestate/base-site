@@ -76,10 +76,10 @@ phpstandry: $(COMPOSERFILE)
 	./vendor/bin/phpstan analyse --memory-limit=512M --no-progress
 
 stylelint:
-	stylelint ./resources/scss/**/*.scss
+	stylelint ./resources/css/**/*.css
 
 stylelintfix:
-	stylelint ./resources/scss/**/*.scss --fix
+	stylelint ./resources/css/**/*.css --fix
 
 eslint:
 	npm run lint
