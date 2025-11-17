@@ -65,7 +65,7 @@
         <h2 id="two-columns-image-left" class="mt-10 my-4">Two columns image left</h2>
 
         <div class="two-col-layout">
-            <div class="md:w-1/3 flex-shrink-0">
+            <div class="md:w-1/3 shrink-0">
                 <img src="/styleguide/image/600x400" alt="Left placeholder image">
             </div>
             <div class="w-full">
@@ -75,7 +75,7 @@
         </div>
 <pre class="code-block" tabindex="0">
 {!! htmlspecialchars('<div class="two-col-layout">
-    <div class="md:w-1/3 flex-shrink-0">
+    <div class="md:w-1/3 shrink-0">
         <img src="https://via.placeholder.com/600x400" alt="Your image description">
     </div>
     <div>
@@ -91,7 +91,7 @@
                 <p>{{ $faker->text(250) }}</p>
                 <p>{{ $faker->text(250) }}</p>
             </div>
-            <div class="md:w-1/3 flex-shrink-0">
+            <div class="md:w-1/3 shrink-0">
                 <img src="/styleguide/image/600x400" alt="Right placeholder image">
             </div>
         </div>
@@ -101,7 +101,7 @@
         <p>'.$faker->text(60).'</p>
         <p>'.$faker->text(60).'</p>
     </div>
-    <div class="md:w-1/3 flex-shrink-0">
+    <div class="md:w-1/3 shrink-0">
         <img src="https://via.placeholder.com/600x400" alt="Your image description">
     </div>
 </div>')!!}
@@ -113,7 +113,7 @@
                 <p>{{ $faker->text(400) }}</p>
                 <p><a href="#" class="button">{{ ucfirst(implode(' ',$faker->words(2))) }}</a></p>
             </div>
-            <div class="md:w-1/3 flex-shrink-0">
+            <div class="md:w-1/3 shrink-0">
                 <ul>
                     <li><a href="/">{{ ucfirst(implode(' ',$faker->words(4))) }}</a></li>
                     <li><a href="/">{{ ucfirst(implode(' ',$faker->words(4))) }}</a></li>
@@ -130,7 +130,7 @@
         <p>'.$faker->text(60).'</p>
         <p><a href="#" class="button">'.ucfirst(implode(' ',$faker->words(2))).'</a></p>
     </div>
-    <div class="md:w-1/3 flex-shrink-0">
+    <div class="md:w-1/3 shrink-0">
         <ul>
             <li><a href="#">'.ucfirst(implode(' ',$faker->words(4))).'</a></li>
             <li><a href="#">'.ucfirst(implode(' ',$faker->words(4))).'</a></li>

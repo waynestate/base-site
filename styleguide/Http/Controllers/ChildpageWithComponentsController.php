@@ -92,7 +92,7 @@ class ChildpageWithComponentsController extends Controller
                     'heading' => 'Spotlight',
                     'filename' => 'spotlight-row',
                     'showDescription' => true,
-                    'sectionClass' => 'bg-gold-50 p-gutter rounded'
+                    'sectionClass' => 'bg-gold-50 p-gutter rounded-sm'
                 ],
             ],
 
@@ -108,7 +108,7 @@ class ChildpageWithComponentsController extends Controller
                             'Data' => '{
 "id": 0,
 "showDescription": true,
-"sectionClass": "bg-gold-50 p-gutter rounded",
+"sectionClass": "bg-gold-50 p-gutter rounded-sm",
 }',
                         ],
                     ],

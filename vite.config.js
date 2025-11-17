@@ -5,6 +5,14 @@ import path from 'path';
 
 // Copy & Rename Blade Files and Replace date in Footer, necessary to do outside of mix.copy and webpack plugins due to
 // file changes causing infinite loops during make watch.
+if(!fs.existsSync('public/_resources/')) {
+    fs.mkdir('public/_resources/', (err) => {
+        if (err) {
+            return console.error(err);
+        }
+        console.log('public/_resources/ directory created.');
+    });
+}
 if(!fs.existsSync('resources/views/errors/')) {
     fs.mkdir('resources/views/errors/', (err) => {
         if (err) {
@@ -21,12 +29,13 @@ if(!fs.existsSync('public/_resources/images/')) {
         console.log('public/_resources/images/ directory created.');
     });
 }
-if(!fs.existsSync('public/_resources/css/')) {
-    fs.mkdir('public/_resources/css/', (err) => {
+if(!fs.existsSync('public/_resources/css')) {
+    console.log('public/_resources/css');
+    fs.mkdir('./public/_resources/css', (err) => {
         if (err) {
             return console.error(err);
         }
-        console.log('public/_resources/css/ directory created.');
+        console.log('./public/_resources/css/ directory created.');
     });
 }
 fs.copyFileSync('node_modules/@waynestate/wsuheader/dist/header.html', 'resources/views/components/header.blade.php', fs.constants.COPYFILE_FICLONE);

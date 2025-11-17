@@ -29,11 +29,11 @@
     "devDependencies": {
         "@eslint/js": "^9.38.0",
         "@tailwindcss/forms": "^0.5.10",
+        "@tailwindcss/postcss": "^4.1.17",
         "@tailwindcss/typography": "^0.5.19",
         "@waynestate/wsufooter": "^1.1.0",
         "@waynestate/wsuheader": "^2.2.1",
         "accordion": "^3.0.2",
-        "autoprefixer": "^10.4.21",
         "browser-sync": "^3.0.4",
         "browser-sync-webpack-plugin": "^2.4.0",
         "copy-webpack-plugin": "^13.0.1",
@@ -47,7 +47,7 @@
         "slideout": "^1.0.1",
         "stylelint": "^16.25.0",
         "stylelint-config-standard": "^39.0.1",
-        "tailwindcss": "^3.4.18",
+        "tailwindcss": "^4.1.17",
         "vite": "^3.0.2",
         "vue-template-compiler": "^2.7.16"
     },

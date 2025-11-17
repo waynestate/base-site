@@ -1,3 +1,15 @@
+@layer utilities {
+    .white-links {
+        & a:not(.button) {
+            @apply text-white underline;
+
+            &:hover {
+                @apply no-underline;
+            }
+        }
+    }
+}
+
 /* Restricts the embedded font from combining two characters like "fi" */
 html {
     font-feature-settings: "liga" 0;
@@ -11,16 +23,6 @@ body {
 /* Links outside of content aren't underlined */
 a {
     @apply text-green no-underline;
-}
-
-@layer utilities {
-    .white-links a:not(.button) {
-        @apply text-white underline;
-
-        &:hover {
-            @apply no-underline;
-        }
-    }
 }
 
 p {

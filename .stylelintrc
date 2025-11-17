@@ -11,9 +11,9 @@
         }],
         "at-rule-no-deprecated": null,
         "declaration-property-value-no-unknown": [true, {
-            "typesSyntax": { 
+            "typesSyntax": {
                 "radial-gradient()": "| <any-value>",
-                "linear-gradient()": "| <any-value>" 
+                "linear-gradient()": "| <any-value>"
             }
         }],
         "no-invalid-double-slash-comments": null,
@@ -23,6 +23,7 @@
                 "theme"
             ]
         }],
-        "media-query-no-invalid": null
+        "media-query-no-invalid": null,
+        "import-notation": "string"
     }
 }
