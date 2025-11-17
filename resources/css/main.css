@@ -1,48 +1,63 @@
-@use "sass:meta";
-/* Combination of normalize and tailwind resets */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@include meta.load-css("mediabox/dist/mediabox");
-@include meta.load-css("flickity/dist/flickity");
-@include meta.load-css("@waynestate/wsuheader/dist/header");
-@include meta.load-css("@waynestate/wsufooter/dist/footer");
+@import 'tailwindcss';
+@import "mediabox/dist/mediabox.css";
+@import "flickity/dist/flickity.css";
+@import "@waynestate/wsuheader/dist/header.css";
+@import "@waynestate/wsufooter/dist/footer.css";
 
 /* Partials */
-@include meta.load-css("partials/layout");
-@include meta.load-css("partials/component-loop");
+@import "partials/layout.css";
+@import "partials/component-loop.css";
 
 /* Components */
-@include meta.load-css("components/global");
-@include meta.load-css("components/global-tables");
-@include meta.load-css("components/global-headings");
-@include meta.load-css("components/global-buttons");
-@include meta.load-css("components/accordion");
-@include meta.load-css("components/flag");
-@include meta.load-css("components/bg-gradient");
-@include meta.load-css("components/carousel");
-@include meta.load-css("components/content");
-@include meta.load-css("components/external-icon");
-@include meta.load-css("components/formy");
-@include meta.load-css("components/icons");
-@include meta.load-css("components/menu-icon");
-@include meta.load-css("components/menu-main");
-@include meta.load-css("components/menu-slideout");
-@include meta.load-css("components/menu-top");
-@include meta.load-css("components/responsive-embed");
-@include meta.load-css("components/row");
-@include meta.load-css("components/skip");
-@include meta.load-css("components/slate");
-@include meta.load-css("components/visually-hidden");
-@include meta.load-css("components/table-of-contents");
-@include meta.load-css("components/print");
-@include meta.load-css("components/cms-layouts");
-@include meta.load-css("components/play-video-button");
-@include meta.load-css("components/pdf");
-@include meta.load-css("components/full-width-styleguide-hero");
-@include meta.load-css("components/policy-numbering");
-@include meta.load-css("components/hero");
+@import "components/global.css";
+@import "components/global-tables.css";
+@import "components/global-headings.css";
+@import "components/global-buttons.css";
+@import "components/accordion.css";
+@import "components/flag.css";
+@import "components/bg-gradient.css";
+@import "components/carousel.css";
+@import "components/content.css";
+@import "components/external-icon.css";
+@import "components/formy.css";
+@import "components/icons.css";
+@import "components/menu-icon.css";
+@import "components/menu-main.css";
+@import "components/menu-slideout.css";
+@import "components/menu-top.css";
+@import "components/responsive-embed.css";
+@import "components/row.css";
+@import "components/skip.css";
+@import "components/slate.css";
+@import "components/visually-hidden.css";
+@import "components/table-of-contents.css";
+@import "components/print.css";
+@import "components/cms-layouts.css";
+@import "components/play-video-button.css";
+@import "components/pdf.css";
+@import "components/full-width-styleguide-hero.css";
+@import "components/policy-numbering.css";
+@import "components/hero.css";
 
 /* Site specific */
-@include meta.load-css("site-specific/theme");
+@import "site-specific/theme.css";
+
+@config '../../tailwind.config.js';
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
