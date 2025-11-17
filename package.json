@@ -4,12 +4,16 @@
     "version": "8.15.2",
     "description": "",
     "scripts": {
+        "dev": "npm run development",
+        "development": "vite build",
+        "watch": "npm run watch-poll",
+        "watch-poll": "vite build --watch",
+        "prod": "npm run production",
+        "production": "vite build",
         "lint": "eslint resources/js/**/*.js",
         "lint:fix": "eslint resources/js/**/*.js --fix",
         "phpstan": "make phpstan",
-        "phpstan:dry": "make phpstandry",
-        "dev": "vite",
-        "build": "vite build"
+        "phpstan:dry": "make phpstandry"
     },
     "repository": {
         "type": "git",
