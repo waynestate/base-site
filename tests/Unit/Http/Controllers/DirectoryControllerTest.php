@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Unit\Http\Controllers;
+
 use PHPUnit\Framework\Attributes\Test;
 use App\Http\Controllers\DirectoryController;
 use App\Repositories\ProfileRepository;
