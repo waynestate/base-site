@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Unit\Http\Controllers;
+
 use App\Http\Controllers\FullWidthController;
 use Illuminate\Http\Request;
 use PHPUnit\Framework\Attributes\Test;
