@@ -22,7 +22,7 @@ body {
 
 /* Links outside of content aren't underlined */
 a {
-    @apply text-green no-underline;
+    @apply text-green-500 no-underline;
 }
 
 p {
@@ -51,7 +51,7 @@ figure {
     }
 
     figcaption {
-        @apply text-sm text-green italic text-left mt-1 table-caption caption-bottom;
+        @apply text-sm text-green-500 italic text-left mt-1 table-caption caption-bottom;
     }
 
     @screen mt {

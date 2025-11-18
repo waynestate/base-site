@@ -10,7 +10,7 @@
                     <div class="mx-2">
                         <div class="relative border-2 border-green rounded-xs text-center mb-4">
                             <div class="w-12 bg-green text-white leading-none border-b-2 border-green text-sm">{{ apdatetime(date('M' , strtotime($key))) }}</div>
-                            <div class="text-green text-2xl leading-tight">{{ apdatetime(date('j' , strtotime($key))) }}</div>
+                            <div class="text-green-500 text-2xl leading-tight">{{ apdatetime(date('j' , strtotime($key))) }}</div>
                         </div>
                     </div>
                 @endif

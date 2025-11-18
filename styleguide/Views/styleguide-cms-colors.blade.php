@@ -4,7 +4,7 @@
     @include('partials.page-title', ['title' => $base['page']['title']])
 
     <div class="content">
-        <p>Example usage: <code>text-green-600</code> or <code>text-gold</code>. When you need to use our palette in CSS where it's not an existing Tailwind property like a gradient stop, use <code>theme('colors.gold.DEFAULT')</code> or <code>theme('colors.gold.500')</code>.</p>
+        <p>Example usage: <code>text-green-600</code> or <code>text-gold</code>. When you need to use our palette in CSS where it's not an existing Tailwind property like a gradient stop, use <code>theme('colors.gold.500')</code> or <code>theme('colors.gold.500')</code>.</p>
         <div class="flex flex-col space-y-3 sm:flex-row text-xs sm:space-y-0 sm:space-x-4">
             <div class="w-32 shrink-0">
                 <div class="h-10 flex flex-col justify-center">
