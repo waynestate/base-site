@@ -1,7 +1,7 @@
 {{--
     "heading":"Heading text",
     "headingLevel":["h2", "h3", "h4"],
-    "headingClass":"text-green divider-gold"
+    "headingClass":"text-green-500 divider-gold"
 --}}
 @if (!empty($headingLevel) && strtolower($headingLevel) != 'h1')
     <{{ $headingLevel }} id="{{ Str::slug($heading) }}" class="{{ $headingClass ?? '' }}">

@@ -1,5 +1,5 @@
-/* 
-    Figure out how to do this with tailwind breakpoints 
+/*
+    Figure out how to do this with tailwind breakpoints
     Need to specifically target max width so the column-span width can override this value
     max-mt:w-full and max-[780px]:w-full aren't working
 */
@@ -15,7 +15,7 @@ ul.accordion.enabled {
     transition: 0.3s ease all;
 
     & > li {
-        @apply border-b border-gray-200 w-full focus-within:outline outline-2 outline-green focus-within:border-b-0 focus-within:rounded-sm;
+        @apply border-b border-gray-200 w-full focus-within:outline outline-2 outline-green-500 focus-within:border-b-0 focus-within:rounded-sm;
         @apply z-[400];
 
         transition: 0.3s ease all;

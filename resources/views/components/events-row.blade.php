@@ -4,12 +4,12 @@
     $link_text => string // 'More events'
     $button_class => string // 'green-gradient-button'
 --}}
-<ul class="grid gap-8 {{ !empty($component['columns']) && $component['columns'] % 2 == 0 ? ($component['columns'] >= 4 ? ' grid-cols-2' : ' sm-grid-cols-2').' md:grid-cols-3 xl:grid-cols-'.($component['columns']) : ' sm:grid-cols-2 md:grid-cols-3' }}"> 
+<ul class="grid gap-8 {{ !empty($component['columns']) && $component['columns'] % 2 == 0 ? ($component['columns'] >= 4 ? ' grid-cols-2' : ' sm-grid-cols-2').' md:grid-cols-3 xl:grid-cols-'.($component['columns']) : ' sm:grid-cols-2 md:grid-cols-3' }}">
     @foreach($data as $key => $event)
         <li class="flex items-start break-avoid mb-6">
             <div class="shrink-0 mt-1 border-2 border-green rounded-xs text-center">
-                <div class="w-12 bg-green text-white leading-none border-b-2 border-green text-sm">{{ apdatetime(date('M' , strtotime($event['date']))) }}</div>
-                <div class="text-green text-2xl leading-tight">{{ apdatetime(date('j' , strtotime($event['date']))) }}</div>
+                <div class="w-12 bg-green-500 text-white leading-none border-b-2 border-green text-sm">{{ apdatetime(date('M' , strtotime($event['date']))) }}</div>
+                <div class="text-green-500 text-2xl leading-tight">{{ apdatetime(date('j' , strtotime($event['date']))) }}</div>
             </div>
 
             <div class="ml-4 grow">

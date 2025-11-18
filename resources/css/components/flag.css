@@ -24,7 +24,7 @@
         @apply row relative;
 
         .flag {
-            @apply absolute hidden mt:flex z-40 bg-gold text-green-800 hover:text-green-900 items-center justify-center mr-4 right-0 px-2 duration-500;
+            @apply absolute hidden mt:flex z-40 bg-gold-500 text-green-800 hover:text-green-900 items-center justify-center mr-4 right-0 px-2 duration-500;
 
             transition-property: height, padding;
             min-width: 140px;
@@ -36,7 +36,7 @@
 
             /* Pointy bottom */
             &::after {
-                @apply bg-gold absolute duration-500;
+                @apply bg-gold-500 absolute duration-500;
 
                 clip-path: polygon(0 0, 100% 0, 100% 4%, 50% 14%, 0 4%);
                 transition-property: top;

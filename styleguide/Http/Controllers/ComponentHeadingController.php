@@ -40,7 +40,7 @@ class ComponentHeadingController extends Controller
                             'Page field' => 'modular-heading-1',
                             'Data' => '{
 "heading":"My heading",
-"headingClass":"gold-divider text-green",
+"headingClass":"gold-divider text-green-500",
 "headingLevel":"h3"
 }',
                         ],

@@ -11,7 +11,7 @@
             @endif
                 @image($item['relative_url'], $item['filename_alt_text'], 'grow-0 shrink-0 w-16')
                 <div>
-                    <div class="font-bold text-xl mt-0 mb-1 text-green no-underline group-hover:underline">{{ $item['title'] }}</div>
+                    <div class="font-bold text-xl mt-0 mb-1 text-green-500 no-underline group-hover:underline">{{ $item['title'] }}</div>
                     @if(!empty($item['excerpt']))<div class="text-sm text-black">{{ $item['excerpt'] }}</div>@endif
                     @if(!empty($item['description']))
                         @if (!empty($item['link']))

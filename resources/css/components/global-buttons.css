@@ -41,7 +41,7 @@
 .green-button {
     @extend .button;
 
-    @apply bg-green text-white;
+    @apply bg-green-500 text-white;
 
     &:hover {
         @apply bg-green-600;
@@ -57,7 +57,7 @@
 .gold-button {
     @extend .button;
 
-    @apply bg-gold text-green-800;
+    @apply bg-gold-500 text-green-800;
 
     &:hover {
         @apply bg-gold-200;

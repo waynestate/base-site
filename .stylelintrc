@@ -8,7 +8,8 @@
                 "screen",
                 "layer",
                 "theme",
-                "source"
+                "source",
+                "utility"
             ]
         }],
         "at-rule-no-deprecated": null,
