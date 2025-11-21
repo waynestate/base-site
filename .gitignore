@@ -26,3 +26,5 @@ cs_fixer_tmp*
 .env.backup
 /tools
 .yarn/
+/.junie
+boost.json
