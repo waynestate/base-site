@@ -1,17 +1,6 @@
 const twColors = require('tailwindcss/colors')
 const path = require('path')
 
-const screens = {
-    sm: '420px',
-    md: '576px',
-    lg: '732px',
-    xl: '888px',
-    '2xl': '1044px',
-    '3xl': '1200px',
-    mt: '780px', // Adjust this based on the top menu width
-    print: { raw: 'print' },
-}
-
 module.exports = {
     content: [
         path.join(__dirname, 'resources/views/**/*.blade.php'),
@@ -61,25 +50,6 @@ module.exports = {
         '/form_responses/',
     ],
     theme: {
-        screens: screens,
-        fontFamily: {
-            sans: [
-                'Lato',
-                'system-ui',
-                'BlinkMacSystemFont',
-                '-apple-system',
-                'Segoe UI',
-                'Roboto',
-                'Oxygen',
-                'Ubuntu',
-                'Cantarell',
-                'Fira Sans',
-                'Droid Sans',
-                'Helvetica Neue',
-                'sans-serif',
-            ],
-            serif: ['Georgia', 'Times', 'Times New Roman', 'serif'],
-        },
         extend: {
             maxWidth: ({ theme }) => ({
                 half: '50%',
