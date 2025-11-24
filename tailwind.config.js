@@ -1,51 +1,6 @@
 const twColors = require('tailwindcss/colors')
 const path = require('path')
 
-const baseColors = {
-    transparent: 'transparent',
-    current: 'currentColor',
-    black: twColors.zinc[950],
-    gray: {
-        50: twColors.zinc[50],
-        100: twColors.zinc[100],
-        200: twColors.zinc[200],
-        300: twColors.zinc[300],
-        400: twColors.zinc[400],
-        DEFAULT: twColors.zinc[400],
-        500: twColors.zinc[500],
-        600: twColors.zinc[600],
-        700: twColors.zinc[700],
-        800: twColors.zinc[800],
-        900: twColors.zinc[900],
-    },
-    green: {
-        50: '#cedddb',
-        100: '#9ebbb6',
-        200: '#6d9892',
-        300: '#3d766d',
-        400: '#0c5449',
-        DEFAULT: '#0c5449',
-        500: '#0b4a40',
-        600: '#094038',
-        700: '#08352f',
-        800: '#062b27',
-        900: '#05211e',
-    },
-    gold: {
-        50: '#fff5d6',
-        100: '#ffebad',
-        200: '#ffe085',
-        300: '#ffd65c',
-        400: '#ffcc33',
-        DEFAULT: '#ffcc33',
-        500: '#edbd2c',
-        600: '#dbae25',
-        700: '#c89f1f',
-        800: '#b69018',
-        900: '#a48111',
-    },
-}
-
 const screens = {
     sm: '420px',
     md: '576px',
@@ -126,7 +81,6 @@ module.exports = {
             serif: ['Georgia', 'Times', 'Times New Roman', 'serif'],
         },
         extend: {
-            colors: baseColors,
             maxWidth: ({ theme }) => ({
                 half: '50%',
                 'screen-3xl': theme('screens.3xl'),

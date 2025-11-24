@@ -6,7 +6,9 @@
                 "include",
                 "extend",
                 "screen",
-                "layer"
+                "layer",
+                "theme",
+                "source"
             ]
         }],
         "at-rule-no-deprecated": null,
@@ -24,6 +26,8 @@
             ]
         }],
         "media-query-no-invalid": null,
-        "import-notation": "string"
+        "import-notation": null,
+        "lightness-notation": null,
+        "hue-degree-notation": null
     }
 }
