@@ -95,6 +95,13 @@
 
     /* Max width custom properties: max-w-(<custom-property>) */
     --max-width-half: 50%;
+
+    /* Spacing custom properties */
+    --aspect-3-4: 75%;
+    --aspect-16-9: 56.35%;
+    --aspect-hero: 36.3%;
+    --aspect-full: 100%;
+    --aspect-portrait: 133%;
 }
 
 /* required if using CSS variables such as --breakpoint-3xl */

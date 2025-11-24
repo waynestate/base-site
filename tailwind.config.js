@@ -51,13 +51,6 @@ module.exports = {
     ],
     theme: {
         extend: {
-            padding: {
-                '3/4': '75%',
-                '16/9': '56.35%',
-                hero: '36.3%',
-                full: '100%',
-                portrait: '133%',
-            },
             spacing: {
                 'container': 'max(1rem, (100% - 73rem) / 2)',
                 'container-lg': 'max(1rem, (100% - 73rem) / 2)',
