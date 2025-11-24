@@ -51,10 +51,6 @@ module.exports = {
     ],
     theme: {
         extend: {
-            maxWidth: ({ theme }) => ({
-                half: '50%',
-                'screen-3xl': theme('screens.3xl'),
-            }),
             padding: {
                 '3/4': '75%',
                 '16/9': '56.35%',

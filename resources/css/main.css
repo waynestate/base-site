@@ -92,6 +92,15 @@
     --color-gold-700: #c89f1f;
     --color-gold-800: #b69018;
     --color-gold-900: #a48111;
+
+    /* Max width custom properties: max-w-(<custom-property>) */
+    --max-width-half: 50%;
+}
+
+/* required if using CSS variables such as --breakpoint-3xl */
+@theme inline {
+    /* Max width custom properties: max-w-(<custom-property>) */
+    --max-width-screen-3xl: var(--breakpoint-3xl);
 }
 
 /*
