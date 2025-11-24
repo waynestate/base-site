@@ -1,5 +1,5 @@
 /* Content returning from CMS */
-.content {
+@utility content {
     ul {
         @apply list-disc;
     }

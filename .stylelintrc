@@ -3,10 +3,12 @@
     "rules": {
         "at-rule-no-unknown": [ true, {
             "ignoreAtRules": [
-                "include",
                 "extend",
+                "include",
+                "layer",
                 "screen",
-                "layer"
+                "theme",
+                "utility"
             ]
         }],
         "at-rule-no-deprecated": null,

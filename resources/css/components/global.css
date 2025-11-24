@@ -1,11 +1,9 @@
-@layer utilities {
-    .white-links {
-        & a:not(.button) {
-            @apply text-white underline;
+@utility white-links {
+    & a:not(.button) {
+        @apply text-white underline;
 
-            &:hover {
-                @apply no-underline;
-            }
+        &:hover {
+            @apply no-underline;
         }
     }
 }
