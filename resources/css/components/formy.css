@@ -6,12 +6,12 @@
     .columns {
         @apply w-full;
 
-        @screen md {
+        @media (width >= theme(--breakpoint-md)) {
             @apply pr-4;
         }
     }
 
-    @screen md {
+    @media (width >= theme(--breakpoint-md)) {
         .xlarge-4 {
             @apply w-1/3;
         }

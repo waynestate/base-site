@@ -8,119 +8,121 @@
     }
 }
 
-/* Restricts the embedded font from combining two characters like "fi" */
-html {
-    font-feature-settings: "liga" 0;
-    text-rendering: optimizelegibility;
-}
-
-body {
-    @apply min-h-screen flex flex-col;
-}
-
-/* Links outside of content aren't underlined */
-a {
-    @apply text-green no-underline;
-}
-
-p {
-    @apply mb-4;
-}
-
-/* Tailwind preflight sets this to .5 which isn't ADA compliant */
-input::placeholder,
-textarea::placeholder {
-    @apply opacity-100 text-gray-500;
-}
-
-hr {
-    @apply border-b border-solid border-gray-200 my-5;
-}
-
-figure {
-    @apply mt-2 mb-4 mx-auto;
-
-    display: table !important;
-    padding: 0 !important;
-    clear: both;
-
-    img {
-        padding: 0 !important;
+@layer base {
+    /* Restricts the embedded font from combining two characters like "fi" */
+    html {
+        font-feature-settings: "liga" 0;
+        text-rendering: optimizelegibility;
     }
 
-    figcaption {
-        @apply text-sm text-green italic text-left mt-1 table-caption caption-bottom;
+    body {
+        @apply min-h-screen flex flex-col;
     }
 
-    @screen mt {
-        @apply w-auto mb-4;
-
-        &[style*="float:right"],
-        &.float-right {
-            @apply ml-6 max-w-half;
-        }
-
-        &[style*="float:left"],
-        &.float-left {
-            @apply mr-6 max-w-half;
-        }
-
-        &[style*="text:center"],
-        &.text-center {
-            @apply ml-auto mr-auto;
-        }
+    /* Links outside of content aren't underlined */
+    a {
+        @apply text-green no-underline;
     }
-}
 
-/* Images remain at their specified width */
+    p {
+        @apply mb-4;
+    }
 
-/* Text appears above and below for small */
-@media (max-width: theme('screens.mt')) {
+    /* Tailwind preflight sets this to .5 which isn't ADA compliant */
+    input::placeholder,
+    textarea::placeholder {
+        @apply opacity-100 text-gray-500;
+    }
+
+    hr {
+        @apply border-b border-solid border-gray-200 my-5;
+    }
+
     figure {
-        @apply block my-0 mx-auto;
+        @apply mt-2 mb-4 mx-auto;
 
-        &[style*="float:right"],
-        &[style*="float:left"],
-        &.float-right,
-        &.float-left {
-            float: none !important;
-        }
-    }
-}
+        display: table !important;
+        padding: 0 !important;
+        clear: both;
 
-/* Floated images can only be 50% of column width for readability */
-@screen mt {
-    img {
-        &[style*="float:right"],
-        &[style*="float:left"] {
+        img {
             padding: 0 !important;
         }
 
-        &[style*="float:right"] {
-            @apply ml-6 my-2 max-w-half;
+        figcaption {
+            @apply text-sm text-green italic text-left mt-1 table-caption caption-bottom;
         }
 
-        &[style*="float:left"] {
-            @apply mr-6 my-2 max-w-half;
+        @media (width >= theme(--breakpoint-mt)) {
+            @apply w-auto mb-4;
+
+            &[style*="float:right"],
+            &.float-right {
+                @apply ml-6 max-w-half;
+            }
+
+            &[style*="float:left"],
+            &.float-left {
+                @apply mr-6 max-w-half;
+            }
+
+            &[style*="text:center"],
+            &.text-center {
+                @apply ml-auto mr-auto;
+            }
         }
     }
-}
 
-/* Firefox uses the outline focus color as the text color. Since our overall background is white we need to change it. */
-a.text-white:-moz-focusring {
-    outline-color: #000;
-}
+    /* Images remain at their specified width */
 
-code {
-    @apply inline-block bg-gray-100 py-0.5 px-1 mx-1 rounded text-sm;
-}
+    /* Text appears above and below for small */
+    @media (width >= theme(--breakpoint-mt)) {
+        figure {
+            @apply block my-0 mx-auto;
 
-pre,
-.code-block {
-    @apply inline-block bg-gray-100 overflow-x-scroll text-sm p-2 my-2 rounded max-w-full;
-}
+            &[style*="float:right"],
+            &[style*="float:left"],
+            &.float-right,
+            &.float-left {
+                float: none !important;
+            }
+        }
+    }
 
-/* Keep footer at the bottom of the browser */
-footer {
-    @apply mt-auto;
+    /* Floated images can only be 50% of column width for readability */
+    @media (width >= theme(--breakpoint-mt)) {
+        img {
+            &[style*="float:right"],
+            &[style*="float:left"] {
+                padding: 0 !important;
+            }
+
+            &[style*="float:right"] {
+                @apply ml-6 my-2 max-w-half;
+            }
+
+            &[style*="float:left"] {
+                @apply mr-6 my-2 max-w-half;
+            }
+        }
+    }
+
+    /* Firefox uses the outline focus color as the text color. Since our overall background is white we need to change it. */
+    a.text-white:-moz-focusring {
+        outline-color: #000;
+    }
+
+    code {
+        @apply inline-block bg-gray-100 py-0.5 px-1 mx-1 rounded text-sm;
+    }
+
+    pre,
+    .code-block {
+        @apply inline-block bg-gray-100 overflow-x-scroll text-sm p-2 my-2 rounded max-w-full;
+    }
+
+    /* Keep footer at the bottom of the browser */
+    footer {
+        @apply mt-auto;
+    }
 }

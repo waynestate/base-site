@@ -96,4 +96,7 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    build: {
+        sourcemap: true, // Set to true, 'inline', or 'hidden'
+    },
 });

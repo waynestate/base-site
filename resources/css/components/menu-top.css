@@ -14,7 +14,7 @@
             @apply mr-0;
         }
 
-        @screen mt {
+        @media (width >= theme(--breakpoint-mt)) {
             @apply inline-block mx-2 my-0;
 
             &.selected a {
@@ -25,7 +25,7 @@
 }
 
 .top_menu_hidden {
-    @media (max-width: theme('screens.mt')) {
+    @media (width >= theme(--breakpoint-mt)) {
         @apply hidden;
     }
 }

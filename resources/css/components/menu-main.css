@@ -32,7 +32,7 @@
 
     /* Bottom borders on child <li> */
     > li {
-        @screen mt {
+        @media (width >= theme(--breakpoint-mt)) {
             @apply border-b border-solid border-gray-200;
         }
     }

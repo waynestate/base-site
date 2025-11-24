@@ -3,6 +3,7 @@
     "rules": {
         "at-rule-no-unknown": [ true, {
             "ignoreAtRules": [
+                "config",
                 "extend",
                 "include",
                 "layer",
@@ -26,6 +27,10 @@
             ]
         }],
         "media-query-no-invalid": null,
-        "import-notation": "string"
+        "import-notation": "string",
+        "nesting-selector-no-missing-scoping-root": [
+            true,
+            { "ignoreAtRules": ["utility"] }
+        ]
     }
 }

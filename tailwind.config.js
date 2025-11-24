@@ -46,17 +46,6 @@ const baseColors = {
     },
 }
 
-const screens = {
-    sm: '420px',
-    md: '576px',
-    lg: '732px',
-    xl: '888px',
-    '2xl': '1044px',
-    '3xl': '1200px',
-    mt: '780px', // Adjust this based on the top menu width
-    print: { raw: 'print' },
-}
-
 module.exports = {
     content: [
         path.join(__dirname, 'resources/views/**/*.blade.php'),
@@ -106,7 +95,6 @@ module.exports = {
         '/form_responses/',
     ],
     theme: {
-        screens: screens,
         fontFamily: {
             sans: [
                 'Lato',
@@ -127,10 +115,6 @@ module.exports = {
         },
         extend: {
             colors: baseColors,
-            maxWidth: ({ theme }) => ({
-                half: '50%',
-                'screen-3xl': theme('screens.3xl'),
-            }),
             padding: {
                 '3/4': '75%',
                 '16/9': '56.35%',
