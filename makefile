@@ -1,7 +1,7 @@
 # Configuration
 YARNFILE := package.json
 COMPOSERFILE := composer.json
-MIXFILE := webpack.mix.js
+VITEFILE := vite.config.js
 DEPLOY := Envoy.blade.php
 DOTENV := .env
 
@@ -10,8 +10,8 @@ all: install
 install: yarn composerinstall generatekey
 update: yarnupgrade composerupdate
 status: yarncheck
-build: webpackdev
-buildproduction: webpackprod
+build: vitedev
+buildproduction: viteprod
 deploy: install buildproduction runtests envoy
 deployproduction: install buildproduction runtests envoyproduction
 
@@ -38,14 +38,14 @@ composerinstalldev: $(COMPOSERFILE)
 composerinstallproduction: $(COMPOSERFILE)
 	composer install --prefer-dist --no-dev --no-interaction && composer dump-autoload --optimize;
 
-webpackdev: $(MIXFILE)
-	npm run development
+vitedev: $(VITEFILE)
+	npm run dev
 
-webpackprod: $(MIXFILE)
-	npm run production
+viteprod: $(VITEFILE)
+	npm run build
 
-watch: $(MIXFILE)
-	npm run watch-poll
+watch: $(VITEFILE)
+	npm run dev-poll
 
 yarnupgrade: $(YARNFILE)
 	yarn upgrade-interactive
@@ -76,10 +76,10 @@ phpstandry: $(COMPOSERFILE)
 	./vendor/bin/phpstan analyse --memory-limit=512M --no-progress
 
 stylelint:
-	stylelint ./resources/scss/**/*.scss
+	stylelint ./resources/css/**/*.css
 
 stylelintfix:
-	stylelint ./resources/scss/**/*.scss --fix
+	stylelint ./resources/css/**/*.css --fix
 
 eslint:
 	npm run lint
@@ -105,9 +105,6 @@ $(YARNFILE):
 
 $(COMPOSERFILE):
 	composer init
-
-$(MIXFILE):
-	touch $(webpack.mix.js)
 
 $(DOTENV):
 	cp .env.example .env

@@ -1,0 +1,82 @@
+@import 'tailwindcss';
+@import "mediabox/dist/mediabox.css";
+@import "flickity/dist/flickity.css";
+@import "@waynestate/wsuheader/dist/header.css";
+@import "@waynestate/wsufooter/dist/footer.css";
+
+/* Partials */
+@import "partials/layout.css";
+@import "partials/component-loop.css";
+
+/* Components */
+@import "components/global.css";
+@import "components/global-tables.css";
+@import "components/global-headings.css";
+@import "components/global-buttons.css";
+@import "components/accordion.css";
+@import "components/flag.css";
+@import "components/bg-gradient.css";
+@import "components/carousel.css";
+@import "components/content.css";
+@import "components/external-icon.css";
+@import "components/formy.css";
+@import "components/icons.css";
+@import "components/menu-icon.css";
+@import "components/menu-main.css";
+@import "components/menu-slideout.css";
+@import "components/menu-top.css";
+@import "components/responsive-embed.css";
+@import "components/row.css";
+@import "components/skip.css";
+@import "components/slate.css";
+@import "components/visually-hidden.css";
+@import "components/table-of-contents.css";
+@import "components/print.css";
+@import "components/cms-layouts.css";
+@import "components/play-video-button.css";
+@import "components/pdf.css";
+@import "components/full-width-styleguide-hero.css";
+@import "components/policy-numbering.css";
+@import "components/hero.css";
+
+/* Site specific */
+@import "site-specific/theme.css";
+
+@config '../../tailwind.config.js';
+
+@theme {
+    --breakpoint-sm: 420px;
+    --breakpoint-md: 576px;
+    --breakpoint-lg: 732px;
+    --breakpoint-xl: 888px;
+    --breakpoint-2xl: 1044px;
+    --breakpoint-3xl: 1200px;
+    --breakpoint-mt: 780px;
+
+    /* Max width custom properties: max-w-(<custom-property>) */
+    --max-width-half: 50%;
+}
+
+/* required if using CSS variables such as --breakpoint-3xl */
+@theme inline {
+    /* Max width custom properties: max-w-(<custom-property>) */
+    --max-width-screen-3xl: var(--breakpoint-3xl);
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}

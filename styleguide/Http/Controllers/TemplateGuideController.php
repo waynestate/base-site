@@ -3,6 +3,7 @@
 namespace Styleguide\Http\Controllers;
 
 use Contracts\Repositories\ModularPageRepositoryContract;
+use Illuminate\Support\Facades\Vite;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -58,7 +59,7 @@ class TemplateGuideController extends Controller
                 ]),
                 'component' => [
                     'filename' => 'promo-column',
-                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center overflow-hidden',
+                    'classes' => 'col-bg rounded-sm bg-gold-50 p-2 pt-1 text-center overflow-hidden',
                     'columnSpan' => 1,
                 ],
             ],
@@ -69,7 +70,7 @@ class TemplateGuideController extends Controller
                 ]),
                 'component' => [
                     'filename' => 'promo-column',
-                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center overflow-hidden',
+                    'classes' => 'col-bg rounded-sm bg-gold-50 p-2 pt-1 text-center overflow-hidden',
                     'columnSpan' => 11,
                 ],
             ],
@@ -81,7 +82,7 @@ class TemplateGuideController extends Controller
                 ]),
                 'component' => [
                     'filename' => 'promo-column',
-                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center overflow-hidden',
+                    'classes' => 'col-bg rounded-sm bg-gold-50 p-2 pt-1 text-center overflow-hidden',
                     'columnSpan' => 2,
                 ],
             ],
@@ -92,7 +93,7 @@ class TemplateGuideController extends Controller
                 ]),
                 'component' => [
                     'filename' => 'promo-column',
-                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center overflow-hidden',
+                    'classes' => 'col-bg rounded-sm bg-gold-50 p-2 pt-1 text-center overflow-hidden',
                     'columnSpan' => 10,
                 ],
             ],
@@ -104,7 +105,7 @@ class TemplateGuideController extends Controller
                 ]),
                 'component' => [
                     'filename' => 'promo-column',
-                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center',
+                    'classes' => 'col-bg rounded-sm bg-gold-50 p-2 pt-1 text-center',
                     'columnSpan' => 3,
                 ],
             ],
@@ -115,7 +116,7 @@ class TemplateGuideController extends Controller
                 ]),
                 'component' => [
                     'filename' => 'promo-column',
-                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center overflow-hidden',
+                    'classes' => 'col-bg rounded-sm bg-gold-50 p-2 pt-1 text-center overflow-hidden',
                     'columnSpan' => 9,
                 ],
             ],
@@ -127,7 +128,7 @@ class TemplateGuideController extends Controller
                 ]),
                 'component' => [
                     'filename' => 'promo-column',
-                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center overflow-hidden',
+                    'classes' => 'col-bg rounded-sm bg-gold-50 p-2 pt-1 text-center overflow-hidden',
                     'columnSpan' => 4,
                 ],
             ],
@@ -138,7 +139,7 @@ class TemplateGuideController extends Controller
                 ]),
                 'component' => [
                     'filename' => 'promo-column',
-                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center overflow-hidden',
+                    'classes' => 'col-bg rounded-sm bg-gold-50 p-2 pt-1 text-center overflow-hidden',
                     'columnSpan' => 8,
                 ],
             ],
@@ -150,7 +151,7 @@ class TemplateGuideController extends Controller
                 ]),
                 'component' => [
                     'filename' => 'promo-column',
-                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center overflow-hidden',
+                    'classes' => 'col-bg rounded-sm bg-gold-50 p-2 pt-1 text-center overflow-hidden',
                     'columnSpan' => 5,
                 ],
             ],
@@ -161,7 +162,7 @@ class TemplateGuideController extends Controller
                 ]),
                 'component' => [
                     'filename' => 'promo-column',
-                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center overflow-hidden',
+                    'classes' => 'col-bg rounded-sm bg-gold-50 p-2 pt-1 text-center overflow-hidden',
                     'columnSpan' => 7,
                 ],
             ],
@@ -173,7 +174,7 @@ class TemplateGuideController extends Controller
                 ]),
                 'component' => [
                     'filename' => 'promo-column',
-                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center overflow-hidden',
+                    'classes' => 'col-bg rounded-sm bg-gold-50 p-2 pt-1 text-center overflow-hidden',
                     'columnSpan' => 6,
                 ],
             ],
@@ -184,7 +185,7 @@ class TemplateGuideController extends Controller
                 ]),
                 'component' => [
                     'filename' => 'promo-column',
-                    'classes' => 'col-bg rounded bg-gold-50 p-2 pt-1 text-center overflow-hidden',
+                    'classes' => 'col-bg rounded-sm bg-gold-50 p-2 pt-1 text-center overflow-hidden',
                     'columnSpan' => 6,
                 ],
             ],
@@ -247,7 +248,7 @@ class TemplateGuideController extends Controller
                     'showDescription' => false,
                     'imageSize' => 'small',
                     'columnSpan' => 8,
-                    'classes' => 'col-bg rounded bg-gold-50 py-2 overflow-hidden',
+                    'classes' => 'col-bg rounded-sm bg-gold-50 py-2 overflow-hidden',
                 ],
             ],
 
@@ -261,7 +262,7 @@ class TemplateGuideController extends Controller
                     'heading' => 'Column 2',
                     'filename' => 'button-column',
                     'columnSpan' => 4,
-                    'classes' => 'col-bg rounded bg-gold-50 py-2 end overflow-hidden',
+                    'classes' => 'col-bg rounded-sm bg-gold-50 py-2 end overflow-hidden',
                 ],
             ],
 
@@ -321,7 +322,7 @@ class TemplateGuideController extends Controller
                     'heading' => 'News',
                     'filename' => 'news-column',
                     'columnSpan' => 6,
-                    'classes' => 'col-bg rounded bg-gold-50 py-2 overflow-hidden',
+                    'classes' => 'col-bg rounded-sm bg-gold-50 py-2 overflow-hidden',
                 ],
             ],
 
@@ -332,7 +333,7 @@ class TemplateGuideController extends Controller
                     'heading' => 'Events',
                     'filename' => 'events-column',
                     'columnSpan' => 6,
-                    'classes' => 'col-bg rounded bg-gold-50 py-2 end overflow-hidden',
+                    'classes' => 'col-bg rounded-sm bg-gold-50 py-2 end overflow-hidden',
                     'cal_name' => 'main/',
                     'link_text' => 'More events',
                 ],
@@ -364,7 +365,7 @@ class TemplateGuideController extends Controller
                             'Data' => '{
 "id": 0,
 "columnSpan": 10,
-"classes": "end bg-gold-50 rounded px-gutter pb-gutte overflow-hiddenr",
+"classes": "end bg-gold-50 rounded-sm px-gutter pb-gutte overflow-hiddenr",
 }',
                         ],
                     ],
@@ -383,7 +384,7 @@ class TemplateGuideController extends Controller
                 'component' => [
                     'filename' => 'promo-row',
                     'columnSpan' => 10,
-                    'classes' => 'end bg-gold-50 rounded px-gutter pb-gutter overflow-hidden',
+                    'classes' => 'end bg-gold-50 rounded-sm px-gutter pb-gutter overflow-hidden',
                 ],
             ],
 
@@ -393,8 +394,8 @@ class TemplateGuideController extends Controller
             'promo-row-900' => [
                 'data' => app(EmptyPromo::class)->create(1, false, [
                     'title' => 'Offset column',
-                    'description' => '<p>Individual columns in their own row are centered by default. 
-To align columns to the left or right of the content area, apply a class to shift the component by <span class="italic">n</span> number of columns. 
+                    'description' => '<p>Individual columns in their own row are centered by default.
+To align columns to the left or right of the content area, apply a class to shift the component by <span class="italic">n</span> number of columns.
 Use <code>mt:left-span-3</code> to move a component 3 columns from the left.
 Use <code>mt:right-span-3</code> to move a component 3 columns from the right.
 Span values range from 1 to 12. It is important to include the <code>mt:</code> prefix, otherwise the component may be missing from mobile view.
@@ -437,7 +438,7 @@ Span values range from 1 to 12. It is important to include the <code>mt:</code> 
                     'heading' => 'Events',
                     'filename' => 'events-column',
                     'columnSpan' => 6,
-                    'classes' => 'bg-gold-50 rounded py-2 end mt:right-span-3 overflow-hidden',
+                    'classes' => 'bg-gold-50 rounded-sm py-2 end mt:right-span-3 overflow-hidden',
                     'cal_name' => 'main/',
                     'link_text' => 'More events',
                 ],
@@ -465,11 +466,11 @@ Span values range from 1 to 12. It is important to include the <code>mt:</code> 
                         'description' => '',
                         'tr1' => [
                             'Page field' => 'modular-button-row',
-                            'Data' => '{
-"id": 0,
-"backgroundImageUrl": "/_resources/images/background.svg",
-"classes": "py-gutter-lg px-gutter-lg rounded text-white overflow-hidden",
-}',
+                            'Data' => json_encode([
+                                'id' => 0,
+                                'backgroundImageUrl' => Vite::asset('resources/images/background.svg'),
+                                'classes' => 'py-gutter-lg px-gutter-lg rounded-sm text-white overflow-hidden',
+                            ]),
                         ],
                     ],
                 ],
@@ -485,8 +486,8 @@ Span values range from 1 to 12. It is important to include the <code>mt:</code> 
                 ]),
                 'component' => [
                     'filename' => 'button-row',
-                    'backgroundImageUrl' => '/_resources/images/background.svg',
-                    'classes' => 'py-gutter-lg px-gutter-lg text-white rounded overflow-hidden',
+                    'backgroundImageUrl' => Vite::asset('resources/images/background.svg'),
+                    'classes' => 'py-gutter-lg px-gutter-lg text-white rounded-sm overflow-hidden',
                     'sectionStyle' => 'background-size:350px;',
                 ],
             ],
@@ -572,7 +573,7 @@ Span values range from 1 to 12. It is important to include the <code>mt:</code> 
                 'data' => app(EmptyPromo::class)->create(1, false, [
                     'title' => 'Customizing gutters',
                     'description' => '
-<p>Control the component\'s padding or margin using the gutter class. 
+<p>Control the component\'s padding or margin using the gutter class.
 Replace the askterisk <code>*</code> in the gutter class with your margin or padding property.
 Padding is used in the example below, however use <code>m</code> for margin instead of <code>p</code> if desired.
 </p>

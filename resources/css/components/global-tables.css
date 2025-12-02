@@ -6,7 +6,7 @@ table {
         @apply block overflow-x-scroll border-collapse;
     }
 
-    @screen mt {
+    @media (width >= theme(--breakpoint-mt)) {
         &:not([class]),
         &.table-sort {
             @apply table;
@@ -19,7 +19,7 @@ table {
         min-width: calc(100vw - 2rem);
     }
 
-    @screen mt {
+    @media (width >= theme(--breakpoint-mt)) {
         caption {
             min-width: auto;
         }

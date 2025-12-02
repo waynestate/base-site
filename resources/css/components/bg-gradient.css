@@ -1,0 +1,34 @@
+@utility bg-gradient-darkest {
+    /* Gradient overlay */
+    &::before {
+        @apply absolute inset-0;
+
+        content: '';
+        background-image: radial-gradient(
+            200% 100% at 50% 100%,
+            rgba(#05211e, 0.9) 10%,
+            transparent 100%
+        );
+
+        @media print {
+            @apply bg-none;
+        }
+    }
+}
+
+@utility bg-gradient-green {
+    /* Backgrounds */
+    @apply bg-green-600;
+
+    background-image: linear-gradient(
+        180deg,
+        theme('colors.green.DEFAULT') 0,
+        theme('colors.green.600')
+    );
+
+    &:hover {
+        @apply bg-green-600;
+
+        background-image: none;
+    }
+}

@@ -6,7 +6,7 @@
             @if(!empty($profile['data']['Picture']['url']))
                 <img src="{{ $profile['data']['Picture']['url'] }}" alt="{{ $base['page']['title'] }}" class="sm:h-64 lg:h-auto mx-auto lg:mx-0 block mb-4">
             @else
-                <img src="/_resources/images/no-photo.svg" alt="{{ $base['page']['title'] }}" class="sm:h-64 lg:h-auto block mx-auto lg:mx-0 mb-4">
+                <img src="@vite('/resources/images/no-photo.svg')" alt="{{ $base['page']['title'] }}" class="sm:h-64 lg:h-auto block mx-auto lg:mx-0 mb-4">
             @endif
 
             @include('partials.page-title', ['title' => $base['page']['title'], 'class' => 'block lg:hidden'])

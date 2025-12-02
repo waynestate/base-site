@@ -1,5 +1,5 @@
 /* Global print styles */
-@screen print {
+@media print {
     *,
     *::before,
     *::after {

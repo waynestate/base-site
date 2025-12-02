@@ -3,6 +3,7 @@
 namespace Styleguide\Http\Controllers;
 
 use Contracts\Repositories\ModularPageRepositoryContract;
+use Illuminate\Support\Facades\Vite;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -512,7 +513,7 @@ class FullWidthController extends Controller
                 'component' => [
                     'heading' => 'Button row with background image',
                     'filename' => 'button-row',
-                    'backgroundImageUrl' => '/_resources/images/background.svg',
+                    'backgroundImageUrl' => Vite::asset('resources/images/background.svg'),
                     'classes' => 'py-gutter-xl px-4 pt-xl pb-xl mt-gutter-lg text-white',
                     'sectionStyle' => 'background-size:350px;',
                 ],
@@ -527,11 +528,11 @@ class FullWidthController extends Controller
                         'description' => '',
                         'tr1' => [
                             'Page field' => 'modular-button-row',
-                            'Data' => '{
-"id": 0,
-"backgroundImageUrl": "/_resources/images/background.svg",
-"classes": "py-gutter-xl",
-}',
+                            'Data' => json_encode([
+                                'id' => 0,
+                                'backgroundImageUrl' => Vite::asset('resources/images/background.svg'),
+                                'classes' => 'py-gutter-xl',
+                            ]),
                         ],
                     ],
                 ],

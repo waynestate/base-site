@@ -8,6 +8,7 @@
 .DS_Store
 /public/_static
 /public/hot
+/public/build
 /public/storage
 /public/_resources
 /shared
@@ -25,3 +26,5 @@ cs_fixer_tmp*
 .env.backup
 /tools
 .yarn/
+/.junie
+boost.json
