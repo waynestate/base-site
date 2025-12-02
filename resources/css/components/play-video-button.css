@@ -2,7 +2,18 @@
     @apply relative block;
 
     &::after {
-        @apply absolute inset-0 opacity-70 transition-all bg-no-repeat bg-center group-hover:opacity-100 hover:opacity-100 bg-[length:50%] md:bg-[length:100px];
+        @apply absolute inset-0 opacity-70 transition-all bg-no-repeat bg-center bg-[length:50%] md:bg-[length:100px];
+
+        /*
+            TODO:
+            This errors if applied
+            ▲ [WARNING] Unexpected ")" [css-syntax-error]
+
+    <stdin>:2:70272:
+      2 │ ...er){.play-video-button:after:is(),.play-video-button:after:hover...
+        ╵
+            @apply group-hover:opacity-100 hover:opacity-100
+        */
 
         content: '';
         background-image: url('/resources/images/youtube-play.svg');

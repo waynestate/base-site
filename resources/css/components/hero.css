@@ -1,26 +1,26 @@
 .hero {
     /* Flickity applies absolute to this container when enabled */
-    &__preserve-flickity {
+    .hero__preserve-flickity {
         @apply w-full;
     }
 
-    &__wrapper {
-        @apply w-full; 
+    .hero__wrapper {
+        @apply w-full;
     }
 
-    &__primary-image {
+    .hero__primary-image {
         @apply w-full;
     }
 
     /* Contained */
-    &--contained {
+    .hero--contained {
         .hero__bg {
             @apply aspect-hero max-h-hero w-full bg-cover bg-center relative;
         }
     }
 
     /* Banner small */
-    &--banner-small {
+    .hero--banner-small {
         @apply h-hero-small max-h-hero-small;
 
         .hero__primary-image {
@@ -29,7 +29,7 @@
     }
 
     /* Banner large */
-    &--banner-large {
+    .hero--banner-large {
         @apply aspect-hero max-h-hero w-full bg-cover bg-center relative;
 
         .hero__primary-image {
@@ -38,13 +38,13 @@
     }
 
     /* Text overlay */
-    &--text-overlay {
+    .hero--text-overlay {
         @apply relative;
 
         .hero__primary-image {
             @apply aspect-hero max-h-hero w-full bg-cover bg-center relative;
         }
-        
+
         .hero__content-position {
             @apply px-container z-1 relative lg:absolute print:relative lg:bottom-0 lg:inset-x-0 lg:bg-gradient-darkest lg:pt-28 lg:pb-6;
         }
@@ -71,7 +71,7 @@
     }
 
     /* Half */
-    &--half {
+    .hero--half {
         @apply relative xl:flex items-center;
 
         .hero__primary-image-wrapper {
@@ -100,7 +100,7 @@
     }
 
     /* Logo overlay */
-    &--logo-overlay {
+    .hero--logo-overlay {
         @apply relative flex flex-col justify-center bg-green-900 min-h-[500px];
 
         .hero__bg {
@@ -125,7 +125,7 @@
     }
 
     /* SVG overlay */
-    &--svg-overlay {
+    .hero--svg-overlay {
         @apply relative pt-hero;
 
         .hero__link {

@@ -37,7 +37,7 @@
 @import "components/pdf.css";
 @import "components/full-width-styleguide-hero.css";
 @import "components/policy-numbering.css";
-/*@import "components/hero.css";*/
+@import "components/hero.css";
 
 /* Site specific */
 @import "site-specific/theme.css";
