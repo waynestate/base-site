@@ -112,24 +112,24 @@ class HeroRepository implements HeroRepositoryContract
             foreach ($hero['data'] as $hero_key => $hero_data) {
 
                 // Explode options to determine type and placement to support previous settings
-                $hero['data'][$hero_key]['hero_options'] = explode(' ',strtolower($hero_data['option'])); 
+                $hero['data'][$hero_key]['hero_classes'] = explode(' ',strtolower($hero_data['option'])); 
 
                 // hero container class
 
                 // Determine hero type
-                if (!empty(array_intersect($hero['data'][$hero_key]['hero_options'], $hero_types))) {
-                    if (array_intersect($hero['data'][$hero_key]['hero_options'], $slim)) {
+                if (!empty(array_intersect($hero['data'][$hero_key]['hero_classes'], $hero_types))) {
+                    if (array_intersect($hero['data'][$hero_key]['hero_classes'], $slim)) {
                         $hero['component']['heroType'] = 'slim';
-                        $hero['data'][$hero_key]['hero_type'] = 'slim';
-                    } elseif (array_intersect($hero['data'][$hero_key]['hero_options'], $split)) {
+                        $hero['data'][$hero_key]['hero_classes'][] = 'slim';
+                    } elseif (array_intersect($hero['data'][$hero_key]['hero_classes'], $split)) {
                         $hero['component']['heroType'] = 'split';
-                        $hero['data'][$hero_key]['hero_type'] = 'split';
-                    } elseif (array_intersect($hero['data'][$hero_key]['hero_options'], $overlay)) {
+                        $hero['data'][$hero_key]['hero_classes'][] = 'split';
+                    } elseif (array_intersect($hero['data'][$hero_key]['hero_classes'], $overlay)) {
                         $hero['component']['heroType'] = 'overlay';
-                        $hero['data'][$hero_key]['hero_type'] = 'overlay';
-                    } elseif (array_intersect($hero['data'][$hero_key]['hero_options'], $large)) {
+                        $hero['data'][$hero_key]['hero_classes'][] = 'overlay';
+                    } elseif (array_intersect($hero['data'][$hero_key]['hero_classes'], $large)) {
                         $hero['component']['heroType'] = 'large';
-                        $hero['data'][$hero_key]['hero_type'] = 'large';
+                        $hero['data'][$hero_key]['hero_classes'][] = 'large';
                     }
                 } else {
                     if (!empty($hero['component']['heroType']) && strtolower($hero['component']['heroType']) === 'carousel') {
@@ -141,19 +141,14 @@ class HeroRepository implements HeroRepositoryContract
                     }
                 }
 
-                if (in_array('svg', $hero['data'][$hero_key]['hero_options'] )) {
-                    $hero['data'][$hero_key]['hero_classes'][] = 'svg';
-                    dump($hero['data'][$hero_key]);
-                }
-
                 // Determine hero placement
                 if (count($hero['data']) != 1) {
                     $hero['component']['heroType'] = 'carousel';
                 } else {
-                    if (!empty(array_intersect($hero['data'][$hero_key]['hero_options'], $hero_placement))) {
-                        if (array_intersect($hero['data'][$hero_key]['hero_options'], $full_width)) {
+                    if (!empty(array_intersect($hero['data'][$hero_key]['hero_classes'], $hero_placement))) {
+                        if (array_intersect($hero['data'][$hero_key]['hero_classes'], $full_width)) {
                             $hero['component']['heroPlacement'] = 'full-width';
-                        } elseif (array_intersect($hero['data'][$hero_key]['hero_options'], $contained)) {
+                        } elseif (array_intersect($hero['data'][$hero_key]['hero_classes'], $contained)) {
                             $hero['component']['heroPlacement'] = 'contained';
                         } else {
                             $hero['component']['heroPlacement'] = $hero['component']['heroPlacement'] ?? config('base.hero_placement');
