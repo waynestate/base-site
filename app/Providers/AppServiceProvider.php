@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
+use URL;
 use Waynestate\Api\Connector;
 
 class AppServiceProvider extends ServiceProvider
@@ -18,14 +20,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public const HOME = '/home';
 
-    /** @var $prefx **/
-    protected $prefix = 'App';
+    protected string $prefix = 'App';
 
     /**
      * Bootstrap any application services.
      */
     public function boot(): void
     {
+        // Allow http when on www-dev
+        if (App::environment('dev')) {
+            URL::forceScheme('http');
+        }
+
         Blade::directive('image', function ($expression) {
             // Since all paramters are concated into a string we need to parse them out into an array
             $params = explode(',', $expression);

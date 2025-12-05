@@ -2,26 +2,25 @@
 
 namespace App\Http\Middleware;
 
-use Symfony\Component\HttpFoundation\Response;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Symfony\Component\HttpFoundation\Response;
 
 class Data
 {
-    /** @var $prefix **/
-    protected $prefix = 'App';
+    protected string $prefix = 'App';
 
     /**
      * Set a global data array to the request object containing page information
      */
-    public function handle(Request $request, Closure $next): Response|null
+    public function handle(Request $request, Closure $next): ?Response
     {
         if (using_styleguide()) {
             $this->prefix = 'Styleguide';
         }
 
-        //Set the matched route parameters to global data
+        // Set the matched route parameters to global data
         $data['parameters'] = $request->route() !== null ? $request->route()->parameters : [];
 
         // If no path was matched from the route parameters, get the path from the request
@@ -44,10 +43,10 @@ class Data
         }
 
         // Overrides for meta information
-        $data['meta']['image'] = !empty($page['data']['meta_image']) ? $page['data']['meta_image'] : '';
-        $data['meta']['image_alt'] = !empty($page['data']['meta_image_alt']) ? $page['data']['meta_image_alt'] : '';
-        $page['page']['description'] = !empty($page['data']['page_description']) ? $page['data']['page_description'] : $page['page']['description'];
-        $page['page']['title'] = !empty($page['data']['page_title']) ? $page['data']['page_title'] : $page['page']['title'];
+        $data['meta']['image'] = ! empty($page['data']['meta_image']) ? $page['data']['meta_image'] : '';
+        $data['meta']['image_alt'] = ! empty($page['data']['meta_image_alt']) ? $page['data']['meta_image_alt'] : '';
+        $page['page']['description'] = ! empty($page['data']['page_description']) ? $page['data']['page_description'] : $page['page']['description'];
+        $page['page']['title'] = ! empty($page['data']['page_title']) ? $page['data']['page_title'] : $page['page']['title'];
 
         // Merge server and page data so global repositories can use them
         $request->data = merge($data, $page);
@@ -63,13 +62,13 @@ class Data
         $callbacks = $config['all']['callbacks'];
 
         // Merge the callbacks for the site we are on
-        if (!empty($config['sites'][$page['site']['id']]['callbacks'])) {
+        if (! empty($config['sites'][$page['site']['id']]['callbacks'])) {
             $callbacks = array_merge($callbacks, $config['sites'][$page['site']['id']]['callbacks']);
         }
 
         // Get global data
         $global = collect($callbacks)->flatMap(function ($callback) use ($request) {
-            list($controller, $method) = Str::parseCallback($callback);
+            [$controller, $method] = Str::parseCallback($callback);
 
             return app($this->getPrefix().$controller)->$method($request->data);
         })->toArray();
@@ -82,7 +81,7 @@ class Data
 
         // Scope the waynestate/base-site global request data to be within ['base']
         // This was found to be an issue with InertiaJS which had it's own $page variable in the view
-        if (!empty($request->data)) {
+        if (! empty($request->data)) {
             $request_keys = array_keys($request->data);
 
             $request->data['base'] = $request->data;
@@ -132,12 +131,10 @@ class Data
         // Check the route uri and trim off all parts that are route parameters.
         $path = collect(explode('/', $uri))
             ->filter(function ($item) {
-                if (!strstr($item, '{')) {
-                    return $item;
-                }
+                return ! strstr($item, '{');  // Return boolean, not the item
             })
             ->implode('/');
 
-        return !empty($request->any) ? $request->any.$path : $path;
+        return ! empty($request->any) ? $request->any.$path : $path;
     }
 }

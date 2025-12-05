@@ -2,12 +2,20 @@
     $data => array // ['title', 'excerpt', 'description', 'relative_url', 'filename_alt_text', 'link']
 --}}
 @foreach($data as $item)
-    <{{ !empty($item['link']) ? 'a href='.$item['link'] : 'div' }} class="{{ !empty($item['link']) ? 'group' : '' }}">
+    @if (!empty($item['link']))
+        <a href="{{ $item['link'] }}" class="group">
+    @else
+        <div>
+    @endif
         <blockquote class="flex gap-x-6 border-0 m-0 p-0 relative">
             <div class="flex flex-wrap content-center w-full">
                 <div class="content text-black w-full text-lg md:text-xl lg:leading-relaxed mb-4">
                     @if(!empty($item['description']) && !empty($component['showDescription']) && $component['showDescription'] === true)
-                        {!! (!empty($item['link']) ? preg_replace(array('"<a href(.*?)>"', '"</a>"'), array('',''), $item['description']) : $item['description']) !!}
+                        @if (!empty($item['link']))
+                            {!! preg_replace(['"<a href(.*?)>"', '"</a>"'], '', $item['description']) !!}
+                        @else
+                            {!! $item['description'] !!}
+                        @endif
                     @else
                         @if(!empty($item['excerpt']))<p>{!! strip_tags($item['excerpt'], ['em', 'strong', 'br', '&ldquo;', '&rdquo;']) !!}</p>@endif
                     @endif
@@ -29,7 +37,11 @@
                 <div class="w-full pt-full">{{-- Absolutely positioned image placeholder --}}</div>
             </div>
         </blockquote>
-    <{{ !empty($item['link']) ? '/a' : '/div' }}>
+    @if (!empty($item['link']))
+        </a>
+    @else
+        </div>
+    @endif
     @if(!$loop->last)
         <hr class="mb-6" />
     @endif

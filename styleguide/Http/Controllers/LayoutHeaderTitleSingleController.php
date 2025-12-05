@@ -30,6 +30,6 @@ class LayoutHeaderTitleSingleController extends Controller
 
         $request->data['base']['site']['short-title'] = $this->faker->sentence(2);
 
-        return view('styleguide-childpage', merge($request->data));
+        return view('childpage', merge($request->data));
     }
 }

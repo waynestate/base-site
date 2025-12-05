@@ -44,7 +44,6 @@ class HeroRepository implements HeroRepositoryContract
             ];
         }
 
-
         // Set hero buttons from components
         if (!empty($promos['components'])) {
             $hero_buttons = collect($promos['components'])->reject(function ($data, $component_name) {

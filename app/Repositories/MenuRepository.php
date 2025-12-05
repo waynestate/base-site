@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use Contracts\Repositories\RequestDataRepositoryContract;
 use Contracts\Repositories\MenuRepositoryContract;
+use Contracts\Repositories\ModularPageRepositoryContract;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use Waynestate\Api\Connector;
@@ -25,21 +26,30 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
     /** @var Repository */
     protected $cache;
 
+    /** @var ModularPageRepositoryContract */
+    protected $components;
+
     /**
      * Construct the repository.
      */
-    public function __construct(Connector $wsuApi, ParseMenu $parseMenu, DisplayMenu $displayMenu, Repository $cache)
-    {
+    public function __construct(
+        Connector $wsuApi,
+        ParseMenu $parseMenu,
+        DisplayMenu $displayMenu,
+        Repository $cache,
+        ModularPageRepositoryContract $components
+    ) {
         $this->wsuApi = $wsuApi;
         $this->parseMenu = $parseMenu;
         $this->displayMenu = $displayMenu;
         $this->cache = $cache;
+        $this->components = $components;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getRequestData(array $data)
+    public function getRequestData(array &$data)
     {
         // Get all the menus for this site
         try {
@@ -114,6 +124,9 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
         if (empty($menus['site_menu_output'])) {
             $menus['show_site_menu'] = false;
         }
+
+        // Hide the site menu or breadcrumbs with the modular-page-config component
+        $menus = $this->menuDisplayToggles($menus, $data);
 
         return $menus;
     }
@@ -199,6 +212,8 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
      */
     public function trimSiteMenu($menu, $parentId = null, $topMenuId = null)
     {
+        $trim_menu = [];
+
         // Trim first level based on path[0] - only if we are on the main website
         // or we aren't enabling top menu across all subsites
         if (!empty($menu['meta']['path']) && ($parentId === null || $topMenuId === null) && config('base.top_menu_enabled') === true) {
@@ -260,5 +275,32 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
         }
 
         return $breadcrumbs;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function menuDisplayToggles($menus, $data)
+    {
+        // TODO: move this to a new middleware file to handle page field data and avoid looping twice
+        if (array_key_exists('modular-page-config', $data['data'])) {
+            foreach ($data['data'] as $componentName => $componentJSON) {
+                if ($componentName === 'modular-page-config') {
+                    $componentJSON = $this->components->cleanComponentJSON($componentJSON);
+
+                    $componentJSON = json_decode($componentJSON, true);
+
+                    if (isset($componentJSON['showPageMenu']) && $componentJSON['showPageMenu'] === false) {
+                        $menus['show_site_menu'] = false;
+                    }
+
+                    if (isset($componentJSON['showBreadcrumbs']) && $componentJSON['showBreadcrumbs'] === false) {
+                        $menus['breadcrumbs'] = [];
+                    }
+                }
+            }
+        }
+
+        return $menus;
     }
 }

@@ -10,7 +10,7 @@ class TopicRepository extends Repository
     /**
      * {@inheritdoc}
      */
-    public function listing($application_ids, $subsite_folder = null)
+    public function listing(int|array $application_ids, $subsite_folder = null): array
     {
         $topics['topics'] = app(Topic::class)->create(20);
 
@@ -20,7 +20,7 @@ class TopicRepository extends Repository
     /**
      * {@inheritdoc}
      */
-    public function find($slug)
+    public function find(string $slug): array
     {
         return [
             'topics' => app(Topic::class)->create(1, true),
@@ -30,7 +30,7 @@ class TopicRepository extends Repository
     /**
      * {@inheritdoc}
      */
-    public function setSelected($topics, $topic)
+    public function setSelected(array $topics, ?string $topic): array
     {
         return collect($topics)->map(function ($item, $key) {
             $item['selected'] = $key === 1 ? true : false;

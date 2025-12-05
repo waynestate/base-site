@@ -402,6 +402,16 @@
                 "relative_url": "/styleguide/component/spotlight",
                 "submenu": []
             },
+            "124100": {
+                "menu_item_id": 124100,
+                "is_active": 1,
+                "page_id": 124100,
+                "target": "",
+                "display_name": "Page config",
+                "class_name": "",
+                "relative_url": "/styleguide/component/pageconfig",
+                "submenu": []
+            },
             "9999": {
                 "menu_item_id": 9999,
                 "is_active": 1,
@@ -685,6 +695,27 @@
                         "display_name": "Header title double",
                         "class_name": "",
                         "relative_url": "/styleguide/layout/header/title/double/",
+                        "submenu": []
+                    }
+                }
+            },
+            "105100": {
+                "menu_item_id": 105100,
+                "is_active": 1,
+                "page_id": 105100,
+                "target": "",
+                "display_name": "Page title",
+                "class_name": "",
+                "relative_url": "/styleguide/layout/page/title",
+                "submenu": {
+                    "105100100": {
+                        "menu_item_id": 105100100,
+                        "is_active": 1,
+                        "page_id": 105100100,
+                        "target": "",
+                        "display_name": "Page title",
+                        "class_name": "",
+                        "relative_url": "/styleguide/layout/page/title",
                         "submenu": []
                     }
                 }

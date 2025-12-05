@@ -31,7 +31,7 @@ class PromoRepository extends Repository
     /**
      * {@inheritdoc}
      */
-    public function getRequestData(array $data)
+    public function getRequestData(array &$data)
     {
         /*
         |--------------------------------------------------------------------------
@@ -159,6 +159,8 @@ class PromoRepository extends Repository
             'flickr',
             'pinterest',
             'mastodon',
+            'bluesky',
+            'threads',
         ])->map(function ($name) {
             return app(FooterSocial::class)->create(1, true, ['title' => $name]);
         })

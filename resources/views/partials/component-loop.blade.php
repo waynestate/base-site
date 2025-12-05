@@ -1,8 +1,12 @@
 {{--
-    modular-component {
-        "sectionClass":"bg-cover bg-center py-16", // class on section element, margins/padding/background
-        "backgroundImageUrl":"https://domain.edu/url.jpg",
-    }
+modular-component {
+    "columnSpan":6,
+    "classes":"bg-cover bg-center py-16", // class on section element, margins/padding/background
+    "backgroundImageUrl":"https://domain.edu/url.jpg",
+    "heading":"My heading",
+    "headingClass":"divider-gold",
+    "headingLevel":"h3",
+}
 --}}
 
 @if(!empty($base['components']))
@@ -10,7 +14,7 @@
         @foreach($base['components'] as $componentName => $component)
             @if(!empty($component['data']) && !empty($component['component']['filename']) && \View::exists('components/'.$component['component']['filename']))
                 <section id="{{ Str::slug($componentName) }}" class="relative w-full {{ $component['component']['containerClass'] ?? ''}}">
-                    <div class="component__container {{ $component['component']['componentClass'] ?? ''}} {{ in_array($base['page']['controller'], config('base.full_width_controllers')) ? '' : 'relative overflow-hidden' }}">
+                    <div class="component__container {{ $component['component']['componentClass'] ?? ''}} {{ in_array($base['page']['controller'], config('base.full_width_controllers')) ? '' : 'relative' }}">
                         <div class="component__background {{ $component['component']['backgroundClass'] ?? ''}}" {!! $component['component']['backgroundImageUrl'] ?? '' !!}></div>
                         @if(!empty($component['component']['heading']))
                             @include('partials/heading', [

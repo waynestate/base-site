@@ -48,7 +48,7 @@
         pre {
             @apply border bg-transparent overflow-auto whitespace-pre-wrap;
 
-            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         hr {

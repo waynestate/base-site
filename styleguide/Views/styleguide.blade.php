@@ -1,7 +1,7 @@
 @extends('layouts.' . (!empty($base['layout']) ? $base['layout'] : 'main'))
 
 @section('content')
-    @include('components.page-title', ['title' => $base['page']['title']])
+    @include('partials.page-title', ['title' => $base['page']['title']])
 
     <div class="content">
         <p>The style guide is specific to each site, so please be sure you are viewing the correct one at <strong>[yourdomain].wayne.edu/styleguide</strong> (ex: <a href="//mac.wayne.edu/styleguide" class="external">mac.wayne.edu/styleguide</a>).

@@ -14,6 +14,9 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
+    /** @var ProfileRepositoryContract */
+    protected $profile;
+
     /**
      * Construct the controller.
      */
@@ -41,15 +44,24 @@ class ProfileController extends Controller
 
         // Set the selected group
         $selected_group = $request->query('group') !== '' ? $request->query('group') : null;
-
-        // Get the options for the dropdown
-        $dropdown_group_options = $this->profile->getDropdownOptions($selected_group, $forced_profile_group_id);
+        // Normalize selected group to int|null for dropdown options (handles arrays or non-numeric)
+        $selected_group_id = is_array($selected_group) ? null : (is_numeric($selected_group) ? (int) $selected_group : null);
+        // Normalize for getGroupIds: string|null
+        $selected_group_str = is_array($selected_group) ? null : ($selected_group !== null ? (string) $selected_group : null);
+        // Normalize forced group id for both methods
+        $forced_profile_group_id_str = $forced_profile_group_id !== null ? (string) $forced_profile_group_id : null;
+        $forced_profile_group_id_int = is_numeric($forced_profile_group_id) ? (int) $forced_profile_group_id : null;
 
         // Determine which group(s) to filter by
-        $group_ids = $this->profile->getGroupIds($selected_group, $forced_profile_group_id, $dropdown_groups['dropdown_groups']);
+        /** @var array $dropdown_groups_arr */
+        $dropdown_groups_arr = $dropdown_groups['dropdown_groups'] ?? [];
+        $group_ids = $this->profile->getGroupIds($selected_group_str, $forced_profile_group_id_str, $dropdown_groups_arr);
 
         // Get the profiles
         $profiles = $this->profile->getProfiles($site_id, $group_ids);
+
+        // Get the options for the dropdown (pass profiles to determine if filtering should be hidden)
+        $dropdown_group_options = $this->profile->getDropdownOptions($selected_group_id, $forced_profile_group_id_int, $profiles);
 
         // Disable hero images
         $request->data['base']['hero'] = false;
@@ -67,7 +79,7 @@ class ProfileController extends Controller
     public function show(Request $request): View
     {
         if (empty($request->accessid)) {
-            abort('404');
+            abort(404);
         }
 
         // Parse profile config from custom fields
@@ -81,7 +93,7 @@ class ProfileController extends Controller
 
         // Make sure the profile exists
         if (empty($profile['profile'])) {
-            abort('404');
+            abort(404);
         }
 
         // Re-label future and current semesters
