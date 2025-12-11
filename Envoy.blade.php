@@ -232,7 +232,7 @@ fi
         echo "LocalSource Pack release...";
         [ -f {{ $localdeploy_tmp_dir }}/release_{{ $release_hash }}.tgz ] && rm -rf {{ $localdeploy_tmp_dir }}/release_{{ $release_hash }}.tgz;
         cd {{ $localdeploy_base }}/;
-        tar --exclude=storage --exclude=node_modules --exclude-vcs -czf {{ $localdeploy_tmp_dir }}/release_{{ $release_hash }}.tgz {{ $source_name }};
+        tar --exclude=storage --exclude=node_modules --exclude-vcs --exclude='.yarn' -czf {{ $localdeploy_tmp_dir }}/release_{{ $release_hash }}.tgz {{ $source_name }};
         echo "LocalSource Pack release Done.";
     fi
 @endtask
