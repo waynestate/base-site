@@ -17,7 +17,7 @@
         @include('partials.page-title', ['title' => $base['page']['title']])
 
         @if(!empty($promo['excerpt']))
-            <p>{{ $promo['excerpt'] }}</p>
+            <p>{!! strip_tags($promo['excerpt'], ['em', 'strong', 'br', '&ldquo;', '&rdquo;']) !!}</p>
         @endif
 
         @if(!empty($promo['description']))

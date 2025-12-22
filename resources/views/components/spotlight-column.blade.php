@@ -17,7 +17,9 @@
                             {!! $item['description'] !!}
                         @endif
                     @else
-                        @if(!empty($item['excerpt']))<p>{!! strip_tags($item['excerpt'], ['em', 'strong', 'br', '&ldquo;', '&rdquo;']) !!}</p>@endif
+                        @if(!empty($item['excerpt']))
+                            <p>{!! strip_tags($item['excerpt'], ['em', 'strong', 'br', '&ldquo;', '&rdquo;']) !!}</p>
+                        @endif
                     @endif
                 </div>
                 <div class="w-full flex items-center gap-x-2 mb-4">
@@ -28,7 +30,9 @@
                     </div>
                     <cite class="not-italic">
                         <span class="block font-bold mb-0 text-lg {{ !empty($item['link']) ? 'group-hover:underline' : '' }}">{{ $item['title'] }}</span>
-                        @if(!empty($item['excerpt']) && !empty($component['showDescription']) && $component['showDescription'] === true)<span class="block text-black">{{ $item['excerpt'] }}</span>@endif
+                        @if(!empty($item['description']) && !empty($item['excerpt']) && !empty($component['showDescription']) && $component['showDescription'] === true)
+                            <span class="block text-black">{!! strip_tags($item['excerpt'], ['em', 'strong', 'br', '&ldquo;', '&rdquo;']) !!}</span>
+                        @endif
                     </cite>
                 </div>
             </div>
