@@ -43,6 +43,8 @@ class HeroRepository implements HeroRepositoryContract
                 ],
             ];
         }
+        dump(config('base.hero_placement'));
+        dump(config('base.hero_type'));
 
         // Set hero buttons from components
         if (!empty($promos['components'])) {
@@ -96,8 +98,11 @@ class HeroRepository implements HeroRepositoryContract
         $large = ['large', 'banner'];
         $slim = ['slim', 'small'];
         $split = ['split', 'half'];
-        $overlay = ['overlay', 'buttons', 'logo', 'svg'];
-        $hero_types = array_merge($large, $slim, $split, $overlay);
+        $text = ['text'];
+        $buttons = ['buttons'];
+        $logo = ['logo'];
+        $svg = ['svg'];
+        $hero_types = array_merge($large, $slim, $split, $text, $buttons, $logo, $svg);
 
         /*
          * Hero placement
@@ -111,24 +116,31 @@ class HeroRepository implements HeroRepositoryContract
             foreach ($hero['data'] as $hero_key => $hero_data) {
 
                 // Explode options to determine type and placement to support previous settings
-                $hero['data'][$hero_key]['hero_classes'] = explode(' ',strtolower($hero_data['option'])); 
-
-                // hero container class
+                $hero['data'][$hero_key]['hero_options'] = explode(' ',strtolower($hero_data['option'])); 
 
                 // Determine hero type
-                if (!empty(array_intersect($hero['data'][$hero_key]['hero_classes'], $hero_types))) {
-                    if (array_intersect($hero['data'][$hero_key]['hero_classes'], $slim)) {
+                if (!empty(array_intersect($hero['data'][$hero_key]['hero_options'], $hero_types))) {
+                    if (array_intersect($hero['data'][$hero_key]['hero_options'], $slim)) {
                         $hero['component']['heroType'] = 'slim';
-                        $hero['data'][$hero_key]['hero_classes'][] = 'slim';
-                    } elseif (array_intersect($hero['data'][$hero_key]['hero_classes'], $split)) {
+                        $hero['data'][$hero_key]['hero_classes'] = 'hero--slim';
+                    } elseif (array_intersect($hero['data'][$hero_key]['hero_options'], $split)) {
                         $hero['component']['heroType'] = 'split';
-                        $hero['data'][$hero_key]['hero_classes'][] = 'split';
-                    } elseif (array_intersect($hero['data'][$hero_key]['hero_classes'], $overlay)) {
-                        $hero['component']['heroType'] = 'overlay';
-                        $hero['data'][$hero_key]['hero_classes'][] = 'overlay';
-                    } elseif (array_intersect($hero['data'][$hero_key]['hero_classes'], $large)) {
+                        $hero['data'][$hero_key]['hero_classes'] = 'hero--split';
+                    } elseif (array_intersect($hero['data'][$hero_key]['hero_options'], $text)) {
+                        $hero['component']['heroType'] = 'text';
+                        $hero['data'][$hero_key]['hero_classes'] = 'hero--text';
+                    } elseif (array_intersect($hero['data'][$hero_key]['hero_options'], $buttons)) {
+                        $hero['component']['heroType'] = 'buttons';
+                        $hero['data'][$hero_key]['hero_classes'] = 'hero--buttons';
+                    } elseif (array_intersect($hero['data'][$hero_key]['hero_options'], $logo)) {
+                        $hero['component']['heroType'] = 'logo';
+                        $hero['data'][$hero_key]['hero_classes'] = 'hero--logo';
+                    } elseif (array_intersect($hero['data'][$hero_key]['hero_options'], $svg)) {
+                        $hero['component']['heroType'] = 'svg';
+                        $hero['data'][$hero_key]['hero_classes'] = 'hero--svg';
+                    } elseif (array_intersect($hero['data'][$hero_key]['hero_options'], $large)) {
                         $hero['component']['heroType'] = 'large';
-                        $hero['data'][$hero_key]['hero_classes'][] = 'large';
+                        $hero['data'][$hero_key]['hero_classes'] = 'hero--large';
                     }
                 } else {
                     if (!empty($hero['component']['heroType']) && strtolower($hero['component']['heroType']) === 'carousel') {
@@ -137,6 +149,7 @@ class HeroRepository implements HeroRepositoryContract
                         // Set the default hero type when hero is set only from component
                         $hero['component']['heroType'] = $hero['component']['heroType'] ?? config('base.hero_type');
                         $hero['data'][$hero_key]['hero_type'] = $hero['component']['heroType'] ?? config('base.hero_type');
+                        $hero['data'][$hero_key]['hero_classes'] = 'hero--'.$hero['data'][$hero_key]['hero_type'];;
                     }
                 }
 
@@ -144,10 +157,10 @@ class HeroRepository implements HeroRepositoryContract
                 if (count($hero['data']) != 1) {
                     $hero['component']['heroType'] = 'carousel';
                 } else {
-                    if (!empty(array_intersect($hero['data'][$hero_key]['hero_classes'], $hero_placement))) {
-                        if (array_intersect($hero['data'][$hero_key]['hero_classes'], $full_width)) {
+                    if (!empty(array_intersect($hero['data'][$hero_key]['hero_options'], $hero_placement))) {
+                        if (array_intersect($hero['data'][$hero_key]['hero_options'], $full_width)) {
                             $hero['component']['heroPlacement'] = 'full-width';
-                        } elseif (array_intersect($hero['data'][$hero_key]['hero_classes'], $contained)) {
+                        } elseif (array_intersect($hero['data'][$hero_key]['hero_options'], $contained)) {
                             $hero['component']['heroPlacement'] = 'contained';
                         } else {
                             $hero['component']['heroPlacement'] = $hero['component']['heroPlacement'] ?? config('base.hero_placement');
@@ -165,7 +178,8 @@ class HeroRepository implements HeroRepositoryContract
             $hero['component']['heroPlacement'] = $hero['component']['heroPlacement'] ?? config('base.hero_placement');
         }
 
-        //dump($hero['component']);
+        dump($hero['component']);
+        dump($hero['data']);
 
         // Add hero back into promos
         unset($promos['hero']);

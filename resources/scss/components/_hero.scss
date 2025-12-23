@@ -15,6 +15,10 @@
         @apply w-full aspect-hero; 
     }
 
+    #{$c}__container {
+        @apply w-full relative;
+    }
+
     #{$c}__primary-image {
         @apply w-full h-full object-cover object-center;
     }
@@ -25,38 +29,53 @@
         #{$c}__primary-image {
             @apply w-full h-full object-cover object-center;
         }
+
+        #{$c}__title {
+            @apply hidden;
+        }
     }
 
-    /* TODO logo overlay 
-    &--variable-height {
+    &--split {
+        @apply relative xl:flex items-center;
+
+        #{$c}__primary-image {
+            @apply w-full xl:w-[60%] shrink-0;
+        }
+
+        #{$c}__content {
+            @apply relative p-6 xl:px-12 2xl:px-16;
+        }
+
+        #{$c}__content {
+            @apply border-l-12 border-gold border-solid pl-6 2xl:pl-8 pt-4 pb-8;
+        }
+
+        #{$c}__title {
+            @apply text-green-700 3xl:text-4xl mb-3 font-black;
+        }
+
+        #{$c}__link {
+             @apply text-green-700 no-underline hover:underline focus:underline;
+         }
+
+        #{$c}__description {
+             @apply text-lg 3xl:text-xl text-green-700 content;
+         }
     }
-    */
 
     &--large {
-        #{$c}__content {
-            @apply hidden;
-        }
-    }
-
-    &--svg {
-        #{$c}__secondary-image {
-            //svg overlay
-            @apply absolute inset-0;
-        }
+        @apply aspect-hero max-h-hero;
 
         #{$c}__content {
             @apply hidden;
         }
     }
 
-    &--overlay {
+    &--buttons {
+        @apply aspect-hero max-h-hero;
+
         #{$c}__primary-image {
             @apply aspect-hero max-h-hero;
-        }
-
-        #{$c}__secondary-image {
-            //svg overlay
-            @apply absolute inset-0;
         }
 
         #{$c}__content {
@@ -83,42 +102,67 @@
         }
     }
 
-    &--split {
-        @apply relative xl:flex items-center;
+    &--text {
+        @apply aspect-hero max-h-hero;
 
         #{$c}__primary-image {
-            @apply w-full xl:w-[60%] shrink-0;
+            @apply aspect-hero max-h-hero;
         }
 
         #{$c}__content {
-            @apply relative p-6 xl:px-12 2xl:px-16;
-        }
-
-        #{$c}__content {
-            @apply border-l-12 border-gold border-solid pl-6 2xl:pl-8 pt-4 pb-8;
+            @apply mt-4 py-1 px-4 border-l-12 border-gold border-solid text-green-900;
+            @apply lg:px-container lg:absolute lg:bottom-0 lg:inset-x-0 lg:pt-28 lg:pb-6;
+            @apply lg:mt-0 lg:border-0 lg:text-white lg:white-links;
+            @apply lg:bg-gradient-darkest;
         }
 
         #{$c}__title {
-            @apply text-green-700 3xl:text-4xl mb-3 font-black;
+            @apply lg:drop-shadow-px leading-tight text-3xl lg:text-5xl font-bold mb-2;
         }
 
-        .hero__link {
-             @apply text-green-700 no-underline hover:underline focus:underline;
-         }
-
         #{$c}__description {
-             @apply text-lg 3xl:text-xl text-green-700 content;
-         }
+            @apply relative text-lg content;
+        }
+
+        #{$c}__buttons {
+            @apply relative mt-5;
+
+            .button {
+                @apply text-lg;
+            }
+        }
     }
 
-    &--logo-overlay {
-        @apply relative flex flex-col justify-center bg-green-900 min-h-[500px];
+    &--svg {
+        @apply relative aspect-hero max-h-hero;
 
-        .hero__bg {
+        #{$c}__primary-image {
+            @apply absolute inset-0;
+        }
+
+        #{$c}__secondary-image {
+            @apply absolute inset-0;
+            //@apply absolute inset-0 z-2;
+        }
+
+        #{$c}__link {
+            @apply absolute inset-0;
+        }
+
+        #{$c}__title,
+        #{$c}__description {
+            @apply hidden;
+        }
+    }
+
+    &--logo {
+        @apply relative flex flex-col justify-center bg-green-900 min-h-[300px];
+
+        #{$c}__primary-image {
             @apply inset-0 absolute print:relative bg-cover bg-top opacity-20;
         }
 
-        .hero__secondary-image {
+        #{$c}__secondary-image {
             @apply mx-auto mb-4;
         }
 
@@ -135,24 +179,4 @@
         }
     }
 
-    &--svg-overlay {
-        @apply relative pt-hero;
-
-        .hero__link {
-            @apply absolute inset-0;
-        }
-
-        #{$c}__primary-image {
-            @apply absolute inset-0 z-1;
-        }
-
-        .hero__secondary-image {
-            @apply absolute inset-0 z-2;
-        }
-
-        #{$c}__title,
-        #{$c}__description {
-            @apply hidden;
-        }
-    }
 }
