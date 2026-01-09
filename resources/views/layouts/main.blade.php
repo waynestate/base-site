@@ -38,9 +38,6 @@
 <div id="panel" @class(['site-theme', $base['layout_config']['page_class'] ?? ''])>
     @yield('top')
     
-    {{-- figure out how to set default display --}}
-    {{-- placement logic only --}}
-
     @if(!empty($base['hero']) && (!empty($base['hero']['component']['heroPlacement']) && $base['hero']['component']['heroPlacement'] != 'contained'))
         @include('components.hero', ['hero' => $base['hero'], 'class' => 'hero--full-width'])
     @endif
