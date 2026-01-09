@@ -446,9 +446,14 @@ class ProfileRepository implements ProfileRepositoryContract
      */
     public function orderProfilesById($profile_listing, $profiles_by_accessid): array
     {
-        $accessids = collect(explode('|', $profiles_by_accessid))->map(function ($item) {
+        $raw_accessIds = preg_split('/[,\|]+/', $profiles_by_accessid);
+
+        $accessids = collect($rawAccessIds)
+        ->map(function ($item) {
             return trim($item);
-        })->all();
+        })
+        ->filter()
+        ->all();
 
         // Find the profiles by a specific order
         $profiles_ordered = collect($accessids)->map(function ($accessid) use ($profile_listing) {
