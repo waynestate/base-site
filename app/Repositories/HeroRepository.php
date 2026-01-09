@@ -5,7 +5,6 @@ namespace App\Repositories;
 use Contracts\Repositories\HeroRepositoryContract;
 use Illuminate\Cache\Repository;
 use Waynestate\Api\Connector;
-use Illuminate\Support\Str;
 
 class HeroRepository implements HeroRepositoryContract
 {
@@ -43,8 +42,6 @@ class HeroRepository implements HeroRepositoryContract
                 ],
             ];
         }
-        dump(config('base.hero_placement'));
-        dump(config('base.hero_type'));
 
         // Set hero buttons from components
         if (!empty($promos['components'])) {
@@ -69,6 +66,7 @@ class HeroRepository implements HeroRepositoryContract
                 return !str_contains($component_name, 'hero');
             })->toArray();
 
+
             // Take only the first hero component found
             if (!empty($hero_components)) {
                 $hero_key = array_key_first($hero_components);
@@ -78,16 +76,16 @@ class HeroRepository implements HeroRepositoryContract
             if (!empty($promos['components'][$hero_key]['data'])) {
                 $hero['data'] = $promos['components'][$hero_key]['data'];
                 $hero['component'] = $promos['components'][$hero_key]['component'];
-                $hero['component']['heroPlacement'] = $promos['hero']['component']['heroPlacement'] ?? config('base.hero_placement');
+                $hero['component']['heroPlacement'] = $promos['components'][$hero_key]['component']['heroPlacement'] ?? config('base.hero_placement');
             }
         }
 
         /*
          * Set hero from component
-         * Determine hero placement and hero type from option 
+         * Determine hero placement and hero type from option
          *
          * NOTE:
-         * Overriding the selected option from the component config 
+         * Overriding the selected option from the component config
          * happens within ModularPageRepository->adjustPromoData();
          */
 
@@ -106,7 +104,7 @@ class HeroRepository implements HeroRepositoryContract
 
         /*
          * Hero placement
-         * Defines where the hero will display within the template 
+         * Defines where the hero will display within the template
          */
         $full_width = ['full-width', 'banner large'];
         $contained = ['contained'];
@@ -116,7 +114,7 @@ class HeroRepository implements HeroRepositoryContract
             foreach ($hero['data'] as $hero_key => $hero_data) {
 
                 // Explode options to determine type and placement to support previous settings
-                $hero['data'][$hero_key]['hero_options'] = explode(' ',strtolower($hero_data['option'])); 
+                $hero['data'][$hero_key]['hero_options'] = explode(' ', strtolower($hero_data['option']));
 
                 // Determine hero type
                 if (!empty(array_intersect($hero['data'][$hero_key]['hero_options'], $hero_types))) {
@@ -145,11 +143,13 @@ class HeroRepository implements HeroRepositoryContract
                 } else {
                     if (!empty($hero['component']['heroType']) && strtolower($hero['component']['heroType']) === 'carousel') {
                         $hero['data'][$hero_key]['hero_type'] = 'large';
+                        $hero['data'][$hero_key]['hero_classes'] = 'hero--large';
                     } else {
                         // Set the default hero type when hero is set only from component
                         $hero['component']['heroType'] = $hero['component']['heroType'] ?? config('base.hero_type');
                         $hero['data'][$hero_key]['hero_type'] = $hero['component']['heroType'] ?? config('base.hero_type');
-                        $hero['data'][$hero_key]['hero_classes'] = 'hero--'.$hero['data'][$hero_key]['hero_type'];;
+                        $hero['data'][$hero_key]['hero_classes'] = 'hero--'.$hero['data'][$hero_key]['hero_type'];
+                        ;
                     }
                 }
 
@@ -178,8 +178,6 @@ class HeroRepository implements HeroRepositoryContract
             $hero['component']['heroPlacement'] = $hero['component']['heroPlacement'] ?? config('base.hero_placement');
         }
 
-        dump($hero['component']);
-        dump($hero['data']);
 
         // Add hero back into promos
         unset($promos['hero']);
