@@ -8,7 +8,7 @@
              'rotate' => (!empty($hero['data']) && count($hero['data']) > 1),
              ])>
         @foreach($hero['data'] as $item)
-            <div @class(['hero__container', $item['hero_classes'] ?? ''])>
+            <div @class(['hero__type', $item['hero_classes'] ?? ''])>
                 <img class="hero__primary-image {{ $hero['component']['backgroundClass'] ?? ''}}" src="{{ $item['relative_url'] }}" alt="{{ $item['filename_alt_text'] }}">
 
                 <div class="hero__content">
