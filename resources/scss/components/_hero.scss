@@ -1,67 +1,99 @@
 .hero {
-    /* Flickity applies absolute to this container when enabled */
-    &__preserve-flickity {
-        @apply w-full;
+    $c: &;
+    @apply relative max-w-full;
+
+    &--full-width {
+        @apply mx-auto;
     }
 
-    &__wrapper {
-        @apply w-full; 
-    }
-
-    &__primary-image {
-        @apply w-full;
-    }
-
-    /* Contained */
     &--contained {
-        .hero__bg {
-            @apply aspect-hero max-h-hero w-full bg-cover bg-center relative;
-        }
+        @apply xl:mx-container;
     }
 
-    /* Banner small */
-    &--banner-small {
+    &__carousel-item {
+        /* Flickity applies absolute to this container when enabled */
+        @apply w-full aspect-hero; 
+    }
+
+    #{$c}__type {
+        @apply w-full relative;
+    }
+
+    #{$c}__primary-image {
+        @apply w-full h-full object-cover object-center;
+    }
+
+    &--slim {
         @apply h-hero-small max-h-hero-small;
 
-        .hero__primary-image {
+        #{$c}__primary-image {
             @apply w-full h-full object-cover object-center;
+        }
+
+        #{$c}__title {
+            @apply hidden;
         }
     }
 
-    /* Banner large */
-    &--banner-large {
-        @apply aspect-hero max-h-hero w-full bg-cover bg-center relative;
+    &--split {
+        @apply relative xl:flex items-center;
 
-        .hero__primary-image {
-            @apply w-full h-full object-cover object-center;
+        #{$c}__primary-image {
+            @apply w-full xl:w-[60%] shrink-0;
+        }
+
+        #{$c}__content {
+            @apply relative p-6 xl:px-12 2xl:px-16;
+        }
+
+        #{$c}__content {
+            @apply border-l-12 border-gold border-solid pl-6 2xl:pl-8 pt-4 pb-8;
+        }
+
+        #{$c}__title {
+            @apply text-green-700 3xl:text-4xl mb-3 font-black;
+        }
+
+        #{$c}__link {
+             @apply text-green-700 no-underline hover:underline focus:underline;
+         }
+
+        #{$c}__description {
+             @apply text-lg 3xl:text-xl text-green-700 content;
+         }
+    }
+
+    &--large {
+        @apply aspect-hero max-h-hero;
+
+        #{$c}__content {
+            @apply hidden;
         }
     }
 
-    /* Text overlay */
-    &--text-overlay {
-        @apply relative;
+    &--buttons {
+        @apply aspect-hero max-h-hero;
 
-        .hero__primary-image {
-            @apply aspect-hero max-h-hero w-full bg-cover bg-center relative;
-        }
-        
-        .hero__content-position {
-            @apply px-container z-1 relative lg:absolute print:relative lg:bottom-0 lg:inset-x-0 lg:bg-gradient-darkest lg:pt-28 lg:pb-6;
+        #{$c}__primary-image {
+            @apply aspect-hero max-h-hero;
         }
 
-        .hero__content {
-            @apply relative z-2 mt-4 lg:mt-0 py-1 lg:py-0 pl-4 lg:pl-0 border-l-12 border-gold border-solid lg:border-0 text-green-900 lg:text-white lg:white-links;
+        #{$c}__content {
+            @apply mt-4 py-1 px-4 border-l-12 border-gold border-solid text-green-900;
+            @apply lg:px-container lg:absolute lg:bottom-0 lg:inset-x-0 lg:pt-28 lg:pb-6;
+            @apply lg:mt-0 lg:border-0 lg:text-white lg:white-links;
+            @apply lg:bg-gradient-darkest;
         }
 
-        .hero__title {
+        #{$c}__title {
             @apply lg:drop-shadow-px leading-tight text-3xl lg:text-5xl font-bold mb-2;
         }
 
-        .hero__description {
-            @apply text-lg content;
+        #{$c}__description {
+            @apply relative text-lg content;
         }
 
-        .hero__buttons {
+        #{$c}__buttons {
             @apply relative mt-5;
 
             .button {
@@ -70,74 +102,81 @@
         }
     }
 
-    /* Half */
-    &--half {
-        @apply relative xl:flex items-center;
+    &--text {
+        @apply aspect-hero max-h-hero;
 
-        .hero__primary-image-wrapper {
-            @apply w-full xl:w-[60%] shrink-0;
+        #{$c}__primary-image {
+            @apply aspect-hero max-h-hero;
         }
 
-        .hero__content-position {
-            @apply relative p-6 xl:px-12 2xl:px-16;
+        #{$c}__content {
+            @apply mt-4 py-1 px-4 border-l-12 border-gold border-solid text-green-900;
+            @apply lg:px-container lg:absolute lg:bottom-0 lg:inset-x-0 lg:pt-28 lg:pb-6;
+            @apply lg:mt-0 lg:border-0 lg:text-white lg:white-links;
+            @apply lg:bg-gradient-darkest;
         }
 
-        .hero__content {
-            @apply border-l-12 border-gold border-solid pl-6 2xl:pl-8 pt-4 pb-8;
+        #{$c}__title {
+            @apply lg:drop-shadow-px leading-tight text-3xl lg:text-5xl font-bold mb-2;
         }
 
-        .hero__title {
-            @apply text-green-700 3xl:text-4xl mb-3 font-black;
+        #{$c}__description {
+            @apply relative text-lg content;
         }
 
-        .hero__link {
-             @apply text-green-700 no-underline hover:underline focus:underline;
-         }
+        #{$c}__buttons {
+            @apply relative mt-5;
 
-         .hero__description {
-             @apply text-lg 3xl:text-xl text-green-700 content;
-         }
+            .button {
+                @apply text-lg;
+            }
+        }
     }
 
-    /* Logo overlay */
-    &--logo-overlay {
-        @apply relative flex flex-col justify-center bg-green-900 min-h-[500px];
+    &--svg {
+        @apply relative aspect-hero max-h-hero;
 
-        .hero__bg {
+        #{$c}__primary-image {
+            @apply absolute inset-0;
+        }
+
+        #{$c}__secondary-image {
+            @apply absolute inset-0;
+            //@apply absolute inset-0 z-2;
+        }
+
+        #{$c}__link {
+            @apply absolute inset-0;
+        }
+
+        #{$c}__title,
+        #{$c}__description {
+            @apply hidden;
+        }
+    }
+
+    &--logo {
+        @apply relative flex flex-col justify-center bg-green-900 min-h-[300px];
+
+        #{$c}__primary-image {
             @apply inset-0 absolute print:relative bg-cover bg-top opacity-20;
         }
 
-        .hero__secondary-image {
+        #{$c}__secondary-image {
             @apply mx-auto mb-4;
         }
 
-        .hero__content {
+        #{$c}__content {
             @apply row w-full px-4 pt-10 pb-6 text-center content text-white white-links relative;
         }
 
-        .hero__title {
+        #{$c}__title {
             @apply md:drop-shadow-px leading-tight text-2xl mb-1 xl:text-5xl;
         }
 
-        .hero__description {
+        #{$c}__description {
             @apply md:text-lg;
         }
     }
 
-    /* SVG overlay */
-    &--svg-overlay {
-        @apply relative pt-hero;
-
-        .hero__link {
-            @apply absolute inset-0;
-        }
-
-        .hero__primary-image {
-            @apply absolute inset-0 z-1;
-        }
-
-        .hero__secondary-image {
-            @apply absolute inset-0 z-2;
-        }
-    }
 }

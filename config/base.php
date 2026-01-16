@@ -44,6 +44,40 @@ $global_config = [
 
     /*
     |--------------------------------------------------------------------------
+    | Hero placement
+    |--------------------------------------------------------------------------
+    |
+    | Sets the default placement of the hero
+    |
+    | 'heroPlacement' = [
+    |     'contained', // content area
+    |     'full-width' // above content
+    | ];
+    |
+    */
+    'hero_placement' => 'contained',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Hero type
+    |--------------------------------------------------------------------------
+    |
+    | Sets the default type of the hero
+    | Default hero type is 'large' for images in a carousel
+    |
+    | 'heroType' = [
+    |     'large', // banner-large, full
+    |     'slim', // banner-small, slim, half-height
+    |     'split', // half
+    |     'overlay', // text-overlay, svg-overlay, logo-overlay, buttons
+    |     'carousel', // more than one in array
+    | ];
+    |
+    */
+    'hero_type' => 'slim',
+
+    /*
+    |--------------------------------------------------------------------------
     | Top Menu Enabled
     |--------------------------------------------------------------------------
     |
@@ -106,20 +140,6 @@ $global_config = [
         'HomepageController',
         'FullWidthController'
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Hero Rotating
-    |--------------------------------------------------------------------------
-    |
-    | This enables the hero image to have arrows to rotate through them, if
-    | the page has more than one hero image assigned. You can specify
-    | which controllers you want this to work on by adding to the
-    | array.
-    |
-    */
-    'hero_rotating_controllers' => [],
-    'hero_rotating_limit' => 3,
 
     /*
     |--------------------------------------------------------------------------
