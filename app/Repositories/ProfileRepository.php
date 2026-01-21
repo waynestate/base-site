@@ -455,7 +455,7 @@ class ProfileRepository implements ProfileRepositoryContract
     {
         $raw_accessIds = preg_split('/[,\|]+/', $profiles_by_accessid);
 
-        $accessids = collect($rawAccessIds)
+        $accessids = collect($raw_accessIds)
         ->map(function ($item) {
             return trim($item);
         })
