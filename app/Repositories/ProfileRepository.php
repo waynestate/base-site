@@ -178,15 +178,22 @@ class ProfileRepository implements ProfileRepositoryContract
      */
     public function getGroupIds($selected_group, $forced_profile_group_id, $dropdown_groups)
     {
-        // Use the selected group or the forced one from custom page fields
-        $group_ids = $forced_profile_group_id === null ? $selected_group : $forced_profile_group_id;
-
-        // Use all the IDs from the dropdown since the initial selection is "All Profiles"
-        if ($group_ids === null) {
-            $group_ids = ltrim(implode('|', array_keys($dropdown_groups)), '|');
+        // Forced ID always wins
+        if ($forced_profile_group_id !== null) {
+            return (string) $forced_profile_group_id;
         }
 
-        return $group_ids;
+        // No selection → all groups
+        if ($selected_group === null) {
+            return implode(',', array_keys($dropdown_groups));
+        }
+
+        // Normalize user input (accept | or ,)
+        return collect(preg_split('/[,\|]+/', (string) $selected_group))
+            ->map(fn ($item) => trim($item))
+            ->filter()
+            ->unique()
+            ->implode(',');
     }
 
     /**

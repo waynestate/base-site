@@ -37,7 +37,7 @@ class DirectoryOrdered extends Page
 <pre class="w-full" tabindex="0">
 {
 "site_id":000000,
-"group_id":"1234|5678",
+"group_id":"1234,5678",
 "parent_group_id":"1234",
 "table_of_contents":"hide",
 "default_back_url":"/profiles/",
