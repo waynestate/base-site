@@ -191,7 +191,7 @@ class ProfileRepository implements ProfileRepositoryContract
         // Normalize user input (accept | or ,)
         return collect(preg_split('/[,\|]+/', (string) $selected_group))
             ->map(fn ($item) => trim($item))
-            ->filter()
+            ->filter(fn ($item) => $item !== '')
             ->unique()
             ->implode(',');
     }
@@ -460,6 +460,8 @@ class ProfileRepository implements ProfileRepositoryContract
             return trim($item);
         })
         ->filter()
+        ->unique()
+        ->values()
         ->all();
 
         // Find the profiles by a specific order

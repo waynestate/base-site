@@ -270,7 +270,6 @@ final class ProfileRepositoryTest extends TestCase
         // Forcing a group ID
         $forced_id = $this->faker->numberBetween(0, $limit - 1);
         $group_ids = app(ProfileRepository::class)->getGroupIds(null, $forced_id, $dropdown);
-
         $this->assertEquals($forced_id, $group_ids);
 
         // Selected from the dropdown
@@ -586,4 +585,58 @@ final class ProfileRepositoryTest extends TestCase
         // Ensure the config value is set
         $this->assertEquals($profiles_by_accessid, config('base.profile.profiles_by_accessid'));
     }
+
+    #[Test]
+    public function ordered_profiles_by_id_should_return_in_requested_order_without_duplicates_for_pipes_and_commas(): void
+    {
+        // Create 6 real profiles using the factory (matches production shape)
+        $profile_listing = app(Profile::class)->create(6);
+
+        // Grab AccessIDs from the listing
+        $access_ids = collect($profile_listing)->pluck('data.AccessID')->values()->all();
+
+        // Randomize deterministically so the test is repeatable
+        $shuffled = $access_ids;
+        mt_srand(12345);
+        shuffle($shuffled);
+
+        // We'll request a subset, and intentionally include a duplicate and a nonexistent ID
+        $requested = array_slice($shuffled, 0, 4);
+        $requested_with_dupe_and_unknown = array_merge($requested, [$requested[1]], ['aa9999']);
+
+        $pipe_input  = implode('|', $requested_with_dupe_and_unknown);
+        $comma_input = implode(',', $requested_with_dupe_and_unknown);
+
+        $repo = app(ProfileRepository::class);
+
+        // Run for both delimiters
+        $result_pipe  = $repo->orderProfilesById($profile_listing, $pipe_input);
+        $result_comma = $repo->orderProfilesById($profile_listing, $comma_input);
+
+        // Expected: requested (deduped, unknown removed) first, then the rest in original listing order
+        $expected_requested_unique = collect($requested)->unique()->values()->all();
+        $expected_rest = collect($access_ids)->reject(fn ($id) => in_array($id, $expected_requested_unique, true))->values()->all();
+        $expected_all = array_merge($expected_requested_unique, $expected_rest);
+
+        // Assert ordering for pipe
+        $this->assertEquals(
+            $expected_all,
+            collect($result_pipe)->pluck('data.AccessID')->values()->all()
+        );
+
+        // Assert ordering for comma
+        $this->assertEquals(
+            $expected_all,
+            collect($result_comma)->pluck('data.AccessID')->values()->all()
+        );
+
+        // Assert no duplicates (pipe)
+        $pipe_ids = collect($result_pipe)->pluck('data.AccessID')->values()->all();
+        $this->assertCount(count($pipe_ids), array_unique($pipe_ids));
+
+        // Assert no duplicates (comma)
+        $comma_ids = collect($result_comma)->pluck('data.AccessID')->values()->all();
+        $this->assertCount(count($comma_ids), array_unique($comma_ids));
+    }
+
 }
