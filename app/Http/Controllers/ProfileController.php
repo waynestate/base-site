@@ -58,7 +58,7 @@ class ProfileController extends Controller
         $group_ids = $this->profile->getGroupIds($selected_group_str, $forced_profile_group_id_str, $dropdown_groups_arr);
 
         // Get the profiles
-        $profiles = $this->profile->getProfiles($site_id, $group_ids);
+        $profiles = $this->profile->getProfiles($site_id, $group_ids, $request->data['base']['site']['subsite-folder'] ?? null);
 
         // Get the options for the dropdown (pass profiles to determine if filtering should be hidden)
         $dropdown_group_options = $this->profile->getDropdownOptions($selected_group_id, $forced_profile_group_id_int, $profiles);
