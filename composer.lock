@@ -6179,16 +6179,16 @@
         },
         {
             "name": "waynestate/error-403",
-            "version": "1.1.6",
+            "version": "1.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/waynestate/error-403.git",
-                "reference": "9a5c10cf4ce586d8720ed67ca60555b189dd669e"
+                "reference": "1b01780b2533d65b0522de0decdac61b60f64f43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/waynestate/error-403/zipball/9a5c10cf4ce586d8720ed67ca60555b189dd669e",
-                "reference": "9a5c10cf4ce586d8720ed67ca60555b189dd669e",
+                "url": "https://api.github.com/repos/waynestate/error-403/zipball/1b01780b2533d65b0522de0decdac61b60f64f43",
+                "reference": "1b01780b2533d65b0522de0decdac61b60f64f43",
                 "shasum": ""
             },
             "require": {
@@ -6217,20 +6217,20 @@
                 "issues": "https://github.com/waynestate/error-403/issues",
                 "source": "https://github.com/waynestate/error-403"
             },
-            "time": "2023-05-23T18:47:02+00:00"
+            "time": "2026-02-02T16:02:56+00:00"
         },
         {
             "name": "waynestate/error-404",
-            "version": "1.1.6",
+            "version": "1.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/waynestate/error-404.git",
-                "reference": "33b0e8c41b6a7274b428ea10745b7143fefb3c15"
+                "reference": "0d223302e515b25afe41e1ebb8524d97dbb2cd3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/waynestate/error-404/zipball/33b0e8c41b6a7274b428ea10745b7143fefb3c15",
-                "reference": "33b0e8c41b6a7274b428ea10745b7143fefb3c15",
+                "url": "https://api.github.com/repos/waynestate/error-404/zipball/0d223302e515b25afe41e1ebb8524d97dbb2cd3a",
+                "reference": "0d223302e515b25afe41e1ebb8524d97dbb2cd3a",
                 "shasum": ""
             },
             "require": {
@@ -6259,20 +6259,20 @@
                 "issues": "https://github.com/waynestate/error-404/issues",
                 "source": "https://github.com/waynestate/error-404"
             },
-            "time": "2023-05-23T18:06:24+00:00"
+            "time": "2026-02-02T16:02:31+00:00"
         },
         {
             "name": "waynestate/error-429",
-            "version": "1.0.6",
+            "version": "1.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/waynestate/error-429.git",
-                "reference": "2e84e2cf7156928aedc0653a71b67f6a45cfc556"
+                "reference": "a25472c5ee279b7a755e580bff9a5c2f6244b3ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/waynestate/error-429/zipball/2e84e2cf7156928aedc0653a71b67f6a45cfc556",
-                "reference": "2e84e2cf7156928aedc0653a71b67f6a45cfc556",
+                "url": "https://api.github.com/repos/waynestate/error-429/zipball/a25472c5ee279b7a755e580bff9a5c2f6244b3ad",
+                "reference": "a25472c5ee279b7a755e580bff9a5c2f6244b3ad",
                 "shasum": ""
             },
             "require": {
@@ -6301,20 +6301,20 @@
                 "issues": "https://github.com/waynestate/error-429/issues",
                 "source": "https://github.com/waynestate/error-429"
             },
-            "time": "2023-05-23T18:41:05+00:00"
+            "time": "2026-02-02T16:02:45+00:00"
         },
         {
             "name": "waynestate/error-500",
-            "version": "1.1.6",
+            "version": "1.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/waynestate/error-500.git",
-                "reference": "6a0a153235c7b37118262a1c4f1d198336444c15"
+                "reference": "931751b4de15437d6709b0ab0f2974bf9fad977b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/waynestate/error-500/zipball/6a0a153235c7b37118262a1c4f1d198336444c15",
-                "reference": "6a0a153235c7b37118262a1c4f1d198336444c15",
+                "url": "https://api.github.com/repos/waynestate/error-500/zipball/931751b4de15437d6709b0ab0f2974bf9fad977b",
+                "reference": "931751b4de15437d6709b0ab0f2974bf9fad977b",
                 "shasum": ""
             },
             "require": {
@@ -6343,7 +6343,7 @@
                 "issues": "https://github.com/waynestate/error-500/issues",
                 "source": "https://github.com/waynestate/error-500"
             },
-            "time": "2023-05-23T18:37:49+00:00"
+            "time": "2026-02-02T16:02:37+00:00"
         },
         {
             "name": "waynestate/formy-parser",
