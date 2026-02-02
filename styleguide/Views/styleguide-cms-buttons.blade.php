@@ -36,11 +36,11 @@
 </pre>
         </div>
         <h2>Button text size variations</h2>
-        <p>Add class "text-sm", "text-lg" or "text-xl" to your button.</p>
+        <p>Add class "text-base", "text-lg" or "text-xl" to your button.</p>
         <div class="pb-4 2xl:flex items-start">
-            <a href="#gold-gradient-button" class="button text-sm 2xl:w-1/4 mr-4 flex-shrink-0">Small text button</a>
+            <a href="#gold-gradient-button" class="button text-base 2xl:w-1/4 mr-4 flex-shrink-0">Content text button</a>
 <pre class="code-block mb-0">
-{!! htmlspecialchars('<a href="#" class="button text-sm">My button</a>') !!}
+{!! htmlspecialchars('<a href="#" class="button text-base">My button</a>') !!}
 </pre>
         </div>
         <div class="pb-4 2xl:flex items-start">

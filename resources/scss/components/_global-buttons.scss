@@ -1,5 +1,5 @@
 .button {
-    @apply bg-gray-200 text-green-800 align-middle mb-2 px-4 py-2 rounded text-center font-bold inline-block transition-all leading-tight;
+    @apply bg-gray-200 text-green-800 align-middle mb-2 px-4 py-2 rounded text-center text-sm font-bold inline-block transition-all leading-tight;
 
     div {
         @apply inline;
@@ -78,4 +78,17 @@
 
 .content a[class*="button"] {
     @apply no-underline cursor-pointer;
+}
+
+/* Overrides for button class modifiers without circular dependencies */
+.content a[class*="text-base"] {
+    @apply text-base !important;
+}
+
+.content a[class*="text-lg"] {
+    @apply text-lg !important;
+}
+
+.content a[class*="text-xl"] {
+    @apply text-xl !important;
 }
