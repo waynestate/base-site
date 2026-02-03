@@ -18,8 +18,8 @@
             window.dataLayer.push({
                 'event': 'http_error',
                 'error_code': '404',
-                'page': '{{ $request->server("HTTP_HOST") }}{{ $request->server("REQUEST_URI") }}',
-                'referrer': '{{ $request->server("HTTP_REFERER") }}'
+                'page': '{{ request()->server("HTTP_HOST") }}{{ request()->server("REQUEST_URI") }}',
+                'referrer': '{{ request()->server("HTTP_REFERER") }}'
             });
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
