@@ -1,5 +1,5 @@
-.button {
-    @apply bg-gray-200 text-green-800 align-middle mb-2 px-4 py-2 rounded text-center text-sm font-bold inline-block transition-all leading-tight;
+@mixin button {
+    @apply bg-gray-200 text-green-800 align-middle mb-2 px-4 py-2 rounded text-center text-sm font-bold inline-block transition-all leading-tight cursor-pointer;
 
     div {
         @apply inline;
@@ -10,37 +10,8 @@
     }
 }
 
-.button--icon-one-line {
-    @apply text-left px-2.5 flex items-center;
-
-    & .button__title {
-        @apply block text-lg leading-none xl:text-xl xl:leading-none not-italic -mt-0.5;
-    }
-
-    & .button__image {
-        @apply w-10 mr-2 float-left;
-    }
-}
-
-.button--two-line {
-    @apply text-left px-2.5 inline-grid auto-rows-auto justify-start;
-
-    & .button__title {
-        @apply block text-lg leading-none xl:text-xl xl:leading-none not-italic col-start-2 col-end-auto;
-    }
-
-    & .button__excerpt {
-        @apply text-sm leading-tight font-normal not-italic col-start-2 col-end-auto w-full;
-    }
-
-    & .button__image {
-        @apply w-10 col-start-1 row-span-2 mr-2;
-    }
-}
-
-.green-button {
-    @extend .button;
-
+@mixin green-button {
+    @include button;
     @apply bg-green text-white;
 
     &:hover {
@@ -48,15 +19,14 @@
     }
 }
 
-.green-gradient-button {
-    @extend .green-button;
+@mixin green-gradient-button {
+    @include green-button;
 
     background-image: radial-gradient(200% 100% at 50% 100%, theme('colors.green.700') 25%, transparent 100%);
 }
 
-.gold-button {
-    @extend .button;
-
+@mixin gold-button {
+    @include button;
     @apply bg-gold text-green-800;
 
     &:hover {
@@ -64,10 +34,8 @@
     }
 }
 
-.gold-gradient-button {
-    @extend .button;
-
-    @apply bg-gold-200 text-green-800;
+@mixin gold-gradient-button {
+    @include gold-button;
 
     background-image: radial-gradient(200% 100% at 50% 100%, theme('colors.gold.500'), 50%, transparent 100%);
 
@@ -76,19 +44,54 @@
     }
 }
 
+.button {
+    @include button;
+
+    &--icon-one-line {
+        @apply text-left px-2.5 flex items-center;
+
+        & .button__title {
+            @apply block text-lg leading-none xl:text-xl xl:leading-none not-italic -mt-0.5;
+        }
+
+        & .button__image {
+            @apply w-10 mr-2 float-left;
+        }
+    }
+
+    &--two-line {
+        @apply text-left px-2.5 inline-grid auto-rows-auto justify-start;
+
+        & .button__title {
+            @apply block text-lg leading-none xl:text-xl xl:leading-none not-italic col-start-2 col-end-auto;
+        }
+
+        & .button__excerpt {
+            @apply text-sm leading-tight font-normal not-italic col-start-2 col-end-auto w-full;
+        }
+
+        & .button__image {
+            @apply w-10 col-start-1 row-span-2 mr-2;
+        }
+    }
+}
+
+.green-button {
+    @include green-button;
+}
+
+.green-gradient-button {
+    @include green-gradient-button;
+}
+
+.gold-button {
+    @include gold-button;
+}  
+
+.gold-gradient-button {
+    @include gold-gradient-button;
+}
+
 .content a[class*="button"] {
     @apply no-underline cursor-pointer;
-}
-
-/* Overrides for button class modifiers without circular dependencies */
-.content a[class*="text-base"] {
-    @apply text-base !important;
-}
-
-.content a[class*="text-lg"] {
-    @apply text-lg !important;
-}
-
-.content a[class*="text-xl"] {
-    @apply text-xl !important;
 }
