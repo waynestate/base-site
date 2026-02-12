@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    
+
     @if(!empty($base['page']['canonical']))<link rel="canonical" href="{{ $base['page']['canonical'] }}">@endif
 
     @include('components.gtm-head')
@@ -27,7 +27,13 @@
     @include('components.header')
 
     @if(!empty($base['site']))
-        @include('components.menu-top', ['site' => $base['site'], 'top_menu_output' => $base['top_menu_output']])
+        @include('components.menu-top', [
+            'site' => $base['site'],
+            'top_menu_output' => $base['top_menu_output'],
+            'surtitle' => $base['surtitle'],
+            'surtitle_url' => $base['surtitle_url'],
+            'hasSurtitle' => $base['hasSurtitle'],
+        ])
     @endif
 
     @if(!empty($base['flag']))
@@ -37,7 +43,7 @@
 
 <div id="panel" @class(['site-theme', $base['layout_config']['page_class'] ?? ''])>
     @yield('top')
-    
+
     @if(!empty($base['hero']) && (empty($base['hero']['component']['option']) || $base['hero']['component']['option'] != 'Banner contained'))
         @include('components.hero', ['hero' => $base['hero']])
 

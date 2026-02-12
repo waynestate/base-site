@@ -128,6 +128,9 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
         // Hide the site menu or breadcrumbs with the modular-page-config component
         $menus = $this->menuDisplayToggles($menus, $data);
 
+        // Get the surtitle
+        $menus = array_merge($menus, $this->getSurtitle($data['site']));
+
         return $menus;
     }
 
@@ -302,5 +305,36 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
         }
 
         return $menus;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSurtitle(array $site)
+    {
+        // Prefer a sub-site's overriding surtitle, otherwise use the main site surtitle
+        $surtitle = config('base.global.sites.'.$site['id'].'.surtitle') ?? config('base.surtitle');
+        // Prefer a sub-site's overriding surtitle_url, otherwise use the main site surtitle
+        $surtitle_url = config('base.global.sites.'.$site['id'].'.surtitle_url') ?? config('base.surtitle_url');
+        // Show the surtitle only when:
+        // 1) a surtitle value exists (either the sub-site's override or the global default),
+        // 2) the current site is allowed to display it:
+        //    - for the main site, only if `base.surtitle_main_site_enabled` is true
+        //    - for sub-sites, it's allowed by default
+        // 3) and this sub-site hasn't explicitly opted out via `base.global.sites.{siteId}.surtitle_disabled`.
+        $hasSurtitle = (
+            $surtitle !== null &&
+            (
+                ($site['parent']['id'] === null && config('base.surtitle_main_site_enabled') === true) ||
+                ($site['parent']['id'] !== null)
+            ) &&
+            !config('base.global.sites.'.$site['id'].'.surtitle_disabled')
+        );
+
+        return [
+            'surtitle' => $surtitle,
+            'surtitle_url' => $surtitle_url,
+            'hasSurtitle' => $hasSurtitle,
+        ];
     }
 }

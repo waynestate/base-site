@@ -276,6 +276,8 @@ $global_config = [
             //     ],
             //     'callbacks' => [],
             //     'surtitle_disabled' => null,
+            //     'surtitle' => null,
+            //     'surtitle_url' => null,
             // ],
         ],
     ],
