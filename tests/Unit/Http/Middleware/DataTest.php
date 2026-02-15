@@ -121,4 +121,122 @@ final class DataTest extends TestCase
 
         $this->assertEquals($path, config('base.news_view_route'));
     }
+
+    #[Test]
+    public function meta_image_overrides_should_work(): void
+    {
+        $request = new Request();
+        $request = $request->create('styleguide');
+
+        // 1. Page-level meta image provided
+        $this->app->bind('Styleguide\Repositories\PageRepository', function ($app) {
+            $mock = Mockery::mock('Styleguide\Repositories\PageRepository');
+            $mock->shouldReceive('getRequestData')->andReturn([
+                'site' => [
+                    'id' => 123,
+                    'parent' => ['id' => null],
+                    'title' => 'Site Title',
+                    'subsite-folder' => null,
+                ],
+                'menu' => ['id' => 1],
+                'data' => [
+                    'meta_image' => 'page-image.png',
+                    'meta_image_alt' => 'Page image alt',
+                ],
+                'page' => [
+                    'id' => 1,
+                    'description' => 'page description',
+                    'title' => 'page title',
+                    'controller' => 'HomepageController',
+                ],
+            ]);
+
+            return $mock;
+        });
+
+        app(Data::class)->handle($request, function ($request) {
+            $this->assertEquals('page-image.png', $request->data['base']['meta']['image']);
+            $this->assertEquals('Page image alt', $request->data['base']['meta']['image_alt']);
+        });
+
+        // 2. Page-level empty, Site-level config provided
+        config(['base.global.sites.123.meta_image' => 'site-image.png']);
+        config(['base.global.sites.123.meta_image_alt' => 'Site image alt']);
+
+        $this->app->bind('Styleguide\Repositories\PageRepository', function ($app) {
+            $mock = Mockery::mock('Styleguide\Repositories\PageRepository');
+            $mock->shouldReceive('getRequestData')->andReturn([
+                'site' => [
+                    'id' => 123,
+                    'parent' => ['id' => null],
+                    'title' => 'Site Title',
+                    'subsite-folder' => null,
+                ],
+                'menu' => ['id' => 1],
+                'data' => [
+                    'meta_image' => '',
+                    'meta_image_alt' => '',
+                ],
+                'page' => [
+                    'id' => 1,
+                    'description' => 'page description',
+                    'title' => 'page title',
+                    'controller' => 'HomepageController',
+                ],
+            ]);
+
+            return $mock;
+        });
+
+        app(Data::class)->handle($request, function ($request) {
+            $this->assertEquals('site-image.png', $request->data['base']['meta']['image']);
+            $this->assertEquals('Site image alt', $request->data['base']['meta']['image_alt']);
+        });
+
+        // 3. Both empty (fallback to empty string in middleware, then global config in view)
+        config(['base.global.sites.123.meta_image' => null]);
+        config(['base.global.sites.123.meta_image_alt' => null]);
+
+        app(Data::class)->handle($request, function ($request) {
+            $this->assertEquals('', $request->data['base']['meta']['image']);
+            $this->assertEquals('', $request->data['base']['meta']['image_alt']);
+        });
+    }
+
+    #[Test]
+    public function page_field_overrides_should_work(): void
+    {
+        $request = new Request();
+        $request = $request->create('styleguide');
+
+        $this->app->bind('Styleguide\Repositories\PageRepository', function ($app) {
+            $mock = Mockery::mock('Styleguide\Repositories\PageRepository');
+            $mock->shouldReceive('getRequestData')->andReturn([
+                'site' => [
+                    'id' => 123,
+                    'parent' => ['id' => null],
+                    'title' => 'Site Title',
+                    'subsite-folder' => null,
+                ],
+                'menu' => ['id' => 1],
+                'data' => [
+                    'page_description' => 'Custom Description',
+                    'page_title' => 'Custom Title',
+                ],
+                'page' => [
+                    'id' => 1,
+                    'description' => 'Original Description',
+                    'title' => 'Original Title',
+                    'controller' => 'HomepageController',
+                ],
+            ]);
+
+            return $mock;
+        });
+
+        app(Data::class)->handle($request, function ($request) {
+            $this->assertEquals('Custom Description', $request->data['base']['page']['description']);
+            $this->assertEquals('Custom Title', $request->data['base']['page']['title']);
+        });
+    }
 }
