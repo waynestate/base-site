@@ -43,8 +43,12 @@ class Data
         }
 
         // Overrides for meta information
-        $data['meta']['image'] = ! empty($page['data']['meta_image']) ? $page['data']['meta_image'] : '';
-        $data['meta']['image_alt'] = ! empty($page['data']['meta_image_alt']) ? $page['data']['meta_image_alt'] : '';
+        $data['meta']['image'] = ! empty($page['data']['meta_image']) ?
+            $page['data']['meta_image'] :
+            (config('base.global.sites.'.$page['site']['id'].'.meta_image') ?? '');
+        $data['meta']['image_alt'] = ! empty($page['data']['meta_image_alt']) ?
+            $page['data']['meta_image_alt'] :
+            (config('base.global.sites.'.$page['site']['id'].'.meta_image_alt') ?? '');
         $page['page']['description'] = ! empty($page['data']['page_description']) ? $page['data']['page_description'] : $page['page']['description'];
         $page['page']['title'] = ! empty($page['data']['page_title']) ? $page['data']['page_title'] : $page['page']['title'];
 

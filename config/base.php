@@ -278,6 +278,8 @@ $global_config = [
             //     'surtitle_disabled' => null,
             //     'surtitle' => null,
             //     'surtitle_url' => null,
+            //     'meta_image' => 'https://site.wayne.edu/opengraph/site-social-share.png',
+            //     'meta_image_alt' => 'Alt text for subsite social share image',
             // ],
         ],
     ],
