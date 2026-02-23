@@ -367,9 +367,9 @@
                 "is_active": 1,
                 "page_id": 124100,
                 "target": "",
-                "display_name": "News and events",
+                "display_name": "Page config",
                 "class_name": "",
-                "relative_url": "/styleguide/component/newsandevents",
+                "relative_url": "/styleguide/component/pageconfig",
                 "submenu": []
             },
             "108100": {
@@ -402,16 +402,6 @@
                 "relative_url": "/styleguide/component/spotlight",
                 "submenu": []
             },
-            "124100": {
-                "menu_item_id": 124100,
-                "is_active": 1,
-                "page_id": 124100,
-                "target": "",
-                "display_name": "Page config",
-                "class_name": "",
-                "relative_url": "/styleguide/component/pageconfig",
-                "submenu": []
-            },
             "9999": {
                 "menu_item_id": 9999,
                 "is_active": 1,
@@ -420,6 +410,16 @@
                 "display_name": "Site specific",
                 "class_name": "",
                 "relative_url": "/styleguide/component/sitespecific",
+                "submenu": {}
+            },
+            "10000": {
+                "menu_item_id": 125100,
+                "is_active": 1,
+                "page_id": 125100,
+                "target": "",
+                "display_name": "CatalogFlex",
+                "class_name": "",
+                "relative_url": "/styleguide/component/catalogflex",
                 "submenu": []
             }
         }
