@@ -4,7 +4,6 @@ namespace Styleguide\Http\Controllers;
 
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
-use Contracts\Repositories\MenuRepositoryContract;
 use Illuminate\Http\Request;
 use Faker\Factory;
 
@@ -14,13 +13,9 @@ class LayoutHeaderTitleDoubleController extends Controller
      * Construct the controller.
      * @param MenuRepositoryContract $menu
      */
-    public function __construct(
-        Factory $faker,
-        MenuRepositoryContract $menu
-    )
+    public function __construct(Factory $faker)
     {
         $this->faker = $faker->create();
-        $this->menu = $menu;
     }
 
     /**
