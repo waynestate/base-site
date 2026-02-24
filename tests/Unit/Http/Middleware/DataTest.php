@@ -239,4 +239,112 @@ final class DataTest extends TestCase
             $this->assertEquals('Custom Title', $request->data['base']['page']['title']);
         });
     }
+
+    #[Test]
+    public function meta_json_ld_is_set_when_page_data_contains_valid_json(): void
+    {
+        $request = new Request();
+        $request = $request->create('styleguide');
+
+        $json_ld = ['@context' => 'https://schema.org', '@type' => 'Person', 'name' => 'Pallav Deka'];
+
+        $this->app->bind('Styleguide\Repositories\PageRepository', function ($app) use ($json_ld) {
+            $mock = Mockery::mock('Styleguide\Repositories\PageRepository');
+            $mock->shouldReceive('getRequestData')->andReturn([
+                'site' => [
+                    'id' => 123,
+                    'parent' => ['id' => null],
+                    'title' => 'Site Title',
+                    'subsite-folder' => null,
+                ],
+                'menu' => ['id' => 1],
+                'data' => [
+                    'meta-json-ld' => json_encode($json_ld),
+                ],
+                'page' => [
+                    'id' => 1,
+                    'description' => 'page description',
+                    'title' => 'page title',
+                    'controller' => 'HomepageController',
+                ],
+            ]);
+
+            return $mock;
+        });
+
+        app(Data::class)->handle($request, function ($request) use ($json_ld) {
+            $this->assertEquals(
+                json_encode($json_ld, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+                $request->data['base']['meta']['json_ld']
+            );
+        });
+    }
+
+    #[Test]
+    public function meta_json_ld_is_empty_when_page_data_contains_invalid_json(): void
+    {
+        $request = new Request();
+        $request = $request->create('styleguide');
+
+        $this->app->bind('Styleguide\Repositories\PageRepository', function ($app) {
+            $mock = Mockery::mock('Styleguide\Repositories\PageRepository');
+            $mock->shouldReceive('getRequestData')->andReturn([
+                'site' => [
+                    'id' => 123,
+                    'parent' => ['id' => null],
+                    'title' => 'Site Title',
+                    'subsite-folder' => null,
+                ],
+                'menu' => ['id' => 1],
+                'data' => [
+                    'meta-json-ld' => 'not valid json {',
+                ],
+                'page' => [
+                    'id' => 1,
+                    'description' => 'page description',
+                    'title' => 'page title',
+                    'controller' => 'HomepageController',
+                ],
+            ]);
+
+            return $mock;
+        });
+
+        app(Data::class)->handle($request, function ($request) {
+            $this->assertEquals('', $request->data['base']['meta']['json_ld']);
+        });
+    }
+
+    #[Test]
+    public function meta_json_ld_is_empty_when_page_data_has_no_json_ld_key(): void
+    {
+        $request = new Request();
+        $request = $request->create('styleguide');
+
+        $this->app->bind('Styleguide\Repositories\PageRepository', function ($app) {
+            $mock = Mockery::mock('Styleguide\Repositories\PageRepository');
+            $mock->shouldReceive('getRequestData')->andReturn([
+                'site' => [
+                    'id' => 123,
+                    'parent' => ['id' => null],
+                    'title' => 'Site Title',
+                    'subsite-folder' => null,
+                ],
+                'menu' => ['id' => 1],
+                'data' => [],
+                'page' => [
+                    'id' => 1,
+                    'description' => 'page description',
+                    'title' => 'page title',
+                    'controller' => 'HomepageController',
+                ],
+            ]);
+
+            return $mock;
+        });
+
+        app(Data::class)->handle($request, function ($request) {
+            $this->assertEquals('', $request->data['base']['meta']['json_ld']);
+        });
+    }
 }

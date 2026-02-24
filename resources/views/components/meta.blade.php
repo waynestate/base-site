@@ -30,3 +30,9 @@
 <meta name="twitter:image" content="{{ !empty($base['meta']['image']) ? $base['meta']['image'] : config('base.meta_image') }}">
 <meta name="twitter:image:alt" content="{{ !empty($base['meta']['image_alt']) ? $base['meta']['image_alt'] : config('base.meta_image_alt') }}">
 <meta property="article:published_time" content="{{ !empty($base['page']['updated-at']) ? $base['page']['updated-at'] : '' }}">
+
+@if(!empty($base['meta']['json_ld']))
+<script type="application/ld+json">
+{!! $base['meta']['json_ld'] !!}
+</script>
+@endif
