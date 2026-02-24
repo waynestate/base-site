@@ -51,7 +51,7 @@ $global_config = [
     | top bar of the site.
     |
     */
-    'top_menu_enabled' => true,
+    'top_menu_enabled' => false,
 
     /*
     |--------------------------------------------------------------------------

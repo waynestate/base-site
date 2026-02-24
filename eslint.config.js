@@ -27,7 +27,7 @@ module.exports = [
         },
         rules: {
             ...js.configs.recommended.rules,
-            'no-console': 'off',
+            'no-console': 'error',
             'no-undef': 'off'
         }
     },
