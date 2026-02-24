@@ -1,0 +1,43 @@
+.menu-top {
+    &__container {
+        @apply text-white bg-green-600 print:bg-transparent px-container py-2.5 flex justify-between min-h-[64px] items-center print:border-b print:border-black;
+    }
+
+    &--sticky {
+        @apply w-full fixed top-0 z-50; 
+    }
+
+    &__title {
+        @apply grow-0 text-white print:text-black;
+    }
+
+    &__surtitle-link {
+        @apply block text-current text-base leading-tight min-h-[24px] pb-[4px] print:min-h-0;
+    }
+
+    &__title-link {
+        @apply text-current font-normal text-2xl leading-none;
+    }
+
+    &__nav {
+        @apply mt:flex mt:shrink-0 mt:justify-end mt:items-center;
+    }
+
+    &__button {
+        @apply self-center shrink-0 text-white text-3xl;
+    }
+
+    li {
+        a {
+            @apply text-current;
+
+            &:hover {
+                @apply text-gold;
+            }
+        }
+
+        &.selected a {
+            @apply text-gold border-b border-gold;
+        }
+    }
+}

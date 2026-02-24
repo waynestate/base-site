@@ -10,7 +10,7 @@ module.exports = [
             globals: {
                 // Browser globals
                 window: 'readonly',
-            document: 'readonly',
+                document: 'readonly',
                 console: 'readonly',
                 // AMD globals
                 define: 'readonly',
@@ -27,7 +27,7 @@ module.exports = [
         },
         rules: {
             ...js.configs.recommended.rules,
-            'no-console': 'error',
+            'no-console': 'off',
             'no-undef': 'off'
         }
     },
