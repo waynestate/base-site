@@ -23,12 +23,12 @@ class LayoutHeaderTitleSingleController extends Controller
     public function index(Request $request): View
     {
         config([
-            'base.surtitle' => null,
-            'base.surtitle_main_site_enabled' => false,
             'base.top_menu_enabled' => true,
         ]);
 
-        $request->data['base']['site']['short-title'] = $this->faker->sentence(2);
+        $request->data['base']['surtitle'] = null;
+        $request->data['base']['surtitle_url'] = null;
+        $request->data['base']['hasSurtitle'] = false;
 
         return view('childpage', merge($request->data));
     }
