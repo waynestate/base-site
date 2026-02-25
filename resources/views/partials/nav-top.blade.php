@@ -6,7 +6,7 @@
     $hasSurtitle => boolean // true
 --}}
 
-<div class="nav-top">
+<div @class(['nav-top', 'nav-top--has-surtitle' => !empty($hasSurtitle)])>
     <div class="nav-top__title" data-short-title="{{ $site['short-title'] }}">
         @if($hasSurtitle)
             <a class="nav-top__surtitle-link" href="{{ $surtitle_url }}">{{ $surtitle }}</a>

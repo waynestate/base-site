@@ -1,5 +1,5 @@
 .nav-top {
-    @apply text-white bg-green-600 print:bg-transparent px-container py-2.5 flex justify-between min-h-[64px] items-center print:border-b print:border-black;
+    @apply text-white bg-green-600 print:bg-transparent px-container flex justify-between min-h-[64px] items-center print:border-b print:border-black;
 
     &--sticky {
         @apply w-full fixed top-0 z-50; 
@@ -10,11 +10,15 @@
     }
 
     &__surtitle-link {
-        @apply block text-current text-base leading-tight min-h-[24px] pb-[4px] print:min-h-0;
+        @apply block text-current text-base leading-none py-[5.25px] print:min-h-0 flex items-center;
     }
 
     &__title-link {
-        @apply text-current text-2xl leading-none;
+        @apply inline-block text-current text-2xl leading-none pt-[4px] pb-[7px];
+    }
+
+    &--has-surtitle .nav-top__title-link {
+        @apply pt-0;
     }
 
     &__nav {
