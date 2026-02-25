@@ -8,7 +8,6 @@
     if (short_title && search_field && search_label) {
         const search_text = "Search " + short_title.dataset.shortTitle.trim();
 
-        search_label.textContent = search_text.trim();
         search_field.setAttribute("placeholder", search_text.trim() + "...");
     }
 })();

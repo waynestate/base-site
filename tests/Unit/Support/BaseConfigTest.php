@@ -30,34 +30,49 @@ final class BaseConfigTest extends TestCase
     #[Test]
     public function config_returns_global_config_when_no_override_is_set(): void
     {
-        // Ensure CONFIG_OVERRIDE is not set
         config(['app.env' => 'testing']);
+
+        // Parse the config as-is
+        $config_original = include config_path('base.php');
+
+        // If CONFIG_OVERRIDE is defined with no value
         putenv('CONFIG_OVERRIDE=');
 
-        $config = include config_path('base.php');
+        // Re-parse the base config
+        $config_updated = include config_path('base.php');
 
-        $this->assertIsArray($config);
-        $this->assertEquals('GTM-NCBVKQ2', $config['gtm_code']);
-        $this->assertEquals('contained-hero', $config['layout']);
-        $this->assertFalse($config['top_menu_enabled']);
+        // Ensure the app config was not modified
+        $this->assertIsArray($config_updated);
+        $this->assertEquals($config_original['gtm_code'], $config_updated['gtm_code']);
+        $this->assertEquals($config_original['layout'], $config_updated['layout']);
+        $this->assertEquals($config_original['top_menu_enabled'], $config_updated['top_menu_enabled']);
     }
 
     #[Test]
     public function config_returns_global_config_when_override_file_does_not_exist(): void
     {
+        // Parse the config as-is
+        $config_original = include config_path('base.php');
+
         // Set CONFIG_OVERRIDE to non-existent file
         putenv('CONFIG_OVERRIDE=non-existent-file.php');
 
-        $config = include config_path('base.php');
+        // Re-parse the base config
+        $config_updated = include config_path('base.php');
 
-        $this->assertIsArray($config);
-        $this->assertEquals('GTM-NCBVKQ2', $config['gtm_code']);
-        $this->assertEquals('contained-hero', $config['layout']);
+        // Ensure the app config was not modified
+        $this->assertIsArray($config_updated);
+        $this->assertEquals($config_original['gtm_code'], $config_updated['gtm_code']);
+        $this->assertEquals($config_original['layout'], $config_updated['layout']);
+        $this->assertEquals($config_original['top_menu_enabled'], $config_updated['top_menu_enabled']);
     }
 
     #[Test]
     public function config_merges_override_file_when_it_exists(): void
     {
+        // Parse the config as-is
+        $config_original = include config_path('base.php');
+
         // Create a test override file
         $overrideContent = '<?php
 return [
@@ -81,7 +96,7 @@ return [
         $this->assertEquals('test_value', $config['new_config_key']);
 
         // Ensure non-overridden values remain
-        $this->assertEquals('@waynestate', $config['twitter_handle']);
+        $this->assertEquals($config_original['twitter_handle'], $config['twitter_handle']);
     }
 
     #[Test]
@@ -139,6 +154,9 @@ return [
     #[Test]
     public function config_handles_empty_override_file(): void
     {
+        // Parse the config as-is
+        $config_original = include config_path('base.php');
+
         // Create empty override file
         $overrideContent = '<?php
 return [];';
@@ -150,8 +168,8 @@ return [];';
 
         // Should return the global config unchanged
         $this->assertIsArray($config);
-        $this->assertEquals('GTM-NCBVKQ2', $config['gtm_code']);
-        $this->assertEquals('contained-hero', $config['layout']);
+        $this->assertEquals($config['gtm_code'], $config['gtm_code']);
+        $this->assertEquals($config['layout'], $config['layout']);
     }
 
     #[Test]

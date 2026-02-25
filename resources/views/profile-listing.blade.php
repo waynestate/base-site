@@ -3,10 +3,6 @@
 @section('content')
     @include('partials.page-title', ['title' => $base['page']['title']])
     @include('components.page-content')
-    
-    <div class="content">
-        {!! $base['page']['content']['main'] !!}
-    </div>
 
     @if($hide_filtering == false)
         <form name="departments" method="get" class="filter formy mb-6">
