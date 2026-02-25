@@ -48,8 +48,8 @@
         @apply w-full m-0 mb-4;
     }
 
-    [type='checkbox'] + label[for],
-    [type='radio'] + label[for] {
+    [type='checkbox']+label[for],
+    [type='radio']+label[for] {
         cursor: pointer;
     }
 
@@ -82,7 +82,7 @@
     /* Errors */
     .error {
         p {
-            @apply text-red-500 mx-auto mt-1 mb-4 text-sm;
+            @apply text-red-600 mx-auto mt-1 mb-4 text-sm;
         }
 
         input,
@@ -177,6 +177,6 @@
 
     /* Required */
     label em {
-        @apply text-red-500;
+        @apply text-red-600;
     }
 }
