@@ -12,7 +12,7 @@
                 <img class="hero__primary-image {{ $hero['component']['backgroundClass'] ?? ''}}" src="{{ $item['relative_url'] }}" alt="{{ $item['filename_alt_text'] }}">
 
                 <div class="hero__content">
-                    @if(!empty($item['secondary_relative_url']))
+                    @if(in_array($hero['component']['heroType'] ?? '', ['logo', 'svg']) && !empty($item['secondary_relative_url']))
                         <img class="hero__secondary-image" src="{{ $item['secondary_relative_url'] }}" alt="{{ $item['secondary_alt_text'] }}">
                     @endif
 

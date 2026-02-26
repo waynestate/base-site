@@ -24,256 +24,224 @@ final class HeroRepositoryTest extends TestCase
     }
 
     #[Test]
-    public function set_hero_with_banner_contained_option(): void
+    public function carousel_hero_with_multiple_promos(): void
     {
-        // Test Banner contained option is set
         $promos = [
             'hero' => [
-                [
-                    'option' => 'Banner contained',
-                    'title' => 'Test Hero'
-                ]
-            ],
-            'components' => []
-        ];
-
-        $data = [
-            'page' => [
-                'controller' => 'TestController'
+                ['title' => 'Hero 1', 'option' => ''],
+                ['title' => 'Hero 2', 'option' => '']
             ]
         ];
-
-        $result = $this->heroRepository->setHero($promos, $data);
-
-        $this->assertEquals('Banner contained', $result['hero']['component']['option']);
+        $result = $this->heroRepository->setHero($promos, []);
+        $this->assertEquals('carousel', $result['hero']['component']['heroType']);
+        $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
+        $this->assertEquals('hero--large', $result['hero']['data'][0]['hero_classes']);
     }
 
     #[Test]
-    public function set_hero_with_contained_hero_layout_and_no_option(): void
+    public function contained_slim_hero_default(): void
     {
-        // Test Layout is 'contained-hero' and no option is set
-        config(['base.layout' => 'contained-hero']);
-
+        config(['base.hero_type' => 'slim']);
+        config(['base.hero_placement' => 'contained']);
         $promos = [
             'hero' => [
-                [
-                    'title' => 'Test Hero'
-                    // No 'option' key set
-                ]
-            ],
-            'components' => []
-        ];
-
-        $data = [
-            'page' => [
-                'controller' => 'TestController'
+                ['title' => 'Hero 1', 'option' => '']
             ]
         ];
-
-        $result = $this->heroRepository->setHero($promos, $data);
-
-        $this->assertEquals('Banner contained', $result['hero']['component']['option']);
+        $result = $this->heroRepository->setHero($promos, []);
+        $this->assertEquals('slim', $result['hero']['component']['heroType']);
+        $this->assertEquals('contained', $result['hero']['component']['heroPlacement']);
     }
 
     #[Test]
-    public function set_hero_overrides_from_components(): void
+    public function full_width_large_hero(): void
     {
-        // Test Hero component override functionality
+        $promos = [
+            'hero' => [
+                ['title' => 'Hero 1', 'option' => 'large full-width']
+            ]
+        ];
+        $result = $this->heroRepository->setHero($promos, []);
+        $this->assertEquals('large', $result['hero']['component']['heroType']);
+        $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
+    }
+
+    #[Test]
+    public function split_hero(): void
+    {
+        $promos = [
+            'hero' => [
+                ['title' => 'Hero 1', 'option' => 'split']
+            ]
+        ];
+        $result = $this->heroRepository->setHero($promos, []);
+        $this->assertEquals('split', $result['hero']['component']['heroType']);
+        $this->assertEquals('hero--split', $result['hero']['data'][0]['hero_classes']);
+    }
+
+    #[Test]
+    public function text_only_hero(): void
+    {
+        $promos = [
+            'hero' => [
+                ['title' => 'Hero 1', 'option' => 'text']
+            ]
+        ];
+        $result = $this->heroRepository->setHero($promos, []);
+        $this->assertEquals('text', $result['hero']['component']['heroType']);
+        $this->assertEquals('hero--text', $result['hero']['data'][0]['hero_classes']);
+    }
+
+    #[Test]
+    public function svg_or_logo_hero(): void
+    {
+        $promos = [
+            'hero' => [
+                ['title' => 'Hero 1', 'option' => 'svg']
+            ]
+        ];
+        $result = $this->heroRepository->setHero($promos, []);
+        $this->assertEquals('svg', $result['hero']['component']['heroType']);
+        $this->assertEquals('hero--svg', $result['hero']['data'][0]['hero_classes']);
+
+        $promos = [
+            'hero' => [
+                ['title' => 'Hero 1', 'option' => 'logo']
+            ]
+        ];
+        $result = $this->heroRepository->setHero($promos, []);
+        $this->assertEquals('logo', $result['hero']['component']['heroType']);
+    }
+
+    #[Test]
+    public function custom_component_override(): void
+    {
         $promos = [
             'components' => [
                 'modular-hero-1' => [
                     'data' => [
-                        [
-                            'title' => 'Component Hero',
-                            'description' => 'This is from a component'
-                        ]
+                        ['title' => 'Component Hero']
+                    ],
+                    'component' => [
+                        'heroType' => 'split',
+                        'heroPlacement' => 'full-width'
                     ]
                 ]
             ]
         ];
-
-        $data = [
-            'page' => [
-                'controller' => 'TestController'
-            ]
-        ];
-
-        $result = $this->heroRepository->setHero($promos, $data);
-
-        // The hero should be set from the component
-        $this->assertArrayHasKey('hero', $result);
-        $this->assertEquals('Component Hero', $result['hero']['data'][0]['title']);
-
+        $result = $this->heroRepository->setHero($promos, []);
+        $this->assertEquals('split', $result['hero']['component']['heroType']);
+        $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
         // The component should be removed from components array
         $this->assertArrayNotHasKey('modular-hero-1', $result['components']);
-
-        // Config should be set for hero_full_controllers
-        $this->assertContains('TestController', config('base.hero_full_controllers'));
-    }
-
-    #[Test]
-    public function set_hero_replaces_buttons_option_with_text_overlay(): void
-    {
-        // Test Buttons option is replaced with Text Overlay
-        $promos = [
-            'hero' => [
-                [
-                    'option' => 'Buttons',
-                    'title' => 'Test Hero with Buttons'
-                ]
-            ],
-            'components' => []
-        ];
-
-        $data = [
-            'page' => [
-                'controller' => 'TestController'
-            ]
-        ];
-
-        $result = $this->heroRepository->setHero($promos, $data);
-
-        $this->assertArrayHasKey('hero', $result);
-        $this->assertArrayHasKey('data', $result['hero']);
-        $this->assertArrayHasKey(0, $result['hero']['data']);
-        $this->assertEquals('Text Overlay', $result['hero']['data'][0]['option']);
     }
 
     #[Test]
     public function set_hero_handles_hero_buttons_component(): void
     {
-        // Test hero buttons functionality
         $promos = [
             'components' => [
                 'hero-buttons-1' => [
                     'data' => [
-                        [
-                            'title' => 'Button 1',
-                            'url' => 'http://example.com'
-                        ]
+                        ['title' => 'Button 1']
+                    ]
+                ]
+            ]
+        ];
+        $result = $this->heroRepository->setHero($promos, []);
+        $this->assertArrayHasKey('hero_buttons', $result);
+        $this->assertEquals('Button 1', $result['hero_buttons']['data'][0]['title']);
+        $this->assertArrayNotHasKey('hero-buttons-1', $result['components']);
+    }
+
+    #[Test]
+    public function modular_hero_with_option_in_component_config(): void
+    {
+        $promos = [
+            'components' => [
+                'modular-hero-1' => [
+                    'data' => [
+                        ['title' => 'Hero 1', 'option' => '']
+                    ],
+                    'component' => [
+                        'option' => 'text full-width',
                     ]
                 ]
             ]
         ];
 
-        $data = [
-            'page' => [
-                'controller' => 'TestController'
-            ]
-        ];
+        $result = $this->heroRepository->setHero($promos, []);
 
-        $result = $this->heroRepository->setHero($promos, $data);
-
-        // Hero buttons should be moved to hero_buttons key
-        $this->assertArrayHasKey('hero_buttons', $result);
-        $this->assertEquals('Button 1', $result['hero_buttons']['data'][0]['title']);
-
-        // Component should be removed
-        $this->assertArrayNotHasKey('hero-buttons-1', $result['components']);
+        $this->assertEquals('text', $result['hero']['component']['heroType']);
+        $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
     }
 
     #[Test]
-    public function set_hero_with_multiple_hero_data_items_does_not_set_component_option(): void
+    public function modular_hero_option_overrides_explicit_config(): void
     {
-        // When there are multiple hero items, component option should not be set
         $promos = [
-            'hero' => [
-                [
-                    'option' => 'Banner contained',
-                    'title' => 'Hero 1'
-                ],
-                [
-                    'option' => 'Banner small',
-                    'title' => 'Hero 2'
+            'components' => [
+                'modular-hero-1' => [
+                    'data' => [
+                        ['title' => 'Hero 1', 'option' => '']
+                    ],
+                    'component' => [
+                        'heroType' => 'slim',
+                        'heroPlacement' => 'contained',
+                        'option' => 'text full-width',
+                    ]
                 ]
-            ],
-            'components' => []
-        ];
-
-        $data = [
-            'page' => [
-                'controller' => 'TestController'
             ]
         ];
 
-        $result = $this->heroRepository->setHero($promos, $data);
+        $result = $this->heroRepository->setHero($promos, []);
 
-        // Component option should not be set when there are multiple hero items
-        // but the component key should still exist as an empty array
-        $this->assertArrayHasKey('component', $result['hero']);
-        $this->assertEmpty($result['hero']['component']);
+        $this->assertEquals('text', $result['hero']['component']['heroType']);
+        $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
     }
 
     #[Test]
-    public function set_hero_preserves_existing_hero_data_structure(): void
+    public function modular_hero_with_option_in_config_string(): void
     {
-        // Test that hero data is preserved when forcing into component structure
         $promos = [
-            'hero' => [
-                [
-                    'title' => 'Test Hero',
-                    'description' => 'Test Description'
+            'components' => [
+                'modular-hero-1' => [
+                    'data' => [
+                        ['title' => 'Hero 1', 'option' => '']
+                    ],
+                    'component' => [
+                        'config' => 'limit:1|option:large full-width|youtube',
+                    ]
                 ]
-            ],
-            'components' => []
-        ];
-
-        $data = [
-            'page' => [
-                'controller' => 'TestController'
             ]
         ];
 
-        $result = $this->heroRepository->setHero($promos, $data);
+        $result = $this->heroRepository->setHero($promos, []);
 
-        // Hero data should be moved to data key
-        $this->assertArrayHasKey('data', $result['hero']);
-        $this->assertEquals('Test Hero', $result['hero']['data'][0]['title']);
-        $this->assertEquals('Test Description', $result['hero']['data'][0]['description']);
+        $this->assertEquals('large', $result['hero']['component']['heroType']);
+        $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
     }
 
     #[Test]
-    public function set_hero_with_empty_promos_returns_unchanged(): void
+    public function modular_hero_option_overrides_promo_option(): void
     {
-        // Test that empty promos are returned unchanged
         $promos = [
-            'components' => []
-        ];
-        $data = [
-            'page' => [
-                'controller' => 'TestController'
-            ]
-        ];
-
-        $result = $this->heroRepository->setHero($promos, $data);
-
-        $this->assertEquals($promos, $result);
-    }
-
-    #[Test]
-    public function set_hero_with_no_option_and_different_layout_sets_banner_small(): void
-    {
-        // Test the final elseif condition for Banner small
-        config(['base.layout' => 'full-width']); // Not 'contained-hero'
-
-        $promos = [
-            'hero' => [
-                [
-                    'title' => 'Test Hero'
-                    // No 'option' key set
+            'components' => [
+                'modular-hero-1' => [
+                    'data' => [
+                        ['title' => 'Hero 1', 'option' => 'banner small']
+                    ],
+                    'component' => [
+                        'config' => 'option:large full-width',
+                    ]
                 ]
-            ],
-            'components' => []
-        ];
-
-        $data = [
-            'page' => [
-                'controller' => 'TestController'
             ]
         ];
 
-        $result = $this->heroRepository->setHero($promos, $data);
+        $result = $this->heroRepository->setHero($promos, []);
 
-        $this->assertEquals('Banner small', $result['hero']['component']['option']);
+        // Even though promo has 'small', component has 'large'
+        $this->assertEquals('large', $result['hero']['component']['heroType']);
+        $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
     }
 }
