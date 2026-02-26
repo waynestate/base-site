@@ -136,19 +136,12 @@
     &--svg {
         @apply relative aspect-hero max-h-hero;
 
-        #{$c}__content {
-            height: 100%;
-        }
-
         #{$c}__primary-image {
             @apply absolute inset-0;
         }
 
         #{$c}__secondary-image {
             @apply absolute inset-0;
-            height: 100%;
-            left: 50%;
-            transform: translateX(-50%);
         }
 
         #{$c}__link {
