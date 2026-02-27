@@ -852,6 +852,16 @@
                         "submenu": []
                     }
                 }
+            },
+            "125100": {
+                "menu_item_id": 125100,
+                "is_active": 1,
+                "page_id": 125100,
+                "target": "",
+                "display_name": "JSON-LD metadata",
+                "class_name": "",
+                "relative_url": "/styleguide/component/jsonld",
+                "submenu": []
             }
         }
     }

@@ -53,12 +53,12 @@ h6 {
 }
 
 .bar-gold {
-    @apply relative mb-2 pl-3;
+    @apply relative pl-5;
 
     &::before {
         content: "";
 
-        @apply absolute h-full w-1 left-0 bg-gold ;
+        @apply absolute h-full w-2 left-0 bg-gold ;
     }
 }
 

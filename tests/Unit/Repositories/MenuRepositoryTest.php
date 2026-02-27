@@ -589,9 +589,6 @@ final class MenuRepositoryTest extends TestCase
         Log::shouldReceive('error')
             ->once();
 
-        $pageData = app(Page::class)->create(1, true);
-
-
         // Create a fake data request
         $pageData = app(Page::class)->create(1, true, [
             'page' => [
@@ -612,5 +609,45 @@ final class MenuRepositoryTest extends TestCase
         $menus = app(MenuRepository::class, ['wsuApi' => $wsuApi])->getRequestData($pageData);
 
         $this->assertFalse($menus['show_site_menu']);
+    }
+
+    #[Test]
+    public function getting_surtitle_should_return_correct_data(): void
+    {
+        $site = ['id' => 123, 'parent' => ['id' => 1]];
+
+        // Case 1: Sub-site with override
+        config(['base.global.sites.123.surtitle' => 'Child Surtitle']);
+        config(['base.global.sites.123.surtitle_url' => '/child']);
+        $result = app(MenuRepository::class)->getSurtitle($site);
+        $this->assertEquals('Child Surtitle', $result['surtitle']);
+        $this->assertEquals('/child', $result['surtitle_url']);
+        $this->assertTrue($result['hasSurtitle']);
+
+        // Case 2: Sub-site fallback to global
+        config(['base.surtitle' => 'Global Surtitle']);
+        config(['base.surtitle_url' => '/global']);
+        config(['base.global.sites.123.surtitle' => null]);
+        config(['base.global.sites.123.surtitle_url' => null]);
+        $result = app(MenuRepository::class)->getSurtitle($site);
+        $this->assertEquals('Global Surtitle', $result['surtitle']);
+        $this->assertEquals('/global', $result['surtitle_url']);
+        $this->assertTrue($result['hasSurtitle']);
+
+        // Case 3: Sub-site disabled
+        config(['base.global.sites.123.surtitle_disabled' => true]);
+        $result = app(MenuRepository::class)->getSurtitle($site);
+        $this->assertFalse($result['hasSurtitle']);
+        config(['base.global.sites.123.surtitle_disabled' => false]);
+
+        // Case 4: Main site enabled/disabled
+        $mainSite = ['id' => 1, 'parent' => ['id' => null]];
+        config(['base.surtitle_main_site_enabled' => true]);
+        $result = app(MenuRepository::class)->getSurtitle($mainSite);
+        $this->assertTrue($result['hasSurtitle']);
+
+        config(['base.surtitle_main_site_enabled' => false]);
+        $result = app(MenuRepository::class)->getSurtitle($mainSite);
+        $this->assertFalse($result['hasSurtitle']);
     }
 }

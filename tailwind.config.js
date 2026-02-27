@@ -101,7 +101,11 @@ module.exports = {
         },
         {
             pattern: /gutter-?/,
-            variants: [,'md','lg','xl','2xl','mt'],
+            variants: ['md','lg','xl','2xl','mt'],
+        },
+        {
+            pattern: /order-[1-6]/,
+            variants: ['md','lg','xl','2xl','mt'],
         },
         '/form_responses/',
     ],
