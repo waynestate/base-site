@@ -10,6 +10,7 @@ use Waynestate\Youtube\ParseId;
 use Waynestate\Api\News;
 use Waynestate\Promotions\ParsePromos;
 use Contracts\Repositories\ProfileRepositoryContract;
+use Contracts\Repositories\ModularPageRepositoryContract;
 use Illuminate\Support\Facades\Config;
 
 class ProfileRepository implements ProfileRepositoryContract
@@ -26,15 +27,24 @@ class ProfileRepository implements ProfileRepositoryContract
     /** @var News */
     protected $newsApi;
 
+    /** @var ModularPageRepositoryContract */
+    protected $components;
+
     /**
      * Construct the repository.
      */
-    public function __construct(Connector $wsuApi, ParsePromos $parsePromos, Repository $cache, News $newsApi)
-    {
+    public function __construct(
+        Connector $wsuApi,
+        ParsePromos $parsePromos,
+        Repository $cache,
+        News $newsApi,
+        ModularPageRepositoryContract $components
+    ) {
         $this->wsuApi = $wsuApi;
         $this->parsePromos = $parsePromos;
         $this->cache = $cache;
         $this->newsApi = $newsApi;
+        $this->components = $components;
     }
 
     /**
@@ -406,45 +416,68 @@ class ProfileRepository implements ProfileRepositoryContract
     /**
      * {@inheritdoc}
      */
+    public function setSiteID($data)
+    {
+        dump($data);
+        dump($data['site']);
+        if (empty(config('base.profile.site_id'))) {
+            Config::set('base.profile.site_id', $data['site']['id']);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function parseProfileConfig(array $data): void
     {
         $profile_config = [];
 
-        if (!empty($data['data']['profile-config'])) {
-            // Remove all spaces and line breaks
-            $value = preg_replace('/\s*\R\s*/', '', $data['data']['profile-config']);
+        // $this->setSiteID($data);
 
-            // Last item cannot have comma at the end of it
-            $value = preg_replace('(,})', '}', $value);
+        if (empty(config('base.profile.site_id'))) {
+            Config::set('base.profile.site_id', $data['site']['id']);
+        }
+
+        if (!empty($data['data']['profile-config'])) {
+            $componentJSON = $this->components->cleanComponentJSON($data['data']['profile-config']);
 
             // Parse the JSON
-            if (Str::startsWith($value, '{')) {
-                $profile_config = json_decode($value, true);
+            if (Str::startsWith($componentJSON, '{')) {
+                $profile_config = json_decode($componentJSON, true);
 
-                foreach ($profile_config as $key => $value) {
-                    Config::set('base.profile.'.$key, $value);
+                foreach ($profile_config as $key => $componentJSON) {
+                    Config::set('base.profile.'.$key, $componentJSON);
                 }
             }
         }
 
-        // Legacy support for profile_group_id
-        if (!empty($data['data']['profile_group_id']) && empty($profile_config['group_id'])) {
+        $this->supportLegacyConfig($data);
+
+        $profile_config = config('base.profile');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function supportLegacyConfig($data)
+    {
+        if (!empty($data['data']['profile_group_id'])) {
             Config::set('base.profile.group_id', $data['data']['profile_group_id']);
         }
 
-        // Legacy support for profile_site_id
-        if (!empty($data['data']['profile_site_id']) && empty($profile_config['site_id'])) {
-            Config::set('base.profile.site_id', $data['data']['profile_site_id']);
+        // Legacy support for table_of_contents
+        if (!empty($data['data']['profile_filter_label'])) {
+            Config::set('base.profile.filter_label', $data['data']['profile_filter_label']);
         }
 
         // Legacy support for table_of_contents
-        if (!empty($data['data']['table_of_contents']) && empty($profile_config['table_of_contents'])) {
+        if (!empty($data['data']['table_of_contents'])) {
             Config::set('base.profile.table_of_contents', $data['data']['table_of_contents']);
         }
 
-        // Legacy support for profiles_by_accessid
-        if (!empty($data['data']['profiles_by_accessid'])) {
-            Config::set('base.profile.profiles_by_accessid', $data['data']['profiles_by_accessid']);
+        // Legacy support for profile_site_id
+        if (!empty($data['data']['profile_site_id'])) {
+            Config::set('base.profile.site_id', $data['data']['profile_site_id']);
         }
     }
 
