@@ -29,7 +29,7 @@ class ComponentCatalogFlexController extends Controller
     public function index(Request $request): View
     {
         $request->data['base']['page']['content']['main'] = '
-<p>The catalog flex component is ideal for showcasing a collection of items from a single promo group in a multiple-column grid or single-column list format.</p>
+<p>The catalog flex component is ideal for showcasing a collection of items from a single promo group in a 3-column grid on large that is centered</p>
 ';
 
         $components = [
@@ -38,20 +38,18 @@ class ComponentCatalogFlexController extends Controller
                     2 => [
                         'promo_item_id' => 'component_config',
                         'title' => 'Component configuration',
-                        'description' => '<p>Image size can only be used with a one-column catalog.</p>',
+                        'description' => '',
                         'tr1' => [
-                            'Page field' => 'modular-catalog-1',
+                            'Page field' => 'modular-catalog-flex-1',
                             'Data' => '{
 "id":000000,
-"heading":"Catalog",
+"heading":"Catalog flex",
 "config":"randomize|limit:3",
-"columns":3,
 "singlePromoView":true,
 "showExcerpt":true,
 "showDescription":false,
 "groupByOptions":false,
-"gradientOverlay":false,
-"imageSize":"small"
+"gradientOverlay":false
 }',
                         ],
                     ],
@@ -77,7 +75,7 @@ class ComponentCatalogFlexController extends Controller
                     'description' => '',
                 ]),
                 'component' => [
-                    'heading' => 'Catalog Flex',
+                    'heading' => 'Catalog flex',
                     'filename' => 'catalog-flex',
                     'columns' => '3',
                     'showDescription' => false,
