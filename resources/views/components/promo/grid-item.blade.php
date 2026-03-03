@@ -24,7 +24,7 @@
 
     <div class="w-full {{ !empty($component['gradientOverlay']) && $component['gradientOverlay'] === true ? 'bg-gradient-darkest absolute inset-x-0 bottom-0' : '' }}">
         <div class="content {{ !empty($component['gradientOverlay']) && $component['gradientOverlay'] === true ? 'white-links text-white relative p-4 pt-20 drop-shadow-px' : '' }}">
-            @if(!empty($component['showTitle']) && $component['showTitle'] == false)
+            @if(empty($component['showTitle']) || !empty($component['showTitle']) && $component['showTitle'] == false)
                 @if(!empty($item['youtube_id']) || !empty($item['relative_url']))
                     <div class="my-1 font-bold {{ !empty($component['columns']) ? ($component['columns'] < 4 ? 'text-lg' : 'text-base') : 'text-xl' }} group-hover:underline group-focus:underline leading-snug xl:leading-tight">
                         {{ $item['title'] }}
