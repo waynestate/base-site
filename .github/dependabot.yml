@@ -1,0 +1,19 @@
+version: 2
+updates:
+  # Enable Dependabot for Composer (PHP dependencies)
+  - package-ecosystem: "composer"
+    directory: "/" # Location of composer.json and composer.lock
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+    target-branch: "develop"
+
+  # Enable Dependabot for npm (JavaScript dependencies)
+  - package-ecosystem: "npm"
+    directory: "/" # Location of package.json and package-lock.json
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+    target-branch: "develop"
