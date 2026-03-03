@@ -134,18 +134,22 @@
     }
 
     &--svg {
-        @apply relative aspect-hero max-h-hero;
+        @apply relative;
 
         #{$c}__primary-image {
-            @apply absolute inset-0;
+            @apply absolute inset-0 aspect-hero;
+        }
+
+        #{$c}__content {
+            @apply relative;
         }
 
         #{$c}__secondary-image {
-            @apply absolute inset-0;
+            @apply relative w-full;
         }
 
         #{$c}__link {
-            @apply absolute inset-0;
+            @apply absolute inset-0 z-10;
         }
 
         #{$c}__title,

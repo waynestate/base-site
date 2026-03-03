@@ -5,6 +5,7 @@ namespace App\Repositories;
 use Contracts\Repositories\HeroRepositoryContract;
 use Illuminate\Cache\Repository;
 use Waynestate\Api\Connector;
+use Illuminate\Support\Facades\Storage;
 
 class HeroRepository implements HeroRepositoryContract
 {
@@ -107,7 +108,7 @@ class HeroRepository implements HeroRepositoryContract
         ];
 
         $placementMap = [
-            'full-width' => ['full-width', 'banner large'],
+            'full-width' => ['full-width', 'full', 'banner large'],
             'contained' => ['contained'],
         ];
 
@@ -183,6 +184,31 @@ class HeroRepository implements HeroRepositoryContract
 
             if ($detectedPlacement) {
                 $hero['component']['heroPlacement'] = $detectedPlacement;
+            }
+
+            // Secondary image processing
+            if (!empty($hero_data['secondary_relative_url'])) {
+                $secondary_url = $hero_data['secondary_relative_url'];
+                $secondary_path = parse_url($secondary_url, PHP_URL_PATH);
+                $hero['data'][$hero_key]['secondary_extension'] = pathinfo($secondary_path, PATHINFO_EXTENSION);
+
+                // If it's an SVG and not already base64 encoded
+                if ($hero['data'][$hero_key]['secondary_extension'] === 'svg' && ! str_contains($secondary_url, 'base64')) {
+                    $clean_path = ltrim($secondary_path, '/');
+                    $content = null;
+
+                    if (Storage::disk('public')->exists($clean_path)) {
+                        $content = Storage::disk('public')->get($clean_path);
+                    } elseif (Storage::disk('base')->exists($clean_path)) {
+                        $content = Storage::disk('base')->get($clean_path);
+                    } elseif (Storage::disk('base')->exists('public/' . $clean_path)) {
+                        $content = Storage::disk('base')->get('public/' . $clean_path);
+                    }
+
+                    if ($content) {
+                        $hero['data'][$hero_key]['secondary_relative_url'] = 'data:image/svg+xml;base64,'.base64_encode($content);
+                    }
+                }
             }
         }
 

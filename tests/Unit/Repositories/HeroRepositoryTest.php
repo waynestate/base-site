@@ -8,6 +8,7 @@ use Tests\TestCase;
 use Mockery as Mockery;
 use Waynestate\Api\Connector;
 use Illuminate\Cache\Repository;
+use Illuminate\Support\Facades\Storage;
 
 final class HeroRepositoryTest extends TestCase
 {
@@ -243,5 +244,89 @@ final class HeroRepositoryTest extends TestCase
         // Even though promo has 'small', component has 'large'
         $this->assertEquals('large', $result['hero']['component']['heroType']);
         $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
+    }
+    #[Test]
+    public function svg_hero_processes_extension_and_base64(): void
+    {
+        Storage::fake('public');
+        Storage::fake('base');
+
+        Storage::disk('public')->put('styleguide/test.svg', '<svg></svg>');
+
+        $promos = [
+            'hero' => [
+                [
+                    'title' => 'Hero 1',
+                    'option' => 'svg',
+                    'secondary_relative_url' => '//base.wayne.localhost/styleguide/test.svg?v=123'
+                ]
+            ]
+        ];
+        $result = $this->heroRepository->setHero($promos, []);
+
+        $this->assertEquals('svg', $result['hero']['data'][0]['secondary_extension']);
+        $this->assertStringContainsString('data:image/svg+xml;base64,', $result['hero']['data'][0]['secondary_relative_url']);
+        $this->assertEquals('data:image/svg+xml;base64,'.base64_encode('<svg></svg>'), $result['hero']['data'][0]['secondary_relative_url']);
+
+        // Test with base disk fallback
+        Storage::disk('base')->put('styleguide/test_base.svg', '<svg>base</svg>');
+
+        $promosBase = [
+            'hero' => [
+                [
+                    'title' => 'Hero 1',
+                    'option' => 'svg',
+                    'secondary_relative_url' => '/styleguide/test_base.svg'
+                ]
+            ]
+        ];
+        $resultBase = $this->heroRepository->setHero($promosBase, []);
+        $this->assertEquals('data:image/svg+xml;base64,'.base64_encode('<svg>base</svg>'), $resultBase['hero']['data'][0]['secondary_relative_url']);
+
+        // Test with base disk public/ fallback
+        Storage::disk('base')->put('public/styleguide/test_base_public.svg', '<svg>base public</svg>');
+
+        $promosBasePublic = [
+            'hero' => [
+                [
+                    'title' => 'Hero 1',
+                    'option' => 'svg',
+                    'secondary_relative_url' => '/styleguide/test_base_public.svg'
+                ]
+            ]
+        ];
+        $resultBasePublic = $this->heroRepository->setHero($promosBasePublic, []);
+        $this->assertEquals('data:image/svg+xml;base64,'.base64_encode('<svg>base public</svg>'), $resultBasePublic['hero']['data'][0]['secondary_relative_url']);
+
+        // Test that it handles missing files gracefully
+        $promosMissing = [
+            'hero' => [
+                [
+                    'title' => 'Hero 1',
+                    'option' => 'svg',
+                    'secondary_relative_url' => 'styleguide/missing.svg'
+                ]
+            ]
+        ];
+        $resultMissing = $this->heroRepository->setHero($promosMissing, []);
+        $this->assertEquals('svg', $resultMissing['hero']['data'][0]['secondary_extension']);
+        $this->assertEquals('styleguide/missing.svg', $resultMissing['hero']['data'][0]['secondary_relative_url']);
+    }
+
+    #[Test]
+    public function logo_hero_processes_extension(): void
+    {
+        $promos = [
+            'hero' => [
+                [
+                    'title' => 'Hero 1',
+                    'option' => 'logo',
+                    'secondary_relative_url' => '/styleguide/image.png'
+                ]
+            ]
+        ];
+        $result = $this->heroRepository->setHero($promos, []);
+
+        $this->assertEquals('png', $result['hero']['data'][0]['secondary_extension']);
     }
 }
