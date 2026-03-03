@@ -157,7 +157,7 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
     {
         $params = [
             'method' => 'cms.menuitems.listing',
-            'site_id' => ($parent_id !== null ? $parent_id : $site_id),
+            'site_id' => !empty($parent_id) ? $parent_id : $site_id,
             'include_subsites' => true,
         ];
 
