@@ -266,6 +266,7 @@ final class HeroRepositoryTest extends TestCase
         $result = $this->heroRepository->setHero($promos, []);
 
         $this->assertEquals('svg', $result['hero']['data'][0]['secondary_extension']);
+        $this->assertEquals('hero--svg', $result['hero']['data'][0]['hero_classes']);
         $this->assertStringContainsString('data:image/svg+xml;base64,', $result['hero']['data'][0]['secondary_relative_url']);
         $this->assertEquals('data:image/svg+xml;base64,'.base64_encode('<svg></svg>'), $result['hero']['data'][0]['secondary_relative_url']);
 
@@ -393,6 +394,19 @@ final class HeroRepositoryTest extends TestCase
         $result = $this->heroRepository->setHero($promos, []);
         $this->assertEquals('buttons', $result['hero']['component']['heroType']);
         $this->assertEquals('hero--buttons', $result['hero']['data'][0]['hero_classes']);
+    }
+
+    #[Test]
+    public function banner_large_placement_matches_correctly(): void
+    {
+        $promos = [
+            'hero' => [
+                ['title' => 'Hero 1', 'option' => 'banner large']
+            ]
+        ];
+        $result = $this->heroRepository->setHero($promos, []);
+        $this->assertEquals('large', $result['hero']['component']['heroType']);
+        $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
     }
 
     #[Test]

@@ -46,49 +46,16 @@ class HeroRepository implements HeroRepositoryContract
 
         // Set hero buttons from components
         if (!empty($promos['components'])) {
-            $hero_buttons = collect($promos['components'])->filter(function ($data, $component_name) {
-                return str_contains($component_name, 'hero-buttons');
-            })->toArray();
-
-            if (!empty($hero_buttons)) {
-                $hero_buttons_key = array_key_first($hero_buttons);
-
-                if (!empty($promos['components'][$hero_buttons_key])) {
-                    $promos['hero_buttons'] = $promos['components'][$hero_buttons_key];
-                    unset($promos['components'][$hero_buttons_key]);
-                }
-            }
+            $promos = $this->getHeroButtons($promos);
         }
 
         // Override global hero with hero component
         if (!empty($promos['components'])) {
-            $hero_components = collect($promos['components'])->filter(function ($data, $component_name) {
-                return str_contains($component_name, 'hero');
-            })->toArray();
-
-            if (!empty($hero_components)) {
-                $hero_key = array_key_first($hero_components);
-
-                if (!empty($promos['components'][$hero_key]['data'])) {
-                    $hero['data'] = $promos['components'][$hero_key]['data'];
-                    $hero['component'] = $promos['components'][$hero_key]['component'] ?? [];
-
-                    // Extract option from config string if it exists
-                    if (!empty($hero['component']['config']) && empty($hero['component']['option'])) {
-                        $config = explode('|', $hero['component']['config']);
-                        foreach ($config as $config_item) {
-                            if (str_contains($config_item, 'option:')) {
-                                $hero['component']['option'] = str_replace('option:', '', $config_item);
-                                break;
-                            }
-                        }
-                    }
-
-                    $hero['component']['heroPlacement'] = $hero['component']['heroPlacement'] ?? config('base.hero_placement');
-                    $hero['component']['heroType'] = $hero['component']['heroType'] ?? config('base.hero_type');
-
-                    unset($promos['components'][$hero_key]);
-                }
+            $extracted = $this->getHeroComponent($promos['components']);
+            if (!empty($extracted)) {
+                $hero['data'] = $extracted['data'];
+                $hero['component'] = $extracted['component'];
+                $promos['components'] = $extracted['components'];
             }
         }
 
@@ -96,120 +63,45 @@ class HeroRepository implements HeroRepositoryContract
             return $promos;
         }
 
-        // Define Mappings
-        $typeMap = [
-            'slim' => ['slim', 'small'],
-            'split' => ['split', 'half'],
-            'text' => ['text'],
-            'buttons' => ['buttons'],
-            'logo' => ['logo'],
-            'svg' => ['svg'],
-            'large' => ['large', 'banner'],
-        ];
-
-        $placementMap = [
-            'full-width' => ['full-width', 'full', 'banner large'],
-            'contained' => ['contained'],
-        ];
-
         $isCarousel = count($hero['data']) > 1;
 
         foreach ($hero['data'] as $hero_key => $hero_data) {
             $promoOption = strtolower($hero_data['option'] ?? '');
             $componentOption = strtolower($hero['component']['option'] ?? '');
             $option = trim($promoOption . ' ' . $componentOption);
-            $hero['data'][$hero_key]['hero_options'] = explode(' ', $option);
+            $hero_data['hero_options'] = explode(' ', $option);
 
             if ($isCarousel) {
                 $hero['component']['heroType'] = 'carousel';
                 $hero['component']['heroPlacement'] = 'full-width';
-                $hero['data'][$hero_key]['hero_classes'] = 'hero--large';
+                $hero_data['hero_classes'] = 'hero--large';
+                $hero['data'][$hero_key] = $hero_data;
                 continue;
             }
 
             // Determine Type
-            $detectedType = null;
-            // Check component first for override
-            foreach ($typeMap as $type => $keywords) {
-                foreach ($keywords as $keyword) {
-                    if (!empty($componentOption) && str_contains($componentOption, $keyword)) {
-                        $detectedType = $type;
-                        break 2;
-                    }
-                }
-            }
-            // Check promo if not found in component
-            if ($detectedType === null) {
-                foreach ($typeMap as $type => $keywords) {
-                    foreach ($keywords as $keyword) {
-                        if (str_contains($promoOption, $keyword)) {
-                            $detectedType = $type;
-                            break 2;
-                        }
-                    }
-                }
-            }
-
-            if ($detectedType) {
-                $hero['component']['heroType'] = $detectedType;
-                $hero['data'][$hero_key]['hero_classes'] = 'hero--' . $detectedType;
+            $type = $this->mapType($promoOption, $componentOption);
+            if ($type) {
+                $hero['component']['heroType'] = $type;
+                $hero_data['hero_classes'] = 'hero--' . $type;
             } else {
                 $type = $hero['component']['heroType'] ?? config('base.hero_type') ?? 'large';
                 $hero['component']['heroType'] = $type;
-                $hero['data'][$hero_key]['hero_classes'] = 'hero--' . $type;
+                $hero_data['hero_classes'] = 'hero--' . $type;
             }
 
             // Determine Placement
-            $detectedPlacement = null;
-            // Check component first for override
-            foreach ($placementMap as $placement => $keywords) {
-                foreach ($keywords as $keyword) {
-                    if (!empty($componentOption) && str_contains($componentOption, $keyword)) {
-                        $detectedPlacement = $placement;
-                        break 2;
-                    }
-                }
-            }
-            // Check promo if not found in component
-            if ($detectedPlacement === null) {
-                foreach ($placementMap as $placement => $keywords) {
-                    foreach ($keywords as $keyword) {
-                        if (str_contains($promoOption, $keyword)) {
-                            $detectedPlacement = $placement;
-                            break 2;
-                        }
-                    }
-                }
-            }
-
-            if ($detectedPlacement) {
-                $hero['component']['heroPlacement'] = $detectedPlacement;
+            $placement = $this->mapPlacement($promoOption, $componentOption);
+            if ($placement) {
+                $hero['component']['heroPlacement'] = $placement;
             }
 
             // Secondary image processing
             if (!empty($hero_data['secondary_relative_url'])) {
-                $secondary_url = $hero_data['secondary_relative_url'];
-                $secondary_path = parse_url($secondary_url, PHP_URL_PATH);
-                $hero['data'][$hero_key]['secondary_extension'] = pathinfo($secondary_path, PATHINFO_EXTENSION);
-
-                // If it's an SVG and not already base64 encoded
-                if ($hero['data'][$hero_key]['secondary_extension'] === 'svg' && ! str_contains($secondary_url, 'base64')) {
-                    $clean_path = ltrim($secondary_path, '/');
-                    $content = null;
-
-                    if (Storage::disk('public')->exists($clean_path)) {
-                        $content = Storage::disk('public')->get($clean_path);
-                    } elseif (Storage::disk('base')->exists($clean_path)) {
-                        $content = Storage::disk('base')->get($clean_path);
-                    } elseif (Storage::disk('base')->exists('public/' . $clean_path)) {
-                        $content = Storage::disk('base')->get('public/' . $clean_path);
-                    }
-
-                    if ($content) {
-                        $hero['data'][$hero_key]['secondary_relative_url'] = 'data:image/svg+xml;base64,'.base64_encode($content);
-                    }
-                }
+                $hero_data = $this->processSecondaryImage($hero_data);
             }
+
+            $hero['data'][$hero_key] = $hero_data;
         }
 
         // Default hero placement if not set
@@ -220,5 +112,187 @@ class HeroRepository implements HeroRepositoryContract
         $promos['hero'] = $hero;
 
         return $promos;
+    }
+
+    /**
+     * Get hero buttons from components.
+     */
+    private function getHeroButtons(array $promos): array
+    {
+        $hero_buttons = collect($promos['components'])->filter(function ($data, $component_name) {
+            return str_contains($component_name, 'hero-buttons');
+        })->toArray();
+
+        if (!empty($hero_buttons)) {
+            $hero_buttons_key = array_key_first($hero_buttons);
+
+            if (!empty($promos['components'][$hero_buttons_key])) {
+                $promos['hero_buttons'] = $promos['components'][$hero_buttons_key];
+                unset($promos['components'][$hero_buttons_key]);
+            }
+        }
+
+        return $promos;
+    }
+
+    /**
+     * Get the first hero component from the components array.
+     */
+    private function getHeroComponent(array $components): array
+    {
+        $hero_components = collect($components)->filter(function ($data, $component_name) {
+            return str_contains($component_name, 'hero');
+        })->toArray();
+
+        if (empty($hero_components)) {
+            return [];
+        }
+
+        $hero_key = array_key_first($hero_components);
+
+        if (empty($components[$hero_key]['data'])) {
+            return [];
+        }
+
+        $hero = [
+            'data' => $components[$hero_key]['data'],
+            'component' => $components[$hero_key]['component'] ?? [],
+        ];
+
+        // Extract option from config string if it exists
+        if (!empty($hero['component']['config']) && empty($hero['component']['option'])) {
+            $hero['component']['option'] = $this->parseComponentOption($hero['component']['config']);
+        }
+
+        $hero['component']['heroPlacement'] = $hero['component']['heroPlacement'] ?? config('base.hero_placement');
+        $hero['component']['heroType'] = $hero['component']['heroType'] ?? config('base.hero_type');
+
+        unset($components[$hero_key]);
+
+        return [
+            'data' => $hero['data'],
+            'component' => $hero['component'],
+            'components' => $components,
+        ];
+    }
+
+    /**
+     * Extract option from config string.
+     */
+    private function parseComponentOption(string $config): string
+    {
+        $config = explode('|', $config);
+        foreach ($config as $config_item) {
+            if (str_contains($config_item, 'option:')) {
+                return str_replace('option:', '', $config_item);
+            }
+        }
+
+        return '';
+    }
+
+    /**
+     * Map keywords to hero types.
+     */
+    private function mapType(string $promoOption, string $componentOption): ?string
+    {
+        $typeMap = [
+            'slim' => ['slim', 'small'],
+            'split' => ['split', 'half'],
+            'text' => ['text'],
+            'buttons' => ['buttons'],
+            'logo' => ['logo'],
+            'svg' => ['svg'],
+            'large' => ['large', 'banner'],
+        ];
+
+        // Check component first for override
+        if (!empty($componentOption)) {
+            foreach ($typeMap as $type => $keywords) {
+                foreach ($keywords as $keyword) {
+                    if (preg_match('/\b' . preg_quote($keyword, '/') . '\b/', $componentOption)) {
+                        return $type;
+                    }
+                }
+            }
+        }
+
+        // Check promo if not found in component
+        if (!empty($promoOption)) {
+            foreach ($typeMap as $type => $keywords) {
+                foreach ($keywords as $keyword) {
+                    if (preg_match('/\b' . preg_quote($keyword, '/') . '\b/', $promoOption)) {
+                        return $type;
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Map keywords to hero placements.
+     */
+    private function mapPlacement(string $promoOption, string $componentOption): ?string
+    {
+        $placementMap = [
+            'full-width' => ['full-width', 'full', 'banner large'],
+            'contained' => ['contained'],
+        ];
+
+        // Check component first for override
+        if (!empty($componentOption)) {
+            foreach ($placementMap as $placement => $keywords) {
+                foreach ($keywords as $keyword) {
+                    if (preg_match('/\b' . preg_quote($keyword, '/') . '\b/', $componentOption)) {
+                        return $placement;
+                    }
+                }
+            }
+        }
+
+        // Check promo if not found in component
+        if (!empty($promoOption)) {
+            foreach ($placementMap as $placement => $keywords) {
+                foreach ($keywords as $keyword) {
+                    if (preg_match('/\b' . preg_quote($keyword, '/') . '\b/', $promoOption)) {
+                        return $placement;
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Process secondary image extension and base64 encoding.
+     */
+    private function processSecondaryImage(array $hero_data): array
+    {
+        $secondary_url = $hero_data['secondary_relative_url'];
+        $secondary_path = parse_url($secondary_url, PHP_URL_PATH);
+        $hero_data['secondary_extension'] = pathinfo($secondary_path, PATHINFO_EXTENSION);
+
+        // If it's an SVG and not already base64 encoded
+        if ($hero_data['secondary_extension'] === 'svg' && ! str_contains($secondary_url, 'base64')) {
+            $clean_path = ltrim($secondary_path, '/');
+            $content = null;
+
+            if (Storage::disk('public')->exists($clean_path)) {
+                $content = Storage::disk('public')->get($clean_path);
+            } elseif (Storage::disk('base')->exists($clean_path)) {
+                $content = Storage::disk('base')->get($clean_path);
+            } elseif (Storage::disk('base')->exists('public/' . $clean_path)) {
+                $content = Storage::disk('base')->get('public/' . $clean_path);
+            }
+
+            if ($content) {
+                $hero_data['secondary_relative_url'] = 'data:image/svg+xml;base64,'.base64_encode($content);
+            }
+        }
+
+        return $hero_data;
     }
 }
