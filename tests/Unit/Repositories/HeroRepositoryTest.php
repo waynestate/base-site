@@ -37,6 +37,7 @@ final class HeroRepositoryTest extends TestCase
         $this->assertEquals('carousel', $result['hero']['component']['heroType']);
         $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
         $this->assertEquals('hero--large', $result['hero']['data'][0]['hero_classes']);
+        $this->assertArrayHasKey('hero_options', $result['hero']['data'][0]);
     }
 
     #[Test]
@@ -328,5 +329,101 @@ final class HeroRepositoryTest extends TestCase
         $result = $this->heroRepository->setHero($promos, []);
 
         $this->assertEquals('png', $result['hero']['data'][0]['secondary_extension']);
+    }
+
+    #[Test]
+    public function mapping_keywords_for_type_and_placement(): void
+    {
+        // small -> slim
+        $promos = ['hero' => [['option' => 'small']]];
+        $result = $this->heroRepository->setHero($promos, []);
+        $this->assertEquals('slim', $result['hero']['component']['heroType']);
+        $this->assertEquals('hero--slim', $result['hero']['data'][0]['hero_classes']);
+
+        // half -> split
+        $promos = ['hero' => [['option' => 'half']]];
+        $result = $this->heroRepository->setHero($promos, []);
+        $this->assertEquals('split', $result['hero']['component']['heroType']);
+        $this->assertEquals('hero--split', $result['hero']['data'][0]['hero_classes']);
+
+        // banner -> large
+        $promos = ['hero' => [['option' => 'banner']]];
+        $result = $this->heroRepository->setHero($promos, []);
+        $this->assertEquals('large', $result['hero']['component']['heroType']);
+        $this->assertEquals('hero--large', $result['hero']['data'][0]['hero_classes']);
+
+        // full -> full-width
+        $promos = ['hero' => [['option' => 'full']]];
+        $result = $this->heroRepository->setHero($promos, []);
+        $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
+
+        // banner large -> full-width
+        $promos = ['hero' => [['option' => 'banner large']]];
+        $result = $this->heroRepository->setHero($promos, []);
+        $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
+        $this->assertEquals('large', $result['hero']['component']['heroType']);
+    }
+
+    #[Test]
+    public function fallback_to_large_type(): void
+    {
+        config(['base.hero_type' => null]);
+        $promos = ['hero' => [['title' => 'Hero 1', 'option' => '']]];
+        $result = $this->heroRepository->setHero($promos, []);
+        $this->assertEquals('large', $result['hero']['component']['heroType']);
+        $this->assertEquals('hero--large', $result['hero']['data'][0]['hero_classes']);
+    }
+
+    #[Test]
+    public function empty_hero_returns_original_promos(): void
+    {
+        $promos = ['test' => 'data'];
+        $result = $this->heroRepository->setHero($promos, []);
+        $this->assertEquals($promos, $result);
+
+        $promos = ['hero' => []];
+        $result = $this->heroRepository->setHero($promos, []);
+        $this->assertEquals($promos, $result);
+    }
+
+    #[Test]
+    public function buttons_hero_type(): void
+    {
+        $promos = ['hero' => [['option' => 'buttons']]];
+        $result = $this->heroRepository->setHero($promos, []);
+        $this->assertEquals('buttons', $result['hero']['component']['heroType']);
+        $this->assertEquals('hero--buttons', $result['hero']['data'][0]['hero_classes']);
+    }
+
+    #[Test]
+    public function only_first_hero_component_is_used_and_removed(): void
+    {
+        $promos = [
+            'components' => [
+                'modular-hero-1' => [
+                    'data' => [['title' => 'Hero 1']],
+                    'component' => ['heroType' => 'split']
+                ],
+                'modular-hero-2' => [
+                    'data' => [['title' => 'Hero 2']],
+                    'component' => ['heroType' => 'slim']
+                ]
+            ]
+        ];
+        $result = $this->heroRepository->setHero($promos, []);
+        $this->assertEquals('split', $result['hero']['component']['heroType']);
+        $this->assertArrayNotHasKey('modular-hero-1', $result['components']);
+        $this->assertArrayHasKey('modular-hero-2', $result['components']);
+    }
+
+    #[Test]
+    public function hero_options_array_is_populated(): void
+    {
+        $promos = [
+            'hero' => [['option' => 'large full-width']]
+        ];
+        $result = $this->heroRepository->setHero($promos, []);
+        $this->assertContains('large', $result['hero']['data'][0]['hero_options']);
+        $this->assertContains('full-width', $result['hero']['data'][0]['hero_options']);
     }
 }

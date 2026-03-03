@@ -154,7 +154,7 @@ class HeroRepository implements HeroRepositoryContract
                 $hero['component']['heroType'] = $detectedType;
                 $hero['data'][$hero_key]['hero_classes'] = 'hero--' . $detectedType;
             } else {
-                $type = $hero['component']['heroType'] ?? config('base.hero_type', 'large');
+                $type = $hero['component']['heroType'] ?? config('base.hero_type') ?? 'large';
                 $hero['component']['heroType'] = $type;
                 $hero['data'][$hero_key]['hero_classes'] = 'hero--' . $type;
             }
