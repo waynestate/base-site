@@ -1,6 +1,6 @@
 @if(!empty($hero['data']))
     <section id="hero"
-         class="GTM-hero
+         class="GTM-hero hero--carousel
               {{ $hero['component']['containerClass'] ?? ' hero'}}
               {{ config('base.global.sites.'.$base['site']['id'].'.promos.hero.class') ?? ''}}
               {{ !empty($hero['data']) && count($hero['data']) > 1 ? ' rotate' : '' }}

@@ -187,4 +187,12 @@
             @apply md:text-lg;
         }
     }
+
+    &--carousel {
+
+        #{$c}__content,
+        #{$c}__secondary-image {
+            @apply hidden;
+        }
+    }
 }
