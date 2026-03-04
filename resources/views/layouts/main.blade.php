@@ -43,9 +43,13 @@
 
 <div id="panel" @class(['site-theme', $base['layout_config']['page_class'] ?? ''])>
     @yield('top')
-    
+
     @if(!empty($base['hero']) && (!empty($base['hero']['component']['heroPlacement']) && $base['hero']['component']['heroPlacement'] != 'contained'))
-        @include('components.hero', ['hero' => $base['hero'], 'class' => 'hero--full-width'])
+        @if(($base['hero']['component']['heroType'] ?? '') === 'carousel')
+            @include('components.hero-carousel', ['hero' => $base['hero'], 'class' => 'hero--full-width'])
+        @else
+            @include('components.hero', ['hero' => $base['hero'], 'class' => 'hero--full-width'])
+        @endif
 
         @yield('under-hero')
     @endif
@@ -56,7 +60,11 @@
         <main class="content-area mx-auto w-full {{ $base['show_site_menu'] === true ? 'max-w-[900px]' : 'max-w-[75rem]' }} {{ (in_array($base['page']['controller'], config('base.full_width_controllers'))) ? ' max-w-full' : '' }}" tabindex="-1">
 
             @if(!empty($base['hero']) && (!empty($base['hero']['component']['heroPlacement']) && $base['hero']['component']['heroPlacement'] === 'contained'))
-                @include('components.hero', ['hero' => $base['hero'], 'class' => 'hero--contained'])
+                @if(($base['hero']['component']['heroType'] ?? '') === 'carousel')
+                    @include('components.hero-carousel', ['hero' => $base['hero'], 'class' => 'hero--contained'])
+                @else
+                    @include('components.hero', ['hero' => $base['hero'], 'class' => 'hero--contained'])
+                @endif
             @endif
 
             @include('components.breadcrumbs', ['breadcrumbs' => $base['breadcrumbs'] ?? ''])

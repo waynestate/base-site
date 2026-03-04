@@ -36,7 +36,7 @@ final class HeroRepositoryTest extends TestCase
         $result = $this->heroRepository->setHero($promos, []);
         $this->assertEquals('carousel', $result['hero']['component']['heroType']);
         $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
-        $this->assertEquals('hero--large', $result['hero']['data'][0]['hero_classes']);
+        $this->assertEquals('', $result['hero']['data'][0]['hero_classes']);
         $this->assertArrayHasKey('hero_options', $result['hero']['data'][0]);
     }
 
@@ -351,7 +351,7 @@ final class HeroRepositoryTest extends TestCase
         $promos = ['hero' => [['option' => 'banner']]];
         $result = $this->heroRepository->setHero($promos, []);
         $this->assertEquals('large', $result['hero']['component']['heroType']);
-        $this->assertEquals('hero--large', $result['hero']['data'][0]['hero_classes']);
+        $this->assertEquals('', $result['hero']['data'][0]['hero_classes']);
 
         // full -> full-width
         $promos = ['hero' => [['option' => 'full']]];
@@ -372,7 +372,7 @@ final class HeroRepositoryTest extends TestCase
         $promos = ['hero' => [['title' => 'Hero 1', 'option' => '']]];
         $result = $this->heroRepository->setHero($promos, []);
         $this->assertEquals('large', $result['hero']['component']['heroType']);
-        $this->assertEquals('hero--large', $result['hero']['data'][0]['hero_classes']);
+        $this->assertEquals('', $result['hero']['data'][0]['hero_classes']);
     }
 
     #[Test]
@@ -439,5 +439,219 @@ final class HeroRepositoryTest extends TestCase
         $result = $this->heroRepository->setHero($promos, []);
         $this->assertContains('large', $result['hero']['data'][0]['hero_options']);
         $this->assertContains('full-width', $result['hero']['data'][0]['hero_options']);
+    }
+
+    #[Test]
+    public function modular_hero_with_multiple_items_triggers_carousel(): void
+    {
+        $promos = [
+            'components' => [
+                'modular-hero-1' => [
+                    'data' => [
+                        ['title' => 'Hero 1', 'option' => ''],
+                        ['title' => 'Hero 2', 'option' => ''],
+                    ],
+                    'component' => [
+                        'config' => 'limit:3|option:buttons full',
+                    ]
+                ]
+            ]
+        ];
+
+        $result = $this->heroRepository->setHero($promos, []);
+
+        $this->assertEquals('carousel', $result['hero']['component']['heroType']);
+        $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
+        $this->assertCount(2, $result['hero']['data']);
+    }
+
+    #[Test]
+    public function modular_hero_with_single_item_and_limit_greater_than_one_triggers_carousel(): void
+    {
+        $promos = [
+            'components' => [
+                'modular-hero-1' => [
+                    'data' => [
+                        ['title' => 'Hero 1', 'option' => ''],
+                    ],
+                    'component' => [
+                        'config' => 'limit:3|option:buttons full',
+                    ]
+                ]
+            ]
+        ];
+
+        $result = $this->heroRepository->setHero($promos, []);
+
+        $this->assertEquals('carousel', $result['hero']['component']['heroType']);
+        $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
+        $this->assertCount(1, $result['hero']['data']);
+    }
+
+    #[Test]
+    public function modular_hero_with_limit_one_and_carousel_option_triggers_carousel(): void
+    {
+        $promos = [
+            'components' => [
+                'modular-hero-1' => [
+                    'data' => [
+                        ['title' => 'Hero 1', 'option' => 'carousel'],
+                    ],
+                    'component' => [
+                        'config' => 'limit:1',
+                    ]
+                ]
+            ]
+        ];
+
+        $result = $this->heroRepository->setHero($promos, []);
+
+        $this->assertEquals('carousel', $result['hero']['component']['heroType']);
+        $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
+    }
+
+    #[Test]
+    public function modular_hero_processes_secondary_image_even_in_carousel(): void
+    {
+        Storage::fake('public');
+        Storage::disk('public')->put('logo.svg', '<svg></svg>');
+
+        $promos = [
+            'hero' => [
+                ['title' => 'Hero 1', 'relative_url' => '/hero.jpg', 'secondary_relative_url' => '/logo.svg', 'option' => ''],
+                ['title' => 'Hero 2', 'relative_url' => '/hero2.jpg', 'option' => ''],
+            ]
+        ];
+
+        $result = $this->heroRepository->setHero($promos, []);
+
+        $this->assertEquals('carousel', $result['hero']['component']['heroType']);
+        $this->assertStringStartsWith('data:image/svg+xml;base64,', $result['hero']['data'][0]['secondary_relative_url']);
+        $this->assertEquals('svg', $result['hero']['data'][0]['secondary_extension']);
+    }
+
+    #[Test]
+    public function modular_hero_with_limit_three_and_option_full_triggers_carousel_for_single_item(): void
+    {
+        $promos = [
+            'components' => [
+                'hero-1' => [
+                    'data' => [
+                        ['title' => 'Slide 1', 'option' => ''],
+                    ],
+                    'component' => [
+                        'config' => 'limit:3|option:full',
+                    ],
+                ],
+            ],
+        ];
+
+        // Simulate how Controller might pass the component data
+        // Often 'limit' and 'option' are already extracted into the component array
+        $promos['components']['hero-1']['component']['limit'] = 3;
+        $promos['components']['hero-1']['component']['option'] = 'full';
+
+        $result = $this->heroRepository->setHero($promos, []);
+
+        $this->assertEquals('carousel', $result['hero']['component']['heroType']);
+        $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
+        $this->assertEquals('', $result['hero']['data'][0]['hero_classes']);
+    }
+
+    #[Test]
+    public function carousel_keyword_in_option_triggers_carousel(): void
+    {
+        $promos = [
+            'hero' => [
+                ['title' => 'Hero 1', 'option' => 'carousel']
+            ]
+        ];
+        $result = $this->heroRepository->setHero($promos, []);
+        $this->assertEquals('carousel', $result['hero']['component']['heroType']);
+    }
+    /**
+     * @test
+     */
+    public function carousel_hero_with_multiple_items_should_have_all_items_in_data()
+    {
+        $promos = [
+            'components' => [
+                'hero-1' => [
+                    'data' => [
+                        ['title' => 'Hero 1', 'option' => 'full'],
+                        ['title' => 'Hero 2', 'option' => 'full'],
+                        ['title' => 'Hero 3', 'option' => 'full'],
+                        ['title' => 'Hero 4', 'option' => 'full'],
+                    ],
+                    'component' => [
+                        'config' => 'limit:4',
+                    ],
+                ],
+            ],
+        ];
+
+        $promos = $this->heroRepository->setHero($promos, []);
+
+        $this->assertCount(4, $promos['hero']['data']);
+        $this->assertEquals('carousel', $promos['hero']['component']['heroType']);
+        $this->assertEquals('full-width', $promos['hero']['component']['heroPlacement']);
+    }
+    /**
+     * @test
+     */
+    public function modular_hero_with_4_items_and_limit_3_should_be_sliced_to_3_items()
+    {
+        // Define 4 hero items
+        $hero_items = [
+            ['title' => 'Hero 1', 'relative_url' => '/hero1.jpg', 'option' => ''],
+            ['title' => 'Hero 2', 'relative_url' => '/hero2.jpg', 'option' => ''],
+            ['title' => 'Hero 3', 'relative_url' => '/hero3.jpg', 'option' => ''],
+            ['title' => 'Hero 4', 'relative_url' => '/hero4.jpg', 'option' => ''],
+        ];
+
+        // Component with limit:3
+        $promos = [
+            'components' => [
+                'hero-1' => [
+                    'data' => $hero_items,
+                    'component' => [
+                        'config' => 'limit:3|option:full',
+                    ],
+                ],
+            ],
+        ];
+
+        $promos = $this->heroRepository->setHero($promos, []);
+
+        // It should be a carousel
+        $this->assertEquals('carousel', $promos['hero']['component']['heroType']);
+
+        // Check the count of data items. If HeroRepository doesn't slice, it will be 4.
+        // The user says there's only 1 item, but they EXPECT 3.
+        // If it's 4, it's not limiting. If it's 1, it's something else.
+        $this->assertCount(3, $promos['hero']['data'], 'Hero data should be limited to 3 items based on component limit');
+    }
+    /**
+     * @test
+     */
+    public function global_hero_with_4_items_and_no_component_limit_should_not_be_sliced()
+    {
+        // Define 4 hero items
+        $hero_items = [
+            ['title' => 'Hero 1', 'relative_url' => '/hero1.jpg', 'option' => ''],
+            ['title' => 'Hero 2', 'relative_url' => '/hero2.jpg', 'option' => ''],
+            ['title' => 'Hero 3', 'relative_url' => '/hero3.jpg', 'option' => ''],
+            ['title' => 'Hero 4', 'relative_url' => '/hero4.jpg', 'option' => ''],
+        ];
+
+        // Global hero (no component)
+        $promos = [
+            'hero' => $hero_items,
+        ];
+
+        $promos = $this->heroRepository->setHero($promos, []);
+
+        $this->assertCount(4, $promos['hero']['data']);
+        $this->assertEquals('carousel', $promos['hero']['component']['heroType']);
     }
 }

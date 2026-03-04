@@ -56,6 +56,11 @@ class HeroRepository implements HeroRepositoryContract
                 $hero['data'] = $extracted['data'];
                 $hero['component'] = $extracted['component'];
                 $promos['components'] = $extracted['components'];
+
+                // Slice data if it exceeds component limit
+                if (!empty($hero['component']['limit']) && count($hero['data']) > $hero['component']['limit']) {
+                    $hero['data'] = array_slice($hero['data'], 0, $hero['component']['limit']);
+                }
             }
         }
 
@@ -63,7 +68,9 @@ class HeroRepository implements HeroRepositoryContract
             return $promos;
         }
 
-        $isCarousel = count($hero['data']) > 1;
+        $heroCount = count($hero['data']);
+        $heroLimit = (int) ($hero['component']['limit'] ?? 1);
+        $isCarousel = $heroCount > 1 || $heroLimit > 1;
 
         foreach ($hero['data'] as $hero_key => $hero_data) {
             $promoOption = strtolower($hero_data['option'] ?? '');
@@ -71,29 +78,32 @@ class HeroRepository implements HeroRepositoryContract
             $option = trim($promoOption . ' ' . $componentOption);
             $hero_data['hero_options'] = explode(' ', $option);
 
+            // Determine carousel type from option if not already set by count or limit
+            if (!$isCarousel && str_contains($option, 'carousel')) {
+                $isCarousel = true;
+            }
+
             if ($isCarousel) {
                 $hero['component']['heroType'] = 'carousel';
                 $hero['component']['heroPlacement'] = 'full-width';
-                $hero_data['hero_classes'] = 'hero--large';
-                $hero['data'][$hero_key] = $hero_data;
-                continue;
-            }
-
-            // Determine Type
-            $type = $this->mapType($promoOption, $componentOption);
-            if ($type) {
-                $hero['component']['heroType'] = $type;
-                $hero_data['hero_classes'] = 'hero--' . $type;
+                $hero_data['hero_classes'] = '';
             } else {
-                $type = $hero['component']['heroType'] ?? config('base.hero_type') ?? 'large';
-                $hero['component']['heroType'] = $type;
-                $hero_data['hero_classes'] = 'hero--' . $type;
-            }
+                // Determine Type
+                $type = $this->mapType($promoOption, $componentOption);
+                if ($type) {
+                    $hero['component']['heroType'] = $type;
+                    $hero_data['hero_classes'] = $type === 'large' ? '' : 'hero--' . $type;
+                } else {
+                    $type = $hero['component']['heroType'] ?? config('base.hero_type') ?? 'large';
+                    $hero['component']['heroType'] = $type;
+                    $hero_data['hero_classes'] = $type === 'large' ? '' : 'hero--' . $type;
+                }
 
-            // Determine Placement
-            $placement = $this->mapPlacement($promoOption, $componentOption);
-            if ($placement) {
-                $hero['component']['heroPlacement'] = $placement;
+                // Determine Placement
+                $placement = $this->mapPlacement($promoOption, $componentOption);
+                if ($placement) {
+                    $hero['component']['heroPlacement'] = $placement;
+                }
             }
 
             // Secondary image processing
@@ -159,9 +169,12 @@ class HeroRepository implements HeroRepositoryContract
             'component' => $components[$hero_key]['component'] ?? [],
         ];
 
-        // Extract option from config string if it exists
-        if (!empty($hero['component']['config']) && empty($hero['component']['option'])) {
-            $hero['component']['option'] = $this->parseComponentOption($hero['component']['config']);
+        // Extract options and limit from config string if they exist
+        if (!empty($hero['component']['config'])) {
+            if (empty($hero['component']['option'])) {
+                $hero['component']['option'] = $this->parseComponentOption($hero['component']['config']);
+            }
+            $hero['component']['limit'] = $this->parseComponentLimit($hero['component']['config']);
         }
 
         $hero['component']['heroPlacement'] = $hero['component']['heroPlacement'] ?? config('base.hero_placement');
@@ -192,17 +205,34 @@ class HeroRepository implements HeroRepositoryContract
     }
 
     /**
+     * Extract limit from config string.
+     */
+    private function parseComponentLimit(string $config): int
+    {
+        $config = explode('|', $config);
+        foreach ($config as $config_item) {
+            if (str_contains($config_item, 'limit:')) {
+                return (int) str_replace('limit:', '', $config_item);
+            }
+        }
+
+        return 1;
+    }
+
+    /**
      * Map keywords to hero types.
      */
     private function mapType(string $promoOption, string $componentOption): ?string
     {
         $typeMap = [
+            'contained' => ['contained', 'contain'],
             'slim' => ['slim', 'small'],
             'split' => ['split', 'half'],
             'text' => ['text'],
             'buttons' => ['buttons'],
             'logo' => ['logo'],
             'svg' => ['svg'],
+            'carousel' => ['carousel'],
             'large' => ['large', 'banner'],
         ];
 

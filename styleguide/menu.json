@@ -280,6 +280,66 @@
                         "relative_url": "/styleguide/component/hero/bannercontained",
                         "submenu": []
                     },
+                    "105100105": {
+                        "menu_item_id": 105100105,
+                        "is_active": 1,
+                        "page_id": 105100105,
+                        "target": "",
+                        "display_name": "Text overlay",
+                        "class_name": "",
+                        "relative_url": "/styleguide/component/hero/textoverlay",
+                        "submenu": []
+                    },
+                    "105100112": {
+                        "menu_item_id": 105100112,
+                        "is_active": 1,
+                        "page_id": 105100112,
+                        "target": "",
+                        "display_name": "Text overlay (Contained)",
+                        "class_name": "",
+                        "relative_url": "/styleguide/component/hero/textoverlaycontained",
+                        "submenu": []
+                    },
+                    "105100106": {
+                        "menu_item_id": 105100106,
+                        "is_active": 1,
+                        "page_id": 105100106,
+                        "target": "",
+                        "display_name": "SVG overlay",
+                        "class_name": "",
+                        "relative_url": "/styleguide/component/hero/svgoverlay",
+                        "submenu": []
+                    },
+                    "105100113": {
+                        "menu_item_id": 105100113,
+                        "is_active": 1,
+                        "page_id": 105100113,
+                        "target": "",
+                        "display_name": "SVG overlay (Contained)",
+                        "class_name": "",
+                        "relative_url": "/styleguide/component/hero/svgoverlaycontained",
+                        "submenu": []
+                    },
+                    "105100107": {
+                        "menu_item_id": 105100107,
+                        "is_active": 1,
+                        "page_id": 105100107,
+                        "target": "",
+                        "display_name": "Logo overlay",
+                        "class_name": "",
+                        "relative_url": "/styleguide/component/hero/logooverlay",
+                        "submenu": []
+                    },
+                    "105100114": {
+                        "menu_item_id": 105100114,
+                        "is_active": 1,
+                        "page_id": 105100114,
+                        "target": "",
+                        "display_name": "Logo overlay (Contained)",
+                        "class_name": "",
+                        "relative_url": "/styleguide/component/hero/logooverlaycontained",
+                        "submenu": []
+                    },
                     "105100111": {
                         "menu_item_id": 105100111,
                         "is_active": 1,
@@ -298,36 +358,6 @@
                         "display_name": "Carousel",
                         "class_name": "",
                         "relative_url": "/styleguide/component/hero/carousel",
-                        "submenu": []
-                    },
-                    "105100105": {
-                        "menu_item_id": 105100105,
-                        "is_active": 1,
-                        "page_id": 105100105,
-                        "target": "",
-                        "display_name": "Text overlay",
-                        "class_name": "",
-                        "relative_url": "/styleguide/component/hero/textoverlay",
-                        "submenu": []
-                    },
-                    "105100106": {
-                        "menu_item_id": 105100106,
-                        "is_active": 1,
-                        "page_id": 105100106,
-                        "target": "",
-                        "display_name": "SVG overlay",
-                        "class_name": "",
-                        "relative_url": "/styleguide/component/hero/svgoverlay",
-                        "submenu": []
-                    },
-                    "105100107": {
-                        "menu_item_id": 105100107,
-                        "is_active": 1,
-                        "page_id": 105100107,
-                        "target": "",
-                        "display_name": "Logo overlay",
-                        "class_name": "",
-                        "relative_url": "/styleguide/component/hero/logooverlay",
                         "submenu": []
                     },
                     "105100109": {

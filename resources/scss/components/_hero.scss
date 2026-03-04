@@ -2,25 +2,31 @@
     $c: &;
     @apply relative max-w-full;
 
+    &__carousel-item {
+        /* Flickity applies absolute to this container when enabled */
+        @apply w-full aspect-hero;
+    }
+
+    &__type {
+        @apply w-full relative;
+    }
+
+    &__primary-image {
+        @apply w-full h-full object-cover object-center;
+    }
+
+    /* Modifiers */
     &--full-width {
         @apply mx-auto;
     }
 
     &--contained {
         @apply xl:mx-container;
-    }
 
-    &__carousel-item {
-        /* Flickity applies absolute to this container when enabled */
-        @apply w-full aspect-hero;
-    }
 
-    #{$c}__type {
-        @apply w-full relative;
-    }
-
-    #{$c}__primary-image {
-        @apply w-full h-full object-cover object-center;
+        #{$c}__title {
+            @apply lg:drop-shadow-px leading-tight text-3xl lg:text-5xl font-bold my-2;
+        }
     }
 
     &--slim {

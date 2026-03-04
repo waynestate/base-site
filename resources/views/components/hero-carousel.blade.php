@@ -1,18 +1,17 @@
 @if(!empty($hero['data']))
-    <section id="hero" 
+    <section id="hero"
          class="GTM-hero
               {{ $hero['component']['containerClass'] ?? ' hero'}}
               {{ config('base.global.sites.'.$base['site']['id'].'.promos.hero.class') ?? ''}}
               {{ !empty($hero['data']) && count($hero['data']) > 1 ? ' rotate' : '' }}
     ">
-
         @foreach($hero['data'] as $item)
             @if(count($hero['data']) > 1)<div class="hero__carousel-item">@endif
 
                 <div class="hero__type hero--{{ $item['hero_type'] ?? 'banner' }}">
 
-                    <img class="hero__primary-image {{ $hero['component']['backgroundClass'] ?? ''}}{{ $loop->first ? '' : ' lazy'}}" 
-                         @if($loop->first) src="{{ $item['relative_url'] }}" @else data-src="{{ $item['relative_url'] }}"@endif 
+                    <img class="hero__primary-image {{ $hero['component']['backgroundClass'] ?? ''}}{{ $loop->first ? '' : ' lazy'}}"
+                         @if($loop->first) src="{{ $item['relative_url'] }}" @else data-src="{{ $item['relative_url'] }}"@endif
                         alt="{{ $item['filename_alt_text'] }}">
 
                     <div class="hero__content">
