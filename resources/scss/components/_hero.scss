@@ -140,18 +140,18 @@
     }
 
     &--svg {
-        @apply relative;
+        @apply relative aspect-hero max-h-hero;
 
         #{$c}__primary-image {
-            @apply absolute inset-0 aspect-hero;
+            @apply absolute inset-0 w-full h-full object-cover;
         }
 
         #{$c}__content {
-            @apply relative;
+            @apply absolute inset-0 flex items-center justify-center;
         }
 
         #{$c}__secondary-image {
-            @apply relative w-full;
+            @apply max-w-full max-h-full;
         }
 
         #{$c}__link {
