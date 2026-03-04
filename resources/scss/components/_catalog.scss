@@ -7,4 +7,24 @@
             @apply w-1/2 lg:w-1/4;
         }
     }
+
+    &__grid {
+        @apply grid gap-8 mt-6;
+    }
+
+    &--even-items {
+        @apply sm:grid-cols-2 md:grid-cols-3;
+    }
+
+    &--odd-items {
+        @apply md:grid-cols-3;
+    }
+
+    &--multiple-rows {
+        @apply grid-cols-2;
+    }
+
+    &--one-row {
+        @apply sm:grid-cols-2;
+    }
 }
