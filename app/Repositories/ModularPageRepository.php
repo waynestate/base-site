@@ -351,6 +351,10 @@ class ModularPageRepository implements ModularPageRepositoryContract
             $data['option'] = $component['option'];
         }
 
+        if (!empty($data['youtube_id']) && empty($data['relative_url'])) {
+            $data['relative_url'] = '//i.wayne.edu/youtube/'.$data['youtube_id'].'/max';
+        }
+
         return $data;
     }
 
