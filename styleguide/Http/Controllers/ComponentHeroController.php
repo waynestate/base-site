@@ -26,6 +26,8 @@ class ComponentHeroController extends Controller
      */
     public function index(Request $request): View
     {
+        $hero_config = $this->getHeroConfig($request->data);
+
         $components = [
             'accordion' => [
                 'data' => [
@@ -36,8 +38,9 @@ class ComponentHeroController extends Controller
                         'tr1' => [
                             'Page field' => 'modular-hero-1',
                             'Data' => '{
-"id":0000,
-"config":"randomize|limit:1"
+"id":'.$hero_config['id'].',
+"option":"'.$hero_config['option'].'",
+"config":"limit:'.$hero_config['limit'].'"
 }',
                         ],
                     ],
@@ -68,5 +71,61 @@ class ComponentHeroController extends Controller
         $request->data['base']['components'] = $components;
 
         return view('childpage', merge($request->data));
+    }
+
+    /**
+     * Get the hero configuration for the styleguide.
+     *
+     * @param array $data
+     * @return array
+     */
+    private function getHeroConfig(array $data): array
+    {
+        $id = $data['page']['id'] ?? 0000;
+        $title = $data['page']['title'] ?? '';
+
+        $hero_type = $data['base']['hero']['component']['heroType'] ?? '';
+        $hero_placement = $data['base']['hero']['component']['heroPlacement'] ?? '';
+
+        // If page data is missing, check hero data (common on styleguide pages)
+        if (($id === 0000 || $id === 0) && ! empty($data['base']['hero']['data'])) {
+            $hero = current($data['base']['hero']['data']);
+            $id = $id === 0000 || $id === 0 ? ($hero['id'] ?? $id) : $id;
+            $title = $hero['title'] ?? $title;
+        }
+
+        $option = '';
+        $limit = 1;
+
+        // Map hero types to their corresponding options and limits
+        $type_map = [
+            'text' => ['option' => 'text'],
+            'svg' => ['option' => 'svg'],
+            'logo' => ['option' => 'logo'],
+            'large' => ['option' => 'large'],
+            'slim' => ['option' => 'small'],
+            'split' => ['option' => 'half'],
+            'carousel' => ['limit' => 3],
+        ];
+
+        if (isset($type_map[$hero_type])) {
+            $option = $type_map[$hero_type]['option'] ?? $option;
+            $limit = $type_map[$hero_type]['limit'] ?? $limit;
+        }
+
+        if ($hero_placement === 'contained') {
+            $option .= ($option !== '' ? ' ' : '').'contained';
+        }
+
+        if ($hero_type === 'carousel' && $hero_placement !== 'contained') {
+            $option .= ($option !== '' ? ' ' : '').'full';
+        }
+
+        return [
+            'id' => $id,
+            'title' => $title,
+            'option' => $option,
+            'limit' => $limit,
+        ];
     }
 }
