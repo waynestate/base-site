@@ -194,5 +194,13 @@
         #{$c}__secondary-image {
             @apply hidden;
         }
+
+        #{$c}__carousel-item {
+            @apply max-h-hero;
+        }
+
+        #{$c}--banner {
+            @apply aspect-hero max-h-hero;
+        }
     }
 }
