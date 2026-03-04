@@ -1,0 +1,114 @@
+.promo {
+    position: relative;
+
+    /* Accessible links */
+    &__link-cover {
+        position: absolute;
+        inset: 0;
+    }
+
+    &__image {
+        @apply w-full shrink-0 grow-0 md:w-2/5;
+    }
+
+    &__content {
+        @apply w-full;
+    }
+
+    &__title {
+        @apply mb-1 font-bold group-hover:underline group-focus:underline leading-tight text-lg lg:text-xl isolate;
+    }
+
+    &__excerpt {
+        @apply mb-4;
+    }
+
+    &__gradient {
+        @apply hidden;
+    }
+
+    &--grid {
+        .promo__image {
+            width: 100%;
+        }
+    }
+
+    /* Gradient overlay */
+    &--gradient-overlay {
+        @apply bg-green-800;
+
+        position: relative;
+        overflow: hidden;
+
+        .promo__content {
+            padding: 0 1rem;
+            line-height: 1.25;
+            filter: drop-shadow(0 1px 1px rgb(12 84 73 / 50%));
+            color: white;
+            display: grid;
+            grid-template-rows: repeat(2, min-content);
+            align-content: end;
+            position: absolute;
+            inset: 0;
+        }
+
+        .promo__description,
+        .promo__excerpt,
+        .promo__title {
+            isolation: isolate;
+            z-index: 1;
+        }
+
+        .promo__title {
+            padding-top: 1rem;
+        }
+
+        .promo__link {
+            color: white;
+            text-decoration-color: transparent;
+            text-decoration-line: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 4px;
+            transition: all 200ms ease-in-out;
+
+            &:focus,
+            &:hover {
+                text-decoration-color: white;
+                transition: all 200ms ease-in-out;
+            }
+        }
+
+        .promo__gradient {
+            display: block;
+            position: absolute;
+            inset: 0;
+            grid-row: -1 / 1;
+            content: "";
+            background-image: radial-gradient(200% 100% at 50% 100%, rgb(5 33 30 / 90%) 10%, transparent 100%);
+        }
+    }
+
+    &--image-small {
+        @apply flex items-start;
+
+        .promo__image {
+            @apply w-1/4;
+        }
+
+        .promo__content {
+            @apply pt-2 lg:pt-0; /* title line height */
+        }
+    }
+
+    &--image-right {
+        .promo__image {
+            @apply md:order-2;
+        }
+    }
+
+    &--image-alternate {
+        .promo__image-container:nth-child(even) {
+            @apply md:order-2;
+        }
+    }
+}
