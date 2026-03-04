@@ -5,7 +5,8 @@
 
 <div @class([
      'promo',
-     'promo--list',
+     'promo--list-item',
+     $class ?? '' => @empty(! $class),
      $component['promoItemClass'] ?? '' => @empty(! $component['promoItemClass']),
      'promo--image-small' => !empty($component['imageSize']) && $component['imageSize'] == "small",
      'promo--image-right' => !empty($component['imagePosition']) && $component['imagePosition'] == "right",
