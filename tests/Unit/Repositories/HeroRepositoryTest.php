@@ -718,4 +718,52 @@ final class HeroRepositoryTest extends TestCase
         $this->assertCount(4, $promos['hero']['data']);
         $this->assertEquals('carousel', $promos['hero']['component']['heroType']);
     }
+
+    /**
+     * @test
+     */
+    public function modular_hero_with_top_level_option_overrides_config_option()
+    {
+        $promos = [
+            'components' => [
+                'hero-1' => [
+                    'data' => [
+                        ['title' => 'Hero 1', 'relative_url' => '/hero1.jpg', 'option' => ''],
+                    ],
+                    'component' => [
+                        'config' => 'limit:1|option:slim',
+                    ],
+                    'option' => 'split',
+                ],
+            ],
+        ];
+
+        $promos = $this->heroRepository->setHero($promos, []);
+
+        $this->assertEquals('split', $promos['hero']['component']['heroType']);
+    }
+
+    /**
+     * @test
+     */
+    public function modular_hero_with_top_level_option_works_without_config_option()
+    {
+        $promos = [
+            'components' => [
+                'hero-1' => [
+                    'data' => [
+                        ['title' => 'Hero 1', 'relative_url' => '/hero1.jpg', 'option' => ''],
+                    ],
+                    'component' => [
+                        'config' => 'limit:1',
+                    ],
+                    'option' => 'text',
+                ],
+            ],
+        ];
+
+        $promos = $this->heroRepository->setHero($promos, []);
+
+        $this->assertEquals('text', $promos['hero']['component']['heroType']);
+    }
 }

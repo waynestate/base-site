@@ -174,14 +174,20 @@ class HeroRepository implements HeroRepositoryContract
         $hero = [
             'data' => $components[$hero_key]['data'],
             'component' => $components[$hero_key]['component'] ?? [],
+            'option' => $components[$hero_key]['option'] ?? '',
         ];
 
         // Extract options and limit from config string if they exist
         if (!empty($hero['component']['config'])) {
-            if (empty($hero['component']['option'])) {
+            if (empty($hero['option']) && empty($hero['component']['option'])) {
                 $hero['component']['option'] = $this->parseComponentOption($hero['component']['config']);
             }
             $hero['component']['limit'] = $this->parseComponentLimit($hero['component']['config']);
+        }
+
+        // Favor top-level option if it exists
+        if (!empty($hero['option'])) {
+            $hero['component']['option'] = $hero['option'];
         }
 
         $hero['component']['heroPlacement'] = $hero['component']['heroPlacement'] ?? config('base.hero_placement');
