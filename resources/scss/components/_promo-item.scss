@@ -1,5 +1,7 @@
 .promo {
     position: relative;
+    display: flex;
+    gap: 0.5rem;
 
     /* Accessible links */
     &__link-cover {
@@ -27,9 +29,20 @@
         @apply hidden;
     }
 
-    &--grid {
+    &--grid-item {
+        flex-direction: column;
+
         .promo__image {
             width: 100%;
+        }
+    }
+
+    &--list-item {
+        flex-direction: row;
+        gap: 1.25rem;
+
+        .promo__image {
+            width: 25%;
         }
     }
 
