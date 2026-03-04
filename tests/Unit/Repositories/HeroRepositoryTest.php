@@ -41,6 +41,40 @@ final class HeroRepositoryTest extends TestCase
     }
 
     #[Test]
+    public function contained_carousel_hero(): void
+    {
+        $promos = [
+            'hero' => [
+                ['title' => 'Hero 1', 'option' => 'contained'],
+                ['title' => 'Hero 2', 'option' => 'contained']
+            ]
+        ];
+        $result = $this->heroRepository->setHero($promos, []);
+        $this->assertEquals('carousel', $result['hero']['component']['heroType']);
+        $this->assertEquals('contained', $result['hero']['component']['heroPlacement']);
+    }
+
+    #[Test]
+    public function modular_carousel_hero_with_contained_option(): void
+    {
+        $promos = [
+            'components' => [
+                'hero-1' => [
+                    'data' => [
+                        ['title' => 'Hero 1', 'option' => '']
+                    ],
+                    'component' => [
+                        'config' => 'limit:4|option:contained'
+                    ]
+                ]
+            ]
+        ];
+        $result = $this->heroRepository->setHero($promos, []);
+        $this->assertEquals('carousel', $result['hero']['component']['heroType']);
+        $this->assertEquals('contained', $result['hero']['component']['heroPlacement']);
+    }
+
+    #[Test]
     public function contained_slim_hero_default(): void
     {
         config(['base.hero_type' => 'slim']);
@@ -66,6 +100,7 @@ final class HeroRepositoryTest extends TestCase
         $result = $this->heroRepository->setHero($promos, []);
         $this->assertEquals('large', $result['hero']['component']['heroType']);
         $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
+        $this->assertEquals('hero--large', $result['hero']['data'][0]['hero_classes']);
     }
 
     #[Test]
@@ -351,7 +386,7 @@ final class HeroRepositoryTest extends TestCase
         $promos = ['hero' => [['option' => 'banner']]];
         $result = $this->heroRepository->setHero($promos, []);
         $this->assertEquals('large', $result['hero']['component']['heroType']);
-        $this->assertEquals('', $result['hero']['data'][0]['hero_classes']);
+        $this->assertEquals('hero--large', $result['hero']['data'][0]['hero_classes']);
 
         // full -> full-width
         $promos = ['hero' => [['option' => 'full']]];
@@ -407,6 +442,35 @@ final class HeroRepositoryTest extends TestCase
         $result = $this->heroRepository->setHero($promos, []);
         $this->assertEquals('large', $result['hero']['component']['heroType']);
         $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
+        $this->assertEquals('hero--large', $result['hero']['data'][0]['hero_classes']);
+    }
+
+    #[Test]
+    public function banner_and_large_default_to_full_width_placement(): void
+    {
+        // banner -> full-width
+        $promos = ['hero' => [['option' => 'banner']]];
+        $result = $this->heroRepository->setHero($promos, []);
+        $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
+
+        // large -> full-width
+        $promos = ['hero' => [['option' => 'large']]];
+        $result = $this->heroRepository->setHero($promos, []);
+        $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
+    }
+
+    #[Test]
+    public function contained_overrides_banner_and_large_placement(): void
+    {
+        // banner contained -> contained
+        $promos = ['hero' => [['option' => 'banner contained']]];
+        $result = $this->heroRepository->setHero($promos, []);
+        $this->assertEquals('contained', $result['hero']['component']['heroPlacement']);
+
+        // large contained -> contained
+        $promos = ['hero' => [['option' => 'large contained']]];
+        $result = $this->heroRepository->setHero($promos, []);
+        $this->assertEquals('contained', $result['hero']['component']['heroPlacement']);
     }
 
     #[Test]

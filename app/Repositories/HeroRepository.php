@@ -86,13 +86,20 @@ class HeroRepository implements HeroRepositoryContract
             if ($isCarousel) {
                 $hero['component']['heroType'] = 'carousel';
                 $hero['component']['heroPlacement'] = 'full-width';
+
+                // Determine Placement for carousel
+                $placement = $this->mapPlacement($promoOption, $componentOption);
+                if ($placement) {
+                    $hero['component']['heroPlacement'] = $placement;
+                }
+
                 $hero_data['hero_classes'] = '';
             } else {
                 // Determine Type
                 $type = $this->mapType($promoOption, $componentOption);
                 if ($type) {
                     $hero['component']['heroType'] = $type;
-                    $hero_data['hero_classes'] = $type === 'large' ? '' : 'hero--' . $type;
+                    $hero_data['hero_classes'] = 'hero--' . $type;
                 } else {
                     $type = $hero['component']['heroType'] ?? config('base.hero_type') ?? 'large';
                     $hero['component']['heroType'] = $type;
@@ -266,8 +273,8 @@ class HeroRepository implements HeroRepositoryContract
     private function mapPlacement(string $promoOption, string $componentOption): ?string
     {
         $placementMap = [
-            'full-width' => ['full-width', 'full', 'banner large'],
             'contained' => ['contained'],
+            'full-width' => ['full-width', 'full', 'banner', 'large', 'banner large'],
         ];
 
         // Check component first for override
