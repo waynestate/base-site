@@ -47,14 +47,14 @@
 
         <div @class(['catalog__grid', implode(' ', $catalog_classes) => !empty($catalog_classes)])>
             @foreach($group_items as $item)
-                @include('components/promo/grid-item', ['class' => $promo_item_class])
+                @include('components/promo/item', ['class' => $promo_item_class])
             @endforeach
         </div>
     @endforeach
 @else
     <div @class(['catalog__grid', implode(' ', $catalog_classes) => !empty($catalog_classes)])>
         @foreach($data as $item)
-            @include('components/promo/grid-item', ['class' => $promo_item_class])
+            @include('components/promo/item', ['class' => $promo_item_class])
         @endforeach
     </div>
 @endif
