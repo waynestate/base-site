@@ -1,4 +1,5 @@
 .catalog {
+    /* Catalog-flex */
     &__flex {
         @apply flex flex-wrap justify-center;
 
@@ -8,23 +9,44 @@
         }
     }
 
+    /* Catalog */
     &__grid {
-        @apply grid gap-8 mt-6;
+        @apply grid items-start;
+
+        gap: 1.3rem;
+        grid-template-columns: repeat(auto-fit, minmax(200px, max-content));
     }
 
-    &--even-items {
-        @apply sm:grid-cols-2 md:grid-cols-3;
+    &--gradient-overlay {
+        grid-template-columns: repeat(auto-fit, minmax(200px, max-content));
     }
 
-    &--odd-items {
-        @apply md:grid-cols-3;
+    &--cols-1 {
+        grid-template-columns: 1fr;
+        row-gap: 1.5rem;
     }
 
-    &--multiple-rows {
-        @apply grid-cols-2;
+    &--cols-2 {
+        gap: 2rem;
+
+        @screen sm {
+            @apply grid-cols-2;
+        }
     }
 
-    &--one-row {
-        @apply sm:grid-cols-2;
+    &--cols-3 {
+        gap: 1.3rem;
+
+        @screen 2xl {
+            @apply grid-cols-3;
+        }
+    }
+
+    &--cols-4 {
+        gap: 1rem;
+
+        @screen 2xl {
+            @apply grid-cols-4;
+        }
     }
 }
