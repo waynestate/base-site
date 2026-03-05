@@ -577,9 +577,8 @@ final class HeroRepositoryTest extends TestCase
         $result = $this->heroRepository->setHero($promos, []);
         $this->assertEquals('carousel', $result['hero']['component']['heroType']);
     }
-    /**
-     * @test
-     */
+
+    #[Test]
     public function carousel_hero_with_multiple_items_should_have_all_items_in_data()
     {
         $promos = [
@@ -604,9 +603,8 @@ final class HeroRepositoryTest extends TestCase
         $this->assertEquals('carousel', $promos['hero']['component']['heroType']);
         $this->assertEquals('full-width', $promos['hero']['component']['heroPlacement']);
     }
-    /**
-     * @test
-     */
+
+    #[Test]
     public function modular_hero_with_4_items_and_limit_3_should_be_sliced_to_3_items()
     {
         // Define 4 hero items
@@ -639,9 +637,8 @@ final class HeroRepositoryTest extends TestCase
         // If it's 4, it's not limiting. If it's 1, it's something else.
         $this->assertCount(3, $promos['hero']['data'], 'Hero data should be limited to 3 items based on component limit');
     }
-    /**
-     * @test
-     */
+
+    #[Test]
     public function global_hero_with_4_items_and_no_component_limit_should_not_be_sliced()
     {
         // Define 4 hero items
@@ -663,9 +660,7 @@ final class HeroRepositoryTest extends TestCase
         $this->assertEquals('carousel', $promos['hero']['component']['heroType']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function modular_hero_with_top_level_option_overrides_config_option()
     {
         $promos = [
@@ -687,9 +682,7 @@ final class HeroRepositoryTest extends TestCase
         $this->assertEquals('split', $promos['hero']['component']['heroType']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function modular_hero_with_top_level_option_works_without_config_option()
     {
         $promos = [
