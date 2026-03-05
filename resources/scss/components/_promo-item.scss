@@ -1,7 +1,12 @@
+.promo-row, 
+.promo-column {
+    .component__container {
+        @apply flex flex-col gap-8;
+    }
+}
+
 .promo {
-    position: relative;
-    display: flex;
-    gap: 0.5rem;
+    @apply relative flex gap-2 items-start;
 
     /* Accessible links */
     &__link-cover {
@@ -10,7 +15,7 @@
     }
 
     &__image {
-        @apply w-full shrink-0 grow-0 md:w-2/5;
+        @apply w-full shrink-0 grow-0;
     }
 
     &__content {
@@ -18,35 +23,29 @@
     }
 
     &__title {
-        @apply mb-1 font-bold group-hover:underline group-focus:underline leading-tight text-lg lg:text-xl isolate;
+        @apply mb-1 font-bold leading-tight text-lg lg:text-xl isolate;
     }
 
     &__excerpt {
         @apply mb-4;
     }
 
+    /* Play button opacity change on accessible link hover */
+    .promo--play-button:has(~ .promo__content:hover)::after {
+        opacity: 1;
+    }
+
+    /* Gradient placeholder */
     &__gradient {
         @apply hidden;
     }
 
+    /* Grid item presentation */
     &--grid-item {
-        flex-direction: column;
-
-        .promo__image {
-            width: 100%;
-        }
+        @apply flex-col;
     }
 
-    &--list-item {
-        flex-direction: row;
-        gap: 1.25rem;
-
-        .promo__image {
-            width: 25%;
-        }
-    }
-
-    /* Gradient overlay */
+    /* Grid item - Gradient overlay */
     &--gradient-overlay {
         @apply bg-green-800;
 
@@ -101,6 +100,17 @@
         }
     }
 
+    /* List item presentation */
+    &--list-item {
+        flex-direction: row;
+        gap: 1.25rem;
+
+        .promo__image {
+            @apply md:w-2/5;
+        }
+    }
+
+    /* List item - Smaller image size option */
     &--image-small {
         @apply flex items-start;
 
@@ -113,14 +123,16 @@
         }
     }
 
+    /* List item - Place image to the right */
     &--image-right {
         .promo__image {
             @apply md:order-2;
         }
     }
 
+    /* List item - Swap image placement on even items */
     &--image-alternate {
-        .promo__image-container:nth-child(even) {
+        &:nth-child(even) .promo__image {
             @apply md:order-2;
         }
     }
