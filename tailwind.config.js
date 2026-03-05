@@ -47,13 +47,13 @@ const baseColors = {
 }
 
 const screens = {
-    sm: '420px',
-    md: '576px',
-    lg: '732px',
-    xl: '888px',
-    '2xl': '1044px',
+    sm: '480px',
+    md: '768px',
+    lg: '840px',
+    mt: '840px', // Adjust this based on the top menu width
+    xl: '1044px',
+    '2xl': '1200px',
     '3xl': '1200px',
-    mt: '780px', // Adjust this based on the top menu width
     print: { raw: 'print' },
 }
 
