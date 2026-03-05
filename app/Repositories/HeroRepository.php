@@ -64,7 +64,7 @@ class HeroRepository implements HeroRepositoryContract
             }
         }
 
-        if (empty($hero) || empty($hero['data'])) {
+        if (empty($hero['data'])) {
             return $promos;
         }
 

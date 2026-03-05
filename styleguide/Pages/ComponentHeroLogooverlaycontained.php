@@ -4,7 +4,7 @@ namespace Styleguide\Pages;
 
 use Factories\Page as PageFactory;
 
-class ComponentHeroLogooverlaycontained extends Page
+class ComponentHeroLogoOverlayContained extends Page
 {
     /**
      * {@inheritdoc}
