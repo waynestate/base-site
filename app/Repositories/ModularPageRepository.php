@@ -395,14 +395,11 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
             // containerClass => columnSpan
             if (!empty($component['component']['columnSpan'])) {
-                // Inject the column span class
-                array_push($components[$componentName]['component']['containerClass'], 'px-4', 'mt:colspan-'.$component['component']['columnSpan']);
+                // Inject specified column span class
+                array_push($components[$componentName]['component']['containerClass'], 'mt:colspan-'.$component['component']['columnSpan']);
             } elseif (!empty($component['component']['filename']) && strpos($component['component']['filename'], 'column') !== false) {
-                // Inject the column span class
-                array_push($components[$componentName]['component']['containerClass'], 'px-4', 'mt:colspan-6');
-            } else {
-                // Default width
-                $components[$componentName]['component']['containerClass'][] = 'px-container';
+                // Inject default column span class
+                array_push($components[$componentName]['component']['containerClass'], 'mt:colspan-6');
             }
 
             // Collect all legacy class names
@@ -430,15 +427,6 @@ class ModularPageRepository implements ModularPageRepositoryContract
             // Default background image positioning classes, won't overwrite existing backgroundClass values
             if (!empty($component['component']['backgroundImageUrl']) && empty($component['component']['backgroundClass'])) {
                 $components[$componentName]['component']['backgroundClass'] = ['bg-cover', 'bg-top'];
-            }
-
-            // Section gutters, bottom padding
-            // - No gutter if component uses margin-bottom class
-            // - No gutter on heading component
-            if (empty(preg_grep('/mb-/', $components[$componentName]['component']['containerClass']))
-                && !Str::contains($componentName, 'heading')
-            ) {
-                $components[$componentName]['component']['containerClass'] [] = 'mb-gutter';
             }
 
             // Implode party, assign all classes to their respective container
