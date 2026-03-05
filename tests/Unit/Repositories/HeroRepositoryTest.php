@@ -8,7 +8,6 @@ use Tests\TestCase;
 use Mockery as Mockery;
 use Waynestate\Api\Connector;
 use Illuminate\Cache\Repository;
-use Illuminate\Support\Facades\Storage;
 
 final class HeroRepositoryTest extends TestCase
 {

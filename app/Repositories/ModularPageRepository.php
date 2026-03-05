@@ -434,7 +434,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
             // - No gutter if component uses margin-bottom class
             // - No gutter on heading component
             if (empty(preg_grep('/mb-/', $components[$componentName]['component']['containerClass']))
-                && !Str::contains($componentName, 'heading' && !Str::contains($componentName, 'hero'))
+                && !Str::contains($componentName, 'heading') && !Str::contains($componentName, 'hero')
             ) {
                 $components[$componentName]['component']['containerClass'] [] = 'mb-gutter';
             }

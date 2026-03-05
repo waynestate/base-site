@@ -5,7 +5,6 @@ namespace App\Repositories;
 use Contracts\Repositories\HeroRepositoryContract;
 use Illuminate\Cache\Repository;
 use Waynestate\Api\Connector;
-use Illuminate\Support\Facades\Storage;
 
 class HeroRepository implements HeroRepositoryContract
 {
