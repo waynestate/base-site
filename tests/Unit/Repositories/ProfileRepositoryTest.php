@@ -125,7 +125,7 @@ final class ProfileRepositoryTest extends TestCase
         $wsuApi->shouldReceive('sendRequest')->with('profile.groups.listing', Mockery::type('array'))->once()->andReturn($return);
         $wsuApi->shouldReceive('nextRequestProduction')->once();
 
-        $dropdown = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getDropdownOfGroups($this->faker->numberBetween(1, 10));
+        $dropdown = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getDropdownOfGroups($return);
 
         $this->assertArrayNotHasKey('single_group', $dropdown);
         collect($return['results'])->each(function ($item) use ($dropdown) {
@@ -151,7 +151,7 @@ final class ProfileRepositoryTest extends TestCase
         $wsuApi->shouldReceive('sendRequest')->with('profile.groups.listing', Mockery::type('array'))->once()->andReturn($return);
         $wsuApi->shouldReceive('nextRequestProduction')->once();
 
-        $dropdown = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getDropdownOfGroups($this->faker->numberBetween(1, 10));
+        $dropdown = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getDropdownOfGroups($return);
 
         // Make sure the single_group key exists with the ID of the group on it
         $this->assertArrayHasKey('single_group', $dropdown);
@@ -478,7 +478,7 @@ final class ProfileRepositoryTest extends TestCase
         ];
 
         $options = app(ProfileRepository::class)->getDropdownOptions(null, null, $profiles_same_group);
-        $this->assertEquals(['selected_group' => null, 'hide_filtering' => true], $options);
+        $this->assertEquals(['selected_group' => null, 'hide_filtering' => false], $options);
 
         // Test with profiles in multiple groups
         $profiles_multiple_groups = [
@@ -506,7 +506,7 @@ final class ProfileRepositoryTest extends TestCase
         ];
 
         $options = app(ProfileRepository::class)->getDropdownOptions(null, null, $profiles_no_groups);
-        $this->assertEquals(['selected_group' => null, 'hide_filtering' => true], $options);
+        $this->assertEquals(['selected_group' => null, 'hide_filtering' => false], $options);
 
         // Test that forced group ID still takes precedence
         $random_group_id = $this->faker->numberBetween(1, 9);

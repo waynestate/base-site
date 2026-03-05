@@ -27,7 +27,7 @@ class ProfileRepository extends Repository
     /**
      * {@inheritdoc}
      */
-    public function getDropdownOfGroups(int $site_id): array
+    public function getDropdownOfGroups(array $profile_groups): array
     {
         $groups = collect(app(ProfileGroup::class)->create(10))->map(function ($item) {
             return $item['display_name'];

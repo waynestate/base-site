@@ -383,6 +383,16 @@ $global_config = [
         |
         */
         'table_of_contents' => null,
+
+        /*
+        |--------------------------------------------------------------------------
+        | Profile llisting - Hide filtering
+        |--------------------------------------------------------------------------
+        |
+        | This will hide the table of contents on the contact table page.
+        |
+        */
+        'hide_filtering' => false,
     ],
     /*
     |--------------------------------------------------------------------------

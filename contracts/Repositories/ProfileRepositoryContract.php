@@ -35,7 +35,7 @@ interface ProfileRepositoryContract
     /**
      * Get the dropdown of groups.
      */
-    public function getDropdownOfGroups(int $site_id): array;
+    public function getDropdownOfGroups(array $profile_groups): array;
 
     /**
      * Get the persons profile information.

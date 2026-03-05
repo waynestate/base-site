@@ -39,8 +39,10 @@ class ProfileController extends Controller
         // Determine if we are forcing the profiles from custom page data
         $forced_profile_group_id = config('base.profile.group_id');
 
+        $profile_groups = $this->profile->getGroups($site_id);
+
         // Get the groups for the dropdown
-        $dropdown_groups = $this->profile->getDropdownOfGroups($site_id);
+        $dropdown_groups = $this->profile->getDropdownOfGroups($profile_groups);
 
         // Set the selected group
         $selected_group = $request->query('group') !== '' ? $request->query('group') : null;

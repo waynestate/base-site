@@ -154,18 +154,30 @@ class ProfileRepository implements ProfileRepositoryContract
     {
         // Default Options
         $options['selected_group'] = $selected_group;
-        $options['hide_filtering'] = false;
+        $options['hide_filtering'] = config('base.profile.hide_filtering') ?? false;
 
         // If a data page field was set force that filtering and don't show the dropdown
         if ($forced_profile_group_id !== null) {
             $options['selected_group'] = $forced_profile_group_id;
-            $options['hide_filtering'] = true;
+
+            if (config('base.profile.hide_filtering') !== null) {
+                $options['hide_filtering'] = true;
+            }
         }
 
         // Hide filtering if all profiles belong to the same group
         if (!$options['hide_filtering'] && !empty($profiles['profiles'])) {
             $unique_groups = $this->getUniqueGroupsFromProfiles($profiles['profiles']);
-            if (count($unique_groups) <= 1) {
+
+            // hide filter if hide_filter === true
+            // hide filter if hide_filter === null
+            if (
+                count($unique_groups) <= 1 &&
+                (
+                    config('base.profile.hide_filtering') === null ||
+                    config('base.profile.hide_filtering') === true
+                )
+            ) {
                 $options['hide_filtering'] = true;
             }
         }
@@ -199,7 +211,28 @@ class ProfileRepository implements ProfileRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getDropdownOfGroups(int $site_id): array
+    public function getDropdownOfGroups(array $profile_groups): array
+    {
+        // Only return the display name ordered by the display order
+        $groupsArray = collect($profile_groups)
+            ->sortBy('display_order')
+            ->map(function ($item) {
+                return $item['display_name'];
+            })->toArray();
+
+        if (count($groupsArray) == 1) {
+            $groups['single_group'] = key($groupsArray);
+        }
+
+        $groups['dropdown_groups'] = ['' => 'All Profiles'] + $groupsArray;
+
+        return $groups;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getGroups(int $site_id): array
     {
         $params = [
             'method' => 'profile.groups.listing',
@@ -214,24 +247,12 @@ class ProfileRepository implements ProfileRepositoryContract
 
         // Filter down the groups based on the parent group from the config
         $parent_group_id = (config('base.profile_parent_group_id')) ?? config('base.profile.parent_group_id');
-        $profile_groups['results'] = collect($profile_groups['results'])
+
+        $groups = collect($profile_groups['results'])
             ->filter(function ($item) use ($parent_group_id) {
                 return (int) $item['parent_id'] === $parent_group_id;
             })
             ->toArray();
-
-        // Only return the display name ordered by the display order
-        $groupsArray = collect($profile_groups['results'])
-            ->sortBy('display_order')
-            ->map(function ($item) {
-                return $item['display_name'];
-            })->toArray();
-
-        if (count($groupsArray) == 1) {
-            $groups['single_group'] = key($groupsArray);
-        }
-
-        $groups['dropdown_groups'] = ['' => 'All Profiles'] + $groupsArray;
 
         return $groups;
     }
