@@ -56,33 +56,24 @@ table {
         top: -30em;
     }
 
-    td, th {
-        padding: 0.125em 0.25em;
-        width: 8em;
-    }
-
     th {
         font-weight: bold;
-        border-bottom: thin solid #888;
         position: relative;
+        padding: 0;
     }
 
     th.no-sort {
-        padding-top: 0.35em;
-    }
-
-    th:nth-child(5) {
-        width: 10em;
+        @apply px-4 py-3;
     }
 
     th button {
-        padding: 4px;
-        margin: 1px;
+        @apply px-4 py-3;
+
         font-size: 100%;
         font-weight: bold;
         background: transparent;
         border: none;
-        display: inline;
+        display: block;
         inset: 0;
         width: 100%;
         text-align: left;
@@ -122,15 +113,11 @@ table {
         text-align: right;
     }
 
-    tbody tr:nth-child(odd) {
-        background-color: #ddd;
-    }
-
     /* Focus and hover styling */
     th button:focus,
     th button:hover {
-        padding: 2px;
-        border: 2px solid currentcolor;
+        @apply outline outline-2 outline-offset-[-2px];
+
         background-color: #e5f4ff;
     }
 
