@@ -114,6 +114,7 @@ final class ProfileRepositoryTest extends TestCase
     {
         // Force this config incase it is changed
         config(['base.profile.parent_group_id' => 0]);
+        $site_id = 1;
 
         // Fake return
         $return = [
@@ -125,7 +126,8 @@ final class ProfileRepositoryTest extends TestCase
         $wsuApi->shouldReceive('sendRequest')->with('profile.groups.listing', Mockery::type('array'))->once()->andReturn($return);
         $wsuApi->shouldReceive('nextRequestProduction')->once();
 
-        $dropdown = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getDropdownOfGroups($return);
+        $groups = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getGroups($site_id);
+        $dropdown = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getDropdownOfGroups($groups);
 
         $this->assertArrayNotHasKey('single_group', $dropdown);
         collect($return['results'])->each(function ($item) use ($dropdown) {
@@ -139,6 +141,7 @@ final class ProfileRepositoryTest extends TestCase
     {
         // Force this config incase it is changed
         config(['base.profile.parent_group_id' => 0]);
+        $site_id = 1;
 
         // Fake return
         $return = [
@@ -151,7 +154,8 @@ final class ProfileRepositoryTest extends TestCase
         $wsuApi->shouldReceive('sendRequest')->with('profile.groups.listing', Mockery::type('array'))->once()->andReturn($return);
         $wsuApi->shouldReceive('nextRequestProduction')->once();
 
-        $dropdown = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getDropdownOfGroups($return);
+        $groups = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getGroups($site_id);
+        $dropdown = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getDropdownOfGroups($groups);
 
         // Make sure the single_group key exists with the ID of the group on it
         $this->assertArrayHasKey('single_group', $dropdown);

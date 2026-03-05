@@ -6,11 +6,20 @@ interface ProfileRepositoryContract
 {
     /**
      * Get the profile listing.
+     *
+     * @param int $site_id
+     * @param string|null $selected_group
+     * @param null $subsite_url
+     * @return array
      */
     public function getProfiles(int $site_id, ?string $selected_group = null, $subsite_url = null): array;
 
     /**
      * Get the profiles based on promo_group_id custom field
+     *
+     * @param $site_id
+     * @param null $subsite_url
+     * @return array
      */
     public function getProfilesByGroup($site_id, $subsite_url = null): array;
 
@@ -33,16 +42,31 @@ interface ProfileRepositoryContract
     public function getDropdownOptions($selected_group, $forced_profile_group_id, $profiles = []);
 
     /**
+     * Get the profile groups from the API
+     *
+     * @param int $site_id
+     * @return array
+     */
+    public function getGroups(int $site_id): array;
+
+    /**
      * Get the dropdown of groups.
+     *
+     * @param array $profile_groups
+     * @return array
      */
     public function getDropdownOfGroups(array $profile_groups): array;
 
     /**
      * Get the persons profile information.
+     *
+     * @param int $site_id
+     * @param string $accessid
+     * @return array
      */
     public function getProfile(int $site_id, string $accessid): array;
 
-    /*
+    /**
      * Get the articles for the profile if available
      *
      * @param string $accessid
@@ -88,6 +112,8 @@ interface ProfileRepositoryContract
 
     /**
      * Parse the profile config from the custom fields
+     *
+     * @param array $data
      */
     public function parseProfileConfig(array $data): void;
 

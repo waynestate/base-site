@@ -77,7 +77,8 @@ class ProfileRepository implements ProfileRepositoryContract
     public function getProfilesByGroup($site_id, $subsite_url = null): array
     {
         // Get the groups for the dropdown
-        $dropdown_groups = $this->getDropdownOfGroups($site_id);
+        $groups = $this->getGroups($site_id);
+        $dropdown_groups = $this->getDropdownOfGroups($groups);
 
         // Determine which group(s) to filter by
         $group_ids = $this->getGroupIds(null, null, $dropdown_groups['dropdown_groups']);
