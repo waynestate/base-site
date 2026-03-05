@@ -15,7 +15,7 @@ class ComponentNewsAndEvents extends Page
             'page' => [
                 'controller' => 'ComponentNewsAndEventsController',
                 'title' => 'News and events',
-                'id' => 124100,
+                'id' => 110100,
             ],
             'site' => [
                 'news' => [
