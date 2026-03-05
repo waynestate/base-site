@@ -351,6 +351,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
             $data['option'] = $component['option'];
         }
 
+        // Replace relative URL with youtube poster
         if (!empty($data['youtube_id']) && empty($data['relative_url'])) {
             $data['relative_url'] = '//i.wayne.edu/youtube/'.$data['youtube_id'].'/max';
         }
