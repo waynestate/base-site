@@ -23,7 +23,7 @@
     @endif
 
     <div class="promo__content">
-        @empty(! $item['title'])
+        @if(!empty($item['title']))
             <div class="promo__title">
                 @empty(! $item['link'])<a href="{{ $item['link'] }}" class="promo__link">@endif
                     {{ $item['title'] }}
@@ -31,13 +31,13 @@
             </div>
         @endif
 
-        @empty(! $item['excerpt'])
+        @if(!empty($item['excerpt']))
             <p class="promo__excerpt">
                 {!! strip_tags($item['excerpt'], ['em', 'strong', 'br', '&ldquo;', '&rdquo;']) !!}
             </p>
         @endif 
 
-        @empty(! $item['description'])
+        @if(!empty($item['description']))
             <div class="promo__description content">
                 {!! !empty($item['link']) ? preg_replace(['"<a href(.*?)>"', '"</a>"'], '', $item['description']) : $item['description'] !!}
             </div>

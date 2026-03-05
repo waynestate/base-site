@@ -13,16 +13,13 @@
      'promo--gradient-overlay' => !empty($component['gradientOverlay']) && $component['gradientOverlay'] == true])>
 
     @empty(! $item['relative_url'])
-        <img data-src="{{ $item['relative_url'] }}" alt="{{ $item['filename_alt_text'] }}" 
-        @class([
-            "promo__image", 
-            "lazy",
-            "promo--play-button" => !empty($item['youtube_id'])
-        ])>
+        <div @class(['promo__image', 'promo--play-button' => !empty($item['youtube_id'])])>
+            <img data-src="{{ $item['relative_url'] }}" alt="{{ $item['filename_alt_text'] }}" @class(['lazy'])>
+        </div>
     @endif
 
     <div class="promo__content">
-        @empty(! $item['title'])
+        @if(! empty($item['title']))
             <div class="promo__title">
                 @empty(! $item['link'])<a href="{{ $item['link'] }}" class="promo__link">@endif
                     {{ $item['title'] }}
@@ -30,19 +27,19 @@
             </div>
         @endif
 
-        @empty(! $item['excerpt'])
+        @if(! empty($item['excerpt']))
             <p class="promo__excerpt">
                 {!! strip_tags($item['excerpt'], ['em', 'strong', 'br', '&ldquo;', '&rdquo;']) !!}
             </p>
         @endif 
 
-        @empty(! $item['description'])
+        @if(! empty($item['description']))
             <div class="promo__description content">
                 {!! !empty($item['link']) ? preg_replace(['"<a href(.*?)>"', '"</a>"'], '', $item['description']) : $item['description'] !!}
             </div>
         @endif
 
-        @if(!empty($component['gradientOverlay']) && $component['gradientOverlay'] == true)
+        @if(! empty($component['gradientOverlay']) && $component['gradientOverlay'] == true)
             <div class="promo__gradient"></div>
         @endif
     </div>
