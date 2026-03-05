@@ -2,9 +2,10 @@
  *   This content is licensed according to the W3C Software License at
  *   https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
  *
- *   File:   sortable-table.js
- *
  *   Desc:   Adds sorting to a HTML data table that implements ARIA Authoring Practices
+ *
+ *   2026-3-4 Switched targeting 'sortable' to be 'table-sort'
+ *
  */
 
 'use strict';

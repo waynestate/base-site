@@ -34,12 +34,33 @@
         <h2>Sortable table</h2>
 
         <table class="table-sort">
-            <caption>Use <code>&lt;table class="table-sort"&gt;</code> for this option. Click on each table heading to sort by column. Status: </caption>
+            <caption>
+                Use <code>&lt;table class="table-sort"&gt;</code> for this option. Click on each table heading to sort by column.
+                <span class="sr-only">
+                    (column headers with buttons are sortable).
+                </span>
+            </caption>
             <thead>
                 <tr>
-                    <th scope="col">First name</th>
-                    <th scope="col">Last name</th>
-                    <th scope="col">Email</th>
+                    <th scope="col">
+                        <button>
+                            First name
+                            <span aria-hidden="true"></span>
+                        </button>
+                    </th>
+                    <th aria-sort="ascending" scope="col">
+                        <button>
+                            Last name
+                            <span aria-hidden="true"></span>
+                        </button>
+                    </th>
+                    <th class="no-sort">Address (no sort)</th>
+                    <th scope="col">
+                        <button>
+                            Email
+                            <span aria-hidden="true"></span>
+                        </button>
+                    </th>
                 </tr>
             </thead>
 
@@ -48,11 +69,13 @@
                     <tr>
                         <td>{{ $faker->firstName() }}</td>
                         <td>{{ $faker->lastName() }}</td>
+                        <td>{{ $faker->address() }}</td>
                         <td><a href="//wayne.edu">{{ $faker->email() }}</a></td>
                     </tr>
                     <tr>
                         <td>{{ $faker->firstName() }}</td>
                         <td>{{ $faker->lastName() }}</td>
+                        <td>{{ $faker->address() }}</td>
                         <td>{{ $faker->email() }}</td>
                     </tr>
                 @endfor
