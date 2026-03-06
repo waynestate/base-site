@@ -229,6 +229,16 @@
                         "relative_url": "/styleguide/component/catalogfourcol",
                         "submenu": []
                     },
+                    "118100500": {
+                        "menu_item_id": 118100500,
+                        "is_active": 1,
+                        "page_id": 118100500,
+                        "target": "",
+                        "display_name": "Grouped by option",
+                        "class_name": "",
+                        "relative_url": "/styleguide/component/cataloggrouped",
+                        "submenu": []
+                    },
                     "126100": {
                         "menu_item_id": 126100,
                         "is_active": 1,

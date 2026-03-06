@@ -12,7 +12,7 @@
      'promo--image-alternate' => !empty($component['imagePosition']) && $component['imagePosition'] == "alternate",
      'promo--gradient-overlay' => !empty($component['gradientOverlay']) && $component['gradientOverlay'] == true])>
 
-    @empty(! $item['relative_url'])
+    @if(! empty($item['relative_url']))
         <div @class(['promo__image', 'promo--play-button' => !empty($item['youtube_id'])])>
             <img data-src="{{ $item['relative_url'] }}" alt="{{ $item['filename_alt_text'] }}" @class(['lazy'])>
         </div>
@@ -21,9 +21,9 @@
     <div class="promo__content">
         @if(! empty($item['title']))
             <div class="promo__title">
-                @empty(! $item['link'])<a href="{{ $item['link'] }}" class="promo__link">@endif
+                @if(! empty($item['link']))<a href="{{ $item['link'] }}" class="promo__link">@endif
                     {{ $item['title'] }}
-                @empty(! $item['link'])<span class="promo__link-cover"></span></a>@endif
+                @if(! empty($item['link']))<span class="promo__link-cover"></span></a>@endif
             </div>
         @endif
 

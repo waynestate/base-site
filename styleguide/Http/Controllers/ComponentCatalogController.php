@@ -29,11 +29,8 @@ class ComponentCatalogController extends Controller
      */
     public function index(Request $request): View
     {
-        $request->data['base']['page']['content']['main'] = '
-<p>The catalog component is ideal for showcasing a collection of items from a single promo group in a multiple-column grid or single-column list format.</p>
-';
 
-        $components = [
+        $accordion = [
             'accordion' => [
                 'data' => [
                     2 => [
@@ -43,16 +40,23 @@ class ComponentCatalogController extends Controller
                         'tr1' => [
                             'Page field' => 'modular-catalog-1',
                             'Data' => '{
+// Basic options
+"id":000000,
+"columns":1,
+}',
+                        ],
+                        'tr2' => [
+                            'Page field' => 'modular-catalog-1',
+                            'Data' => '{
+// Available options
 "id":000000,
 "heading":"Catalog",
-"config":"randomize|limit:3",
-"columns":3,
-"singlePromoView":true,
+"config":"limit:10",
+"columns":1,
+"imageSize":"small"
 "showExcerpt":true,
 "showDescription":false,
-"groupByOptions":false,
-"gradientOverlay":false,
-"imageSize":"small"
+"singlePromoView":true,
 }',
                         ],
                     ],
@@ -73,19 +77,23 @@ class ComponentCatalogController extends Controller
                     'filename' => 'accordion-styleguide',
                 ],
             ],
+        ];
+
+        // One column components
+        $components[118100100] = [
             'catalog-1' => [
-                'data' => app(GenericPromo::class)->create(3, false, [
-                    'description' => '',
-                ]),
+                'data' => app(GenericPromo::class)->create(3, false),
                 'component' => [
-                    'heading' => 'Three-column catalog',
+                    'heading' => 'One-column catalog, small images',
                     'filename' => 'catalog',
-                    'columns' => '3',
+                    'columns' => '1',
                     'showDescription' => false,
+                    'imageSize' => 'small',
                 ],
             ],
             'catalog-2' => [
                 'data' => app(GenericPromo::class)->create(3, false, [
+                    'page_id' => 118100100,
                 ]),
                 'component' => [
                     'heading' => 'One-column catalog',
@@ -94,62 +102,130 @@ class ComponentCatalogController extends Controller
                     'showDescription' => false,
                 ],
             ],
-            'catalog-9' => [
+        ];
+
+        // Two column components
+        $components[118100200] = [
+            'catalog-1' => [
                 'data' => app(GenericPromo::class)->create(2, false, [
                     'description' => '',
                 ]),
                 'component' => [
-                    'heading' => 'Two-column catalog',
+                    'heading' => 'Two-column catalog, one row',
                     'filename' => 'catalog',
                     'columns' => '2',
                     'showDescription' => false,
                 ],
             ],
-            'catalog-3' => [
-                'data' => app(PromoWithOptions::class)->create(8, false, [
+            'catalog-2' => [
+                'data' => app(GenericPromo::class)->create(6, false, [
                     'excerpt' => '',
                 ]),
                 'component' => [
-                    'heading' => 'Four-column catalog sorted by option',
+                    'heading' => 'Two-column catalog, gradient-overlay',
                     'filename' => 'catalog',
-                    'columns' => '4',
-                    'showDescription' => true,
-                    'groupByOptions' => true,
+                    'columns' => '2',
+                    'showDescription' => false,
+                    'gradientOverlay' => true,
                 ],
             ],
-            'catalog-5' => [
+        ];
+
+        // Three column components
+        $components[118100300] = [
+            'catalog-1' => [
                 'data' => app(GenericPromo::class)->create(3, false, [
-                    'relative_url' => '/styleguide/image/450x600',
+                    'excerpt' => '',
+                ]),
+                'component' => [
+                    'heading' => 'Three-column catalog, one row',
+                    'filename' => 'catalog',
+                    'columns' => '3',
+                    'showDescription' => false,
+                ],
+            ],
+            'catalog-2' => [
+                'data' => app(GenericPromo::class)->create(6, false, [
                     'description' => '',
                 ]),
                 'component' => [
-                    'heading' => 'Catalog with gradient overlay',
+                    'heading' => 'Three-column catalog, gradient-overlay',
                     'filename' => 'catalog',
                     'columns' => '3',
                     'showDescription' => false,
                     'gradientOverlay' => true,
                 ],
             ],
-            'catalog-6' => [
-                'data' => app(GenericPromo::class)->create(3, false, [
-                    'relative_url' => '',
+        ];
+
+        // Four column components
+        $components[118100400] = [
+            'catalog-1' => [
+                'data' => app(GenericPromo::class)->create(4, false, [
                     'excerpt' => '',
-                    'youtube_id' => '',
-                    'link' => '',
                 ]),
                 'component' => [
-                    'heading' => 'Catalog without images',
+                    'heading' => 'Four-column catalog, one row',
                     'filename' => 'catalog',
-                    'columns' => '3',
-                    'showDescription' => true,
+                    'columns' => '4',
+                    'showDescription' => false,
+                ],
+            ],
+            'catalog-2' => [
+                'data' => app(GenericPromo::class)->create(8, false, [
+                    'relative_url' => '/styleguide/image/600x600?text=600x600',
+                    'description' => '',
+                ]),
+                'component' => [
+                    'heading' => 'Four-column catalog, gradient-overlay',
+                    'filename' => 'catalog',
+                    'columns' => '4',
+                    'showDescription' => false,
+                    'gradientOverlay' => true,
                 ],
             ],
         ];
 
+        // Grouped components
+        $components[118100500] = [
+            'catalog-1' => [
+                'data' => app(PromoWithOptions::class)->create(18, false, [
+                    'relative_url' => '/styleguide/image/600x600?text=600x600',
+                    'description' => '',
+                ]),
+                'component' => [
+                    'heading' => 'Four-column catalog, grouped items',
+                    'filename' => 'catalog',
+                    'columns' => '4',
+                    'showDescription' => false,
+                    'gradientOverlay' => true,
+                    'groupByOptions' => true,
+                ],
+            ],
+            'catalog-2' => [
+                'data' => app(PromoWithOptions::class)->create(12, false, [
+                    'relative_url' => '/styleguide/image/600x600?text=600x600',
+                    'description' => '',
+                ]),
+                'component' => [
+                    'heading' => 'Three-column catalog, grouped items',
+                    'filename' => 'catalog',
+                    'columns' => '3',
+                    'showDescription' => false,
+                    'gradientOverlay' => true,
+                    'groupByOptions' => true,
+                ],
+            ],
+        ];
+
+        $components[118100500]['catalog-1']['data'] = $this->components->organizePromoItemsByOption($components[118100500]['catalog-1']['data']);
+        $components[118100500]['catalog-2']['data'] = $this->components->organizePromoItemsByOption($components[118100500]['catalog-2']['data']);
+
+        $components = array_merge($accordion, $components[$request->data['base']['page']['id']]);
+
         $components = $this->components->componentClasses($components);
         $components = $this->components->componentStyles($components);
 
-        $components['catalog-3']['data'] = $this->components->organizePromoItemsByOption($components['catalog-3']['data']);
 
         // Assign components globally
         $request->data['base']['components'] = $components;

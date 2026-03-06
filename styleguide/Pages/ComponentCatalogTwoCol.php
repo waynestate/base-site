@@ -14,10 +14,10 @@ class ComponentCatalogTwoCol extends Page
         return app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'ComponentCatalogController',
-                'title' => 'Catalog',
+                'title' => 'Catalog - Two column',
                 'id' => 118100200,
                 'content' => [
-                    'main' => '',
+                    'main' => '<p>The two-column catalog component is ideal for showcasing a collection of items from a single promo group in a multiple-column grid format.</p>',
                 ],
             ],
         ]);
