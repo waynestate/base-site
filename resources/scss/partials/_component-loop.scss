@@ -6,6 +6,25 @@
 }
 
 #component-loop {
+    @apply flex flex-wrap items-start mt:justify-center;
+
+    > section {
+        @apply relative w-full mb-gutter px-container;
+
+        &[class*='colspan'] {
+            @apply px-4;
+        }
+
+        &.heading {
+            @apply mb-auto;
+        }
+    }
+
+    // Contain or expand the background if the left menu is present
+    .component__background {
+        @apply absolute inset-0 -z-10; 
+    }
+
     @layer utilities {
         .col-count-2 {
             column-count: 2;
@@ -67,11 +86,6 @@
     hr.row-break {
         @apply my-0 border-0 w-full;
     }
-}
-
-// Contain or expand the background if the left menu is present
-.component__background {
-    @apply absolute inset-0 -z-10; 
 }
 
 .layout--full-width {

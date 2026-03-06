@@ -1,0 +1,139 @@
+.promo-row, 
+.promo-column {
+    .component__container {
+        @apply flex flex-col gap-8;
+    }
+}
+
+.promo {
+    @apply relative flex gap-2 items-start;
+
+    /* Accessible links */
+    &__link-cover {
+        position: absolute;
+        inset: 0;
+    }
+
+    &__image {
+        @apply w-full shrink-0 grow-0;
+    }
+
+    &__content {
+        @apply w-full;
+    }
+
+    &__title {
+        @apply mb-3 font-bold leading-tight text-lg lg:text-xl isolate;
+    }
+
+    &__excerpt {
+        @apply mb-4;
+    }
+
+    /* Play button opacity change on accessible link hover */
+    .promo--play-button:has(~ .promo__content:hover)::after {
+        opacity: 1;
+    }
+
+    /* Gradient placeholder */
+    &__gradient {
+        @apply hidden;
+    }
+
+    /* Grid item presentation */
+    &--grid-item {
+        @apply flex-col;
+    }
+
+    /* Grid item - Gradient overlay */
+    &--grid-item.promo--gradient-overlay {
+        @apply bg-green-800;
+
+        position: relative;
+        overflow: hidden;
+
+        .promo__content {
+            padding: 0 1rem;
+            line-height: 1.25;
+            filter: drop-shadow(0 1px 1px rgb(12 84 73 / 50%));
+            color: white;
+            display: grid;
+            grid-template-rows: repeat(2, min-content);
+            align-content: end;
+            position: absolute;
+            inset: 0;
+        }
+
+        .promo__description,
+        .promo__excerpt,
+        .promo__title {
+            isolation: isolate;
+            z-index: 1;
+        }
+
+        .promo__title {
+            padding-top: 1.5rem;
+        }
+
+        .promo__link {
+            color: white;
+            text-decoration-color: transparent;
+            text-decoration-line: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 4px;
+            transition: all 200ms ease-in-out;
+
+            &:focus,
+            &:hover {
+                text-decoration-color: white;
+                transition: all 200ms ease-in-out;
+            }
+        }
+
+        .promo__gradient {
+            display: block;
+            position: absolute;
+            inset: 0;
+            grid-row: -3 / 4;
+            content: "";
+            background-image: radial-gradient(200% 100% at 50% 100%, rgb(5 33 30 / 90%) 10%, transparent 100%);
+        }
+    }
+
+    /* List item presentation */
+    &--list-item {
+        flex-direction: row;
+        gap: 0.75rem;
+
+        @screen md {
+            gap: 1.25rem;
+        }
+
+        .promo__image {
+            @apply w-1/3 md:w-2/5;
+        }
+    }
+
+    /* List item - Smaller image size option */
+    &--list-item.promo--image-small {
+        @apply flex items-start;
+
+        .promo__image {
+            @apply w-1/4;
+        }
+    }
+
+    /* List item - Place image to the right */
+    &--list-item.promo--image-right {
+        .promo__image {
+            @apply md:order-2;
+        }
+    }
+
+    /* List item - Swap image placement on even items */
+    &--list-item.promo--image-alternate {
+        &:nth-child(even) .promo__image {
+            @apply md:order-2;
+        }
+    }
+}

@@ -187,18 +187,69 @@
                 "target": "",
                 "display_name": "Catalog",
                 "class_name": "",
-                "relative_url": "/styleguide/component/catalog",
-                "submenu": []
-            },
-            "126100": {
-                "menu_item_id": 126100,
-                "is_active": 1,
-                "page_id": 126100,
-                "target": "",
-                "display_name": "Catalog Flex",
-                "class_name": "",
-                "relative_url": "/styleguide/component/catalogflex",
-                "submenu": []
+                "relative_url": "/styleguide/component/catalogonecol",
+                "submenu": {
+                    "118100100": {
+                        "menu_item_id": 118100100,
+                        "is_active": 1,
+                        "page_id": 118100100,
+                        "target": "",
+                        "display_name": "One column",
+                        "class_name": "",
+                        "relative_url": "/styleguide/component/catalogonecol",
+                        "submenu": []
+                    },
+                    "118100200": {
+                        "menu_item_id": 118100200,
+                        "is_active": 1,
+                        "page_id": 118100200,
+                        "target": "",
+                        "display_name": "Two column",
+                        "class_name": "",
+                        "relative_url": "/styleguide/component/catalogtwocol",
+                        "submenu": []
+                    },
+                    "118100300": {
+                        "menu_item_id": 118100300,
+                        "is_active": 1,
+                        "page_id": 118100300,
+                        "target": "",
+                        "display_name": "Three column",
+                        "class_name": "",
+                        "relative_url": "/styleguide/component/catalogthreecol",
+                        "submenu": []
+                    },
+                    "118100400": {
+                        "menu_item_id": 118100400,
+                        "is_active": 1,
+                        "page_id": 118100400,
+                        "target": "",
+                        "display_name": "Four column",
+                        "class_name": "",
+                        "relative_url": "/styleguide/component/catalogfourcol",
+                        "submenu": []
+                    },
+                    "118100500": {
+                        "menu_item_id": 118100500,
+                        "is_active": 1,
+                        "page_id": 118100500,
+                        "target": "",
+                        "display_name": "Grouped by option",
+                        "class_name": "",
+                        "relative_url": "/styleguide/component/cataloggrouped",
+                        "submenu": []
+                    },
+                    "126100": {
+                        "menu_item_id": 126100,
+                        "is_active": 1,
+                        "page_id": 126100,
+                        "target": "",
+                        "display_name": "Catalog Flex",
+                        "class_name": "",
+                        "relative_url": "/styleguide/component/catalogflex",
+                        "submenu": []
+                    }
+                }
             },
             "109100": {
                 "menu_item_id": 109100,

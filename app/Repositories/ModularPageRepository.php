@@ -351,6 +351,11 @@ class ModularPageRepository implements ModularPageRepositoryContract
             $data['option'] = $component['option'];
         }
 
+        // Replace relative URL with youtube poster
+        if (!empty($data['youtube_id']) && empty($data['relative_url'])) {
+            $data['relative_url'] = '//i.wayne.edu/youtube/'.$data['youtube_id'].'/max';
+        }
+
         return $data;
     }
 
@@ -428,15 +433,6 @@ class ModularPageRepository implements ModularPageRepositoryContract
             // Default background image positioning classes, won't overwrite existing backgroundClass values
             if (!empty($component['component']['backgroundImageUrl']) && empty($component['component']['backgroundClass'])) {
                 $components[$componentName]['component']['backgroundClass'] = ['bg-cover', 'bg-top'];
-            }
-
-            // Section gutters, bottom padding
-            // - No gutter if component uses margin-bottom class
-            // - No gutter on heading component
-            if (empty(preg_grep('/mb-/', $components[$componentName]['component']['containerClass']))
-                && !Str::contains($componentName, 'heading') && !Str::contains($componentName, 'hero')
-            ) {
-                $components[$componentName]['component']['containerClass'] [] = 'mb-gutter';
             }
 
             // Implode party, assign all classes to their respective container
