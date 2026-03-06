@@ -27,7 +27,7 @@
     @include('components.header')
 
     @if(!empty($base['site']))
-        @include('components.menu-top', [
+        @include('partials.nav-top', [
             'site' => $base['site'],
             'top_menu_output' => $base['top_menu_output'],
             'surtitle' => $base['surtitle'],
