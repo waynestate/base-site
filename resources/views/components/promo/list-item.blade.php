@@ -26,7 +26,7 @@
     @endif
 
     <div class="content w-full">
-        @if(empty($component['showTitle']) || !empty($component['showTitle']) && $component['showTitle'] == false)
+        @if(! empty($item['title']))
             @if(!empty($item['youtube_id']) || !empty($item['relative_url']))
                 <div class="mb-1 font-bold group-hover:underline group-focus:underline leading-tight text-lg lg:text-xl {{ !empty($component['imageSize']) && $component['imageSize'] === 'small' ? '' : 'mt-2 lg:mt-0' }}">{{ $item['title'] }}</div>
             @else
