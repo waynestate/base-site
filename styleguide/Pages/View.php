@@ -13,7 +13,7 @@ class View extends Page
     {
         return app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'PromoPageController',
+                'controller' => 'ChildpageController',
                 'title' => 'Promotion view',
                 'id' => 101110100,
                 'content' => [

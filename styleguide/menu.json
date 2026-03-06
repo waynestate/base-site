@@ -190,6 +190,16 @@
                 "relative_url": "/styleguide/component/catalog",
                 "submenu": []
             },
+            "126100": {
+                "menu_item_id": 126100,
+                "is_active": 1,
+                "page_id": 126100,
+                "target": "",
+                "display_name": "Catalog Flex",
+                "class_name": "",
+                "relative_url": "/styleguide/component/catalogflex",
+                "submenu": []
+            },
             "109100": {
                 "menu_item_id": 109100,
                 "is_active": 1,
@@ -280,6 +290,66 @@
                         "relative_url": "/styleguide/component/hero/bannercontained",
                         "submenu": []
                     },
+                    "105100105": {
+                        "menu_item_id": 105100105,
+                        "is_active": 1,
+                        "page_id": 105100105,
+                        "target": "",
+                        "display_name": "Text overlay",
+                        "class_name": "",
+                        "relative_url": "/styleguide/component/hero/textoverlay",
+                        "submenu": []
+                    },
+                    "105100112": {
+                        "menu_item_id": 105100112,
+                        "is_active": 1,
+                        "page_id": 105100112,
+                        "target": "",
+                        "display_name": "Text overlay (Contained)",
+                        "class_name": "",
+                        "relative_url": "/styleguide/component/hero/textoverlaycontained",
+                        "submenu": []
+                    },
+                    "105100106": {
+                        "menu_item_id": 105100106,
+                        "is_active": 1,
+                        "page_id": 105100106,
+                        "target": "",
+                        "display_name": "SVG overlay",
+                        "class_name": "",
+                        "relative_url": "/styleguide/component/hero/svgoverlay",
+                        "submenu": []
+                    },
+                    "105100113": {
+                        "menu_item_id": 105100113,
+                        "is_active": 1,
+                        "page_id": 105100113,
+                        "target": "",
+                        "display_name": "SVG overlay (Contained)",
+                        "class_name": "",
+                        "relative_url": "/styleguide/component/hero/svgoverlaycontained",
+                        "submenu": []
+                    },
+                    "105100107": {
+                        "menu_item_id": 105100107,
+                        "is_active": 1,
+                        "page_id": 105100107,
+                        "target": "",
+                        "display_name": "Logo overlay",
+                        "class_name": "",
+                        "relative_url": "/styleguide/component/hero/logooverlay",
+                        "submenu": []
+                    },
+                    "105100114": {
+                        "menu_item_id": 105100114,
+                        "is_active": 1,
+                        "page_id": 105100114,
+                        "target": "",
+                        "display_name": "Logo overlay (Contained)",
+                        "class_name": "",
+                        "relative_url": "/styleguide/component/hero/logooverlaycontained",
+                        "submenu": []
+                    },
                     "105100111": {
                         "menu_item_id": 105100111,
                         "is_active": 1,
@@ -298,36 +368,6 @@
                         "display_name": "Carousel",
                         "class_name": "",
                         "relative_url": "/styleguide/component/hero/carousel",
-                        "submenu": []
-                    },
-                    "105100105": {
-                        "menu_item_id": 105100105,
-                        "is_active": 1,
-                        "page_id": 105100105,
-                        "target": "",
-                        "display_name": "Text overlay",
-                        "class_name": "",
-                        "relative_url": "/styleguide/component/hero/textoverlay",
-                        "submenu": []
-                    },
-                    "105100106": {
-                        "menu_item_id": 105100106,
-                        "is_active": 1,
-                        "page_id": 105100106,
-                        "target": "",
-                        "display_name": "SVG overlay",
-                        "class_name": "",
-                        "relative_url": "/styleguide/component/hero/svgoverlay",
-                        "submenu": []
-                    },
-                    "105100107": {
-                        "menu_item_id": 105100107,
-                        "is_active": 1,
-                        "page_id": 105100107,
-                        "target": "",
-                        "display_name": "Logo overlay",
-                        "class_name": "",
-                        "relative_url": "/styleguide/component/hero/logooverlay",
                         "submenu": []
                     },
                     "105100109": {
@@ -367,9 +407,9 @@
                 "is_active": 1,
                 "page_id": 124100,
                 "target": "",
-                "display_name": "News and events",
+                "display_name": "Page config",
                 "class_name": "",
-                "relative_url": "/styleguide/component/newsandevents",
+                "relative_url": "/styleguide/component/pageconfig",
                 "submenu": []
             },
             "108100": {
@@ -380,6 +420,16 @@
                 "display_name": "News listing",
                 "class_name": "",
                 "relative_url": "/styleguide/component/articlelisting",
+                "submenu": []
+            },
+            "110100": {
+                "menu_item_id": 110100,
+                "is_active": 1,
+                "page_id": 110100,
+                "target": "",
+                "display_name": "News and events",
+                "class_name": "",
+                "relative_url": "/styleguide/component/newsandevents",
                 "submenu": []
             },
             "116100": {
@@ -400,16 +450,6 @@
                 "display_name": "Spotlight",
                 "class_name": "",
                 "relative_url": "/styleguide/component/spotlight",
-                "submenu": []
-            },
-            "124100": {
-                "menu_item_id": 124100,
-                "is_active": 1,
-                "page_id": 124100,
-                "target": "",
-                "display_name": "Page config",
-                "class_name": "",
-                "relative_url": "/styleguide/component/pageconfig",
                 "submenu": []
             },
             "9999": {

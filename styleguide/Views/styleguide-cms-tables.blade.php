@@ -34,30 +34,102 @@
         <h2>Sortable table</h2>
 
         <table class="table-sort">
-            <caption>Use <code>&lt;table class="table-sort"&gt;</code> for this option. Click on each table heading to sort by column. Status: </caption>
+            <caption>
+                Use <code>&lt;table class="table-sort"&gt;</code> for this option. Click on each table heading to sort by column.
+                <span class="sr-only">
+                    (column headers with buttons are sortable).
+                </span>
+            </caption>
             <thead>
                 <tr>
-                    <th scope="col">First name</th>
-                    <th scope="col">Last name</th>
-                    <th scope="col">Email</th>
+                    <th scope="col">
+                        <button>
+                            First name
+                            <span aria-hidden="true"></span>
+                        </button>
+                    </th>
+                    <th scope="col">
+                        <button>
+                            Last name
+                            <span aria-hidden="true"></span>
+                        </button>
+                    </th>
+                    <th aria-sort="ascending" scope="col">
+                        <button>
+                            Email
+                            <span aria-hidden="true"></span>
+                        </button>
+                    </th>
+                    <th class="no-sort">Address (no sort)</th>
                 </tr>
             </thead>
 
             <tbody>
-                @for ($i = 0; $i < 10; $i++)
+                @for ($i = 0; $i < 5; $i++)
                     <tr>
                         <td>{{ $faker->firstName() }}</td>
                         <td>{{ $faker->lastName() }}</td>
                         <td><a href="//wayne.edu">{{ $faker->email() }}</a></td>
+                        <td>{{ $faker->streetAddress() }}</td>
                     </tr>
                     <tr>
                         <td>{{ $faker->firstName() }}</td>
                         <td>{{ $faker->lastName() }}</td>
                         <td>{{ $faker->email() }}</td>
+                        <td>{{ $faker->streetAddress() }}</td>
                     </tr>
                 @endfor
             </tbody>
         </table>
+
+        <h2>Source code</h2>
+        <pre class="code-block" tabindex="0">
+{!! htmlspecialchars('<table>
+    <caption>Describe your table for screen readers in the caption.
+        <span class="sr-only">
+            (column headers with buttons are sortable).
+        </span>
+    </caption>
+    <thead>
+        <tr>
+            <th scope="col">
+                <button>
+                    First name
+                    <span aria-hidden="true"></span>
+                </button>
+            </th>
+            <th scope="col">
+                <button>
+                    Last name
+                    <span aria-hidden="true"></span>
+                </button>
+            </th>
+            <th aria-sort="ascending" scope="col">
+                <button>
+                    Email
+                    <span aria-hidden="true"></span>
+                </button>
+            </th>
+            <th class="no-sort">Address (no sort)</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>Data for col 1</td>
+            <td>Data for col 2</td>
+            <td>Data for col 3</td>
+            <td>Data for col 4</td>
+        </tr>
+        <tr>
+            <td>Data for col 1</td>
+            <td>Data for col 2</td>
+            <td>Data for col 3</td>
+            <td>Data for col 4</td>
+        </tr>
+    </tbody>
+</table>') !!}
+</pre>
 
         <h2>Responsive table</h2>
 

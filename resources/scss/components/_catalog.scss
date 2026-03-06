@@ -1,0 +1,10 @@
+.catalog {
+    &__flex {
+        @apply flex flex-wrap justify-center;
+
+        > a,
+        > div {
+            @apply w-1/2 lg:w-1/4;
+        }
+    }
+}

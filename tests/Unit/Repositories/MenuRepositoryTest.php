@@ -650,4 +650,39 @@ final class MenuRepositoryTest extends TestCase
         $result = app(MenuRepository::class)->getSurtitle($mainSite);
         $this->assertFalse($result['hasSurtitle']);
     }
+
+    #[Test]
+    public function getallmenus_parent_id_should_handle_falsey_values(): void
+    {
+        $site_id = 1;
+        $params = [
+            'method' => 'cms.menuitems.listing',
+            'site_id' => $site_id,
+            'include_subsites' => true,
+        ];
+
+        // Make sure the $params get set properly depending on if we set 0 or null
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.menuitems.listing', $params)->once()->andReturn([]);
+        $menus = app(MenuRepository::class, ['wsuApi' => $wsuApi])->getAllMenus($site_id, 0);
+
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.menuitems.listing', $params)->once()->andReturn([]);
+        $menus = app(MenuRepository::class, ['wsuApi' => $wsuApi])->getAllMenus($site_id, '0');
+
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.menuitems.listing', $params)->once()->andReturn([]);
+        $menus = app(MenuRepository::class, ['wsuApi' => $wsuApi])->getAllMenus($site_id, null);
+
+        // Make sure if parent_id is valid to use instead
+        $params['site_id'] = 2;
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.menuitems.listing', $params)->once()->andReturn([]);
+        $menus = app(MenuRepository::class, ['wsuApi' => $wsuApi])->getAllMenus($site_id, $params['site_id']);
+
+        $params['site_id'] = '2';
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.menuitems.listing', $params)->once()->andReturn([]);
+        $menus = app(MenuRepository::class, ['wsuApi' => $wsuApi])->getAllMenus($site_id, $params['site_id']);
+    }
 }
