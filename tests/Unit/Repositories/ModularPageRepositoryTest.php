@@ -140,6 +140,7 @@ final class ModularPageRepositoryTest extends TestCase
                     'singlePromoView' => false,
                     'showExcerpt' => false,
                     'showDescription' => false,
+                    'showTitle' => false,
                 ]),
             ],
         ]);
@@ -155,6 +156,7 @@ final class ModularPageRepositoryTest extends TestCase
         $this->assertFalse($components['accordion-3']['component']['singlePromoView']);
         $this->assertFalse($components['accordion-3']['component']['showExcerpt']);
         $this->assertFalse($components['accordion-3']['component']['showDescription']);
+        $this->assertFalse($components['accordion-3']['component']['showTitle']);
         $this->assertNotEquals($component['link'], 'view/'.Str::slug($component['title']).'-'.$component['promo_item_id']);
         $this->assertArrayNotHasKey('excerpt', $component);
         $this->assertArrayNotHasKey('description', $component);
