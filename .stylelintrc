@@ -1,28 +1,42 @@
 {
-    "extends": "stylelint-config-standard",
+    "extends": [
+        "stylelint-config-standard",
+        "stylelint-config-standard-scss"
+    ],
+    "plugins": ["stylelint-scss"],
+    "customSyntax": "postcss-scss",
     "rules": {
-        "at-rule-no-unknown": [ true, {
-            "ignoreAtRules": [
-                "include",
-                "extend",
-                "screen",
-                "layer"
-            ]
-        }],
-        "at-rule-no-deprecated": null,
-        "declaration-property-value-no-unknown": [true, {
-            "typesSyntax": { 
-                "radial-gradient()": "| <any-value>",
-                "linear-gradient()": "| <any-value>" 
-            }
-        }],
+        "scss/at-extend-no-missing-placeholder": null,
+        "scss/operator-no-unspaced": null,
+        "media-feature-range-notation": null,
         "no-invalid-double-slash-comments": null,
-        "selector-class-pattern": null,
+        "comment-empty-line-before": null,
+        "no-empty-source": true,
+        "at-rule-empty-line-before": null,
+        "selector-class-pattern": [
+            "^([a-z][a-z0-9-]*|#\\{\\$[a-z][a-z0-9-]*\\})([a-z0-9_-]*)$",
+            {
+                "resolveNestedSelectors": true
+            }
+        ],
         "function-no-unknown": [ true, {
             "ignoreFunctions": [
                 "theme"
             ]
         }],
-        "media-query-no-invalid": null
+        "media-query-no-invalid": null,
+        "selector-id-pattern": null,
+        "import-notation": "string",
+        "at-rule-no-unknown": null,
+        "scss/dollar-variable-pattern": "^[a-z][a-z0-9-]*$",
+        "scss/at-rule-no-unknown": [ true, {
+            "ignoreAtRules": [
+                "include",
+                "extend",
+                "screen",
+                "layer",
+                "tailwind"
+            ]
+        }]
     }
 }

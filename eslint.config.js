@@ -10,7 +10,7 @@ module.exports = [
             globals: {
                 // Browser globals
                 window: 'readonly',
-            document: 'readonly',
+                document: 'readonly',
                 console: 'readonly',
                 // AMD globals
                 define: 'readonly',

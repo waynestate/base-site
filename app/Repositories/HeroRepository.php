@@ -30,35 +30,108 @@ class HeroRepository implements HeroRepositoryContract
      */
     public function setHero(array $promos, array $data)
     {
-        // Force global promos into the component structure
+        $hero = [];
+
+        // Structure global hero as a component
         if (!empty($promos['hero'])) {
-            // Preserve the hero data
-            $temporary_hero = $promos['hero'];
-            unset($promos['hero']);
-
-            // Initialize hero component structure
-            $promos['hero'] = [
-                'data' => $temporary_hero,
-                'component' => [],
+            $hero = [
+                'data' => $promos['hero'],
+                'component' => [
+                    'heroPlacement' => config('base.hero_placement'),
+                    'heroType' => config('base.hero_type'),
+                ],
             ];
+        }
 
-            foreach ($promos['hero']['data'] as $hero) {
-                // Force the correct component option based on the layout
-                if (count($promos['hero']['data']) === 1) {
-                    if (isset($hero['option']) && $hero['option'] === 'Banner contained') {
-                        $promos['hero']['component']['option'] = 'Banner contained';
-                    } elseif (!isset($hero['option']) && config('base.layout') == 'contained-hero') {
-                        $promos['hero']['component']['option'] = 'Banner contained';
-                    } elseif (!isset($hero['option'])) {
-                        $promos['hero']['component']['option'] = 'Banner small';
-                    }
+        // Set hero buttons from components
+        if (!empty($promos['components'])) {
+            $promos = $this->getHeroButtons($promos);
+        }
+
+        // Override global hero with hero component
+        if (!empty($promos['components'])) {
+            $extracted = $this->getHeroComponent($promos['components']);
+            if (!empty($extracted)) {
+                $hero['data'] = $extracted['data'];
+                $hero['component'] = $extracted['component'];
+                $promos['components'] = $extracted['components'];
+
+                // Slice data if it exceeds component limit
+                if (!empty($hero['component']['limit']) && count($hero['data']) > $hero['component']['limit']) {
+                    $hero['data'] = array_slice($hero['data'], 0, $hero['component']['limit']);
                 }
             }
         }
 
-        // Set hero buttons from components
-        $hero_buttons = collect($promos['components'])->reject(function ($data, $component_name) {
-            return !str_contains($component_name, 'hero-buttons');
+        if (empty($hero['data'])) {
+            return $promos;
+        }
+
+        $heroCount = count($hero['data']);
+        $heroLimit = (int) ($hero['component']['limit'] ?? 1);
+        $isCarousel = $heroCount > 1 || $heroLimit > 1;
+
+        foreach ($hero['data'] as $hero_key => $hero_data) {
+            $promoOption = strtolower($hero_data['option'] ?? '');
+            $componentOption = strtolower($hero['component']['option'] ?? '');
+            $option = trim($promoOption . ' ' . $componentOption);
+            $hero_data['hero_options'] = explode(' ', $option);
+
+            // Determine carousel type from option if not already set by count or limit
+            if (!$isCarousel && str_contains($option, 'carousel')) {
+                $isCarousel = true;
+            }
+
+            if ($isCarousel) {
+                $hero['component']['heroType'] = 'carousel';
+                $hero['component']['heroPlacement'] = 'full-width';
+
+                // Determine Placement for carousel
+                $placement = $this->mapPlacement($promoOption, $componentOption);
+                if ($placement) {
+                    $hero['component']['heroPlacement'] = $placement;
+                }
+
+                $hero_data['hero_classes'] = '';
+            } else {
+                // Determine Type
+                $type = $this->mapType($promoOption, $componentOption);
+                if ($type) {
+                    $hero['component']['heroType'] = $type;
+                    $hero_data['hero_classes'] = 'hero--' . $type;
+                } else {
+                    $type = $hero['component']['heroType'] ?? config('base.hero_type') ?? 'large';
+                    $hero['component']['heroType'] = $type;
+                    $hero_data['hero_classes'] = $type === 'large' ? '' : 'hero--' . $type;
+                }
+
+                // Determine Placement
+                $placement = $this->mapPlacement($promoOption, $componentOption);
+                if ($placement) {
+                    $hero['component']['heroPlacement'] = $placement;
+                }
+            }
+
+            $hero['data'][$hero_key] = $hero_data;
+        }
+
+        // Default hero placement if not set
+        $hero['component']['heroPlacement'] = $hero['component']['heroPlacement'] ?? config('base.hero_placement');
+
+        // Add hero back into promos
+        unset($promos['hero']);
+        $promos['hero'] = $hero;
+
+        return $promos;
+    }
+
+    /**
+     * Get hero buttons from components.
+     */
+    private function getHeroButtons(array $promos): array
+    {
+        $hero_buttons = collect($promos['components'])->filter(function ($data, $component_name) {
+            return str_contains($component_name, 'hero-buttons');
         })->toArray();
 
         if (!empty($hero_buttons)) {
@@ -70,33 +143,162 @@ class HeroRepository implements HeroRepositoryContract
             }
         }
 
-        // Override hero from components
-        $hero = collect($promos['components'])->reject(function ($data, $component_name) {
-            return !str_contains($component_name, 'hero');
+        return $promos;
+    }
+
+    /**
+     * Get the first hero component from the components array.
+     */
+    private function getHeroComponent(array $components): array
+    {
+        $hero_components = collect($components)->filter(function ($data, $component_name) {
+            return str_contains($component_name, 'hero');
         })->toArray();
 
-        if (!empty($hero)) {
-            $hero_key = array_key_first($hero);
+        if (empty($hero_components)) {
+            return [];
+        }
 
-            if (!empty($promos['components'][$hero_key]['data'])) {
-                $promos['hero'] = $promos['components'][$hero_key];
-                config(['base.hero_full_controllers' => [$data['page']['controller']]]);
-                unset($promos['components'][$hero_key]);
+        $hero_key = array_key_first($hero_components);
+
+        if (empty($components[$hero_key]['data'])) {
+            return [];
+        }
+
+        $hero = [
+            'data' => $components[$hero_key]['data'],
+            'component' => $components[$hero_key]['component'] ?? [],
+            'option' => $components[$hero_key]['option'] ?? '',
+        ];
+
+        // Extract options and limit from config string if they exist
+        if (!empty($hero['component']['config'])) {
+            if (empty($hero['option']) && empty($hero['component']['option'])) {
+                $hero['component']['option'] = $this->parseComponentOption($hero['component']['config']);
+            }
+            $hero['component']['limit'] = $this->parseComponentLimit($hero['component']['config']);
+        }
+
+        // Favor top-level option if it exists
+        if (!empty($hero['option'])) {
+            $hero['component']['option'] = $hero['option'];
+        }
+
+        $hero['component']['heroPlacement'] = $hero['component']['heroPlacement'] ?? config('base.hero_placement');
+        $hero['component']['heroType'] = $hero['component']['heroType'] ?? config('base.hero_type');
+
+        unset($components[$hero_key]);
+
+        return [
+            'data' => $hero['data'],
+            'component' => $hero['component'],
+            'components' => $components,
+        ];
+    }
+
+    /**
+     * Extract option from config string.
+     */
+    private function parseComponentOption(string $config): string
+    {
+        $config = explode('|', $config);
+        foreach ($config as $config_item) {
+            if (str_contains($config_item, 'option:')) {
+                return str_replace('option:', '', $config_item);
             }
         }
 
-        // Replace Hero Buttons option with Text Overlay
-        // TODO Make hero buttons it's own option
-        if (!empty($promos['hero'])) {
-            $promos['hero']['data'] = collect($promos['hero']['data'])->map(function ($hero_data) {
-                if (!empty($hero_data['option']) && $hero_data['option'] == 'Buttons') {
-                    $hero_data['option'] = 'Text Overlay';
-                }
+        return '';
+    }
 
-                return $hero_data;
-            })->toArray();
+    /**
+     * Extract limit from config string.
+     */
+    private function parseComponentLimit(string $config): int
+    {
+        $config = explode('|', $config);
+        foreach ($config as $config_item) {
+            if (str_contains($config_item, 'limit:')) {
+                return (int) str_replace('limit:', '', $config_item);
+            }
         }
 
-        return $promos;
+        return 1;
+    }
+
+    /**
+     * Map keywords to hero types.
+     */
+    private function mapType(string $promoOption, string $componentOption): ?string
+    {
+        $typeMap = [
+            'slim' => ['slim', 'small'],
+            'split' => ['split', 'half'],
+            'text' => ['text'],
+            'buttons' => ['buttons'],
+            'logo' => ['logo'],
+            'svg' => ['svg'],
+            'carousel' => ['carousel'],
+            'large' => ['large', 'banner'],
+        ];
+
+        // Check component first for override
+        if (!empty($componentOption)) {
+            foreach ($typeMap as $type => $keywords) {
+                foreach ($keywords as $keyword) {
+                    if (preg_match('/\b' . preg_quote($keyword, '/') . '\b/', $componentOption)) {
+                        return $type;
+                    }
+                }
+            }
+        }
+
+        // Check promo if not found in component
+        if (!empty($promoOption)) {
+            foreach ($typeMap as $type => $keywords) {
+                foreach ($keywords as $keyword) {
+                    if (preg_match('/\b' . preg_quote($keyword, '/') . '\b/', $promoOption)) {
+                        return $type;
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Map keywords to hero placements.
+     */
+    private function mapPlacement(string $promoOption, string $componentOption): ?string
+    {
+        $placementMap = [
+            'contained' => ['contained'],
+            'full-width' => ['full-width', 'full', 'banner', 'large', 'banner large'],
+        ];
+
+        // Check component first for override
+        if (!empty($componentOption)) {
+            foreach ($placementMap as $placement => $keywords) {
+                foreach ($keywords as $keyword) {
+                    if (preg_match('/\b' . preg_quote($keyword, '/') . '\b/', $componentOption)) {
+                        return $placement;
+                    }
+                }
+            }
+        }
+
+        // Check promo if not found in component
+        if (!empty($promoOption)) {
+            foreach ($placementMap as $placement => $keywords) {
+                foreach ($keywords as $keyword) {
+                    if (preg_match('/\b' . preg_quote($keyword, '/') . '\b/', $promoOption)) {
+                        return $placement;
+                    }
+                }
+            }
+        }
+
+        return null;
     }
 }
