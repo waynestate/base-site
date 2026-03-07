@@ -54,16 +54,20 @@
             <hr class="border-gold border-b-2 mt-6" />
         @endif
 
-        <div @class(['catalog__grid', implode(' ', $catalog_classes) => !empty($catalog_classes)])>
+        <ul @class(['catalog__grid', implode(' ', $catalog_classes) => !empty($catalog_classes)])>
             @foreach($group_items as $item)
+                <li>
                 @include('components/promo/item', ['class' => $promo_item_class])
+                </li>
             @endforeach
-        </div>
+        </ul>
     @endforeach
 @else
-    <div @class(['catalog__grid', implode(' ', $catalog_classes) => !empty($catalog_classes)])>
+    <ul @class(['catalog__grid', implode(' ', $catalog_classes) => !empty($catalog_classes)])>
         @foreach($data as $item)
+            <li>
             @include('components/promo/item', ['class' => $promo_item_class])
+            </li>
         @endforeach
-    </div>
+    </ul>
 @endif

@@ -27,7 +27,7 @@
     }
 
     &--cols-2 {
-        gap: 2rem;
+        gap: 2.5rem;
 
         @screen sm {
             @apply grid-cols-2;
@@ -35,7 +35,7 @@
     }
 
     &--cols-3 {
-        gap: 1.3rem;
+        gap: 2rem;
 
         @screen xl {
             @apply grid-cols-3;
@@ -44,6 +44,24 @@
 
     &--cols-4 {
         gap: 1rem;
+
+        .promo--grid-item {
+            &.promo--gradient-overlay .promo__content {
+                padding: 0.75em;
+            }
+
+            .promo__title {
+                font-size: var(--text-sm);
+            }
+
+            .promo__excerpt {
+                font-size: var(--text-xs);
+            }
+
+            .promo__description {
+                font-size: var(--text-xs);
+            }
+        }
 
         @screen 2xl {
             @apply grid-cols-4;
