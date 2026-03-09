@@ -4,7 +4,6 @@
  *
  *   Desc:   Adds sorting to a HTML data table that implements ARIA Authoring Practices
  *
- *   2026-3-4 Switched targeting 'sortable' to be 'table-sort'
  *
  */
 
@@ -14,33 +13,53 @@ class SortableTable {
     constructor(tableNode) {
         this.tableNode = tableNode;
 
+        // Ensure there is a table caption and screen reader information about being sortable
+        var tableCaption = tableNode.querySelector('caption');
+        if (!tableCaption) {
+            // If there is no caption, create one and add it to the table
+            tableCaption = document.createElement('caption');
+            tableNode.insertBefore(tableCaption, tableNode.firstChild);
+        }
+
+        // Add a screen reader only text to the caption to indicate that the table is sortable
+        var srOnlyText = document.createElement('span');
+        srOnlyText.classList.add('sr-only');
+        srOnlyText.textContent = ' (column headers with buttons are sortable).';
+        tableCaption.appendChild(srOnlyText);
+
         this.columnHeaders = tableNode.querySelectorAll('thead th');
 
         this.sortColumns = [];
 
         for (var i = 0; i < this.columnHeaders.length; i++) {
             var ch = this.columnHeaders[i];
-            var buttonNode = ch.querySelector('button');
-            if (buttonNode) {
-                this.sortColumns.push(i);
-                buttonNode.setAttribute('data-column-index', i);
-                buttonNode.addEventListener('click', this.handleClick.bind(this));
+
+            // If the column doesn't contain the 'no-sort' class, make it sortable
+            if (ch.classList.contains('no-sort')) {
+                continue;
             }
+
+            // Create a button for the column header text and add it to the column header
+            var chText = ch.textContent.trim();
+            var buttonNode = document.createElement('button');
+            buttonNode.textContent = chText;
+
+            // Add an element to the button to indicate that it is sortable
+            var sortIcon = document.createElement('span');
+            sortIcon.setAttribute('aria-hidden', 'true');
+            buttonNode.appendChild(sortIcon);
+
+            // Store the column index in an array and as a data attribute on the button
+            this.sortColumns.push(i);
+            buttonNode.setAttribute('data-column-index', i);
+            buttonNode.addEventListener('click', this.handleClick.bind(this));
+
+            // Replace the column header text with the button
+            ch.textContent = '';
+            ch.appendChild(buttonNode);
         }
 
-        this.optionCheckbox = document.querySelector(
-            'input[type="checkbox"][value="show-unsorted-icon"]'
-        );
-
-        if (this.optionCheckbox) {
-            this.optionCheckbox.addEventListener(
-                'change',
-                this.handleOptionChange.bind(this)
-            );
-            if (this.optionCheckbox.checked) {
-                this.tableNode.classList.add('show-unsorted-icon');
-            }
-        }
+        this.tableNode.classList.add('show-unsorted-icon');
     }
 
     setColumnHeaderSort(columnIndex) {
@@ -146,16 +165,6 @@ class SortableTable {
     handleClick(event) {
         var tgt = event.currentTarget;
         this.setColumnHeaderSort(tgt.getAttribute('data-column-index'));
-    }
-
-    handleOptionChange(event) {
-        var tgt = event.currentTarget;
-
-        if (tgt.checked) {
-            this.tableNode.classList.add('show-unsorted-icon');
-        } else {
-            this.tableNode.classList.remove('show-unsorted-icon');
-        }
     }
 }
 
