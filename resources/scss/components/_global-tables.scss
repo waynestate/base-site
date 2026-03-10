@@ -66,6 +66,7 @@ table {
     /* Button Header */
     th button {
         @apply px-4 py-2;
+
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -75,7 +76,6 @@ table {
         background: transparent;
         border: none;
         font-size: inherit;
-        //font-weight: bold;
         text-align: left;
         cursor: pointer;
         box-sizing: border-box;
@@ -84,11 +84,11 @@ table {
     /* Non sortable heading */
     th.no-sort {
         @apply px-4 py-2;
+
         display: flex;
         align-items: center;
         min-height: 3rem;
         height: 100%;
-        //font-weight: bold;
         box-sizing: border-box;
     }
 
@@ -133,6 +133,7 @@ table {
     th button:focus,
     th button:hover {
         @apply outline outline-2 outline-offset-[-2px];
+
         background-color: #e5f4ff;
     }
 }
