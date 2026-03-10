@@ -13,8 +13,14 @@
     &__grid {
         @apply grid items-start;
 
-        gap: 1.3rem;
+        gap: 1.3em;
         grid-template-columns: repeat(auto-fit, minmax(200px, max-content));
+
+        font-size: var(--text-sm);
+
+        @screen lg {
+            font-size: var(--text-md);
+        }
     }
 
     &--gradient-overlay {
@@ -23,11 +29,11 @@
 
     &--cols-1 {
         grid-template-columns: 1fr;
-        row-gap: 1.5rem;
+        row-gap: 1.5em;
     }
 
     &--cols-2 {
-        gap: 2.5rem;
+        gap: 2.5em;
 
         @screen sm {
             @apply grid-cols-2;

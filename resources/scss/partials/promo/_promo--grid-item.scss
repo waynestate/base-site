@@ -1,0 +1,18 @@
+/* Grid item presentation */
+.promo--grid-item {
+    flex-direction: column;
+
+    .promo {
+        &__title {
+            font-size: var(--text-lg);
+        }
+
+        &__excerpt {
+            font-size: var(--text-sm);
+        }
+
+        &__description {
+            font-size: var(--text-sm);
+        }
+    }
+}

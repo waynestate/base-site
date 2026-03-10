@@ -8,15 +8,23 @@
 @import "~@waynestate/wsuheader/dist/header";
 @import "~@waynestate/wsufooter/dist/footer";
 
+/* Settings */
+
 /* Partials */
+@import "partials/global";
+@import "partials/global-variables";
+@import "partials/global-tables";
+@import "partials/global-headings";
+@import "partials/global-buttons";
+@import "partials/global-print";
 @import "partials/layout";
 @import "partials/component-loop";
+@import "partials/promo/promo";
+@import "partials/promo/promo--list-item";
+@import "partials/promo/promo--grid-item";
+@import "partials/promo/promo--gradient-overlay";
 
 /* Components */
-@import "components/global";
-@import "components/global-tables";
-@import "components/global-headings";
-@import "components/global-buttons";
 @import "components/accordion";
 @import "components/flag";
 @import "components/bg-gradient";
@@ -35,7 +43,6 @@
 @import "components/slate";
 @import "components/visually-hidden";
 @import "components/table-of-contents";
-@import "components/print";
 @import "components/cms-layouts";
 @import "components/play-video-button";
 @import "components/pdf";
@@ -43,7 +50,6 @@
 @import "components/policy-numbering";
 @import "components/hero";
 @import "components/catalog";
-@import "components/promo-item";
 
 /* Site specific */
 @import "site-specific/theme";

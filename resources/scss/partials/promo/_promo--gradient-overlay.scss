@@ -1,0 +1,55 @@
+/* Grid item - Gradient overlay */
+.promo--gradient-overlay {
+    @apply bg-green-800;
+
+    position: relative;
+    overflow: hidden;
+
+    .promo {
+        &__content {
+            padding: 0 1em 1em 1em;
+            filter: drop-shadow(0 1px 1px rgb(12 84 73 / 50%));
+            color: white;
+            display: grid;
+            grid-template-rows: repeat(2, min-content);
+            align-content: end;
+            position: absolute;
+            inset: 0;
+        }
+
+        &__description,
+        &__excerpt,
+        &__title {
+            isolation: isolate;
+            z-index: 1;
+        }
+
+        &__title {
+            padding-top: 1.5rem;
+        }
+
+        &__link {
+            color: white;
+            text-decoration-color: transparent;
+            text-decoration-line: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 4px;
+            transition: all 200ms ease-in-out;
+
+            &:focus,
+            &:hover {
+                text-decoration-color: white;
+                transition: all 200ms ease-in-out;
+            }
+        }
+
+        &__gradient {
+            display: block;
+            position: absolute;
+            inset: 0;
+            grid-row: -3 / 5;
+            content: "";
+            background-image: radial-gradient(200% 100% at 50% 100%, rgb(5 33 30 / 90%) 10%, transparent 100%);
+        }
+    }
+}
