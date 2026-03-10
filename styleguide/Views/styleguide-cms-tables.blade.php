@@ -32,8 +32,8 @@
         </table>
 
         <h2>Sortable table</h2>
-
         <table class="table-sort">
+            <caption>Use <code>&lt;table class="table-sort"&gt;</code> for this option. This table will make the columns sortable.</caption>
             <thead>
                 <tr>
                     <th scope="col">
@@ -79,10 +79,12 @@
             <th scope="col">
                 Last name
             </th>
-            <th scope="col" aria-sort="ascending">
+            <th scope="col">
                 Email
             </th>
-            <th scope="col" class="no-sort">Address (no sort)</th>
+            <th scope="col">
+                Address
+            </th>
         </tr>
     </thead>
 
@@ -102,6 +104,11 @@
     </tbody>
 </table>') !!}
 </pre>
+        <h3 class="mt-0">Available table-sort options:</h3>
+            <p>
+                <strong>Disable sorting:</strong> Add <code>&lt;th class="no-sort"&gt;</code> to preferred column headers.<br>
+                <strong>Default sort:</strong> Add <code>&lt;th aria-sort="ascending" or "descending"&gt;</code> to preferred column headers.
+            </p>
 
         <h2>Responsive table</h2>
 
