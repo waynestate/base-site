@@ -32,35 +32,20 @@
         </table>
 
         <h2>Sortable table</h2>
-
         <table class="table-sort">
-            <caption>
-                Use <code>&lt;table class="table-sort"&gt;</code> for this option. Click on each table heading to sort by column.
-                <span class="sr-only">
-                    (column headers with buttons are sortable).
-                </span>
-            </caption>
+            <caption>Use <code>&lt;table class="table-sort"&gt;</code> for this option. This table will make the columns sortable.</caption>
             <thead>
                 <tr>
                     <th scope="col">
-                        <button>
-                            First name
-                            <span aria-hidden="true"></span>
-                        </button>
+                        First name
                     </th>
                     <th scope="col">
-                        <button>
-                            Last name
-                            <span aria-hidden="true"></span>
-                        </button>
+                        Last name
                     </th>
-                    <th aria-sort="ascending" scope="col">
-                        <button>
-                            Email
-                            <span aria-hidden="true"></span>
-                        </button>
+                    <th scope="col">
+                        Email
                     </th>
-                    <th class="no-sort">Address (no sort)</th>
+                    <th class="no-sort" scope="col">Address (no sort)</th>
                 </tr>
             </thead>
 
@@ -84,33 +69,22 @@
 
         <h2>Source code</h2>
         <pre class="code-block" tabindex="0">
-{!! htmlspecialchars('<table>
-    <caption>Describe your table for screen readers in the caption.
-        <span class="sr-only">
-            (column headers with buttons are sortable).
-        </span>
-    </caption>
+{!! htmlspecialchars('<table class="table-sort">
+    <caption>Describe your table for screen readers in the caption.</caption>
     <thead>
         <tr>
             <th scope="col">
-                <button>
-                    First name
-                    <span aria-hidden="true"></span>
-                </button>
+                First name
             </th>
             <th scope="col">
-                <button>
-                    Last name
-                    <span aria-hidden="true"></span>
-                </button>
+                Last name
             </th>
-            <th aria-sort="ascending" scope="col">
-                <button>
-                    Email
-                    <span aria-hidden="true"></span>
-                </button>
+            <th scope="col">
+                Email
             </th>
-            <th class="no-sort">Address (no sort)</th>
+            <th scope="col">
+                Address
+            </th>
         </tr>
     </thead>
 
@@ -130,6 +104,11 @@
     </tbody>
 </table>') !!}
 </pre>
+        <h3 class="mt-0">Available table-sort options:</h3>
+            <p>
+                <strong>Disable sorting:</strong> Add <code>&lt;th class="no-sort"&gt;</code> to preferred column headers.<br>
+                <strong>Default sort:</strong> Add <code>&lt;th aria-sort="ascending" or "descending"&gt;</code> to preferred column headers.
+            </p>
 
         <h2>Responsive table</h2>
 
@@ -156,7 +135,7 @@
 
         <h2>Source code</h2>
 <pre class="code-block" tabindex="0">
-{!! htmlspecialchars('<table>
+{!! htmlspecialchars('<table class="table-stack">
     <caption>Describe your table for screen readers in the caption.</caption>
     <thead>
         <tr>
