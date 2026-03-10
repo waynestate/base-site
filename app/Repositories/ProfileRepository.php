@@ -309,49 +309,7 @@ class ProfileRepository implements ProfileRepositoryContract
      */
     public function getFields()
     {
-        return [
-            // Show under the profile image
-            'contact_fields' => [
-                'Curriculum Vitae',
-                'Syllabi',
-                'Phone',
-                'Fax',
-                'Email',
-                'Office',
-                'Website',
-            ],
-            // Fields that should be displayed as a URL
-            'url_fields' => [
-                'Website',
-            ],
-            // Show under the profile images contact fields
-            'file_fields' => [
-                'Curriculum Vitae',
-                'Syllabi',
-                'Youtube Videos',
-            ],
-            // Hide these in the main tube of content
-            'hidden_fields' => [
-                'Title',
-                'AccessID',
-                'Suffix',
-                'Honorific',
-                'First Name',
-                'Middle name',
-                'Last Name',
-                'Picture',
-                'Photo Download',
-                'Youtube Videos',
-            ],
-            // Build the users name based on these fields
-            'name_fields' => [
-                'Honorific',
-                'First Name',
-                'Middle name',
-                'Last Name',
-                'Suffix',
-            ],
-        ];
+        return config('base.profile.fields');
     }
 
     /**
