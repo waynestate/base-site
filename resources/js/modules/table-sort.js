@@ -14,7 +14,7 @@ class SortableTable {
         this.tableNode = tableNode;
 
         // Ensure there is a table caption and screen reader information about being sortable
-        var tableCaption = tableNode.querySelector('caption');
+        let tableCaption = tableNode.querySelector('caption');
         if (!tableCaption) {
             // If there is no caption, create one and add it to the table
             tableCaption = document.createElement('caption');
@@ -22,7 +22,7 @@ class SortableTable {
         }
 
         // Add a screen reader only text to the caption to indicate that the table is sortable
-        var srOnlyText = document.createElement('span');
+        const srOnlyText = document.createElement('span');
         srOnlyText.classList.add('sr-only');
         srOnlyText.textContent = ' (column headers with buttons are sortable).';
         tableCaption.appendChild(srOnlyText);
@@ -40,12 +40,12 @@ class SortableTable {
             }
 
             // Create a button for the column header text and add it to the column header
-            var chText = ch.textContent.trim();
-            var buttonNode = document.createElement('button');
+            const chText = ch.textContent.trim();
+            const buttonNode = document.createElement('button');
             buttonNode.textContent = chText;
 
             // Add an element to the button to indicate that it is sortable
-            var sortIcon = document.createElement('span');
+            const sortIcon = document.createElement('span');
             sortIcon.setAttribute('aria-hidden', 'true');
             buttonNode.appendChild(sortIcon);
 
