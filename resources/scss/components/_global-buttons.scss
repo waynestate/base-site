@@ -79,3 +79,16 @@
 .content a[class*="button"] {
     @apply no-underline cursor-pointer;
 }
+
+/* Overrides for button class modifiers without circular dependencies */
+.content a[class*="text-base"] {
+    @apply text-base !important;
+}
+
+.content a[class*="text-lg"] {
+    @apply text-lg !important;
+}
+
+.content a[class*="text-xl"] {
+    @apply text-xl !important;
+}

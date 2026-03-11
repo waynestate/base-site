@@ -26,13 +26,17 @@
     @endif
 
     <div class="content w-full">
-        @if(!empty($item['youtube_id']) || !empty($item['relative_url']))
-            <div class="mb-1 font-bold group-hover:underline group-focus:underline leading-tight text-lg lg:text-xl {{ !empty($component['imageSize']) && $component['imageSize'] === 'small' ? '' : 'mt-2 lg:mt-0' }}">{{ $item['title'] }}</div>
-        @else
-            @include('partials/heading', ['heading' => $item['title'], 'headingLevel' => $component['headingLevel'] ?? 'h3', 'headingClass' => (!empty($component['columns']) ? ($component['columns'] < 3 ? 'text-2xl' : 'text-xl') : 'text-2xl').' group-hover:underline group-focus:underline leading-snug xl:leading-tight '.($component['headingClass'] ?? '')])
+        @if(! empty($item['title']))
+            @if(!empty($item['youtube_id']) || !empty($item['relative_url']))
+                <div class="mb-1 font-bold group-hover:underline group-focus:underline leading-tight text-lg lg:text-xl {{ !empty($component['imageSize']) && $component['imageSize'] === 'small' ? '' : 'mt-2 lg:mt-0' }}">{{ $item['title'] }}</div>
+            @else
+                @include('partials/heading', ['heading' => $item['title'], 'headingLevel' => $component['headingLevel'] ?? 'h3', 'headingClass' => (!empty($component['columns']) ? ($component['columns'] < 3 ? 'text-2xl' : 'text-xl') : 'text-2xl').' group-hover:underline group-focus:underline leading-snug xl:leading-tight '.($component['headingClass'] ?? '')])
+            @endif
         @endif
         <div class="text-black">
-            @if(!empty($item['excerpt']))<p class="my-1">{!! strip_tags($item['excerpt'], ['em', 'strong']) !!}</p>@endif 
+            @if(!empty($item['excerpt']))
+                <p class="my-1">{!! strip_tags($item['excerpt'], ['em', 'strong', 'br', '&ldquo;', '&rdquo;']) !!}</p>
+            @endif 
             @if(!empty($item['description']))
                 @if (!empty($item['link']))
                     <div>{!! preg_replace(['"<a href(.*?)>"', '"</a>"'], '', $item['description']) !!}</div>

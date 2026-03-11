@@ -1,6 +1,6 @@
 <nav id="menu" class="px-container-lg mt:w-80 {{ $base['show_site_menu'] === false ? ' mt:hidden' : '' }}" aria-label="Page menu" tabindex="-1">
     @if(!empty($base['top_menu_output']) && $base['site_menu'] !== $base['top_menu'] && config('base.top_menu_enabled'))
-        @if(!empty($base['top_menu_output']))
+        @if(! empty($base['site_menu_output']))
             <div class="slideout-main-menu mt:hidden">
                 <ul class="main-menu mb-2">
                     <li>

@@ -346,6 +346,10 @@ class ModularPageRepository implements ModularPageRepositoryContract
             unset($data['description']);
         }
 
+        if (isset($component['showTitle']) && $component['showTitle'] === false) {
+            $data['title'] = '';
+        }
+
         // Override promo item option with component option
         if (isset($component['option'])) {
             $data['option'] = $component['option'];
@@ -390,15 +394,17 @@ class ModularPageRepository implements ModularPageRepositoryContract
             }
 
             // containerClass => columnSpan
-            if (!empty($component['component']['columnSpan'])) {
-                // Inject the column span class
-                array_push($components[$componentName]['component']['containerClass'], 'px-4', 'mt:colspan-'.$component['component']['columnSpan']);
-            } elseif (!empty($component['component']['filename']) && strpos($component['component']['filename'], 'column') !== false) {
-                // Inject the column span class
-                array_push($components[$componentName]['component']['containerClass'], 'px-4', 'mt:colspan-6');
-            } else {
-                // Default width
-                $components[$componentName]['component']['containerClass'][] = 'px-container';
+            if (!empty($component['component']['filename']) && $component['component']['filename'] != 'hero') {
+                if (!empty($component['component']['columnSpan'])) {
+                    // Inject the column span class
+                    array_push($components[$componentName]['component']['containerClass'], 'px-4', 'mt:colspan-'.$component['component']['columnSpan']);
+                } elseif (!empty($component['component']['filename']) && strpos($component['component']['filename'], 'column') !== false) {
+                    // Inject the column span class
+                    array_push($components[$componentName]['component']['containerClass'], 'px-4', 'mt:colspan-6');
+                } else {
+                    // Default width
+                    $components[$componentName]['component']['containerClass'][] = 'px-container';
+                }
             }
 
             // Collect all legacy class names
@@ -432,7 +438,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
             // - No gutter if component uses margin-bottom class
             // - No gutter on heading component
             if (empty(preg_grep('/mb-/', $components[$componentName]['component']['containerClass']))
-                && !Str::contains($componentName, 'heading')
+                && !Str::contains($componentName, 'heading') && !Str::contains($componentName, 'hero')
             ) {
                 $components[$componentName]['component']['containerClass'] [] = 'mb-gutter';
             }

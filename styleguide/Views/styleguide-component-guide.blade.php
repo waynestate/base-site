@@ -196,6 +196,20 @@ True or false; false is default and will use the promotion's link field if it is
                     </td>
                 </tr>
                 <tr>
+                    <td class="font-bold">showTitle</td>
+                    <td>
+<code class="mt-1 mb-2">"showTitle":true</code><br />
+Show or hide the promo's title.<br />
+True or false; true is default.
+                    </td>
+                    <td class="font-bold">
+                        Catalog<br /> 
+                        Spotlight<br /> 
+                        Promo row, column<br /> 
+                        Icon row, column<br /> 
+                    </td>
+                </tr>
+                <tr>
                     <td class="font-bold">showExcerpt</td>
                     <td>
 <code class="mt-1 mb-2">"showExcerpt":true</code><br />

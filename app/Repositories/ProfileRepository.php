@@ -178,15 +178,22 @@ class ProfileRepository implements ProfileRepositoryContract
      */
     public function getGroupIds($selected_group, $forced_profile_group_id, $dropdown_groups)
     {
-        // Use the selected group or the forced one from custom page fields
-        $group_ids = $forced_profile_group_id === null ? $selected_group : $forced_profile_group_id;
-
-        // Use all the IDs from the dropdown since the initial selection is "All Profiles"
-        if ($group_ids === null) {
-            $group_ids = ltrim(implode('|', array_keys($dropdown_groups)), '|');
+        // Forced ID always wins
+        if ($forced_profile_group_id !== null) {
+            return (string) $forced_profile_group_id;
         }
 
-        return $group_ids;
+        // No selection → all groups
+        if ($selected_group === null) {
+            return implode(',', array_keys($dropdown_groups));
+        }
+
+        // Normalize user input (accept | or ,)
+        return collect(preg_split('/[,\|]+/', (string) $selected_group))
+            ->map(fn ($item) => trim($item))
+            ->filter(fn ($item) => $item !== '')
+            ->unique()
+            ->implode(',');
     }
 
     /**
@@ -446,9 +453,16 @@ class ProfileRepository implements ProfileRepositoryContract
      */
     public function orderProfilesById($profile_listing, $profiles_by_accessid): array
     {
-        $accessids = collect(explode('|', $profiles_by_accessid))->map(function ($item) {
+        $raw_accessIds = preg_split('/[,\|]+/', $profiles_by_accessid);
+
+        $accessids = collect($raw_accessIds)
+        ->map(function ($item) {
             return trim($item);
-        })->all();
+        })
+        ->filter()
+        ->unique()
+        ->values()
+        ->all();
 
         // Find the profiles by a specific order
         $profiles_ordered = collect($accessids)->map(function ($accessid) use ($profile_listing) {

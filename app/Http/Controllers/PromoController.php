@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use Contracts\Repositories\PromoRepositoryContract;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -24,6 +25,17 @@ class PromoController extends Controller
     public function __construct(PromoRepositoryContract $promo)
     {
         $this->promo = $promo;
+    }
+
+    /**
+     * Placeholder for WildcardController calling PromoController::index to redirect back to the configured
+     * app.url
+     *
+     * @return RedirectResponse
+     */
+    public function index(): RedirectResponse
+    {
+        return response()->redirectTo(config('app.url'));
     }
 
     /**

@@ -11,6 +11,7 @@
 /* Partials */
 @import "partials/layout";
 @import "partials/component-loop";
+@import "partials/nav-top";
 
 /* Components */
 @import "components/global";
@@ -28,7 +29,6 @@
 @import "components/menu-icon";
 @import "components/menu-main";
 @import "components/menu-slideout";
-@import "components/menu-top";
 @import "components/responsive-embed";
 @import "components/row";
 @import "components/skip";
@@ -42,6 +42,7 @@
 @import "components/full-width-styleguide-hero";
 @import "components/policy-numbering";
 @import "components/hero";
+@import "components/catalog";
 
 /* Site specific */
 @import "site-specific/theme";

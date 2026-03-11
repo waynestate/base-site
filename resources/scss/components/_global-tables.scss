@@ -50,6 +50,92 @@ table {
     }
 }
 
+.table-sort {
+    th {
+        padding: 0;
+        height: 1px; /* Allow 100% height buttons */
+        border: none;
+    }
+
+    thead tr {
+        height: 100%;
+    }
+
+    /* Button Header */
+    th button {
+        @apply px-4 py-2;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: 100%;
+        min-height: 3rem;
+        background: transparent;
+        border: none;
+        font-size: inherit;
+        text-align: left;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    /* Non sortable heading */
+    th.no-sort {
+        @apply px-4 py-2;
+
+        display: flex;
+        align-items: center;
+        min-height: 3rem;
+        height: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Icon Sizing */
+    th button span {
+        display: inline-flex;
+        min-width: 1.2em;
+        margin-left: 5px;
+        flex-shrink: 0;
+    }
+
+    /* Descending arrow icon */
+    th[aria-sort="descending"] button span::after {
+        content: "▼";
+        color: currentcolor;
+        font-size: 100%;
+    }
+
+    /* Ascending arrow icon */
+    th[aria-sort="ascending"] button span::after {
+        content: "▲";
+        color: currentcolor;
+        font-size: 100%;
+    }
+
+    /* Unsorted diamond icon  */
+    &.show-unsorted-icon th:not([aria-sort]) button span::after {
+        content: "♢";
+        color: currentcolor;
+        font-size: 100%;
+        line-height: 1;
+    }
+
+    /* Hover/Focus arrow icon */
+    th:not([aria-sort]) button:focus span::after,
+    th:not([aria-sort]) button:hover span::after {
+        content: "▼";
+        color: currentcolor;
+    }
+
+    /* Interaction Backgrounds */
+    th button:focus,
+    th button:hover {
+        @apply outline outline-2 outline-offset-[-2px];
+
+        background-color: #e5f4ff;
+    }
+}
+
 .table-stack {
     @media (max-width: theme('screens.md')) {
         @apply w-full;

@@ -93,4 +93,12 @@ interface MenuRepositoryContract
      * @return array
      */
     public function menuDisplayToggles($menus, $data);
+
+    /**
+     * Get the surtitle.
+     *
+     * @param  array  $site
+     * @return array
+     */
+    public function getSurtitle(array $site);
 }

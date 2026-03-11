@@ -17,7 +17,9 @@
                             {!! $item['description'] !!}
                         @endif
                     @else
-                        @if(!empty($item['excerpt']))<p>{!! strip_tags($item['excerpt'], ['em', 'strong', 'br', '&ldquo;', '&rdquo;']) !!}</p>@endif
+                        @if(!empty($item['excerpt']))
+                            <p>{!! strip_tags($item['excerpt'], ['em', 'strong', 'br', '&ldquo;', '&rdquo;']) !!}</p>
+                        @endif
                     @endif
                 </div>
 
@@ -29,12 +31,14 @@
                     </div>
                     <cite class="not-italic">
                         <span class="block font-bold mb-0 text-lg xl:text-xl group-hover:underline">{{ $item['title'] }}</span>
-                        @if(!empty($item['excerpt']) && !empty($component['showDescription']) && $component['showDescription'] === true)<span class="block text-black 2xl:text-lg">{!! strip_tags($item['excerpt'], ['em', 'strong', 'br', '&ldquo;', '&rdquo;']) !!}</span>@endif
+                        @if(!empty($item['description']) && !empty($item['excerpt']) && !empty($component['showDescription']) && $component['showDescription'] === true)
+                            <span class="block text-black 2xl:text-lg">{!! strip_tags($item['excerpt'], ['em', 'strong', 'br', '&ldquo;', '&rdquo;']) !!}</span>
+                        @endif
                     </cite>
                 </div>
             </div>
              <div class="hidden lg:block shrink-0 grow-0 w-1/4">
-                <div class="w-full pt-full">{{-- Absolutely positioned image placeholder --}}</div>
+                <div class="w-full pt-full">{{-- Absolute-positioned image placeholder --}}</div>
             </div>
         </blockquote>
     @if (!empty($item['link']))
