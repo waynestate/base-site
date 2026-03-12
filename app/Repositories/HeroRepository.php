@@ -69,7 +69,7 @@ class HeroRepository implements HeroRepositoryContract
 
         $heroCount = count($hero['data']);
         $heroLimit = (int) ($hero['component']['limit'] ?? 1);
-        $isCarousel = $heroCount > 1 || $heroLimit > 1;
+        $isCarousel = $heroCount > 1 && $heroLimit > 1;
 
         foreach ($hero['data'] as $hero_key => $hero_data) {
             $promoOption = strtolower($hero_data['option'] ?? '');
@@ -82,9 +82,31 @@ class HeroRepository implements HeroRepositoryContract
                 $isCarousel = true;
             }
 
+            // Determine Type
+            $type = $this->mapType($promoOption, $componentOption);
+            if ($type) {
+                $hero['component']['heroType'] = $type;
+                $hero_data['hero_classes'] = 'hero--' . $type;
+            } else {
+                $type = $hero['component']['heroType'] ?? config('base.hero_type') ?? 'large';
+                $hero['component']['heroType'] = $type;
+                $hero_data['hero_classes'] = $type === 'large' ? '' : 'hero--' . $type;
+            }
+
+            // Determine Placement
+            $placement = $this->mapPlacement($promoOption, $componentOption);
+            if ($placement) {
+                $hero['component']['heroPlacement'] = $placement;
+            }
+
+            // TODO Moved isCarousel after settings are applied in order to retain hero type for slide style
+            // Carousel
             if ($isCarousel) {
-                $hero['component']['heroType'] = 'carousel';
-                $hero['component']['heroPlacement'] = 'full-width';
+                // TODO We need hero type to set the appropriate class on the slide
+                //$hero['component']['heroType'] = 'carousel';
+
+                // TODO Hero placement should come from comonent config or base config
+                //$hero['component']['heroPlacement'] = 'full-width';
 
                 // Determine Placement for carousel
                 $placement = $this->mapPlacement($promoOption, $componentOption);
@@ -92,24 +114,8 @@ class HeroRepository implements HeroRepositoryContract
                     $hero['component']['heroPlacement'] = $placement;
                 }
 
-                $hero_data['hero_classes'] = '';
-            } else {
-                // Determine Type
-                $type = $this->mapType($promoOption, $componentOption);
-                if ($type) {
-                    $hero['component']['heroType'] = $type;
-                    $hero_data['hero_classes'] = 'hero--' . $type;
-                } else {
-                    $type = $hero['component']['heroType'] ?? config('base.hero_type') ?? 'large';
-                    $hero['component']['heroType'] = $type;
-                    $hero_data['hero_classes'] = $type === 'large' ? '' : 'hero--' . $type;
-                }
-
-                // Determine Placement
-                $placement = $this->mapPlacement($promoOption, $componentOption);
-                if ($placement) {
-                    $hero['component']['heroPlacement'] = $placement;
-                }
+                // TODO We need hero classes to style individual carousel slides
+                //$hero_data['hero_classes'] = '';
             }
 
             $hero['data'][$hero_key] = $hero_data;
@@ -272,6 +278,7 @@ class HeroRepository implements HeroRepositoryContract
      */
     private function mapPlacement(string $promoOption, string $componentOption): ?string
     {
+        // TODO: If placement is not found in the component config, use the config hero placement
         $placementMap = [
             'contained' => ['contained'],
             'full-width' => ['full-width', 'full', 'banner', 'large', 'banner large'],
