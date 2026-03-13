@@ -120,7 +120,6 @@ link_newrelease_on_remote
 cache_remote_release
 cleanup_oldreleases_on_remote
 clean_localsrc
-update_conf_for_refresh
 @endmacro
 
 @macro('rollback')
