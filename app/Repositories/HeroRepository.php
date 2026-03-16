@@ -67,9 +67,35 @@ class HeroRepository implements HeroRepositoryContract
             return $promos;
         }
 
+        // Initialize the hero component if not set
+        $hero['component'] = $hero['component'] ?? [];
+        $hero['component']['heroLayout'] = '';
+
+        // Layout is carousel if the limit is more than 1 and there is more than one hero promo item
         $heroCount = count($hero['data']);
         $heroLimit = (int) ($hero['component']['limit'] ?? 1);
-        $isCarousel = $heroCount > 1 || $heroLimit > 1;
+
+        // If it's a global hero (no component limit set), it should be a carousel if there's more than 1 item
+        if (!isset($hero['component']['limit']) && $heroCount > 1) {
+            $heroLimit = $heroCount;
+        }
+
+        $isCarousel = ($heroCount > 1 && $heroLimit > 1);
+
+        // Check if any promo or component option explicitly sets the carousel
+        if (!$isCarousel) {
+            foreach ($hero['data'] as $hero_data) {
+                $option = strtolower(($hero_data['option'] ?? '') . ' ' . ($hero['component']['option'] ?? ''));
+                if (str_contains($option, 'carousel')) {
+                    $isCarousel = true;
+                    break;
+                }
+            }
+        }
+
+        if ($isCarousel) {
+            $hero['component']['heroLayout'] = 'carousel';
+        }
 
         foreach ($hero['data'] as $hero_key => $hero_data) {
             $promoOption = strtolower($hero_data['option'] ?? '');
@@ -77,39 +103,26 @@ class HeroRepository implements HeroRepositoryContract
             $option = trim($promoOption . ' ' . $componentOption);
             $hero_data['hero_options'] = explode(' ', $option);
 
-            // Determine carousel type from option if not already set by count or limit
-            if (!$isCarousel && str_contains($option, 'carousel')) {
-                $isCarousel = true;
+            // Determine Type
+            $type = $this->mapType($promoOption, $componentOption);
+            if ($type) {
+                $hero['component']['heroType'] = $type;
+                $hero_data['hero_classes'] = 'hero--' . $type;
+            } else {
+                $type = $hero['component']['heroType'] ?? config('base.hero_type') ?? 'large';
+                $hero['component']['heroType'] = $type;
+                $hero_data['hero_classes'] = $type === 'large' ? '' : 'hero--' . $type;
             }
 
+            // If carousel, add the class to the item as well
             if ($isCarousel) {
-                $hero['component']['heroType'] = 'carousel';
-                $hero['component']['heroPlacement'] = 'full-width';
+                $hero_data['hero_classes'] .= ' hero--carousel';
+            }
 
-                // Determine Placement for carousel
-                $placement = $this->mapPlacement($promoOption, $componentOption);
-                if ($placement) {
-                    $hero['component']['heroPlacement'] = $placement;
-                }
-
-                $hero_data['hero_classes'] = '';
-            } else {
-                // Determine Type
-                $type = $this->mapType($promoOption, $componentOption);
-                if ($type) {
-                    $hero['component']['heroType'] = $type;
-                    $hero_data['hero_classes'] = 'hero--' . $type;
-                } else {
-                    $type = $hero['component']['heroType'] ?? config('base.hero_type') ?? 'large';
-                    $hero['component']['heroType'] = $type;
-                    $hero_data['hero_classes'] = $type === 'large' ? '' : 'hero--' . $type;
-                }
-
-                // Determine Placement
-                $placement = $this->mapPlacement($promoOption, $componentOption);
-                if ($placement) {
-                    $hero['component']['heroPlacement'] = $placement;
-                }
+            // Determine Placement
+            $placement = $this->mapPlacement($promoOption, $componentOption);
+            if ($placement) {
+                $hero['component']['heroPlacement'] = $placement;
             }
 
             $hero['data'][$hero_key] = $hero_data;
