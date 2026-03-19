@@ -50,10 +50,10 @@ const screens = {
     sm: '420px',
     md: '576px',
     lg: '732px',
+    mt: '780px', // Adjust this based on the top menu width
     xl: '888px',
     '2xl': '1044px',
     '3xl': '1200px',
-    mt: '780px', // Adjust this based on the top menu width
     print: { raw: 'print' },
 }
 
@@ -70,6 +70,10 @@ module.exports = {
     safelist: [
         {
             pattern: /at-/,
+        },
+        {
+            pattern: /text-[2-6]xl/,
+            variants: ['sm', 'md', 'lg', 'xl', 'mt'],
         },
         {
             pattern: /w-[1-5]\/[1-5]/,
