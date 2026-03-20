@@ -347,4 +347,40 @@ final class DataTest extends TestCase
             $this->assertEquals('', $request->data['base']['meta']['json_ld']);
         });
     }
+
+    #[Test]
+    public function show_header_is_true_when_exclude_cookie_is_absent(): void
+    {
+        $request = Request::create('styleguide');
+
+        config(['base.exclude_header_cookie' => 'mobileUser']);
+
+        app(Data::class)->handle($request, function ($request) {
+            $this->assertTrue($request->data['base']['show_header']);
+        });
+    }
+
+    #[Test]
+    public function show_header_is_false_when_exclude_cookie_is_present_with_null_value(): void
+    {
+        $request = Request::create('styleguide', 'GET', [], ['mobileUser' => null]);
+
+        config(['base.exclude_header_cookie' => 'mobileUser']);
+
+        app(Data::class)->handle($request, function ($request) {
+            $this->assertFalse($request->data['base']['show_header']);
+        });
+    }
+
+    #[Test]
+    public function show_header_is_false_when_exclude_cookie_is_present_with_a_value(): void
+    {
+        $request = Request::create('styleguide', 'GET', [], ['mobileUser' => 'someValue']);
+
+        config(['base.exclude_header_cookie' => 'mobileUser']);
+
+        app(Data::class)->handle($request, function ($request) {
+            $this->assertFalse($request->data['base']['show_header']);
+        });
+    }
 }
