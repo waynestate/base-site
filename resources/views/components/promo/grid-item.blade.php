@@ -3,8 +3,9 @@
     $item => array // ['title', 'link', 'description', 'excerpt', 'relative_url', 'option']
 --}}
 
+@php $titleId = isset($item['promo_item_id']) ? 'promo-' . $item['promo_item_id'] : null; @endphp
 @if (!empty($item['link']))
-    <a href="{{ $item['link'] }}" class="block {{ !empty($component['gradientOverlay']) && $component['gradientOverlay'] === true ? 'bg-green-800 relative overflow-hidden' : '' }} group">
+    <a href="{{ $item['link'] }}" class="block {{ !empty($component['gradientOverlay']) && $component['gradientOverlay'] === true ? 'bg-green-800 relative overflow-hidden' : '' }} group" @if($titleId) aria-labelledby="{{ $titleId }}" @endif>
 @else
     <div class="block {{ !empty($component['gradientOverlay']) && $component['gradientOverlay'] === true ? 'bg-green-800 relative overflow-hidden' : '' }} {{ $loop->last != true && !empty($component['filename']) && $component['filename'] != 'catalog' ? 'mt-6 mb-8' : '' }}">
 @endif
@@ -26,11 +27,11 @@
         <div class="content {{ !empty($component['gradientOverlay']) && $component['gradientOverlay'] === true ? 'white-links text-white relative p-4 pt-20 drop-shadow-px' : '' }}">
             @if(! empty($item['title']))
                 @if(!empty($item['youtube_id']) || !empty($item['relative_url']))
-                    <div class="my-1 font-bold {{ !empty($component['columns']) ? ($component['columns'] < 4 ? 'text-lg' : 'text-base') : 'text-xl' }} group-hover:underline group-focus:underline leading-snug xl:leading-tight">
+                    <div @if($titleId) id="{{ $titleId }}" @endif class="my-1 font-bold {{ !empty($component['columns']) ? ($component['columns'] < 4 ? 'text-lg' : 'text-base') : 'text-xl' }} group-hover:underline group-focus:underline leading-snug xl:leading-tight">
                         {{ $item['title'] }}
                     </div>
                 @else
-                    @include('partials/heading', ['heading' => $item['title'], 'headingLevel' => $component['headingLevel'] ?? 'h3', 'headingClass' => (!empty($component['columns']) ? ($component['columns'] < 3 ? 'text-2xl' : 'text-xl') : 'text-2xl').' group-hover:underline group-focus:underline leading-snug xl:leading-tight '.($component['headingClass'] ?? '')])
+                    @include('partials/heading', ['heading' => $item['title'], 'headingLevel' => $component['headingLevel'] ?? 'h3', 'headingId' => $titleId, 'headingClass' => (!empty($component['columns']) ? ($component['columns'] < 3 ? 'text-2xl' : 'text-xl') : 'text-2xl').' group-hover:underline group-focus:underline leading-snug xl:leading-tight '.($component['headingClass'] ?? '')])
                 @endif
             @endif
             <div class="{{ !empty($component['columns']) ? ($component['columns'] < 4 ? ($component['columns'] < 3 ? 'text-base md:text-base' : 'text-base md:text-sm xl:text-base') : 'text-sm') : 'text-base' }} {{ !empty($component['gradientOverlay']) && $component['gradientOverlay'] === true ? 'xl:leading-tight' : 'text-black'}}">
