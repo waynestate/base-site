@@ -13,7 +13,7 @@ class ComponentHeroBannerSmall extends Page
     {
         return app(PageFactory::class)->create(1, true, [
             'page' => [
-                'controller' => 'ComponentHeroController',
+                'controller' => 'ChildpageController',
                 'title' => 'Hero banner small',
                 'id' => 105100108,
                 'content' => [

@@ -4,7 +4,7 @@
 
     &__carousel-item {
         /* Flickity applies absolute to this container when enabled */
-        @apply w-full aspect-hero;
+        @apply w-full;
     }
 
     &__type {
@@ -15,7 +15,7 @@
         @apply w-full h-full object-cover object-center;
     }
 
-    /* Modifiers */
+    /* Placement modifiers */
     &--full-width {
         @apply mx-auto;
     }
@@ -29,11 +29,27 @@
         }
     }
 
+    /* Height modifiers */
     &--slim {
         @apply h-hero-small max-h-hero-small;
 
         #{$c}__primary-image {
             @apply w-full h-full object-cover object-center;
+        }
+    }
+
+    &--large {
+        @apply aspect-hero max-h-hero;
+
+        #{$c}__primary-image {
+            @apply w-full h-full object-cover object-center;
+        }
+    }
+
+    /* Type modifiers */
+    #{$c}--banner {
+        #{$c}__secondary-image {
+            @apply hidden;
         }
 
         #{$c}__content {
@@ -45,7 +61,11 @@
         @apply relative xl:flex items-center;
 
         #{$c}__primary-image {
-            @apply w-full xl:w-[60%] shrink-0;
+            @apply w-full xl:w-[60%] shrink-0 aspect-video;
+        }
+        
+        #{$c}__secondary-image {
+            @apply hidden;
         }
 
         #{$c}__content {
@@ -57,7 +77,7 @@
         }
 
         #{$c}__title {
-            @apply text-green-700 3xl:text-4xl mb-3 font-black;
+            @apply text-green-700 3xl:text-4xl mb-3 font-black lg:drop-shadow-none;
         }
 
         #{$c}__link {
@@ -67,14 +87,6 @@
         #{$c}__description {
              @apply text-lg 3xl:text-xl text-green-700 content;
          }
-    }
-
-    &--large {
-        @apply aspect-hero max-h-hero;
-
-        #{$c}__content {
-            @apply hidden;
-        }
     }
 
     &--buttons {
@@ -113,6 +125,10 @@
 
         #{$c}__primary-image {
             @apply aspect-hero max-h-hero;
+        }
+
+        #{$c}__secondary-image {
+            @apply hidden;
         }
 
         #{$c}__content {
@@ -185,22 +201,6 @@
 
         #{$c}__description {
             @apply md:text-lg;
-        }
-    }
-
-    &--carousel {
-
-        #{$c}__content,
-        #{$c}__secondary-image {
-            @apply hidden;
-        }
-
-        #{$c}__carousel-item {
-            @apply max-h-hero;
-        }
-
-        #{$c}--banner {
-            @apply aspect-hero max-h-hero;
         }
     }
 }

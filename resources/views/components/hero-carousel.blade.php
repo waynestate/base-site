@@ -8,7 +8,7 @@
         @foreach($hero['data'] as $item)
             @if(count($hero['data']) > 1)<div class="hero__carousel-item">@endif
 
-                <div class="hero__type hero--{{ $item['hero_type'] ?? 'banner' }}">
+                <div @class(['hero__type', implode(' ', $item['hero_classes'] ?? ['hero--banner'])])>
 
                     <img class="hero__primary-image {{ $hero['component']['backgroundClass'] ?? ''}}{{ $loop->first ? '' : ' lazy'}}"
                          @if($loop->first) src="{{ $item['relative_url'] }}" @else data-src="{{ $item['relative_url'] }}"@endif
