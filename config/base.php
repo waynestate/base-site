@@ -232,6 +232,17 @@ $global_config = [
 
     /*
     |--------------------------------------------------------------------------
+    | WSUMobile requests
+    |--------------------------------------------------------------------------
+    |
+    | The name of the cookie whose presence indicates the request is coming
+    | from WSUMobile. When this cookie exists, the global header is hidden.
+    |
+    */
+    'exclude_header_cookie' => 'mobileUser',
+
+    /*
+    |--------------------------------------------------------------------------
     | Global Data
     |--------------------------------------------------------------------------
     |

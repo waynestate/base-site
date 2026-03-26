@@ -24,7 +24,9 @@
 @include('components.skip')
 
 <header>
-    @include('components.header')
+    @if($base['show_header'])
+        @include('components.header')
+    @endif
 
     @if(!empty($base['site']))
         @include('partials.nav-top', [
