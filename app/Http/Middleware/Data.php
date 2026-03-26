@@ -68,6 +68,9 @@ class Data
         $layout['layout'] = config('base.layout');
         $request->data = merge($request->data, $layout);
 
+        // Determine whether the global header should be shown based on the request
+        $request->data['show_header'] = !$request->cookies->has(config('base.exclude_header_cookie'));
+
         // Get the global data config
         $config = config('base.global');
 

@@ -67,9 +67,35 @@ class HeroRepository implements HeroRepositoryContract
             return $promos;
         }
 
+        // Initialize the hero component if not set
+        $hero['component'] = $hero['component'] ?? [];
+        $hero['component']['heroLayout'] = '';
+
+        // Layout is carousel if the limit is more than 1 and there is more than one hero promo item
         $heroCount = count($hero['data']);
         $heroLimit = (int) ($hero['component']['limit'] ?? 1);
-        $isCarousel = $heroCount > 1 || $heroLimit > 1;
+
+        // If it's a global hero (no component limit set), it should be a carousel if there's more than 1 item
+        if (!isset($hero['component']['limit']) && $heroCount > 1) {
+            $heroLimit = $heroCount;
+        }
+
+        $isCarousel = ($heroCount > 1 && $heroLimit > 1);
+
+        // Check if any promo or component option explicitly sets the carousel
+        if (!$isCarousel) {
+            foreach ($hero['data'] as $hero_data) {
+                $option = strtolower(($hero_data['option'] ?? '') . ' ' . ($hero['component']['option'] ?? ''));
+                if (str_contains($option, 'carousel')) {
+                    $isCarousel = true;
+                    break;
+                }
+            }
+        }
+
+        if ($isCarousel) {
+            $hero['component']['heroLayout'] = 'carousel';
+        }
 
         foreach ($hero['data'] as $hero_key => $hero_data) {
             $promoOption = strtolower($hero_data['option'] ?? '');
@@ -100,6 +126,11 @@ class HeroRepository implements HeroRepositoryContract
             if ($height) {
                 $hero['component']['heroHeight'] = $height;
                 $hero_data['hero_classes'][] = 'hero--' . $height;
+            }
+
+            // If carousel, add the class to the item as well
+            if ($isCarousel) {
+                $hero_data['hero_classes'][] = 'hero--carousel';
             }
 
             $hero['data'][$hero_key] = $hero_data;

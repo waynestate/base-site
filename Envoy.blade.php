@@ -120,7 +120,6 @@ link_newrelease_on_remote
 cache_remote_release
 cleanup_oldreleases_on_remote
 clean_localsrc
-update_conf_for_refresh
 @endmacro
 
 @macro('rollback')
@@ -349,9 +348,4 @@ fi
 
 @task('notice_done')
     echo "Deployment ({{ $release }}) done.";
-@endtask
-
-@task('update_conf_for_refresh', ['on' => $remote_server])
-    echo "Updating config for refreshing opcache";
-    sed -i -e 's/#release_.*/#{{ $release }}/g' {{ $app_base }}/conf/{{ $appname }}.conf
 @endtask

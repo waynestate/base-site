@@ -2,8 +2,9 @@
     $data => array // ['title', 'excerpt', 'description', 'relative_url', 'filename_alt_text', 'link']
 --}}
 @foreach($data as $item)
+    @php $titleId = 'promo-' . $item['promo_item_id']; @endphp
     @if (!empty($item['link']))
-        <a href="{{ $item['link'] }}" class="group">
+        <a href="{{ $item['link'] }}" class="group" aria-labelledby="{{ $titleId }}">
     @else
         <div>
     @endif
@@ -30,7 +31,7 @@
                         </div>
                     </div>
                     <cite class="not-italic">
-                        <span class="block font-bold mb-0 text-lg xl:text-xl group-hover:underline">{{ $item['title'] }}</span>
+                        <span id="{{ $titleId }}" class="block font-bold mb-0 text-lg xl:text-xl group-hover:underline">{{ $item['title'] }}</span>
                         @if(!empty($item['description']) && !empty($item['excerpt']) && !empty($component['showDescription']) && $component['showDescription'] === true)
                             <span class="block text-black 2xl:text-lg">{!! strip_tags($item['excerpt'], ['em', 'strong', 'br', '&ldquo;', '&rdquo;']) !!}</span>
                         @endif

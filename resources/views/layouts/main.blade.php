@@ -24,7 +24,9 @@
 @include('components.skip')
 
 <header>
-    @include('components.header')
+    @if($base['show_header'])
+        @include('components.header')
+    @endif
 
     @if(!empty($base['site']))
         @include('partials.nav-top', [
@@ -45,7 +47,7 @@
     @yield('top')
 
     @if(!empty($base['hero']) && (!empty($base['hero']['component']['heroPlacement']) && $base['hero']['component']['heroPlacement'] != 'contained'))
-        @if(($base['hero']['component']['heroType'] ?? '') === 'carousel')
+        @if(($base['hero']['component']['heroLayout'] ?? '') === 'carousel')
             @include('components.hero-carousel', ['hero' => $base['hero'], 'class' => 'hero--full-width'])
         @else
             @include('components.hero', ['hero' => $base['hero'], 'class' => 'hero--full-width'])
@@ -60,7 +62,7 @@
         <main class="content-area mx-auto w-full {{ $base['show_site_menu'] === true ? 'max-w-[900px]' : 'max-w-[75rem]' }} {{ (in_array($base['page']['controller'], config('base.full_width_controllers'))) ? ' max-w-full' : '' }}" tabindex="-1">
 
             @if(!empty($base['hero']) && (!empty($base['hero']['component']['heroPlacement']) && $base['hero']['component']['heroPlacement'] === 'contained'))
-                @if(($base['hero']['component']['heroType'] ?? '') === 'carousel')
+                @if(($base['hero']['component']['heroLayout'] ?? '') === 'carousel')
                     @include('components.hero-carousel', ['hero' => $base['hero'], 'class' => 'hero--contained'])
                 @else
                     @include('components.hero', ['hero' => $base['hero'], 'class' => 'hero--contained'])

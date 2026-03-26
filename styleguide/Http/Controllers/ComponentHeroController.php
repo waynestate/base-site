@@ -85,6 +85,7 @@ class ComponentHeroController extends Controller
         $title = $data['page']['title'] ?? '';
 
         $hero_type = $data['base']['hero']['component']['heroType'] ?? '';
+        $hero_layout = $data['base']['hero']['component']['heroLayout'] ?? '';
         $hero_placement = $data['base']['hero']['component']['heroPlacement'] ?? '';
 
         // If page data is missing, check hero data (common on styleguide pages)
@@ -105,7 +106,7 @@ class ComponentHeroController extends Controller
             'large' => ['option' => 'large'],
             'slim' => ['option' => 'small'],
             'split' => ['option' => 'half'],
-            'carousel' => ['limit' => 3],
+            'buttons' => ['option' => 'buttons'],
         ];
 
         if (isset($type_map[$hero_type])) {
@@ -113,11 +114,15 @@ class ComponentHeroController extends Controller
             $limit = $type_map[$hero_type]['limit'] ?? $limit;
         }
 
+        if ($hero_layout === 'carousel') {
+            $limit = 3;
+        }
+
         if ($hero_placement === 'contained') {
             $option .= ($option !== '' ? ' ' : '').'contained';
         }
 
-        if ($hero_type === 'carousel' && $hero_placement !== 'contained') {
+        if ($hero_layout === 'carousel' && $hero_placement !== 'contained') {
             $option .= ($option !== '' ? ' ' : '').'full';
         }
 

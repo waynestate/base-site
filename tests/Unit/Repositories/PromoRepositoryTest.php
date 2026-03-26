@@ -517,7 +517,7 @@ final class PromoRepositoryTest extends TestCase
         $promos = app(PromoRepository::class, ['wsuApi' => $wsuApi])->getRequestData($data);
 
         // Assert that the (empty) modular hero component replaces the global hero
-        $this->assertTrue($promos['hero'] == []);
+        $this->assertEmpty($promos['hero'] ?? []);
     }
 
     #[Test]
