@@ -66,14 +66,14 @@ $global_config = [
     | Default hero type is 'large' for images in a carousel
     |
     | 'heroType' = [
-    |         'slim' => ['slim', 'small'],
-    |         'split' => ['split', 'half'],
-    |         'text' => ['text'],
-    |         'buttons' => ['buttons'],
-    |         'logo' => ['logo'],
-    |         'svg' => ['svg'],
-    |         'carousel' => ['carousel'],
-    |         'large' => ['large', 'banner'],
+    |     'slim' => ['slim', 'small'],
+    |     'split' => ['split', 'half'],
+    |     'text' => ['text'],
+    |     'buttons' => ['buttons'],
+    |     'logo' => ['logo'],
+    |     'svg' => ['svg'],
+    |     'carousel' => ['carousel'],
+    |     'large' => ['large', 'banner'],
     | ];
     |
     */
