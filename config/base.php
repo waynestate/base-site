@@ -50,12 +50,12 @@ $global_config = [
     | Sets the default placement of the hero
     |
     | 'heroPlacement' = [
-    |     'contained', // content area
-    |     'full-width' // above content
+    |     'contained' => ['contained'],
+    |     'full-width' => ['full-width', 'full', 'banner', 'large', 'banner large'],
     | ];
     |
     */
-    'hero_placement' => 'contained',
+    'hero_placement' => 'full-width',
 
     /*
     |--------------------------------------------------------------------------
@@ -66,15 +66,18 @@ $global_config = [
     | Default hero type is 'large' for images in a carousel
     |
     | 'heroType' = [
-    |     'large', // banner-large, full
-    |     'slim', // banner-small, slim, half-height
-    |     'split', // half
-    |     'overlay', // text-overlay, svg-overlay, logo-overlay, buttons
-    |     'carousel', // more than one in array
+    |         'slim' => ['slim', 'small'],
+    |         'split' => ['split', 'half'],
+    |         'text' => ['text'],
+    |         'buttons' => ['buttons'],
+    |         'logo' => ['logo'],
+    |         'svg' => ['svg'],
+    |         'carousel' => ['carousel'],
+    |         'large' => ['large', 'banner'],
     | ];
     |
     */
-    'hero_type' => 'slim',
+    'hero_type' => 'banner',
 
     /*
     |--------------------------------------------------------------------------
