@@ -50,12 +50,12 @@ $global_config = [
     | Sets the default placement of the hero
     |
     | 'heroPlacement' = [
-    |     'contained', // content area
-    |     'full-width' // above content
+    |     'contained' => ['contained'],
+    |     'full-width' => ['full-width', 'full', 'banner', 'large', 'banner large'],
     | ];
     |
     */
-    'hero_placement' => 'contained',
+    'hero_placement' => 'full-width',
 
     /*
     |--------------------------------------------------------------------------
@@ -66,15 +66,18 @@ $global_config = [
     | Default hero type is 'large' for images in a carousel
     |
     | 'heroType' = [
-    |     'large', // banner-large, full
-    |     'slim', // banner-small, slim, half-height
-    |     'split', // half
-    |     'overlay', // text-overlay, svg-overlay, logo-overlay, buttons
-    |     'carousel', // more than one in array
+    |     'slim' => ['slim', 'small'],
+    |     'split' => ['split', 'half'],
+    |     'text' => ['text'],
+    |     'buttons' => ['buttons'],
+    |     'logo' => ['logo'],
+    |     'svg' => ['svg'],
+    |     'carousel' => ['carousel'],
+    |     'large' => ['large', 'banner'],
     | ];
     |
     */
-    'hero_type' => 'slim',
+    'hero_type' => 'banner',
 
     /*
     |--------------------------------------------------------------------------
@@ -226,6 +229,17 @@ $global_config = [
     'news_topics_text' => 'Filter by topic',
     'news_topics_controller' => TopicController::class,
     'news_controller' => ArticleController::class,
+
+    /*
+    |--------------------------------------------------------------------------
+    | WSUMobile requests
+    |--------------------------------------------------------------------------
+    |
+    | The name of the cookie whose presence indicates the request is coming
+    | from WSUMobile. When this cookie exists, the global header is hidden.
+    |
+    */
+    'exclude_header_cookie' => 'mobileUser',
 
     /*
     |--------------------------------------------------------------------------

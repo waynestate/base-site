@@ -190,11 +190,6 @@
 
     &--carousel {
 
-        #{$c}__content,
-        #{$c}__secondary-image {
-            @apply hidden;
-        }
-
         #{$c}__carousel-item {
             @apply max-h-hero;
         }

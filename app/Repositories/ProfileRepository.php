@@ -185,7 +185,7 @@ class ProfileRepository implements ProfileRepositoryContract
 
         // No selection → all groups
         if ($selected_group === null) {
-            return implode(',', array_keys($dropdown_groups));
+            return implode('|', array_keys($dropdown_groups));
         }
 
         // Normalize user input (accept | or ,)
@@ -193,7 +193,7 @@ class ProfileRepository implements ProfileRepositoryContract
             ->map(fn ($item) => trim($item))
             ->filter(fn ($item) => $item !== '')
             ->unique()
-            ->implode(',');
+            ->implode('|');
     }
 
     /**
