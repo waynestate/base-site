@@ -2771,7 +2771,7 @@ __metadata:
     copy-webpack-plugin: "npm:^14.0.0"
     eslint: "npm:^10.1.0"
     eslint-webpack-plugin: "npm:^5.0.3"
-    flickity: "npm:^2.3.0"
+    flickity: "npm:^3.0.0"
     intersection-observer: "npm:^0.12.2"
     laravel-mix: "npm:^6.0.49"
     mediabox: "npm:^1.1.3"
@@ -4040,13 +4040,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"desandro-matches-selector@npm:^2.0.0":
-  version: 2.0.2
-  resolution: "desandro-matches-selector@npm:2.0.2"
-  checksum: 10c0/f4b1f42e6ccd6c97e93e3f99a64461eef2722075b03d8a9e349e31766436f8b385d1fd50802b024dae951dc69399f13de20a139c1187000fd5e2fcf11cb5eb00
-  languageName: node
-  linkType: hard
-
 "destroy@npm:1.2.0":
   version: 1.2.0
   resolution: "destroy@npm:1.2.0"
@@ -4615,10 +4608,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ev-emitter@npm:^1.0.1, ev-emitter@npm:^1.1.1":
-  version: 1.1.1
-  resolution: "ev-emitter@npm:1.1.1"
-  checksum: 10c0/332dcb444de2b1d81035fb22a10dd33926311baa7ea6fc24f1de7b60c6eff5b7e133611000fce740471f0c8f95259d3914d49b4201af2d85a51f0aeb8cb1ceda
+"ev-emitter@npm:^2.0.0, ev-emitter@npm:^2.1.2":
+  version: 2.1.2
+  resolution: "ev-emitter@npm:2.1.2"
+  checksum: 10c0/3c7a7983d1b964ca58e4ed025aeb1f4201b1a76ffd1c1f59677518f4d4a3bd82cd4d94fa1f1646b29949744c30725e4607505c75a1fb81832846537d65ac026f
   languageName: node
   linkType: hard
 
@@ -4895,12 +4888,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fizzy-ui-utils@npm:^2.0.7":
-  version: 2.0.7
-  resolution: "fizzy-ui-utils@npm:2.0.7"
-  dependencies:
-    desandro-matches-selector: "npm:^2.0.0"
-  checksum: 10c0/4c36d45db4e2e0cf1507aa9633af6710a12bdc047146fa89505e10aedc5bfb16cbfb0da686d5dfd89a37e1da4bce86bbee365e22be88705ab4ffccd530b4902a
+"fizzy-ui-utils@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "fizzy-ui-utils@npm:3.0.0"
+  checksum: 10c0/09a64d0e482d02eb87f4a70689f6f02866cb488b472739d5781046805127f2027a30101b5aefc1b66b21b408e110f097c3f268a2fc0fdf7cfe7bb1b693f2e1f8
   languageName: node
   linkType: hard
 
@@ -4941,17 +4932,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flickity@npm:^2.3.0":
-  version: 2.3.0
-  resolution: "flickity@npm:2.3.0"
+"flickity@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "flickity@npm:3.0.0"
   dependencies:
-    desandro-matches-selector: "npm:^2.0.0"
-    ev-emitter: "npm:^1.1.1"
-    fizzy-ui-utils: "npm:^2.0.7"
-    get-size: "npm:^2.0.3"
-    unidragger: "npm:^2.4.0"
-    unipointer: "npm:^2.4.0"
-  checksum: 10c0/75922e9e01514bd72486be2893412dd25a10e15ca91bb7e517dd8584ca74972ef8e158d00f57ca6b14372ea138b342fbcf9ca65e0bda14b57ca69e108c546bcc
+    ev-emitter: "npm:^2.1.2"
+    fizzy-ui-utils: "npm:^3.0.0"
+    get-size: "npm:^3.0.0"
+    imagesloaded: "npm:^5.0.0"
+    unidragger: "npm:^3.0.0"
+  checksum: 10c0/f6dbab582dff320bf5d4eaaec82ba8496313469db9354dd22f69b00e9e27e10a48610e25a71b9325db0e7fa0cc4a8be83811e709949be6dbd69a76c339b360c2
   languageName: node
   linkType: hard
 
@@ -5132,10 +5122,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"get-size@npm:^2.0.3":
-  version: 2.0.3
-  resolution: "get-size@npm:2.0.3"
-  checksum: 10c0/c9703caa61b4d38385eab34aa5068f3a25ab40f6d9cda6dac3f0dc4dcd8da38f7b0283035e71c9f52a47b670b9315372cae46f58d66ad709a4939e57c1fdc6cc
+"get-size@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "get-size@npm:3.0.0"
+  checksum: 10c0/dcfed978a6671941ca2ac8618e300cb8726fa6c01a072506bc67330790b81d5590c1e080f24e983d92782c32a7d17cc276d84156cd90275e13f9acf310ce0f05
   languageName: node
   linkType: hard
 
@@ -5662,6 +5652,15 @@ __metadata:
     p-pipe: "npm:^3.0.0"
     replace-ext: "npm:^1.0.0"
   checksum: 10c0/13e5de25fe1275d05a948b745b5cc8ca472f69bec895baf32e96e61bbd9c98a065f14a5de8f178ce426e2466780360dbddc9f6024664f3afa551d6390733c40e
+  languageName: node
+  linkType: hard
+
+"imagesloaded@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "imagesloaded@npm:5.0.0"
+  dependencies:
+    ev-emitter: "npm:^2.1.2"
+  checksum: 10c0/7eae70f19d298f411e2359e8f4be532f7e6842481147ac9234ff42d49f02be0f3b2c3c562466feaae699eb9b126d7ef2bec5f58878ab3efe486275997b87512b
   languageName: node
   linkType: hard
 
@@ -9662,21 +9661,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unidragger@npm:^2.4.0":
-  version: 2.4.0
-  resolution: "unidragger@npm:2.4.0"
+"unidragger@npm:^3.0.0":
+  version: 3.0.1
+  resolution: "unidragger@npm:3.0.1"
   dependencies:
-    unipointer: "npm:^2.4.0"
-  checksum: 10c0/108d519d2a3653299ad9ac5fdf25ae851696fbd4769b2139af34613162772acfbfb3e72aee463c5bb42f79203da08118581ff0a2df7b049ea3e2d30022cc0427
-  languageName: node
-  linkType: hard
-
-"unipointer@npm:^2.4.0":
-  version: 2.4.0
-  resolution: "unipointer@npm:2.4.0"
-  dependencies:
-    ev-emitter: "npm:^1.0.1"
-  checksum: 10c0/cb824e5dce62094509d71ab9fc857901191082649febf6d5ffc00a7b9a27977b3e2429c2ccce49d9923cbed18f551c58038f08638734b0737b32d70181a9d5ac
+    ev-emitter: "npm:^2.0.0"
+  checksum: 10c0/d9751e6641b56fd92001ffafaa1b352ca5c80392de4f451926a75685a268bbabde6bb337a4fe45043c14ef8e632931dab60ba120bc7371768c1ad7011963af39
   languageName: node
   linkType: hard
 
