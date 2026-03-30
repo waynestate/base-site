@@ -55,7 +55,7 @@ $global_config = [
     | ];
     |
     */
-    'hero_placement' => 'full-width',
+    'hero_placement' => 'contained',
 
     /*
     |--------------------------------------------------------------------------

@@ -521,7 +521,7 @@ final class HeroRepositoryTest extends TestCase
 
         $result = $this->heroRepository->setHero($promos, []);
         $this->assertEquals('carousel', $result['hero']['component']['heroLayout']);
-        $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
+        $this->assertEquals('contained', $result['hero']['component']['heroPlacement']);
     }
 
     #[Test]
