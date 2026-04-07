@@ -97,6 +97,8 @@ class HeroRepository implements HeroRepositoryContract
             $hero['component']['heroLayout'] = 'carousel';
         }
 
+        // if banner is selected unset title etc 
+
         foreach ($hero['data'] as $hero_key => $hero_data) {
             $promoOption = strtolower($hero_data['option'] ?? '');
             $componentOption = strtolower($hero['component']['option'] ?? '');
@@ -269,7 +271,7 @@ class HeroRepository implements HeroRepositoryContract
     private function mapType(string $promoOption, string $componentOption): ?string
     {
         $typeMap = [
-            'banner' => ['slim', 'small', 'banner'],
+            'banner' => ['slim', 'small'],
             'split' => ['split', 'half'],
             'text' => ['text'],
             'buttons' => ['buttons'],
@@ -290,6 +292,22 @@ class HeroRepository implements HeroRepositoryContract
                 }
             }
         }
+
+        $unsetMap = [
+            'title' => [],
+            'description' => [],
+            'excerpt' => [],
+            'filename_url' => [],
+            'secondary_image' => [],
+            'banner' => ['slim', 'small'],
+            'split' => ['split', 'half'],
+            'text' => ['text'],
+            'buttons' => ['buttons'],
+            'logo' => ['logo'],
+            'svg' => ['svg'],
+            'carousel' => ['carousel'],
+        ];
+
 
         return null;
     }
