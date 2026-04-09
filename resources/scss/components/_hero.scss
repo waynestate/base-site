@@ -12,7 +12,7 @@
     }
 
     &__primary-image {
-        @apply w-full h-full object-cover object-center;
+        @apply w-full object-cover object-center;
     }
 
     /* Placement modifiers */
@@ -34,7 +34,7 @@
         @apply h-hero-small max-h-hero-small;
 
         #{$c}__primary-image {
-            @apply w-full h-full object-cover object-center;
+            @apply w-full object-cover object-center;
         }
     }
 
@@ -42,12 +42,16 @@
         @apply aspect-hero max-h-hero;
 
         #{$c}__primary-image {
-            @apply w-full h-full object-cover object-center;
+            @apply w-full object-cover object-center;
         }
     }
 
     /* Type modifiers */
     #{$c}--banner {
+        #{$c}__primary-image {
+            @apply w-full object-cover object-center;
+        }
+
         #{$c}__secondary-image {
             @apply hidden;
         }
@@ -159,7 +163,7 @@
         @apply relative aspect-hero max-h-hero;
 
         #{$c}__primary-image {
-            @apply absolute inset-0 w-full h-full object-cover;
+            @apply absolute inset-0 w-full object-cover;
         }
 
         #{$c}__content {
@@ -167,7 +171,8 @@
         }
 
         #{$c}__secondary-image {
-            @apply max-w-full max-h-full;
+            //@apply max-w-full max-h-full;
+            @apply absolute inset-0 z-10;
         }
 
         #{$c}__link {
@@ -184,7 +189,7 @@
         @apply relative flex flex-col justify-center bg-green-900 min-h-[300px];
 
         #{$c}__primary-image {
-            @apply inset-0 absolute print:relative bg-cover bg-top opacity-20;
+            @apply inset-0 absolute opacity-20 w-full h-full;
         }
 
         #{$c}__secondary-image {
