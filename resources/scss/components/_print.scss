@@ -18,12 +18,12 @@
         content: '';
     }
 
-    .menu-top-container {
+    .nav-top {
         &.fixed {
             @apply relative;
         }
 
-        h1 > a[href]::after {
+        a[href]::after {
             content: '';
         }
     }
