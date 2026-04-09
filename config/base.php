@@ -59,28 +59,6 @@ $global_config = [
 
     /*
     |--------------------------------------------------------------------------
-    | Hero type
-    |--------------------------------------------------------------------------
-    |
-    | Sets the default type of the hero
-    | Default hero type is 'large' for images in a carousel
-    |
-    | 'heroType' = [
-    |     'slim' => ['slim', 'small'],
-    |     'split' => ['split', 'half'],
-    |     'text' => ['text'],
-    |     'buttons' => ['buttons'],
-    |     'logo' => ['logo'],
-    |     'svg' => ['svg'],
-    |     'carousel' => ['carousel'],
-    |     'large' => ['large', 'banner'],
-    | ];
-    |
-    */
-    'hero_type' => 'banner',
-
-    /*
-    |--------------------------------------------------------------------------
     | Top Menu Enabled
     |--------------------------------------------------------------------------
     |
