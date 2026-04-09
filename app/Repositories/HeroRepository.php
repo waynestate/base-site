@@ -69,36 +69,8 @@ class HeroRepository implements HeroRepositoryContract
 
         // Initialize the hero component if not set
         $hero['component'] = $hero['component'] ?? [];
-        $hero['component']['heroLayout'] = '';
 
-        // Layout is carousel if the limit is more than 1 and there is more than one hero promo item
-        $heroCount = count($hero['data']);
-        $heroLimit = (int) ($hero['component']['limit'] ?? 1);
-
-        // If it's a global hero (no component limit set), it should be a carousel if there's more than 1 item
-        if (!isset($hero['component']['limit']) && $heroCount > 1) {
-            $heroLimit = $heroCount;
-        }
-
-        $isCarousel = ($heroCount > 1 && $heroLimit > 1);
-
-        // Check if any promo or component option explicitly sets the carousel
-        if (!$isCarousel) {
-            foreach ($hero['data'] as $hero_data) {
-                $option = strtolower(($hero_data['option'] ?? '') . ' ' . ($hero['component']['option'] ?? ''));
-                if (str_contains($option, 'carousel')) {
-                    $isCarousel = true;
-                    break;
-                }
-            }
-        }
-
-        if ($isCarousel) {
-            $hero['component']['heroLayout'] = 'carousel';
-        }
-
-        // if banner is selected unset title etc 
-
+        // Set hero classes on each item
         foreach ($hero['data'] as $hero_key => $hero_data) {
             $promoOption = strtolower($hero_data['option'] ?? '');
             $componentOption = strtolower($hero['component']['option'] ?? '');
@@ -106,56 +78,33 @@ class HeroRepository implements HeroRepositoryContract
             $hero_data['hero_options'] = explode(' ', $option);
             $hero_data['hero_classes'] = [];
 
-            // Determine Type
+            // Determine type
             $type = $this->mapType($promoOption, $componentOption);
             if ($type) {
-                $hero['component']['heroType'] = $type;
+                $hero_data['hero_type'] = $type;
                 $hero_data['hero_classes'][] = 'hero--' . $type;
             } else {
-                $type = $hero['component']['heroType'] ?? config('base.hero_type') ?? 'banner';
-                $hero['component']['heroType'] = $type;
+                $hero_data['hero_type'] = $type;
                 $hero_data['hero_classes'][] = 'hero--' . $type;
             }
 
-            // Determine Placement
+            // Determine placement
             $placement = $this->mapPlacement($promoOption, $componentOption);
             if ($placement) {
                 $hero['component']['heroPlacement'] = $placement;
             }
 
-            // Determine Height
+            // Determine height
             $height = $this->mapHeight($promoOption, $componentOption);
             if ($height) {
-                $hero['component']['heroHeight'] = $height;
                 $hero_data['hero_classes'][] = 'hero--' . $height;
             }
 
-            // If carousel, add the class to the item as well
-            if ($isCarousel) {
-                $hero_data['hero_classes'][] = 'hero--carousel';
-            }
+            // Unset hero data based on type
+            $hero_data = $this->unsetHeroData($hero_data);
 
             $hero['data'][$hero_key] = $hero_data;
         }
-
-        // Determine carousel type from option if not already set by count or limit
-        if (!$isCarousel && str_contains($option, 'carousel')) {
-            $isCarousel = true;
-        }
-
-        if ($isCarousel) {
-            $hero['component']['heroType'] = 'carousel';
-            $hero['component']['heroPlacement'] = 'full-width';
-
-            // Determine Placement for carousel
-            $placement = $this->mapPlacement($promoOption, $componentOption);
-            if ($placement) {
-                $hero['component']['heroPlacement'] = $placement;
-            }
-        }
-
-        // Default hero placement if not set
-        $hero['component']['heroPlacement'] = $hero['component']['heroPlacement'] ?? config('base.hero_placement');
 
         // Add hero back into promos
         unset($promos['hero']);
@@ -224,7 +173,7 @@ class HeroRepository implements HeroRepositoryContract
         }
 
         $hero['component']['heroPlacement'] = $hero['component']['heroPlacement'] ?? config('base.hero_placement');
-        $hero['component']['heroType'] = $hero['component']['heroType'] ?? config('base.hero_type');
+        $hero['component']['heroType'] = $hero['component']['heroType'] ?? 'banner';
 
         unset($components[$hero_key]);
 
@@ -271,13 +220,12 @@ class HeroRepository implements HeroRepositoryContract
     private function mapType(string $promoOption, string $componentOption): ?string
     {
         $typeMap = [
-            'banner' => ['slim', 'small'],
+            'banner' => ['slim', 'small', 'banner'],
             'split' => ['split', 'half'],
             'text' => ['text'],
             'buttons' => ['buttons'],
             'logo' => ['logo'],
             'svg' => ['svg'],
-            'carousel' => ['carousel'],
         ];
 
         $option = $promoOption ?? $componentOption;
@@ -286,30 +234,14 @@ class HeroRepository implements HeroRepositoryContract
         if (!empty($option)) {
             foreach ($typeMap as $type => $keywords) {
                 foreach ($keywords as $keyword) {
-                    if (preg_match('/\b' . preg_quote($keyword, '/') . '\b/', $option)) {
+                    if (preg_match('/\b' . preg_quote($keyword, '/') . '\b/i', $option)) {
                         return $type;
                     }
                 }
             }
         }
 
-        $unsetMap = [
-            'title' => [],
-            'description' => [],
-            'excerpt' => [],
-            'filename_url' => [],
-            'secondary_image' => [],
-            'banner' => ['slim', 'small'],
-            'split' => ['split', 'half'],
-            'text' => ['text'],
-            'buttons' => ['buttons'],
-            'logo' => ['logo'],
-            'svg' => ['svg'],
-            'carousel' => ['carousel'],
-        ];
-
-
-        return null;
+        return 'banner';
     }
 
     /**
@@ -319,23 +251,23 @@ class HeroRepository implements HeroRepositoryContract
     {
         $placementMap = [
             'contained' => ['contained'],
-            'full-width' => ['full-width', 'full', 'large',],
+            'full-width' => ['full-width', 'full', 'large'],
         ];
 
         $option = $promoOption ?? $componentOption;
 
         // Component will override promo option
         if (!empty($option)) {
-            foreach ($placementMap as $type => $keywords) {
+            foreach ($placementMap as $placement => $keywords) {
                 foreach ($keywords as $keyword) {
                     if (preg_match('/\b' . preg_quote($keyword, '/') . '\b/', $option)) {
-                        return $type;
+                        return $placement;
                     }
                 }
             }
         }
 
-        return null;
+        return config('base.hero_placement');
     }
 
     /**
@@ -362,5 +294,29 @@ class HeroRepository implements HeroRepositoryContract
         }
 
         return null;
+    }
+
+    /**
+     * Unset hero data based on type.
+     */
+    private function unsetHeroData(array $hero_data): ?array
+    {
+        $unsetHeroDataMap = [
+            'banner' => ['title', 'link', 'description', 'secondary_relative_url'],
+            'svg' => ['title', 'description'],
+            'split' => ['secondary_relative_url'],
+            'text' => ['secondary_relative_url'],
+            'buttons' => ['secondary_relative_url'],
+        ];
+
+        foreach($unsetHeroDataMap as $type => $hero_values) {
+            if(!empty($hero_data['hero_type']) && $hero_data['hero_type'] === $type) {
+                foreach($hero_values as $hero_value) {
+                    unset($hero_data[$hero_value]);
+                }
+            }
+        }
+
+        return $hero_data;
     }
 }
