@@ -47,11 +47,7 @@
     @yield('top')
 
     @if(!empty($base['hero']) && (!empty($base['hero']['component']['heroPlacement']) && $base['hero']['component']['heroPlacement'] != 'contained'))
-        @if(($base['hero']['component']['heroLayout'] ?? '') === 'carousel')
-            @include('components.hero-carousel', ['hero' => $base['hero'], 'class' => 'hero--full-width'])
-        @else
-            @include('components.hero', ['hero' => $base['hero'], 'class' => 'hero--full-width'])
-        @endif
+        @include('components.hero', ['hero' => $base['hero']])
 
         @yield('under-hero')
     @endif
