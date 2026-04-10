@@ -59,6 +59,11 @@ class ArticleController extends Controller
         // Force the menu to be shown if categories are found
         if (! empty($topics['topics']['data'])) {
             $request->data['base']['show_site_menu'] = true;
+
+            if (config('base.top_menu_enabled') == true) {
+                $request->data['base']['site_menu'] = null;
+                $request->data['base']['site_menu_output'] = null;
+            }
         }
 
         return view('articles', merge($request->data, $articles, $topics));
@@ -122,6 +127,11 @@ class ArticleController extends Controller
         // Force the menu to be shown if categories are found
         if (! empty($topics['topics']['data'])) {
             $request->data['base']['show_site_menu'] = true;
+
+            if (config('base.top_menu_enabled') == true) {
+                $request->data['base']['site_menu'] = null;
+                $request->data['base']['site_menu_output'] = null;
+            }
         }
 
         return view('article', merge($request->data, $article, $topics));
