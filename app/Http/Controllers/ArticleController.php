@@ -52,6 +52,14 @@ class ArticleController extends Controller
 
         $articles = $this->article->listing($request->data['base']['site']['news']['application_id'], 25, $request->query('page'), ! empty($selected_topic['topic_id']) ? $selected_topic['topic_id'] : null);
 
+        // 404 if no articles are found and we are trying to page which doesn't exist
+        if (
+            $request->query('page') > 0 &&
+            empty($articles['articles']['data'])
+        ) {
+            abort(404);
+        }
+
         if (! empty($articles['articles']['meta'])) {
             $articles['articles']['meta'] = $this->article->setPaging($articles['articles']['meta'], $request->query('page'));
         }
