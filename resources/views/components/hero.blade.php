@@ -14,14 +14,14 @@
                 @if(!empty($item['title']) || !empty($item['secondary_relative_url']))
                     <div class="hero__content">
                         @if(!empty($item['secondary_relative_url']))
-                            @if(empty($item['title']) && !empty($item['link']))<a href="{{ $item['link'] }}"><span class="absolute inset-0 z-10"></span>@endif
+                            @if(empty($item['title']) && !empty($item['link']))<a class="hero__link" href="{{ $item['link'] }}"><span class="hero__link-span"></span>@endif
                                 <img class="hero__secondary-image" src="{{ $item['secondary_relative_url'] }}" alt="{{ $item['secondary_alt_text'] }}">
                             @if(empty($item['title']) && !empty($item['link']))</a>@endif
                         @endif
 
                         @if(!empty($item['title']))
                             <div class="hero__title">
-                                @if(!empty($item['link']))<a href="{{ $item['link'] }}"><span class="absolute inset-0 z-10"></span>@endif
+                                @if(!empty($item['link']))<a class="hero__link" href="{{ $item['link'] }}"><span class="absolute inset-0 z-10"></span>@endif
                                     {!! strip_tags($item['title'], ['em']) !!}
                                 @if(!empty($item['link']))</a>@endif
                             </div>

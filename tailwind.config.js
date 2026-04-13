@@ -170,14 +170,15 @@ module.exports = {
             },
             height: {
                 'hero-small': '18.75vw',
-                hero: '36.25vw',
+                'hero': '36.25vw',
             },
             maxHeight: {
                 'hero-small': '250px',
-                hero: '600px',
+                'hero': '600px',
             },
             minHeight: {
-                hero: '600px',
+                'hero': '600px',
+                'hero-small': '18.75vw',
             },
             borderWidth: {
                 12: '12px',
@@ -195,6 +196,7 @@ module.exports = {
             aspectRatio: {
                 portrait: '3 / 4',
                 hero: '2.76 / 1',
+                'hero-small': '32 / 5',
             },
             transitionProperty: {
                 height: 'height',

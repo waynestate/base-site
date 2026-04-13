@@ -1,6 +1,6 @@
 .hero {
     $c: &;
-    @apply relative max-w-full;
+    @apply relative max-w-full overflow-hidden;
 
     &__carousel-item {
         /* Flickity applies absolute to this container when enabled */
@@ -15,6 +15,14 @@
         @apply w-full object-cover object-center;
     }
 
+    &__link {
+        @apply text-green-700 no-underline hover:underline focus:underline decoration-2 underline-offset-4;
+    }
+
+    &__link-span {
+        @apply absolute inset-0 z-10;
+    }
+
     /* Placement modifiers */
     &--full-width {
         @apply mx-auto;
@@ -23,42 +31,38 @@
     &--contained {
         @apply xl:mx-container;
 
+        /* TODO fix placement */
+        #{$c}--text {
+            @apply w-full sm:aspect-hero max-h-hero;
 
-        #{$c}__title {
-            @apply lg:drop-shadow-px leading-tight text-3xl lg:text-5xl font-bold my-2;
+            #{$c}__primary-image {
+                @apply w-full h-full absolute inset-0 object-cover object-center;
+            }
         }
     }
 
     /* Height modifiers */
     &--slim {
-        @apply h-hero-small max-h-hero-small;
+        @apply w-full;
+
+        max-height: 250px;
 
         #{$c}__primary-image {
-            @apply w-full object-cover object-center;
+            @apply w-full h-full absolute inset-0 object-cover object-center;
         }
     }
 
     &--large {
-        @apply aspect-hero max-h-hero;
+        @apply w-full sm:aspect-hero max-h-hero;
 
         #{$c}__primary-image {
-            @apply w-full object-cover object-center;
+            @apply w-full h-full absolute inset-0 object-cover object-center;
         }
     }
 
     /* Type modifiers */
     #{$c}--banner {
-        #{$c}__primary-image {
-            @apply w-full object-cover object-center;
-        }
-
-        #{$c}__secondary-image {
-            @apply hidden;
-        }
-
-        #{$c}__content {
-            @apply hidden;
-        }
+        /* No styles */
     }
 
     &--split {
@@ -68,28 +72,17 @@
             @apply w-full xl:w-[60%] shrink-0 aspect-video;
         }
         
-        #{$c}__secondary-image {
-            @apply hidden;
-        }
-
         #{$c}__content {
             @apply relative p-6 xl:px-12 2xl:px-16 ml-6;
-        }
-
-        #{$c}__content {
             @apply border-l-12 border-gold border-solid pl-6 2xl:pl-8 pt-4 pb-8;
         }
 
         #{$c}__title {
-            @apply text-green-700 3xl:text-4xl mb-3 font-black lg:drop-shadow-none;
+            @apply text-green-700 3xl:text-4xl mb-3 font-black;
         }
 
-        #{$c}__link {
-             @apply text-green-700 no-underline hover:underline focus:underline;
-         }
-
         #{$c}__description {
-             @apply text-lg 3xl:text-xl text-green-700 content;
+             @apply text-lg 3xl:text-xl text-green-700;
          }
     }
 
@@ -108,11 +101,14 @@
         }
 
         #{$c}__title {
-            @apply lg:drop-shadow-px leading-tight text-3xl lg:text-5xl font-bold mb-2;
+            @apply lg:drop-shadow-px leading-tight text-3xl lg:text-5xl font-bold mb-1;
         }
 
         #{$c}__description {
-            @apply relative text-lg content;
+            @apply relative; 
+
+            font-size: 1.125rem;
+            line-height: 1.13rem;
         }
 
         #{$c}__buttons {
@@ -125,29 +121,40 @@
     }
 
     &--text {
-        @apply aspect-hero max-h-hero;
+        @apply grid items-end bg-green-800;
 
         #{$c}__primary-image {
-            @apply aspect-hero max-h-hero;
-        }
-
-        #{$c}__secondary-image {
-            @apply hidden;
+            @apply w-full h-full absolute inset-0;
         }
 
         #{$c}__content {
-            @apply mt-4 py-1 px-4 border-l-12 border-gold border-solid text-green-900;
-            @apply lg:px-container lg:absolute lg:bottom-0 lg:inset-x-0 lg:pt-28 lg:pb-6;
-            @apply lg:mt-0 lg:border-0 lg:text-white lg:white-links;
-            @apply lg:bg-gradient-darkest;
+            @apply relative w-full text-white bg-gradient-darkest
+            px-container;
+
+            padding-bottom: clamp(16px, 2vw, 3vw);
+            padding-top: calc(8vw + 2.5em)
         }
 
         #{$c}__title {
-            @apply lg:drop-shadow-px leading-tight text-3xl lg:text-5xl font-bold mb-2;
+            @apply drop-shadow-px leading-tight font-bold mb-1;
+
+            font-size: clamp(2rem, 1.9726rem + 1.3699vw, 3rem);
+            line-height: 1.15em;
+        }
+
+        #{$c}__link {
+            @apply text-white;
         }
 
         #{$c}__description {
-            @apply relative text-lg content;
+            @apply relative white-links;
+
+            font-size: 1.125rem;
+            line-height: 1.5rem;
+
+            p:last-of-type {
+                margin-bottom: 0;
+            }
         }
 
         #{$c}__buttons {
@@ -160,28 +167,13 @@
     }
 
     &--svg {
-        @apply relative aspect-hero max-h-hero;
-
-        #{$c}__primary-image {
-            @apply absolute inset-0 w-full object-cover;
-        }
-
+        #{$c}__link,
         #{$c}__content {
-            @apply absolute inset-0 flex items-center justify-center;
+            @apply absolute inset-0 z-10 flex items-center; 
         }
 
         #{$c}__secondary-image {
-            //@apply max-w-full max-h-full;
-            @apply absolute inset-0 z-10;
-        }
-
-        #{$c}__link {
-            @apply absolute inset-0 z-10;
-        }
-
-        #{$c}__title,
-        #{$c}__description {
-            @apply hidden;
+            @apply object-contain object-center mx-auto max-h-full max-w-full;
         }
     }
 

@@ -220,7 +220,7 @@ class HeroRepository implements HeroRepositoryContract
     private function mapType(string $promoOption, string $componentOption): ?string
     {
         $typeMap = [
-            'banner' => ['slim', 'small', 'banner'],
+            'banner' => ['banner'],
             'split' => ['split', 'half'],
             'text' => ['text'],
             'buttons' => ['buttons'],
