@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 use Contracts\Repositories\PromoRepositoryContract;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -55,6 +56,12 @@ class PromoController extends Controller
 
         if (! empty($promo['promo']['title'])) {
             $request->data['base']['page']['title'] = $promo['promo']['title'];
+        }
+
+        // Update to append the slug and promo id to match the current URL structure
+        if (!empty($request->data['base']['page']['canonical'])) {
+            $request->data['base']['page']['canonical'] .= '/' . Str::slug($promo['promo']['title']) . '-' .
+                $promo['promo']['promo_item_id'];
         }
 
         // Set the back URL
