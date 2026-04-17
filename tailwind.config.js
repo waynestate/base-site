@@ -184,7 +184,8 @@ module.exports = {
                 12: '12px',
             },
             dropShadow: {
-                px: '0 1px 1px rgba(12, 84, 73, 0.5)',
+                px: '0 1px 1px rgba(5, 33, 30, 0.5)',
+                '2px': '0 2px 1px rgba(5, 33, 30, 0.5)',
             },
             boxShadow: {
                 white: '0 7px 0 ' + twColors.white + ', 0 14px 0 ' + twColors.white,
