@@ -50,7 +50,7 @@ const screens = {
     sm: '420px',
     md: '576px',
     lg: '732px',
-    xl: '888px',
+    xl: '869px',
     '2xl': '1044px',
     '3xl': '1200px',
     mt: '780px', // Adjust this based on the top menu width
@@ -169,7 +169,7 @@ module.exports = {
                 19: '4.75rem',
             },
             height: {
-                'hero-small': '18.75vw',
+                'hero-small': '20.83vw',
                 'hero': '36.25vw',
             },
             maxHeight: {
@@ -178,7 +178,7 @@ module.exports = {
             },
             minHeight: {
                 'hero': '600px',
-                'hero-small': '18.75vw',
+                'hero-small': '20.83vw',
             },
             borderWidth: {
                 12: '12px',
@@ -197,7 +197,7 @@ module.exports = {
             aspectRatio: {
                 portrait: '3 / 4',
                 hero: '2.76 / 1',
-                'hero-small': '32 / 5',
+                'hero-small': '22 / 5',
             },
             transitionProperty: {
                 height: 'height',

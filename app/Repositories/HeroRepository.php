@@ -103,6 +103,11 @@ class HeroRepository implements HeroRepositoryContract
             // Unset hero data based on type
             $hero_data = $this->unsetHeroData($hero_data);
 
+            // Remove links from description if link field is set
+            if(!empty($hero_data['link']) && !empty($hero_data['description'])) {
+                $hero_data['description'] = preg_replace(['"<a href(.*?)>"', '"</a>"'], '', $hero_data['description']);
+            }
+
             $hero['data'][$hero_key] = $hero_data;
         }
 
@@ -306,7 +311,7 @@ class HeroRepository implements HeroRepositoryContract
             'svg' => ['title', 'description'],
             'split' => ['secondary_relative_url'],
             'text' => ['secondary_relative_url'],
-            'buttons' => ['secondary_relative_url'],
+            'buttons' => ['link', 'secondary_relative_url'],
         ];
 
         foreach($unsetHeroDataMap as $type => $hero_values) {
