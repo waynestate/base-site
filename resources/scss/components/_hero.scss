@@ -1,14 +1,11 @@
 .hero {
     $c: &;
+
     @apply relative max-w-full overflow-hidden;
 
     container: hero / inline-size;
 
-    &__carousel-item {
-        /* Flickity applies absolute to this container when enabled */
-        @apply w-full;
-    }
-
+    /* Default styles across all classes */
     &__type {
         @apply w-full relative;
     }
@@ -22,7 +19,18 @@
     }
 
     &__link {
-        @apply text-green-700 underline focus:underline decoration-1 focus:decoration-2 hover:decoration-2 underline-offset-[0.2rem] hover:underline-offset-[0.3rem] transition-all;
+        @apply 
+
+        text-green-700 
+
+        underline 
+        underline-offset-[0.2rem] 
+        hover:underline-offset-[0.3rem] focus:underline-offset-[0.3rem] 
+
+        decoration-1 
+        hover:decoration-2 focus:decoration-2 
+
+        transition-all;
     }
 
     &__link-span {
@@ -40,11 +48,14 @@
 
     /* Height modifiers */
     &--slim {
-        @apply w-full min-h-[135px] md:aspect-hero-small lg:h-hero-small 2xl:max-h-[250px];
+        @apply 
+        min-h-[135px] 
+        md:aspect-hero-small /* maintain aspect ratio between set heights */
+        lg:h-hero-small 
+        2xl:max-h-[250px];
     }
 
     &--large {
-        @apply w-full;
     }
 
     /* Type modifiers */
@@ -56,10 +67,131 @@
         }
 
         &#{$c}--slim {
-            @apply aspect-hero-small
+            @apply aspect-hero-small max-h-[250px];;
         }
     }
 
+
+    /* 
+     * Text and Buttons 
+     */
+    &--text,
+    &--buttons {
+        @apply grid items-end lg:bg-green-900;
+
+        #{$c}__primary-image {
+            @apply aspect-hero lg:aspect-auto max-h-hero;
+        }
+
+        #{$c}__content {
+            @apply 
+
+            /* positioning */
+            relative lg:absolute 
+            lg:inset-x-0 lg:bottom-0 
+
+            /* background */
+            rounded bg-white 
+            lg:bg-transparent lg:bg-gradient-darkest
+
+            /* text and shadows */
+            drop-shadow-md 
+            lg:drop-shadow-none 
+            lg:text-white 
+
+            /* border */
+            border-gold border-solid border-l-12 
+            lg:border-0
+
+            /* margins */
+            -mt-8 mb-2 mx-6
+            lg:m-0
+
+            /* padding */
+            p-4 pr-5 
+            lg:px-container lg:pt-20 
+            ;
+
+            @container hero (width > 868px) {
+                @apply text-4xl pb-6;
+            }
+
+            &::before {
+                /* Extending gradient overlay for readability */
+                @apply -top-[60%];
+            }
+        }
+
+        #{$c}__title {
+            @apply leading-tight font-bold  mb-2 text-green lg:text-white lg:drop-shadow-2px lg:max-w-[36ch]
+            text-2xl lg:text-3xl;
+
+            @container hero (width > 868px) {
+                @apply text-4xl;
+            }
+
+            @container hero (width > 1000px) {
+                @apply text-5xl;
+            }
+        }
+
+        #{$c}__link {
+            @apply lg:text-white;
+        }
+
+        #{$c}__description {
+            @apply relative lg:white-links text-base mt-2;
+
+            p:last-of-type {
+                @apply mb-0;
+            }
+
+            @container hero (width > 868px) {
+                @apply text-lg;
+            }
+        }
+
+        &#{$c}--slim {
+            @apply min-h-[135px] md:aspect-hero-small lg:h-hero-small 2xl:max-h-[250px];
+
+            #{$c}__title {
+                @apply mb-0 text-white relative text-4xl xl:text-5xl;
+            }
+
+            #{$c}__content {
+                @apply pt-12 border-0 m-0 drop-shadow-none bg-transparent bg-gradient-darkest;
+            }
+
+            #{$c}__primary-image {
+                @apply h-full absolute inset-0;
+            }
+        }
+    }
+
+    /* 
+     * Buttons - Additional
+     */
+    &--buttons {
+        #{$c}__buttons {
+            @apply relative mt-5;
+
+            .button {
+                @apply lg:text-lg;
+            }
+        }
+
+        #{$c}__title {
+            @apply text-4xl;
+
+            @container hero (width > 868px) {
+                @apply text-5xl;
+            }
+        }
+    }
+
+    /* 
+     * Split 
+     */
     &--split {
         @apply relative md:flex items-center md:max-h-hero;
 
@@ -72,12 +204,21 @@
         }
         
         #{$c}__content {
-            @apply relative bg-white drop-shadow-md md:drop-shadow-none 
+            @apply 
+
+            relative 
+
+            bg-white 
+            drop-shadow-md md:drop-shadow-none 
+            rounded md:rounded-none
+            
             border-gold border-solid border-l-12 
+            
             -mt-8 mb-2 mx-6
             md:mt-0 md:mb-0 md:mr-0 md:ml-6
-            p-2 pt-4 pl-4 md:p-4 md:pt-6 md:pl-6
-            rounded md:rounded-none
+            
+            p-2 pt-4 pl-4 
+            md:p-4 md:pt-6 md:pl-6
             ;
         }
 
@@ -98,176 +239,16 @@
          }
     }
 
-    &--buttons {
-        #{$c}__buttons {
-            @apply relative mt-5;
 
-            .button {
-                @apply lg:text-lg;
-            }
-        }
-
-        #{$c}__title {
-            @apply text-4xl;
-
-            @container hero (width > 868px) {
-                @apply text-5xl;
-            }
-        }
-    }
-
-    &--text,
-    &--buttons {
-        @apply grid items-end lg:bg-green-900;
-
-        #{$c}__primary-image {
-            @apply aspect-hero lg:aspect-auto max-h-hero;
-        }
-
-        #{$c}__content {
-            @apply 
-
-            relative 
-            lg:absolute 
-            lg:inset-x-0 lg:bottom-0 
-            lg:text-white 
-
-            rounded
-            bg-white 
-            lg:bg-transparent
-            lg:bg-gradient-darkest
-
-            drop-shadow-md 
-            lg:drop-shadow-none 
-
-            border-gold border-solid border-l-12 
-            lg:border-0
-
-            -mt-8 mb-2 mx-6
-            lg:m-0
-
-            p-4 pr-5 
-            lg:px-container lg:pt-20 
-            ;
-
-            @container hero (width > 868px) {
-                @apply text-4xl pb-6;
-            }
-
-            &::before {
-                @apply -top-[60%];
-            }
-        }
-
-        #{$c}__title {
-            @apply leading-tight font-bold  mb-2 text-green lg:text-white lg:drop-shadow-2px lg:max-w-[36ch]
-            text-2xl lg:text-3xl;
-
-            @container hero (width > 868px) {
-                @apply text-4xl;
-            }
-
-            @container hero (width > 1000px) {
-                @apply text-5xl;
-            }
-        }
-
-        #{$c}__description {
-            @apply relative 
-            lg:white-links 
-            text-base mt-2;
-
-            p:last-of-type {
-                @apply mb-0;
-            }
-
-            @container hero (width > 868px) {
-                @apply text-lg;
-            }
-        }
-
-        #{$c}__link {
-            @apply lg:text-white;
-        }
-
-        &#{$c}--slim {
-            @apply min-h-[135px] md:aspect-hero-small lg:h-hero-small 2xl:max-h-[250px];
-
-            #{$c}__title {
-                @apply mb-0 text-white relative text-4xl xl:text-5xl;
-            }
-
-            #{$c}__content {
-                @apply pt-12 border-0 m-0 drop-shadow-none bg-transparent bg-gradient-darkest;
-            }
-
-            #{$c}__primary-image {
-                @apply h-full absolute inset-0;
-            }
-        }
-    }
-
-    /*
-    &--text {
-        @apply min-h-[200px] grid items-end bg-green-900;
-        @apply md:aspect-hero md:max-h-hero;
+    /* 
+     * SVG 
+     */
+    &--svg {
+        @apply aspect-hero max-h-hero;
 
         #{$c}__primary-image {
             @apply h-full absolute inset-0;
         }
-
-        #{$c}__content {
-            @apply relative w-full px-container pt-12 pb-6 text-white bg-gradient-darkest;
-
-        }
-
-        #{$c}__title {
-            @apply drop-shadow-2px leading-tight font-bold text-4xl mb-2;
-
-            line-height: 1.1em;
-
-            @container hero (width > 868px) {
-                @apply text-5xl;
-            }
-        }
-
-        #{$c}__description {
-            @apply relative white-links text-base mt-2;
-
-            p:last-of-type {
-                @apply mb-0;
-            }
-
-            @container hero (width > 868px) {
-                @apply text-lg;
-            }
-        }
-
-        #{$c}__link {
-            @apply text-white;
-        }
-
-        &#{$c}--slim {
-            @apply min-h-[135px] md:aspect-hero-small lg:h-hero-small 3xl:max-h-[250px];
-
-            #{$c}__title {
-                @apply mb-0;
-            }
-
-            #{$c}__content {
-                @apply pt-12;
-            }
-
-            #{$c}__primary-image {
-                @apply h-full absolute inset-0;
-            }
-        }
-
-    }
-    */
-
-    &--svg {
-        @apply md:max-h-hero;
 
         #{$c}__link,
         #{$c}__content {
@@ -277,8 +258,15 @@
         #{$c}__secondary-image {
             @apply object-contain object-center mx-auto max-h-full max-w-full;
         }
+
+        &#{$c}--slim {
+            @apply aspect-hero-small max-h-[250px];;
+        }
     }
 
+    /* 
+     * Logo 
+     */
     &--logo {
         @apply relative flex flex-col justify-center bg-green-900 min-h-[300px];
 
@@ -301,5 +289,12 @@
         #{$c}__description {
             @apply md:text-lg;
         }
+    }
+
+    /* 
+     * Carousel - Flickity applies absolute to this container when enabled 
+     */
+    &__carousel-item {
+        @apply w-full;
     }
 }
