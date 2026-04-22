@@ -24,12 +24,37 @@ class Formy
      */
     public function handle(Request $request, Closure $next): ?Response
     {
-        $request->data['base']['page']['content'] = collect($request->data['base']['page']['content'])
-            ->map(function ($content) {
-                return $this->parser->parse(stripslashes($content));
-            })
-            ->toArray();
+        if (!empty($request->data['base']['page']['content'])) {
+            $request->data['base']['page']['content'] = collect($request->data['base']['page']['content'])
+                ->map(function ($content) {
+                    $content = is_string($content) ? stripslashes($content) : $content;
+
+                    return is_string($content) && str_contains($content, '[') ? $this->parser->parse($content) : $content;
+                })
+                ->toArray();
+        }
+
+        if (!empty($request->data['base'])) {
+            $request->data['base'] = $this->parseDescriptions($request->data['base']);
+        }
 
         return $next($request);
+    }
+
+    /**
+     * Recursively parse the description fields.
+     */
+    public function parseDescriptions(array $data): array
+    {
+        foreach ($data as $key => $value) {
+            if (is_array($value)) {
+                $data[$key] = $this->parseDescriptions($value);
+            } elseif ($key === 'description' && is_string($value)) {
+                $value = stripslashes($value);
+                $data[$key] = str_contains($value, '[') ? $this->parser->parse($value) : $value;
+            }
+        }
+
+        return $data;
     }
 }
