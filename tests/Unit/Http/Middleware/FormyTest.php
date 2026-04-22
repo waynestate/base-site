@@ -14,7 +14,8 @@ final class FormyTest extends TestCase
     #[Test]
     public function formy_embed_should_show_form_in_page_content(): void
     {
-        $content = $this->faker->sentence();
+        $content = "[\'formy-shortcode\']";
+        $strippedContent = "['formy-shortcode']";
         $parsed = $this->faker->sentence();
 
         // Fake request
@@ -30,9 +31,9 @@ final class FormyTest extends TestCase
         ];
 
         // Mock the parser
-        $this->app->bind(Parser::class, function () use ($content, $parsed) {
+        $this->app->bind(Parser::class, function () use ($strippedContent, $parsed) {
             $mock = Mockery::mock(Parser::class);
-            $mock->shouldReceive('parse')->with($content)->once()->andReturn($parsed);
+            $mock->shouldReceive('parse')->with($strippedContent)->once()->andReturn($parsed);
 
             return $mock;
         });
@@ -46,9 +47,11 @@ final class FormyTest extends TestCase
     #[Test]
     public function description_fields_should_be_parsed(): void
     {
-        $description = $this->faker->sentence();
+        $description = "[\'description\']";
+        $strippedDescription = "['description']";
         $parsedDescription = $this->faker->sentence();
-        $nestedDescription = $this->faker->sentence();
+        $nestedDescription = "[\'nested\']";
+        $strippedNestedDescription = "['nested']";
         $parsedNestedDescription = $this->faker->sentence();
 
         // Fake request
@@ -63,10 +66,10 @@ final class FormyTest extends TestCase
         ];
 
         // Mock the parser
-        $this->app->bind(Parser::class, function () use ($description, $parsedDescription, $nestedDescription, $parsedNestedDescription) {
+        $this->app->bind(Parser::class, function () use ($strippedDescription, $parsedDescription, $strippedNestedDescription, $parsedNestedDescription) {
             $mock = Mockery::mock(Parser::class);
-            $mock->shouldReceive('parse')->with($description)->once()->andReturn($parsedDescription);
-            $mock->shouldReceive('parse')->with($nestedDescription)->once()->andReturn($parsedNestedDescription);
+            $mock->shouldReceive('parse')->with($strippedDescription)->once()->andReturn($parsedDescription);
+            $mock->shouldReceive('parse')->with($strippedNestedDescription)->once()->andReturn($parsedNestedDescription);
 
             return $mock;
         });
@@ -75,6 +78,42 @@ final class FormyTest extends TestCase
         app(Formy::class)->handle($request, function ($request) use ($parsedDescription, $parsedNestedDescription) {
             $this->assertEquals($parsedDescription, $request->data['base']['description']);
             $this->assertEquals($parsedNestedDescription, $request->data['base']['nested']['description']);
+        });
+    }
+
+    #[Test]
+    public function it_should_not_parse_if_no_shortcode_is_present_but_still_strip_slashes(): void
+    {
+        $content = "No shortcode here, but has \'slashes\'";
+        $expectedContent = "No shortcode here, but has 'slashes'";
+        $description = "Another one without shortcode, but has \'slashes\'";
+        $expectedDescription = "Another one without shortcode, but has 'slashes'";
+
+        // Fake request
+        $request = new Request();
+        $request->data = [
+            'base' => [
+                'page' => [
+                    'content' => [
+                        'main' => $content,
+                    ],
+                ],
+                'description' => $description,
+            ],
+        ];
+
+        // Mock the parser - should NOT receive any calls
+        $this->app->bind(Parser::class, function () {
+            $mock = Mockery::mock(Parser::class);
+            $mock->shouldNotReceive('parse');
+
+            return $mock;
+        });
+
+        // Call the middleware
+        app(Formy::class)->handle($request, function ($request) use ($expectedContent, $expectedDescription) {
+            $this->assertEquals($expectedContent, $request->data['base']['page']['content']['main']);
+            $this->assertEquals($expectedDescription, $request->data['base']['description']);
         });
     }
 }

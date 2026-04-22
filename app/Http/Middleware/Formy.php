@@ -27,7 +27,9 @@ class Formy
         if (!empty($request->data['base']['page']['content'])) {
             $request->data['base']['page']['content'] = collect($request->data['base']['page']['content'])
                 ->map(function ($content) {
-                    return $this->parser->parse(stripslashes($content));
+                    $content = is_string($content) ? stripslashes($content) : $content;
+
+                    return is_string($content) && str_contains($content, '[') ? $this->parser->parse($content) : $content;
                 })
                 ->toArray();
         }
@@ -48,7 +50,8 @@ class Formy
             if (is_array($value)) {
                 $data[$key] = $this->parseDescriptions($value);
             } elseif ($key === 'description' && is_string($value)) {
-                $data[$key] = $this->parser->parse(stripslashes($value));
+                $value = stripslashes($value);
+                $data[$key] = str_contains($value, '[') ? $this->parser->parse($value) : $value;
             }
         }
 
