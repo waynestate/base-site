@@ -8,7 +8,7 @@
         @foreach($hero['data'] as $item)
             @if(count($hero['data']) > 1)<div class="hero__carousel-item">@endif
 
-                <div class="hero__type hero--{{ $item['hero_type'] ?? 'banner' }} {{ $item['hero_classes'] ?? '' }}">
+                <div @class(['hero__type', implode(' ', $item['hero_classes'] ?? ['hero--banner'])])>
 
                     <img class="hero__primary-image {{ $hero['component']['backgroundClass'] ?? ''}}{{ $loop->first ? '' : ' lazy'}}"
                          @if($loop->first) src="{{ $item['relative_url'] }}" @else data-src="{{ $item['relative_url'] }}"@endif
@@ -43,17 +43,3 @@
         @endforeach
     </section>
 @endif
-
-{{--
-    $base['hero']['component']['heroSize'] => string // ['large', 'small', 'contained']
-    $hero['component']['heroSize'] => array // ['large','small','contained']
-    $hero['component']['heroStyle'] => array // ['banner', 'text overlay', 'svg overlay', 'logo overlay', 'half', 'video']
-    $hero['component']['option'] => array // ['large', 'small', 'contained', 'text overlay', 'svg overlay', 'half', 'video']
-    $hero['data'] => array // ['relative_url', 'title', 'description']
-    $heroClass => string, 'class-name'
-
-    Enable to carousel by increasing the limit of hero items.
-    Add specific classes in base config under global -> sites -> promos -> hero -> class = 'class-name'
-    Add your specific css in scss/subsite/_main.scss
-    Hero buttons are in text-overlay
---}}

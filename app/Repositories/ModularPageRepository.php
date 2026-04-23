@@ -419,7 +419,15 @@ class ModularPageRepository implements ModularPageRepositoryContract
                     if (strpos($class, 'bg-') !== false) {
                         // backgroundClass
                         $components[$componentName]['component']['backgroundClass'][] = $class;
-                    } elseif (strpos($class, 'my-') !== false | strpos($class, 'mt-') !== false | strpos($class, 'mb-') !== false | strpos($class, 'end') !== false | strpos($class, 'left') !== false | strpos($class, 'right') !== false) {
+                    } elseif (
+                        strpos($class, 'my-') !== false | 
+                        strpos($class, 'mt-') !== false | 
+                        strpos($class, 'mb-') !== false | 
+                        strpos($class, 'end') !== false | 
+                        strpos($class, 'left') !== false | 
+                        strpos($class, 'right') !== false | 
+                        strpos($class, 'order-') !== false
+                    ) {
                         // containerClass
                         $components[$componentName]['component']['containerClass'][] = $class;
                     } else {
