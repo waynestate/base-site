@@ -38,12 +38,13 @@ class ModularPageRepository implements ModularPageRepositoryContract
      *
      */
     public function __construct(
-        Connector $wsuApi,
-        ParsePromos $parsePromos,
-        Repository $cache,
+        Connector                 $wsuApi,
+        ParsePromos               $parsePromos,
+        Repository                $cache,
         ArticleRepositoryContract $article,
-        EventRepositoryContract $event
-    ) {
+        EventRepositoryContract   $event
+    )
+    {
         $this->wsuApi = $wsuApi;
         $this->parsePromos = $parsePromos;
         $this->cache = $cache;
@@ -129,7 +130,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
                         foreach ($promo_config as $key => $config_item) {
                             // Inject page_id
                             if (Str::startsWith($config_item, 'page_id')) {
-                                $promo_config[$key] = 'page_id:'.$data['page']['id'];
+                                $promo_config[$key] = 'page_id:' . $data['page']['id'];
                             }
                             // Component loop expects the return being a multi-dimensional array
                             if (Str::startsWith($config_item, 'first')) {
@@ -335,7 +336,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
     public function adjustPromoData($data, $component)
     {
         if (isset($component['singlePromoView']) && $component['singlePromoView'] === true) {
-            $data['link'] = 'view/'.Str::slug($data['title']).'-'.$data['promo_item_id'];
+            $data['link'] = 'view/' . Str::slug($data['title']) . '-' . $data['promo_item_id'];
         }
 
         if (isset($component['showExcerpt']) && $component['showExcerpt'] === false) {
@@ -359,8 +360,8 @@ class ModularPageRepository implements ModularPageRepositoryContract
     }
 
     /**
-    * {@inheritdoc}
-    */
+     * {@inheritdoc}
+     */
     public function organizePromoItemsByOption(array $data)
     {
         $options_exist = collect($data)->filter(function ($item) {
@@ -397,7 +398,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
             if (!empty($component['component']['filename']) && $component['component']['filename'] != 'hero') {
                 if (!empty($component['component']['columnSpan'])) {
                     // Inject the column span class
-                    array_push($components[$componentName]['component']['containerClass'], 'px-4', 'mt:colspan-'.$component['component']['columnSpan']);
+                    array_push($components[$componentName]['component']['containerClass'], 'px-4', 'mt:colspan-' . $component['component']['columnSpan']);
                 } elseif (!empty($component['component']['filename']) && strpos($component['component']['filename'], 'column') !== false) {
                     // Inject the column span class
                     array_push($components[$componentName]['component']['containerClass'], 'px-4', 'mt:colspan-6');
@@ -408,7 +409,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
             }
 
             // Collect all legacy class names
-            $classes = trim(($component['component']['sectionClass'] ?? '').' '.($component['component']['componentClass'] ?? '').' '.($component['component']['classes'] ?? ''));
+            $classes = trim(($component['component']['sectionClass'] ?? '') . ' ' . ($component['component']['componentClass'] ?? '') . ' ' . ($component['component']['classes'] ?? ''));
 
             // Group the classes based on the container they will be applied to
             // Set backgroundClass, containerClass, componentClass
@@ -419,7 +420,15 @@ class ModularPageRepository implements ModularPageRepositoryContract
                     if (strpos($class, 'bg-') !== false) {
                         // backgroundClass
                         $components[$componentName]['component']['backgroundClass'][] = $class;
-                    } elseif (strpos($class, 'my-') !== false | strpos($class, 'mt-') !== false | strpos($class, 'mb-') !== false | strpos($class, 'end') !== false | strpos($class, 'left') !== false | strpos($class, 'right') !== false) {
+                    } elseif (
+                        strpos($class, 'my-') !== false |
+                        strpos($class, 'mt-') !== false |
+                        strpos($class, 'mb-') !== false |
+                        strpos($class, 'end') !== false |
+                        strpos($class, 'left') !== false |
+                        strpos($class, 'right') !== false |
+                        strpos($class, 'order-') !== false
+                    ) {
                         // containerClass
                         $components[$componentName]['component']['containerClass'][] = $class;
                     } else {
@@ -462,7 +471,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
         foreach ($components as $componentName => $component) {
             if (!empty($component['component']['backgroundImageUrl'])) {
                 //$component['component']['backgroundImageUrl'] = "background-image:url('".$component['component']['backgroundImageUrl']."');";
-                $components[$componentName]['component']['backgroundImageUrl'] = "style=\"background-image:url('".$component['component']['backgroundImageUrl']."');\"";
+                $components[$componentName]['component']['backgroundImageUrl'] = "style=\"background-image:url('" . $component['component']['backgroundImageUrl'] . "');\"";
             }
 
             // Forcing a space delimeter
