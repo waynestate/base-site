@@ -33,15 +33,13 @@ class HeroRepository implements HeroRepositoryContract
         $hero = [];
 
         // Structure global hero as a component
-        if (!empty($promos['hero'])) {
-            $hero = [
-                'data' => $promos['hero'],
-                'component' => [
-                    'heroPlacement' => config('base.hero_placement'),
-                    'heroType' => config('base.hero_type'),
-                ],
-            ];
-        }
+        $hero = [
+            'data' => $promos['hero'] ?? [],
+            'component' => [
+                'heroPlacement' => config('base.hero_placement'),
+                'heroType' => '',
+            ],
+        ];
 
         // Set hero buttons from components
         if (!empty($promos['components'])) {
@@ -73,7 +71,7 @@ class HeroRepository implements HeroRepositoryContract
         // Set hero classes on each item
         foreach ($hero['data'] as $hero_key => $hero_data) {
             $promoOption = strtolower($hero_data['option'] ?? '');
-            $componentOption = strtolower($hero['component']['option'] ?? '');
+            $componentOption = strtolower($hero['component']['option'] ?? '') ?: $hero['component']['heroType'];
             $option = trim($promoOption . ' ' . $componentOption);
             $hero_data['hero_options'] = explode(' ', $option);
             $hero_data['hero_classes'] = [];
@@ -233,7 +231,7 @@ class HeroRepository implements HeroRepositoryContract
             'svg' => ['svg'],
         ];
 
-        $option = $promoOption ?? $componentOption;
+        $option = $promoOption ?: $componentOption;
 
         // Component will override promo option
         if (!empty($option)) {
@@ -259,7 +257,7 @@ class HeroRepository implements HeroRepositoryContract
             'full-width' => ['full-width', 'full', 'large'],
         ];
 
-        $option = $promoOption ?? $componentOption;
+        $option = $promoOption ?: $componentOption;
 
         // Component will override promo option
         if (!empty($option)) {
@@ -285,7 +283,7 @@ class HeroRepository implements HeroRepositoryContract
             'large' => ['large'],
         ];
 
-        $option = $promoOption ?? $componentOption;
+        $option = $promoOption ?: $componentOption;
 
         // Component will override promo option
         if (!empty($option)) {

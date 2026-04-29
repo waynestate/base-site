@@ -675,39 +675,8 @@
         "target": "",
         "display_name": "Layout",
         "class_name": "",
-        "relative_url": "/styleguide/layout/main",
+        "relative_url": "/styleguide/layout/header/title/single",
         "submenu": {
-            "103200": {
-                "menu_item_id": 120100,
-                "is_active": 1,
-                "page_id": 120100,
-                "target": "",
-                "display_name": "Site layout",
-                "class_name": "",
-                "relative_url": "/styleguide/layout/main",
-                "submenu": {
-                    "102100100": {
-                        "menu_item_id": 120100100,
-                        "is_active": 1,
-                        "page_id": 120100100,
-                        "target": "",
-                        "display_name": "Main default layout",
-                        "class_name": "",
-                        "relative_url": "/styleguide/layout/main",
-                        "submenu": []
-                    },
-                    "102100101": {
-                        "menu_item_id": 120100101,
-                        "is_active": 1,
-                        "page_id": 120100101,
-                        "target": "",
-                        "display_name": "Contained hero layout",
-                        "class_name": "",
-                        "relative_url": "/styleguide/layout/containedhero",
-                        "submenu": []
-                    }
-                }
-            },
             "102100": {
                 "menu_item_id": 102100,
                 "is_active": 1,
@@ -735,27 +704,6 @@
                         "display_name": "Header title double",
                         "class_name": "",
                         "relative_url": "/styleguide/layout/header/title/double/",
-                        "submenu": []
-                    }
-                }
-            },
-            "105100": {
-                "menu_item_id": 105100,
-                "is_active": 1,
-                "page_id": 105100,
-                "target": "",
-                "display_name": "Page title",
-                "class_name": "",
-                "relative_url": "/styleguide/layout/page/title",
-                "submenu": {
-                    "105100100": {
-                        "menu_item_id": 105100100,
-                        "is_active": 1,
-                        "page_id": 105100100,
-                        "target": "",
-                        "display_name": "Page title",
-                        "class_name": "",
-                        "relative_url": "/styleguide/layout/page/title",
                         "submenu": []
                     }
                 }
@@ -797,6 +745,27 @@
                         "display_name": "External icon",
                         "class_name": "external",
                         "relative_url": "/styleguide/layout/menu/external",
+                        "submenu": []
+                    }
+                }
+            },
+            "105100": {
+                "menu_item_id": 105100,
+                "is_active": 1,
+                "page_id": 105100,
+                "target": "",
+                "display_name": "Page title",
+                "class_name": "",
+                "relative_url": "/styleguide/layout/page/title",
+                "submenu": {
+                    "105100100": {
+                        "menu_item_id": 105100100,
+                        "is_active": 1,
+                        "page_id": 105100100,
+                        "target": "",
+                        "display_name": "Page title",
+                        "class_name": "",
+                        "relative_url": "/styleguide/layout/page/title",
                         "submenu": []
                     }
                 }
@@ -901,6 +870,16 @@
                 "display_name": "JSON-LD metadata",
                 "class_name": "",
                 "relative_url": "/styleguide/component/jsonld",
+                "submenu": []
+            },
+            "103200": {
+                "menu_item_id": 120100100,
+                "is_active": 1,
+                "page_id": 120100100,
+                "target": "",
+                "display_name": "Custom layout",
+                "class_name": "",
+                "relative_url": "/styleguide/layout/custom",
                 "submenu": []
             }
         }
