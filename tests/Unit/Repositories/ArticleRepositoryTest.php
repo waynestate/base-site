@@ -94,10 +94,12 @@ final class ArticleRepositoryTest extends TestCase
     }
 
     #[Test]
-    public function articles_paging_no_page(): void
+    public function articles_paging_no_page_with_more_than_limit(): void
     {
+        $total_articles = 10;
+        $per_page = 5;
         // Fake return
-        $return = app(Article::class)->create(5);
+        $return = app(Article::class)->create($total_articles);
 
         // Mock the connector and set the return
         $newsApi = Mockery::mock(News::class);
@@ -105,9 +107,12 @@ final class ArticleRepositoryTest extends TestCase
 
         $page = null;
 
-        $articles = app(ArticleRepository::class, ['newsApi' => $newsApi])->listing(1, 5, $page);
+        $articles = app(ArticleRepository::class, ['newsApi' => $newsApi])->listing(1, $per_page, $page);
 
-        $articles['articles']['meta'] = app(ArticleRepository::class, ['newsApi' => $newsApi])->setPaging($articles['articles']['meta'], $page);
+        $articles['articles']['meta']['total'] = $total_articles;
+        $articles['articles']['meta']['per_page'] = $per_page;
+        $articles['articles']['meta'] = app(ArticleRepository::class, ['newsApi' => $newsApi])
+            ->setPaging($articles['articles']['meta'], $page);
 
         $next = parse_url($articles['articles']['meta']['next_page_url']);
         $this->assertTrue(empty($next['page']));
@@ -115,6 +120,34 @@ final class ArticleRepositoryTest extends TestCase
         $prev = parse_url($articles['articles']['meta']['prev_page_url']);
         parse_str($prev['query'], $prev);
         $this->assertEquals(2, $prev['page']);
+    }
+
+    #[Test]
+    public function articles_paging_no_page_with_same_or_less_than_limit(): void
+    {
+        $total_articles = 5;
+        $per_page = 5;
+        // Fake return
+        $return = app(Article::class)->create($total_articles);
+
+        // Mock the connector and set the return
+        $newsApi = Mockery::mock(News::class);
+        $newsApi->shouldReceive('request')->andReturn($return);
+
+        $page = null;
+
+        $articles = app(ArticleRepository::class, ['newsApi' => $newsApi])->listing(1, $per_page, $page);
+
+        $articles['articles']['meta']['total'] = $total_articles;
+        $articles['articles']['meta']['per_page'] = $per_page;
+        $articles['articles']['meta'] = app(ArticleRepository::class, ['newsApi' => $newsApi])
+            ->setPaging($articles['articles']['meta'], $page);
+
+        $next = parse_url($articles['articles']['meta']['next_page_url']);
+        $this->assertTrue(empty($next['page']));
+
+        $prev = parse_url($articles['articles']['meta']['prev_page_url']);
+        $this->assertTrue(empty($prev['page']));
     }
 
     #[Test]

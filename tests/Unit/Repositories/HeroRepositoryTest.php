@@ -502,7 +502,6 @@ final class HeroRepositoryTest extends TestCase
         $this->assertCount(1, $result['hero']['data']);
     }
 
-
     #[Test]
     public function modular_hero_with_limit_three_and_option_full_triggers_carousel_for_single_item(): void
     {

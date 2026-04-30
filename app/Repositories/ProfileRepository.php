@@ -163,7 +163,7 @@ class ProfileRepository implements ProfileRepositoryContract
         }
 
         // Hide filtering if all profiles belong to the same group
-        if (!$options['hide_filtering'] && !empty($profiles['profiles'])) {
+        if (empty($selected_group) && !$options['hide_filtering'] && !empty($profiles['profiles'])) {
             $unique_groups = $this->getUniqueGroupsFromProfiles($profiles['profiles']);
             if (count($unique_groups) <= 1) {
                 $options['hide_filtering'] = true;
@@ -185,7 +185,7 @@ class ProfileRepository implements ProfileRepositoryContract
 
         // No selection → all groups
         if ($selected_group === null) {
-            return implode(',', array_keys($dropdown_groups));
+            return implode('|', array_keys($dropdown_groups));
         }
 
         // Normalize user input (accept | or ,)
@@ -193,7 +193,7 @@ class ProfileRepository implements ProfileRepositoryContract
             ->map(fn ($item) => trim($item))
             ->filter(fn ($item) => $item !== '')
             ->unique()
-            ->implode(',');
+            ->implode('|');
     }
 
     /**

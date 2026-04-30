@@ -420,12 +420,12 @@ class ModularPageRepository implements ModularPageRepositoryContract
                         // backgroundClass
                         $components[$componentName]['component']['backgroundClass'][] = $class;
                     } elseif (
-                        strpos($class, 'my-') !== false | 
-                        strpos($class, 'mt-') !== false | 
-                        strpos($class, 'mb-') !== false | 
-                        strpos($class, 'end') !== false | 
-                        strpos($class, 'left') !== false | 
-                        strpos($class, 'right') !== false | 
+                        strpos($class, 'my-') !== false |
+                        strpos($class, 'mt-') !== false |
+                        strpos($class, 'mb-') !== false |
+                        strpos($class, 'end') !== false |
+                        strpos($class, 'left') !== false |
+                        strpos($class, 'right') !== false |
                         strpos($class, 'order-') !== false
                     ) {
                         // containerClass
@@ -448,7 +448,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
             if (empty(preg_grep('/mb-/', $components[$componentName]['component']['containerClass']))
                 && !Str::contains($componentName, 'heading') && !Str::contains($componentName, 'hero')
             ) {
-                $components[$componentName]['component']['containerClass'] [] = 'mb-gutter';
+                $components[$componentName]['component']['containerClass'][] = 'mb-gutter';
             }
 
             // Implode party, assign all classes to their respective container
