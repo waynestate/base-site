@@ -74,14 +74,9 @@ class HeroRepository implements HeroRepositoryContract
             $promoOption = strtolower($hero_data['option'] ?? '');
             $componentOption = strtolower($hero['component']['option'] ?? '') ?: $hero['component']['heroType'] ?? '';
             $componentPlacement = strtolower($hero['component']['option'] ?? '') ?: $hero['component']['heroPlacement'] ?? '';
+
+            // TODO Cycle through hero options to apply classes
             $option = trim($promoOption . ' ' . $componentOption);
-
-
-            $option = $componentOption ?: $promoOption;
-
-            // what if you only want to override placement
-            //$option = trim($componentOption . ' ' . $promoOption);
-
             $hero_data['hero_options'] = explode(' ', $option);
 
             // Determine type
