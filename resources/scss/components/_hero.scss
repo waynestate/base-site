@@ -55,9 +55,6 @@
         2xl:max-h-[250px];
     }
 
-    &--large {
-    }
-
     /* Type modifiers */
     #{$c}--banner {
         @apply aspect-hero max-h-hero;

@@ -33,13 +33,12 @@ class HeroRepository implements HeroRepositoryContract
         $hero = [];
 
         // Structure global hero as a component
-        $hero = [
-            'data' => $promos['hero'] ?? [],
-            'component' => [
-                'heroPlacement' => config('base.hero_placement'),
-                'heroType' => '',
-            ],
-        ];
+        if (!empty($promos['hero'])) {
+            $hero = [
+                'data' => $promos['hero'],
+                'component' => [],
+            ];
+        }
 
         // Set hero buttons from components
         if (!empty($promos['components'])) {
@@ -68,29 +67,28 @@ class HeroRepository implements HeroRepositoryContract
         // Initialize the hero component if not set
         $hero['component'] = $hero['component'] ?? [];
 
-        // Set hero classes on each item
         foreach ($hero['data'] as $hero_key => $hero_data) {
-            $promoOption = strtolower($hero_data['option'] ?? '');
-            $componentOption = strtolower($hero['component']['option'] ?? '') ?: $hero['component']['heroType'];
-            $option = trim($promoOption . ' ' . $componentOption);
-            $hero_data['hero_options'] = explode(' ', $option);
+            // Initialize classes
             $hero_data['hero_classes'] = [];
+
+            $promoOption = strtolower($hero_data['option'] ?? '');
+            $componentOption = strtolower($hero['component']['option'] ?? '') ?: $hero['component']['heroType'] ?? '';
+            $componentPlacement = strtolower($hero['component']['option'] ?? '') ?: $hero['component']['heroPlacement'] ?? '';
+            $option = trim($promoOption . ' ' . $componentOption);
+
+
+            $option = $componentOption ?: $promoOption;
+
+            // what if you only want to override placement
+            //$option = trim($componentOption . ' ' . $promoOption);
+
+            $hero_data['hero_options'] = explode(' ', $option);
 
             // Determine type
             $type = $this->mapType($promoOption, $componentOption);
             if ($type) {
                 $hero_data['hero_type'] = $type;
                 $hero_data['hero_classes'][] = 'hero--' . $type;
-            } else {
-                $hero_data['hero_type'] = $type;
-                $hero_data['hero_classes'][] = 'hero--' . $type;
-            }
-
-            // Determine placement
-            $placement = $this->mapPlacement($promoOption, $componentOption);
-            dump($placement);
-            if ($placement) {
-                $hero['component']['heroPlacement'] = $placement;
             }
 
             // Determine height
@@ -99,13 +97,14 @@ class HeroRepository implements HeroRepositoryContract
                 $hero_data['hero_classes'][] = 'hero--' . $height;
             }
 
+            // Determine placement
+            $placement = $this->mapPlacement($promoOption, $componentPlacement);
+            if ($placement) {
+                $hero['component']['heroPlacement'] = $placement;
+            }
+
             // Unset hero data based on type
             $hero_data = $this->unsetHeroData($hero_data);
-
-            // Remove links from description if link field is set
-            if(!empty($hero_data['link']) && !empty($hero_data['description'])) {
-                $hero_data['description'] = preg_replace(['"<a href(.*?)>"', '"</a>"'], '', $hero_data['description']);
-            }
 
             $hero['data'][$hero_key] = $hero_data;
         }
@@ -113,8 +112,6 @@ class HeroRepository implements HeroRepositoryContract
         // Add hero back into promos
         unset($promos['hero']);
         $promos['hero'] = $hero;
-
-        dump($hero);
 
         return $promos;
     }
@@ -223,7 +220,7 @@ class HeroRepository implements HeroRepositoryContract
     /**
      * Map keywords to hero types.
      */
-    private function mapType(string $promoOption, string $componentOption): ?string
+    private function mapType(string $promoOption, string $componentOption)
     {
         $typeMap = [
             'banner' => ['banner'],
@@ -234,9 +231,8 @@ class HeroRepository implements HeroRepositoryContract
             'svg' => ['svg'],
         ];
 
-        $option = $promoOption ?? $componentOption;
+        $option = $componentOption ?: $promoOption;
 
-        // Component will override promo option
         if (!empty($option)) {
             foreach ($typeMap as $type => $keywords) {
                 foreach ($keywords as $keyword) {
@@ -260,15 +256,12 @@ class HeroRepository implements HeroRepositoryContract
             'full-width' => ['full-width', 'full', 'large', 'slim', 'buttons'],
         ];
 
-        $option = $promoOption ?? $componentOption;
-        dump($option);
+        $option = $componentOption ?: $promoOption;
 
-        // Component will override promo option
         if (!empty($option)) {
             foreach ($placementMap as $placement => $keywords) {
                 foreach ($keywords as $keyword) {
                     if (preg_match('/\b' . preg_quote($keyword, '/') . '\b/', $option)) {
-                        dump($placement);
                         return $placement;
                     }
                 }
@@ -288,9 +281,8 @@ class HeroRepository implements HeroRepositoryContract
             'large' => ['large'],
         ];
 
-        $option = $promoOption ?? $componentOption;
+        $option = $componentOption ?: $promoOption;
 
-        // Component will override promo option
         if (!empty($option)) {
             foreach ($heightMap as $height => $keywords) {
                 foreach ($keywords as $keyword) {
@@ -307,7 +299,7 @@ class HeroRepository implements HeroRepositoryContract
     /**
      * Unset hero data based on type.
      */
-    private function unsetHeroData(array $hero_data): ?array
+    private function unsetHeroData(array $hero_data)
     {
         $unsetHeroDataMap = [
             'banner' => ['title', 'link', 'description', 'secondary_relative_url'],
@@ -317,12 +309,17 @@ class HeroRepository implements HeroRepositoryContract
             'buttons' => ['link', 'secondary_relative_url'],
         ];
 
-        foreach($unsetHeroDataMap as $type => $hero_values) {
-            if(!empty($hero_data['hero_type']) && $hero_data['hero_type'] === $type) {
-                foreach($hero_values as $hero_value) {
+        foreach ($unsetHeroDataMap as $type => $hero_values) {
+            if (!empty($hero_data['hero_type']) && $hero_data['hero_type'] === $type) {
+                foreach ($hero_values as $hero_value) {
                     unset($hero_data[$hero_value]);
                 }
             }
+        }
+
+        // Remove links from description if link field is set
+        if (!empty($hero_data['link']) && !empty($hero_data['description'])) {
+            $hero_data['description'] = preg_replace(['"<a (.*?)>"', '"</a>"'], '', $hero_data['description']);
         }
 
         return $hero_data;
