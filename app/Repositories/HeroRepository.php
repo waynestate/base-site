@@ -88,6 +88,7 @@ class HeroRepository implements HeroRepositoryContract
 
             // Determine placement
             $placement = $this->mapPlacement($promoOption, $componentOption);
+            dump($placement);
             if ($placement) {
                 $hero['component']['heroPlacement'] = $placement;
             }
@@ -112,6 +113,8 @@ class HeroRepository implements HeroRepositoryContract
         // Add hero back into promos
         unset($promos['hero']);
         $promos['hero'] = $hero;
+
+        dump($hero);
 
         return $promos;
     }
@@ -231,7 +234,7 @@ class HeroRepository implements HeroRepositoryContract
             'svg' => ['svg'],
         ];
 
-        $option = $promoOption ?: $componentOption;
+        $option = $promoOption ?? $componentOption;
 
         // Component will override promo option
         if (!empty($option)) {
@@ -254,16 +257,18 @@ class HeroRepository implements HeroRepositoryContract
     {
         $placementMap = [
             'contained' => ['contained'],
-            'full-width' => ['full-width', 'full', 'large'],
+            'full-width' => ['full-width', 'full', 'large', 'slim', 'buttons'],
         ];
 
-        $option = $promoOption ?: $componentOption;
+        $option = $promoOption ?? $componentOption;
+        dump($option);
 
         // Component will override promo option
         if (!empty($option)) {
             foreach ($placementMap as $placement => $keywords) {
                 foreach ($keywords as $keyword) {
                     if (preg_match('/\b' . preg_quote($keyword, '/') . '\b/', $option)) {
+                        dump($placement);
                         return $placement;
                     }
                 }
@@ -283,7 +288,7 @@ class HeroRepository implements HeroRepositoryContract
             'large' => ['large'],
         ];
 
-        $option = $promoOption ?: $componentOption;
+        $option = $promoOption ?? $componentOption;
 
         // Component will override promo option
         if (!empty($option)) {

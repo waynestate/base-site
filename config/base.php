@@ -50,7 +50,7 @@ $global_config = [
     | 'heroPlacement' = ['contained', 'full-width'];
     |
     */
-    'hero_placement' => 'full-width',
+    'hero_placement' => 'contained',
 
     /*
     |--------------------------------------------------------------------------

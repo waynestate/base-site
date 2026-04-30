@@ -365,9 +365,9 @@
                         "is_active": 1,
                         "page_id": 105100109,
                         "target": "",
-                        "display_name": "Half",
+                        "display_name": "Split",
                         "class_name": "",
-                        "relative_url": "/styleguide/component/hero/half",
+                        "relative_url": "/styleguide/component/hero/split",
                         "submenu": []
                     },
                     "105100104": {
