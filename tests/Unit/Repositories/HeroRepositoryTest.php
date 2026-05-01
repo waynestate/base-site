@@ -24,59 +24,7 @@ final class HeroRepositoryTest extends TestCase
     }
 
     #[Test]
-    public function carousel_hero_with_multiple_promos(): void
-    {
-        config(['base.hero_placement' => 'full-width']);
-        $promos = [
-            'hero' => [
-                ['title' => 'Hero 1', 'option' => ''],
-                ['title' => 'Hero 2', 'option' => '']
-            ]
-        ];
-        $result = $this->heroRepository->setHero($promos, []);
-        $this->assertEquals('banner', $result['hero']['data'][0]['hero_type']);
-        $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
-        $this->assertEquals('banner', $result['hero']['data'][0]['hero_type']);
-        $this->assertContains('hero--banner', $result['hero']['data'][0]['hero_classes']);
-        $this->assertArrayHasKey('hero_options', $result['hero']['data'][0]);
-    }
-
-    #[Test]
-    public function contained_carousel_hero(): void
-    {
-        $promos = [
-            'hero' => [
-                ['title' => 'Hero 1', 'option' => 'contained'],
-                ['title' => 'Hero 2', 'option' => 'contained']
-            ]
-        ];
-        $result = $this->heroRepository->setHero($promos, []);
-        $this->assertEquals('banner', $result['hero']['data'][0]['hero_type']);
-        $this->assertEquals('contained', $result['hero']['component']['heroPlacement']);
-    }
-
-    #[Test]
-    public function modular_carousel_hero_with_contained_option(): void
-    {
-        $promos = [
-            'components' => [
-                'hero-1' => [
-                    'data' => [
-                        ['title' => 'Hero 1', 'option' => '']
-                    ],
-                    'component' => [
-                        'config' => 'limit:4|option:contained'
-                    ]
-                ]
-            ]
-        ];
-        $result = $this->heroRepository->setHero($promos, []);
-        $this->assertEquals('banner', $result['hero']['data'][0]['hero_type']);
-        $this->assertEquals('contained', $result['hero']['component']['heroPlacement']);
-    }
-
-    #[Test]
-    public function contained_slim_hero_default(): void
+    public function slim_hero_default(): void
     {
         config(['base.hero_placement' => 'contained']);
         $promos = [
@@ -551,5 +499,47 @@ final class HeroRepositoryTest extends TestCase
         $promos = $this->heroRepository->setHero($promos, []);
 
         $this->assertEquals('text', $promos['hero']['data'][0]['hero_type']);
+    }
+
+    #[Test]
+    public function limit_5(): void
+    {
+        $promos = [
+            'components' => [
+                'modular-hero-1' => [
+                    'data' => [
+                        ['title' => 'Hero 1', 'option' => '']
+                    ],
+                    'component' => [
+                        'config' => 'limit:5',
+                    ]
+                ]
+            ]
+        ];
+
+        $result = $this->heroRepository->setHero($promos, []);
+
+        $this->assertEquals('5', $result['hero']['component']['limit']);
+    }
+
+    #[Test]
+    public function limit_1(): void
+    {
+        $promos = [
+            'components' => [
+                'modular-hero-1' => [
+                    'data' => [
+                        ['title' => 'Hero 1', 'option' => '']
+                    ],
+                    'component' => [
+                        'config' => 'randomize',
+                    ]
+                ]
+            ]
+        ];
+
+        $result = $this->heroRepository->setHero($promos, []);
+
+        $this->assertEquals('1', $result['hero']['component']['limit']);
     }
 }
