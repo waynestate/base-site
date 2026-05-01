@@ -108,6 +108,8 @@ module.exports = {
             variants: ['md','lg','xl','2xl','mt'],
         },
         '/form_responses/',
+        '/code/',
+        '/code-block/',
     ],
     theme: {
         screens: screens,
@@ -127,7 +129,22 @@ module.exports = {
                 'Helvetica Neue',
                 'sans-serif',
             ],
-            serif: ['Georgia', 'Times', 'Times New Roman', 'serif'],
+            serif: [
+                'Georgia',
+                'Times', 
+                'Times New Roman', 
+                'serif'
+            ],
+            mono: [
+                'ui-monospace', 
+                'SFMono-Regular', 
+                'Menlo',
+                'Monaco', 
+                'Consolas', 
+                'Liberation Mono', 
+                'Courier New', 
+                'monospace'
+            ]
         },
         extend: {
             colors: baseColors,
