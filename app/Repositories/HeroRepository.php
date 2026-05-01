@@ -93,7 +93,7 @@ class HeroRepository implements HeroRepositoryContract
             }
 
             // Determine placement
-            $placement = $this->mapPlacement($promoOption, $componentPlacement);
+            $placement = $this->mapPlacement($promoOption, $componentOption);
             if ($placement) {
                 $hero['component']['heroPlacement'] = $placement;
             }
@@ -171,7 +171,7 @@ class HeroRepository implements HeroRepositoryContract
         }
 
         $hero['component']['heroPlacement'] = $hero['component']['heroPlacement'] ?? config('base.hero_placement');
-        $hero['component']['heroType'] = $hero['component']['heroType'] ?? 'banner';
+        $hero['component']['heroType'] = $hero['component']['heroType'] ?? '';
 
         unset($components[$hero_key]);
 
