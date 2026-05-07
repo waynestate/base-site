@@ -37,7 +37,7 @@ class ComponentEventListingController extends Controller
                     0 => [
                         'promo_item_id' => 'component_config',
                         'title' => 'Component configuration',
-                        'description' => '
+                        'description' => <<<'HTML'
 <table>
     <thead>
         <tr>
@@ -72,12 +72,15 @@ All available configurations
 "config":"limit:4",
 "cal_name": "myurl/",
 "link_text":"More events"
+"is_featured": 0,
+"featured_images_only": 0,
 }
 </pre>
             </td>
         </tr>
     </tbody>
-</table>',
+</table>
+HTML
                     ],
                 ],
                 'component' => [
