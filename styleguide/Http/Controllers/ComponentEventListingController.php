@@ -72,11 +72,58 @@ All available configurations
 "config":"limit:4",
 "cal_name": "myurl/",
 "link_text":"More events"
-"is_featured": 0,
-"featured_images_only": 0,
+"audience_id": 0,
+"is_featured": 0 (no) or 1 (yes),
+"featured_images_only": 0 (no) or 1 (yes),
 }
 </pre>
             </td>
+        </tr>
+    </tbody>
+</table>
+<table>
+    <thead>
+        <tr>
+            <th>Audience ID</th>
+            <th>Audience</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Prospective students</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Faculty</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Staff</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Alumni</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>Community</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>Invite only</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>Parents</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>Academic staff</td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>Current students</td>
         </tr>
     </tbody>
 </table>

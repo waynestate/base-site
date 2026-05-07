@@ -31,7 +31,7 @@ class EventRepository implements EventRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getEvents(int $site_id, int $limit = 4)
+    public function getEvents(int $site_id, int $limit = 4, int $audience_id = null, int $is_featured = null, int $featured_images_only = null): array
     {
         $params = [
             'method' => 'calendar.events.listing',
@@ -60,7 +60,7 @@ class EventRepository implements EventRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getEventsFullListing($site_id, $limit = 4)
+    public function getEventsFullListing(int $site_id, int $limit = 4, int $audience_id = null, int $is_featured = null, int $featured_images_only = null): array
     {
         $params = [
             'method' => 'calendar.events.fulllisting',
