@@ -10,7 +10,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
     @if(!empty($base['page']['canonical']))<link rel="canonical" href="{{ $base['page']['canonical'] }}">@endif
 
@@ -47,11 +47,7 @@
     @yield('top')
 
     @if(!empty($base['hero']) && (!empty($base['hero']['component']['heroPlacement']) && $base['hero']['component']['heroPlacement'] != 'contained'))
-        @if(($base['hero']['component']['heroLayout'] ?? '') === 'carousel')
-            @include('components.hero-carousel', ['hero' => $base['hero'], 'class' => 'hero--full-width'])
-        @else
-            @include('components.hero', ['hero' => $base['hero'], 'class' => 'hero--full-width'])
-        @endif
+        @include('components.hero', ['hero' => $base['hero']])
 
         @yield('under-hero')
     @endif
