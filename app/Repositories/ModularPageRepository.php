@@ -244,10 +244,22 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
                     // Use full listing if the name contains featured, or events-row
                     // TODO Find better naming convention
-                    if (!Str::contains($name, 'featured') && Str::contains($name, 'column') || Str::contains($name, 'news-and-events')) {
-                        $events = $this->event->getEvents($components['components'][$name]['id'] ?? $base['site']['id'], $limit);
+                    if (!Str::contains($name, 'featured') && (Str::contains($name, 'column') || Str::contains($name, 'news-and-events'))) {
+                        $events = $this->event->getEvents(
+                            $components['components'][$name]['id'] ?? $base['site']['id'],
+                            $limit,
+                            audience_id: $components['components'][$name]['audience_id'] ?? null,
+                            is_featured: $components['components'][$name]['is_featured'] ?? null,
+                            featured_images_only: $components['components'][$name]['featured_images_only'] ?? null,
+                        );
                     } else {
-                        $events = $this->event->getEventsFullListing($components['components'][$name]['id'] ?? $base['site']['id'], $limit);
+                        $events = $this->event->getEventsFullListing(
+                            $components['components'][$name]['id'] ?? $base['site']['id'],
+                            $limit,
+                            audience_id: $components['components'][$name]['audience_id'] ?? null,
+                            is_featured: $components['components'][$name]['is_featured'] ?? null,
+                            featured_images_only: $components['components'][$name]['featured_images_only'] ?? null,
+                        );
                     }
 
                     // Special data structure for news-and-events component

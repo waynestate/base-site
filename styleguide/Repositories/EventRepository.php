@@ -10,7 +10,7 @@ class EventRepository extends Repository
     /**
      * {@inheritdoc}
      */
-    public function getEvents(int $site_id, int $limit = 4)
+    public function getEvents(int $site_id, int $limit = 4, int $audience_id = null, int $is_featured = null, int $featured_images_only = null): array
     {
         $events['events'] = app(Event::class)->create(5);
 
