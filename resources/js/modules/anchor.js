@@ -13,8 +13,7 @@
         var hash = window.location.hash.substring(1);
 
         if(hash !== '' && document.getElementById(hash)) {
-            let y = offset((document.getElementById(hash))).top - document.querySelector('.menu-top-container').offsetHeight;
-
+            let y = offset((document.getElementById(hash))).top - document.querySelector('.nav-top').offsetHeight;
             window.scroll(0, y);
         }
     }

@@ -112,12 +112,12 @@ a.text-white:-moz-focusring {
 }
 
 code {
-    @apply inline-block bg-gray-100 py-0.5 px-1 mx-1 rounded text-sm;
+    @apply inline-block bg-gray-100 py-0.5 px-1 mx-1 rounded text-sm font-mono;
 }
 
 pre,
 .code-block {
-    @apply inline-block bg-gray-100 overflow-x-scroll text-sm p-2 my-2 rounded max-w-full;
+    @apply inline-block bg-gray-100 overflow-x-auto text-sm p-2 my-2 rounded w-full max-w-full font-mono;
 }
 
 /* Keep footer at the bottom of the browser */

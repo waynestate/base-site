@@ -163,7 +163,7 @@ class ProfileRepository implements ProfileRepositoryContract
         }
 
         // Hide filtering if all profiles belong to the same group
-        if (!$options['hide_filtering'] && !empty($profiles['profiles'])) {
+        if (empty($selected_group) && !$options['hide_filtering'] && !empty($profiles['profiles'])) {
             $unique_groups = $this->getUniqueGroupsFromProfiles($profiles['profiles']);
             if (count($unique_groups) <= 1) {
                 $options['hide_filtering'] = true;

@@ -36,11 +36,10 @@ $global_config = [
     |
     | Create a new layout when adjustments to the content area are needed.
     | Layouts are stored in resources/layouts
-    | Sets the default look of the hero; main => small banner, contained-hero => contained hero
-    | ['main', 'contained-hero']
+    | 'layout' = ['main'];
     |
     */
-    'layout' => 'contained-hero',
+    'layout' => 'main',
 
     /*
     |--------------------------------------------------------------------------
@@ -48,36 +47,10 @@ $global_config = [
     |--------------------------------------------------------------------------
     |
     | Sets the default placement of the hero
-    |
-    | 'heroPlacement' = [
-    |     'contained' => ['contained'],
-    |     'full-width' => ['full-width', 'full', 'banner', 'large', 'banner large'],
-    | ];
+    | 'heroPlacement' = ['contained', 'full-width'];
     |
     */
-    'hero_placement' => 'full-width',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Hero type
-    |--------------------------------------------------------------------------
-    |
-    | Sets the default type of the hero
-    | Default hero type is 'large' for images in a carousel
-    |
-    | 'heroType' = [
-    |     'slim' => ['slim', 'small'],
-    |     'split' => ['split', 'half'],
-    |     'text' => ['text'],
-    |     'buttons' => ['buttons'],
-    |     'logo' => ['logo'],
-    |     'svg' => ['svg'],
-    |     'carousel' => ['carousel'],
-    |     'large' => ['large', 'banner'],
-    | ];
-    |
-    */
-    'hero_type' => 'banner',
+    'hero_placement' => 'contained',
 
     /*
     |--------------------------------------------------------------------------

@@ -225,4 +225,36 @@ final class ArticleControllerTest extends TestCase
         // Call the news listing
         $view = $ArticleController->index($request);
     }
+
+    #[Test]
+    public function news_listing_with_page_and_no_articles_should_404(): void
+    {
+        $this->expectException(NotFoundHttpException::class);
+
+        $newsApi = Mockery::mock(News::class);
+        $articleRepository = app(ArticleRepository::class, ['newsApi' => $newsApi]);
+
+        $newsApi = Mockery::mock(News::class);
+        $newsApi->shouldReceive('request')->once()->andReturn(app(Topic::class)->create(3));
+        $topicRepository = app(TopicRepository::class, ['newsApi' => $newsApi]);
+
+        // Construct the news controller
+        $ArticleController = app(ArticleController::class, ['article' => $articleRepository, 'topic' => $topicRepository]);
+
+        $request = new Request(['page' => 2]);
+        $request->path = '/'.config('base.news_listing_route').'/';
+        $request->data = [
+            'base' => [
+                'site' => [
+                    'news' => [
+                        'application_id' => 1,
+                    ],
+                    'subsite-folder' => null,
+                ],
+            ],
+        ];
+
+        // Call the news listing
+        $view = $ArticleController->index($request);
+    }
 }

@@ -24,72 +24,18 @@ final class HeroRepositoryTest extends TestCase
     }
 
     #[Test]
-    public function carousel_hero_with_multiple_promos(): void
+    public function slim_hero_default(): void
     {
-        config(['base.hero_placement' => 'full-width']);
-        $promos = [
-            'hero' => [
-                ['title' => 'Hero 1', 'option' => ''],
-                ['title' => 'Hero 2', 'option' => '']
-            ]
-        ];
-        $result = $this->heroRepository->setHero($promos, []);
-        $this->assertEquals('banner', $result['hero']['component']['heroType']);
-        $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
-        $this->assertEquals('carousel', $result['hero']['component']['heroLayout']);
-        $this->assertEquals('hero--banner hero--carousel', $result['hero']['data'][0]['hero_classes']);
-        $this->assertArrayHasKey('hero_options', $result['hero']['data'][0]);
-    }
-
-    #[Test]
-    public function contained_carousel_hero(): void
-    {
-        $promos = [
-            'hero' => [
-                ['title' => 'Hero 1', 'option' => 'contained'],
-                ['title' => 'Hero 2', 'option' => 'contained']
-            ]
-        ];
-        $result = $this->heroRepository->setHero($promos, []);
-        $this->assertEquals('banner', $result['hero']['component']['heroType']);
-        $this->assertEquals('contained', $result['hero']['component']['heroPlacement']);
-        $this->assertEquals('carousel', $result['hero']['component']['heroLayout']);
-    }
-
-    #[Test]
-    public function modular_carousel_hero_with_contained_option(): void
-    {
-        $promos = [
-            'components' => [
-                'hero-1' => [
-                    'data' => [
-                        ['title' => 'Hero 1', 'option' => '']
-                    ],
-                    'component' => [
-                        'config' => 'limit:4|option:contained'
-                    ]
-                ]
-            ]
-        ];
-        $result = $this->heroRepository->setHero($promos, []);
-        $this->assertEquals('banner', $result['hero']['component']['heroType']);
-        $this->assertEquals('contained', $result['hero']['component']['heroPlacement']);
-        $this->assertEquals('', $result['hero']['component']['heroLayout']);
-    }
-
-    #[Test]
-    public function contained_slim_hero_default(): void
-    {
-        config(['base.hero_type' => 'slim']);
         config(['base.hero_placement' => 'contained']);
         $promos = [
             'hero' => [
-                ['title' => 'Hero 1', 'option' => '']
+                ['title' => 'Hero 1', 'option' => 'slim']
             ]
         ];
         $result = $this->heroRepository->setHero($promos, []);
-        $this->assertEquals('slim', $result['hero']['component']['heroType']);
-        $this->assertEquals('contained', $result['hero']['component']['heroPlacement']);
+        $this->assertEquals('banner', $result['hero']['data'][0]['hero_type']);
+        $this->assertContains('hero--slim', $result['hero']['data'][0]['hero_classes']);
+        $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
     }
 
     #[Test]
@@ -101,9 +47,9 @@ final class HeroRepositoryTest extends TestCase
             ]
         ];
         $result = $this->heroRepository->setHero($promos, []);
-        $this->assertEquals('large', $result['hero']['component']['heroType']);
+        $this->assertEquals('banner', $result['hero']['data'][0]['hero_type']);
+        $this->assertContains('hero--banner', $result['hero']['data'][0]['hero_classes']);
         $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
-        $this->assertEquals('hero--large', $result['hero']['data'][0]['hero_classes']);
     }
 
     #[Test]
@@ -115,8 +61,8 @@ final class HeroRepositoryTest extends TestCase
             ]
         ];
         $result = $this->heroRepository->setHero($promos, []);
-        $this->assertEquals('split', $result['hero']['component']['heroType']);
-        $this->assertEquals('hero--split', $result['hero']['data'][0]['hero_classes']);
+        $this->assertEquals('split', $result['hero']['data'][0]['hero_type']);
+        $this->assertContains('hero--split', $result['hero']['data'][0]['hero_classes']);
     }
 
     #[Test]
@@ -128,8 +74,8 @@ final class HeroRepositoryTest extends TestCase
             ]
         ];
         $result = $this->heroRepository->setHero($promos, []);
-        $this->assertEquals('text', $result['hero']['component']['heroType']);
-        $this->assertEquals('hero--text', $result['hero']['data'][0]['hero_classes']);
+        $this->assertEquals('text', $result['hero']['data'][0]['hero_type']);
+        $this->assertContains('hero--text', $result['hero']['data'][0]['hero_classes']);
     }
 
     #[Test]
@@ -141,16 +87,18 @@ final class HeroRepositoryTest extends TestCase
             ]
         ];
         $result = $this->heroRepository->setHero($promos, []);
-        $this->assertEquals('svg', $result['hero']['component']['heroType']);
-        $this->assertEquals('hero--svg', $result['hero']['data'][0]['hero_classes']);
+        $this->assertEquals('svg', $result['hero']['data'][0]['hero_type']);
+        $this->assertContains('hero--svg', $result['hero']['data'][0]['hero_classes']);
 
         $promos = [
             'hero' => [
                 ['title' => 'Hero 1', 'option' => 'logo']
             ]
         ];
+
         $result = $this->heroRepository->setHero($promos, []);
-        $this->assertEquals('logo', $result['hero']['component']['heroType']);
+        $this->assertEquals('logo', $result['hero']['data'][0]['hero_type']);
+        $this->assertContains('hero--logo', $result['hero']['data'][0]['hero_classes']);
     }
 
     #[Test]
@@ -160,17 +108,19 @@ final class HeroRepositoryTest extends TestCase
             'components' => [
                 'modular-hero-1' => [
                     'data' => [
-                        ['title' => 'Component Hero']
+                        [
+                            'title' => 'Component Hero',
+                            'option' => 'banner contained'
+                        ]
                     ],
                     'component' => [
-                        'heroType' => 'split',
-                        'heroPlacement' => 'full-width'
+                        'option' => 'split full-width',
                     ]
                 ]
             ]
         ];
         $result = $this->heroRepository->setHero($promos, []);
-        $this->assertEquals('split', $result['hero']['component']['heroType']);
+        $this->assertEquals('split', $result['hero']['data'][0]['hero_type']);
         $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
         // The component should be removed from components array
         $this->assertArrayNotHasKey('modular-hero-1', $result['components']);
@@ -212,8 +162,8 @@ final class HeroRepositoryTest extends TestCase
 
         $result = $this->heroRepository->setHero($promos, []);
 
-        $this->assertEquals('text', $result['hero']['component']['heroType']);
         $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
+        $this->assertEquals('text', $result['hero']['data'][0]['hero_type']);
     }
 
     #[Test]
@@ -236,7 +186,7 @@ final class HeroRepositoryTest extends TestCase
 
         $result = $this->heroRepository->setHero($promos, []);
 
-        $this->assertEquals('text', $result['hero']['component']['heroType']);
+        $this->assertEquals('text', $result['hero']['data'][0]['hero_type']);
         $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
     }
 
@@ -258,7 +208,7 @@ final class HeroRepositoryTest extends TestCase
 
         $result = $this->heroRepository->setHero($promos, []);
 
-        $this->assertEquals('large', $result['hero']['component']['heroType']);
+        $this->assertEquals('banner', $result['hero']['data'][0]['hero_type']);
         $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
     }
 
@@ -272,7 +222,7 @@ final class HeroRepositoryTest extends TestCase
                         ['title' => 'Hero 1', 'option' => 'banner small']
                     ],
                     'component' => [
-                        'config' => 'option:large full-width',
+                        'option' => 'large full-width',
                     ]
                 ]
             ]
@@ -281,7 +231,7 @@ final class HeroRepositoryTest extends TestCase
         $result = $this->heroRepository->setHero($promos, []);
 
         // Even though promo has 'small', component has 'large'
-        $this->assertEquals('large', $result['hero']['component']['heroType']);
+        $this->assertEquals('banner', $result['hero']['data'][0]['hero_type']);
         $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
     }
     #[Test]
@@ -298,7 +248,7 @@ final class HeroRepositoryTest extends TestCase
         ];
         $result = $this->heroRepository->setHero($promos, []);
 
-        $this->assertEquals('hero--svg', $result['hero']['data'][0]['hero_classes']);
+        $this->assertContains('hero--svg', $result['hero']['data'][0]['hero_classes']);
         $this->assertEquals('//base.wayne.localhost/styleguide/test.svg?v=123', $result['hero']['data'][0]['secondary_relative_url']);
     }
 
@@ -316,7 +266,7 @@ final class HeroRepositoryTest extends TestCase
         ];
         $result = $this->heroRepository->setHero($promos, []);
 
-        $this->assertEquals('logo', $result['hero']['component']['heroType']);
+        $this->assertEquals('logo', $result['hero']['data'][0]['hero_type']);
     }
 
     #[Test]
@@ -325,20 +275,20 @@ final class HeroRepositoryTest extends TestCase
         // small -> slim
         $promos = ['hero' => [['option' => 'small']]];
         $result = $this->heroRepository->setHero($promos, []);
-        $this->assertEquals('slim', $result['hero']['component']['heroType']);
-        $this->assertEquals('hero--slim', $result['hero']['data'][0]['hero_classes']);
+        $this->assertEquals('banner', $result['hero']['data'][0]['hero_type']);
+        $this->assertContains('hero--slim', $result['hero']['data'][0]['hero_classes']);
 
         // half -> split
         $promos = ['hero' => [['option' => 'half']]];
         $result = $this->heroRepository->setHero($promos, []);
-        $this->assertEquals('split', $result['hero']['component']['heroType']);
-        $this->assertEquals('hero--split', $result['hero']['data'][0]['hero_classes']);
+        $this->assertEquals('split', $result['hero']['data'][0]['hero_type']);
+        $this->assertContains('hero--split', $result['hero']['data'][0]['hero_classes']);
 
         // banner -> large
         $promos = ['hero' => [['option' => 'banner']]];
         $result = $this->heroRepository->setHero($promos, []);
-        $this->assertEquals('large', $result['hero']['component']['heroType']);
-        $this->assertEquals('hero--large', $result['hero']['data'][0]['hero_classes']);
+        $this->assertEquals('banner', $result['hero']['data'][0]['hero_type']);
+        $this->assertContains('hero--banner', $result['hero']['data'][0]['hero_classes']);
 
         // full -> full-width
         $promos = ['hero' => [['option' => 'full']]];
@@ -348,8 +298,8 @@ final class HeroRepositoryTest extends TestCase
         // banner large -> full-width
         $promos = ['hero' => [['option' => 'banner large']]];
         $result = $this->heroRepository->setHero($promos, []);
+        $this->assertEquals('banner', $result['hero']['data'][0]['hero_type']);
         $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
-        $this->assertEquals('large', $result['hero']['component']['heroType']);
     }
 
     #[Test]
@@ -358,8 +308,8 @@ final class HeroRepositoryTest extends TestCase
         config(['base.hero_type' => null]);
         $promos = ['hero' => [['title' => 'Hero 1', 'option' => '']]];
         $result = $this->heroRepository->setHero($promos, []);
-        $this->assertEquals('large', $result['hero']['component']['heroType']);
-        $this->assertEquals('', $result['hero']['data'][0]['hero_classes']);
+        $this->assertEquals('banner', $result['hero']['data'][0]['hero_type']);
+        $this->assertContains('hero--banner', $result['hero']['data'][0]['hero_classes']);
     }
 
     #[Test]
@@ -379,8 +329,8 @@ final class HeroRepositoryTest extends TestCase
     {
         $promos = ['hero' => [['option' => 'buttons']]];
         $result = $this->heroRepository->setHero($promos, []);
-        $this->assertEquals('buttons', $result['hero']['component']['heroType']);
-        $this->assertEquals('hero--buttons', $result['hero']['data'][0]['hero_classes']);
+        $this->assertEquals('buttons', $result['hero']['data'][0]['hero_type']);
+        $this->assertContains('hero--buttons', $result['hero']['data'][0]['hero_classes']);
     }
 
     #[Test]
@@ -392,19 +342,14 @@ final class HeroRepositoryTest extends TestCase
             ]
         ];
         $result = $this->heroRepository->setHero($promos, []);
-        $this->assertEquals('large', $result['hero']['component']['heroType']);
+        $this->assertEquals('banner', $result['hero']['data'][0]['hero_type']);
         $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
-        $this->assertEquals('hero--large', $result['hero']['data'][0]['hero_classes']);
+        $this->assertContains('hero--banner', $result['hero']['data'][0]['hero_classes']);
     }
 
     #[Test]
-    public function banner_and_large_default_to_full_width_placement(): void
+    public function large_defaults_to_full_width_placement(): void
     {
-        // banner -> full-width
-        $promos = ['hero' => [['option' => 'banner']]];
-        $result = $this->heroRepository->setHero($promos, []);
-        $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
-
         // large -> full-width
         $promos = ['hero' => [['option' => 'large']]];
         $result = $this->heroRepository->setHero($promos, []);
@@ -432,16 +377,16 @@ final class HeroRepositoryTest extends TestCase
             'components' => [
                 'modular-hero-1' => [
                     'data' => [['title' => 'Hero 1']],
-                    'component' => ['heroType' => 'split']
+                    'component' => ['option' => 'split']
                 ],
                 'modular-hero-2' => [
                     'data' => [['title' => 'Hero 2']],
-                    'component' => ['heroType' => 'slim']
+                    'component' => ['option' => 'slim']
                 ]
             ]
         ];
         $result = $this->heroRepository->setHero($promos, []);
-        $this->assertEquals('split', $result['hero']['component']['heroType']);
+        $this->assertEquals('split', $result['hero']['data'][0]['hero_type']);
         $this->assertArrayNotHasKey('modular-hero-1', $result['components']);
         $this->assertArrayHasKey('modular-hero-2', $result['components']);
     }
@@ -455,156 +400,6 @@ final class HeroRepositoryTest extends TestCase
         $result = $this->heroRepository->setHero($promos, []);
         $this->assertContains('large', $result['hero']['data'][0]['hero_options']);
         $this->assertContains('full-width', $result['hero']['data'][0]['hero_options']);
-    }
-
-    #[Test]
-    public function modular_hero_with_multiple_items_triggers_carousel(): void
-    {
-        $promos = [
-            'components' => [
-                'modular-hero-1' => [
-                    'data' => [
-                        ['title' => 'Hero 1', 'option' => ''],
-                        ['title' => 'Hero 2', 'option' => ''],
-                    ],
-                    'component' => [
-                        'config' => 'limit:3|option:buttons full',
-                    ]
-                ]
-            ]
-        ];
-
-        $result = $this->heroRepository->setHero($promos, []);
-
-        $this->assertEquals('carousel', $result['hero']['component']['heroLayout']);
-        $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
-        $this->assertCount(2, $result['hero']['data']);
-    }
-
-    #[Test]
-    public function modular_hero_with_single_item_and_limit_greater_than_one_triggers_carousel(): void
-    {
-        $promos = [
-            'components' => [
-                'modular-hero-1' => [
-                    'data' => [
-                        ['title' => 'Hero 1', 'option' => ''],
-                    ],
-                    'component' => [
-                        'config' => 'limit:3|option:buttons full',
-                    ]
-                ]
-            ]
-        ];
-
-        $result = $this->heroRepository->setHero($promos, []);
-
-        $this->assertEquals('buttons', $result['hero']['component']['heroType']);
-        $this->assertCount(1, $result['hero']['data']);
-    }
-
-    #[Test]
-    public function modular_hero_with_limit_one_and_carousel_option_triggers_carousel(): void
-    {
-        $promos = [
-            'components' => [
-                'modular-hero-1' => [
-                    'data' => [
-                        ['title' => 'Hero 1', 'option' => 'carousel'],
-                    ],
-                    'component' => [
-                        'config' => 'limit:1',
-                    ]
-                ]
-            ]
-        ];
-
-        $result = $this->heroRepository->setHero($promos, []);
-        $this->assertEquals('carousel', $result['hero']['component']['heroLayout']);
-        $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
-    }
-
-    #[Test]
-    public function modular_hero_processes_secondary_image_even_in_carousel(): void
-    {
-        $promos = [
-            'hero' => [
-                ['title' => 'Hero 1', 'relative_url' => '/hero.jpg', 'secondary_relative_url' => '/logo.svg', 'option' => ''],
-                ['title' => 'Hero 2', 'relative_url' => '/hero2.jpg', 'option' => ''],
-            ]
-        ];
-
-        $result = $this->heroRepository->setHero($promos, []);
-
-        $this->assertEquals('banner', $result['hero']['component']['heroType']);
-        $this->assertEquals('/logo.svg', $result['hero']['data'][0]['secondary_relative_url']);
-    }
-
-    #[Test]
-    public function modular_hero_with_limit_three_and_option_full_triggers_carousel_for_single_item(): void
-    {
-        $promos = [
-            'components' => [
-                'hero-1' => [
-                    'data' => [
-                        ['title' => 'Slide 1', 'option' => ''],
-                    ],
-                    'component' => [
-                        'config' => 'limit:3|option:full',
-                    ],
-                ],
-            ],
-        ];
-
-        // Simulate how Controller might pass the component data
-        // Often 'limit' and 'option' are already extracted into the component array
-        $promos['components']['hero-1']['component']['limit'] = 3;
-        $promos['components']['hero-1']['component']['option'] = 'full';
-
-        $result = $this->heroRepository->setHero($promos, []);
-
-        $this->assertEquals('banner', $result['hero']['component']['heroType']);
-        $this->assertEquals('full-width', $result['hero']['component']['heroPlacement']);
-        $this->assertEquals('', $result['hero']['component']['heroLayout']);
-        $this->assertEquals('hero--banner', $result['hero']['data'][0]['hero_classes']);
-    }
-
-    #[Test]
-    public function carousel_keyword_in_option_triggers_carousel(): void
-    {
-        $promos = [
-            'hero' => [
-                ['title' => 'Hero 1', 'option' => 'carousel']
-            ]
-        ];
-        $result = $this->heroRepository->setHero($promos, []);
-        $this->assertEquals('carousel', $result['hero']['component']['heroLayout']);
-    }
-
-    #[Test]
-    public function carousel_hero_with_multiple_items_should_have_all_items_in_data()
-    {
-        $promos = [
-            'components' => [
-                'hero-1' => [
-                    'data' => [
-                        ['title' => 'Hero 1', 'option' => 'full'],
-                        ['title' => 'Hero 2', 'option' => 'full'],
-                        ['title' => 'Hero 3', 'option' => 'full'],
-                        ['title' => 'Hero 4', 'option' => 'full'],
-                    ],
-                    'component' => [
-                        'config' => 'limit:4',
-                    ],
-                ],
-            ],
-        ];
-
-        $promos = $this->heroRepository->setHero($promos, []);
-
-        $this->assertCount(4, $promos['hero']['data']);
-        $this->assertEquals('banner', $promos['hero']['component']['heroType']);
-        $this->assertEquals('full-width', $promos['hero']['component']['heroPlacement']);
     }
 
     #[Test]
@@ -633,7 +428,7 @@ final class HeroRepositoryTest extends TestCase
         $promos = $this->heroRepository->setHero($promos, []);
 
         // It should be a carousel
-        $this->assertEquals('banner', $promos['hero']['component']['heroType']);
+        $this->assertEquals('banner', $promos['hero']['data'][0]['hero_type']);
 
         // Check the count of data items. If HeroRepository doesn't slice, it will be 4.
         // The user says there's only 1 item, but they EXPECT 3.
@@ -660,7 +455,7 @@ final class HeroRepositoryTest extends TestCase
         $promos = $this->heroRepository->setHero($promos, []);
 
         $this->assertCount(4, $promos['hero']['data']);
-        $this->assertEquals('banner', $promos['hero']['component']['heroType']);
+        $this->assertEquals('banner', $promos['hero']['data'][0]['hero_type']);
     }
 
     #[Test]
@@ -673,16 +468,15 @@ final class HeroRepositoryTest extends TestCase
                         ['title' => 'Hero 1', 'relative_url' => '/hero1.jpg', 'option' => ''],
                     ],
                     'component' => [
-                        'config' => 'limit:1|option:slim',
+                        'option' => 'split',
                     ],
-                    'option' => 'split',
                 ],
             ],
         ];
 
         $promos = $this->heroRepository->setHero($promos, []);
 
-        $this->assertEquals('split', $promos['hero']['component']['heroType']);
+        $this->assertEquals('split', $promos['hero']['data'][0]['hero_type']);
     }
 
     #[Test]
@@ -704,6 +498,48 @@ final class HeroRepositoryTest extends TestCase
 
         $promos = $this->heroRepository->setHero($promos, []);
 
-        $this->assertEquals('text', $promos['hero']['component']['heroType']);
+        $this->assertEquals('text', $promos['hero']['data'][0]['hero_type']);
+    }
+
+    #[Test]
+    public function limit_5(): void
+    {
+        $promos = [
+            'components' => [
+                'modular-hero-1' => [
+                    'data' => [
+                        ['title' => 'Hero 1', 'option' => '']
+                    ],
+                    'component' => [
+                        'config' => 'limit:5',
+                    ]
+                ]
+            ]
+        ];
+
+        $result = $this->heroRepository->setHero($promos, []);
+
+        $this->assertEquals('5', $result['hero']['component']['limit']);
+    }
+
+    #[Test]
+    public function limit_1(): void
+    {
+        $promos = [
+            'components' => [
+                'modular-hero-1' => [
+                    'data' => [
+                        ['title' => 'Hero 1', 'option' => '']
+                    ],
+                    'component' => [
+                        'config' => 'randomize',
+                    ]
+                ]
+            ]
+        ];
+
+        $result = $this->heroRepository->setHero($promos, []);
+
+        $this->assertEquals('1', $result['hero']['component']['limit']);
     }
 }

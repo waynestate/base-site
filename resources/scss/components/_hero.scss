@@ -1,174 +1,315 @@
 .hero {
     $c: &;
-    @apply relative max-w-full;
 
-    &__carousel-item {
-        /* Flickity applies absolute to this container when enabled */
-        @apply w-full aspect-hero;
-    }
+    @apply relative max-w-full overflow-hidden;
 
+    container: hero / inline-size;
+
+    /* Default styles across all classes */
     &__type {
         @apply w-full relative;
     }
 
     &__primary-image {
-        @apply w-full h-full object-cover object-center;
+        @apply w-full object-cover object-center;
     }
 
-    /* Modifiers */
+    &__title em {
+        @apply text-gold-500 lg:text-gold font-black;
+    }
+
+    &__link {
+        @apply 
+        text-green-700 
+        underline 
+        underline-offset-[0.2rem] 
+        hover:underline-offset-[0.3rem] focus:underline-offset-[0.3rem] 
+        decoration-1 
+        hover:decoration-2 focus:decoration-2 
+        transition-all;
+    }
+
+    &__link-span {
+        @apply absolute inset-0 z-10;
+    }
+
+    /* Placement modifiers */
     &--full-width {
         @apply mx-auto;
     }
 
     &--contained {
         @apply xl:mx-container;
-
-
-        #{$c}__title {
-            @apply lg:drop-shadow-px leading-tight text-3xl lg:text-5xl font-bold my-2;
-        }
     }
 
+    /* Height modifiers */
     &--slim {
-        @apply h-hero-small max-h-hero-small;
+        @apply 
+        min-h-[135px] 
+        md:aspect-hero-small /* maintain aspect ratio between set heights */
+        lg:h-hero-small 
+        2xl:max-h-[250px];
+    }
+
+    /* Type modifiers */
+    #{$c}--banner {
+        @apply aspect-hero max-h-hero;
 
         #{$c}__primary-image {
-            @apply w-full h-full object-cover object-center;
+            @apply h-full absolute inset-0;
         }
 
-        #{$c}__content {
-            @apply hidden;
+        &#{$c}--slim {
+            @apply aspect-hero-small max-h-[250px];;
         }
     }
 
-    &--split {
-        @apply relative xl:flex items-center;
+
+    /* 
+     * Text and Buttons 
+     */
+    &--text,
+    &--buttons {
+        @apply grid items-end lg:bg-green-900;
 
         #{$c}__primary-image {
-            @apply w-full xl:w-[60%] shrink-0;
+            @apply aspect-hero lg:aspect-auto max-h-hero h-full;
         }
 
         #{$c}__content {
-            @apply relative p-6 xl:px-12 2xl:px-16 ml-6;
-        }
+            @apply 
 
-        #{$c}__content {
-            @apply border-l-12 border-gold border-solid pl-6 2xl:pl-8 pt-4 pb-8;
+            /* positioning */
+            relative lg:absolute 
+            lg:inset-x-0 lg:bottom-0 
+
+            /* background */
+            rounded bg-white 
+            lg:bg-transparent lg:bg-gradient-darkest
+
+            /* text and shadows */
+            drop-shadow-md 
+            lg:drop-shadow-none 
+            lg:text-white 
+
+            /* border */
+            border-gold border-solid border-l-12 
+            lg:border-0
+
+            /* margins */
+            -mt-8 mb-2 mx-6
+            lg:m-0
+
+            /* padding */
+            p-4 pr-5 
+            lg:px-container lg:pt-20 
+            ;
+
+            @container hero (width > 868px) {
+                @apply text-4xl pb-6;
+            }
+
+            &::before {
+                /* Extending gradient overlay for readability */
+                @apply -top-[60%];
+            }
         }
 
         #{$c}__title {
-            @apply text-green-700 3xl:text-4xl mb-3 font-black;
+            @apply leading-tight font-bold  mb-2 text-green lg:text-white lg:drop-shadow-2px lg:max-w-[36ch]
+            text-2xl lg:text-3xl;
+
+            @container hero (width > 868px) {
+                @apply text-4xl;
+            }
+
+            @container hero (width > 1000px) {
+                @apply text-5xl;
+            }
         }
 
         #{$c}__link {
-             @apply text-green-700 no-underline hover:underline focus:underline;
-         }
-
-        #{$c}__description {
-             @apply text-lg 3xl:text-xl text-green-700 content;
-         }
-    }
-
-    &--large {
-        @apply aspect-hero max-h-hero;
-
-        #{$c}__content {
-            @apply hidden;
-        }
-    }
-
-    &--buttons {
-        @apply aspect-hero max-h-hero;
-
-        #{$c}__primary-image {
-            @apply aspect-hero max-h-hero;
-        }
-
-        #{$c}__content {
-            @apply mt-4 py-1 px-4 border-l-12 border-gold border-solid text-green-900;
-            @apply lg:px-container lg:absolute lg:bottom-0 lg:inset-x-0 lg:pt-28 lg:pb-6;
-            @apply lg:mt-0 lg:border-0 lg:text-white lg:white-links;
-            @apply lg:bg-gradient-darkest;
-        }
-
-        #{$c}__title {
-            @apply lg:drop-shadow-px leading-tight text-3xl lg:text-5xl font-bold mb-2;
+            @apply lg:text-white;
         }
 
         #{$c}__description {
-            @apply relative text-lg content;
-        }
+            @apply relative lg:white-links text-base mt-2;
 
-        #{$c}__buttons {
-            @apply relative mt-5;
+            p:last-of-type {
+                @apply mb-0;
+            }
 
-            .button {
+            @container hero (width > 868px) {
                 @apply text-lg;
             }
         }
+
     }
 
+    /* 
+     * Text - Additional
+     */
     &--text {
-        @apply aspect-hero max-h-hero;
+        &#{$c}--slim {
+            @apply min-h-[135px] md:aspect-hero-small lg:h-hero-small 2xl:max-h-[250px];
 
-        #{$c}__primary-image {
-            @apply aspect-hero max-h-hero;
-        }
+            #{$c}__title {
+                @apply mb-0 text-white relative text-4xl xl:text-5xl;
+            }
 
-        #{$c}__content {
-            @apply mt-4 py-1 px-4 border-l-12 border-gold border-solid text-green-900;
-            @apply lg:px-container lg:absolute lg:bottom-0 lg:inset-x-0 lg:pt-28 lg:pb-6;
-            @apply lg:mt-0 lg:border-0 lg:text-white lg:white-links;
-            @apply lg:bg-gradient-darkest;
-        }
+            #{$c}__content {
+                @apply pt-12 border-0 m-0 drop-shadow-none bg-transparent bg-gradient-darkest;
+            }
 
-        #{$c}__title {
-            @apply lg:drop-shadow-px leading-tight text-3xl lg:text-5xl font-bold mb-2;
-        }
-
-        #{$c}__description {
-            @apply relative text-lg content;
-        }
-
-        #{$c}__buttons {
-            @apply relative mt-5;
-
-            .button {
-                @apply text-lg;
+            #{$c}__primary-image {
+                @apply h-full absolute inset-0;
             }
         }
     }
 
-    &--svg {
-        @apply relative aspect-hero max-h-hero;
+    /* 
+     * Buttons - Additional
+     */
+    &--buttons {
+        #{$c}__buttons {
+            @apply relative mt-5;
 
-        #{$c}__primary-image {
-            @apply absolute inset-0 w-full h-full object-cover;
+            .button {
+                @apply lg:text-lg;
+            }
         }
 
+        #{$c}__title {
+            @apply text-4xl;
+
+            @container hero (width > 868px) {
+                @apply text-5xl;
+            }
+        }
+
+        &#{$c}--slim {
+            @apply min-h-[135px] md:aspect-auto lg:h-hero-small 2xl:max-h-[250px];
+
+            #{$c}__content {
+                @apply flex flex-wrap lg:flex-nowrap justify-between items-end;
+            }
+
+            #{$c}__title {
+                @apply lg:w-[60%] lg:shrink-0;
+            }
+
+            #{$c}__buttons {
+                @apply flex lg:w-full justify-end;
+
+                ul {
+                    @apply grid lg:w-full justify-end;
+
+                    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+
+                    @screen lg {
+                        grid-template-columns: repeat(auto-fit, minmax(130px, max-content));
+                    }
+                }
+
+                li {
+                    @apply w-full lg:shrink-0;
+
+                    .button {
+                        @apply text-sm xl:text-lg px-8;
+                    }
+                    
+                    .button__title {
+                        @apply text-sm xl:text-lg;
+                    }
+                }
+
+            }
+        }
+    }
+
+    /* 
+     * Split 
+     */
+    &--split {
+        @apply relative md:flex items-center md:max-h-hero;
+
+        #{$c}__primary-image {
+            @apply w-full md:w-[50%] max-h-[250px] md:max-h-none shrink-0;
+
+            @container hero (width > 1100px) {
+                @apply w-[60%];
+            }
+        }
+        
         #{$c}__content {
-            @apply absolute inset-0 flex items-center justify-center;
+            @apply 
+
+            relative 
+
+            bg-white 
+            drop-shadow-md md:drop-shadow-none 
+            rounded md:rounded-none
+            
+            border-gold border-solid border-l-12 
+            
+            -mt-8 mb-2 mx-6
+            md:mt-0 md:mb-0 md:mr-0 md:ml-6
+            
+            p-2 pt-4 pl-4 
+            md:p-4 md:pt-6 md:pl-6
+            ;
+        }
+
+        #{$c}__title {
+            @apply text-green-700 text-2xl mb-1 font-black;
+
+            @container hero (width > 868px) {
+                @apply text-4xl;
+            }
+        }
+
+        #{$c}__description {
+             @apply text-green-700;
+
+            @container hero (width > 868px) {
+                @apply text-xl;
+            }
+         }
+    }
+
+
+    /* 
+     * SVG 
+     */
+    &--svg {
+        @apply aspect-hero max-h-hero;
+
+        #{$c}__primary-image {
+            @apply h-full absolute inset-0;
+        }
+
+        #{$c}__link,
+        #{$c}__content {
+            @apply absolute inset-0 z-10 flex items-center; 
         }
 
         #{$c}__secondary-image {
-            @apply max-w-full max-h-full;
+            @apply object-contain object-center mx-auto max-h-full max-w-full;
         }
 
-        #{$c}__link {
-            @apply absolute inset-0 z-10;
-        }
-
-        #{$c}__title,
-        #{$c}__description {
-            @apply hidden;
+        &#{$c}--slim {
+            @apply aspect-hero-small max-h-[250px];;
         }
     }
 
+    /* 
+     * Logo 
+     */
     &--logo {
         @apply relative flex flex-col justify-center bg-green-900 min-h-[300px];
 
         #{$c}__primary-image {
-            @apply inset-0 absolute print:relative bg-cover bg-top opacity-20;
+            @apply inset-0 absolute opacity-20 w-full h-full;
         }
 
         #{$c}__secondary-image {
@@ -188,14 +329,10 @@
         }
     }
 
-    &--carousel {
-
-        #{$c}__carousel-item {
-            @apply max-h-hero;
-        }
-
-        #{$c}--banner {
-            @apply aspect-hero max-h-hero;
-        }
+    /* 
+     * Carousel - Flickity applies absolute to this container when enabled 
+     */
+    &__carousel-item {
+        @apply w-full;
     }
 }

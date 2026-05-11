@@ -149,7 +149,7 @@ class ArticleRepository implements ArticleRepositoryContract
     {
         if (empty($page)) {
             $meta['next_page_url'] = null;
-            $meta['prev_page_url'] = ($meta['total'] < $meta['per_page']) ? null : url()->current().'?page=2';
+            $meta['prev_page_url'] = ($meta['total'] <= $meta['per_page']) ? null : url()->current().'?page=2';
         } elseif ($page == $meta['last_page']) {
             $meta['next_page_url'] = url()->current().'?page='.($page - 1);
             $meta['prev_page_url'] = null;

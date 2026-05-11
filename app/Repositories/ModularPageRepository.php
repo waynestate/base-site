@@ -244,10 +244,22 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
                     // Use full listing if the name contains featured, or events-row
                     // TODO Find better naming convention
-                    if (!Str::contains($name, 'featured') && Str::contains($name, 'column') || Str::contains($name, 'news-and-events')) {
-                        $events = $this->event->getEvents($components['components'][$name]['id'] ?? $base['site']['id'], $limit);
+                    if (!Str::contains($name, 'featured') && (Str::contains($name, 'column') || Str::contains($name, 'news-and-events'))) {
+                        $events = $this->event->getEvents(
+                            $components['components'][$name]['id'] ?? $base['site']['id'],
+                            $limit,
+                            audience_id: $components['components'][$name]['audience_id'] ?? null,
+                            is_featured: $components['components'][$name]['is_featured'] ?? null,
+                            featured_images_only: $components['components'][$name]['featured_images_only'] ?? null,
+                        );
                     } else {
-                        $events = $this->event->getEventsFullListing($components['components'][$name]['id'] ?? $base['site']['id'], $limit);
+                        $events = $this->event->getEventsFullListing(
+                            $components['components'][$name]['id'] ?? $base['site']['id'],
+                            $limit,
+                            audience_id: $components['components'][$name]['audience_id'] ?? null,
+                            is_featured: $components['components'][$name]['is_featured'] ?? null,
+                            featured_images_only: $components['components'][$name]['featured_images_only'] ?? null,
+                        );
                     }
 
                     // Special data structure for news-and-events component
@@ -419,7 +431,15 @@ class ModularPageRepository implements ModularPageRepositoryContract
                     if (strpos($class, 'bg-') !== false) {
                         // backgroundClass
                         $components[$componentName]['component']['backgroundClass'][] = $class;
-                    } elseif (strpos($class, 'my-') !== false | strpos($class, 'mt-') !== false | strpos($class, 'mb-') !== false | strpos($class, 'end') !== false | strpos($class, 'left') !== false | strpos($class, 'right') !== false) {
+                    } elseif (
+                        strpos($class, 'my-') !== false |
+                        strpos($class, 'mt-') !== false |
+                        strpos($class, 'mb-') !== false |
+                        strpos($class, 'end') !== false |
+                        strpos($class, 'left') !== false |
+                        strpos($class, 'right') !== false |
+                        strpos($class, 'order-') !== false
+                    ) {
                         // containerClass
                         $components[$componentName]['component']['containerClass'][] = $class;
                     } else {
@@ -440,7 +460,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
             if (empty(preg_grep('/mb-/', $components[$componentName]['component']['containerClass']))
                 && !Str::contains($componentName, 'heading') && !Str::contains($componentName, 'hero')
             ) {
-                $components[$componentName]['component']['containerClass'] [] = 'mb-gutter';
+                $components[$componentName]['component']['containerClass'][] = 'mb-gutter';
             }
 
             // Implode party, assign all classes to their respective container

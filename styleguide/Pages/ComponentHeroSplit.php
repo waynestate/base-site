@@ -4,7 +4,7 @@ namespace Styleguide\Pages;
 
 use Factories\Page as PageFactory;
 
-class ComponentHeroHalf extends Page
+class ComponentHeroSplit extends Page
 {
     /**
      * {@inheritdoc}
@@ -14,7 +14,7 @@ class ComponentHeroHalf extends Page
         return app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'ComponentHeroController',
-                'title' => 'Hero half',
+                'title' => 'Hero split',
                 'id' => 105100109,
                 'content' => [
                     'main' => '',

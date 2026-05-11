@@ -52,6 +52,14 @@ class ArticleController extends Controller
 
         $articles = $this->article->listing($request->data['base']['site']['news']['application_id'], 25, $request->query('page'), ! empty($selected_topic['topic_id']) ? $selected_topic['topic_id'] : null);
 
+        // 404 if no articles are found and we are trying to page which doesn't exist
+        if (
+            $request->query('page') > 0 &&
+            empty($articles['articles']['data'])
+        ) {
+            abort(404);
+        }
+
         if (! empty($articles['articles']['meta'])) {
             $articles['articles']['meta'] = $this->article->setPaging($articles['articles']['meta'], $request->query('page'));
         }
@@ -59,6 +67,11 @@ class ArticleController extends Controller
         // Force the menu to be shown if categories are found
         if (! empty($topics['topics']['data'])) {
             $request->data['base']['show_site_menu'] = true;
+
+            if (config('base.top_menu_enabled') == true) {
+                $request->data['base']['site_menu'] = null;
+                $request->data['base']['site_menu_output'] = null;
+            }
         }
 
         return view('articles', merge($request->data, $articles, $topics));
@@ -122,6 +135,11 @@ class ArticleController extends Controller
         // Force the menu to be shown if categories are found
         if (! empty($topics['topics']['data'])) {
             $request->data['base']['show_site_menu'] = true;
+
+            if (config('base.top_menu_enabled') == true) {
+                $request->data['base']['site_menu'] = null;
+                $request->data['base']['site_menu_output'] = null;
+            }
         }
 
         return view('article', merge($request->data, $article, $topics));
