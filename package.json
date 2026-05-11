@@ -1,7 +1,7 @@
 {
   "name": "base",
   "private": true,
-  "version": "8.17.0",
+  "version": "8.17.1",
   "description": "",
   "scripts": {
     "dev": "npm run development",
@@ -59,7 +59,13 @@
   "overrides": {
     "slideout": {
       "emitter": "https://github.com/Mango/emitter.git#0.0.7"
+    },
+    "laravel-mix": {
+      "webpackbar": "^7.0.0"
     }
+  },
+  "resolutions": {
+    "webpackbar": "^7.0.0"
   },
   "packageManager": "yarn@4.9.2"
 }
