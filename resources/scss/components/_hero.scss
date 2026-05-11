@@ -191,7 +191,7 @@
             @apply min-h-[135px] md:aspect-auto lg:h-hero-small 2xl:max-h-[250px];
 
             #{$c}__content {
-                @apply flex flex-wrap lg:flex-nowrap justify-between items-end;
+                @apply lg:flex lg:flex-nowrap justify-between items-end;
             }
 
             #{$c}__title {
@@ -199,16 +199,10 @@
             }
 
             #{$c}__buttons {
-                @apply flex lg:w-full justify-end;
+                @apply lg:flex lg:w-full lg:justify-end;
 
                 ul {
                     @apply grid lg:w-full justify-end;
-
-                    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-
-                    @screen lg {
-                        grid-template-columns: repeat(auto-fit, minmax(130px, max-content));
-                    }
                 }
 
                 li {
@@ -220,6 +214,11 @@
                     
                     .button__title {
                         @apply text-sm xl:text-lg;
+                    }
+
+                    // Only display 2 buttons max
+                    &:nth-of-type(n+3) {
+                        @apply hidden;
                     }
                 }
 
