@@ -52,7 +52,7 @@
     "stylelint": "^17.6.0",
     "stylelint-config-standard": "^40.0.0",
     "stylelint-config-standard-scss": "^17.0.0",
-    "stylelint-scss": "^7.0.0",
+    "stylelint-scss": "^7.1.1",
     "tailwindcss": "^3.4.19",
     "vue-template-compiler": "^2.7.16"
   },
