@@ -349,6 +349,18 @@ final class DataTest extends TestCase
     }
 
     #[Test]
+    public function layout_falls_back_to_main_when_configured_layout_does_not_exist(): void
+    {
+        config(['base.layout' => 'contained-hero']);
+
+        $request = Request::create('styleguide');
+
+        app(Data::class)->handle($request, function ($request) {
+            $this->assertEquals('main', $request->data['base']['layout']);
+        });
+    }
+
+    #[Test]
     public function show_header_is_true_when_exclude_cookie_is_absent(): void
     {
         $request = Request::create('styleguide');

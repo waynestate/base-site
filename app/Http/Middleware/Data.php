@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -65,7 +66,8 @@ class Data
         $request->data = merge($data, $page);
 
         // Get the site layout and merge
-        $layout['layout'] = config('base.layout');
+        $layoutName = config('base.layout', 'main');
+        $layout['layout'] = View::exists('layouts.' . $layoutName) ? $layoutName : 'main';
         $request->data = merge($request->data, $layout);
 
         // Determine whether the global header should be shown based on the request
