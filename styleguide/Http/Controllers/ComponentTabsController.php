@@ -23,12 +23,12 @@ class ComponentTabsController extends Controller
     }
 
     /**
-     * Article Listing Controller
+     * Tabs Controller
      */
     public function index(Request $request): View
     {
         $request->data['base']['page']['content']['main'] = '
-<p>Present a list of promotional items accompanied by icons, offering a visually appealing and informative display.</p>
+<p>Present a list of promotional items in tab format, offering a visually appealing and informative display.</p>
 ';
 
         $components = [
@@ -42,7 +42,7 @@ class ComponentTabsController extends Controller
                             'Page field' => 'modular-tabs-1',
                             'Data' => '{
 "id":000000,
-"heading":"Tabs column"
+"heading":"Tabs"
 }',
                         ],
                     ],
@@ -51,11 +51,9 @@ class ComponentTabsController extends Controller
                         'promo_item_id' => 'promo_details',
                         'description' => '',
                         'table' => [
-                            'Title' => 'Bold text.',
-                            'Link' => 'Optional external link. Component flag "singlePromoView" sets the link to the individual promo item view.',
-                            'Excerpt' => 'Optional smaller text under the title.',
-                            'Description' => 'Optional smaller text under the title and/or excerpt. You might use this area on a singe promo view page and hide it from the component.',
-                            'Primary image' => 'Minimum width of 160px svg, png, jpg.',
+                            'Title' => 'Tab title text',
+                            'Description' => 'Description text within the tab/pane area',
+                            'Primary image' => 'Optional: Minimum width of 600px svg, png, jpg.',
                         ],
                     ],
                 ],
@@ -64,9 +62,7 @@ class ComponentTabsController extends Controller
                 ],
             ],
             'tabs-1' => [
-                'data' => app(Tab::class)->create(4, false, [
-                    'description' => '',
-                ]),
+                'data' => app(Tab::class)->create(4, false),
                 'component' => [
                     'heading' => 'Tabs',
                     'filename' => 'tabs',

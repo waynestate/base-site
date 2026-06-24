@@ -9,8 +9,6 @@ class Tab implements FactoryContract
 {
     /**
      * Construct the factory.
-     *
-     * @param Factory $faker
      */
     public function __construct(Factory $faker)
     {
@@ -24,8 +22,12 @@ class Tab implements FactoryContract
     {
         for ($i = 1; $i <= $limit; $i++) {
             $data[$i] = [
-                'title' => $this->faker->sentence,
-                'description' => '<p>'.$this->faker->paragraph.'</p>',
+                'title' => $this->faker->word(),
+                'promo_item_id' => strval($this->faker->randomNumber(5)),
+                'relative_url' => '/styleguide/image/800x600?text=800x600',
+                'filename_alt_text' => 'Placeholder image',
+                'description' => $this->faker->paragraph(8),
+                'excerpt' => '',
             ];
 
             $data[$i] = array_replace_recursive($data[$i], $options);

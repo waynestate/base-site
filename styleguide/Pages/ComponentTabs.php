@@ -14,7 +14,7 @@ class ComponentTabs extends Page
         return app(PageFactory::class)->create(1, true, [
             'page' => [
                 'controller' => 'ComponentTabsController',
-                'title' => 'tabs',
+                'title' => 'Tabs',
                 'id' => 99902,
                 'content' => [
                     'main' => '',
