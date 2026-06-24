@@ -27,7 +27,7 @@ class Tab implements FactoryContract
                 'relative_url' => '/styleguide/image/800x600?text=800x600',
                 'filename_alt_text' => 'Placeholder image',
                 'description' => $this->faker->paragraph(8),
-                'excerpt' => '',
+                'excerpt' => $this->faker->randomElement(['Image caption', '']),
             ];
 
             $data[$i] = array_replace_recursive($data[$i], $options);
