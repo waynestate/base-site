@@ -54,6 +54,7 @@ class ComponentTabsController extends Controller
                             'Title' => 'Tab title text',
                             'Description' => 'Description text within the tab/pane area',
                             'Primary image' => 'Optional: Minimum width of 600px svg, png, jpg.',
+                            'Excerpt' => 'Optional: Image caption',
                         ],
                     ],
                 ],
