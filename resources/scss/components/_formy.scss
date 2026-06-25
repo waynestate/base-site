@@ -176,7 +176,8 @@
     }
 
     /* Required */
-    label em {
+    label em,
+    legend em {
         @apply text-red-600;
     }
 }
