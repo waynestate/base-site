@@ -59,14 +59,14 @@
         }
 
         &--left {
-            @screen mt {
-                @apply items-start flex-row;
+            @screen lg {
+                @apply flex-row-reverse;
             }
         }
 
         &--center {
-            @screen mt {
-                @apply flex-row-reverse items-start;
+            @screen lg {
+                @apply flex-col items-center text-left;
             }
         }
 
@@ -87,7 +87,7 @@
         }
 
         &--center {
-            @screen mt {
+            @screen lg {
                 @apply w-2/3;
             }
         }

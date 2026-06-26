@@ -55,6 +55,7 @@ class ComponentTabsController extends Controller
                             'Description' => 'Description text within the tab/pane area',
                             'Primary image' => 'Optional: Minimum width of 600px svg, png, jpg.',
                             'Excerpt' => 'Optional: Image caption',
+                            'Option' => 'Image orientation: Left, Center, Right(default)',
                         ],
                     ],
                 ],
