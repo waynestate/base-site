@@ -19,7 +19,7 @@
         </div>
 
         <form action="/{{ $base['server']['path'] }}#form-1" method="post" id="form-1" name="form-1" enctype="multipart/form-data" tabindex="-1">
-            <p id="required-message">Fields with asterisks (<em>*</em>) are required.</p>
+            <p id="required-message">Fields with asterisks (*) are required.</p>
             <h2>Contact Information (autofilled if authenticated)</h2>
             <div class="row field_group">
                 <div class="xlarge-4 large-4 medium-12 small-12 columns field_first_name">
@@ -115,7 +115,7 @@
             <div class="row">
                 <div class="xlarge-8 large-8 medium-12 small-12 columns field_f_7593">
                     <fieldset class="field_group">
-                        <legend>Checkboxes (Multiple Answers) </legend>
+                        <legend>Checkboxes (Multiple Answers)</legend>
                         <div class="checkbox">
                             <div>
                                 <input name="f_7593[]" type="checkbox" value="First Choice" id="f_7593_first-choice" />
