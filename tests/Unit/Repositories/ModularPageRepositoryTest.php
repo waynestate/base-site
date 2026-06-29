@@ -690,6 +690,8 @@ final class ModularPageRepositoryTest extends TestCase
     {
         $page_id = $this->faker->numberbetween(10, 50);
         $promo_group_id = $this->faker->numberbetween(1, 3);
+        $current_site_id = 1561;
+        $promo_site_id = 2;
 
         // Fake return
         $return['promotions'] = app(GenericPromo::class)->create(5, false, [
@@ -701,7 +703,7 @@ final class ModularPageRepositoryTest extends TestCase
             'promo_group_id' => $promo_group_id,
             'page_id' => $page_id,
             'site' => [
-                'site_id' => 9999,
+                'site_id' => $promo_site_id,
                 'url' => 'https://base.wayne.edu',
             ],
             'group' => [
@@ -712,7 +714,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Create a fake data request
         $data = app(Page::class)->create(1, true, [
             'site' => [
-                'id' => 1561,
+                'id' => $current_site_id,
             ],
             'page' => [
                 'controller' => 'ChildpageController',
