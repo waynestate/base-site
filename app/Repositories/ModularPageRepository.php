@@ -194,21 +194,26 @@ class ModularPageRepository implements ModularPageRepositoryContract
             $promos['promotions'] = $this->filterExpiredItems($promos['promotions'], ['end_date', 'display_end_date']);
         }
 
-        // Use another site's promo items only from Base
-        if (!empty($site_id) && $site_id === 1561) {
-            $promos['promotions'] = collect($promos['promotions'])->map(function ($promo) {
-                if (!empty($promo['filename_url'])) {
-                    $promo['relative_url'] = $promo['filename_url'];
-                }
+        // Use another site's promo items
+        if (!empty($promos['promotions'])) {
+            $promos['promotions'] = collect($promos['promotions'])->map(function ($promo) use ($site_id) {
+                if (!empty($promo['site']) && !empty($promo['site']['site_id']) && $promo['site']['site_id'] != $site_id) {
+                    if (!empty($promo['filename_url'])) {
+                        $promo['relative_url'] = $promo['filename_url'];
+                    }
 
-                if (!empty($promo['secondary_filename_url'])) {
-                    $promo['secondary_relative_url'] = $promo['secondary_filename_url'];
+                    if (!empty($promo['secondary_filename_url'])) {
+                        $promo['secondary_relative_url'] = $promo['secondary_filename_url'];
+                    }
+
+                    if (!empty($promo['link'])) {
+                        $promo['link'] = $this->externalPromoLink($promo['link'], $promo['site']);
+                    }
                 }
 
                 return $promo;
             })->toArray();
         }
-
         $promos = $this->parsePromos->parse($promos, $components['group_reference'], $components['group_config']);
 
         foreach ($promos as $name => $data) {
@@ -230,6 +235,45 @@ class ModularPageRepository implements ModularPageRepositoryContract
         }
 
         return $promos;
+    }
+
+    public function externalPromoLink(string $link, array $site): string
+    {
+        if ($this->isAbsolutePromoLink($link)) {
+            return $link;
+        }
+
+        $site_url = $this->promoSiteUrl($site);
+
+        if (empty($site_url)) {
+            return $link;
+        }
+
+        return rtrim($site_url, '/').'/'.ltrim($link, '/');
+    }
+
+    protected function isAbsolutePromoLink(string $link): bool
+    {
+        return Str::startsWith($link, ['#', '//']) || parse_url($link, PHP_URL_SCHEME) !== null;
+    }
+
+    protected function promoSiteUrl(array $site): ?string
+    {
+        $site_url = $site['url'] ?? $site['domain'] ?? $site['hostname'] ?? $site['host'] ?? null;
+
+        if (empty($site_url)) {
+            return null;
+        }
+
+        if (Str::startsWith($site_url, '//')) {
+            return 'https:'.$site_url;
+        }
+
+        if (parse_url($site_url, PHP_URL_SCHEME) === null) {
+            return 'https://'.$site_url;
+        }
+
+        return $site_url;
     }
 
     /**

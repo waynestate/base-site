@@ -686,7 +686,7 @@ final class ModularPageRepositoryTest extends TestCase
     }
 
     #[Test]
-    public function replace_modular_page_relative_url_with_filename_if_on_base(): void
+    public function replace_modular_page_relative_urls_and_local_links_for_promos_from_other_sites(): void
     {
         $page_id = $this->faker->numberbetween(10, 50);
         $promo_group_id = $this->faker->numberbetween(1, 3);
@@ -697,8 +697,13 @@ final class ModularPageRepositoryTest extends TestCase
             'filename_url' => 'https://base.wayne.edu/promo/image.jpg',
             'secondary_relative_url' => '/promo/image2.jpg',
             'secondary_filename_url' => 'https://base.wayne.edu/promo/image2.jpg',
+            'link' => '/apply',
             'promo_group_id' => $promo_group_id,
             'page_id' => $page_id,
+            'site' => [
+                'site_id' => 9999,
+                'url' => 'https://base.wayne.edu',
+            ],
             'group' => [
                 'promo_group_id' => $promo_group_id,
             ],
@@ -731,6 +736,7 @@ final class ModularPageRepositoryTest extends TestCase
 
         $this->assertTrue($component['relative_url'] === $component['filename_url']);
         $this->assertTrue($component['secondary_relative_url'] === $component['secondary_filename_url']);
+        $this->assertEquals('https://base.wayne.edu/apply', $component['link']);
     }
 
     #[Test]
