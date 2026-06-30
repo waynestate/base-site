@@ -452,6 +452,16 @@
                 "relative_url": "/styleguide/component/spotlight",
                 "submenu": []
             },
+            "99902": {
+                "menu_item_id": 99902,
+                "is_active": 1,
+                "page_id": 99902,
+                "target": "",
+                "display_name": "Tabs",
+                "class_name": "",
+                "relative_url": "/styleguide/component/tabs",
+                "submenu": []
+            },
             "9999": {
                 "menu_item_id": 9999,
                 "is_active": 1,
