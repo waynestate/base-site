@@ -842,4 +842,26 @@ final class ModularPageRepositoryTest extends TestCase
         $this->assertEmpty($components['news-and-events-2']['data']['events']);
         $this->assertArrayHasKey(0, $components['news-and-events-2']['data']);
     }
+
+    #[Test]
+    public function external_promo_link_does_not_change_absolute_links(): void
+    {
+        $repository = app(ModularPageRepository::class);
+
+        $this->assertEquals(
+            'https://wayne.edu/apply',
+            $repository->externalPromoLink('https://wayne.edu/apply', ['url' => 'https://base.wayne.edu'])
+        );
+    }
+
+    #[Test]
+    public function external_promo_link_does_not_change_local_links_without_site_url(): void
+    {
+        $repository = app(ModularPageRepository::class);
+
+        $this->assertEquals(
+            '/apply',
+            $repository->externalPromoLink('/apply', [])
+        );
+    }
 }

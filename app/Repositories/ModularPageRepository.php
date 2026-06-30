@@ -243,37 +243,16 @@ class ModularPageRepository implements ModularPageRepositoryContract
             return $link;
         }
 
-        $site_url = $this->promoSiteUrl($site);
-
-        if (empty($site_url)) {
+        if (empty($site['url'])) {
             return $link;
         }
 
-        return rtrim($site_url, '/').'/'.ltrim($link, '/');
+        return rtrim($site['url'], '/').'/'.ltrim($link, '/');
     }
 
     protected function isAbsolutePromoLink(string $link): bool
     {
         return Str::startsWith($link, ['#', '//']) || parse_url($link, PHP_URL_SCHEME) !== null;
-    }
-
-    protected function promoSiteUrl(array $site): ?string
-    {
-        $site_url = $site['url'] ?? $site['domain'] ?? $site['hostname'] ?? $site['host'] ?? null;
-
-        if (empty($site_url)) {
-            return null;
-        }
-
-        if (Str::startsWith($site_url, '//')) {
-            return 'https:'.$site_url;
-        }
-
-        if (parse_url($site_url, PHP_URL_SCHEME) === null) {
-            return 'https://'.$site_url;
-        }
-
-        return $site_url;
     }
 
     /**
