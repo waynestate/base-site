@@ -2,21 +2,15 @@
 
 namespace App\Console\Commands;
 
+use Illuminate\Console\Attributes\Description;
+use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 
+#[Signature('base:module {name}')]
+#[Description('Scaffold out files for a new modular component, use singular form of module name, e.g. "spotlight-row"')]
 class BaseModule extends Command
 {
-    /**
-     * @var string
-     */
-    protected $signature = 'base:module {name}';
-
-    /**
-     * @var string
-     */
-    protected $description = 'Scaffold out files for a new modular component, use singular form of module name, e.g. "spotlight-row"';
-
     protected string $stub; // Stub file contents
     protected string $lowercase; // dummy-component
     protected string $singleword; // dummycomponent
