@@ -2,25 +2,15 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use Illuminate\Cache\Repository;
+use Illuminate\Console\Attributes\Description;
+use Illuminate\Console\Attributes\Signature;
+use Illuminate\Console\Command;
 
+#[Signature('redis:clear')]
+#[Description('Clean out the REDIS cache for the site cache prefix')]
 class RedisClear extends Command
 {
-    /**
-     * redis:clear command.
-     *
-     * @var string
-     */
-    protected $signature = 'redis:clear';
-
-    /**
-     * Clean out the REDIS cache for the site cache prefix.
-     *
-     * @var string
-     */
-    protected $description = 'Clean out the REDIS cache for the site cache prefix';
-
     protected $cache;
 
     /**
