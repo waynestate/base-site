@@ -24,6 +24,9 @@
     <env name="APP_PACKAGES_CACHE" value="bootstrap/cache/packages.phpunit.php"/>
     <env name="APP_ROUTES_CACHE" value="bootstrap/cache/routes.phpunit.php"/>
     <env name="APP_EVENTS_CACHE" value="bootstrap/cache/events.phpunit.php"/>
+    <env name="BROADCAST_CONNECTION" value="null"/>
+    <env name="PULSE_ENABLED" value="false"/>
+    <env name="NIGHTWATCH_ENABLED" value="false"/>
   </php>
   <source>
     <include>
