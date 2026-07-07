@@ -247,12 +247,21 @@ class ModularPageRepository implements ModularPageRepositoryContract
             return $link;
         }
 
-        return rtrim($site['url'], '/').'/'.ltrim($link, '/');
+        return rtrim($this->promoSiteUrl($site['url']), '/').'/'.ltrim($link, '/');
     }
 
     protected function isAbsolutePromoLink(string $link): bool
     {
         return Str::startsWith($link, ['#', '//']) || parse_url($link, PHP_URL_SCHEME) !== null;
+    }
+
+    protected function promoSiteUrl(string $url): string
+    {
+        if (parse_url($url, PHP_URL_SCHEME) === null) {
+            return 'https://'.$url;
+        }
+
+        return $url;
     }
 
     /**
