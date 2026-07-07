@@ -239,8 +239,16 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
     public function externalPromoLink(string $link, array $site): string
     {
+        if (Str::startsWith($link, '#')) {
+            return $link;
+        }
+
         if ($this->isAbsolutePromoLink($link)) {
             return $link;
+        }
+
+        if ($this->isPromoUrlWithoutScheme($link)) {
+            return $this->promoSiteUrl($link);
         }
 
         if (empty($site['url'])) {
@@ -252,7 +260,12 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
     protected function isAbsolutePromoLink(string $link): bool
     {
-        return Str::startsWith($link, ['#', '//']) || parse_url($link, PHP_URL_SCHEME) !== null;
+        return Str::startsWith($link, '//') || parse_url($link, PHP_URL_SCHEME) !== null;
+    }
+
+    protected function isPromoUrlWithoutScheme(string $link): bool
+    {
+        return preg_match('/^[A-Za-z0-9.-]+\.[A-Za-z]{2,}(?:[\/?#]|$)/', $link) === 1;
     }
 
     protected function promoSiteUrl(string $url): string

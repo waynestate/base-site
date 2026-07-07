@@ -875,4 +875,15 @@ final class ModularPageRepositoryTest extends TestCase
             $repository->externalPromoLink('/apply', ['url' => 'wayne.edu'])
         );
     }
+
+    #[Test]
+    public function external_promo_link_adds_scheme_to_bare_domain_links(): void
+    {
+        $repository = app(ModularPageRepository::class);
+
+        $this->assertEquals(
+            'https://wayne.edu/summer/',
+            $repository->externalPromoLink('wayne.edu/summer/', ['url' => 'https://wayne.wayne.localhost'])
+        );
+    }
 }
