@@ -207,7 +207,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
                     }
 
                     if (!empty($promo['link'])) {
-                        $promo['link'] = $this->externalPromoLink($promo['link'], $promo['site']);
+                        $promo['link'] = $this->fullyQualifiedUrl($promo['link'], $promo['site']['url'] ?? '');
                     }
                 }
 
@@ -237,38 +237,41 @@ class ModularPageRepository implements ModularPageRepositoryContract
         return $promos;
     }
 
-    public function externalPromoLink(string $link, array $site): string
+    /**
+     * Fully qualify a local or bare-domain URL using the provided base URL when needed.
+     */
+    public function fullyQualifiedUrl(string $url, string $base_url = ''): string
     {
-        if (Str::startsWith($link, '#')) {
-            return $link;
+        if (Str::startsWith($url, '#')) {
+            return $url;
         }
 
-        if ($this->isAbsolutePromoLink($link)) {
-            return $link;
+        if ($this->isAbsoluteUrl($url)) {
+            return $url;
         }
 
-        if ($this->isPromoUrlWithoutScheme($link)) {
-            return $this->promoSiteUrl($link);
+        if ($this->isUrlWithoutScheme($url)) {
+            return $this->urlWithScheme($url);
         }
 
-        if (empty($site['url'])) {
-            return $link;
+        if (empty($base_url)) {
+            return $url;
         }
 
-        return rtrim($this->promoSiteUrl($site['url']), '/').'/'.ltrim($link, '/');
+        return rtrim($this->urlWithScheme($base_url), '/').'/'.ltrim($url, '/');
     }
 
-    protected function isAbsolutePromoLink(string $link): bool
+    protected function isAbsoluteUrl(string $url): bool
     {
-        return Str::startsWith($link, '//') || parse_url($link, PHP_URL_SCHEME) !== null;
+        return Str::startsWith($url, '//') || parse_url($url, PHP_URL_SCHEME) !== null;
     }
 
-    protected function isPromoUrlWithoutScheme(string $link): bool
+    protected function isUrlWithoutScheme(string $url): bool
     {
-        return preg_match('/^[A-Za-z0-9.-]+\.[A-Za-z]{2,}(?:[\/?#]|$)/', $link) === 1;
+        return preg_match('/^[A-Za-z0-9.-]+\.[A-Za-z]{2,}(?:[\/?#]|$)/', $url) === 1;
     }
 
-    protected function promoSiteUrl(string $url): string
+    protected function urlWithScheme(string $url): string
     {
         if (parse_url($url, PHP_URL_SCHEME) === null) {
             return 'https://'.$url;

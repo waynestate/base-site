@@ -844,46 +844,68 @@ final class ModularPageRepositoryTest extends TestCase
     }
 
     #[Test]
-    public function external_promo_link_does_not_change_absolute_links(): void
+    public function fully_qualified_url_does_not_change_absolute_links(): void
     {
         $repository = app(ModularPageRepository::class);
 
         $this->assertEquals(
             'https://wayne.edu/apply',
-            $repository->externalPromoLink('https://wayne.edu/apply', ['url' => 'https://base.wayne.edu'])
+            $repository->fullyQualifiedUrl('https://wayne.edu/apply', 'https://base.wayne.edu')
         );
     }
 
     #[Test]
-    public function external_promo_link_does_not_change_local_links_without_site_url(): void
+    public function fully_qualified_url_does_not_change_protocol_relative_links(): void
+    {
+        $repository = app(ModularPageRepository::class);
+
+        $this->assertEquals(
+            '//wayne.edu/apply',
+            $repository->fullyQualifiedUrl('//wayne.edu/apply', 'https://base.wayne.edu')
+        );
+    }
+
+    #[Test]
+    public function fully_qualified_url_does_not_change_anchor_links(): void
+    {
+        $repository = app(ModularPageRepository::class);
+
+        $this->assertEquals(
+            '#apply',
+            $repository->fullyQualifiedUrl('#apply', 'https://base.wayne.edu')
+        );
+    }
+
+    #[Test]
+    public function fully_qualified_url_does_not_change_local_links_without_base_url(): void
     {
         $repository = app(ModularPageRepository::class);
 
         $this->assertEquals(
             '/apply',
-            $repository->externalPromoLink('/apply', [])
+            $repository->fullyQualifiedUrl('/apply')
         );
     }
 
     #[Test]
-    public function external_promo_link_adds_scheme_to_site_urls_without_prefix(): void
+    public function fully_qualified_url_adds_scheme_to_base_urls_without_prefix(): void
     {
         $repository = app(ModularPageRepository::class);
 
         $this->assertEquals(
             'https://wayne.edu/apply',
-            $repository->externalPromoLink('/apply', ['url' => 'wayne.edu'])
+            $repository->fullyQualifiedUrl('/apply', 'wayne.edu')
         );
     }
 
     #[Test]
-    public function external_promo_link_adds_scheme_to_bare_domain_links(): void
+    public function fully_qualified_url_adds_scheme_to_bare_domain_links(): void
     {
         $repository = app(ModularPageRepository::class);
 
         $this->assertEquals(
             'https://wayne.edu/summer/',
-            $repository->externalPromoLink('wayne.edu/summer/', ['url' => 'https://wayne.wayne.localhost'])
+            $repository->fullyQualifiedUrl('wayne.edu/summer/', 'https://wayne.wayne.localhost')
         );
     }
 }
