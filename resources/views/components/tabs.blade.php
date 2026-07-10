@@ -5,14 +5,20 @@
     @include('components.accordion', ['data' => $data])
 
     <div class="tabs__area js-tabArea">
-        <ul class="tabs__nav js-tabNav">
+        <ul class="tabs__nav js-tabNav" role="tablist" aria-label="Promo Tabs">
             @foreach($data as $item)
                 <li @class([
                         'tabs__nav-item',
                         'lg:w-1/' . $loop->count,
                         'active' => $loop->first
-                    ])>
+                    ]) role="presentation">
+
                     <a class="tabs__nav-link"
+                       id="tab-link-{{ $item['promo_item_id'] }}"
+                       role="tab"
+                       aria-selected="{{ $loop->first ? 'true' : 'false' }}"
+                       aria-controls="tab-{{ $item['promo_item_id'] }}"
+                       tabindex="{{ $loop->first ? '0' : '-1' }}"
                        href="#definition-{{ $item['promo_item_id'] }}"
                        data-target="#tab-{{ $item['promo_item_id'] }}">
                         {{ $item['title'] }}
@@ -23,7 +29,12 @@
 
         <div class="tabs__pane">
             @foreach($data as $item)
-                <div @class(['tabs__pane-content', 'active' => $loop->first]) id="tab-{{ $item['promo_item_id'] }}">
+                <div @class(['tabs__pane-content', 'active' => $loop->first])
+                     id="tab-{{ $item['promo_item_id'] }}"
+                     role="tabpanel"
+                     aria-labelledby="tab-link-{{ $item['promo_item_id'] }}"
+                     tabindex="0">
+
                     <div @class([
                          'content',
                          'tabs__pane-description',
