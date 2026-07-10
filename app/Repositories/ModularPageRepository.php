@@ -346,7 +346,22 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 unset($modularComponents[$name]['component']['heading']);
             } else {
                 $modularComponents[$name]['data'] = $promos[$name]['data'] ?? [];
-                $modularComponents[$name]['component'] = $promos[$name]['component'] ?? [];
+                $modularComponents[$name]['component'] = $component;
+            }
+
+            // Post-process based on visibility option
+            $visibility = $component['visibility'] ?? 'data-only';
+            if ($visibility === 'hide') {
+                $modularComponents[$name]['data'] = [];
+            } elseif ($visibility === 'always') {
+                $hasData = !empty($modularComponents[$name]['data']);
+                if ($hasData && (isset($modularComponents[$name]['data']['news']) || isset($modularComponents[$name]['data']['events']))) {
+                    $hasData = !empty($modularComponents[$name]['data']['news']) || !empty($modularComponents[$name]['data']['events']);
+                }
+
+                if (!$hasData) {
+                    $modularComponents[$name]['data'][] = $component;
+                }
             }
         }
 

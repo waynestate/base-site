@@ -12,7 +12,7 @@
         <h2>Configuring components</h2>
         <p>You will use a JSON array paired with your page field to configure each component. The specifics of each component can be found on the individual component page from the menu.</p>
         <h3 id="example-component-configurations">Example component configuration</h3>
-        <p>Adding this data set into your CMS page fields area will display your promo data as a catalog component.</p>  
+        <p>Adding this data set into your CMS page fields area will display your promo data as a catalog component.</p>
         <table class="mt-2">
             <thead>
                 <tr>
@@ -99,6 +99,13 @@ Add any number of classes to a component heading.
 Change default component heading level from h2 to h3 or h4.
                     </td>
                 </tr>
+                <tr>
+                    <td class="font-bold">visibility</td>
+                    <td>
+<code class="mt-1 mb-2">"visibility":"always"</code><br />
+Control when the component is displayed. Options: <code>data-only</code> (default, only show if there is data), <code>always</code> (always show component), and <code>hide</code> (temporarily hide component).
+                    </td>
+                </tr>
         </table>
 
         <h3>Page config</h3>
@@ -174,10 +181,10 @@ Define how many columns the component will display.<br />
 1 to 4 columns is recommended.
                     </td>
                     <td class="font-bold">
-                        Catalog<br /> 
-                        Button row<br /> 
-                        Icon row<br /> 
-                        Events row<br /> 
+                        Catalog<br />
+                        Button row<br />
+                        Icon row<br />
+                        Events row<br />
                         News row
                     </td>
                 </tr>
@@ -189,10 +196,10 @@ Creates a link to a detailed page of a single promo item, like a Spotlight.<br /
 True or false; false is default and will use the promotion's link field if it is set.
                     </td>
                     <td class="font-bold">
-                        Catalog<br /> 
-                        Spotlight<br /> 
-                        Promo row, column<br /> 
-                        Icon row, column<br /> 
+                        Catalog<br />
+                        Spotlight<br />
+                        Promo row, column<br />
+                        Icon row, column<br />
                     </td>
                 </tr>
                 <tr>
@@ -203,10 +210,10 @@ Show or hide the promo's title.<br />
 True or false; true is default.
                     </td>
                     <td class="font-bold">
-                        Catalog<br /> 
-                        Spotlight<br /> 
-                        Promo row, column<br /> 
-                        Icon row, column<br /> 
+                        Catalog<br />
+                        Spotlight<br />
+                        Promo row, column<br />
+                        Icon row, column<br />
                     </td>
                 </tr>
                 <tr>
@@ -217,10 +224,10 @@ Show or hide the promo's excerpt.<br />
 True or false; true is default.
                     </td>
                     <td class="font-bold">
-                        Catalog<br /> 
-                        Spotlight<br /> 
-                        Promo row, column<br /> 
-                        Icon row, column<br /> 
+                        Catalog<br />
+                        Spotlight<br />
+                        Promo row, column<br />
+                        Icon row, column<br />
                     </td>
                 </tr>
                 <tr>
@@ -232,10 +239,10 @@ True or false; true is default.<br />
 Commonly used in conjunction with "singlePromoView" where the description is hidden from the catalog but displayed on the detailed promo page.
                     </td>
                     <td class="font-bold">
-                        Catalog<br /> 
-                        Spotlight<br /> 
-                        Promo row, column<br /> 
-                        Icon row, column<br /> 
+                        Catalog<br />
+                        Spotlight<br />
+                        Promo row, column<br />
+                        Icon row, column<br />
                     </td>
                 </tr>
                 <tr>
@@ -309,7 +316,7 @@ Define how many columns the component will display.<br />
 1 to 4 columns is recommended.
                     </td>
                     <td class="font-bold">
-                        Events row<br /> 
+                        Events row<br />
                         News row
                     </td>
                 </tr>
