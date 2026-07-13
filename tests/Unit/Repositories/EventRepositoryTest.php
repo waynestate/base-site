@@ -38,6 +38,24 @@ final class EventRepositoryTest extends TestCase
         // Expected events to be returned
         $expected = app(Event::class)->create(2);
 
+        // Event::create()'s faker dates default to somewhere earlier this month,
+        // which the repository's now-mandatory past-date expiry filter would
+        // strip out. Force both groups into the future so this test exercises
+        // grouping behavior without tripping that filter.
+        $future_dates = [now()->addDays(10)->format('Y-m-d'), now()->addDays(20)->format('Y-m-d')];
+        $expected = collect(array_values($expected))
+            ->mapWithKeys(function ($events, $index) use ($future_dates) {
+                $date = $future_dates[$index];
+
+                $events = collect($events)->map(function ($event) use ($date) {
+                    $event['date'] = $date;
+
+                    return $event;
+                })->all();
+
+                return [$date => $events];
+            })->all();
+
         // Maniuplate events to mimic the API return since they aren't grouped yet
         $return['events'] = collect($expected)->flatten(1)->toArray();
 
