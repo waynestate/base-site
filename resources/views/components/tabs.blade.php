@@ -5,7 +5,7 @@
     @include('components.accordion', ['data' => $data])
 
     <div class="tabs__area js-tabArea">
-        <ul class="tabs__nav js-tabNav" role="tablist" aria-label="Promo Tabs">
+        <ul class="tabs__nav js-tabNav" role="tablist">
             @foreach($data as $item)
                 <li @class([
                         'tabs__nav-item',
