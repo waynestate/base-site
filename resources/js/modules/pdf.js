@@ -2,7 +2,7 @@
     "use strict";
 
     document.querySelectorAll('a[href$=".pdf"]').forEach(function(link) {
-        if (link.textContent.toLowerCase().includes('(pdf)')) {
+        if (hasPdfLabel(link)) {
             return;
         }
 
@@ -14,6 +14,10 @@
             link.appendChild(document.createTextNode(' (pdf)'));
         }
     });
+
+    function hasPdfLabel(link) {
+        return /(?:\(\s*pdf\s*\)|\bpdf\b)/i.test(link.textContent);
+    }
 
     function getLastTextNode(element) {
         const walker = document.createTreeWalker(
