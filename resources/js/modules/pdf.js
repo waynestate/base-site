@@ -2,18 +2,43 @@
     "use strict";
 
     document.querySelectorAll('a[href$=".pdf"]').forEach(function(link) {
-        const pdfSpan = document.createElement("span");
-        const pdfLabel = document.createTextNode(" (pdf)");
-        if(link.classList.contains('button') && link.children.length > 0) {
-            const lastChild = link.children.length - 1;
-            pdfSpan.appendChild(pdfLabel);
-            link.children[lastChild].appendChild(pdfSpan);
-        } else if(!link.classList.contains('button') && link.getElementsByTagName('img').length > 0) {
-            pdfSpan.appendChild(pdfLabel);
-            link.appendChild(pdfSpan);
+        if (hasPdfLabel(link)) {
+            return;
+        }
 
+        const lastTextNode = getLastTextNode(link);
+
+        if (lastTextNode) {
+            lastTextNode.textContent = lastTextNode.textContent.replace(/\s*$/, ' (pdf)');
         } else {
-            link.innerHTML += ' (pdf)';
+            link.appendChild(document.createTextNode(' (pdf)'));
         }
     });
+
+    function hasPdfLabel(link) {
+        return /(?:\(\s*pdf\s*\)|\bpdf\b)/i.test(link.textContent);
+    }
+
+    function getLastTextNode(element) {
+        const walker = document.createTreeWalker(
+            element,
+            NodeFilter.SHOW_TEXT,
+            {
+                acceptNode: function(node) {
+                    return node.textContent.trim().length > 0
+                        ? NodeFilter.FILTER_ACCEPT
+                        : NodeFilter.FILTER_REJECT;
+                }
+            }
+        );
+
+        let currentNode;
+        let lastTextNode = null;
+
+        while ((currentNode = walker.nextNode())) {
+            lastTextNode = currentNode;
+        }
+
+        return lastTextNode;
+    }
 })();
