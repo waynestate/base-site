@@ -307,6 +307,75 @@ final class PromoRepositoryTest extends TestCase
     }
 
     #[Test]
+    public function expired_promo_excluded_from_listing(): void
+    {
+        // Use a group id unique to this test so its cache key (derived from
+        // the group id list) can't collide with another test's cached entry
+        // under the array cache store, which persists across tests.
+        $group_id = $this->faker->unique()->numberBetween(100000, 999999);
+        $active_item_id = $this->faker->unique()->numberBetween(1, 99);
+
+        // Fake return: one expired item, one active item, same group
+        $return = [
+            'promotions' => [
+                [
+                    'promo_item_id' => $active_item_id + 1,
+                    'promo_group_id' => $group_id,
+                    'end_date' => now()->subDays(2)->format('Y-m-d H:i:s'),
+                    'display_end_date' => '0000-00-00 00:00:00',
+                ],
+                [
+                    'promo_item_id' => $active_item_id,
+                    'promo_group_id' => $group_id,
+                    'end_date' => '',
+                    'display_end_date' => '0000-00-00 00:00:00',
+                ],
+            ],
+        ];
+
+        // Create a fake data request
+        $data = app(Page::class)->create(1, true, [
+            'site' => [
+                'id' => 2,
+                'parent' => [
+                    'id' => 1,
+                ],
+            ],
+        ]);
+
+        // Build the config
+        config(['base.global' => [
+            'all' => [
+                'promos' => [],
+            ],
+            'sites' => [
+                $data['site']['id'] => [
+                    'promos' => [
+                        // merge_with_main_contact must be explicit false here — when
+                        // unset, manipulateGlobalPromos() merges in main_contact via
+                        // array_merge(), which renumbers purely-integer promo_item_id
+                        // keys and would make the key-based assertion below meaningless.
+                        'contact' => [
+                            'id' => $group_id,
+                            'merge_with_main_contact' => false,
+                        ],
+                    ],
+                ],
+            ],
+        ]]);
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
+
+        // Get the promos
+        $promos = app(PromoRepository::class, ['wsuApi' => $wsuApi])->getRequestData($data);
+
+        $this->assertCount(1, $promos['contact']);
+        $this->assertEquals($active_item_id, $promos['contact'][$active_item_id]['promo_item_id']);
+    }
+
+    #[Test]
     public function subsite_under_menu_merging_with_no_main_under_menu(): void
     {
         // Fake return
@@ -381,6 +450,28 @@ final class PromoRepositoryTest extends TestCase
         $promo['promotion'] = $single_promo['promo'];
 
         $this->assertEquals($promo, ['promotion' => $promo_return]);
+    }
+
+    #[Test]
+    public function expired_single_promo_should_be_filtered_out(): void
+    {
+        $promo_return = app(GenericPromo::class)->create(1, true, [
+            'end_date' => now()->subDays(2)->format('Y-m-d H:i:s'),
+        ]);
+
+        // Fake return
+        $return = [
+            'promotion' => $promo_return,
+        ];
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.info', Mockery::type('array'))->once()->andReturn($return);
+
+        // Get the promo
+        $single_promo = app(PromoRepository::class, ['wsuApi' => $wsuApi])->getPromoView($this->faker->randomDigit());
+
+        $this->assertEquals([], $single_promo['promo']);
     }
 
     #[Test]
