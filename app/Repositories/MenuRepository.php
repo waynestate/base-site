@@ -11,9 +11,12 @@ use Waynestate\Api\Connector;
 use Waynestate\Menuitems\ParseMenu;
 use Waynestate\Menu\DisplayMenu;
 use Illuminate\Cache\Repository;
+use App\Traits\StaleCache;
 
 class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryContract
 {
+    use StaleCache;
+
     /** @var Connector */
     protected $wsuApi;
 
@@ -161,7 +164,7 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
             'include_subsites' => true,
         ];
 
-        $menus = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+        $menus = $this->rememberWithFallback($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 

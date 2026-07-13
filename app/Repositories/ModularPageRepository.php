@@ -9,9 +9,14 @@ use Illuminate\Cache\Repository;
 use Illuminate\Support\Str;
 use Waynestate\Api\Connector;
 use Waynestate\Promotions\ParsePromos;
+use App\Traits\StaleCache;
+use App\Traits\FiltersExpiredItems;
 
 class ModularPageRepository implements ModularPageRepositoryContract
 {
+    use StaleCache;
+    use FiltersExpiredItems;
+
     /** @var Connector */
     protected $wsuApi;
 
@@ -181,9 +186,13 @@ class ModularPageRepository implements ModularPageRepositoryContract
             'is_active' => '1',
         ];
 
-        $promos = $this->cache->remember($params['method'] . md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+        $promos = $this->rememberWithFallback($params['method'] . md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
+
+        if (!empty($promos['promotions'])) {
+            $promos['promotions'] = $this->filterExpiredItems($promos['promotions'], ['end_date', 'display_end_date']);
+        }
 
         // Use another site's promo items only from Base
         if (!empty($site_id) && $site_id === 1561) {

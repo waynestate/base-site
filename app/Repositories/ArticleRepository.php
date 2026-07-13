@@ -5,9 +5,12 @@ namespace App\Repositories;
 use Contracts\Repositories\ArticleRepositoryContract;
 use Illuminate\Cache\Repository;
 use Waynestate\Api\News;
+use App\Traits\StaleCache;
 
 class ArticleRepository implements ArticleRepositoryContract
 {
+    use StaleCache;
+
     /** @var News */
     protected $newsApi;
 
@@ -45,7 +48,7 @@ class ArticleRepository implements ArticleRepositoryContract
             $params['topics'] = $topics;
         }
 
-        $articles['articles'] = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+        $articles['articles'] = $this->rememberWithFallback($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             try {
                 return $this->newsApi->request($params['method'], $params);
             } catch (\Exception $e) {
@@ -67,7 +70,7 @@ class ArticleRepository implements ArticleRepositoryContract
             'preview' => $preview,
         ];
 
-        $article['article'] = $this->cache->remember($params['method'].md5(serialize($params)), $preview ? 0 : config('cache.ttl'), function () use ($params) {
+        $article['article'] = $this->rememberWithFallback($params['method'].md5(serialize($params)), $preview ? 0 : config('cache.ttl'), function () use ($params) {
             return $this->newsApi->request($params['method'], $params);
         });
 
