@@ -62,11 +62,13 @@
             "emitter": "https://github.com/Mango/emitter.git#0.0.7"
         },
         "laravel-mix": {
-            "webpackbar": "^7.0.0"
+            "webpackbar": "^7.0.0",
+            "webpack": "5.106.2"
         }
     },
     "resolutions": {
-        "webpackbar": "^7.0.0"
+        "webpackbar": "^7.0.0",
+        "webpack": "5.106.2"
     },
     "packageManager": "yarn@4.9.2",
     "$schema": "https://www.schemastore.org/package.json"
