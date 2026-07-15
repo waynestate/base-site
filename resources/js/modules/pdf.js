@@ -10,13 +10,34 @@
 
         if (lastTextNode) {
             lastTextNode.textContent = lastTextNode.textContent.replace(/\s*$/, ' (pdf)');
-        } else {
-            link.appendChild(document.createTextNode(' (pdf)'));
+            return;
+        }
+
+        if (hasImageOrSvg(link)) {
+            appendPdfSpan(link);
         }
     });
 
     function hasPdfLabel(link) {
-        return /(?:\(\s*pdf\s*\)|\bpdf\b)/i.test(link.textContent);
+        return hasPdfText(link.textContent)
+            || hasPdfText(link.getAttribute('aria-label') || '');
+    }
+
+    function hasPdfText(text) {
+        return /(?:\(\s*pdf\s*\)|\bpdf\b)/i.test(text);
+    }
+
+    function hasImageOrSvg(link) {
+        return Boolean(link.querySelector('img, svg'));
+    }
+
+    function appendPdfSpan(link) {
+        link.classList.add('pdf-image');
+
+        const pdfSpan = document.createElement('span');
+        pdfSpan.appendChild(document.createTextNode(' (pdf)'));
+
+        link.appendChild(pdfSpan);
     }
 
     function getLastTextNode(element) {
