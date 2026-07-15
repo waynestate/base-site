@@ -20,7 +20,7 @@ jobs:
             -   name: Install PHP
                 uses: shivammathur/setup-php@v2
                 with:
-                    php-version: '8.2'
+                    php-version: '8.4'
             - name: Checkout
               uses: actions/checkout@v3.3.0
               with:
@@ -38,7 +38,7 @@ jobs:
             - name: Setup Node.js environment
               uses: actions/setup-node@v4.0.1
               with:
-                    node-version: 22.x
+                    node-version: 26.x
             - name: Install node dependences
               run: make yarn
             - name: Append node_modules to PATH
