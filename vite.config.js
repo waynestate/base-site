@@ -67,8 +67,8 @@ export default defineConfig({
         }),
     ],
     resolve: {
-        // resources/scss/main.scss has webpack-style `@import "~pkg/..."`
-        // node_modules imports (sass-loader's `~` convention). Vite's Dart
+        // resources/scss/main.scss has legacy `@import "~pkg/..."`
+        // node_modules imports (tilde convention). Vite's Dart
         // Sass resolver has no built-in tilde support, so without this the
         // build fails with "Can't find stylesheet to import." Stripping the
         // leading `~` lets it fall through to normal bare-specifier /

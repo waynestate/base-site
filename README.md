@@ -12,12 +12,10 @@ Starter repository for creating a new website. Live demo can be found at https:/
 
 * Backend built on [Laravel](https://laravel.com/)
 * Frontend built on [Tailwind](https://tailwindcss.com/)
-* Module bundling using [Webpack](https://webpack.github.io/)
-* Fluent webpack API using [Laravel Mix](https://laravel.com/docs/5.6/mix)
+* Module bundling using [Vite](https://vitejs.dev/)
 * Zero downtime deployment using [Envoy](https://laravel.com/docs/5.6/envoy)
 * Configure multiple enviorments using [PHPDotenv](https://github.com/vlucas/phpdotenv)
 * SCSS support
-* Automatically inject JS/CSS while developing using [BrowserSync](https://browsersync.io/)
 * [100% test code coverage](https://base.wayne.edu/coverages)
 * [Public API documentation](https://base.wayne.edu/api)
 * Commit hook that require the following to pass:
@@ -46,7 +44,7 @@ Starter repository for creating a new website. Live demo can be found at https:/
 1. run `make install`
 1. run `make build`
 1. run `make watch`
-1. open https://domain.local:3000/ (for BrowserSync)
+1. open https://domain.local/
 
 ## Deployment
 
