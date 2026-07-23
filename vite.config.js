@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 // Vite's ConfigEnv does NOT expose whether `--watch`/`-w` was passed on the
 // CLI, and (verified empirically on vite@8.1.5) a plain `vite build` still
@@ -18,6 +19,51 @@ export default defineConfig({
             // public/_resources/ and @vite() resolves /_resources/...
             buildDirectory: '_resources',
             refresh: false, // no dev server / HMR
+        }),
+        // Replicate webpack.mix.js .copy()/.copyDirectory() targets:
+        // error CSS + maps → public/_resources/css/
+        // error PNGs     → public/_resources/images/
+        // fonts          → public/_resources/fonts/
+        // images         → public/_resources/images/
+        viteStaticCopy({
+            // Suppress errors when optional source dirs (e.g. resources/fonts)
+            // don't exist — matches Mix's silent-no-op behavior
+            silent: true,
+            targets: [
+                {
+                    src: [
+                        'vendor/waynestate/error-404/dist/404.css',
+                        'vendor/waynestate/error-404/dist/404.css.map',
+                        'vendor/waynestate/error-403/dist/403.css',
+                        'vendor/waynestate/error-403/dist/403.css.map',
+                        'vendor/waynestate/error-429/dist/429.css',
+                        'vendor/waynestate/error-429/dist/429.css.map',
+                        'vendor/waynestate/error-500/dist/500.css',
+                        'vendor/waynestate/error-500/dist/500.css.map',
+                    ],
+                    dest: 'css',
+                    rename: { stripBase: true },
+                },
+                {
+                    src: [
+                        'vendor/waynestate/error-404/dist/404.png',
+                        'vendor/waynestate/error-403/dist/403.png',
+                        'vendor/waynestate/error-429/dist/429.png',
+                        'vendor/waynestate/error-500/dist/500.png',
+                    ],
+                    dest: 'images',
+                    rename: { stripBase: true },
+                },
+                {
+                    src: 'resources/fonts/**/*',
+                    dest: 'fonts',
+                },
+                {
+                    src: 'resources/images/**/*',
+                    dest: 'images',
+                    rename: { stripBase: true },
+                },
+            ],
         }),
     ],
     resolve: {
