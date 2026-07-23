@@ -5,6 +5,7 @@ namespace App\Providers;
 use App;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 use URL;
 use Waynestate\Api\Connector;
@@ -27,6 +28,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Tell @vite() to look for the manifest in public/_resources/
+        Vite::useBuildDirectory('_resources');
+
         // Allow http when on www-dev
         if (App::environment('dev')) {
             URL::forceScheme('http');

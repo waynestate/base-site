@@ -6,7 +6,7 @@
     <title>{{ $base['meta']['title'] ?? 'Wayne State University' }}</title>
 
     <link rel="icon" type="image/x-icon" href="https://wayne.edu/favicon.ico">
-    <link rel="stylesheet" href="{{ mix('_resources/css/main.css') }}">
+    @vite(['resources/scss/main.scss', 'resources/js/main.js'])
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -92,6 +92,5 @@
     @include('components.footer')
 </footer>
 
-<script src="{{ mix('_resources/js/main.js') }}"></script>
 </body>
 </html>
