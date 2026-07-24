@@ -14,7 +14,7 @@ use Tests\TestCase;
 final class PromoControllerTest extends TestCase
 {
     #[Test]
-    public function promo_controller_index_should_redirect_to_app_url()
+    public function promo_controller_index_should_redirect_to_app_url(): void
     {
         $response = app(PromoController::class)->index();
 
