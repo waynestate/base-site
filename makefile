@@ -19,6 +19,7 @@ deployproduction: install buildproduction runtests envoyproduction
 # Commands
 yarn: $(YARNFILE)
 	@if ! grep -q ".yarn" .gitignore > /dev/null 2>&1; then echo ".yarn/" >> .gitignore; fi
+	npm install -g corepack
 	corepack enable yarn
 	yarn set version self
 	yarn config set --home nodeLinker node-modules

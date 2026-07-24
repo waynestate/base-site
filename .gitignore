@@ -1,3 +1,4 @@
+*.log
 /sami-cache
 /vendor
 /node_modules
