@@ -11,6 +11,15 @@ on:
             - 'develop'
             - 'master'
 
+# Cancel superseded runs on the same ref to save CI minutes
+concurrency:
+    group: build-${{ github.ref }}
+    cancel-in-progress: true
+
+# Least-privilege token: only reading the repo is required
+permissions:
+    contents: read
+
 # Set up the environment and run the tests
 jobs:
     build:
@@ -22,23 +31,40 @@ jobs:
                 with:
                     php-version: '8.4'
             - name: Checkout
-              uses: actions/checkout@v3.3.0
+              uses: actions/checkout@v5
               with:
                     ref: ${{ github.ref }}
             -   name: Directory Permissions
                 run: chmod -R 777 storage bootstrap/cache
             -   name: Cache Composer packages
                 id: composer-cache
-                uses: actions/cache@v3
+                uses: actions/cache@v6
                 with:
                     path: vendor
                     key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
                     restore-keys: |
                         ${{ runner.os }}-php-
             - name: Setup Node.js environment
-              uses: actions/setup-node@v4.0.1
+              uses: actions/setup-node@v5
               with:
                     node-version: 26.x
+                    # setup-node v5 auto-runs 'yarn cache dir' when a yarn.lock
+                    # is present; that probe uses the runner's global yarn
+                    # 1.22.22 and fails on the 'packageManager: yarn@4.9.2'
+                    # field before corepack is enabled. Disable it — we cache
+                    # manually below.
+                    package-manager-cache: false
+            # Cache by key only — no yarn probe, so this won't clash with the
+            # corepack/yarn 4 bootstrap that `make yarn` performs.
+            - name: Cache Node modules
+              uses: actions/cache@v6
+              with:
+                    path: |
+                        node_modules
+                        .yarn/cache
+                    key: ${{ runner.os }}-node-${{ hashFiles('yarn.lock') }}
+                    restore-keys: |
+                        ${{ runner.os }}-node-
             - name: Install node dependences
               run: make yarn
             - name: Append node_modules to PATH
@@ -53,11 +79,9 @@ jobs:
               run: make phplintdry
             - name: Stylelint test
               run: make stylelint
-            - name: Run PHPUnit tests
-              run: make runtests
             - name: Make coverage directory
               run: mkdir -p build/logs
-            - name: Run the Coverage
+            - name: Run PHPUnit tests with coverage
               run: XDEBUG_MODE=coverage php vendor/bin/phpunit --coverage-clover build/logs/clover.xml
             - name: Upload coverage results to Coveralls
               env:
