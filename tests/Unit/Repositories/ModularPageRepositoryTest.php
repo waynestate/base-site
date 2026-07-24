@@ -686,10 +686,12 @@ final class ModularPageRepositoryTest extends TestCase
     }
 
     #[Test]
-    public function replace_modular_page_relative_url_with_filename_if_on_base(): void
+    public function replace_modular_page_relative_urls_and_local_links_for_promos_from_other_sites(): void
     {
         $page_id = $this->faker->numberbetween(10, 50);
         $promo_group_id = $this->faker->numberbetween(1, 3);
+        $current_site_id = 1561;
+        $promo_site_id = 2;
 
         // Fake return
         $return['promotions'] = app(GenericPromo::class)->create(5, false, [
@@ -697,8 +699,13 @@ final class ModularPageRepositoryTest extends TestCase
             'filename_url' => 'https://base.wayne.edu/promo/image.jpg',
             'secondary_relative_url' => '/promo/image2.jpg',
             'secondary_filename_url' => 'https://base.wayne.edu/promo/image2.jpg',
+            'link' => '/apply',
             'promo_group_id' => $promo_group_id,
             'page_id' => $page_id,
+            'site' => [
+                'site_id' => $promo_site_id,
+                'url' => 'https://base.wayne.edu',
+            ],
             'group' => [
                 'promo_group_id' => $promo_group_id,
             ],
@@ -707,7 +714,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Create a fake data request
         $data = app(Page::class)->create(1, true, [
             'site' => [
-                'id' => 1561,
+                'id' => $current_site_id,
             ],
             'page' => [
                 'controller' => 'ChildpageController',
@@ -731,6 +738,7 @@ final class ModularPageRepositoryTest extends TestCase
 
         $this->assertTrue($component['relative_url'] === $component['filename_url']);
         $this->assertTrue($component['secondary_relative_url'] === $component['secondary_filename_url']);
+        $this->assertEquals('https://base.wayne.edu/apply', $component['link']);
     }
 
     #[Test]
@@ -833,5 +841,71 @@ final class ModularPageRepositoryTest extends TestCase
         $this->assertEmpty($components['news-and-events-2']['data']['news']);
         $this->assertEmpty($components['news-and-events-2']['data']['events']);
         $this->assertArrayHasKey(0, $components['news-and-events-2']['data']);
+    }
+
+    #[Test]
+    public function fully_qualified_url_does_not_change_absolute_links(): void
+    {
+        $repository = app(ModularPageRepository::class);
+
+        $this->assertEquals(
+            'https://wayne.edu/apply',
+            $repository->fullyQualifiedUrl('https://wayne.edu/apply', 'https://base.wayne.edu')
+        );
+    }
+
+    #[Test]
+    public function fully_qualified_url_does_not_change_protocol_relative_links(): void
+    {
+        $repository = app(ModularPageRepository::class);
+
+        $this->assertEquals(
+            '//wayne.edu/apply',
+            $repository->fullyQualifiedUrl('//wayne.edu/apply', 'https://base.wayne.edu')
+        );
+    }
+
+    #[Test]
+    public function fully_qualified_url_does_not_change_anchor_links(): void
+    {
+        $repository = app(ModularPageRepository::class);
+
+        $this->assertEquals(
+            '#apply',
+            $repository->fullyQualifiedUrl('#apply', 'https://base.wayne.edu')
+        );
+    }
+
+    #[Test]
+    public function fully_qualified_url_does_not_change_local_links_without_base_url(): void
+    {
+        $repository = app(ModularPageRepository::class);
+
+        $this->assertEquals(
+            '/apply',
+            $repository->fullyQualifiedUrl('/apply')
+        );
+    }
+
+    #[Test]
+    public function fully_qualified_url_adds_scheme_to_base_urls_without_prefix(): void
+    {
+        $repository = app(ModularPageRepository::class);
+
+        $this->assertEquals(
+            'https://wayne.edu/apply',
+            $repository->fullyQualifiedUrl('/apply', 'wayne.edu')
+        );
+    }
+
+    #[Test]
+    public function fully_qualified_url_adds_scheme_to_bare_domain_links(): void
+    {
+        $repository = app(ModularPageRepository::class);
+
+        $this->assertEquals(
+            'https://wayne.edu/summer/',
+            $repository->fullyQualifiedUrl('wayne.edu/summer/', 'https://wayne.wayne.localhost')
+        );
     }
 }
