@@ -403,7 +403,7 @@ final class HeroRepositoryTest extends TestCase
     }
 
     #[Test]
-    public function modular_hero_with_4_items_and_limit_3_should_be_sliced_to_3_items()
+    public function modular_hero_with_4_items_and_limit_3_should_be_sliced_to_3_items(): void
     {
         // Define 4 hero items
         $hero_items = [
@@ -437,7 +437,7 @@ final class HeroRepositoryTest extends TestCase
     }
 
     #[Test]
-    public function global_hero_with_4_items_and_no_component_limit_should_not_be_sliced()
+    public function global_hero_with_4_items_and_no_component_limit_should_not_be_sliced(): void
     {
         // Define 4 hero items
         $hero_items = [
@@ -459,7 +459,7 @@ final class HeroRepositoryTest extends TestCase
     }
 
     #[Test]
-    public function modular_hero_with_top_level_option_overrides_config_option()
+    public function modular_hero_with_top_level_option_overrides_config_option(): void
     {
         $promos = [
             'components' => [
@@ -480,7 +480,7 @@ final class HeroRepositoryTest extends TestCase
     }
 
     #[Test]
-    public function modular_hero_with_top_level_option_works_without_config_option()
+    public function modular_hero_with_top_level_option_works_without_config_option(): void
     {
         $promos = [
             'components' => [
