@@ -2,21 +2,15 @@
 
 namespace App\Console\Commands;
 
+use Illuminate\Console\Attributes\Description;
+use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 
+#[Signature('base:feature {feature}')]
+#[Description('Scaffold out files for a new feature, use singular form of feature name, e.g. "Spotlight"')]
 class BaseFeature extends Command
 {
-    /**
-     * @var string
-     */
-    protected $signature = 'base:feature {feature}';
-
-    /**
-     * @var string
-     */
-    protected $description = 'Scaffold out files for a new feature, use singular form of feature name, e.g. "Spotlight"';
-
     protected string $feature;
 
     protected string $stub;

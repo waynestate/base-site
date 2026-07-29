@@ -7,9 +7,14 @@ use Contracts\Repositories\ModularPageRepositoryContract;
 use Illuminate\Cache\Repository;
 use Waynestate\Api\Connector;
 use Waynestate\Promotions\ParsePromos;
+use App\Traits\StaleCache;
+use App\Traits\FiltersExpiredItems;
 
 class HomepageRepository implements HomepageRepositoryContract
 {
+    use StaleCache;
+    use FiltersExpiredItems;
+
     /** @var Connector */
     protected $wsuApi;
 
@@ -57,9 +62,13 @@ class HomepageRepository implements HomepageRepositoryContract
             'is_active' => '1',
         ];
 
-        $promos = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+        $promos = $this->rememberWithFallback($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
+
+        if (!empty($promos['promotions'])) {
+            $promos['promotions'] = $this->filterExpiredItems($promos['promotions'], ['end_date', 'display_end_date']);
+        }
 
         return $this->parsePromos->parse($promos, $group_reference, $group_config);
     }

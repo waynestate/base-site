@@ -74,7 +74,7 @@ class FullWidthController extends Controller
             'accordion-101' => [
                 'data' => [
                     0 => [
-                        'promo_item_id' => 'component-config-icons',
+                        'promo_item_id' => 'component_config_icons',
                         'title' => 'Icons row configuration',
                         'description' => '',
                         'tr1' => [
@@ -115,7 +115,7 @@ class FullWidthController extends Controller
             'accordion-201' => [
                 'data' => [
                     0 => [
-                        'promo_item_id' => 'component-config-catalog',
+                        'promo_item_id' => 'component_config_catalog',
                         'title' => 'Catalog with background configuration',
                         'description' => '',
                         'tr1' => [
@@ -178,7 +178,7 @@ class FullWidthController extends Controller
             'accordion-303' => [
                 'data' => [
                     0 => [
-                        'promo_item_id' => 'component-config-resources',
+                        'promo_item_id' => 'component_config_resources',
                         'title' => 'Resources area configuration',
                         'description' => '',
                         'tr1' => [
@@ -228,7 +228,7 @@ class FullWidthController extends Controller
             'accordion-401' => [
                 'data' => [
                     0 => [
-                        'promo_item_id' => 'component-config-news',
+                        'promo_item_id' => 'component_config_news',
                         'title' => 'News configuration',
                         'description' => '',
                         'tr1' => [
@@ -277,7 +277,7 @@ class FullWidthController extends Controller
             'accordion-503' => [
                 'data' => [
                     0 => [
-                        'promo_item_id' => 'component-config-events',
+                        'promo_item_id' => 'component_config_events',
                         'title' => 'Events area configuration',
                         'description' => '',
                         'tr1' => [
@@ -337,7 +337,7 @@ class FullWidthController extends Controller
             'accordion-602' => [
                 'data' => [
                     0 => [
-                        'promo_item_id' => 'component-config-facts',
+                        'promo_item_id' => 'component_config_facts',
                         'title' => 'Facts area configuration',
                         'description' => '',
                         'tr1' => [
@@ -400,7 +400,7 @@ class FullWidthController extends Controller
             'accordion-702' => [
                 'data' => [
                     0 => [
-                        'promo_item_id' => 'component-config-catalog-and-buttons',
+                        'promo_item_id' => 'component_config_catalog_and_buttons',
                         'title' => 'Single column catalog and buttons area configuration',
                         'description' => '',
                         'tr1' => [
@@ -446,7 +446,7 @@ class FullWidthController extends Controller
             'accordion-801' => [
                 'data' => [
                     0 => [
-                        'promo_item_id' => 'component-config-spotlight-row',
+                        'promo_item_id' => 'component_config_spotlight_row',
                         'title' => 'Spotlight row area configuration',
                         'description' => '',
                         'tr1' => [
@@ -483,7 +483,7 @@ class FullWidthController extends Controller
             'accordion-901' => [
                 'data' => [
                     0 => [
-                        'promo_item_id' => 'component-config-smaller-width',
+                        'promo_item_id' => 'component_config_smaller_width',
                         'title' => 'Smaller-width area configuration',
                         'description' => '',
                         'tr1' => [
@@ -522,7 +522,7 @@ class FullWidthController extends Controller
             'accordion-1001' => [
                 'data' => [
                     0 => [
-                        'promo_item_id' => 'component-config-button-row',
+                        'promo_item_id' => 'component_config_button_row',
                         'title' => 'Button row area configuration',
                         'description' => '',
                         'tr1' => [

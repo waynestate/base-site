@@ -6,9 +6,14 @@ use Contracts\Repositories\EventRepositoryContract;
 use Illuminate\Cache\Repository;
 use Waynestate\Api\Connector;
 use Waynestate\Promotions\ParsePromos;
+use App\Traits\StaleCache;
+use App\Traits\FiltersExpiredItems;
 
 class EventRepository implements EventRepositoryContract
 {
+    use StaleCache;
+    use FiltersExpiredItems;
+
     /** @var Connector */
     protected $wsuApi;
 
@@ -31,7 +36,7 @@ class EventRepository implements EventRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getEvents(int $site_id, int $limit = 4, int $audience_id = null, int $is_featured = null, int $featured_images_only = null): array
+    public function getEvents(int $site_id, int $limit = 4, ?int $audience_id = null, ?int $is_featured = null, ?int $featured_images_only = null): array
     {
         $params = [
             'method' => 'calendar.events.listing',
@@ -40,19 +45,19 @@ class EventRepository implements EventRepositoryContract
             'end_date' => date('Y-m-d', strtotime('+6 month')),
         ];
 
-        $events['events'] = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+        // Cache the raw list only — grouping and expiry filtering must run on every
+        // call (fresh or stale), not just when the API is actually reached.
+        $events_listing = $this->rememberWithFallback($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             $this->wsuApi->nextRequestProduction();
 
-            $events_listing = $this->wsuApi->sendRequest($params['method'], $params);
+            $response = $this->wsuApi->sendRequest($params['method'], $params);
 
-            if (!empty($events_listing['events'])) {
-                $events_listing = collect($events_listing['events'])->groupBy('date')->toArray();
-            } else {
-                $events_listing = [];
-            }
-
-            return $events_listing;
+            return !empty($response['events']) ? $response['events'] : [];
         });
+
+        $events['events'] = collect($this->filterExpiredItems($events_listing, ['date']))
+            ->groupBy('date')
+            ->toArray();
 
         return $events;
     }
@@ -60,7 +65,7 @@ class EventRepository implements EventRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getEventsFullListing(int $site_id, int $limit = 4, int $audience_id = null, int $is_featured = null, int $featured_images_only = null): array
+    public function getEventsFullListing(int $site_id, int $limit = 4, ?int $audience_id = null, ?int $is_featured = null, ?int $featured_images_only = null): array
     {
         $params = [
             'method' => 'calendar.events.fulllisting',
@@ -69,29 +74,30 @@ class EventRepository implements EventRepositoryContract
             'end_date' => date('Y-m-d', strtotime('+6 month')),
         ];
 
-        $events['events'] = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params, $limit) {
+        // Cache the raw list only — the image-fallback map, expiry filter, and
+        // limit must run on every call (fresh or stale), not just when the API
+        // is actually reached.
+        $events_listing = $this->rememberWithFallback($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             $this->wsuApi->nextRequestProduction();
 
-            $events_listing = $this->wsuApi->sendRequest($params['method'], $params);
+            $response = $this->wsuApi->sendRequest($params['method'], $params);
 
-            if (!empty($events_listing['events'])) {
-                $events = collect($events_listing['events'])
-                    ->map(function ($event) {
-                        if (!empty($event['images'])) {
-                            $event['display_image'] = collect($event['images'])->first();
-                        } else {
-                            $event['display_image']['full_url'] = 'https://wayne.edu/opengraph/wsu-social-share-square.jpg';
-                            $event['display_image']['description'] = 'Event on wayne.edu';
-                        }
-
-                        return $event;
-                    })
-                    ->take($limit)
-                    ->toArray();
-            }
-
-            return $events ?? [];
+            return !empty($response['events']) ? $response['events'] : [];
         });
+
+        $events['events'] = collect($this->filterExpiredItems($events_listing, ['end_date', 'repeat_end_date'], false))
+            ->map(function ($event) {
+                if (!empty($event['images'])) {
+                    $event['display_image'] = collect($event['images'])->first();
+                } else {
+                    $event['display_image']['full_url'] = 'https://wayne.edu/opengraph/wsu-social-share-square.jpg';
+                    $event['display_image']['description'] = 'Event on wayne.edu';
+                }
+
+                return $event;
+            })
+            ->take($limit)
+            ->toArray();
 
         return $events;
     }

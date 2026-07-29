@@ -1,0 +1,95 @@
+.tabs {
+    ul.accordion.enabled {
+        @screen lg {
+            display: none !important;
+        }
+    }
+
+    &__area {
+        @apply hidden lg:block;
+    }
+
+    &__nav {
+        @apply flex flex-wrap lg:flex-nowrap items-stretch;
+    }
+
+    &__nav-item {
+        @apply w-full flex mb-2;
+
+        &:first-child {
+            @apply ml-0;
+        }
+
+        &:last-child {
+            @apply mr-0;
+        }
+
+        @screen lg {
+            @apply mx-1 mb-0;
+        }
+
+        &.active {
+            .tabs__nav-link {
+                @apply border-gold text-green font-bold bg-gray-100;
+            }
+        }
+    }
+
+    &__nav-link {
+        @apply w-full h-full text-white bg-green text-sm leading-tight hover:underline p-4 pt-3 border-t-8 border-green-700 box-border focus-visible:outline-2 focus-visible:outline-green;
+    }
+
+    &__pane {
+        @apply p-4 lg:p-8 bg-gray-100;
+    }
+
+    &__pane-content {
+        display: none;
+
+        &.active {
+            display: block;
+        }
+    }
+
+    &__pane-description {
+        @apply flex gap-6 items-center flex-col;
+
+        @screen lg {
+            @apply items-start flex-row;
+        }
+
+        &--left {
+            @screen lg {
+                @apply flex-row-reverse;
+            }
+        }
+
+        &--center {
+            @screen lg {
+                @apply flex-col items-center text-left;
+            }
+        }
+
+        > .content {
+            @apply w-full;
+        }
+    }
+
+    &__figure {
+        @apply m-0 w-2/3 shrink-0;
+
+        @screen lg {
+            @apply w-1/2;
+        }
+
+        @screen xl {
+            @apply w-2/5;
+        }
+
+        &--center {
+            @screen lg {
+                @apply w-2/3;
+            }
+        }
+    }
+}

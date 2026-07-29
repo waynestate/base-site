@@ -9,9 +9,14 @@ use Illuminate\Cache\Repository;
 use Illuminate\Support\Str;
 use Waynestate\Api\Connector;
 use Waynestate\Promotions\ParsePromos;
+use App\Traits\StaleCache;
+use App\Traits\FiltersExpiredItems;
 
 class ModularPageRepository implements ModularPageRepositoryContract
 {
+    use StaleCache;
+    use FiltersExpiredItems;
+
     /** @var Connector */
     protected $wsuApi;
 
@@ -181,25 +186,34 @@ class ModularPageRepository implements ModularPageRepositoryContract
             'is_active' => '1',
         ];
 
-        $promos = $this->cache->remember($params['method'] . md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+        $promos = $this->rememberWithFallback($params['method'] . md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
-        // Use another site's promo items only from Base
-        if (!empty($site_id) && $site_id === 1561) {
-            $promos['promotions'] = collect($promos['promotions'])->map(function ($promo) {
-                if (!empty($promo['filename_url'])) {
-                    $promo['relative_url'] = $promo['filename_url'];
-                }
+        if (!empty($promos['promotions'])) {
+            $promos['promotions'] = $this->filterExpiredItems($promos['promotions'], ['end_date', 'display_end_date']);
+        }
 
-                if (!empty($promo['secondary_filename_url'])) {
-                    $promo['secondary_relative_url'] = $promo['secondary_filename_url'];
+        // Use another site's promo items
+        if (!empty($promos['promotions'])) {
+            $promos['promotions'] = collect($promos['promotions'])->map(function ($promo) use ($site_id) {
+                if (!empty($promo['site']) && !empty($promo['site']['site_id']) && $promo['site']['site_id'] != $site_id) {
+                    if (!empty($promo['filename_url'])) {
+                        $promo['relative_url'] = $promo['filename_url'];
+                    }
+
+                    if (!empty($promo['secondary_filename_url'])) {
+                        $promo['secondary_relative_url'] = $promo['secondary_filename_url'];
+                    }
+
+                    if (!empty($promo['link'])) {
+                        $promo['link'] = $this->fullyQualifiedUrl($promo['link'], $promo['site']['url'] ?? '');
+                    }
                 }
 
                 return $promo;
             })->toArray();
         }
-
         $promos = $this->parsePromos->parse($promos, $components['group_reference'], $components['group_config']);
 
         foreach ($promos as $name => $data) {
@@ -221,6 +235,49 @@ class ModularPageRepository implements ModularPageRepositoryContract
         }
 
         return $promos;
+    }
+
+    /**
+     * Fully qualify a local or bare-domain URL using the provided base URL when needed.
+     */
+    public function fullyQualifiedUrl(string $url, string $base_url = ''): string
+    {
+        if (Str::startsWith($url, '#')) {
+            return $url;
+        }
+
+        if ($this->isAbsoluteUrl($url)) {
+            return $url;
+        }
+
+        if ($this->isUrlWithoutScheme($url)) {
+            return $this->urlWithScheme($url);
+        }
+
+        if (empty($base_url)) {
+            return $url;
+        }
+
+        return rtrim($this->urlWithScheme($base_url), '/').'/'.ltrim($url, '/');
+    }
+
+    protected function isAbsoluteUrl(string $url): bool
+    {
+        return Str::startsWith($url, '//') || parse_url($url, PHP_URL_SCHEME) !== null;
+    }
+
+    protected function isUrlWithoutScheme(string $url): bool
+    {
+        return preg_match('/^[A-Za-z0-9.-]+\.[A-Za-z]{2,}(?:[\/?#]|$)/', $url) === 1;
+    }
+
+    protected function urlWithScheme(string $url): string
+    {
+        if (parse_url($url, PHP_URL_SCHEME) === null) {
+            return 'https://'.$url;
+        }
+
+        return $url;
     }
 
     /**
@@ -337,7 +394,22 @@ class ModularPageRepository implements ModularPageRepositoryContract
                 unset($modularComponents[$name]['component']['heading']);
             } else {
                 $modularComponents[$name]['data'] = $promos[$name]['data'] ?? [];
-                $modularComponents[$name]['component'] = $promos[$name]['component'] ?? [];
+                $modularComponents[$name]['component'] = $component;
+            }
+
+            // Post-process based on visibility option
+            $visibility = $component['visibility'] ?? 'data-only';
+            if ($visibility === 'hide') {
+                $modularComponents[$name]['data'] = [];
+            } elseif ($visibility === 'always') {
+                $hasData = !empty($modularComponents[$name]['data']);
+                if ($hasData && (isset($modularComponents[$name]['data']['news']) || isset($modularComponents[$name]['data']['events']))) {
+                    $hasData = !empty($modularComponents[$name]['data']['news']) || !empty($modularComponents[$name]['data']['events']);
+                }
+
+                if (!$hasData) {
+                    $modularComponents[$name]['data'][] = $component;
+                }
             }
         }
 

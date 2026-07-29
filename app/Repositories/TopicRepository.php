@@ -5,9 +5,12 @@ namespace App\Repositories;
 use Contracts\Repositories\TopicRepositoryContract;
 use Illuminate\Cache\Repository;
 use Waynestate\Api\News;
+use App\Traits\StaleCache;
 
 class TopicRepository implements TopicRepositoryContract
 {
+    use StaleCache;
+
     /** @var News */
     protected $newsApi;
 
@@ -33,7 +36,7 @@ class TopicRepository implements TopicRepositoryContract
             'method' => 'topics',
         ];
 
-        $topics['topics'] = $this->cache->remember('newsroom-topics'.md5(serialize($params)), config('cache.ttl'), function () use ($params, $subsite_folder) {
+        $topics['topics'] = $this->rememberWithFallback('newsroom-topics'.md5(serialize($params)), config('cache.ttl'), function () use ($params, $subsite_folder) {
             try {
                 $topics = $this->newsApi->request($params['method'], $params);
             } catch (\Exception $e) {
@@ -70,7 +73,7 @@ class TopicRepository implements TopicRepositoryContract
             'method' => 'topic/'.$slug,
         ];
 
-        $topic['topic'] = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+        $topic['topic'] = $this->rememberWithFallback($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             return $this->newsApi->request($params['method'], $params);
         });
 

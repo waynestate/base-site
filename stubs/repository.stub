@@ -6,9 +6,12 @@ use Contracts\Repositories\DummyRepositoryContract;
 use Illuminate\Cache\Repository;
 use Waynestate\Api\Connector;
 use Waynestate\Promotions\ParsePromos;
+use App\Traits\StaleCache;
 
 class DummyRepository implements DummyRepositoryContract
 {
+    use StaleCache;
+
     /** @var Connector */
     protected $wsuApi;
 
@@ -46,7 +49,7 @@ class DummyRepository implements DummyRepositoryContract
             'status' => 0,
         ];
 
-        $submissions = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+        $submissions = $this->rememberWithFallback($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             $this->wsuApi->nextRequestProduction();
 
             return $this->wsuApi->sendRequest($params['method'], $params);
@@ -72,7 +75,7 @@ class DummyRepository implements DummyRepositoryContract
             'is_active' => '1',
         ];
 
-        $promos = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+        $promos = $this->rememberWithFallback($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 

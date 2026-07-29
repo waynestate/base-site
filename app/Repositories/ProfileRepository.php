@@ -11,9 +11,12 @@ use Waynestate\Api\News;
 use Waynestate\Promotions\ParsePromos;
 use Contracts\Repositories\ProfileRepositoryContract;
 use Illuminate\Support\Facades\Config;
+use App\Traits\StaleCache;
 
 class ProfileRepository implements ProfileRepositoryContract
 {
+    use StaleCache;
+
     /** @var Connector */
     protected $wsuApi;
 
@@ -48,7 +51,7 @@ class ProfileRepository implements ProfileRepositoryContract
             'groups' => $selected_group,
         ];
 
-        $profile_listing = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+        $profile_listing = $this->rememberWithFallback($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             $this->wsuApi->nextRequestProduction();
 
             return $this->wsuApi->sendRequest($params['method'], $params);
@@ -206,7 +209,7 @@ class ProfileRepository implements ProfileRepositoryContract
             'site_id' => $site_id,
         ];
 
-        $profile_groups = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+        $profile_groups = $this->rememberWithFallback($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             $this->wsuApi->nextRequestProduction();
 
             return $this->wsuApi->sendRequest($params['method'], $params);
@@ -248,7 +251,7 @@ class ProfileRepository implements ProfileRepositoryContract
             'include_courses' => 'true',
         ];
 
-        $profiles = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+        $profiles = $this->rememberWithFallback($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             $this->wsuApi->nextRequestProduction();
 
             return $this->wsuApi->sendRequest($params['method'], $params);
@@ -291,7 +294,7 @@ class ProfileRepository implements ProfileRepositoryContract
             'env' => config('app.env'),
         ];
 
-        $articles = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+        $articles = $this->rememberWithFallback($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             try {
                 $articles = $this->newsApi->request($params['method'], $params);
 

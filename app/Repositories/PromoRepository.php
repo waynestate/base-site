@@ -9,9 +9,14 @@ use Contracts\Repositories\ModularPageRepositoryContract;
 use Illuminate\Cache\Repository;
 use Waynestate\Api\Connector;
 use Waynestate\Promotions\ParsePromos;
+use App\Traits\StaleCache;
+use App\Traits\FiltersExpiredItems;
 
 class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryContract
 {
+    use StaleCache;
+    use FiltersExpiredItems;
+
     /** @var Connector */
     protected $wsuApi;
 
@@ -58,9 +63,13 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
             'is_active' => '1',
         ];
 
-        $promo = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+        $promo = $this->rememberWithFallback($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
+
+        if (!empty($promo['promotion']) && $this->isExpired($promo['promotion'], ['end_date', 'display_end_date'])) {
+            $promo['promotion'] = [];
+        }
 
         $promo['promo'] = empty($promo['error']) ? $promo['promotion'] : [];
 
@@ -124,9 +133,13 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
             'is_active' => '1',
         ];
 
-        $promos = $this->cache->remember($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+        $promos = $this->rememberWithFallback($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
+
+        if (!empty($promos['promotions'])) {
+            $promos['promotions'] = $this->filterExpiredItems($promos['promotions'], ['end_date', 'display_end_date']);
+        }
 
         $group_config = $this->createGlobalPromoGroupConfig($data, $config, $groups);
 

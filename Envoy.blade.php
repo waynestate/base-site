@@ -306,11 +306,11 @@ echo "RemoteRelease Environment file setup Done.";
 shopt -s expand_aliases
 source ~/.bashrc
 echo "Clearing view cache"
-php82 {{ $release_dir }}/{{ $release }}/artisan view:clear
+php84 {{ $release_dir }}/{{ $release }}/artisan view:clear
 echo "Caching configs...";
-php82 {{ $release_dir }}/{{ $release }}/artisan config:cache
+php84 {{ $release_dir }}/{{ $release }}/artisan config:cache
 echo "Caching routes...";
-php82 {{ $release_dir }}/{{ $release }}/artisan route:cache
+php84 {{ $release_dir }}/{{ $release }}/artisan route:cache
 echo "Done caching ";
 @endtask
 

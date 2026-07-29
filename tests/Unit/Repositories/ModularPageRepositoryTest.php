@@ -6,6 +6,8 @@ use Factories\Article;
 use Illuminate\Support\Str;
 use PHPUnit\Framework\Attributes\Test;
 use App\Repositories\ModularPageRepository;
+use Contracts\Repositories\ArticleRepositoryContract;
+use Contracts\Repositories\EventRepositoryContract;
 use Factories\Page;
 use Factories\GenericPromo;
 use Factories\PromoWithOptions;
@@ -684,10 +686,12 @@ final class ModularPageRepositoryTest extends TestCase
     }
 
     #[Test]
-    public function replace_modular_page_relative_url_with_filename_if_on_base(): void
+    public function replace_modular_page_relative_urls_and_local_links_for_promos_from_other_sites(): void
     {
         $page_id = $this->faker->numberbetween(10, 50);
         $promo_group_id = $this->faker->numberbetween(1, 3);
+        $current_site_id = 1561;
+        $promo_site_id = 2;
 
         // Fake return
         $return['promotions'] = app(GenericPromo::class)->create(5, false, [
@@ -695,8 +699,13 @@ final class ModularPageRepositoryTest extends TestCase
             'filename_url' => 'https://base.wayne.edu/promo/image.jpg',
             'secondary_relative_url' => '/promo/image2.jpg',
             'secondary_filename_url' => 'https://base.wayne.edu/promo/image2.jpg',
+            'link' => '/apply',
             'promo_group_id' => $promo_group_id,
             'page_id' => $page_id,
+            'site' => [
+                'site_id' => $promo_site_id,
+                'url' => 'https://base.wayne.edu',
+            ],
             'group' => [
                 'promo_group_id' => $promo_group_id,
             ],
@@ -705,7 +714,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Create a fake data request
         $data = app(Page::class)->create(1, true, [
             'site' => [
-                'id' => 1561,
+                'id' => $current_site_id,
             ],
             'page' => [
                 'controller' => 'ChildpageController',
@@ -729,5 +738,174 @@ final class ModularPageRepositoryTest extends TestCase
 
         $this->assertTrue($component['relative_url'] === $component['filename_url']);
         $this->assertTrue($component['secondary_relative_url'] === $component['secondary_filename_url']);
+        $this->assertEquals('https://base.wayne.edu/apply', $component['link']);
+    }
+
+    #[Test]
+    public function get_modular_page_components_with_visibility_options(): void
+    {
+        $promo_group_id_summon = 9876;
+        $promo_group_id_accordion_always = 5432;
+        $promo_group_id_accordion_hide = 1111;
+        $promo_group_id_accordion_default = 2222;
+
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'ChildpageController',
+            ],
+            'data' => [
+                // 1. Custom component, no ID, visibility = always -> should display
+                'modular-weekly-hours-1' => '{"visibility": "always", "filename": "weekly-hours"}',
+
+                // 2. Promo component, ID, visibility = always, no promotions returned -> should display
+                'modular-summon-search-1' => '{"id": ' . $promo_group_id_summon . ', "visibility": "always", "filename": "summon-search"}',
+
+                // 3. Promo component, ID, visibility = always, no promotions returned -> should display
+                'modular-accordion-1' => '{"id": ' . $promo_group_id_accordion_always . ', "visibility": "always", "filename": "accordion"}',
+
+                // 4. Promo component, ID, visibility = hide, promotions returned -> should NOT display (empty)
+                'modular-accordion-2' => '{"id": ' . $promo_group_id_accordion_hide . ', "visibility": "hide", "filename": "accordion"}',
+
+                // 5. Promo component, ID, visibility = data-only (default), no promotions returned -> should NOT display (empty)
+                'modular-accordion-3' => '{"id": ' . $promo_group_id_accordion_default . ', "filename": "accordion"}',
+
+                // 6. News and Events component, ID, visibility = always, returns news/events -> should NOT append component, should have news/events
+                'modular-news-and-events-1' => '{"id": 1, "visibility": "always", "filename": "news-and-events"}',
+
+                // 7. News and Events component, ID, visibility = always, returns empty news/events -> should append component
+                'modular-news-and-events-2' => '{"id": 2, "visibility": "always", "filename": "news-and-events"}',
+            ],
+        ]);
+
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn([
+            'promotions' => [
+                [
+                    'promo_item_id' => 101,
+                    'promo_group_id' => $promo_group_id_accordion_hide,
+                    'title' => 'Active Promo',
+                ]
+            ]
+        ]);
+
+        $articleRepo = Mockery::mock(ArticleRepositoryContract::class);
+        $articleRepo->shouldReceive('listing')
+            ->with(1, Mockery::any(), Mockery::any(), Mockery::any())
+            ->andReturn(['articles' => ['data' => [['title' => 'News 1']], 'meta' => []]]);
+        $articleRepo->shouldReceive('listing')
+            ->with(2, Mockery::any(), Mockery::any(), Mockery::any())
+            ->andReturn(['articles' => ['data' => [], 'meta' => []]]);
+
+        $eventRepo = Mockery::mock(EventRepositoryContract::class);
+        $eventRepo->shouldReceive('getEvents')
+            ->with(1, Mockery::any(), Mockery::any(), Mockery::any(), Mockery::any())
+            ->andReturn(['events' => [['title' => 'Event 1']]]);
+        $eventRepo->shouldReceive('getEvents')
+            ->with(2, Mockery::any(), Mockery::any(), Mockery::any(), Mockery::any())
+            ->andReturn(['events' => []]);
+
+        $components = app(ModularPageRepository::class, [
+            'wsuApi' => $wsuApi,
+            'article' => $articleRepo,
+            'event' => $eventRepo,
+        ])->getModularComponents($data);
+
+        // 1. Weekly-hours (visibility: always) should be present and contain the component array in its data list
+        $this->assertArrayHasKey('weekly-hours-1', $components);
+        $this->assertNotEmpty($components['weekly-hours-1']['data']);
+
+        // 2. Summon-search (visibility: always) should be present and contain the component array in its data list
+        $this->assertArrayHasKey('summon-search-1', $components);
+        $this->assertNotEmpty($components['summon-search-1']['data']);
+
+        // 3. Accordion-1 (visibility: always) should be present and contain data even with 0 promos
+        $this->assertArrayHasKey('accordion-1', $components);
+        $this->assertNotEmpty($components['accordion-1']['data']);
+
+        // 4. Accordion-2 (visibility: hide) should be empty even though promos were returned
+        $this->assertArrayHasKey('accordion-2', $components);
+        $this->assertEmpty($components['accordion-2']['data']);
+
+        // 5. Accordion-3 (visibility: data-only / default) should be empty since no promos were returned
+        $this->assertArrayHasKey('accordion-3', $components);
+        $this->assertEmpty($components['accordion-3']['data']);
+
+        // 6. News-and-events-1 (visibility: always, with data) should contain news and events and NOT append the component array
+        $this->assertArrayHasKey('news-and-events-1', $components);
+        $this->assertNotEmpty($components['news-and-events-1']['data']['news']);
+        $this->assertNotEmpty($components['news-and-events-1']['data']['events']);
+        $this->assertArrayNotHasKey(0, $components['news-and-events-1']['data']);
+
+        // 7. News-and-events-2 (visibility: always, empty data) should append the component array to the data list
+        $this->assertArrayHasKey('news-and-events-2', $components);
+        $this->assertEmpty($components['news-and-events-2']['data']['news']);
+        $this->assertEmpty($components['news-and-events-2']['data']['events']);
+        $this->assertArrayHasKey(0, $components['news-and-events-2']['data']);
+    }
+
+    #[Test]
+    public function fully_qualified_url_does_not_change_absolute_links(): void
+    {
+        $repository = app(ModularPageRepository::class);
+
+        $this->assertEquals(
+            'https://wayne.edu/apply',
+            $repository->fullyQualifiedUrl('https://wayne.edu/apply', 'https://base.wayne.edu')
+        );
+    }
+
+    #[Test]
+    public function fully_qualified_url_does_not_change_protocol_relative_links(): void
+    {
+        $repository = app(ModularPageRepository::class);
+
+        $this->assertEquals(
+            '//wayne.edu/apply',
+            $repository->fullyQualifiedUrl('//wayne.edu/apply', 'https://base.wayne.edu')
+        );
+    }
+
+    #[Test]
+    public function fully_qualified_url_does_not_change_anchor_links(): void
+    {
+        $repository = app(ModularPageRepository::class);
+
+        $this->assertEquals(
+            '#apply',
+            $repository->fullyQualifiedUrl('#apply', 'https://base.wayne.edu')
+        );
+    }
+
+    #[Test]
+    public function fully_qualified_url_does_not_change_local_links_without_base_url(): void
+    {
+        $repository = app(ModularPageRepository::class);
+
+        $this->assertEquals(
+            '/apply',
+            $repository->fullyQualifiedUrl('/apply')
+        );
+    }
+
+    #[Test]
+    public function fully_qualified_url_adds_scheme_to_base_urls_without_prefix(): void
+    {
+        $repository = app(ModularPageRepository::class);
+
+        $this->assertEquals(
+            'https://wayne.edu/apply',
+            $repository->fullyQualifiedUrl('/apply', 'wayne.edu')
+        );
+    }
+
+    #[Test]
+    public function fully_qualified_url_adds_scheme_to_bare_domain_links(): void
+    {
+        $repository = app(ModularPageRepository::class);
+
+        $this->assertEquals(
+            'https://wayne.edu/summer/',
+            $repository->fullyQualifiedUrl('wayne.edu/summer/', 'https://wayne.wayne.localhost')
+        );
     }
 }

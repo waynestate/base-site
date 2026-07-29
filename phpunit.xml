@@ -13,6 +13,7 @@
     <env name="APP_ENV" value="testing"/>
     <env name="BCRYPT_ROUNDS" value="4"/>
     <env name="CACHE_STORE" value="array"/>
+    <env name="NEWS_API_CACHE" value="storage/app/newsapi/"/>
     <env name="MAIL_DRIVER" value="array"/>
     <env name="QUEUE_CONNECTION" value="sync"/>
     <env name="SESSION_DRIVER" value="array"/>
@@ -24,6 +25,9 @@
     <env name="APP_PACKAGES_CACHE" value="bootstrap/cache/packages.phpunit.php"/>
     <env name="APP_ROUTES_CACHE" value="bootstrap/cache/routes.phpunit.php"/>
     <env name="APP_EVENTS_CACHE" value="bootstrap/cache/events.phpunit.php"/>
+    <env name="BROADCAST_CONNECTION" value="null"/>
+    <env name="PULSE_ENABLED" value="false"/>
+    <env name="NIGHTWATCH_ENABLED" value="false"/>
   </php>
   <source>
     <include>
