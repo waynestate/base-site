@@ -742,6 +742,61 @@ final class ModularPageRepositoryTest extends TestCase
     }
 
     #[Test]
+    public function does_not_replace_modular_page_relative_urls_and_local_links_for_promos_from_the_current_site(): void
+    {
+        $page_id = $this->faker->numberbetween(10, 50);
+        $promo_group_id = $this->faker->numberbetween(1, 3);
+        $current_site_id = 1561;
+
+        // Fake return
+        $return['promotions'] = app(GenericPromo::class)->create(5, false, [
+            'relative_url' => '/promo/image.jpg',
+            'filename_url' => 'https://base.wayne.edu/promo/image.jpg',
+            'secondary_relative_url' => '/promo/image2.jpg',
+            'secondary_filename_url' => 'https://base.wayne.edu/promo/image2.jpg',
+            'link' => '/apply',
+            'promo_group_id' => $promo_group_id,
+            'page_id' => $page_id,
+            'site' => [
+                'site_id' => $current_site_id,
+                'url' => 'https://base.wayne.edu',
+            ],
+            'group' => [
+                'promo_group_id' => $promo_group_id,
+            ],
+        ]);
+
+        // Create a fake data request
+        $data = app(Page::class)->create(1, true, [
+            'site' => [
+                'id' => $current_site_id,
+            ],
+            'page' => [
+                'controller' => 'ChildpageController',
+                'id' => $page_id,
+            ],
+            'data' => [
+                'modular-promo-column-1' => json_encode([
+                    'id' => $promo_group_id,
+                    'config' => 'randomize|limit:2',
+                ]),
+            ],
+        ]);
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
+
+        // Run the promos through the repository
+        $components = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
+        $component = collect($components['promo-column-1']['data'])->first();
+
+        $this->assertEquals('/promo/image.jpg', $component['relative_url']);
+        $this->assertEquals('/promo/image2.jpg', $component['secondary_relative_url']);
+        $this->assertEquals('/apply', $component['link']);
+    }
+
+    #[Test]
     public function get_modular_page_components_with_visibility_options(): void
     {
         $promo_group_id_summon = 9876;
@@ -906,6 +961,138 @@ final class ModularPageRepositoryTest extends TestCase
         $this->assertEquals(
             'https://wayne.edu/summer/',
             $repository->fullyQualifiedUrl('wayne.edu/summer/', 'https://wayne.wayne.localhost')
+        );
+    }
+
+    #[Test]
+    public function fully_qualified_url_does_not_change_mailto_links(): void
+    {
+        $repository = app(ModularPageRepository::class);
+
+        $this->assertEquals(
+            'mailto:mark.garrison@wayne.edu',
+            $repository->fullyQualifiedUrl('mailto:mark.garrison@wayne.edu', 'https://base.wayne.edu')
+        );
+    }
+
+    #[Test]
+    public function fully_qualified_url_does_not_change_tel_links(): void
+    {
+        $repository = app(ModularPageRepository::class);
+
+        $this->assertEquals(
+            'tel:1-800-222-1222',
+            $repository->fullyQualifiedUrl('tel:1-800-222-1222', 'https://base.wayne.edu')
+        );
+    }
+
+    #[Test]
+    public function fully_qualified_url_does_not_change_a_lone_anchor_symbol(): void
+    {
+        $repository = app(ModularPageRepository::class);
+
+        $this->assertEquals(
+            '#',
+            $repository->fullyQualifiedUrl('#', 'https://base.wayne.edu')
+        );
+    }
+
+    #[Test]
+    public function fully_qualified_url_does_not_change_a_lone_protocol_relative_slashes(): void
+    {
+        $repository = app(ModularPageRepository::class);
+
+        $this->assertEquals(
+            '//',
+            $repository->fullyQualifiedUrl('//', 'https://base.wayne.edu')
+        );
+    }
+
+    #[Test]
+    public function fully_qualified_url_resolves_a_lone_slash_against_base_url(): void
+    {
+        $repository = app(ModularPageRepository::class);
+
+        $this->assertEquals(
+            'https://base.wayne.edu/',
+            $repository->fullyQualifiedUrl('/', 'https://base.wayne.edu')
+        );
+    }
+
+    #[Test]
+    public function fully_qualified_url_adds_scheme_to_bare_domain_links_with_numeric_subdomain(): void
+    {
+        $repository = app(ModularPageRepository::class);
+
+        $this->assertEquals(
+            'https://150.wayne.edu',
+            $repository->fullyQualifiedUrl('150.wayne.edu', 'https://base.wayne.edu')
+        );
+    }
+
+    #[Test]
+    public function fully_qualified_url_adds_scheme_to_external_bare_www_domain_links(): void
+    {
+        $repository = app(ModularPageRepository::class);
+
+        $this->assertEquals(
+            'https://www.linkedin.com/in/janakabbani',
+            $repository->fullyQualifiedUrl('www.linkedin.com/in/janakabbani', 'https://base.wayne.edu')
+        );
+    }
+
+    #[Test]
+    public function fully_qualified_url_makes_absolute_links_relative_when_the_promo_site_is_the_current_site(): void
+    {
+        $repository = app(ModularPageRepository::class);
+
+        $this->assertEquals(
+            '/apply',
+            $repository->fullyQualifiedUrl(config('app.url').'/apply', config('app.url'))
+        );
+    }
+
+    #[Test]
+    public function fully_qualified_url_makes_links_relative_when_the_current_site_host_has_a_www_prefix(): void
+    {
+        $repository = app(ModularPageRepository::class);
+
+        $this->assertEquals(
+            '/apply',
+            $repository->fullyQualifiedUrl('www.'.parse_url(config('app.url'), PHP_URL_HOST).'/apply', config('app.url'))
+        );
+    }
+
+    #[Test]
+    public function fully_qualified_url_keeps_query_and_fragment_when_relativizing_a_local_site_link(): void
+    {
+        $repository = app(ModularPageRepository::class);
+
+        $this->assertEquals(
+            '/apply?term=fall#form',
+            $repository->fullyQualifiedUrl(config('app.url').'/apply?term=fall#form', config('app.url'))
+        );
+    }
+
+    #[Test]
+    public function fully_qualified_url_leaves_relative_links_unchanged_when_the_promo_site_is_the_current_site(): void
+    {
+        $repository = app(ModularPageRepository::class);
+
+        $this->assertEquals(
+            '/apply',
+            $repository->fullyQualifiedUrl('/apply', config('app.url'))
+        );
+    }
+
+    #[Test]
+    public function fully_qualified_url_leaves_external_links_absolute_even_when_the_promo_site_is_the_current_site(): void
+    {
+        $repository = app(ModularPageRepository::class);
+
+        $this->assertEquals(
+            'https://wayne.edu/apply',
+            $repository->fullyQualifiedUrl('https://wayne.edu/apply', config('app.url'))
         );
     }
 }
