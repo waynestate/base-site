@@ -89,7 +89,7 @@ eslintfix:
 	npm run lint:fix
 
 coverage: $(COMPOSERFILE)
-	phpbrew ext enable xdebug && XDEBUG_MODE=coverage php vendor/bin/phpunit --coverage-html coverages && phpbrew ext disable xdebug
+	php -d error_reporting="E_ALL & ~E_DEPRECATED" /usr/bin/phpbrew ext enable xdebug && XDEBUG_MODE=coverage php vendor/bin/phpunit --coverage-html coverages && php -d error_reporting="E_ALL & ~E_DEPRECATED" /usr/bin/phpbrew ext disable xdebug
 
 envoy: $(DEPLOY)
 	envoy run deploy
