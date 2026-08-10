@@ -9,15 +9,17 @@
         <ul>
             <li>{{ $faker->sentence() }}</li>
             <li>{{ $faker->sentence() }}</li>
-            <li>{{ $faker->sentence() }}</li>
-            <ul>
-                <li>{{ $faker->sentence() }}</li>
-                <li>{{ $faker->sentence() }}</li>
+            <li>{{ $faker->sentence() }}
                 <ul>
                     <li>{{ $faker->sentence() }}</li>
-                    <li>{{ $faker->sentence() }}</li>
+                    <li>{{ $faker->sentence() }}
+                        <ul>
+                            <li>{{ $faker->sentence() }}</li>
+                            <li>{{ $faker->sentence() }}</li>
+                        </ul>
+                    </li>
                 </ul>
-            </ul>
+            </li>
             <li>{{ $faker->sentence() }}</li>
             <li>{{ $faker->sentence() }}</li>
             <li>{{ $faker->sentence() }}</li>
@@ -28,15 +30,17 @@
         <ol>
             <li>{{ $faker->sentence() }}</li>
             <li>{{ $faker->sentence() }}</li>
-            <li>{{ $faker->sentence() }}</li>
-            <ol>
-                <li>{{ $faker->sentence() }}</li>
-                <li>{{ $faker->sentence() }}</li>
+            <li>{{ $faker->sentence() }}
                 <ol>
                     <li>{{ $faker->sentence() }}</li>
-                    <li>{{ $faker->sentence() }}</li>
+                    <li>{{ $faker->sentence() }}
+                        <ol>
+                            <li>{{ $faker->sentence() }}</li>
+                            <li>{{ $faker->sentence() }}</li>
+                        </ol>
+                    </li>
                 </ol>
-            </ol>
+            </li>
             <li>{{ $faker->sentence() }}</li>
             <li>{{ $faker->sentence() }}</li>
             <li>{{ $faker->sentence() }}</li>

@@ -99,7 +99,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function parseComponentJSON(array $data)
+    public function parseComponentJSON(array $data): array
     {
         // Get data to send through parsePromos
         // Preserve component data
@@ -177,7 +177,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function getPromos($components, $site_id)
+    public function getPromos($components, $site_id): array
     {
         $params = [
             'method' => 'cms.promotions.listing',
@@ -238,12 +238,18 @@ class ModularPageRepository implements ModularPageRepositoryContract
     }
 
     /**
-     * Fully qualify a local or bare-domain URL using the provided base URL when needed.
+     * {@inheritdoc}
      */
     public function fullyQualifiedUrl(string $url, string $base_url = ''): string
     {
         if (Str::startsWith($url, '#')) {
             return $url;
+        }
+
+        $app_host = $this->normalizeHost((string) config('app.url'));
+
+        if ($app_host !== null && $this->normalizeHost($base_url) === $app_host) {
+            return $this->normalizeHost($url) === $app_host ? $this->relativePath($url) : $url;
         }
 
         if ($this->isAbsoluteUrl($url)) {
@@ -261,23 +267,71 @@ class ModularPageRepository implements ModularPageRepositoryContract
         return rtrim($this->urlWithScheme($base_url), '/').'/'.ltrim($url, '/');
     }
 
+    /**
+     * Determine if the URL is already absolute (has a scheme or is protocol-relative).
+     */
     protected function isAbsoluteUrl(string $url): bool
     {
         return Str::startsWith($url, '//') || parse_url($url, PHP_URL_SCHEME) !== null;
     }
 
+    /**
+     * Determine if the URL is a bare domain without a scheme, e.g. "wayne.edu/apply".
+     */
     protected function isUrlWithoutScheme(string $url): bool
     {
         return preg_match('/^[A-Za-z0-9.-]+\.[A-Za-z]{2,}(?:[\/?#]|$)/', $url) === 1;
     }
 
+    /**
+     * Add an https scheme to the URL if it doesn't already have one.
+     */
     protected function urlWithScheme(string $url): string
     {
-        if (parse_url($url, PHP_URL_SCHEME) === null) {
-            return 'https://'.$url;
+        if (parse_url($url, PHP_URL_SCHEME) !== null) {
+            return $url;
         }
 
-        return $url;
+        return Str::startsWith($url, '//') ? 'https:'.$url : 'https://'.$url;
+    }
+
+    /**
+     * Extract and normalize the host from a URL, or null when the URL has no host
+     * (e.g. a relative path or anchor).
+     */
+    protected function normalizeHost(string $url): ?string
+    {
+        if ($url === '' || Str::startsWith($url, '#')) {
+            return null;
+        }
+
+        if ($this->isAbsoluteUrl($url) || $this->isUrlWithoutScheme($url)) {
+            $host = parse_url($this->urlWithScheme($url), PHP_URL_HOST);
+        } else {
+            $host = null;
+        }
+
+        if (empty($host)) {
+            return null;
+        }
+
+        $host = strtolower($host);
+
+        return Str::startsWith($host, 'www.') ? substr($host, 4) : $host;
+    }
+
+    /**
+     * Strip the scheme and host from a URL, keeping the path, query, and fragment.
+     */
+    protected function relativePath(string $url): string
+    {
+        $parseable = $this->urlWithScheme($url);
+
+        $path = parse_url($parseable, PHP_URL_PATH) ?: '/';
+        $query = parse_url($parseable, PHP_URL_QUERY);
+        $fragment = parse_url($parseable, PHP_URL_FRAGMENT);
+
+        return $path.($query ? '?'.$query : '').($fragment ? '#'.$fragment : '');
     }
 
     /**
@@ -386,7 +440,6 @@ class ModularPageRepository implements ModularPageRepositoryContract
                     }
                 }
             } elseif (Str::startsWith($name, 'page-content') || Str::startsWith($name, 'heading') || Str::contains($name, 'page-config')) {
-                //} elseif (Str::startsWith($name, ['page-content', 'heading', 'layout'])) {
                 // If there's JSON but no news, events or promo data, assign the component array as data
                 // Page-content and heading components
                 $modularComponents[$name]['data'][] = $components['components'][$name] ?? [];
@@ -416,7 +469,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
         return $modularComponents;
     }
 
-    public function adjustPromoData($data, $component)
+    public function adjustPromoData($data, $component): array
     {
         if (isset($component['singlePromoView']) && $component['singlePromoView'] === true) {
             $data['link'] = 'view/'.Str::slug($data['title']).'-'.$data['promo_item_id'];
@@ -445,7 +498,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
     /**
     * {@inheritdoc}
     */
-    public function organizePromoItemsByOption(array $data)
+    public function organizePromoItemsByOption(array $data): array
     {
         $options_exist = collect($data)->filter(function ($item) {
             return !empty($item['option']);
@@ -464,7 +517,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
         return $data;
     }
 
-    public function componentClasses($components)
+    public function componentClasses($components): array
     {
         foreach ($components as $componentName => $component) {
             // Establishing final arrays so they will always exist
@@ -544,16 +597,14 @@ class ModularPageRepository implements ModularPageRepositoryContract
         return $components;
     }
 
-    public function componentStyles($components)
+    public function componentStyles($components): array
     {
         $expected_styles = [
             'backgroundImageUrl',
-            //'sectionStyle',
         ];
 
         foreach ($components as $componentName => $component) {
             if (!empty($component['component']['backgroundImageUrl'])) {
-                //$component['component']['backgroundImageUrl'] = "background-image:url('".$component['component']['backgroundImageUrl']."');";
                 $components[$componentName]['component']['backgroundImageUrl'] = "style=\"background-image:url('".$component['component']['backgroundImageUrl']."');\"";
             }
 
@@ -561,7 +612,6 @@ class ModularPageRepository implements ModularPageRepositoryContract
             foreach ($component['component'] as $option => $style) {
                 if (in_array($option, $expected_styles)) {
                     $styles[$componentName][] = $style;
-                    //$components[$componentName]['component']['componentStyle'] = "style=\"".implode(' ', $styles[$componentName])."\"";
                 }
             }
         }
@@ -572,7 +622,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function legacyPageFieldSupport(array $data)
+    public function legacyPageFieldSupport(array $data): array
     {
         // Legacy support for accordion
         if (!empty($data['data']['accordion_promo_group_id'])) {

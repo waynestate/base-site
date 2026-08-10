@@ -1677,7 +1677,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tailwindcss/typography@npm:^0.5.19":
+"@tailwindcss/typography@npm:^0.5.20":
   version: 0.5.20
   resolution: "@tailwindcss/typography@npm:0.5.20"
   dependencies:
@@ -2543,7 +2543,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"autoprefixer@npm:^10.4.0, autoprefixer@npm:^10.5.0":
+"autoprefixer@npm:^10.4.0, autoprefixer@npm:^10.5.4":
   version: 10.5.4
   resolution: "autoprefixer@npm:10.5.4"
   dependencies:
@@ -2666,30 +2666,30 @@ __metadata:
   dependencies:
     "@eslint/js": "npm:^10.0.1"
     "@tailwindcss/forms": "npm:^0.5.11"
-    "@tailwindcss/typography": "npm:^0.5.19"
+    "@tailwindcss/typography": "npm:^0.5.20"
     "@waynestate/wsufooter": "npm:^1.1.1"
     "@waynestate/wsuheader": "npm:^2.2.2"
     accordion: "npm:^3.0.2"
-    autoprefixer: "npm:^10.5.0"
+    autoprefixer: "npm:^10.5.4"
     browser-sync: "npm:^3.0.4"
     browser-sync-webpack-plugin: "npm:^2.4.0"
-    concurrently: "npm:^9.0.1"
+    concurrently: "npm:^9.2.4"
     copy-webpack-plugin: "npm:^14.0.0"
-    eslint: "npm:^10.3.0"
+    eslint: "npm:^10.8.0"
     eslint-webpack-plugin: "npm:^6.0.0"
     flickity: "npm:^2.3.0"
     intersection-observer: "npm:^0.12.2"
     laravel-mix: "npm:^6.0.49"
     mediabox: "npm:^1.1.3"
-    postcss: "npm:^8.5.14"
+    postcss: "npm:^8.5.26"
     postcss-scss: "npm:^4.0.9"
     sass: "npm:^1.99.0"
     sass-loader: "npm:^16.0.8"
     slideout: "npm:^1.0.1"
-    stylelint: "npm:^17.11.1"
+    stylelint: "npm:^17.14.1"
     stylelint-config-standard: "npm:^40.0.0"
     stylelint-config-standard-scss: "npm:^17.0.0"
-    stylelint-scss: "npm:^7.1.1"
+    stylelint-scss: "npm:^7.2.0"
     tailwindcss: "npm:^3.4.19"
     vue-template-compiler: "npm:^2.7.16"
   languageName: unknown
@@ -3340,7 +3340,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"concurrently@npm:^9.0.1":
+"concurrently@npm:^9.2.4":
   version: 9.2.4
   resolution: "concurrently@npm:9.2.4"
   dependencies:
@@ -4279,7 +4279,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^10.3.0":
+"eslint@npm:^10.8.0":
   version: 10.8.0
   resolution: "eslint@npm:10.8.0"
   dependencies:
@@ -6366,6 +6366,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nanoid@npm:^3.3.17":
+  version: 3.3.17
+  resolution: "nanoid@npm:3.3.17"
+  bin:
+    nanoid: bin/nanoid.cjs
+  checksum: 10c0/06f7949c7cce5c92c6aea66022f29a1eae7f56e05acbfddf1e049e819b4bf234c44a765cc44da7163482b111677948514012e27acdfa56f95309295768bdae32
+  languageName: node
+  linkType: hard
+
 "natural-compare@npm:^1.4.0":
   version: 1.4.0
   resolution: "natural-compare@npm:1.4.0"
@@ -7428,7 +7437,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.2.15, postcss@npm:^8.4.47, postcss@npm:^8.5.14, postcss@npm:^8.5.16":
+"postcss@npm:^8.2.15, postcss@npm:^8.4.47, postcss@npm:^8.5.16":
   version: 8.5.25
   resolution: "postcss@npm:8.5.25"
   dependencies:
@@ -7436,6 +7445,17 @@ __metadata:
     picocolors: "npm:^1.1.1"
     source-map-js: "npm:^1.2.1"
   checksum: 10c0/0a12c1e74b456c57122e81f684e02fd98ff4d57526f794d10c996df1147158808f5ae373ac82b988c8de6cbbaa82dbd7b13803b14f5dd3cf7cc6a42ccad5c9f2
+  languageName: node
+  linkType: hard
+
+"postcss@npm:^8.5.26":
+  version: 8.5.26
+  resolution: "postcss@npm:8.5.26"
+  dependencies:
+    nanoid: "npm:^3.3.17"
+    picocolors: "npm:^1.1.1"
+    source-map-js: "npm:^1.2.1"
+  checksum: 10c0/2bdafc00d96bd57b6649a52e458864a4bf58ee56cfdbe4aea1472b5cccc127e6c1ad653bd0bec50d211e650eb0b9270c80e1e72aff2e2fa40d9e7363234d6e43
   languageName: node
   linkType: hard
 
@@ -8567,7 +8587,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-scss@npm:^7.0.0, stylelint-scss@npm:^7.1.1":
+"stylelint-scss@npm:^7.0.0, stylelint-scss@npm:^7.2.0":
   version: 7.2.0
   resolution: "stylelint-scss@npm:7.2.0"
   dependencies:
@@ -8588,7 +8608,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint@npm:^17.11.1":
+"stylelint@npm:^17.14.1":
   version: 17.14.1
   resolution: "stylelint@npm:17.14.1"
   dependencies:
