@@ -33,22 +33,30 @@ h6 {
 
 /* Heading styles */
 .divider-gold {
-    @apply relative overflow-hidden;
+    @apply border-b-2 border-gold pb-2;
 
-    &::after {
-        content: "";
+    @screen lg {
+        @apply relative overflow-hidden border-0 pb-0;
 
-        @apply absolute inline w-full h-0.5 ml-4 top-[60%] bottom-auto bg-gold;
+        &::after {
+            content: "";
+
+            @apply absolute inline w-full h-0.5 ml-4 top-[60%] bottom-auto bg-gold;
+        }
     }
 }
 
 .divider-green {
-    @apply relative overflow-hidden mb-2;
+    @apply border-b-2 border-green pb-2;
 
-    &::after {
-        content: "";
+    @screen lg {
+        @apply relative overflow-hidden mb-2;
 
-        @apply absolute inline w-full h-0.5 ml-4 top-[60%] bottom-auto bg-green;
+        &::after {
+            content: "";
+
+            @apply absolute inline w-full h-0.5 ml-4 top-[60%] bottom-auto bg-green;
+        }
     }
 }
 
