@@ -80,11 +80,6 @@
         a {
             @apply no-underline border-b border-green;
         }
-
-        /* Prevent users from having gold text */
-        &.text-gold {
-            @apply text-black;
-        }
     }
 
     a:hover,
