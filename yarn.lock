@@ -2675,7 +2675,7 @@ __metadata:
     browser-sync-webpack-plugin: "npm:^2.4.0"
     concurrently: "npm:^9.2.4"
     copy-webpack-plugin: "npm:^14.0.0"
-    eslint: "npm:^10.8.0"
+    eslint: "npm:^10.9.0"
     eslint-webpack-plugin: "npm:^6.0.0"
     flickity: "npm:^2.3.0"
     intersection-observer: "npm:^0.12.2"
@@ -4279,9 +4279,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^10.8.0":
-  version: 10.8.0
-  resolution: "eslint@npm:10.8.0"
+"eslint@npm:^10.9.0":
+  version: 10.9.0
+  resolution: "eslint@npm:10.9.0"
   dependencies:
     "@eslint-community/eslint-utils": "npm:^4.8.0"
     "@eslint-community/regexpp": "npm:^4.12.2"
@@ -4320,7 +4320,7 @@ __metadata:
       optional: true
   bin:
     eslint: bin/eslint.js
-  checksum: 10c0/2dbc523578834088615f388e08418d2620b25655f7a398f6d415765fa2a3a25d6b8b43bd3293d40f977e12752323a841d52654a2648697a00c0102c9794bb3dc
+  checksum: 10c0/bc6c9f4a5c0b97e37ab1aa1753ae30ad5b0cf43a25ca3dcfff937f2b47243654c3ca34e37f71006474a3c1b95d6d4e046149facc6d66af4af6e993a619c23509
   languageName: node
   linkType: hard
 
