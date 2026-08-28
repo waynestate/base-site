@@ -1095,4 +1095,95 @@ final class ModularPageRepositoryTest extends TestCase
             $repository->fullyQualifiedUrl('https://wayne.edu/apply', config('app.url'))
         );
     }
+
+    #[Test]
+    public function get_modular_page_components_with_container_class(): void
+    {
+        // Create a fake data request with custom containerClass
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'ChildpageController',
+            ],
+            'data' => [
+                'modular-page-content' => json_encode([
+                    'containerClass' => 'custom-container-class',
+                ]),
+            ],
+        ]);
+
+        // Run through repository
+        $components = app(ModularPageRepository::class)->getModularComponents($data);
+
+        $this->assertStringContainsString('custom-container-class', $components['page-content']['component']['containerClass']);
+        $this->assertStringStartsNotWith(' ', $components['page-content']['component']['containerClass']);
+    }
+
+    #[Test]
+    public function get_modular_page_components_with_background_class(): void
+    {
+        // Create a fake data request with custom backgroundClass
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'ChildpageController',
+            ],
+            'data' => [
+                'modular-page-content' => json_encode([
+                    'backgroundClass' => 'custom-background-class',
+                ]),
+            ],
+        ]);
+
+        // Run through repository
+        $components = app(ModularPageRepository::class)->getModularComponents($data);
+
+        $this->assertStringContainsString('custom-background-class', $components['page-content']['component']['backgroundClass']);
+        $this->assertStringStartsNotWith(' ', $components['page-content']['component']['backgroundClass']);
+    }
+
+    #[Test]
+    public function get_modular_page_components_with_component_class(): void
+    {
+        // Create a fake data request with custom componentClass
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'ChildpageController',
+            ],
+            'data' => [
+                'modular-page-content' => json_encode([
+                    'componentClass' => 'custom-component-class',
+                ]),
+            ],
+        ]);
+
+        // Run through repository
+        $components = app(ModularPageRepository::class)->getModularComponents($data);
+
+        $this->assertStringContainsString('custom-component-class', $components['page-content']['component']['componentClass']);
+        $this->assertStringStartsNotWith(' ', $components['page-content']['component']['componentClass']);
+    }
+
+    #[Test]
+    public function get_modular_page_components_with_all_custom_classes(): void
+    {
+        // Create a fake data request with containerClass, backgroundClass, and componentClass
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'ChildpageController',
+            ],
+            'data' => [
+                'modular-page-content' => json_encode([
+                    'containerClass' => 'custom-container-class',
+                    'backgroundClass' => 'custom-background-class',
+                    'componentClass' => 'custom-component-class',
+                ]),
+            ],
+        ]);
+
+        // Run through repository
+        $components = app(ModularPageRepository::class)->getModularComponents($data);
+
+        $this->assertStringContainsString('custom-container-class', $components['page-content']['component']['containerClass']);
+        $this->assertStringContainsString('custom-background-class', $components['page-content']['component']['backgroundClass']);
+        $this->assertStringContainsString('custom-component-class', $components['page-content']['component']['componentClass']);
+    }
 }
