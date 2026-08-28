@@ -395,4 +395,16 @@ final class DataTest extends TestCase
             $this->assertFalse($request->data['base']['show_header']);
         });
     }
+
+    #[Test]
+    public function path_with_dot_should_abort_404(): void
+    {
+        $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
+
+        $request = new Request();
+        $request = $request->create('path/to/image.jpg');
+
+        app(Data::class)->handle($request, function () {
+        });
+    }
 }
