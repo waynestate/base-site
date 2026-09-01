@@ -307,6 +307,8 @@ shopt -s expand_aliases
 source ~/.bashrc
 echo "Clearing view cache"
 php84 {{ $release_dir }}/{{ $release }}/artisan view:clear
+echo "Pre-compiling view cache...";
+php84 {{ $release_dir }}/{{ $release }}/artisan view:cache
 echo "Caching configs...";
 php84 {{ $release_dir }}/{{ $release }}/artisan config:cache
 echo "Caching routes...";

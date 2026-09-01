@@ -34,10 +34,10 @@ composerinstall: $(COMPOSERFILE)
 	composer update --lock --prefer-dist --no-interaction
 
 composerinstalldev: $(COMPOSERFILE)
-	composer install --prefer-dist --no-interaction && composer dump-autoload --optimize;
+	composer install --prefer-dist --optimize-autoloader --no-interaction
 
 composerinstallproduction: $(COMPOSERFILE)
-	composer install --prefer-dist --no-dev --no-interaction && composer dump-autoload --optimize;
+	composer install --prefer-dist --no-dev --optimize-autoloader --classmap-authoritative --no-interaction
 
 webpackdev: $(MIXFILE)
 	npm run development

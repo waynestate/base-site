@@ -115,4 +115,44 @@ final class FiltersExpiredItemsTest extends TestCase
         $this->assertCount(2, $filtered);
         $this->assertEquals(['Active', 'Evergreen'], collect($filtered)->pluck('title')->values()->toArray());
     }
+
+    #[Test]
+    public function filter_expired_items_skips_non_array_entries(): void
+    {
+        $items = [
+            'invalid_item',
+            null,
+            123,
+            ['title' => 'Active', 'end_date' => now()->addDays(1)->format('Y-m-d H:i:s')],
+        ];
+
+        $filtered = $this->subject()->filterExpiredItems($items, ['end_date']);
+
+        $this->assertCount(1, $filtered);
+        $this->assertEquals(['Active'], collect($filtered)->pluck('title')->values()->toArray());
+    }
+
+    #[Test]
+    public function parse_expiry_timestamp_returns_null_for_empty_or_non_string_values(): void
+    {
+        $this->assertNull($this->subject()->parseExpiryTimestamp(null));
+        $this->assertNull($this->subject()->parseExpiryTimestamp(''));
+        $this->assertNull($this->subject()->parseExpiryTimestamp(0));
+        $this->assertNull($this->subject()->parseExpiryTimestamp(12345));
+        $this->assertNull($this->subject()->parseExpiryTimestamp(['2026-01-01']));
+        $this->assertNull($this->subject()->parseExpiryTimestamp(false));
+        $this->assertNull($this->subject()->parseExpiryTimestamp(true));
+    }
+
+    #[Test]
+    public function parse_expiry_timestamp_parses_date_only_and_datetime_strings(): void
+    {
+        $dateOnly = '2026-09-01';
+        $expectedDateOnly = strtotime('2026-09-01 23:59:59');
+        $this->assertSame($expectedDateOnly, $this->subject()->parseExpiryTimestamp($dateOnly));
+
+        $dateTime = '2026-09-01 12:00:00';
+        $expectedDateTime = strtotime($dateTime);
+        $this->assertSame($expectedDateTime, $this->subject()->parseExpiryTimestamp($dateTime));
+    }
 }
