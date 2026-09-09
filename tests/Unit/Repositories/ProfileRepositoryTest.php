@@ -257,6 +257,132 @@ final class ProfileRepositoryTest extends TestCase
     }
 
     #[Test]
+    public function getting_profiles_with_missing_pictures_should_fill_them_in_from_batch_endpoint_when_use_global_image_is_enabled(): void
+    {
+        Config::set('base.profile.use_global_image', true);
+
+        // Fake return with the picture missing from one profile
+        $return = app(Profile::class)->create(3);
+        $missing_id = array_key_first($return);
+        $return[$missing_id]['data']['Picture'] = '';
+        $access_id = $return[$missing_id]['data']['AccessID'];
+
+        $batch_return = [
+            $missing_id => ['data' => ['Picture' => ['url' => '/global/picture.jpg']]],
+        ];
+
+        // Mock the Connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('profile.users.listing', Mockery::type('array'))->once()->andReturn($return);
+        $wsuApi->shouldReceive('sendRequest')->with('profile.users.batch', Mockery::on(function ($params) use ($access_id) {
+            return in_array($access_id, $params['accessids']);
+        }))->once()->andReturn($batch_return);
+        $wsuApi->shouldReceive('nextRequestProduction')->twice();
+
+        $profiles = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getProfiles($this->faker->numberBetween(1, 10));
+
+        $this->assertEquals(['url' => '/global/picture.jpg'], $profiles['profiles'][$missing_id]['data']['Picture']);
+    }
+
+    #[Test]
+    public function getting_profiles_with_all_pictures_present_should_not_call_batch_endpoint(): void
+    {
+        Config::set('base.profile.use_global_image', true);
+
+        // Fake return where every profile already has a picture
+        $return = app(Profile::class)->create(3);
+
+        // Mock the Connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('profile.users.listing', Mockery::type('array'))->once()->andReturn($return);
+        $wsuApi->shouldReceive('sendRequest')->with('profile.users.batch', Mockery::any())->never();
+        $wsuApi->shouldReceive('nextRequestProduction')->once();
+
+        app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getProfiles($this->faker->numberBetween(1, 10));
+    }
+
+    #[Test]
+    public function getting_profiles_with_missing_pictures_should_not_call_batch_endpoint_when_use_global_image_is_disabled(): void
+    {
+        Config::set('base.profile.use_global_image', false);
+
+        // Fake return with the picture missing from one profile
+        $return = app(Profile::class)->create(3);
+        $missing_id = array_key_first($return);
+        $return[$missing_id]['data']['Picture'] = '';
+
+        // Mock the Connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('profile.users.listing', Mockery::type('array'))->once()->andReturn($return);
+        $wsuApi->shouldReceive('sendRequest')->with('profile.users.batch', Mockery::any())->never();
+        $wsuApi->shouldReceive('nextRequestProduction')->once();
+
+        $profiles = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getProfiles($this->faker->numberBetween(1, 10));
+
+        $this->assertEquals('', $profiles['profiles'][$missing_id]['data']['Picture']);
+    }
+
+    #[Test]
+    public function getting_profile_with_missing_picture_should_fill_it_in_from_batch_endpoint_when_use_global_image_is_enabled(): void
+    {
+        Config::set('base.profile.use_global_image', true);
+
+        $site_id = $this->faker->numberBetween(1, 10);
+        $accessid = $this->faker->word();
+
+        $profile = app(Profile::class)->create(1, true);
+        $profile['data']['AccessID'] = $accessid;
+        $profile['data']['Picture'] = '';
+
+        $return = [
+            'profiles' => [$site_id => $profile],
+            'courses' => [],
+        ];
+
+        $batch_return = [
+            $site_id => ['data' => ['Picture' => ['url' => '/global/picture.jpg']]],
+        ];
+
+        // Mock the Connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('profile.users.view', Mockery::type('array'))->once()->andReturn($return);
+        $wsuApi->shouldReceive('sendRequest')->with('profile.users.batch', Mockery::type('array'))->once()->andReturn($batch_return);
+        $wsuApi->shouldReceive('nextRequestProduction')->twice();
+
+        $result = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getProfile($site_id, $accessid);
+
+        $this->assertEquals(['url' => '/global/picture.jpg'], $result['profile']['data']['Picture']);
+    }
+
+    #[Test]
+    public function getting_profile_with_missing_picture_should_not_call_batch_endpoint_when_use_global_image_is_disabled(): void
+    {
+        Config::set('base.profile.use_global_image', false);
+
+        $site_id = $this->faker->numberBetween(1, 10);
+        $accessid = $this->faker->word();
+
+        $profile = app(Profile::class)->create(1, true);
+        $profile['data']['AccessID'] = $accessid;
+        $profile['data']['Picture'] = '';
+
+        $return = [
+            'profiles' => [$site_id => $profile],
+            'courses' => [],
+        ];
+
+        // Mock the Connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('profile.users.view', Mockery::type('array'))->once()->andReturn($return);
+        $wsuApi->shouldReceive('sendRequest')->with('profile.users.batch', Mockery::any())->never();
+        $wsuApi->shouldReceive('nextRequestProduction')->once();
+
+        $result = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getProfile($site_id, $accessid);
+
+        $this->assertEquals('', $result['profile']['data']['Picture']);
+    }
+
+    #[Test]
     public function getting_profile_group_ids_should_return_correct_string(): void
     {
         // Fake a dropdown array of group_id => group name
@@ -463,6 +589,27 @@ final class ProfileRepositoryTest extends TestCase
 
         $this->assertEquals($site_id, config('base.profile.site_id'));
         $this->assertEquals($group_id, config('base.profile.group_id'));
+    }
+
+    #[Test]
+    public function get_profile_config_should_set_use_global_image_from_json_config(): void
+    {
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'ProfileController',
+            ],
+            'data' => [
+                'profile-config' => json_encode([
+                    'use_global_image' => true,
+                ]),
+            ],
+        ]);
+
+        $wsuApi = Mockery::mock(Connector::class);
+
+        app(ProfileRepository::class, ['wsuApi' => $wsuApi])->parseProfileConfig($data);
+
+        $this->assertTrue(config('base.profile.use_global_image'));
     }
 
     #[Test]

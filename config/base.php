@@ -370,6 +370,18 @@ $global_config = [
         |
         */
         'table_of_contents' => null,
+
+        /*
+        |--------------------------------------------------------------------------
+        | Use Global Image
+        |--------------------------------------------------------------------------
+        |
+        | When true, any profile missing a picture will fall back to the latest
+        | picture found for that AccessID from any site via the batch profile
+        | image endpoint.
+        |
+        */
+        'use_global_image' => false,
     ],
     /*
     |--------------------------------------------------------------------------

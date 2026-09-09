@@ -37,7 +37,7 @@ class ContactTables extends Page
 "group_id":"1234,5678",
 "parent_group_id":"1234",
 "table_of_contents":"hide",
-"default_back_url":"/profiles/",
+"default_back_url":"/profiles/"
 }
 </pre>
                                 </td>
