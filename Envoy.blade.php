@@ -180,6 +180,7 @@ fi
 @endtask
 
 @task('updaterepo_localsrc', ['on' => 'local'])
+    set -e;
     echo "LocalSource Repository update...";
     if [ ! {{ $release_current }} ]; then
         if [ -d {{ $localdeploy_source_dir }}/.git ]; then
@@ -188,6 +189,9 @@ fi
             [ -d {{ $localdeploy_source_dir }}/public/_resources ] && rm -rf {{ $localdeploy_source_dir }}/public/_resources
             cd {{ $localdeploy_source_dir }};
             git fetch origin;
+            echo "Discarding any local changes left over from a previous build...";
+            git reset --hard HEAD;
+            git clean -fd;
             git checkout -B {{ $branch }} origin/{{ $branch }};
             git pull origin {{ $branch }};
         else
@@ -199,6 +203,7 @@ fi
 @endtask
 
 @task('depsinstall_localsrc', ['on' => 'local'])
+    set -e;
     if [ ! {{ $release_current }} ]; then
         echo "LocalSource Dependencies install...";
         cd {{ $localdeploy_source_dir }};
@@ -227,6 +232,7 @@ fi
 @endtask
 
 @task('packrelease_localsrc', ['on' => 'local'])
+    set -e;
     if [ ! {{ $release_current }} ]; then
         echo "LocalSource Pack release...";
         [ -f {{ $localdeploy_tmp_dir }}/release_{{ $release_hash }}.tgz ] && rm -rf {{ $localdeploy_tmp_dir }}/release_{{ $release_hash }}.tgz;
