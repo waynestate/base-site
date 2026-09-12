@@ -327,7 +327,7 @@ class ProfileRepository implements ProfileRepositoryContract
     {
         return [
             // Show under the profile image
-            'contact_fields' => [
+            'contact_fields' => config('base.profile.contact_fields', [
                 'Curriculum Vitae',
                 'Syllabi',
                 'Phone',
@@ -335,19 +335,19 @@ class ProfileRepository implements ProfileRepositoryContract
                 'Email',
                 'Office',
                 'Website',
-            ],
+            ]),
             // Fields that should be displayed as a URL
-            'url_fields' => [
+            'url_fields' => config('base.profile.url_fields', [
                 'Website',
-            ],
+            ]),
             // Show under the profile images contact fields
-            'file_fields' => [
+            'file_fields' => config('base.profile.file_fields', [
                 'Curriculum Vitae',
                 'Syllabi',
                 'Youtube Videos',
-            ],
+            ]),
             // Hide these in the main tube of content
-            'hidden_fields' => [
+            'hidden_fields' => config('base.profile.hidden_fields', [
                 'Title',
                 'AccessID',
                 'Suffix',
@@ -358,15 +358,15 @@ class ProfileRepository implements ProfileRepositoryContract
                 'Picture',
                 'Photo Download',
                 'Youtube Videos',
-            ],
+            ]),
             // Build the users name based on these fields
-            'name_fields' => [
+            'name_fields' => config('base.profile.name_fields', [
                 'Honorific',
                 'First Name',
                 'Middle name',
                 'Last Name',
                 'Suffix',
-            ],
+            ]),
         ];
     }
 

@@ -38,10 +38,12 @@ class Profiles extends Page
 "table_of_contents":"hide",
 "default_back_url":"/profiles",
 "profiles_by_accessid":"aa0000,aa0001",
-"use_global_image": false
+"use_global_image": false,
+"listing_fields": ["Title", "Department", "Email"]
 }
 </pre>
 <p>Setting <code>use_global_image</code> to <code>true</code> will try to use ANY profile image available for the user for missing pictures.</p>
+<p>Setting <code>listing_fields</code> specifies which profile fields to display under each name (defaults to Title).</p>
                                 </td>
                             </tr>
                         </tbody>
