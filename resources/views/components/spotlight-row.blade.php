@@ -25,11 +25,13 @@
                 </div>
 
                 <div class="w-full flex items-center lg:items-start gap-x-2 mb-4 lg:mb-2">
-                    <div class="w-20 lg:w-1/4 lg:absolute top-0 right-0 shrink-0">
-                        <div class="rounded-full overflow-hidden w-full pt-full relative">
-                            @image($item['relative_url'], $item['filename_alt_text'], 'block inset-0 absolute z-10 w-full h-full object-cover')
+                    @if (!empty($item['relative_url']))
+                        <div class="w-20 lg:w-1/4 lg:absolute top-0 right-0 shrink-0">
+                            <div class="rounded-full overflow-hidden w-full pt-full relative">
+                                @image($item['relative_url'], $item['filename_alt_text'], 'block inset-0 absolute z-10 w-full h-full object-cover')
+                            </div>
                         </div>
-                    </div>
+                    @endif
                     <cite class="not-italic">
                         <span id="{{ $titleId }}" class="block font-bold mb-0 text-lg xl:text-xl group-hover:underline">{{ $item['title'] }}</span>
                         @if(!empty($item['description']) && !empty($item['excerpt']) && !empty($component['showDescription']) && $component['showDescription'] === true)
@@ -38,9 +40,11 @@
                     </cite>
                 </div>
             </div>
-             <div class="hidden lg:block shrink-0 grow-0 w-1/4">
-                <div class="w-full pt-full">{{-- Absolute-positioned image placeholder --}}</div>
-            </div>
+            @if (!empty($item['relative_url']))
+                <div class="hidden lg:block shrink-0 grow-0 w-1/4">
+                    <div class="w-full pt-full">{{-- Absolute-positioned image placeholder --}}</div>
+                </div>
+            @endif
         </blockquote>
     @if (!empty($item['link']))
         </a>
