@@ -59,7 +59,7 @@ class ComponentSpotlightController extends Controller
                             'Excerpt' => 'Main quote area by default. If component flag "showDescription" is set to true, excerpt can display underneath the name like a degree or job title. <br />
                             Accepts only these html entities: &ldquo; &rdquo; &lt;em&gt; &lt;strong&gt;',
                             'Description' => 'Can be used as the quote area if the component flag "showDescription" is set to true.',
-                            'Filename' => 'Primary promo image, 600x600px or any square size. Other sizes will be centered to fit in the circle.',
+                            'Filename' => 'Primary promo image, 600x600px or any square size. Other sizes will be centered to fit in the circle. (optional)',
                         ],
                     ],
                 ],
@@ -89,6 +89,31 @@ class ComponentSpotlightController extends Controller
                 ]),
                 'component' => [
                     'heading' => 'Spotlight row',
+                    'filename' => 'spotlight-row',
+                ],
+            ],
+            'spotlight-3' => [
+                'data' => app(Spotlight::class)->create(1, false, [
+                    'link' => '',
+                    'relative_url' => '',
+                    'filename_url' => '',
+                ]),
+                'component' => [
+                    'heading' => 'Spotlight column (without image)',
+                    'filename' => 'spotlight-column',
+                    'showDescription' => true,
+                    'classes' => 'mt:right-span-3',
+                ],
+            ],
+            'spotlight-4' => [
+                'data' => app(GenericPromo::class)->create(1, false, [
+                    'title' => $this->faker->name(),
+                    'excerpt' => '&ldquo;' . $this->faker->text(200) . '&rdquo;',
+                    'relative_url' => '',
+                    'filename_url' => '',
+                ]),
+                'component' => [
+                    'heading' => 'Spotlight row (without image)',
                     'filename' => 'spotlight-row',
                 ],
             ],
