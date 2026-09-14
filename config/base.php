@@ -382,6 +382,83 @@ $global_config = [
         |
         */
         'use_global_image' => false,
+
+        /*
+        |--------------------------------------------------------------------------
+        | Fields to display under each profile name in the listing view
+        |--------------------------------------------------------------------------
+        |
+        | List of profile fields to display under each profile name in the listing view. The
+        | fields should be an array of field names. If a field does not exist on a profile
+        | it will be skipped. If no fields are specified, the default fields will be used.
+        |
+        */
+        'listing_fields' => [
+            'Title',
+        ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Fields that should be displayed as a URL
+        |--------------------------------------------------------------------------
+        |
+        | List of profile fields that should be rendered as links with their
+        | value as the href.
+        |
+        */
+        'url_fields' => [
+            'Website',
+        ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Fields that should be displayed as file download links
+        |--------------------------------------------------------------------------
+        |
+        | List of profile fields that contain file arrays with a url property.
+        |
+        */
+        'file_fields' => [
+            'Curriculum Vitae',
+            'Syllabi',
+        ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Fields to display in the contact table view
+        |--------------------------------------------------------------------------
+        |
+        | List of profile fields to display as columns in the contact table view.
+        | The first column is always the person's name.
+        |
+        */
+        'table_fields' => [
+            'Title',
+            'Office',
+            'Phone',
+        ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Contact table name link destination
+        |--------------------------------------------------------------------------
+        |
+        | Destination for the name link in the first column of the contact table.
+        | Options: 'email' (default), 'profile', or 'none'.
+        |
+        */
+        'table_name_link' => 'email',
+
+        /*
+        |--------------------------------------------------------------------------
+        | Link name to individual profile view (promotions parity)
+        |--------------------------------------------------------------------------
+        |
+        | When true, links the person's name in contact tables to their profile view
+        | instead of their email address. Alias for 'table_name_link' => 'profile'.
+        |
+        */
+        'singleProfileView' => false,
     ],
     /*
     |--------------------------------------------------------------------------
