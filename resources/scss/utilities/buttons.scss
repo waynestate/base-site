@@ -1,0 +1,33 @@
+@mixin button-base {
+    @apply bg-gray-200 text-green-800 align-middle mb-2 px-4 py-2 rounded text-center text-sm font-bold inline-block transition-all leading-tight;
+
+    div {
+        @apply inline;
+    }
+
+    &:hover {
+        @apply bg-gray-100;
+    }
+}
+
+@mixin green-button-base {
+    @include button-base;
+
+    @apply bg-green text-white;
+
+    &:hover {
+        @apply bg-green-600;
+    }
+}
+
+@mixin gold-gradient-button-base {
+    @include button-base;
+
+    @apply bg-gold-200 text-green-800;
+
+    background-image: radial-gradient(200% 100% at 50% 100%, theme('colors.gold.500'), 50%, transparent 100%);
+
+    &:hover {
+        @apply bg-gold-100;
+    }
+}

@@ -1,3 +1,5 @@
+@use '../utilities/buttons';
+
 .flag__container {
     .flag {
         &__title {
@@ -14,7 +16,7 @@
         @apply mx-4;
 
         .flag {
-            @extend .gold-gradient-button;
+            @include buttons.gold-gradient-button-base;
 
             @apply w-full font-normal mt:hidden;
         }
