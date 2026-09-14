@@ -394,7 +394,7 @@ $global_config = [
         |
         */
         'listing_fields' => [
-            'Title'
+            'Title',
         ],
 
         /*
@@ -430,8 +430,33 @@ $global_config = [
             'Syllabi',
             'File',
             'Photo download',
-            'Syllabi',
         ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Fields to display in the contact table view
+        |--------------------------------------------------------------------------
+        |
+        | List of profile fields to display as columns in the contact table view.
+        | The first column is always the person's name.
+        |
+        */
+        'table_fields' => [
+            'Title',
+            'Office',
+            'Phone',
+        ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Contact table name link destination
+        |--------------------------------------------------------------------------
+        |
+        | Destination for the name link in the first column of the contact table.
+        | Options: 'email' (default), 'profile', or 'none'.
+        |
+        */
+        'table_name_link' => 'email',
     ],
     /*
     |--------------------------------------------------------------------------
