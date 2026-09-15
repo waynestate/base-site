@@ -47,6 +47,20 @@ final class ProfileRepositoryTest extends TestCase
     }
 
     #[Test]
+    public function getting_fields_should_read_from_config(): void
+    {
+        config([
+            'base.profile.url_fields' => ['Custom URL Field'],
+            'base.profile.file_fields' => ['Custom File Field'],
+        ]);
+
+        $fields = app(ProfileRepository::class)->getFields();
+
+        $this->assertEquals(['Custom URL Field'], $fields['url_fields']);
+        $this->assertEquals(['Custom File Field'], $fields['file_fields']);
+    }
+
+    #[Test]
     public function getting_page_title_should_come_from_name(): void
     {
         $returnNameFields = [
@@ -610,6 +624,31 @@ final class ProfileRepositoryTest extends TestCase
         app(ProfileRepository::class, ['wsuApi' => $wsuApi])->parseProfileConfig($data);
 
         $this->assertTrue(config('base.profile.use_global_image'));
+    }
+
+    #[Test]
+    public function get_profile_config_should_set_custom_fields_from_json_config(): void
+    {
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'ProfileController',
+            ],
+            'data' => [
+                'profile-config' => json_encode([
+                    'listing_fields' => ['Title', 'Email', 'Website'],
+                    'url_fields' => ['Website', 'Lab'],
+                    'file_fields' => ['Curriculum Vitae', 'Syllabi'],
+                ]),
+            ],
+        ]);
+
+        $wsuApi = Mockery::mock(Connector::class);
+
+        app(ProfileRepository::class, ['wsuApi' => $wsuApi])->parseProfileConfig($data);
+
+        $this->assertEquals(['Title', 'Email', 'Website'], config('base.profile.listing_fields'));
+        $this->assertEquals(['Website', 'Lab'], config('base.profile.url_fields'));
+        $this->assertEquals(['Curriculum Vitae', 'Syllabi'], config('base.profile.file_fields'));
     }
 
     #[Test]
