@@ -1,0 +1,47 @@
+@use './colors.scss' as colors;
+
+@mixin button-base {
+    background-color: colors.$gray-200;
+    color: colors.$green-800;
+    vertical-align: middle;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    text-align: center;
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1.25;
+    display: inline-block;
+    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    div {
+        display: inline;
+    }
+
+    &:hover {
+        background-color: colors.$gray-100;
+    }
+}
+
+@mixin green-button-base {
+    @include button-base;
+
+    background-color: colors.$green;
+    color: colors.$white;
+
+    &:hover {
+        background-color: colors.$green-600;
+    }
+}
+
+@mixin gold-gradient-button-base {
+    @include button-base;
+
+    background-color: colors.$gold-200;
+    color: colors.$green-800;
+    background-image: radial-gradient(200% 100% at 50% 100%, colors.$gold-500, 50%, transparent 100%);
+
+    &:hover {
+        background-color: colors.$gold-100;
+    }
+}

@@ -1,3 +1,5 @@
+@use '../utilities/buttons';
+
 .formy {
     .row {
         @apply flex flex-wrap;
@@ -136,7 +138,7 @@
 
     /* The subit button */
     #formy-button {
-        @extend .button;
+        @include buttons.button-base;
     }
 
     .select #country,
