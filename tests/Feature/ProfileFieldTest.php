@@ -201,4 +201,41 @@ final class ProfileFieldTest extends TestCase
         $this->assertStringNotContainsString('<a href="mailto:', $parts[0]);
         $this->assertStringContainsString('<a href="mailto:anthony@wayne.edu">anthony@wayne.edu</a>', $rendered);
     }
+
+    #[Test]
+    public function empty_data_renders_nothing_even_with_tag(): void
+    {
+        $rendered = view('components.profile-field', [
+            'field' => 'Title',
+            'data' => '',
+            'tag' => 'p',
+        ])->render();
+
+        $this->assertEquals('', trim($rendered));
+    }
+
+    #[Test]
+    public function multi_value_field_filters_out_empty_items(): void
+    {
+        $rendered = view('components.profile-field', [
+            'field' => 'Email',
+            'data' => ['first@wayne.edu', '', null, 'second@wayne.edu'],
+            'tag' => 'p',
+        ])->render();
+
+        $this->assertStringContainsString('<a href="mailto:first@wayne.edu">first@wayne.edu</a>', $rendered);
+        $this->assertStringContainsString('<a href="mailto:second@wayne.edu">second@wayne.edu</a>', $rendered);
+        $this->assertEquals(2, substr_count($rendered, '<p>'));
+    }
+
+    #[Test]
+    public function omitted_data_renders_nothing_without_errors(): void
+    {
+        $rendered = view('components.profile-field', [
+            'field' => 'Title',
+            'tag' => 'p',
+        ])->render();
+
+        $this->assertEquals('', trim($rendered));
+    }
 }
