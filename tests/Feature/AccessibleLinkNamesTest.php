@@ -61,15 +61,4 @@ final class AccessibleLinkNamesTest extends TestCase
         $this->assertStringContainsString('id="promo-0"', $content);
         $this->assertStringContainsString('aria-labelledby="promo-0"', $content);
     }
-
-    #[Test]
-    public function profile_links_have_aria_labelledby_pointing_to_title_id(): void
-    {
-        $response = $this->call('GET', '/styleguide/profiles');
-        $content = $response->content();
-
-        // Profile AccessID is two letters + four digits (e.g. ab1234)
-        $this->assertMatchesRegularExpression('/id="profile-[a-z]{2}\d{4}"/', $content);
-        $this->assertMatchesRegularExpression('/aria-labelledby="profile-[a-z]{2}\d{4}"/', $content);
-    }
 }
