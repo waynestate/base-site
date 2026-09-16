@@ -452,6 +452,16 @@
                 "relative_url": "/styleguide/component/spotlight",
                 "submenu": []
             },
+            "120100": {
+                "menu_item_id": 120100,
+                "is_active": 1,
+                "page_id": 120100,
+                "target": "",
+                "display_name": "Listserv subscribe",
+                "class_name": "",
+                "relative_url": "/styleguide/component/listservsubscribe",
+                "submenu": []
+            },
             "99902": {
                 "menu_item_id": 99902,
                 "is_active": 1,
