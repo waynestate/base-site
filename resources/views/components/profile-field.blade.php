@@ -22,7 +22,7 @@
     @if ($field === 'Youtube Videos')
         <div class="{{ !empty($class) ? $class : 'pb-4' }}">
             @if ($link && !empty($item['link']))
-                <a href="{{ $item['link'] }}">@image('//i.wayne.edu/youtube/' . $item['youtube_id'], $item['filename_alt_text'], 'lazy')</a>
+                <a href="{{ html_entity_decode($item['link']) }}">@image('//i.wayne.edu/youtube/' . $item['youtube_id'], $item['filename_alt_text'], 'lazy')</a>
             @else
                 @image('//i.wayne.edu/youtube/' . $item['youtube_id'], $item['filename_alt_text'], 'lazy')
             @endif
@@ -33,7 +33,7 @@
         @endif
         @if (in_array($field, $fileFields) || (is_array($item) && isset($item['url'])))
             @if ($link && !empty($item['url']))
-                <a href="{{ $item['url'] }}">{{ $field }}</a>@else{{ $field }}
+                <a href="{{ html_entity_decode($item['url']) }}">{{ $field }}</a>@else{{ $field }}
             @endif
         @elseif($field === 'Email')
             @if ($link)
@@ -42,8 +42,9 @@
         @elseif($field === 'Fax')
             {!! strip_tags($item) !!} (fax)
         @elseif(in_array($field, $urlFields))
+            @php $url = html_entity_decode($item); @endphp
             @if ($link)
-                <a href="{{ $item }}">{{ $item }}</a>@else{{ $item }}
+                <a href="{{ $url }}">{{ $url }}</a>@else{{ $url }}
             @endif
         @else{!! strip_tags($item, '<br>') !!}
         @endif

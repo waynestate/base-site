@@ -238,4 +238,32 @@ final class ProfileFieldTest extends TestCase
 
         $this->assertEquals('', trim($rendered));
     }
+
+    #[Test]
+    public function url_field_decodes_html_entities_in_link(): void
+    {
+        config(['base.profile.url_fields' => ['Google Scholar URL']]);
+
+        $url = 'https://scholar.google.com/citations?user=abc&amp;hl=en';
+
+        $rendered = view('components.profile-field', [
+            'field' => 'Google Scholar URL',
+            'data' => $url,
+        ])->render();
+
+        $this->assertStringContainsString('href="https://scholar.google.com/citations?user=abc&amp;hl=en"', $rendered);
+        $this->assertStringNotContainsString('&amp;amp;', $rendered);
+    }
+
+    #[Test]
+    public function file_field_decodes_html_entities_in_link(): void
+    {
+        $rendered = view('components.profile-field', [
+            'field' => 'Curriculum Vitae',
+            'data' => ['url' => 'https://wayne.edu/cv.pdf?a=1&amp;b=2'],
+        ])->render();
+
+        $this->assertStringContainsString('href="https://wayne.edu/cv.pdf?a=1&amp;b=2"', $rendered);
+        $this->assertStringNotContainsString('&amp;amp;', $rendered);
+    }
 }
