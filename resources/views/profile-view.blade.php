@@ -13,43 +13,17 @@
 
             <div class="content">
                 @if(!empty($profile['data']['Title']))
-                    <p>{!! strip_tags($profile['data']['Title'], '<br>') !!}</p>
+                    @include('components.profile-field', ['field' => 'Title', 'data' => $profile['data']['Title'], 'tag' => 'p'])
                 @endif
 
                 @foreach($profile['data'] as $field=>$data)
                     @if(in_array($field, $contact_fields))
-                        @if(in_array($field, $file_fields))
-                            <p><a href="{{ $data['url'] }}">{{ $field }}</a></p>
-                        @else
-                            @if(is_array($data))
-                                @foreach($data as $value)
-                                    @if(in_array($field, $url_fields))
-                                        <p><a href="{{ $value }}">{{ $value }}</a></p>
-                                    @else
-                                        <p>{{ $value }}</p>
-                                    @endif
-                                @endforeach
-                            @else
-                                @if($field == 'Email')
-                                    <p><a href="mailto:{{ $data }}">{{ $data }}</a></p>
-                                @elseif($field == 'Fax')
-                                    <p>{!! strip_tags($data) !!} (fax)</p>
-                                @elseif(in_array($field, $url_fields))
-                                    <p><a href="{{ $data }}">{{ $data }}</a></p>
-                                @else
-                                    <p>{!! strip_tags($data) !!}</p>
-                                @endif
-                            @endif
-                        @endif
+                        @include('components.profile-field', ['field' => $field, 'data' => $data, 'tag' => 'p'])
                     @endif
                 @endforeach
 
                 @if(!empty($profile['data']['Youtube Videos']))
-                    @foreach ($profile['data']['Youtube Videos'] as $item)
-                        <div class="pb-4">
-                            @include('components.video-profile', ['video' =>  $item])
-                        </div>
-                    @endforeach
+                    @include('components.profile-field', ['field' => 'Youtube Videos', 'data' => $profile['data']['Youtube Videos']])
                 @endif
              </div>
         </div>

@@ -71,6 +71,11 @@ class ProfileRepository implements ProfileRepositoryContract
         // Make sure the return is an array
         $profiles['profiles'] = empty($profile_listing['error']) ? $profile_listing : [];
 
+        // Fall back to the batch faculty image endpoint for any profile missing a picture
+        if (config('base.profile.use_global_image') && !empty($profiles['profiles']) && $this->hasProfilesMissingPictures($profiles['profiles'])) {
+            $profiles = $this->getProfileImages($profiles);
+        }
+
         return $profiles;
     }
 
@@ -276,11 +281,19 @@ class ProfileRepository implements ProfileRepositoryContract
             $profiles['profiles']['articles'] = $this->getNewsArticles($accessid, 10);
         }
 
-        return [
+        $profile = [
             'profile' =>  Arr::get($profiles['profiles'], $site_id, []),
             'courses' => Arr::get($profiles, 'courses', []),
             'articles' => Arr::get($profiles['profiles'], 'articles', []),
         ];
+
+        // Fall back to the batch faculty image endpoint if this profile is missing a picture
+        if (config('base.profile.use_global_image') && !empty($profile['profile']['data']) && empty($profile['profile']['data']['Picture'])) {
+            $profile_images = $this->getProfileImages(['profiles' => [$site_id => $profile['profile']]]);
+            $profile['profile'] = $profile_images['profiles'][$site_id];
+        }
+
+        return $profile;
     }
 
     /**
@@ -314,7 +327,7 @@ class ProfileRepository implements ProfileRepositoryContract
     {
         return [
             // Show under the profile image
-            'contact_fields' => [
+            'contact_fields' => config('base.profile.contact_fields', [
                 'Curriculum Vitae',
                 'Syllabi',
                 'Phone',
@@ -322,19 +335,19 @@ class ProfileRepository implements ProfileRepositoryContract
                 'Email',
                 'Office',
                 'Website',
-            ],
+            ]),
             // Fields that should be displayed as a URL
-            'url_fields' => [
+            'url_fields' => config('base.profile.url_fields', [
                 'Website',
-            ],
+            ]),
             // Show under the profile images contact fields
-            'file_fields' => [
+            'file_fields' => config('base.profile.file_fields', [
                 'Curriculum Vitae',
                 'Syllabi',
                 'Youtube Videos',
-            ],
+            ]),
             // Hide these in the main tube of content
-            'hidden_fields' => [
+            'hidden_fields' => config('base.profile.hidden_fields', [
                 'Title',
                 'AccessID',
                 'Suffix',
@@ -345,15 +358,15 @@ class ProfileRepository implements ProfileRepositoryContract
                 'Picture',
                 'Photo Download',
                 'Youtube Videos',
-            ],
+            ]),
             // Build the users name based on these fields
-            'name_fields' => [
+            'name_fields' => config('base.profile.name_fields', [
                 'Honorific',
                 'First Name',
                 'Middle name',
                 'Last Name',
                 'Suffix',
-            ],
+            ]),
         ];
     }
 
@@ -478,6 +491,51 @@ class ProfileRepository implements ProfileRepositoryContract
         });
 
         return $profiles_ordered->merge($profiles_all)->toArray();
+    }
+
+    /**
+     * Determine if any profile in the collection is missing its picture.
+     *
+     * @param array $profiles
+     * @return bool
+     */
+    protected function hasProfilesMissingPictures(array $profiles): bool
+    {
+        return collect($profiles)->contains(function ($profile) {
+            return empty($profile['data']['Picture']);
+        });
+    }
+
+    /**
+     * Fill in missing profile pictures using the batch profile image endpoint.
+     *
+     * @param array $profiles
+     * @return array
+     */
+    protected function getProfileImages(array $profiles): array
+    {
+        $accessids = collect($profiles['profiles'])->map(function ($profile) {
+            return $profile['data']['AccessID'];
+        })->toArray();
+
+        $params = [
+            'method' => 'profile.users.batch',
+            'accessids' => $accessids,
+        ];
+
+        $profile_images = $this->rememberWithFallback($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+            $this->wsuApi->nextRequestProduction();
+
+            return $this->wsuApi->sendRequest($params['method'], $params);
+        });
+
+        foreach ($profiles['profiles'] as $id => $profile) {
+            if (empty($profile['data']['Picture']) && !empty($profile_images[$id]['data']['Picture'])) {
+                $profiles['profiles'][$id]['data']['Picture'] = $profile_images[$id]['data']['Picture'];
+            }
+        }
+
+        return $profiles;
     }
 
     /**

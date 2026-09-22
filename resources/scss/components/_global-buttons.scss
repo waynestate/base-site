@@ -1,13 +1,7 @@
+@use '../utilities/buttons';
+
 .button {
-    @apply bg-gray-200 text-green-800 align-middle mb-2 px-4 py-2 rounded text-center text-sm font-bold inline-block transition-all leading-tight;
-
-    div {
-        @apply inline;
-    }
-
-    &:hover {
-        @apply bg-gray-100;
-    }
+    @include buttons.button-base;
 }
 
 .button--icon-one-line {
@@ -39,23 +33,17 @@
 }
 
 .green-button {
-    @extend .button;
-
-    @apply bg-green text-white;
-
-    &:hover {
-        @apply bg-green-600;
-    }
+    @include buttons.green-button-base;
 }
 
 .green-gradient-button {
-    @extend .green-button;
+    @include buttons.green-button-base;
 
     background-image: radial-gradient(200% 100% at 50% 100%, theme('colors.green.700') 25%, transparent 100%);
 }
 
 .gold-button {
-    @extend .button;
+    @include buttons.button-base;
 
     @apply bg-gold text-green-800;
 
@@ -65,15 +53,7 @@
 }
 
 .gold-gradient-button {
-    @extend .button;
-
-    @apply bg-gold-200 text-green-800;
-
-    background-image: radial-gradient(200% 100% at 50% 100%, theme('colors.gold.500'), 50%, transparent 100%);
-
-    &:hover {
-        @apply bg-gold-100;
-    }
+    @include buttons.gold-gradient-button-base;
 }
 
 .content a[class*="button"] {

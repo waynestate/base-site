@@ -39,8 +39,12 @@ class ContactTablesNoTOC extends Page
 "parent_group_id":"1234",
 "table_of_contents":"hide",
 "default_back_url":"/profiles/",
+"table_fields": ["Title", "Office", "Phone"],
+"table_name_link": "email"
 }
 </pre>
+<p>Setting <code>table_fields</code> specifies which columns to display after the Name column (defaults to <code>["Title", "Office", "Phone"]</code>).</p>
+<p>Setting <code>table_name_link</code> configures the Name column link destination (<code>"email"</code>, <code>"profile"</code>, or <code>"none"</code>; defaults to <code>"email"</code>).</p>
                                 </td>
                             </tr>
                         </tbody>

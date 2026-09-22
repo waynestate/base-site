@@ -370,6 +370,93 @@ $global_config = [
         |
         */
         'table_of_contents' => null,
+
+        /*
+        |--------------------------------------------------------------------------
+        | Use Global Image
+        |--------------------------------------------------------------------------
+        |
+        | When true, any profile missing a picture will fall back to the latest
+        | picture found for that AccessID from any site via the batch profile
+        | image endpoint.
+        |
+        */
+        'use_global_image' => false,
+
+        /*
+        |--------------------------------------------------------------------------
+        | Fields to display under each profile name in the listing view
+        |--------------------------------------------------------------------------
+        |
+        | List of profile fields to display under each profile name in the listing view. The
+        | fields should be an array of field names. If a field does not exist on a profile
+        | it will be skipped. If no fields are specified, the default fields will be used.
+        |
+        */
+        'listing_fields' => [
+            'Title',
+        ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Fields that should be displayed as a URL
+        |--------------------------------------------------------------------------
+        |
+        | List of profile fields that should be rendered as links with their
+        | value as the href.
+        |
+        */
+        'url_fields' => [
+            'Website',
+            'Department URL',
+            'External profile URL',
+            'Full profile URL',
+            'Google Scholar URL',
+            'Homepage URL',
+            'Make an appointment',
+            'Scopus URL',
+        ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Fields that should be displayed as file download links
+        |--------------------------------------------------------------------------
+        |
+        | List of profile fields that contain file arrays with a url property.
+        |
+        */
+        'file_fields' => [
+            'Curriculum Vitae',
+            'Syllabi',
+            'File',
+            'Photo download',
+        ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Fields to display in the contact table view
+        |--------------------------------------------------------------------------
+        |
+        | List of profile fields to display as columns in the contact table view.
+        | The first column is always the person's name.
+        |
+        */
+        'table_fields' => [
+            'Title',
+            'Office',
+            'Phone',
+        ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Contact table name link destination
+        |--------------------------------------------------------------------------
+        |
+        | Destination for the name link in the first column of the contact table.
+        | Options: 'email' (default), 'profile', or 'none'.
+        |
+        */
+        'table_name_link' => 'email',
     ],
     /*
     |--------------------------------------------------------------------------

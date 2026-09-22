@@ -521,13 +521,25 @@ class ModularPageRepository implements ModularPageRepositoryContract
     {
         foreach ($components as $componentName => $component) {
             // Establishing final arrays so they will always exist
-            $components[$componentName]['component']['containerClass'] = $component['component']['containerClass'] ?? [];
-            $components[$componentName]['component']['backgroundClass'] = $component['component']['backgroundClass'] ?? [];
-            $components[$componentName]['component']['componentClass'] = $component['component']['componentClass'] ?? [];
+            $components[$componentName]['component']['containerClass'] = [];
+            $components[$componentName]['component']['backgroundClass'] = [];
+            $components[$componentName]['component']['componentClass'] = [];
+
+            if (!empty($component['component']['containerClass'])) {
+                array_push($components[$componentName]['component']['containerClass'], $component['component']['containerClass']);
+            }
+
+            if (!empty($component['component']['backgroundClass'])) {
+                array_push($components[$componentName]['component']['backgroundClass'], $component['component']['backgroundClass']);
+            }
+
+            if (!empty($component['component']['componentClass'])) {
+                array_push($components[$componentName]['component']['componentClass'], $component['component']['componentClass']);
+            }
 
             // containerClass => filename
             if (!empty($component['component']['filename'])) {
-                $components[$componentName]['component']['containerClass'][] = $component['component']['filename'];
+                array_push($components[$componentName]['component']['containerClass'], $component['component']['filename']);
             }
 
             // containerClass => columnSpan
@@ -540,7 +552,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
                     array_push($components[$componentName]['component']['containerClass'], 'px-4', 'mt:colspan-6');
                 } else {
                     // Default width
-                    $components[$componentName]['component']['containerClass'][] = 'px-container';
+                    array_push($components[$componentName]['component']['containerClass'], 'px-container');
                 }
             }
 
@@ -566,7 +578,7 @@ class ModularPageRepository implements ModularPageRepositoryContract
                         strpos($class, 'order-') !== false
                     ) {
                         // containerClass
-                        $components[$componentName]['component']['containerClass'][] = $class;
+                        array_push($components[$componentName]['component']['containerClass'], $class);
                     } else {
                         // componentClass
                         $components[$componentName]['component']['componentClass'][] = $class;
@@ -582,16 +594,16 @@ class ModularPageRepository implements ModularPageRepositoryContract
             // Section gutters, bottom padding
             // - No gutter if component uses margin-bottom class
             // - No gutter on heading component
-            if (empty(preg_grep('/mb-/', $components[$componentName]['component']['containerClass']))
+            if (!empty($components[$componentName]['component']['containerClass']) && empty(preg_grep('/mb-/', $components[$componentName]['component']['containerClass']))
                 && !Str::contains($componentName, 'heading') && !Str::contains($componentName, 'hero')
             ) {
-                $components[$componentName]['component']['containerClass'][] = 'mb-gutter';
+                array_push($components[$componentName]['component']['containerClass'], 'mb-gutter');
             }
 
             // Implode party, assign all classes to their respective container
-            $components[$componentName]['component']['containerClass'] = implode(' ', $components[$componentName]['component']['containerClass']);
-            $components[$componentName]['component']['backgroundClass'] = implode(' ', $components[$componentName]['component']['backgroundClass']);
-            $components[$componentName]['component']['componentClass'] = implode(' ', $components[$componentName]['component']['componentClass']);
+            $components[$componentName]['component']['containerClass'] = is_array($components[$componentName]['component']['containerClass']) ? trim(implode(' ', $components[$componentName]['component']['containerClass'])) : '';
+            $components[$componentName]['component']['backgroundClass'] = is_array($components[$componentName]['component']['backgroundClass']) ? trim(implode(' ', $components[$componentName]['component']['backgroundClass'])) : '';
+            $components[$componentName]['component']['componentClass'] = is_array($components[$componentName]['component']['componentClass']) ? trim(implode(' ', $components[$componentName]['component']['componentClass'])) : '';
         }
 
         return $components;

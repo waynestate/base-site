@@ -19,24 +19,40 @@
 
     <div class="content">
         @if(!empty($profiles))
+            @php
+                $tableFields = config('base.profile.table_fields');
+                $tableNameLink = config('base.profile.table_name_link');
+            @endphp
             @foreach($profiles as $group=>$profile_list)
                 <h2 @if(!empty($anchors)) id="{{$anchors[$group]}}" @endif>{{$group}}</h2>
-                <table class="table-stack">
+                <table class="table-stack md:table-fixed w-full">
                     <thead>
                     <tr>
                         <th class="w-48">Name</th>
-                        <th>Title</th>
-                        <th class="w-40">Office</th>
-                        <th class="w-40">Phone</th>
+                        @foreach($tableFields as $field)
+                            <th{!! !$loop->first ? ' class="w-40"' : '' !!}>{{ $field }}</th>
+                        @endforeach
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($profile_list as $profile)
                         <tr>
-                            <td>@if(isset($profile['data']['Email']))<a href="mailto:{{$profile['data']['Email']}}">@endif{{$profile['full_name']}}@if(isset($profile['data']['Email']))</a>@endif</td>
-                            <td>@if(isset($profile['data']['Title'])){{$profile['data']['Title']}}@endif</td>
-                            <td>@if(isset($profile['data']['Office Location'])){{$profile['data']['Office Location']}}@endif</td>
-                            <td>@if(isset($profile['data']['Phone'])){{$profile['data']['Phone']}}@endif</td>
+                            <td>
+                                @if($tableNameLink === 'profile' && !empty($profile['link']))
+                                    <a href="{{ $profile['link'] }}">{{ $profile['full_name'] }}</a>
+                                @elseif($tableNameLink !== 'none' && !empty($profile['data']['Email']))
+                                    <a href="mailto:{{ $profile['data']['Email'] }}">{{ $profile['full_name'] }}</a>
+                                @else
+                                    {{ $profile['full_name'] }}
+                                @endif
+                            </td>
+                            @foreach($tableFields as $field)
+                                <td>
+                                    @if(!empty($profile['data'][$field]))
+                                        @include('components.profile-field', ['field' => $field, 'data' => $profile['data'][$field]])
+                                    @endif
+                                </td>
+                            @endforeach
                         </tr>
                     @endforeach
                     </tbody>

@@ -2,9 +2,6 @@
 
 namespace App\Traits;
 
-use Carbon\Carbon;
-use Throwable;
-
 trait FiltersExpiredItems
 {
     /**
@@ -14,17 +11,24 @@ trait FiltersExpiredItems
      */
     public function isExpired(array $item, array $fields, bool $useEarliest = true): bool
     {
-        $dates = collect($fields)
-            ->map(fn ($field) => $this->parseExpiryDate($item[$field] ?? null))
-            ->filter();
+        $timestamps = [];
 
-        if ($dates->isEmpty()) {
+        foreach ($fields as $field) {
+            if (!empty($item[$field])) {
+                $ts = $this->parseExpiryTimestamp($item[$field]);
+                if ($ts !== null) {
+                    $timestamps[] = $ts;
+                }
+            }
+        }
+
+        if (empty($timestamps)) {
             return false;
         }
 
-        $boundary = $useEarliest ? $dates->min() : $dates->max();
+        $boundary = $useEarliest ? min($timestamps) : max($timestamps);
 
-        return $boundary->isPast();
+        return $boundary < time();
     }
 
     /**
@@ -32,33 +36,42 @@ trait FiltersExpiredItems
      */
     public function filterExpiredItems(array $items, array $fields, bool $useEarliest = true): array
     {
-        return collect($items)
-            ->reject(fn ($item) => $this->isExpired($item, $fields, $useEarliest))
-            ->toArray();
+        $filtered = [];
+
+        foreach ($items as $key => $item) {
+            if (is_array($item) && !$this->isExpired($item, $fields, $useEarliest)) {
+                $filtered[$key] = $item;
+            }
+        }
+
+        return $filtered;
     }
 
     /**
-     * Parse a date field, treating empty strings, the '0000-00-00...' sentinel,
-     * and unparseable values as "not set" (never expires on that field alone).
+     * Parse a date field to a Unix timestamp integer, treating empty strings,
+     * the '0000-00-00...' sentinel, and unparseable values as null ("not set").
      * Date-only values (no time component) represent the whole day, so expiry
-     * is evaluated against the end of that day rather than its start.
+     * is evaluated against the end of that day (23:59:59) rather than its start.
      */
-    private function parseExpiryDate($value): ?Carbon
+    public function parseExpiryTimestamp(mixed $value): ?int
     {
-        if (empty($value) || !is_string($value) || str_starts_with(trim($value), '0000-00-00')) {
+        if (empty($value) || !is_string($value)) {
             return null;
         }
 
-        try {
-            $date = Carbon::parse($value);
-        } catch (Throwable $e) {
+        $trimmed = trim($value);
+        if ($trimmed === '' || str_starts_with($trimmed, '0000-00-00')) {
             return null;
         }
 
-        if (preg_match('/^\d{4}-\d{2}-\d{2}$/', trim($value)) === 1) {
-            return $date->endOfDay();
+        if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $trimmed) === 1) {
+            $ts = strtotime($trimmed.' 23:59:59');
+
+            return $ts !== false ? $ts : null;
         }
 
-        return $date;
+        $ts = strtotime($trimmed);
+
+        return $ts !== false ? $ts : null;
     }
 }

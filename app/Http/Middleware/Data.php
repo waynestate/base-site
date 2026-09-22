@@ -29,6 +29,11 @@ class Data
             $data['parameters']['path'] = $this->getPathFromRequest($request);
         }
 
+        if (str_contains($data['parameters']['path'], '.')) {
+            return abort(404);
+        }
+
+
         // Set the current url
         $data['server']['url'] = $request->url();
         $data['server']['url_with_query'] = $request->fullUrl();

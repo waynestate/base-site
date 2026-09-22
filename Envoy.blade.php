@@ -39,10 +39,43 @@ $shared_subdirs = [
     'storage',
 ];
 /**
- * addon exclude pattens , eg: /node_modules/
+ * Exclude patterns for the release tar archive
  */
-$exclude_addon_pattens = [
+$exclude_patterns = [
     'node_modules',
+    'storage',
+    '.yarn',
+    'tests',
+    '.env',
+    '.env.example',
+    '*.map',
+    'composer.lock',
+    'yarn.lock',
+    'resources/js',
+    'resources/scss',
+    'resources/images',
+    'Envoy.blade.php',
+    'phpunit.xml',
+    '.phpunit.cache',
+    'phpstan.neon',
+    'pint.json',
+    'eslint.config.js',
+    '.stylelintrc',
+    '.editorconfig',
+    '.babelrc',
+    'sami.php',
+    'fontello-config.json',
+    '.github',
+    'hooks',
+    'stubs',
+    'makefile',
+    'server.php',
+    'tailwind.config.js',
+    'webpack.mix.js',
+    'README.md',
+    'CONTRIBUTING.md',
+    'CODEOWNERS',
+    'AGENTS.md',
 ];
 
 function getReleaseHash() {
@@ -99,6 +132,12 @@ $localdeploy_tmp_dir = $localdeploy_base.'/tmp';
 
 $release_hash = getReleaseHash();
 $release_current = isReleaseCurrent($localdeploy_tmp_dir, $release_hash);
+
+$exclude_flags = implode(' ', array_map(function ($pattern) use ($source_name) {
+    $target = str_starts_with($pattern, '*') ? $pattern : $source_name . '/' . ltrim($pattern, '/');
+
+    return '--exclude=' . escapeshellarg($target);
+}, $exclude_patterns));
 @endsetup
 
 @servers($envoy_servers)
@@ -180,6 +219,7 @@ fi
 @endtask
 
 @task('updaterepo_localsrc', ['on' => 'local'])
+    set -e;
     echo "LocalSource Repository update...";
     if [ ! {{ $release_current }} ]; then
         if [ -d {{ $localdeploy_source_dir }}/.git ]; then
@@ -188,6 +228,9 @@ fi
             [ -d {{ $localdeploy_source_dir }}/public/_resources ] && rm -rf {{ $localdeploy_source_dir }}/public/_resources
             cd {{ $localdeploy_source_dir }};
             git fetch origin;
+            echo "Discarding any local changes left over from a previous build...";
+            git reset --hard HEAD;
+            git clean -fd;
             git checkout -B {{ $branch }} origin/{{ $branch }};
             git pull origin {{ $branch }};
         else
@@ -199,16 +242,13 @@ fi
 @endtask
 
 @task('depsinstall_localsrc', ['on' => 'local'])
+    set -e;
     if [ ! {{ $release_current }} ]; then
         echo "LocalSource Dependencies install...";
         cd {{ $localdeploy_source_dir }};
 
         echo "Composer install...";
-        if [ "{{ $remote_server }}" = "production" ]; then
         make composerinstallproduction
-        else
-        make composerinstalldev
-        fi
         echo "Composer installed.";
 
         echo "Generate the artisan key...";
@@ -227,11 +267,12 @@ fi
 @endtask
 
 @task('packrelease_localsrc', ['on' => 'local'])
+    set -e;
     if [ ! {{ $release_current }} ]; then
         echo "LocalSource Pack release...";
         [ -f {{ $localdeploy_tmp_dir }}/release_{{ $release_hash }}.tgz ] && rm -rf {{ $localdeploy_tmp_dir }}/release_{{ $release_hash }}.tgz;
         cd {{ $localdeploy_base }}/;
-        tar --exclude=storage --exclude=node_modules --exclude-vcs --exclude='.yarn' -czf {{ $localdeploy_tmp_dir }}/release_{{ $release_hash }}.tgz {{ $source_name }};
+        COPYFILE_DISABLE=1 tar --exclude-vcs {{ $exclude_flags }} --no-xattrs -czf {{ $localdeploy_tmp_dir }}/release_{{ $release_hash }}.tgz {{ $source_name }};
         echo "LocalSource Pack release Done.";
     fi
 @endtask
@@ -307,6 +348,8 @@ shopt -s expand_aliases
 source ~/.bashrc
 echo "Clearing view cache"
 php84 {{ $release_dir }}/{{ $release }}/artisan view:clear
+echo "Pre-compiling view cache...";
+php84 {{ $release_dir }}/{{ $release }}/artisan view:cache
 echo "Caching configs...";
 php84 {{ $release_dir }}/{{ $release }}/artisan config:cache
 echo "Caching routes...";

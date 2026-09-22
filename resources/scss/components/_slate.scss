@@ -1,3 +1,5 @@
+@use '../utilities/buttons';
+
 .form_responses {
     & * {
         @apply border border-gray py-1 px-2 rounded-sm;
@@ -17,5 +19,5 @@
 }
 
 .form_button_submit {
-    @extend .button;
+    @include buttons.button-base;
 }
