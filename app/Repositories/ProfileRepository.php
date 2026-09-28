@@ -262,7 +262,7 @@ class ProfileRepository implements ProfileRepositoryContract
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
-        if (!empty($profiles['error'])) {
+        if (!empty($profiles['error']) || empty($profiles['profiles'])) {
             return ['profile' => []];
         }
 

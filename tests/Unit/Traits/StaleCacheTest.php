@@ -124,4 +124,117 @@ final class StaleCacheTest extends TestCase
 
         $this->assertEquals($default, $result);
     }
+
+    #[Test]
+    public function callback_returning_error_falls_back_to_stale_data_and_logs(): void
+    {
+        $key = 'test-key-'.$this->faker->uuid();
+        $stale_value = ['data' => $this->faker->word()];
+
+        app(Repository::class)->put('stale_'.$key, $stale_value, 604800);
+
+        Log::shouldReceive('warning')->once();
+
+        $result = $this->subject()->rememberWithFallback($key, 60, function () {
+            return ['error' => ['status' => 500, 'message' => 'Internal Server Error']];
+        });
+
+        $this->assertEquals($stale_value, $result);
+    }
+
+    #[Test]
+    public function callback_returning_error_with_no_stale_data_returns_default_and_logs(): void
+    {
+        $key = 'test-key-'.$this->faker->uuid();
+
+        Log::shouldReceive('warning')->once();
+
+        $result = $this->subject()->rememberWithFallback($key, 60, function () {
+            return ['error' => ['status' => 500, 'message' => 'Internal Server Error']];
+        });
+
+        $this->assertEquals([], $result);
+    }
+
+    #[Test]
+    public function primary_cache_hit_with_error_key_invokes_callback(): void
+    {
+        $key = 'test-key-'.$this->faker->uuid();
+        $value = ['data' => $this->faker->word()];
+
+        app(Repository::class)->put($key, ['error' => ['status' => 500]], 60);
+
+        $invoked = false;
+
+        $result = $this->subject()->rememberWithFallback($key, 60, function () use ($value, &$invoked) {
+            $invoked = true;
+
+            return $value;
+        });
+
+        $this->assertEquals($value, $result);
+        $this->assertTrue($invoked);
+    }
+
+    #[Test]
+    public function stale_fallback_repopulates_primary_cache_with_half_ttl(): void
+    {
+        $key = 'test-key-'.$this->faker->uuid();
+        $stale_value = ['data' => $this->faker->word()];
+
+        app(Repository::class)->put('stale_'.$key, $stale_value, 604800);
+
+        Log::shouldReceive('warning')->once();
+
+        $result = $this->subject()->rememberWithFallback($key, 60, function () {
+            throw new RuntimeException('API is down');
+        });
+
+        $this->assertEquals($stale_value, $result);
+        $this->assertEquals($stale_value, app(Repository::class)->get($key));
+
+        $this->travel(29)->seconds();
+        $this->assertEquals($stale_value, app(Repository::class)->get($key));
+
+        $this->travel(2)->seconds();
+        $this->assertNull(app(Repository::class)->get($key));
+
+        $this->travelBack();
+    }
+
+    #[Test]
+    public function stale_fallback_due_to_error_repopulates_primary_cache_with_half_ttl(): void
+    {
+        $key = 'test-key-'.$this->faker->uuid();
+        $stale_value = ['data' => $this->faker->word()];
+
+        app(Repository::class)->put('stale_'.$key, $stale_value, 604800);
+
+        Log::shouldReceive('warning')->once();
+
+        $result = $this->subject()->rememberWithFallback($key, 60, function () {
+            return ['error' => ['status' => 429, 'message' => 'Too Many Requests']];
+        });
+
+        $this->assertEquals($stale_value, $result);
+        $this->assertEquals($stale_value, app(Repository::class)->get($key));
+    }
+
+    #[Test]
+    public function stale_fallback_does_not_populate_primary_cache_when_ttl_is_zero(): void
+    {
+        $key = 'test-key-'.$this->faker->uuid();
+        $stale_value = ['data' => $this->faker->word()];
+
+        app(Repository::class)->put('stale_'.$key, $stale_value, 604800);
+
+        Log::shouldReceive('warning')->once();
+
+        $result = $this->subject()->rememberWithFallback($key, 0, function () {
+            throw new RuntimeException('API is down');
+        });
+
+        $this->assertEquals($stale_value, $result);
+        $this->assertNull(app(Repository::class)->get($key));
+    }
 }

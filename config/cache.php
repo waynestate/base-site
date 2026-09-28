@@ -6,7 +6,7 @@ return [
 
     'prefix' => null,
 
-    'ttl' => env('TTL'),
+    'ttl' => env('TTL', 600),
 
     'stale_ttl' => env('CACHE_STALE_TTL', 604800),
 

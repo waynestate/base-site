@@ -67,7 +67,7 @@ final class MenuRepositoryTest extends TestCase
         $wsuApi = Mockery::mock(Connector::class);
         $wsuApi->shouldReceive('sendRequest')->with('cms.menuitems.listing', Mockery::type('array'))->once()->andReturn($return);
 
-        Log::shouldReceive('error')
+        Log::shouldReceive('warning')
             ->once();
 
         $pageData = app(Page::class)->create(1, true);
@@ -586,7 +586,7 @@ final class MenuRepositoryTest extends TestCase
         $wsuApi = Mockery::mock(Connector::class);
         $wsuApi->shouldReceive('sendRequest')->with('cms.menuitems.listing', Mockery::type('array'))->once()->andReturn($return);
 
-        Log::shouldReceive('error')
+        Log::shouldReceive('warning')
             ->once();
 
         // Create a fake data request
