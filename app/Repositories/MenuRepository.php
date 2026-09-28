@@ -5,8 +5,6 @@ namespace App\Repositories;
 use Contracts\Repositories\RequestDataRepositoryContract;
 use Contracts\Repositories\MenuRepositoryContract;
 use Contracts\Repositories\ModularPageRepositoryContract;
-use Exception;
-use Illuminate\Support\Facades\Log;
 use Waynestate\Api\Connector;
 use Waynestate\Menuitems\ParseMenu;
 use Waynestate\Menu\DisplayMenu;
@@ -55,12 +53,7 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
     public function getRequestData(array &$data)
     {
         // Get all the menus for this site
-        try {
-            $menus = $this->getAllMenus($data['site']['id'], $data['site']['parent']['id'], $data['menu']['id']);
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
-            $menus = [];
-        }
+        $menus = $this->getAllMenus($data['site']['id'], $data['site']['parent']['id'], $data['menu']['id']);
 
         // Return an array of all the menus needed for the view
         return $this->getMenus($data, $menus);
@@ -171,10 +164,6 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
         // If the menu assigned to the page has no menu items set it as a blank array
         if ($page_menu_id !== null && empty($menus[$page_menu_id])) {
             $menus[$page_menu_id] = [];
-        }
-
-        if (!empty($menus['error'])) {
-            throw new Exception($menus['error']['message']);
         }
 
         return $menus;
