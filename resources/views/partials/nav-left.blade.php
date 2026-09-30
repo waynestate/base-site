@@ -1,19 +1,19 @@
-<nav id="menu" class="px-container-lg mt:w-80 {{ $base['show_site_menu'] === false ? ' mt:hidden' : '' }}" aria-label="Page menu" tabindex="-1">
+<nav id="menu" class="page-menu  {{ $base['show_site_menu'] === false ? ' mt:hidden' : '' }}" aria-label="Page menu" tabindex="-1">
     @if(
         !empty($base['top_menu_output']) &&
         $base['site_menu'] !== $base['top_menu'] &&
         config('base.top_menu_enabled')
     )
         @if(! empty($base['site_menu_output']))
-            <div class="slideout-main-menu mt:hidden">
-                <ul class="main-menu mb-2">
+            <div class="slideout-main-menu">
+                <ul class="main-menu">
                     <li>
-                        <a
-                            role="button"
-                            class="main-menu-toggle pt-2 pb-2 pl-3 pr-3 block"
-                            tabindex="0"
-                            aria-expanded="false"
-                        >{{ config('base.top_menu_label') }}</a>
+                        <a role="button"
+                           class="main-menu-toggle"
+                           tabindex="0"
+                           aria-expanded="false">
+                            {{ config('base.top_menu_label') }}
+                        </a>
                         {!! $base['top_menu_output'] !!}
                     </li>
                 </ul>

@@ -1,0 +1,15 @@
+.page-menu {
+    @apply px-container mt:w-80;
+
+    .main-menu {
+        @apply mb-2;
+    }
+
+    .main-menu-toggle {
+        @apply pt-2 pb-2 pl-3 pr-3 block;
+    }
+
+    .slideout-main-menu {
+        @apply mt:hidden;
+    }
+}
