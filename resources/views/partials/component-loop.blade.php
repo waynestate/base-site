@@ -10,7 +10,7 @@ modular-component {
 --}}
 
 @if(!empty($base['components']))
-    <div id="component-loop" class="flex flex-wrap items-start mt:justify-center">
+    <div id="component-loop" class="component-loop"">
         @foreach($base['components'] as $componentName => $component)
             @if(!empty($component['data']) && !empty($component['component']['filename']) && \View::exists('components/'.$component['component']['filename']))
                 <section id="{{ Str::slug($componentName) }}" class="relative w-full {{ $component['component']['containerClass'] ?? ''}}">
