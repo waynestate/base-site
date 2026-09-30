@@ -16,6 +16,11 @@ $column-count: 12;
         justify-content: center;
     }
 
+    section {
+        position: relative;
+        width: 100%;
+    }
+
     @layer utilities {
         .col-count-2 {
             column-count: 2;
