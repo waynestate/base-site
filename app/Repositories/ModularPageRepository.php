@@ -577,11 +577,12 @@ class ModularPageRepository implements ModularPageRepositoryContract
                         strpos($class, 'right') !== false |
                         strpos($class, 'order-') !== false
                     ) {
-                        // containerClass
-                        array_push($components[$componentName]['component']['containerClass'], $class);
-                    } else {
                         // componentClass
                         $components[$componentName]['component']['componentClass'][] = $class;
+                    } else {
+                        // containerClass
+                        // sectionClass
+                        array_push($components[$componentName]['component']['containerClass'], $class);
                     }
                 }
             }
