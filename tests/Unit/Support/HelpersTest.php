@@ -3,6 +3,7 @@
 namespace Tests\Unit\Support;
 
 use PHPUnit\Framework\Attributes\Test;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -129,5 +130,19 @@ final class HelpersTest extends TestCase
             'Styleguide\Http\Controllers\FullWidthController',
             site_controller('Styleguide\Http\Controllers\FullWidthController')
         );
+    }
+
+    #[Test]
+    public function component_view_should_prefer_site_specific_component(): void
+    {
+        View::addLocation(__DIR__.'/fixtures/views');
+
+        $this->assertSame('site-specific/components/fixture-component', component_view('fixture-component'));
+    }
+
+    #[Test]
+    public function component_view_should_fall_back_to_base_component(): void
+    {
+        $this->assertSame('components/accordion', component_view('accordion'));
     }
 }
