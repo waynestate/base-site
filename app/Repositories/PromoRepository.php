@@ -104,12 +104,8 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
         |
         | Add to config/base.app Global Data => $global['all']['promos']['new_promo']
         | - or -
-        | Extend this repository; copy and edit these stubs:
-        |     stubs/extend-repository.stub => app/Repositories/PromosExtendedRepository.php
-        |     stubs/extend-repository-styleguide.stub => styleguide/Repositories/PromosExtendedRepository.php
-        |
-        |     Update config/base.app Global Data 'callbacks' and replace:
-        |     '\Repositories\PromoRepository@getRequestData' => '\Repositories\PromosExtendedRepository@getRequestData'
+        | Extend this repository for a single site in app/Repositories/Custom/PromoRepository.php
+        | and styleguide/Repositories/Custom/PromoRepository.php (see "Developing repositories" in the README).
         |
         */
 
