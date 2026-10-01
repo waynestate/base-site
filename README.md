@@ -248,6 +248,18 @@ $menus = [
 
 Feature names should be singular and CamelCased. To create a new feature called "Spotlight": `php artisan base:feature Spotlight`
 
+It scaffolds a site-only feature, so every class goes in a `Custom` namespace: the controller in `/app/Http/Controllers/Custom/`, its contract in `/contracts/Repositories/Custom/`, the repositories in `/app/Repositories/Custom/` and `/styleguide/Repositories/Custom/`, and the factory in `/factories/Custom/`. The view goes in `/resources/views/site-specific/` and the style guide page is `/styleguide/Pages/SitespecificSpotlight.php`, under Templates > Site specific.
+
+When adding a feature to base itself, run it with `--base` (`php artisan base:feature Spotlight --base`) to use base's own folders instead, with the style guide page `/styleguide/Pages/Spotlight.php` under Templates.
+
+## Style guide development for a new modular component
+
+Module names should be singular and kebab-case. To create a new module called "expanding-grid": `php artisan base:module expanding-grid`
+
+The component view goes in `/resources/views/site-specific/components/`, its style guide controller in `/styleguide/Http/Controllers/Custom/`, and its style guide page is `/styleguide/Pages/ComponentSitespecificExpandingGrid.php`, under Components > Site specific. A component in `/resources/views/site-specific/components/` is used instead of a base component with the same name.
+
+When adding a module to base itself, run it with `--base` (`php artisan base:module expanding-grid --base`) to use `/resources/views/components/`, `/styleguide/Http/Controllers/` and `/styleguide/Pages/ComponentExpandingGrid.php` under Components.
+
 ## Adding SVG icons
 
 1. Load the fontello-config.json file into http://fontello.com/
