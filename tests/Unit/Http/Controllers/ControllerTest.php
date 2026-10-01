@@ -36,6 +36,10 @@ final class ControllerTest extends TestCase
         ->reject(function ($item) {
             return basename($item) === 'Controller.php' || !Str::endsWith($item, '.php');
         })
+        // The CMS template dropdown lists a site overload instead of the base controller it replaces
+        ->reject(function ($item) {
+            return !Str::contains($item, '/Custom/') && Storage::disk('base')->exists('app/Http/Controllers/Custom/'.basename($item));
+        })
         ->map(function ($item) {
             return $this->getCommentData($item);
         });
