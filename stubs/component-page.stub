@@ -4,7 +4,7 @@ namespace Styleguide\Pages;
 
 use Factories\Page as PageFactory;
 
-class ComponentDummyComponent extends Page
+class Component{{ page }}DummyComponent extends Page
 {
     /**
      * {@inheritdoc}

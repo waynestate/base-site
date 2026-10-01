@@ -4,6 +4,7 @@ namespace Tests;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Routing\Middleware\ThrottleRequests;
+use Illuminate\Support\Facades\Storage;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -47,5 +48,19 @@ abstract class TestCase extends BaseTestCase
         if (! class_exists($class, false)) {
             class_alias(get_class(new class () {}), $class);
         }
+    }
+
+    /**
+     * Swap the base disk for an empty fake holding only what the generator commands read.
+     */
+    protected function fakeBaseDisk(): void
+    {
+        $files = collect(Storage::disk('base')->files('stubs'))
+            ->push('styleguide/menu.json')
+            ->mapWithKeys(fn ($path) => [$path => Storage::disk('base')->get($path)]);
+
+        Storage::fake('base');
+
+        $files->each(fn ($contents, $path) => Storage::disk('base')->put($path, $contents));
     }
 }
