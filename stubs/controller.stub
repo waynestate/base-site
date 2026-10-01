@@ -5,9 +5,10 @@
 * Default: false
 */
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers{{ custom }};
 
-use Contracts\Repositories\DummyRepositoryContract;
+use App\Http\Controllers\Controller;
+use Contracts\Repositories{{ custom }}\DummyRepositoryContract;
 use Illuminate\Http\Request;
 
 class DummyController extends Controller
@@ -32,6 +33,6 @@ class DummyController extends Controller
     {
         $dummyitems = $this->dummy->getDummyItems();
 
-        return view('DummyView', merge($request->data, $dummyitems));
+        return view('{{ views }}DummyView', merge($request->data, $dummyitems));
     }
 }
