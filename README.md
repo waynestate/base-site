@@ -137,7 +137,7 @@ Email web@wayne.edu with your request.
     }
     ```
 
-    * It is used instead of the base one for CMS pages.
+    * It is used instead of the base one for CMS pages and for the news, promo view and profile view routes.
     * The CMS template dropdown shows only the site version, using the site file's header. Copy the `Status`, `Description` and `Default` lines from the base file (and change them on purpose), otherwise a `Private` or `Hidden` template becomes public.
 1. Controllers that only exist for a single site also go in `/app/Http/Controllers/Custom/`, extending `App\Http\Controllers\Controller`.
 
