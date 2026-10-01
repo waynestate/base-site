@@ -16,19 +16,19 @@ use App\Http\Controllers\WildCardController;
 */
 
 // Individual promo view route
-Route::get('{any?}view/{title}-{id}', [PromoController::class, 'show'])
+Route::get('{any?}view/{title}-{id}', [site_controller(PromoController::class), 'show'])
     ->where(['any' => '.*', 'title' => '.+', 'id' => '\d+']);
 
 // Profile view
-Route::get('{any?}profile/{accessid?}', [ProfileController::class, 'show'])
+Route::get('{any?}profile/{accessid?}', [site_controller(ProfileController::class), 'show'])
     ->where(['any' => '.*', 'accessid' => '[a-zA-Z]{2}\d{4}']);
 
 // News listing by topic
-Route::get('{any?}'.config('base.news_listing_route').'/'.config('base.news_topic_route').'/{slug}', [config('base.news_controller'), 'index'])
+Route::get('{any?}'.config('base.news_listing_route').'/'.config('base.news_topic_route').'/{slug}', [site_controller(config('base.news_controller')), 'index'])
     ->where(['any' => '.*', 'slug' => '.+']);
 
 // News view
-Route::get('{any?}'.config('base.news_view_route').'/{slug}-{id}', [config('base.news_controller'), 'show'])
+Route::get('{any?}'.config('base.news_view_route').'/{slug}-{id}', [site_controller(config('base.news_controller')), 'show'])
     ->where(['any' => '.*', 'slug' => '.+', 'id' => '\d+']);
 
 // The wild card route is a catch all route that tries to resolve the requests path to a json file
