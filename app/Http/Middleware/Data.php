@@ -97,7 +97,7 @@ class Data
         $global = collect($callbacks)->flatMap(function ($callback) use ($request) {
             [$controller, $method] = Str::parseCallback($callback);
 
-            return app($this->getPrefix().$controller)->$method($request->data);
+            return app($this->getCallbackClass($controller))->$method($request->data);
         })->toArray();
 
         // Merge global data
@@ -154,6 +154,16 @@ class Data
     public function getPrefix(): string
     {
         return $this->prefix;
+    }
+
+    /**
+     * Get a global callback's class, preferring its site overload in a Custom namespace.
+     */
+    public function getCallbackClass(string $class): string
+    {
+        $site = $this->getPrefix().Str::beforeLast($class, '\\').'\Custom\\'.class_basename($class);
+
+        return class_exists($site) ? $site : $this->getPrefix().$class;
     }
 
     /**
