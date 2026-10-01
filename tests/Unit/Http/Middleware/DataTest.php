@@ -79,6 +79,58 @@ final class DataTest extends TestCase
     }
 
     #[Test]
+    public function callback_should_prefer_site_repository(): void
+    {
+        $this->fakeClass('App\Repositories\CallbackFixtureRepository');
+        $this->fakeClass('App\Repositories\Custom\CallbackFixtureRepository');
+
+        $this->assertSame(
+            'App\Repositories\Custom\CallbackFixtureRepository',
+            (new Data())->getCallbackClass('\Repositories\CallbackFixtureRepository')
+        );
+    }
+
+    #[Test]
+    public function callback_without_site_repository_should_use_base_repository(): void
+    {
+        $this->fakeClass('App\Repositories\BaseOnlyCallbackFixtureRepository');
+
+        $this->assertSame(
+            'App\Repositories\BaseOnlyCallbackFixtureRepository',
+            (new Data())->getCallbackClass('\Repositories\BaseOnlyCallbackFixtureRepository')
+        );
+    }
+
+    #[Test]
+    public function site_callback_should_be_called_for_global_data(): void
+    {
+        $request = new Request();
+        $request = $request->create('styleguide');
+
+        config([
+            'base.global.sites' => [
+                2 => [
+                    'callbacks' => [
+                        '\Mocked\Method@mockMethod',
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->fakeClass('Styleguide\Mocked\Custom\Method');
+        $this->app->bind('Styleguide\Mocked\Custom\Method', function ($app) {
+            $mock = Mockery::mock('Mocked\Custom\Method');
+            $mock->shouldReceive('mockMethod')->andReturn(['siteMethod' => true]);
+
+            return $mock;
+        });
+
+        app(Data::class)->handle($request, function ($request) {
+            $this->assertTrue($request->data['base']['siteMethod']);
+        });
+    }
+
+    #[Test]
     public function controller_namespace_should_return_string(): void
     {
         // Test an existing app controller
