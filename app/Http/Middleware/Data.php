@@ -122,9 +122,23 @@ class Data
      */
     public function getControllerNamespace(string $controller): string
     {
-        // First see if it exists as a prefixed controller
-        if (class_exists($this->GetPrefix().'\Http\Controllers\\'.$controller)) {
-            return $this->GetPrefix().'\Http\Controllers\\'.$controller;
+        $candidates = [
+            'App\Http\Controllers\Custom\\'.$controller,
+            'App\Http\Controllers\\'.$controller,
+        ];
+
+        if ($this->getPrefix() !== 'App') {
+            array_unshift(
+                $candidates,
+                $this->getPrefix().'\Http\Controllers\Custom\\'.$controller,
+                $this->getPrefix().'\Http\Controllers\\'.$controller,
+            );
+        }
+
+        foreach ($candidates as $candidate) {
+            if (class_exists($candidate)) {
+                return $candidate;
+            }
         }
 
         return 'App\Http\Controllers\\'.$controller;

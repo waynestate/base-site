@@ -117,6 +117,29 @@ Email web@wayne.edu with your request.
 1. Controllers should:
     * Dependency inject repositories into the constructor.
     * Call repositories to obtain data to send to the view.
+1. To change a base controller for a single site, don't edit it. Create a class with the same name in `/app/Http/Controllers/Custom/` that extends the base controller:
+
+    ```php
+    <?php
+
+    /*
+    * Status: Private
+    * Description: Article Template
+    * Default: false
+    */
+
+    namespace App\Http\Controllers\Custom;
+
+    use App\Http\Controllers\ArticleController as BaseArticleController;
+
+    class ArticleController extends BaseArticleController
+    {
+    }
+    ```
+
+    * It is used instead of the base one for CMS pages.
+    * The CMS template dropdown shows only the site version, using the site file's header. Copy the `Status`, `Description` and `Default` lines from the base file (and change them on purpose), otherwise a `Private` or `Hidden` template becomes public.
+1. Controllers that only exist for a single site also go in `/app/Http/Controllers/Custom/`, extending `App\Http\Controllers\Controller`.
 
 ## Developing views
 
