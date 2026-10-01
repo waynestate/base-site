@@ -94,6 +94,84 @@ final class DataTest extends TestCase
     }
 
     #[Test]
+    public function site_controller_should_overload_app_controller(): void
+    {
+        $this->fakeClass('App\Http\Controllers\OverloadFixtureController');
+        $this->fakeClass('App\Http\Controllers\Custom\OverloadFixtureController');
+
+        $this->assertSame(
+            'App\Http\Controllers\Custom\OverloadFixtureController',
+            (new Data())->getControllerNamespace('OverloadFixtureController')
+        );
+    }
+
+    #[Test]
+    public function site_only_controller_should_resolve_to_site_namespace(): void
+    {
+        $this->fakeClass('App\Http\Controllers\Custom\SiteOnlyFixtureController');
+
+        $this->assertSame(
+            'App\Http\Controllers\Custom\SiteOnlyFixtureController',
+            (new Data())->getControllerNamespace('SiteOnlyFixtureController')
+        );
+    }
+
+    #[Test]
+    public function app_controller_without_site_override_should_resolve_to_app_namespace(): void
+    {
+        $this->fakeClass('App\Http\Controllers\AppOnlyFixtureController');
+
+        $this->assertSame(
+            'App\Http\Controllers\AppOnlyFixtureController',
+            (new Data())->getControllerNamespace('AppOnlyFixtureController')
+        );
+    }
+
+    #[Test]
+    public function styleguide_controller_should_take_precedence_over_site_controller(): void
+    {
+        $this->fakeClass('App\Http\Controllers\OverloadFixtureController');
+        $this->fakeClass('App\Http\Controllers\Custom\OverloadFixtureController');
+        $this->fakeClass('Styleguide\Http\Controllers\OverloadFixtureController');
+
+        $data = new Data();
+        $prefix = new \ReflectionProperty($data, 'prefix');
+        $prefix->setValue($data, 'Styleguide');
+
+        $this->assertSame(
+            'Styleguide\Http\Controllers\OverloadFixtureController',
+            $data->getControllerNamespace('OverloadFixtureController')
+        );
+    }
+
+    #[Test]
+    public function styleguide_site_controller_should_take_precedence_over_styleguide_controller(): void
+    {
+        $this->fakeClass('Styleguide\Http\Controllers\StyleguideOverloadFixtureController');
+        $this->fakeClass('Styleguide\Http\Controllers\Custom\StyleguideOverloadFixtureController');
+
+        $data = new Data();
+        $prefix = new \ReflectionProperty($data, 'prefix');
+        $prefix->setValue($data, 'Styleguide');
+
+        $this->assertSame(
+            'Styleguide\Http\Controllers\Custom\StyleguideOverloadFixtureController',
+            $data->getControllerNamespace('StyleguideOverloadFixtureController')
+        );
+    }
+
+    #[Test]
+    public function styleguide_site_controller_should_not_resolve_outside_the_styleguide(): void
+    {
+        $this->fakeClass('Styleguide\Http\Controllers\Custom\StyleguideOnlyFixtureController');
+
+        $this->assertSame(
+            'App\Http\Controllers\StyleguideOnlyFixtureController',
+            (new Data())->getControllerNamespace('StyleguideOnlyFixtureController')
+        );
+    }
+
+    #[Test]
     public function when_the_request_has_no_matched_route_the_path_should_be_path(): void
     {
         $actual_path = $this->faker->word();

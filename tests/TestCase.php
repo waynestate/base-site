@@ -39,4 +39,14 @@ abstract class TestCase extends BaseTestCase
         // Create a new faker that every test can use
         $this->faker = (new Factory())->create();
     }
+
+    /**
+     * Declare an empty class under the given name so class_exists() finds it.
+     */
+    protected function fakeClass(string $class): void
+    {
+        if (! class_exists($class, false)) {
+            class_alias(get_class(new class () {}), $class);
+        }
+    }
 }
