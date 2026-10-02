@@ -107,7 +107,7 @@ class ComponentButtonsController extends Controller
                     2 => [
                         'promo_item_id' => 'component_config',
                         'title' => 'Component configuration',
-                        'description' => '',
+                        'description' => '<p>Optional: add <code>"buttonSize":"large"</code> to increase the button padding.</p>',
                         'tr1' => [
                             'Page field' => 'modular-button-column-1',
                             'Data' => '{

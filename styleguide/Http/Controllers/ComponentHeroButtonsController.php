@@ -36,7 +36,7 @@ class ComponentHeroButtonsController extends Controller
                     0 => [
                         'title' => 'Component configuration',
                         'promo_item_id' => 'component_config',
-                        'description' => '',
+                        'description' => '<p>Optional: add <code>"buttonSize":"large"</code> to increase the button padding.</p>',
                         'tr1' => [
                             'Page field' => 'modular-hero-buttons-1',
                             'Data' => '{
