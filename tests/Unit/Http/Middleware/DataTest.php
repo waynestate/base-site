@@ -407,4 +407,49 @@ final class DataTest extends TestCase
         app(Data::class)->handle($request, function () {
         });
     }
+
+    #[Test]
+    public function seed_query_param_seeds_faker_deterministically(): void
+    {
+        $request1 = Request::create('styleguide', 'GET', ['seed' => 1234]);
+        $value1 = null;
+        app(Data::class)->handle($request1, function () use (&$value1) {
+            $value1 = fake()->sentence();
+        });
+
+        $request2 = Request::create('styleguide', 'GET', ['seed' => 1234]);
+        $value2 = null;
+        app(Data::class)->handle($request2, function () use (&$value2) {
+            $value2 = fake()->sentence();
+        });
+
+        $this->assertNotEmpty($value1);
+        $this->assertEquals($value1, $value2);
+
+        $request3 = Request::create('styleguide', 'GET', ['seed' => 5678]);
+        $value3 = null;
+        app(Data::class)->handle($request3, function () use (&$value3) {
+            $value3 = fake()->sentence();
+        });
+
+        $this->assertNotEquals($value1, $value3);
+    }
+
+    #[Test]
+    public function seed_query_param_renders_identical_styleguide_content(): void
+    {
+        $response1 = $this->call('GET', '/styleguide/cms/basiclayouts?seed=1234');
+        $content1 = $response1->getContent();
+
+        $response2 = $this->call('GET', '/styleguide/cms/basiclayouts?seed=1234');
+        $content2 = $response2->getContent();
+
+        $this->assertEquals(200, $response1->status());
+        $this->assertEquals(200, $response2->status());
+        $this->assertEquals($content1, $content2);
+
+        $response3 = $this->call('GET', '/styleguide/cms/basiclayouts?seed=5678');
+        $content3 = $response3->getContent();
+        $this->assertNotEquals($content1, $content3);
+    }
 }
