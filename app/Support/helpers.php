@@ -87,6 +87,32 @@ function using_styleguide()
 }
 
 /**
+ * Swap an App\Http\Controllers class for its App\Http\Controllers\Custom override when one exists.
+ */
+function site_controller(string $controller): string
+{
+    $namespace = 'App\Http\Controllers\\';
+
+    if (!str_starts_with($controller, $namespace)) {
+        return $controller;
+    }
+
+    $site = $namespace . 'Custom\\' . substr($controller, strlen($namespace));
+
+    return class_exists($site) ? $site : $controller;
+}
+
+/**
+ * Get a modular component's view, preferring its site-specific version.
+ */
+function component_view(string $filename): string
+{
+    $site = 'site-specific/components/'.$filename;
+
+    return view()->exists($site) ? $site : 'components/'.$filename;
+}
+
+/**
  * Recursively merge two arrays, with values from array2 replacing values from array1.
  * Indexed arrays are completely replaced, while associative arrays are merged recursively.
  *

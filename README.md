@@ -117,6 +117,51 @@ Email web@wayne.edu with your request.
 1. Controllers should:
     * Dependency inject repositories into the constructor.
     * Call repositories to obtain data to send to the view.
+1. To change a base controller for a single site, don't edit it. Create a class with the same name in `/app/Http/Controllers/Custom/` that extends the base controller:
+
+    ```php
+    <?php
+
+    /*
+    * Status: Private
+    * Description: Article Template
+    * Default: false
+    */
+
+    namespace App\Http\Controllers\Custom;
+
+    use App\Http\Controllers\ArticleController as BaseArticleController;
+
+    class ArticleController extends BaseArticleController
+    {
+    }
+    ```
+
+    * It is used instead of the base one for CMS pages and for the news, promo view and profile view routes.
+    * The CMS template dropdown shows only the site version, using the site file's header. Copy the `Status`, `Description` and `Default` lines from the base file (and change them on purpose), otherwise a `Private` or `Hidden` template becomes public.
+1. Controllers that only exist for a single site also go in `/app/Http/Controllers/Custom/`, extending `App\Http\Controllers\Controller`.
+
+### Developing repositories
+
+1. Repositories live in `/app/Repositories/` and are bound to the contract of the same name in `/contracts/Repositories/`. The styleguide binds the matching class in `/styleguide/Repositories/` instead.
+1. To change a base repository for a single site, don't edit it. Create a class with the same name in `/app/Repositories/Custom/` that extends the base repository, and one in `/styleguide/Repositories/Custom/` that extends the base styleguide repository:
+
+    ```php
+    <?php
+
+    namespace App\Repositories\Custom;
+
+    use App\Repositories\ProfileRepository as BaseProfileRepository;
+
+    class ProfileRepository extends BaseProfileRepository
+    {
+    }
+    ```
+
+    * The base contract (`Contracts\Repositories\ProfileRepositoryContract`) resolves to the site version everywhere, including in base controllers.
+    * Global data callbacks in `config/base.php` (e.g. `'\Repositories\PromoRepository@getRequestData'`) use the site version too, so the config doesn't need to change.
+    * To add methods, create a site contract in `/contracts/Repositories/Custom/` that extends the base contract, implement it on both site repositories, and type-hint the site contract where the new methods are used.
+1. Repositories that only exist for a single site also go in `/app/Repositories/Custom/` and `/styleguide/Repositories/Custom/`, with their contract in `/contracts/Repositories/Custom/`.
 
 ## Developing views
 
@@ -202,6 +247,18 @@ $menus = [
 ## Style guide development for a new feature
 
 Feature names should be singular and CamelCased. To create a new feature called "Spotlight": `php artisan base:feature Spotlight`
+
+It scaffolds a site-only feature, so every class goes in a `Custom` namespace: the controller in `/app/Http/Controllers/Custom/`, its contract in `/contracts/Repositories/Custom/`, the repositories in `/app/Repositories/Custom/` and `/styleguide/Repositories/Custom/`, and the factory in `/factories/Custom/`. The view goes in `/resources/views/site-specific/` and the style guide page is `/styleguide/Pages/SitespecificSpotlight.php`, under Templates > Site specific.
+
+When adding a feature to base itself, run it with `--base` (`php artisan base:feature Spotlight --base`) to use base's own folders instead, with the style guide page `/styleguide/Pages/Spotlight.php` under Templates.
+
+## Style guide development for a new modular component
+
+Module names should be singular and kebab-case. To create a new module called "expanding-grid": `php artisan base:module expanding-grid`
+
+The component view goes in `/resources/views/site-specific/components/`, its style guide controller in `/styleguide/Http/Controllers/Custom/`, and its style guide page is `/styleguide/Pages/ComponentSitespecificExpandingGrid.php`, under Components > Site specific. A component in `/resources/views/site-specific/components/` is used instead of a base component with the same name.
+
+When adding a module to base itself, run it with `--base` (`php artisan base:module expanding-grid --base`) to use `/resources/views/components/`, `/styleguide/Http/Controllers/` and `/styleguide/Pages/ComponentExpandingGrid.php` under Components.
 
 ## Adding SVG icons
 

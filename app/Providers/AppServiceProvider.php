@@ -84,14 +84,33 @@ class AppServiceProvider extends ServiceProvider
             return $api;
         });
 
-        // Bind all repositories following the filename convention
+        // Bind all repositories following the filename convention, preferring a site overload
         collect(Storage::disk('base')->allFiles('contracts'))
             ->reject(function ($filename) {
-                return in_array(basename($filename), ['RequestDataRepositoryContract.php']);
+                return in_array(basename($filename), ['RequestDataRepositoryContract.php']) || str_contains($filename, '/Custom/');
             })
             ->each(function ($filename) {
-                $this->app->bind('Contracts\Repositories\\'.basename($filename, '.php'), $this->getPrefix().'\Repositories\\'.basename(str_replace('Contract', '', $filename), '.php'));
+                $this->app->bind('Contracts\Repositories\\'.basename($filename, '.php'), $this->getRepository(basename(str_replace('Contract', '', $filename), '.php')));
             });
+
+        // Site contracts add methods to a base contract for its site repository
+        collect(Storage::disk('base')->allFiles('contracts/Repositories/Custom'))
+            ->filter(function ($filename) {
+                return str_ends_with($filename, 'Contract.php');
+            })
+            ->each(function ($filename) {
+                $this->app->bind('Contracts\Repositories\Custom\\'.basename($filename, '.php'), $this->getPrefix().'\Repositories\Custom\\'.basename(str_replace('Contract', '', $filename), '.php'));
+            });
+    }
+
+    /**
+     * Get the repository class, preferring its site overload in Repositories\Custom.
+     */
+    public function getRepository(string $repository): string
+    {
+        $site = $this->getPrefix().'\Repositories\Custom\\'.$repository;
+
+        return class_exists($site) ? $site : $this->getPrefix().'\Repositories\\'.$repository;
     }
 
     /**
