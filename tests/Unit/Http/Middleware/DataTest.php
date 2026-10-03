@@ -94,6 +94,93 @@ final class DataTest extends TestCase
     }
 
     #[Test]
+    public function site_controller_should_overload_app_controller(): void
+    {
+        config(['base.site_namespace' => 'Nursing']);
+        $this->fakeClass('App\Http\Controllers\OverloadFixtureController');
+        $this->fakeClass('App\Nursing\Controllers\OverloadFixtureController');
+
+        $this->assertSame(
+            'App\Nursing\Controllers\OverloadFixtureController',
+            (new Data())->getControllerNamespace('OverloadFixtureController')
+        );
+    }
+
+    #[Test]
+    public function default_site_namespace_should_be_used_when_not_explicitly_set(): void
+    {
+        config(['base.site_namespace' => 'Site']);
+        $this->fakeClass('App\Http\Controllers\DefaultSiteFixtureController');
+        $this->fakeClass('App\Site\Controllers\DefaultSiteFixtureController');
+
+        $this->assertSame(
+            'App\Site\Controllers\DefaultSiteFixtureController',
+            (new Data())->getControllerNamespace('DefaultSiteFixtureController')
+        );
+    }
+
+    #[Test]
+    public function site_controller_should_fall_back_to_app_controller_when_not_overridden(): void
+    {
+        config(['base.site_namespace' => 'Nursing']);
+        $this->fakeClass('App\Http\Controllers\AppOnlyFixtureController');
+
+        $this->assertSame(
+            'App\Http\Controllers\AppOnlyFixtureController',
+            (new Data())->getControllerNamespace('AppOnlyFixtureController')
+        );
+    }
+
+    #[Test]
+    public function styleguide_site_controller_should_take_precedence_in_styleguide(): void
+    {
+        config(['base.site_namespace' => 'Nursing']);
+        $this->fakeClass('App\Http\Controllers\StyleguideSiteFixtureController');
+        $this->fakeClass('App\Nursing\Controllers\StyleguideSiteFixtureController');
+        $this->fakeClass('App\Nursing\Styleguide\Controllers\StyleguideSiteFixtureController');
+
+        $data = new Data();
+        $prefix = new \ReflectionProperty($data, 'prefix');
+        $prefix->setValue($data, 'Styleguide');
+
+        $this->assertSame(
+            'App\Nursing\Styleguide\Controllers\StyleguideSiteFixtureController',
+            $data->getControllerNamespace('StyleguideSiteFixtureController')
+        );
+    }
+
+    #[Test]
+    public function callback_should_prefer_site_repository(): void
+    {
+        config(['base.site_namespace' => 'Nursing']);
+        $this->fakeClass('App\Repositories\CallbackFixtureRepository');
+        $this->fakeClass('App\Nursing\Repositories\CallbackFixtureRepository');
+
+        $this->assertSame(
+            'App\Nursing\Repositories\CallbackFixtureRepository',
+            (new Data())->getCallbackClass('\Repositories\CallbackFixtureRepository')
+        );
+    }
+
+    #[Test]
+    public function callback_should_prefer_site_styleguide_repository_in_styleguide(): void
+    {
+        config(['base.site_namespace' => 'Nursing']);
+        $this->fakeClass('App\Repositories\CallbackFixtureRepository');
+        $this->fakeClass('App\Nursing\Repositories\CallbackFixtureRepository');
+        $this->fakeClass('App\Nursing\Styleguide\Repositories\CallbackFixtureRepository');
+
+        $data = new Data();
+        $prefix = new \ReflectionProperty($data, 'prefix');
+        $prefix->setValue($data, 'Styleguide');
+
+        $this->assertSame(
+            'App\Nursing\Styleguide\Repositories\CallbackFixtureRepository',
+            $data->getCallbackClass('\Repositories\CallbackFixtureRepository')
+        );
+    }
+
+    #[Test]
     public function when_the_request_has_no_matched_route_the_path_should_be_path(): void
     {
         $actual_path = $this->faker->word();

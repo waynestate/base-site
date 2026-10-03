@@ -93,7 +93,7 @@ class Data
         $global = collect($callbacks)->flatMap(function ($callback) use ($request) {
             [$controller, $method] = Str::parseCallback($callback);
 
-            return app($this->getPrefix().$controller)->$method($request->data);
+            return app($this->getCallbackClass($controller))->$method($request->data);
         })->toArray();
 
         // Merge global data
@@ -122,12 +122,47 @@ class Data
      */
     public function getControllerNamespace(string $controller): string
     {
-        // First see if it exists as a prefixed controller
-        if (class_exists($this->GetPrefix().'\Http\Controllers\\'.$controller)) {
-            return $this->GetPrefix().'\Http\Controllers\\'.$controller;
+        $siteNamespace = config('base.site_namespace', 'Site');
+
+        $candidates = [];
+
+        if ($this->getPrefix() !== 'App') {
+            $candidates[] = 'App\\'.$siteNamespace.'\Styleguide\Controllers\\'.$controller;
+            $candidates[] = $this->getPrefix().'\Http\Controllers\\'.$controller;
+        }
+
+        $candidates[] = 'App\\'.$siteNamespace.'\Controllers\\'.$controller;
+        $candidates[] = 'App\Http\Controllers\\'.$controller;
+
+        foreach ($candidates as $candidate) {
+            if (class_exists($candidate)) {
+                return $candidate;
+            }
         }
 
         return 'App\Http\Controllers\\'.$controller;
+    }
+
+    /**
+     * Get a global callback's class, preferring its site overload under the site namespace.
+     */
+    public function getCallbackClass(string $class): string
+    {
+        $siteNamespace = config('base.site_namespace', 'Site');
+
+        if ($this->getPrefix() !== 'App') {
+            $siteStyleguide = 'App\\'.$siteNamespace.'\Styleguide'.Str::beforeLast($class, '\\').'\\'.class_basename($class);
+            if (class_exists($siteStyleguide)) {
+                return $siteStyleguide;
+            }
+        }
+
+        $site = 'App\\'.$siteNamespace.Str::beforeLast($class, '\\').'\\'.class_basename($class);
+        if (class_exists($site)) {
+            return $site;
+        }
+
+        return $this->getPrefix().$class;
     }
 
     /**

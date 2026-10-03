@@ -5,7 +5,9 @@ namespace App\Providers;
 use App;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use URL;
 use Waynestate\Api\Connector;
 
@@ -30,6 +32,28 @@ class AppServiceProvider extends ServiceProvider
         // Allow http when on www-dev
         if (App::environment('dev')) {
             URL::forceScheme('http');
+        }
+
+        // Prepend site-specific view path if it exists
+        $siteNamespace = config('base.site_namespace', 'Site');
+        $siteViewPath = resource_path('views/'.Str::snake($siteNamespace));
+
+        if (is_dir($siteViewPath)) {
+            View::prependLocation($siteViewPath);
+        }
+
+        // Bind route controllers to site namespace overrides when present
+        $siteControllers = [
+            \App\Http\Controllers\PromoController::class,
+            \App\Http\Controllers\ProfileController::class,
+            \App\Http\Controllers\ArticleController::class,
+        ];
+
+        foreach ($siteControllers as $controller) {
+            $siteClass = 'App\\'.$siteNamespace.'\Controllers\\'.class_basename($controller);
+            if (class_exists($siteClass)) {
+                $this->app->bind($controller, $siteClass);
+            }
         }
 
         Blade::directive('image', function ($expression) {
@@ -75,6 +99,8 @@ class AppServiceProvider extends ServiceProvider
             $this->prefix = 'Styleguide';
         }
 
+        $this->registerSiteServiceProvider();
+
         // WSU API
         $this->app->bind('Waynestate\Api\Connector', function () {
             $api = new Connector(
@@ -90,8 +116,50 @@ class AppServiceProvider extends ServiceProvider
                 return in_array(basename($filename), ['RequestDataRepositoryContract.php']);
             })
             ->each(function ($filename) {
-                $this->app->bind('Contracts\Repositories\\'.basename($filename, '.php'), $this->getPrefix().'\Repositories\\'.basename(str_replace('Contract', '', $filename), '.php'));
+                $this->app->bind('Contracts\Repositories\\'.basename($filename, '.php'), $this->getRepository(basename(str_replace('Contract', '', $filename), '.php')));
             });
+    }
+
+    /**
+     * Auto-register site-specific service provider if it exists.
+     */
+    protected function registerSiteServiceProvider(): void
+    {
+        $siteNamespace = config('base.site_namespace', 'Site');
+
+        $providers = [
+            "App\\{$siteNamespace}\\{$siteNamespace}ServiceProvider",
+            "App\\{$siteNamespace}\\SiteServiceProvider",
+        ];
+
+        foreach ($providers as $provider) {
+            if (class_exists($provider)) {
+                $this->app->register($provider);
+                break;
+            }
+        }
+    }
+
+    /**
+     * Get the repository class, preferring its site overload under the site namespace.
+     */
+    public function getRepository(string $repository): string
+    {
+        $siteNamespace = config('base.site_namespace', 'Site');
+
+        if ($this->getPrefix() !== 'App') {
+            $siteStyleguide = 'App\\'.$siteNamespace.'\Styleguide\Repositories\\'.$repository;
+            if (class_exists($siteStyleguide)) {
+                return $siteStyleguide;
+            }
+        }
+
+        $site = 'App\\'.$siteNamespace.'\Repositories\\'.$repository;
+        if (class_exists($site)) {
+            return $site;
+        }
+
+        return $this->getPrefix().'\Repositories\\'.$repository;
     }
 
     /**

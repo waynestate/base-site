@@ -33,6 +33,26 @@ class PageRepository extends Repository
             $filename = $parsedPath->implode('');
         }
 
+        $siteNamespace = config('base.site_namespace', 'Site');
+        $sitePagesDir = 'app/'.$siteNamespace.'/Styleguide/Pages';
+
+        // Check site-specific styleguide pages first
+        if (Storage::disk('base')->exists($sitePagesDir)) {
+            $class_name = collect(Storage::disk('base')->allFiles($sitePagesDir))->filter(function ($item) use ($filename) {
+                return strtolower(basename($item)) == strtolower($filename).'.php';
+            })->map(function ($item) {
+                return basename($item, '.php');
+            })->first();
+
+            if ($class_name != null) {
+                $page = app('\\App\\'.$siteNamespace.'\\Styleguide\\Pages\\'.$class_name);
+
+                if (in_array('Contracts\Pages\StyleguidePageContract', class_implements($page))) {
+                    return $page;
+                }
+            }
+        }
+
         // Compare the path's class_name to the filesystem so we can eliminate case sensitivity issues
         $class_name = collect(Storage::disk('base')->allFiles('styleguide/Pages'))->filter(function ($item) use ($filename) {
             return strtolower(basename($item)) == strtolower($filename).'.php';

@@ -89,6 +89,7 @@ Or to run without progress bar (useful in CI environments):
 1. Open `/config/base.php`
 1. Edit the options to configure the site, some values are present in the `.env` file.
 1. Server specific configuration options come from the `.env` file which need to be manually created/updated on the servers the app is deployed to.
+1. To customize or override base functionality for a specific site (e.g. Nursing), set `SITE_NAMESPACE=Nursing` in `.env` (defaults to `Site`). Site-specific code lives in `/app/{SiteNamespace}/` and views in `/resources/views/{site_slug}/`.
 
 ## Request a WSU API key
 
@@ -117,6 +118,55 @@ Email web@wayne.edu with your request.
 1. Controllers should:
     * Dependency inject repositories into the constructor.
     * Call repositories to obtain data to send to the view.
+1. To change a base controller for a single site, don't edit it directly. Set `SITE_NAMESPACE=Nursing` in your `.env` file (defaults to `Site` if unset) and create a class with the same name in `/app/Nursing/Controllers/` that extends the base controller:
+
+    ```php
+    <?php
+
+    /*
+    * Status: Private
+    * Description: Article Template
+    * Default: false
+    */
+
+    namespace App\Nursing\Controllers;
+
+    use App\Http\Controllers\ArticleController as BaseArticleController;
+
+    class ArticleController extends BaseArticleController
+    {
+    }
+    ```
+
+    * It is resolved instead of the base controller for CMS wildcard pages, as well as for news, promo view, and profile view routes.
+    * Controllers that only exist for a single site also go in `/app/{SiteNamespace}/Controllers/`, extending `App\Http\Controllers\Controller`.
+
+### Developing repositories
+
+1. Repositories live in `/app/Repositories/` and are bound to the contract of the same name in `/contracts/Repositories/`. The styleguide binds the matching class in `/styleguide/Repositories/` instead.
+1. To customize a base repository for a single site, create a class with the same name in `/app/{SiteNamespace}/Repositories/` extending the base repository, and one in `/app/{SiteNamespace}/Styleguide/Repositories/` that extends the site repository:
+
+    ```php
+    <?php
+
+    namespace App\Nursing\Repositories;
+
+    use App\Repositories\ProfileRepository as BaseProfileRepository;
+
+    class ProfileRepository extends BaseProfileRepository
+    {
+    }
+    ```
+
+    * The contract (`Contracts\Repositories\ProfileRepositoryContract`) automatically resolves to the site's repository throughout the app.
+    * Global data callbacks in `config/base.php` (e.g. `'\Repositories\PromoRepository@getRequestData'`) also resolve to the site's repository.
+
+### Site Service Provider
+
+Sites can provide a dedicated service provider:
+- Place it at `/app/{SiteNamespace}/{SiteNamespace}ServiceProvider.php` (e.g. `App\Nursing\NursingServiceProvider`) or `/app/{SiteNamespace}/SiteServiceProvider.php`.
+- If present, it is automatically registered on boot.
+- Use it to register site-specific container bindings, view composers, or custom configurations.
 
 ## Developing views
 
@@ -124,6 +174,7 @@ Email web@wayne.edu with your request.
 1. This folder contains all the views for the front-end using the [blade templating engine](https://laravel.com/docs/)
 1. Files must be saved in the format of: `homepage.blade.php`
 1. Components: Contains views that are reusable
+1. To override a base view, layout, partial, or modular component for a site, create a file with the same relative path in `/resources/views/{site_slug}/` (e.g. `/resources/views/nursing/components/accordion.blade.php` or `/resources/views/nursing/homepage.blade.php`). Laravel's view finder automatically checks the site's view directory first before falling back to the base views.
 
 ## Pages
 
@@ -202,6 +253,34 @@ $menus = [
 ## Style guide development for a new feature
 
 Feature names should be singular and CamelCased. To create a new feature called "Spotlight": `php artisan base:feature Spotlight`
+
+To scaffold a feature for a specific site namespace:
+`php artisan base:feature Spotlight --site`
+
+This uses the `SITE_NAMESPACE` defined in `.env` (defaults to `Site`). You can also specify the site namespace explicitly:
+`php artisan base:feature Spotlight --site=Nursing`
+
+The command creates:
+* Controller: `app/{SiteNamespace}/Controllers/SpotlightController.php`
+* View: `resources/views/{site_slug}/spotlight.blade.php`
+* Styleguide page: `app/{SiteNamespace}/Styleguide/Pages/Spotlight.php`
+* Styleguide menu: `app/{SiteNamespace}/Styleguide/menu.json`
+
+## Style guide development for a new modular component
+
+Module names should be singular and kebab-cased. To create a new component called "expanding-grid": `php artisan base:module expanding-grid`
+
+To scaffold a modular component for a specific site namespace:
+`php artisan base:module expanding-grid --site`
+
+This uses the `SITE_NAMESPACE` defined in `.env` (defaults to `Site`). You can also specify the site namespace explicitly:
+`php artisan base:module expanding-grid --site=Nursing`
+
+The command creates:
+* Component view: `resources/views/{site_slug}/components/expanding-grid.blade.php`
+* Styleguide controller: `app/{SiteNamespace}/Styleguide/Controllers/ComponentExpandingGridController.php`
+* Styleguide page: `app/{SiteNamespace}/Styleguide/Pages/ComponentExpandingGrid.php`
+* Styleguide menu: `app/{SiteNamespace}/Styleguide/menu.json`
 
 ## Adding SVG icons
 

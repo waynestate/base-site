@@ -43,6 +43,17 @@ $global_config = [
 
     /*
     |--------------------------------------------------------------------------
+    | Site Namespace
+    |--------------------------------------------------------------------------
+    |
+    | Namespace where site-specific controllers, repositories, and providers
+    | reside under the App namespace (e.g. 'Nursing' resolves to App\Nursing).
+    |
+    */
+    'site_namespace' => env('SITE_NAMESPACE', 'Site'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Hero placement
     |--------------------------------------------------------------------------
     |

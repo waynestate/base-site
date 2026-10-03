@@ -39,4 +39,29 @@ abstract class TestCase extends BaseTestCase
         // Create a new faker that every test can use
         $this->faker = (new Factory())->create();
     }
+
+    /**
+     * Declare an empty class under the given name so class_exists() finds it.
+     */
+    protected function fakeClass(string $class): void
+    {
+        if (! class_exists($class, false)) {
+            class_alias(get_class(new class () {}), $class);
+        }
+    }
+
+    /**
+     * Swap the base disk for an empty fake holding only what the generator commands read.
+     */
+    protected function fakeBaseDisk(): void
+    {
+        $files = collect(\Illuminate\Support\Facades\Storage::disk('base')->files('stubs'))
+            ->push('styleguide/menu.json')
+            ->push('package.json')
+            ->mapWithKeys(fn ($path) => [$path => \Illuminate\Support\Facades\Storage::disk('base')->get($path)]);
+
+        \Illuminate\Support\Facades\Storage::fake('base');
+
+        $files->each(fn ($contents, $path) => \Illuminate\Support\Facades\Storage::disk('base')->put($path, $contents));
+    }
 }

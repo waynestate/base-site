@@ -8,6 +8,7 @@ use Factories\ApiError;
 use Factories\Menu;
 use Factories\Page;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Styleguide\Repositories\MenuRepository as StyleguideMenuRepository;
 use Tests\TestCase;
 use Mockery as Mockery;
@@ -684,5 +685,51 @@ final class MenuRepositoryTest extends TestCase
         $wsuApi = Mockery::mock(Connector::class);
         $wsuApi->shouldReceive('sendRequest')->with('cms.menuitems.listing', $params)->once()->andReturn([]);
         $menus = app(MenuRepository::class, ['wsuApi' => $wsuApi])->getAllMenus($site_id, $params['site_id']);
+    }
+
+    #[Test]
+    public function get_request_data_merges_site_menu_into_base_menu(): void
+    {
+        $this->fakeBaseDisk();
+        config(['base.site_namespace' => 'Nursing']);
+
+        $siteMenu = [
+            101 => [
+                'submenu' => [
+                    999 => [
+                        'submenu' => [
+                            999101 => [
+                                'menu_item_id' => 999101,
+                                'is_active' => 1,
+                                'page_id' => 999101,
+                                'target' => '',
+                                'display_name' => 'Custom Site Feature',
+                                'class_name' => '',
+                                'relative_url' => '/styleguide/custom-site-feature',
+                                'submenu' => [],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        Storage::disk('base')->put(
+            'app/Nursing/Styleguide/menu.json',
+            json_encode($siteMenu, JSON_PRETTY_PRINT)
+        );
+
+        $page = app(Page::class)->create(1, true, [
+            'page' => [
+                'id' => 999101,
+            ],
+        ]);
+
+        $menus = app(StyleguideMenuRepository::class)->getRequestData($page);
+
+        $this->assertArrayHasKey('site_menu', $menus);
+        $this->assertArrayHasKey(999, $menus['site_menu']['menu']);
+        $this->assertArrayHasKey(999101, $menus['site_menu']['menu'][999]['submenu']);
+        $this->assertSame('Custom Site Feature', $menus['site_menu']['menu'][999]['submenu'][999101]['display_name']);
     }
 }

@@ -36,6 +36,7 @@
     <exclude>
       <directory>./app/Providers</directory>
       <directory>./app/Console/Commands</directory>
+      <directory suffix=".php">./app/*/Styleguide</directory>
       <file>./app/Http/Kernel.php</file>
       <file>./app/Http/Controllers/Controller.php</file>
       <file>./app/Http/Middleware/EncryptCookies.php</file>

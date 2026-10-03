@@ -10,6 +10,8 @@ use Factories\GenericPromo;
 
 class ComponentDummyComponentController extends Controller
 {
+    protected array $faker = [];
+
     /**
      * Construct the controller.
      */
