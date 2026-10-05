@@ -48,10 +48,11 @@ class BaseModule extends Command
         $this->singleword = strtolower($this->camelcase);
         $this->titlecase = str_replace('-', ' ', ucwords($module, '-'));
 
-        // A site-specific component sharing a base component's name would silently replace it
+        // A site component or page sharing a base one's name would silently replace it
         if (collect([
             'resources/views/components/'.$this->lowercase.'.blade.php',
             'resources/views/site-specific/components/'.$this->lowercase.'.blade.php',
+            'styleguide/Pages/Component'.$this->camelcase.'.php',
         ])->contains(fn ($path) => Storage::disk('base')->exists($path))) {
             $this->error('Module "'.$this->lowercase.'" already exists, please use another name.');
 
@@ -64,11 +65,7 @@ class BaseModule extends Command
     protected function initializeStub($type)
     {
         $this->stub = Storage::disk('base')->get('stubs/'.$type.'.stub');
-        $this->stub = str_replace(
-            ['{{ custom }}', '{{ page }}'],
-            $this->option('base') ? ['', ''] : ['\Custom', 'Sitespecific'],
-            $this->stub
-        );
+        $this->stub = str_replace('{{ custom }}', $this->option('base') ? '' : '\Custom', $this->stub);
     }
 
     protected function localizeStub()
@@ -102,7 +99,7 @@ class BaseModule extends Command
 
     protected function styleguideMenu()
     {
-        $url = '/styleguide/component/'.($this->option('base') ? '' : 'sitespecific/').$this->singleword;
+        $url = '/styleguide/component/'.$this->singleword;
 
         // Base modules go under Components, ahead of its "Site specific" entry
         [$menu, $this->menuItemId] = $this->option('base')
@@ -120,7 +117,11 @@ class BaseModule extends Command
 
         $this->stub = str_replace('DummyId', (string) $this->menuItemId, $this->stub);
 
-        $this->write('styleguide/Pages/Component'.($this->option('base') ? '' : 'Sitespecific').$this->camelcase.'.php');
+        if ($this->option('base')) {
+            $this->stub = str_replace("use Styleguide\Pages\Page;\n", '', $this->stub);
+        }
+
+        $this->write('styleguide/Pages/'.($this->option('base') ? '' : 'Custom/').'Component'.$this->camelcase.'.php');
     }
 
     protected function write(string $path): void
