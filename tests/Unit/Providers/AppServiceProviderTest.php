@@ -33,11 +33,12 @@ final class AppServiceProviderTest extends TestCase
     }
 
     #[Test]
-    public function contracts_should_still_bind_base_repositories(): void
+    public function contracts_should_still_bind_repositories(): void
     {
-        $this->assertSame(
+        // A site may override the repository in Custom
+        $this->assertContains(get_class(app(ProfileRepositoryContract::class)), [
             'Styleguide\Repositories\ProfileRepository',
-            get_class(app(ProfileRepositoryContract::class))
-        );
+            'Styleguide\Repositories\Custom\ProfileRepository',
+        ]);
     }
 }
