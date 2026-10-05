@@ -1,8 +1,9 @@
 <?php
 
-namespace Styleguide\Pages;
+namespace Styleguide\Pages{{ custom }};
 
 use Factories\Page as PageFactory;
+use Styleguide\Pages\Page;
 
 class DummyPage extends Page
 {
