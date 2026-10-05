@@ -33,12 +33,12 @@ final class AppServiceProviderTest extends TestCase
     }
 
     #[Test]
-    public function contracts_should_still_bind_repositories(): void
+    public function contracts_should_bind_the_site_repository_when_one_exists(): void
     {
-        // A site may override the repository in Custom
-        $this->assertContains(get_class(app(ProfileRepositoryContract::class)), [
-            'Styleguide\Repositories\ProfileRepository',
-            'Styleguide\Repositories\Custom\ProfileRepository',
-        ]);
+        $expected = class_exists('Styleguide\Repositories\Custom\ProfileRepository')
+            ? 'Styleguide\Repositories\Custom\ProfileRepository'
+            : 'Styleguide\Repositories\ProfileRepository';
+
+        $this->assertSame($expected, get_class(app(ProfileRepositoryContract::class)));
     }
 }
