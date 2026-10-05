@@ -54,16 +54,19 @@ final class BaseFeatureTest extends TestCase
     }
 
     #[Test]
-    public function styleguide_page_should_be_under_site_specific(): void
+    public function styleguide_page_should_be_a_custom_page_under_site_specific(): void
     {
-        $page = Storage::disk('base')->get('styleguide/Pages/SitespecificFacultyBook.php');
-        $this->assertStringContainsString('class SitespecificFacultyBook extends Page', $page);
+        $page = Storage::disk('base')->get('styleguide/Pages/Custom/FacultyBook.php');
+        $this->assertStringContainsString('namespace Styleguide\Pages\Custom;', $page);
+        $this->assertStringContainsString('use Styleguide\Pages\Page;', $page);
+        $this->assertStringContainsString('class FacultyBook extends Page', $page);
         $this->assertStringContainsString("'controller' => 'FacultyBookController'", $page);
+        $this->assertFalse(Storage::disk('base')->exists('styleguide/Pages/SitespecificFacultyBook.php'));
 
         $menu = json_decode(Storage::disk('base')->get('styleguide/menu.json'), true);
         $item = end($menu[101]['submenu'][999]['submenu']);
         $this->assertSame('FacultyBook', $item['display_name']);
-        $this->assertSame('/styleguide/sitespecific/facultybook', $item['relative_url']);
+        $this->assertSame('/styleguide/facultybook', $item['relative_url']);
     }
 
     #[Test]
@@ -101,7 +104,10 @@ final class BaseFeatureTest extends TestCase
         $this->assertStringContainsString('use Factories\Award;', $disk->get('styleguide/Repositories/AwardRepository.php'));
         $this->assertStringContainsString('namespace Factories;', $disk->get('factories/Award.php'));
         $this->assertTrue($disk->exists('resources/views/award.blade.php'));
-        $this->assertStringContainsString('class Award extends Page', $disk->get('styleguide/Pages/Award.php'));
+        $page = $disk->get('styleguide/Pages/Award.php');
+        $this->assertStringContainsString('namespace Styleguide\Pages;', $page);
+        $this->assertStringNotContainsString('use Styleguide\Pages\Page;', $page);
+        $this->assertStringContainsString('class Award extends Page', $page);
         $this->assertFalse($disk->exists('app/Http/Controllers/Custom/AwardController.php'));
     }
 
@@ -131,5 +137,14 @@ final class BaseFeatureTest extends TestCase
 
         $this->artisan('base:feature', ['feature' => 'Article'])->assertFailed();
         $this->assertFalse(Storage::disk('base')->exists('app/Http/Controllers/Custom/ArticleController.php'));
+    }
+
+    #[Test]
+    public function feature_named_after_a_base_styleguide_page_should_fail(): void
+    {
+        Storage::disk('base')->put('styleguide/Pages/Directory.php', '');
+
+        $this->artisan('base:feature', ['feature' => 'Directory'])->assertFailed();
+        $this->assertFalse(Storage::disk('base')->exists('styleguide/Pages/Custom/Directory.php'));
     }
 }

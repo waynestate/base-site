@@ -91,7 +91,7 @@ class BaseFeature extends Command
 
     public function menu()
     {
-        $url = '/styleguide/'.($this->option('base') ? '' : 'sitespecific/').strtolower($this->feature);
+        $url = '/styleguide/'.strtolower($this->feature);
 
         // Base features go under Templates, ahead of its "Site specific" entry
         [$menu, $this->menuItemId] = $this->option('base')
@@ -105,11 +105,15 @@ class BaseFeature extends Command
     {
         $this->initializeStub('page');
         $this->replaceController();
-        $this->stub = str_replace('DummyPage', $this->getPage(), $this->stub);
+        $this->stub = str_replace('DummyPage', $this->feature, $this->stub);
         $this->stub = str_replace('DummyTitle', $this->feature, $this->stub);
         $this->stub = str_replace('DummyId', (string) $this->menuItemId, $this->stub);
 
-        Storage::disk('base')->put('styleguide/Pages/'.$this->getPage().'.php', $this->stub);
+        if ($this->option('base')) {
+            $this->stub = str_replace("use Styleguide\Pages\Page;\n", '', $this->stub);
+        }
+
+        Storage::disk('base')->put($this->custom('styleguide/Pages').$this->feature.'.php', $this->stub);
     }
 
     public function view()
@@ -132,10 +136,11 @@ class BaseFeature extends Command
     {
         $this->feature = ucfirst($feature);
 
-        // A Custom controller sharing a base controller's name would silently replace it
+        // A Custom controller or page sharing a base one's name would silently replace it
         if (collect([
             'app/Http/Controllers/'.$this->feature.'Controller.php',
             'app/Http/Controllers/Custom/'.$this->feature.'Controller.php',
+            'styleguide/Pages/'.$this->feature.'.php',
         ])->contains(fn ($path) => Storage::disk('base')->exists($path))) {
             $this->error('Feature already exists, please use another name.');
 
@@ -185,11 +190,6 @@ class BaseFeature extends Command
     public function getView()
     {
         return strtolower(preg_replace('/(?<!^)[A-Z]/', '-$0', $this->feature));
-    }
-
-    public function getPage(): string
-    {
-        return ($this->option('base') ? '' : 'Sitespecific').$this->feature;
     }
 
     public function getMenu()
