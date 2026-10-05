@@ -147,4 +147,22 @@ final class BaseFeatureTest extends TestCase
         $this->artisan('base:feature', ['feature' => 'Directory'])->assertFailed();
         $this->assertFalse(Storage::disk('base')->exists('styleguide/Pages/Custom/Directory.php'));
     }
+
+    #[Test]
+    public function feature_named_after_a_base_styleguide_page_in_another_case_should_fail(): void
+    {
+        Storage::disk('base')->put('styleguide/Pages/NewsTopics.php', '');
+
+        $this->artisan('base:feature', ['feature' => 'Newstopics'])->assertFailed();
+        $this->assertFalse(Storage::disk('base')->exists('styleguide/Pages/Custom/Newstopics.php'));
+    }
+
+    #[Test]
+    public function feature_named_after_an_existing_custom_page_should_fail(): void
+    {
+        Storage::disk('base')->put('styleguide/Pages/Custom/Award.php', 'hand-written');
+
+        $this->artisan('base:feature', ['feature' => 'Award'])->assertFailed();
+        $this->assertSame('hand-written', Storage::disk('base')->get('styleguide/Pages/Custom/Award.php'));
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Console\Commands\Concerns\AddsStyleguideMenuItems;
+use App\Console\Commands\Concerns\ChecksExistingFiles;
 use Illuminate\Console\Attributes\Description;
 use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Storage;
 class BaseModule extends Command
 {
     use AddsStyleguideMenuItems;
+    use ChecksExistingFiles;
 
     protected string $stub; // Stub file contents
     protected string $lowercase; // dummy-component
@@ -49,11 +51,12 @@ class BaseModule extends Command
         $this->titlecase = str_replace('-', ' ', ucwords($module, '-'));
 
         // A site component or page sharing a base one's name would silently replace it
-        if (collect([
+        if ($this->anyExists([
             'resources/views/components/'.$this->lowercase.'.blade.php',
             'resources/views/site-specific/components/'.$this->lowercase.'.blade.php',
             'styleguide/Pages/Component'.$this->camelcase.'.php',
-        ])->contains(fn ($path) => Storage::disk('base')->exists($path))) {
+            'styleguide/Pages/Custom/Component'.$this->camelcase.'.php',
+        ])) {
             $this->error('Module "'.$this->lowercase.'" already exists, please use another name.');
 
             return false;
