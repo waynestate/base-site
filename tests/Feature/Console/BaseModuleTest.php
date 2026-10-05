@@ -35,16 +35,19 @@ final class BaseModuleTest extends TestCase
     }
 
     #[Test]
-    public function styleguide_page_should_be_under_site_specific(): void
+    public function styleguide_page_should_be_a_custom_page_under_site_specific(): void
     {
-        $page = Storage::disk('base')->get('styleguide/Pages/ComponentSitespecificExpandingGrid.php');
-        $this->assertStringContainsString('class ComponentSitespecificExpandingGrid extends Page', $page);
+        $page = Storage::disk('base')->get('styleguide/Pages/Custom/ComponentExpandingGrid.php');
+        $this->assertStringContainsString('namespace Styleguide\Pages\Custom;', $page);
+        $this->assertStringContainsString('use Styleguide\Pages\Page;', $page);
+        $this->assertStringContainsString('class ComponentExpandingGrid extends Page', $page);
         $this->assertStringContainsString("'controller' => 'ComponentExpandingGridController'", $page);
+        $this->assertFalse(Storage::disk('base')->exists('styleguide/Pages/ComponentSitespecificExpandingGrid.php'));
 
         $menu = json_decode(Storage::disk('base')->get('styleguide/menu.json'), true);
         $item = end($menu[102]['submenu'][9999]['submenu']);
         $this->assertSame('Expanding Grid', $item['display_name']);
-        $this->assertSame('/styleguide/component/sitespecific/expandinggrid', $item['relative_url']);
+        $this->assertSame('/styleguide/component/expandinggrid', $item['relative_url']);
     }
 
     #[Test]
@@ -56,7 +59,10 @@ final class BaseModuleTest extends TestCase
 
         $this->assertTrue($disk->exists('resources/views/components/photo-strip.blade.php'));
         $this->assertStringContainsString('namespace Styleguide\Http\Controllers;', $disk->get('styleguide/Http/Controllers/ComponentPhotoStripController.php'));
-        $this->assertStringContainsString('class ComponentPhotoStrip extends Page', $disk->get('styleguide/Pages/ComponentPhotoStrip.php'));
+        $page = $disk->get('styleguide/Pages/ComponentPhotoStrip.php');
+        $this->assertStringContainsString('namespace Styleguide\Pages;', $page);
+        $this->assertStringNotContainsString('use Styleguide\Pages\Page;', $page);
+        $this->assertStringContainsString('class ComponentPhotoStrip extends Page', $page);
 
         $components = json_decode($disk->get('styleguide/menu.json'), true)[102]['submenu'];
         $keys = array_keys($components);
@@ -79,5 +85,14 @@ final class BaseModuleTest extends TestCase
 
         $this->artisan('base:module', ['name' => 'accordion'])->assertFailed();
         $this->assertFalse(Storage::disk('base')->exists('resources/views/site-specific/components/accordion.blade.php'));
+    }
+
+    #[Test]
+    public function module_named_after_a_base_styleguide_page_should_fail(): void
+    {
+        Storage::disk('base')->put('styleguide/Pages/ComponentPhotoStrip.php', '');
+
+        $this->artisan('base:module', ['name' => 'photo-strip'])->assertFailed();
+        $this->assertFalse(Storage::disk('base')->exists('resources/views/site-specific/components/photo-strip.blade.php'));
     }
 }
