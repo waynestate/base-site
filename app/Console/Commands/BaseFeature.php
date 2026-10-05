@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Console\Commands\Concerns\AddsStyleguideMenuItems;
+use App\Console\Commands\Concerns\ChecksExistingFiles;
 use Illuminate\Console\Attributes\Description;
 use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Storage;
 class BaseFeature extends Command
 {
     use AddsStyleguideMenuItems;
+    use ChecksExistingFiles;
 
     protected string $feature;
 
@@ -137,11 +139,12 @@ class BaseFeature extends Command
         $this->feature = ucfirst($feature);
 
         // A Custom controller or page sharing a base one's name would silently replace it
-        if (collect([
+        if ($this->anyExists([
             'app/Http/Controllers/'.$this->feature.'Controller.php',
             'app/Http/Controllers/Custom/'.$this->feature.'Controller.php',
             'styleguide/Pages/'.$this->feature.'.php',
-        ])->contains(fn ($path) => Storage::disk('base')->exists($path))) {
+            'styleguide/Pages/Custom/'.$this->feature.'.php',
+        ])) {
             $this->error('Feature already exists, please use another name.');
 
             return false;

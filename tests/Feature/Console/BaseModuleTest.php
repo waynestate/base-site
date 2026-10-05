@@ -95,4 +95,22 @@ final class BaseModuleTest extends TestCase
         $this->artisan('base:module', ['name' => 'photo-strip'])->assertFailed();
         $this->assertFalse(Storage::disk('base')->exists('resources/views/site-specific/components/photo-strip.blade.php'));
     }
+
+    #[Test]
+    public function module_named_after_a_base_styleguide_page_in_another_case_should_fail(): void
+    {
+        Storage::disk('base')->put('styleguide/Pages/ComponentPhotoStrip.php', '');
+
+        $this->artisan('base:module', ['name' => 'photostrip'])->assertFailed();
+        $this->assertFalse(Storage::disk('base')->exists('styleguide/Pages/Custom/ComponentPhotostrip.php'));
+    }
+
+    #[Test]
+    public function module_named_after_an_existing_custom_page_should_fail(): void
+    {
+        Storage::disk('base')->put('styleguide/Pages/Custom/ComponentPhotoStrip.php', 'hand-written');
+
+        $this->artisan('base:module', ['name' => 'photo-strip'])->assertFailed();
+        $this->assertSame('hand-written', Storage::disk('base')->get('styleguide/Pages/Custom/ComponentPhotoStrip.php'));
+    }
 }
