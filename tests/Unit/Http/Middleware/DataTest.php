@@ -407,4 +407,68 @@ final class DataTest extends TestCase
         app(Data::class)->handle($request, function () {
         });
     }
+
+    #[Test]
+    public function site_css_and_site_js_should_be_null_when_app_name_is_base(): void
+    {
+        config(['app.name' => 'base']);
+
+        $request = Request::create('styleguide');
+
+        app(Data::class)->handle($request, function ($request) {
+            $this->assertNull($request->data['base']['site_css']);
+            $this->assertNull($request->data['base']['site_js']);
+        });
+    }
+
+    #[Test]
+    public function site_css_and_site_js_should_be_null_when_not_in_manifest(): void
+    {
+        config(['app.name' => 'custom-nonexistent-site']);
+
+        $request = Request::create('styleguide');
+
+        app(Data::class)->handle($request, function ($request) {
+            $this->assertNull($request->data['base']['site_css']);
+            $this->assertNull($request->data['base']['site_js']);
+        });
+    }
+
+    #[Test]
+    public function site_css_and_site_js_should_return_path_when_in_manifest(): void
+    {
+        config(['app.name' => '404']);
+
+        $request = Request::create('styleguide');
+
+        app(Data::class)->handle($request, function ($request) {
+            $this->assertEquals('_resources/css/404.css', $request->data['base']['site_css']);
+            $this->assertNull($request->data['base']['site_js']);
+        });
+    }
+
+    #[Test]
+    public function get_mix_manifest_returns_empty_array_when_file_does_not_exist(): void
+    {
+        $manifest = app(Data::class)->getMixManifest('nonexistent-mix-manifest.json');
+
+        $this->assertSame([], $manifest);
+    }
+
+    #[Test]
+    public function get_site_js_returns_path_when_in_manifest(): void
+    {
+        $js = app(Data::class)->getSiteJs('main');
+
+        $this->assertEquals('_resources/js/main.js', $js);
+    }
+
+    #[Test]
+    public function site_css_and_site_js_should_be_null_when_app_name_is_empty(): void
+    {
+        config(['app.name' => '']);
+
+        $this->assertNull(app(Data::class)->getSiteCss());
+        $this->assertNull(app(Data::class)->getSiteJs());
+    }
 }

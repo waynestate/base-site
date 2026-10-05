@@ -78,6 +78,10 @@ class Data
         // Determine whether the global header should be shown based on the request
         $request->data['show_header'] = !$request->cookies->has(config('base.exclude_header_cookie'));
 
+        // Site-specific additive styles and scripts
+        $request->data['site_css'] = $this->getSiteCss();
+        $request->data['site_js'] = $this->getSiteJs();
+
         // Get the global data config
         $config = config('base.global');
 
@@ -159,5 +163,53 @@ class Data
             ->implode('/');
 
         return ! empty($request->any) ? $request->any.$path : $path;
+    }
+
+    /**
+     * Get the site-specific CSS file path if it exists in the mix manifest.
+     */
+    public function getSiteCss(?string $site = null): ?string
+    {
+        $site = Str::slug($site ?? config('app.name', 'base'));
+
+        if (empty($site) || $site === 'base') {
+            return null;
+        }
+
+        $manifest = $this->getMixManifest();
+        $path = '/_resources/css/'.$site.'.css';
+
+        return isset($manifest[$path]) ? '_resources/css/'.$site.'.css' : null;
+    }
+
+    /**
+     * Get the site-specific JS file path if it exists in the mix manifest.
+     */
+    public function getSiteJs(?string $site = null): ?string
+    {
+        $site = Str::slug($site ?? config('app.name', 'base'));
+
+        if (empty($site) || $site === 'base') {
+            return null;
+        }
+
+        $manifest = $this->getMixManifest();
+        $path = '/_resources/js/'.$site.'.js';
+
+        return isset($manifest[$path]) ? '_resources/js/'.$site.'.js' : null;
+    }
+
+    /**
+     * Get the mix manifest array.
+     */
+    public function getMixManifest(?string $path = null): array
+    {
+        $path = $path ?? public_path('mix-manifest.json');
+
+        if (! file_exists($path)) {
+            return [];
+        }
+
+        return json_decode((string) file_get_contents($path), true) ?: [];
     }
 }
