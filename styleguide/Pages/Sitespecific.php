@@ -29,7 +29,7 @@ class Sitespecific extends Page
                         <li>`styleguide/Repositories/Custom/FacultyBookRepository.php`</li>
                         <li>`factories/Custom/FacultyBook.php`</li>
                         <li>`resources/views/site-specific/faculty-book.blade.php`</li>
-                        <li>`styleguide/Pages/SitespecificFacultyBook.php`, added to the menu under Templates > Site specific</li>
+                        <li>`styleguide/Pages/Custom/FacultyBook.php`, served at `/styleguide/facultybook` and added to the menu under Templates > Site specific</li>
                     </ul></p>',
                 ],
             ],

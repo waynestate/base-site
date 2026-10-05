@@ -58,7 +58,7 @@ final class PageRepositoryTest extends TestCase
     {
         return collect(Storage::disk('base')->allFiles('styleguide/Pages'))
             ->reject(function ($filename) {
-                return in_array(basename($filename), ['Page.php']);
+                return ! str_ends_with($filename, '.php') || in_array(basename($filename), ['Page.php']);
             })
             ->map(function ($filename) use ($handle_exceptions) {
                 $path = app('Styleguide\\'.str_replace('/', '\\', substr($filename, strlen('styleguide/'), -strlen('.php'))))->getPath();
