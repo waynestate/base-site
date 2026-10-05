@@ -61,7 +61,7 @@ final class PageRepositoryTest extends TestCase
                 return in_array(basename($filename), ['Page.php']);
             })
             ->map(function ($filename) use ($handle_exceptions) {
-                $path = app('Styleguide\Pages\\'.basename($filename, '.php'))->getPath();
+                $path = app('Styleguide\\'.str_replace('/', '\\', substr($filename, strlen('styleguide/'), -strlen('.php'))))->getPath();
 
                 try {
                     $response = $this->call('GET', $path);
