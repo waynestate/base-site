@@ -125,6 +125,19 @@ Email web@wayne.edu with your request.
 1. Files must be saved in the format of: `homepage.blade.php`
 1. Components: Contains views that are reusable
 
+## Site-specific styles and scripts
+
+Base supports additive site-specific CSS and JavaScript bundles based on the site domain configured via `APP_NAME` in `.env`.
+
+All site assets are compiled up front during the build process (`make build` or `make buildproduction`) so a single codebase or build artifact can be deployed across multiple sites without rebuilding assets per site. At runtime, the site's matching CSS and JS files are automatically loaded additively in the layout after `main.css` and `main.js`.
+
+1. Create the entrypoint file(s) for your site under `resources/scss/{site}/main.scss` and/or `resources/js/{site}/main.js` (where `{site}` matches the domain in `APP_NAME`):
+    * `resources/scss/{site}/main.scss` compiles to `public/_resources/css/{site}.css`
+    * `resources/js/{site}/main.js` compiles to `public/_resources/js/{site}.js`
+1. Run `make build` (dev) or `make buildproduction` (prod) to compile assets into `public/_resources/`.
+1. Set `APP_NAME={site}` in the site's `.env` file (e.g., `APP_NAME=nursing`).
+1. The site's additive stylesheet and script will automatically be included in the `<head>` and `<body>` of the layout. Sites can include CSS only, JS only, or both.
+
 ## Pages
 
 Pages are written from the content management system automatically. To replicate what it writes you can use the following JSON format to create pages. Example homeage: `storage/app/public/index.json`.
