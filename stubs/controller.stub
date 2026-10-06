@@ -5,10 +5,9 @@
 * Default: false
 */
 
-namespace App\Http\Controllers{{ custom }};
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Contracts\Repositories{{ custom }}\DummyRepositoryContract;
+use Contracts\Repositories\DummyRepositoryContract;
 use Illuminate\Http\Request;
 
 class DummyController extends Controller

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories{{ custom }};
+namespace App\Repositories;
 
-use Contracts\Repositories{{ custom }}\DummyRepositoryContract;
+use Contracts\Repositories\DummyRepositoryContract;
 use Illuminate\Cache\Repository;
 use Waynestate\Api\Connector;
 use Waynestate\Promotions\ParsePromos;

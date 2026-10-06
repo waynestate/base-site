@@ -51,6 +51,20 @@ final class BaseModuleTest extends TestCase
     }
 
     #[Test]
+    public function site_specific_components_should_be_added_alphabetically(): void
+    {
+        $this->artisan('base:module', ['name' => 'tabbed-cards'])->assertSuccessful();
+        $this->artisan('base:module', ['name' => 'award-list'])->assertSuccessful();
+        $this->artisan('base:module', ['name' => 'quote-row'])->assertSuccessful();
+
+        $menu = json_decode(Storage::disk('base')->get('styleguide/menu.json'), true);
+        $this->assertSame(
+            ['Award List', 'Expanding Grid', 'Quote Row', 'Tabbed Cards'],
+            array_column($menu[102]['submenu'][9999]['submenu'], 'display_name')
+        );
+    }
+
+    #[Test]
     public function base_option_should_scaffold_into_base_folders(): void
     {
         $this->artisan('base:module', ['name' => 'photo-strip', '--base' => true])->assertSuccessful();

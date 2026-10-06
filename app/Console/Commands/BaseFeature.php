@@ -9,7 +9,7 @@ use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 
-#[Signature('base:feature {feature} {--base : Scaffold into base\'s own folders instead of the site\'s Custom ones}')]
+#[Signature('base:feature {feature} {--base : Scaffold a base feature, with its view outside site-specific/ and its page under Templates}')]
 #[Description('Scaffold out files for a new feature, use singular form of feature name, e.g. "Spotlight"')]
 class BaseFeature extends Command
 {
@@ -52,11 +52,7 @@ class BaseFeature extends Command
         $this->stub = str_replace('Dummy Template', $this->feature.' Template', $this->stub);
         $this->stub = str_replace('DummyView', $this->getView(), $this->stub);
 
-        if ($this->option('base')) {
-            $this->stub = str_replace("use App\Http\Controllers\Controller;\n", '', $this->stub);
-        }
-
-        Storage::disk('base')->put($this->custom('app/Http/Controllers').$this->feature.'Controller.php', $this->stub);
+        Storage::disk('base')->put('app/Http/Controllers/'.$this->feature.'Controller.php', $this->stub);
     }
 
     public function contract()
@@ -66,7 +62,7 @@ class BaseFeature extends Command
         $this->stub = str_replace('getDummy', 'get'.$this->feature, $this->stub);
         $this->stub = str_replace('dummy', strtolower($this->feature), $this->stub);
 
-        Storage::disk('base')->put($this->custom('contracts/Repositories').$this->feature.'RepositoryContract.php', $this->stub);
+        Storage::disk('base')->put('contracts/Repositories/'.$this->feature.'RepositoryContract.php', $this->stub);
     }
 
     public function repository()
@@ -77,7 +73,7 @@ class BaseFeature extends Command
         $this->stub = str_replace('getDummy', 'get'.$this->feature, $this->stub);
         $this->stub = str_replace('dummy', strtolower($this->feature), $this->stub);
 
-        Storage::disk('base')->put($this->custom('app/Repositories').$this->feature.'Repository.php', $this->stub);
+        Storage::disk('base')->put('app/Repositories/'.$this->feature.'Repository.php', $this->stub);
     }
 
     public function repositoryStyleguide()
@@ -88,17 +84,19 @@ class BaseFeature extends Command
         $this->stub = str_replace('dummy', strtolower($this->feature), $this->stub);
         $this->stub = str_replace('DummyFactory', $this->feature, $this->stub);
 
-        Storage::disk('base')->put($this->custom('styleguide/Repositories').$this->feature.'Repository.php', $this->stub);
+        Storage::disk('base')->put('styleguide/Repositories/'.$this->feature.'Repository.php', $this->stub);
     }
 
     public function menu()
     {
         $url = '/styleguide/'.strtolower($this->feature);
 
-        // Base features go under Templates, ahead of its "Site specific" entry
+        $menu = $this->getMenu();
+
+        // Base features go under Templates, ahead of its "Site specific" entry; site features are alphabetical after its guide
         [$menu, $this->menuItemId] = $this->option('base')
-            ? $this->addMenuItem($this->getMenu(), '101.submenu', 101, $this->feature, $url, before: 999)
-            : $this->addMenuItem($this->getMenu(), '101.submenu.999.submenu', 999, $this->feature, $url);
+            ? $this->addMenuItem($menu, '101.submenu', 101, $this->feature, $url, before: 999)
+            : $this->addMenuItem($menu, '101.submenu.999.submenu', 999, $this->feature, $url, before: $this->alphabeticalBefore($menu[101]['submenu'][999]['submenu'] ?? [], $this->feature, pinned: 1));
 
         Storage::disk('base')->put('styleguide/menu.json', json_encode($menu, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
     }
@@ -111,11 +109,7 @@ class BaseFeature extends Command
         $this->stub = str_replace('DummyTitle', $this->feature, $this->stub);
         $this->stub = str_replace('DummyId', (string) $this->menuItemId, $this->stub);
 
-        if ($this->option('base')) {
-            $this->stub = str_replace("use Styleguide\Pages\Page;\n", '', $this->stub);
-        }
-
-        Storage::disk('base')->put($this->custom('styleguide/Pages').$this->feature.'.php', $this->stub);
+        Storage::disk('base')->put('styleguide/Pages/'.$this->feature.'.php', $this->stub);
     }
 
     public function view()
@@ -131,14 +125,14 @@ class BaseFeature extends Command
         $this->initializeStub('factory');
         $this->stub = str_replace('DummyFactory', $this->feature, $this->stub);
 
-        Storage::disk('base')->put($this->custom('factories').$this->feature.'.php', $this->stub);
+        Storage::disk('base')->put('factories/'.$this->feature.'.php', $this->stub);
     }
 
     public function setFeature($feature): bool
     {
         $this->feature = ucfirst($feature);
 
-        // A Custom controller or page sharing a base one's name would silently replace it
+        // Don't overwrite an existing feature, or add one that a Custom overload would shadow
         if ($this->anyExists([
             'app/Http/Controllers/'.$this->feature.'Controller.php',
             'app/Http/Controllers/Custom/'.$this->feature.'Controller.php',
@@ -156,19 +150,7 @@ class BaseFeature extends Command
     public function initializeStub($type)
     {
         $this->stub = Storage::disk('base')->get('stubs/'.$type.'.stub');
-        $this->stub = str_replace(
-            ['{{ custom }}', '{{ views }}'],
-            $this->option('base') ? ['', ''] : ['\Custom', 'site-specific.'],
-            $this->stub
-        );
-    }
-
-    /**
-     * Folder to write to, with a trailing slash: the Custom subfolder unless --base.
-     */
-    public function custom(string $folder): string
-    {
-        return $folder.($this->option('base') ? '/' : '/Custom/');
+        $this->stub = str_replace('{{ views }}', $this->option('base') ? '' : 'site-specific.', $this->stub);
     }
 
     public function replaceContract()

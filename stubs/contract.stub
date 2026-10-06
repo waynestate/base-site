@@ -1,6 +1,6 @@
 <?php
 
-namespace Contracts\Repositories{{ custom }};
+namespace Contracts\Repositories;
 
 interface DummyRepositoryContract
 {
