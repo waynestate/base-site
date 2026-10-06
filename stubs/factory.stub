@@ -1,6 +1,6 @@
 <?php
 
-namespace Factories{{ custom }};
+namespace Factories;
 
 use Contracts\Factories\FactoryContract;
 use Faker\Factory;

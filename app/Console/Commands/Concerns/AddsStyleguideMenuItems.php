@@ -45,6 +45,16 @@ trait AddsStyleguideMenuItems
     }
 
     /**
+     * Get the key of the first item, after the $pinned leading ones, whose name sorts after the given one.
+     */
+    protected function alphabeticalBefore(array $items, string $name, int $pinned = 0): ?int
+    {
+        $key = collect($items)->skip($pinned)->search(fn ($item) => strcasecmp($item['display_name'], $name) > 0);
+
+        return $key === false ? null : $key;
+    }
+
+    /**
      * Get the next id after the given one that no menu item or page in the menu uses yet.
      */
     protected function nextMenuItemId(array $menu, int $id): int

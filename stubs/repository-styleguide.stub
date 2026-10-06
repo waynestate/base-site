@@ -1,9 +1,9 @@
 <?php
 
-namespace Styleguide\Repositories{{ custom }};
+namespace Styleguide\Repositories;
 
-use App\Repositories{{ custom }}\DummyRepository as Repository;
-use Factories{{ custom }}\DummyFactory;
+use App\Repositories\DummyRepository as Repository;
+use Factories\DummyFactory;
 
 class DummyRepository extends Repository
 {

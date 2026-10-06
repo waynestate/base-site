@@ -104,10 +104,12 @@ class BaseModule extends Command
     {
         $url = '/styleguide/component/'.$this->singleword;
 
-        // Base modules go under Components, ahead of its "Site specific" entry
+        $menu = $this->getMenu();
+
+        // Base modules go under Components, ahead of its "Site specific" entry; site modules are alphabetical
         [$menu, $this->menuItemId] = $this->option('base')
-            ? $this->addMenuItem($this->getMenu(), '102.submenu', 102, $this->titlecase, $url, before: 9999)
-            : $this->addMenuItem($this->getMenu(), '102.submenu.9999.submenu', 9999, $this->titlecase, $url);
+            ? $this->addMenuItem($menu, '102.submenu', 102, $this->titlecase, $url, before: 9999)
+            : $this->addMenuItem($menu, '102.submenu.9999.submenu', 9999, $this->titlecase, $url, before: $this->alphabeticalBefore($menu[102]['submenu'][9999]['submenu'] ?? [], $this->titlecase));
 
         Storage::disk('base')->put('styleguide/menu.json', json_encode($menu, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
         $this->line('styleguide/menu.json written successfully.');
