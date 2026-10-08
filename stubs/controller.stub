@@ -32,6 +32,6 @@ class DummyController extends Controller
     {
         $dummyitems = $this->dummy->getDummyItems();
 
-        return view('DummyView', merge($request->data, $dummyitems));
+        return view('{{ views }}DummyView', merge($request->data, $dummyitems));
     }
 }

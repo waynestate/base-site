@@ -12,7 +12,14 @@ modular-component {
 @if(!empty($base['components']))
     <div id="component-loop" class="flex flex-wrap items-start mt:justify-center">
         @foreach($base['components'] as $componentName => $component)
-            @if(!empty($component['data']) && !empty($component['component']['filename']) && \View::exists('components/'.$component['component']['filename']))
+            @php
+                $componentView = null;
+
+                if (!empty($component['component']['filename'])) {
+                    $componentView = component_view($component['component']['filename']);
+                }
+            @endphp
+            @if(!empty($component['data']) && $componentView !== null && \View::exists($componentView))
                 <section id="{{ Str::slug($componentName) }}" class="relative w-full {{ $component['component']['containerClass'] ?? ''}}">
                     <div class="component__container {{ $component['component']['componentClass'] ?? ''}} {{ in_array($base['page']['controller'], config('base.full_width_controllers')) ? '' : 'relative' }}">
                         <div class="component__background {{ $component['component']['backgroundClass'] ?? ''}}" {!! $component['component']['backgroundImageUrl'] ?? '' !!}></div>
@@ -24,7 +31,7 @@ modular-component {
                             ])
                         @endif
                         @if(!empty($component['data']))
-                            @include('components/'.$component['component']['filename'], [
+                            @include($componentView, [
                                 'data' => $component['data'], 
                                 'component' => $component['component']
                             ])
