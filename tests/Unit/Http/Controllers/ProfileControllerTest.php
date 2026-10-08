@@ -5,6 +5,7 @@ namespace Tests\Unit\Http\Controllers;
 use PHPUnit\Framework\Attributes\Test;
 use App\Http\Controllers\ProfileController;
 use App\Repositories\ProfileRepository;
+use Factories\Page;
 use Tests\TestCase;
 use Mockery as Mockery;
 use Illuminate\Http\Request;
@@ -23,6 +24,21 @@ final class ProfileControllerTest extends TestCase
 
         // Call the profile listing
         $view = $this->profileController->show(new Request());
+    }
+
+    #[Test]
+    public function multiple_forced_group_ids_should_hide_filtering(): void
+    {
+        $request = new Request();
+        $request->data = ['base' => app(Page::class)->create(1, true, ['data' => ['profile_group_id' => '10|11']])];
+
+        $profileRepository = Mockery::mock(ProfileRepository::class)->makePartial();
+        $profileRepository->shouldReceive('getDropdownOfGroups')->once()->andReturn(['dropdown_groups' => ['' => 'All Profiles', 10 => 'A', 11 => 'B']]);
+        $profileRepository->shouldReceive('getProfiles')->once()->with(Mockery::any(), '10|11', Mockery::any())->andReturn(['profiles' => []]);
+
+        $view = app(ProfileController::class, ['profile' => $profileRepository])->index($request);
+
+        $this->assertTrue($view->getData()['hide_filtering']);
     }
 
     #[Test]

@@ -26,7 +26,7 @@ interface ProfileRepositoryContract
      * Get the dropdown config options.
      *
      * @param  int|null  $selected_group
-     * @param  int|null  $forced_profile_group_id
+     * @param  int|string|null  $forced_profile_group_id
      * @param  array  $profiles
      * @return array
      */

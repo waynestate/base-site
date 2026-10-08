@@ -50,7 +50,8 @@ class ProfileController extends Controller
         $selected_group_str = is_array($selected_group) ? null : ($selected_group !== null ? (string) $selected_group : null);
         // Normalize forced group id for both methods
         $forced_profile_group_id_str = $forced_profile_group_id !== null ? (string) $forced_profile_group_id : null;
-        $forced_profile_group_id_int = is_numeric($forced_profile_group_id) ? (int) $forced_profile_group_id : null;
+        // Keep multiple ids (e.g. "1|2") so the dropdown still hides
+        $forced_profile_group_id_option = is_numeric($forced_profile_group_id) ? (int) $forced_profile_group_id : $forced_profile_group_id_str;
 
         // Determine which group(s) to filter by
         /** @var array $dropdown_groups_arr */
@@ -61,7 +62,7 @@ class ProfileController extends Controller
         $profiles = $this->profile->getProfiles($site_id, $group_ids, $request->data['base']['site']['subsite-folder'] ?? null);
 
         // Get the options for the dropdown (pass profiles to determine if filtering should be hidden)
-        $dropdown_group_options = $this->profile->getDropdownOptions($selected_group_id, $forced_profile_group_id_int, $profiles);
+        $dropdown_group_options = $this->profile->getDropdownOptions($selected_group_id, $forced_profile_group_id_option, $profiles);
 
         // Disable hero images
         $request->data['base']['hero'] = false;
