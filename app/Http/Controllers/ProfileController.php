@@ -60,6 +60,11 @@ class ProfileController extends Controller
         // Get the profiles
         $profiles = $this->profile->getProfiles($site_id, $group_ids, $request->data['base']['site']['subsite-folder'] ?? null);
 
+        // Order specific profiles first
+        if (!empty(config('base.profile.profiles_by_accessid')) && !empty($profiles['profiles'])) {
+            $profiles['profiles'] = $this->profile->orderProfilesById($profiles['profiles'], config('base.profile.profiles_by_accessid'));
+        }
+
         // Get the options for the dropdown (pass profiles to determine if filtering should be hidden)
         $dropdown_group_options = $this->profile->getDropdownOptions($selected_group_id, $forced_profile_group_id_int, $profiles);
 
