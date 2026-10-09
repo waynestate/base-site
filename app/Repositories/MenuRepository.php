@@ -121,11 +121,11 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
             $menus['show_site_menu'] = false;
         }
 
-        // Hide the site menu or breadcrumbs with the modular-page-config component
-        $menus = $this->menuDisplayToggles($menus, $data);
-
         // Get the surtitle
         $menus = array_merge($menus, $this->getSurtitle($data['site']));
+
+        // Hide the site menu or breadcrumbs with the modular-page-config component
+        $menus = $this->menuDisplayToggles($menus, $data);
 
         return $menus;
     }
@@ -287,6 +287,10 @@ class MenuRepository implements RequestDataRepositoryContract, MenuRepositoryCon
 
                     if (isset($componentJSON['showPageMenu']) && $componentJSON['showPageMenu'] === false) {
                         $menus['show_site_menu'] = false;
+                    }
+
+                    if (isset($componentJSON['showPageMenu']) && $componentJSON['showPageMenu'] === true) {
+                        $menus['show_site_menu'] = true;
                     }
 
                     if (isset($componentJSON['showBreadcrumbs']) && $componentJSON['showBreadcrumbs'] === false) {
