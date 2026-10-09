@@ -78,9 +78,16 @@ class Data
         // Determine whether the global header should be shown based on the request
         $request->data['show_header'] = !$request->cookies->has(config('base.exclude_header_cookie'));
 
+        $styleguideSites = (using_styleguide() && config('app.name') === 'base')
+            ? $this->getAvailableStyleguideSites()
+            : [];
+        $previewApp = $this->getStyleguidePreviewApp($request, $styleguideSites);
+
         // Site-specific additive styles and scripts
-        $request->data['site_css'] = $this->getSiteCss();
-        $request->data['site_js'] = $this->getSiteJs();
+        $request->data['site_css'] = $this->getSiteCss($previewApp);
+        $request->data['site_js'] = $this->getSiteJs($previewApp);
+        $request->data['styleguide_sites'] = $styleguideSites;
+        $request->data['styleguide_selected_site'] = $previewApp;
 
         // Get the global data config
         $config = config('base.global');
@@ -211,5 +218,51 @@ class Data
         }
 
         return json_decode((string) file_get_contents($path), true) ?: [];
+    }
+
+    /**
+     * Get the available custom sites from the mix manifest.
+     *
+     * @return array<string, string>
+     */
+    public function getAvailableStyleguideSites(?array $manifest = null): array
+    {
+        $manifest = $manifest ?? $this->getMixManifest();
+        $reserved = ['main', '404', '403', '429', '500'];
+        $sites = [];
+
+        foreach (array_keys($manifest) as $path) {
+            if (preg_match('#^/_resources/(css|js)/([a-zA-Z0-9_-]+)\.(css|js)$#', $path, $matches)) {
+                $site = $matches[2];
+                if (! in_array($site, $reserved, true) && ! isset($sites[$site])) {
+                    $sites[$site] = Str::headline($site);
+                }
+            }
+        }
+
+        ksort($sites);
+
+        return $sites;
+    }
+
+    /**
+     * Get the active styleguide preview site name from query param or cookie.
+     */
+    public function getStyleguidePreviewApp(Request $request, ?array $availableSites = null): ?string
+    {
+        if (! using_styleguide() || config('app.name') !== 'base') {
+            return null;
+        }
+
+        $app = $request->query('app', $request->cookie('styleguide_app'));
+
+        if (! is_string($app) || empty($app)) {
+            return null;
+        }
+
+        $app = Str::slug($app);
+        $available = $availableSites ?? $this->getAvailableStyleguideSites();
+
+        return array_key_exists($app, $available) ? $app : null;
     }
 }

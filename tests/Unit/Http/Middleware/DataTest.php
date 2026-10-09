@@ -471,4 +471,111 @@ final class DataTest extends TestCase
         $this->assertNull(app(Data::class)->getSiteCss());
         $this->assertNull(app(Data::class)->getSiteJs());
     }
+
+    #[Test]
+    public function get_available_styleguide_sites_extracts_and_sorts_valid_sites_from_manifest(): void
+    {
+        $manifest = [
+            '/_resources/css/main.css' => '/_resources/css/main.css',
+            '/_resources/css/404.css' => '/_resources/css/404.css',
+            '/_resources/css/nursing.css' => '/_resources/css/nursing.css',
+            '/_resources/js/nursing.js' => '/_resources/js/nursing.js',
+            '/_resources/css/icons-column.css' => '/_resources/css/icons-column.css',
+            '/_resources/images/background.svg' => '/_resources/images/background.svg',
+        ];
+
+        $sites = app(Data::class)->getAvailableStyleguideSites($manifest);
+
+        $this->assertEquals([
+            'icons-column' => 'Icons Column',
+            'nursing' => 'Nursing',
+        ], $sites);
+    }
+
+    #[Test]
+    public function get_styleguide_preview_app_returns_null_when_not_in_styleguide(): void
+    {
+        config(['app.env' => 'local', 'app.name' => 'base']);
+        unset($_SERVER['REQUEST_URI']);
+
+        $request = Request::create('/', 'GET', ['app' => 'nursing']);
+
+        $this->assertNull(app(Data::class)->getStyleguidePreviewApp($request, ['nursing' => 'Nursing']));
+    }
+
+    #[Test]
+    public function get_styleguide_preview_app_returns_null_when_app_name_is_not_base(): void
+    {
+        config(['app.name' => 'nursing']);
+
+        $request = Request::create('styleguide', 'GET', ['app' => 'nursing']);
+
+        $this->assertNull(app(Data::class)->getStyleguidePreviewApp($request, ['nursing' => 'Nursing']));
+    }
+
+    #[Test]
+    public function get_styleguide_preview_app_returns_null_when_no_query_param_or_cookie(): void
+    {
+        config(['app.name' => 'base']);
+
+        $request = Request::create('styleguide', 'GET');
+
+        $this->assertNull(app(Data::class)->getStyleguidePreviewApp($request, ['nursing' => 'Nursing']));
+    }
+
+    #[Test]
+    public function get_styleguide_preview_app_returns_slug_from_query_parameter(): void
+    {
+        config(['app.name' => 'base']);
+
+        $request = Request::create('styleguide', 'GET', ['app' => 'nursing']);
+
+        $this->assertEquals('nursing', app(Data::class)->getStyleguidePreviewApp($request, ['nursing' => 'Nursing']));
+    }
+
+    #[Test]
+    public function get_styleguide_preview_app_returns_slug_from_cookie_when_no_query(): void
+    {
+        config(['app.name' => 'base']);
+
+        $request = Request::create('styleguide', 'GET', [], ['styleguide_app' => 'nursing']);
+
+        $this->assertEquals('nursing', app(Data::class)->getStyleguidePreviewApp($request, ['nursing' => 'Nursing']));
+    }
+
+    #[Test]
+    public function get_styleguide_preview_app_returns_null_for_invalid_site_not_in_available_sites(): void
+    {
+        config(['app.name' => 'base']);
+
+        $request = Request::create('styleguide', 'GET', ['app' => 'nonexistent']);
+
+        $this->assertNull(app(Data::class)->getStyleguidePreviewApp($request, ['nursing' => 'Nursing']));
+    }
+
+    #[Test]
+    public function handle_sets_styleguide_sites_and_selected_site(): void
+    {
+        config(['app.name' => 'base']);
+
+        $request = Request::create('styleguide');
+
+        app(Data::class)->handle($request, function ($request) {
+            $this->assertIsArray($request->data['base']['styleguide_sites']);
+            $this->assertNull($request->data['base']['styleguide_selected_site']);
+        });
+    }
+
+    #[Test]
+    public function handle_does_not_set_styleguide_sites_when_not_on_base(): void
+    {
+        config(['app.name' => 'nursing']);
+
+        $request = Request::create('styleguide');
+
+        app(Data::class)->handle($request, function ($request) {
+            $this->assertSame([], $request->data['base']['styleguide_sites']);
+            $this->assertNull($request->data['base']['styleguide_selected_site']);
+        });
+    }
 }
