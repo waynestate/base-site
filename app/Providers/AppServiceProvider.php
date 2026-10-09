@@ -6,6 +6,9 @@ use App;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
+use App\Support\FakerFactory;
+use Faker\Factory;
+use Faker\Generator;
 use URL;
 use Waynestate\Api\Connector;
 
@@ -74,6 +77,12 @@ class AppServiceProvider extends ServiceProvider
         if (using_styleguide()) {
             $this->prefix = 'Styleguide';
         }
+
+        // Faker
+        $this->app->singleton(Factory::class, FakerFactory::class);
+        $this->app->singleton(Generator::class, function () {
+            return fake();
+        });
 
         // WSU API
         $this->app->bind('Waynestate\Api\Connector', function () {
