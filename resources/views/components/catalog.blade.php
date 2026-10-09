@@ -16,13 +16,13 @@
             @endif
 
             @if(!empty($component['columns']) && $component['columns'] == 1)
-                <div class="grid gap-8 mt-6">
+                <div class="catalog__items">
                     @foreach($group_items as $item)
                         @include('components/promo/list-item', [$component['imageSize'] = 'small'])
                     @endforeach
                 </div>
             @else
-                <div class="grid gap-8 mt-6 {{ !empty($component['columns']) && $component['columns'] % 2 == 0 ? ($component['columns'] >= 4 ? ' grid-cols-2' : ' sm-grid-cols-2').' md:grid-cols-3 xl:grid-cols-'.($component['columns']) : ' sm:grid-cols-2 md:grid-cols-3' }}"> 
+                <div @class(['catalog__items', {{ !empty($component['columns']) && $component['columns'] % 2 == 0 ? ($component['columns'] >= 4 ? ' grid-cols-2' : ' sm-grid-cols-2').' md:grid-cols-3 xl:grid-cols-'.($component['columns']) : ' sm:grid-cols-2 md:grid-cols-3' }}])> 
                     @foreach($group_items as $item)
                         @include('components/promo/grid-item')
                     @endforeach
