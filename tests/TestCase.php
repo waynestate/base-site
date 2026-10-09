@@ -3,7 +3,6 @@
 namespace Tests;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
-use Faker\Factory;
 use Illuminate\Routing\Middleware\ThrottleRequests;
 
 abstract class TestCase extends BaseTestCase
@@ -36,7 +35,7 @@ abstract class TestCase extends BaseTestCase
             ThrottleRequests::class,
         );
 
-        // Create a new faker that every test can use
-        $this->faker = (new Factory())->create();
+        // Shared faker instance that every test can use
+        $this->faker = fake();
     }
 }
