@@ -1,15 +1,24 @@
 .page-menu {
-    @apply px-container mt:w-80;
+    margin-top: 1.5rem;
+    padding-inline: 'max(1rem, (100% - 73rem) / 2)';
+
+    @screen mt {
+        width: 20rem;
+    }
 
     .main-menu {
-        @apply mb-2;
+        margin-bottom: 0.5rem;
     }
 
     .main-menu-toggle {
-        @apply pt-2 pb-2 pl-3 pr-3 block;
+        display: block;
+        padding-block: 0.5rem;
+        padding-inline: 0.75rem;
     }
 
     .slideout-main-menu {
-        @apply mt:hidden;
+        @screen mt {
+            display: none;
+        }
     }
 }
