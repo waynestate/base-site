@@ -53,7 +53,7 @@
     @endif
 
     <div class="layout mb-8 {{ (in_array($base['page']['controller'], config('base.full_width_controllers'))) ? 'layout--full-width' : 'layout--left-menu  max-w-[75em] mx-auto mt:flex' }}">
-        @include('partials.nav-left')
+        @include('partials.page-menu')
 
         <main class="content-area mx-auto w-full {{ $base['show_site_menu'] === true ? 'max-w-[900px]' : 'max-w-[75rem]' }} {{ (in_array($base['page']['controller'], config('base.full_width_controllers'))) ? ' max-w-full' : '' }}" tabindex="-1">
 
