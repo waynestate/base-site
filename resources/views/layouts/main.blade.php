@@ -95,5 +95,8 @@
 
 <script src="{{ mix('_resources/js/main.js') }}"></script>
 @if(!empty($base['site_js']))<script src="{{ mix($base['site_js']) }}"></script>@endif
+@if(using_styleguide() && config('app.name') === 'base' && !empty($base['styleguide_sites']))
+    @include('components.styleguide-toolbar')
+@endif
 </body>
 </html>

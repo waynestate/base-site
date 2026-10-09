@@ -138,6 +138,11 @@ All site assets are compiled up front during the build process (`make build` or 
 1. Set `APP_NAME={site}` in the site's `.env` file (e.g., `APP_NAME=nursing`).
 1. The site's additive stylesheet and script will automatically be included in the `<head>` and `<body>` of the layout. Sites can include CSS only, JS only, or both.
 
+### Previewing site styles in the styleguide
+
+When developing on the `base` domain (`APP_NAME=base`), a sticky bottom toolbar appears in the styleguide whenever custom site overrides exist in `public/mix-manifest.json`. You can preview any site theme across the styleguide by selecting it from the dropdown or passing `?app={site}` in the URL (e.g. `/styleguide?app=nursing`). The selection is saved in `localStorage` and a cookie to persist across page navigations.
+
+
 ## Pages
 
 Pages are written from the content management system automatically. To replicate what it writes you can use the following JSON format to create pages. Example homeage: `storage/app/public/index.json`.
