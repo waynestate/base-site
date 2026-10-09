@@ -87,22 +87,52 @@ mix.js('resources/js/main.js', 'public/_resources/js')
             require('tailwindcss'),
             require('autoprefixer')
         ]
-    })
-    .browserSync({
-        proxy: 'https://' + package.name + '.wayne.local',
-        open: false,
-        files: [
-            'app/**/*.php',
-            'resources/views/**/*.php',
-            'public/_resources/js/main.js',
-            'public/_resources/css/main.css',
-            'tailwind.config.js'
-        ],
-        watchOptions: {
-            usePolling: true,
-            interval: 500
-        }
     });
+
+// Compile all site-specific CSS and JS files up front
+const reservedFolders = ['components', 'partials', 'site-specific', 'utilities', 'modules', 'polyfills', 'base'];
+
+const scssDir = path.resolve('resources/scss');
+if (fs.existsSync(scssDir)) {
+    fs.readdirSync(scssDir, { withFileTypes: true })
+        .filter(dirent => dirent.isDirectory() && !reservedFolders.includes(dirent.name))
+        .forEach(dirent => {
+            const site = dirent.name;
+            const siteScssPath = path.join(scssDir, site, 'main.scss');
+            if (fs.existsSync(siteScssPath)) {
+                mix.sass(`resources/scss/${site}/main.scss`, `public/_resources/css/${site}.css`);
+            }
+        });
+}
+
+const jsDir = path.resolve('resources/js');
+if (fs.existsSync(jsDir)) {
+    fs.readdirSync(jsDir, { withFileTypes: true })
+        .filter(dirent => dirent.isDirectory() && !reservedFolders.includes(dirent.name))
+        .forEach(dirent => {
+            const site = dirent.name;
+            const siteJsPath = path.join(jsDir, site, 'main.js');
+            if (fs.existsSync(siteJsPath)) {
+                mix.js(`resources/js/${site}/main.js`, `public/_resources/js/${site}.js`);
+            }
+        });
+}
+
+mix.browserSync({
+    proxy: 'https://' + package.name + '.wayne.local',
+    open: false,
+    files: [
+        'app/**/*.php',
+        'resources/views/**/*.php',
+        'public/_resources/js/*.js',
+        'public/_resources/css/*.css',
+        'tailwind.config.js'
+    ],
+    watchOptions: {
+        usePolling: true,
+        interval: 500
+    }
+});
 
 // Create the _static symlink
 fs.symlink(
