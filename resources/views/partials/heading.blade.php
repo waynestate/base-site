@@ -14,3 +14,22 @@
         {!! strip_tags($heading, ['em', 'strong']) !!}
     </h2>
 @endif
+
+{{-- Wayne stuff to integrate
+@if(!empty($heading['title']))
+    <div class="component__heading">
+        <{{ $heading['headingLevel'] ?? 'h2' }} 
+            id="{{ $heading['headingId'] ?? '' }}" 
+            @class([($heading['headingClass'] ?? '') => !empty($heading['headingClass'])])
+        >
+            {!! strip_tags($heading['title'], ['em', 'strong']) !!}
+        </{{ $heading['headingLevel'] ?? 'h2' }}>
+
+        @if(!empty($heading['description']))
+            <div class="component__heading-description content">
+                {!! $heading['description'] !!}
+            </div>
+        @endif
+    </div>
+@endif
+--}}
