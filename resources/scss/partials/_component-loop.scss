@@ -1,5 +1,6 @@
 $column-max: 100px;
 $column-count: 12;
+$container: max(1rem, (100% - 73rem) / 2);
 
 @layer base {
     :root {
@@ -21,6 +22,26 @@ $column-count: 12;
         width: 100%;
     }
 
+    hr.row-break {
+        margin-block: 0;
+        border: 0;
+        width: 100%;
+    }
+
+    // Contain or expand the background if the left menu is present
+    .component {
+        &__container {
+            position: relative;
+            padding-inline: 'max(1rem, (100% - 73rem) / 2)';
+        }
+
+        &__background {
+            position: absolute;
+            inset: 0;
+            z-index: -10;
+        }
+    }
+
     @layer utilities {
         .col-count-2 {
             column-count: 2;
@@ -36,25 +57,16 @@ $column-count: 12;
             }
         }
     }
-
-    hr.row-break {
-        @apply my-0 border-0 w-full;
-    }
 }
 
-// Contain or expand the background if the left menu is present
-.component__background {
-    @apply absolute inset-0 -z-10; 
+@mixin colspan($i) {
+    width: min(calc(#{$i} * var(--column-min)), #{$i * $column-max});
 }
 
-.layout--full-width {
-    .component__background {
-        @apply absolute inset-0 -z-10; 
-    }
+@mixin right-span($i) {
+    right: calc(#{$i} * var(--column-min));
 }
 
-.layout--left-menu {
-    .component__background {
-        @apply block h-full w-full; 
-    }
+@mixin left-span($i) {
+    left: calc(#{$i} * var(--column-min));
 }
