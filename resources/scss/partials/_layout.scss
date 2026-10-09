@@ -1,5 +1,77 @@
+@use '_component-loop.scss';
+
 .layout {
+    .content-area {
+        margin-top: 1.5rem;
+        padding-inline: 'max(1rem, (100% - 73rem) / 2)';
+    }
+
     &--left-menu {
-      @apply w-full max-w-[75em] mx-auto mt:flex;
+        @screen mt {
+            .content-area {
+                display: flex;
+                width: 100%;
+                max-width: 75rem;
+                margin: 0 auto 2rem;
+            }
+
+            /* Page menu positioned to allow component loop to sit right beneath wysiwyg content */
+            .page-menu {
+                position: absolute;
+                padding: 0 1rem;
+                z-index: 4;
+                @include component-loop.colspan(3);
+            }
+
+            /* Page content width restricted */
+            .page-content {
+                @include component-loop.colspan(9);
+                @include component-loop.left-span(3);
+                position: relative;
+            }
+
+            /* Menu placeholder in component loop */
+            .component-loop {
+                display: flex;
+                margin: 0 auto;
+                position: relative;
+                gap: 0;
+                @include component-loop.colspan(12);
+
+                &::before {
+                    content: '';
+                    @include component-loop.colspan(3);
+                    padding-inline: 1rem;
+                    z-index: -1000;
+                    position: relative;
+                }
+            }
+
+            /* Component section width restricted */
+            .component-loop section {
+                @include component-loop.colspan(9);
+            }
+
+            .component__background {
+                display: block;
+                height: 100%;
+                width: 100%;
+            }
+        }
+    }
+
+    .layout--full-width {
+        .component {
+            &__container {
+                position: relative;
+                padding-inline: 'max(1rem, (100% - 73rem) / 2)';
+            }
+
+            &__background {
+                position: absolute;
+                inset: 0;
+                z-index: -10;
+            }
+        }
     }
 }
