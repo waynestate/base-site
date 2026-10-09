@@ -1,4 +1,8 @@
 .catalog {
+    &__items {
+        @apply grid gap-8 mt-6;
+    }
+
     &__flex {
         @apply flex flex-wrap justify-center;
 
