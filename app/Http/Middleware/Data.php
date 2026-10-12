@@ -19,6 +19,10 @@ class Data
     {
         if (using_styleguide()) {
             $this->prefix = 'Styleguide';
+
+            if (is_numeric($request->query('seed'))) {
+                fake()->seed((int) $request->query('seed'));
+            }
         }
 
         // Set the matched route parameters to global data
