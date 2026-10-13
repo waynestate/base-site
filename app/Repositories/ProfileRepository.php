@@ -48,7 +48,7 @@ class ProfileRepository implements ProfileRepositoryContract
         $params = [
             'method' => 'profile.users.listing',
             'site_id' => $site_id,
-            'groups' => $selected_group,
+            'groups' => !empty($selected_group) ? $this->expandParentGroups($site_id, $selected_group) : $selected_group,
         ];
 
         $profile_listing = $this->rememberWithFallback($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
@@ -164,10 +164,17 @@ class ProfileRepository implements ProfileRepositoryContract
         $options['selected_group'] = $selected_group;
         $options['hide_filtering'] = false;
 
-        // If a data page field was set force that filtering and don't show the dropdown
+        // A single forced group hides the dropdown; multiple forced groups can be filtered between
         if ($forced_profile_group_id !== null) {
-            $options['selected_group'] = $forced_profile_group_id;
-            $options['hide_filtering'] = true;
+            $forced_ids = $this->splitGroupIds($forced_profile_group_id);
+
+            if (count($forced_ids) <= 1) {
+                $options['selected_group'] = $forced_profile_group_id;
+                $options['hide_filtering'] = true;
+            } elseif (!in_array((string) $selected_group, $forced_ids, true)) {
+                $selected_group = null;
+                $options['selected_group'] = null;
+            }
         }
 
         // Hide filtering if all profiles belong to the same group
@@ -186,9 +193,11 @@ class ProfileRepository implements ProfileRepositoryContract
      */
     public function getGroupIds($selected_group, $forced_profile_group_id, $dropdown_groups)
     {
-        // Forced ID always wins
+        // Forced IDs always win, narrowed to the selection when it is within them
         if ($forced_profile_group_id !== null) {
-            return (string) $forced_profile_group_id;
+            $selected_ids = $selected_group !== null ? array_intersect($this->splitGroupIds($selected_group), $this->splitGroupIds($forced_profile_group_id)) : [];
+
+            return !empty($selected_ids) ? implode('|', $selected_ids) : (string) $forced_profile_group_id;
         }
 
         // No selection → all groups
@@ -196,29 +205,58 @@ class ProfileRepository implements ProfileRepositoryContract
             return implode('|', array_keys($dropdown_groups));
         }
 
-        // Normalize user input (accept | or ,)
-        return collect(preg_split('/[,\|]+/', (string) $selected_group))
+        return implode('|', $this->splitGroupIds($selected_group));
+    }
+
+    /**
+     * Split a pipe or comma delimited list of group IDs (accepts | or ,).
+     */
+    protected function splitGroupIds($group_ids): array
+    {
+        return collect(preg_split('/[,\|]+/', (string) $group_ids))
             ->map(fn ($item) => trim($item))
             ->filter(fn ($item) => $item !== '')
+            ->unique()
+            ->values()
+            ->toArray();
+    }
+
+    /**
+     * Swap any parent group IDs for their child groups, since profiles are only attached to child groups.
+     */
+    protected function expandParentGroups(int $site_id, string $group_ids): string
+    {
+        $children = collect($this->getGroupsListing($site_id)['results'] ?? [])->groupBy('parent_id');
+
+        return collect($this->splitGroupIds($group_ids))
+            ->flatMap(fn ($id) => $children->has($id) ? $children->get($id)->pluck('id')->all() : [$id])
             ->unique()
             ->implode('|');
     }
 
     /**
-     * {@inheritdoc}
+     * Get the site's profile groups from the API.
      */
-    public function getDropdownOfGroups(int $site_id): array
+    protected function getGroupsListing(int $site_id): array
     {
         $params = [
             'method' => 'profile.groups.listing',
             'site_id' => $site_id,
         ];
 
-        $profile_groups = $this->rememberWithFallback($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+        return $this->rememberWithFallback($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             $this->wsuApi->nextRequestProduction();
 
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDropdownOfGroups(int $site_id, $forced_profile_group_id = null): array
+    {
+        $profile_groups = $this->getGroupsListing($site_id);
 
         // Filter down the groups based on the parent group from the config
         $parent_group_id = (config('base.profile_parent_group_id')) ?? config('base.profile.parent_group_id');
@@ -234,6 +272,11 @@ class ProfileRepository implements ProfileRepositoryContract
             ->map(function ($item) {
                 return $item['display_name'];
             })->toArray();
+
+        // Only offer the forced groups
+        if ($forced_profile_group_id !== null) {
+            $groupsArray = array_intersect_key($groupsArray, array_flip($this->splitGroupIds($forced_profile_group_id)));
+        }
 
         if (count($groupsArray) == 1) {
             $groups['single_group'] = key($groupsArray);

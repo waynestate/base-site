@@ -39,8 +39,8 @@ class ProfileController extends Controller
         // Determine if we are forcing the profiles from custom page data
         $forced_profile_group_id = config('base.profile.group_id');
 
-        // Get the groups for the dropdown
-        $dropdown_groups = $this->profile->getDropdownOfGroups($site_id);
+        // Get the groups for the dropdown, limited to any forced groups
+        $dropdown_groups = $this->profile->getDropdownOfGroups($site_id, $forced_profile_group_id);
 
         // Set the selected group
         $selected_group = $request->query('group') !== '' ? $request->query('group') : null;
@@ -50,8 +50,6 @@ class ProfileController extends Controller
         $selected_group_str = is_array($selected_group) ? null : ($selected_group !== null ? (string) $selected_group : null);
         // Normalize forced group id for both methods
         $forced_profile_group_id_str = $forced_profile_group_id !== null ? (string) $forced_profile_group_id : null;
-        // Keep multiple ids (e.g. "1|2") so the dropdown still hides
-        $forced_profile_group_id_option = is_numeric($forced_profile_group_id) ? (int) $forced_profile_group_id : $forced_profile_group_id_str;
 
         // Determine which group(s) to filter by
         /** @var array $dropdown_groups_arr */
@@ -67,7 +65,12 @@ class ProfileController extends Controller
         }
 
         // Get the options for the dropdown (pass profiles to determine if filtering should be hidden)
-        $dropdown_group_options = $this->profile->getDropdownOptions($selected_group_id, $forced_profile_group_id_option, $profiles);
+        $dropdown_group_options = $this->profile->getDropdownOptions($selected_group_id, $forced_profile_group_id_str, $profiles);
+
+        // Allow the page to always hide the dropdown
+        if (config('base.profile.group_filter') === 'hide') {
+            $dropdown_group_options['hide_filtering'] = true;
+        }
 
         // Disable hero images
         $request->data['base']['hero'] = false;

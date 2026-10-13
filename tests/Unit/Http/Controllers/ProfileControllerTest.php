@@ -5,7 +5,6 @@ namespace Tests\Unit\Http\Controllers;
 use PHPUnit\Framework\Attributes\Test;
 use App\Http\Controllers\ProfileController;
 use App\Repositories\ProfileRepository;
-use Factories\Page;
 use Tests\TestCase;
 use Mockery as Mockery;
 use Illuminate\Http\Request;
@@ -30,14 +29,55 @@ final class ProfileControllerTest extends TestCase
     }
 
     #[Test]
-    public function multiple_forced_group_ids_should_hide_filtering(): void
+    public function multiple_forced_group_ids_should_show_filtering_when_profiles_span_groups(): void
     {
         $request = new Request();
-        $request->data = ['base' => app(Page::class)->create(1, true, ['data' => ['profile_group_id' => '10|11']])];
+        $request->data = ['base' => app(Page::class)->create(1, true, ['data' => ['profile_group_id' => '1000|1001']])];
 
         $profileRepository = Mockery::mock(ProfileRepository::class)->makePartial();
-        $profileRepository->shouldReceive('getDropdownOfGroups')->once()->andReturn(['dropdown_groups' => ['' => 'All Profiles', 10 => 'A', 11 => 'B']]);
-        $profileRepository->shouldReceive('getProfiles')->once()->with(Mockery::any(), '10|11', Mockery::any())->andReturn(['profiles' => []]);
+        $profileRepository->shouldReceive('getDropdownOfGroups')->once()->andReturn(['dropdown_groups' => ['' => 'All Profiles', 1000 => 'A', 1001 => 'B']]);
+        $profileRepository->shouldReceive('getProfiles')->once()->with(Mockery::any(), '1000|1001', Mockery::any())->andReturn(['profiles' => [
+            ['groups' => [1000 => 'A']],
+            ['groups' => [1001 => 'B']],
+        ]]);
+
+        $view = app(ProfileController::class, ['profile' => $profileRepository])->index($request);
+
+        $this->assertFalse($view->getData()['hide_filtering']);
+    }
+
+    #[Test]
+    public function selecting_a_group_within_multiple_forced_group_ids_should_filter_profiles(): void
+    {
+        $request = new Request(['group' => '1001']);
+        $request->data = ['base' => app(Page::class)->create(1, true, ['data' => ['profile_group_id' => '1000|1001']])];
+
+        $profileRepository = Mockery::mock(ProfileRepository::class)->makePartial();
+        $profileRepository->shouldReceive('getDropdownOfGroups')->once()->with(Mockery::any(), '1000|1001')->andReturn(['dropdown_groups' => ['' => 'All Profiles', 1000 => 'A', 1001 => 'B']]);
+        $profileRepository->shouldReceive('getProfiles')->once()->with(Mockery::any(), '1001', Mockery::any())->andReturn(['profiles' => [
+            ['groups' => [1001 => 'B']],
+        ]]);
+
+        $view = app(ProfileController::class, ['profile' => $profileRepository])->index($request);
+
+        $this->assertFalse($view->getData()['hide_filtering']);
+        $this->assertEquals(1001, $view->getData()['selected_group']);
+    }
+
+    #[Test]
+    public function group_filter_hide_should_always_hide_filtering(): void
+    {
+        $request = new Request();
+        $request->data = ['base' => app(Page::class)->create(1, true, ['data' => [
+            'profile-config' => json_encode(['group_id' => '1000|1001', 'group_filter' => 'hide']),
+        ]])];
+
+        $profileRepository = Mockery::mock(ProfileRepository::class)->makePartial();
+        $profileRepository->shouldReceive('getDropdownOfGroups')->once()->andReturn(['dropdown_groups' => ['' => 'All Profiles', 1000 => 'A', 1001 => 'B']]);
+        $profileRepository->shouldReceive('getProfiles')->once()->andReturn(['profiles' => [
+            ['groups' => [1000 => 'A']],
+            ['groups' => [1001 => 'B']],
+        ]]);
 
         $view = app(ProfileController::class, ['profile' => $profileRepository])->index($request);
 

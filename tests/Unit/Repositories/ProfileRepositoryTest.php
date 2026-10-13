@@ -149,6 +149,44 @@ final class ProfileRepositoryTest extends TestCase
     }
 
     #[Test]
+    public function getting_dropdown_of_groups_should_only_contain_forced_groups(): void
+    {
+        config(['base.profile.parent_group_id' => 0]);
+
+        $return = [
+            'results' => app(ProfileGroup::class)->create(5),
+        ];
+        $forced_ids = array_slice(array_keys($return['results']), 0, 2);
+
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('profile.groups.listing', Mockery::type('array'))->once()->andReturn($return);
+        $wsuApi->shouldReceive('nextRequestProduction')->once();
+
+        $dropdown = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getDropdownOfGroups($this->faker->numberBetween(1, 10), implode('|', $forced_ids));
+
+        $this->assertEqualsCanonicalizing(array_merge([''], $forced_ids), array_keys($dropdown['dropdown_groups']));
+    }
+
+    #[Test]
+    public function getting_profiles_should_swap_parent_groups_for_their_children(): void
+    {
+        // 1 is a parent of 10 and 11, 2 has no children
+        $groups = ['results' => [
+            1 => ['id' => 1, 'parent_id' => 0],
+            2 => ['id' => 2, 'parent_id' => 0],
+            10 => ['id' => 10, 'parent_id' => 1],
+            11 => ['id' => 11, 'parent_id' => 1],
+        ]];
+
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('nextRequestProduction');
+        $wsuApi->shouldReceive('sendRequest')->with('profile.groups.listing', Mockery::type('array'))->andReturn($groups);
+        $wsuApi->shouldReceive('sendRequest')->with('profile.users.listing', Mockery::on(fn ($params) => $params['groups'] === '10|11|2'))->once()->andReturn([]);
+
+        app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getProfiles($this->faker->numberBetween(1, 10), '1|2');
+    }
+
+    #[Test]
     public function getting_dropdown_of_single_group_should_contain_single_group(): void
     {
         // Force this config incase it is changed
@@ -419,6 +457,17 @@ final class ProfileRepositoryTest extends TestCase
     }
 
     #[Test]
+    public function getting_group_ids_should_narrow_multiple_forced_ids_to_the_selection(): void
+    {
+        $repository = app(ProfileRepository::class);
+
+        $this->assertEquals('1000|1001', $repository->getGroupIds(null, '1000|1001', []));
+        $this->assertEquals('1001', $repository->getGroupIds('1001', '1000|1001', []));
+        $this->assertEquals('1000|1001', $repository->getGroupIds('2000', '1000|1001', []));
+        $this->assertEquals('1000', $repository->getGroupIds('1001', '1000', []));
+    }
+
+    #[Test]
     public function profiles_should_be_grouped(): void
     {
         // Force this config incase it is changed
@@ -441,8 +490,9 @@ final class ProfileRepositoryTest extends TestCase
             ->toArray();
 
         // Mock the groups listing
-        $wsuApi->shouldReceive('sendRequest')->with('profile.groups.listing', Mockery::type('array'))->once()->andReturn($return_group_listing);
-        $wsuApi->shouldReceive('nextRequestProduction')->twice();
+        // Once for the dropdown and once to expand parent groups
+        $wsuApi->shouldReceive('sendRequest')->with('profile.groups.listing', Mockery::type('array'))->twice()->andReturn($return_group_listing);
+        $wsuApi->shouldReceive('nextRequestProduction')->times(3);
 
         $profiles = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getProfilesByGroup($this->faker->numberBetween(1, 10));
 
@@ -698,6 +748,22 @@ final class ProfileRepositoryTest extends TestCase
         $random_group_id = $this->faker->numberBetween(1, 9);
         $options = app(ProfileRepository::class)->getDropdownOptions(null, $random_group_id, $profiles_multiple_groups);
         $this->assertEquals(['selected_group' => $random_group_id, 'hide_filtering' => true], $options);
+
+        // Multiple forced group IDs show the dropdown when profiles span groups
+        $options = app(ProfileRepository::class)->getDropdownOptions(null, '1|2', $profiles_multiple_groups);
+        $this->assertEquals(['selected_group' => null, 'hide_filtering' => false], $options);
+
+        // A selection within the forced group IDs stays selected
+        $options = app(ProfileRepository::class)->getDropdownOptions(2, '1|2', $profiles_same_group);
+        $this->assertEquals(['selected_group' => 2, 'hide_filtering' => false], $options);
+
+        // A selection outside the forced group IDs is ignored
+        $options = app(ProfileRepository::class)->getDropdownOptions(3, '1|2', $profiles_multiple_groups);
+        $this->assertEquals(['selected_group' => null, 'hide_filtering' => false], $options);
+
+        // Multiple forced group IDs hide the dropdown when profiles share one group
+        $options = app(ProfileRepository::class)->getDropdownOptions(null, '1|2', $profiles_same_group);
+        $this->assertEquals(['selected_group' => null, 'hide_filtering' => true], $options);
     }
 
     #[Test]

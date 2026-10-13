@@ -373,6 +373,17 @@ $global_config = [
 
         /*
         |--------------------------------------------------------------------------
+        | Group Filter - Profile Listing
+        |--------------------------------------------------------------------------
+        |
+        | Set to "hide" to always hide the group dropdown on the profile listing.
+        | Defaults to "show", which hides it only when one group is on the page.
+        |
+        */
+        'group_filter' => 'show',
+
+        /*
+        |--------------------------------------------------------------------------
         | Use Global Image
         |--------------------------------------------------------------------------
         |
