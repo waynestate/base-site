@@ -27,6 +27,8 @@ class ComponentButtonsController extends Controller
      */
     public function index(Request $request): View
     {
+        // Large buttons page
+        $isLarge = $request->data['base']['page']['id'] === 114100200;
 
         $request->data['base']['page']['content']['main'] = '
 <p>This component serves as the buttons under the side menu and as button components on your page.</p>
@@ -107,13 +109,16 @@ class ComponentButtonsController extends Controller
                     2 => [
                         'promo_item_id' => 'component_config',
                         'title' => 'Component configuration',
-                        'description' => '<p>Optional: add <code>"buttonSize":"large"</code> to increase the button padding.</p>',
+                        'description' => $isLarge
+                            ? '<p>Add <code>"buttonSize":"large"</code> to increase the button padding.</p>'
+                            : '<p>Optional: add <code>"buttonSize":"large"</code> to increase the button padding.</p>',
                         'tr1' => [
                             'Page field' => 'modular-button-column-1',
                             'Data' => '{
 "id":000000,
 "heading":"Buttons",
-"config":"limit:3"
+"config":"limit:3"'.($isLarge ? ',
+"buttonSize":"large"' : '').'
 }',
                         ],
                         'tr2' => [
@@ -122,7 +127,8 @@ class ComponentButtonsController extends Controller
 "id":000000,
 "heading":"Buttons",
 "config":"limit:3",
-"columns":3
+"columns":3'.($isLarge ? ',
+"buttonSize":"large"' : '').'
 }',
                         ],
                     ],
@@ -185,6 +191,14 @@ class ComponentButtonsController extends Controller
                 ],
             ],
         ];
+
+        if ($isLarge) {
+            foreach ($components as $name => $component) {
+                if (str_starts_with($name, 'button_')) {
+                    $components[$name]['component']['buttonSize'] = 'large';
+                }
+            }
+        }
 
         $components = $this->components->componentClasses($components);
         $components = $this->components->componentStyles($components);

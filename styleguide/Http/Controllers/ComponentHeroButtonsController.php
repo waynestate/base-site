@@ -30,19 +30,25 @@ class ComponentHeroButtonsController extends Controller
      */
     public function index(Request $request): View
     {
+        // Large hero buttons page
+        $isLarge = $request->data['base']['page']['id'] === 105100115;
+
         $promos['components'] = [
             'accordion' => [
                 'data' => [
                     0 => [
                         'title' => 'Component configuration',
                         'promo_item_id' => 'component_config',
-                        'description' => '<p>Optional: add <code>"buttonSize":"large"</code> to increase the button padding.</p>',
+                        'description' => $isLarge
+                            ? '<p>Add <code>"buttonSize":"large"</code> to increase the button padding.</p>'
+                            : '<p>Optional: add <code>"buttonSize":"large"</code> to increase the button padding.</p>',
                         'tr1' => [
                             'Page field' => 'modular-hero-buttons-1',
                             'Data' => '{
 "id":0000,
 "option":"Gold gradient",
-"config":"limit:3"
+"config":"limit:3"'.($isLarge ? ',
+"buttonSize":"large"' : '').'
 }
 
 Note: Setting the option from the config overrides all
@@ -76,9 +82,10 @@ chosen dropdown options for all buttons.',
                 'data' => app(Button::class)->create(3, false, [
                     'option' => 'Gold gradient',
                 ]),
-                'component' => [
+                'component' => array_filter([
                     'option' => 'Gold gradient',
-                ],
+                    'buttonSize' => $isLarge ? 'large' : null,
+                ]),
             ],
         ];
 

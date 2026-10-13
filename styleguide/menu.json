@@ -178,7 +178,28 @@
                 "display_name": "Buttons",
                 "class_name": "",
                 "relative_url": "/styleguide/component/buttons",
-                "submenu": []
+                "submenu": {
+                    "114100100": {
+                        "menu_item_id": 114100100,
+                        "is_active": 1,
+                        "page_id": 114100100,
+                        "target": "",
+                        "display_name": "Default",
+                        "class_name": "",
+                        "relative_url": "/styleguide/component/buttons",
+                        "submenu": []
+                    },
+                    "114100200": {
+                        "menu_item_id": 114100200,
+                        "is_active": 1,
+                        "page_id": 114100200,
+                        "target": "",
+                        "display_name": "Large",
+                        "class_name": "",
+                        "relative_url": "/styleguide/component/buttonslarge",
+                        "submenu": []
+                    }
+                }
             },
             "118100": {
                 "menu_item_id": 118100,
@@ -358,6 +379,16 @@
                         "display_name": "Buttons",
                         "class_name": "",
                         "relative_url": "/styleguide/component/hero/buttons",
+                        "submenu": []
+                    },
+                    "105100115": {
+                        "menu_item_id": 105100115,
+                        "is_active": 1,
+                        "page_id": 105100115,
+                        "target": "",
+                        "display_name": "Buttons (Large)",
+                        "class_name": "",
+                        "relative_url": "/styleguide/component/hero/buttonslarge",
                         "submenu": []
                     },
                     "105100109": {
