@@ -7,6 +7,7 @@
 
     <link rel="icon" type="image/x-icon" href="https://wayne.edu/favicon.ico">
     <link rel="stylesheet" href="{{ mix('_resources/css/main.css') }}">
+    @if(!empty($base['site_css']))<link rel="stylesheet" href="{{ mix($base['site_css']) }}">@endif
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -93,5 +94,9 @@
 </footer>
 
 <script src="{{ mix('_resources/js/main.js') }}"></script>
+@if(!empty($base['site_js']))<script src="{{ mix($base['site_js']) }}"></script>@endif
+@if(using_styleguide() && config('app.name') === 'base' && !empty($base['styleguide_sites']))
+    @include('components.styleguide-toolbar')
+@endif
 </body>
 </html>
