@@ -355,6 +355,7 @@ final class ModularPageRepositoryTest extends TestCase
         $return['promotions'] = app(GenericPromo::class)->create(5, false, [
             'promo_group_id' => $promo_group_id,
             'page_id' => $page_id,
+            'link' => '',
             'group' => [
                 'promo_group_id' => $promo_group_id,
             ],
@@ -398,6 +399,45 @@ final class ModularPageRepositoryTest extends TestCase
         $this->assertArrayHasKey('description', $component);
         // Test that component option overrides promo item option
         $this->assertEquals('Component Override Option', $component['option']);
+    }
+
+    #[Test]
+    public function single_promo_view_does_not_override_existing_link(): void
+    {
+        $promo_group_id = $this->faker->numberbetween(1, 3);
+        $external_link = 'https://wayne.edu';
+
+        // Fake return
+        $return['promotions'] = app(GenericPromo::class)->create(1, false, [
+            'promo_group_id' => $promo_group_id,
+            'link' => $external_link,
+            'group' => [
+                'promo_group_id' => $promo_group_id,
+            ],
+        ]);
+
+        // Create a fake data request
+        $data = app(Page::class)->create(1, true, [
+            'page' => [
+                'controller' => 'ChildpageController',
+            ],
+            'data' => [
+                'modular-catalog-1' => json_encode([
+                    'id' => $promo_group_id,
+                    'singlePromoView' => true,
+                ]),
+            ],
+        ]);
+
+        // Mock the connector and set the return
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.listing', Mockery::type('array'))->once()->andReturn($return);
+
+        // Run the promos through the repository
+        $components = app(ModularPageRepository::class, ['wsuApi' => $wsuApi])->getModularComponents($data);
+        $component = collect($components['catalog-1']['data'])->first();
+
+        $this->assertEquals($external_link, $component['link']);
     }
 
     #[Test]
@@ -548,6 +588,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Fake return
         $return['promotions'] = app(GenericPromo::class)->create(1, false, [
             'promo_group_id' => $promo_group_id,
+            'link' => '',
         ]);
 
         // Create a fake data request
@@ -581,6 +622,7 @@ final class ModularPageRepositoryTest extends TestCase
         // Fake return
         $return['promotions'] = app(GenericPromo::class)->create(5, false, [
             'promo_group_id' => $promo_group_id,
+            'link' => '',
         ]);
 
         // Create a fake data request
