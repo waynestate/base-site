@@ -37,7 +37,7 @@
     "autoprefixer": "^10.6.1",
     "browser-sync": "^3.0.4",
     "browser-sync-webpack-plugin": "^2.4.0",
-    "concurrently": "^10.0.5",
+    "concurrently": "^10.0.6",
     "copy-webpack-plugin": "^14.0.0",
     "eslint": "^10.11.0",
     "eslint-webpack-plugin": "^6.0.0",
