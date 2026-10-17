@@ -3,6 +3,7 @@
 namespace Tests\Unit\Support;
 
 use PHPUnit\Framework\Attributes\Test;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -97,5 +98,51 @@ final class HelpersTest extends TestCase
             $pre_merge['base']['page']['title'],
             $post_merge['base']['meta']['title']
         );
+    }
+
+    #[Test]
+    public function site_controller_should_prefer_site_namespace(): void
+    {
+        $this->fakeClass('App\Http\Controllers\OverloadFixtureController');
+        $this->fakeClass('App\Http\Controllers\Custom\OverloadFixtureController');
+
+        $this->assertSame(
+            'App\Http\Controllers\Custom\OverloadFixtureController',
+            site_controller('App\Http\Controllers\OverloadFixtureController')
+        );
+    }
+
+    #[Test]
+    public function site_controller_should_return_the_given_class_without_a_site_override(): void
+    {
+        $this->fakeClass('App\Http\Controllers\AppOnlyFixtureController');
+
+        $this->assertSame(
+            'App\Http\Controllers\AppOnlyFixtureController',
+            site_controller('App\Http\Controllers\AppOnlyFixtureController')
+        );
+    }
+
+    #[Test]
+    public function site_controller_should_leave_classes_outside_app_controllers_alone(): void
+    {
+        $this->assertSame(
+            'Styleguide\Http\Controllers\FullWidthController',
+            site_controller('Styleguide\Http\Controllers\FullWidthController')
+        );
+    }
+
+    #[Test]
+    public function component_view_should_prefer_site_specific_component(): void
+    {
+        View::addLocation(__DIR__.'/fixtures/views');
+
+        $this->assertSame('site-specific/components/fixture-component', component_view('fixture-component'));
+    }
+
+    #[Test]
+    public function component_view_should_fall_back_to_base_component(): void
+    {
+        $this->assertSame('components/accordion', component_view('accordion'));
     }
 }

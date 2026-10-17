@@ -4,6 +4,8 @@ namespace Tests;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Routing\Middleware\ThrottleRequests;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Storage;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -37,5 +39,32 @@ abstract class TestCase extends BaseTestCase
 
         // Shared faker instance that every test can use
         $this->faker = fake();
+    }
+
+    /**
+     * Declare an empty class under the given name so class_exists() finds it.
+     */
+    protected function fakeClass(string $class): void
+    {
+        if (! class_exists($class, false)) {
+            class_alias(get_class(new class () {}), $class);
+        }
+    }
+
+    /**
+     * Swap the base disk for an empty fake holding only what the generator commands read.
+     */
+    protected function fakeBaseDisk(): void
+    {
+        $files = collect(Storage::disk('base')->files('stubs'))
+            ->push('styleguide/menu.json')
+            ->mapWithKeys(fn ($path) => [$path => Storage::disk('base')->get($path)]);
+
+        // A temp dir is case-sensitive on Linux like CI, where a macOS bind mount is not
+        $root = sys_get_temp_dir().'/base-disk';
+        (new Filesystem())->deleteDirectory($root);
+        Storage::set('base', Storage::build(['driver' => 'local', 'root' => $root]));
+
+        $files->each(fn ($contents, $path) => Storage::disk('base')->put($path, $contents));
     }
 }

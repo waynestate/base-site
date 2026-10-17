@@ -21,8 +21,16 @@ class Sitespecific extends Page
                     <h2>Example new features</h2>
                     <ul><li>"Spotlight" <code class="bg-gray-200 py-1 px-2 rounded text-sm">php artisan base:feature Spotlight</code></li>
                     <li>"Faculty Books" <code class="bg-gray-200 py-1 px-2 rounded text-sm">php artisan base:feature FacultyBook</code></li></ul>
-                    <p>'.$this->faker->paragraph(8).'</p>
-                    <p>'.$this->faker->paragraph(8).'</p>',
+                    <h3>"Faculty Books" command result</h3>
+                    <p><ul>
+                        <li>`app/Http/Controllers/FacultyBookController.php`</li>
+                        <li>`contracts/Repositories/FacultyBookRepositoryContract.php`</li>
+                        <li>`app/Repositories/FacultyBookRepository.php`</li>
+                        <li>`styleguide/Repositories/FacultyBookRepository.php`</li>
+                        <li>`factories/FacultyBook.php`</li>
+                        <li>`resources/views/site-specific/faculty-book.blade.php`</li>
+                        <li>`styleguide/Pages/FacultyBook.php`, served at `/styleguide/facultybook` and added to the menu under Templates > Site specific</li>
+                    </ul></p>',
                 ],
             ],
 
