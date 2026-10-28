@@ -28,10 +28,10 @@ final class PageRepositoryTest extends TestCase
         // Overload all styleguide repositories to only return a blank array
         collect(Storage::disk('base')->allFiles('factories'))
             ->reject(function ($filename) {
-                return in_array(basename($filename), ['Page.php']);
+                return ! str_ends_with($filename, '.php') || in_array(basename($filename), ['Page.php']);
             })
             ->each(function ($filename) {
-                $class = 'Factories\\'.basename($filename, '.php');
+                $class = 'Factories\\'.str_replace('/', '\\', substr($filename, strlen('factories/'), -strlen('.php')));
 
                 $this->app->bind($class, function ($app) use ($class) {
                     $factory = Mockery::mock($class)->makePartial();
@@ -58,10 +58,10 @@ final class PageRepositoryTest extends TestCase
     {
         return collect(Storage::disk('base')->allFiles('styleguide/Pages'))
             ->reject(function ($filename) {
-                return in_array(basename($filename), ['Page.php']);
+                return ! str_ends_with($filename, '.php') || in_array(basename($filename), ['Page.php']);
             })
             ->map(function ($filename) use ($handle_exceptions) {
-                $path = app('Styleguide\Pages\\'.basename($filename, '.php'))->getPath();
+                $path = app('Styleguide\\'.str_replace('/', '\\', substr($filename, strlen('styleguide/'), -strlen('.php'))))->getPath();
 
                 try {
                     $response = $this->call('GET', $path);

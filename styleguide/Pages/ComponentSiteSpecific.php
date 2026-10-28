@@ -23,17 +23,17 @@ class ComponentSiteSpecific extends Page
                     <li>"Expanding Grid" <code class="bg-gray-200 py-1 px-2 rounded text-sm">php artisan base:module expanding-grid</code></li></ul>
                     <h3>"Expanding Grid" command result</h3>
                     <pre class="code-block">$ php artisan base:module expanding-grid
-resources/views/components/expanding-grid.blade.php written successfully.
-styleguide/Http/Controllers/ComponentExpandingGridController.php written successfully.
+resources/views/site-specific/components/expanding-grid.blade.php written successfully.
+styleguide/Http/Controllers/Custom/ComponentExpandingGridController.php written successfully.
 styleguide/menu.json written successfully.
-styleguide/Pages/ComponentExpandingGrid.php written successfully.
+styleguide/Pages/Custom/ComponentExpandingGrid.php written successfully.
 
 "modular-expanding-grid" is now ready to use. 🚀</pre>
                     <h3>Customizing the component</h3>
                     <p><ol>
-                        <li>Update `styleguide/Pages/ComponentExpandingGrid.php` to provide a description of the modular component</li>
-                        <li>Update `styleguide/Http/Controllers/ComponentExpandingGridController.php` to include required fields and config options</li>
-                        <li>Update `resources/views/components/expanding-grid.blade.php` to create the HTML of the component</li>
+                        <li>Update `styleguide/Pages/Custom/ComponentExpandingGrid.php` to provide a description of the modular component</li>
+                        <li>Update `styleguide/Http/Controllers/Custom/ComponentExpandingGridController.php` to include required fields and config options</li>
+                        <li>Update `resources/views/site-specific/components/expanding-grid.blade.php` to create the HTML of the component</li>
                         <li>Add the "modular-expanding-grid" custom page field to the CMS site to start using component on pages</li>
                     </ol></p>',
                 ],
