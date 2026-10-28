@@ -2,34 +2,25 @@
 
 namespace App\Console\Commands;
 
-use App\Console\Commands\Concerns\AddsStyleguideMenuItems;
-use App\Console\Commands\Concerns\ChecksExistingFiles;
 use Illuminate\Console\Attributes\Description;
 use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 
-#[Signature('base:feature {feature} {--base : Scaffold a base feature, with its view outside site-specific/ and its page under Templates}')]
+#[Signature('base:feature {feature}')]
 #[Description('Scaffold out files for a new feature, use singular form of feature name, e.g. "Spotlight"')]
 class BaseFeature extends Command
 {
-    use AddsStyleguideMenuItems;
-    use ChecksExistingFiles;
-
     protected string $feature;
 
     protected string $stub;
 
-    protected int $menuItemId;
-
     /**
      * Scaffold files.
      */
-    public function handle(): int
+    public function handle(): void
     {
-        if (! $this->setFeature($this->argument('feature'))) {
-            return self::FAILURE;
-        }
+        $this->setFeature($this->argument('feature'));
 
         $this->controller();
         $this->contract();
@@ -39,8 +30,6 @@ class BaseFeature extends Command
         $this->page();
         $this->view();
         $this->factory();
-
-        return self::SUCCESS;
     }
 
     public function controller()
@@ -52,7 +41,7 @@ class BaseFeature extends Command
         $this->stub = str_replace('Dummy Template', $this->feature.' Template', $this->stub);
         $this->stub = str_replace('DummyView', $this->getView(), $this->stub);
 
-        Storage::disk('base')->put('app/Http/Controllers/'.$this->feature.'Controller.php', $this->stub);
+        Storage::disk('base')->put('app\Http\Controllers\/'.$this->feature.'Controller.php', $this->stub);
     }
 
     public function contract()
@@ -62,7 +51,7 @@ class BaseFeature extends Command
         $this->stub = str_replace('getDummy', 'get'.$this->feature, $this->stub);
         $this->stub = str_replace('dummy', strtolower($this->feature), $this->stub);
 
-        Storage::disk('base')->put('contracts/Repositories/'.$this->feature.'RepositoryContract.php', $this->stub);
+        Storage::disk('base')->put('contracts\Repositories\/'.$this->feature.'RepositoryContract.php', $this->stub);
     }
 
     public function repository()
@@ -73,7 +62,7 @@ class BaseFeature extends Command
         $this->stub = str_replace('getDummy', 'get'.$this->feature, $this->stub);
         $this->stub = str_replace('dummy', strtolower($this->feature), $this->stub);
 
-        Storage::disk('base')->put('app/Repositories/'.$this->feature.'Repository.php', $this->stub);
+        Storage::disk('base')->put('app\Repositories\/'.$this->feature.'Repository.php', $this->stub);
     }
 
     public function repositoryStyleguide()
@@ -84,32 +73,36 @@ class BaseFeature extends Command
         $this->stub = str_replace('dummy', strtolower($this->feature), $this->stub);
         $this->stub = str_replace('DummyFactory', $this->feature, $this->stub);
 
-        Storage::disk('base')->put('styleguide/Repositories/'.$this->feature.'Repository.php', $this->stub);
+        Storage::disk('base')->put('styleguide\Repositories\/'.$this->feature.'Repository.php', $this->stub);
     }
 
     public function menu()
     {
-        $url = '/styleguide/'.strtolower($this->feature);
-
         $menu = $this->getMenu();
 
-        // Base features go under Templates, ahead of its "Site specific" entry; site features are alphabetical after its guide
-        [$menu, $this->menuItemId] = $this->option('base')
-            ? $this->addMenuItem($menu, '101.submenu', 101, $this->feature, $url, before: 999)
-            : $this->addMenuItem($menu, '101.submenu.999.submenu', 999, $this->feature, $url, before: $this->alphabeticalBefore($menu[101]['submenu'][999]['submenu'] ?? [], $this->feature, pinned: 1));
+        $item = end($menu[101]['submenu'][999]['submenu']);
+
+        $item['menu_item_id']++;
+        $item['page_id'] = $item['menu_item_id'];
+        $item['display_name'] = $this->feature;
+        $item['relative_url'] = '/styleguide/'.strtolower($this->feature);
+
+        $menu[101]['submenu'][999]['submenu'][$item['menu_item_id']] = $item;
 
         Storage::disk('base')->put('styleguide/menu.json', json_encode($menu, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
     }
 
     public function page()
     {
+        $menu = $this->getMenu();
+
         $this->initializeStub('page');
         $this->replaceController();
         $this->stub = str_replace('DummyPage', $this->feature, $this->stub);
         $this->stub = str_replace('DummyTitle', $this->feature, $this->stub);
-        $this->stub = str_replace('DummyId', (string) $this->menuItemId, $this->stub);
+        $this->stub = str_replace('DummyId', end($menu[101]['submenu'][999]['submenu'])['menu_item_id'], $this->stub);
 
-        Storage::disk('base')->put('styleguide/Pages/'.$this->feature.'.php', $this->stub);
+        Storage::disk('base')->put('styleguide\Pages\/'.$this->feature.'.php', $this->stub);
     }
 
     public function view()
@@ -117,7 +110,7 @@ class BaseFeature extends Command
         $this->initializeStub('view');
         $this->replaceVariables();
 
-        Storage::disk('base')->put('resources/views/'.($this->option('base') ? '' : 'site-specific/').$this->getView().'.blade.php', $this->stub);
+        Storage::disk('base')->put('resources\views\/'.$this->getView().'.blade.php', $this->stub);
     }
 
     public function factory()
@@ -125,32 +118,22 @@ class BaseFeature extends Command
         $this->initializeStub('factory');
         $this->stub = str_replace('DummyFactory', $this->feature, $this->stub);
 
-        Storage::disk('base')->put('factories/'.$this->feature.'.php', $this->stub);
+        Storage::disk('base')->put('factories\/'.$this->feature.'.php', $this->stub);
     }
 
-    public function setFeature($feature): bool
+    public function setFeature($feature)
     {
         $this->feature = ucfirst($feature);
 
-        // Don't overwrite an existing feature, or add one that a Custom overload would shadow
-        if ($this->anyExists([
-            'app/Http/Controllers/'.$this->feature.'Controller.php',
-            'app/Http/Controllers/Custom/'.$this->feature.'Controller.php',
-            'styleguide/Pages/'.$this->feature.'.php',
-            'styleguide/Pages/Custom/'.$this->feature.'.php',
-        ])) {
+        if (Storage::disk('base')->exists('app\Http\Controllers\/'.$this->feature.'Controller.php')) {
             $this->error('Feature already exists, please use another name.');
-
-            return false;
+            exit(1);
         }
-
-        return true;
     }
 
     public function initializeStub($type)
     {
         $this->stub = Storage::disk('base')->get('stubs/'.$type.'.stub');
-        $this->stub = str_replace('{{ views }}', $this->option('base') ? '' : 'site-specific.', $this->stub);
     }
 
     public function replaceContract()

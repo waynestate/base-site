@@ -108,7 +108,7 @@ class Data
         $global = collect($callbacks)->flatMap(function ($callback) use ($request) {
             [$controller, $method] = Str::parseCallback($callback);
 
-            return app($this->getCallbackClass($controller))->$method($request->data);
+            return app($this->getPrefix().$controller)->$method($request->data);
         })->toArray();
 
         // Merge global data
@@ -137,23 +137,9 @@ class Data
      */
     public function getControllerNamespace(string $controller): string
     {
-        $candidates = [
-            'App\Http\Controllers\Custom\\'.$controller,
-            'App\Http\Controllers\\'.$controller,
-        ];
-
-        if ($this->getPrefix() !== 'App') {
-            array_unshift(
-                $candidates,
-                $this->getPrefix().'\Http\Controllers\Custom\\'.$controller,
-                $this->getPrefix().'\Http\Controllers\\'.$controller,
-            );
-        }
-
-        foreach ($candidates as $candidate) {
-            if (class_exists($candidate)) {
-                return $candidate;
-            }
+        // First see if it exists as a prefixed controller
+        if (class_exists($this->GetPrefix().'\Http\Controllers\\'.$controller)) {
+            return $this->GetPrefix().'\Http\Controllers\\'.$controller;
         }
 
         return 'App\Http\Controllers\\'.$controller;
@@ -165,16 +151,6 @@ class Data
     public function getPrefix(): string
     {
         return $this->prefix;
-    }
-
-    /**
-     * Get a global callback's class, preferring its site overload in a Custom namespace.
-     */
-    public function getCallbackClass(string $class): string
-    {
-        $site = $this->getPrefix().Str::beforeLast($class, '\\').'\Custom\\'.class_basename($class);
-
-        return class_exists($site) ? $site : $this->getPrefix().$class;
     }
 
     /**

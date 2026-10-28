@@ -2,35 +2,27 @@
 
 namespace App\Console\Commands;
 
-use App\Console\Commands\Concerns\AddsStyleguideMenuItems;
-use App\Console\Commands\Concerns\ChecksExistingFiles;
 use Illuminate\Console\Attributes\Description;
 use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 
-#[Signature('base:module {name} {--base : Scaffold into base\'s own folders instead of the site-specific ones}')]
+#[Signature('base:module {name}')]
 #[Description('Scaffold out files for a new modular component, use singular form of module name, e.g. "spotlight-row"')]
 class BaseModule extends Command
 {
-    use AddsStyleguideMenuItems;
-    use ChecksExistingFiles;
-
     protected string $stub; // Stub file contents
     protected string $lowercase; // dummy-component
     protected string $singleword; // dummycomponent
     protected string $camelcase; // DummyComponent
     protected string $titlecase; // Dummy Component
-    protected int $menuItemId;
 
     /**
      * Scaffold files.
      */
-    public function handle(): int
+    public function handle(): void
     {
-        if (! $this->setModule($this->argument('name'))) {
-            return self::FAILURE;
-        }
+        $this->setModule($this->argument('name'));
 
         $this->component();
         $this->styleguideController();
@@ -39,36 +31,24 @@ class BaseModule extends Command
 
         $this->newLine();
         $this->info('"modular-'.$this->lowercase.'" is now ready to use. 🚀');
-
-        return self::SUCCESS;
     }
 
-    protected function setModule($module): bool
+    protected function setModule($module)
     {
         $this->lowercase = strtolower($module);
         $this->camelcase = str_replace('-', '', ucwords($module, '-'));
         $this->singleword = strtolower($this->camelcase);
         $this->titlecase = str_replace('-', ' ', ucwords($module, '-'));
 
-        // A site component or page sharing a base one's name would silently replace it
-        if ($this->anyExists([
-            'resources/views/components/'.$this->lowercase.'.blade.php',
-            'resources/views/site-specific/components/'.$this->lowercase.'.blade.php',
-            'styleguide/Pages/Component'.$this->camelcase.'.php',
-            'styleguide/Pages/Custom/Component'.$this->camelcase.'.php',
-        ])) {
+        if (Storage::disk('base')->exists('resources/views/components/'.$this->lowercase.'.blade.php')) {
             $this->error('Module "'.$this->lowercase.'" already exists, please use another name.');
-
-            return false;
+            exit(1);
         }
-
-        return true;
     }
 
     protected function initializeStub($type)
     {
         $this->stub = Storage::disk('base')->get('stubs/'.$type.'.stub');
-        $this->stub = str_replace('{{ custom }}', $this->option('base') ? '' : '\Custom', $this->stub);
     }
 
     protected function localizeStub()
@@ -89,7 +69,8 @@ class BaseModule extends Command
         $this->initializeStub('component');
         $this->localizeStub();
 
-        $this->write('resources/views/'.($this->option('base') ? '' : 'site-specific/').'components/'.$this->lowercase.'.blade.php');
+        Storage::disk('base')->put('resources/views/components/'.$this->lowercase.'.blade.php', $this->stub);
+        $this->line('resources/views/components/'.$this->lowercase.'.blade.php written successfully.');
     }
 
     protected function styleguideController()
@@ -97,19 +78,25 @@ class BaseModule extends Command
         $this->initializeStub('component-controller');
         $this->localizeStub();
 
-        $this->write('styleguide/Http/Controllers/'.($this->option('base') ? '' : 'Custom/').'Component'.$this->camelcase.'Controller.php');
+        Storage::disk('base')->put('styleguide/Http/Controllers/Component'.$this->camelcase.'Controller.php', $this->stub);
+        $this->line('styleguide/Http/Controllers/Component'.$this->camelcase.'Controller.php written successfully.');
     }
 
     protected function styleguideMenu()
     {
-        $url = '/styleguide/component/'.$this->singleword;
-
         $menu = $this->getMenu();
 
-        // Base modules go under Components, ahead of its "Site specific" entry; site modules are alphabetical
-        [$menu, $this->menuItemId] = $this->option('base')
-            ? $this->addMenuItem($menu, '102.submenu', 102, $this->titlecase, $url, before: 9999)
-            : $this->addMenuItem($menu, '102.submenu.9999.submenu', 9999, $this->titlecase, $url, before: $this->alphabeticalBefore($menu[102]['submenu'][9999]['submenu'] ?? [], $this->titlecase));
+        $item = end($menu[102]['submenu'][9999]['submenu']);
+        if (empty($item)) {
+            $item = end($menu[102]['submenu']);
+        }
+
+        $item['menu_item_id']++;
+        $item['page_id'] = $item['menu_item_id'];
+        $item['display_name'] = $this->titlecase;
+        $item['relative_url'] = '/styleguide/component/'.$this->singleword;
+
+        $menu[102]['submenu'][9999]['submenu'][$item['menu_item_id']] = $item;
 
         Storage::disk('base')->put('styleguide/menu.json', json_encode($menu, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
         $this->line('styleguide/menu.json written successfully.');
@@ -117,21 +104,14 @@ class BaseModule extends Command
 
     protected function styleguidePage()
     {
+        $menu = $this->getMenu();
+
         $this->initializeStub('component-page');
         $this->localizeStub();
 
-        $this->stub = str_replace('DummyId', (string) $this->menuItemId, $this->stub);
+        $this->stub = str_replace('DummyId', end($menu[102]['submenu'][9999]['submenu'])['menu_item_id'], $this->stub);
 
-        if ($this->option('base')) {
-            $this->stub = str_replace("use Styleguide\Pages\Page;\n", '', $this->stub);
-        }
-
-        $this->write('styleguide/Pages/'.($this->option('base') ? '' : 'Custom/').'Component'.$this->camelcase.'.php');
-    }
-
-    protected function write(string $path): void
-    {
-        Storage::disk('base')->put($path, $this->stub);
-        $this->line($path.' written successfully.');
+        Storage::disk('base')->put('styleguide/Pages/Component'.$this->camelcase.'.php', $this->stub);
+        $this->line('styleguide/Pages/Component'.$this->camelcase.'.php written successfully.');
     }
 }

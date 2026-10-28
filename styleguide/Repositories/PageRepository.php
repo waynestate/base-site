@@ -3,7 +3,6 @@
 namespace Styleguide\Repositories;
 
 use App\Repositories\PageRepository as Repository;
-use Contracts\Pages\StyleguidePageContract;
 use Illuminate\Support\Facades\Storage;
 
 class PageRepository extends Repository
@@ -34,23 +33,19 @@ class PageRepository extends Repository
             $filename = $parsedPath->implode('');
         }
 
-        // A site page in Pages/Custom wins over the base page with the same name
-        $class = collect([
-            'styleguide/Pages/Custom' => 'Styleguide\Pages\Custom\\',
-            'styleguide/Pages' => 'Styleguide\Pages\\',
-        ])->map(function ($namespace, $folder) use ($filename) {
-            // Compare against the filesystem so the URL's case doesn't matter
-            $file = collect(Storage::disk('base')->files($folder))->first(function ($item) use ($filename) {
-                return strtolower(basename($item)) === strtolower($filename).'.php';
-            });
+        // Compare the path's class_name to the filesystem so we can eliminate case sensitivity issues
+        $class_name = collect(Storage::disk('base')->allFiles('styleguide/Pages'))->filter(function ($item) use ($filename) {
+            return strtolower(basename($item)) == strtolower($filename).'.php';
+        })->map(function ($item) {
+            return basename($item, '.php');
+        })->first();
 
-            return $file !== null ? $namespace.basename($file, '.php') : null;
-        })->filter()->first();
+        if ($class_name != null) {
+            // Construct the page object
+            $page = app('\Styleguide\Pages\\'.$class_name);
 
-        if ($class !== null) {
-            $page = app($class);
-
-            if ($page instanceof StyleguidePageContract) {
+            // Make sure it impelments the proper contract
+            if (in_array('Contracts\Pages\StyleguidePageContract', class_implements($page))) {
                 return $page;
             }
         }
