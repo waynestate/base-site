@@ -480,8 +480,19 @@ class ProfileRepository implements ProfileRepositoryContract
             if (Str::startsWith($value, '{')) {
                 $profile_config = json_decode($value, true);
 
-                foreach ($profile_config as $key => $value) {
-                    Config::set('base.profile.'.$key, $value);
+                if (is_array($profile_config)) {
+                    if (array_key_exists('columns', $profile_config)) {
+                        if (is_numeric($profile_config['columns']) && (int) $profile_config['columns'] >= 1 && (int) $profile_config['columns'] <= 4) {
+                            $profile_config['columns'] = (int) $profile_config['columns'];
+                        } else {
+                            unset($profile_config['columns']);
+                            Config::set('base.profile.columns', 4);
+                        }
+                    }
+
+                    foreach ($profile_config as $key => $value) {
+                        Config::set('base.profile.'.$key, $value);
+                    }
                 }
             }
         }

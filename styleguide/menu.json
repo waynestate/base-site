@@ -634,6 +634,16 @@
                         "relative_url": "/styleguide/profiles",
                         "submenu": []
                     },
+                    "101115": {
+                        "menu_item_id": 101115,
+                        "is_active": 1,
+                        "page_id": 101115,
+                        "target": "",
+                        "display_name": "Profile row",
+                        "class_name": "",
+                        "relative_url": "/styleguide/profiles-row",
+                        "submenu": []
+                    },
                     "101106": {
                         "menu_item_id": 101106,
                         "is_active": 1,
