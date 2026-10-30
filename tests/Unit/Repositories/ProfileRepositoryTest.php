@@ -702,6 +702,38 @@ final class ProfileRepositoryTest extends TestCase
     }
 
     #[Test]
+    public function get_profile_config_should_set_columns_from_json_config_when_valid_or_default_to_four(): void
+    {
+        $wsuApi = Mockery::mock(Connector::class);
+
+        // Test valid column numbers 1-4
+        foreach ([1, 2, 3, 4] as $columns) {
+            Config::set('base.profile.columns', 4);
+            $data = app(Page::class)->create(1, true, [
+                'data' => [
+                    'profile-config' => json_encode(['columns' => $columns]),
+                ],
+            ]);
+
+            app(ProfileRepository::class, ['wsuApi' => $wsuApi])->parseProfileConfig($data);
+            $this->assertSame($columns, config('base.profile.columns'));
+        }
+
+        // Test invalid column values are ignored / keep default 4
+        foreach ([0, 5, -1, 'invalid', null] as $invalidColumns) {
+            Config::set('base.profile.columns', 4);
+            $data = app(Page::class)->create(1, true, [
+                'data' => [
+                    'profile-config' => json_encode(['columns' => $invalidColumns]),
+                ],
+            ]);
+
+            app(ProfileRepository::class, ['wsuApi' => $wsuApi])->parseProfileConfig($data);
+            $this->assertSame(4, config('base.profile.columns'));
+        }
+    }
+
+    #[Test]
     public function getting_dropdown_options_should_hide_filtering_when_all_profiles_in_same_group(): void
     {
         // Test with profiles all in the same group
