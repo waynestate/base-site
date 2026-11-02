@@ -26,16 +26,18 @@ interface ProfileRepositoryContract
      * Get the dropdown config options.
      *
      * @param  int|null  $selected_group
-     * @param  int|null  $forced_profile_group_id
+     * @param  int|string|null  $forced_profile_group_id
      * @param  array  $profiles
      * @return array
      */
     public function getDropdownOptions($selected_group, $forced_profile_group_id, $profiles = []);
 
     /**
-     * Get the dropdown of groups.
+     * Get the dropdown of groups, limited to the forced group IDs when given.
+     *
+     * @param  int|string|null  $forced_profile_group_id
      */
-    public function getDropdownOfGroups(int $site_id): array;
+    public function getDropdownOfGroups(int $site_id, $forced_profile_group_id = null): array;
 
     /**
      * Get the persons profile information.

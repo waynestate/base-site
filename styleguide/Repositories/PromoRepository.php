@@ -56,7 +56,7 @@ class PromoRepository extends Repository
         */
         // Define the pages that have under menu promos: page_id => quanity
         $under_menu_page_ids = [
-            114100 => 3, // Styleguide
+            114100100 => 3, // Styleguide
         ];
 
         // Only pull under_menu promos if they match the page_ids that are specified
@@ -88,6 +88,13 @@ class PromoRepository extends Repository
             105100111 => app(HeroImage::class)->create(1, false, [
                 'option' => 'buttons full',
                 'relative_url' => '/styleguide/image/1600x580?text=Hero+buttons',
+                'description' => '',
+                'link' => '',
+            ]),
+            // Buttons (large)
+            105100115 => app(HeroImage::class)->create(1, false, [
+                'option' => 'buttons full',
+                'relative_url' => '/styleguide/image/1600x580?text=Hero+buttons+large',
                 'description' => '',
                 'link' => '',
             ]),

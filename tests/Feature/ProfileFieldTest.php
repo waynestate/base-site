@@ -178,6 +178,15 @@ final class ProfileFieldTest extends TestCase
     }
 
     #[Test]
+    public function styleguide_profiles_row_renders_successfully(): void
+    {
+        $response = $this->call('GET', '/styleguide/profiles-row');
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertStringContainsString('divide-y divide-gray-200', $response->getContent());
+    }
+
+    #[Test]
     public function profile_card_renders_anchor_wrapping_only_photo_and_name(): void
     {
         $profile = [

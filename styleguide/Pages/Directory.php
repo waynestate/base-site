@@ -36,10 +36,12 @@ class Directory extends Page
 "table_of_contents":"hide",
 "default_back_url":"/profiles/",
 "use_global_image": false,
+"columns": 4,
 "listing_fields": ["Title", "Department", "Email"]
 }
 </pre>
 <p>Setting <code>use_global_image</code> to <code>true</code> will try to use ANY profile image available for the user for missing pictures.</p>
+<p>Setting <code>columns</code> to <code>1</code>, <code>2</code>, <code>3</code>, or <code>4</code> controls the column layout (defaults to <code>4</code>). Setting to <code>1</code> displays a single column with the photo on the left and information on the right.</p>
 <p>Setting <code>listing_fields</code> specifies which profile fields to display under each name (defaults to Title).</p>
                                 </td>
                             </tr>

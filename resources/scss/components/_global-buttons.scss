@@ -56,6 +56,12 @@
     @include buttons.gold-gradient-button-base;
 }
 
+.button {
+    &--large {
+        @apply py-4;
+    }
+}
+
 .content a[class*="button"] {
     @apply no-underline cursor-pointer;
 }

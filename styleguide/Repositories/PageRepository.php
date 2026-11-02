@@ -24,9 +24,9 @@ class PageRepository extends Repository
         $parsedPath = collect(explode('/', $path));
 
         // Strip off styleguide since we aren't prefixing every filename with it
-        $filename = $parsedPath->reject(function ($item) {
+        $filename = str_replace('-', '', $parsedPath->reject(function ($item) {
             return $item == 'styleguide';
-        })->implode('');
+        })->implode(''));
 
         // If no filename is found then we are on the styleguide homepage
         if ($filename == '') {

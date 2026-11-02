@@ -373,6 +373,17 @@ $global_config = [
 
         /*
         |--------------------------------------------------------------------------
+        | Group Filter - Profile Listing
+        |--------------------------------------------------------------------------
+        |
+        | Set to "hide" to always hide the group dropdown on the profile listing.
+        | Defaults to "show", which hides it only when one group is on the page.
+        |
+        */
+        'group_filter' => 'show',
+
+        /*
+        |--------------------------------------------------------------------------
         | Use Global Image
         |--------------------------------------------------------------------------
         |
@@ -457,6 +468,18 @@ $global_config = [
         |
         */
         'table_name_link' => 'email',
+
+        /*
+        |--------------------------------------------------------------------------
+        | Columns - Profile Listing and Directory
+        |--------------------------------------------------------------------------
+        |
+        | Number of columns to display on profile listing and directory pages (1-4).
+        | 1 displays a vertical list with the photo on the left and info on the right.
+        | 2-4 display grid columns. Defaults to 4.
+        |
+        */
+        'columns' => 4,
     ],
     /*
     |--------------------------------------------------------------------------

@@ -10,8 +10,11 @@
         @foreach($hero['data'] as $item)
             <div @class(['hero__type', implode(' ', $item['hero_classes'] ?? ['hero--banner'])])>
                 <img class="hero__primary-image {{ $hero['component']['backgroundClass'] ?? ''}}" src="{{ $item['relative_url'] }}" alt="{{ $item['filename_alt_text'] }}">
-
-                @if(!empty($item['title']) || !empty($item['secondary_relative_url']))
+                @if(!empty($item['title'])
+                    || !empty($item['secondary_relative_url'])
+                    || !empty($item['description'])
+                    || !empty($base['hero_buttons'])
+                    )
                     <div class="hero__content">
                         @if(!empty($item['secondary_relative_url']))
                             @if(empty($item['title']) && !empty($item['link']))<a class="hero__link" href="{{ $item['link'] }}"><span class="hero__link-span"></span>@endif

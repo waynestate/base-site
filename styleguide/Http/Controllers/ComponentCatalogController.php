@@ -62,7 +62,7 @@ class ComponentCatalogController extends Controller
                         'description' => '',
                         'table' => [
                             'Title' => 'Bold text.',
-                            'Link' => 'Optional external link. Component flag "singlePromoView" sets the link to the individual promo item view.',
+                            'Link' => 'Optional external link. Component flag "singlePromoView" will link to the individual promo item view if no Link is set.',
                             'Excerpt' => 'Optional smaller text under the title.',
                             'Description' => 'Optional smaller text under the title and/or excerpt. You might use this area on a singe promo view page and hide it from the catalog component.',
                             'Primary image' => 'Minimum width of 600px jpg, png.',

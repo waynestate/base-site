@@ -471,7 +471,8 @@ class ModularPageRepository implements ModularPageRepositoryContract
 
     public function adjustPromoData($data, $component): array
     {
-        if (isset($component['singlePromoView']) && $component['singlePromoView'] === true) {
+        // If there is no external link and the component is set to singlePromoView, create a link to the promo item
+        if (isset($component['singlePromoView']) && $component['singlePromoView'] === true && empty($data['link'])) {
             $data['link'] = 'view/'.Str::slug($data['title']).'-'.$data['promo_item_id'];
         }
 

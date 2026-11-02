@@ -15,7 +15,7 @@ class ComponentButtons extends Page
             'page' => [
                 'controller' => 'ComponentButtonsController',
                 'title' => 'Button set',
-                'id' => 114100,
+                'id' => 114100100,
                 'content' => [
                     'main' => '',
                 ],
