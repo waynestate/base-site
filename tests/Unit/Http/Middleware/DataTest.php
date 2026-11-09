@@ -204,6 +204,126 @@ final class DataTest extends TestCase
     }
 
     #[Test]
+    public function page_config_meta_image_should_override_legacy_and_site_config(): void
+    {
+        $request = new Request();
+        $request = $request->create('styleguide');
+
+        config(['base.global.sites.123.meta_image' => 'site-image.png']);
+        config(['base.global.sites.123.meta_image_alt' => 'Site image alt']);
+
+        $this->app->bind('Styleguide\Repositories\PageRepository', function ($app) {
+            $mock = Mockery::mock('Styleguide\Repositories\PageRepository');
+            $mock->shouldReceive('getRequestData')->andReturn([
+                'site' => [
+                    'id' => 123,
+                    'parent' => ['id' => null],
+                    'title' => 'Site Title',
+                    'subsite-folder' => null,
+                ],
+                'menu' => ['id' => 1],
+                'data' => [
+                    'modular-page-config' => json_encode([
+                        'metaImage' => 'page-config-image.png',
+                        'metaImageAlt' => 'Page config image alt',
+                    ]),
+                    'meta_image' => 'legacy-page-image.png',
+                    'meta_image_alt' => 'Legacy page image alt',
+                ],
+                'page' => [
+                    'id' => 1,
+                    'description' => 'page description',
+                    'title' => 'page title',
+                    'controller' => 'HomepageController',
+                ],
+            ]);
+
+            return $mock;
+        });
+
+        app(Data::class)->handle($request, function ($request) {
+            $this->assertEquals('page-config-image.png', $request->data['base']['meta']['image']);
+            $this->assertEquals('Page config image alt', $request->data['base']['meta']['image_alt']);
+        });
+    }
+
+    #[Test]
+    public function page_config_without_meta_image_should_fallback_to_legacy(): void
+    {
+        $request = new Request();
+        $request = $request->create('styleguide');
+
+        $this->app->bind('Styleguide\Repositories\PageRepository', function ($app) {
+            $mock = Mockery::mock('Styleguide\Repositories\PageRepository');
+            $mock->shouldReceive('getRequestData')->andReturn([
+                'site' => [
+                    'id' => 123,
+                    'parent' => ['id' => null],
+                    'title' => 'Site Title',
+                    'subsite-folder' => null,
+                ],
+                'menu' => ['id' => 1],
+                'data' => [
+                    'modular-page-config' => json_encode([
+                        'showPageMenu' => false,
+                    ]),
+                    'meta_image' => 'legacy-page-image.png',
+                    'meta_image_alt' => 'Legacy page image alt',
+                ],
+                'page' => [
+                    'id' => 1,
+                    'description' => 'page description',
+                    'title' => 'page title',
+                    'controller' => 'HomepageController',
+                ],
+            ]);
+
+            return $mock;
+        });
+
+        app(Data::class)->handle($request, function ($request) {
+            $this->assertEquals('legacy-page-image.png', $request->data['base']['meta']['image']);
+            $this->assertEquals('Legacy page image alt', $request->data['base']['meta']['image_alt']);
+        });
+    }
+
+    #[Test]
+    public function page_config_meta_image_cleans_loose_json(): void
+    {
+        $request = new Request();
+        $request = $request->create('styleguide');
+
+        $this->app->bind('Styleguide\Repositories\PageRepository', function ($app) {
+            $mock = Mockery::mock('Styleguide\Repositories\PageRepository');
+            $mock->shouldReceive('getRequestData')->andReturn([
+                'site' => [
+                    'id' => 123,
+                    'parent' => ['id' => null],
+                    'title' => 'Site Title',
+                    'subsite-folder' => null,
+                ],
+                'menu' => ['id' => 1],
+                'data' => [
+                    'modular-page-config' => "{\r\n\"metaImage\": \"cleaned-image.png\",\r\n\"metaImageAlt\": \"Cleaned alt\",\r\n}",
+                ],
+                'page' => [
+                    'id' => 1,
+                    'description' => 'page description',
+                    'title' => 'page title',
+                    'controller' => 'HomepageController',
+                ],
+            ]);
+
+            return $mock;
+        });
+
+        app(Data::class)->handle($request, function ($request) {
+            $this->assertEquals('cleaned-image.png', $request->data['base']['meta']['image']);
+            $this->assertEquals('Cleaned alt', $request->data['base']['meta']['image_alt']);
+        });
+    }
+
+    #[Test]
     public function page_field_overrides_should_work(): void
     {
         $request = new Request();

@@ -146,6 +146,20 @@ Visually hide the page title.
 Add a custom class to the page.
                     </td>
                 </tr>
+                <tr>
+                    <td class="font-bold">metaImage</td>
+                    <td>
+<code class="mt-1 mb-2">"metaImage": "https://base.wayne.edu/styleguide/image/1200x630"</code><br />
+Add a custom social share image to the page. (Must be a fully qualified URL)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="font-bold">metaImageAlt</td>
+                    <td>
+<code class="mt-1 mb-2">"metaImageAlt": "Custom alt text for social share image"</code><br />
+Add alt text for the custom social share image.
+                    </td>
+                </tr>
             </tbody>
         </table>
 

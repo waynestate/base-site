@@ -53,12 +53,19 @@ class Data
         }
 
         // Overrides for meta information
-        $data['meta']['image'] = ! empty($page['data']['meta_image']) ?
-            $page['data']['meta_image'] :
-            (config('base.global.sites.'.$page['site']['id'].'.meta_image') ?? '');
-        $data['meta']['image_alt'] = ! empty($page['data']['meta_image_alt']) ?
-            $page['data']['meta_image_alt'] :
-            (config('base.global.sites.'.$page['site']['id'].'.meta_image_alt') ?? '');
+        $pageConfig = $this->getPageConfig($page['data'] ?? []);
+        $siteId = $page['site']['id'] ?? null;
+
+        $data['meta']['image'] = $this->getFirstValue(
+            $pageConfig['metaImage'] ?? null,
+            $page['data']['meta_image'] ?? null,
+            config('base.global.sites.'.$siteId.'.meta_image'),
+        );
+        $data['meta']['image_alt'] = $this->getFirstValue(
+            $pageConfig['metaImageAlt'] ?? null,
+            $page['data']['meta_image_alt'] ?? null,
+            config('base.global.sites.'.$siteId.'.meta_image_alt'),
+        );
 
         $data['meta']['json_ld'] = '';
         if (! empty($page['data']['meta-json-ld'])) {
@@ -268,5 +275,35 @@ class Data
         $available = $availableSites ?? $this->getAvailableStyleguideSites();
 
         return array_key_exists($app, $available) ? $app : null;
+    }
+
+    /**
+     * Get the page configuration from modular-page-config.
+     */
+    public function getPageConfig(array $data): array
+    {
+        if (empty($data['modular-page-config']) || ! is_string($data['modular-page-config'])) {
+            return [];
+        }
+
+        $cleaned = app($this->getPrefix().'\Repositories\ModularPageRepository')->cleanComponentJSON($data['modular-page-config']);
+
+        $decoded = json_decode($cleaned, true);
+
+        return is_array($decoded) ? $decoded : [];
+    }
+
+    /**
+     * Get the first non-empty meta value.
+     */
+    public function getFirstValue(mixed ...$values): string
+    {
+        foreach ($values as $value) {
+            if (! empty($value) && is_string($value)) {
+                return $value;
+            }
+        }
+
+        return '';
     }
 }
