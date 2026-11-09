@@ -215,6 +215,7 @@ module.exports = {
                 portrait: '3 / 4',
                 hero: '2.76 / 1',
                 'hero-small': '22 / 5',
+                wsuvideo: '2.5 / 1',
             },
             transitionProperty: {
                 height: 'height',

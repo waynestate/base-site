@@ -102,6 +102,45 @@ final class HeroRepositoryTest extends TestCase
     }
 
     #[Test]
+    public function video_hero_types(): void
+    {
+        $options = [
+            'video',
+            'Video SVG Overlay',
+            'Hero video',
+            'video full-width',
+        ];
+
+        foreach ($options as $option) {
+            $promos = [
+                'hero' => [
+                    [
+                        'title' => 'Video Hero',
+                        'option' => $option,
+                        'relative_url' => '/video.mp4',
+                        'filename_alt_text' => '/poster.jpg',
+                        'secondary_relative_url' => '/overlay.svg',
+                        'secondary_alt_text' => 'Overlay text',
+                        'link' => 'https://wayne.edu',
+                        'excerpt' => 'Description for video',
+                    ],
+                ],
+            ];
+
+            $result = $this->heroRepository->setHero($promos, []);
+            $this->assertEquals('video', $result['hero']['data'][0]['hero_type'], "Failed asserting that option '{$option}' maps to 'video' type.");
+            $this->assertContains('hero--video', $result['hero']['data'][0]['hero_classes'], "Failed asserting that option '{$option}' includes 'hero--video' class.");
+            $this->assertEquals('/video.mp4', $result['hero']['data'][0]['relative_url']);
+            $this->assertEquals('/poster.jpg', $result['hero']['data'][0]['filename_alt_text']);
+            $this->assertEquals('/overlay.svg', $result['hero']['data'][0]['secondary_relative_url']);
+            $this->assertEquals('Overlay text', $result['hero']['data'][0]['secondary_alt_text']);
+            $this->assertEquals('https://wayne.edu', $result['hero']['data'][0]['link']);
+            $this->assertEquals('Description for video', $result['hero']['data'][0]['excerpt']);
+            $this->assertArrayNotHasKey('title', $result['hero']['data'][0]);
+        }
+    }
+
+    #[Test]
     public function custom_component_override(): void
     {
         $promos = [

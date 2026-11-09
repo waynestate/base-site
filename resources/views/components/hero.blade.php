@@ -9,7 +9,11 @@
              ])>
         @foreach($hero['data'] as $item)
             <div @class(['hero__type', implode(' ', $item['hero_classes'] ?? ['hero--banner'])])>
-                <img class="hero__primary-image {{ $hero['component']['backgroundClass'] ?? ''}}" src="{{ $item['relative_url'] }}" alt="{{ $item['filename_alt_text'] }}">
+                @if(!empty($item['hero_type']) && $item['hero_type'] === 'video')
+                    @include('partials.hero-video', ['item' => $item])
+                @else
+                    <img class="hero__primary-image {{ $hero['component']['backgroundClass'] ?? ''}}" src="{{ $item['relative_url'] }}" alt="{{ $item['filename_alt_text'] }}">
+                @endif
                 @if(!empty($item['title'])
                     || !empty($item['secondary_relative_url'])
                     || !empty($item['description'])
