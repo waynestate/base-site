@@ -177,6 +177,49 @@ final class StaleCacheTest extends TestCase
     }
 
     #[Test]
+    public function callback_returning_accepted_error_is_cached_and_replaces_stale_copy(): void
+    {
+        $key = 'test-key-'.$this->faker->uuid();
+        $error = ['error' => ['code' => 101, 'message' => 'No user profile.']];
+
+        app(Repository::class)->put('stale_'.$key, ['data' => $this->faker->word()], 604800);
+
+        Log::shouldReceive('warning')->never();
+
+        $result = $this->subject()->rememberWithFallback($key, 60, function () use ($error) {
+            return $error;
+        }, [], function ($value) {
+            return !array_key_exists('error', (array) $value) || $value['error']['code'] === 101;
+        });
+
+        $this->assertEquals($error, $result);
+        $this->assertEquals($error, app(Repository::class)->get($key));
+        $this->assertEquals($error, app(Repository::class)->get('stale_'.$key));
+    }
+
+    #[Test]
+    public function primary_cache_hit_with_accepted_error_does_not_invoke_callback(): void
+    {
+        $key = 'test-key-'.$this->faker->uuid();
+        $error = ['error' => ['code' => 101, 'message' => 'No user profile.']];
+
+        app(Repository::class)->put($key, $error, 60);
+
+        $invoked = false;
+
+        $result = $this->subject()->rememberWithFallback($key, 60, function () use (&$invoked) {
+            $invoked = true;
+
+            return [];
+        }, [], function ($value) {
+            return !array_key_exists('error', (array) $value) || $value['error']['code'] === 101;
+        });
+
+        $this->assertEquals($error, $result);
+        $this->assertFalse($invoked);
+    }
+
+    #[Test]
     public function stale_fallback_repopulates_primary_cache_with_half_ttl(): void
     {
         $key = 'test-key-'.$this->faker->uuid();

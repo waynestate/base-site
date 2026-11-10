@@ -100,6 +100,11 @@ class ProfileController extends Controller
         // Get the profile information
         $profile = $this->profile->getProfile($site_id, $request->accessid);
 
+        // An API failure isn't a missing profile, so don't report it as a 404
+        if (!empty($profile['api_failed'])) {
+            abort(500);
+        }
+
         // Make sure the profile exists
         if (empty($profile['profile'])) {
             abort(404);

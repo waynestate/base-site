@@ -216,17 +216,116 @@ final class ProfileRepositoryTest extends TestCase
         $site_id = $this->faker->numberBetween(1, 10);
         $accessid = $this->faker->word();
 
-        // Fake return
-        $return = app(ApiError::class)->create(1, true);
-
         // Mock the Connector and set the return
         $wsuApi = Mockery::mock(Connector::class);
-        $wsuApi->shouldReceive('sendRequest')->with('profile.users.view', Mockery::type('array'))->once()->andReturn($return);
+        $wsuApi->shouldReceive('sendRequest')->with('profile.users.view', Mockery::type('array'))->once()->andReturn($this->noUserProfileError());
         $wsuApi->shouldReceive('nextRequestProduction')->once();
 
         $profile = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getProfile($site_id, $accessid);
 
         $this->assertTrue(is_array($profile['profile']) && count($profile['profile']) == 0) ;
+        $this->assertArrayNotHasKey('api_failed', $profile);
+    }
+
+    #[Test]
+    public function getting_profile_that_doesnt_exist_should_be_cached(): void
+    {
+        // The local .env sets TTL=0, which would keep anything from being cached
+        Config::set('cache.ttl', 60);
+
+        $site_id = $this->faker->numberBetween(1, 10);
+        $accessid = $this->faker->word();
+
+        // The mock only allows one API request
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('profile.users.view', Mockery::type('array'))->once()->andReturn($this->noUserProfileError());
+        $wsuApi->shouldReceive('nextRequestProduction')->once();
+
+        $profileRepository = app(ProfileRepository::class, ['wsuApi' => $wsuApi]);
+
+        $profileRepository->getProfile($site_id, $accessid);
+        $profile = $profileRepository->getProfile($site_id, $accessid);
+
+        $this->assertEmpty($profile['profile']);
+        $this->assertArrayNotHasKey('api_failed', $profile);
+    }
+
+    #[Test]
+    public function getting_profile_that_was_removed_should_not_fall_back_to_the_stale_copy(): void
+    {
+        Config::set('cache.ttl', 60);
+
+        $site_id = $this->faker->numberBetween(1, 10);
+        $accessid = $this->faker->word();
+
+        // The profile exists, then is removed after the cache expires
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('profile.users.view', Mockery::type('array'))->twice()->andReturn($this->existingProfile($site_id), $this->noUserProfileError());
+        $wsuApi->shouldReceive('nextRequestProduction')->twice();
+
+        $profileRepository = $this->profileRepositoryWithoutArticles($wsuApi);
+
+        $this->assertNotEmpty($profileRepository->getProfile($site_id, $accessid)['profile']);
+
+        $this->travel(61)->seconds();
+
+        $profile = $profileRepository->getProfile($site_id, $accessid);
+
+        $this->assertEmpty($profile['profile']);
+        $this->assertArrayNotHasKey('api_failed', $profile);
+
+        $this->travelBack();
+    }
+
+    #[Test]
+    public function getting_profile_with_api_error_should_fall_back_to_the_stale_copy(): void
+    {
+        Config::set('cache.ttl', 60);
+
+        $site_id = $this->faker->numberBetween(1, 10);
+        $accessid = $this->faker->word();
+        // The profile exists, then the API fails after the cache expires
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('profile.users.view', Mockery::type('array'))->twice()->andReturn($this->existingProfile($site_id), $this->apiFailureError());
+        $wsuApi->shouldReceive('nextRequestProduction')->twice();
+
+        $profileRepository = $this->profileRepositoryWithoutArticles($wsuApi);
+
+        $existing_profile = $profileRepository->getProfile($site_id, $accessid);
+
+        $this->travel(61)->seconds();
+
+        $profile = $profileRepository->getProfile($site_id, $accessid);
+
+        $this->assertNotEmpty($profile['profile']);
+        $this->assertEquals($existing_profile['profile'], $profile['profile']);
+        $this->assertArrayNotHasKey('api_failed', $profile);
+
+        $this->travelBack();
+    }
+
+    #[Test]
+    public function getting_profile_with_api_error_and_no_stale_copy_should_flag_api_failed_and_not_be_cached(): void
+    {
+        Config::set('cache.ttl', 60);
+
+        $site_id = $this->faker->numberBetween(1, 10);
+        $accessid = $this->faker->word();
+
+        // The API fails once and then succeeds
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('profile.users.view', Mockery::type('array'))->twice()->andReturn($this->apiFailureError(), $this->existingProfile($site_id));
+        $wsuApi->shouldReceive('nextRequestProduction')->twice();
+
+        $profileRepository = $this->profileRepositoryWithoutArticles($wsuApi);
+
+        $this->assertEquals(['profile' => [], 'api_failed' => true], $profileRepository->getProfile($site_id, $accessid));
+
+        // The error should not be cached, so the next request goes back to the API
+        $profile = $profileRepository->getProfile($site_id, $accessid);
+
+        $this->assertNotEmpty($profile['profile']);
+        $this->assertArrayNotHasKey('api_failed', $profile);
     }
 
     #[Test]
@@ -923,4 +1022,41 @@ final class ProfileRepositoryTest extends TestCase
         $this->assertCount(count($comma_ids), array_unique($comma_ids));
     }
 
+    /**
+     * The API's answer for a profile that doesn't exist.
+     */
+    private function noUserProfileError(): array
+    {
+        return ['error' => ['code' => '101', 'field' => 'accessid', 'message' => 'No user profile.']];
+    }
+
+    /**
+     * The Connector's response when the API fails.
+     */
+    private function apiFailureError(): array
+    {
+        return ['error' => ['code' => 429, 'field' => '', 'message' => 'Rate limit exceeded (HTTP 429)']];
+    }
+
+    /**
+     * The API's answer for a profile that exists.
+     */
+    private function existingProfile(int $site_id): array
+    {
+        return [
+            'profiles' => [$site_id => app(Profile::class)->create(1, true)],
+            'courses' => [],
+        ];
+    }
+
+    /**
+     * A profile repository whose news API returns no articles.
+     */
+    private function profileRepositoryWithoutArticles(Connector $wsuApi): ProfileRepository
+    {
+        $newsApi = Mockery::mock(News::class);
+        $newsApi->shouldReceive('request')->andReturn(['data' => []]);
+
+        return app(ProfileRepository::class, ['wsuApi' => $wsuApi, 'newsApi' => $newsApi]);
+    }
 }

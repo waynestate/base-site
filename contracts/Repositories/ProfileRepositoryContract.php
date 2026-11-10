@@ -41,6 +41,8 @@ interface ProfileRepositoryContract
 
     /**
      * Get the persons profile information.
+     *
+     * Returns an empty profile when it doesn't exist, plus 'api_failed' => true when the API failed and there is no stale copy to fall back to.
      */
     public function getProfile(int $site_id, string $accessid): array;
 

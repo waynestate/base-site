@@ -303,7 +303,15 @@ class ProfileRepository implements ProfileRepositoryContract
             $this->wsuApi->nextRequestProduction();
 
             return $this->wsuApi->sendRequest($params['method'], $params);
+        }, null, function ($value) {
+            // "No user profile" (101) is the API answering that the profile doesn't exist, so cache it like a good response
+            return !array_key_exists('error', (array)$value) || (int) ($value['error']['code'] ?? 0) === 101;
         });
+
+        // No fresh or stale response means the API failed, which isn't the same as a missing profile
+        if ($profiles === null) {
+            return ['profile' => [], 'api_failed' => true];
+        }
 
         if (!empty($profiles['error']) || empty($profiles['profiles'])) {
             return ['profile' => []];
