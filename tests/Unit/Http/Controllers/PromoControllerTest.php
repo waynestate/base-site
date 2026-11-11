@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Mockery;
 use PHPUnit\Framework\Attributes\Test;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Tests\TestCase;
 
 final class PromoControllerTest extends TestCase
@@ -53,5 +54,20 @@ final class PromoControllerTest extends TestCase
 
         $expected = config('app.url') . '/promos/' . Str::slug($title) . '-' . $promo_item_id;
         $this->assertEquals($expected, $view->getData()['base']['page']['canonical']);
+    }
+
+    #[Test]
+    public function promo_show_should_500_instead_of_404_when_the_api_failed(): void
+    {
+        $promoRepository = Mockery::mock(PromoRepositoryContract::class);
+        $promoRepository->shouldReceive('getPromoView')->once()->andReturn(['promotion' => [], 'promo' => [], 'api_failed' => true]);
+
+        try {
+            app(PromoController::class, ['promo' => $promoRepository])->show(new Request());
+
+            $this->fail('Expected a 500 HttpException');
+        } catch (HttpException $e) {
+            $this->assertEquals(500, $e->getStatusCode());
+        }
     }
 }

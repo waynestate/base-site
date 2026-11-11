@@ -50,6 +50,11 @@ class PromoController extends Controller
     {
         $promo = $this->promo->getPromoView($request->id);
 
+        // The API failed and there's no last good copy, which isn't the same as a missing promo
+        if (!empty($promo['api_failed'])) {
+            abort(500);
+        }
+
         if (empty($promo['promo'])) {
             abort(404);
         }

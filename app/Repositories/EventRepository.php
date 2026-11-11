@@ -52,6 +52,11 @@ class EventRepository implements EventRepositoryContract
 
             $response = $this->wsuApi->sendRequest($params['method'], $params);
 
+            // Treat API errors as a failure so they fall back to the last good copy instead of being cached as "no events"
+            if (!is_array($response) || array_key_exists('error', $response)) {
+                return null;
+            }
+
             return !empty($response['events']) ? $response['events'] : [];
         });
 
@@ -81,6 +86,11 @@ class EventRepository implements EventRepositoryContract
             $this->wsuApi->nextRequestProduction();
 
             $response = $this->wsuApi->sendRequest($params['method'], $params);
+
+            // Treat API errors as a failure so they fall back to the last good copy instead of being cached as "no events"
+            if (!is_array($response) || array_key_exists('error', $response)) {
+                return null;
+            }
 
             return !empty($response['events']) ? $response['events'] : [];
         });

@@ -647,4 +647,94 @@ final class PromoRepositoryTest extends TestCase
 
         $this->assertTrue(!empty($promos['page_config']));
     }
+
+    #[Test]
+    public function getting_single_promo_that_doesnt_exist_should_be_cached_and_not_fall_back_to_the_stale_copy(): void
+    {
+        config(['cache.ttl' => 60]);
+
+        $id = $this->faker->randomDigit();
+
+        // The promo exists, then is removed after the cache expires, and the "not found" answer should be cached
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.info', Mockery::type('array'))->twice()->andReturn(['promotion' => app(GenericPromo::class)->create(1, true)], $this->promoNotFoundError());
+
+        $promoRepository = app(PromoRepository::class, ['wsuApi' => $wsuApi]);
+
+        $this->assertNotEmpty($promoRepository->getPromoView($id)['promo']);
+
+        $this->travel(61)->seconds();
+
+        $promo = $promoRepository->getPromoView($id);
+        $this->assertEmpty($promo['promo']);
+        $this->assertArrayNotHasKey('api_failed', $promo);
+
+        // Cached, so this doesn't go back to the API
+        $this->assertEmpty($promoRepository->getPromoView($id)['promo']);
+
+        $this->travelBack();
+    }
+
+    #[Test]
+    public function getting_single_promo_with_api_error_should_fall_back_to_the_stale_copy(): void
+    {
+        config(['cache.ttl' => 60]);
+
+        $id = $this->faker->randomDigit();
+        $promo_return = app(GenericPromo::class)->create(1, true);
+
+        // The promo exists, then the API fails after the cache expires
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.info', Mockery::type('array'))->twice()->andReturn(['promotion' => $promo_return], $this->promoApiFailureError());
+
+        $promoRepository = app(PromoRepository::class, ['wsuApi' => $wsuApi]);
+
+        $promoRepository->getPromoView($id);
+
+        $this->travel(61)->seconds();
+
+        $promo = $promoRepository->getPromoView($id);
+        $this->assertEquals($promo_return, $promo['promo']);
+        $this->assertArrayNotHasKey('api_failed', $promo);
+
+        $this->travelBack();
+    }
+
+    #[Test]
+    public function getting_single_promo_with_api_error_and_no_stale_copy_should_flag_api_failed_and_not_be_cached(): void
+    {
+        config(['cache.ttl' => 60]);
+
+        $id = $this->faker->randomDigit();
+        $promo_return = app(GenericPromo::class)->create(1, true);
+
+        // The API fails once and then succeeds
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('cms.promotions.info', Mockery::type('array'))->twice()->andReturn($this->promoApiFailureError(), ['promotion' => $promo_return]);
+
+        $promoRepository = app(PromoRepository::class, ['wsuApi' => $wsuApi]);
+
+        $promo = $promoRepository->getPromoView($id);
+        $this->assertEmpty($promo['promo']);
+        $this->assertTrue($promo['api_failed']);
+
+        // The error should not be cached, so the next request goes back to the API
+        $this->assertEquals($promo_return, $promoRepository->getPromoView($id)['promo']);
+    }
+
+    /**
+     * The API's answer when a promo doesn't exist or isn't active.
+     */
+    private function promoNotFoundError(): array
+    {
+        return ['error' => ['code' => '101', 'field' => 'promo_item_id', 'message' => 'Promo item not found.']];
+    }
+
+    /**
+     * An API failure that isn't an answer about the promo.
+     */
+    private function promoApiFailureError(): array
+    {
+        return ['error' => ['code' => 429, 'field' => '', 'message' => 'Rate limit exceeded (HTTP 429)']];
+    }
 }

@@ -36,13 +36,17 @@ class TopicRepository implements TopicRepositoryContract
             'method' => 'topics',
         ];
 
-        $topics['topics'] = $this->rememberWithFallback('newsroom-topics'.md5(serialize($params)), config('cache.ttl'), function () use ($params, $subsite_folder) {
-            try {
-                $topics = $this->newsApi->request($params['method'], $params);
-            } catch (\Exception $e) {
-                $topics = [];
-            }
+        // Cache the raw response only, and let failures reach rememberWithFallback (don't catch them in here) so it falls back to the last good copy instead of caching no topics
+        // The key changed from newsroom-topics when the URLs moved out of the cache, so old copies that already have "All topics" aren't used
+        $topics['topics'] = $this->rememberWithFallback('newsroom-topics-raw'.md5(serialize($params)), config('cache.ttl'), function () use ($params) {
+            return $this->newsApi->request($params['method'], $params);
+        }, [], function ($value) {
+            // The news API returns false instead of throwing for some failures
+            return is_array($value);
+        });
 
+        // Build the URLs on every request so they use the current subsite folder
+        if (! empty($topics['topics']['data'])) {
             $all_topics = [
                 'topic_id' => '0',
                 'name' => 'All topics',
@@ -50,16 +54,12 @@ class TopicRepository implements TopicRepositoryContract
                 'url' => '/'.(! empty($subsite_folder) ? $subsite_folder : '').config('base.news_listing_route'),
             ];
 
-            if (! empty($topics['data'])) {
-                $topics['data'] = collect($topics['data'])->map(function ($topic) use ($subsite_folder) {
-                    $topic['url'] = '/'.(! empty($subsite_folder) ? $subsite_folder : '').config('base.news_listing_route').'/'.config('base.news_topic_route').'/'.$topic['slug'];
+            $topics['topics']['data'] = collect($topics['topics']['data'])->map(function ($topic) use ($subsite_folder) {
+                $topic['url'] = '/'.(! empty($subsite_folder) ? $subsite_folder : '').config('base.news_listing_route').'/'.config('base.news_topic_route').'/'.$topic['slug'];
 
-                    return $topic;
-                })->prepend($all_topics)->toArray();
-            }
-
-            return $topics;
-        });
+                return $topic;
+            })->prepend($all_topics)->toArray();
+        }
 
         return $topics;
     }
@@ -75,6 +75,9 @@ class TopicRepository implements TopicRepositoryContract
 
         $topic['topic'] = $this->rememberWithFallback($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             return $this->newsApi->request($params['method'], $params);
+        }, [], function ($value) {
+            // The news API returns false instead of throwing for some failures
+            return is_array($value);
         });
 
         return $topic;
