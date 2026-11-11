@@ -1059,4 +1059,66 @@ final class ProfileRepositoryTest extends TestCase
 
         return app(ProfileRepository::class, ['wsuApi' => $wsuApi, 'newsApi' => $newsApi]);
     }
+
+    #[Test]
+    public function getting_dropdown_of_groups_with_api_error_and_no_stale_copy_should_only_contain_all_profiles(): void
+    {
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('profile.groups.listing', Mockery::type('array'))->once()->andReturn($this->apiFailureError());
+        $wsuApi->shouldReceive('nextRequestProduction')->once();
+
+        $dropdown = app(ProfileRepository::class, ['wsuApi' => $wsuApi])->getDropdownOfGroups($this->faker->numberBetween(1, 10));
+
+        $this->assertEquals(['' => 'All Profiles'], $dropdown['dropdown_groups']);
+    }
+
+    #[Test]
+    public function getting_profile_articles_with_exception_should_fall_back_to_last_good_articles(): void
+    {
+        Config::set('cache.ttl', 60);
+
+        $return = app(Article::class)->create(5);
+
+        // Mock the News API to succeed once and then fail
+        $newsApi = Mockery::mock(News::class);
+        $newsApi->shouldReceive('request')->twice()->andReturnUsing(
+            fn () => $return,
+            fn () => throw new TransferException('API is down')
+        );
+
+        $profileRepository = app(ProfileRepository::class, ['newsApi' => $newsApi]);
+
+        $profileRepository->getNewsArticles('aa0000');
+
+        // Expire the good copy so the next request goes back to the API and fails
+        $this->travel(61)->seconds();
+
+        $this->assertEquals($return['data'], $profileRepository->getNewsArticles('aa0000'));
+
+        $this->travelBack();
+    }
+
+    #[Test]
+    public function getting_profile_articles_with_exception_should_not_be_cached(): void
+    {
+        Config::set('cache.ttl', 60);
+
+        $return = app(Article::class)->create(5);
+
+        // Mock the News API to fail once, fail without throwing, and then succeed
+        $newsApi = Mockery::mock(News::class);
+        $newsApi->shouldReceive('request')->times(3)->andReturnUsing(
+            fn () => throw new TransferException('API is down'),
+            fn () => false,
+            fn () => $return
+        );
+
+        $profileRepository = app(ProfileRepository::class, ['newsApi' => $newsApi]);
+
+        $this->assertEmpty($profileRepository->getNewsArticles('aa0000'));
+        $this->assertEmpty($profileRepository->getNewsArticles('aa0000'));
+
+        // Neither failure should be cached, so the next request goes back to the API
+        $this->assertEquals($return['data'], $profileRepository->getNewsArticles('aa0000'));
+    }
 }

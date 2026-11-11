@@ -106,4 +106,73 @@ final class EventRepositoryTest extends TestCase
         $this->assertTrue(!empty($event['display_image']['full_url']));
         $this->assertTrue(!empty($event['display_image']['description']));
     }
+
+    #[Test]
+    public function getting_events_with_api_error_should_not_be_cached(): void
+    {
+        config(['cache.ttl' => 60]);
+
+        $return['events'] = [['date' => now()->addDays(10)->format('Y-m-d'), 'title' => $this->faker->sentence()]];
+
+        // Mock the connector to fail once and then succeed
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('calendar.events.listing', Mockery::type('array'))->twice()->andReturn(app(ApiError::class)->create(1, true), $return);
+        $wsuApi->shouldReceive('nextRequestProduction')->twice();
+
+        $eventRepository = app(EventRepository::class, ['wsuApi' => $wsuApi]);
+
+        $this->assertEquals(['events' => []], $eventRepository->getEvents(1));
+
+        // The error should not be cached, so the next request goes back to the API
+        $this->assertCount(1, $eventRepository->getEvents(1)['events']);
+    }
+
+    #[Test]
+    public function getting_events_with_api_error_should_fall_back_to_last_good_events(): void
+    {
+        config(['cache.ttl' => 60]);
+
+        $return['events'] = [['date' => now()->addDays(10)->format('Y-m-d'), 'title' => $this->faker->sentence()]];
+
+        // Mock the connector to succeed once and then fail
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('calendar.events.listing', Mockery::type('array'))->twice()->andReturn($return, app(ApiError::class)->create(1, true));
+        $wsuApi->shouldReceive('nextRequestProduction')->twice();
+
+        $eventRepository = app(EventRepository::class, ['wsuApi' => $wsuApi]);
+
+        $events = $eventRepository->getEvents(1);
+
+        // Expire the good copy so the next request goes back to the API and fails
+        $this->travel(61)->seconds();
+
+        $this->assertNotEmpty($events['events']);
+        $this->assertEquals($events, $eventRepository->getEvents(1));
+
+        $this->travelBack();
+    }
+
+    #[Test]
+    public function getting_events_full_listing_with_api_error_should_fall_back_to_last_good_events(): void
+    {
+        config(['cache.ttl' => 60]);
+
+        $return['events'] = app(EventFullListing::class)->create(4);
+
+        // Mock the connector to succeed once and then fail
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('sendRequest')->with('calendar.events.fulllisting', Mockery::type('array'))->twice()->andReturn($return, app(ApiError::class)->create(1, true));
+        $wsuApi->shouldReceive('nextRequestProduction')->twice();
+
+        $eventRepository = app(EventRepository::class, ['wsuApi' => $wsuApi]);
+
+        $eventRepository->getEventsFullListing(1);
+
+        // Expire the good copy so the next request goes back to the API and fails
+        $this->travel(61)->seconds();
+
+        $this->assertEquals($return, $eventRepository->getEventsFullListing(1));
+
+        $this->travelBack();
+    }
 }

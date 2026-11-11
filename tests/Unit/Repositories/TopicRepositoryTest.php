@@ -119,4 +119,87 @@ final class TopicRepositoryTest extends TestCase
 
         $this->assertFalse(collect($selected)->first()['selected']);
     }
+
+    #[Test]
+    public function getting_topics_with_exception_should_fall_back_to_last_good_topics(): void
+    {
+        config(['cache.ttl' => 60]);
+
+        $return = app(Topic::class)->create(5);
+
+        // Mock the News API to succeed once and then fail
+        $newsApi = Mockery::mock(News::class);
+        $newsApi->shouldReceive('request')->twice()->andReturnUsing(
+            fn () => $return,
+            fn () => throw new \Exception('API is down')
+        );
+
+        $topicRepository = app(TopicRepository::class, ['newsApi' => $newsApi]);
+
+        $topics = $topicRepository->listing(1);
+
+        // Expire the good copy so the next request goes back to the API and fails
+        $this->travel(61)->seconds();
+
+        $this->assertNotEmpty($topics['topics']['data']);
+        $this->assertEquals($topics, $topicRepository->listing(1));
+
+        $this->travelBack();
+    }
+
+    #[Test]
+    public function getting_topics_when_news_api_returns_false_should_not_be_cached(): void
+    {
+        config(['cache.ttl' => 60]);
+
+        $return = app(Topic::class)->create(5);
+
+        // Mock the News API to fail without throwing once and then succeed
+        $newsApi = Mockery::mock(News::class);
+        $newsApi->shouldReceive('request')->twice()->andReturn(false, $return);
+
+        $topicRepository = app(TopicRepository::class, ['newsApi' => $newsApi]);
+
+        $this->assertEquals(['topics' => []], $topicRepository->listing(1));
+
+        // "All topics" plus the topics from the API
+        $this->assertCount(count($return['data']) + 1, $topicRepository->listing(1)['topics']['data']);
+    }
+
+    #[Test]
+    public function cached_topics_should_use_the_current_subsite_folder(): void
+    {
+        config(['cache.ttl' => 60]);
+
+        $return = app(Topic::class)->create(1);
+        $topic = current($return['data']);
+
+        // The News API should only be called once
+        $newsApi = Mockery::mock(News::class);
+        $newsApi->shouldReceive('request')->once()->andReturn($return);
+
+        $topicRepository = app(TopicRepository::class, ['newsApi' => $newsApi]);
+
+        $topicRepository->listing(1, 'first/');
+        $topics = $topicRepository->listing(1, 'second/');
+
+        $this->assertEquals('/second/'.config('base.news_listing_route'), $topics['topics']['data'][0]['url']);
+        $this->assertEquals('/second/'.config('base.news_listing_route').'/'.config('base.news_topic_route').'/'.$topic['slug'], $topics['topics']['data'][1]['url']);
+    }
+
+    #[Test]
+    public function finding_topic_when_news_api_returns_false_should_not_be_cached(): void
+    {
+        config(['cache.ttl' => 60]);
+
+        $return = app(Topic::class)->create(1, true);
+
+        $newsApi = Mockery::mock(News::class);
+        $newsApi->shouldReceive('request')->twice()->andReturn(false, $return);
+
+        $topicRepository = app(TopicRepository::class, ['newsApi' => $newsApi]);
+
+        $this->assertEquals(['topic' => []], $topicRepository->find('slug'));
+        $this->assertEquals($return, $topicRepository->find('slug')['topic']);
+    }
 }
