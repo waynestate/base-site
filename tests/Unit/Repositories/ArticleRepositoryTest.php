@@ -423,6 +423,20 @@ final class ArticleRepositoryTest extends TestCase
     }
 
     #[Test]
+    public function previewing_article_when_news_api_has_other_client_error_should_rethrow(): void
+    {
+        $id = $this->faker->numberBetween(1, 100);
+
+        // Mock the News API to respond with a 403
+        $newsApi = Mockery::mock(News::class);
+        $newsApi->shouldReceive('request')->once()->andThrow($this->clientException($id, 403));
+
+        $this->expectException(ClientException::class);
+
+        app(ArticleRepository::class, ['newsApi' => $newsApi])->find($id, $this->faker->numberBetween(1, 100), true);
+    }
+
+    #[Test]
     public function getting_articles_with_exception_should_not_be_cached(): void
     {
         config(['cache.ttl' => 60]);
