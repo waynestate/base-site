@@ -67,6 +67,10 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
             return $this->wsuApi->sendRequest($params['method'], $params);
         });
 
+        if (empty($promo) || empty($promo['promotion'])) {
+            return [];
+        }
+
         if (!empty($promo['promotion']) && $this->isExpired($promo['promotion'], ['end_date', 'display_end_date'])) {
             $promo['promotion'] = [];
         }

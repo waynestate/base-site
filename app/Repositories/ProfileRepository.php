@@ -256,30 +256,33 @@ class ProfileRepository implements ProfileRepositoryContract
      */
     public function getDropdownOfGroups(int $site_id, $forced_profile_group_id = null): array
     {
+        $groupsArray = [];
         $profile_groups = $this->getGroupsListing($site_id);
 
-        // Filter down the groups based on the parent group from the config
-        $parent_group_id = (config('base.profile_parent_group_id')) ?? config('base.profile.parent_group_id');
-        $profile_groups['results'] = collect($profile_groups['results'])
-            ->filter(function ($item) use ($parent_group_id) {
-                return (int) $item['parent_id'] === $parent_group_id;
-            })
-            ->toArray();
+        if (!empty($profile_groups['results'])) {
+            // Filter down the groups based on the parent group from the config
+            $parent_group_id = (config('base.profile_parent_group_id')) ?? config('base.profile.parent_group_id');
+            $profile_groups['results'] = collect($profile_groups['results'])
+                ->filter(function ($item) use ($parent_group_id) {
+                    return (int) $item['parent_id'] === $parent_group_id;
+                })
+                ->toArray();
 
-        // Only return the display name ordered by the display order
-        $groupsArray = collect($profile_groups['results'])
-            ->sortBy('display_order')
-            ->map(function ($item) {
-                return $item['display_name'];
-            })->toArray();
+            // Only return the display name ordered by the display order
+            $groupsArray = collect($profile_groups['results'])
+                ->sortBy('display_order')
+                ->map(function ($item) {
+                    return $item['display_name'];
+                })->toArray();
 
-        // Only offer the forced groups
-        if ($forced_profile_group_id !== null) {
-            $groupsArray = array_intersect_key($groupsArray, array_flip($this->splitGroupIds($forced_profile_group_id)));
-        }
+            // Only offer the forced groups
+            if ($forced_profile_group_id !== null) {
+                $groupsArray = array_intersect_key($groupsArray, array_flip($this->splitGroupIds($forced_profile_group_id)));
+            }
 
-        if (count($groupsArray) == 1) {
-            $groups['single_group'] = key($groupsArray);
+            if (count($groupsArray) == 1) {
+                $groups['single_group'] = key($groupsArray);
+            }
         }
 
         $groups['dropdown_groups'] = ['' => 'All Profiles'] + $groupsArray;
@@ -333,9 +336,9 @@ class ProfileRepository implements ProfileRepositoryContract
         }
 
         $profile = [
-            'profile' =>  Arr::get($profiles['profiles'], $site_id, []),
+            'profile' =>  Arr::get($profiles, 'profiles.' . $site_id, []),
             'courses' => Arr::get($profiles, 'courses', []),
-            'articles' => Arr::get($profiles['profiles'], 'articles', []),
+            'articles' => Arr::get($profiles, 'profiles.articles', []),
         ];
 
         // Fall back to the batch faculty image endpoint if this profile is missing a picture
