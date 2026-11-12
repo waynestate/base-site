@@ -8,16 +8,21 @@ use Throwable;
 trait StaleCache
 {
     /**
-     * Cache the result of a callback, falling back to a long-lived stale copy
-     * when the callback fails or returns null (API/DB outage), and falling
-     * back to $default when no stale copy exists yet (cold start).
+     * Cache the result of a callback, falling back to a long-lived stale copy when the callback fails or returns null (API/DB outage),
+     *  and falling back to $default when no stale copy exists yet (cold start).
+     *
+     * By default any response with an error key is treated as a failure.
+     * - Pass $is_valid to accept specific errors that are real answers from the API (e.g. a profile that doesn't exist),
+     *  so they are cached and replace the stale copy instead of being hidden by it.
      */
-    public function rememberWithFallback(string $key, $ttl, callable $callback, $default = [])
+    public function rememberWithFallback(string $key, $ttl, callable $callback, $default = [], ?callable $is_valid = null)
     {
+        $is_valid ??= fn ($value) => !array_key_exists('error', (array)$value);
+
         $cached = $this->cache->get($key);
 
-        // If found in cache and not an error, return it
-        if ($cached !== null && !array_key_exists('error', (array)$cached)) {
+        // If found in cache and valid, return it
+        if ($cached !== null && $is_valid($cached)) {
             return $cached;
         }
 
@@ -33,7 +38,7 @@ trait StaleCache
         }
 
         // If the callback returned a valid response, cache it short and long-term then return it
-        if ($value !== null && !array_key_exists('error', (array)$value)) {
+        if ($value !== null && $is_valid($value)) {
             $this->cache->put($key, $value, $ttl);
             $this->cache->put($stale_key, $value, config('cache.stale_ttl'));
 

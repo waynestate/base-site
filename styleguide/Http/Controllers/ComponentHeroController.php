@@ -52,9 +52,12 @@ class ComponentHeroController extends Controller
                             'Title' => 'Displayed using options "Text overlay," "Logo overlay" and will become a link if link field is used.',
                             'Link' => 'URL',
                             'Description' => 'Formattable text. If the link field is set, description links will be stripped out.',
+                            'Excerpt' => 'Description of video playing if using video hero.',
                             'Filename' => '1600x580px or 3200x1160px saved at low quality',
+                            'Image alt text' => 'Alt text for the image. Poster image if using hero video.',
                             'Secondary image' => 'SVG Overlay: 1600x580px or 3200x1160px svg<br />Logo overlay: >600px jpg, png',
-                            'Options' => 'Banner small, Banner large, Text overlay, Half, Logo overlay, SVG overlay, Contained',
+                            'Secondary image alt text' => 'Alt text for the SVG/logo overlay for an image.',
+                            'Options' => 'Banner small, Banner large, Text overlay, Half, Logo overlay, SVG overlay, Contained, Video',
                         ],
                     ],
                 ],
@@ -88,6 +91,12 @@ class ComponentHeroController extends Controller
         $hero_layout = $data['base']['hero']['component']['heroLayout'] ?? '';
         $hero_placement = $data['base']['hero']['component']['heroPlacement'] ?? '';
 
+        // If hero type is missing from component, check hero data
+        if (empty($hero_type) && ! empty($data['base']['hero']['data'])) {
+            $hero = current($data['base']['hero']['data']);
+            $hero_type = $hero['hero_type'] ?? '';
+        }
+
         // If page data is missing, check hero data (common on styleguide pages)
         if (($id === 0000 || $id === 0) && ! empty($data['base']['hero']['data'])) {
             $hero = current($data['base']['hero']['data']);
@@ -102,6 +111,7 @@ class ComponentHeroController extends Controller
         $type_map = [
             'text' => ['option' => 'text'],
             'svg' => ['option' => 'svg'],
+            'video' => ['option' => 'video'],
             'logo' => ['option' => 'logo'],
             'large' => ['option' => 'large'],
             'slim' => ['option' => 'small'],

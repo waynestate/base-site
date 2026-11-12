@@ -54,8 +54,6 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
      */
     public function getPromoView($id)
     {
-        $promo['promotion'] = [];
-
         $params = [
             'method' => 'cms.promotions.info',
             'promo_item_id' => $id,
@@ -65,7 +63,17 @@ class PromoRepository implements RequestDataRepositoryContract, PromoRepositoryC
 
         $promo = $this->rememberWithFallback($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
             return $this->wsuApi->sendRequest($params['method'], $params);
+        }, null, function ($value) {
+            // "Promo item not found" (101) is the API answering that the promo doesn't exist or was deactivated, so cache it like a good response instead of falling back to the removed promo
+            return !array_key_exists('error', (array) $value) || (int) ($value['error']['code'] ?? 0) === 101;
         });
+
+        // No fresh or stale response means the API failed, which isn't the same as a missing promo
+        if ($promo === null) {
+            return ['promotion' => [], 'promo' => [], 'api_failed' => true];
+        }
+
+        $promo['promotion'] = $promo['promotion'] ?? [];
 
         if (!empty($promo['promotion']) && $this->isExpired($promo['promotion'], ['end_date', 'display_end_date'])) {
             $promo['promotion'] = [];

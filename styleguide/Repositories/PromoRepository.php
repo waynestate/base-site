@@ -154,6 +154,16 @@ class PromoRepository extends Repository
                 'relative_url' => '/styleguide/image/1600x580?text=Contained+logo+overlay',
                 'secondary_relative_url' => '/styleguide/image/600x250?text=Secondary+image',
             ]),
+            // Video
+            105100116 => app(HeroImage::class)->create(1, false, [
+                'option' => 'Video full',
+                'title' => 'Hero video',
+                'relative_url' => 'https://assets.apps.wayne.edu/images/base/community-connected-720p.webm',
+                'filename_alt_text' => 'https://assets.apps.wayne.edu/images/base/community-connected-frame1.jpg',
+                'secondary_relative_url' => 'https://assets.apps.wayne.edu/images/base/community-connection-video-overlay.svg',
+                'secondary_alt_text' => 'Wayne State University',
+                'excerpt' => 'Playing video of Wayne State campus life',
+            ]),
         ];
 
         // Only pull hero promos if they match the page ids that are specificed
@@ -168,6 +178,7 @@ class PromoRepository extends Repository
             105100107,
             105100108,
             105100109,
+            105100116,
         ];
 
         /*

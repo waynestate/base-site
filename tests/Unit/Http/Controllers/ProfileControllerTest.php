@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Factories\Page;
 use Factories\Profile;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Waynestate\Api\Connector;
 
@@ -117,6 +118,30 @@ final class ProfileControllerTest extends TestCase
 
         // Call the profile listing
         $view = $this->profileController->show($request);
+    }
+
+    #[Test]
+    public function profile_api_failure_should_500_instead_of_404(): void
+    {
+        $request = new Request();
+        $request->accessid = 'aa1234';
+        $request->data = ['base' => ['site' => ['id' => 1]]];
+
+        // Mock the connector failing with no stale copy to fall back to
+        $wsuApi = Mockery::mock(Connector::class);
+        $wsuApi->shouldReceive('nextRequestProduction')->once()->andReturn(true);
+        $wsuApi->shouldReceive('sendRequest')->with('profile.users.view', Mockery::type('array'))->once()->andReturn([
+            'error' => ['code' => 500, 'field' => '', 'message' => 'cURL error: Operation timed out'],
+        ]);
+
+        $profileController = app(ProfileController::class, ['profile' => app(ProfileRepository::class, ['wsuApi' => $wsuApi])]);
+
+        try {
+            $profileController->show($request);
+            $this->fail('The API failure should abort with a 500');
+        } catch (HttpException $e) {
+            $this->assertEquals(500, $e->getStatusCode());
+        }
     }
 
     #[Test]

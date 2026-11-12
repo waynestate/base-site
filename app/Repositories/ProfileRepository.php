@@ -260,7 +260,8 @@ class ProfileRepository implements ProfileRepositoryContract
 
         // Filter down the groups based on the parent group from the config
         $parent_group_id = (config('base.profile_parent_group_id')) ?? config('base.profile.parent_group_id');
-        $profile_groups['results'] = collect($profile_groups['results'])
+        // When the API fails with no last good copy there are no results, so the dropdown falls back to "All Profiles"
+        $profile_groups['results'] = collect($profile_groups['results'] ?? [])
             ->filter(function ($item) use ($parent_group_id) {
                 return (int) $item['parent_id'] === $parent_group_id;
             })
@@ -303,7 +304,15 @@ class ProfileRepository implements ProfileRepositoryContract
             $this->wsuApi->nextRequestProduction();
 
             return $this->wsuApi->sendRequest($params['method'], $params);
+        }, null, function ($value) {
+            // "No user profile" (101) is the API answering that the profile doesn't exist, so cache it like a good response
+            return !array_key_exists('error', (array)$value) || (int) ($value['error']['code'] ?? 0) === 101;
         });
+
+        // No fresh or stale response means the API failed, which isn't the same as a missing profile
+        if ($profiles === null) {
+            return ['profile' => [], 'api_failed' => true];
+        }
 
         if (!empty($profiles['error']) || empty($profiles['profiles'])) {
             return ['profile' => []];
@@ -350,14 +359,12 @@ class ProfileRepository implements ProfileRepositoryContract
             'env' => config('app.env'),
         ];
 
+        // Let failures reach rememberWithFallback (don't catch them in here) so it falls back to the last good copy instead of caching no articles
         $articles = $this->rememberWithFallback($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
-            try {
-                $articles = $this->newsApi->request($params['method'], $params);
+            $articles = $this->newsApi->request($params['method'], $params);
 
-                return $articles['data'] ?? [];
-            } catch (\Exception $e) {
-                return [];
-            }
+            // The news API returns false instead of throwing for some failures
+            return is_array($articles) ? ($articles['data'] ?? []) : null;
         });
 
         return $articles;

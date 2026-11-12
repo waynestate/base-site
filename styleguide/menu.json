@@ -351,6 +351,16 @@
                         "relative_url": "/styleguide/component/hero/svgoverlaycontained",
                         "submenu": []
                     },
+                    "105100116": {
+                        "menu_item_id": 105100116,
+                        "is_active": 1,
+                        "page_id": 105100116,
+                        "target": "",
+                        "display_name": "Hero video",
+                        "class_name": "",
+                        "relative_url": "/styleguide/component/hero/video",
+                        "submenu": []
+                    },
                     "105100107": {
                         "menu_item_id": 105100107,
                         "is_active": 1,

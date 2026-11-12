@@ -330,6 +330,44 @@
     }
 
     /* 
+     * Video
+     */
+    &--video {
+        @apply w-full aspect-wsuvideo relative overflow-hidden flex;
+
+        #{$c}__video {
+            @apply absolute backdrop-opacity-10 top-0 left-0 object-cover w-full h-full;
+        }
+
+        #{$c}__link,
+        #{$c}__content {
+            @apply absolute bottom-0 inset-x-0 bg-gradient-darkest pt-[15%] px-container;
+        }
+
+        #{$c}__secondary-image {
+            @apply relative mb-[4vw] px-2 3xl:px-0;
+        }
+
+        #{$c}__video-controls,
+        #{$c}__play-pause-button {
+            @apply z-10 absolute right-4 top-3 mt:top-10;
+
+            @media (min-width: 1310px) {
+                @apply top-3;
+            }
+
+            #{$c}__play-icon,
+            #{$c}__pause-icon {
+                @apply fill-white hover:fill-gold drop-shadow-px opacity-60 hover:opacity-100;
+            }
+        }
+
+        #{$c}__link:focus #{$c}__secondary-image {
+            @apply outline-gold outline-2 -outline-offset-2 outline;
+        }
+    }
+
+    /* 
      * Carousel - Flickity applies absolute to this container when enabled 
      */
     &__carousel-item {

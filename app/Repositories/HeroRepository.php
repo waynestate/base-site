@@ -217,6 +217,7 @@ class HeroRepository implements HeroRepositoryContract
     private function mapType(string $promoOption, string $componentOption)
     {
         $typeMap = [
+            'video' => ['video'],
             'banner' => ['banner'],
             'split' => ['split', 'half'],
             'text' => ['text'],
@@ -298,6 +299,7 @@ class HeroRepository implements HeroRepositoryContract
         $unsetHeroDataMap = [
             'banner' => ['title', 'link', 'description', 'secondary_relative_url'],
             'svg' => ['title', 'description'],
+            'video' => ['title', 'description'],
             'split' => ['secondary_relative_url'],
             'text' => ['secondary_relative_url'],
             'buttons' => ['link', 'secondary_relative_url'],

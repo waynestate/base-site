@@ -18,5 +18,6 @@ import './modules/accordion';
 import './modules/slideout';
 import './modules/slideout-main-menu';
 import './modules/carousel';
+import './modules/video-hero';
 import './modules/under-menu';
 import './modules/tabs';

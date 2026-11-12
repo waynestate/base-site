@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use Contracts\Repositories\ArticleRepositoryContract;
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Cache\Repository;
 use Waynestate\Api\News;
 use App\Traits\StaleCache;
@@ -48,12 +49,12 @@ class ArticleRepository implements ArticleRepositoryContract
             $params['topics'] = $topics;
         }
 
+        // Let failures reach rememberWithFallback (don't catch them in here) so it falls back to the last good copy instead of caching no articles
         $articles['articles'] = $this->rememberWithFallback($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params) {
-            try {
-                return $this->newsApi->request($params['method'], $params);
-            } catch (\Exception $e) {
-                return [];
-            }
+            return $this->newsApi->request($params['method'], $params);
+        }, [], function ($value) {
+            // The news API returns false instead of throwing for some failures
+            return is_array($value);
         });
 
         return $articles;
@@ -70,11 +71,80 @@ class ArticleRepository implements ArticleRepositoryContract
             'preview' => $preview,
         ];
 
-        $article['article'] = $this->rememberWithFallback($params['method'].md5(serialize($params)), $preview ? 0 : config('cache.ttl'), function () use ($params) {
-            return $this->newsApi->request($params['method'], $params);
+        // Previews are never cached, and skip the last good copy too since it could be an old draft
+        if ($preview) {
+            try {
+                $article['article'] = $this->requestArticle($params);
+            } catch (\Throwable $e) {
+                $this->abortWhenRateLimited($e);
+
+                throw $e;
+            }
+
+            return $article;
+        }
+
+        // Set by reference inside the closure, which PHPStan can't see
+        /** @var \Throwable|null $failure */
+        $failure = null;
+
+        // Fall back to the last good copy when the news API fails
+        $article['article'] = $this->rememberWithFallback($params['method'].md5(serialize($params)), config('cache.ttl'), function () use ($params, &$failure) {
+            try {
+                return $this->requestArticle($params);
+            } catch (\Throwable $e) {
+                // Keep the failure so it can be reported if there's no last good copy
+                $failure = $e;
+
+                throw $e;
+            }
+        }, null, function ($value) {
+            // The news API returns false instead of throwing for some failures
+            return is_array($value);
         });
 
+        // The news API failed and there's no last good copy, so report it instead of showing a real article as a 404
+        if ($article['article'] === null) {
+            if ($failure !== null) {
+                $this->abortWhenRateLimited($failure);
+
+                throw $failure;
+            }
+
+            // The news API returned nothing instead of throwing, so it's still treated as a missing article
+            $article['article'] = [];
+        }
+
         return $article;
+    }
+
+    /**
+     * Request an article from the news API.
+     *
+     * @throws \Throwable
+     */
+    protected function requestArticle(array $params)
+    {
+        try {
+            return $this->newsApi->request($params['method'], $params);
+        } catch (ClientException $e) {
+            // A 404 is the news API answering that the article doesn't exist, so it's returned like a good response
+            if ($e->getResponse()->getStatusCode() == 404) {
+                return [];
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Show the 429 page instead of a 500 when the news API rate limits.
+     */
+    protected function abortWhenRateLimited(\Throwable $e): void
+    {
+        if ($e instanceof ClientException && $e->getResponse()->getStatusCode() == 429) {
+            abort(429);
+        }
     }
 
     /**
