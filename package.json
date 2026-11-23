@@ -34,7 +34,7 @@
     "@waynestate/wsufooter": "^1.1.1",
     "@waynestate/wsuheader": "^2.2.2",
     "accordion": "^3.0.2",
-    "autoprefixer": "^10.6.2",
+    "autoprefixer": "^10.7.0",
     "browser-sync": "^3.0.4",
     "browser-sync-webpack-plugin": "^2.4.0",
     "concurrently": "^10.0.7",
